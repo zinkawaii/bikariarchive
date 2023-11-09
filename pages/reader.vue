@@ -1,0 +1,352 @@
+<script setup>
+    const readRecordStore = useReadRecordStore();
+    const settingStore = useSettingStore();
+    const route = useRoute();
+    const router = useRouter();
+
+    //获取参数
+    const { novel, index } = route.params;
+
+    //初始化
+    const art = new Article(novel, index);
+
+    //错误跳转
+    if (art.error) {
+        router.replace("/catalogue");
+        throw "Article Not Found (404)";
+    }
+
+    //设置元信息
+    useHead({
+        title: `${art.title} - ${art.volName}`,
+        meta: [
+            { property: "og:type", content: "novel" },
+            { property: "og:title", content: art.title },
+            { property: "og:novel:author", content: art.novelInfo.author },
+            { property: "og:novel:book_name", content: art.novelInfo.title },
+            { property: "og:novel:category", content: art.novelInfo.tag.join(",") }
+        ]
+    });
+
+    const state = ref({
+        author: art.novelInfo.author,
+        readCount: 0,
+        content: "",
+        title: art.title,
+        date: {
+            type: "",
+            value: "",
+            tip: ""
+        },
+        fontFamily: null,
+        fontSize: null
+    });
+
+    //加载正文
+    useFetch("/api/article", {
+        query: {
+            novel,
+            volOrder: art.volOrder,
+            index
+        },
+        pick: `${novel}/${index}`,
+        onResponse({ response }) {
+            console.log(1);
+            state.value.content = response._data.content;
+        }
+    });
+
+    //写入阅读记录
+    readRecordStore.set(art.novel, {
+        index: art.index,
+        title: art.title
+    });
+
+    settingStore.listen("font-family", (value) => {
+    });
+
+    settingStore.listen("font-size", (value) => {
+        state.value.fontFamily = {
+            0: 14,
+            1: 16,
+            2: 18
+        }[value];
+    });
+
+    //日期
+    const { date } = state.value;
+    if (art.date.publish) {
+        date.type = "发布";
+        date.value = art.date.publish;
+    }
+    else if (art.date.reco) {
+        date.type = "重构";
+        date.value = art.date.reco;
+        date.tip = "该章节源自旧稿，是在本卷大改时调整章节顺序与修改细节后的产物\n在剧情安排与走向上没有大幅度的变化，但发布时间因结构的切分而难以标明";
+    }
+    else {
+        date.type = "发布";
+        date.value = "很久以前";
+        date.tip = "该章节的发布时间已经无法追溯";
+    }
+
+    //本章链接
+    const currentUrl = computed(() => {
+        return process.browser && location.origin + `/book/${art.novel}/${art.index}`;
+    });
+
+    const toLastClass = { hidden: art.isFirst };
+    const toNextClass = { hidden: art.isLast };
+
+    //上一章
+    function toLastChapter() {
+        router.push(`/book/${novel}/${art.getLastIndex()}`);
+    }
+
+    //下一章
+    function toNextChapter() {
+        router.push(`/book/${novel}/${art.getNextIndex()}`);
+    }
+</script>
+
+<template>
+    <div class="content-group">
+        <header class="novel-header">
+            <a class="novel-wrap-top" :class="toLastClass" @click="toLastChapter">
+                <i class="fas fa-chevron-left"></i>
+                <span>上一章</span>
+            </a>
+            <div class="novel-title">
+                <h2 id="Title" style="float: left;">{{ state.title }}</h2>
+                <div class="novel-information">
+                    <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
+                    <span :title="state.date.tip">{{ state.date.type }}时间：{{ state.date.value }}</span>
+                </div>
+            </div>
+            <a class="novel-wrap-top" :class="toNextClass" @click="toNextChapter">
+                <span>下一章</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </header>
+        <article class="novel-text" v-html="state.content"></article>
+        <footer class="novel-copyright">
+            <div><span class="meta">本章作者</span><nuxt-link to="/home">{{ state.author }}</nuxt-link></div>
+            <div><span class="meta">本章链接</span><nuxt-link class="content" :href="currentUrl">{{ currentUrl }}</nuxt-link></div>
+            <div><span class="meta">版权声明</span><span class="content">本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></div>
+        </footer>
+    </div>
+    <div class="novel-wrap-bottom">
+        <a :class="toLastClass" @click="toLastChapter">上一章</a>
+        <a :class="toNextClass" @click="toNextChapter">下一章</a>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+
+    .novel-header {
+        display: flex;
+        margin: -16px 0 8px;
+        padding: 0 0 16px;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .novel-title {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        overflow: invisible;
+        text-align: center;
+
+        h2 {
+            line-height: 52px;
+        }
+    }
+
+    .novel-information {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 20px;
+        font-size: 12px;
+        line-height: 20px;
+        color: var(--color-gray);
+
+        span {
+            display: inline-block;
+        }
+    }
+
+    .novel-text {
+        padding: 0 32px;
+
+        h2 {
+            position: relative;
+            margin: 8px 0 0;
+            padding: 4px 0 4px 16px;
+
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 6px;
+                height: 85%;
+                border-radius: 3px;
+                background-color: var(--color-theme-block-dark);
+                translate: 0 -50%;
+            }
+        }
+
+        em {
+            font-style: normal;
+            color: var(--color-theme-text);
+        }
+    }
+
+    .novel-illustration {
+        display: grid;
+        grid-gap: 16px;
+        padding: 16px 0 8px;
+    }
+
+    .novel-copyright {
+        position: relative;
+        margin-top: 16px;
+        padding: 8px 16px;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 2;
+        word-break: break-word;
+
+        .meta {
+            font-weight: bold;
+            color: var(--color-theme-text);
+
+            &::after {
+                content: "：";
+            }
+        }
+    }
+
+    .novel-wrap-top {
+        display: flex;
+        align-items: center;
+        font-weight: bolder;
+        color: var(--color-theme-text);
+        cursor: pointer;
+
+        > i {
+            width: 1em;
+            font-size: 42px;
+            translate: 0 2px;
+        }
+    }
+
+    .novel-wrap-bottom {
+        display: flex;
+        justify-content: space-between;
+
+        > a {
+            width: 40%;
+            padding: 16px 0;
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));
+            font-weight: bold;
+            text-align: center;
+            text-shadow: var(--text-shadow);
+            color: white;
+            cursor: pointer;
+        }
+    }
+
+    .novel-index {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        overflow: auto;
+        border: var(--border-theme-group);
+        border-radius: 16px;
+        box-shadow: var(--box-shadow);
+        background-color: var(--color-background-alpha);
+    }
+
+    .index-volume {
+        margin: 4px 16px 8px;
+        padding: 8px 0;
+        border: 0;
+        border-bottom: 1px solid var(--color-border);
+        background-color: transparent;
+        font-size: 16px;
+        font-weight: bolder;
+    }
+
+    .index-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        overflow: invisible scroll;
+        overscroll-behavior: contain;
+        padding: 0 8px 8px;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border: 0;
+            background-color: var(--color-theme-block);
+        }
+
+        a {
+            display: block;
+            overflow: invisible;
+            padding: 6px 0 6px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: var(--color-text);
+
+            &:hover {
+                background-color: var(--color-border);
+                color: white;
+            }
+
+            &[active] {
+                background-color: var(--color-theme-block);
+                color: white;
+            }
+        }
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    @media (width < 1024px) {
+        .novel-header {
+            margin-top: 0;
+        }
+    }
+
+    @container main (width < 768px) {
+        .novel-wrap-top > span {
+            display: none;
+        }
+
+        .novel-text {
+            padding: 0;
+        }
+    }
+</style>
+
+<style lang="scss">
+    .novel-illustration {
+        display: grid;
+        grid-gap: 16px;
+        padding: 16px 0 8px;
+    }
+</style>

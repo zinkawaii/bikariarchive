@@ -1,0 +1,3 @@
+interface BaseResponse {
+    error: number
+}

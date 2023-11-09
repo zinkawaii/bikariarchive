@@ -1,0 +1,76 @@
+<script setup>
+    import jArticle from "~/dist/json/Article.json";
+
+    const jNovel = jArticle.bikari;
+    const jVolume = jNovel.volume;
+    const jChapter = jNovel.chapter;
+
+    const jUpdated = jChapter
+    .filter((c) => Reflect.has(c, "date"))
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 10);
+</script>
+
+<template>
+    <div class="home-update">
+        <span class="content-h2 coco-title">更新历史</span>
+        <ul class="update-list">
+            <li class="update-item" v-for="item in jUpdated">
+                <nuxt-link class="title" :to="`/book/bikari/${item.index}`">{{ item.title }}</nuxt-link>
+                <div class="info">
+                    <span class="volume">{{ jVolume[item.volume].title }}</span>
+                    <span class="date">{{ item.date }}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+    .home-update {
+        grid-area: A;
+        width: 256px;
+        padding: 16px 32px;
+        border: var(--border-theme-group);
+        border-radius: 16px;
+        box-shadow: var(--box-shadow);
+        background-color: var(--color-background-alpha);
+    }
+
+    .update-item {
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--color-border-light);
+
+        .title {
+            line-height: 28px;
+        }
+
+        .info {
+            display: flex;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--color-gray);
+        }
+
+        .volume {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+        }
+    }
+
+    @container main (width < 596px) {
+        .home-update {
+            width: 100%;
+            padding-inline: 16px;
+        }
+
+        .update-list {
+            display: grid;
+            column-gap: 16px;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+</style>

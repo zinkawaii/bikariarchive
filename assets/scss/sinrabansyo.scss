@@ -1,0 +1,366 @@
+:root {
+    --color-text              : rgb(36 33 30); /* 文本色 */
+    --color-link              : rgb(63 81 181); /* 超链接色 */
+    --color-danger            : rgb(255 0 0); /* 警告色 */
+    --color-gray              : rgb(128 128 128); /* 灰色 */
+    --color-border            : rgb(160 160 160); /* 边框色 */
+    --color-border-light      : rgb(221 221 221); /* 边框色-浅 */
+    --color-border-dark       : rgb(51 51 51); /* 边框色-深 */
+    --color-background        : rgb(248 248 248); /* 背景色 */
+    --color-background-alpha  : rgb(248 248 248 / 88%); /* 背景色-透明 */
+    --color-tab-background    : rgb(216 216 216); /* 标签背景色 */
+    --color-tab-text          : rgb(80 80 80); /* 标签文本色 */
+    --color-theme-text        : hsl(var(--theme-hue) 53% 67%); /* 文本色-高亮 */
+    --color-theme-block       : hsl(var(--theme-hue) 100% 90%); /* 填充色 */
+    --color-theme-block-light : hsl(var(--theme-hue) 100% 97.5%); /* 填充色-浅 */
+    --color-theme-block-dark  : hsl(var(--theme-hue) 60% 75%); /* 填充色-深 */
+    --border-theme-group      : 2px solid var(--color-theme-block-dark); /* 内容组边框 */
+    --box-shadow              : 0 0 4px 0 rgb(0 0 0 / 32%); /* 块盒阴影 */
+    --text-shadow             : 1px 1px 2px rgb(0 0 0 / 50%); /* 白字阴影 */
+    --size-width-min-mobile   : 320px;
+}
+
+[theme="hatsusora"] {
+    --theme-hue: 196;
+}
+
+[theme="ayame"] {
+    --theme-hue: 256;
+}
+
+[theme="sakura"] {
+    --theme-hue: 0;
+}
+
+[z-dark] {
+    --color-text              : rgb(255 255 255 / 88%); /* 文本色 */
+    --color-link              : rgb(88 160 255); /* 超链接色 */
+    --color-danger            : rgb(255 64 64); /* 警告色 */
+    --color-border            : rgb(136 136 136); /* 边框色 */
+    --color-border-light      : rgb(75 75 75); /* 边框色-浅 */
+    --color-border-dark       : rgb(216 216 216); /* 边框色-深 */
+    --color-background        : rgb(48 48 48); /* 背景色 */
+    --color-background-alpha  : rgb(48 48 48 / 88%); /* 背景色-透明 */
+    --color-tab-background    : rgb(88 88 88); /* 标签背景色 */
+    --color-tab-text          : rgb(176 176 176); /* 标签文本色 */
+    --color-theme-text        : hsl(var(--theme-hue) 75% 66%); /* 文本色-高亮 */
+    --color-theme-block       : hsl(var(--theme-hue) 66% 45%); /* 填充色 */
+    --color-theme-block-light : hsl(var(--theme-hue) 66% 53%); /* 填充色-浅 */
+    --color-theme-block-dark  : hsl(var(--theme-hue) 66% 60%); /* 填充色-深 */
+    --theme-hue               : 196;
+}
+
+@font-face {
+    font-family: "腾祥沁圆简";
+    font-display: swap;
+    src: url("/fonts/TengXQJianYuan-w3.ttf") format("truetype");
+}
+
+/* ---------------------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, button, table, caption, tbody, tfoot, thead, tr, th, td, dialog {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: "Microsoft Yahei UI", "Microsoft Yahei";
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: auto;
+    color: var(--color-text);
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 32px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-link);
+    cursor: pointer;
+}
+
+blockquote {
+    margin: 8px 0;
+    padding: 8px 16px;
+    border-left: 6px solid var(--color-theme-block);
+    box-shadow: 4px 4px 0 var(--color-border-light);
+    background-color: var(--color-theme-block-light);
+}
+
+code {
+    margin: 0 0.25em;
+    padding: 2px 0.25em;
+    border-radius: 4px;
+    background-color: var(--color-tab-background);
+    font-family: inherit;
+    color: var(--color-theme-text);
+}
+
+th, dt {
+    padding: 4px;
+    background-color: var(--color-theme-block);
+    font-weight: bold;
+    text-align: center;
+}
+
+td, dd {
+    padding: 0 6px;
+    line-height: 26px;
+}
+
+ol, ul {
+    list-style-type: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+rt {
+    font-size: 75%;
+}
+
+input, textarea, select, option {
+    border: 0;
+    outline: 0;
+    background-color: var(--color-background);
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+img[is="mb-image"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+[type="number"] {
+    appearance: textfield;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+}
+
+:focus {
+    outline: 0;
+}
+
+::selection {
+    background-color: rgb(188 224 251);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-clip: content-box;
+    background-color: var(--color-theme-block-dark);
+}
+
+/* ---------------------------------------------------------------- */
+
+/* 通用内容组 */
+.content-group {
+    padding: 32px;
+    border: var(--border-theme-group);
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-background-alpha);
+}
+
+/* 通用内容盒 */
+.content-table {
+    padding: 16px;
+    border: 1px solid var(--color-border-light);
+    border-left: 32px solid var(--color-theme-block);
+    background-color: var(--color-background);
+    font-size: 14px;
+
+    p {
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
+.content-h2 {
+    font-family: "腾祥沁圆简";
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 26px;
+}
+
+.coco-title {
+    display: inline-block;
+    margin-bottom: 4px;
+
+    &::after {
+        content: "";
+        display: block;
+        margin: -9px -4px 0;
+        padding: 5px;
+        background-color: var(--color-theme-block);
+    }
+}
+
+.div-table {
+    display: flex;
+    padding: 1px 2px;
+    border: 1px solid var(--color-border);
+    font-size: 14px;
+
+    dl {
+        flex: 1;
+    }
+
+    dt, dd {
+        float: left;
+        overflow: hidden;
+        margin: 1px 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.mask {
+    position: fixed;
+    opacity: 0;
+    inset: 0;
+    background-color: black;
+    z-index: -1;
+}
+
+.p-small {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.tab {
+    background-color: var(--color-tab-background);
+    color: var(--color-tab-text);
+
+    &:is(a):hover {
+        color: var(--color-theme-text);
+    }
+}
+
+.text-gray {
+    color: var(--color-gray);
+}
+
+.text-primary {
+    color: var(--color-theme-text);
+}
+
+.text-center {
+    text-align: center;
+}
+
+[invisible] {
+    visibility: hidden;
+}
+
+/* 导航表格 */
+.navbox-wrapper {
+    overflow: auto;
+    border: 1px solid var(--color-border);
+}
+
+.navbox-table {
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-spacing: 2px;
+}
+
+.navbox-ceil-odd {
+    background-color: var(--color-theme-block-light);
+}
+
+.navbox-ceil-even {
+    background-color: var(--color-theme-block);
+}
+
+/* ---------------------------------------------------------------- */
+
+/* 按钮 */
+.btn {
+    display: inline-block;
+    padding: 0 12px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-theme-block-dark);
+    border-radius: 3px;
+    line-height: 2em;
+    text-align: center;
+    color: var(--color-theme-text);
+    transition: all 0.4s;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background-color: var(--color-theme-block-dark);
+        color: white;
+    }
+
+    &[disabled], &.disabled {
+        border-color: var(--color-border);
+        color: var(--color-border);
+        pointer-events: none;
+    }
+
+    & + & {
+        margin-inline-start: 0.5em;
+    }
+}
+
+/* ---------------------------------------------------------------- */
+
+:where(.intro-synopsis, .novel-text, .detail-text, .result-part) p {
+    text-indent: 2em;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* 媒体查询 */
+@media (width < 1024px) {
+    .content-group {
+        padding: 16px;
+    }
+}
