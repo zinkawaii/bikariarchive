@@ -24,7 +24,7 @@
 </script>
 
 <template>
-    <div class="mb-footer">
+    <div class="z-footer">
         <div class="time">
             茶馆已营业 {{ time.day }} 天 {{ time.hour }} 时 {{ time.minute }} 分 {{ time.second }} 秒
         </div>
@@ -35,7 +35,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .mb-footer {
+    .z-footer {
         display: block;
         padding: 16px 32px;
         border-radius: 16px;

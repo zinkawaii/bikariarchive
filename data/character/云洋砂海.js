@@ -1,0 +1,24 @@
+module.exports = {
+    title: "云洋砂海",
+    summary: /*HTML*/``,
+    info: [
+        [
+            ["中文名", "云洋砂海"],
+            ["外文名", "Kumoyō Sunami"],
+            ["性别", "男"]
+        ],
+        [
+            ["日文名", "雲洋砂海"],
+            ["平假名", "くもよう　すなみ"],
+            ["年龄", "16"]
+        ]
+    ],
+    illustration: [],
+    talent: [],
+    relationship: [
+        {
+            name: "森谷雪绘",
+            relation: "老师"
+        }
+    ]
+};

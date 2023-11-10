@@ -1,6 +1,7 @@
 <script setup>
+    import jArticle from "~/dist/json/Article.json";
+
     const readRecordStore = useReadRecordStore();
-    const settingStore = useSettingStore();
     const route = useRoute();
     const router = useRouter();
 
@@ -17,15 +18,13 @@
     }
 
     //设置元信息
-    useHead({
+    useSeoMeta({
         title: `${art.title} - ${art.volName}`,
-        meta: [
-            { property: "og:type", content: "novel" },
-            { property: "og:title", content: art.title },
-            { property: "og:novel:author", content: art.novelInfo.author },
-            { property: "og:novel:book_name", content: art.novelInfo.title },
-            { property: "og:novel:category", content: art.novelInfo.tag.join(",") }
-        ]
+        ogTitle: art.title,
+        ogType: "article",
+        ogNovelAuthor: art.novelInfo.author,
+        ogNovelBook_name: art.novelInfo.title,
+        ogNovelCategory: art.novelInfo.tag.join(",")
     });
 
     const state = ref({
@@ -39,7 +38,8 @@
             tip: ""
         },
         fontFamily: null,
-        fontSize: null
+        fontSize: null,
+        currentVolume: art.volOrder
     });
 
     //加载正文
@@ -51,26 +51,12 @@
         },
         pick: `${novel}/${index}`,
         onResponse({ response }) {
-            console.log(1);
-            state.value.content = response._data.content;
+            const { error, content, readCount } = response._data;
+            if (error === 0) {
+                state.value.content = content;
+                state.value.readCount = readCount;
+            }
         }
-    });
-
-    //写入阅读记录
-    readRecordStore.set(art.novel, {
-        index: art.index,
-        title: art.title
-    });
-
-    settingStore.listen("font-family", (value) => {
-    });
-
-    settingStore.listen("font-size", (value) => {
-        state.value.fontFamily = {
-            0: 14,
-            1: 16,
-            2: 18
-        }[value];
     });
 
     //日期
@@ -107,9 +93,41 @@
     function toNextChapter() {
         router.push(`/book/${novel}/${art.getNextIndex()}`);
     }
+
+    //写入阅读记录
+    readRecordStore.set(art.novel, {
+        index: art.index,
+        title: art.title
+    });
+
+    //本卷章节
+    const jChapter = computed(() => {
+        return jArticle[novel].chapter.filter((c) => c.volume === state.value.currentVolume);
+    });
+
+    const $Index = ref();
+    onMounted(() => {
+        if ($Index.value) {
+            $Index.value.scrollTo(0, (art.order_in_vol - 1) * 34);
+        }
+    });
 </script>
 
 <template>
+    <ClientOnly>
+        <Teleport to=".z-sidebar">
+            <aside class="novel-index">
+                <select class="index-volume" :value="art.volOrder" v-model="state.currentVolume">
+                    <option v-for="(v, i) in jArticle[novel].volume" :value="i">{{ v.title }}</option>
+                </select>
+                <ul class="index-list" ref="$Index">
+                    <li v-for="c in jChapter">
+                        <nuxt-link :to="{ name: `reader`, params: { novel, index: c.index } }">{{ c.title }}</nuxt-link>
+                    </li>
+                </ul>
+            </aside>
+        </Teleport>
+    </ClientOnly>
     <div class="content-group">
         <header class="novel-header">
             <a class="novel-wrap-top" :class="toLastClass" @click="toLastChapter">
@@ -287,7 +305,7 @@
         display: flex;
         flex-direction: column;
         gap: 4px;
-        overflow: invisible scroll;
+        overflow: auto scroll;
         overscroll-behavior: contain;
         padding: 0 8px 8px;
 
@@ -315,7 +333,7 @@
                 color: white;
             }
 
-            &[active] {
+            &.router-link-active {
                 background-color: var(--color-theme-block);
                 color: white;
             }

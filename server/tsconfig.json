@@ -1,6 +1,11 @@
 {
-    "extends": "../.nuxt/tsconfig.server.json",
-    "exclude": [
-        "../task"
-    ]
+  "extends": "../.nuxt/tsconfig.server.json",
+  "exclude": [
+      "../data",
+      "../task"
+  ],
+  "compilerOptions": {
+    "noImplicitThis": false,
+    "strict": false
+  }
 }

@@ -8,7 +8,7 @@
     <div class="content-group">
         <div class="jouhou-block">
             <div class="jouhou-header">
-                <img class="jouhou-image" src="/garden/icon/浅井爱纱.png" alt="角色一览"/>
+                <nuxt-img class="jouhou-image" src="/garden/icon/浅井爱纱.png"/>
                 <span>角色一览</span>
             </div>
             <table class="navbox-table">
@@ -82,7 +82,7 @@
         </div>
         <div class="jouhou-block">
             <div class="jouhou-header">
-                <img class="jouhou-image" src="/garden/icon/世界观设定.png" alt="世界观设定"/>
+                <nuxt-img class="jouhou-image" src="/garden/icon/世界观设定.png"/>
                 <span>世界观设定</span>
             </div>
             <table class="navbox-table">

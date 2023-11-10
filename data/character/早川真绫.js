@@ -1,0 +1,18 @@
+module.exports = {
+    title: "早川真绫",
+    summary: /*HTML*/``,
+    info: [
+        [
+            ["中文名", "早川真绫"],
+            ["外文名", "Hayakawa Maaya"],
+            ["性别", "女"]
+        ],
+        [
+            ["日文名", "早川真綾"],
+            ["平假名", "はやかわ　まあや"],
+            ["年龄", "16"]
+        ]
+    ],
+    illustration: [],
+    talent: []
+};

@@ -221,7 +221,7 @@
                     <div class="calendar-heroine" v-if="currentDate.event?.heroine">
                         <div class="heroine-wrapper">
                             <nuxt-link v-for="heroine in currentDate.event.heroine" :to="`/${heroine}`">
-                                <img :src="`/garden/icon/${heroine}.png`" @error.once="$event.target.src = `/garden/icon/unknown.png`"/>
+                                <nuxt-img :src="`/garden/icon/${heroine}.png`" placeholder="/garden/icon/unknown.png"/>
                                 <span>{{ heroine }}</span>
                             </nuxt-link>
                         </div>

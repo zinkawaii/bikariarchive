@@ -4,31 +4,31 @@
 
 <template>
     <Transition name="slide-fade">
-        <div v-if="settingStore.isOpen" class="mb-setting">
+        <div v-if="settingStore.isOpen" class="z-setting">
             <i class="fas fa-xmark" id="Close" @click="settingStore.close()"></i>
             <span class="content-h2 coco-title">全局设置</span>
-            <MBForm title="主题颜色" type="select" name="theme" :list="[`初空`, `菖蒲`, `早樱`]"/>
-            <MBForm title="夜间模式" type="select" name="dark-mode" :list="[`自动`, `白昼`, `暗夜`]"/>
-            <MBForm title="边栏显隐" type="select" name="sidebar-display" :list="[`默认`, `显现`, `隐匿`]"/>
+            <mb-form title="主题颜色" type="select" name="theme" :list="[`初空`, `菖蒲`, `早樱`]"/>
+            <mb-form title="夜间模式" type="select" name="dark-mode" :list="[`自动`, `白昼`, `暗夜`]"/>
+            <mb-form title="边栏显隐" type="select" name="sidebar-display" :list="[`默认`, `显现`, `隐匿`]"/>
             <span class="content-h2 coco-title">快捷键设置</span>
             <div class="shortcut-box">
-                <MBForm title="上一章节" type="input">
+                <mb-form title="上一章节" type="input">
                     <input class="input-line" id="ShortCut-Last" value="A">
-                </MBForm>
-                <MBForm title="下一章节" type="input">
+                </mb-form>
+                <mb-form title="下一章节" type="input">
                     <input class="input-line" id="ShortCut-Next" value="D">
-                </MBForm>
+                </mb-form>
             </div>
             <span class="content-h2 coco-title">阅读设置</span>
-            <MBForm title="字体选择" type="select" name="font-family" :list="[`系统默认`, `宋体`, `楷体`]"/>
-            <MBForm title="字体大小" type="select" name="font-size" :list="[`小`, `中`, `大`]"/>
+            <mb-form title="字体选择" type="select" name="font-family" :list="[`系统默认`, `宋体`, `楷体`]"/>
+            <mb-form title="字体大小" type="select" name="font-size" :list="[`小`, `中`, `大`]"/>
         </div>
     </Transition>
-    <MBMask :when="settingStore.isOpen" z="511" @click="settingStore.close()"/>
+    <mb-mask :when="settingStore.isOpen" z="511" @click="settingStore.close()"/>
 </template>
 
 <style lang="scss" scoped>
-    .mb-setting {
+    .z-setting {
         position: fixed;
         inset: 0;
         width: min(100%, 512px);

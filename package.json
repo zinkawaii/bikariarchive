@@ -12,13 +12,18 @@
   "dependencies": {
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
+    "clipboard": "^2.0.11",
     "dayjs": "^1.11.10",
     "lunisolar": "^2.2.3",
-    "unraw": "^3.0.0"
+    "prismjs": "^1.29.0",
+    "unraw": "^3.0.0",
+    "vue": "^3.3.8",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
     "@nuxt/devtools": "latest",
+    "@nuxt/image": "^1.0.0",
     "@types/fs-extra": "^11.0.4",
     "cheerio": "1.0.0-rc.12",
     "chokidar": "^3.5.3",
@@ -28,15 +33,15 @@
     "front-matter": "^4.0.2",
     "fs-extra": "^11.1.1",
     "glob": "^10.3.10",
-    "marked": "^9.1.5",
+    "h3-session": "^0.2.5",
+    "marked": "^9.1.6",
     "nuxt": "^3.8.1",
+    "nuxt-mongoose": "^1.0.3",
     "sass": "^1.69.5",
     "stylelint": "^15.11.0",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-standard-scss": "^11.1.0",
     "stylelint-order": "^6.0.3",
-    "stylelint-stylistic": "^0.4.3",
-    "vue": "^3.3.8",
-    "vue-router": "^4.2.5"
+    "stylelint-stylistic": "^0.4.3"
   }
 }

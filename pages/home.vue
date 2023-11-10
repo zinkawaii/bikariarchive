@@ -63,7 +63,7 @@
         </div>
         <div class="content-table home-profile">
             <a class="profile-avatar">
-                <img :src="author.avatar"/>
+                <nuxt-img :src="author.avatar"/>
             </a>
             <table class="profile-table">
                 <tr>
@@ -155,6 +155,7 @@
     .profile-avatar {
         display: block;
         width: 80%;
+        aspect-ratio: 1;
         max-width: 256px;
         margin: auto;
         border-radius: 100%;

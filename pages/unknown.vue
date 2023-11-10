@@ -6,14 +6,20 @@
     const router = useRouter();
     const time = ref(4);
 
+    onUnmounted(() => {
+        controller.abort();
+    });
+
+    const controller = new TimeoutController();
     Zin.setInterval(() => {
         time.value--;
     }, {
         duration: 1000,
-        times: 4
+        times: 4,
+        controller
     })
     .then(() => {
-        router.push("/home");
+        router.replace("/home");
     });
 </script>
 

@@ -92,7 +92,7 @@
 </script>
 
 <template>
-    <div class="mb-sidebar" :hidden="!display">
+    <div class="z-sidebar" :hidden="!display">
         <ul class="clock-table">
             <li v-for="i in 6" class="clock-item" :style="{ translate: clocks[i - 1].translate }" @click="exchange(i - 1)">
                 <span>{{ getTime(i - 1) }}</span>
@@ -103,13 +103,14 @@
 </template>
 
 <style lang="scss" scoped>
-    .mb-sidebar {
+    .z-sidebar {
         display: flex;
         flex-direction: column;
         gap: 24px;
         position: sticky;
         top: 96px;
         width: 256px;
+        height: calc(100vh - 128px);
         margin: 32px 0;
 
         &[hidden] {
@@ -206,7 +207,7 @@
     }
 
     @media (width < 1024px) {
-        .mb-sidebar {
+        .z-sidebar {
             position: static;
             min-width: var(--size-width-min-mobile);
             margin: 32px auto;

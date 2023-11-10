@@ -154,8 +154,9 @@ const Zin = new class Z
     //按照一定时间和次数循环执行函数
     setInterval(func, {
         duration = 1000,
-        times = -1
-    }) {
+        times = -1,
+        controller = null
+    } = {}) {
         return new Promise<void>((resolve, reject) => {
             let t = 0;
             recursion();
@@ -163,7 +164,7 @@ const Zin = new class Z
             function recursion() {
                 try {
                     func(t);
-                    setTimeout(() => {
+                    const timer = setTimeout(() => {
                         t++;
                         if (times >= 0 && t === times) {
                             resolve();
@@ -171,6 +172,7 @@ const Zin = new class Z
                         }
                         recursion();
                     }, duration);
+                    controller && (controller.timer = timer);
                 }
                 catch (err) {
                     reject(err);
@@ -228,5 +230,13 @@ const Zin = new class Z
         console.info(`${sign} -- ${measure.duration.toFixed(0)}ms`);
     }
 };
+
+export class TimeoutController {
+    timer: NodeJS.Timeout;
+
+    abort() {
+        clearTimeout(this.timer);
+    }
+}
 
 export default Zin;

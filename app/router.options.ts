@@ -1,4 +1,5 @@
 import type { RouterConfig } from "@nuxt/schema";
+import jInfo from "~/assets/json/Info.json";
 import Unknown from "~/pages/unknown.vue";
 
 export default <RouterConfig> {
@@ -28,6 +29,20 @@ export default <RouterConfig> {
             path: "/home",
             alias: "/",
             component: () => import("~/pages/home.vue")
+        },
+        {
+            name: "info",
+            path: "/:name",
+            component: () => import("~/pages/info.vue"),
+            beforeEnter(to, from, next) {
+                const folder = ["area", "character", "concept"];
+                for (const key of folder) {
+                    if (jInfo[key].includes(to.params.name)) {
+                        to.meta.type = key;
+                        next();
+                    }
+                }
+            }
         },
         {
             name: "reader",

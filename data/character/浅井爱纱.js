@@ -1,0 +1,62 @@
+module.exports = {
+    title: "浅井爱纱",
+    summary: /*HTML*/`
+        <p>风纪委第 125 支部行动组成员。</p>
+    `,
+    info: [
+        [
+            ["中文名", "浅井爱纱"],
+            ["外文名", "Asai Aisa"],
+            ["性别", "女"]
+        ],
+        [
+            ["日文名", "浅井愛紗"],
+            ["平假名", "あさい　あいさ"],
+            ["年龄", "15"]
+        ]
+    ],
+    illustration: [
+        {
+            title: "立绘",
+            src: "/public/image/illustration/浅井爱纱_1.jpg",
+            illustrator: "狸猫森"
+        },
+        {
+            title: "人物卡",
+            src: "/public/image/illustration/浅井爱纱_2.jpg",
+            illustrator: "狸猫森"
+        }
+    ],
+    talent: [
+        {
+            type: "超能力",
+            name: {
+                zh: "风力使",
+                jp: "風力使い",
+                en: "Aero Shooter"
+            },
+            star: "3",
+            class: ["元素"],
+            content: /*HTML*/`
+                <p>操纵风，能够制造折断巨树的烈风。</p>
+            `
+        },
+        {
+            type: "体质",
+            name: "未来视",
+            content: /*HTML*/`
+                <p>在某一时刻进入推演现实，看到至多一天之后的未来。</p>
+            `
+        }
+    ],
+    relationship: [
+        {
+            name: "浅井花环",
+            relation: "妹妹"
+        },
+        {
+            name: "浅井香草",
+            relation: "妹妹"
+        }
+    ]
+};

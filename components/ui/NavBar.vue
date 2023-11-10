@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="mb-navbar" :class="{ collapse: settingStore.setting[`ui-collapse`] }">
+    <div class="z-navbar" :class="{ collapse: settingStore.setting[`ui-collapse`] }">
         <ul class="list">
             <li class="item">
                 <nuxt-link href="/home">
@@ -34,7 +34,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .mb-navbar {
+    .z-navbar {
         position: fixed;
         overflow: hidden;
         top: calc(50% - 144px);

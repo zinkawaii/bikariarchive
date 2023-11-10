@@ -1,0 +1,14 @@
+const ability = require("@core/Ability");
+
+module.exports = {
+    title: "精神系",
+    summary: /*HTML*/`
+        <p>精神系，通过对生物电流的操纵来影响人体精神的能力系别，常常以某一领域的特化形态出现。不同于元素系的发电能力，无法直接制造肉眼可见的电流现象，但与生俱来地拥有极强的精密操作意识。</p>
+    `,
+    details: [
+        {
+            title: "已知能力",
+            content: ability.renderByClass("精神")
+        }
+    ]
+};

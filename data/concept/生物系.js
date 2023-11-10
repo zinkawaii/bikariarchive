@@ -1,0 +1,14 @@
+const ability = require("@core/Ability");
+
+module.exports = {
+    title: "生物系",
+    summary: /*HTML*/`
+        <p>生物系，以生物体为作用对象并造成物理层面的影响的能力系别。与精神系不同，通常能够使个体发生实际的生理变化，如「四肢健壮了起来」而不是「感觉浑身充满了力量」。</p>
+    `,
+    details: [
+        {
+            title: "已知能力",
+            content: ability.renderByClass("生物")
+        }
+    ]
+};

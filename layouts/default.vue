@@ -5,11 +5,11 @@
     <ZToolBar />
     <ZSetting />
     <div class="nakami">
-        <ZSideBar />
         <main class="main-content">
             <slot></slot>
             <ZFooter />
         </main>
+        <ZSideBar />
     </div>
     <ZLoader />
 </template>
@@ -17,7 +17,6 @@
 <style lang="scss">
     .nakami {
         display: flex;
-        flex-direction: row-reverse;
         align-items: flex-start;
         justify-content: center;
         gap: 32px;
@@ -34,43 +33,43 @@
         margin: 32px 0;
     }
 
-    .mb-background {
+    .z-background {
         z-index: -1;
     }
 
-    .mb-jumbotron {
+    .z-jumbotron {
         z-index: 64;
     }
 
-    .mb-header {
+    .z-header {
         z-index: 64;
     }
 
-    .mb-navbar {
+    .z-navbar {
         z-index: 128;
     }
 
-    .mb-maestrale {
+    .z-maestrale {
         z-index: 128;
     }
 
-    .mb-toolbar {
+    .z-toolbar {
         z-index: 128;
     }
 
-    .mb-drawer {
+    .z-drawer {
         z-index: 128;
     }
 
-    .mb-setting {
+    .z-setting {
         z-index: 512;
     }
 
-    .mb-mask {
+    .z-mask {
         z-index: 1024;
     }
 
-    .mb-loader {
+    .z-loader {
         z-index: 2048;
     }
 

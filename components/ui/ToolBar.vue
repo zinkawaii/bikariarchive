@@ -21,7 +21,7 @@
 </script>
 
 <template>
-    <div class="mb-toolbar">
+    <div class="z-toolbar">
         <ul class="tool-list" :class="{ collapse }">
             <li class="tool-item" @click="settingStore.open()">
                 <i class="fas fa-gear"></i>
@@ -43,7 +43,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .mb-toolbar {
+    .z-toolbar {
         position: fixed;
         right: 24px;
         bottom: 32px;

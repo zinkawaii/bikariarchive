@@ -10,7 +10,7 @@
 
 <template>
     <Transition name="fade">
-        <div v-if="loading" class="mb-loader">
+        <div v-if="loading" class="z-loader">
             <div class="loader-graph"></div>
             <div class="loader-shadow"></div>
         </div>
@@ -20,7 +20,7 @@
 <style lang="scss" scoped>
     $loader-color: rgb(255 245 165);
 
-    .mb-loader {
+    .z-loader {
         position: fixed;
         inset: 0;
         background: linear-gradient(135deg, rgb(153 210 228), rgb(255 212 218));

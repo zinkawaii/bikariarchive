@@ -194,39 +194,39 @@
             </div>
             <div class="excalc-label">
                 <span>标题</span>
-                <Input type="text" v-model="state.name"/>
+                <mb-input type="text" v-model="state.name"/>
             </div>
             <div class="excalc-label">
                 <span>后排</span>
-                <Input type="number" v-for="(item, index) in state.power.main" v-model="state.power.main[index]"/>
+                <mb-input type="number" v-for="(item, index) in state.power.main" v-model="state.power.main[index]"/>
             </div>
             <div class="excalc-label">
                 <span>前排</span>
-                <Input type="number" v-for="(item, index) in state.power.pioneer" v-model="state.power.pioneer[index]"/>
+                <mb-input type="number" v-for="(item, index) in state.power.pioneer" v-model="state.power.pioneer[index]"/>
             </div>
         </div>
         <div class="excalc-main">
             <label>
                 <span>血量</span>
-                <Input type="number" v-model="state.health"/>
+                <mb-input type="number" v-model="state.health"/>
             </label>
             <label>
                 <span>次数</span>
-                <Input type="number" v-model="state.times"/>
+                <mb-input type="number" v-model="state.times"/>
             </label>
             <a class="btn" @click="roll">Roll</a>
             <label>
                 <span>斩杀率</span>
-                <Input type="number" v-model="kill_rate" readonly/>
+                <mb-input type="number" v-model="kill_rate" readonly/>
             </label>
             <div class="excalc-division"></div>
             <label>
                 <span>时间</span>
-                <Input type="number" v-model="state.time"/>
+                <mb-input type="number" v-model="state.time"/>
             </label>
             <label>
                 <span>分数</span>
-                <Input type="number" v-model="score"/>
+                <mb-input type="number" v-model="score"/>
             </label>
         </div>
     </div>
@@ -246,12 +246,12 @@
                     <th>其他</th>
                 </tr>
                 <tr v-for="item, index in state.buki">
-                    <td><Input type="text" v-model="item.name"/></td>
-                    <td><Input type="number" v-model="item.damage"/></td>
-                    <td><Input type="number" v-model="item.hit"/></td>
-                    <td><Input type="number" accuracy="2" v-model="item.accuracy_rate"/></td>
-                    <td><Input type="number" accuracy="2" v-model="item.crit_rate"/></td>
-                    <td><Input type="number" accuracy="2" v-model="item.crit_damage"/></td>
+                    <td><mb-input type="text" v-model="item.name"/></td>
+                    <td><mb-input type="number" v-model="item.damage"/></td>
+                    <td><mb-input type="number" v-model="item.hit"/></td>
+                    <td><mb-input type="number" accuracy="2" v-model="item.accuracy_rate"/></td>
+                    <td><mb-input type="number" accuracy="2" v-model="item.crit_rate"/></td>
+                    <td><mb-input type="number" accuracy="2" v-model="item.crit_damage"/></td>
                     <td><a class="btn excalc-delete" @click="removeBuki(index)">删除</a></td>
                 </tr>
             </table>

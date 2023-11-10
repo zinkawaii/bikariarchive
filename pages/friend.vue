@@ -12,7 +12,7 @@
         <div class="friend-list">
             <a v-for="item in jFriend.list" class="friend-item" :href="item.href" target="_blank" rel="noopener noreferrer">
                 <div class="friend-avatar-wrapper">
-                    <div class="friend-avatar"><img :src="item.icon" loading="lazy"/></div>
+                    <div class="friend-avatar"><nuxt-img :src="item.icon" loading="lazy"/></div>
                     <div class="friend-diamond"></div>
                 </div>
                 <div class="friend-info">

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="mb-header">
+    <div class="z-header">
         <nuxt-link class="title" to="/home">BikariArchive</nuxt-link>
         <ul class="nav">
             <li class="nav-item">
@@ -47,7 +47,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .mb-header {
+    .z-header {
         display: flex;
         position: sticky;
         top: 0;
@@ -104,20 +104,21 @@
 
             &::after {
                 content: "";
-                display: block;
                 position: absolute;
                 bottom: 14px;
-                left: 12px;
-                width: 0;
+                width: calc(100% - 24px);
                 height: 4px;
                 border-radius: 2px;
                 background-color: var(--color-theme-block-dark);
+                transform-origin: left;
                 transition: all 0.4s;
+                scale: 0 1;
+                translate: -4px;
             }
         }
 
         &:hover a::after {
-            width: calc(100% - 24px);
+            scale: 1;
         }
     }
 
@@ -150,7 +151,7 @@
     }
 
     @media (width < 1024px) {
-        .mb-header {
+        .z-header {
             width: 100vw;
             min-width: var(--size-width-min-mobile);
         }

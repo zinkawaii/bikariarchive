@@ -15,11 +15,11 @@
 </script>
 
 <template>
-    <div class="mb-background" :style="{ backgroundImage: `url(/garden/background/bg_${bgName}.webp)` }"></div>
+    <div class="z-background" :style="{ backgroundImage: `url(/garden/background/bg_${bgName}.webp)` }"></div>
 </template>
 
 <style lang="scss" scoped>
-    .mb-background {
+    .z-background {
         position: fixed;
         inset: 0;
         background-attachment: fixed;

@@ -9,6 +9,19 @@ export default defineNuxtConfig({
             ]
         }
     },
+    components: [
+        {
+            path: "~/components"
+        },
+        {
+            path: "~/components/ui",
+            prefix: "z"
+        },
+        {
+            path: "~/components/common",
+            prefix: "mb"
+        }
+    ],
     css: [
         "~/assets/fontawesome/css/fontawesome.css",
         "~/assets/fontawesome/css/brands.css",
@@ -16,6 +29,23 @@ export default defineNuxtConfig({
         "~/assets/scss/sinrabansyo.scss"
     ],
     modules: [
+        ["h3-session/nuxt", {
+            secret: "<!-- ??? -->",
+            resave: true,
+            saveUninitialized: true,
+            cookie: {
+                secure: true
+            }
+        }],
+        ["nuxt-mongoose", {
+            uri: process.env.MONGODB_URI,
+            options: {
+                dbName: process.env.MONGODB_DBNAME,
+                user: process.env.MONGODB_USER,
+                pass: process.env.MONGODB_PASS
+            }
+        }],
+        "@nuxt/image",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt"
     ],
