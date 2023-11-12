@@ -1,5 +1,10 @@
 <script setup>
+    const drawerStore = useDrawerStore();
     const settingStore = useSettingStore();
+
+    function toggleDrawer() {
+        drawerStore.toggle();
+    }
 
     function scrollToTop() {
         window.scrollTo({
@@ -26,7 +31,7 @@
             <li class="tool-item" @click="settingStore.open()">
                 <i class="fas fa-gear"></i>
             </li>
-            <li class="tool-item" id="User">
+            <li class="tool-item" @click="toggleDrawer">
                 <i class="fas fa-user"></i>
             </li>
             <li class="tool-item" @click="scrollToTop">

@@ -2,7 +2,7 @@
     --color-text              : rgb(36 33 30); /* 文本色 */
     --color-link              : rgb(63 81 181); /* 超链接色 */
     --color-danger            : rgb(255 0 0); /* 警告色 */
-    --color-gray              : rgb(128 128 128); /* 灰色 */
+    --color-gray              : rgb(148 148 148); /* 灰色 */
     --color-border            : rgb(160 160 160); /* 边框色 */
     --color-border-light      : rgb(221 221 221); /* 边框色-浅 */
     --color-border-dark       : rgb(51 51 51); /* 边框色-深 */
@@ -154,9 +154,10 @@ input, textarea, select, option {
     color: inherit;
 }
 
-img[is="mb-image"] {
-    width: 100%;
-    cursor: pointer;
+img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
 }
 
 [type="number"] {
@@ -192,6 +193,13 @@ img[is="mb-image"] {
 }
 
 /* ---------------------------------------------------------------- */
+
+/* 通用内容页 */
+.content-page {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
 
 /* 通用内容组 */
 .content-group {
@@ -360,6 +368,10 @@ img[is="mb-image"] {
 
 /* 媒体查询 */
 @media (width < 1024px) {
+    .content-page {
+        gap: 16px;
+    }
+
     .content-group {
         padding: 16px;
     }

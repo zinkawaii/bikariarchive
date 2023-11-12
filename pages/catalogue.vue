@@ -64,7 +64,7 @@
                 <legend class="content-h2">章节列表</legend>
                 <ul>
                     <li v-for="chapter in chapters">
-                        <nuxt-link :to="`/book/${current.novel}/${chapter.index}`">
+                        <nuxt-link :to="{ name: `reader`, params: { novel: current.novel, index: chapter.index }}">
                             <span class="title">{{ chapter.title }}</span>
                             <span class="date">{{ chapter.date_reco ?? chapter.date ?? "很久以前" }}</span>
                         </nuxt-link>

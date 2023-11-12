@@ -88,16 +88,20 @@
             1: true,
             2: false
         }[s];
+    }, {
+        immediate: true
     });
 </script>
 
 <template>
     <div class="z-sidebar" :hidden="!display">
-        <ul class="clock-table">
-            <li v-for="i in 6" class="clock-item" :style="{ translate: clocks[i - 1].translate }" @click="exchange(i - 1)">
-                <span>{{ getTime(i - 1) }}</span>
-            </li>
-        </ul>
+        <ClientOnly>
+            <ul class="clock-table">
+                <li v-for="i in 6" class="clock-item" :style="{ translate: clocks[i - 1].translate }" @click="exchange(i - 1)">
+                    <span>{{ getTime(i - 1) }}</span>
+                </li>
+            </ul>
+        </ClientOnly>
         <slot></slot>
     </div>
 </template>
@@ -111,7 +115,6 @@
         top: 96px;
         width: 256px;
         height: calc(100vh - 128px);
-        margin: 32px 0;
 
         &[hidden] {
             display: none;
@@ -209,8 +212,9 @@
     @media (width < 1024px) {
         .z-sidebar {
             position: static;
+            height: auto;
             min-width: var(--size-width-min-mobile);
-            margin: 32px auto;
+            margin: auto;
             padding: 0 32px;
         }
     }

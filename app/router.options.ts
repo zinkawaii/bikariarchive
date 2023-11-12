@@ -1,6 +1,4 @@
 import type { RouterConfig } from "@nuxt/schema";
-import jInfo from "~/assets/json/Info.json";
-import Unknown from "~/pages/unknown.vue";
 
 export default <RouterConfig> {
     routes: (_routes) => [
@@ -31,20 +29,6 @@ export default <RouterConfig> {
             component: () => import("~/pages/home.vue")
         },
         {
-            name: "info",
-            path: "/:name",
-            component: () => import("~/pages/info.vue"),
-            beforeEnter(to, from, next) {
-                const folder = ["area", "character", "concept"];
-                for (const key of folder) {
-                    if (jInfo[key].includes(to.params.name)) {
-                        to.meta.type = key;
-                        next();
-                    }
-                }
-            }
-        },
-        {
             name: "reader",
             path: "/book/:novel/:index",
             component: () => import("~/pages/reader.vue")
@@ -55,15 +39,15 @@ export default <RouterConfig> {
             component: () => import("~/pages/search.vue")
         },
         {
-            name: "unknown",
-            path: "/:pathMatch(.*)*",
-            component: Unknown
+            name: "entry",
+            path: "/:title",
+            component: () => import("~/pages/entry/index.vue")
         },
         {
             name: "tools",
             path: "/tools",
-            redirect: "/unknown",
-            component: () => import("~/pages/tools/tools.vue"),
+            redirect: { name: "unknown" },
+            component: () => import("~/pages/tools/index.vue"),
             children: [
                 {
                     name: "excalc",
@@ -81,6 +65,34 @@ export default <RouterConfig> {
                     component: () => import("~/pages/tools/namaemaker.vue")
                 }
             ]
+        },
+        {
+            name: "user",
+            path: "/user",
+            redirect: { name: "login" },
+            component: () => import("~/pages/user/index.vue"),
+            children: [
+                {
+                    name: "login",
+                    path: "login",
+                    component: () => import("~/pages/user/login.vue")
+                },
+                {
+                    name: "logon",
+                    path: "logon",
+                    component: () => import("~/pages/user/logon.vue")
+                },
+                {
+                    name: "space",
+                    path: "space/:uid",
+                    component: () => import("~/pages/user/space.vue")
+                }
+            ]
+        },
+        {
+            name: "unknown",
+            path: "/:pathMatch(.*)*",
+            component: () => import("~/pages/unknown.vue")
         }
     ]
 };

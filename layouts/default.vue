@@ -3,9 +3,10 @@
     <ZHeader />
     <ZNavBar />
     <ZToolBar />
+    <ZDrawer />
     <ZSetting />
-    <div class="nakami">
-        <main class="main-content">
+    <div class="sotomi">
+        <main class="nakami">
             <slot></slot>
             <ZFooter />
         </main>
@@ -15,22 +16,21 @@
 </template>
 
 <style lang="scss">
-    .nakami {
+    .sotomi {
         display: flex;
-        align-items: flex-start;
         justify-content: center;
         gap: 32px;
-        padding: 0 32px;
+        padding: 32px;
     }
 
-    .main-content {
+    .nakami {
         container: main / inline-size;
         display: flex;
         flex: 1;
         flex-direction: column;
         gap: 32px;
+        min-width: var(--size-width-min-mobile);
         max-width: 1028px;
-        margin: 32px 0;
     }
 
     .z-background {
@@ -74,17 +74,10 @@
     }
 
     @media (width < 1024px) {
-        .nakami {
-            flex-direction: column-reverse;
-            gap: 0;
-            padding: 0;
-        }
-
-        .main-content {
-            width: 100vw;
-            min-width: var(--size-width-min-mobile);
-            margin: 8px 0;
-            padding: 0 8px;
+        .sotomi {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 8px;
         }
     }
 </style>

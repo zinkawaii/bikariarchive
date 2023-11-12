@@ -42,23 +42,6 @@
         currentVolume: art.volOrder
     });
 
-    //加载正文
-    useFetch("/api/article", {
-        query: {
-            novel,
-            volOrder: art.volOrder,
-            index
-        },
-        pick: `${novel}/${index}`,
-        onResponse({ response }) {
-            const { error, content, readCount } = response._data;
-            if (error === 0) {
-                state.value.content = content;
-                state.value.readCount = readCount;
-            }
-        }
-    });
-
     //日期
     const { date } = state.value;
     if (art.date.publish) {
@@ -78,21 +61,24 @@
 
     //本章链接
     const currentUrl = computed(() => {
-        return process.browser && location.origin + `/book/${art.novel}/${art.index}`;
+        return process.browser && location.origin + route.path;
     });
 
-    const toLastClass = { hidden: art.isFirst };
-    const toNextClass = { hidden: art.isLast };
-
     //上一章
-    function toLastChapter() {
-        router.push(`/book/${novel}/${art.getLastIndex()}`);
-    }
+    const toLastClass = { hidden: art.isFirst };
+    const toLastChapter = art.isFirst ? {} : {
+        params: {
+            index: art.getLastIndex()
+        }
+    };
 
     //下一章
-    function toNextChapter() {
-        router.push(`/book/${novel}/${art.getNextIndex()}`);
-    }
+    const toNextClass = { hidden: art.isLast };
+    const toNextChapter = art.isLast ? {} : {
+        params: {
+            index: art.getNextIndex()
+        }
+    };
 
     //写入阅读记录
     readRecordStore.set(art.novel, {
@@ -105,12 +91,20 @@
         return jArticle[novel].chapter.filter((c) => c.volume === state.value.currentVolume);
     });
 
-    const $Index = ref();
-    onMounted(() => {
-        if ($Index.value) {
-            $Index.value.scrollTo(0, (art.order_in_vol - 1) * 34);
+    //获取正文
+    const { data } = await useFetch("/api/article", {
+        query: {
+            novel,
+            volOrder: art.volOrder,
+            index
         }
     });
+
+    const { error, content, readCount } = data.value;
+    if (error === 0) {
+        state.value.content = content;
+        state.value.readCount = readCount;
+    }
 </script>
 
 <template>
@@ -120,47 +114,48 @@
                 <select class="index-volume" :value="art.volOrder" v-model="state.currentVolume">
                     <option v-for="(v, i) in jArticle[novel].volume" :value="i">{{ v.title }}</option>
                 </select>
-                <ul class="index-list" ref="$Index">
+                <ul class="index-list">
                     <li v-for="c in jChapter">
-                        <nuxt-link :to="{ name: `reader`, params: { novel, index: c.index } }">{{ c.title }}</nuxt-link>
+                        <nuxt-link :to="{ name: `reader`, params: { novel, index: c.index }}">{{ c.title }}</nuxt-link>
                     </li>
                 </ul>
             </aside>
         </Teleport>
     </ClientOnly>
-    <div class="content-group">
-        <header class="novel-header">
-            <a class="novel-wrap-top" :class="toLastClass" @click="toLastChapter">
-                <i class="fas fa-chevron-left"></i>
-                <span>上一章</span>
-            </a>
-            <div class="novel-title">
-                <h2 id="Title" style="float: left;">{{ state.title }}</h2>
-                <div class="novel-information">
-                    <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
-                    <span :title="state.date.tip">{{ state.date.type }}时间：{{ state.date.value }}</span>
+    <div class="content-page">
+        <div class="content-group">
+            <header class="novel-header">
+                <nuxt-link class="novel-wrap-top" :class="toLastClass" :to="toLastChapter">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>上一章</span>
+                </nuxt-link>
+                <div class="novel-title">
+                    <h2 id="Title" style="float: left;">{{ state.title }}</h2>
+                    <div class="novel-information">
+                        <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
+                        <span :title="state.date.tip">{{ state.date.type }}时间：{{ state.date.value }}</span>
+                    </div>
                 </div>
-            </div>
-            <a class="novel-wrap-top" :class="toNextClass" @click="toNextChapter">
-                <span>下一章</span>
-                <i class="fas fa-chevron-right"></i>
-            </a>
-        </header>
-        <article class="novel-text" v-html="state.content"></article>
-        <footer class="novel-copyright">
-            <div><span class="meta">本章作者</span><nuxt-link to="/home">{{ state.author }}</nuxt-link></div>
-            <div><span class="meta">本章链接</span><nuxt-link class="content" :href="currentUrl">{{ currentUrl }}</nuxt-link></div>
-            <div><span class="meta">版权声明</span><span class="content">本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></div>
-        </footer>
-    </div>
-    <div class="novel-wrap-bottom">
-        <a :class="toLastClass" @click="toLastChapter">上一章</a>
-        <a :class="toNextClass" @click="toNextChapter">下一章</a>
+                <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
+                    <span>下一章</span>
+                    <i class="fas fa-chevron-right"></i>
+                </nuxt-link>
+            </header>
+            <article class="novel-text" v-html="state.content"></article>
+            <footer class="novel-copyright">
+                <div><span class="meta">本章作者</span><nuxt-link :to="{ name: `home` }">{{ state.author }}</nuxt-link></div>
+                <div><span class="meta">本章链接</span><nuxt-link class="content" :to="route.path">{{ currentUrl }}</nuxt-link></div>
+                <div><span class="meta">版权声明</span><span class="content">本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></div>
+            </footer>
+        </div>
+        <div class="novel-wrap-bottom">
+            <nuxt-link :class="toLastClass" :to="toLastChapter">上一章</nuxt-link>
+            <nuxt-link :class="toNextClass" :to="toNextChapter">下一章</nuxt-link>
+        </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-
     .novel-header {
         display: flex;
         margin: -16px 0 8px;
@@ -305,7 +300,7 @@
         display: flex;
         flex-direction: column;
         gap: 4px;
-        overflow: auto scroll;
+        overflow: hidden scroll;
         overscroll-behavior: contain;
         padding: 0 8px 8px;
 
@@ -320,7 +315,7 @@
 
         a {
             display: block;
-            overflow: invisible;
+            overflow: hidden;
             padding: 6px 0 6px 16px;
             border-radius: 8px;
             font-size: 14px;

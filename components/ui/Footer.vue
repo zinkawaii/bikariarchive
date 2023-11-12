@@ -25,33 +25,35 @@
 
 <template>
     <div class="z-footer">
-        <div class="time">
-            茶馆已营业 {{ time.day }} 天 {{ time.hour }} 时 {{ time.minute }} 分 {{ time.second }} 秒
-        </div>
-        <div class="icp">
-            <span>Copyright © 2022-2023 By KazariEX</span>｜<a href="https://icp.gov.moe/?keyword=20230904" target="_blank" rel="nofollow noopener noreferrer">萌ICP备20230904号</a>
-        </div>
+        <ClientOnly>
+            <p class="time">茶馆已营业 {{ time.day }} 天 {{ time.hour }} 时 {{ time.minute }} 分 {{ time.second }} 秒</p>
+        </ClientOnly>
+        <p class="icp">
+            <span>Copyright © 2022-2023 By KazariEX</span>｜<a class="icp" href="https://icp.gov.moe/?keyword=20230904" target="_blank" rel="nofollow noopener noreferrer">萌ICP备20230904号</a>
+        </p>
     </div>
 </template>
 
 <style lang="scss" scoped>
     .z-footer {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 16px 32px;
         border-radius: 16px;
         box-shadow: var(--box-shadow);
         background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));
-        line-height: 24px;
-        text-align: center;
+        font-size: 14px;
         text-shadow: var(--text-shadow);
         color: white;
+
+        > p {
+            font-size: 14px;
+            line-height: 24px;
+        }
     }
 
     .icp {
-        display: inline-block;
-
-        > a {
-            color: white;
-        }
+        color: white;
     }
 </style>

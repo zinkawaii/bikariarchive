@@ -5,54 +5,61 @@
 
     const route = useRoute();
     const router = useRouter();
-    const word = ref(route.query.word);
+    const searchHistoryStore = useSearchHistoryStore();
+
+    const word = ref("");
     const results = ref([]);
-    const searchWord = ref();
+    const searchWord = ref("");
+    const { history } = searchHistoryStore;
 
     //全文检索
-    const fullTextSearch = Zin.debounce(() => {
-        useFetch("/api/search", {
-            query: {
-                word: word.value
-            },
-            onResponse({ response }) {
-                results.value.length = 0;
-                searchWord.value = word.value;
-                router.replace({
-                    query: {
-                        word: word.value
-                    }
-                });
+    const fullTextSearch = Zin.debounce(async (w = word.value) => {
+        if (!(w?.length > 0)) return;
 
-                const {
-                    error,
-                    results: res
-                } = response._data;
-                if (error !== 0 || res.length === 0) return;
+        const { data } = await useFetch("/api/search", { query: { word: w }});
 
-                const art = new Article();
-                for (const item of res) {
-                    art.init("bikari", item.index);
-                    const parts = item.parts.map((part) => {
-                        return part.replaceAll(word.value, `<span class="light">${word.value}</span>`);
-                    });
+        results.value.length = 0;
+        searchWord.value = w;
+        router.replace({ query: { word: w }});
 
-                    results.value.push({
-                        index: item.index,
-                        title: art.title,
-                        volName: art.volName,
-                        count: item.count,
-                        parts
-                    });
-                }
-            },
-            pick: [word.value]
-        });
+        const {
+            error,
+            results: res
+        } = data.value;
+        if (error !== 0) return;
+
+        const art = new Article();
+        for (const item of res) {
+            art.init("bikari", item.index);
+            const parts = item.parts.map((part) => {
+                return part.replaceAll(w, `<span class="light">${w}</span>`);
+            });
+
+            results.value.push({
+                index: item.index,
+                title: art.title,
+                volName: art.volName,
+                count: item.count,
+                parts
+            });
+        }
+
+        //写入历史记录
+        searchHistoryStore.push(w);
     });
 
-    //带参数进页面时
-    if (word.value) {
-        fullTextSearch();
+    //带参数进入页面时
+    watch(() => route.query.word, (value) => {
+        word.value = value;
+        fullTextSearch(value);
+    }, {
+        immediate: true
+    });
+
+    //点击历史词条
+    function clickHistory(historyWord) {
+        word.value = historyWord;
+        fullTextSearch(historyWord);
     }
 
     //总出现次数
@@ -64,40 +71,45 @@
 </script>
 
 <template>
-    <div class="content-group">
-        <div class="search-box">
-            <input class="search-input" v-model="word" @keyup.enter="fullTextSearch"/>
-            <span class="search-button" @click="fullTextSearch">全文检索</span>
-        </div>
-        <div class="search-history">
-            <div class="history-title">
-                <span>历史词条</span>
-                <i class="fas fa-trash-can history-clear"></i>
+    <div class="content-page">
+        <div class="content-group">
+            <div class="search-box">
+                <input class="search-input" v-model="word" @keyup.enter="fullTextSearch()"/>
+                <span class="search-button" @click="fullTextSearch()">全文检索</span>
             </div>
-            <ul class="history-list">
-            </ul>
-        </div>
-    </div>
-    <div v-if="results.length > 0" class="content-group">
-        <div class="search-statistics">
-            <div class="title">
-                “{{ searchWord }}”的检索结果
-            </div>
-            <div class="text">
-                共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次
-            </div>
-        </div>
-        <div class="search-result">
-            <nuxt-link v-for="item in results" class="result-box" :to="`/book/bikari/${item.index}`">
-                <div class="result-title">
-                    {{ item.title }}
+            <div class="search-history">
+                <div class="history-title">
+                    <span>历史词条</span>
+                    <i class="fas fa-trash-can history-clear" @click="searchHistoryStore.clear()"></i>
                 </div>
-                <span class="result-volume">{{ item.volName }}</span>
-                <article class="result-part">
-                    <p v-for="part in item.parts" v-html="part"></p>
-                </article>
-                <span class="result-count">本章共出现{{ item.count }}次</span>
-            </nuxt-link>
+                <ul v-if="history.length > 0" class="history-list">
+                    <li v-for="item in history">
+                        <a class="tab" @click="clickHistory(item)">{{ item }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div v-if="searchWord.length > 0" class="content-group">
+            <div class="search-statistics">
+                <div class="title">
+                    “{{ searchWord }}”的检索结果
+                </div>
+                <div class="text">
+                    共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次
+                </div>
+            </div>
+            <div class="search-result">
+                <nuxt-link v-for="item in results" class="result-box" :to="`/book/bikari/${item.index}`">
+                    <div class="result-title">
+                        {{ item.title }}
+                    </div>
+                    <span class="result-volume">{{ item.volName }}</span>
+                    <article class="result-part">
+                        <p v-for="part in item.parts" v-html="part"></p>
+                    </article>
+                    <span class="result-count">本章共出现{{ item.count }}次</span>
+                </nuxt-link>
+            </div>
         </div>
     </div>
 </template>
@@ -149,7 +161,7 @@
     .history-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 16px 8px;
         margin-top: 8px;
 
         > li > a {
@@ -179,7 +191,8 @@
 
     .result-box {
         padding: 16px;
-        border-width: 0 0 0 16px;
+        border: 1px;
+        border-left: 16px;
         border-style: solid;
         border-color: transparent;
         border-radius: 8px;
@@ -188,7 +201,8 @@
         cursor: pointer;
 
         &:hover {
-            border-left: 16px solid var(--color-theme-block);
+            border-color: var(--color-border-light);
+            border-left-color: var(--color-theme-block);
             background-color: var(--color-background);
         }
     }

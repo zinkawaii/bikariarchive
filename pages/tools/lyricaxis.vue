@@ -3,13 +3,16 @@
         title: "歌词打轴"
     });
 
-    const data = reactive({
+    const state = ref({
         //音频相关
+        src: "",
         filename: "",
         invalid: true,
         playing: false,
         duration: 0,
         current: 0,
+        rate: 0,
+        dragging: false,
 
         //打轴相关
         axising: false
@@ -21,39 +24,37 @@
         current: 0
     });
 
-    const audio = new Audio();
-    const $Control = ref();
+    const $Audio = ref();
 
     //音频可以播放
-    audio.addEventListener("canplay", () => {
-        data.invalid = null;
-        data.duration = audio.duration;
-    });
+    function audioCanplay() {
+        state.value.invalid = null;
+        state.value.duration = $Audio.value.duration;
+    };
 
     //音频错误
-    audio.addEventListener("error", () => {
-        data.filename = "";
-    });
+    function audioError() {
+        state.value.filename = "";
+    };
 
     //音频结束播放
-    audio.addEventListener("ended", () => {
-        data.playing = false;
-    });
+    function audioEnded() {
+        state.value.playing = false;
+    };
 
     //音频播放时
-    audio.addEventListener("timeupdate", () => {
-        if (!$Control.value.dragging) {
-            data.current = audio.currentTime;
+    function audioTimeupdate() {
+        if (!state.value.dragging) {
+            state.value.current = $Audio.value.currentTime;
 
             //进度条
-            const rate = data.current / data.duration;
-            $Control.value.rate = rate;
+            const rate = state.value.current / state.value.duration;
+            state.value.rate = rate;
         }
-    });
+    };
 
     //上传
-    function upload()
-    {
+    function upload() {
         showOpenFilePicker({
             types: [{
                 accept: {
@@ -64,60 +65,57 @@
         .then((handle) => handle[0].getFile())
         .then((file) => {
             //状态初始化
-            data.filename = file.name;
-            data.invalid = true;
-            data.playing = false;
-            data.duration = 0;
-            data.current = 0;
-            data.axising = false;
-            $Control.value.rate = 0;
+            state.value.filename = file.name;
+            state.value.invalid = true;
+            state.value.playing = false;
+            state.value.duration = 0;
+            state.value.current = 0;
+            state.value.axising = false;
+            state.value.rate = 0;
 
             //链接
-            URL.revokeObjectURL(audio.src);
-            audio.src = URL.createObjectURL(file);
+            URL.revokeObjectURL(state.value.src);
+            state.value.src = URL.createObjectURL(file);
         });
     }
 
     //播放 & 暂停
-    function play()
-    {
-        if (data.playing ^= 1) {
-            audio.play();
+    function play() {
+        if (state.value.playing ^= 1) {
+            $Audio.value.play();
         }
         else {
-            audio.pause();
+            $Audio.value.pause();
         }
     }
 
     //进度正在改变时
-    function controlProgress(event)
-    {
-        data.current = data.duration * event.rate;
+    function controlProgress(event) {
+        if (!state.value.invalid) {
+            state.value.current = state.value.duration * event.rate;
+        }
     }
 
     //进度改变时
-    function controlChange(event)
-    {
-        if (!data.invalid) {
-            audio.currentTime = data.duration * event.rate;
+    function controlChange(event) {
+        if (!state.value.invalid) {
+            $Audio.value.currentTime = state.value.duration * event.rate;
         }
         else {
             //音频无效，进度归零
-            $Control.value.rate = 0;
+            state.value.rate = 0;
         }
     }
 
     //导出
-    function exporter()
-    {
+    function exporter() {
         const output = getCompileText();
-        Zin.download(output, "blob", `${data.filename}.lrc`);
+        Zin.download(output, "blob", `${state.value.filename}.lrc`);
     }
 
     //打轴
-    function axis()
-    {
-        if (data.axising ^= 1) {
+    function axis() {
+        if (state.value.axising ^= 1) {
             //清空数据
             lyric.value.data.length = 0;
 
@@ -159,7 +157,7 @@
         } = lyric.value.data;
 
         //回到两句前的时间点
-        audio.currentTime = target?.time || 0;
+        $Audio.value.currentTime = target?.time || 0;
 
         if (last) {
             last.sign = false;
@@ -173,7 +171,7 @@
 
     //标记
     function sign() {
-        const time = audio.currentTime;
+        const time = state.value.current;
         const current = lyric.value.data[lyric.value.current];
 
         if (current) {
@@ -195,16 +193,14 @@
     }
 
     //获取打轴结果
-    function getCompileText()
-    {
+    function getCompileText() {
         return lyric.value.data.map((item) => {
             return item.timed + item.content;
         }).join("\n");
     }
 
     //时间格式化
-    function timeFormat(time)
-    {
+    function timeFormat(time) {
         const m = time / 60;
         const s = time % 60;
         return `${String(Math.floor(m)).padStart(2, "0")}:${String(Math.floor(s)).padStart(2, "0")}`;
@@ -213,21 +209,37 @@
 
 <template>
     <div class="lyric-player">
+        <audio
+            ref="$Audio"
+            :src="state.src"
+            @canplay="audioCanplay"
+            @error="audioError"
+            @ended="audioEnded"
+            @timeupdate="audioTimeupdate"
+        ></audio>
         <a class="btn" @click="upload">上传</a>
-        <a class="btn" @click="play" :disabled="data.invalid">{{ !data.invalid && data.playing ? "暂停" : "播放" }}</a>
+        <a class="btn" @click="play" :disabled="state.invalid">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</a>
         <span>
-            <a class="btn" @click="exporter" :disabled="data.invalid">导出</a>
-            <a class="btn" @click="axis" :disabled="data.invalid">{{ data.axising ? "结束打轴" : "开始打轴" }}</a>
+            <a class="btn" @click="exporter" :disabled="state.invalid">导出</a>
+            <a class="btn" @click="axis" :disabled="state.invalid">{{ state.axising ? "结束打轴" : "开始打轴" }}</a>
         </span>
         <div>
-            <span class="lyric-time">{{ timeFormat(data.current) }}</span>
-            <mb-progress class="lyric-control" ref="$Control" @progress="controlProgress" @change="controlChange">{{ data.filename || "- 请上传歌曲 -" }}</mb-progress>
-            <span class="lyric-time">{{ timeFormat(data.duration) }}</span>
+            <span class="lyric-time">{{ timeFormat(state.current) }}</span>
+            <mb-progress
+                class="lyric-control"
+                v-model="state.rate"
+                :title="state.filename || `- 请上传歌曲 -`"
+                @progress="controlProgress"
+                @change="controlChange"
+                @dragstart="state.dragging = true"
+                @dragend="state.dragging = false"
+            />
+            <span class="lyric-time">{{ timeFormat(state.duration) }}</span>
         </div>
     </div>
     <div class="lyric-main">
         <textarea class="lyric-textarea lyric-editor" placeholder="在这里输入歌词……" v-model="lyric.raw"></textarea>
-        <div class="lyric-textarea lyric-compile" :class="{ show: data.axising }">
+        <div class="lyric-textarea lyric-compile" :class="{ show: state.axising }">
             <article>
                 <p v-for="item in lyric.data" :class="{
                     light: lyric.current === item.index,
@@ -299,7 +311,6 @@
         position: absolute;
         overflow: auto;
         inset: 0;
-        background-color: white;
 
         > article > p {
             margin: 0 -8px;
@@ -334,9 +345,5 @@
         position: fixed;
         right: 16px;
         bottom: 8px;
-
-        .btn:not(:hover) {
-            background-color: white;
-        }
     }
 </style>

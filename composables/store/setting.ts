@@ -30,7 +30,12 @@ export const useSettingStore = defineStore("setting", () => {
         watch(() => setting.value[key], (newVal, oldVal, onCleanup) => {
             const fn = handler.bind(null, newVal, oldVal, onCleanup);
 
-            if (options?.viewTransition && process.browser && document.startViewTransition) {
+            if (//首屏加载时不应用视图转换
+                oldVal !== void(0)
+                && process.browser
+                && options?.viewTransition
+                && document.startViewTransition
+            ) {
                 document.startViewTransition(fn);
             }
             else fn();

@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { serverConfig, clientConfig } from "./server/zin.config";
+
 export default defineNuxtConfig({
     app: {
         head: {
@@ -28,27 +29,15 @@ export default defineNuxtConfig({
         "~/assets/fontawesome/css/solid.css",
         "~/assets/scss/sinrabansyo.scss"
     ],
-    modules: [
-        ["h3-session/nuxt", {
-            secret: "<!-- ??? -->",
-            resave: true,
-            saveUninitialized: true,
-            cookie: {
-                secure: true
-            }
-        }],
-        ["nuxt-mongoose", {
-            uri: process.env.MONGODB_URI,
-            options: {
-                dbName: process.env.MONGODB_DBNAME,
-                user: process.env.MONGODB_USER,
-                pass: process.env.MONGODB_PASS
-            }
-        }],
-        "@nuxt/image",
-        "@pinia/nuxt",
-        "@pinia-plugin-persistedstate/nuxt"
-    ],
+    vite: {
+        plugins: [
+
+        ]
+    },
+    runtimeConfig: {
+        ...serverConfig,
+        public: clientConfig
+    },
     devtools: {
         enabled: false
     },
@@ -61,6 +50,51 @@ export default defineNuxtConfig({
             cert: "<!-- ??? -->"
         },
         host: "<!-- ??? -->",
-        port: 615
+        port: 443
+    },
+    modules: [
+        ["h3-session/nuxt", {
+            secret: "<!-- ??? -->",
+            resave: true,
+            saveUninitialized: true,
+            cookie: {
+                secure: true
+            }
+        }],
+        ["nuxt-mongoose", serverConfig.mongoose],
+        "@nuxtjs/robots",
+        "@nuxt/image",
+        "@pinia/nuxt",
+        "@pinia-plugin-persistedstate/nuxt"
+    ],
+    robots: {
+        rules: [
+            ...[
+                "AhrefsBot",
+                "AhrefsSiteAudit",
+                "aiHitBot",
+                "BLEXBot",
+                "Barkrowler",
+                "DnyzBot",
+                "DotBot",
+                "ExtLinksBot",
+                "GPTBot",
+                "Mail.Ru",
+                "MegaIndex.ru",
+                "MJ12bot",
+                "Researchscan",
+                "SemrushBot",
+                "spbot",
+                "Uptimebot",
+                "ZoominfoBot"
+            ].map((ua) => ({
+                UserAgent: ua,
+                Disallow: "/",
+                BlankLine: true
+            })),
+            {
+                Sitemap: (req) => `https://${req.headers.host}/sitemap.txt`
+            }
+        ]
     }
 });

@@ -1,44 +1,55 @@
 <script setup>
+    const router = useRouter();
+    const word = ref("");
 
+    function search() {
+        router.push({
+            name: "search",
+            query: {
+                word: word.value
+            }
+        });
+        word.value = "";
+    }
 </script>
 
 <template>
     <div class="z-header">
-        <nuxt-link class="title" to="/home">BikariArchive</nuxt-link>
+        <nuxt-link class="title" :to="{ name: `home` }">BikariArchive</nuxt-link>
         <ul class="nav">
             <li class="nav-item">
-                <nuxt-link to="/home">
+                <nuxt-link :to="{ name: `home` }">
                     <i class="fas fa-house"></i>
                     <span>主页</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
-                <nuxt-link to="/catalogue">
+                <nuxt-link :to="{ name: `catalogue` }">
                     <i class="fas fa-book-open"></i>
                     <span>目录</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
-                <nuxt-link to="/details">
+                <nuxt-link :to="{ name: `details` }">
                     <i class="fas fa-sitemap"></i>
                     <span>情报</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
-                <nuxt-link to="/friend">
+                <nuxt-link :to="{ name: `friend` }">
                     <i class="fas fa-link"></i>
                     <span>友链</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
-                <nuxt-link to="/borrowing">
+                <nuxt-link :to="{ name: `borrowing` }">
                     <i class="fas fa-person-praying"></i>
                     <span>借物表</span>
                 </nuxt-link>
             </li>
         </ul>
-        <form class="retrieval" action="/search">
-            <input class="entry" placeholder="输入关键词..." name="word"/>
+        <form class="retrieval" @submit.prevent="search">
+            <input class="entry" placeholder="输入关键词..." v-model="word"/>
             <button class="search" type="submit">
                 <i class="fas fa-search"></i>
             </button>

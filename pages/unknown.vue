@@ -6,10 +6,6 @@
     const router = useRouter();
     const time = ref(4);
 
-    onUnmounted(() => {
-        controller.abort();
-    });
-
     const controller = new TimeoutController();
     Zin.setInterval(() => {
         time.value--;
@@ -19,12 +15,16 @@
         controller
     })
     .then(() => {
-        router.replace("/home");
+        router.replace({ name: "home" });
+    });
+
+    onUnmounted(() => {
+        controller.abort();
     });
 </script>
 
 <template>
     <div class="content-group">
-        <p class="text-center">你访问了一个不存在的页面！将在 {{ time }} 秒后<nuxt-link to="/home">返回主页</nuxt-link>。</p>
+        <p class="text-center">你访问了一个不存在的页面！将在 {{ time }} 秒后<nuxt-link :to="{ name: `home` }">返回主页</nuxt-link>。</p>
     </div>
 </template>

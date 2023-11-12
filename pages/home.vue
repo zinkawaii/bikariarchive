@@ -45,70 +45,72 @@
 </script>
 
 <template>
-    <div class="content-group home-brief">
-        <div class="content-table home-welcome">
-            <p>
-                <i class="home-qrcode"></i>
-                <span class="content-h2">欢迎来到微光茶馆！</span><br>
-                这里是我（山吹色御守）的个人网站，主要用于发布小说正文，所有文章均可在<nuxt-link to="/catalogue">目录页</nuxt-link>索引并浏览。<nuxt-link to="/details">情报页</nuxt-link>整理并展示了目前部分可以公开的设定。<nuxt-link to="/search">检索页</nuxt-link>可在全文范围内对特定关键词进行检索。
-            </p>
+    <div class="content-page">
+        <div class="content-group home-brief">
+            <div class="content-table home-welcome">
+                <p>
+                    <i class="home-qrcode"></i>
+                    <span class="content-h2">欢迎来到微光茶馆！</span><br>
+                    这里是我（山吹色御守）的个人网站，主要用于发布小说正文，所有文章均可在<nuxt-link to="/catalogue">目录页</nuxt-link>索引并浏览。<nuxt-link to="/details">情报页</nuxt-link>整理并展示了目前部分可以公开的设定。<nuxt-link to="/search">检索页</nuxt-link>可在全文范围内对特定关键词进行检索。
+                </p>
+            </div>
+            <div class="home-introduction">
+                <HomeIntroCard v-for="i in 2"
+                    :style="{ translate: intro.translate[i - 1] }"
+                    :layer="intro.layer[i - 1]"
+                    :novel="intro.novel[intro.status ? 2 - i : i - 1]"
+                    @exchange="exchange"
+                />
+            </div>
+            <div class="content-table home-profile">
+                <a class="profile-avatar">
+                    <nuxt-img :src="author.avatar"/>
+                </a>
+                <table class="profile-table">
+                    <tr>
+                        <th width="40%">作者</th>
+                        <td>{{ author.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>个人群</th>
+                        <td><a href="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank" rel="nofollow noopener noreferrer">836164664</a></td>
+                    </tr>
+                    <tr>
+                        <th>读者群</th>
+                        <td><a href="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank" rel="nofollow noopener noreferrer">743284714</a></td>
+                    </tr>
+                </table>
+                <ul class="profile-link">
+                    <li>
+                        <a href="https://github.com/MysteryBao37" title="Github" target="_blank" rel="nofollow noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/KazariEX_0929" title="Twitter" target="_blank" rel="nofollow noopener noreferrer">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://space.bilibili.com/37810541" title="BiliBili" target="_blank" rel="nofollow noopener noreferrer">
+                            <i class="fab fa-bilibili"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/feed" title="RSS">
+                            <i class="fas fa-rss"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="home-introduction">
-            <HomeIntroCard v-for="i in 2"
-                :style="{ translate: intro.translate[i - 1] }"
-                :layer="intro.layer[i - 1]"
-                :novel="intro.novel[intro.status ? 2 - i : i - 1]"
-                @exchange="exchange"
-            />
+        <div class="home-complex">
+            <HomeUpdate />
+            <HomeCalendar />
+            <HomeBlank />
         </div>
-        <div class="content-table home-profile">
-            <a class="profile-avatar">
-                <nuxt-img :src="author.avatar"/>
-            </a>
-            <table class="profile-table">
-                <tr>
-                    <th width="40%">作者</th>
-                    <td>{{ author.name }}</td>
-                </tr>
-                <tr>
-                    <th>个人群</th>
-                    <td><a href="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank" rel="nofollow noopener noreferrer">836164664</a></td>
-                </tr>
-                <tr>
-                    <th>读者群</th>
-                    <td><a href="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank" rel="nofollow noopener noreferrer">743284714</a></td>
-                </tr>
-            </table>
-            <ul class="profile-link">
-                <li>
-                    <a href="https://github.com/MysteryBao37" title="Github" target="_blank" rel="nofollow noopener noreferrer">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://twitter.com/KazariEX_0929" title="Twitter" target="_blank" rel="nofollow noopener noreferrer">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://space.bilibili.com/37810541" title="BiliBili" target="_blank" rel="nofollow noopener noreferrer">
-                        <i class="fab fa-bilibili"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/feed" title="RSS">
-                        <i class="fas fa-rss"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <HomeToolContainer />
     </div>
-    <div class="home-complex">
-        <HomeUpdate />
-        <HomeCalendar />
-        <HomeBlank />
-    </div>
-    <HomeToolContainer />
 </template>
 
 <style lang="scss" scoped>
@@ -224,8 +226,7 @@
             grid-template:
                 "A"
                 "B"
-                "C"
-                "D";
+                "C";
         }
     }
 </style>
