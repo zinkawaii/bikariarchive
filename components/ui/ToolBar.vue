@@ -21,7 +21,7 @@
     }
 
     const collapse = computed(() => {
-        return settingStore.setting["ui-collapse"];
+        return settingStore.get("ui-collapse");
     });
 </script>
 

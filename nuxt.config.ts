@@ -39,7 +39,7 @@ export default defineNuxtConfig({
         public: clientConfig
     },
     devtools: {
-        enabled: false
+        enabled: true
     },
     experimental: {
         viewTransition: true

@@ -3,17 +3,17 @@
 </script>
 
 <template>
-    <div class="detail-header">
+    <div class="entry-header">
         <h1 id="Title">{{ data.title }}</h1>
     </div>
-    <article class="detail-text">
-        <div class="detail-block detail-main">
+    <article class="entry-text">
+        <div class="entry-block entry-main">
             <div class="left">
                 <div id="Summary">
                     <p v-for="text in toSplit(data.summary)" v-html="text"></p>
                 </div>
-                <div class="div-table detail-brief">
-                    <dl v-for="i in data.info?.length">
+                <div v-if="data.info?.length > 0" class="div-table entry-brief">
+                    <dl v-for="i in data.info.length">
                         <template v-for="item in data.info[i - 1]">
                             <dt>{{ item[0] }}</dt>
                             <dd>{{ item[1] }}</dd>
@@ -23,7 +23,7 @@
             </div>
             <mb-tab
                 v-if="data.illustration?.length > 0"
-                class="detail-illustration"
+                class="entry-illustration"
                 :item="data.illustration.map(item => item.title)"
                 ><template v-for="item in data.illustration" #[item.title]>
                     <nuxt-img is="mb-image" :src="item.src"/>
@@ -36,7 +36,7 @@
                 </template>
             </mb-tab>
         </div>
-        <div class="detail-block">
+        <div class="entry-block">
             <h2>能力</h2>
             <template v-if="data.talent?.length > 0">
                 <div v-for="item in data.talent" class="talent-block">
@@ -65,9 +65,9 @@
             </template>
             <p v-else>未知。</p>
         </div>
-        <div v-if="data.relationship?.length > 0" class="detail-block">
+        <div v-if="data.relationship?.length > 0" class="entry-block">
             <h2>人物关系</h2>
-            <div class="detail-relation">
+            <div class="entry-relation">
                 <div v-for="item in data.relationship" class="relation-wrapper">
                     <nuxt-img
                         class="relation-icon"

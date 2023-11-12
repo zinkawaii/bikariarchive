@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="z-navbar" :class="{ collapse: settingStore.setting[`ui-collapse`] }">
+    <div class="z-navbar" :class="{ collapse: settingStore.get(`ui-collapse`) }">
         <ul class="list">
             <li class="item">
                 <nuxt-link href="/home">

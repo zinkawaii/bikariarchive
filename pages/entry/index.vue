@@ -1,7 +1,7 @@
 <script setup>
-    import jInfo from "~/assets/json/Info.json";
+    import jEntry from "~/assets/json/Entry.json";
     import Character from "./character.vue";
-    import Details from "./details.vue";
+    import General from "./general.vue";
 
     const route = useRoute();
     const router = useRouter();
@@ -12,10 +12,10 @@
     let data = null;
 
     let isExist = false;
-    for (const key in jInfo) {
-        const jList = jInfo[key];
+    for (const key in jEntry.category) {
+        const jList = jEntry.category[key];
         if (jList.includes(title)) {
-            template.value = key === "character" ? Character : Details;
+            template.value = key === "character" ? Character : General;
             category = key;
 
             //获取数据
@@ -48,12 +48,12 @@
 </template>
 
 <style lang="scss">
-    .detail-header {
+    .entry-header {
         padding-bottom: 8px;
         border-bottom: 1px solid var(--color-border);
     }
 
-    .detail-main {
+    .entry-main {
         display: flex;
         gap: 16px;
 
@@ -65,7 +65,7 @@
         }
     }
 
-    .detail-brief {
+    .entry-brief {
         margin: 8px 0 0;
 
         dt {
@@ -77,12 +77,12 @@
         }
     }
 
-    .detail-illustration {
+    .entry-illustration {
         width: min(336px, 100%);
         margin: auto;
     }
 
-    .detail-block {
+    .entry-block {
         overflow: auto;
         margin-top: 8px;
 
@@ -93,7 +93,7 @@
         }
     }
 
-    .detail-known {
+    .entry-known {
         padding: 0 0 0 32px;
         font-size: 14px;
         line-height: 26px;
@@ -103,7 +103,7 @@
         }
     }
 
-    .detail-relation {
+    .entry-relation {
         display: grid;
         grid: auto / repeat(auto-fill, minmax(min(216px, 100%), 1fr));
         grid-gap: 16px;

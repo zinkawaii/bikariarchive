@@ -51,7 +51,7 @@
                 <p>
                     <i class="home-qrcode"></i>
                     <span class="content-h2">欢迎来到微光茶馆！</span><br>
-                    这里是我（山吹色御守）的个人网站，主要用于发布小说正文，所有文章均可在<nuxt-link to="/catalogue">目录页</nuxt-link>索引并浏览。<nuxt-link to="/details">情报页</nuxt-link>整理并展示了目前部分可以公开的设定。<nuxt-link to="/search">检索页</nuxt-link>可在全文范围内对特定关键词进行检索。
+                    这里是我（山吹色御守）的个人网站，主要用于发布小说正文，所有文章均可在<nuxt-link :to="{ name: `catalogue` }">目录页</nuxt-link>索引并浏览。<nuxt-link :to="{ name: `details` }">情报页</nuxt-link>整理并展示了目前部分可以公开的设定。<nuxt-link :to="{ name: `search` }">检索页</nuxt-link>可在全文范围内对特定关键词进行检索。
                 </p>
             </div>
             <div class="home-introduction">
@@ -157,8 +157,8 @@
     .profile-avatar {
         display: block;
         width: 80%;
-        aspect-ratio: 1;
         max-width: 256px;
+        aspect-ratio: 1;
         margin: auto;
         border-radius: 100%;
         translate: 0 -32px;
@@ -171,7 +171,6 @@
         }
 
         > img {
-            width: 100%;
             margin: 0 0 -24px;
             border-radius: inherit;
             transition: all 0.4s;

@@ -121,6 +121,10 @@ code {
     color: var(--color-theme-text);
 }
 
+table {
+    width: 100%;
+}
+
 th, dt {
     padding: 4px;
     background-color: var(--color-theme-block);
@@ -360,7 +364,7 @@ img {
 
 /* ---------------------------------------------------------------- */
 
-:where(.intro-synopsis, .novel-text, .detail-text, .result-part) p {
+:where(.intro-synopsis, .novel-text, .entry-text, .result-part) p {
     text-indent: 2em;
 }
 
