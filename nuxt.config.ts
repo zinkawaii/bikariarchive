@@ -53,14 +53,7 @@ export default defineNuxtConfig({
         port: 443
     },
     modules: [
-        ["h3-session/nuxt", {
-            secret: "<!-- ??? -->",
-            resave: true,
-            saveUninitialized: true,
-            cookie: {
-                secure: true
-            }
-        }],
+        ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
         "@nuxtjs/robots",
         "@nuxt/image",

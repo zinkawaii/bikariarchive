@@ -2,18 +2,30 @@
     const drawerStore = useDrawerStore();
     const userStore = useUserStore();
     const route = useRoute();
+    const router = useRouter();
 
     //路径变更时收起
     watch(() => route.path, () => {
         drawerStore.close();
     });
 
+    //空间链接
     const toSpace = computed(() => ({
         name: "space",
         params: {
-            uid: userStore.uid || "1"
+            uid: userStore.uid ?? -1
         }
     }));
+
+    //退出登录
+    function logout() {
+        Zjax.post({
+            url: "/api/user/logout"
+        }).then(() => {
+            userStore.reset();
+            router.push({ name: "home" });
+        });
+    }
 </script>
 
 <template>
@@ -25,7 +37,7 @@
                     <span><nuxt-link class="user-nickname" :to="toSpace">{{ userStore.nickname }}</nuxt-link>，欢迎回来！</span>
                     <div class="user-tool">
                         <nuxt-link class="btn" :to="toSpace">个人空间</nuxt-link>
-                        <a class="btn" id="Logout">退出登录</a>
+                        <a class="btn" @click="logout">退出登录</a>
                     </div>
                 </div>
             </div>

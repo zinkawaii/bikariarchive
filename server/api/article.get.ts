@@ -1,7 +1,5 @@
 import dayjs from "dayjs";
 import fs from "fs-extra";
-import { defineCustomHandler } from "../utils/handler";
-import getQueryValues from "../utils/getQueryValues";
 
 interface GetArticleResponse extends BaseResponse {
     content?: string,
@@ -13,7 +11,7 @@ export default defineCustomHandler(async (event) => {
     const { novel, volOrder, index } = getQueryValues(event);
 
     if (novel) {
-        const path = `dist/novel/${novel[0].toUpperCase() + novel.slice(1)}.${volOrder}/${index}.txt`;
+        const path = r(`dist/novel/${novel[0].toUpperCase() + novel.slice(1)}.${volOrder}/${index}.txt`);
         const isExist = await fs.exists(path);
 
         if (isExist) {
@@ -80,10 +78,12 @@ export default defineCustomHandler(async (event) => {
             })();
         }
         else {
+            //章节不存在
             res.error = 2;
         }
     }
     else {
+        //找不到小说
         res.error = 1;
     }
 

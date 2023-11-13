@@ -85,7 +85,33 @@ export default <RouterConfig> {
                 {
                     name: "space",
                     path: "space/:uid",
-                    component: () => import("~/pages/user/space.vue")
+                    component: () => import("~/pages/user/space.vue"),
+                    meta: {
+                        identity: 1,
+                        middleware: ["auth"]
+                    }
+                },
+                {
+                    name: "manage",
+                    path: "manage",
+                    redirect: { name: "read-record" },
+                    component: () => import("~/pages/user/manage/index.vue"),
+                    children: [
+                        {
+                            name: "read-record",
+                            path: "read-record",
+                            component: () => import("~/pages/user/manage/read-record.vue")
+                        },
+                        {
+                            name: "user-data",
+                            path: "user-data",
+                            component: () => import("~/pages/user/manage/user-data.vue")
+                        }
+                    ],
+                    meta: {
+                        identity: 9,
+                        middleware: ["auth"]
+                    }
                 }
             ]
         },

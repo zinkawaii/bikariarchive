@@ -10,8 +10,13 @@ defineEventHandler<T>(async (event) => {
     }
     catch (err) {
         console.error(err);
-        return {
-            error: 100
-        };
+        if (err.statusCode) {
+            event.node.res.writeHead(err.statusCode).end();
+        }
+        else {
+            return {
+                error: 100
+            };
+        }
     }
 });

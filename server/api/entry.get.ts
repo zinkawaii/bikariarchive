@@ -1,6 +1,4 @@
 import fs from "fs-extra";
-import { defineCustomHandler } from "../utils/handler";
-import getQueryValues from "../utils/getQueryValues";
 
 interface GetEntryResponse extends BaseResponse {
     [key: string]: any
@@ -15,7 +13,7 @@ export default defineCustomHandler(async (event) => {
 
     const folders = ["area", "character", "concept"];
     if (folders.includes(category)) {
-        const path = `data/${category}/${title}.json`;
+        const path = r(`data/${category}/${title}.json`);
         const isExist = await fs.exists(path);
 
         if (isExist) {
@@ -24,10 +22,12 @@ export default defineCustomHandler(async (event) => {
             Object.assign(res, data);
         }
         else {
+            //词条不存在
             res.error = 2;
         }
     }
     else {
+        //不在目录范围内
         res.error = 1;
     }
 

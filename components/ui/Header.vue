@@ -63,7 +63,7 @@
         position: sticky;
         top: 0;
         height: 64px;
-        min-width: fit-content;
+        min-width: var(--size-width-min-mobile);
         box-shadow: 0 0 8px rgb(0 0 0 / 33%);
         background:
             linear-gradient(
@@ -162,11 +162,6 @@
     }
 
     @media (width < 1024px) {
-        .z-header {
-            width: 100vw;
-            min-width: var(--size-width-min-mobile);
-        }
-
         .retrieval {
             display: none;
         }

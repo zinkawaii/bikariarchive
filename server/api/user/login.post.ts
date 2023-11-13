@@ -1,14 +1,15 @@
-import { defineCustomHandler } from "../utils/handler";
-import { encrypt } from "../core/InnerCode";
+import InnerCode from "~/server/core/InnerCode";
 
 interface PostLoginResponse extends BaseResponse {
-    uid?: string,
+    uid?: number,
     nickname?: string,
-    identity?: number
+    identity?: number,
+    sign?: string
 };
 
 export default defineCustomHandler(async (event) => {
     const res: PostLoginResponse = { error: 0 };
+    const { session } = event.context;
     const {
         account: acc,
         password: pwd
@@ -21,23 +22,29 @@ export default defineCustomHandler(async (event) => {
             { nickname: acc },
             { email: acc }
         ]
-    }, "uid nickname identity hash salt");
+    }, "uid nickname identity sign hash salt") as any;
 
     if (result) {
         const {
             uid,
             nickname,
             identity,
+            sign,
             hash,
             salt
-        }: any = result;
+        } = result;
 
         //哈希验证
-        const p_hash = encrypt(pwd, salt);
+        const p_hash = InnerCode.encrypt(pwd, salt);
         if (p_hash === hash) {
             res.uid = uid;
             res.nickname = nickname;
             res.identity = identity;
+            res.sign = sign;
+
+            //写入会话
+            session.uid = uid;
+            session.identity = identity;
         }
         else {
             //密码错误

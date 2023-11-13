@@ -30,17 +30,17 @@
     function audioCanplay() {
         state.value.invalid = null;
         state.value.duration = $Audio.value.duration;
-    };
+    }
 
     //音频错误
     function audioError() {
         state.value.filename = "";
-    };
+    }
 
     //音频结束播放
     function audioEnded() {
         state.value.playing = false;
-    };
+    }
 
     //音频播放时
     function audioTimeupdate() {
@@ -51,7 +51,7 @@
             const rate = state.value.current / state.value.duration;
             state.value.rate = rate;
         }
-    };
+    }
 
     //上传
     function upload() {

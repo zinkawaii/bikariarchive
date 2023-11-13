@@ -1,22 +1,20 @@
 <script setup>
+    const route = useRoute();
+    const router = useRouter();
     const userStore = useUserStore();
-    const sign = ref();
+
+    const sign = ref(userStore.sign);
     const sign_old = ref();
 
+    //UID校验
+    if (userStore.uid !== Number(route.params.uid)) {
+        router.replace({ name: "unknown" });
+    }
+
+    //设置标题
     useHead({
         title: `${userStore.nickname}的个人空间`
     });
-
-    // Zjax.get({
-    //     url: "/api/user/sign",
-    // })
-    // .then((res) => {
-    //     switch (res.error) {
-    //         case 0:
-    //             sign.value = res.content;
-    //             break;
-    //     }
-    // });
 
     //更新签名
     const signUpdate = Zin.debounce(() => {
@@ -103,8 +101,8 @@
 
         &:focus {
             box-shadow: 0 2px 4px inset rgb(35 54 86 / 30%);
-            background-color: white;
-            color: var(--color-font);
+            background-color: var(--color-background);
+            color: var(--color-text);
         }
 
         &::placeholder,

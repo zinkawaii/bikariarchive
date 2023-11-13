@@ -115,10 +115,6 @@
         top: 96px;
         width: 256px;
         height: calc(100vh - 128px);
-
-        &[hidden] {
-            display: none;
-        }
     }
 
     .clock-table {
@@ -204,7 +200,7 @@
     }
 
     @media (width >= 1024px) {
-        .mb-sidebar[hide] {
+        .z-sidebar[hidden] {
             display: none;
         }
     }

@@ -2,6 +2,15 @@ const server = {
     global: {
         env: process.env.NODE_ENV,
         address: "<!-- ??? -->",
+        mail: {
+            name: "微光茶馆",
+            host: "smtp.qq.com",
+            port: 465,
+            auth: {
+                user: "<!-- ??? -->",
+                pass: "<!-- ??? -->"
+            }
+        },
         mongoose: {
             uri: "<!-- ??? -->",
             options: {
@@ -10,13 +19,13 @@ const server = {
                 pass: "<!-- ??? -->"
             }
         },
-        mail: {
-            name: "微光茶馆",
-            host: "smtp.qq.com",
-            port: 465,
-            auth: {
-                user: "<!-- ??? -->",
-                pass: "<!-- ??? -->"
+        session: {
+            cookie: {
+                maxAge: 86400 * 30
+            },
+            storage: {
+                driver: "cookie",
+                secret: "<!-- ??? -->"
             }
         },
         blacklist: {

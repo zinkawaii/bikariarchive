@@ -2,9 +2,6 @@ import * as cheerio from "cheerio";
 import dayjs from "dayjs";
 import Article from "~/utils/Article";
 import jArticle from "~/dist/json/Article.json";
-import { defineCustomHandler } from "../utils/handler";
-import getQueryValues from "../utils/getQueryValues";
-import readArticle from "../utils/readArticle";
 
 interface GetArticleResponse extends BaseResponse {
     results?: SearchResult[]

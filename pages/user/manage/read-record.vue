@@ -29,12 +29,10 @@
     const data = ref([]);
 
     //范围查询
-    async function exactQuery(from, to)
-    {
+    async function exactQuery(from, to) {
         //开始查询
         querying.value = true;
-
-        const result = await zjax.get({
+        const result = await Zjax.get({
             url: "/api/read-record",
             data: {
                 from,
@@ -44,17 +42,11 @@
 
         //结束查询
         querying.value = false;
-
         return result;
     }
 
     //查询
-    async function query()
-    {
-        if (data.value.length > 0) {
-            if (!await Zin.confirm(`是否清空所有数据并重新执行查询（${que.value.title} ${que.value.count} 条）？`)) return;
-        }
-
+    async function query() {
         const [from, to] = ((current) => {
             const count = que.value.list[current].count;
             return {
@@ -75,19 +67,15 @@
     }
 
     //清空
-    async function clear()
-    {
-        if (await Zin.confirm("是否清空所有数据？")) {
-            data.value.length = 0;
-        }
+    function clear() {
+        data.value.length = 0;
     }
 
     //编辑
-    async function edit(item) {}
+    function edit(item) {}
 
     //删除
-    async function remove(item, index)
-    {
+    async function remove(item, index) {
         const res = await Zjax.delete({
             url: "/api/read-record",
             data: {
@@ -100,16 +88,11 @@
                 data.value.splice(index, 1);
                 break;
             }
-            default: {
-                await Zin.info("删除失败！");
-                break;
-            }
         }
     }
 
     //时间格式化
-    function formatTime(time)
-    {
+    function formatTime(time) {
         return dayjs(time).format("YYYY-MM-DD HH:mm:ss");
     }
 </script>

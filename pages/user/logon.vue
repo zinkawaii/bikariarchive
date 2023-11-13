@@ -1,4 +1,6 @@
 <script setup>
+    const router = useRouter();
+
     const nickname = ref();
     const email = ref();
     const verify = ref();
@@ -16,7 +18,7 @@
             this.email = "",
             this.verify = "",
             this.password = "",
-            this.repeat = ""
+            this.repeat = "";
         }
     });
     const verifyStage = ref({
@@ -27,8 +29,7 @@
     //表单检测
     const checker = {
         //昵称
-        nickname()
-        {
+        nickname() {
             const reg = /^[\w\u4e00-\u9fa5]*$/;
             const count = getByteLength(nickname.value);
 
@@ -48,8 +49,7 @@
             return false;
         },
         //邮箱
-        email()
-        {
+        email() {
             const reg = /^[\w-]+@[\w-]+(.[\w-]+)+$/;
 
             let str;
@@ -62,14 +62,13 @@
             return false;
         },
         //密码
-        password()
-        {
+        password() {
             const reg = /^[\w]*$/;
             const count = password.value?.length;
 
             let str;
             if (count < 6 || count > 18) {
-                str = "* 密码位数必须在6-18位之间"
+                str = "* 密码位数必须在6-18位之间";
             }
             else if (reg.test(password.value) === false) {
                 str = "* 密码仅由大小写字母、数字以及下划线组成";
@@ -80,8 +79,7 @@
             return false;
         },
         //重复密码
-        repeat()
-        {
+        repeat() {
             let str;
             if (repeat.value !== password.value) {
                 str = "* 两次密码不一致";
@@ -92,16 +90,14 @@
             return false;
         },
         //全检测
-        all()
-        {
+        all() {
             return this.nickname() && this.email() && this.password() && this.repeat();
         }
     };
 
     //验证码输入限制
-    function verifyInput(event)
-    {
-        let value = event.target.value;
+    function verifyInput(event) {
+        const value = event.target.value;
         event.target.value = value.replace(/\D+/, "").slice(0, 6);
     }
 
@@ -112,26 +108,25 @@
 
         verifyStage.value.stage = 1;
 
-        zjax.get({
-            url: "/api/logon/verify",
+        Zjax.get({
+            url: "/api/user/logon/verify",
             data: {
                 email: email.value
             }
         })
-        .then((response) => {
-            switch (response.error) {
-                case 0:
-                    successed();
-                    break;
-                case 1:
-                    failed();
-                    break;
+        .then((res) => {
+            switch (res.error) {
+                case 0: {
+                    return successed();
+                }
+                default: {
+                    return failed();
+                }
             }
         });
 
         //发送成功
-        function successed()
-        {
+        function successed() {
             const max = 60;
             verifyStage.value.stage = 2;
             verifyStage.value.delay = max + 1;
@@ -149,14 +144,13 @@
 
         //发送失败
         function failed() {
-            Zin.confirm("验证码发送失败，请检查邮箱地址！")
+            tip.value.verify = "* 验证码发送失败，请检查邮箱地址";
             verifyStage.value.stage = 0;
         }
     }
 
     //提交
-    function submit()
-    {
+    function submit() {
         tip.value.clear();
         if (checker.all()) {
             register();
@@ -164,10 +158,9 @@
     }
 
     //注册
-    const register = Zin.debounce(function()
-    {
-        zjax.post({
-            url: "/api/logon",
+    const register = Zin.debounce(() => {
+        Zjax.post({
+            url: "/api/user/logon",
             data: {
                 nickname: nickname.value,
                 email: email.value,
@@ -178,8 +171,7 @@
         .then(async (res) => {
             switch (res.error) {
                 case 0:
-                    await Zin.confirm("注册成功！");
-                    location.assign("/home");
+                    router.push({ name: "login" });
                     break;
                 case 1:
                     tip.value.email = "* 该邮箱已注册";
@@ -188,7 +180,7 @@
                     tip.value.verify = "* 验证码不存在";
                     break;
                 case 3:
-                    tip.value.nickname = "* 验证码已过期";
+                    tip.value.verify = "* 验证码已过期";
                     break;
                 case 4:
                     tip.value.password = "* 验证码不正确";

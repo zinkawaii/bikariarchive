@@ -5,27 +5,25 @@ type ZjaxOptions = Partial<{
     timeout: number
 }>;
 
-const zjax = function({
+const Zjax = function({
     url,
     method,
     data,
     timeout
 }: ZjaxOptions) {
-    return zjax[method]?.({ url, data, timeout });
+    return Zjax[method]?.({ url, data, timeout });
 };
 
-for (const method of ["get", "post", "put", "delete"]) {
-    Object.defineProperty(zjax, method, {
-        value: request(method)
-    });
-}
+Zjax.get = request("get");
+Zjax.post = request("post");
+Zjax.put = request("put");
+Zjax.delete = request("delete");
 
-function request(method: string)
-{
+function request(method: string) {
     return async function({
         url: urlStr,
-        data,
-        timeout
+        data = {},
+        timeout = 0
     }) {
         const url = new URL(urlStr, location.origin);
         const options: RequestInit = { method };
@@ -34,7 +32,7 @@ function request(method: string)
         ({ get, post }[method.toLowerCase()] || post)(url, data, options);
 
         //超时处理
-        if (timeout >= 0) {
+        if (timeout > 0) {
             const controller = new AbortController();
             options.signal = controller.signal;
             setTimeout(() => controller.abort(), timeout);
@@ -48,19 +46,17 @@ function request(method: string)
     };
 }
 
-function get(url: URL, data: any, options: RequestInit)
-{
+function get(url: URL, data: any, options: RequestInit) {
     for (const key in data) {
         url.searchParams.append(key, data[key]);
     }
 }
 
-function post(url: URL, data: any, options: RequestInit)
-{
+function post(url: URL, data: any, options: RequestInit) {
     options.headers = {
         "Content-Type": "application/json"
     };
     options.body = JSON.stringify(data);
 }
 
-export default zjax;
+export default Zjax;

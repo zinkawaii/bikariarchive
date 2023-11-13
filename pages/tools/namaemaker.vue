@@ -239,7 +239,7 @@
     <form class="namae-form" autocomplete="off">
         <div class="namae-option">
             <span>介绍</span>
-            <p class="p-small">本页面用于生成日文名，数据库与随机算法均来自<a href="https://namaemaker.net" target="_blank" rel="nofollow noopener noreferrer">namaemaker.net</a></p>
+            <p class="p-small">本页面用于生成日文名，数据库与随机算法均来自<nuxt-link to="https://namaemaker.net" target="_blank">namaemaker.net</nuxt-link></p>
         </div>
         <div class="namae-option">
             <span>数量</span>

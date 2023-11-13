@@ -4,8 +4,6 @@
     useHead({
         title: "情报"
     });
-
-    let zCount = 0;
 </script>
 
 <template>

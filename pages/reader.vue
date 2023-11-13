@@ -1,6 +1,7 @@
 <script setup>
     import jArticle from "~/dist/json/Article.json";
 
+    const config = useRuntimeConfig();
     const readRecordStore = useReadRecordStore();
     const route = useRoute();
     const router = useRouter();
@@ -61,7 +62,7 @@
 
     //本章链接
     const currentUrl = computed(() => {
-        return process.browser && location.origin + route.path;
+        return "https://" + config.public.domain + route.path;
     });
 
     //上一章

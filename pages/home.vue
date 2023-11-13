@@ -67,39 +67,41 @@
                     <nuxt-img :src="author.avatar"/>
                 </a>
                 <table class="profile-table">
-                    <tr>
-                        <th width="40%">作者</th>
-                        <td>{{ author.name }}</td>
-                    </tr>
-                    <tr>
-                        <th>个人群</th>
-                        <td><a href="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank" rel="nofollow noopener noreferrer">836164664</a></td>
-                    </tr>
-                    <tr>
-                        <th>读者群</th>
-                        <td><a href="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank" rel="nofollow noopener noreferrer">743284714</a></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th width="40%">作者</th>
+                            <td>{{ author.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>个人群</th>
+                            <td><nuxt-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</nuxt-link></td>
+                        </tr>
+                        <tr>
+                            <th>读者群</th>
+                            <td><nuxt-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</nuxt-link></td>
+                        </tr>
+                    </tbody>
                 </table>
                 <ul class="profile-link">
                     <li>
-                        <a href="https://github.com/MysteryBao37" title="Github" target="_blank" rel="nofollow noopener noreferrer">
+                        <nuxt-link to="https://github.com/MysteryBao37" title="Github" target="_blank">
                             <i class="fab fa-github"></i>
-                        </a>
+                        </nuxt-link>
                     </li>
                     <li>
-                        <a href="https://twitter.com/KazariEX_0929" title="Twitter" target="_blank" rel="nofollow noopener noreferrer">
+                        <nuxt-link to="https://twitter.com/KazariEX_0929" title="Twitter" target="_blank">
                             <i class="fab fa-twitter"></i>
-                        </a>
+                        </nuxt-link>
                     </li>
                     <li>
-                        <a href="https://space.bilibili.com/37810541" title="BiliBili" target="_blank" rel="nofollow noopener noreferrer">
+                        <nuxt-link to="https://space.bilibili.com/37810541" title="BiliBili" target="_blank">
                             <i class="fab fa-bilibili"></i>
-                        </a>
+                        </nuxt-link>
                     </li>
                     <li>
-                        <a href="/feed" title="RSS">
+                        <nuxt-link to="/feed" title="RSS">
                             <i class="fas fa-rss"></i>
-                        </a>
+                        </nuxt-link>
                     </li>
                 </ul>
             </div>

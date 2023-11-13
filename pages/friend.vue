@@ -10,7 +10,7 @@
 <template>
     <div class="content-group">
         <div class="friend-list">
-            <a v-for="item in jFriend.list" class="friend-item" :href="item.href" target="_blank" rel="noopener noreferrer">
+            <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.href" target="_blank">
                 <div class="friend-avatar-wrapper">
                     <div class="friend-avatar"><nuxt-img :src="item.icon" loading="lazy"/></div>
                     <div class="friend-diamond"></div>
@@ -19,7 +19,7 @@
                     <div class="title">{{ item.title }}</div>
                     <span class="description">{{ item.description }}</span>
                 </div>
-            </a>
+            </nuxt-link>
         </div>
     </div>
 </template>

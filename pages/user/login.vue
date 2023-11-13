@@ -11,7 +11,7 @@
 
     const submit = Zin.debounce(() => {
         Zjax.post({
-            url: "/api/login",
+            url: "/api/user/login",
             data: {
                 account: nickname.value,
                 password: password.value
@@ -23,6 +23,8 @@
                     userStore.$patch({
                         uid: res.uid,
                         nickname: res.nickname,
+                        identity: res.identity,
+                        sign: res.sign,
                         isLogin: true
                     });
                     router.push({ name: "space", params: { uid: res.uid }});

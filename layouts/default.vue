@@ -20,6 +20,7 @@
         display: flex;
         justify-content: center;
         gap: 32px;
+        min-width: var(--size-width-min-mobile);
         padding: 32px;
     }
 
@@ -29,7 +30,6 @@
         flex: 1;
         flex-direction: column;
         gap: 32px;
-        min-width: var(--size-width-min-mobile);
         max-width: 1028px;
     }
 

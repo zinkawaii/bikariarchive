@@ -37,7 +37,6 @@
             viewTransition: true
         });
     }
-
 </script>
 
 <template>
