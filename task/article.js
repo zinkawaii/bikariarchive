@@ -8,36 +8,36 @@ import * as glob from "glob";
 import * as marked from "marked";
 import * as path from "path";
 
+marked.use({
+    renderer: {
+        heading(text, level) {
+            return `<h${level} class="content-h${level}">${text}</h${level}>\n`;
+        },
+        code(code, infostring) {
+            return `<mb-code lang="${infostring}"><pre>${code}</pre></mb-code>\n`;
+        },
+        link(href, title, text) {
+            let extra;
+            if (!href.startsWith("/")) {
+                extra = `target="_blank" rel="noopener noreferrer nofollow"`;
+            }
+            return `<a href="${href}" ${title ? `title=${title}` : ""} ${extra}>${text}</a>`;
+        },
+        text(text) {
+            return text.replaceAll("\n", "");
+        }
+    },
+    hooks: {
+        postprocess(html) {
+            return html.replaceAll(/<br(\s*)\/>/g, "<p><br /></p>");
+        }
+    }
+});
+
 const srcDir = "../data/novel";
 const outDir = "../dist/novel";
 
 (async () => {
-    marked.use({
-        renderer: {
-            heading(text, level) {
-                return `<h${level} class="content-h${level}">${text}</h${level}>\n`;
-            },
-            code(code, infostring) {
-                return `<mb-code lang="${infostring}">${code}</mb-code>\n`;
-            },
-            link(href, title, text) {
-                let extra;
-                if (!href.startsWith("/")) {
-                    extra = `target="_blank" rel="noopener noreferrer nofollow"`;
-                }
-                return `<a href="${href}" ${title ? `title=${title}` : ""} ${extra}>${text}</a>`;
-            },
-            text(text) {
-                return text.replaceAll("\n", "");
-            }
-        },
-        hooks: {
-            postprocess(html) {
-                return html.replaceAll(/<br(\s*)\/>/g, "<p><br /></p>");
-            }
-        }
-    });
-
     //从元信息和Front Matter生成全文和Article.json
     await timer("Meta-Info", generateMetaInfo)();
 
@@ -49,14 +49,19 @@ const outDir = "../dist/novel";
     .on("change", parse);
 })();
 
-function simpleParse(pathname, stats)
+//单文件解析
+function simpleParse(pathname)
 {
     const file = fs.readFileSync(pathname);
-    const data = fm(String(file));
+    const data = fm(file.toString());
     const result = marked.parse(data.body);
 
+    //写入文件
     const outPath = pathname.replaceAll("\\", "/").replace(srcDir, outDir).replace(".md", ".txt");
     fs.outputFileSync(outPath, result);
+
+    //返回数据供进一步处理
+    return data;
 }
 
 function generateMetaInfo()
@@ -74,31 +79,27 @@ function generateMetaInfo()
         const index = path.basename(pathname, ".md");
         const order = jMeta[novel].chapter.indexOf(index);
 
-        //读取数据
-        const file = fs.readFileSync(pathname);
+        //将正文写入文件并读取数据
+        const data = simpleParse(pathname);
         const {
-            attributes: attr,
-            body: data
-        } = fm(file.toString());
+            attributes,
+            body
+        } = data;
 
         //解析内容
-        const result = marked.parse(data);
+        const result = marked.parse(body);
         const $ = cheerio.load(result);
-        const wordCount = $("p").text().length;
-
-        //写入正文
-        const outPath = pathname.replaceAll("\\", "/").replace(srcDir, outDir).replace(".md", ".txt");
-        fs.outputFileSync(outPath, result);
+        const runtime = [...$("*")].some((e) => e?.name?.includes("-"));
 
         //日期格式化
-        dateFormat(attr, ["date", "date_reco"]);
+        dateFormat(attributes, ["date", "date_reco"]);
 
         //写入数据
         jMeta[novel].chapter[order] = {
             index,
             volume,
-            wordCount,
-            ...attr
+            runtime,
+            ...attributes
         };
     });
 

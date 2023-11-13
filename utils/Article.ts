@@ -2,16 +2,16 @@ import jArticle from "~/dist/json/Article.json";
 
 class Article
 {
-    novel        = "";   //小说名
-    volOrder     = -1;   //卷序号
-    volName      = "";   //卷名
-    order        = -1;   //章序号
-    order_in_vol = -1;   //章序号（卷内）
-    index        = "";   //章文件名
-    title        = "";   //章节名
-    date         = {};   //日期
-    wordCount    = 0;    //总字数
-    error        = true; //错误信息
+    novel        = "";    //小说名
+    volOrder     = -1;    //卷序号
+    volName      = "";    //卷名
+    order        = -1;    //章序号
+    order_in_vol = -1;    //章序号（卷内）
+    index        = "";    //章文件名
+    title        = "";    //章节名
+    date         = {};    //日期
+    runtime      = false; //运行时
+    error        = true;  //错误信息
 
     constructor(novel: string, index: string)
     {
@@ -57,7 +57,7 @@ class Article
                         publish: c.date,
                         reco: c.date_reco
                     };
-                    this.wordCount = c.wordCount;
+                    this.runtime = c.runtime;
                     this.error = false;
                     break;
                 }

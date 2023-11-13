@@ -159,8 +159,8 @@ input, textarea, select, option {
 }
 
 img {
+    width: 100%;
     height: auto;
-    max-width: 100%;
     vertical-align: middle;
 }
 
@@ -366,6 +366,32 @@ img {
 
 :where(.intro-synopsis, .novel-text, .entry-text, .result-part) p {
     text-indent: 2em;
+}
+
+.novel-text {
+    h2 {
+        position: relative;
+        margin: 8px 0 0;
+        padding: 4px 0 4px 16px;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 6px;
+            height: 85%;
+            border-radius: 3px;
+            background-color: var(--color-theme-block-dark);
+            translate: 0 -50%;
+        }
+    }
+
+    em {
+        font-style: normal;
+        color: var(--color-theme-text);
+    }
 }
 
 /* ---------------------------------------------------------------- */

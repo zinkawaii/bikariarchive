@@ -19,7 +19,8 @@
     "prismjs": "^1.29.0",
     "unraw": "^3.0.0",
     "vue": "^3.3.8",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vue3-runtime-template": "^1.0.2"
   },
   "devDependencies": {
     "@kikiutils/nuxt-session": "^1.2.1",

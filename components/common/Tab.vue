@@ -12,7 +12,7 @@
             }" @click="selectedIndex = index"
             >{{ name }}</li>
         </ul>
-        <div class="content">
+        <div class="tab-content">
             <template v-for="(name, index) in item">
                 <div v-show="selectedIndex === index">
                     <slot :name="name"></slot>
@@ -67,7 +67,7 @@
         }
     }
 
-    .content {
+    .tab-content {
         min-height: 64px;
         padding: 8px;
         border: 1px solid var(--color-border-light);

@@ -1,3 +1,16 @@
+<script>
+    import VRuntimeTemplate from "vue3-runtime-template";
+    import { NuxtImg, MbCode } from "#components";
+
+    //需要导入文章的组件
+    export default {
+        components: {
+            "mb-code": MbCode,
+            "nuxt-img": NuxtImg
+        }
+    }
+</script>
+
 <script setup>
     import jArticle from "~/dist/json/Article.json";
 
@@ -30,14 +43,15 @@
 
     const state = ref({
         author: art.novelInfo.author,
-        readCount: 0,
-        content: "",
         title: art.title,
+        readCount: 0,
+        wordCount: 0,
         date: {
             type: "",
             value: "",
             tip: ""
         },
+        content: "",
         fontFamily: null,
         fontSize: null,
         currentVolume: art.volOrder
@@ -60,11 +74,6 @@
         date.tip = "该章节的发布时间已经无法追溯";
     }
 
-    //本章链接
-    const currentUrl = computed(() => {
-        return "https://" + config.public.domain + route.path;
-    });
-
     //上一章
     const toLastClass = { hidden: art.isFirst };
     const toLastChapter = art.isFirst ? {} : {
@@ -81,15 +90,20 @@
         }
     };
 
-    //写入阅读记录
-    readRecordStore.set(art.novel, {
-        index: art.index,
-        title: art.title
+    //本章链接
+    const currentUrl = computed(() => {
+        return "https://" + config.public.domain + route.path;
     });
 
     //本卷章节
     const jChapter = computed(() => {
         return jArticle[novel].chapter.filter((c) => c.volume === state.value.currentVolume);
+    });
+
+    //写入阅读记录
+    readRecordStore.set(art.novel, {
+        index: art.index,
+        title: art.title
     });
 
     //获取正文
@@ -105,6 +119,13 @@
     if (error === 0) {
         state.value.content = content;
         state.value.readCount = readCount;
+
+        //字数统计
+        onMounted(() => {
+            state.value.wordCount = [...document.querySelectorAll(".novel-text > p")].reduce((count, p) => {
+                return count + p.textContent.length;
+            }, 0);
+        });
     }
 </script>
 
@@ -133,7 +154,7 @@
                 <div class="novel-title">
                     <h2 id="Title" style="float: left;">{{ state.title }}</h2>
                     <div class="novel-information">
-                        <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
+                        <span>{{ state.readCount }} 阅读 ／ {{ state.wordCount }} 字</span>
                         <span :title="state.date.tip">{{ state.date.type }}时间：{{ state.date.value }}</span>
                     </div>
                 </div>
@@ -142,7 +163,10 @@
                     <i class="fas fa-chevron-right"></i>
                 </nuxt-link>
             </header>
-            <article class="novel-text" v-html="state.content"></article>
+            <article v-if="art.runtime" class="novel-text">
+                <v-runtime-template :template="state.content"></v-runtime-template>
+            </article>
+            <article v-else class="novel-text" v-html="state.content"></article>
             <footer class="novel-copyright">
                 <div><span class="meta">本章作者</span><nuxt-link :to="{ name: `home` }">{{ state.author }}</nuxt-link></div>
                 <div><span class="meta">本章链接</span><nuxt-link class="content" :to="route.path">{{ currentUrl }}</nuxt-link></div>
@@ -192,30 +216,6 @@
 
     .novel-text {
         padding: 0 32px;
-
-        h2 {
-            position: relative;
-            margin: 8px 0 0;
-            padding: 4px 0 4px 16px;
-
-            &::before {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 0;
-                width: 6px;
-                height: 85%;
-                border-radius: 3px;
-                background-color: var(--color-theme-block-dark);
-                translate: 0 -50%;
-            }
-        }
-
-        em {
-            font-style: normal;
-            color: var(--color-theme-text);
-        }
     }
 
     .novel-illustration {

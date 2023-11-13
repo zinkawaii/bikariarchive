@@ -32,6 +32,9 @@ dependencies:
   vue-router:
     specifier: ^4.2.5
     version: 4.2.5(vue@3.3.8)
+  vue3-runtime-template:
+    specifier: ^1.0.2
+    version: 1.0.2
 
 devDependencies:
   '@kikiutils/nuxt-session':
@@ -8470,6 +8473,14 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.5.1
       vue: 3.3.8
+
+  /vue3-runtime-template@1.0.2:
+    resolution: {integrity: sha512-oquh7JFsbL9MuPqCehOufzgONVvBCmcLWCvVgBA5VreLpNGcQSmb9Bz0g9xqQ+ufdwZGQs+T111GbRyJfPYFQA==}
+    dependencies:
+      vue: 3.3.8
+    transitivePeerDependencies:
+      - typescript
+    dev: false
 
   /vue@3.3.8:
     resolution: {integrity: sha512-5VSX/3DabBikOXMsxzlW8JyfeLKlG9mzqnWgLQLty88vdZL7ZJgrdgBOmrArwxiLtmS+lNNpPcBYqrhE6TQW5w==}

@@ -29,10 +29,12 @@ export default defineNuxtConfig({
         "~/assets/fontawesome/css/solid.css",
         "~/assets/scss/sinrabansyo.scss"
     ],
-    vite: {
-        plugins: [
-
-        ]
+    hooks: {
+        "vite:extendConfig": (config, { isClient, isServer }) => {
+            if (isClient) {
+                config.resolve.alias["vue"] = "vue/dist/vue.esm-bundler";
+            }
+        },
     },
     runtimeConfig: {
         ...serverConfig,
@@ -84,10 +86,7 @@ export default defineNuxtConfig({
                 UserAgent: ua,
                 Disallow: "/",
                 BlankLine: true
-            })),
-            {
-                Sitemap: (req) => `https://${req.headers.host}/sitemap.txt`
-            }
+            }))
         ]
     }
 });

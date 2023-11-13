@@ -61,8 +61,8 @@
 
 <template>
     <div class="mb-progress" ref="self" @mousedown="onMouseDown">
-        <span class="progress" :style="{ transform: `scaleX(${displayRate})` }"></span>
-        <span class="title">{{ title }}</span>
+        <span class="progress-bar" :style="{ transform: `scaleX(${displayRate})` }"></span>
+        <span class="progress-title">{{ title }}</span>
     </div>
 </template>
 
@@ -74,7 +74,7 @@
         cursor: pointer;
     }
 
-    .progress {
+    .progress-bar {
         display: block;
         position: absolute;
         inset: 0;
@@ -83,7 +83,7 @@
         transform-origin: left;
     }
 
-    .title {
+    .progress-title {
         overflow: hidden;
         opacity: 0.5;
         margin: auto;
