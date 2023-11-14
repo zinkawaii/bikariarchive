@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
     const emit = defineEmits([
         "update:modelValue",
         "progress",
@@ -6,17 +6,28 @@
         "dragstart",
         "dragend"
     ]);
-    const props = defineProps<{
-        modelValue: number,
-        title: string
-    }>();
+    const props = defineProps([
+        "modelValue",
+        "title"
+    ]);
 
-    let oldValue = 0;
     let p_width = 0;
     let p_left = 0;
     const self = ref();
     const rate = ref(0);
     const dragging = ref(false);
+
+    //全局事件绑定
+    if (process.browser) {
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+
+        //释放内存
+        onUnmounted(() => {
+            document.removeEventListener("mousemove", onMouseMove);
+            document.removeEventListener("mouseup", onMouseUp);
+        });
+    }
 
     //显示的进度
     const displayRate = computed(() => {
@@ -33,28 +44,24 @@
         dragging.value = true;
 
         //进度预变化
-        progressChange(event);
+        onMouseMove(event);
     }
 
-    if (process.browser) {
-        //鼠标移动时
-        document.addEventListener("mousemove", progressChange);
-
-        //鼠标松开时
-        document.addEventListener("mouseup", () => {
-            if (dragging.value) {
-                emit("dragend");
-                emit("update:modelValue", rate.value);
-                emit("change", { rate: rate.value });
-                dragging.value = false;
-            }
-        });
-    }
-
-    function progressChange(event) {
+    //鼠标移动时
+    function onMouseMove(event) {
         if (dragging.value) {
             rate.value = Math.max(0, Math.min(1, (event.clientX - p_left) / p_width));
             emit("progress", { rate: rate.value });
+        }
+    }
+
+    //鼠标松开时
+    function onMouseUp() {
+        if (dragging.value) {
+            emit("dragend");
+            emit("update:modelValue", rate.value);
+            emit("change", { rate: rate.value });
+            dragging.value = false;
         }
     }
 </script>

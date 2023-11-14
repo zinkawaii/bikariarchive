@@ -1,5 +1,4 @@
-const Zin = new class Z
-{
+const Zin = new class Z {
     //默认动画配置
     DEFAULT_ANIME_OPTION = {
         duration: 400,
@@ -17,22 +16,19 @@ const Zin = new class Z
     PERIOD_NIGHT = Symbol();
 
     //获取时间段
-    get period()
-    {
+    get period() {
         const now = new Date();
         const hour = now.getHours();
         return (hour >= 6 && hour < 18) ? this.PERIOD_DAY : this.PERIOD_NIGHT;
     }
 
     //创建Fragment
-    createFragment()
-    {
+    createFragment() {
         return document.createDocumentFragment();
     }
 
     //用虚拟DOM创建元素
-    createNode(tag, attrs, ...children)
-    {
+    createNode(tag, attrs, ...children) {
         //初始化
         const node = {
             function: () => tag(),
@@ -66,19 +62,19 @@ const Zin = new class Z
     }
 
     //防抖（立即执行）
-    debounce(func, {
+    debounce<T extends () => any>(func: T, {
         delay = 1500,
         immediate = true
     } = {}) {
         let timer;
         return immediate ?
-            function(...args) {
+            function(...args: Parameters<T>) {
                 timer ? clearTimeout(timer) : func.apply(this, args);
                 timer = setTimeout(() => {
                     timer = null;
                 }, delay);
             } :
-            function(...args) {
+            function(...args: Parameters<T>) {
                 clearTimeout(timer);
                 timer = setTimeout(() => {
                     func.apply(this, args);
@@ -88,8 +84,7 @@ const Zin = new class Z
     }
 
     //从字符串或对象下载文本文件
-    download(data, type, filename)
-    {
+    download(data, type, filename) {
         let blob;
         if (type === "blob") {
             blob = new Blob([data], {
@@ -111,40 +106,19 @@ const Zin = new class Z
         URL.revokeObjectURL(url);
     }
 
-    //获取元素绝对位置
-    getPosition(e)
-    {
-        let top = 0;
-        let left = 0;
-        let current = e;
-
-        do {
-            top += current.offsetTop;
-            left += current.offsetLeft;
-            current = current.offsetParent;
-        } while (current !== null);
-
-        return {
-            top,
-            left
-        };
-    }
-
     //立即运行并返回函数
-    iife(func, ...args)
-    {
+    iife<T extends () => any>(func: T, ...args: Parameters<T>) {
         func.apply(this, args);
         return func;
     }
 
     //生成随机整数
-    randInt(from, to)
-    {
-        return parseInt(Math.random() * (to - from + 1) + from);
+    randInt(from: number, to: number) {
+        return Math.floor(Math.random() * (to - from + 1) + from);
     }
 
     //延时执行函数
-    setTimeout(duration)
+    setTimeout(duration: number): Promise<void>
     {
         return new Promise((resolve, reject) => {
             setTimeout(resolve, duration);
@@ -152,19 +126,20 @@ const Zin = new class Z
     }
 
     //按照一定时间和次数循环执行函数
-    setInterval(func, {
+    setInterval(func: (time: number) => void, {
         duration = 1000,
-        times = -1,
-        controller = null
+        times = -1
     } = {}) {
-        return new Promise<void>((resolve, reject) => {
+        let timer: NodeJS.Timeout;
+
+        const interval: IntervalController<void> = new Promise((resolve, reject) => {
             let t = 0;
             recursion();
 
             function recursion() {
                 try {
                     func(t);
-                    const timer = setTimeout(() => {
+                    timer = setTimeout(() => {
                         t++;
                         if (times >= 0 && t === times) {
                             resolve();
@@ -172,22 +147,26 @@ const Zin = new class Z
                         }
                         recursion();
                     }, duration);
-                    controller && (controller.timer = timer);
                 }
                 catch (err) {
                     reject(err);
                 }
             }
         });
+
+        interval.abort = () => {
+            clearTimeout(timer);
+        };
+
+        return interval;
     }
 
     //节流
-    throttle(func, delay)
-    {
+    throttle<T extends () => any>(func: T, delay: number) {
         //根据延迟时长
         if (delay && delay > 0) {
             let timer = null;
-            return function(...args) {
+            return function(...args: Parameters<T>) {
                 if (!timer) {
                     func.apply(this, args);
                     timer = setTimeout(() => {
@@ -199,7 +178,7 @@ const Zin = new class Z
         //根据屏幕刷新率
         else {
             let running = false;
-            return function(...args) {
+            return function(...args: Parameters<T>) {
                 if (!running) {
                     running = true;
                     requestAnimationFrame(() => {
@@ -231,12 +210,8 @@ const Zin = new class Z
     }
 };
 
-export class TimeoutController {
-    timer: NodeJS.Timeout;
-
-    abort() {
-        clearTimeout(this.timer);
-    }
+interface IntervalController<T> extends Promise<T> {
+    abort?: () => void
 }
 
 export default Zin;

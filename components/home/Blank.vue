@@ -1,5 +1,5 @@
 <script setup>
-    const serif = ref();
+    const i = ref(0);
     const serifs = [
         "可愛いだけではだめだってわかってる",
         "だけど君が知りたい 昨日とは違うんだ",
@@ -12,18 +12,23 @@
         "長く続くピークはグルービータイフーン 恋よりステキなトキメキ教えてあげる"
     ];
 
-    Zin.setInterval(() => {
-        const i = Zin.randInt(0, serifs.length - 1);
-        serif.value = serifs[i];
+    //每7秒随机显示
+    const interval = Zin.setInterval(() => {
+        i.value = Zin.randInt(0, serifs.length - 1);
     }, {
         duration: 7000
+    });
+
+    //释放内存
+    onUnmounted(() => {
+        interval.abort();
     });
 </script>
 
 <template>
     <div class="home-blank">
         <div>空白板</div>
-        <textarea :placeholder="serif"></textarea>
+        <textarea :placeholder="serifs[i]"></textarea>
     </div>
 </template>
 
