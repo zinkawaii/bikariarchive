@@ -2,8 +2,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "server": "nuxt dev",
-    "deploy": "cd .output && forever start index.mjs",
+    "publish": "cd task && node publish.js",
+    "dev": "nuxt dev",
     "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
