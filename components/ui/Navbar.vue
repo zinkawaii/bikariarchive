@@ -4,26 +4,26 @@
 
 <template>
     <div class="z-navbar" :class="{ collapse: settingStore.get(`ui-collapse`) }">
-        <ul class="list">
-            <li class="item">
+        <ul class="nav-list">
+            <li class="nav-item">
                 <nuxt-link href="/home">
                     <i class="fas fa-house"></i>
                     <span>主页</span>
                 </nuxt-link>
             </li>
-            <li class="item">
+            <li class="nav-item">
                 <nuxt-link href="/catalogue">
                     <i class="fas fa-book-open"></i>
                     <span>目录</span>
                 </nuxt-link>
             </li>
-            <li class="item">
+            <li class="nav-item">
                 <nuxt-link href="/details">
                     <i class="fas fa-sitemap"></i>
                     <span>情报</span>
                 </nuxt-link>
             </li>
-            <li class="item">
+            <li class="nav-item">
                 <nuxt-link href="/search">
                     <i class="fas fa-search"></i>
                     <span>检索</span>
@@ -36,17 +36,16 @@
 <style lang="scss" scoped>
     .z-navbar {
         position: fixed;
-        overflow: hidden;
         top: calc(50% - 144px);
-        left: -32px;
-        width: 80px;
+        left: -16px;
+        width: 64px;
         box-shadow: 4px 4px 8px rgb(0 0 0 / 33%);
         transition: all 0.4s;
 
         &:hover {
-            width: 148px;
+            width: 132px;
 
-            .item span {
+            .nav-item span {
                 opacity: 1;
             }
         }
@@ -57,25 +56,23 @@
         }
     }
 
-    .list {
+    .nav-list {
         display: flex;
         flex-direction: column;
-        border: 16px solid var(--color-theme-block);
-        border-right: 0;
+        overflow: hidden;
+        border-block: 16px solid var(--color-theme-block);
     }
 
-    .item {
+    .nav-item {
         display: flex;
-        position: relative;
-        left: 0;
         height: 64px;
         padding-left: 16px;
         background-color: var(--color-background);
-        transition: left 0.4s;
+        transition: margin-left 0.4s;
         user-select: none;
 
         &:hover {
-            left: 16px;
+            margin-left: 16px;
 
             > a {
                 background-color: rgb(64 64 64);

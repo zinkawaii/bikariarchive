@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "publish": "cd task && node publish.js",
+    "deploy": "cd .output && forever start server/index.mjs",
     "dev": "nuxt dev",
     "build": "nuxt build",
     "preview": "nuxt preview",

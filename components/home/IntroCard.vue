@@ -6,10 +6,12 @@
 
     const readRecordStore = useReadRecordStore();
 
+    //简介
     const synopsis = computed(() => {
         return jArticle[props.novel]?.synopsis?.split("\n");
     });
 
+    //阅读记录
     const record = computed(() => {
         const data = readRecordStore.get(props.novel);
         return data ? {

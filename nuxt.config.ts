@@ -29,13 +29,6 @@ export default defineNuxtConfig({
         "~/assets/fontawesome/css/solid.css",
         "~/assets/scss/sinrabansyo.scss"
     ],
-    hooks: {
-        "vite:extendConfig": (config, { isClient, isServer }) => {
-            if (isClient) {
-                config.resolve.alias["vue"] = "vue/dist/vue.esm-bundler";
-            }
-        },
-    },
     runtimeConfig: {
         ...serverConfig,
         public: clientConfig
@@ -45,6 +38,9 @@ export default defineNuxtConfig({
     },
     experimental: {
         viewTransition: true
+    },
+    vue: {
+        runtimeCompiler: true
     },
     devServer: {
         https: {

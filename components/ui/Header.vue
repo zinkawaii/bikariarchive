@@ -15,7 +15,9 @@
 
 <template>
     <div class="z-header">
-        <nuxt-link class="title" :to="{ name: `home` }">BikariArchive</nuxt-link>
+        <div class="title-wrapper">
+            <nuxt-link class="title" :to="{ name: `home` }">BikariArchive</nuxt-link>
+        </div>
         <ul class="nav">
             <li class="nav-item">
                 <nuxt-link :to="{ name: `home` }">
@@ -76,8 +78,13 @@
         backdrop-filter: blur(3px);
     }
 
+    .title-wrapper {
+        display: flex;
+        flex: 1;
+        margin-right: auto;
+    }
+
     .title {
-        min-width: fit-content;
         margin: auto;
         font-family: "腾祥沁圆简";
         font-size: 32px;
@@ -136,12 +143,14 @@
     .retrieval {
         display: flex;
         overflow: hidden;
-        margin: 18px 32px 18px 16px;
+        margin-block: auto;
+        margin-inline: 16px 32px;
         border-radius: 8px;
-        box-shadow: 0 0 4px rgb(0 0 0 / 32%);
+        box-shadow: var(--box-shadow);
     }
 
     .entry {
+        width: 160px;
         padding: 0 8px;
         font-size: 14px;
         line-height: 28px;
@@ -155,9 +164,9 @@
         cursor: pointer;
     }
 
-    @media (width >= 1174px) {
-        .title {
-            margin-left: 96px;
+    @media (width >= 768px) {
+        .title-wrapper {
+            max-width: 456px;
         }
     }
 
