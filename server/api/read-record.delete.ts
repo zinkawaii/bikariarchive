@@ -1,6 +1,6 @@
 export default defineCustomHandler(async (event) => {
     const res: BaseResponse = { error: 0 };
-    const { id } = getQueryValues(event);
+    const { id } = await readBody(event);
 
     //权限验证
     identityValidate(event, 9);
