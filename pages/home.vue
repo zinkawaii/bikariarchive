@@ -45,6 +45,11 @@
 </script>
 
 <template>
+    <client-only>
+        <teleport to=".jumbotron-wrapper">
+            <z-jumbotron />
+        </teleport>
+    </client-only>
     <div class="content-page">
         <div class="content-group home-brief">
             <div class="content-table home-welcome">
