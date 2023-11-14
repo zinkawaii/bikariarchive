@@ -28,6 +28,9 @@
 <template>
     <div class="z-toolbar">
         <ul class="tool-list" :class="{ collapse }">
+            <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
+                <i class="fas fa-subway"></i>
+            </nuxt-link>
             <li class="tool-item" @click="settingStore.open()">
                 <i class="fas fa-gear"></i>
             </li>
