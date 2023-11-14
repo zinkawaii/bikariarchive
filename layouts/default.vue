@@ -1,18 +1,19 @@
 <template>
-    <ZBackground />
-    <ZHeader />
-    <ZNavBar />
-    <ZToolBar />
-    <ZDrawer />
-    <ZSetting />
+    <div class="jumbotron-wrapper"></div>
+    <z-background />
+    <z-header />
+    <z-navbar />
+    <z-toolbar />
+    <z-drawer />
+    <z-setting />
     <div class="sotomi">
         <main class="nakami">
             <slot></slot>
-            <ZFooter />
+            <z-footer />
         </main>
-        <ZSideBar />
+        <z-sidebar />
     </div>
-    <ZLoader />
+    <z-loader />
 </template>
 
 <style lang="scss">

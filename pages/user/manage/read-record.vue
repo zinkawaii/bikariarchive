@@ -123,7 +123,7 @@
                 <th width="96px">用户</th>
                 <th width="1%">操作</th>
             </tr>
-            <TransitionGroup>
+            <transition-group>
                 <tr v-for="item, index in data" :key="item._id">
                     <th>{{ index + 1 }}</th>
                     <td>{{ item.ip }}</td>
@@ -136,7 +136,7 @@
                         <a class="btn" @click="remove(item, index)"><i class="fas fa-trash-can"></i></a>
                     </td>
                 </tr>
-            </TransitionGroup>
+            </transition-group>
         </table>
     </div>
 </template>

@@ -55,7 +55,7 @@
                 </p>
             </div>
             <div class="home-introduction">
-                <HomeIntroCard v-for="i in 2"
+                <home-intro-card v-for="i in 2"
                     :style="{ translate: intro.translate[i - 1] }"
                     :layer="intro.layer[i - 1]"
                     :novel="intro.novel[intro.status ? 2 - i : i - 1]"
@@ -107,11 +107,11 @@
             </div>
         </div>
         <div class="home-complex">
-            <HomeUpdate />
-            <HomeCalendar />
-            <HomeBlank />
+            <home-update />
+            <home-calendar />
+            <home-blank />
         </div>
-        <HomeToolContainer />
+        <home-tool-container />
     </div>
 </template>
 

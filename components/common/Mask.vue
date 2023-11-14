@@ -3,9 +3,9 @@
 </script>
 
 <template>
-    <Transition name="mask">
+    <transition name="mask">
         <div v-if="when" class="mb-mask" :style="{ zIndex: z }"></div>
-    </Transition>
+    </transition>
 </template>
 
 <style lang="scss" scoped>

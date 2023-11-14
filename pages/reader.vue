@@ -130,8 +130,8 @@
 </script>
 
 <template>
-    <ClientOnly>
-        <Teleport to=".z-sidebar">
+    <client-only>
+        <teleport to=".z-sidebar">
             <aside class="novel-index">
                 <select class="index-volume" :value="art.volOrder" v-model="state.currentVolume">
                     <option v-for="(v, i) in jArticle[novel].volume" :value="i">{{ v.title }}</option>
@@ -142,8 +142,8 @@
                     </li>
                 </ul>
             </aside>
-        </Teleport>
-    </ClientOnly>
+        </teleport>
+    </client-only>
     <div class="content-page">
         <div class="content-group">
             <header class="novel-header">

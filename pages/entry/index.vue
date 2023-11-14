@@ -27,9 +27,7 @@
             }));
 
             //设置标题
-            useHead({
-                title
-            });
+            useHead({ title });
 
             isExist = true;
             break;
@@ -108,5 +106,11 @@
         grid: auto / repeat(auto-fill, minmax(min(216px, 100%), 1fr));
         grid-gap: 16px;
         margin: 16px 0 0;
+    }
+
+    @media (width < 596px) {
+        .entry-brief {
+            flex-direction: column;
+        }
     }
 </style>

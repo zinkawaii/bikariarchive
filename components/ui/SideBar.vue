@@ -78,6 +78,7 @@
         };
     }
 
+    //边栏显隐与UI折叠
     const display = ref(true);
     watch(() => [
         settingStore.setting["sidebar-display"],
@@ -95,13 +96,13 @@
 
 <template>
     <div class="z-sidebar" :hidden="!display">
-        <ClientOnly>
+        <client-only>
             <ul class="clock-table">
                 <li v-for="i in 6" class="clock-item" :style="{ translate: clocks[i - 1].translate }" @click="exchange(i - 1)">
                     <span>{{ getTime(i - 1) }}</span>
                 </li>
             </ul>
-        </ClientOnly>
+        </client-only>
         <slot></slot>
     </div>
 </template>
