@@ -272,7 +272,6 @@
     }
 
     .lyric-time {
-        display: block;
         width: 54px;
         margin: auto;
         text-align: center;
@@ -296,6 +295,7 @@
         padding: 8px 16px;
         border: 1px solid var(--color-border-light);
         border-radius: 8px;
+        background-color: var(--color-background);
         font-size: 14px;
     }
 

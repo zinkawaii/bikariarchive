@@ -115,9 +115,9 @@
         }
 
         .sub {
+            height: 30px;
             margin-top: 8px;
             font-size: 24px;
-            line-height: 30px;
         }
     }
 

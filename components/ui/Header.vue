@@ -52,7 +52,7 @@
         </ul>
         <form class="retrieval" @submit.prevent="search">
             <input class="entry" placeholder="输入关键词..." v-model="word"/>
-            <button class="search" type="submit">
+            <button class="search">
                 <i class="fas fa-search"></i>
             </button>
         </form>
