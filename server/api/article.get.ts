@@ -62,7 +62,7 @@ export default defineCustomHandler(async (event) => {
             (async () => {
                 //获取时间，UID
                 const time = dayjs.tz();
-                const uid = event.context.sessions?.uid;
+                const uid = event.context.session?.uid;
 
                 //获取用户
                 const user = await UserDataModel.findOne({ uid });
@@ -73,7 +73,7 @@ export default defineCustomHandler(async (event) => {
                     time,
                     novel,
                     index,
-                    user: user?.id
+                    user: user?._id
                 });
             })();
         }
