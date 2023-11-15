@@ -6,6 +6,8 @@ export const useSettingStore = defineStore("setting", () => {
         "theme": 2,
         "dark-mode": 0,
         "sidebar-display": 0,
+        "shortcut-last": "a",
+        "shortcut-next": "d",
         "font-family": 0,
         "font-size": 1,
         "ui-collapse": false

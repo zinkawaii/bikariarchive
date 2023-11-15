@@ -16,6 +16,7 @@
 
     const config = useRuntimeConfig();
     const readRecordStore = useReadRecordStore();
+    const settingStore = useSettingStore();
     const route = useRoute();
     const router = useRouter();
 
@@ -89,6 +90,26 @@
             index: art.getNextIndex()
         }
     };
+
+    if (process.browser) {
+        //键盘松开时
+        const onKeyup = (event) => {
+            if (!art.isFirst && event.key === settingStore.get("shortcut-last")) {
+                router.push(toLastChapter);
+            }
+            else if (!art.isLast && event.key === settingStore.get("shortcut-next")) {
+                router.push(toNextChapter);
+            }
+        };
+
+        //上下章快捷键
+        document.addEventListener("keyup", onKeyup);
+
+        //解除绑定
+        onUnmounted(() => {
+            document.removeEventListener("keyup", onKeyup);
+        });
+    }
 
     //本章链接
     const currentUrl = computed(() => {
