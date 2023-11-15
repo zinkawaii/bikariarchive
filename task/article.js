@@ -37,6 +37,9 @@ marked.use({
 const srcDir = "../data/novel";
 const outDir = "../dist/novel";
 
+const metaSrcDir = "../assets/json/Article.json";
+const metaOutDir = "../dist/json/Article.json";
+
 (async () => {
     //从元信息和Front Matter生成全文和Article.json
     await timer("Meta-Info", generateMetaInfo)();
@@ -66,7 +69,7 @@ function simpleParse(pathname)
 
 function generateMetaInfo()
 {
-    const jFile = fs.readFileSync("../assets/json/Article.json");
+    const jFile = fs.readFileSync(metaSrcDir);
     const jMeta = JSON.parse(jFile);
 
     const re = /^(.*?)\.(\d+)$/;
@@ -89,7 +92,7 @@ function generateMetaInfo()
         //解析内容
         const result = marked.parse(body);
         const $ = cheerio.load(result);
-        const runtime = [...$("*")].some((e) => e?.name?.includes("-"));
+        const runtime = [...$("*")].some((e) => e?.name?.includes("-")) || void(0);
 
         //日期格式化
         dateFormat(attributes, ["date", "date_reco"]);
@@ -105,7 +108,7 @@ function generateMetaInfo()
 
     //输出到文件
     const result = JSON.stringify(jMeta);
-    fs.outputFileSync("../dist/json/Article.json", result);
+    fs.outputFileSync(metaOutDir, result);
 
     //日期格式化
     function dateFormat(obj, keys) {

@@ -2,9 +2,9 @@
     const drawerStore = useDrawerStore();
     const settingStore = useSettingStore();
 
-    function toggleDrawer() {
-        drawerStore.toggle();
-    }
+    const collapse = computed(() => {
+        return settingStore.get("ui-collapse");
+    });
 
     function scrollToTop() {
         window.scrollTo({
@@ -12,17 +12,6 @@
             behavior: "smooth"
         });
     }
-
-    function scrollToBottom() {
-        window.scrollTo({
-            top: document.body.offsetHeight,
-            behavior: "smooth"
-        });
-    }
-
-    const collapse = computed(() => {
-        return settingStore.get("ui-collapse");
-    });
 </script>
 
 <template>
@@ -34,14 +23,11 @@
             <li class="tool-item" @click="settingStore.open()">
                 <i class="fas fa-gear"></i>
             </li>
-            <li class="tool-item" @click="toggleDrawer">
+            <li class="tool-item" @click="drawerStore.toggle()">
                 <i class="fas fa-user"></i>
             </li>
             <li class="tool-item" @click="scrollToTop">
                 <i class="fas fa-arrow-up"></i>
-            </li>
-            <li class="tool-item" @click="scrollToBottom">
-                <i class="fas fa-arrow-down"></i>
             </li>
         </ul>
         <div class="tool-item" id="Hide" @click="settingStore.toggle(`ui-collapse`)">

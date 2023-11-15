@@ -18,7 +18,7 @@
                     <colgroup>
                         <col width="15%"/>
                         <col width="20%"/>
-                        <col/>
+                        <col />
                     </colgroup>
                     <tbody>
                         <template v-for="x in block.children">

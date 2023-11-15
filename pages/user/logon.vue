@@ -119,9 +119,6 @@
                 case 0: {
                     return successed();
                 }
-                default: {
-                    return failed();
-                }
             }
         });
 
@@ -140,12 +137,6 @@
             .then(() => {
                 verifyStage.value.stage = 0;
             });
-        }
-
-        //发送失败
-        function failed() {
-            tip.value.verify = "* 验证码发送失败，请检查邮箱地址";
-            verifyStage.value.stage = 0;
         }
     }
 

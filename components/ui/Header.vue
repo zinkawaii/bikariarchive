@@ -66,7 +66,7 @@
         top: 0;
         height: 64px;
         min-width: var(--size-width-min-mobile);
-        box-shadow: 0 0 8px rgb(0 0 0 / 33%);
+        box-shadow: var(--box-shadow-dark);
         background:
             linear-gradient(
                 to right,

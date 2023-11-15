@@ -89,25 +89,22 @@
     }
 
     .jumbo-background {
-        position: relative;
-        width: 100%;
         height: 72vh;
         background-image: url("/garden/jumbotron.webp");
-        background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
         scale: 1.1;
     }
 
     .jumbo-banner {
+        display: grid;
+        align-content: center;
         position: absolute;
-        top: 50%;
-        width: 100%;
+        inset: 0;
         font-family: "Noto Serif JP";
         text-align: center;
         text-shadow: 0 0 12px rgb(0 0 0 / 66%);
         color: white;
-        translate: 0 -50%;
 
         .title {
             font-size: 72px;

@@ -109,6 +109,10 @@
     }
 
     @media (width < 596px) {
+        .entry-main {
+            flex-direction: column;
+        }
+
         .entry-brief {
             flex-direction: column;
         }
