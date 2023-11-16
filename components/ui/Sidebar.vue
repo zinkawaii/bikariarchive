@@ -1,11 +1,6 @@
 <script setup>
     const settingStore = useSettingStore();
-
-    const time = ref({
-        hour: 0,
-        minute: 0,
-        second: 0
-    });
+    const timerStore = useTimerStore();
 
     const clocks = ref([]);
     for (let i = 0; i < 6; i++) {
@@ -22,14 +17,14 @@
         clocks.value.push(clock);
     }
 
-    onMounted(() => {
-        //走时
-        useEventListener(document, "timer", (event) => {
-            const now = event.date;
-            time.value.hour = now.getHours();
-            time.value.minute = now.getMinutes();
-            time.value.second = now.getSeconds();
-        });
+    //走时
+    const time = computed(() => {
+        const { now } = timerStore;
+        return {
+            hour: now.getHours(),
+            minute: now.getMinutes(),
+            second: now.getSeconds()
+        };
     });
 
     //获取时间

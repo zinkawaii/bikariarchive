@@ -1,25 +1,19 @@
 <script setup>
+    const timerStore = useTimerStore();
     const startDate = new Date("2022/09/30");
-    const time = ref({
-        day: 0,
-        hour: 0,
-        minute: 0,
-        second: 0
-    });
 
-    onMounted(() => {
-        useEventListener(document, "timer", (event) => {
-            const now = event.date;
-            const sub = Math.floor((now - startDate) / 1000);
-            const d = Math.floor(sub / 60 / 60 / 24);
-            const h = Math.floor(sub / 60 / 60) - 24 * d;
-            const m = Math.floor(sub % 3600 / 60);
-            const s = Math.floor(sub % 60);
-            time.value.day = d;
-            time.value.hour = h;
-            time.value.minute = m;
-            time.value.second = s;
-        });
+    const time = computed(() => {
+        const sub = Math.floor((timerStore.now - startDate) / 1000);
+        const d = Math.floor(sub / 60 / 60 / 24);
+        const h = Math.floor(sub / 60 / 60) - 24 * d;
+        const m = Math.floor(sub % 3600 / 60);
+        const s = Math.floor(sub % 60);
+        return {
+            day: d,
+            hour: h,
+            minute: m,
+            second: s
+        };
     });
 </script>
 
