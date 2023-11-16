@@ -10,32 +10,24 @@
         translate: 0
     });
 
-    if (process.browser) {
-        let x, y;
-        const bg_func = Zin.throttle((event) => {
-            if (window.scrollY > window.innerHeight) return;
-            if (event.x && event.y) {
-                x = (window.innerWidth / 2 - event.x) / 20;
-                y = (window.innerHeight / 2 - event.y) / 20;
-            }
+    let x, y;
+    const bg_func = Zin.throttle((event) => {
+        if (window.scrollY > window.innerHeight) return;
+        if (event.x && event.y) {
+            x = (window.innerWidth / 2 - event.x) / 20;
+            y = (window.innerHeight / 2 - event.y) / 20;
+        }
 
-            //滑动时强制更新
-            style.value = { translate: `${x}px ${y + window.scrollY}px` };
-        });
+        //滑动时强制更新
+        style.value = { translate: `${x}px ${y + window.scrollY}px` };
+    });
 
-        //背景相对鼠标移动与视差
-        window.addEventListener("mousemove", bg_func);
-        window.addEventListener("scroll", bg_func);
-
-        //释放内存
-        onUnmounted(() => {
-            window.removeEventListener("mousemove", bg_func);
-            window.removeEventListener("scroll", bg_func);
-        });
-    }
+    //背景相对鼠标移动与视差
+    useEventListener("mousemove", bg_func);
+    useEventListener("scroll", bg_func);
 
     //标题打字特效
-    (async () => {
+    onMounted(async () => {
         const main = "微光茶館";
         const sub = "微かの力を尽くして、光の導いた彼方へ";
 
@@ -58,7 +50,7 @@
             times: sub.length + 1
         });
         title.value.isSubTyping = false;
-    })();
+    });
 
     //点击箭头
     function toBottom() {

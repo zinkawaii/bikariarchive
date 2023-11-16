@@ -30,6 +30,8 @@
     "@nuxtjs/robots": "^3.0.0",
     "@types/fs-extra": "^11.0.4",
     "@types/nodemailer": "^6.4.14",
+    "@vueuse/core": "^10.6.1",
+    "@vueuse/nuxt": "^10.6.1",
     "cheerio": "1.0.0-rc.12",
     "chokidar": "^3.5.3",
     "consola": "^3.2.3",

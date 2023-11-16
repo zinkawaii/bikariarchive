@@ -18,16 +18,8 @@
     const dragging = ref(false);
 
     //全局事件绑定
-    if (process.browser) {
-        document.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseup", onMouseUp);
-
-        //解除绑定
-        onUnmounted(() => {
-            document.removeEventListener("mousemove", onMouseMove);
-            document.removeEventListener("mouseup", onMouseUp);
-        });
-    }
+    useEventListener("mousemove", onMouseMove);
+    useEventListener("mouseup", onMouseUp);
 
     //显示的进度
     const displayRate = computed(() => {

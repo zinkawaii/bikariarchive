@@ -103,12 +103,7 @@
         };
 
         //上下章快捷键
-        document.addEventListener("keyup", onKeyup);
-
-        //解除绑定
-        onUnmounted(() => {
-            document.removeEventListener("keyup", onKeyup);
-        });
+        useEventListener("keyup", onKeyup);
     }
 
     //本章链接

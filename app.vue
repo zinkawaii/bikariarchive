@@ -36,6 +36,15 @@
         }, {
             viewTransition: true
         });
+
+        //全局走时
+        Zin.setInterval(() => {
+            const event = new Event("timer");
+            event.date = new Date();
+            document.dispatchEvent(event);
+        }, {
+            duration: 1000
+        });
     }
 </script>
 

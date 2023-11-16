@@ -56,7 +56,8 @@ export default defineNuxtConfig({
         "@nuxtjs/robots",
         "@nuxt/image",
         "@pinia/nuxt",
-        "@pinia-plugin-persistedstate/nuxt"
+        "@pinia-plugin-persistedstate/nuxt",
+        "@vueuse/nuxt"
     ],
     robots: {
         rules: [
