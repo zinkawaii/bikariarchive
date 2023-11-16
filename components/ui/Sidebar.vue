@@ -22,14 +22,14 @@
         clocks.value.push(clock);
     }
 
-    //走时
-    Zin.setInterval(() => {
-        const now = new Date();
-        time.value.hour = now.getHours();
-        time.value.minute = now.getMinutes();
-        time.value.second = now.getSeconds();
-    }, {
-        duration: 1000
+    onMounted(() => {
+        //走时
+        useEventListener(document, "timer", (event) => {
+            const now = event.date;
+            time.value.hour = now.getHours();
+            time.value.minute = now.getMinutes();
+            time.value.second = now.getSeconds();
+        });
     });
 
     //获取时间

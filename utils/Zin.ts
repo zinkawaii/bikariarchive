@@ -130,35 +130,24 @@ const Zin = new class Z {
         duration = 1000,
         times = -1
     } = {}) {
-        let timer: NodeJS.Timeout;
-
-        const interval: IntervalController<void> = new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             let t = 0;
-            recursion();
+            func(t);
 
-            function recursion() {
-                try {
+            try {
+                useIntervalFn(() => {
+                    if (times >= 0 && t === times) {
+                        resolve();
+                        return;
+                    }
+                    t++;
                     func(t);
-                    timer = setTimeout(() => {
-                        t++;
-                        if (times >= 0 && t === times) {
-                            resolve();
-                            return;
-                        }
-                        recursion();
-                    }, duration);
-                }
-                catch (err) {
-                    reject(err);
-                }
+                }, duration);
+            }
+            catch (err) {
+                reject(err);
             }
         });
-
-        interval.abort = () => {
-            clearTimeout(timer);
-        };
-
-        return interval;
     }
 
     //节流

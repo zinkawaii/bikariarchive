@@ -7,19 +7,19 @@
         second: 0
     });
 
-    Zin.setInterval(() => {
-        const now = new Date();
-        const sub = Math.floor((now - startDate) / 1000);
-        const d = Math.floor(sub / 60 / 60 / 24);
-        const h = Math.floor(sub / 60 / 60) - 24 * d;
-        const m = Math.floor(sub % 3600 / 60);
-        const s = Math.floor(sub % 60);
-        time.value.day = d;
-        time.value.hour = h;
-        time.value.minute = m;
-        time.value.second = s;
-    }, {
-        duration: 1000
+    onMounted(() => {
+        useEventListener(document, "timer", (event) => {
+            const now = event.date;
+            const sub = Math.floor((now - startDate) / 1000);
+            const d = Math.floor(sub / 60 / 60 / 24);
+            const h = Math.floor(sub / 60 / 60) - 24 * d;
+            const m = Math.floor(sub % 3600 / 60);
+            const s = Math.floor(sub % 60);
+            time.value.day = d;
+            time.value.hour = h;
+            time.value.minute = m;
+            time.value.second = s;
+        });
     });
 </script>
 
