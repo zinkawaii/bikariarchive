@@ -19,9 +19,7 @@
 
     //退出登录
     function logout() {
-        Zjax.post({
-            url: "/api/user/logout"
-        }).then(() => {
+        Zjax.post("/api/user/logout").then(() => {
             userStore.reset();
             router.push({ name: "home" });
         });

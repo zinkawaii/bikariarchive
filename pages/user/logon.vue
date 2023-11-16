@@ -108,9 +108,8 @@
 
         verifyStage.value.stage = 1;
 
-        Zjax.get({
-            url: "/api/user/logon/verify",
-            data: {
+        Zjax.get("/api/user/logon/verify", {
+            query: {
                 email: email.value
             }
         })
@@ -150,9 +149,8 @@
 
     //注册
     const register = Zin.debounce(() => {
-        Zjax.post({
-            url: "/api/user/logon",
-            data: {
+        Zjax.post("/api/user/logon", {
+            body: {
                 nickname: nickname.value,
                 email: email.value,
                 verify: verify.value,

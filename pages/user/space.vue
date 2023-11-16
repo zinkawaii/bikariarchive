@@ -20,9 +20,8 @@
     const signUpdate = Zin.debounce(() => {
         if (sign.value === sign_old.value) return;
 
-        Zjax.post({
-            url: "/api/user/sign",
-            data: {
+        Zjax.post("/api/user/sign", {
+            body: {
                 content: sign.value
             }
         });

@@ -11,7 +11,7 @@ const Zjax = function({
     data,
     timeout
 }: ZjaxOptions) {
-    return Zjax[method]?.({ url, data, timeout });
+    return Zjax[method]?.(url, { data, timeout });
 };
 
 Zjax.get = request("get");
@@ -20,16 +20,27 @@ Zjax.put = request("put");
 Zjax.delete = request("delete");
 
 function request(method: string) {
-    return async function({
-        url: urlStr,
-        data = {},
+    return async function(urlStr: string, {
+        body = {},
+        query = {},
         timeout = 0
-    }) {
+    } = {}) {
         const url = new URL(urlStr, location.origin);
-        const options: RequestInit = { method };
+        const options: RequestInit = {
+            method,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
 
         //数据处理
-        ({ get, post }[method.toLowerCase()] || post)(url, data, options);
+        for (const key in query) {
+            url.searchParams.append(key, query[key]);
+        }
+
+        if (Object.keys(body).length > 0) {
+            options.body = JSON.stringify(body);
+        }
 
         //超时处理
         if (timeout > 0) {
@@ -44,19 +55,6 @@ function request(method: string) {
         }
         return res.json();
     };
-}
-
-function get(url: URL, data: any, options: RequestInit) {
-    for (const key in data) {
-        url.searchParams.append(key, data[key]);
-    }
-}
-
-function post(url: URL, data: any, options: RequestInit) {
-    options.headers = {
-        "Content-Type": "application/json"
-    };
-    options.body = JSON.stringify(data);
 }
 
 export default Zjax;

@@ -10,9 +10,8 @@
     });
 
     const submit = Zin.debounce(() => {
-        Zjax.post({
-            url: "/api/user/login",
-            data: {
+        Zjax.post("/api/user/login", {
+            body: {
                 account: nickname.value,
                 password: password.value
             }

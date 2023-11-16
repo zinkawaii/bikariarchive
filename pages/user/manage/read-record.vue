@@ -32,9 +32,8 @@
     async function exactQuery(from, to) {
         //开始查询
         querying.value = true;
-        const result = await Zjax.get({
-            url: "/api/read-record",
-            data: {
+        const result = await Zjax.get("/api/read-record", {
+            query: {
                 from,
                 to
             }
@@ -76,9 +75,8 @@
 
     //删除
     async function remove(item, index) {
-        const res = await Zjax.delete({
-            url: "/api/read-record",
-            data: {
+        const res = await Zjax.delete("/api/read-record", {
+            body: {
                 id: item._id
             }
         });

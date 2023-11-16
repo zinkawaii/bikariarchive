@@ -8,9 +8,7 @@
 
     //从静态资源服务器读取数据，防止打包文件过大
     if (process.browser) {
-        Zjax.get({
-            url: "/json/Jnm.json"
-        }).then((data) => {
+        Zjax.get("/json/Jnm.json").then((data) => {
             Jnm = data;
             isJnmLoaded.value = true;
         });
