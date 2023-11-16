@@ -6,16 +6,14 @@
     const router = useRouter();
     const time = ref(4);
 
-    onMounted(() => {
-        Zin.setInterval(() => {
-            time.value--;
-        }, {
-            duration: 1000,
-            times: 4
-        })
-        .then(() => {
-            router.replace({ name: "home" });
-        });
+    Zin.setInterval(() => {
+        time.value--;
+    }, {
+        duration: 1000,
+        times: 4
+    })
+    .then(() => {
+        router.replace({ name: "home" });
     });
 </script>
 

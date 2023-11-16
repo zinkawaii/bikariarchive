@@ -3,6 +3,8 @@
         title: "西北风计算器"
     });
 
+    const confirmStore = useConfirmStore();
+
     //数据集合
     const state = ref();
 
@@ -28,7 +30,7 @@
         //保存
         async save()
         {
-            if (await Zin.confirm(`是否将当前所有数据保存至本地？`)) {
+            if (await confirmStore.show(`是否将当前所有数据保存至本地？`)) {
                 //保存至数据
                 this.data.value[this.current.value] = {
                     ...state.value
@@ -42,7 +44,7 @@
         //添加
         async add()
         {
-            if (await Zin.confirm("是否清空当前数据（若未保存）并新建一组数据？")) {
+            if (await confirmStore.show("是否清空当前数据（若未保存）并新建一组数据？")) {
                 //初始化
                 const obj = this.init({ name: "新参数" });
 
@@ -57,7 +59,7 @@
         //删除
         async remove()
         {
-            if (await Zin.confirm(`是否删除「${state.value.name}」并清空当前数据？`)) {
+            if (await confirmStore.show(`是否删除「${state.value.name}」并清空当前数据？`)) {
                 //删除
                 this.data.value.splice(this.current.value, 1);
 
@@ -136,10 +138,7 @@
     //删除武器
     function removeBuki(index)
     {
-        if (state.value.buki.length <= 1) {
-            Zin.confirm("至少需要一个武器！");
-        }
-        else {
+        if (state.value.buki.length > 1) {
             state.value.buki.splice(index, 1);
         }
     }

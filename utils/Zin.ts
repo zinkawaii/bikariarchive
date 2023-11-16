@@ -135,10 +135,10 @@ const Zin = new class Z {
             func(t);
 
             try {
-                useIntervalFn(() => {
+                const { pause } = useIntervalFn(() => {
                     if (times >= 0 && t === times) {
                         resolve();
-                        return;
+                        pause();
                     }
                     t++;
                     func(t);

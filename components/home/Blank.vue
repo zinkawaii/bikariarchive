@@ -12,13 +12,11 @@
         "長く続くピークはグルービータイフーン 恋よりステキなトキメキ教えてあげる"
     ];
 
-    onMounted(() => {
-        //每7秒随机显示
-        Zin.setInterval(() => {
-            i.value = Zin.randInt(0, serifs.length - 1);
-        }, {
-            duration: 7000
-        });
+    //每7秒随机显示
+    Zin.setInterval(() => {
+        i.value = Zin.randInt(0, serifs.length - 1);
+    }, {
+        duration: 7000
     });
 </script>
 

@@ -5,7 +5,6 @@
     <z-navbar />
     <z-toolbar />
     <z-drawer />
-    <z-setting />
     <div class="sotomi">
         <main class="nakami">
             <slot></slot>
@@ -13,6 +12,8 @@
         </main>
         <z-sidebar />
     </div>
+    <z-setting />
+    <z-confirm />
     <z-loader />
 </template>
 
@@ -66,8 +67,8 @@
         z-index: 512;
     }
 
-    .z-mask {
-        z-index: 1024;
+    .z-confirm {
+        z-index: 512;
     }
 
     .z-loader {

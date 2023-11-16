@@ -44,7 +44,7 @@
 </script>
 
 <template>
-    <Transition name="slide-fade">
+    <transition name="slide-fade">
         <div v-if="settingStore.isOpen" class="z-setting">
             <i class="fas fa-xmark" id="Close" @click="settingStore.close()"></i>
             <span class="content-h2 coco-title">全局设置</span>
@@ -66,7 +66,7 @@
             <mb-form title="字体选择" type="select" name="font-family" :list="[`系统默认`, `宋体`, `楷体`]"/>
             <mb-form title="字体大小" type="select" name="font-size" :list="[`小`, `中`, `大`]"/>
         </div>
-    </Transition>
+    </transition>
     <mb-mask :when="settingStore.isOpen" z="511" @click="settingStore.close()"/>
 </template>
 
