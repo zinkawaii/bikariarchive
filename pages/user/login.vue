@@ -26,7 +26,7 @@
                         sign: res.sign,
                         isLogin: true
                     });
-                    router.push({ name: "space", params: { uid: res.uid }});
+                    router.push({ name: "space", params: { uid: res.uid } });
                     break;
                 case 1:
                     tip.value.nickname = "* 账号不存在";

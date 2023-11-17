@@ -112,7 +112,7 @@
 
     @media (width < 1024px) {
         .space-header {
-            --s: -8px;
+            --s: -16px;
         }
     }
 </style>

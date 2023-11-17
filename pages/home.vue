@@ -215,6 +215,13 @@
         grid-template:
             "A B" auto
             "A C" 1fr / auto 1fr;
+
+        > div {
+            border: var(--border-theme-group);
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            background-color: var(--color-background-alpha);
+        }
     }
 
     @container main (width < 768px) {

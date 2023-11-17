@@ -78,8 +78,11 @@
     @media (width < 1024px) {
         .sotomi {
             flex-direction: column;
-            align-items: stretch;
-            padding: 8px;
+            padding: 16px 8px;
+        }
+
+        .nakami {
+            gap: 16px;
         }
     }
 </style>

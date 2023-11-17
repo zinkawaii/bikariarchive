@@ -131,18 +131,21 @@ const Zin = new class Z {
         times = -1
     } = {}) {
         return new Promise<void>((resolve, reject) => {
-            let t = 0;
-            func(t);
-
             try {
-                const { pause } = useIntervalFn(() => {
+                let t = 0;
+                recursion();
+                const { pause } = useIntervalFn(recursion, duration);
+
+                function recursion() {
                     if (times >= 0 && t === times) {
-                        resolve();
                         pause();
+                        resolve();
                     }
-                    t++;
-                    func(t);
-                }, duration);
+                    else {
+                        func(t);
+                        t++;
+                    }
+                }
             }
             catch (err) {
                 reject(err);

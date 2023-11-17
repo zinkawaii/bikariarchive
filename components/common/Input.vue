@@ -19,8 +19,7 @@
         re: /^(\d*)(\.\d*)?$/,
 
         //输入时
-        input(value)
-        {
+        input(value) {
             const match = String(value).match(this.re);
 
             if (match) {
@@ -47,8 +46,7 @@
         },
 
         //失焦时
-        blur(value)
-        {
+        blur(value) {
             const match = String(value).match(this.re);
 
             if (match) {
@@ -71,8 +69,7 @@
             }
         }
     }, {
-        get(target, p)
-        {
+        get(target, p) {
             switch (props.type) {
                 case "number": {
                     return target[p];
@@ -98,8 +95,7 @@
     });
 
     //输入时
-    function input(event)
-    {
+    function input(event) {
         //记录旧值
         oldValue = props.modelValue;
 
@@ -114,8 +110,7 @@
     }
 
     //失焦时
-    function blur(event)
-    {
+    function blur(event) {
         //处理数据
         const value = formatter.blur(event.target.value);
 

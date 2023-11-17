@@ -16,11 +16,11 @@
     const fullTextSearch = Zin.debounce(async (w = word.value) => {
         if (!(w?.length > 0)) return;
 
-        const { data } = await useFetch("/api/search", { query: { word: w }});
+        const { data } = await useFetch("/api/search", { query: { word: w } });
 
         results.value.length = 0;
         searchWord.value = w;
-        router.replace({ query: { word: w }});
+        router.replace({ query: { word: w } });
 
         const {
             error,

@@ -240,10 +240,6 @@
         display: grid;
         grid-template-columns: auto 1fr;
         overflow: auto;
-        border: var(--border-theme-group);
-        border-radius: 16px;
-        box-shadow: var(--box-shadow);
-        background-color: var(--color-background-alpha);
         font-size: 14px;
         scroll-snap-type: x mandatory;
 

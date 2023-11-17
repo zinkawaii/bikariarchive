@@ -31,10 +31,6 @@
         grid-area: A;
         width: 256px;
         padding: 16px 32px;
-        border: var(--border-theme-group);
-        border-radius: 16px;
-        box-shadow: var(--box-shadow);
-        background-color: var(--color-background-alpha);
     }
 
     .update-item {

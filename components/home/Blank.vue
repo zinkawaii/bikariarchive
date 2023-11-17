@@ -1,6 +1,7 @@
 <script setup>
     const i = ref(0);
     const serifs = [
+        "あと少しだけでいい 満ち足りない",
         "可愛いだけではだめだってわかってる",
         "だけど君が知りたい 昨日とは違うんだ",
         "魔法みたいな 君の声まるで Magic だよ",
@@ -32,10 +33,6 @@
         display: grid;
         grid-template-rows: auto 1fr;
         padding: 4px;
-        border: var(--border-theme-group);
-        border-radius: 16px;
-        box-shadow: var(--box-shadow);
-        background-color: var(--color-background-alpha);
 
         > div {
             border-radius: 12px;
