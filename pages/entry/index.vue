@@ -2,16 +2,16 @@
     import jEntry from "~/assets/json/Entry.json";
     import Character from "./character.vue";
     import General from "./general.vue";
+    import Unknown from "./unknown.vue";
 
     const route = useRoute();
-    const router = useRouter();
 
     const { title } = route.params;
     const template = shallowRef();
+    const isExist = ref(false);
     let category = "";
     let data = null;
 
-    let isExist = false;
     for (const key in jEntry.category) {
         const jList = jEntry.category[key];
         if (jList.includes(title)) {
@@ -29,19 +29,16 @@
             //设置标题
             useHead({ title });
 
-            isExist = true;
+            isExist.value = true;
             break;
         }
-    }
-
-    if (!isExist) {
-        router.replace({ name: "unknown" });
     }
 </script>
 
 <template>
     <div class="content-group">
-        <component :is="template" :title="title" :category="category" :data="data"></component>
+        <component v-if="isExist" :is="template" :title="title" :category="category" :data="data"></component>
+        <Unknown v-else />
     </div>
 </template>
 
