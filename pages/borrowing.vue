@@ -18,7 +18,7 @@
                 </tr>
                 <template v-for="(element, i) in jBorrowing.list">
                     <tr v-for="(item, j) in element.items">
-                        <th v-if="j === 0" :rowspan="element.items.length" :class="`navbox-ceil-${i % 2 === 0 ? 'odd' : 'even'}`">{{ element.title }}</th>
+                        <th v-if="j === 0" :rowspan="element.items.length">{{ element.title }}</th>
                         <td><nuxt-link :to="item.src.link" target="_blank">{{ item.src.name }}</nuxt-link></td>
                         <td><nuxt-link :to="item.creator.link" target="_blank">{{ item.creator.name }}</nuxt-link></td>
                     </tr>

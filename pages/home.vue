@@ -67,7 +67,7 @@
                     @exchange="exchange"
                 />
             </div>
-            <div class="content-table home-profile">
+            <div class="content-table">
                 <a class="profile-avatar">
                     <nuxt-img :src="author.avatar"/>
                 </a>
@@ -89,7 +89,7 @@
                 </table>
                 <ul class="profile-link">
                     <li>
-                        <nuxt-link to="https://github.com/MysteryBao37" title="Github" target="_blank">
+                        <nuxt-link to="https://github.com/KazariEX" title="Github" target="_blank">
                             <i class="fab fa-github"></i>
                         </nuxt-link>
                     </li>
@@ -147,14 +147,10 @@
         position: relative;
     }
 
-    .home-profile {
-        text-align: center;
-    }
-
     .profile-table {
-        width: 100%;
-        border-spacing: 8px;
         font-size: 16px;
+        text-align: center;
+        border-spacing: 8px;
 
         td {
             border-bottom: 1px solid var(--color-border-light);
@@ -167,6 +163,7 @@
         max-width: 256px;
         aspect-ratio: 1;
         margin: auto;
+        margin-bottom: -24px;
         border-radius: 100%;
         translate: 0 -32px;
         filter: drop-shadow(4px 12px 8px rgb(0 0 0 / 24%));
@@ -178,7 +175,6 @@
         }
 
         > img {
-            margin: 0 0 -24px;
             border-radius: inherit;
             transition: all 0.4s;
         }

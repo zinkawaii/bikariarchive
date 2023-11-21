@@ -65,12 +65,12 @@
     <div class="z-jumbotron">
         <div class="jumbo-background" :style="style"></div>
         <div class="jumbo-banner">
-            <div class="title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</div>
-            <div class="sub" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</div>
+            <h1 class="title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
+            <h2 class="sub" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
         </div>
-        <div class="jumbo-hide" @click="toBottom">
+        <a class="jumbo-hide" @click="toBottom">
             <i class="fas fa-chevron-down"></i>
-        </div>
+        </a>
     </div>
 </template>
 
@@ -100,6 +100,7 @@
 
         .title {
             font-size: 72px;
+            font-weight: normal;
             line-height: 80px;
         }
 
@@ -107,6 +108,7 @@
             height: 30px;
             margin-top: 8px;
             font-size: 24px;
+            font-weight: normal;
         }
     }
 
@@ -152,24 +154,24 @@
     }
 
     .jumbo-hide {
-        display: flex;
+        display: grid;
+        align-items: center;
         position: absolute;
         opacity: 0;
         bottom: 0;
         width: 100%;
         height: 20%;
         background: linear-gradient(transparent, rgb(0 0 0 / 50%));
-        transition: all 0.3s;
-        cursor: pointer;
+        font-size: 64px;
+        color: white;
+        transition: all 0.4s;
 
         &:hover {
             opacity: 1;
         }
 
         > i {
-            margin: auto;
-            font-size: 64px;
-            color: rgb(255 255 255 / 45%);
+            opacity: 0.5;
         }
     }
 </style>
