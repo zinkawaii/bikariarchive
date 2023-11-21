@@ -1,7 +1,6 @@
 import jArticle from "~/dist/json/Article.json";
 
-class Article
-{
+class Article {
     novel        = "";    //小说名
     volOrder     = -1;    //卷序号
     volName      = "";    //卷名
@@ -13,15 +12,13 @@ class Article
     runtime      = false; //运行时
     error        = true;  //错误信息
 
-    constructor(novel: string, index: string)
-    {
+    constructor(novel: string, index: string) {
         if (novel && index) {
             this.init(novel, index);
         }
     }
 
-    init(novel: string, index: string)
-    {
+    init(novel: string, index: string) {
         this.novel = novel;
         this.index = index;
         this.error = true;
@@ -65,28 +62,23 @@ class Article
         }
     }
 
-    get novelInfo()
-    {
+    get novelInfo() {
         return jArticle[this.novel];
     }
 
-    get isFirst()
-    {
+    get isFirst() {
         return this.order === 0;
     }
 
-    get isLast()
-    {
+    get isLast() {
         return this.order === jArticle[this.novel].chapter.length - 1;
     }
 
-    getLastIndex()
-    {
+    getLastIndex() {
         return jArticle[this.novel].chapter[this.order - 1].index;
     }
 
-    getNextIndex()
-    {
+    getNextIndex() {
         return jArticle[this.novel].chapter[this.order + 1].index;
     }
 }

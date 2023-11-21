@@ -48,11 +48,10 @@
     });
 
     //结果
-    const result = ref([ [], [] ]);
+    const result = ref([[], []]);
 
     //生成
-    function generate()
-    {
+    function generate() {
         const count = counter.value.current;
         const sex = gender.value.current;
 
@@ -84,8 +83,7 @@
     }
 
     //清空结果
-    function clear()
-    {
+    function clear() {
         result.value.forEach((colume) => colume.length = 0);
     }
 
@@ -96,8 +94,7 @@
     });
 
     //姓
-    function getLastName()
-    {
+    function getLastName() {
         let kanji, i;
 
         const r = Math.floor(100 * Math.random());

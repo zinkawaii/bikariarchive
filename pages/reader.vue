@@ -8,7 +8,7 @@
             "mb-code": MbCode,
             "nuxt-img": NuxtImg
         }
-    }
+    };
 </script>
 
 <script setup>

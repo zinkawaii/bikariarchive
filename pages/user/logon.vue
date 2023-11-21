@@ -12,8 +12,7 @@
         verify: "",
         password: "",
         repeat: "",
-        clear()
-        {
+        clear() {
             this.nickname = "";
             this.email = "",
             this.verify = "",
@@ -102,8 +101,7 @@
     }
 
     //发送验证码
-    function verifySend()
-    {
+    function verifySend() {
         if (!checker.email()) return;
 
         verifyStage.value.stage = 1;

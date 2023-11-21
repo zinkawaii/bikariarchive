@@ -28,8 +28,7 @@
         data: ref(JSON.parse(process.browser && localStorage.getItem(key))?.data || []),
 
         //保存
-        async save()
-        {
+        async save() {
             if (await confirmStore.show(`是否将当前所有数据保存至本地？`)) {
                 //保存至数据
                 this.data.value[this.current.value] = {
@@ -42,8 +41,7 @@
         },
 
         //添加
-        async add()
-        {
+        async add() {
             if (await confirmStore.show("是否清空当前数据（若未保存）并新建一组数据？")) {
                 //初始化
                 const obj = this.init({ name: "新参数" });
@@ -57,8 +55,7 @@
         },
 
         //删除
-        async remove()
-        {
+        async remove() {
             if (await confirmStore.show(`是否删除「${state.value.name}」并清空当前数据？`)) {
                 //删除
                 this.data.value.splice(this.current.value, 1);
@@ -80,8 +77,7 @@
         },
 
         //初始化
-        init({ name = "" } = {})
-        {
+        init({ name = "" } = {}) {
             const obj = {
                 name,
                 power: {
@@ -100,14 +96,12 @@
         },
 
         //切换时
-        change()
-        {
+        change() {
             state.value = this.data.value[this.current.value];
         },
 
         //保存至本地
-        save2Local()
-        {
+        save2Local() {
             localStorage.setItem(key, JSON.stringify({
                 data: this.data.value
             }));
@@ -126,26 +120,23 @@
             state.value.power.pioneer.reduce((prev, ship) => {
                 return prev += ship;
             }, 0);
-        return parseInt((5000 / Math.pow(state.value.time + 50, 0.36) - Math.pow(powers, 0.6)) * 10);
+        return Number.parseInt((5000 / Math.pow(state.value.time + 50, 0.36) - Math.pow(powers, 0.6)) * 10);
     });
 
     //添加武器
-    function addBuki()
-    {
+    function addBuki() {
         state.value.buki.push({ ...buki_template });
     }
 
     //删除武器
-    function removeBuki(index)
-    {
+    function removeBuki(index) {
         if (state.value.buki.length > 1) {
             state.value.buki.splice(index, 1);
         }
     }
 
     //Roll
-    function roll()
-    {
+    function roll() {
         let kill = 0;
         for (let t = 0; t < state.value.times; t++) {
             let hp = 0;
@@ -169,8 +160,7 @@
             kill_rate.value = 0;
         }
 
-        function isRateEffect(rate)
-        {
+        function isRateEffect(rate) {
             if (Math.random() * 100 < rate) return true;
             else return false;
         }

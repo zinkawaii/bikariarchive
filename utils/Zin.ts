@@ -118,8 +118,7 @@ const Zin = new class Z {
     }
 
     //延时执行函数
-    setTimeout(duration: number): Promise<void>
-    {
+    setTimeout(duration: number): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(resolve, duration);
         });
@@ -183,8 +182,7 @@ const Zin = new class Z {
     }
 
     //性能计时
-    timer(sign, func, times = 1)
-    {
+    timer(sign: string, func: () => any, times = 1) {
         //开始标记
         performance.mark("start");
 
@@ -201,9 +199,5 @@ const Zin = new class Z {
         console.info(`${sign} -- ${measure.duration.toFixed(0)}ms`);
     }
 };
-
-interface IntervalController<T> extends Promise<T> {
-    abort?: () => void
-}
 
 export default Zin;

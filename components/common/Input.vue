@@ -1,6 +1,4 @@
 <script setup>
-    import { ref, onMounted } from "vue";
-
     const emit = defineEmits(["update:modelValue"]);
     const props = defineProps([
         "modelValue",
@@ -50,7 +48,7 @@
             const match = String(value).match(this.re);
 
             if (match) {
-                let i = match[1] ?? "";
+                const i = match[1] ?? "";
                 let d = match[2] ?? "";
 
                 //小数
@@ -75,7 +73,7 @@
                     return target[p];
                 }
                 default: {
-                    return v => v;
+                    return (v) => v;
                 }
             }
         }

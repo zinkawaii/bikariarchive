@@ -97,8 +97,7 @@
         //设置选中日期
         if (currentDate.value) {
             for (const date of dates) {
-                if (
-                    currentDate.value.solar === date.solar &&
+                if (currentDate.value.solar === date.solar &&
                     currentDate.value.month === date.month &&
                     currentDate.value.year === date.year
                 ) {
@@ -120,8 +119,7 @@
     });
 
     //上一月份
-    function toLastMonth()
-    {
+    function toLastMonth() {
         if (state.value.month === 0) {
             state.value.month = 11;
             state.value.year--;
@@ -132,8 +130,7 @@
     }
 
     //下一月份
-    function toNextMonth()
-    {
+    function toNextMonth() {
         if (state.value.month === 11) {
             state.value.month = 0;
             state.value.year++;
@@ -144,8 +141,7 @@
     }
 
     //创建日期对象
-    function createDate(year, month, day)
-    {
+    function createDate(year, month, day) {
         const base = new Date(year, month, day);
 
         const solar = dayjs(base);
@@ -160,8 +156,7 @@
         };
 
         //副标题
-        function getSubTitle()
-        {
+        function getSubTitle() {
             //节气
             if (lunar.solarTerm) {
                 return lunar.solarTerm;

@@ -191,14 +191,11 @@
 
     .result-box {
         padding: 16px;
-        border: 1px;
-        border-left: 16px;
-        border-style: solid;
-        border-color: transparent;
+        border: 1px solid transparent;
+        border-left-width: 16px;
         border-radius: 8px;
         color: inherit;
         transition: all 0.2s;
-        cursor: pointer;
 
         &:hover {
             border-color: var(--color-border-light);
