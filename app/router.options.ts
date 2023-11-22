@@ -114,6 +114,11 @@ export default <RouterConfig> {
                     }
                 }
             ]
+        },
+        {
+            name: "unknown",
+            path: "/:pathMatch(.*)*",
+            component: () => import("~/pages/unknown.vue")
         }
     ]
 };

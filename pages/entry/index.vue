@@ -2,7 +2,7 @@
     import jEntry from "~/assets/json/Entry.json";
     import Character from "./character.vue";
     import General from "./general.vue";
-    import Unknown from "./unknown.vue";
+    import Unknown from "../unknown.vue";
 
     const route = useRoute();
 
@@ -36,10 +36,10 @@
 </script>
 
 <template>
-    <div class="content-group">
-        <component v-if="isExist" :is="template" :title="title" :category="category" :data="data"></component>
-        <Unknown v-else />
+    <div v-if="isExist" class="content-group">
+        <component :is="template" :title="title" :category="category" :data="data"></component>
     </div>
+    <Unknown v-else />
 </template>
 
 <style lang="scss">
