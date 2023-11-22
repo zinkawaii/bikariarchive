@@ -68,7 +68,6 @@ const base = {
         "object-property-newline": ["warn", {
             allowAllPropertiesOnSameLine: true
         }],
-        "operator-linebreak": ["warn", "after"],
         "quotes": ["warn", "double", {
             allowTemplateLiterals: true
         }],

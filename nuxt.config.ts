@@ -7,6 +7,10 @@ export default defineNuxtConfig({
             viewport: "width=device-width, initial-scale=1",
             link: [
                 { rel: "icon", href: "/garden/favicon.ico" }
+            ],
+            meta: [
+                { "http-equiv": "Cache-Control", content: "no-siteapp" },
+                { "http-equiv": "X-UA-Compatible", content: "IE=edge, chrome=1" }
             ]
         }
     },
@@ -37,6 +41,7 @@ export default defineNuxtConfig({
         enabled: true
     },
     experimental: {
+        inlineSSRStyles: false,
         viewTransition: true
     },
     vue: {

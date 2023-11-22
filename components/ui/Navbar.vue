@@ -3,34 +3,34 @@
 </script>
 
 <template>
-    <div class="z-navbar" :class="{ collapse: settingStore.get(`ui-collapse`) }">
+    <nav class="z-navbar" :class="{ collapse: settingStore.get(`ui-collapse`) }">
         <ul class="nav-list">
             <li class="nav-item">
-                <nuxt-link href="/home">
+                <nuxt-link :to="{ name: `home` }">
                     <i class="fas fa-house"></i>
                     <span>主页</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
-                <nuxt-link href="/catalogue">
+                <nuxt-link :to="{ name: `catalogue` }">
                     <i class="fas fa-book-open"></i>
                     <span>目录</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
-                <nuxt-link href="/details">
+                <nuxt-link :to="{ name: `details` }">
                     <i class="fas fa-sitemap"></i>
                     <span>情报</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
-                <nuxt-link href="/search">
+                <nuxt-link :to="{ name: `search` }">
                     <i class="fas fa-search"></i>
                     <span>检索</span>
                 </nuxt-link>
             </li>
         </ul>
-    </div>
+    </nav>
 </template>
 
 <style lang="scss" scoped>

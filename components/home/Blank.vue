@@ -47,7 +47,6 @@
             background-color: transparent;
             font-size: 14px;
             line-height: 24px;
-            resize: none;
         }
     }
 </style>

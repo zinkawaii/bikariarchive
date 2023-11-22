@@ -117,8 +117,6 @@
         display: flex;
         gap: 6px;
         position: relative;
-        top: 0;
-        left: 0;
         margin-bottom: -8px;
         padding: 0 17px 20px;
 
@@ -203,11 +201,8 @@
 
     @media (width < 1024px) {
         .z-sidebar {
-            position: static;
             height: auto;
-            min-width: var(--size-width-min-mobile);
             margin: auto;
-            padding: 0 32px;
         }
     }
 </style>

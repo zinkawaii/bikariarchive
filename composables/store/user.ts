@@ -36,5 +36,5 @@ export const useUserStore = defineStore("user", () => {
         isLogin,
         getInfo,
         reset
-    }
+    };
 });

@@ -28,7 +28,7 @@
 
     //错误跳转
     if (art.error) {
-        router.replace("/catalogue");
+        router.replace({ name: "catalogue" });
         throw "Article Not Found (404)";
     }
 
@@ -76,7 +76,7 @@
     }
 
     //上一章
-    const toLastClass = { hidden: art.isFirst };
+    const toLastClass = { invisible: art.isFirst };
     const toLastChapter = art.isFirst ? {} : {
         params: {
             index: art.getLastIndex()
@@ -84,7 +84,7 @@
     };
 
     //下一章
-    const toNextClass = { hidden: art.isLast };
+    const toNextClass = { invisible: art.isLast };
     const toNextChapter = art.isLast ? {} : {
         params: {
             index: art.getNextIndex()
@@ -154,7 +154,7 @@
                 </select>
                 <ul class="index-list">
                     <li v-for="c in jChapter">
-                        <nuxt-link :to="{ name: `reader`, params: { novel, index: c.index }}">{{ c.title }}</nuxt-link>
+                        <nuxt-link :to="{ params: { index: c.index } }">{{ c.title }}</nuxt-link>
                     </li>
                 </ul>
             </aside>
@@ -306,10 +306,8 @@
     .index-volume {
         margin: 4px 16px 8px;
         padding: 8px 0;
-        border: 0;
         border-bottom: 1px solid var(--color-border);
         background-color: transparent;
-        font-size: 16px;
         font-weight: bolder;
     }
 
@@ -350,10 +348,6 @@
                 color: white;
             }
         }
-    }
-
-    .hidden {
-        visibility: hidden;
     }
 
     @media (width < 1024px) {

@@ -75,7 +75,7 @@
         <div class="content-group">
             <div class="search-box">
                 <input class="search-input" v-model="word" @keyup.enter="fullTextSearch()"/>
-                <span class="search-button" @click="fullTextSearch()">全文检索</span>
+                <a class="search-button" @click="fullTextSearch()">全文检索</a>
             </div>
             <div class="search-history">
                 <div class="history-title">
@@ -127,20 +127,15 @@
     .search-input {
         flex: 1;
         padding: 0 12px;
-        border: 0;
-        font-size: 16px;
     }
 
     .search-button {
         display: flex;
         align-items: center;
-        width: 100px;
-        padding-left: 16px;
+        padding-inline: 16px 18px;
         background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));
         text-shadow: var(--text-shadow);
         color: white;
-        cursor: pointer;
-        user-select: none;
     }
 
     .search-history {

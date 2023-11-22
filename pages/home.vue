@@ -226,7 +226,7 @@
         }
 
         .home-introduction {
-            height: 328px;
+            height: 332px;
         }
     }
 

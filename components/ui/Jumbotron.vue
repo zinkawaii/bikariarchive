@@ -101,12 +101,10 @@
         .title {
             font-size: 72px;
             font-weight: normal;
-            line-height: 80px;
         }
 
         .sub {
-            height: 30px;
-            margin-top: 8px;
+            height: 1.4em;
             font-size: 24px;
             font-weight: normal;
         }
@@ -116,9 +114,7 @@
         content: "";
         display: inline-block;
         outline: 1px solid white;
-        animation: cursor-flash 1s;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
+        animation: cursor-flash 1s forwards infinite;
     }
 
     .main-typing::after {

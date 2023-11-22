@@ -16,23 +16,23 @@
 
 <template>
     <div class="z-toolbar">
-        <ul class="tool-list" :class="{ collapse }">
+        <div class="tool-list" :class="{ collapse }">
             <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
                 <i class="fas fa-subway"></i>
             </nuxt-link>
-            <li class="tool-item" @click="settingStore.open()">
+            <a class="tool-item" @click="settingStore.open()">
                 <i class="fas fa-gear"></i>
-            </li>
-            <li class="tool-item" @click="drawerStore.toggle()">
+            </a>
+            <a class="tool-item" @click="drawerStore.toggle()">
                 <i class="fas fa-user"></i>
-            </li>
-            <li class="tool-item" @click="scrollToTop">
+            </a>
+            <a class="tool-item" @click="scrollToTop">
                 <i class="fas fa-arrow-up"></i>
-            </li>
-        </ul>
-        <div class="tool-item" id="Hide" @click="settingStore.toggle(`ui-collapse`)">
-            <i :class="[`fas`, `fa-chevron-${collapse ? `left` : `right`}`]"></i>
+            </a>
         </div>
+        <a class="tool-item" id="Hide" @click="settingStore.toggle(`ui-collapse`)">
+            <i :class="[`fas`, `fa-chevron-${collapse ? `left` : `right`}`]"></i>
+        </a>
     </div>
 </template>
 
@@ -45,8 +45,7 @@
     }
 
     .tool-list {
-        display: flex;
-        flex-direction: column;
+        display: grid;
         gap: 8px;
         margin-bottom: 8px;
         transition: all 0.4s;
@@ -59,14 +58,13 @@
     }
 
     .tool-item {
-        display: block;
+        display: grid;
+        align-items: center;
         width: 36px;
+        aspect-ratio: 1;
         border-radius: 6px;
         box-shadow: var(--box-shadow);
         background-color: var(--color-theme-block-dark);
-        line-height: 36px;
-        text-align: center;
-        cursor: pointer;
         pointer-events: auto;
 
         &:hover {

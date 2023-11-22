@@ -124,6 +124,12 @@ code {
     color: var(--color-theme-text);
 }
 
+img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
 table {
     width: 100%;
 }
@@ -144,36 +150,28 @@ ol, ul {
     list-style-type: none;
 }
 
-label {
-    cursor: pointer;
-}
-
 rt {
     font-size: 75%;
 }
 
+button, label {
+    cursor: pointer;
+}
+
 input, textarea, select, option {
     border: 0;
-    outline: 0;
     background-color: var(--color-background);
     font-family: inherit;
     font-size: inherit;
     color: inherit;
 }
 
-img {
-    width: 100%;
-    height: auto;
-    vertical-align: middle;
+input {
+    min-width: 0;
 }
 
-[type="number"] {
-    appearance: textfield;
-}
-
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-    appearance: none;
+textarea {
+    resize: none;
 }
 
 :focus {
@@ -274,14 +272,6 @@ img {
     display: flex;
 }
 
-.mask {
-    position: fixed;
-    opacity: 0;
-    inset: 0;
-    background-color: black;
-    z-index: -1;
-}
-
 .p-small {
     font-size: 14px;
     line-height: 24px;
@@ -308,7 +298,7 @@ img {
     text-align: center;
 }
 
-[invisible] {
+.invisible {
     visibility: hidden;
 }
 

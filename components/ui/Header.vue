@@ -18,40 +18,30 @@
         <div class="title-wrapper">
             <nuxt-link class="title" :to="{ name: `home` }">BikariArchive</nuxt-link>
         </div>
-        <ul class="nav">
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `home` }">
-                    <i class="fas fa-house"></i>
-                    <span>主页</span>
-                </nuxt-link>
-            </li>
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `catalogue` }">
-                    <i class="fas fa-book-open"></i>
-                    <span>目录</span>
-                </nuxt-link>
-            </li>
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `details` }">
-                    <i class="fas fa-sitemap"></i>
-                    <span>情报</span>
-                </nuxt-link>
-            </li>
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `friend` }">
-                    <i class="fas fa-link"></i>
-                    <span>友链</span>
-                </nuxt-link>
-            </li>
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `borrowing` }">
-                    <i class="fas fa-person-praying"></i>
-                    <span>借物表</span>
-                </nuxt-link>
-            </li>
-        </ul>
+        <nav class="nav-list">
+            <nuxt-link :to="{ name: `home` }">
+                <i class="fas fa-house"></i>
+                <span>主页</span>
+            </nuxt-link>
+            <nuxt-link :to="{ name: `catalogue` }">
+                <i class="fas fa-book-open"></i>
+                <span>目录</span>
+            </nuxt-link>
+            <nuxt-link :to="{ name: `details` }">
+                <i class="fas fa-sitemap"></i>
+                <span>情报</span>
+            </nuxt-link>
+            <nuxt-link :to="{ name: `friend` }">
+                <i class="fas fa-link"></i>
+                <span>友链</span>
+            </nuxt-link>
+            <nuxt-link :to="{ name: `borrowing` }">
+                <i class="fas fa-person-praying"></i>
+                <span>借物表</span>
+            </nuxt-link>
+        </nav>
         <form class="retrieval" @submit.prevent="search">
-            <input class="entry" placeholder="输入关键词..." v-model="word"/>
+            <input class="keyword" placeholder="输入关键词..." v-model="word"/>
             <button class="search">
                 <i class="fas fa-search"></i>
             </button>
@@ -90,7 +80,6 @@
         font-size: 32px;
         text-shadow: 1px 1px 4px rgb(0 0 0 / 50%);
         color: white;
-        cursor: pointer;
 
         &::before {
             content: "ʚ";
@@ -101,15 +90,9 @@
         }
     }
 
-    .nav {
+    .nav-list {
         display: flex;
         min-width: fit-content;
-        margin: 0;
-        padding: 0;
-    }
-
-    .nav-item {
-        display: flex;
 
         > a {
             display: flex;
@@ -133,11 +116,15 @@
                 scale: 0 1;
                 translate: -4px;
             }
-        }
 
-        &:hover a::after {
-            scale: 1;
+            &:hover::after {
+                scale: 1;
+            }
         }
+    }
+
+    .nav-item {
+        display: flex;
     }
 
     .retrieval {
@@ -147,21 +134,19 @@
         margin-inline: 16px 32px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
+        font-size: 14px;
     }
 
-    .entry {
+    .keyword {
         width: 160px;
         padding: 0 8px;
-        font-size: 14px;
         line-height: 28px;
     }
 
     .search {
         width: 48px;
         background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));
-        font-size: 14px;
         color: white;
-        cursor: pointer;
     }
 
     @media (width >= 768px) {
@@ -177,7 +162,7 @@
     }
 
     @media (width < 768px) {
-        .nav {
+        .nav-list {
             display: none;
         }
     }
