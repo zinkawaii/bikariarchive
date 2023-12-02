@@ -23,7 +23,6 @@
         position: fixed;
         inset: 0;
         background-attachment: fixed;
-        background-image: url("/garden/background/bg_dark.webp");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

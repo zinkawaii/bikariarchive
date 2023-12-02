@@ -281,8 +281,8 @@
 
     .calendar-week, .calendar-date {
         display: grid;
-        gap: 2px;
         grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
         text-align: center;
     }
 

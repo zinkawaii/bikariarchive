@@ -4,7 +4,7 @@ interface GetUserInfoResponse extends BaseResponse {
     identity?: number,
     sign?: string,
     isLogin?: boolean
-};
+}
 
 export default defineCustomHandler(async (event) => {
     const res: GetUserInfoResponse = { error: 0 };

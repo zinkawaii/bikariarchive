@@ -133,10 +133,10 @@
 
     .home-brief {
         display: grid;
-        gap: 32px;
         grid-template:
             "A A"
             "B C" / 1fr 40%;
+        gap: 32px;
     }
 
     .home-welcome {
@@ -148,9 +148,9 @@
     }
 
     .profile-table {
+        border-spacing: 8px;
         font-size: 16px;
         text-align: center;
-        border-spacing: 8px;
 
         td {
             border-bottom: 1px solid var(--color-border-light);

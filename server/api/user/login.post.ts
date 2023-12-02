@@ -5,7 +5,7 @@ interface PostLoginResponse extends BaseResponse {
     nickname?: string,
     identity?: number,
     sign?: string
-};
+}
 
 export default defineCustomHandler(async (event) => {
     const res: PostLoginResponse = { error: 0 };

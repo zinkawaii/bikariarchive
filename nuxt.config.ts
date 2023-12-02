@@ -38,7 +38,7 @@ export default defineNuxtConfig({
         public: clientConfig
     },
     devtools: {
-        enabled: true
+        enabled: false
     },
     experimental: {
         inlineSSRStyles: false,

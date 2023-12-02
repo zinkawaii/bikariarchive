@@ -8,6 +8,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "eslint": "eslint **/*.vue",
+    "stylelint": "stylelint **/*.{vue,scss}",
     "task:article": "cd task && nodemon article.js"
   },
   "dependencies": {
@@ -24,12 +25,12 @@
     "vue3-runtime-template": "^1.0.2"
   },
   "devDependencies": {
-    "@kikiutils/nuxt-session": "^1.2.1",
-    "@nuxt/devtools": "latest",
+    "@kikiutils/nuxt-session": "^1.2.2",
+    "@nuxt/devtools": "^1.0.3",
     "@nuxt/image": "^1.1.0",
     "@nuxt/schema": "^3.8.2",
     "@nuxtjs/robots": "^3.0.0",
-    "@stylistic/eslint-plugin": "^1.4.0",
+    "@stylistic/eslint-plugin": "^1.4.1",
     "@types/fs-extra": "^11.0.4",
     "@types/nodemailer": "^6.4.14",
     "@types/prismjs": "^1.26.3",

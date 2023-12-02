@@ -5,7 +5,7 @@ interface GetLogonResponse extends BaseResponse {
     uid?: number,
     nickname?: string,
     identity?: number
-};
+}
 
 export default defineCustomHandler(async (event) => {
     const res: GetLogonResponse = { error: 0 };
@@ -93,8 +93,7 @@ export default defineCustomHandler(async (event) => {
 });
 
 //服务端验证
-function check_params(nickname: string, email: string, password: string)
-{
+function check_params(nickname: string, email: string, password: string) {
     if (
         (/^[\w\u4e00-\u9fa5]{0,18}$/).test(nickname) &&
         (/^[\w-]+@[\w-]+(.[\w-]+)+$/).test(email) &&
@@ -106,8 +105,7 @@ function check_params(nickname: string, email: string, password: string)
 }
 
 //UID生成
-function create_uid()
-{
+function create_uid() {
     const uid = Math.floor(Math.random() * (100000 - 10000) + 10000);
     return uid;
 }

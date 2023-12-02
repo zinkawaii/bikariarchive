@@ -2,7 +2,7 @@ import fs from "fs-extra";
 
 interface GetEntryResponse extends BaseResponse {
     [key: string]: any
-};
+}
 
 export default defineCustomHandler(async (event) => {
     const res: GetEntryResponse = { error: 0 };

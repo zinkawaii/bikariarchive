@@ -1,6 +1,6 @@
 interface GetUserSignResponse extends BaseResponse {
     content?: string
-};
+}
 
 export default defineCustomHandler(async (event) => {
     const res: GetUserSignResponse = { error: 0 };

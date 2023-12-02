@@ -40,7 +40,7 @@
                 <span>借物表</span>
             </nuxt-link>
         </nav>
-        <form class="retrieval" @submit.prevent="search">
+        <form class="search-wrapper" @submit.prevent="search">
             <input class="keyword" placeholder="输入关键词..." v-model="word"/>
             <button class="search">
                 <i class="fas fa-search"></i>
@@ -72,6 +72,10 @@
         display: flex;
         flex: 1;
         margin-right: auto;
+    }
+
+    .title-wrapper:has(~ nav) {
+        color: black;
     }
 
     .title {
@@ -127,7 +131,7 @@
         display: flex;
     }
 
-    .retrieval {
+    .search-wrapper {
         display: flex;
         overflow: hidden;
         margin-block: auto;
@@ -156,7 +160,7 @@
     }
 
     @media (width < 1024px) {
-        .retrieval {
+        .search-wrapper {
             display: none;
         }
     }

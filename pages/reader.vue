@@ -106,11 +106,6 @@
         useEventListener("keyup", onKeyup);
     }
 
-    //本章链接
-    const currentUrl = computed(() => {
-        return "https://" + config.public.domain + route.path;
-    });
-
     //本卷章节
     const jChapter = computed(() => {
         return jArticle[novel].chapter.filter((c) => c.volume === state.value.currentVolume);
@@ -185,8 +180,8 @@
             <article v-else class="novel-text" v-html="state.content"></article>
             <footer class="novel-copyright">
                 <div><span class="meta">本章作者</span><nuxt-link :to="{ name: `home` }">{{ state.author }}</nuxt-link></div>
-                <div><span class="meta">本章链接</span><nuxt-link class="content" :to="route.path">{{ currentUrl }}</nuxt-link></div>
-                <div><span class="meta">版权声明</span><span class="content">本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></div>
+                <div><span class="meta">本章链接</span><nuxt-link :to="route.path">https://{{ config.public.domain + route.path }}</nuxt-link></div>
+                <div><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></div>
             </footer>
         </div>
         <div class="novel-wrap-bottom">
@@ -199,8 +194,8 @@
 <style lang="scss" scoped>
     .novel-header {
         display: flex;
-        margin: -16px 0 8px;
-        padding: 0 0 16px;
+        margin-bottom: 8px;
+        padding-bottom: 16px;
         border-bottom: 1px solid var(--color-border);
     }
 
@@ -350,9 +345,9 @@
         }
     }
 
-    @media (width < 1024px) {
+    @media (width >= 1024px) {
         .novel-header {
-            margin-top: 0;
+            margin-top: -16px;
         }
     }
 

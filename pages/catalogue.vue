@@ -78,10 +78,10 @@
 <style lang="scss" scoped>
     .catalogue-wrapper {
         display: grid;
-        gap: 16px;
         grid-template:
             "A B"
             "C C" / auto 1fr;
+        gap: 16px;
     }
 
     .catalogue-novel,
