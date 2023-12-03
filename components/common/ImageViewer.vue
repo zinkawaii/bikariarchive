@@ -109,7 +109,7 @@
     }
 
     //鼠标移动时
-    useEventListener("mousemove", (event) => {
+    useEventListener("mousemove", Zin.throttle((event) => {
         if (imageViewerStore.state && isPressing && event.button === 0) {
             $img.value.animate({
                 top: imageY - mouseY + event.pageY + "px",
@@ -119,7 +119,7 @@
                 fill: "forwards"
             });
         }
-    });
+    }));
 
     //鼠标松开时
     useEventListener("mouseup", () => {
