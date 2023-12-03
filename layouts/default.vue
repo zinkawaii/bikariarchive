@@ -13,7 +13,8 @@
         <z-sidebar />
     </div>
     <z-setting />
-    <z-confirm />
+    <mb-image-viewer />
+    <mb-confirm />
     <z-loader />
 </template>
 
@@ -67,7 +68,11 @@
         z-index: 512;
     }
 
-    .z-confirm {
+    .mb-image-viewer {
+        z-index: 512;
+    }
+
+    .mb-confirm {
         z-index: 512;
     }
 

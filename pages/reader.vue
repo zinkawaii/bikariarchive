@@ -1,11 +1,12 @@
 <script>
     import VRuntimeTemplate from "vue3-runtime-template";
-    import { NuxtImg, MbCode } from "#components";
+    import { NuxtImg, MbCode, MbImage } from "#components";
 
     //需要导入文章的组件
     export default {
         components: {
             "mb-code": MbCode,
+            "mb-image": MbImage,
             "nuxt-img": NuxtImg
         }
     };
@@ -366,6 +367,6 @@
     .novel-illustration {
         display: grid;
         grid-gap: 16px;
-        padding: 16px 0 8px;
+        margin: 16px 0 8px;
     }
 </style>

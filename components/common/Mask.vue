@@ -1,5 +1,5 @@
 <script setup>
-    defineProps(["when", "z"]);
+    defineProps(["when", "z", "duration"]);
 </script>
 
 <template>
@@ -17,7 +17,7 @@
     }
 
     .mask-enter-active, .mask-leave-active {
-        transition: opacity 0.4s;
+        transition: opacity v-bind("(duration ?? 400) / 1000 + `s`");
     }
 
     .mask-enter-from, .mask-leave-to {

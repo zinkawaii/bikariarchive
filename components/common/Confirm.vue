@@ -21,7 +21,7 @@
 
 <template>
     <transition name="slide-fade">
-        <div v-if="confirmStore.isShow" class="z-confirm">
+        <div v-if="confirmStore.isShow" class="mb-confirm">
             <div class="confirm-content">{{ confirmStore.content }}</div>
             <div class="confirm-button-group">
                 <a class="btn" @click="res(false)">取消</a>
@@ -33,7 +33,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .z-confirm {
+    .mb-confirm {
         position: fixed;
         inset: 0;
         width: fit-content;

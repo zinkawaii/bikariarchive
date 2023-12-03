@@ -53,8 +53,7 @@ const metaOutDir = "../dist/json/Article.json";
 })();
 
 //单文件解析
-function simpleParse(pathname)
-{
+function simpleParse(pathname) {
     const file = fs.readFileSync(pathname);
     const data = fm(file.toString());
     const result = marked.parse(data.body);
@@ -67,8 +66,7 @@ function simpleParse(pathname)
     return data;
 }
 
-function generateMetaInfo()
-{
+function generateMetaInfo() {
     const jFile = fs.readFileSync(metaSrcDir);
     const jMeta = JSON.parse(jFile);
 
@@ -121,10 +119,8 @@ function generateMetaInfo()
 }
 
 //统计执行时长
-function timer(sign, func)
-{
-    return async function(...arg)
-    {
+function timer(sign, func) {
+    return async function(...arg) {
         //开始标记
         performance.mark("start");
 
