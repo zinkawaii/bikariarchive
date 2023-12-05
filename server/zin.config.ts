@@ -25,7 +25,9 @@ const server = {
             },
             storage: {
                 driver: "cookie",
-                secret: "<!-- ??? -->"
+                options: {
+                    key: "<!-- ??? -->"
+                }
             }
         },
         blacklist: {

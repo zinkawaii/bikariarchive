@@ -15,6 +15,7 @@
     <z-setting />
     <mb-image-viewer />
     <mb-confirm />
+    <mb-fps />
     <z-loader />
 </template>
 
@@ -74,6 +75,10 @@
 
     .mb-confirm {
         z-index: 512;
+    }
+
+    .mb-fps {
+        z-index: 768;
     }
 
     .z-loader {

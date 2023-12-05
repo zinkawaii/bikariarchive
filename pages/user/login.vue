@@ -1,4 +1,8 @@
 <script setup>
+    useHead({
+        title: "登录"
+    });
+
     const router = useRouter();
     const userStore = useUserStore();
 

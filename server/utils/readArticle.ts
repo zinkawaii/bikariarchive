@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import Article from "~/utils/Article";
 
-export default async function(art: Article): Promise<string> {
+export async function readArticle(art: Article): Promise<string> {
     return new Promise((resolve, reject) => {
         const { novel, volOrder, index } = art;
         const path = `dist/novel/${novel[0].toUpperCase() + novel.slice(1)}.${volOrder}/${index}.txt`;

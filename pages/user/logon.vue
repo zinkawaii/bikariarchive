@@ -1,4 +1,8 @@
 <script setup>
+    useHead({
+        title: "注册"
+    });
+
     const router = useRouter();
 
     const nickname = ref();

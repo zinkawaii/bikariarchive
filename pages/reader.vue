@@ -123,7 +123,6 @@
     const { data } = await useFetch("/api/article", {
         query: {
             novel,
-            volOrder: art.volOrder,
             index
         }
     });

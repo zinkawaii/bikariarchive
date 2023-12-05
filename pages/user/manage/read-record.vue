@@ -1,6 +1,10 @@
 <script setup>
     import dayjs from "dayjs";
 
+    useHead({
+        title: "阅读记录"
+    });
+
     //查询方式
     const que = ref({
         list: [
