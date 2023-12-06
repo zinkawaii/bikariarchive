@@ -35,7 +35,7 @@
             <template v-if="!code">
                 <slot></slot>
             </template>
-            <pre v-else class="code-content" ref="$Code" v-html="code"></pre>
+            <pre v-else ref="$Code" class="code-content" v-html="code"></pre>
         </div>
         <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
             <i :class="[`fas`, `fa-angles-${isExpand ? `up` : `down`}`]"></i>

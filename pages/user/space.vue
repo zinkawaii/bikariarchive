@@ -35,7 +35,9 @@
             <div>
                 <span class="space-nickname">{{ userStore.nickname }}</span>
             </div>
-            <input class="space-sign" placeholder="在这里输入你的个性签名……"
+            <input
+                class="space-sign"
+                placeholder="在这里输入你的个性签名……"
                 v-model="sign"
                 @focus="sign_old = sign"
                 @blur="signUpdate"

@@ -31,10 +31,12 @@
                                     <th>{{ z.title }}</th>
                                     <td>
                                         <span v-for="title in z.children" class="detail-link">
-                                            <nuxt-link v-if="(typeof title) === `object`"
+                                            <nuxt-link
+                                                v-if="(typeof title) === `object`"
                                                 :to="toEntry(title[0])"
                                             >{{ title[1] }}</nuxt-link>
-                                            <nuxt-link v-else
+                                            <nuxt-link
+                                                v-else
                                                 :to="toEntry(title)"
                                             >{{ title }}</nuxt-link>
                                         </span>

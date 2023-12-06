@@ -1,11 +1,23 @@
 <script setup>
     const emit = defineEmits(["update:modelValue"]);
-    const props = defineProps([
-        "modelValue",
-        "readonly",
-        "type",
-        "accuracy"
-    ]);
+    const props = defineProps({
+        modelValue: {
+            type: [String, Number],
+            required: true
+        },
+        readonly: {
+            type: Boolean,
+            default: false
+        },
+        type: {
+            type: String,
+            default: "text"
+        },
+        accuracy: {
+            type: Number,
+            default: 0
+        }
+    });
 
     const entity = ref();
 
@@ -52,7 +64,7 @@
                 let d = match[2] ?? "";
 
                 //小数
-                const accuracy = Number(props.accuracy);
+                const accuracy = props.accuracy;
                 if (accuracy > 0) {
                     if (d === "") {
                         d = ".";

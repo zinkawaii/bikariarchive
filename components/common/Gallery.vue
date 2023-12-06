@@ -1,6 +1,9 @@
 <script setup>
     const props = defineProps({
-        illustrator: String
+        illustrator: {
+            type: String,
+            required: true
+        }
     });
 </script>
 

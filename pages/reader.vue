@@ -176,7 +176,7 @@
                 </nuxt-link>
             </header>
             <article v-if="art.runtime" class="novel-text">
-                <v-runtime-template :template="state.content"></v-runtime-template>
+                <v-runtime-template :template="state.content"/>
             </article>
             <article v-else class="novel-text" v-html="state.content"></article>
             <footer class="novel-copyright">

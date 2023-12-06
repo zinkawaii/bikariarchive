@@ -15,7 +15,7 @@
     <div class="home-update">
         <span class="content-h2 coco-title">更新历史</span>
         <ul class="update-list">
-            <li class="update-item" v-for="item in jUpdated">
+            <li v-for="item in jUpdated" class="update-item">
                 <nuxt-link class="title" :to="`/book/bikari/${item.index}`">{{ item.title }}</nuxt-link>
                 <div class="info">
                     <span class="volume">{{ jVolume[item.volume].title }}</span>

@@ -15,7 +15,7 @@
     for (const key in jEntry.category) {
         const jList = jEntry.category[key];
         if (jList.includes(title)) {
-            template.value = key === "character" ? Character : General;
+            template.value = (key === "character") ? Character : General;
             category = key;
 
             //获取数据
@@ -37,7 +37,7 @@
 
 <template>
     <div v-if="isExist" class="content-group">
-        <component :is="template" :title="title" :category="category" :data="data"></component>
+        <component :is="template" :data="data"/>
     </div>
     <Unknown v-else />
 </template>

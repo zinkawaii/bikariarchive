@@ -1,5 +1,5 @@
 <script setup>
-    const props = defineProps(["title", "category", "data"]);
+    const props = defineProps(["data"]);
 </script>
 
 <template>

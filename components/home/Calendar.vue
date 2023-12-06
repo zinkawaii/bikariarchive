@@ -186,12 +186,14 @@
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
             </ul>
             <div class="calendar-date">
-                <a v-for="date in state.dates" :class="{
-                    sub: date.month !== state.month,
-                    special: date.event,
-                    selected: currentDate === date
-                }"
-                @click="currentDate = (currentDate === date) ? null : date"
+                <a
+                    v-for="date in state.dates"
+                    :class="{
+                        sub: date.month !== state.month,
+                        special: date.event,
+                        selected: currentDate === date
+                    }"
+                    @click="currentDate = (currentDate === date) ? null : date"
                    ><span class="solar">{{ date.solar }}</span>
                     <span class="lunar">{{ date.lunar }}</span>
                 </a>
@@ -204,16 +206,16 @@
                 </time>
                 <div class="calendar-section">
                     <div class="title">事件</div>
-                    <div class="calendar-event" v-if="currentDate.event?.mono">
+                    <div v-if="currentDate.event?.mono" class="calendar-event">
                         <i class="fas fa-quote-left"></i>
                         <span>{{ currentDate.event.mono }}</span>
                         <i class="fas fa-quote-right"></i>
                     </div>
-                    <span class="none" v-else>No Special.</span>
+                    <span v-else class="none">No Special.</span>
                 </div>
                 <div class="calendar-section">
                     <div class="title">关键人物</div>
-                    <div class="calendar-heroine" v-if="currentDate.event?.heroine">
+                    <div v-if="currentDate.event?.heroine" class="calendar-heroine">
                         <div class="heroine-wrapper">
                             <nuxt-link v-for="heroine in currentDate.event.heroine" :to="`/${heroine}`">
                                 <nuxt-img :src="`/garden/icon/${heroine}.png`" placeholder="/garden/icon/unknown.png"/>
@@ -221,7 +223,7 @@
                             </nuxt-link>
                         </div>
                     </div>
-                    <span class="none" v-else>No Character.</span>
+                    <span v-else class="none">No Character.</span>
                 </div>
                 <span class="calendar-hitokoto">{{ currentDate.event?.hitokoto }}</span>
             </template>

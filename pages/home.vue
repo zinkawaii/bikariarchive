@@ -55,12 +55,13 @@
             <div class="content-table home-welcome">
                 <p>
                     <i class="home-qrcode"></i>
-                    <span class="content-h2">欢迎来到微光茶馆！</span><br>
+                    <span class="content-h2">欢迎来到微光茶馆！</span><br />
                     这里是我（山吹色御守）的个人网站，主要用于发布小说正文，所有文章均可在<nuxt-link :to="{ name: `catalogue` }">目录页</nuxt-link>索引并浏览。<nuxt-link :to="{ name: `details` }">情报页</nuxt-link>整理并展示了目前部分可以公开的设定。<nuxt-link :to="{ name: `search` }">检索页</nuxt-link>可在全文范围内对特定关键词进行检索。
                 </p>
             </div>
             <div class="home-introduction">
-                <home-intro-card v-for="i in 2"
+                <home-intro-card
+                    v-for="i in 2"
                     :style="{ translate: intro.translate[i - 1] }"
                     :layer="intro.layer[i - 1]"
                     :novel="intro.novel[intro.status ? 2 - i : i - 1]"

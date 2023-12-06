@@ -59,7 +59,7 @@
 </script>
 
 <template>
-    <div class="mb-progress" ref="self" @mousedown="onMouseDown">
+    <div ref="self" class="mb-progress" @mousedown="onMouseDown">
         <span class="progress-bar" :style="{ transform: `scaleX(${displayRate})` }"></span>
         <span class="progress-title">{{ title }}</span>
     </div>

@@ -23,7 +23,12 @@
         <span class="form-name">{{ title }}</span>
         <div class="form-area">
             <template v-if="type === `select`">
-                <span v-for="(item, i) in list" class="form-select" :class="{ active: isActive(i) }" @click="setValue(i)">{{ item }}</span>
+                <span
+                    v-for="(item, i) in list"
+                    class="form-select"
+                    :class="{ active: isActive(i) }"
+                    @click="setValue(i)"
+                >{{ item }}</span>
             </template>
             <slot v-else></slot>
         </div>

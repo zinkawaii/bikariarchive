@@ -23,7 +23,7 @@
         </div>
         <nuxt-page v-slot="{ Component }">
             <keep-alive>
-                <component :is="Component"></component>
+                <component :is="Component"/>
             </keep-alive>
         </nuxt-page>
     </div>

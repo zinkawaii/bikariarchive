@@ -111,8 +111,8 @@
                 <div class="manage-cursor" :class="{ active: index === que.current }" @click="que.current = index"></div>
             </div>
         </div>
-        <a class="btn" @click="query" :disabled="querying || null">查询</a>
-        <a class="btn" @click="clear" :disabled="!data.length || null">清空</a>
+        <a class="btn" :disabled="querying || null" @click="query">查询</a>
+        <a class="btn" :disabled="!data.length || null" @click="clear">清空</a>
     </div>
     <div class="manage-table-wrapper" :hidden="!data.length">
         <table class="manage-table">

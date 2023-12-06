@@ -218,17 +218,17 @@
             @timeupdate="audioTimeupdate"
         ></audio>
         <a class="btn" @click="upload">上传</a>
-        <a class="btn" @click="play" :disabled="state.invalid">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</a>
+        <a class="btn" :disabled="state.invalid" @click="play">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</a>
         <span>
-            <a class="btn" @click="exporter" :disabled="state.invalid">导出</a>
-            <a class="btn" @click="axis" :disabled="state.invalid">{{ state.axising ? "结束打轴" : "开始打轴" }}</a>
+            <a class="btn" :disabled="state.invalid" @click="exporter">导出</a>
+            <a class="btn" :disabled="state.invalid" @click="axis">{{ state.axising ? "结束打轴" : "开始打轴" }}</a>
         </span>
         <div>
             <span class="lyric-time">{{ timeFormat(state.current) }}</span>
             <mb-progress
                 class="lyric-control"
-                v-model="state.rate"
                 :title="state.filename || `- 请上传歌曲 -`"
+                v-model="state.rate"
                 @progress="controlProgress"
                 @change="controlChange"
                 @dragstart="state.dragging = true"
@@ -241,11 +241,15 @@
         <textarea class="lyric-textarea lyric-editor" placeholder="在这里输入歌词……" v-model="lyric.raw"></textarea>
         <div class="lyric-textarea lyric-compile" :class="{ show: state.axising }">
             <article>
-                <p v-for="item in lyric.data" :class="{
-                    light: lyric.current === item.index,
-                    sign: item.sign
-                }" :key="item.index" :data-time="item.time" @click="lyric.current = item.index">
-                    <time>{{ item.timed }}</time>
+                <p
+                    v-for="item in lyric.data"
+                    :key="item.index"
+                    :class="{
+                        light: lyric.current === item.index,
+                        sign: item.sign
+                    }"
+                    @click="lyric.current = item.index"
+                   ><time>{{ item.timed }}</time>
                     <span>{{ item.content }}</span>
                 </p>
             </article>

@@ -30,7 +30,7 @@
                 <i class="fas fa-arrow-up"></i>
             </a>
         </div>
-        <a class="tool-item" id="Hide" @click="settingStore.toggle(`ui-collapse`)">
+        <a class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
             <i :class="[`fas`, `fa-chevron-${collapse ? `left` : `right`}`]"></i>
         </a>
     </div>

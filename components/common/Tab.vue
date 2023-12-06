@@ -1,5 +1,10 @@
 <script setup>
-    const props = defineProps(["item"]);
+    const props = defineProps({
+        item: {
+            type: Array,
+            required: true
+        }
+    });
 
     const selectedIndex = ref(0);
 </script>
@@ -7,9 +12,11 @@
 <template>
     <div class="mb-tab">
         <ul class="tab-list">
-            <li v-for="(name, index) in item" class="tab-item" :class="{
-                active: selectedIndex === index
-            }" @click="selectedIndex = index"
+            <li
+                v-for="(name, index) in item"
+                class="tab-item"
+                :class="{ active: selectedIndex === index }"
+                @click="selectedIndex = index"
             >{{ name }}</li>
         </ul>
         <div class="tab-content">
@@ -60,10 +67,10 @@
         &:not(.active) {
             color: var(--color-gray);
             cursor: pointer;
-        }
 
-        &:not(.active) + &:not(.active) {
-            border-left: 1px solid var(--color-border-light);
+            & + & {
+                border-left: 1px solid var(--color-border-light);
+            }
         }
     }
 

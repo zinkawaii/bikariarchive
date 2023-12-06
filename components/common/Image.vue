@@ -8,7 +8,7 @@
 </script>
 
 <template>
-    <nuxt-img class="mb-image" ref="$" @click="openViewer"/>
+    <nuxt-img ref="$" class="mb-image" @click="openViewer"/>
 </template>
 
 <style lang="scss" scoped>

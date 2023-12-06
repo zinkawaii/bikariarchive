@@ -16,9 +16,9 @@
                     <th width="50%">出处</th>
                     <th>创作者</th>
                 </tr>
-                <template v-for="(element, i) in jBorrowing.list">
-                    <tr v-for="(item, j) in element.items">
-                        <th v-if="j === 0" :rowspan="element.items.length">{{ element.title }}</th>
+                <template v-for="element in jBorrowing.list">
+                    <tr v-for="(item, i) in element.items">
+                        <th v-if="i === 0" :rowspan="element.items.length">{{ element.title }}</th>
                         <td><nuxt-link :to="item.src.link" target="_blank">{{ item.src.name }}</nuxt-link></td>
                         <td><nuxt-link :to="item.creator.link" target="_blank">{{ item.creator.name }}</nuxt-link></td>
                     </tr>

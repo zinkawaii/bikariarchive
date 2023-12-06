@@ -150,15 +150,15 @@
     <transition name="move">
         <nuxt-img
             v-if="imageViewerStore.state"
-            class="mb-image-viewer"
             ref="$v"
+            class="mb-image-viewer"
             :src="$i.src"
             :style="imageStyle"
             @mousedown="onMouseDown"
             @mousewheel.prevent="onMouseWheel"
         />
     </transition>
-    <mb-mask :when="imageViewerStore.state" z="511" @click="closeViewer" @mousewheel.prevent></mb-mask>
+    <mb-mask :when="imageViewerStore.state" z="511" @click="closeViewer" @mousewheel.prevent/>
 </template>
 
 <style lang="scss" scoped>

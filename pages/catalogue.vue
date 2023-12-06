@@ -40,10 +40,9 @@
                 <legend class="content-h2">书单</legend>
                 <ul>
                     <li v-for="(novel, key) in jArticle">
-                        <a :class="{
-                            checked: current.novel === key
-                        }"
-                        @click="selectNovel(key)"
+                        <a
+                            :class="{ checked: current.novel === key }"
+                            @click="selectNovel(key)"
                         >{{ novel.title.split("-")[0] }}</a>
                     </li>
                 </ul>
@@ -52,10 +51,9 @@
                 <legend class="content-h2">卷册列表</legend>
                 <ul>
                     <li v-for="(volume, volOrder) in volumes">
-                        <a :class="{
-                            checked: current.volOrder === volOrder
-                        }"
-                        @click="selectVolume(volOrder)"
+                        <a
+                            :class="{ checked: current.volOrder === volOrder }"
+                            @click="selectVolume(volOrder)"
                         >{{ volume }}</a>
                     </li>
                 </ul>

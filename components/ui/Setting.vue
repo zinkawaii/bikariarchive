@@ -46,7 +46,7 @@
 <template>
     <transition name="slide-fade">
         <div v-if="settingStore.isOpen" class="z-setting">
-            <i class="fas fa-xmark" id="Close" @click="settingStore.close()"></i>
+            <i class="fas fa-xmark setting-close" @click="settingStore.close()"></i>
             <span class="content-h2 coco-title">全局设置</span>
             <mb-form title="主题颜色" type="select" name="theme" :list="[`初空`, `菖蒲`, `早樱`]"/>
             <mb-form title="夜间模式" type="select" name="dark-mode" :list="[`自动`, `白昼`, `暗夜`]"/>
@@ -91,7 +91,7 @@
         translate: 0 -50%;
     }
 
-    #Close {
+    .setting-close {
         position: absolute;
         top: 0.5em;
         right: 0.5em;

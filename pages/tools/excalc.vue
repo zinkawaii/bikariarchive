@@ -187,11 +187,11 @@
             </div>
             <div class="excalc-label">
                 <span>后排</span>
-                <mb-input type="number" v-for="(item, index) in state.power.main" v-model="state.power.main[index]"/>
+                <mb-input v-for="(item, index) in state.power.main" type="number" v-model="state.power.main[index]"/>
             </div>
             <div class="excalc-label">
                 <span>前排</span>
-                <mb-input type="number" v-for="(item, index) in state.power.pioneer" v-model="state.power.pioneer[index]"/>
+                <mb-input v-for="(item, index) in state.power.pioneer" type="number" v-model="state.power.pioneer[index]"/>
             </div>
         </div>
         <div class="excalc-main">
@@ -206,7 +206,7 @@
             <a class="btn" @click="roll">Roll</a>
             <label>
                 <span>斩杀率</span>
-                <mb-input type="number" v-model="kill_rate" readonly/>
+                <mb-input type="number" readonly v-model="kill_rate"/>
             </label>
             <div class="excalc-division"></div>
             <label>
@@ -238,9 +238,9 @@
                     <td><mb-input type="text" v-model="item.name"/></td>
                     <td><mb-input type="number" v-model="item.damage"/></td>
                     <td><mb-input type="number" v-model="item.hit"/></td>
-                    <td><mb-input type="number" accuracy="2" v-model="item.accuracy_rate"/></td>
-                    <td><mb-input type="number" accuracy="2" v-model="item.crit_rate"/></td>
-                    <td><mb-input type="number" accuracy="2" v-model="item.crit_damage"/></td>
+                    <td><mb-input type="number" :accuracy="2" v-model="item.accuracy_rate"/></td>
+                    <td><mb-input type="number" :accuracy="2" v-model="item.crit_rate"/></td>
+                    <td><mb-input type="number" :accuracy="2" v-model="item.crit_damage"/></td>
                     <td><a class="btn excalc-delete" @click="removeBuki(index)">删除</a></td>
                 </tr>
             </table>

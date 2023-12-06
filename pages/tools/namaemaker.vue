@@ -240,7 +240,7 @@
             <span>数量</span>
             <div class="namae-radio">
                 <label v-for="item in counter.list">
-                    <input type="radio" v-model="counter.current" :value="item">
+                    <input type="radio" :value="item" v-model="counter.current"/>
                     <span>{{ item }}</span>
                 </label>
             </div>
@@ -249,7 +249,7 @@
             <span>性别</span>
             <div class="namae-radio">
                 <label v-for="item in gender.list">
-                    <input type="radio" v-model="gender.current" :value="item.value">
+                    <input type="radio" :value="item.value" v-model="gender.current"/>
                     <span>{{ item.title }}</span>
                 </label>
             </div>
@@ -258,12 +258,12 @@
             <span>指定</span>
             <div class="namae-specific">
                 <div>
-                    <input type="text" v-model="specific.last.kanji" placeholder="姓">
-                    <input type="text" v-model="specific.last.kana" placeholder="姓（读音）">
+                    <input type="text" placeholder="姓" v-model="specific.last.kanji"/>
+                    <input type="text" placeholder="姓（读音）" v-model="specific.last.kana"/>
                 </div>
                 <div>
-                    <input type="text" v-model="specific.first.kanji" placeholder="名">
-                    <input type="text" v-model="specific.first.kana" placeholder="名（读音）">
+                    <input type="text" placeholder="名" v-model="specific.first.kanji"/>
+                    <input type="text" placeholder="名（读音）" v-model="specific.first.kana"/>
                 </div>
             </div>
         </div>
@@ -272,7 +272,7 @@
             <a class="btn" @click="clear">清除结果</a>
         </div>
     </form>
-    <div class="div-table namae-result" v-if="!isResultEmpty">
+    <div v-if="!isResultEmpty" class="div-table namae-result">
         <dl class="namae-col">
             <template v-for="item in result[0]">
                 <dt>{{ item.kanji }}</dt>
