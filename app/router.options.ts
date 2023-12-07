@@ -1,7 +1,7 @@
 import type { RouterConfig } from "@nuxt/schema";
 
 export default <RouterConfig> {
-    routes: (_routes) => [
+    routes: () => [
         {
             name: "borrowing",
             path: "/borrowing",

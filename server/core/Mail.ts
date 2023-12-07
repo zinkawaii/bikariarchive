@@ -11,8 +11,7 @@ const transporter = nodemailer.createTransport({
 
 export default {
     //发送邮件
-    send(email: string, title: string, content: string)
-    {
+    send(email: string, title: string, content: string) {
         return transporter.sendMail({
             from: {
                 name: config.mail.name,
@@ -25,8 +24,7 @@ export default {
     },
 
     //邮件模板
-    template(key: string, ...args: string[]): string
-    {
+    template(key: string, ...args: string[]) {
         //读取文本
         const file = fs.readFileSync(r(`data/mail/${key}.txt`));
         let mail = file.toString();

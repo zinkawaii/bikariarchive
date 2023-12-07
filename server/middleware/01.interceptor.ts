@@ -3,8 +3,7 @@ const { blacklist } = config;
 const domain = ["localhost", config.public.domain];
 
 //IP遍历检测
-const checkIP = function(ip: string, list: string[])
-{
+const checkIP = function(ip: string, list: string[]) {
     for (const item of list) {
         const reg = new RegExp(`^${item.replace(/\*/g, "\\d{1,3}")}$`);
         if (reg.test(ip)) {

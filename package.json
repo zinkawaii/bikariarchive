@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "eslint": "eslint **/*.vue",
+    "eslint": "eslint **/*.{vue,ts}",
     "stylelint": "stylelint **/*.{vue,scss}",
     "task:article": "cd task && nodemon article.js"
   },
@@ -25,7 +25,7 @@
     "vue3-runtime-template": "^1.0.2"
   },
   "devDependencies": {
-    "@kikiutils/nuxt-session": "^2.0.0",
+    "@kikiutils/nuxt-session": "^2.0.1",
     "@nuxt/devtools": "^1.0.4",
     "@nuxt/image": "^1.1.0",
     "@nuxt/schema": "^3.8.2",

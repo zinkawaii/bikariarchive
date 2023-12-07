@@ -58,15 +58,8 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
-        "@nuxtjs/robots",
-        "@nuxt/image",
-        "@pinia/nuxt",
-        "@pinia-plugin-persistedstate/nuxt",
-        "@vueuse/nuxt"
-    ],
-    robots: {
-        rules: [
-            ...[
+        ["@nuxtjs/robots", {
+            rules: [
                 "AhrefsBot",
                 "AhrefsSiteAudit",
                 "aiHitBot",
@@ -89,6 +82,10 @@ export default defineNuxtConfig({
                 Disallow: "/",
                 BlankLine: true
             }))
-        ]
-    }
+        }],
+        "@nuxt/image",
+        "@pinia/nuxt",
+        "@pinia-plugin-persistedstate/nuxt",
+        "@vueuse/nuxt"
+    ]
 });

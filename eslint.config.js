@@ -199,7 +199,56 @@ const base = {
     }
 };
 
-const rules = {};
+const rules = {
+    recommended: {
+        "constructor-super": "warn",
+        "for-direction": "warn",
+        "getter-return": "warn",
+        "no-async-promise-executor": "warn",
+        "no-class-assign": "warn",
+        "no-compare-neg-zero": "warn",
+        "no-const-assign": "warn",
+        "no-constant-condition": ["warn", {
+            checkLoops: false
+        }],
+        "no-control-regex": "warn",
+        "no-debugger": "warn",
+        "no-dupe-args": "warn",
+        "no-dupe-class-members": "warn",
+        "no-dupe-else-if": "warn",
+        "no-dupe-keys": "warn",
+        "no-duplicate-case": "warn",
+        "no-empty-character-class": "warn",
+        "no-empty-pattern": "warn",
+        "no-ex-assign": "warn",
+        "no-func-assign": "warn",
+        "no-import-assign": "warn",
+        "no-invalid-regexp": "warn",
+        "no-irregular-whitespace": "warn",
+        "no-loss-of-precision": "warn",
+        "no-misleading-character-class": "warn",
+        "no-new-symbol": "warn",
+        "no-obj-calls": "warn",
+        "no-prototype-builtins": "warn",
+        "no-self-assign": "warn",
+        "no-setter-return": "warn",
+        "no-sparse-arrays": "warn",
+        "no-this-before-super": "warn",
+        "no-unexpected-multiline": "warn",
+        "no-unreachable": "warn",
+        "no-unsafe-finally": "warn",
+        "no-unsafe-negation": ["warn", {
+            enforceForOrderingRelations: true
+        }],
+        "no-unsafe-optional-chaining": "warn",
+        "no-useless-backreference": "warn",
+        "use-isnan": ["warn", {
+            enforceForIndexOf: true
+        }],
+        "valid-typeof": "warn"
+    }
+};
+
 for (const ns in base) {
     rules[ns] = Object.entries(base[ns]).reduce((res, [key, value]) => {
         res[`${ns}/${key}`] = value;
@@ -211,6 +260,9 @@ export default [
     {
         files: [
             "**/*.{js,ts,vue}"
+        ],
+        ignores: [
+            ".nuxt/**/*"
         ],
         languageOptions: {
             parser: vueParser,
@@ -225,14 +277,19 @@ export default [
         rules: {
             ...rules.stylistic,
             ...rules.vue,
+            ...rules.recommended,
+            "array-callback-return": "warn",
             "dot-notation": ["warn", {
                 allowPattern: "^[a-z]+(_[a-z]+)+$"
             }],
             "eqeqeq": ["warn", "smart"],
-            "no-constant-condition": ["warn", {
-                checkLoops: false
-            }],
-            "no-unused-labels": "off",
+            "no-constant-binary-expression": "warn",
+            "no-constructor-return": "warn",
+            "no-duplicate-imports": "warn",
+            "no-promise-executor-return": "warn",
+            "no-self-compare": "warn",
+            "no-unreachable-loop": "warn",
+            "no-unused-private-class-members": "warn",
             "no-useless-concat": "warn",
             "no-useless-rename": "warn",
             "no-useless-return": "warn",

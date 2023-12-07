@@ -67,7 +67,7 @@
             <mb-form title="字体大小" type="select" name="font-size" :list="[`小`, `中`, `大`]"/>
         </div>
     </transition>
-    <mb-mask :when="settingStore.isOpen" z="511" @click="settingStore.close()"/>
+    <mb-mask :when="settingStore.isOpen" :z="511" @click="settingStore.close()"/>
 </template>
 
 <style lang="scss" scoped>

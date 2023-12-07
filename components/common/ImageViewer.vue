@@ -158,7 +158,7 @@
             @mousewheel.prevent="onMouseWheel"
         />
     </transition>
-    <mb-mask :when="imageViewerStore.state" z="511" @click="closeViewer" @mousewheel.prevent/>
+    <mb-mask :when="imageViewerStore.state" :z="511" @click="closeViewer" @mousewheel.prevent/>
 </template>
 
 <style lang="scss" scoped>
