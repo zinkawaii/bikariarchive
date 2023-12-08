@@ -1,6 +1,8 @@
 <template>
     <div class="jumbotron-wrapper"></div>
-    <z-background />
+    <client-only>
+        <z-background />
+    </client-only>
     <z-header />
     <z-navbar />
     <z-toolbar />
