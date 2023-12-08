@@ -39,6 +39,10 @@
                 <i class="fas fa-person-praying"></i>
                 <span>借物表</span>
             </nuxt-link>
+            <nuxt-link :to="{ name: `chanrina` }">
+                <i class="fas fa-torii-gate"></i>
+                <span>神殿</span>
+            </nuxt-link>
         </nav>
         <form class="search-wrapper" @submit.prevent="search">
             <input class="keyword" placeholder="输入关键词..." v-model="word"/>
@@ -56,6 +60,7 @@
         top: 0;
         height: 64px;
         min-width: var(--size-width-min-mobile);
+        padding-inline: 16px;
         box-shadow: var(--box-shadow-dark);
         background:
             linear-gradient(
@@ -72,10 +77,7 @@
         display: flex;
         flex: 1;
         margin-right: auto;
-    }
-
-    .title-wrapper:has(~ nav) {
-        color: black;
+        padding-inline: 16px;
     }
 
     .title {
@@ -135,13 +137,14 @@
         display: flex;
         overflow: hidden;
         margin-block: auto;
-        margin-inline: 16px 32px;
+        margin-inline: 16px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
         font-size: 14px;
     }
 
     .keyword {
+        flex: 1;
         width: 160px;
         padding: 0 8px;
         line-height: 28px;
@@ -161,6 +164,12 @@
 
     @media (width < 1024px) {
         .search-wrapper {
+            display: none;
+        }
+    }
+
+    @media (width < 896px) {
+        .nav-list span {
             display: none;
         }
     }

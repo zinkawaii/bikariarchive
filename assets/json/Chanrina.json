@@ -1,0 +1,567 @@
+{
+  "name": {
+    "zh": "日高里菜",
+    "jp": "ひだか りな",
+    "en": "Hidaka Rina"
+  },
+  "characters": [
+    {
+      "name": {
+        "zh": "最后之作",
+        "jp": "打ち止め",
+        "en": "Last Order"
+      },
+      "special": [
+        "御坂御坂"
+      ],
+      "link": "https://toaru-project.com/index_1_2/chara/19.html",
+      "bangumi": "魔法禁书目录",
+      "date": "2008-10-04"
+    },
+    {
+      "name": {
+        "zh": "樱泽美美奈",
+        "jp": "桜沢 みみな",
+        "en": "Sakurazawa Mimina"
+      },
+      "special": [],
+      "link": "http://www.ladies-vs-butlers.com/chara.html",
+      "bangumi": "管家后宫学园",
+      "date": "2010-01-05"
+    },
+    {
+      "name": {
+        "zh": "如月湊",
+        "jp": "如月 湊",
+        "en": "Kisaragi Minato"
+      },
+      "special": [],
+      "bangumi": "食梦者玛利",
+      "date": "2011-01-07"
+    },
+    {
+      "name": {
+        "zh": "日出佳乃",
+        "jp": "日出 佳乃",
+        "en": "Hide Yoshino"
+      },
+      "special": [],
+      "bangumi": "战国少女～桃色Paradox～",
+      "date": "2011-04-04"
+    },
+    {
+      "name": {
+        "zh": "香椎爱莉",
+        "jp": "香椎 愛莉",
+        "en": "Kashii Airi"
+      },
+      "special": [],
+      "link": "http://www.ro-kyu-bu.com/contents/hp0003/index00070000.html",
+      "bangumi": "萝球社",
+      "date": "2011-07-01"
+    },
+    {
+      "name": {
+        "zh": "白鬼院凛凛蝶",
+        "jp": "白鬼院 凛々蝶",
+        "en": "Shirakiin Ririchiyo"
+      },
+      "special": [],
+      "link": "https://www.inuboku.tv/character/chara_ririchiyo.html",
+      "bangumi": "妖狐×仆SS",
+      "date": "2012-01-13"
+    },
+    {
+      "name": {
+        "zh": "上月由仁子",
+        "jp": "上月 由仁子",
+        "en": "Kouzuki Yuniko"
+      },
+      "special": [],
+      "link": "http://www.accel-world.net/character.php",
+      "bangumi": "加速世界",
+      "date": "2012-04-07"
+    },
+    {
+      "name": {
+        "zh": "嵯峨良芽依",
+        "jp": "嵯峨良 芽依",
+        "en": "Sagara Mei"
+      },
+      "special": [],
+      "link": "https://www.tbs.co.jp/anime/nakaimo/chara/",
+      "bangumi": "三人行必有我妹",
+      "date": "2012-07-06"
+    },
+    {
+      "name": {
+        "zh": "草薙静花",
+        "jp": "草薙 静花",
+        "en": "Kusanagi Shizuka"
+      },
+      "special": [
+        "妹妹"
+      ],
+      "link": "https://wwws.warnerbros.co.jp/anime/campi-anime/character/#shizuka",
+      "bangumi": "弑神者",
+      "date": "2012-07-06"
+    },
+    {
+      "name": {
+        "zh": "绫野珪子",
+        "jp": "綾乃 珪子",
+        "en": "Ayano Keiko"
+      },
+      "special": [
+        "西莉卡"
+      ],
+      "link": "https://www.swordart-online.net/aincrad/character/",
+      "bangumi": "刀剑神域",
+      "date": "2012-07-07"
+    },
+    {
+      "name": {
+        "zh": "北白川馅子",
+        "jp": "北白川 あんこ",
+        "en": "Kitashirakawa Anko"
+      },
+      "special": [],
+      "link": "https://tamakomarket.com/character/1/#anko",
+      "bangumi": "玉子市场",
+      "date": "2013-01-09"
+    },
+    {
+      "name": {
+        "zh": "樱/拉普拉斯魔",
+        "jp": "桜",
+        "en": "Sakura"
+      },
+      "special": [],
+      "bangumi": "如果折断她的旗",
+      "date": "2013-04-06"
+    },
+    {
+      "name": {
+        "zh": "晓凪沙",
+        "jp": "暁 凪沙",
+        "en": "Akatsuki Nagisa"
+      },
+      "special": [
+        "妹妹"
+      ],
+      "link": "http://www.strike-the-blood.com/first/#/character",
+      "bangumi": "噬血狂袭",
+      "date": "2013-10-04"
+    },
+    {
+      "name": {
+        "zh": "星月·费拉里",
+        "jp": "星月・フェラーリ",
+        "en": "Hozuki Ferrari"
+      },
+      "special": [],
+      "link": "https://www.galileidonna.tv/character/index.html#ch01",
+      "bangumi": "伽利略少女",
+      "date": "2013-10-10"
+    },
+    {
+      "name": {
+        "zh": "蓝原延珠",
+        "jp": "藍原 延珠",
+        "en": "Aihara Enju"
+      },
+      "special": [],
+      "link": "https://www.black-bullet.net/contents/chara/enju.html",
+      "bangumi": "黑色子弹",
+      "date": "2014-04-08"
+    },
+    {
+      "name": {
+        "zh": "莉莉姆",
+        "jp": "リリム",
+        "en": "Lilim"
+      },
+      "special": [],
+      "link": "https://movie.trinity-7.com/ea/profile/#lilim",
+      "bangumi": "Trinity Seven 魔道书7使者",
+      "date": "2014-10-08"
+    },
+    {
+      "name": {
+        "zh": "优木苗",
+        "jp": "優木 苗",
+        "en": "Yuuki Nae"
+      },
+      "special": [],
+      "bangumi": "临时女友",
+      "date": "2014-10-12"
+    },
+    {
+      "name": {
+        "zh": "伊莉丝·芙蕾雅",
+        "jp": "イリス・フレイア",
+        "en": "Iris Freyja"
+      },
+      "special": [],
+      "link": "https://www.tbs.co.jp/anime/fafnir/personal/chara02.html",
+      "bangumi": "铳皇无尽的法夫纳",
+      "date": "2015-01-08"
+    },
+    {
+      "name": {
+        "zh": "小坂结季奈",
+        "jp": "小坂 結季奈",
+        "en": "Kosaka Yukina"
+      },
+      "special": [],
+      "link": "http://rollinggirls.com/chara.html#yukina",
+      "bangumi": "旋转少女",
+      "date": "2015-01-10"
+    },
+    {
+      "name": {
+        "zh": "川岛丽",
+        "jp": "川島 麗",
+        "en": "Kawashima Urara"
+      },
+      "special": [],
+      "link": "http://shokugekinosoma.com/2ndplate/character/urara.html",
+      "bangumi": "食戟之灵",
+      "date": "2015-04-03"
+    },
+    {
+      "name": {
+        "zh": "山田巽美",
+        "jp": "山田 巽美",
+        "en": "Yamada Tatsumi"
+      },
+      "special": [
+        "妹妹"
+      ],
+      "bangumi": "山田君与7人魔女",
+      "date": "2015-04-12"
+    },
+    {
+      "name": {
+        "zh": "夏莉·杜耶里",
+        "jp": "シェリー・テュエリ",
+        "en": "Sherry Tyueli"
+      },
+      "special": [],
+      "link": "http://gate-anime.com/character/",
+      "bangumi": "GATE 奇幻自卫队",
+      "date": "2015-07-03"
+    },
+    {
+      "name": {
+        "zh": "玉置亚子",
+        "jp": "玉置 亜子",
+        "en": "Tamaki Ako"
+      },
+      "special": [],
+      "link": "https://netogenoyome.com/character/ako.html",
+      "bangumi": "线上游戏的老婆不可能是女生？",
+      "date": "2016-04-07"
+    },
+    {
+      "name": {
+        "zh": "鸠田亚子",
+        "jp": "鳩田 亜子",
+        "en": "Hatoda Ako"
+      },
+      "special": [
+        "爱丽丝"
+      ],
+      "link": "http://mahoiku.jp/chara/hardgorealice.html",
+      "bangumi": "魔法少女育成计划",
+      "date": "2016-10-01"
+    },
+    {
+      "name": {
+        "zh": "澄原里佳",
+        "jp": "澄原 里佳",
+        "en": "Sumihara Satoka"
+      },
+      "special": [],
+      "link": "http://sgs-anime.com/character/satoka/",
+      "bangumi": "校园女生强袭者",
+      "date": "2017-01-06"
+    },
+    {
+      "name": {
+        "zh": "花酒蕨",
+        "jp": "花酒 蕨",
+        "en": "Hanasake Warabi"
+      },
+      "special": [],
+      "link": "http://machiavellism-anime.jp/character/?mode=warabi",
+      "bangumi": "武装少女",
+      "date": "2017-04-05"
+    },
+    {
+      "name": {
+        "zh": "贯井胡桃",
+        "jp": "貫井 くるみ",
+        "en": "Tsuranui Kurumi"
+      },
+      "special": [
+        "妹妹"
+      ],
+      "link": "https://dengekibunko.jp/title/tenshino3p/",
+      "bangumi": "天使的3P！",
+      "date": "2017-07-10"
+    },
+    {
+      "name": {
+        "zh": "坂柳有栖",
+        "jp": "坂柳 有栖",
+        "en": "Sakayanagi Arisu"
+      },
+      "special": [],
+      "link": "https://you-zitsu.com/1st/character/",
+      "bangumi": "欢迎来到实力至上主义的教室",
+      "date": "2017-07-12"
+    },
+    {
+      "name": {
+        "zh": "雏鹤爱",
+        "jp": "雛鶴 愛",
+        "en": "Hinazuru Ai"
+      },
+      "special": [],
+      "link": "https://www.ryuoh-anime.com/chara/02ai.html",
+      "bangumi": "龙王的工作",
+      "date": "2018-01-08"
+    },
+    {
+      "name": {
+        "zh": "蓝璃",
+        "jp": "藍璃",
+        "en": "Airi"
+      },
+      "special": [
+        "妹妹"
+      ],
+      "link": "https://alice-or-alice.com/chara_02.html",
+      "bangumi": "ALICE or ALICE",
+      "date": "2018-04-04"
+    },
+    {
+      "name": {
+        "zh": "米莉姆·纳瓦",
+        "jp": "ミリム・ナーヴァ",
+        "en": "Milim Nava"
+      },
+      "special": [
+        "魔王"
+      ],
+      "link": "https://www.ten-sura.com/character/milim",
+      "bangumi": "关于我转生变成史莱姆这档事",
+      "date": "2018-10-01"
+    },
+    {
+      "name": {
+        "zh": "王胡蝶",
+        "jp": "王 胡蝶",
+        "en": "Kochou Wang"
+      },
+      "special": [],
+      "link": "https://www.juliet-anime.com/character/kochou.html",
+      "bangumi": "寄宿学校的朱丽叶",
+      "date": "2018-10-05"
+    },
+    {
+      "name": {
+        "zh": "仓井朔夜",
+        "jp": "倉井 朔夜",
+        "en": "Kurai Sakuya"
+      },
+      "special": [],
+      "link": "http://kyuketsukisan-anime.com/character/",
+      "bangumi": "邻家的吸血鬼小妹",
+      "date": "2018-10-05"
+    },
+    {
+      "name": {
+        "zh": "菲洛",
+        "jp": "フィーロ",
+        "en": "Filo"
+      },
+      "special": [],
+      "link": "http://shieldhero-anime.jp/#Char",
+      "bangumi": "盾之勇者成名录",
+      "date": "2019-01-02"
+    },
+    {
+      "name": {
+        "zh": "古贺唯花",
+        "jp": "古賀 唯花",
+        "en": "Koga Yuika"
+      },
+      "special": [
+        "女王"
+      ],
+      "link": "https://hensuki.com/character/",
+      "bangumi": "只要长得可爱，即使是变态你也喜欢吗",
+      "date": "2019-07-08"
+    },
+    {
+      "name": {
+        "zh": "薇妮",
+        "jp": "ウィーネ",
+        "en": "Wiene"
+      },
+      "special": [],
+      "link": "https://danmachi.com/danmachi3/character/",
+      "bangumi": "在地下城寻求邂逅是否搞错了什么Ⅱ",
+      "date": "2019-07-12"
+    },
+    {
+      "name": {
+        "zh": "大星林檎",
+        "jp": "大星 林檎",
+        "en": "Ooboshi Ringo"
+      },
+      "special": [],
+      "link": "http://choyoyu.com/character/",
+      "bangumi": "超人高中生即便在异世界也能从容生存！",
+      "date": "2019-10-03"
+    },
+    {
+      "name": {
+        "zh": "早乙女六海",
+        "jp": "早乙女 六海",
+        "en": "Saotome Mutsumi"
+      },
+      "special": [],
+      "link": "https://val-love.com/character/4.php",
+      "bangumi": "战×恋",
+      "date": "2019-10-05"
+    },
+    {
+      "name": {
+        "zh": "和浦野乃",
+        "jp": "和浦 野乃",
+        "en": "Kazuura Nono"
+      },
+      "special": [],
+      "link": "https://sigururi.com/chara/other/#chara_09",
+      "bangumi": "战翼的希格德莉法",
+      "date": "2020-10-03"
+    },
+    {
+      "name": {
+        "zh": "六科科六",
+        "jp": "六科 なじむ",
+        "en": "Mujina Najimu"
+      },
+      "special": [
+        "社长"
+      ],
+      "link": "https://www.mujina-company.com/character/",
+      "bangumi": "幼女社长",
+      "date": "2021-01-01"
+    },
+    {
+      "name": {
+        "zh": "小樱",
+        "jp": "小桜",
+        "en": "Kosakura"
+      },
+      "special": [],
+      "link": "https://www.othersidepicnic.com/character/",
+      "bangumi": "里世界郊游",
+      "date": "2021-01-04"
+    },
+    {
+      "name": {
+        "zh": "罗琦亚",
+        "jp": "ロージア",
+        "en": "Rosia"
+      },
+      "special": [],
+      "link": "https://showbyrock-anime-s.com/character/20.php",
+      "bangumi": "摇滚少女!!STARS!!",
+      "date": "2021-01-07"
+    },
+    {
+      "name": {
+        "zh": "真神疾风",
+        "jp": "真神 疾風",
+        "en": "Magami Hayate"
+      },
+      "special": [],
+      "link": "https://denchi-project.com/character.html",
+      "bangumi": "逆转世界的电池少女",
+      "date": "2021-10-11"
+    },
+    {
+      "name": {
+        "zh": "白桦梢",
+        "jp": "白樺 梢",
+        "en": "Shirakaba Kozue"
+      },
+      "special": [],
+      "link": "https://tokyo24project.com/character/#14",
+      "bangumi": "东京24区",
+      "date": "2022-01-05"
+    },
+    {
+      "name": {
+        "zh": "幽灵酱",
+        "jp": "幽霊ちゃん",
+        "en": "Yuurei Chan"
+      },
+      "special": [],
+      "link": "https://shachikusan.com/character/",
+      "bangumi": "社畜小姐想被幽灵幼女治愈",
+      "date": "2022-04-07"
+    },
+    {
+      "name": {
+        "zh": "八满结",
+        "jp": "八満 結",
+        "en": "Hachimitsu Yui"
+      },
+      "special": [],
+      "link": "https://shikimori-anime.com/character/hachimitsu.html",
+      "bangumi": "我家女友可不止可爱呢",
+      "date": "2022-04-09"
+    },
+    {
+      "name": {
+        "zh": "伊理户结女",
+        "jp": "伊理戸 結女",
+        "en": "Irido Yume"
+      },
+      "special": [
+        "绫井"
+      ],
+      "link": "https://tsurekano-anime.com/character/",
+      "bangumi": "继母的拖油瓶是我的前女友",
+      "date": "2022-07-06"
+    },
+    {
+      "name": {
+        "zh": "克蕾娅·卡盖诺",
+        "jp": "カゲノー・クレア",
+        "en": "Claire Kageno"
+      },
+      "special": [],
+      "link": "https://shadow-garden.jp/character/#chara9_claire",
+      "bangumi": "想要成为影之实力者",
+      "date": "2022-10-05"
+    },
+    {
+      "name": {
+        "zh": "爱姆露",
+        "jp": "エムル",
+        "en": "Emul"
+      },
+      "special": [],
+      "link": "https://anime.shangrilafrontier.com/character/",
+      "bangumi": "香格里拉·开拓异境～粪作猎手挑战神作～",
+      "date": "2023-10-01"
+    }
+  ]
+}

@@ -5,9 +5,14 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     await userStore.getInfo;
 
     //权限验证
-    if (!userStore.isLogin || userStore.identity < (to.meta.identity as number)) {
+    if (!userStore.isLogin) {
         return navigateTo({
             name: "login"
         });
+    }
+    else if (userStore.identity < (to.meta.identity as number)) {
+        const confirmStore = useConfirmStore();
+        confirmStore.show(`无访问权限 (Limit Code: 143)`);
+        return false;
     }
 });

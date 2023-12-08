@@ -3,6 +3,9 @@ import { serverConfig, clientConfig } from "./server/zin.config";
 export default defineNuxtConfig({
     app: {
         head: {
+            htmlAttrs: {
+                lang: "zh-CN"
+            },
             charset: "utf-8",
             viewport: "width=device-width, initial-scale=1",
             link: [

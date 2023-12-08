@@ -13,6 +13,15 @@ export default <RouterConfig> {
             component: () => import("~/pages/catalogue.vue")
         },
         {
+            name: "chanrina",
+            path: "/chanrina",
+            component: () => import("~/pages/chanrina.vue"),
+            meta: {
+                identity: 6,
+                middleware: ["auth"]
+            }
+        },
+        {
             name: "details",
             path: "/details",
             component: () => import("~/pages/details.vue")
