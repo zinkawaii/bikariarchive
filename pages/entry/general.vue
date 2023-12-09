@@ -1,5 +1,11 @@
 <script setup>
+    import { EntryKnownAbility } from "#components";
+
     const props = defineProps(["data"]);
+
+    const components = {
+        "known-ability": EntryKnownAbility
+    };
 </script>
 
 <template>
@@ -22,9 +28,12 @@
                 </div>
             </div>
         </div>
-        <div v-for="item in data.entrys" class="entry-block">
+        <div v-for="item in data.details" class="entry-block">
             <h2>{{ item.title }}</h2>
-            <p v-for="text in toSplit(item.content)" v-html="text"></p>
+            <component v-if="item.component" :is="components[item.component]" v-bind="item.attrs"/>
+            <template v-else>
+                <p v-for="text in toSplit(item.content)" v-html="text"></p>
+            </template>
         </div>
     </article>
 </template>

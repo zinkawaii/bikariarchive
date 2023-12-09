@@ -101,12 +101,12 @@ const base = {
         "attribute-hyphenation": "warn",
         "attributes-order": ["warn", {
             order: [
-                "DEFINITION",
                 "LIST_RENDERING",
                 "CONDITIONALS",
                 "RENDER_MODIFIERS",
-                "SLOT",
                 "OTHER_DIRECTIVES",
+                "SLOT",
+                "DEFINITION",
                 "UNIQUE",
                 "GLOBAL",
                 ["ATTR_DYNAMIC", "ATTR_STATIC", "ATTR_SHORTHAND_BOOL"],
@@ -165,7 +165,6 @@ const base = {
         "prefer-import-from-vue": "warn",
         "prop-name-casing": ["warn", "camelCase"],
         "require-component-is": "warn",
-        "require-default-prop": "warn",
         "require-explicit-emits": "warn",
         "require-prop-type-constructor": "warn",
         "require-render-return": "warn",

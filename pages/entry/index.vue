@@ -105,7 +105,7 @@
         margin: 16px 0 0;
     }
 
-    @media (width < 596px) {
+    @media (width < 768px) {
         .entry-main {
             flex-direction: column;
         }
