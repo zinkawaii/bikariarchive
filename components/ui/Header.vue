@@ -16,7 +16,7 @@
 <template>
     <div class="z-header">
         <div class="title-wrapper">
-            <nuxt-link class="title" :to="{ name: `home` }">BikariArchive</nuxt-link>
+            <nuxt-link :to="{ name: `home` }">BikariArchive</nuxt-link>
         </div>
         <nav class="nav-list">
             <nuxt-link :to="{ name: `home` }">
@@ -55,7 +55,8 @@
 
 <style lang="scss" scoped>
     .z-header {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto auto;
         position: sticky;
         top: 0;
         height: 64px;
@@ -71,80 +72,90 @@
                 rgb(188 255 240 / 50%)
             );
         backdrop-filter: blur(3px);
+        font-size: 14px;
     }
+
+    $title: 297px;
+    $item-max: 60px;
+    $item-min: 48px;
+    $count: 6;
+    $nav-max: $item-max * $count;
+    $nav-min: $item-min * $count;
+    $padding: 16px * 2;
+    $max: $title + $nav-max + $padding;
+    $min: $title + $nav-min + $padding;
 
     .title-wrapper {
         display: flex;
-        flex: 1;
+        width: 100%;
         margin-right: auto;
         padding-inline: 16px;
-    }
 
-    .title {
-        margin: auto;
-        font-family: "腾祥沁圆简";
-        font-size: 32px;
-        text-shadow: 1px 1px 4px rgb(0 0 0 / 50%);
-        color: white;
+        > a {
+            margin: auto;
+            font-family: "腾祥沁圆简";
+            font-size: 32px;
+            text-shadow: 1px 1px 4px rgb(0 0 0 / 50%);
+            color: white;
 
-        &::before {
-            content: "ʚ";
+            &::before {
+                content: "ʚ";
+            }
+
+            &::after {
+                content: "ɞ";
+            }
         }
 
-        &::after {
-            content: "ɞ";
+        @media (width >= #{$min}) {
+            max-width: 456px;
         }
     }
 
     .nav-list {
         display: flex;
-        min-width: fit-content;
 
         > a {
-            display: flex;
-            align-items: center;
+            display: grid;
+            place-content: center;
             gap: 4px;
-            position: relative;
-            padding: 0 16px;
+            width: $item-max;
             text-shadow: var(--text-shadow);
             color: white;
 
-            &::after {
-                content: "";
-                position: absolute;
-                bottom: 14px;
-                width: calc(100% - 24px);
-                height: 4px;
-                border-radius: 2px;
-                background-color: var(--color-theme-block-dark);
-                transform-origin: left;
-                transition: all 0.4s;
-                scale: 0 1;
-                translate: -4px;
+            > i {
+                transition: translate 0.2s;
             }
 
-            &:hover::after {
-                scale: 1;
+            &:hover > i {
+                translate: 0 -4px;
             }
         }
-    }
 
-    .nav-item {
-        display: flex;
+        @media (width < #{$max}) {
+            > a {
+                width: $item-min;
+            }
+
+            span {
+                display: none;
+            }
+        }
+
+        @media (width < #{$min}) {
+            display: none;
+        }
     }
 
     .search-wrapper {
         display: flex;
         overflow: hidden;
-        margin-block: auto;
-        margin-inline: 16px;
+        margin: auto 16px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
-        font-size: 14px;
     }
 
     .keyword {
-        flex: 1;
         width: 160px;
         padding: 0 8px;
         line-height: 28px;
@@ -156,26 +167,8 @@
         color: white;
     }
 
-    @media (width >= 768px) {
-        .title-wrapper {
-            max-width: 456px;
-        }
-    }
-
     @media (width < 1024px) {
         .search-wrapper {
-            display: none;
-        }
-    }
-
-    @media (width < 896px) {
-        .nav-list span {
-            display: none;
-        }
-    }
-
-    @media (width < 768px) {
-        .nav-list {
             display: none;
         }
     }
