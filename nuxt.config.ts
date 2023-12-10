@@ -1,4 +1,5 @@
 import { serverConfig, clientConfig } from "./server/zin.config";
+import sitemapConfig from "./app/sitemap.config";
 
 export default defineNuxtConfig({
     app: {
@@ -61,30 +62,9 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
+        ["nuxt-simple-sitemap", sitemapConfig],
         ["@nuxtjs/robots", {
-            rules: [
-                "AhrefsBot",
-                "AhrefsSiteAudit",
-                "aiHitBot",
-                "BLEXBot",
-                "Barkrowler",
-                "DnyzBot",
-                "DotBot",
-                "ExtLinksBot",
-                "GPTBot",
-                "Mail.Ru",
-                "MegaIndex.ru",
-                "MJ12bot",
-                "Researchscan",
-                "SemrushBot",
-                "spbot",
-                "Uptimebot",
-                "ZoominfoBot"
-            ].map((ua) => ({
-                UserAgent: ua,
-                Disallow: "/",
-                BlankLine: true
-            }))
+            configPath: "./app/robots.config.ts"
         }],
         "@nuxt/image",
         "@pinia/nuxt",
