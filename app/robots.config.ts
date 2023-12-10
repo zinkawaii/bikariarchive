@@ -1,5 +1,5 @@
-export default [
-    ...[
+export default {
+    groups: [
         "AhrefsBot",
         "AhrefsSiteAudit",
         "aiHitBot",
@@ -18,11 +18,7 @@ export default [
         "Uptimebot",
         "ZoominfoBot"
     ].map((ua) => ({
-        UserAgent: ua,
-        Disallow: "/",
-        BlankLine: true
-    })),
-    {
-        Sitemap: (req) => `https://${req.headers.host}/sitemap.xml`
-    }
-];
+        userAgent: ua,
+        disallow: "/"
+    }))
+};

@@ -1,5 +1,6 @@
 import { serverConfig, clientConfig } from "./server/zin.config";
 import sitemapConfig from "./app/sitemap.config";
+import robotsConfig from "./app/robots.config";
 
 export default defineNuxtConfig({
     app: {
@@ -63,12 +64,16 @@ export default defineNuxtConfig({
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
         ["nuxt-simple-sitemap", sitemapConfig],
-        ["@nuxtjs/robots", {
-            configPath: "./app/robots.config.ts"
-        }],
+        ["nuxt-simple-robots", robotsConfig],
+        "nuxt-site-config",
         "@nuxt/image",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
         "@vueuse/nuxt"
-    ]
+    ],
+    site: {
+        name: "微光茶馆",
+        url: "https://bikariarchive.xyz",
+        indexable: true
+    }
 });
