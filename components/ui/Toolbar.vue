@@ -1,5 +1,5 @@
 <script setup>
-    const drawerStore = useDrawerStore();
+    const signerStore = useSignerStore();
     const settingStore = useSettingStore();
 
     const collapse = computed(() => {
@@ -23,7 +23,7 @@
             <a class="tool-item" @click="settingStore.open()">
                 <i class="fas fa-gear"></i>
             </a>
-            <a class="tool-item" @click="drawerStore.toggle()">
+            <a class="tool-item" @click="signerStore.toggle()">
                 <i class="fas fa-user"></i>
             </a>
             <a class="tool-item" @click="scrollToTop">

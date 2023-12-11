@@ -24,6 +24,11 @@
             body: {
                 content: sign.value
             }
+        })
+        .then((res) => {
+            if (!res.error) {
+                userStore.sign = sign.value;
+            }
         });
     });
 </script>

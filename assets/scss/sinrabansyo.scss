@@ -5,6 +5,7 @@
     --color-link              : rgb(63 81 181); /* 超链接色 */
     --color-danger            : rgb(255 0 0); /* 警告色 */
     --color-gray              : rgb(148 148 148); /* 灰色 */
+    --color-gray-dark         : rgb(120 120 120); /* 灰色-深 */
     --color-border            : rgb(168 168 168); /* 边框色 */
     --color-border-light      : rgb(221 221 221); /* 边框色-浅 */
     --color-border-dark       : rgb(51 51 51); /* 边框色-深 */
@@ -38,6 +39,7 @@
 [z-dark] {
     --color-text              : rgb(255 255 255 / 88%); /* 文本色 */
     --color-link              : rgb(88 160 255); /* 超链接色 */
+    --color-gray-dark         : rgb(188 188 188); /* 灰色-深 */
     --color-danger            : rgb(255 64 64); /* 警告色 */
     --color-border            : rgb(136 136 136); /* 边框色 */
     --color-border-light      : rgb(75 75 75); /* 边框色-浅 */
@@ -195,6 +197,11 @@ textarea {
     background-color: var(--color-theme-block-dark);
 }
 
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+}
+
 /* ---------------------------------------------------------------- */
 
 /* 通用内容页 */
@@ -345,6 +352,22 @@ textarea {
 
     & + & {
         margin-inline-start: 0.5em;
+    }
+}
+
+/* 关闭按钮 */
+.xmark {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    width: 1em;
+    font-size: 32px;
+    color: var(--color-border);
+    transition: rotate 0.25s;
+    cursor: pointer;
+
+    &:hover {
+        rotate: 360deg;
     }
 }
 

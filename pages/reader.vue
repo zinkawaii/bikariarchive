@@ -153,7 +153,7 @@
 <template>
     <client-only>
         <teleport to=".z-sidebar">
-            <ReaderCatalog :art="art"/>
+            <reader-catalog :art="art"/>
         </teleport>
     </client-only>
     <div class="content-page">

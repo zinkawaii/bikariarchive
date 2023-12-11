@@ -78,19 +78,9 @@ export default <RouterConfig> {
         {
             name: "user",
             path: "/user",
-            redirect: { name: "login" },
+            redirect: { name: "home" },
             component: () => import("~/pages/user/index.vue"),
             children: [
-                {
-                    name: "login",
-                    path: "login",
-                    component: () => import("~/pages/user/login.vue")
-                },
-                {
-                    name: "logon",
-                    path: "logon",
-                    component: () => import("~/pages/user/logon.vue")
-                },
                 {
                     name: "space",
                     path: "space/:uid",

@@ -1,4 +1,4 @@
-export const useDrawerStore = defineStore("drawer", {
+export const useSignerStore = defineStore("signer", {
     state: () => ({
         state: false
     }),

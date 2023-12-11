@@ -46,7 +46,7 @@
 <template>
     <transition name="slide-fade">
         <div v-if="settingStore.isOpen" class="z-setting">
-            <i class="fas fa-xmark setting-close" @click="settingStore.close()"></i>
+            <i class="fas fa-xmark xmark" @click="settingStore.close()"></i>
             <span class="content-h2 coco-title">全局设置</span>
             <mb-form title="主题颜色" type="select" name="theme" :list="[`初空`, `菖蒲`, `早樱`]"/>
             <mb-form title="夜间模式" type="select" name="dark-mode" :list="[`自动`, `白昼`, `暗夜`]"/>
@@ -67,7 +67,7 @@
             <mb-form title="字体大小" type="select" name="font-size" :list="[`小`, `中`, `大`]"/>
         </div>
     </transition>
-    <mb-mask :when="settingStore.isOpen" :z="511" @click="settingStore.close()"/>
+    <mb-mask :when="settingStore.isOpen" @click="settingStore.close()"/>
 </template>
 
 <style lang="scss" scoped>
@@ -79,7 +79,8 @@
         margin: auto;
         padding: 32px;
         border-radius: 16px;
-        background-color: var(--color-background);
+        background-color: var(--color-background-alpha);
+        backdrop-filter: blur(4px);
     }
 
     .slide-fade-enter-active, .slide-fade-leave-active {
@@ -89,21 +90,6 @@
     .slide-fade-enter-from, .slide-fade-leave-to {
         opacity: 0;
         translate: 0 -50%;
-    }
-
-    .setting-close {
-        position: absolute;
-        top: 0.5em;
-        right: 0.5em;
-        width: 1em;
-        font-size: 32px;
-        color: rgb(196 196 196);
-        transition: rotate 0.25s;
-        cursor: pointer;
-
-        &:hover {
-            rotate: 360deg;
-        }
     }
 
     .shortcut-box {

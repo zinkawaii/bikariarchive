@@ -29,7 +29,7 @@
             </div>
         </div>
     </transition>
-    <mb-mask :when="confirmStore.isShow" :z="511" @click="res(false)"/>
+    <mb-mask :when="confirmStore.isShow" @click="res(false)"/>
 </template>
 
 <style lang="scss" scoped>

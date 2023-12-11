@@ -20,9 +20,7 @@ const server = {
             }
         },
         session: {
-            cookie: {
-                maxAge: 86400 * 30
-            },
+            maxAge: 86400 * 30,
             storage: {
                 driver: "cookie",
                 options: {

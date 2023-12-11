@@ -4,10 +4,6 @@
             type: Boolean,
             required: true
         },
-        z: {
-            type: Number,
-            default: 0
-        },
         duration: {
             type: Number,
             default: 400
@@ -17,7 +13,7 @@
 
 <template>
     <transition name="mask">
-        <div v-if="when" class="mb-mask" :style="{ zIndex: z }"></div>
+        <div v-if="when" class="mb-mask"></div>
     </transition>
 </template>
 

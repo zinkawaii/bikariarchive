@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
+    const signerStore = useSignerStore();
     const userStore = useUserStore();
 
     //等待登录信息获取
@@ -6,9 +7,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     //权限验证
     if (!userStore.isLogin) {
-        return navigateTo({
-            name: "login"
-        });
+        signerStore.open();
+        return false;
     }
     else if (userStore.identity < (to.meta.identity as number)) {
         const confirmStore = useConfirmStore();

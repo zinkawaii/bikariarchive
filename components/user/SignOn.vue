@@ -1,27 +1,21 @@
 <script setup>
-    useHead({
-        title: "注册"
-    });
-
-    const router = useRouter();
+    const emit = defineEmits(["success"]);
 
     const nickname = ref();
     const email = ref();
     const verify = ref();
     const password = ref();
-    const repeat = ref();
+
     const tip = ref({
         nickname: "",
         email: "",
         verify: "",
         password: "",
-        repeat: "",
         clear() {
             this.nickname = "";
-            this.email = "",
-            this.verify = "",
-            this.password = "",
-            this.repeat = "";
+            this.email = "";
+            this.verify = "";
+            this.password = "";
         }
     });
     const verifyStage = ref({
@@ -81,20 +75,9 @@
             tip.value.password = str;
             return false;
         },
-        //重复密码
-        repeat() {
-            let str;
-            if (repeat.value !== password.value) {
-                str = "* 两次密码不一致";
-            }
-            else return true;
-
-            tip.value.repeat = str;
-            return false;
-        },
         //全检测
         all() {
-            return this.nickname() && this.email() && this.password() && this.repeat();
+            return this.nickname() && this.email() && this.password();
         }
     };
 
@@ -162,7 +145,7 @@
         .then(async (res) => {
             switch (res.error) {
                 case 0:
-                    router.push({ name: "login" });
+                    emit("success");
                     break;
                 case 1:
                     tip.value.email = "* 该邮箱已注册";
@@ -182,58 +165,40 @@
 </script>
 
 <template>
-    <div class="content-group">
-        <div class="content-table login-frame">
-            <p>注册账号，成为茶馆的常客~</p>
+    <div class="sign-single">
+        <input type="text" class="sign-input" required v-model="nickname" @blur="tip.nickname = ``"/>
+        <div class="sign-underline"></div>
+        <span class="sign-placeholder" :class="{ warn: tip.nickname }">{{ tip.nickname || "昵称" }}</span>
+    </div>
+    <div class="sign-single">
+        <input type="text" class="sign-input" required v-model="email" @blur="tip.email = ``"/>
+        <div class="sign-underline"></div>
+        <span class="sign-placeholder" :class="{ warn: tip.email }">{{ tip.email || "电子邮箱" }}</span>
+    </div>
+    <div class="sign-verify">
+        <div class="sign-single">
+            <input type="number" class="sign-input" required v-model="verify" @blur="tip.verify = ``" @input="verifyInput"/>
+            <div class="sign-underline"></div>
+            <span class="sign-placeholder" :class="{ warn: tip.verify }">{{ tip.verify || "验证码" }}</span>
         </div>
-        <div class="content-table login-frame">
-            <label class="login-line">
-                <span>昵称</span>
-                <input autocomplete="username" v-model="nickname" @blur="tip.nickname = ``"/>
-                <span class="login-tip">{{ tip.nickname }}</span>
-            </label>
-            <label class="login-line">
-                <span>电子邮箱地址</span>
-                <input autocomplete="email" v-model="email" @blur="tip.email = ``"/>
-                <span class="login-tip">{{ tip.email }}</span>
-            </label>
-            <label class="login-line">
-                <span>验证码</span>
-                <div class="logon-verify">
-                    <input type="text" maxlength="6" v-model="verify" @input="verifyInput" @blur="tip.verify = ``"/>
-                    <div :class="[`btn`, { disabled: verifyStage.stage > 0 }]" @click="verifySend">{{
-                        verifyStage.stage === 1 ? "发送中……" :
-                        verifyStage.stage === 2 ? `已发送(${verifyStage.delay})` :
-                        "发送验证码"
-                    }}</div>
-                </div>
-                <span class="login-tip">{{ tip.verify }}</span>
-            </label>
-            <label class="login-line">
-                <span>密码</span>
-                <input type="password" maxlength="18" v-model="password" @blur="tip.password = ``"/>
-                <span class="login-tip">{{ tip.password }}</span>
-            </label>
-            <label class="login-line">
-                <span>重复密码</span>
-                <input type="password" maxlength="18" v-model="repeat" @blur="tip.repeat = ``"/>
-                <span class="login-tip">{{ tip.repeat }}</span>
-            </label>
-            <div class="login-bottom">
-                <nuxt-link class="btn left" :to="{ name: `login` }">登录</nuxt-link>
-                <div class="btn" @click="submit">注册</div>
-            </div>
-        </div>
+        <a :class="[`btn`, { disabled: verifyStage.stage > 0 }]" @click="verifySend">{{
+            verifyStage.stage === 1 ? "发送中……" :
+            verifyStage.stage === 2 ? `已发送(${verifyStage.delay})` :
+            "发送验证码"
+        }}</a>
+    </div>
+    <div class="sign-single">
+        <input type="password" class="sign-input" required v-model="password" @blur="tip.password = ``" @keyup.enter="submit"/>
+        <div class="sign-underline"></div>
+        <span class="sign-placeholder" :class="{ warn: tip.password }">{{ tip.password || "密码" }}</span>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .logon-verify {
-        display: flex;
-        gap: 16px;
-
-        input {
-            flex: 1;
-        }
+    .sign-verify {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        align-items: flex-end;
+        gap: 1em;
     }
 </style>

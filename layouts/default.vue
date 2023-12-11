@@ -6,7 +6,6 @@
     <z-header />
     <z-navbar />
     <z-toolbar />
-    <z-drawer />
     <div class="sotomi">
         <main class="nakami">
             <slot></slot>
@@ -15,6 +14,7 @@
         <z-sidebar />
     </div>
     <z-setting />
+    <user-sign />
     <mb-image-viewer />
     <mb-confirm />
     <mb-fps />
@@ -55,19 +55,19 @@
         z-index: 128;
     }
 
-    .z-maestrale {
-        z-index: 128;
-    }
-
     .z-toolbar {
-        z-index: 128;
+        z-index: 256;
     }
 
-    .z-drawer {
-        z-index: 128;
+    .mb-mask {
+        z-index: 511;
     }
 
     .z-setting {
+        z-index: 512;
+    }
+
+    .user-sign {
         z-index: 512;
     }
 
