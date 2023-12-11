@@ -5,7 +5,7 @@ export default defineCustomHandler(async (event) => {
     const { email } = getQueryValues(event);
 
     //预生成验证码
-    const time = Date.now() / 1000;
+    const time = Date.now();
     let verify = String(Math.floor(Math.random() * 1000000)).padStart(6, "0");
 
     //查询数据库中是否已存在该邮箱未处理的验证码
@@ -13,7 +13,7 @@ export default defineCustomHandler(async (event) => {
 
     let query = null;
     if (result) {
-        if (result.time + 1800 >= time) {
+        if (result.time.getTime() + 1800000 >= time) {
             verify = result.verify;
         }
         else {

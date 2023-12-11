@@ -27,8 +27,7 @@ export default defineCustomHandler(async (event) => {
             const result = await TempVerifyModel.findOne({ email }) as any;
 
             if (result) {
-                const time = result.time;
-                if (time.getTime() + 1800 >= Date.now() / 1000) {
+                if (result.time.getTime() + 1800000 >= Date.now()) {
                     if (verify === result.verify) {
                         //验证成功，从数据库中删除临时数据
                         TempVerifyModel.deleteOne({ email }).exec();

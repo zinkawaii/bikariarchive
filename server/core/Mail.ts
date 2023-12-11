@@ -27,15 +27,10 @@ export default {
     template(key: string, ...args: string[]) {
         //读取文本
         const file = fs.readFileSync(r(`data/mail/${key}.txt`));
-        let mail = file.toString();
 
         //参数替换
-        if (args.length > 0) {
-            args.forEach((word, index) => {
-                mail = mail.replaceAll(new RegExp(`\\{${index}\\}`, "g"), word);
-            });
-        }
-
-        return mail;
+        return args.reduce((mail, word, index) => {
+            return mail.replaceAll(new RegExp(`\\{${index}\\}`, "g"), word);
+        }, file.toString());
     }
 };
