@@ -53,8 +53,6 @@
             tip: ""
         },
         content: "",
-        fontFamily: null,
-        fontSize: null,
         currentVolume: art.volOrder
     });
 
@@ -105,6 +103,24 @@
         //上下章快捷键
         useEventListener("keyup", onKeyup);
     }
+
+    //字体系列
+    const fontFamily = computed(() => {
+        return {
+            0: "inherit",
+            1: "宋体",
+            2: "楷体"
+        }[settingStore.get("font-family")];
+    });
+
+    //字体大小
+    const fontSize = computed(() => {
+        return {
+            0: 14,
+            1: 16,
+            2: 18
+        }[settingStore.get("font-size")] + "px";
+    });
 
     //写入阅读记录
     readRecordStore.set(art.novel, {
@@ -211,6 +227,11 @@
 
     .novel-text {
         padding: 0 32px;
+
+        :deep(p) {
+            font-family: v-bind("fontFamily");
+            font-size: v-bind("fontSize");
+        }
 
         :deep(.mb-gallery) {
             margin-block: 16px;
