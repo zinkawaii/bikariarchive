@@ -48,6 +48,10 @@
         border-bottom: 1px solid var(--color-border);
     }
 
+    .entry-title, .entry-article :is(h1, h2, h3) {
+        font-weight: bold;
+    }
+
     .entry-main {
         display: flex;
         gap: 16px;
@@ -77,7 +81,7 @@
         margin: auto;
     }
 
-    .entry-block {
+    .entry-section {
         overflow: auto;
         margin-top: 8px;
 

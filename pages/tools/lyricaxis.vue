@@ -28,7 +28,7 @@
 
     //音频可以播放
     function audioCanplay() {
-        state.value.invalid = null;
+        state.value.invalid = false;
         state.value.duration = $Audio.value.duration;
     }
 
@@ -218,10 +218,10 @@
             @timeupdate="audioTimeupdate"
         ></audio>
         <a class="btn" @click="upload">上传</a>
-        <a class="btn" :disabled="state.invalid" @click="play">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</a>
+        <a :class="[`btn`, { disabled: state.invalid }]" @click="play">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</a>
         <span>
-            <a class="btn" :disabled="state.invalid" @click="exporter">导出</a>
-            <a class="btn" :disabled="state.invalid" @click="axis">{{ state.axising ? "结束打轴" : "开始打轴" }}</a>
+            <a :class="[`btn`, { disabled: state.invalid }]" @click="exporter">导出</a>
+            <a :class="[`btn`, { disabled: state.invalid }]" @click="axis">{{ state.axising ? "结束打轴" : "开始打轴" }}</a>
         </span>
         <div>
             <span class="lyric-time">{{ timeFormat(state.current) }}</span>

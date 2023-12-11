@@ -65,8 +65,8 @@
     <div class="z-jumbotron">
         <div class="jumbo-background" :style="style"></div>
         <div class="jumbo-banner">
-            <h1 class="title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
-            <h2 class="sub" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
+            <h1 class="jumbo-title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
+            <h2 class="jumbo-phrase" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
         </div>
         <a class="jumbo-hide" @click="toBottom">
             <i class="fas fa-chevron-down"></i>
@@ -98,15 +98,13 @@
         text-shadow: 0 0 12px rgb(0 0 0 / 66%);
         color: white;
 
-        .title {
+        .jumbo-title {
             font-size: 72px;
-            font-weight: normal;
         }
 
-        .sub {
+        .jumbo-phrase {
             height: 1.4em;
             font-size: 24px;
-            font-weight: normal;
         }
     }
 

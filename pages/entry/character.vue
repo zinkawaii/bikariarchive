@@ -3,13 +3,13 @@
 </script>
 
 <template>
-    <div class="entry-header">
-        <h1 id="Title">{{ data.title }}</h1>
-    </div>
-    <article class="entry-text">
-        <div class="entry-block entry-main">
+    <header class="entry-header">
+        <h1 class="entry-title">{{ data.title }}</h1>
+    </header>
+    <article class="entry-article">
+        <section class="entry-section entry-main">
             <div class="left">
-                <div id="Summary">
+                <div class="entry-summary">
                     <p v-for="text in toSplit(data.summary)" v-html="text"></p>
                 </div>
                 <div v-if="data.info?.length > 0" class="div-table entry-brief">
@@ -31,8 +31,8 @@
                     </mb-gallery>
                 </template>
             </mb-tab>
-        </div>
-        <div class="entry-block">
+        </section>
+        <section class="entry-section">
             <h2>能力</h2>
             <template v-if="data.talent?.length > 0">
                 <div v-for="item in data.talent" class="talent-block">
@@ -60,8 +60,8 @@
                 </div>
             </template>
             <p v-else>未知。</p>
-        </div>
-        <div v-if="data.relationship?.length > 0" class="entry-block">
+        </section>
+        <section v-if="data.relationship?.length > 0" class="entry-section">
             <h2>人物关系</h2>
             <div class="entry-relation">
                 <div v-for="item in data.relationship" class="relation-wrapper">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </article>
 </template>
 

@@ -65,11 +65,12 @@
     box-sizing: border-box;
 }
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, button, table, caption, tbody, tfoot, thead, tr, th, td, dialog {
+a, abbr, address, area, article, aside, audio, b, bdi, bdo, big, blockquote, body, button, canvas, caption, cite, code, col, colgroup, datalist, dd, del, details, dialog, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, html, i, iframe, img, input, ins, kbd, keygen, label, legend, li, main, map, mark, menu, meter, nav, noscript, object, ol, optgroup, option, output, p, param, pre, progress, q, rp, rt, ruby, s, samp, section, select, small, span, strike, strong, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, tt, u, ul, var, video, wbr {
     margin: 0;
     padding: 0;
     border: 0;
-    outline: 0;
+    outline: none;
+    font: inherit;
 }
 
 html {
@@ -105,6 +106,10 @@ a {
     text-decoration: none;
     color: var(--color-link);
     cursor: pointer;
+}
+
+rt {
+    font-size: 75%;
 }
 
 blockquote {
@@ -150,19 +155,12 @@ ol, ul {
     list-style-type: none;
 }
 
-rt {
-    font-size: 75%;
-}
-
-button, label {
+button, label, select {
     cursor: pointer;
 }
 
 input, textarea, select, option {
-    border: 0;
     background-color: var(--color-background);
-    font-family: inherit;
-    font-size: inherit;
     color: inherit;
 }
 
@@ -175,7 +173,7 @@ textarea {
 }
 
 :focus {
-    outline: 0;
+    outline: none;
 }
 
 ::selection {
@@ -232,7 +230,6 @@ textarea {
 .content-h2 {
     font-family: "腾祥沁圆简";
     font-size: 20px;
-    font-weight: normal;
     line-height: 26px;
 }
 
@@ -266,10 +263,6 @@ textarea {
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-}
-
-.flex {
-    display: flex;
 }
 
 .p-small {
@@ -344,7 +337,7 @@ textarea {
         color: white;
     }
 
-    &[disabled], &.disabled {
+    &.disabled {
         border-color: var(--color-border);
         color: var(--color-border);
         pointer-events: none;
@@ -357,7 +350,7 @@ textarea {
 
 /* ---------------------------------------------------------------- */
 
-:where(.intro-synopsis, .novel-text, .entry-text, .result-part) p {
+:where(.intro-synopsis, .novel-text, .entry-article, .result-part) p {
     text-indent: 2em;
 }
 

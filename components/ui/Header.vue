@@ -14,7 +14,7 @@
 </script>
 
 <template>
-    <div class="z-header">
+    <header class="z-header">
         <div class="title-wrapper">
             <nuxt-link :to="{ name: `home` }">BikariArchive</nuxt-link>
         </div>
@@ -50,7 +50,7 @@
                 <i class="fas fa-search"></i>
             </button>
         </form>
-    </div>
+    </header>
 </template>
 
 <style lang="scss" scoped>

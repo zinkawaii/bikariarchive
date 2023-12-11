@@ -201,7 +201,7 @@
                 <span>验证码</span>
                 <div class="logon-verify">
                     <input type="text" maxlength="6" v-model="verify" @input="verifyInput" @blur="tip.verify = ``"/>
-                    <div class="btn" :disabled="verifyStage.stage > 0 || null" @click="verifySend">{{
+                    <div :class="[`btn`, { disabled: verifyStage.stage > 0 }]" @click="verifySend">{{
                         verifyStage.stage === 1 ? "发送中……" :
                         verifyStage.stage === 2 ? `已发送(${verifyStage.delay})` :
                         "发送验证码"

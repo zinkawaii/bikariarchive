@@ -14,8 +14,6 @@
 </script>
 
 <script setup>
-    import jArticle from "~/dist/json/Article.json";
-
     const config = useRuntimeConfig();
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();
@@ -108,11 +106,6 @@
         useEventListener("keyup", onKeyup);
     }
 
-    //本卷章节
-    const jChapter = computed(() => {
-        return jArticle[novel].chapter.filter((c) => c.volume === state.value.currentVolume);
-    });
-
     //写入阅读记录
     readRecordStore.set(art.novel, {
         index: art.index,
@@ -144,16 +137,7 @@
 <template>
     <client-only>
         <teleport to=".z-sidebar">
-            <aside class="novel-index">
-                <select class="index-volume" :value="art.volOrder" v-model="state.currentVolume">
-                    <option v-for="(v, i) in jArticle[novel].volume" :value="i">{{ v.title }}</option>
-                </select>
-                <ul class="index-list">
-                    <li v-for="c in jChapter">
-                        <nuxt-link :to="{ params: { index: c.index } }">{{ c.title }}</nuxt-link>
-                    </li>
-                </ul>
-            </aside>
+            <ReaderCatalog :art="art"/>
         </teleport>
     </client-only>
     <div class="content-page">
@@ -164,7 +148,7 @@
                     <span>上一章</span>
                 </nuxt-link>
                 <div class="novel-title">
-                    <h2 id="Title" style="float: left;">{{ state.title }}</h2>
+                    <h2>{{ state.title }}</h2>
                     <div class="novel-information">
                         <span>{{ state.readCount }} 阅读 ／ {{ state.wordCount }} 字</span>
                         <span :title="state.date.tip">{{ state.date.type }}时间：{{ state.date.value }}</span>
@@ -201,14 +185,13 @@
     }
 
     .novel-title {
-        display: flex;
         flex: 1;
-        flex-direction: column;
-        overflow: invisible;
         text-align: center;
 
-        h2 {
-            line-height: 52px;
+        > h2 {
+            padding-block: 8px;
+            font-weight: bold;
+            line-height: 36px;
         }
     }
 
@@ -289,64 +272,6 @@
             text-shadow: var(--text-shadow);
             color: white;
             cursor: pointer;
-        }
-    }
-
-    .novel-index {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        overflow: auto;
-        border: var(--border-theme-group);
-        border-radius: 16px;
-        box-shadow: var(--box-shadow);
-        background-color: var(--color-background-alpha);
-    }
-
-    .index-volume {
-        margin: 4px 16px 8px;
-        padding: 8px 0;
-        border-bottom: 1px solid var(--color-border);
-        background-color: transparent;
-        font-weight: bolder;
-    }
-
-    .index-list {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        overflow: hidden scroll;
-        overscroll-behavior: contain;
-        padding: 0 8px 8px;
-
-        &::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border: 0;
-            background-color: var(--color-theme-block);
-        }
-
-        a {
-            display: block;
-            overflow: hidden;
-            padding: 6px 0 6px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            color: var(--color-text);
-
-            &:hover {
-                background-color: var(--color-border);
-                color: white;
-            }
-
-            &.router-link-active {
-                background-color: var(--color-theme-block);
-                color: white;
-            }
         }
     }
 

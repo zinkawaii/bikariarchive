@@ -162,7 +162,6 @@
         display: block;
         width: 80%;
         max-width: 256px;
-        aspect-ratio: 1;
         margin: auto;
         margin-bottom: -24px;
         border-radius: 100%;

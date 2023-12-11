@@ -9,13 +9,13 @@
 </script>
 
 <template>
-    <div class="entry-header">
-        <h1 id="Title">{{ data.title }}</h1>
-    </div>
-    <article class="entry-text">
-        <div class="entry-block entry-main">
+    <header class="entry-header">
+        <h1 class="entry-title">{{ data.title }}</h1>
+    </header>
+    <article class="entry-article">
+        <section class="entry-section entry-main">
             <div class="left">
-                <div id="Summary">
+                <div class="entry-summary">
                     <p v-for="text in toSplit(data.summary)" v-html="text"></p>
                 </div>
                 <div v-if="data.info?.length > 0" class="div-table entry-brief">
@@ -27,13 +27,13 @@
                     </dl>
                 </div>
             </div>
-        </div>
-        <div v-for="item in data.details" class="entry-block">
+        </section>
+        <section v-for="item in data.details" class="entry-section">
             <h2>{{ item.title }}</h2>
             <component v-if="item.component" :is="components[item.component]" v-bind="item.attrs"/>
             <template v-else>
                 <p v-for="text in toSplit(item.content)" v-html="text"></p>
             </template>
-        </div>
+        </section>
     </article>
 </template>
