@@ -43,35 +43,37 @@
         <div v-if="signerStore.state" class="user-sign">
             <div class="sign-innerworld"></div>
             <div class="sign-wrapper">
-                <template v-if="currentView === `login`">
-                    <div class="sign-header">
-                        <h2 class="sign-title">登录</h2>
-                        <a class="sign-have" @click="currentView = `logon`">没有账号？立即注册<i class="fas fa-chevron-right"></i></a>
-                    </div>
-                    <user-sign-in />
-                </template>
-                <template v-else-if="currentView === `logon`">
-                    <div class="sign-header">
-                        <h2 class="sign-title">注册</h2>
-                        <a class="sign-have" @click="currentView = `login`">已有账号，前往登录<i class="fas fa-chevron-right"></i></a>
-                    </div>
-                    <user-sign-on @success="currentView.value = `login`"/>
-                </template>
-                <template v-else-if="currentView === `profile`">
-                    <div class="sign-header">
-                        <h2 class="sign-title">用户简介</h2>
-                        <span class="sign-have">{{ userStore.sign }}</span>
-                    </div>
-                    <div class="user-profile">
-                        <div>
-                            <span class="user-nickname">{{ userStore.nickname }}</span>
-                            <div class="user-tool">
-                                <a class="btn" @click="logout">退出登录</a>
-                            </div>
+                <transition name="fade" mode="out-in">
+                    <div v-if="currentView === `login`">
+                        <div class="sign-header">
+                            <h2 class="sign-title">登录</h2>
+                            <a class="sign-have" @click="currentView = `logon`">没有账号？立即注册<i class="fas fa-chevron-right"></i></a>
                         </div>
-                        <nuxt-link :to="toSpace"><nuxt-img class="user-icon" src="/garden/icon/default.png"/></nuxt-link>
+                        <user-sign-in />
                     </div>
-                </template>
+                    <div v-else-if="currentView === `logon`">
+                        <div class="sign-header">
+                            <h2 class="sign-title">注册</h2>
+                            <a class="sign-have" @click="currentView = `login`">已有账号，前往登录<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <user-sign-on @success="currentView.value = `login`"/>
+                    </div>
+                    <div v-else-if="currentView === `profile`">
+                        <div class="sign-header">
+                            <h2 class="sign-title">资料卡</h2>
+                            <span class="sign-have">{{ userStore.sign }}</span>
+                        </div>
+                        <div class="user-profile">
+                            <div>
+                                <span class="user-nickname">{{ userStore.nickname }}</span>
+                                <div class="user-tool">
+                                    <a class="btn" @click="logout">退出登录</a>
+                                </div>
+                            </div>
+                            <nuxt-link :to="toSpace"><nuxt-img class="user-icon" src="/garden/icon/default.png"/></nuxt-link>
+                        </div>
+                    </div>
+                </transition>
             </div>
             <i class="fas fa-xmark xmark" @click="signerStore.close"></i>
         </div>
@@ -103,13 +105,25 @@
         scale: 0.5;
     }
 
+    .fade-enter-active, .fade-leave-active {
+        transition: all 0.15s;
+    }
+
+    .fade-enter-from, .fade-leave-to {
+        opacity: 0;
+    }
+
     .sign-innerworld {
-        width: 75%;
+        flex: 0.75;
         box-shadow: var(--box-shadow);
-        mask-image: linear-gradient(to left, transparent, var(--color-background-alpha));
-        background-image: url("/garden/innerworld.webp");
-        background-position: center;
+        mask-image: linear-gradient(to left, transparent, white);
+        background-image: url("/garden/outerworld.webp");
+        background-position: center 15%;
         background-size: cover;
+
+        [z-dark] & {
+            background-image: url("/garden/innerworld.webp");
+        }
     }
 
     .sign-wrapper {
@@ -179,6 +193,18 @@
         width: 72px;
         border-radius: 100%;
         box-shadow: var(--box-shadow);
+    }
+
+    @media (width < 425px) {
+        .user-sign {
+            flex-direction: column;
+            height: 100%;
+            border-radius: 0;
+        }
+
+        .sign-innerworld {
+            mask-image: linear-gradient(to top, transparent, white);
+        }
     }
 </style>
 

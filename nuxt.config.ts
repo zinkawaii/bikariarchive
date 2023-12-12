@@ -1,4 +1,4 @@
-import { serverConfig, clientConfig } from "./server/zin.config";
+import { serverConfig, clientConfig } from "./app/zin.config";
 import sitemapConfig from "./app/sitemap.config";
 import robotsConfig from "./app/robots.config";
 
@@ -73,7 +73,7 @@ export default defineNuxtConfig({
     ],
     site: {
         name: "微光茶馆",
-        url: "https://bikariarchive.xyz",
+        url: `https://${clientConfig.domain}`,
         indexable: true
     }
 });
