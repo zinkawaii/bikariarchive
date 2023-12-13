@@ -2,6 +2,7 @@
   "bikari": {
     "author": "山吹色御守",
     "title": "微光茶馆-Bikari",
+    "type": "novel",
     "tag": [
       "后宫", "幻想", "战斗", "超能力"
     ],
@@ -90,6 +91,7 @@
   "yukipara": {
     "author": "山吹色御守",
     "title": "雪女乐园-Yukipara",
+    "type": "novel",
     "tag": [
       "后宫", "幻想", "战斗", "超能力"
     ],
@@ -100,6 +102,7 @@
   "daily": {
     "author": "山吹色御守",
     "title": "真理笔记-Daily",
+    "type": "blog",
     "tag": [
       "日常", "讨论", "主观", "意识流"
     ],

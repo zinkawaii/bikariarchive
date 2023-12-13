@@ -179,10 +179,13 @@
                 <v-runtime-template :template="state.content"/>
             </article>
             <article v-else class="novel-text" v-html="state.content"></article>
-            <footer class="novel-copyright">
-                <div><span class="meta">本章作者</span><nuxt-link :to="{ name: `home` }">{{ state.author }}</nuxt-link></div>
-                <div><span class="meta">本章链接</span><nuxt-link :to="route.path">https://{{ config.public.domain + route.path }}</nuxt-link></div>
-                <div><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></div>
+            <footer class="novel-footer">
+                <p v-if="art.novelInfo.type === `novel` && art.isLastInVol" class="novel-endding">THE END</p>
+                <div class="novel-copyright">
+                    <p><span class="meta">本章作者</span><nuxt-link :to="{ name: `home` }">{{ state.author }}</nuxt-link></p>
+                    <p><span class="meta">本章链接</span><nuxt-link :to="route.path">https://{{ config.public.domain + route.path }}</nuxt-link></p>
+                    <p><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></p>
+                </div>
             </footer>
         </div>
         <div class="novel-wrap-bottom">
@@ -227,25 +230,32 @@
 
     .novel-text {
         padding: 0 32px;
-
-        :deep(p) {
-            font-family: v-bind("fontFamily");
-            font-size: v-bind("fontSize");
-        }
+        font-family: v-bind("fontFamily");
+        font-size: v-bind("fontSize");
 
         :deep(.mb-gallery) {
             margin-block: 16px;
         }
     }
 
-    .novel-illustration {
-        display: grid;
-        grid-gap: 16px;
-        padding: 16px 0 8px;
+    .novel-endding {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        padding-block: 3px;
+        font-size: 13px;
+        color: var(--color-border);
+
+        &::before, &::after {
+            content: "";
+            width: 20%;
+            height: 1px;
+            background-color: var(--color-border-light);
+        }
     }
 
     .novel-copyright {
-        position: relative;
         margin-top: 16px;
         padding: 8px 16px;
         border: 1px solid var(--color-border);

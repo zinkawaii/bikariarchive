@@ -71,15 +71,19 @@ class Article {
     }
 
     get isLast() {
-        return this.order === jArticle[this.novel].chapter.length - 1;
+        return this.order === this.novelInfo.chapter.length - 1;
+    }
+
+    get isLastInVol() {
+        return (this.novelInfo.chapter[this.order + 1]?.volume ?? Infinity) > this.volOrder;
     }
 
     getLastIndex() {
-        return jArticle[this.novel].chapter[this.order - 1].index;
+        return this.novelInfo.chapter[this.order - 1].index;
     }
 
     getNextIndex() {
-        return jArticle[this.novel].chapter[this.order + 1].index;
+        return this.novelInfo.chapter[this.order + 1].index;
     }
 }
 
