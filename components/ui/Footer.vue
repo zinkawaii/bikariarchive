@@ -30,8 +30,7 @@
 
 <style lang="scss" scoped>
     .z-footer {
-        display: flex;
-        flex-direction: column;
+        display: grid;
         padding: 16px 32px;
         border-radius: 16px;
         box-shadow: var(--box-shadow);
@@ -42,7 +41,6 @@
         color: white;
 
         > p {
-            font-size: 14px;
             line-height: 24px;
         }
     }

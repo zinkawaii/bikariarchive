@@ -64,7 +64,7 @@
                     <li v-for="chapter in chapters">
                         <nuxt-link :to="{ name: `reader`, params: { novel: current.novel, index: chapter.index }}">
                             <span class="title">{{ chapter.title }}</span>
-                            <span class="date">{{ chapter.date_reco ?? chapter.date ?? "很久以前" }}</span>
+                            <time class="date">{{ chapter.date_reco ?? chapter.date ?? "很久以前" }}</time>
                         </nuxt-link>
                     </li>
                 </ul>

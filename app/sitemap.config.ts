@@ -13,8 +13,6 @@ export default {
         "/tools/excalc",
         "/tools/lyricaxis",
         "/tools/namaemaker",
-        "/user/login",
-        "/user/logon",
         ...Object.entries(jArticle).map(([novel, { chapter }]) => {
             return chapter.map((item) => {
                 return `/book/${novel}/${item.index}`;

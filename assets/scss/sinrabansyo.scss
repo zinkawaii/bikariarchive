@@ -3,8 +3,8 @@
 :root {
     --color-text              : rgb(36 33 30); /* 文本色 */
     --color-link              : rgb(63 81 181); /* 超链接色 */
-    --color-danger            : rgb(255 0 0); /* 警告色 */
-    --color-gray              : rgb(148 148 148); /* 灰色 */
+    --color-danger            : rgb(245 64 64); /* 警告色 */
+    --color-gray              : rgb(152 152 152); /* 灰色 */
     --color-gray-dark         : rgb(120 120 120); /* 灰色-深 */
     --color-border            : rgb(168 168 168); /* 边框色 */
     --color-border-light      : rgb(221 221 221); /* 边框色-浅 */
@@ -12,7 +12,7 @@
     --color-background        : rgb(248 248 248); /* 背景色 */
     --color-background-alpha  : rgb(248 248 248 / 88%); /* 背景色-透明 */
     --color-tab-background    : rgb(216 216 216); /* 标签背景色 */
-    --color-tab-text          : rgb(80 80 80); /* 标签文本色 */
+    --color-tab-text          : rgb(96 93 90); /* 标签文本色 */
     --color-theme-text        : hsl(var(--theme-hue) 53% 67%); /* 文本色-高亮 */
     --color-theme-block       : hsl(var(--theme-hue) 100% 90%); /* 填充色 */
     --color-theme-block-light : hsl(var(--theme-hue) 100% 97.5%); /* 填充色-浅 */
@@ -39,15 +39,14 @@
 [z-dark] {
     --color-text              : rgb(255 255 255 / 88%); /* 文本色 */
     --color-link              : rgb(88 160 255); /* 超链接色 */
-    --color-gray-dark         : rgb(188 188 188); /* 灰色-深 */
-    --color-danger            : rgb(255 64 64); /* 警告色 */
+    --color-gray-dark         : rgb(184 184 184); /* 灰色-深 */
     --color-border            : rgb(136 136 136); /* 边框色 */
-    --color-border-light      : rgb(75 75 75); /* 边框色-浅 */
+    --color-border-light      : rgb(83 83 83); /* 边框色-浅 */
     --color-border-dark       : rgb(216 216 216); /* 边框色-深 */
     --color-background        : rgb(48 48 48); /* 背景色 */
     --color-background-alpha  : rgb(48 48 48 / 88%); /* 背景色-透明 */
     --color-tab-background    : rgb(88 88 88); /* 标签背景色 */
-    --color-tab-text          : rgb(176 176 176); /* 标签文本色 */
+    --color-tab-text          : rgb(196 193 190); /* 标签文本色 */
     --color-theme-text        : hsl(var(--theme-hue) 75% 66%); /* 文本色-高亮 */
     --color-theme-block       : hsl(var(--theme-hue) 66% 45%); /* 填充色 */
     --color-theme-block-light : hsl(var(--theme-hue) 66% 53%); /* 填充色-浅 */
@@ -64,15 +63,15 @@
 /* ---------------------------------------------------------------- */
 
 * {
-    box-sizing: border-box;
-}
-
-a, abbr, address, area, article, aside, audio, b, bdi, bdo, big, blockquote, body, button, canvas, caption, cite, code, col, colgroup, datalist, dd, del, details, dialog, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, html, i, iframe, img, input, ins, kbd, keygen, label, legend, li, main, map, mark, menu, meter, nav, noscript, object, ol, optgroup, option, output, p, param, pre, progress, q, rp, rt, ruby, s, samp, section, select, small, span, strike, strong, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, tt, u, ul, var, video, wbr {
     margin: 0;
     padding: 0;
     border: 0;
     outline: none;
     font: inherit;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
 }
 
 html {
@@ -100,8 +99,7 @@ h3 {
 }
 
 p {
-    font-size: 16px;
-    line-height: 32px;
+    line-height: 2em;
 }
 
 a {
@@ -298,6 +296,12 @@ textarea {
     text-align: center;
 }
 
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+}
+
 .invisible {
     visibility: hidden;
 }
@@ -328,9 +332,7 @@ textarea {
 .btn {
     display: inline-block;
     padding: 0 12px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--color-theme-block-dark);
+    border: 1px solid var(--color-theme-block-dark);
     border-radius: 3px;
     line-height: 2em;
     text-align: center;

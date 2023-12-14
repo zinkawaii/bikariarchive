@@ -212,8 +212,8 @@
     .sign-single {
         display: grid;
         position: relative;
-        margin-top: 1.5em;
-        line-height: 1.5em;
+        margin-top: 22px;
+        line-height: 20px;
     }
 
     .sign-input {
@@ -249,7 +249,7 @@
             width: 0;
             height: 1px;
             background-color: var(--color-theme-block-dark);
-            transition: all 0.25s;
+            transition: all 0.4s;
         }
     }
 

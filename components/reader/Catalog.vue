@@ -71,10 +71,13 @@
             border: 0;
             background-color: var(--color-theme-block);
         }
+
+        > li {
+            display: grid;
+        }
     }
 
     .catalog-link {
-        display: block;
         overflow: hidden;
         padding: 6px 0 6px 16px;
         border-radius: 8px;

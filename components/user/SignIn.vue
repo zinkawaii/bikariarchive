@@ -1,6 +1,4 @@
 <script setup>
-    const router = useRouter();
-    const signerStore = useSignerStore();
     const userStore = useUserStore();
 
     const nickname = ref();

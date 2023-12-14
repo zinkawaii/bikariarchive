@@ -167,7 +167,7 @@
                     <h2>{{ state.title }}</h2>
                     <div class="novel-information">
                         <span>{{ state.readCount }} 阅读 ／ {{ state.wordCount }} 字</span>
-                        <span :title="state.date.tip">{{ state.date.type }}时间：{{ state.date.value }}</span>
+                        <span :title="state.date.tip">{{ state.date.type }}时间：<time>{{ state.date.value }}</time></span>
                     </div>
                 </div>
                 <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
