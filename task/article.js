@@ -11,7 +11,7 @@ import * as path from "path";
 marked.use({
     renderer: {
         heading(text, level) {
-            return `<h${level} class="content-h${level}">${text}</h${level}>\n`;
+            return `<h${level}>${text}</h${level}>\n`;
         },
         code(code, infostring) {
             return `<mb-code lang="${infostring}"><pre>${code}</pre></mb-code>\n`;

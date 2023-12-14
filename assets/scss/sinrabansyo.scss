@@ -113,19 +113,21 @@ rt {
 }
 
 blockquote {
-    margin: 8px 2em;
-    padding: 8px 1em;
+    margin: 1em 2em;
+    padding: 1em;
     border-block: 1px solid var(--color-border-light);
     border-inline: 4px solid var(--color-theme-block);
     background-color: var(--color-background);
+
+    > p {
+        text-indent: 0;
+    }
 }
 
 code {
-    margin: 0 0.25em;
-    padding: 2px 0.25em;
+    padding: 2px 4px;
     border-radius: 4px;
     background-color: color-mix(in srgb, var(--color-tab-background), transparent 33%);
-    font-family: inherit;
     color: var(--color-theme-text);
 }
 
@@ -382,8 +384,9 @@ textarea {
 .novel-text {
     h2 {
         position: relative;
-        margin: 8px 0 0;
-        padding: 4px 0 4px 16px;
+        margin-block: 16px 4px;
+        padding: 4px 16px;
+        font-family: "腾祥沁圆简";
 
         &::before {
             content: "";

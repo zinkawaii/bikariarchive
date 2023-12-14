@@ -47,7 +47,7 @@
     .mb-code {
         position: relative;
         overflow: hidden;
-        margin: 8px 0;
+        margin-block: 1em;
         border: 1px solid var(--color-border-light);
         border-radius: 8px;
         background-color: var(--color-background);
