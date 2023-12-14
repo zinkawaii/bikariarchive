@@ -9,6 +9,7 @@ class Article {
     index        = "";    //章文件名
     title        = "";    //章节名
     date         = {};    //日期
+    endding      = false; //终章标记
     runtime      = false; //运行时
     error        = true;  //错误信息
 
@@ -54,6 +55,7 @@ class Article {
                         publish: c.date,
                         reco: c.date_reco
                     };
+                    this.endding = c.endding;
                     this.runtime = c.runtime;
                     this.error = false;
                     break;
