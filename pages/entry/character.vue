@@ -93,7 +93,6 @@
         text-wrap: nowrap;
 
         > h3 {
-            display: inline-block;
             line-height: 26px;
             text-indent: 19px;
         }

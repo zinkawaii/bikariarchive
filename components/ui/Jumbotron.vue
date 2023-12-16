@@ -97,32 +97,24 @@
         text-align: center;
         text-shadow: 0 0 12px rgb(0 0 0 / 66%);
         color: white;
+    }
 
-        .jumbo-title {
-            font-size: 72px;
-        }
+    .jumbo-title {
+        font-size: 72px;
+    }
 
-        .jumbo-phrase {
-            height: 1.4em;
-            font-size: 24px;
-        }
+    .jumbo-phrase {
+        height: 1.4em;
     }
 
     .main-typing::after, .sub-typing::after {
         content: "";
         display: inline-block;
+        height: 1em;
         outline: 1px solid white;
+        vertical-align: middle;
         animation: cursor-flash 1s forwards infinite;
-    }
-
-    .main-typing::after {
-        height: 52px;
-        transform: translate(6px, 4px);
-    }
-
-    .sub-typing::after {
-        height: 18px;
-        transform: translateX(6px);
+        translate: 4px -0.12em;
     }
 
     @keyframes cursor-flash {

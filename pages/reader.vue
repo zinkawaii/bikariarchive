@@ -164,7 +164,7 @@
                     <span>上一章</span>
                 </nuxt-link>
                 <div class="novel-title">
-                    <h2>{{ state.title }}</h2>
+                    <h1>{{ state.title }}</h1>
                     <div class="novel-information">
                         <span>{{ state.readCount }} 阅读 ／ {{ state.wordCount }} 字</span>
                         <span :title="state.date.tip">{{ state.date.type }}时间：<time>{{ state.date.value }}</time></span>
@@ -207,8 +207,9 @@
         flex: 1;
         text-align: center;
 
-        > h2 {
+        > h1 {
             padding-block: 8px;
+            font-size: 24px;
             font-weight: bold;
             line-height: 36px;
         }

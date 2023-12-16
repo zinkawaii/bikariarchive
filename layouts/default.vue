@@ -25,7 +25,7 @@
     .sotomi {
         display: flex;
         justify-content: center;
-        gap: 32px;
+        gap: 24px;
         min-width: var(--size-width-min-mobile);
         padding: 32px;
     }
@@ -35,7 +35,7 @@
         display: flex;
         flex: 1;
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
         max-width: 1028px;
     }
 

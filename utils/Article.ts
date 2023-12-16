@@ -76,6 +76,10 @@ class Article {
         return this.order === this.novelInfo.chapter.length - 1;
     }
 
+    get isFirstInVol() {
+        return (this.novelInfo.chapter[this.order - 1]?.volume ?? -Infinity) < this.volOrder;
+    }
+
     get isLastInVol() {
         return (this.novelInfo.chapter[this.order + 1]?.volume ?? Infinity) > this.volOrder;
     }
