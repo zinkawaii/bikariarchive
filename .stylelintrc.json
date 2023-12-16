@@ -183,7 +183,14 @@
           "border-spacing"
         ]
       },
-      "box-shadow",
+      {
+        "groupName": "box",
+        "properties": [
+          "box-decoration-break",
+          "box-sizing",
+          "box-shadow"
+        ]
+      },
       {
         "groupName": "outline",
         "properties": [

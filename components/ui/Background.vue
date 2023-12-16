@@ -22,7 +22,7 @@
     .z-background {
         position: fixed;
         inset: 0;
-        background-attachment: fixed;
+        background-attachment: local;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

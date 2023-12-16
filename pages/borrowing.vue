@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <div class="content-group">
+    <div class="content-widget" z-main>
         <p class="p-small text-gray borrowing-tip">* 除本借物表所标注的素材外，其余所有（底部或含有画师标签的）图片均为《微光茶馆》及其衍生作品的原创稿件。</p>
         <table class="navbox-table">
             <tbody>

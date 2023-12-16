@@ -51,7 +51,7 @@
         </teleport>
     </client-only>
     <div class="content-page">
-        <div class="content-group home-brief">
+        <div class="content-widget home-brief" z-main>
             <div class="content-table home-welcome">
                 <p>
                     <i class="home-qrcode"></i>
@@ -211,13 +211,6 @@
         grid-template:
             "A B" auto
             "A C" 1fr / auto 1fr;
-
-        > div {
-            border: var(--border-theme-group);
-            border-radius: 16px;
-            box-shadow: var(--box-shadow);
-            background-color: var(--color-background-alpha);
-        }
     }
 
     @container main (width < 768px) {

@@ -12,7 +12,7 @@
 </script>
 
 <template>
-    <div class="home-update">
+    <div class="content-widget home-update">
         <span class="content-h2 coco-title">更新历史</span>
         <ul class="update-list">
             <li v-for="item in jUpdated" class="update-item">

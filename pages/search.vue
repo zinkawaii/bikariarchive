@@ -72,7 +72,7 @@
 
 <template>
     <div class="content-page">
-        <div class="content-group">
+        <div class="content-widget" z-main>
             <div class="search-box">
                 <input class="search-input" v-model="word" @keyup.enter="fullTextSearch()"/>
                 <a class="search-button" @click="fullTextSearch()">全文检索</a>
@@ -89,7 +89,7 @@
                 </ul>
             </div>
         </div>
-        <div v-if="searchWord.length > 0" class="content-group">
+        <div v-if="searchWord.length > 0" class="content-widget" z-main>
             <div class="search-statistics">
                 <div class="title">
                     “{{ searchWord }}”的检索结果

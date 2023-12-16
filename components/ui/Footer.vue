@@ -19,9 +19,7 @@
 
 <template>
     <footer class="z-footer">
-        <client-only>
-            <p>茶馆已营业 {{ time.day }} 天 {{ time.hour }} 时 {{ time.minute }} 分 {{ time.second }} 秒</p>
-        </client-only>
+        <p>茶馆已营业 {{ time.day }} 天 {{ time.hour }} 时 {{ time.minute }} 分 {{ time.second }} 秒</p>
         <p class="icp">
             <span>Copyright © 2022-2023 By KazariEX</span>｜<nuxt-link class="icp" href="https://icp.gov.moe/?keyword=20230904" target="_blank">萌ICP备20230904号</nuxt-link>
         </p>

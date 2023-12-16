@@ -1,5 +1,5 @@
 <template>
-    <div class="content-group">
+    <div class="content-widget" z-main>
         <nuxt-page />
     </div>
 </template>

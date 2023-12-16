@@ -82,7 +82,7 @@ body {
     font-family: "Microsoft Yahei UI", "Microsoft Yahei";
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
-    text-size-adjust: auto;
+    text-size-adjust: 100%;
     color: var(--color-text);
 }
 
@@ -125,9 +125,12 @@ blockquote {
 }
 
 code {
-    padding: 2px 4px;
+    padding: 1px 4px;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
-    background-color: color-mix(in srgb, var(--color-tab-background), transparent 33%);
+    box-decoration-break: clone;
+    background-color: color-mix(in srgb, var(--color-tab-background), transparent 66%);
+    font-family: consolas;
     color: var(--color-theme-text);
 }
 
@@ -184,6 +187,7 @@ textarea {
 
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -197,9 +201,12 @@ textarea {
     background-color: var(--color-theme-block-dark);
 }
 
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-    appearance: none;
+[type="number"] {
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        appearance: none;
+    }
 }
 
 /* ---------------------------------------------------------------- */
@@ -211,13 +218,20 @@ textarea {
     gap: 32px;
 }
 
-/* 通用内容组 */
-.content-group {
-    padding: 32px;
+/* 通用内容部件 */
+.content-widget {
     border: var(--border-theme-group);
     border-radius: 16px;
     box-shadow: var(--box-shadow);
     background-color: var(--color-background-alpha);
+
+    &[z-main] {
+        padding: 32px;
+
+        @media (width < 1024px) {
+            padding: 16px;
+        }
+    }
 }
 
 /* 通用内容盒 */

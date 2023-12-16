@@ -174,7 +174,7 @@
 </script>
 
 <template>
-    <div class="home-calendar">
+    <div class="content-widget home-calendar">
         <div class="calendar-wrapper">
             <div class="calendar-header">
                 <span class="calendar-month">{{ state.month + 1 }}° {{ monthMap[state.month][0] }}</span>

@@ -36,7 +36,7 @@
 </script>
 
 <template>
-    <div v-if="isExist" class="content-group">
+    <div v-if="isExist" class="content-widget" z-main>
         <component :is="template" :data="data"/>
     </div>
     <Unknown v-else />

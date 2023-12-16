@@ -18,7 +18,7 @@
 </script>
 
 <template>
-    <div class="content-group">
+    <div class="content-widget" z-main>
         <p class="text-center">你访问了一个不存在的页面！将在 {{ time }} 秒后<nuxt-link :to="{ name: `home` }">返回主页</nuxt-link>。</p>
     </div>
 </template>

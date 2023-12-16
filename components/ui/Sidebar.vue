@@ -91,13 +91,11 @@
 
 <template>
     <aside class="z-sidebar" :hidden="!display">
-        <client-only>
-            <ul class="clock-table">
-                <li v-for="i in 6" class="clock-item" :style="{ translate: clocks[i - 1].translate }" @click="exchange(i - 1)">
-                    <span>{{ getTime(i - 1) }}</span>
-                </li>
-            </ul>
-        </client-only>
+        <ul class="clock-table">
+            <li v-for="i in 6" class="clock-item" :style="{ translate: clocks[i - 1].translate }" @click="exchange(i - 1)">
+                <span>{{ getTime(i - 1) }}</span>
+            </li>
+        </ul>
         <slot></slot>
     </aside>
 </template>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="content-group">
+    <div class="content-widget" z-main>
         <div class="navbox-wrapper">
             <table class="chanrina-table">
                 <tbody>

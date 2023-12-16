@@ -8,7 +8,7 @@
 </script>
 
 <template>
-    <div class="content-group">
+    <div class="content-widget" z-main>
         <div class="friend-list">
             <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.href" target="_blank">
                 <div class="friend-avatar-wrapper">

@@ -20,7 +20,7 @@
 </script>
 
 <template>
-    <nav class="novel-catalog">
+    <nav class="content-widget novel-catalog">
         <select class="catalog-volume" v-model="currentVolume">
             <option v-for="(v, i) in jNovel.volume" :value="i">{{ v.title }}</option>
         </select>
@@ -38,10 +38,6 @@
         flex: 1;
         flex-direction: column;
         overflow: auto;
-        border: var(--border-theme-group);
-        border-radius: 16px;
-        box-shadow: var(--box-shadow);
-        background-color: var(--color-background-alpha);
     }
 
     .catalog-volume {

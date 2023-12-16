@@ -157,7 +157,7 @@
         </teleport>
     </client-only>
     <div class="content-page">
-        <div class="content-group">
+        <div class="content-widget" z-main>
             <header class="novel-header">
                 <nuxt-link class="novel-wrap-top" :class="toLastClass" :to="toLastChapter">
                     <i class="fas fa-chevron-left"></i>

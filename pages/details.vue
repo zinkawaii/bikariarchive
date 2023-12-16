@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <div class="content-group">
+    <div class="content-widget" z-main>
         <div v-for="block in jEntry.blocks" class="detail-block">
             <div class="detail-header">
                 <nuxt-img class="detail-image" :src="block.icon"/>

@@ -34,7 +34,7 @@
 </script>
 
 <template>
-    <div class="content-group">
+    <div class="content-widget" z-main>
         <div class="catalogue-wrapper">
             <fieldset class="catalogue-novel">
                 <legend class="content-h2">书单</legend>

@@ -22,7 +22,7 @@
 </script>
 
 <template>
-    <div class="home-blank">
+    <div class="content-widget home-blank">
         <div>空白板</div>
         <textarea :placeholder="serifs[i]"></textarea>
     </div>

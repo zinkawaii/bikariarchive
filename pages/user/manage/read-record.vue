@@ -100,7 +100,7 @@
 </script>
 
 <template>
-    <div class="content-group">
+    <div class="content-widget" z-main>
         <div class="manage-flex">
             <div v-for="item, index in que.list">
                 <form class="manage-form" :name="item.title">
