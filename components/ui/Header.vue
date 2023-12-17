@@ -3,12 +3,7 @@
     const word = ref("");
 
     function search() {
-        router.push({
-            name: "search",
-            query: {
-                word: word.value
-            }
-        });
+        router.push(toSearch(word.value));
         word.value = "";
     }
 </script>

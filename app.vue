@@ -15,12 +15,8 @@
         }
 
         //夜间模式
-        settingStore.listen("dark-mode", (value) => {
-            const mode = {
-                1: false,
-                2: true
-            }[value] ?? (Zin.period === Zin.PERIOD_NIGHT);
-            document.documentElement.toggleAttribute("z-dark", mode);
+        settingStore.listen("dark-mode", () => {
+            document.documentElement.toggleAttribute("z-dark", settingStore.isDarkMode);
         }, {
             viewTransition: true
         });

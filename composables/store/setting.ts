@@ -13,6 +13,12 @@ export const useSettingStore = defineStore("setting", () => {
         "ui-collapse": false
     });
 
+    //是否为夜间模式
+    const isDarkMode = computed(() => ({
+        1: false,
+        2: true
+    }[setting.value["dark-mode"]] ?? (Zin.period === Zin.PERIOD_NIGHT)));
+
     function get(key: string) {
         return setting.value[key];
     }
@@ -59,6 +65,7 @@ export const useSettingStore = defineStore("setting", () => {
 
     return {
         setting,
+        isDarkMode,
         isOpen,
         get,
         set,

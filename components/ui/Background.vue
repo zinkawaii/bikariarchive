@@ -1,21 +1,19 @@
 <script setup>
     const settingStore = useSettingStore();
-    const bgName = ref();
+    const type = ref();
 
-    settingStore.listen("dark-mode", (value) => {
-        const isDay = Zin.period === Zin.PERIOD_DAY;
-        bgName.value = {
-            0: isDay ? "day" : "dark",
-            1: isDay ? "day" : "night",
-            2: "dark"
-        }[value ?? 0];
+    settingStore.listen("dark-mode", () => {
+        type.value = settingStore.isDarkMode ?
+            "dark" : Zin.period === Zin.PERIOD_DAY ?
+            "day" :
+            "night";
     }, {
         viewTransition: true
     });
 </script>
 
 <template>
-    <div class="z-background" :style="{ backgroundImage: `url(/garden/background/bg_${bgName}.webp)` }"></div>
+    <div class="z-background" :style="{ backgroundImage: `url(/garden/background/bg_${type}.webp)` }"></div>
 </template>
 
 <style lang="scss" scoped>

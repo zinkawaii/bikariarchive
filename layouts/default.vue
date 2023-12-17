@@ -18,6 +18,7 @@
     <mb-image-viewer />
     <mb-confirm />
     <mb-fps />
+    <z-context-menu />
     <z-loader />
 </template>
 
@@ -81,6 +82,10 @@
 
     .mb-fps {
         z-index: 768;
+    }
+
+    .z-context-menu {
+        z-index: 1024;
     }
 
     .z-loader {
