@@ -81,15 +81,27 @@
         margin: auto;
     }
 
-    .entry-section {
-        overflow: auto;
-        margin-top: 8px;
-
-        > h2 {
+    .entry-article {
+        h2 {
             margin-bottom: 8px;
             padding-bottom: 8px;
             border-bottom: 1px solid var(--color-border);
         }
+
+        h3 {
+            margin-top: 4px;
+            padding: 4px 0 0 19px;
+            line-height: 26px;
+
+            &::before {
+                content: "· ";
+            }
+        }
+    }
+
+    .entry-section {
+        overflow: auto;
+        margin-top: 8px;
     }
 
     .entry-known {
@@ -100,13 +112,6 @@
         > li {
             list-style-type: disc;
         }
-    }
-
-    .entry-relation {
-        display: grid;
-        grid: auto / repeat(auto-fill, minmax(min(216px, 100%), 1fr));
-        grid-gap: 16px;
-        margin-top: 16px;
     }
 
     @media (width < 768px) {

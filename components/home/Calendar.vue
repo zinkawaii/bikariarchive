@@ -217,10 +217,7 @@
                     <div class="title">关键人物</div>
                     <div v-if="currentDate.event?.heroine" class="calendar-heroine">
                         <div class="heroine-wrapper">
-                            <nuxt-link v-for="heroine in currentDate.event.heroine" :to="`/${heroine}`">
-                                <nuxt-img :src="`/garden/icon/${heroine}.png`" placeholder="/garden/icon/unknown.png"/>
-                                <span>{{ heroine }}</span>
-                            </nuxt-link>
+                            <character-tag v-for="heroine in currentDate.event.heroine" :name="heroine" />
                         </div>
                     </div>
                     <span v-else class="none">No Character.</span>
@@ -396,28 +393,6 @@
         display: flex;
         gap: 8px;
         margin: auto;
-
-        > a {
-            display: flex;
-            align-items: center;
-            padding-right: 8px;
-            border: 1px solid var(--color-theme-block-dark);
-            border-radius: 16px;
-            background-color: var(--color-background);
-            color: var(--color-theme-text);
-        }
-
-        img {
-            width: 28px;
-            height: 28px;
-            margin: 2px;
-            border-radius: 100%;
-        }
-
-        span {
-            padding-inline: 5px;
-            text-wrap: nowrap;
-        }
     }
 
     .calendar-hitokoto {

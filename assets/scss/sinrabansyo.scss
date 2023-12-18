@@ -11,8 +11,8 @@
     --color-border-dark       : rgb(51 51 51); /* 边框色-深 */
     --color-background        : rgb(248 248 248); /* 背景色 */
     --color-background-alpha  : rgb(248 248 248 / 88%); /* 背景色-透明 */
-    --color-tab-background    : rgb(216 216 216); /* 标签背景色 */
-    --color-tab-text          : rgb(96 93 90); /* 标签文本色 */
+    --color-tag-background    : rgb(216 216 216); /* 标签背景色 */
+    --color-tag-text          : rgb(96 93 90); /* 标签文本色 */
     --color-theme-text        : hsl(var(--theme-hue) 53% 67%); /* 文本色-高亮 */
     --color-theme-block       : hsl(var(--theme-hue) 100% 90%); /* 填充色 */
     --color-theme-block-light : hsl(var(--theme-hue) 100% 97.5%); /* 填充色-浅 */
@@ -45,8 +45,8 @@
     --color-border-dark       : rgb(216 216 216); /* 边框色-深 */
     --color-background        : rgb(48 48 48); /* 背景色 */
     --color-background-alpha  : rgb(48 48 48 / 88%); /* 背景色-透明 */
-    --color-tab-background    : rgb(88 88 88); /* 标签背景色 */
-    --color-tab-text          : rgb(196 193 190); /* 标签文本色 */
+    --color-tag-background    : rgb(88 88 88); /* 标签背景色 */
+    --color-tag-text          : rgb(196 193 190); /* 标签文本色 */
     --color-theme-text        : hsl(var(--theme-hue) 75% 66%); /* 文本色-高亮 */
     --color-theme-block       : hsl(var(--theme-hue) 66% 45%); /* 填充色 */
     --color-theme-block-light : hsl(var(--theme-hue) 66% 53%); /* 填充色-浅 */
@@ -129,7 +129,7 @@ code {
     border: 1px solid var(--color-border);
     border-radius: 4px;
     box-decoration-break: clone;
-    background-color: color-mix(in srgb, var(--color-tab-background), transparent 66%);
+    background-color: color-mix(in srgb, var(--color-tag-background), transparent 66%);
     font-family: consolas;
     color: var(--color-theme-text);
 }
@@ -290,9 +290,9 @@ textarea {
     line-height: 24px;
 }
 
-.tab {
-    background-color: var(--color-tab-background);
-    color: var(--color-tab-text);
+.tag {
+    background-color: var(--color-tag-background);
+    color: var(--color-tag-text);
 
     &:is(a):hover {
         color: var(--color-theme-text);

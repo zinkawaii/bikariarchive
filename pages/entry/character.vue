@@ -35,25 +35,25 @@
         <section class="entry-section">
             <h2>能力</h2>
             <template v-if="data.talent?.length > 0">
-                <div v-for="item in data.talent" class="talent-block">
+                <div v-for="item in data.talent">
                     <div class="talent-header">
                         <template v-if="item.type === `超能力`">
-                            <h3>· {{ item.name.zh }}</h3>
+                            <h3>{{ item.name.zh }}</h3>
                             <div>
                                 <nuxt-link
                                     v-for="cls in item.class"
-                                    class="tab talent-tab"
+                                    class="tag talent-tag"
                                     :to="toEntry(`${cls}系`)"
                                 >{{ cls }}</nuxt-link>
                                 <nuxt-link
-                                    class="tab talent-tab"
+                                    class="tag talent-tag"
                                     :to="toEntry(`能力评级`)"
                                 >Star {{ item.star }}</nuxt-link>
-                                <span class="tab talent-tab">{{ item.name.en }}</span>
+                                <span class="tag talent-tag">{{ item.name.en }}</span>
                             </div>
                         </template>
                         <template v-else>
-                            <h3>· {{ item.name }}</h3>
+                            <h3>{{ item.name }}</h3>
                         </template>
                     </div>
                     <p v-for="text in toSplit(item.content)" v-html="text"></p>
@@ -62,72 +62,30 @@
             <p v-else>未知。</p>
         </section>
         <section v-if="data.relationship?.length > 0" class="entry-section">
-            <h2>人物关系</h2>
-            <div class="entry-relation">
-                <div v-for="item in data.relationship" class="relation-wrapper">
-                    <nuxt-img
-                        class="relation-icon"
-                        :src="`/garden/icon/${item.name}.png`"
-                        placeholder="/garden/icon/unknown.png"
-                    />
-                    <div>
-                        <nuxt-link class="relation-name" :to="toEntry(item.name)">{{ item.name }}</nuxt-link>
-                        <span class="relation-sub">{{ item.relation }}</span>
-                    </div>
+            <h2>人际关系</h2>
+            <div v-for="item in data.relationship">
+                <div class="relation-header">
+                    <h3><character-tag :name="item.name"/></h3>
+                    <span class="relation-ship">：{{ item.relation }}</span>
                 </div>
+                <p>{{ item.description }}</p>
             </div>
         </section>
     </article>
 </template>
 
 <style lang="scss" scoped>
-    .talent-block {
-        margin-top: 4px;
-        padding-top: 4px;
-    }
-
-    .talent-header {
+    .talent-header, .relation-header {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         overflow: hidden;
         text-wrap: nowrap;
-
-        > h3 {
-            line-height: 26px;
-            text-indent: 19px;
-        }
     }
 
-    .talent-tab {
+    .talent-tag {
         margin-left: 6px;
         padding: 2px 8px;
         border-radius: 4px;
         font-size: 13px;
-    }
-
-    .relation-wrapper {
-        display: flex;
-        gap: 16px;
-        padding: 16px;
-        border: 1px solid var(--color-border-light);
-        border-left: 16px solid var(--color-theme-block);
-        background-color: var(--color-background);
-    }
-
-    .relation-icon {
-        width: 64px;
-        height: 64px;
-        filter: drop-shadow(4px 4px 6px rgb(0 0 0 / 24%));
-        z-index: 0;
-    }
-
-    .relation-name {
-        display: block;
-    }
-
-    .relation-sub {
-        font-size: 14px;
-        line-height: 24px;
-        color: var(--color-gray);
     }
 </style>

@@ -84,7 +84,7 @@
                 </div>
                 <ul v-if="history.length > 0" class="history-list">
                     <li v-for="item in history">
-                        <a class="tab" @click="clickHistory(item)">{{ item }}</a>
+                        <a class="tag" @click="clickHistory(item)">{{ item }}</a>
                     </li>
                 </ul>
             </div>
