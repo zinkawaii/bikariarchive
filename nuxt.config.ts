@@ -50,7 +50,8 @@ export default defineNuxtConfig({
         viewTransition: true
     },
     vue: {
-        runtimeCompiler: true
+        runtimeCompiler: true,
+        defineModel: true
     },
     devServer: {
         https: {

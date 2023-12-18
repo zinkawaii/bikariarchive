@@ -239,19 +239,21 @@
         <div class="namae-option">
             <span>数量</span>
             <div class="namae-radio">
-                <label v-for="item in counter.list">
-                    <input type="radio" :value="item" v-model="counter.current"/>
-                    <span>{{ item }}</span>
-                </label>
+                <mb-radio
+                    v-for="item in counter.list"
+                    :value="item"
+                    v-model="counter.current"
+                >{{ item }}</mb-radio>
             </div>
         </div>
         <div class="namae-option">
             <span>性别</span>
             <div class="namae-radio">
-                <label v-for="item in gender.list">
-                    <input type="radio" :value="item.value" v-model="gender.current"/>
-                    <span>{{ item.title }}</span>
-                </label>
+                <mb-radio
+                    v-for="item in gender.list"
+                    :value="item.value"
+                    v-model="gender.current"
+                >{{ item.title }}</mb-radio>
             </div>
         </div>
         <div class="namae-option">
@@ -313,11 +315,9 @@
 
     .namae-radio {
         display: flex;
-        gap: 16px;
 
         > label {
-            display: inline-block;
-            min-width: 40px;
+            min-width: 4.5em;
         }
     }
 
