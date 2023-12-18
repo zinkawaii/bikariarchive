@@ -1,16 +1,16 @@
 export const useSignerStore = defineStore("signer", {
     state: () => ({
-        state: false
+        isOpened: false
     }),
     actions: {
         open() {
-            this.state = true;
+            this.isOpened = true;
         },
         close() {
-            this.state = false;
+            this.isOpened = false;
         },
         toggle(state: boolean) {
-            this.state = state ?? !this.state;
+            this.isOpened = state ?? !this.isOpened;
         }
     }
 });

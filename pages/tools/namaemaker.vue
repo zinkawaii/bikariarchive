@@ -259,14 +259,10 @@
         <div class="namae-option">
             <span>指定</span>
             <div class="namae-specific">
-                <div>
-                    <input type="text" placeholder="姓" v-model="specific.last.kanji"/>
-                    <input type="text" placeholder="姓（读音）" v-model="specific.last.kana"/>
-                </div>
-                <div>
-                    <input type="text" placeholder="名" v-model="specific.first.kanji"/>
-                    <input type="text" placeholder="名（读音）" v-model="specific.first.kana"/>
-                </div>
+                <input type="text" placeholder="姓" v-model="specific.last.kanji"/>
+                <input type="text" placeholder="姓（读音）" v-model="specific.last.kana"/>
+                <input type="text" placeholder="名" v-model="specific.first.kanji"/>
+                <input type="text" placeholder="名（读音）" v-model="specific.first.kana"/>
             </div>
         </div>
         <div class="namae-operator">
@@ -298,10 +294,10 @@
 
     .namae-option {
         display: flex;
-        gap: 22px;
+        gap: 1.6em;
 
         & + & {
-            margin-top: 8px;
+            margin-top: 0.6em;
         }
 
         > span {
@@ -322,20 +318,12 @@
     }
 
     .namae-specific {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-
-        > div {
-            display: flex;
-            gap: 16px;
-        }
+        display: grid;
+        grid-template: repeat(2, 1fr) / repeat(2, minmax(auto, 128px));
+        gap: 0.5em 1em;
 
         input {
-            width: 100%;
-            max-width: 128px;
             padding-bottom: 2px;
-            border: 0;
             border-bottom: 1px solid var(--color-border);
             background: transparent;
         }
@@ -349,10 +337,8 @@
         margin-top: 16px;
     }
 
-    .namae-col {
-        dt, dd {
-            width: 50%;
-        }
+    .namae-col :is(dt, dd) {
+        width: 50%;
     }
 
     @container main (width < 768px) {

@@ -40,7 +40,7 @@
 
 <template>
     <transition name="scale">
-        <div v-if="signerStore.state" class="user-sign">
+        <div v-if="signerStore.isOpened" class="user-sign">
             <div class="sign-innerworld"></div>
             <div class="sign-wrapper">
                 <transition name="fade" mode="out-in">
@@ -78,7 +78,7 @@
             <i class="fas fa-xmark xmark" @click="signerStore.close"></i>
         </div>
     </transition>
-    <mb-mask :when="signerStore.state" @click="signerStore.close"/>
+    <mb-mask :when="signerStore.isOpened" @click="signerStore.close"/>
 </template>
 
 <style lang="scss" scoped>

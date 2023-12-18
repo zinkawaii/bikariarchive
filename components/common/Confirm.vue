@@ -3,7 +3,7 @@
 
     //键盘监听
     useEventListener("keyup", (event) => {
-        if (confirmStore.isShow) {
+        if (confirmStore.isOpened) {
             switch (event.key) {
                 case "Escape":
                     return res(false);
@@ -21,7 +21,7 @@
 
 <template>
     <transition name="slide-fade">
-        <div v-if="confirmStore.isShow" class="mb-confirm">
+        <div v-if="confirmStore.isOpened" class="mb-confirm">
             <div class="confirm-content">{{ confirmStore.content }}</div>
             <div class="confirm-button-group">
                 <a class="btn" @click="res(false)">取消</a>
@@ -29,7 +29,7 @@
             </div>
         </div>
     </transition>
-    <mb-mask :when="confirmStore.isShow" @click="res(false)"/>
+    <mb-mask :when="confirmStore.isOpened" @click="res(false)"/>
 </template>
 
 <style lang="scss" scoped>

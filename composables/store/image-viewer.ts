@@ -1,15 +1,15 @@
 export const useImageViewerStore = defineStore("image-viewer", {
     state: () => ({
-        state: false,
+        isOpened: false,
         target: null
     }),
     actions: {
         open(target: HTMLImageElement) {
-            this.state = true;
+            this.isOpened = true;
             this.target = target;
         },
         close() {
-            this.state = false;
+            this.isOpened = false;
         }
     }
 });

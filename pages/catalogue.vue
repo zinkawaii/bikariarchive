@@ -82,9 +82,7 @@
         gap: 16px;
     }
 
-    .catalogue-novel,
-    .catalogue-volume,
-    .catalogue-chapter {
+    :where(.catalogue-novel, .catalogue-volume, .catalogue-chapter) {
         padding: 8px 16px 16px;
         border: 1px solid var(--color-border);
         border-radius: 4px;
@@ -95,7 +93,6 @@
 
         li {
             display: flex;
-            justify-content: center;
             border: 1px solid transparent;
             border-radius: 4px;
             text-align: center;
@@ -116,13 +113,16 @@
     }
 
     .catalogue-novel {
-        display: flex;
-        flex-direction: column;
-        width: 144px;
+        width: 136px;
+
+        > ul {
+            display: grid;
+            gap: 4px;
+        }
 
         a {
             position: relative;
-            line-height: 36px;
+            line-height: 28px;
 
             &.checked {
                 &::before {

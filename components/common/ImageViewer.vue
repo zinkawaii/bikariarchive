@@ -33,13 +33,13 @@
 
     //按下ESC键关闭
     useEventListener("keydown", (event) => {
-        if (imageViewerStore.state && event.key === "Escape") {
+        if (imageViewerStore.isOpened && event.key === "Escape") {
             closeViewer();
         }
     });
 
     //打开时
-    watch(() => imageViewerStore.state, (state) => {
+    watch(() => imageViewerStore.isOpened, (state) => {
         if (!state) return;
 
         //起始位置
@@ -110,7 +110,7 @@
 
     //鼠标移动时
     useEventListener("mousemove", Zin.throttle((event) => {
-        if (imageViewerStore.state && isPressing && event.button === 0) {
+        if (imageViewerStore.isOpened && isPressing && event.button === 0) {
             $img.value.animate({
                 top: imageY - mouseY + event.pageY + "px",
                 left: imageX - mouseX + event.pageX + "px"
@@ -149,7 +149,7 @@
 <template>
     <transition name="move">
         <nuxt-img
-            v-if="imageViewerStore.state"
+            v-if="imageViewerStore.isOpened"
             ref="$v"
             class="mb-image-viewer"
             :src="$i.src"
@@ -158,7 +158,7 @@
             @mousewheel.prevent="onMouseWheel"
         />
     </transition>
-    <mb-mask :when="imageViewerStore.state" @click="closeViewer" @mousewheel.prevent/>
+    <mb-mask :when="imageViewerStore.isOpened" @click="closeViewer" @mousewheel.prevent/>
 </template>
 
 <style lang="scss" scoped>

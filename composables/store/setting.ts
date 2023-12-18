@@ -1,7 +1,7 @@
 import type { WatchCallback, WatchOptions } from "vue";
 
 export const useSettingStore = defineStore("setting", () => {
-    const isOpen = ref(false);
+    const isOpened = ref(false);
     const setting = ref({
         "theme": 2,
         "dark-mode": 0,
@@ -55,18 +55,18 @@ export const useSettingStore = defineStore("setting", () => {
 
     //打开设置
     function open() {
-        isOpen.value = true;
+        isOpened.value = true;
     }
 
     //关闭设置
     function close() {
-        isOpen.value = false;
+        isOpened.value = false;
     }
 
     return {
+        isOpened,
         setting,
         isDarkMode,
-        isOpen,
         get,
         set,
         toggle,

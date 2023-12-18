@@ -57,14 +57,9 @@ export default defineCustomHandler(async (event) => {
                 const line = position[0].line;
 
                 //前后文
-                const parts = [];
-                if (line > 0) {
-                    parts.push(lines.eq(line - 1).html());
-                }
-                parts.push(lines.eq(line).html());
-                if (line + 1 < lines.length) {
-                    parts.push(lines.eq(line + 1).html());
-                }
+                const start = Math.max(line - 1, 0);
+                const end = Math.min(line + 2, lines.length);
+                const parts = [...new Array(end - start)].map((_, i) => lines.eq(i + start).html());
 
                 res.results.push({
                     index: art.index,

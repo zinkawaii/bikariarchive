@@ -45,7 +45,7 @@
 
 <template>
     <transition name="slide-fade">
-        <div v-if="settingStore.isOpen" class="z-setting">
+        <div v-if="settingStore.isOpened" class="z-setting">
             <i class="fas fa-xmark xmark" @click="settingStore.close()"></i>
             <span class="content-h2 coco-title">全局设置</span>
             <mb-form title="主题颜色" type="select" name="theme" :list="[`初空`, `菖蒲`, `早樱`]"/>
@@ -53,10 +53,10 @@
             <mb-form title="边栏显隐" type="select" name="sidebar-display" :list="[`默认`, `显现`, `隐匿`]"/>
             <span class="content-h2 coco-title">快捷键设置</span>
             <div class="shortcut-box">
-                <mb-form v-for="(sc, name) in shortcuts" :title="sc.title" type="input">
+                <mb-form v-for="({ title, value }, name) in shortcuts" :title="title" type="input">
                     <input
                         class="input-line"
-                        :value="sc.value"
+                        :value="value"
                         @keypress.stop="onShortcutKeypress(name)"
                         @keyup.stop="onShortcutKeyup(name, $event)"
                     />
@@ -67,7 +67,7 @@
             <mb-form title="字体大小" type="select" name="font-size" :list="[`小`, `中`, `大`]"/>
         </div>
     </transition>
-    <mb-mask :when="settingStore.isOpen" @click="settingStore.close()"/>
+    <mb-mask :when="settingStore.isOpened" @click="settingStore.close()"/>
 </template>
 
 <style lang="scss" scoped>

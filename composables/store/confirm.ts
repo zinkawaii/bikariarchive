@@ -1,26 +1,20 @@
-export const useConfirmStore = defineStore("confirm", () => {
-    const content = ref("");
-    const isShow = ref(false);
-
-    let res = null;
-
-    function show(str: string) {
-        content.value = str;
-        isShow.value = true;
-        return new Promise((resolve) => {
-            res = resolve;
-        });
+export const useConfirmStore = defineStore("confirm", {
+    state: () => ({
+        content: "",
+        isOpened: false,
+        res: null
+    }),
+    actions: {
+        show(str: string) {
+            this.content = str;
+            this.isOpened = true;
+            return new Promise((resolve) => {
+                this.res = resolve;
+            });
+        },
+        hide(state: boolean) {
+            this.isOpened = false;
+            this.res(state);
+        }
     }
-
-    function hide(state: boolean) {
-        isShow.value = false;
-        res(state);
-    }
-
-    return {
-        content,
-        isShow,
-        show,
-        hide
-    };
 });
