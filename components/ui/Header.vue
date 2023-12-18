@@ -152,7 +152,7 @@
 
     .keyword {
         width: 160px;
-        padding: 0 8px;
+        padding-inline: 8px;
         line-height: 28px;
     }
 

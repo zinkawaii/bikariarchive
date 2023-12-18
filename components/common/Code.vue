@@ -56,7 +56,7 @@
     .code-header {
         display: flex;
         justify-content: space-between;
-        padding: 0 12px;
+        padding-inline: 12px;
         background: var(--color-theme-block);
         font-weight: bold;
         line-height: 28px;

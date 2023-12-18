@@ -298,9 +298,8 @@
     }
 
     .excalc-division {
-        width: 100%;
         height: 1px;
-        margin: 8px 0;
+        margin-block: 8px;
         background-color: var(--color-border);
     }
 

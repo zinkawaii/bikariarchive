@@ -230,7 +230,7 @@
     }
 
     .novel-text {
-        padding: 0 32px;
+        padding-inline: 32px;
         font-family: v-bind("fontFamily");
         font-size: v-bind("fontSize");
 
@@ -295,7 +295,7 @@
 
         > a {
             width: 40%;
-            padding: 16px 0;
+            padding-block: 16px;
             border-radius: 16px;
             box-shadow: var(--box-shadow);
             background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));

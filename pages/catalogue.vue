@@ -90,7 +90,7 @@
         border-radius: 4px;
 
         > legend {
-            padding: 0 8px;
+            padding-inline: 8px;
         }
 
         li {
@@ -152,7 +152,7 @@
                 white-space: nowrap;
 
                 > a {
-                    padding: 0 8px;
+                    padding-inline: 8px;
                 }
             }
         }
@@ -165,7 +165,7 @@
             display: flex;
             justify-content: space-between;
             gap: 8px;
-            padding: 0 8px;
+            padding-inline: 8px;
             line-height: 32px;
             color: var(--color-text);
 

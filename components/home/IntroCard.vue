@@ -74,14 +74,14 @@
         display: flex;
         gap: 12px;
         overflow: auto;
-        margin: 8px 0;
+        margin-block: 8px;
 
         &::-webkit-scrollbar {
             display: none;
         }
 
         > li {
-            padding: 0 12px;
+            padding-inline: 12px;
             border: 1px solid var(--color-border-light);
             border-radius: 12px;
             line-height: 24px;
@@ -95,16 +95,16 @@
     }
 
     .intro-record {
-        padding: 8px 0 0;
+        padding-top: 8px;
         border-top: 1px solid var(--color-border);
         text-align: center;
 
         a {
-            margin: 0 20px;
+            margin-inline: 20px;
             transition: all 0.2s;
 
             &:hover {
-                margin: 0 8px;
+                margin-inline: 8px;
             }
         }
     }

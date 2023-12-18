@@ -144,16 +144,15 @@ table {
     width: 100%;
 }
 
+th, td, dt, dd {
+    padding-inline: 6px;
+    line-height: 28px;
+}
+
 th, dt {
-    padding: 4px;
     background-color: var(--color-theme-block);
     font-weight: bold;
     text-align: center;
-}
-
-td, dd {
-    padding: 0 6px;
-    line-height: 26px;
 }
 
 ol, ul, menu {
@@ -280,7 +279,7 @@ textarea {
     dt, dd {
         float: left;
         overflow: hidden;
-        margin: 1px 0;
+        margin-block: 1px;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -347,7 +346,7 @@ textarea {
 /* 按钮 */
 .btn {
     display: inline-block;
-    padding: 0 12px;
+    padding-inline: 12px;
     border: 1px solid var(--color-theme-block-dark);
     border-radius: 3px;
     line-height: 2em;

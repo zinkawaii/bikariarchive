@@ -39,7 +39,7 @@
     .tab-item {
         overflow: hidden;
         height: 18px;
-        margin: 0 0 5px;
+        margin-bottom: 5px;
         padding: 0 12px 5px;
         font-size: 14px;
         line-height: 1.5;

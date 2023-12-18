@@ -143,7 +143,7 @@
     input {
         flex: 1;
         width: 100%;
-        padding: 4px 0;
+        padding-block: 4px;
         border: 1px solid var(--color-border);
         border-radius: 4px;
         text-align: center;

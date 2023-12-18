@@ -126,7 +126,7 @@
 
     .search-input {
         flex: 1;
-        padding: 0 12px;
+        padding-inline: 12px;
     }
 
     .search-button {
@@ -205,7 +205,7 @@
 
     .result-volume {
         display: inline-block;
-        padding: 4px 0;
+        padding-block: 4px;
         font-size: 15px;
         color: var(--color-gray);
     }

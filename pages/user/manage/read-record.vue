@@ -184,7 +184,7 @@
         --bg: var(--color-background);
 
         margin: -8px 0 8px;
-        padding: 8px 0;
+        padding-block: 8px;
         cursor: pointer;
 
         &::after {

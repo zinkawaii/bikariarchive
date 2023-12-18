@@ -66,7 +66,7 @@
 
     .friend-avatar {
         position: absolute;
-        margin: 4px 0;
+        margin-block: 4px;
         transition: all 0.4s;
         z-index: 1;
 
@@ -100,14 +100,14 @@
     .friend-info {
         flex: 1;
         overflow: hidden;
-        padding: 4px 8px 0 12px;
+        padding-inline: 12px 8px;
 
         .title {
-            margin: 0 0 4px;
-            padding: 0 0 4px;
+            margin-bottom: 4px;
             border-bottom: 1px solid var(--color-border-light);
             font-family: "腾祥沁圆简";
             font-size: 21px;
+            line-height: 35px;
         }
 
         .description {

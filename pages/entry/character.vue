@@ -82,8 +82,8 @@
 
 <style lang="scss" scoped>
     .talent-block {
-        margin: 4px 0 0;
-        padding: 4px 0 0;
+        margin-top: 4px;
+        padding-top: 4px;
     }
 
     .talent-header {
@@ -123,14 +123,11 @@
 
     .relation-name {
         display: block;
-        width: fit-content;
     }
 
     .relation-sub {
-        display: inline-block;
-        width: fit-content;
-        margin: 4px 0;
         font-size: 14px;
+        line-height: 24px;
         color: var(--color-gray);
     }
 </style>

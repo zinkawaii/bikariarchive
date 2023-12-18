@@ -40,7 +40,7 @@
         display: flex;
         overflow: hidden;
         height: 40px;
-        margin: 16px 0;
+        margin-block: 16px;
         border: 1px solid var(--color-border-dark);
         border-radius: 8px;
         background-color: var(--color-background);

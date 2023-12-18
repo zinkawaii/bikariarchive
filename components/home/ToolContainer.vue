@@ -53,7 +53,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            margin: 0 auto;
+            margin-inline: auto;
             transition: all 0.4s;
             translate: -50% -50%;
 

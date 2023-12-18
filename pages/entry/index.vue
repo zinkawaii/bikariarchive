@@ -65,7 +65,7 @@
     }
 
     .entry-brief {
-        margin: 8px 0 0;
+        margin-top: 8px;
 
         dt {
             width: 30%;
@@ -93,7 +93,7 @@
     }
 
     .entry-known {
-        padding: 0 0 0 32px;
+        padding-left: 32px;
         font-size: 14px;
         line-height: 26px;
 
@@ -106,7 +106,7 @@
         display: grid;
         grid: auto / repeat(auto-fill, minmax(min(216px, 100%), 1fr));
         grid-gap: 16px;
-        margin: 16px 0 0;
+        margin-top: 16px;
     }
 
     @media (width < 768px) {

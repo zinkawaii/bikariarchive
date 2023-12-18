@@ -271,13 +271,13 @@
 
         > div {
             display: flex;
-            margin: 16px 0 0;
+            align-items: center;
+            margin-top: 16px;
         }
     }
 
     .lyric-time {
         width: 54px;
-        margin: auto;
         text-align: center;
         color: var(--color-gray);
     }
@@ -317,8 +317,8 @@
         inset: 0;
 
         > article > p {
-            margin: 0 -8px;
-            padding: 0 8px;
+            margin-inline: -8px;
+            padding-inline: 8px;
             border-radius: 8px;
             font-size: 14px;
             line-height: 24px;

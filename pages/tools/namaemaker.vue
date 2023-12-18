@@ -334,7 +334,7 @@
         input {
             width: 100%;
             max-width: 128px;
-            padding: 0 0 2px;
+            padding-bottom: 2px;
             border: 0;
             border-bottom: 1px solid var(--color-border);
             background: transparent;

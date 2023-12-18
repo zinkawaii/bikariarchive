@@ -264,7 +264,7 @@
         line-height: 28px;
 
         > a {
-            padding: 0 12px;
+            padding-inline: 12px;
             color: var(--color-theme-text);
             transition: all 0.15s;
 
@@ -289,7 +289,7 @@
     }
 
     .calendar-week {
-        padding: 6px 0;
+        padding-block: 6px;
         border-bottom: 1px dashed var(--color-theme-block-dark);
     }
 

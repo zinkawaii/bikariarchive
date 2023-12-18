@@ -37,18 +37,16 @@
     <div class="space-header">
         <img class="space-icon" src="/garden/icon/default.png"/>
         <div class="space-title">
-            <div>
-                <span class="space-nickname">{{ userStore.nickname }}</span>
-            </div>
-            <input
-                class="space-sign"
-                placeholder="在这里输入你的个性签名……"
-                v-model="sign"
-                @focus="sign_old = sign"
-                @blur="signUpdate"
-                @keyup.enter="$event.target.blur()"
-            />
+            <span class="space-nickname">{{ userStore.nickname }}</span>
         </div>
+        <input
+            class="space-sign"
+            placeholder="在这里输入你的个性签名……"
+            v-model="sign"
+            @focus="sign_old = sign"
+            @blur="signUpdate"
+            @keyup.enter="$event.target.blur()"
+        />
     </div>
 </template>
 
@@ -56,11 +54,14 @@
     .space-header {
         --s: -32px;
 
-        display: flex;
-        margin: 0 0 var(--s);
+        display: grid;
+        grid-template:
+            "A B"
+            "A C" 1fr / auto 1fr;
+        gap: 3px 24px;
+        margin-bottom: var(--s);
         padding: 16px 32px;
-        border-bottom-right-radius: 16px;
-        border-bottom-left-radius: 16px;
+        border-radius: 0 0 16px 16px;
         box-shadow: var(--box-shadow);
         background-attachment: fixed;
         background-image: url("/garden/background/space_header.webp");
@@ -70,15 +71,14 @@
     }
 
     .space-icon {
-        display: inline-block;
+        grid-area: A;
         width: 64px;
         border: 3px solid rgb(255 255 255 / 50%);
         border-radius: 100%;
     }
 
     .space-title {
-        flex: 1;
-        margin: 6px 0 6px 24px;
+        margin-top: 8px;
     }
 
     .space-nickname {
@@ -91,8 +91,8 @@
     .space-sign {
         width: 100%;
         height: 25px;
-        margin: 4px 0 0 -4px;
-        padding: 0 0 0 4px;
+        margin-left: -4px;
+        padding-left: 4px;
         border: 0;
         border-radius: 4px;
         background-color: transparent;

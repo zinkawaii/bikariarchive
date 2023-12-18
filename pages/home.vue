@@ -190,7 +190,7 @@
         display: flex;
         justify-content: flex-end;
         gap: 8px;
-        padding: 0 8px;
+        padding-inline: 8px;
 
         a {
             display: flex;
