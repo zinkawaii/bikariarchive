@@ -102,29 +102,20 @@
 
 <style lang="scss" scoped>
     .z-sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        position: sticky;
-        top: 96px;
         width: 256px;
-        height: calc(100vh - 128px);
     }
 
     .clock-table {
         display: flex;
         gap: 6px;
         position: relative;
-        margin-bottom: -8px;
-        padding: 0 17px 20px;
+        margin-bottom: 34px;
+        padding-inline: 17px;
 
         &::before {
             content: "";
             position: absolute;
-            top: 24px;
-            left: 0;
-            width: 100%;
-            height: 34px;
+            inset: 24px 0 -10px;
             border-bottom: var(--border-theme-group);
             border-radius: 16px;
             box-shadow: var(--box-shadow);
@@ -199,7 +190,6 @@
 
     @media (width < 1024px) {
         .z-sidebar {
-            height: auto;
             margin: auto;
         }
     }

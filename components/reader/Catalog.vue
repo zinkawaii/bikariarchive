@@ -34,10 +34,19 @@
 
 <style lang="scss" scoped>
     .novel-catalog {
+        --p: 128px;
+
         display: flex;
         flex: 1;
         flex-direction: column;
+        position: sticky;
         overflow: auto;
+        top: 96px;
+        height: calc(100vh - var(--p));
+
+        @media (width < 1024px) {
+            --p: 96px;
+        }
     }
 
     .catalog-volume {
