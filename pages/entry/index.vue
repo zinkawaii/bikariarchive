@@ -67,12 +67,9 @@
     .entry-brief {
         margin-top: 8px;
 
-        dt {
-            width: 30%;
-        }
-
-        dd {
-            width: 70%;
+        dl {
+            --dt-fr: 0.3fr;
+            --dd-fr: 0.7fr;
         }
     }
 
@@ -114,7 +111,7 @@
         }
     }
 
-    @media (width < 768px) {
+    @container main (width < 768px) {
         .entry-main {
             flex-direction: column;
         }

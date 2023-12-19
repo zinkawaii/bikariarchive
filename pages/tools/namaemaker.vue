@@ -337,10 +337,6 @@
         margin-top: 16px;
     }
 
-    .namae-col :is(dt, dd) {
-        width: 50%;
-    }
-
     @container main (width < 768px) {
         .namae-result {
             flex-direction: column;

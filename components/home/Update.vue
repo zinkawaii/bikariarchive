@@ -18,7 +18,7 @@
             <li v-for="item in jUpdated" class="update-item">
                 <nuxt-link class="update-title" :to="`/book/bikari/${item.index}`">{{ item.title }}</nuxt-link>
                 <div class="update-info">
-                    <span class="text-ellipsis">{{ jVolume[item.volume].title }}</span>
+                    <span class="text-truncate">{{ jVolume[item.volume].title }}</span>
                     <time>{{ item.date }}</time>
                 </div>
             </li>
