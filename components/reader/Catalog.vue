@@ -65,7 +65,7 @@
 
         &::-webkit-scrollbar-thumb {
             border: 0;
-            background-color: var(--color-theme-block);
+            background-color: var(--color-theme);
         }
 
         > li {
@@ -88,7 +88,7 @@
         }
 
         &.router-link-active {
-            background-color: var(--color-theme-block);
+            background-color: var(--color-theme);
             color: white;
         }
     }

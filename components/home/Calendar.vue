@@ -257,7 +257,7 @@
         display: grid;
         grid-template-columns: auto 1fr auto auto;
         border-radius: 12px;
-        background-color: var(--color-theme-block);
+        background-color: var(--color-theme);
         line-height: 28px;
 
         > a {
@@ -287,7 +287,7 @@
 
     .calendar-week {
         padding-block: 6px;
-        border-bottom: 1px dashed var(--color-theme-block-dark);
+        border-bottom: 1px dashed var(--color-theme-dark);
     }
 
     .calendar-date {
@@ -302,7 +302,7 @@
             color: var(--color-text);
 
             &:hover {
-                box-shadow: 0 0 0 1px var(--color-theme-block-dark) inset;
+                box-shadow: 0 0 0 1px var(--color-theme-dark) inset;
             }
 
             &.sub {
@@ -316,7 +316,7 @@
             }
 
             &.selected {
-                background: var(--color-theme-block-dark);
+                background: var(--color-theme-dark);
                 font-weight: bold;
                 color: white;
             }
@@ -332,7 +332,7 @@
         display: flex;
         flex-direction: column;
         padding: 16px;
-        border: 6px dashed var(--color-theme-block-dark);
+        border: 6px dashed var(--color-theme-dark);
         border-radius: 16px;
         text-align: center;
         transition: filter 0.2s;
@@ -371,7 +371,7 @@
         > i {
             padding-inline: 4px;
             font-size: 12px;
-            color: var(--color-theme-block-dark);
+            color: var(--color-theme-dark);
 
             &:nth-of-type(1) {
                 translate: 0 -3px;
@@ -404,8 +404,8 @@
                 to bottom,
                 transparent 0,
                 transparent $h - 1px,
-                var(--color-theme-block) 0,
-                var(--color-theme-block-dark) $h
+                var(--color-theme) 0,
+                var(--color-theme-dark) $h
             );
         line-height: $h;
         white-space: pre-line;

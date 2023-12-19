@@ -160,7 +160,7 @@
         user-select: none;
 
         &:hover {
-            background-color: var(--color-theme-block);
+            background-color: var(--color-theme);
             color: white;
         }
     }

@@ -57,7 +57,7 @@
         display: flex;
         justify-content: space-between;
         padding-inline: 12px;
-        background: var(--color-theme-block);
+        background: var(--color-theme);
         font-weight: bold;
         line-height: 28px;
         color: var(--color-theme-text);

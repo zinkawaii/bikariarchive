@@ -16,7 +16,7 @@
         display: inline-flex;
         align-items: center;
         padding-right: 8px;
-        border: 1px solid var(--color-theme-block-dark);
+        border: 1px solid var(--color-theme-dark);
         border-radius: 16px;
         background-color: var(--color-background);
         font-size: 14px;

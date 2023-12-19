@@ -60,7 +60,7 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        border-block: 16px solid var(--color-theme-block);
+        border-block: 16px solid var(--color-theme);
     }
 
     .nav-item {

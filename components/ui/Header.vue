@@ -158,7 +158,7 @@
 
     .search {
         width: 48px;
-        background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));
+        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
         color: white;
     }
 

@@ -154,7 +154,7 @@
             width: calc(100% + 6px);
             height: 3px;
             border-radius: 3px;
-            background-color: var(--color-theme-block-dark);
+            background-color: var(--color-theme-dark);
         }
     }
 
@@ -248,7 +248,7 @@
             display: block;
             width: 0;
             height: 1px;
-            background-color: var(--color-theme-block-dark);
+            background-color: var(--color-theme-dark);
             transition: all 0.4s;
         }
     }

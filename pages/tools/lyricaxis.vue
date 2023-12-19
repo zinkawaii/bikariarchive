@@ -333,7 +333,7 @@
             }
 
             &:hover {
-                background-color: var(--color-theme-block-light);
+                background-color: var(--color-theme-light);
             }
         }
 

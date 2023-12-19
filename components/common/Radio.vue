@@ -26,7 +26,7 @@
         border: 1px solid var(--color-border);
         border-radius: 100%;
         background-clip: content-box;
-        background-color: var(--color-theme-block-dark);
+        background-color: var(--color-theme-dark);
         transition: all 0.1s;
         appearance: none;
         cursor: pointer;

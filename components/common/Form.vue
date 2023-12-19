@@ -74,7 +74,7 @@
             opacity: 0;
             width: 75%;
             height: 3px;
-            background-color: var(--color-theme-block);
+            background-color: var(--color-theme);
             transform: scale(1, 0);
             transform-origin: bottom;
             transition: all 0.2s ease-out;

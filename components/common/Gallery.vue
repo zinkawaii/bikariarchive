@@ -12,14 +12,12 @@
         <div class="gallery-illustration">
             <slot></slot>
         </div>
-        <table class="navbox-table gallery-illustrator">
-            <tbody>
-                <tr>
-                    <th>画师</th>
-                    <td>{{ illustrator }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="div-table gallery-illustrator">
+            <dl>
+                <dt>画师</dt>
+                <dd>{{ illustrator }}</dd>
+            </dl>
+        </div>
     </div>
 </template>
 
@@ -30,11 +28,10 @@
     }
 
     .gallery-illustrator {
-        margin-top: 8px;
-        text-align: center;
+        --dt-fr: 0.6fr;
 
-        > th {
-            width: 40%;
-        }
+        margin-top: 8px;
+        font-size: 1rem;
+        text-align: center;
     }
 </style>

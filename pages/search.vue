@@ -133,7 +133,7 @@
         display: flex;
         align-items: center;
         padding-inline: 16px 18px;
-        background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));
+        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
         text-shadow: var(--text-shadow);
         color: white;
     }
@@ -158,6 +158,7 @@
     }
 
     .history-item {
+        display: block;
         max-width: 112px;
         padding: 4px 8px;
         border-radius: 4px;
@@ -191,7 +192,7 @@
 
         &:hover {
             border-color: var(--color-border-light);
-            border-left-color: var(--color-theme-block);
+            border-left-color: var(--color-theme);
             background-color: var(--color-background);
         }
     }

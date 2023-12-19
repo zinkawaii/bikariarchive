@@ -81,7 +81,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            border: 1px solid var(--color-theme-block-dark);
+            border: 1px solid var(--color-theme-dark);
             rotate: 45deg;
             scale: 0.7;
         }
@@ -91,7 +91,7 @@
         position: absolute;
         width: 51px;
         height: 51px;
-        border: 3px solid var(--color-theme-block);
+        border: 3px solid var(--color-theme);
         transition: translate 0.4s, rotate 0.4s;
         rotate: 45deg;
         translate: 24px 14px;

@@ -197,7 +197,7 @@
         }
 
         &.active {
-            --bg: var(--color-theme-block);
+            --bg: var(--color-theme);
         }
     }
 

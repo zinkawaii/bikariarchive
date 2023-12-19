@@ -58,7 +58,7 @@
             margin: 0 0 -1px;
             padding: 3px 12px 6px;
             border: 1px solid var(--color-border-light);
-            border-top: 4px solid var(--color-theme-block);
+            border-top: 4px solid var(--color-theme);
             border-bottom: 0;
             background-color: var(--color-background);
             z-index: 1;

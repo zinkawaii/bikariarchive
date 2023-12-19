@@ -127,7 +127,7 @@
         width: 74px;
         height: 74px;
         margin-left: 8px;
-        background-color: var(--color-theme-block-dark);
+        background-color: var(--color-theme-dark);
         mask-image: url("/garden/QRCode_Site.svg");
         mask-size: cover;
     }
@@ -201,7 +201,7 @@
             border: 1px solid var(--color-border-light);
             border-radius: 4px;
             font-size: 16px;
-            color: var(--color-theme-block-dark);
+            color: var(--color-theme-dark);
         }
     }
 

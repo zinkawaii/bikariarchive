@@ -77,7 +77,7 @@
         display: block;
         position: absolute;
         inset: 0;
-        background-color: var(--color-theme-block);
+        background-color: var(--color-theme);
         transform: scaleX(0);
         transform-origin: left;
     }

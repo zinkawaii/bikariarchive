@@ -98,7 +98,7 @@
             text-align: center;
 
             &:hover {
-                border-color: var(--color-theme-block-dark);
+                border-color: var(--color-theme-dark);
             }
         }
 

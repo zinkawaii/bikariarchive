@@ -41,7 +41,7 @@
         padding: 16px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
-        background: linear-gradient(to left, var(--color-theme-block), var(--color-theme-block-dark));
+        background: linear-gradient(to left, var(--color-theme), var(--color-theme-dark));
         color: white;
         transition: all 0.4s;
 
@@ -56,7 +56,7 @@
             font-size: 18px;
             font-weight: bold;
             line-height: 28px;
-            text-shadow: 2px 2px 0 var(--color-theme-block-dark);
+            text-shadow: 2px 2px 0 var(--color-theme-dark);
         }
 
         &:not(.router-link-active, :hover) {
@@ -80,7 +80,7 @@
 
         tr {
             &:nth-child(even) > th {
-                background-color: var(--color-theme-block-light);
+                background-color: var(--color-theme-light);
             }
 
             &.v-enter-active,

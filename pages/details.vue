@@ -69,7 +69,7 @@
         gap: 8px;
         padding: 16px 24px 12px;
         border: 1px solid var(--color-border-light);
-        border-left: 32px solid var(--color-theme-block);
+        border-left: 32px solid var(--color-theme);
         background-color: var(--color-background);
         font-weight: bold;
     }

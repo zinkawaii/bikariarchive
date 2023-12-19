@@ -40,7 +40,7 @@
         height: fit-content;
         margin: auto;
         padding: 1em;
-        border: 2px solid var(--color-theme-block-dark);
+        border: 2px solid var(--color-theme-dark);
         border-radius: 8px;
         background-color: var(--color-background-alpha);
         font-size: 14px;

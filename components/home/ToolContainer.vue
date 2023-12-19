@@ -38,7 +38,7 @@
         height: 64px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
-        background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));
+        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

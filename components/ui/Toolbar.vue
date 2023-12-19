@@ -64,7 +64,7 @@
         aspect-ratio: 1;
         border-radius: 6px;
         box-shadow: var(--box-shadow);
-        background-color: var(--color-theme-block-dark);
+        background-color: var(--color-theme-dark);
         pointer-events: auto;
 
         &:hover {

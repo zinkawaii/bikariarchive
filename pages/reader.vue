@@ -298,7 +298,7 @@
             padding-block: 16px;
             border-radius: 16px;
             box-shadow: var(--box-shadow);
-            background: linear-gradient(to right, var(--color-theme-block), var(--color-theme-block-dark));
+            background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
             font-weight: bold;
             text-align: center;
             text-shadow: var(--text-shadow);
