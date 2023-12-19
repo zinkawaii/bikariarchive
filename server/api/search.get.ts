@@ -18,9 +18,12 @@ export default defineCustomHandler(async (event) => {
         error: 0,
         results: []
     };
-    const { word } = getQueryValues(event);
+    let { word } = getQueryValues(event);
 
     if (word && word.length > 0) {
+        //限制长度
+        word = word.slice(0, 64);
+
         const jNovel = jArticle.bikari;
         const jChapter = jNovel.chapter;
 

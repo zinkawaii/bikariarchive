@@ -16,16 +16,16 @@
     const fullTextSearch = Zin.debounce(async (w = word.value) => {
         if (!(w?.length > 0)) return;
 
+        //限制长度
+        w = w.slice(0, 64);
+
         const { data } = await useFetch("/api/search", { query: { word: w } });
 
         results.value.length = 0;
         searchWord.value = w;
         router.replace({ query: { word: w } });
 
-        const {
-            error,
-            results: res
-        } = data.value;
+        const { error, results: res } = data.value;
         if (error !== 0) return;
 
         const art = new Article();
@@ -57,9 +57,9 @@
     });
 
     //点击历史词条
-    function clickHistory(historyWord) {
-        word.value = historyWord;
-        fullTextSearch(historyWord);
+    function clickHistory(value) {
+        word.value = value;
+        fullTextSearch(value);
     }
 
     //总出现次数
@@ -80,11 +80,11 @@
             <div class="search-history">
                 <div class="history-title">
                     <span>历史词条</span>
-                    <i class="fas fa-trash-can history-clear" @click="searchHistoryStore.clear()"></i>
+                    <i class="fas fa-trash-can cursor-pointer" @click="searchHistoryStore.clear()"></i>
                 </div>
                 <ul v-if="history.length > 0" class="history-list">
                     <li v-for="item in history">
-                        <a class="tag" @click="clickHistory(item)">{{ item }}</a>
+                        <a class="tag text-truncate history-item" @click="clickHistory(item)">{{ item }}</a>
                     </li>
                 </ul>
             </div>
@@ -149,21 +149,18 @@
         justify-content: space-between;
     }
 
-    .history-clear {
-        cursor: pointer;
-    }
-
     .history-list {
         display: flex;
         flex-wrap: wrap;
         gap: 16px 8px;
         margin-top: 8px;
+        font-size: 14px;
+    }
 
-        > li > a {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 14px;
-        }
+    .history-item {
+        max-width: 112px;
+        padding: 4px 8px;
+        border-radius: 4px;
     }
 
     .search-statistics {
