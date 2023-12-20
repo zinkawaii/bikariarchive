@@ -74,7 +74,7 @@
     <div class="content-page">
         <div class="content-widget" z-main>
             <div class="search-box">
-                <input class="search-input" v-model="word" @keyup.enter="fullTextSearch()"/>
+                <input class="search-input" type="search" v-model="word" @keyup.enter="fullTextSearch()"/>
                 <a class="search-button" @click="fullTextSearch()">全文检索</a>
             </div>
             <div class="search-history">
@@ -187,7 +187,6 @@
         border: 1px solid transparent;
         border-left-width: 16px;
         border-radius: 8px;
-        color: inherit;
         transition: all 0.2s;
 
         &:hover {

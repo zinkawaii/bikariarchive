@@ -299,7 +299,6 @@
             position: relative;
             width: 46px;
             padding: 4px;
-            color: var(--color-text);
 
             &:hover {
                 box-shadow: 0 0 0 1px var(--color-theme-dark) inset;

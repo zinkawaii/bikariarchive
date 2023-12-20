@@ -84,7 +84,9 @@
     padding: 0;
     border: 0;
     outline: none;
-    font: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 *, ::before, ::after {
@@ -121,7 +123,7 @@ p {
 
 a {
     text-decoration: none;
-    color: var(--color-link);
+    color: inherit;
     cursor: pointer;
 }
 
@@ -226,6 +228,10 @@ textarea {
     }
 }
 
+[type="search"]::-webkit-search-cancel-button {
+    appearance: none;
+}
+
 /* ---------------------------------------------------------------- */
 
 /* 通用内容页 */
@@ -269,19 +275,6 @@ textarea {
     font-family: "腾祥沁圆简";
     font-size: 20px;
     line-height: 26px;
-}
-
-.coco-title {
-    display: inline-block;
-    margin-bottom: 4px;
-
-    &::after {
-        content: "";
-        display: block;
-        margin: -9px -4px 0;
-        padding: 5px;
-        background-color: var(--color-theme);
-    }
 }
 
 .div-table {

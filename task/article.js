@@ -21,7 +21,7 @@ marked.use({
             if (!href.startsWith("/")) {
                 extra = `target="_blank" rel="noopener noreferrer nofollow"`;
             }
-            return `<a href="${href}" ${title ? `title=${title}` : ""} ${extra}>${text}</a>`;
+            return `<a class="coco-link" href="${href}" ${title ? `title=${title}` : ""} ${extra}>${text}</a>`;
         },
         text(text) {
             return text.replaceAll("\n", "");

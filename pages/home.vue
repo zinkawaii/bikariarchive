@@ -56,7 +56,7 @@
                 <p>
                     <i class="home-qrcode"></i>
                     <span class="content-h2">欢迎来到微光茶馆！</span><br />
-                    这里是我（山吹色御守）的个人网站，主要用于发布小说正文，所有文章均可在<nuxt-link :to="{ name: `catalogue` }">目录页</nuxt-link>索引并浏览。<nuxt-link :to="{ name: `details` }">情报页</nuxt-link>整理并展示了目前部分可以公开的设定。<nuxt-link :to="{ name: `search` }">检索页</nuxt-link>可在全文范围内对特定关键词进行检索。
+                    这里是我（山吹色御守）的个人网站，主要用于发布小说正文，所有文章均可在<coco-link :to="{ name: `catalogue` }">目录页</coco-link>索引并浏览。<coco-link :to="{ name: `details` }">情报页</coco-link>整理并展示了目前部分可以公开的设定。<coco-link :to="{ name: `search` }">检索页</coco-link>可在全文范围内对特定关键词进行检索。
                 </p>
             </div>
             <div class="home-introduction">
@@ -80,11 +80,11 @@
                         </tr>
                         <tr>
                             <th>个人群</th>
-                            <td><nuxt-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</nuxt-link></td>
+                            <td><coco-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</coco-link></td>
                         </tr>
                         <tr>
                             <th>读者群</th>
-                            <td><nuxt-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</nuxt-link></td>
+                            <td><coco-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</coco-link></td>
                         </tr>
                     </tbody>
                 </table>

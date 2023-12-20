@@ -40,7 +40,7 @@
             </nuxt-link>
         </nav>
         <form class="search-wrapper" @submit.prevent="search">
-            <input class="keyword" placeholder="输入关键词..." v-model="word"/>
+            <input class="keyword" type="search" placeholder="输入关键词..." v-model="word"/>
             <button class="search">
                 <i class="fas fa-search"></i>
             </button>

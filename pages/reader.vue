@@ -182,8 +182,8 @@
             <footer class="novel-footer">
                 <p v-if="art.endding" class="novel-endding">THE END</p>
                 <div class="novel-copyright">
-                    <p><span class="meta">本章作者</span><nuxt-link :to="{ name: `home` }">{{ state.author }}</nuxt-link></p>
-                    <p><span class="meta">本章链接</span><nuxt-link :to="route.path">https://{{ config.public.domain + route.path }}</nuxt-link></p>
+                    <p><span class="meta">本章作者</span><coco-link :to="{ name: `home` }">{{ state.author }}</coco-link></p>
+                    <p><span class="meta">本章链接</span><coco-link :to="route.path">https://{{ config.public.domain + route.path }}</coco-link></p>
                     <p><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></p>
                 </div>
             </footer>

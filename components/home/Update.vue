@@ -13,10 +13,10 @@
 
 <template>
     <div class="content-widget home-update">
-        <span class="content-h2 coco-title">更新历史</span>
+        <coco-title>更新历史</coco-title>
         <ul class="update-list">
             <li v-for="item in jUpdated" class="update-item">
-                <nuxt-link class="update-title" :to="`/book/bikari/${item.index}`">{{ item.title }}</nuxt-link>
+                <coco-link class="update-title" :to="`/book/bikari/${item.index}`">{{ item.title }}</coco-link>
                 <div class="update-info">
                     <span class="text-truncate">{{ jVolume[item.volume].title }}</span>
                     <time>{{ item.date }}</time>

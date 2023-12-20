@@ -19,8 +19,8 @@
                 <template v-for="element in jBorrowing.list">
                     <tr v-for="(item, i) in element.items">
                         <th v-if="i === 0" :rowspan="element.items.length">{{ element.title }}</th>
-                        <td><nuxt-link :to="item.src.link" target="_blank">{{ item.src.name }}</nuxt-link></td>
-                        <td><nuxt-link :to="item.creator.link" target="_blank">{{ item.creator.name }}</nuxt-link></td>
+                        <td><coco-link :to="item.src.link" target="_blank">{{ item.src.name }}</coco-link></td>
+                        <td><coco-link :to="item.creator.link" target="_blank">{{ item.creator.name }}</coco-link></td>
                     </tr>
                 </template>
             </tbody>

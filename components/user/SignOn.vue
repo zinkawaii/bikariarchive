@@ -171,7 +171,7 @@
         <span class="sign-placeholder" :class="{ warn: tip.nickname }">{{ tip.nickname || "昵称" }}</span>
     </div>
     <div class="sign-single">
-        <input type="text" class="sign-input" required v-model="email" @blur="tip.email = ``"/>
+        <input type="email" class="sign-input" required v-model="email" @blur="tip.email = ``"/>
         <div class="sign-underline"></div>
         <span class="sign-placeholder" :class="{ warn: tip.email }">{{ tip.email || "电子邮箱" }}</span>
     </div>

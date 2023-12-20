@@ -104,7 +104,6 @@
 
         a {
             flex: 1;
-            color: var(--color-text);
 
             &.checked {
                 color: var(--color-theme-text);
@@ -167,7 +166,6 @@
             gap: 8px;
             padding-inline: 8px;
             line-height: 32px;
-            color: var(--color-text);
 
             .title {
                 flex: 1;

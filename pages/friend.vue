@@ -42,7 +42,6 @@
             0 0 2px inset var(--color-border);
         background-clip: padding-box;
         background-color: var(--color-background);
-        color: var(--color-text);
 
         &:hover {
             color: var(--color-theme-text);

@@ -65,14 +65,11 @@
         border-radius: 6px;
         box-shadow: var(--box-shadow);
         background-color: var(--color-theme-dark);
+        color: white;
         pointer-events: auto;
 
         &:hover {
             background-color: var(--color-gray);
-        }
-
-        > i {
-            color: white;
         }
     }
 </style>

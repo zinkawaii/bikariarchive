@@ -42,7 +42,7 @@
         </div>
         <div class="intro-record">
             <span class="front">&gt;</span>
-            <nuxt-link :to="record.link">{{ record.title }}</nuxt-link>
+            <coco-link :to="record.link">{{ record.title }}</coco-link>
             <span class="rear">&lt;</span>
         </div>
     </div>

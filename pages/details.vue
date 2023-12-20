@@ -31,14 +31,14 @@
                                     <th>{{ z.title }}</th>
                                     <td>
                                         <span v-for="title in z.children" class="detail-link">
-                                            <nuxt-link
+                                            <coco-link
                                                 v-if="(typeof title) === `object`"
                                                 :to="toEntry(title[0])"
-                                            >{{ title[1] }}</nuxt-link>
-                                            <nuxt-link
+                                            >{{ title[1] }}</coco-link>
+                                            <coco-link
                                                 v-else
                                                 :to="toEntry(title)"
-                                            >{{ title }}</nuxt-link>
+                                            >{{ title }}</coco-link>
                                         </span>
                                     </td>
                                 </tr>
