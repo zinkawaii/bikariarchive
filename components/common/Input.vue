@@ -143,9 +143,9 @@
     input {
         flex: 1;
         width: 100%;
-        padding-block: 4px;
         border: 1px solid var(--color-border);
         border-radius: 4px;
+        line-height: 28px;
         text-align: center;
     }
 </style>

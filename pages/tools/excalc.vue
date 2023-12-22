@@ -220,7 +220,7 @@
         </div>
     </div>
     <div class="excalc-bottom">
-        <div>
+        <div class="excalc-tools">
             <a class="btn" @click="addBuki">添加武器</a>
         </div>
         <div class="navbox-wrapper">
@@ -255,6 +255,10 @@
         gap: 32px;
     }
 
+    .btn {
+        line-height: 28px;
+    }
+
     .excalc-power {
         max-width: 512px;
     }
@@ -264,12 +268,6 @@
         padding: 3px;
         border: 1px solid var(--color-border);
         border-radius: 4px;
-    }
-
-    .excalc-param-handlers {
-        > .btn {
-            line-height: 28px;
-        }
     }
 
     .excalc-label {
@@ -304,10 +302,17 @@
     }
 
     .excalc-bottom {
-        display: flex;
-        flex-direction: column;
+        display: grid;
         gap: 16px;
-        margin-top: -32px;
+        margin-top: -30px;
+    }
+
+    .excalc-tools {
+        pointer-events: none;
+
+        > .btn {
+            pointer-events: auto;
+        }
     }
 
     .excalc-table {
@@ -320,7 +325,6 @@
 
     .excalc-delete {
         width: 58px;
-        line-height: 28px;
     }
 
     @media (width <= 544px) {

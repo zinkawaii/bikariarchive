@@ -316,11 +316,10 @@
         overflow: auto;
         inset: 0;
 
-        > article > p {
+        p {
             margin-inline: -8px;
             padding-inline: 8px;
             border-radius: 8px;
-            font-size: 14px;
             line-height: 24px;
             user-select: none;
 

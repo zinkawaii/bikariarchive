@@ -1,10 +1,4 @@
 <script setup>
-    useHead({
-        titleTemplate: (title) => {
-            return title ? `${title} - 微光茶馆` : "微光茶馆";
-        }
-    });
-
     //浏览器环境下
     if (process.browser) {
         const settingStore = useSettingStore();

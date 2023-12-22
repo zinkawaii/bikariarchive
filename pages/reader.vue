@@ -77,7 +77,7 @@
     const toLastClass = { invisible: art.isFirst };
     const toLastChapter = art.isFirst ? {} : {
         params: {
-            index: art.getLastIndex()
+            index: art.lastIndex
         }
     };
 
@@ -85,7 +85,7 @@
     const toNextClass = { invisible: art.isLast };
     const toNextChapter = art.isLast ? {} : {
         params: {
-            index: art.getNextIndex()
+            index: art.nextIndex
         }
     };
 
@@ -180,7 +180,7 @@
             </article>
             <article v-else class="novel-text" v-html="state.content"></article>
             <footer class="novel-footer">
-                <p v-if="art.endding" class="novel-endding">THE END</p>
+                <p v-if="art.ending" class="novel-endding">THE END</p>
                 <div class="novel-copyright">
                     <p><span class="meta">本章作者</span><coco-link :to="{ name: `home` }">{{ state.author }}</coco-link></p>
                     <p><span class="meta">本章链接</span><coco-link :to="route.path">https://{{ config.public.domain + route.path }}</coco-link></p>

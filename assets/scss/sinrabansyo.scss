@@ -84,9 +84,7 @@
     padding: 0;
     border: 0;
     outline: none;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
+    font: inherit;
 }
 
 *, ::before, ::after {
@@ -266,7 +264,6 @@ textarea {
     font-size: 14px;
 
     p {
-        font-size: 14px;
         line-height: 24px;
     }
 }

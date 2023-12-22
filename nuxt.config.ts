@@ -5,9 +5,6 @@ import robotsConfig from "./app/robots.config";
 export default defineNuxtConfig({
     app: {
         head: {
-            htmlAttrs: {
-                lang: "zh-CN"
-            },
             charset: "utf-8",
             viewport: "width=device-width, initial-scale=1",
             link: [
@@ -16,7 +13,11 @@ export default defineNuxtConfig({
             meta: [
                 { "http-equiv": "Cache-Control", content: "no-siteapp" },
                 { "http-equiv": "X-UA-Compatible", content: "IE=edge, chrome=1" }
-            ]
+            ],
+            titleTemplate: "%s %separator %siteName",
+            templateParams: {
+                separator: "-"
+            }
         }
     },
     components: [
@@ -68,6 +69,7 @@ export default defineNuxtConfig({
         ["nuxt-simple-robots", robotsConfig],
         "nuxt-site-config",
         "@nuxt/image",
+        "@nuxtseo/module",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
         "@vueuse/nuxt"
@@ -75,6 +77,7 @@ export default defineNuxtConfig({
     site: {
         name: "微光茶馆",
         url: `https://${clientConfig.domain}`,
+        defaultLocale: "zh-CN",
         indexable: true
     }
 });
