@@ -1,4 +1,5 @@
 <script setup>
+    const route = useRoute();
     const settingStore = useSettingStore();
     const timerStore = useTimerStore();
 
@@ -44,7 +45,7 @@
         let r;
         do {
             r = Zin.randInt(0, 5);
-        } while (r === clocks.value[i].seat);
+        } while (r === i);
 
         const a = clocks.value[i];
         const b = clocks.value[r];
@@ -96,7 +97,25 @@
                 <span>{{ getTime(i - 1) }}</span>
             </li>
         </ul>
-        <slot></slot>
+        <aside-widget class="aside-profile">
+            <nuxt-img class="aside-avatar" :src="$config.public.avatar"/>
+            <span class="aside-author">{{ $config.public.author }}</span>
+            <p class="p-small">うたかたなしあわせ</p>
+        </aside-widget>
+        <aside-widget title="公告" icon="bullhorn">
+            <p class="p-small">
+                欢迎来到<span class="text-primary">微光茶馆</span>！(｡･ ω&lt;)ゞ♡<br />
+                小说正在缓慢更新中……
+            </p>
+        </aside-widget>
+        <div class="aside-sticky">
+            <aside-catalog v-if="route.name === `reader`"/>
+            <aside-widget class="aside-update" title="最近更新" icon="clock-rotate-left">
+                <ul class="update-list">
+                    <recent-article type="blog" :limit="5"/>
+                </ul>
+            </aside-widget>
+        </div>
     </aside>
 </template>
 
@@ -105,11 +124,37 @@
         width: 256px;
     }
 
+    .aside-profile {
+        display: grid;
+        justify-items: center;
+    }
+
+    .aside-avatar {
+        width: 96px;
+        border-radius: 24px;
+        box-shadow: var(--box-shadow);
+    }
+
+    .aside-author {
+        padding-block: 12px 4px;
+        font-family: "腾祥沁圆简";
+        font-size: 21px;
+    }
+
+    .aside-sticky {
+        position: sticky;
+        top: 80px;
+    }
+
+    .aside-update {
+        font-size: 14px;
+    }
+
     .clock-table {
         display: flex;
         gap: 6px;
         position: relative;
-        margin-bottom: 34px;
+        margin-bottom: 24px;
         padding-inline: 17px;
 
         &::before {

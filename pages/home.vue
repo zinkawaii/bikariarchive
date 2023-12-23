@@ -6,11 +6,6 @@
         link: { rel: "canonical", href: "https://bikariarchive.xyz" }
     });
 
-    const author = {
-        name: "山吹色御守",
-        avatar: "/garden/avatar/tsumugi.webp"
-    };
-
     const intro = ref({
         status: 0,
         novel: [...Object.keys(jArticle)],
@@ -56,7 +51,7 @@
                 <p>
                     <i class="home-qrcode"></i>
                     <span class="content-h2">欢迎来到微光茶馆！</span><br />
-                    这里是我（山吹色御守）的个人网站，主要用于发布小说正文，所有文章均可在<coco-link :to="{ name: `catalogue` }">目录页</coco-link>索引并浏览。<coco-link :to="{ name: `details` }">情报页</coco-link>整理并展示了目前部分可以公开的设定。<coco-link :to="{ name: `search` }">检索页</coco-link>可在全文范围内对特定关键词进行检索。
+                    这里是我的个人网站，主要用于发布小说正文，所有文章均可在<coco-link :to="{ name: `catalogue` }">目录页</coco-link>索引并浏览。<coco-link :to="{ name: `details` }">情报页</coco-link>整理并展示了目前部分可以公开的设定。<coco-link :to="{ name: `search` }">检索页</coco-link>可在全文范围内对特定关键词进行检索。
                 </p>
             </div>
             <div class="home-introduction">
@@ -70,13 +65,13 @@
             </div>
             <div class="content-table">
                 <a class="profile-avatar">
-                    <nuxt-img :src="author.avatar"/>
+                    <nuxt-img :src="$config.public.avatar"/>
                 </a>
                 <table class="profile-table">
                     <tbody>
                         <tr>
                             <th width="40%">作者</th>
-                            <td>{{ author.name }}</td>
+                            <td>{{ $config.public.author }}</td>
                         </tr>
                         <tr>
                             <th>个人群</th>

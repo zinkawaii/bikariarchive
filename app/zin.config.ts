@@ -35,7 +35,8 @@ const server = {
 
 const client = {
     global: {
-
+        author: "山吹色御守",
+        avatar: "/garden/avatar/tsumugi.webp"
     },
     development: {
         domain: "zinkawaii"

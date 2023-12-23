@@ -14,7 +14,6 @@
 </script>
 
 <script setup>
-    const config = useRuntimeConfig();
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();
     const route = useRoute();
@@ -43,8 +42,6 @@
     });
 
     const state = ref({
-        author: art.novelInfo.author,
-        title: art.title,
         readCount: 0,
         wordCount: 0,
         date: {
@@ -52,8 +49,7 @@
             value: "",
             tip: ""
         },
-        content: "",
-        currentVolume: art.volOrder
+        content: ""
     });
 
     //日期
@@ -151,11 +147,6 @@
 </script>
 
 <template>
-    <client-only>
-        <teleport to=".z-sidebar">
-            <reader-catalog :art="art"/>
-        </teleport>
-    </client-only>
     <div class="content-page">
         <div class="content-widget" z-main>
             <header class="novel-header">
@@ -164,7 +155,7 @@
                     <span>上一章</span>
                 </nuxt-link>
                 <div class="novel-title">
-                    <h1>{{ state.title }}</h1>
+                    <h1>{{ art.title }}</h1>
                     <div class="novel-information">
                         <span>{{ state.readCount }} 阅读 ／ {{ state.wordCount }} 字</span>
                         <span :title="state.date.tip">{{ state.date.type }}时间：<time>{{ state.date.value }}</time></span>
@@ -182,8 +173,8 @@
             <footer class="novel-footer">
                 <p v-if="art.ending" class="novel-endding">THE END</p>
                 <div class="novel-copyright">
-                    <p><span class="meta">本章作者</span><coco-link :to="{ name: `home` }">{{ state.author }}</coco-link></p>
-                    <p><span class="meta">本章链接</span><coco-link :to="route.path">https://{{ config.public.domain + route.path }}</coco-link></p>
+                    <p><span class="meta">本章作者</span><coco-link :to="{ name: `home` }">{{ art.novelInfo.author }}</coco-link></p>
+                    <p><span class="meta">本章链接</span><coco-link :to="route.path">https://{{ $config.public.domain + route.path }}</coco-link></p>
                     <p><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></p>
                 </div>
             </footer>
@@ -280,12 +271,10 @@
         align-items: center;
         font-weight: bolder;
         color: var(--color-theme-text);
-        cursor: pointer;
 
         > i {
             width: 1em;
             font-size: 42px;
-            translate: 0 2px;
         }
     }
 

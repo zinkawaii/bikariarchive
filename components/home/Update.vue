@@ -1,28 +1,7 @@
-<script setup>
-    import jArticle from "~/dist/json/Article.json";
-
-    const jNovel = jArticle.bikari;
-    const jVolume = jNovel.volume;
-    const jChapter = jNovel.chapter;
-
-    const jUpdated = jChapter
-    .filter((c) => Reflect.has(c, "date"))
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 10);
-</script>
-
 <template>
     <div class="content-widget home-update">
-        <coco-title>更新历史</coco-title>
-        <ul class="update-list">
-            <li v-for="item in jUpdated" class="update-item">
-                <coco-link class="update-title" :to="`/book/bikari/${item.index}`">{{ item.title }}</coco-link>
-                <div class="update-info">
-                    <span class="text-truncate">{{ jVolume[item.volume].title }}</span>
-                    <time>{{ item.date }}</time>
-                </div>
-            </li>
-        </ul>
+        <coco-title>历史章节</coco-title>
+        <recent-article type="novel" :limit="10"/>
     </div>
 </template>
 
@@ -33,31 +12,13 @@
         padding: 16px 32px;
     }
 
-    .update-item {
-        margin-bottom: 4px;
-        padding-bottom: 4px;
-        border-bottom: 1px solid var(--color-border-light);
-    }
-
-    .update-title {
-        line-height: 28px;
-    }
-
-    .update-info {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 8px;
-        font-size: 12px;
-        color: var(--color-gray);
-    }
-
     @container main (width < 596px) {
         .home-update {
             width: 100%;
             padding-inline: 16px;
         }
 
-        .update-list {
+        :deep(.recent-article) {
             display: grid;
             column-gap: 16px;
             grid-template-columns: 1fr 1fr;

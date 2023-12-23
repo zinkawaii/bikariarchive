@@ -1,11 +1,9 @@
 <script setup>
     const loading = ref(true);
 
-    if (process.browser) {
-        nextTick(() => {
-            loading.value = false;
-        });
-    }
+    nextTick(() => {
+        loading.value = false;
+    });
 </script>
 
 <template>
