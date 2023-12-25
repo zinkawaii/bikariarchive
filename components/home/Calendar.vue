@@ -179,8 +179,8 @@
             <div class="calendar-header">
                 <span class="calendar-month">{{ state.month + 1 }}° {{ monthMap[state.month][0] }}</span>
                 <span class="text-primary">「{{ monthMap[state.month][1] }}」</span>
-                <a :class="{ hidden: isFirstMonth }" @click="toLastMonth"><i class="fas fa-chevron-left"></i></a>
-                <a :class="{ hidden: isLastMonth }" @click="toNextMonth"><i class="fas fa-chevron-right"></i></a>
+                <a :class="{ hidden: isFirstMonth }" @click="toLastMonth"><fa-icon icon="chevron-left"/></a>
+                <a :class="{ hidden: isLastMonth }" @click="toNextMonth"><fa-icon icon="chevron-right"/></a>
             </div>
             <ul class="calendar-week">
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
@@ -207,9 +207,9 @@
                 <div class="calendar-section">
                     <div class="title">事件</div>
                     <div v-if="currentDate.event?.mono" class="calendar-event">
-                        <i class="fas fa-quote-left"></i>
+                        <fa-icon icon="quote-left"/>
                         <span>{{ currentDate.event.mono }}</span>
-                        <i class="fas fa-quote-right"></i>
+                        <fa-icon icon="quote-right"/>
                     </div>
                     <span v-else class="none">No Special.</span>
                 </div>
@@ -334,7 +334,6 @@
         border: 6px dashed var(--color-theme-dark);
         border-radius: 16px;
         text-align: center;
-        transition: filter 0.2s;
     }
 
     .calendar-detail-date {
@@ -367,8 +366,8 @@
     .calendar-event {
         line-height: 32px;
 
-        > i {
-            padding-inline: 4px;
+        > svg {
+            padding-inline: 3px;
             font-size: 12px;
             color: var(--color-theme-dark);
 
@@ -412,12 +411,9 @@
 
     .calendar-default {
         opacity: 0.5;
+        margin: auto;
         font-size: 48px;
         font-weight: bold;
         color: var(--color-gray);
-
-        .calendar-detail:has(&) {
-            justify-content: center;
-        }
     }
 </style>

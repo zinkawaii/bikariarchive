@@ -80,7 +80,7 @@
             <div class="search-history">
                 <div class="history-title">
                     <span>历史词条</span>
-                    <i class="fas fa-trash-can cursor-pointer" @click="searchHistoryStore.clear()"></i>
+                    <fa-icon class="cursor-pointer" icon="trash-can" @click="searchHistoryStore.clear()"/>
                 </div>
                 <ul v-if="history.length > 0" class="history-list">
                     <li v-for="item in history">

@@ -18,20 +18,20 @@
     <div class="z-toolbar">
         <div class="tool-list" :class="{ collapse }">
             <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
-                <i class="fas fa-subway"></i>
+                <fa-icon icon="subway"/>
             </nuxt-link>
             <a class="tool-item" @click="settingStore.open()">
-                <i class="fas fa-gear"></i>
+                <fa-icon icon="gear"/>
             </a>
             <a class="tool-item" @click="signerStore.toggle()">
-                <i class="fas fa-user"></i>
+                <fa-icon icon="user"/>
             </a>
             <a class="tool-item" @click="scrollToTop">
-                <i class="fas fa-arrow-up"></i>
+                <fa-icon icon="arrow-up"/>
             </a>
         </div>
         <a class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
-            <i :class="[`fas`, `fa-chevron-${collapse ? `left` : `right`}`]"></i>
+            <fa-icon :icon="`chevron-${collapse ? `left` : `right`}`"/>
         </a>
     </div>
 </template>
@@ -59,7 +59,7 @@
 
     .tool-item {
         display: grid;
-        align-items: center;
+        place-content: center;
         width: 36px;
         aspect-ratio: 1;
         border-radius: 6px;

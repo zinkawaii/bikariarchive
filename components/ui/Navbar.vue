@@ -7,25 +7,25 @@
         <ul class="nav-list">
             <li class="nav-item">
                 <nuxt-link :to="{ name: `home` }">
-                    <i class="fas fa-house"></i>
+                    <fa-icon icon="house"/>
                     <span>主页</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
                 <nuxt-link :to="{ name: `catalogue` }">
-                    <i class="fas fa-book-open"></i>
+                    <fa-icon icon="book-open"/>
                     <span>目录</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
                 <nuxt-link :to="{ name: `details` }">
-                    <i class="fas fa-sitemap"></i>
+                    <fa-icon icon="sitemap"/>
                     <span>情报</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
                 <nuxt-link :to="{ name: `search` }">
-                    <i class="fas fa-search"></i>
+                    <fa-icon icon="search"/>
                     <span>检索</span>
                 </nuxt-link>
             </li>
@@ -90,7 +90,7 @@
             border-bottom-right-radius: 0;
             color: var(--color-text);
 
-            > i {
+            > svg {
                 width: 48px;
                 font-size: 21px;
             }

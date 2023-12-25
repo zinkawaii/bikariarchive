@@ -13,7 +13,7 @@
                         <th>萌点</th>
                         <th>番剧</th>
                         <th width="96px">上映时间</th>
-                        <th width="32px"><i class="fas fa-link"></i></th>
+                        <th width="32px"><fa-icon icon="link"/></th>
                     </tr>
                     <tr v-for="{ name, special, link, bangumi, date } in jChanrina.characters">
                         <td>{{ name.zh }}</td>
@@ -21,7 +21,7 @@
                         <td>{{ special.join("、") || "--" }}</td>
                         <td>{{ bangumi }}</td>
                         <td>{{ date }}</td>
-                        <td><nuxt-link v-if="link" :to="link" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i></nuxt-link></td>
+                        <td><nuxt-link v-if="link" :to="link" target="_blank"><fa-icon icon="arrow-up-right-from-square"/></nuxt-link></td>
                     </tr>
                 </tbody>
             </table>

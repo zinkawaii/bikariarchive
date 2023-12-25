@@ -4,7 +4,7 @@
         const settingStore = useSettingStore();
 
         //移动端
-        if (window.innerWidth < Zin.MOBILE_SIZE_MAX) {
+        if (window.innerWidth < Zin.WINDOW_SIZE_MAX) {
             settingStore.set("ui-collapse", true);
         }
 

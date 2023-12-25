@@ -69,8 +69,8 @@
         animation:
             loader-shadow 2.6s ease 0s infinite forwards,
             loader-float 5s ease-in-out 0s infinite forwards;
-        z-index: 1;
         filter: blur(5px);
+        z-index: 1;
     }
 
     @keyframes loader-main {

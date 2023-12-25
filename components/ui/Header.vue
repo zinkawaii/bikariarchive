@@ -15,34 +15,34 @@
         </div>
         <nav class="nav-list">
             <nuxt-link :to="{ name: `home` }">
-                <i class="fas fa-house"></i>
+                <fa-icon icon="house"/>
                 <span>主页</span>
             </nuxt-link>
             <nuxt-link :to="{ name: `catalogue` }">
-                <i class="fas fa-book-open"></i>
+                <fa-icon icon="book-open"/>
                 <span>目录</span>
             </nuxt-link>
             <nuxt-link :to="{ name: `details` }">
-                <i class="fas fa-sitemap"></i>
+                <fa-icon icon="sitemap"/>
                 <span>情报</span>
             </nuxt-link>
             <nuxt-link :to="{ name: `friend` }">
-                <i class="fas fa-link"></i>
+                <fa-icon icon="link"/>
                 <span>友链</span>
             </nuxt-link>
             <nuxt-link :to="{ name: `borrowing` }">
-                <i class="fas fa-person-praying"></i>
+                <fa-icon icon="person-praying"/>
                 <span>借物表</span>
             </nuxt-link>
             <nuxt-link :to="{ name: `chanrina` }">
-                <i class="fas fa-torii-gate"></i>
+                <fa-icon icon="torii-gate"/>
                 <span>神殿</span>
             </nuxt-link>
         </nav>
         <form class="search-wrapper" @submit.prevent="search">
             <input class="keyword" type="search" placeholder="输入关键词..." v-model="word"/>
             <button class="search">
-                <i class="fas fa-search"></i>
+                <fa-icon icon="search"/>
             </button>
         </form>
     </header>
@@ -55,7 +55,7 @@
         position: sticky;
         top: 0;
         height: 64px;
-        min-width: var(--size-width-min-mobile);
+        min-width: var(--size-min-width);
         padding-inline: 16px;
         box-shadow: var(--box-shadow-dark);
         background:
@@ -112,17 +112,18 @@
 
         > a {
             display: grid;
-            place-content: center;
+            align-content: center;
+            justify-items: center;
             gap: 4px;
             width: $item-max;
-            text-shadow: var(--text-shadow);
             color: white;
+            filter: drop-shadow(var(--text-shadow));
 
-            > i {
+            > svg {
                 transition: translate 0.2s;
             }
 
-            &:hover > i {
+            &:hover > svg {
                 translate: 0 -4px;
             }
         }

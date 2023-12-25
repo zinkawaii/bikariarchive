@@ -151,7 +151,7 @@
         <div class="content-widget" z-main>
             <header class="novel-header">
                 <nuxt-link class="novel-wrap-top" :class="toLastClass" :to="toLastChapter">
-                    <i class="fas fa-chevron-left"></i>
+                    <fa-icon icon="chevron-left"/>
                     <span>上一章</span>
                 </nuxt-link>
                 <div class="novel-title">
@@ -163,7 +163,7 @@
                 </div>
                 <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
                     <span>下一章</span>
-                    <i class="fas fa-chevron-right"></i>
+                    <fa-icon icon="chevron-right"/>
                 </nuxt-link>
             </header>
             <article v-if="art.runtime" class="novel-text">
@@ -272,7 +272,7 @@
         font-weight: bolder;
         color: var(--color-theme-text);
 
-        > i {
+        > svg {
             width: 1em;
             font-size: 42px;
         }

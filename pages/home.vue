@@ -86,22 +86,22 @@
                 <ul class="profile-link">
                     <li>
                         <nuxt-link to="https://github.com/KazariEX" title="Github" target="_blank">
-                            <i class="fab fa-github"></i>
+                            <fa-icon icon="fab fa-github"/>
                         </nuxt-link>
                     </li>
                     <li>
                         <nuxt-link to="https://twitter.com/KazariEX_0929" title="Twitter" target="_blank">
-                            <i class="fab fa-twitter"></i>
+                            <fa-icon icon="fab fa-twitter"/>
                         </nuxt-link>
                     </li>
                     <li>
                         <nuxt-link to="https://space.bilibili.com/37810541" title="BiliBili" target="_blank">
-                            <i class="fab fa-bilibili"></i>
+                            <fa-icon icon="fab fa-bilibili"/>
                         </nuxt-link>
                     </li>
                     <li>
                         <nuxt-link to="/feed" title="RSS">
-                            <i class="fas fa-rss"></i>
+                            <fa-icon icon="rss"/>
                         </nuxt-link>
                     </li>
                 </ul>
@@ -121,7 +121,7 @@
         float: right;
         width: 74px;
         height: 74px;
-        margin-left: 8px;
+        margin-left: 4px;
         background-color: var(--color-theme-dark);
         mask-image: url("/garden/qrcode-site.svg");
         mask-size: cover;

@@ -7,9 +7,9 @@ const Zin = new class Z {
     };
 
     //视口宽度常量
-    MOBILE_SIZE_MAX = 1024;
-    MOBILE_SIZE_MID = 768;
-    MOBILE_SIZE_MIN = 425;
+    WINDOW_SIZE_MAX = 1024;
+    WINDOW_SIZE_MID = 768;
+    WINDOW_SIZE_MIN = 425;
 
     //时间段常量
     PERIOD_DAY = Symbol();

@@ -134,8 +134,8 @@
                     <td>{{ item.index }}</td>
                     <td>{{ item.user?.uid || "--" }}</td>
                     <td class="manage-operators">
-                        <a class="btn" @click="edit(item)"><i class="fas fa-pencil"></i></a>
-                        <a class="btn" @click="remove(item, index)"><i class="fas fa-trash-can"></i></a>
+                        <a class="btn" @click="edit(item)"><fa-icon icon="pencil"/></a>
+                        <a class="btn" @click="remove(item, index)"><fa-icon icon="trash-can"/></a>
                     </td>
                 </tr>
             </transition-group>

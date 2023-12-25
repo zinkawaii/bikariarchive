@@ -13,8 +13,8 @@
         position: fixed;
         inset: 0;
         background-image: v-bind("image");
-        background-repeat: no-repeat;
         background-position: center;
+        background-repeat: no-repeat;
         background-size: cover;
 
         [z-dark] & {

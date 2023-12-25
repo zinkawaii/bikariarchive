@@ -47,14 +47,14 @@
                     <div v-if="currentView === `login`">
                         <div class="sign-header">
                             <h2 class="sign-title">登录</h2>
-                            <a class="sign-have" @click="currentView = `logon`">没有账号？立即注册<i class="fas fa-chevron-right"></i></a>
+                            <a class="sign-have" @click="currentView = `logon`">没有账号？立即注册<fa-icon icon="chevron-right"/></a>
                         </div>
                         <user-sign-in />
                     </div>
                     <div v-else-if="currentView === `logon`">
                         <div class="sign-header">
                             <h2 class="sign-title">注册</h2>
-                            <a class="sign-have" @click="currentView = `login`">已有账号，前往登录<i class="fas fa-chevron-right"></i></a>
+                            <a class="sign-have" @click="currentView = `login`">已有账号，前往登录<fa-icon icon="chevron-right"/></a>
                         </div>
                         <user-sign-on @success="currentView.value = `login`"/>
                     </div>
@@ -75,7 +75,7 @@
                     </div>
                 </transition>
             </div>
-            <i class="fas fa-xmark xmark" @click="signerStore.close"></i>
+            <fa-icon class="xmark" icon="xmark" @click="signerStore.close"/>
         </div>
     </transition>
     <mb-mask :when="signerStore.isOpened" @click="signerStore.close"/>
@@ -116,10 +116,10 @@
     .sign-innerworld {
         flex: 0.75;
         box-shadow: var(--box-shadow);
-        mask-image: linear-gradient(to left, transparent, white);
         background-image: url("/garden/outerworld.webp");
         background-position: center 15%;
         background-size: cover;
+        mask-image: linear-gradient(to left, transparent, white);
 
         [z-dark] & {
             background-image: url("/garden/innerworld.webp");

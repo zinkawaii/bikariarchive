@@ -21,6 +21,7 @@
     <div class="home-tool-container">
         <nuxt-link v-for="link in links" class="home-tool" :to="link.href">
             <span>{{ link.title || "卖萌中……" }}</span>
+            <fa-icon icon="arrow-right"/>
         </nuxt-link>
     </div>
 </template>
@@ -33,19 +34,19 @@
     }
 
     .home-tool {
+        $shadow: 1px 1px 4px black;
+
         position: relative;
-        overflow: hidden;
         height: 64px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
         background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
-        background-repeat: no-repeat;
         background-position: center;
+        background-repeat: no-repeat;
         background-size: cover;
         font-family: "腾祥沁圆简";
         word-break: keep-all;
-        text-align: center;
-        text-shadow: black 1px 1px 4px;
+        text-shadow: $shadow;
         color: white;
 
         span {
@@ -53,7 +54,6 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            margin-inline: auto;
             transition: all 0.4s;
             translate: -50% -50%;
 
@@ -71,16 +71,14 @@
             }
         }
 
-        &::after {
-            content: "\f061";
-            display: block;
+        svg {
             position: absolute;
             opacity: 0;
             right: 8px;
             bottom: 4px;
-            font-family: "Font Awesome 6 Free";
             font-size: 24px;
             transition: all 0.4s;
+            filter: drop-shadow($shadow);
         }
 
         &:hover {
@@ -94,7 +92,7 @@
                 }
             }
 
-            &::after {
+            svg {
                 opacity: 0.8;
             }
         }

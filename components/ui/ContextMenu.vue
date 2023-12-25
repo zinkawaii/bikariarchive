@@ -120,18 +120,18 @@
     <div v-show="state" ref="$Menu" class="content-widget z-context-menu">
         <menu class="menu-tool-bar">
             <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
-                <i :class="[`fas`, `fa-${icon}`]"></i>
+                <fa-icon :icon="icon"/>
             </li>
         </menu>
         <menu v-if="textSelection.text.value" class="menu-list">
             <li v-for="{ title, icon, action } in textItems" class="menu-item" @click="action">
-                <i :class="[`fas`, `fa-${icon}`]"></i>
+                <fa-icon :icon="icon"/>
                 <span>{{ title }}</span>
             </li>
         </menu>
         <menu class="menu-list">
             <li v-for="{ title, icon, action } in menuItems" class="menu-item" @click="action">
-                <i :class="[`fas`, `fa-${icon}`]"></i>
+                <fa-icon :icon="icon"/>
                 <span>{{ title }}</span>
             </li>
         </menu>
@@ -181,7 +181,7 @@
     .menu-item {
         padding-inline: 8px;
 
-        > i {
+        > svg {
             width: 16px;
             margin-right: 8px;
         }

@@ -27,7 +27,7 @@
         display: flex;
         justify-content: center;
         gap: 24px;
-        min-width: var(--size-width-min-mobile);
+        min-width: var(--size-min-width);
         padding: 32px;
     }
 

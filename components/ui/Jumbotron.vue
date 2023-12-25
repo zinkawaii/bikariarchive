@@ -69,7 +69,7 @@
             <h2 class="jumbo-phrase" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
         </div>
         <a class="jumbo-hide" @click="toBottom">
-            <i class="fas fa-chevron-down"></i>
+            <fa-icon icon="chevron-down"/>
         </a>
     </div>
 </template>
@@ -140,8 +140,7 @@
     }
 
     .jumbo-hide {
-        display: grid;
-        align-items: center;
+        display: flex;
         position: absolute;
         opacity: 0;
         bottom: 0;
@@ -156,8 +155,9 @@
             opacity: 1;
         }
 
-        > i {
+        > svg {
             opacity: 0.5;
+            margin: auto;
         }
     }
 </style>

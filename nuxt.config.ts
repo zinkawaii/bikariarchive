@@ -20,6 +20,10 @@ export default defineNuxtConfig({
             }
         }
     },
+    css: [
+        "@fortawesome/fontawesome-svg-core/styles.css",
+        "~/assets/scss/sinrabansyo.scss"
+    ],
     components: [
         {
             path: "~/components"
@@ -33,26 +37,10 @@ export default defineNuxtConfig({
             prefix: "mb"
         }
     ],
-    css: [
-        "~/assets/fontawesome/css/fontawesome.css",
-        "~/assets/fontawesome/css/brands.css",
-        "~/assets/fontawesome/css/solid.css",
-        "~/assets/scss/sinrabansyo.scss"
-    ],
-    runtimeConfig: {
-        ...serverConfig,
-        public: clientConfig
-    },
-    devtools: {
-        enabled: false
-    },
-    experimental: {
-        inlineSSRStyles: false,
-        viewTransition: true
-    },
-    vue: {
-        runtimeCompiler: true,
-        defineModel: true
+    build: {
+        transpile: [
+            "@fortawesome/vue-fontawesome"
+        ]
     },
     devServer: {
         https: {
@@ -61,6 +49,23 @@ export default defineNuxtConfig({
         },
         host: "<!-- ??? -->",
         port: 443
+    },
+    devtools: {
+        enabled: false
+    },
+    experimental: {
+        viewTransition: true
+    },
+    features: {
+        inlineStyles: false
+    },
+    runtimeConfig: {
+        ...serverConfig,
+        public: clientConfig
+    },
+    vue: {
+        runtimeCompiler: true,
+        defineModel: true
     },
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],

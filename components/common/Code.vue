@@ -28,7 +28,7 @@
     <div class="mb-code">
         <div class="code-header">
             <span>{{ lang }}</span>
-            <span class="code-copy" @click="copy"><i class="fas fa-paste"></i></span>
+            <span class="code-copy" @click="copy"><fa-icon icon="paste"/></span>
         </div>
         <div class="code-area" :class="{ expanded: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
@@ -38,7 +38,7 @@
             <pre v-else ref="$Code" class="code-content" v-html="code"></pre>
         </div>
         <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
-            <i :class="[`fas`, `fa-angles-${isExpand ? `up` : `down`}`]"></i>
+            <fa-icon :icon="`angles-${isExpand ? `up` : `down`}`"/>
         </div>
     </div>
 </template>
@@ -110,12 +110,12 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 24px;
         background: linear-gradient(to bottom, transparent, var(--color-background));
+        line-height: 28px;
         text-align: center;
         cursor: pointer;
 
-        > i {
+        > svg {
             animation: expand-flash 2s infinite;
         }
     }
