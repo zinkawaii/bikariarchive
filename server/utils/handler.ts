@@ -9,13 +9,6 @@ export const defineCustomHandler = <T extends EventHandlerRequest, D> (
     }
     catch (err) {
         console.error(err);
-        if (err.statusCode) {
-            event.node.res.writeHead(err.statusCode).end();
-        }
-        else {
-            return {
-                error: 100
-            };
-        }
+        event.node.res.writeHead(err.statusCode ?? 500).end();
     }
 });

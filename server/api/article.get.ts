@@ -28,17 +28,17 @@ export default defineCustomHandler(async (event) => {
         const rlist: {
             [T: string]: {
                 count: number,
-                time: Date
+                time: number
             }
         } = {};
         result.forEach((record: any) => {
             const ip = record.ip;
             if (ip in rlist) {
-                const next: Date = record.time;
+                const next = record.time.getTime();
                 const last = rlist[ip].time;
 
                 //同IP下阅读间隔大于8小时
-                if ((next.getTime() - last.getTime()) >= interval) {
+                if (next - last >= interval) {
                     rlist[ip].count++;
                     rlist[ip].time = next;
                 }
@@ -46,7 +46,7 @@ export default defineCustomHandler(async (event) => {
             else {
                 rlist[ip] = {
                     count: 1,
-                    time: record.time
+                    time: record.time.getTime()
                 };
             }
         });

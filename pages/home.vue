@@ -23,7 +23,7 @@
 
         //交换层级
         const { status, layer } = intro.value;
-        [layer[0], layer[1]] = [layer[1], layer[0]];
+        layer.reverse();
 
         //旋转动画
         Zin.setInterval((t) => {
@@ -123,7 +123,7 @@
         height: 74px;
         margin-left: 8px;
         background-color: var(--color-theme-dark);
-        mask-image: url("/garden/QRCode_Site.svg");
+        mask-image: url("/garden/qrcode-site.svg");
         mask-size: cover;
     }
 

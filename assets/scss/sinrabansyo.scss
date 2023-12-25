@@ -96,7 +96,9 @@ html {
 }
 
 body {
-    font-family: "Microsoft YaHei UI", "Microsoft YaHei";
+    font-family:
+        system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Source Han Sans CN", sans-serif;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;

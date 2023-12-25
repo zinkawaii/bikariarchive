@@ -27,8 +27,8 @@
 </script>
 
 <template>
-    <nav class="content-widget aside-catalog">
-        <select class="catalog-volume" v-model="currentVolume">
+    <aside-widget class="aside-catalog">
+        <select class="content-h2 catalog-volume" v-model="currentVolume">
             <option v-for="({ title }, i) in jNovel.volume" :value="i">{{ title }}</option>
         </select>
         <ul class="catalog-list">
@@ -36,30 +36,27 @@
                 <nuxt-link class="catalog-link" :to="{ params: { index } }">{{ title }}</nuxt-link>
             </li>
         </ul>
-    </nav>
+    </aside-widget>
 </template>
 
 <style lang="scss" scoped>
     .aside-catalog {
-        --p: 96px;
-
         display: flex;
         flex-direction: column;
         overflow: auto;
-        height: calc(100vh - var(--p));
-        margin-top: 16px;
-        border-block: none;
+        max-height: calc(100vh - 96px);
+        padding: 0;
     }
 
     .catalog-volume {
-        margin: 4px 16px 8px;
+        margin: 8px 16px;
         padding-block: 8px;
         border-bottom: 1px solid var(--color-border);
         background-color: transparent;
-        font-weight: bold;
 
         > option {
-            font-weight: normal;
+            font-family: initial;
+            font-size: 1rem;
         }
     }
 
@@ -68,7 +65,7 @@
         gap: 4px;
         overflow: hidden scroll;
         overscroll-behavior: contain;
-        padding: 0 8px 8px;
+        padding: 0 8px 12px 12px;
 
         &::-webkit-scrollbar {
             width: 5px;
@@ -86,7 +83,7 @@
 
     .catalog-link {
         overflow: hidden;
-        padding: 6px 0 6px 16px;
+        padding: 6px 0 6px 12px;
         border-radius: 8px;
         font-size: 14px;
         white-space: nowrap;

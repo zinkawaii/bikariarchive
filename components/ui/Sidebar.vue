@@ -99,7 +99,7 @@
         </ul>
         <aside-widget class="aside-profile">
             <nuxt-img class="aside-avatar" :src="$config.public.avatar"/>
-            <span class="aside-author">{{ $config.public.author }}</span>
+            <span class="content-h2 aside-author">{{ $config.public.author }}</span>
             <p class="p-small">うたかたなしあわせ</p>
         </aside-widget>
         <aside-widget title="公告" icon="bullhorn">
@@ -111,9 +111,7 @@
         <div class="aside-sticky">
             <aside-catalog v-if="route.name === `reader`"/>
             <aside-widget class="aside-update" title="最近更新" icon="clock-rotate-left">
-                <ul class="update-list">
-                    <recent-article type="blog" :limit="5"/>
-                </ul>
+                <recent-article type="blog" :limit="5"/>
             </aside-widget>
         </div>
     </aside>
@@ -137,8 +135,6 @@
 
     .aside-author {
         padding-block: 12px 4px;
-        font-family: "腾祥沁圆简";
-        font-size: 21px;
     }
 
     .aside-sticky {
