@@ -33,7 +33,7 @@
 
     //设置元信息
     useSeoMeta({
-        title: `${art.title} - ${art.volName}`,
+        title: `${art.title} - ${art.volumeInfo.title}`,
         ogTitle: art.title,
         ogType: "article",
         ogNovelAuthor: art.novelInfo.author,
@@ -53,13 +53,13 @@
 
     //日期
     const { date } = state.value;
-    if (art.date.publish) {
+    if (art.date) {
         date.type = "发布";
-        date.value = art.date.publish;
+        date.value = art.date;
     }
-    else if (art.date.refactor) {
+    else if (art.refactored) {
         date.type = "重构";
-        date.value = art.date.refactor;
+        date.value = art.refactored;
         date.tip = "该章节源自旧稿，是在本卷大改时调整章节顺序与修改细节后的产物\n在剧情安排与走向上没有大幅度的变化，但发布时间因结构的切分而难以标明";
     }
     else {

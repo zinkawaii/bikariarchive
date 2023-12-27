@@ -7,7 +7,7 @@
 
     const current = ref({
         novel: "bikari",
-        volOrder: 0
+        volume: 0
     });
 
     const volumes = computed(() => {
@@ -19,17 +19,17 @@
 
     const chapters = computed(() => {
         return jArticle[current.value.novel].chapter.filter((c) => {
-            return current.value.volOrder === c.volume;
+            return current.value.volume === c.volume;
         });
     });
 
     function selectNovel(key) {
         current.value.novel = key;
-        current.value.volOrder = 0;
+        current.value.volume = 0;
     }
 
-    function selectVolume(volOrder) {
-        current.value.volOrder = volOrder;
+    function selectVolume(vol) {
+        current.value.volume = vol;
     }
 </script>
 
@@ -50,11 +50,11 @@
             <fieldset class="catalogue-volume">
                 <legend class="content-h2">卷册列表</legend>
                 <ul>
-                    <li v-for="(volume, volOrder) in volumes">
+                    <li v-for="(title, i) in volumes">
                         <a
-                            :class="{ checked: current.volOrder === volOrder }"
-                            @click="selectVolume(volOrder)"
-                        >{{ volume }}</a>
+                            :class="{ checked: current.volume === i }"
+                            @click="selectVolume(i)"
+                        >{{ title }}</a>
                     </li>
                 </ul>
             </fieldset>
@@ -64,7 +64,7 @@
                     <li v-for="chapter in chapters">
                         <nuxt-link :to="{ name: `reader`, params: { novel: current.novel, index: chapter.index }}">
                             <span class="title">{{ chapter.title }}</span>
-                            <time class="date">{{ chapter.refactor ?? chapter.date ?? "很久以前" }}</time>
+                            <time class="date">{{ chapter.refactored ?? chapter.date ?? "很久以前" }}</time>
                         </nuxt-link>
                     </li>
                 </ul>

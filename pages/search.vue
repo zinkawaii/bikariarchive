@@ -38,7 +38,7 @@
             results.value.push({
                 index: item.index,
                 title: art.title,
-                volName: art.volName,
+                volume: art.volumeInfo.title,
                 count: item.count,
                 parts
             });
@@ -103,7 +103,7 @@
                     <div class="result-title">
                         {{ item.title }}
                     </div>
-                    <span class="result-volume">{{ item.volName }}</span>
+                    <span class="result-volume">{{ item.volume }}</span>
                     <article class="result-part">
                         <p v-for="part in item.parts" v-html="part"></p>
                     </article>

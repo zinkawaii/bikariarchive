@@ -12,7 +12,7 @@
     //当前选中卷
     const currentVolume = ref();
     watchEffect(() => {
-        currentVolume.value = art.value.volOrder;
+        currentVolume.value = art.value.volume;
     });
 
     //当前小说

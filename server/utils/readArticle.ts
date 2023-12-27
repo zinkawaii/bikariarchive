@@ -1,10 +1,12 @@
 import fs from "fs-extra";
 import Article from "~/utils/Article";
+import jArtmap from "~/dist/json/Artmap.json";
 
 export async function readArticle(art: Article): Promise<string> {
     return new Promise((resolve, reject) => {
-        const { novel, volOrder, index } = art;
-        const path = r(`dist/novel/${novel[0].toUpperCase() + novel.slice(1)}.${volOrder}/${index}.txt`);
+        const { novel, volume, index } = art;
+        const filename = jArtmap[novel][index];
+        const path = r(`dist/novel/${novel[0].toUpperCase() + novel.slice(1)}.${volume}/${filename}.txt`);
         fs.readFile(path, (err, data) => {
             if (err) {
                 reject(err);

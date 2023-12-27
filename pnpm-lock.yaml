@@ -130,6 +130,9 @@ devDependencies:
   md5:
     specifier: ^2.3.0
     version: 2.3.0
+  nanoid:
+    specifier: ^5.0.4
+    version: 5.0.4
   node-schedule:
     specifier: ^2.1.1
     version: 2.1.1

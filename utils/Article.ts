@@ -1,14 +1,27 @@
 import jArticle from "~/dist/json/Article.json";
 
-class Article {
+type WithMetaAttrs = Partial<{
+    volume: number,
+    index: string,
+    title: string,
+    date: string,
+    updated: string,
+    refactored: string,
+    ending: boolean,
+    runtime: boolean,
+    wordCount: number
+}>;
+
+class Article implements WithMetaAttrs {
     novel        = "";    //小说名
-    volOrder     = -1;    //卷序号
-    volName      = "";    //卷名
+    volume       = -1;    //卷序号
     order        = -1;    //章序号
     order_in_vol = -1;    //章序号（卷内）
     index        = "";    //章文件名
     title        = "";    //章节名
-    date         = {};    //日期
+    date         = "";    //日期
+    updated      = "";    //更新日期
+    refactored   = "";    //重构日期
     ending       = false; //终章标记
     runtime      = false; //运行时
     wordCount    = 0;     //字数
@@ -38,7 +51,7 @@ class Article {
             };
 
             for (let i = 0; i < jChapter.length; i++) {
-                const c = jChapter[i];
+                const c: WithMetaAttrs = jChapter[i];
 
                 if (c.volume !== temp.vol) {
                     temp.vol++, temp.order = 0;
@@ -47,18 +60,9 @@ class Article {
                     temp.order++;
                 }
                 if (c.index === index) {
-                    this.volOrder = c.volume;
-                    this.volName = jVolume[this.volOrder].title;
+                    Object.assign(this, c);
                     this.order = i;
                     this.order_in_vol = temp.order;
-                    this.title = c.title;
-                    this.date = {
-                        publish: c.date,
-                        refactor: c.refactor
-                    };
-                    this.ending = c.ending;
-                    this.runtime = c.runtime;
-                    this.wordCount = c.wordCount;
                     this.error = false;
                     break;
                 }
@@ -70,6 +74,10 @@ class Article {
         return jArticle[this.novel];
     }
 
+    get volumeInfo() {
+        return this.novelInfo.volume[this.volume];
+    }
+
     get isFirst() {
         return this.order === 0;
     }
@@ -79,11 +87,11 @@ class Article {
     }
 
     get isFirstInVol() {
-        return (this.novelInfo.chapter[this.order - 1]?.volume ?? -Infinity) < this.volOrder;
+        return (this.novelInfo.chapter[this.order - 1]?.volume ?? -Infinity) < this.volume;
     }
 
     get isLastInVol() {
-        return (this.novelInfo.chapter[this.order + 1]?.volume ?? Infinity) > this.volOrder;
+        return (this.novelInfo.chapter[this.order + 1]?.volume ?? Infinity) > this.volume;
     }
 
     get lastIndex() {

@@ -39,6 +39,7 @@ const outDir = "../dist/novel";
 
 const metaSrcDir = "../assets/json/Article.json";
 const metaOutDir = "../dist/json/Article.json";
+const mapOutDir = "../dist/json/Artmap.json";
 
 (async () => {
     //从元信息和Front Matter生成全文和Article.json
@@ -73,12 +74,30 @@ function generateMetaInfo() {
     const re = /^(.*?)\.(\d+)$/;
     const filelist = glob.globSync(`${srcDir}/**/*.md`);
 
-    filelist.forEach((pathname) => {
+    //序号与文件名的映射表
+    const jMap = {};
+    for (const key in jMeta) {
+        jMap[key] = {};
+
+        //在元数据中按顺序填入<blog>文章
+        if (jMeta[key].type === "blog") {
+            jMeta[key].chapter = [];
+            filelist
+            .filter((pathname) => pathname.includes(key[0].toUpperCase() + key.slice(1)))
+            .sort((a, b) => a.localeCompare(b))
+            .forEach((pathname) => {
+                const filename = path.basename(pathname, ".md");
+                jMeta[key].chapter.push(filename);
+            });
+        }
+    }
+
+    for (const pathname of filelist) {
         const match = path.basename(path.resolve(pathname, "..")).match(re);
         const novel = match[1].toLowerCase();
         const volume = Number(match[2]);
-        const index = path.basename(pathname, ".md");
-        const order = jMeta[novel].chapter.indexOf(index);
+        const filename = path.basename(pathname, ".md");
+        const order = jMeta[novel].chapter.indexOf(filename);
 
         //将正文写入文件并读取数据
         const data = simpleParse(pathname);
@@ -94,7 +113,14 @@ function generateMetaInfo() {
         const wordCount = $("p").text().length;
 
         //日期格式化
-        dateFormat(attributes, ["date", "refactor"]);
+        dateFormat(attributes, ["date", "refactored"]);
+
+        //生成映射
+        const index = {
+            novel: filename,
+            blog: attributes.abbrlink
+        }[jMeta[novel].type];
+        jMap[novel][index] = filename;
 
         //写入数据
         jMeta[novel].chapter[order] = {
@@ -104,11 +130,11 @@ function generateMetaInfo() {
             wordCount,
             ...attributes
         };
-    });
+    }
 
     //输出到文件
-    const result = JSON.stringify(jMeta);
-    fs.outputFileSync(metaOutDir, result);
+    fs.outputFileSync(metaOutDir, JSON.stringify(jMeta));
+    fs.outputFileSync(mapOutDir, JSON.stringify(jMap));
 
     //日期格式化
     function dateFormat(obj, keys) {
