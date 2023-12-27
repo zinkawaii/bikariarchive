@@ -58,9 +58,9 @@
         date.type = "发布";
         date.value = art.date.publish;
     }
-    else if (art.date.reco) {
+    else if (art.date.refactor) {
         date.type = "重构";
-        date.value = art.date.reco;
+        date.value = art.date.refactor;
         date.tip = "该章节源自旧稿，是在本卷大改时调整章节顺序与修改细节后的产物\n在剧情安排与走向上没有大幅度的变化，但发布时间因结构的切分而难以标明";
     }
     else {
