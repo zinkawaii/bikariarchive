@@ -43,7 +43,6 @@
 
     const state = ref({
         readCount: 0,
-        wordCount: 0,
         date: {
             type: "",
             value: "",
@@ -70,6 +69,7 @@
     }
 
     //上一章
+    const toLast = art.isFirstInVol ? "上一卷" : "上一章";
     const toLastClass = { invisible: art.isFirst };
     const toLastChapter = art.isFirst ? {} : {
         params: {
@@ -78,6 +78,7 @@
     };
 
     //下一章
+    const toNext = art.isLastInVol ? "下一卷" : "下一章";
     const toNextClass = { invisible: art.isLast };
     const toNextChapter = art.isLast ? {} : {
         params: {
@@ -136,13 +137,6 @@
     if (error === 0) {
         state.value.content = content;
         state.value.readCount = readCount;
-
-        //字数统计
-        onMounted(() => {
-            state.value.wordCount = [...document.querySelectorAll(".novel-text > p")].reduce((count, p) => {
-                return count + p.textContent.length;
-            }, 0);
-        });
     }
 </script>
 
@@ -152,17 +146,17 @@
             <header class="novel-header">
                 <nuxt-link class="novel-wrap-top" :class="toLastClass" :to="toLastChapter">
                     <fa-icon icon="chevron-left"/>
-                    <span>上一章</span>
+                    <span>{{ toLast }}</span>
                 </nuxt-link>
                 <div class="novel-title">
                     <h1>{{ art.title }}</h1>
                     <div class="novel-information">
-                        <span>{{ state.readCount }} 阅读 ／ {{ state.wordCount }} 字</span>
+                        <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
                         <span :title="state.date.tip">{{ state.date.type }}时间：<time>{{ state.date.value }}</time></span>
                     </div>
                 </div>
                 <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
-                    <span>下一章</span>
+                    <span>{{ toNext }}</span>
                     <fa-icon icon="chevron-right"/>
                 </nuxt-link>
             </header>
@@ -180,8 +174,8 @@
             </footer>
         </div>
         <div class="novel-wrap-bottom">
-            <nuxt-link :class="toLastClass" :to="toLastChapter">上一章</nuxt-link>
-            <nuxt-link :class="toNextClass" :to="toNextChapter">下一章</nuxt-link>
+            <nuxt-link :class="toLastClass" :to="toLastChapter">{{ toLast }}</nuxt-link>
+            <nuxt-link :class="toNextClass" :to="toNextChapter">{{ toNext }}</nuxt-link>
         </div>
     </div>
 </template>

@@ -91,15 +91,17 @@ function generateMetaInfo() {
         const result = marked.parse(body);
         const $ = cheerio.load(result);
         const runtime = [...$("*")].some((e) => e?.name?.includes("-")) || void(0);
+        const wordCount = $("p").text().length;
 
         //日期格式化
-        dateFormat(attributes, ["date", "date_reco"]);
+        dateFormat(attributes, ["date", "refactor"]);
 
         //写入数据
         jMeta[novel].chapter[order] = {
             index,
             volume,
             runtime,
+            wordCount,
             ...attributes
         };
     });

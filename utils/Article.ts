@@ -11,6 +11,7 @@ class Article {
     date         = {};    //日期
     ending       = false; //终章标记
     runtime      = false; //运行时
+    wordCount    = 0;     //字数
     error        = true;  //错误信息
 
     constructor(novel: string, index: string) {
@@ -53,10 +54,11 @@ class Article {
                     this.title = c.title;
                     this.date = {
                         publish: c.date,
-                        reco: c.date_reco
+                        refactor: c.refactor
                     };
                     this.ending = c.ending;
                     this.runtime = c.runtime;
+                    this.wordCount = c.wordCount;
                     this.error = false;
                     break;
                 }
