@@ -91,7 +91,7 @@
 </script>
 
 <template>
-    <aside class="z-sidebar" :hidden="!display">
+    <aside class="z-sidebar" :class="{ hidden: !display }">
         <ul class="clock-table">
             <li v-for="i in 6" class="clock-item" :style="{ translate: clocks[i - 1].translate }" @click="exchange(i - 1)">
                 <span>{{ getTime(i - 1) }}</span>
@@ -224,7 +224,7 @@
     }
 
     @media (width >= 1024px) {
-        .z-sidebar[hidden] {
+        .z-sidebar.hidden {
             display: none;
         }
     }

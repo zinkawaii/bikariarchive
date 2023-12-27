@@ -23,61 +23,47 @@
         delay: 0
     });
 
-    //表单检测
     const checker = {
-        //昵称
-        nickname() {
-            const reg = /^[\w\u4e00-\u9fa5]*$/;
-            const count = getByteLength(nickname.value);
-
-            let str;
-            if (count === 0) {
-                str = "* 昵称不能为空";
+        nickname: {
+            target: nickname,
+            reg: /^[\w\u4e00-\u9fa5]*$/,
+            message: "昵称不可包含非法字符",
+            validate() {
+                const count = getByteLength(this.target.value);
+                if (count === 0) {
+                    return "昵称不能为空";
+                }
+                else if (count > 24) {
+                    return "昵称长度不能超过24个字符";
+                }
             }
-            else if (count > 24) {
-                str = "* 昵称长度不能超过24个字符";
-            }
-            else if (reg.test(nickname.value) === false) {
-                str = "* 昵称不可包含非法字符";
-            }
-            else return true;
-
-            tip.value.nickname = str;
-            return false;
         },
-        //邮箱
-        email() {
-            const reg = /^[\w-]+@[\w-]+(.[\w-]+)+$/;
-
-            let str;
-            if (reg.test(email.value) === false) {
-                str = "* 邮箱格式不正确";
-            }
-            else return true;
-
-            tip.value.email = str;
-            return false;
+        email: {
+            target: email,
+            reg: /^[\w-]+@[\w-]+(.[\w-]+)+$/,
+            message: "邮箱格式不正确"
         },
-        //密码
-        password() {
-            const reg = /^[\w]*$/;
-            const count = password.value?.length;
-
-            let str;
-            if (count < 6 || count > 18) {
-                str = "* 密码位数必须在6-18位之间";
+        password: {
+            target: password,
+            reg: /^[\w]*$/,
+            message: "密码仅由大小写字母、数字以及下划线组成",
+            validate() {
+                const count = getByteLength(this.target.value);
+                if (count < 6 || count > 18) {
+                    return "密码位数必须在6-18位之间";
+                }
             }
-            else if (reg.test(password.value) === false) {
-                str = "* 密码仅由大小写字母、数字以及下划线组成";
-            }
-            else return true;
-
-            tip.value.password = str;
-            return false;
         },
-        //全检测
         all() {
-            return this.nickname() && this.email() && this.password();
+            for (const key of ["nickname", "email", "password"]) {
+                const { target, reg, message } = this[key];
+                const msg = !reg.test(target.value) ? message : this[key].validate();
+                if (msg?.length > 0) {
+                    tip.value[key] = `* ${msg}`;
+                    return false;
+                }
+            }
+            return true;
         }
     };
 
@@ -166,18 +152,18 @@
 
 <template>
     <div class="sign-single">
-        <input type="text" class="sign-input" required v-model="nickname" @blur="tip.nickname = ``"/>
+        <input class="sign-input" required v-model="nickname" @blur="tip.nickname = ``"/>
         <div class="sign-underline"></div>
         <span class="sign-placeholder" :class="{ warn: tip.nickname }">{{ tip.nickname || "昵称" }}</span>
     </div>
     <div class="sign-single">
-        <input type="email" class="sign-input" required v-model="email" @blur="tip.email = ``"/>
+        <input class="sign-input" required v-model="email" @blur="tip.email = ``"/>
         <div class="sign-underline"></div>
         <span class="sign-placeholder" :class="{ warn: tip.email }">{{ tip.email || "电子邮箱" }}</span>
     </div>
     <div class="sign-verify">
         <div class="sign-single">
-            <input type="number" class="sign-input" required v-model="verify" @blur="tip.verify = ``" @input="verifyInput"/>
+            <input class="sign-input" type="number" required v-model="verify" @blur="tip.verify = ``" @input="verifyInput"/>
             <div class="sign-underline"></div>
             <span class="sign-placeholder" :class="{ warn: tip.verify }">{{ tip.verify || "验证码" }}</span>
         </div>
@@ -188,7 +174,7 @@
         }}</a>
     </div>
     <div class="sign-single">
-        <input type="password" class="sign-input" required v-model="password" @blur="tip.password = ``" @keyup.enter="submit"/>
+        <input class="sign-input" type="password" required v-model="password" @blur="tip.password = ``" @keyup.enter="submit"/>
         <div class="sign-underline"></div>
         <span class="sign-placeholder" :class="{ warn: tip.password }">{{ tip.password || "密码" }}</span>
     </div>

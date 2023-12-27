@@ -136,6 +136,7 @@ blockquote {
     padding: 1em;
     border-block: 1px solid var(--color-border-light);
     border-inline: 4px solid var(--color-theme);
+    border-radius: 4px;
     background-color: var(--color-background);
 
     > p {

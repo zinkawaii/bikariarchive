@@ -8,7 +8,7 @@
 
     //简介
     const synopsis = computed(() => {
-        return jArticle[props.novel]?.synopsis?.split("\n");
+        return jArticle[props.novel].synopsis.split("\n");
     });
 
     //阅读记录
@@ -33,9 +33,9 @@
 
 <template>
     <div class="content-table intro-card" :layer="layer" @click="exchange">
-        <h2 class="content-h2">{{ jArticle[novel]?.title }}</h2>
+        <h2 class="content-h2">{{ jArticle[novel].title }}</h2>
         <ul class="intro-tag">
-            <li v-for="tag in jArticle[novel]?.tag">{{ tag }}</li>
+            <li v-for="tag in jArticle[novel].tag">{{ tag }}</li>
         </ul>
         <div class="intro-synopsis">
             <p v-for="line in synopsis">{{ line }}</p>

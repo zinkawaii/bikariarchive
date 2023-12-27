@@ -8,6 +8,7 @@ export default {
         "DnyzBot",
         "DotBot",
         "ExtLinksBot",
+        "GeedoBot",
         "GPTBot",
         "Mail.Ru",
         "MegaIndex.ru",

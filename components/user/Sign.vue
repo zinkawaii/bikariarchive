@@ -56,7 +56,7 @@
                             <h2 class="sign-title">注册</h2>
                             <a class="sign-have" @click="currentView = `login`">已有账号，前往登录<fa-icon icon="chevron-right"/></a>
                         </div>
-                        <user-sign-on @success="currentView.value = `login`"/>
+                        <user-sign-on @success="currentView = `login`"/>
                     </div>
                     <div v-else-if="currentView === `profile`">
                         <div class="sign-header">
