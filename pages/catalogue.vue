@@ -5,84 +5,130 @@
         title: "目录"
     });
 
-    const current = ref({
-        novel: "bikari",
+    const novel = ref("bikari");
+    const curOrder = ref({
+        novel: 0,
         volume: 0
     });
 
     const volumes = computed(() => {
-        const { novel } = current.value;
-        return jArticle[novel].volume.map((item) => {
+        return jArticle[novel.value].volume.map((item) => {
             return item.title;
         });
     });
 
     const chapters = computed(() => {
-        return jArticle[current.value.novel].chapter.filter((c) => {
-            return current.value.volume === c.volume;
+        return jArticle[novel.value].chapter.filter((c) => {
+            return curOrder.value.volume === c.volume;
         });
     });
 
-    function selectNovel(key) {
-        current.value.novel = key;
-        current.value.volume = 0;
+    function selectNovel(key, i) {
+        novel.value = key;
+        curOrder.value.novel = i;
+        curOrder.value.volume = 0;
     }
 
     function selectVolume(vol) {
-        current.value.volume = vol;
+        curOrder.value.volume = vol;
     }
 </script>
 
 <template>
     <div class="content-widget" z-main>
-        <div class="catalogue-wrapper">
-            <fieldset class="catalogue-novel">
-                <legend class="content-h2">书单</legend>
-                <ul>
-                    <li v-for="(novel, key) in jArticle">
-                        <a
-                            :class="{ checked: current.novel === key }"
-                            @click="selectNovel(key)"
-                        >{{ novel.title.split("-")[0] }}</a>
-                    </li>
-                </ul>
-            </fieldset>
-            <fieldset class="catalogue-volume">
-                <legend class="content-h2">卷册列表</legend>
-                <ul>
-                    <li v-for="(title, i) in volumes">
-                        <a
-                            :class="{ checked: current.volume === i }"
-                            @click="selectVolume(i)"
-                        >{{ title }}</a>
-                    </li>
-                </ul>
-            </fieldset>
-            <fieldset class="catalogue-chapter" :hidden="chapters.length === 0">
-                <legend class="content-h2">章节列表</legend>
-                <ul>
-                    <li v-for="chapter in chapters">
-                        <nuxt-link :to="{ name: `reader`, params: { novel: current.novel, index: chapter.index }}">
-                            <span class="title">{{ chapter.title }}</span>
-                            <time class="date">{{ chapter.refactored ?? chapter.date ?? "很久以前" }}</time>
-                        </nuxt-link>
-                    </li>
-                </ul>
-            </fieldset>
+        <div class="catalogue-shelf">
+            <ul class="shelf-wrapper" :style="{ translate: curOrder.novel * -144 + `px` }">
+                <li v-for="({ title, cover }, key, i) in jArticle">
+                    <a
+                        class="shelf-novel"
+                        :class="{ checked: novel === key }"
+                        @click="selectNovel(key, i)"
+                        ><div class="shelf-cover">
+                            <nuxt-img v-if="cover" :src="cover"/>
+                            <div v-else class="shelf-placeholder">Cover.</div>
+                        </div>
+                        <span class="shelf-title">{{ title.split("-")[0] }}</span>
+                    </a>
+                </li>
+            </ul>
         </div>
+        <fieldset v-show="volumes.length" class="catalogue-volume">
+            <legend class="content-h2">卷册列表</legend>
+            <ul>
+                <li v-for="(title, i) in volumes">
+                    <a
+                        :class="{ checked: curOrder.volume === i }"
+                        @click="selectVolume(i)"
+                    >{{ title }}</a>
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset v-show="chapters.length" class="catalogue-chapter">
+            <legend class="content-h2">章节列表</legend>
+            <ul>
+                <li v-for="chapter in chapters">
+                    <nuxt-link :to="{ name: `reader`, params: { novel, index: chapter.index }}">
+                        <span class="title">{{ chapter.title }}</span>
+                        <time class="date">{{ chapter.refactored ?? chapter.date ?? "很久以前" }}</time>
+                    </nuxt-link>
+                </li>
+            </ul>
+        </fieldset>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .catalogue-wrapper {
-        display: grid;
-        grid-template:
-            "A B"
-            "C C" / auto 1fr;
-        gap: 16px;
+    .catalogue-shelf {
+        padding-left: calc(50% - 72px);
+        mask-image: linear-gradient(to right, transparent, white 32px, white calc(100% - 32px), transparent);
     }
 
-    :where(.catalogue-novel, .catalogue-volume, .catalogue-chapter) {
+    .shelf-wrapper {
+        display: flex;
+        width: fit-content;
+        transition: all 0.4s;
+    }
+
+    .shelf-novel {
+        display: grid;
+        justify-items: center;
+        margin-inline: 8px;
+        color: var(--color-gray);
+    }
+
+    .shelf-cover {
+        width: 128px;
+        aspect-ratio: 1 / 1.414;
+        transform-origin: bottom;
+        transition: all 0.4s;
+        filter: drop-shadow(8px 8px 2px rgb(0 0 0 / 16%));
+
+        :not(.checked) > & {
+            opacity: 0.66;
+            scale: 0.9;
+        }
+    }
+
+    .shelf-placeholder {
+        display: grid;
+        place-items: center;
+        height: 100%;
+        border: 4px dashed var(--color-border);
+        border-radius: 8px;
+        font-size: 32px;
+        font-weight: bold;
+        user-select: none;
+    }
+
+    .shelf-title {
+        line-height: 42px;
+
+        .checked > & {
+            color: var(--color-theme-text);
+        }
+    }
+
+    :where(.catalogue-volume, .catalogue-chapter) {
         padding: 8px 16px 16px;
         border: 1px solid var(--color-border);
         border-radius: 4px;
@@ -95,7 +141,6 @@
             display: flex;
             border: 1px solid transparent;
             border-radius: 4px;
-            text-align: center;
 
             &:hover {
                 border-color: var(--color-theme-dark);
@@ -104,6 +149,8 @@
 
         a {
             flex: 1;
+            padding-inline: 8px;
+            line-height: 32px;
 
             &.checked {
                 color: var(--color-theme-text);
@@ -111,66 +158,19 @@
         }
     }
 
-    .catalogue-novel {
-        width: 136px;
-
-        > ul {
-            display: grid;
-            gap: 4px;
-        }
-
-        a {
-            position: relative;
-            line-height: 28px;
-
-            &.checked {
-                &::before {
-                    content: "《";
-                    position: absolute;
-                    left: 0;
-                }
-
-                &::after {
-                    content: "》";
-                    position: absolute;
-                    right: 0;
-                }
-            }
-        }
-    }
-
-    .catalogue-volume {
-        flex: 1;
-
-        > ul {
-            display: grid;
-            grid: auto / repeat(auto-fit, minmax(min(144px, 100%), 1fr));
-
-            > li {
-                line-height: 26px;
-                white-space: nowrap;
-
-                > a {
-                    padding-inline: 8px;
-                }
-            }
-        }
+    .catalogue-volume > ul {
+        display: grid;
+        grid: auto / repeat(auto-fit, minmax(min(144px, 100%), 1fr));
+        text-align: center;
     }
 
     .catalogue-chapter {
-        grid-area: C;
+        margin-top: 16px;
 
         a {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto;
             gap: 8px;
-            padding-inline: 8px;
-            line-height: 32px;
-
-            .title {
-                flex: 1;
-                text-align: left;
-            }
 
             .date {
                 font-size: 14px;
