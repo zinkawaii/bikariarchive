@@ -79,17 +79,15 @@ function generateMetaInfo() {
     for (const key in jMeta) {
         jMap[key] = {};
 
-        //在元数据中按顺序填入<blog>文章
-        if (jMeta[key].type === "blog") {
-            jMeta[key].chapter = [];
-            filelist
-            .filter((pathname) => pathname.includes(key[0].toUpperCase() + key.slice(1)))
-            .sort((a, b) => a.localeCompare(b))
-            .forEach((pathname) => {
-                const filename = path.basename(pathname, ".md");
-                jMeta[key].chapter.push(filename);
-            });
-        }
+        //在元数据中按顺序填入文章
+        jMeta[key].chapter = [];
+        filelist
+        .filter((pathname) => pathname.includes(key[0].toUpperCase() + key.slice(1)))
+        .sort((a, b) => a.localeCompare(b))
+        .forEach((pathname) => {
+            const filename = path.basename(pathname, ".md");
+            jMeta[key].chapter.push(filename);
+        });
     }
 
     for (const pathname of filelist) {
@@ -116,10 +114,15 @@ function generateMetaInfo() {
         dateFormat(attributes, ["date", "updated", "refactored"]);
 
         //生成映射
-        const index = {
-            novel: filename,
-            blog: attributes.abbrlink
-        }[jMeta[novel].type];
+        let index = "";
+        switch (jMeta[novel].type) {
+            case "novel":
+                index = filename.match(/(.*?)-(.*)/)[2];
+                break;
+            case "blog":
+                index = attributes.abbrlink;
+                break;
+        }
         jMap[novel][index] = filename;
 
         //写入数据
