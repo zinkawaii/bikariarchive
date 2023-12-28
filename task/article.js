@@ -113,7 +113,7 @@ function generateMetaInfo() {
         const wordCount = $("p").text().length;
 
         //日期格式化
-        dateFormat(attributes, ["date", "refactored"]);
+        dateFormat(attributes, ["date", "updated", "refactored"]);
 
         //生成映射
         const index = {

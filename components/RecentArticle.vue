@@ -3,7 +3,13 @@
 
     const props = defineProps({
         type: String,
-        limit: Number
+        limit: Number,
+        sortBy: String
+    });
+
+    //是否按更新日期排序
+    const sortByUpdated = computed(() => {
+        return props.sortBy === "updated";
     });
 
     const jRecent = Object.entries(jArticle)
@@ -16,17 +22,21 @@
     })
     .flat(1)
     .filter((c) => Reflect.has(c, "date"))
-    .sort((a, b) => b.date.localeCompare(a.date))
+    .sort((a, b) => {
+        const x = sortByUpdated && a.updated || a.date;
+        const y = sortByUpdated && b.updated || b.date;
+        return y.localeCompare(x);
+    })
     .slice(0, props.limit);
 </script>
 
 <template>
     <ul class="recent-article">
-        <li v-for="{ index, title, date, volume, novel } in jRecent" class="recent-item">
+        <li v-for="{ index, title, date, updated, volume, novel } in jRecent" class="recent-item">
             <coco-link class="text-truncate recent-title" :to="{ name: `reader`, params: { novel, index } }">{{ title }}</coco-link>
             <div class="recent-info">
                 <span class="text-truncate">{{ jArticle[novel].volume[volume].title }}</span>
-                <time>{{ date }}</time>
+                <time>{{ sortByUpdated && updated || date }}</time>
             </div>
         </li>
     </ul>

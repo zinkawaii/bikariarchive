@@ -111,7 +111,7 @@
         <div class="aside-sticky">
             <aside-catalog v-if="route.name === `reader`"/>
             <aside-widget class="aside-update" title="最近更新" icon="clock-rotate-left">
-                <recent-article type="blog" :limit="5"/>
+                <recent-article type="blog" :limit="5" sort-by="updated"/>
             </aside-widget>
         </div>
     </aside>
