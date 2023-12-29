@@ -192,7 +192,7 @@
             width: fit-content;
             height: fit-content;
             margin: auto;
-            font-family: "腾祥沁圆简";
+            font-family: TengXiang;
             font-size: 18px;
             text-shadow: var(--text-shadow);
             color: white;

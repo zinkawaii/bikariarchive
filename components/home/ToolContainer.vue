@@ -44,7 +44,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        font-family: "腾祥沁圆简";
+        font-family: TengXiang;
         word-break: keep-all;
         text-shadow: $shadow;
         color: white;

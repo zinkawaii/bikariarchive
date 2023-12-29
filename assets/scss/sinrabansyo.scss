@@ -72,7 +72,7 @@
 }
 
 @font-face {
-    font-family: "腾祥沁圆简";
+    font-family: TengXiang;
     font-display: swap;
     src: url("/fonts/TengXQJianYuan-w3.ttf") format("truetype");
 }
@@ -272,7 +272,7 @@ textarea {
 }
 
 .content-h2 {
-    font-family: "腾祥沁圆简";
+    font-family: TengXiang;
     font-size: 20px;
     line-height: 26px;
 }
@@ -412,7 +412,7 @@ textarea {
         position: relative;
         margin-block: 16px 4px;
         padding: 4px 16px;
-        font-family: "腾祥沁圆简";
+        font-family: TengXiang;
 
         &::before {
             content: "";

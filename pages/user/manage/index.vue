@@ -47,7 +47,7 @@
 
         .title {
             display: block;
-            font-family: "腾祥沁圆简";
+            font-family: TengXiang;
             text-shadow: var(--text-shadow);
         }
 

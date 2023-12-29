@@ -104,7 +104,7 @@
         .title {
             margin-bottom: 4px;
             border-bottom: 1px solid var(--color-border-light);
-            font-family: "腾祥沁圆简";
+            font-family: TengXiang;
             font-size: 21px;
             line-height: 35px;
         }

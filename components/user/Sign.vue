@@ -143,7 +143,7 @@
     .sign-title {
         position: relative;
         margin-bottom: 12px;
-        font-family: "腾祥沁圆简";
+        font-family: TengXiang;
         font-size: 28px;
 
         &::after {
