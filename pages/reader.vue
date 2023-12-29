@@ -1,10 +1,11 @@
 <script>
     import VRuntimeTemplate from "vue3-runtime-template";
-    import { NuxtImg, MbCode, MbGallery, MbImage } from "#components";
+    import { CocoLink, MbCode, MbGallery, MbImage, NuxtImg } from "#components";
 
     //需要导入文章的组件
     export default {
         components: {
+            "coco-link": CocoLink,
             "mb-code": MbCode,
             "mb-gallery": MbGallery,
             "mb-image": MbImage,
@@ -263,7 +264,7 @@
     .novel-wrap-top {
         display: flex;
         align-items: center;
-        font-weight: bolder;
+        font-weight: bold;
         color: var(--color-theme-text);
 
         > svg {

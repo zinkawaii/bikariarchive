@@ -87,7 +87,7 @@
 
         h3 {
             margin-top: 4px;
-            padding: 4px 0 0 19px;
+            padding: 4px 0 0 18px;
             line-height: 26px;
 
             &::before {
