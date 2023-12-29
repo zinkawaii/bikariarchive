@@ -259,10 +259,6 @@
         line-height: 28px;
     }
 
-    .excalc-power {
-        max-width: 512px;
-    }
-
     .excalc-param-selector {
         flex: 1;
         padding: 3px;
@@ -327,7 +323,13 @@
         width: 58px;
     }
 
-    @media (width <= 544px) {
+    @container main (width >= 596px) {
+        .excalc-power {
+            max-width: 512px;
+        }
+    }
+
+    @container main (width < 596px) {
         .excalc-top {
             flex-direction: column;
             gap: 16px;

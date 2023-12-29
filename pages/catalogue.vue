@@ -52,9 +52,9 @@
                 </li>
             </ul>
         </div>
-        <fieldset v-show="volumes.length" class="catalogue-volume">
+        <fieldset v-show="volumes.length" class="catalogue-fieldset">
             <legend class="content-h2">卷册列表</legend>
-            <ul>
+            <ul class="catalogue-volume">
                 <li v-for="(title, i) in volumes">
                     <a
                         :class="{ checked: curOrder.volume === i }"
@@ -63,12 +63,12 @@
                 </li>
             </ul>
         </fieldset>
-        <fieldset v-show="chapters.length" class="catalogue-chapter">
+        <fieldset v-show="chapters.length" class="catalogue-fieldset">
             <legend class="content-h2">章节列表</legend>
-            <ul>
+            <ul class="catalogue-chapter">
                 <li v-for="chapter in chapters">
                     <nuxt-link :to="{ name: `reader`, params: { novel, index: chapter.index }}">
-                        <span class="title">{{ chapter.title }}</span>
+                        <span class="text-truncate">{{ chapter.title }}</span>
                         <time class="date">{{ chapter.refactored ?? chapter.date ?? "很久以前" }}</time>
                     </nuxt-link>
                 </li>
@@ -128,29 +128,31 @@
         }
     }
 
-    :where(.catalogue-volume, .catalogue-chapter) {
-        padding: 8px 16px 16px;
-        border: 1px solid var(--color-border);
-        border-radius: 4px;
+    .catalogue-fieldset {
+        margin-top: 16px;
+        padding-top: 8px;
+        border-top: 1px solid var(--color-border);
 
         > legend {
             padding-inline: 8px;
+            text-align: center;
         }
+    }
 
-        li {
+    .catalogue-volume {
+        display: grid;
+        grid: auto / repeat(auto-fit, minmax(min(144px, 100%), 1fr));
+
+        a {
             display: flex;
+            justify-content: center;
             border: 1px solid transparent;
             border-radius: 4px;
+            line-height: 32px;
 
             &:hover {
                 border-color: var(--color-theme-dark);
             }
-        }
-
-        a {
-            flex: 1;
-            padding-inline: 8px;
-            line-height: 32px;
 
             &.checked {
                 color: var(--color-theme-text);
@@ -158,24 +160,29 @@
         }
     }
 
-    .catalogue-volume > ul {
-        display: grid;
-        grid: auto / repeat(auto-fit, minmax(min(144px, 100%), 1fr));
-        text-align: center;
-    }
-
     .catalogue-chapter {
-        margin-top: 16px;
-
         a {
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 8px;
+            border-bottom: 1px dashed var(--color-border-light);
+            line-height: 36px;
+
+            &:hover {
+                color: var(--color-theme-text);
+            }
 
             .date {
                 font-size: 14px;
                 color: var(--color-gray);
             }
+        }
+    }
+
+    @container main (width >= 596px) {
+        .catalogue-chapter {
+            columns: 2;
+            column-gap: 2em;
         }
     }
 </style>

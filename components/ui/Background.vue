@@ -12,6 +12,7 @@
     .z-background {
         position: fixed;
         inset: 0;
+        width: 100vw;
         background-image: v-bind("image");
         background-position: center;
         background-repeat: no-repeat;
