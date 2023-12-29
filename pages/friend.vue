@@ -5,118 +5,90 @@
         title: "友情链接"
     });
 
+    const site = useSiteConfig();
+    const schema = `{
+  "title": "${site.name}",
+  "link": "${site.url}",
+  "icon": "https://cravatar.cn/avatar/ECB2EA87C4532F007838D86D02798F89",
+  "description": "虚幻的幸福"
+}`;
 </script>
 
 <template>
     <div class="content-widget" z-main>
         <div class="friend-list">
-            <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.href" target="_blank">
-                <div class="friend-avatar-wrapper">
-                    <div class="friend-avatar"><nuxt-img :src="item.icon" loading="lazy"/></div>
-                    <div class="friend-diamond"></div>
-                </div>
+            <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.link" target="_blank">
+                <nuxt-img class="friend-avatar" :src="item.icon" loading="lazy"/>
                 <div class="friend-info">
-                    <div class="title">{{ item.title }}</div>
-                    <span class="description">{{ item.description }}</span>
+                    <div class="content-h2 text-truncate friend-title">{{ item.title }}</div>
+                    <span class="friend-desc">{{ item.description }}</span>
                 </div>
             </nuxt-link>
         </div>
+        <blockquote>
+            <p>暂不开放评论区，友链数据可参考以下 Schema 结构。</p>
+        </blockquote>
+        <mb-code class="friend-schema" lang="json">{{ schema }}</mb-code>
     </div>
 </template>
 
 <style lang="scss" scoped>
     .friend-list {
         display: grid;
-        grid: auto / repeat(auto-fill, minmax(240px, 1fr));
+        grid: auto / repeat(auto-fill, minmax(256px, 1fr));
         grid-gap: 16px;
+        margin-bottom: 16px;
     }
 
     .friend-item {
         display: flex;
+        gap: 16px;
         height: 112px;
-        padding: 8px;
-        border: 8px solid transparent;
-        border-radius: 8px;
-        box-shadow:
-            0 0 1px var(--color-border),
-            0 0 2px inset var(--color-border);
-        background-clip: padding-box;
+        padding: 16px;
+        border: 1px solid var(--color-border-light);
+        border-radius: 16px;
         background-color: var(--color-background);
+        transition: border 0.25s;
 
         &:hover {
-            color: var(--color-theme-text);
+            border-color: var(--color-theme-dark);
 
-            .friend-avatar {
-                rotate: 12deg;
-                scale: 1.1;
-            }
-
-            .friend-diamond {
-                rotate: -12deg;
-                translate: 31px 15px;
+            .friend-title {
+                color: var(--color-theme-text);
             }
         }
-    }
-
-    .friend-avatar-wrapper {
-        position: relative;
-        width: 80px;
     }
 
     .friend-avatar {
-        position: absolute;
-        margin-block: 4px;
-        transition: all 0.4s;
-        z-index: 1;
-
-        > img {
-            display: block;
-            width: 72px;
-            height: 72px;
-            clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border: 1px solid var(--color-theme-dark);
-            rotate: 45deg;
-            scale: 0.7;
-        }
-    }
-
-    .friend-diamond {
-        position: absolute;
-        width: 51px;
-        height: 51px;
-        border: 3px solid var(--color-theme);
-        transition: translate 0.4s, rotate 0.4s;
-        rotate: 45deg;
-        translate: 24px 14px;
+        width: 72px;
+        height: 72px;
+        margin: auto;
+        border-radius: 8px;
     }
 
     .friend-info {
         flex: 1;
         overflow: hidden;
-        padding-inline: 12px 8px;
+    }
 
-        .title {
-            margin-bottom: 4px;
-            border-bottom: 1px solid var(--color-border-light);
-            font-family: TengXiang;
-            font-size: 21px;
-            line-height: 35px;
-        }
+    .friend-title {
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--color-border-light);
+        transition: color 0.25s;
+    }
 
-        .description {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            font-size: 14px;
-            line-height: 20px;
-            text-overflow: ellipsis;
-            color: var(--color-gray);
-        }
+    .friend-desc {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        font-size: 14px;
+        line-height: 22px;
+        text-overflow: ellipsis;
+        color: var(--color-gray);
+    }
+
+    .friend-schema {
+        margin-bottom: 0;
     }
 </style>

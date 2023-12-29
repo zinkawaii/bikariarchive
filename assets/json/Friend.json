@@ -2,9 +2,16 @@
   "list": [
     {
       "title": "蜡羽集",
-      "href": "https://layuji.com",
+      "link": "https://layuji.com",
       "icon": "https://layuji.com/images/meidoavatar.jpg",
       "description": "幻猫的随笔博客"
+    },
+    {
+      "title": "Kloudy Shape",
+      "link": "https://shape.kloudy.cn",
+      "icon": "https://api.kloudy.cn/img/icon.webp",
+      "color": "#0099ff",
+      "description": "Stay Hungry, Stay Foolish"
     }
   ]
 }
