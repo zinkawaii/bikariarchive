@@ -231,13 +231,6 @@ textarea {
 
 /* ---------------------------------------------------------------- */
 
-/* 通用内容页 */
-.content-page {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
 /* 通用内容部件 */
 .content-widget {
     border: var(--border-theme-group);
@@ -448,10 +441,6 @@ textarea {
 
 /* 媒体查询 */
 @media (width < 1024px) {
-    .content-page {
-        gap: 16px;
-    }
-
     .content-group {
         padding: 16px;
     }

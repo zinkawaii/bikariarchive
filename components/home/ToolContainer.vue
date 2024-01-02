@@ -40,9 +40,7 @@
         height: 64px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
-        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
         background-position: center;
-        background-repeat: no-repeat;
         background-size: cover;
         font-family: TengXiang;
         word-break: keep-all;

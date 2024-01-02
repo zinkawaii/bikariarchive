@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
+    const confirmStore = useConfirmStore();
     const signerStore = useSignerStore();
     const userStore = useUserStore();
 
@@ -11,7 +12,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         return false;
     }
     else if (userStore.identity < (to.meta.identity as number)) {
-        const confirmStore = useConfirmStore();
         confirmStore.show(`无访问权限 (Limit Code: 143)`);
         return false;
     }

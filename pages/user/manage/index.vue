@@ -14,19 +14,17 @@
 </script>
 
 <template>
-    <div class="content-page">
-        <div class="manage-banner">
-            <nuxt-link v-for="view in views" class="manage-link" :to="{ name: view.name }">
-                <span class="title">{{ view.title }}</span>
-                <span class="sub">{{ view.sub }}</span>
-            </nuxt-link>
-        </div>
-        <nuxt-page v-slot="{ Component }">
-            <keep-alive>
-                <component :is="Component"/>
-            </keep-alive>
-        </nuxt-page>
+    <div class="manage-banner">
+        <nuxt-link v-for="view in views" class="manage-link" :to="{ name: view.name }">
+            <span class="title">{{ view.title }}</span>
+            <span class="sub">{{ view.sub }}</span>
+        </nuxt-link>
     </div>
+    <nuxt-page v-slot="{ Component }">
+        <keep-alive>
+            <component :is="Component"/>
+        </keep-alive>
+    </nuxt-page>
 </template>
 
 <style lang="scss" scoped>

@@ -44,13 +44,15 @@
 
 <style lang="scss" scoped>
     .recent-item {
+        display: grid;
         margin-bottom: 4px;
         padding-bottom: 4px;
         border-bottom: 1px dashed var(--color-border-light);
     }
 
     .recent-title {
-        display: block;
+        width: fit-content;
+        max-width: 100%;
         line-height: 28px;
     }
 

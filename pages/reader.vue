@@ -142,42 +142,40 @@
 </script>
 
 <template>
-    <div class="content-page">
-        <div class="content-widget" z-main>
-            <header class="novel-header">
-                <nuxt-link class="novel-wrap-top" :class="toLastClass" :to="toLastChapter">
-                    <fa-icon icon="chevron-left"/>
-                    <span>{{ toLast }}</span>
-                </nuxt-link>
-                <div class="novel-title">
-                    <h1>{{ art.title }}</h1>
-                    <div class="novel-information">
-                        <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
-                        <span :title="state.date.tip">{{ state.date.type }}时间：<time>{{ state.date.value }}</time></span>
-                    </div>
+    <div class="content-widget" z-main>
+        <header class="novel-header">
+            <nuxt-link class="novel-wrap-top" :class="toLastClass" :to="toLastChapter">
+                <fa-icon icon="chevron-left"/>
+                <span>{{ toLast }}</span>
+            </nuxt-link>
+            <div class="novel-title">
+                <h1>{{ art.title }}</h1>
+                <div class="novel-information">
+                    <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
+                    <span :title="state.date.tip">{{ state.date.type }}时间：<time>{{ state.date.value }}</time></span>
                 </div>
-                <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
-                    <span>{{ toNext }}</span>
-                    <fa-icon icon="chevron-right"/>
-                </nuxt-link>
-            </header>
-            <article v-if="art.runtime" class="novel-text">
-                <v-runtime-template :template="state.content"/>
-            </article>
-            <article v-else class="novel-text" v-html="state.content"></article>
-            <footer class="novel-footer">
-                <p v-if="art.ending" class="novel-endding">THE END</p>
-                <div class="novel-copyright">
-                    <p><span class="meta">本章作者</span><coco-link :to="{ name: `home` }">{{ art.novelInfo.author }}</coco-link></p>
-                    <p><span class="meta">本章链接</span><coco-link :to="route.path">https://{{ $config.public.domain + route.path }}</coco-link></p>
-                    <p><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></p>
-                </div>
-            </footer>
-        </div>
-        <div class="novel-wrap-bottom">
-            <nuxt-link :class="toLastClass" :to="toLastChapter">{{ toLast }}</nuxt-link>
-            <nuxt-link :class="toNextClass" :to="toNextChapter">{{ toNext }}</nuxt-link>
-        </div>
+            </div>
+            <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
+                <span>{{ toNext }}</span>
+                <fa-icon icon="chevron-right"/>
+            </nuxt-link>
+        </header>
+        <article v-if="art.runtime" class="novel-text">
+            <v-runtime-template :template="state.content"/>
+        </article>
+        <article v-else class="novel-text" v-html="state.content"></article>
+        <footer class="novel-footer">
+            <p v-if="art.ending" class="novel-endding">THE END</p>
+            <div class="novel-copyright">
+                <p><span class="meta">本章作者</span><coco-link :to="{ name: `home` }">{{ art.novelInfo.author }}</coco-link></p>
+                <p><span class="meta">本章链接</span><coco-link :to="route.path">https://{{ $config.public.domain + route.path }}</coco-link></p>
+                <p><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></p>
+            </div>
+        </footer>
+    </div>
+    <div class="novel-wrap-bottom">
+        <nuxt-link :class="toLastClass" :to="toLastChapter">{{ toLast }}</nuxt-link>
+        <nuxt-link :class="toNextClass" :to="toNextChapter">{{ toNext }}</nuxt-link>
     </div>
 </template>
 

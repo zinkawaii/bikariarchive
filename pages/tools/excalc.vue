@@ -215,7 +215,7 @@
             </label>
             <label>
                 <span>分数</span>
-                <mb-input type="number" v-model="score"/>
+                <mb-input type="number" readonly v-model="score"/>
             </label>
         </div>
     </div>

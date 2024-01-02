@@ -4,7 +4,6 @@ import consola from "consola";
 import dayjs from "dayjs";
 import fm from "front-matter";
 import fs from "fs-extra";
-import lodash from "lodash";
 import * as glob from "glob";
 import * as marked from "marked";
 import * as path from "path";
@@ -125,11 +124,13 @@ function generateMetaInfo() {
     }
 
     filelist.forEach(simpleParse);
+    outputFile();
 }
 
 //输出到文件
 function outputFile() {
-    const jNeta = lodash.cloneDeep(jMeta);
+    const jNeta = structuredClone(jMeta);
+
     for (const key in jNeta) {
         const jChapter = Object.values(jNeta[key].chapter);
         jNeta[key].chapter = jChapter;

@@ -45,75 +45,73 @@
             <z-jumbotron />
         </teleport>
     </client-only>
-    <div class="content-page">
-        <div class="content-widget home-brief" z-main>
-            <div class="content-table home-welcome">
-                <p>
-                    <i class="home-qrcode"></i>
-                    <span class="content-h2">欢迎来到微光茶馆！</span><br />
-                    这里是我的个人网站，主要用于发布小说正文，所有文章均可在<coco-link :to="{ name: `catalogue` }">目录页</coco-link>索引并浏览。<coco-link :to="{ name: `details` }">情报页</coco-link>整理并展示了目前部分可以公开的设定。<coco-link :to="{ name: `search` }">检索页</coco-link>可在全文范围内对特定关键词进行检索。
-                </p>
-            </div>
-            <div class="home-introduction">
-                <home-intro-card
-                    v-for="i in 2"
-                    :style="{ translate: intro.translate[i - 1] }"
-                    :layer="intro.layer[i - 1]"
-                    :novel="intro.novel[intro.status ? 2 - i : i - 1]"
-                    @exchange="exchange"
-                />
-            </div>
-            <div class="content-table">
-                <a class="profile-avatar">
-                    <nuxt-img :src="$config.public.avatar"/>
-                </a>
-                <table class="profile-table">
-                    <tbody>
-                        <tr>
-                            <th width="40%">作者</th>
-                            <td>{{ $config.public.author }}</td>
-                        </tr>
-                        <tr>
-                            <th>个人群</th>
-                            <td><coco-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</coco-link></td>
-                        </tr>
-                        <tr>
-                            <th>读者群</th>
-                            <td><coco-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</coco-link></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <ul class="profile-link">
-                    <li>
-                        <nuxt-link to="https://github.com/KazariEX" title="Github" target="_blank">
-                            <fa-icon icon="fab fa-github"/>
-                        </nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="https://twitter.com/KazariEX_0929" title="Twitter" target="_blank">
-                            <fa-icon icon="fab fa-twitter"/>
-                        </nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="https://space.bilibili.com/37810541" title="BiliBili" target="_blank">
-                            <fa-icon icon="fab fa-bilibili"/>
-                        </nuxt-link>
-                    </li>
-                    <li>
-                        <nuxt-link to="/feed" title="RSS">
-                            <fa-icon icon="rss"/>
-                        </nuxt-link>
-                    </li>
-                </ul>
-            </div>
+    <div class="content-widget home-brief" z-main>
+        <div class="content-table home-welcome">
+            <p>
+                <i class="home-qrcode"></i>
+                <span class="content-h2">欢迎来到微光茶馆！</span><br />
+                这里是我的个人网站，主要用于发布小说正文，所有文章均可在<coco-link :to="{ name: `catalogue` }">目录页</coco-link>索引并浏览。<coco-link :to="{ name: `details` }">情报页</coco-link>整理并展示了目前部分可以公开的设定。<coco-link :to="{ name: `search` }">检索页</coco-link>可在全文范围内对特定关键词进行检索。
+            </p>
         </div>
-        <div class="home-complex">
-            <home-update />
-            <home-calendar />
-            <home-blank />
+        <div class="home-introduction">
+            <home-intro-card
+                v-for="i in 2"
+                :style="{ translate: intro.translate[i - 1] }"
+                :layer="intro.layer[i - 1]"
+                :novel="intro.novel[intro.status ? 2 - i : i - 1]"
+                @exchange="exchange"
+            />
         </div>
-        <home-tool-container />
+        <div class="content-table">
+            <a class="profile-avatar">
+                <nuxt-img :src="$config.public.avatar"/>
+            </a>
+            <table class="profile-table">
+                <tbody>
+                    <tr>
+                        <th width="40%">作者</th>
+                        <td>{{ $config.public.author }}</td>
+                    </tr>
+                    <tr>
+                        <th>个人群</th>
+                        <td><coco-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</coco-link></td>
+                    </tr>
+                    <tr>
+                        <th>读者群</th>
+                        <td><coco-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</coco-link></td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="profile-link">
+                <li>
+                    <nuxt-link to="https://github.com/KazariEX" title="Github" target="_blank">
+                        <fa-icon icon="fab fa-github"/>
+                    </nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to="https://twitter.com/KazariEX_0929" title="Twitter" target="_blank">
+                        <fa-icon icon="fab fa-twitter"/>
+                    </nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to="https://space.bilibili.com/37810541" title="BiliBili" target="_blank">
+                        <fa-icon icon="fab fa-bilibili"/>
+                    </nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to="/feed" title="RSS">
+                        <fa-icon icon="rss"/>
+                    </nuxt-link>
+                </li>
+            </ul>
+        </div>
     </div>
+    <div class="home-complex">
+        <home-update />
+        <home-calendar />
+        <home-blank />
+    </div>
+    <home-tool-container />
 </template>
 
 <style lang="scss" scoped>

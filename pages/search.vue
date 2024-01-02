@@ -71,45 +71,43 @@
 </script>
 
 <template>
-    <div class="content-page">
-        <div class="content-widget" z-main>
-            <div class="search-box">
-                <input class="search-input" type="search" v-model="word" @keyup.enter="fullTextSearch()"/>
-                <a class="search-button" @click="fullTextSearch()">全文检索</a>
+    <div class="content-widget" z-main>
+        <div class="search-box">
+            <input class="search-input" type="search" v-model="word" @keyup.enter="fullTextSearch()"/>
+            <a class="search-button" @click="fullTextSearch()">全文检索</a>
+        </div>
+        <div class="search-history">
+            <div class="history-title">
+                <span>历史词条</span>
+                <fa-icon class="cursor-pointer" icon="trash-can" @click="searchHistoryStore.clear()"/>
             </div>
-            <div class="search-history">
-                <div class="history-title">
-                    <span>历史词条</span>
-                    <fa-icon class="cursor-pointer" icon="trash-can" @click="searchHistoryStore.clear()"/>
-                </div>
-                <ul v-if="history.length > 0" class="history-list">
-                    <li v-for="item in history">
-                        <a class="tag text-truncate history-item" @click="clickHistory(item)">{{ item }}</a>
-                    </li>
-                </ul>
+            <ul v-if="history.length > 0" class="history-list">
+                <li v-for="item in history">
+                    <a class="tag text-truncate history-item" @click="clickHistory(item)">{{ item }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div v-if="searchWord.length > 0" class="content-widget" z-main>
+        <div class="search-statistics">
+            <div class="title">
+                “{{ searchWord }}”的检索结果
+            </div>
+            <div class="text">
+                共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次
             </div>
         </div>
-        <div v-if="searchWord.length > 0" class="content-widget" z-main>
-            <div class="search-statistics">
-                <div class="title">
-                    “{{ searchWord }}”的检索结果
+        <div class="search-result">
+            <nuxt-link v-for="item in results" class="result-box" :to="`/book/bikari/${item.index}`">
+                <div class="result-title">
+                    {{ item.title }}
                 </div>
-                <div class="text">
-                    共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次
-                </div>
-            </div>
-            <div class="search-result">
-                <nuxt-link v-for="item in results" class="result-box" :to="`/book/bikari/${item.index}`">
-                    <div class="result-title">
-                        {{ item.title }}
-                    </div>
-                    <span class="result-volume">{{ item.volume }}</span>
-                    <article class="result-part">
-                        <p v-for="part in item.parts" v-html="part"></p>
-                    </article>
-                    <span class="result-count">本章共出现{{ item.count }}次</span>
-                </nuxt-link>
-            </div>
+                <span class="result-volume">{{ item.volume }}</span>
+                <article class="result-part">
+                    <p v-for="part in item.parts" v-html="part"></p>
+                </article>
+                <span class="result-count">本章共出现{{ item.count }}次</span>
+            </nuxt-link>
         </div>
     </div>
 </template>

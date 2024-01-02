@@ -116,29 +116,31 @@
     </div>
     <div class="manage-table-wrapper" :hidden="!data.length">
         <table class="manage-table">
-            <tr>
-                <th width="60px">序号</th>
-                <th>IP</th>
-                <th width="176px">时间</th>
-                <th width="96px">小说</th>
-                <th width="96px">章节</th>
-                <th width="96px">用户</th>
-                <th width="1%">操作</th>
-            </tr>
-            <transition-group>
-                <tr v-for="item, index in data" :key="item._id">
-                    <th>{{ index + 1 }}</th>
-                    <td>{{ item.ip }}</td>
-                    <td>{{ formatTime(item.time) }}</td>
-                    <td>{{ item.novel }}</td>
-                    <td>{{ item.index }}</td>
-                    <td>{{ item.user?.uid || "--" }}</td>
-                    <td class="manage-operators">
-                        <a class="btn" @click="edit(item)"><fa-icon icon="pencil"/></a>
-                        <a class="btn" @click="remove(item, index)"><fa-icon icon="trash-can"/></a>
-                    </td>
+            <tbody>
+                <tr>
+                    <th width="60px">序号</th>
+                    <th>IP</th>
+                    <th width="176px">时间</th>
+                    <th width="96px">小说</th>
+                    <th width="96px">章节</th>
+                    <th width="96px">用户</th>
+                    <th width="1%">操作</th>
                 </tr>
-            </transition-group>
+                <transition-group>
+                    <tr v-for="item, index in data" :key="item._id">
+                        <th>{{ index + 1 }}</th>
+                        <td>{{ item.ip }}</td>
+                        <td>{{ formatTime(item.time) }}</td>
+                        <td>{{ item.novel }}</td>
+                        <td>{{ item.index }}</td>
+                        <td>{{ item.user?.uid || "--" }}</td>
+                        <td class="manage-operators">
+                            <a class="btn" @click="edit(item)"><fa-icon icon="pencil"/></a>
+                            <a class="btn" @click="remove(item, index)"><fa-icon icon="trash-can"/></a>
+                        </td>
+                    </tr>
+                </transition-group>
+            </tbody>
         </table>
     </div>
 </template>

@@ -75,7 +75,7 @@
         position: fixed;
         inset: 0;
         width: min(100%, 512px);
-        max-height: fit-content;
+        height: fit-content;
         margin: auto;
         padding: 32px;
         border-radius: 16px;
