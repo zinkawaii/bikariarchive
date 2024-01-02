@@ -1,6 +1,7 @@
 import { library, config } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import * as fab from "@fortawesome/free-brands-svg-icons";
+import * as far from "@fortawesome/free-regular-svg-icons";
 import * as fas from "@fortawesome/free-solid-svg-icons";
 
 config.autoAddCss = false;
@@ -9,6 +10,7 @@ library.add(
     fab.faBilibili,
     fab.faGithub,
     fab.faTwitter,
+    far.faClock,
     fas.faArrowUp,
     fas.faArrowUpRightFromSquare,
     fas.faArrowRight,
@@ -23,6 +25,7 @@ library.add(
     fas.faLink,
     fas.faMoon,
     fas.faPaste,
+    fas.faPen,
     fas.faPencil,
     fas.faPersonPraying,
     fas.faQuoteLeft,

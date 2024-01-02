@@ -18,7 +18,8 @@ export const ReadRecordModel = defineMongooseModel({
         },
         index: {
             type: String,
-            required: true
+            required: true,
+            index: true
         },
         user: {
             type: Schema.Types.ObjectId,

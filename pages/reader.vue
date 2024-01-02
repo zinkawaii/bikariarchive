@@ -44,30 +44,8 @@
 
     const state = ref({
         readCount: 0,
-        date: {
-            type: "",
-            value: "",
-            tip: ""
-        },
         content: ""
     });
-
-    //日期
-    const { date } = state.value;
-    if (art.date) {
-        date.type = "发布";
-        date.value = art.date;
-    }
-    else if (art.refactored) {
-        date.type = "重构";
-        date.value = art.refactored;
-        date.tip = "该章节源自旧稿，是在本卷大改时调整章节顺序与修改细节后的产物\n在剧情安排与走向上没有大幅度的变化，但发布时间因结构的切分而难以标明";
-    }
-    else {
-        date.type = "发布";
-        date.value = "很久以前";
-        date.tip = "该章节的发布时间已经无法追溯";
-    }
 
     //上一章
     const toLast = art.isFirstInVol ? "上一卷" : "上一章";
@@ -152,7 +130,14 @@
                 <h1>{{ art.title }}</h1>
                 <div class="novel-information">
                     <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
-                    <span :title="state.date.tip">{{ state.date.type }}时间：<time>{{ state.date.value }}</time></span>
+                    <span class="novel-date">
+                        <fa-icon icon="pen"/>
+                        <time>{{ art.publishDate }}</time>
+                    </span>
+                    <span class="novel-date">
+                        <fa-icon :icon="[`far`, `clock`]"/>
+                        <time>{{ art.updateDate }}</time>
+                    </span>
                 </div>
             </div>
             <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
@@ -207,10 +192,12 @@
         font-size: 12px;
         line-height: 20px;
         color: var(--color-gray);
+    }
 
-        span {
-            display: inline-block;
-        }
+    .novel-date {
+        display: flex;
+        align-items: center;
+        gap: 4px;
     }
 
     .novel-text {

@@ -93,6 +93,14 @@ class Article implements WithMetaAttrs {
     get nextIndex() {
         return this.novelInfo.chapters[this.order + 1].index;
     }
+
+    get publishDate() {
+        return this.date ?? this.refactored ?? "很久以前";
+    }
+
+    get updateDate() {
+        return this.updated ?? this.publishDate;
+    }
 }
 
 export default Article;

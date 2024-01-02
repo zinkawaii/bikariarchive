@@ -182,13 +182,13 @@ const Zin = new class Z {
     }
 
     //性能计时
-    timer(sign: string, func: () => any, times = 1) {
+    async timer(sign: string, func: () => any, times = 1) {
         //开始标记
         performance.mark("start");
 
         //运行函数
         for (let i = 0; i < times; i++) {
-            func();
+            await func();
         }
 
         //结束标记
