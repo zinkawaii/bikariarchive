@@ -12,22 +12,24 @@
         return props.sortBy === "updated";
     });
 
-    const jRecent = Object.entries(jArticle)
-    .filter(([, { type }]) => type === props.type)
-    .map(([novel, { chapters }]) => {
-        return chapters.map((c) => ({
-            ...c,
-            novel
-        }));
-    })
-    .flat(1)
-    .filter((c) => Reflect.has(c, "date"))
-    .sort((a, b) => {
-        const x = sortByUpdated && a.updated || a.date;
-        const y = sortByUpdated && b.updated || b.date;
-        return y.localeCompare(x);
-    })
-    .slice(0, props.limit);
+    const jRecent = computed(() => {
+        return Object.entries(jArticle)
+            .filter(([, { type }]) => type === props.type)
+            .map(([novel, { chapters }]) => {
+                return chapters.map((c) => ({
+                    ...c,
+                    novel
+                }));
+            })
+            .flat(1)
+            .filter((c) => Reflect.has(c, "date"))
+            .sort((a, b) => {
+                const x = sortByUpdated.value && a.updated || a.date;
+                const y = sortByUpdated.value && b.updated || b.date;
+                return y.localeCompare(x);
+            })
+            .slice(0, props.limit);
+    });
 </script>
 
 <template>
