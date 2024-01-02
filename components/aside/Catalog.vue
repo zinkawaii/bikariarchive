@@ -22,14 +22,14 @@
 
     //本卷章节
     const jChapter = computed(() => {
-        return jNovel.value.chapter.filter((c) => c.volume === currentVolume.value);
+        return jNovel.value.chapters.filter((c) => c.volume === currentVolume.value);
     });
 </script>
 
 <template>
     <aside-widget class="aside-catalog">
         <select class="content-h2 catalog-volume" v-model="currentVolume">
-            <option v-for="({ title }, i) in jNovel.volume" :value="i">{{ title }}</option>
+            <option v-for="({ title }, i) in jNovel.volumes" :value="i">{{ title }}</option>
         </select>
         <ul class="catalog-list">
             <li v-for="{ index, title } in jChapter">

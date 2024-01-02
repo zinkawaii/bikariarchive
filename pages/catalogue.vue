@@ -12,13 +12,13 @@
     });
 
     const volumes = computed(() => {
-        return jArticle[novel.value].volume.map((item) => {
+        return jArticle[novel.value].volumes.map((item) => {
             return item.title;
         });
     });
 
     const chapters = computed(() => {
-        return jArticle[novel.value].chapter.filter((c) => {
+        return jArticle[novel.value].chapters.filter((c) => {
             return curOrder.value.volume === c.volume;
         });
     });

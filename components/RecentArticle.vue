@@ -14,8 +14,8 @@
 
     const jRecent = Object.entries(jArticle)
     .filter(([, { type }]) => type === props.type)
-    .map(([novel, { chapter }]) => {
-        return chapter.map((c) => ({
+    .map(([novel, { chapters }]) => {
+        return chapters.map((c) => ({
             ...c,
             novel
         }));
@@ -35,7 +35,7 @@
         <li v-for="{ index, title, date, updated, volume, novel } in jRecent" class="recent-item">
             <coco-link class="text-truncate recent-title" :to="{ name: `reader`, params: { novel, index } }">{{ title }}</coco-link>
             <div class="recent-info">
-                <span class="text-truncate">{{ jArticle[novel].volume[volume].title }}</span>
+                <span class="text-truncate">{{ jArticle[novel].volumes[volume].title }}</span>
                 <time>{{ sortByUpdated && updated || date }}</time>
             </div>
         </li>

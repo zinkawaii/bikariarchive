@@ -25,7 +25,7 @@ export default defineCustomHandler(async (event) => {
         word = word.slice(0, 64);
 
         const jNovel = jArticle.bikari;
-        const jChapter = jNovel.chapter;
+        const jChapter = jNovel.chapters;
 
         //按章节遍历
         for (const item of jChapter) {

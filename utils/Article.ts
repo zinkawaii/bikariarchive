@@ -16,12 +16,12 @@ class Article implements WithMetaAttrs {
     novel        = "";    //小说名
     volume       = -1;    //卷序号
     order        = -1;    //章序号
-    order_in_vol = -1;    //章序号（卷内）
+    orderInVol   = -1;    //章序号（卷内）
     index        = "";    //章文件名
     title        = "";    //章节名
-    date         = "";    //日期
-    updated      = "";    //更新日期
-    refactored   = "";    //重构日期
+    date         = null;  //日期
+    updated      = null;  //更新日期
+    refactored   = null;  //重构日期
     ending       = false; //终章标记
     runtime      = false; //运行时
     wordCount    = 0;     //字数
@@ -39,33 +39,25 @@ class Article implements WithMetaAttrs {
         this.error = true;
 
         //参数检测
-        if (jArticle[novel]) {
+        if (novel in jArticle) {
             const jNovel = jArticle[novel];
-            const jVolume = jNovel.volume;
-            const jChapter = jNovel.chapter;
+            const jChapter = jNovel.chapters;
 
-            //用于计算卷内章序号
-            const temp = {
-                vol: 0,
-                order: -1
-            };
+            const order = jNovel.$map.indexOf(index);
+            if (order === -1) {
+                return;
+            }
 
-            for (let i = 0; i < jChapter.length; i++) {
-                const c: WithMetaAttrs = jChapter[i];
+            const c = jChapter[order];
+            Object.assign(this, c);
+            this.order = order;
+            this.error = false;
 
-                if (c.volume !== temp.vol) {
-                    temp.vol++, temp.order = 0;
-                }
-                else {
-                    temp.order++;
-                }
-                if (c.index === index) {
-                    Object.assign(this, c);
-                    this.order = i;
-                    this.order_in_vol = temp.order;
-                    this.error = false;
-                    break;
-                }
+            //计算卷内序号
+            const jChapterInVol = jChapter.filter((n) => n.volume === c.volume);
+            for (const item of jChapterInVol) {
+                this.orderInVol++;
+                if (item.index === index) break;
             }
         }
     }
@@ -75,7 +67,7 @@ class Article implements WithMetaAttrs {
     }
 
     get volumeInfo() {
-        return this.novelInfo.volume[this.volume];
+        return this.novelInfo.volumes[this.volume];
     }
 
     get isFirst() {
@@ -83,23 +75,23 @@ class Article implements WithMetaAttrs {
     }
 
     get isLast() {
-        return this.order === this.novelInfo.chapter.length - 1;
+        return this.order === this.novelInfo.chapters.length - 1;
     }
 
     get isFirstInVol() {
-        return (this.novelInfo.chapter[this.order - 1]?.volume ?? -Infinity) < this.volume;
+        return (this.novelInfo.chapters[this.order - 1]?.volume ?? -Infinity) < this.volume;
     }
 
     get isLastInVol() {
-        return (this.novelInfo.chapter[this.order + 1]?.volume ?? Infinity) > this.volume;
+        return (this.novelInfo.chapters[this.order + 1]?.volume ?? Infinity) > this.volume;
     }
 
     get lastIndex() {
-        return this.novelInfo.chapter[this.order - 1].index;
+        return this.novelInfo.chapters[this.order - 1].index;
     }
 
     get nextIndex() {
-        return this.novelInfo.chapter[this.order + 1].index;
+        return this.novelInfo.chapters[this.order + 1].index;
     }
 }
 

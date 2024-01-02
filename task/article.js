@@ -92,12 +92,13 @@ function simpleParse(pathname) {
             break;
         case "blog":
             index = attributes.abbrlink;
+            delete attributes.abbrlink;
             break;
     }
     jMap[novel][index] = filename;
 
     //写入数据
-    jMeta[novel].chapter[pathname] = {
+    jMeta[novel].chapters[pathname] = {
         index,
         volume,
         runtime,
@@ -109,21 +110,17 @@ function simpleParse(pathname) {
 function generateMetaInfo() {
     const filelist = glob.globSync(`${srcDir}/**/*.md`);
 
-    //序号与文件名的映射表
     for (const key in jMeta) {
+        //编号与文件名的映射表
         jMap[key] = {};
 
-        //在元数据中按顺序填入文章
-        jMeta[key].chapter = {};
-        filelist
-        .filter((pathname) => pathname.includes(key[0].toUpperCase() + key.slice(1)))
-        .sort((a, b) => a.localeCompare(b))
-        .forEach((pathname) => {
-            jMeta[key].chapter[pathname] = {};
-        });
+        //章节对象集合
+        jMeta[key].chapters = {};
     }
 
-    filelist.forEach(simpleParse);
+    //按字母顺序解析章节
+    filelist.sort((a, b) => a.localeCompare(b)).forEach(simpleParse);
+
     outputFile();
 }
 
@@ -132,8 +129,11 @@ function outputFile() {
     const jNeta = structuredClone(jMeta);
 
     for (const key in jNeta) {
-        const jChapter = Object.values(jNeta[key].chapter);
-        jNeta[key].chapter = jChapter;
+        const jChapter = Object.values(jNeta[key].chapters);
+        jNeta[key].chapters = jChapter;
+        jNeta[key].$map = jChapter.map((c, i) => {
+            return c.index;
+        });
     }
 
     fs.outputFileSync(metaOutDir, JSON.stringify(jNeta));

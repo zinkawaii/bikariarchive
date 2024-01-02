@@ -13,8 +13,8 @@ export default {
         "/tools/excalc",
         "/tools/lyricaxis",
         "/tools/namaemaker",
-        ...Object.entries(jArticle).map(([novel, { chapter }]) => {
-            return chapter.map((item) => {
+        ...Object.entries(jArticle).map(([novel, { chapters }]) => {
+            return chapters.map((item) => {
                 return `/book/${novel}/${item.index}`;
             });
         }),
