@@ -19,13 +19,17 @@
         //限制长度
         w = w.slice(0, 64);
 
-        const { data } = await useFetch("/api/search", { query: { word: w } });
+        //会话存储对象
+        const session = useSessionStorage("search-result", {});
+
+        //获取数据
+        const data = session.value[w] ?? (await useFetch("/api/search", { query: { word: w } })).data.value;
 
         results.value.length = 0;
         searchWord.value = w;
         router.replace({ query: { word: w } });
 
-        const { error, results: res } = data.value;
+        const { error, results: res } = data;
         if (error !== 0) return;
 
         const art = new Article();
@@ -46,6 +50,9 @@
 
         //写入历史记录
         searchHistoryStore.push(w);
+
+        //写入会话存储
+        session.value[w] = data;
     });
 
     //带参数进入页面时
@@ -55,12 +62,6 @@
     }, {
         immediate: true
     });
-
-    //点击历史词条
-    function clickHistory(value) {
-        word.value = value;
-        fullTextSearch(value);
-    }
 
     //总出现次数
     const totalCount = computed(() => {
@@ -72,10 +73,10 @@
 
 <template>
     <div class="content-widget" z-main>
-        <div class="search-box">
-            <input class="search-input" type="search" v-model="word" @keyup.enter="fullTextSearch()"/>
-            <a class="search-button" @click="fullTextSearch()">全文检索</a>
-        </div>
+        <form class="search-box" @submit.prevent="fullTextSearch()">
+            <input class="search-input" type="search" v-model="word"/>
+            <button class="search-button">全文检索</button>
+        </form>
         <div class="search-history">
             <div class="history-title">
                 <span>历史词条</span>
@@ -83,7 +84,7 @@
             </div>
             <ul v-if="history.length > 0" class="history-list">
                 <li v-for="item in history">
-                    <a class="tag text-truncate history-item" @click="clickHistory(item)">{{ item }}</a>
+                    <nuxt-link class="tag text-truncate history-item" :to="toSearch(item)">{{ item }}</nuxt-link>
                 </li>
             </ul>
         </div>
