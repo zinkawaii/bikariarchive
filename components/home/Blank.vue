@@ -14,10 +14,12 @@
     ];
 
     //每7秒随机显示
-    Zin.setInterval(() => {
-        i.value = Zin.randInt(0, serifs.length - 1);
-    }, {
-        duration: 7000
+    onMounted(() => {
+        Zin.setInterval(() => {
+            i.value = Zin.randInt(0, serifs.length - 1);
+        }, {
+            duration: 7000
+        });
     });
 </script>
 

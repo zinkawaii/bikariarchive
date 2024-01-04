@@ -4,7 +4,7 @@
 
 <style lang="scss">
     .coco-title {
-        display: inline-block;
+        width: fit-content;
         margin-bottom: 4px;
 
         &::after {

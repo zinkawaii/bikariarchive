@@ -10,7 +10,7 @@
         <section class="entry-section entry-main">
             <div class="left">
                 <div class="entry-summary">
-                    <p v-for="text in toSplit(data.summary)" v-html="text"></p>
+                    <p v-for="text in splitByNewline(data.summary)" v-html="text"></p>
                 </div>
                 <div v-if="data.info?.length > 0" class="div-table entry-brief">
                     <dl v-for="i in data.info.length">
@@ -56,7 +56,7 @@
                             <h3>{{ item.name }}</h3>
                         </template>
                     </div>
-                    <p v-for="text in toSplit(item.content)" v-html="text"></p>
+                    <p v-for="text in splitByNewline(item.content)" v-html="text"></p>
                 </div>
             </template>
             <p v-else>未知。</p>

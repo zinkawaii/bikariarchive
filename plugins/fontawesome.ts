@@ -11,6 +11,8 @@ library.add(
     fab.faGithub,
     fab.faTwitter,
     far.faClock,
+    fas.faAnglesDown,
+    fas.faAnglesUp,
     fas.faArrowUp,
     fas.faArrowUpRightFromSquare,
     fas.faArrowRight,

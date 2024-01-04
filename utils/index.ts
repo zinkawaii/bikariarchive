@@ -4,7 +4,7 @@ export function getByteLength(str: string) {
 }
 
 //以换行符切分字符串
-export function toSplit(text: string) {
+export function splitByNewline(text: string) {
     return text?.split("\n");
 }
 
