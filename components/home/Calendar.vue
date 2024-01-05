@@ -337,7 +337,7 @@
     }
 
     .calendar-detail-date {
-        font-family: TengXiang;
+        font-family: var(--font-smooth);
         font-size: 32px;
         letter-spacing: 2px;
         color: var(--color-theme-text);

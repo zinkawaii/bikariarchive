@@ -45,7 +45,7 @@
 
         .title {
             display: block;
-            font-family: TengXiang;
+            font-family: var(--font-smooth);
             text-shadow: var(--text-shadow);
         }
 

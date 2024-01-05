@@ -31,6 +31,11 @@
     --theme-l-light          : 95%;
     --theme-l-dark           : 75%;
     --theme-l-text           : 67%;
+    --font                   :
+        system-ui, -apple-system, blinkmacsystemfont, "Helvetica Neue",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Source Han Sans CN", sans-serif;
+    --font-smooth            : tengxiang, var(--font);
+    --circle-radius          : calc(1px * infinity);
 }
 
 [theme="hatsusora"] {
@@ -96,9 +101,7 @@ html {
 }
 
 body {
-    font-family:
-        system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Source Han Sans CN", sans-serif;
+    font-family: var(--font);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;
@@ -196,6 +199,10 @@ textarea {
     outline: none;
 }
 
+::placeholder {
+    color: var(--color-gray);
+}
+
 ::selection {
     background-color: var(--color-selection-bg);
     color: white;
@@ -261,7 +268,7 @@ textarea {
 }
 
 .content-h2 {
-    font-family: TengXiang;
+    font-family: var(--font-smooth);
     font-size: 20px;
     line-height: 26px;
 }
@@ -405,7 +412,7 @@ textarea {
         position: relative;
         margin-block: 16px 4px;
         padding-left: 16px;
-        font-family: TengXiang;
+        font-family: var(--font-smooth);
         line-height: 36px;
 
         &::before {
@@ -421,7 +428,7 @@ textarea {
 
     h3 {
         margin-block: 12px 4px;
-        font-family: TengXiang;
+        font-family: var(--font-smooth);
         line-height: 24px;
     }
 

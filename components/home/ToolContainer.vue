@@ -42,7 +42,7 @@
         box-shadow: var(--box-shadow);
         background-position: center;
         background-size: cover;
-        font-family: TengXiang;
+        font-family: var(--font-smooth);
         word-break: keep-all;
         text-shadow: $shadow;
         color: white;

@@ -192,7 +192,7 @@
             width: fit-content;
             height: fit-content;
             margin: auto;
-            font-family: TengXiang;
+            font-family: var(--font-smooth);
             font-size: 18px;
             text-shadow: var(--text-shadow);
             color: white;

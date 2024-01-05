@@ -88,7 +88,7 @@
 
         > a {
             margin: auto;
-            font-family: TengXiang;
+            font-family: var(--font-smooth);
             font-size: 32px;
             text-shadow: 1px 1px 4px rgb(0 0 0 / 50%);
             color: white;
