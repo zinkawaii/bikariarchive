@@ -3,7 +3,8 @@
         title: string,
         type?: string,
         name?: string,
-        list?: string[]
+        desc?: string,
+        options?: string[]
     }>();
 
     const settingStore = useSettingStore();
@@ -20,11 +21,14 @@
 
 <template>
     <div class="mb-form">
-        <span class="form-name">{{ title }}</span>
+        <div>
+            <div class="form-title">{{ title }}</div>
+            <div class="form-desc">{{ desc }}</div>
+        </div>
         <div class="form-area">
             <template v-if="type === `select`">
                 <span
-                    v-for="(item, i) in list"
+                    v-for="(item, i) in options"
                     class="form-select"
                     :class="{ active: isActive(i) }"
                     @click="setValue(i)"
@@ -37,27 +41,30 @@
 
 <style lang="scss" scoped>
     .mb-form {
-        display: flex;
-        overflow: hidden;
-        height: 40px;
-        margin-block: 16px;
-        border: 1px solid var(--color-border-dark);
-        border-radius: 8px;
-        background-color: var(--color-background);
-        line-height: 38px;
+        display: grid;
+        grid-template-columns: 0.8fr 1fr;
+        align-items: center;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--color-border-light);
     }
 
-    .form-name {
-        margin: auto;
-        padding-inline: 1em;
-        border-right: 1px solid var(--color-border-dark);
-        line-height: 1;
+    .form-title {
+        line-height: 24px;
+    }
+
+    .form-desc {
+        font-size: 12px;
+        color: var(--color-gray);
     }
 
     .form-area {
         display: flex;
-        flex: 1;
-        justify-content: space-between;
+        gap: 16px;
+        overflow: hidden;
+        padding-inline: 16px;
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        line-height: 38px;
     }
 
     .form-select {
@@ -65,28 +72,37 @@
         flex: 1;
         justify-content: center;
         position: relative;
+        transition: all 0.25s;
         cursor: pointer;
 
         &::after {
             content: "";
-            align-self: flex-end;
             position: absolute;
-            opacity: 0;
+            top: 0;
             width: 75%;
             height: 3px;
+            border-radius: 1.5px;
             background-color: var(--color-theme);
-            transform: scale(1, 0);
-            transform-origin: bottom;
-            transition: all 0.2s ease-out;
+            transform-origin: top;
+            transition: all 0.25s;
+            scale: 1 0;
         }
 
-        &:is(.active, :hover) {
+        &:is(.active, :hover)::after {
+            scale: 1;
+        }
+
+        &.active {
             color: var(--color-theme-text);
 
             &::after {
-                opacity: 1;
-                transform: scale(1);
+                top: 35px;
             }
+        }
+
+        &:is(.active:has(~ :hover), :hover ~ .active)::after {
+            transform-origin: bottom;
+            scale: 1 0;
         }
     }
 </style>

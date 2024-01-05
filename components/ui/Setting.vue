@@ -12,24 +12,18 @@
     ]);
 
     const shortcuts = ref({
-        "shortcut-last": {
-            title: "上一章节",
-            value: keyToStr(settingStore.get("shortcut-last"))
-        },
-        "shortcut-next": {
-            title: "下一章节",
-            value: keyToStr(settingStore.get("shortcut-next"))
-        }
+        "shortcut-last": keyToStr(settingStore.get("shortcut-last")),
+        "shortcut-next": keyToStr(settingStore.get("shortcut-next"))
     });
 
     //键盘按下时
     function onShortcutKeypress(name) {
-        shortcuts.value[name].value = "";
+        shortcuts.value[name] = "";
     }
 
     //键盘松开时
     function onShortcutKeyup(name, event) {
-        shortcuts.value[name].value = keyToStr(event.key);
+        shortcuts.value[name] = keyToStr(event.key);
         settingStore.set(name, event.key);
     }
 
@@ -48,23 +42,22 @@
         <div v-if="settingStore.isOpened" class="z-setting">
             <fa-icon class="xmark" icon="xmark" @click="settingStore.close()"/>
             <coco-title>全局设置</coco-title>
-            <mb-form title="主题颜色" type="select" name="theme" :list="[`初空`, `菖蒲`, `早樱`]"/>
-            <mb-form title="夜间模式" type="select" name="dark-mode" :list="[`自动`, `白昼`, `暗夜`]"/>
-            <mb-form title="边栏显隐" type="select" name="sidebar-display" :list="[`默认`, `显现`, `隐匿`]"/>
+            <setting-form title="主题颜色" desc="仅在非夜间模式下生效" type="select" name="theme" :options="[`初空`, `菖蒲`, `早樱`]"/>
+            <setting-form title="夜间模式" desc="每天早晚 6 点自动切换" type="select" name="dark-mode" :options="[`自动`, `白昼`, `暗夜`]"/>
+            <setting-form title="边栏显隐" desc="侧边栏是否跟随其他 UI 折叠" type="select" name="sidebar-display" :options="[`默认`, `显现`, `隐匿`]"/>
             <coco-title>快捷键设置</coco-title>
-            <div class="shortcut-box">
-                <mb-form v-for="({ title, value }, name) in shortcuts" :title="title" type="input">
-                    <input
-                        class="input-line"
-                        :value="value"
-                        @keypress.stop="onShortcutKeypress(name)"
-                        @keyup.stop="onShortcutKeyup(name, $event)"
-                    />
-                </mb-form>
-            </div>
+            <setting-form title="切换章节" type="input">
+                <input
+                    v-for="(value, name) in shortcuts"
+                    class="input-line"
+                    :value="value"
+                    @keypress.stop="onShortcutKeypress(name)"
+                    @keyup.stop="onShortcutKeyup(name, $event)"
+                />
+            </setting-form>
             <coco-title>阅读设置</coco-title>
-            <mb-form title="字体选择" type="select" name="font-family" :list="[`系统默认`, `宋体`, `楷体`]"/>
-            <mb-form title="字体大小" type="select" name="font-size" :list="[`小`, `中`, `大`]"/>
+            <setting-form title="字体选择" type="select" name="font-family" :options="[`默认`, `宋体`, `楷体`]"/>
+            <setting-form title="字体大小" type="select" name="font-size" :options="[`小`, `中`, `大`]"/>
         </div>
     </transition>
     <mb-mask :when="settingStore.isOpened" @click="settingStore.close()"/>
@@ -74,13 +67,12 @@
     .z-setting {
         position: fixed;
         inset: 0;
-        width: min(100%, 512px);
+        width: min(100%, 556px);
         height: fit-content;
         margin: auto;
         padding: 32px;
         border-radius: 16px;
-        background-color: var(--color-background-alpha);
-        backdrop-filter: blur(4px);
+        background-color: var(--color-background);
     }
 
     .slide-fade-enter-active, .slide-fade-leave-active {
@@ -92,9 +84,12 @@
         translate: 0 -50%;
     }
 
-    .shortcut-box {
-        display: flex;
-        gap: 32px;
+    .mb-form {
+        margin-top: 16px;
+
+        + h2 {
+            margin-top: 32px;
+        }
     }
 
     .input-line {
@@ -107,10 +102,6 @@
             height: 100vh;
             padding: 16px;
             border-radius: 0;
-        }
-
-        .shortcut-box {
-            display: block;
         }
     }
 </style>
