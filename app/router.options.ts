@@ -29,7 +29,10 @@ export default <RouterConfig> {
         {
             name: "friend",
             path: "/friend",
-            component: () => import("~/pages/friend.vue")
+            component: () => import("~/pages/friend.vue"),
+            meta: {
+                comment: true
+            }
         },
         {
             name: "home",
@@ -40,7 +43,10 @@ export default <RouterConfig> {
         {
             name: "reader",
             path: "/book/:novel/:index",
-            component: () => import("~/pages/reader.vue")
+            component: () => import("~/pages/reader.vue"),
+            meta: {
+                comment: true
+            }
         },
         {
             name: "search",
@@ -50,7 +56,10 @@ export default <RouterConfig> {
         {
             name: "entry",
             path: "/:title",
-            component: () => import("~/pages/entry/index.vue")
+            component: () => import("~/pages/entry/index.vue"),
+            meta: {
+                comment: true
+            }
         },
         {
             name: "tools",
@@ -78,7 +87,7 @@ export default <RouterConfig> {
         {
             name: "user",
             path: "/user",
-            redirect: { name: "home" },
+            redirect: { name: "unknown" },
             component: () => import("~/pages/user/index.vue"),
             children: [
                 {

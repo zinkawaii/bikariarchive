@@ -39,14 +39,19 @@
 </script>
 
 <template>
-    <div class="sign-single">
-        <input type="text" class="sign-input" required v-model="nickname" @blur="warn.nickname = false"/>
-        <div class="sign-underline"></div>
-        <span class="sign-placeholder" :class="{ warn: warn.nickname }">昵称／UID／电子邮箱</span>
-    </div>
-    <div class="sign-single">
-        <input type="password" class="sign-input" required v-model="password" @blur="warn.password = false" @keyup.enter="submit"/>
-        <div class="sign-underline"></div>
-        <span class="sign-placeholder" :class="{ warn: warn.password }">密码</span>
-    </div>
+    <coco-input
+        type="text"
+        placeholder="昵称／UID／电子邮箱"
+        :warn="warn.nickname"
+        v-model="nickname"
+        @blur="warn.nickname = false"
+    />
+    <coco-input
+        type="password"
+        placeholder="密码"
+        :warn="warn.password"
+        v-model="password"
+        @blur="warn.password = false"
+        @keyup.enter="submit"
+    />
 </template>

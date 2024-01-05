@@ -102,7 +102,7 @@
 
     .scale-enter-from, .scale-leave-to {
         opacity: 0;
-        scale: 0.5;
+        scale: 0.75;
     }
 
     .fade-enter-active, .fade-leave-active {
@@ -172,6 +172,10 @@
         }
     }
 
+    :deep(.coco-input) {
+        margin-top: 22px;
+    }
+
     .user-profile {
         display: flex;
         gap: 1em;
@@ -204,65 +208,6 @@
 
         .sign-innerworld {
             mask-image: linear-gradient(to top, transparent, white);
-        }
-    }
-</style>
-
-<style lang="scss">
-    .sign-single {
-        display: grid;
-        position: relative;
-        margin-top: 22px;
-        line-height: 20px;
-    }
-
-    .sign-input {
-        padding: 4px;
-        background-color: transparent;
-
-        &:where(:focus) {
-            ~ .sign-underline::before {
-                width: 100%;
-            }
-
-            ~ .sign-placeholder {
-                color: var(--color-theme-text);
-            }
-        }
-
-        &:where(:focus, :valid) {
-            ~ .sign-placeholder {
-                top: -1em;
-                font-size: 12px;
-                line-height: 1em;
-            }
-        }
-    }
-
-    .sign-underline {
-        height: 1px;
-        background-color: var(--color-border-light);
-
-        &::before {
-            content: "";
-            display: block;
-            width: 0;
-            height: 1px;
-            background-color: var(--color-theme-dark);
-            transition: all 0.4s;
-        }
-    }
-
-    .sign-placeholder {
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        color: var(--color-gray);
-        transition: all 0.25s;
-        pointer-events: none;
-
-        &.warn {
-            color: var(--color-danger);
         }
     }
 </style>

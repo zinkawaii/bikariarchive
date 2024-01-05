@@ -1,3 +1,4 @@
+export * from "./comment-panel";
 export * from "./confirm";
 export * from "./image-viewer";
 export * from "./read-record";

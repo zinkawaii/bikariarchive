@@ -81,7 +81,7 @@
 
     .slide-fade-enter-from, .slide-fade-leave-to {
         opacity: 0;
-        translate: 0 -50%;
+        translate: 0 -25%;
     }
 
     .mb-form {

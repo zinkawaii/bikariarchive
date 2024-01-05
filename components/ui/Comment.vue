@@ -1,0 +1,79 @@
+<script setup>
+    const commentPanelStore = useCommentPanelStore();
+    const route = useRoute();
+
+    const comments = ref();
+    const count = ref(0);
+    const page = ref(1);
+
+    watch(() => [route.path, page.value], getComments, {
+        immediate: true
+    });
+
+    //获取评论
+    function getComments() {
+        $fetch("/api/comments", {
+            query: {
+                path: route.path,
+                page: page.value
+            }
+        })
+        .then(({ error, count: i, data }) => {
+            if (error !== 0) return;
+
+            //总评论数
+            count.value = i;
+
+            for (const x of data) {
+                //子评论回归指向
+                (function func(x) {
+                    for (const y of x.children) {
+                        y.parent = x;
+                        func(y);
+                    }
+                })(x);
+
+                //将嵌套子评论拍平
+                for (const y of x.children) {
+                    if (y.children.length > 0) {
+                        x.children.push(...y.children);
+                        y.children.length = 0;
+                    }
+                }
+
+                //按时间排序
+                x.children.sort((a, b) => a.time.localeCompare(b.time));
+            }
+            comments.value = data;
+        });
+    }
+
+    //发表评论
+    function postComment() {
+        commentPanelStore.open({
+            onReply: getComments
+        });
+    }
+</script>
+
+<template>
+    <div class="content-widget z-comment" z-main>
+        <div class="comment-title">
+            <h2>评论 <span class="text-gray">{{ count }}</span></h2>
+            <a class="btn" @click="postComment"><fa-icon icon="comment-dots"/> 发表评论</a>
+        </div>
+        <comment-item v-for="item in comments" :key="item.id" :data="item" @update="getComments"/>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+    .comment-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > h2 {
+            font-family: var(--font-smooth);
+        }
+    }
+</style>

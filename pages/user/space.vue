@@ -110,11 +110,6 @@
             background-color: var(--color-background);
             color: var(--color-text);
         }
-
-        &::placeholder,
-        &:-webkit-input-placeholder {
-            color: rgb(214 222 228);
-        }
     }
 
     @media (width < 1024px) {

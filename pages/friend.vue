@@ -25,9 +25,6 @@
                 </div>
             </nuxt-link>
         </div>
-        <blockquote>
-            <p>暂不开放评论区，友链数据可参考以下 Schema 结构。</p>
-        </blockquote>
         <mb-code class="friend-schema" lang="json">{{ schema }}</mb-code>
     </div>
 </template>

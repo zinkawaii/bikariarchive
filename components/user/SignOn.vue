@@ -57,7 +57,7 @@
         all() {
             for (const key of ["nickname", "email", "password"]) {
                 const { target, reg, message } = this[key];
-                const msg = !reg.test(target.value) ? message : this[key].validate();
+                const msg = !reg.test(target.value) ? message : this[key].validate?.();
                 if (msg?.length > 0) {
                     tip.value[key] = `* ${msg}`;
                     return false;
@@ -151,33 +151,43 @@
 </script>
 
 <template>
-    <div class="sign-single">
-        <input class="sign-input" required v-model="nickname" @blur="tip.nickname = ``"/>
-        <div class="sign-underline"></div>
-        <span class="sign-placeholder" :class="{ warn: tip.nickname }">{{ tip.nickname || "昵称" }}</span>
-    </div>
-    <div class="sign-single">
-        <input class="sign-input" required v-model="email" @blur="tip.email = ``"/>
-        <div class="sign-underline"></div>
-        <span class="sign-placeholder" :class="{ warn: tip.email }">{{ tip.email || "电子邮箱" }}</span>
-    </div>
+    <coco-input
+        type="text"
+        placeholder="昵称"
+        :warn-tip="tip.nickname"
+        v-model="nickname"
+        @blur="tip.nickname = ``"
+    />
+    <coco-input
+        type="text"
+        placeholder="电子邮箱"
+        :warn-tip="tip.email"
+        v-model="email"
+        @blur="tip.email = ``"
+    />
     <div class="sign-verify">
-        <div class="sign-single">
-            <input class="sign-input" type="number" required v-model="verify" @blur="tip.verify = ``" @input="verifyInput"/>
-            <div class="sign-underline"></div>
-            <span class="sign-placeholder" :class="{ warn: tip.verify }">{{ tip.verify || "验证码" }}</span>
-        </div>
+        <coco-input
+            type="number"
+            placeholder="验证码"
+            :warn-tip="tip.verify"
+            v-model="verify"
+            @blur="tip.verify = ``"
+            @input="verifyInput"
+        />
         <a :class="[`btn`, { disabled: verifyStage.stage > 0 }]" @click="verifySend">{{
             verifyStage.stage === 1 ? "发送中……" :
             verifyStage.stage === 2 ? `已发送(${verifyStage.delay})` :
             "发送验证码"
         }}</a>
     </div>
-    <div class="sign-single">
-        <input class="sign-input" type="password" required v-model="password" @blur="tip.password = ``" @keyup.enter="submit"/>
-        <div class="sign-underline"></div>
-        <span class="sign-placeholder" :class="{ warn: tip.password }">{{ tip.password || "密码" }}</span>
-    </div>
+    <coco-input
+        type="password"
+        placeholder="密码"
+        :warn-tip="tip.password"
+        v-model="password"
+        @blur="tip.password = ``"
+        @keyup.enter="submit"
+    />
 </template>
 
 <style lang="scss" scoped>

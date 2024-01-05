@@ -9,12 +9,14 @@
     <div class="sotomi">
         <main class="nakami">
             <slot></slot>
+            <z-comment v-if="$route.meta.comment"/>
             <z-footer />
         </main>
         <z-sidebar />
     </div>
     <z-setting />
     <user-sign />
+    <comment-panel />
     <mb-image-viewer />
     <mb-confirm />
     <mb-fps />
@@ -69,6 +71,10 @@
     }
 
     .user-sign {
+        z-index: 512;
+    }
+
+    .comment-panel {
         z-index: 512;
     }
 
