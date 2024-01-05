@@ -151,8 +151,9 @@
         border: 1px solid var(--color-border-light);
         border-radius: 4px;
         background-color: var(--color-background);
+        transition: all 0.4s;
 
-        :has(~ :focus) {
+        &:focus-within {
             border-color: var(--color-theme-dark);
         }
 

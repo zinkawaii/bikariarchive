@@ -1,3 +1,4 @@
+import prismjs from "vite-plugin-prismjs";
 import { serverConfig, clientConfig } from "./app/zin.config";
 import sitemapConfig from "./app/sitemap.config";
 import robotsConfig from "./app/robots.config";
@@ -22,6 +23,7 @@ export default defineNuxtConfig({
     },
     css: [
         "@fortawesome/fontawesome-svg-core/styles.css",
+        "prism-themes/themes/prism-one-dark.min.css",
         "~/assets/scss/sinrabansyo.scss"
     ],
     components: [
@@ -62,6 +64,15 @@ export default defineNuxtConfig({
     runtimeConfig: {
         ...serverConfig,
         public: clientConfig
+    },
+    vite: {
+        plugins: [
+            prismjs({
+                languages: [
+                    "json"
+                ]
+            })
+        ]
     },
     vue: {
         runtimeCompiler: true,

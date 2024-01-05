@@ -1,8 +1,6 @@
 <script setup>
     import ClipboardJS from "clipboard";
     import prism from "prismjs";
-    import "prismjs/components/prism-json";
-    import "prism-themes/themes/prism-one-dark.min.css";
 
     const props = defineProps(["lang"]);
     const slots = useSlots();

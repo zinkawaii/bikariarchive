@@ -4,14 +4,6 @@
     useHead({
         title: "友情链接"
     });
-
-    const site = useSiteConfig();
-    const schema = `{
-  "title": "${site.name}",
-  "link": "${site.url}",
-  "icon": "https://cravatar.cn/avatar/ECB2EA87C4532F007838D86D02798F89",
-  "description": "虚幻的幸福"
-}`;
 </script>
 
 <template>
@@ -25,7 +17,6 @@
                 </div>
             </nuxt-link>
         </div>
-        <mb-code class="friend-schema" lang="json">{{ schema }}</mb-code>
     </div>
 </template>
 
@@ -34,7 +25,6 @@
         display: grid;
         grid: auto / repeat(auto-fill, minmax(256px, 1fr));
         grid-gap: 16px;
-        margin-bottom: 16px;
     }
 
     .friend-item {
@@ -83,9 +73,5 @@
         line-height: 22px;
         text-overflow: ellipsis;
         color: var(--color-gray);
-    }
-
-    .friend-schema {
-        margin-bottom: 0;
     }
 </style>
