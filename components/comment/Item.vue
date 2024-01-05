@@ -113,6 +113,8 @@
     .comment-content {
         padding-block: 7px;
         line-height: 28px;
+        white-space: pre-wrap;
+        word-break: break-word;
     }
 
     .comment-operator {

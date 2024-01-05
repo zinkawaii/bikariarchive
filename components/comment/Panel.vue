@@ -147,7 +147,7 @@
         display: grid;
         grid-template-rows: 1fr auto;
         overflow: hidden;
-        height: 160px;
+        height: 180px;
         border: 1px solid var(--color-border-light);
         border-radius: 4px;
         background-color: var(--color-background);
@@ -159,6 +159,7 @@
 
         > textarea {
             padding: 8px 8px 0;
+            line-height: 24px;
         }
     }
 
