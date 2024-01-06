@@ -20,7 +20,7 @@ export function getQueryValues(event: any) {
 }
 
 //获取无尾斜杠路径
-const pathRegexp = /^((?:\/[\w-]+)+)\/?$/;
+const pathRegexp = /^((?:\/[\w-%]+)+)\/?$/;
 export function getStrictPath(path: string) {
     const match = path.match(pathRegexp);
     return match ? match[1] : null;

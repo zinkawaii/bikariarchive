@@ -3,7 +3,10 @@
     const route = useRoute();
 
     const comments = ref();
-    const count = ref(0);
+    const count = ref({
+        total: 0,
+        main: 0
+    });
     const page = ref(1);
 
     watch(() => [route.path, page.value], getComments, {
@@ -18,11 +21,12 @@
                 page: page.value
             }
         })
-        .then(({ error, count: i, data }) => {
+        .then(({ error, totalCount, mainCount, data }) => {
             if (error !== 0) return;
 
-            //总评论数
-            count.value = i;
+            //评论数
+            count.value.total = totalCount;
+            count.value.main = mainCount;
 
             for (const x of data) {
                 //子评论回归指向
@@ -59,10 +63,11 @@
 <template>
     <div class="content-widget z-comment" z-main>
         <div class="comment-title">
-            <h2>评论 <span class="text-gray">{{ count }}</span></h2>
+            <h2>评论 <span class="text-gray">{{ count.total }}</span></h2>
             <a class="btn" @click="postComment"><fa-icon icon="comment-dots"/> 发表评论</a>
         </div>
         <comment-item v-for="item in comments" :key="item.id" :data="item" @update="getComments"/>
+        <mb-pagination v-if="count.main > 0" :count="count.main" v-model="page"/>
     </div>
 </template>
 
@@ -75,5 +80,9 @@
         > h2 {
             font-family: var(--font-smooth);
         }
+    }
+
+    .mb-pagination {
+        margin-top: 21px;
     }
 </style>

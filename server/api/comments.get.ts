@@ -1,7 +1,8 @@
 import md5 from "md5";
 
 interface GetCommentsResponse extends BaseResponse {
-    count?: number,
+    totalCount?: number,
+    mainCount?: number,
     data?: any[]
 }
 
@@ -21,8 +22,14 @@ export default defineCustomHandler(async (event) => {
         const limit = 10;
 
         //总评论数
-        res.count = await CommentDataModel.count({
+        res.totalCount = await CommentDataModel.count({
             path
+        });
+
+        //主评论数
+        res.mainCount = await CommentDataModel.count({
+            path,
+            parent: null
         });
 
         //获取主评论

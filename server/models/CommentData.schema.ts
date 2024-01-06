@@ -6,7 +6,8 @@ export const CommentDataModel = defineMongooseModel({
     schema: {
         path: {
             type: String,
-            required: true
+            required: true,
+            index: true
         },
         parent: {
             type: Schema.Types.ObjectId,
