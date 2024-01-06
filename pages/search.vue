@@ -8,8 +8,9 @@
     const searchHistoryStore = useSearchHistoryStore();
 
     const word = ref("");
-    const results = ref([]);
     const searchWord = ref("");
+    const results = ref([]);
+    const page = ref(0);
     const { history } = searchHistoryStore;
 
     //全文检索
@@ -53,6 +54,9 @@
 
         //写入会话存储
         session.value[w] = data;
+
+        //重置到第一页
+        page.value = 1;
     });
 
     //带参数进入页面时
@@ -61,6 +65,13 @@
         fullTextSearch(value);
     }, {
         immediate: true
+    });
+
+    //分页显示结果
+    const displayResults = computed(() => {
+        const start = (page.value - 1) * 10;
+        const end = start + 10;
+        return results.value.slice(start, end);
     });
 
     //总出现次数
@@ -73,7 +84,7 @@
 
 <template>
     <div class="content-widget" z-main>
-        <form class="search-box" @submit.prevent="fullTextSearch()">
+        <form class="search-form" @submit.prevent="fullTextSearch()">
             <input class="search-input" type="search" v-model="word"/>
             <button class="search-button">全文检索</button>
         </form>
@@ -98,8 +109,8 @@
                 共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次
             </div>
         </div>
-        <div class="search-result">
-            <nuxt-link v-for="item in results" class="result-box" :to="`/book/bikari/${item.index}`">
+        <div class="search-results">
+            <nuxt-link v-for="item in displayResults" class="result-item" :to="`/book/bikari/${item.index}`">
                 <div class="result-title">
                     {{ item.title }}
                 </div>
@@ -110,11 +121,12 @@
                 <span class="result-count">本章共出现{{ item.count }}次</span>
             </nuxt-link>
         </div>
+        <mb-pagination :total="results.length" scroll-to=".content-widget" v-model="page"/>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .search-box {
+    .search-form {
         display: flex;
         justify-content: center;
         overflow: hidden;
@@ -175,13 +187,13 @@
         }
     }
 
-    .search-result {
+    .search-results {
         display: flex;
         flex-direction: column;
-        margin-top: 16px;
+        margin-block: 16px;
     }
 
-    .result-box {
+    .result-item {
         padding: 16px;
         border: 1px solid transparent;
         border-left-width: 16px;
