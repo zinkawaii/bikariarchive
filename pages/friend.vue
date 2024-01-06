@@ -4,6 +4,13 @@
     useHead({
         title: "友情链接"
     });
+
+    const schema = `{
+  title: "微光茶馆"
+  link: "https://bikariarchive.xyz"
+  icon: "https://cravatar.cn/avatar/ECB2EA87C4532F007838D86D02798F89"
+  description: "虚幻的幸福"
+}`;
 </script>
 
 <template>
@@ -16,6 +23,16 @@
                     <span class="friend-desc">{{ item.description }}</span>
                 </div>
             </nuxt-link>
+        </div>
+        <div class="novel-text">
+            <h2>交换基准</h2>
+            <ul>
+                <li>全站 HTTPS，可正常访问；</li>
+                <li>原创文章大于 7 篇，言之有物；</li>
+                <li>拥有独立域名，而不是公有子域名或免费域名（如 <code>github.io</code> <code>vercel.app</code> <code>.tk</code> <code>.ml</code> <code>.cf</code> 等）。</li>
+            </ul>
+            <h2>本站信息</h2>
+            <mb-code lang="js">{{ schema }}</mb-code>
         </div>
     </div>
 </template>
@@ -73,5 +90,10 @@
         line-height: 22px;
         text-overflow: ellipsis;
         color: var(--color-gray);
+    }
+
+    .novel-text {
+        margin-bottom: -1em;
+        font-size: 14px;
     }
 </style>
