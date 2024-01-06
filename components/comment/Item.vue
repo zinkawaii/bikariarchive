@@ -22,6 +22,7 @@
     function replyComment() {
         commentPanelStore.open({
             replyId: props.data.id,
+            replyName: props.data.nickname,
             onReply() {
                 emit("update");
             }

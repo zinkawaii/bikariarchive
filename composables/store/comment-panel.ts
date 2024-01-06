@@ -5,15 +5,18 @@ export const useCommentPanelStore = defineStore("comment-panel", {
         email: "",
         address: "",
         replyId: "",
+        replyName: "",
         onReply: null
     }),
     actions: {
         open({
             replyId = "",
+            replyName = "",
             onReply = null
         }) {
             this.isOpened = true;
             this.replyId = replyId;
+            this.replyName = replyName;
             this.onReply = onReply;
         },
         close(success = false) {

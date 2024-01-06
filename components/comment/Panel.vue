@@ -3,7 +3,7 @@
 
     const { nickname, email, address } = storeToRefs(commentPanelStore);
     const comment = ref("");
-    const maxLength = 233;
+    const maxLength = 512;
 
     const tip = ref({
         nickname: "",
@@ -52,6 +52,12 @@
         }
     };
 
+    //标题
+    const title = computed(() => {
+        const { replyName } = commentPanelStore;
+        return replyName ? `回复 @${replyName}` : "评论";
+    });
+
     //提交
     function submit() {
         if (checker.all()) {
@@ -82,7 +88,7 @@
     <transition name="scale">
         <div v-if="commentPanelStore.isOpened" class="comment-panel">
             <fa-icon class="xmark" icon="xmark" @click="commentPanelStore.close()"/>
-            <coco-title>评论</coco-title>
+            <coco-title>{{ title }}</coco-title>
             <div class="panel-form">
                 <coco-input placeholder="昵称" :warn-tip="tip.nickname" v-model="nickname" @blur="tip.nickname = ``"/>
                 <p class="panel-tip">必填，用于展示评论昵称</p>
@@ -93,7 +99,7 @@
             </div>
             <div class="panel-form">
                 <coco-input placeholder="网址" :warn-tip="tip.address" v-model="address" @blur="tip.address = ``"/>
-                <p class="panel-tip">选填，用于点击昵称或头像时链向你的个人网站</p>
+                <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
             </div>
             <div class="panel-form panel-editor">
                 <textarea placeholder="说点什么吧~" :maxlength="maxLength" v-model="comment"></textarea>
@@ -130,6 +136,10 @@
     .panel-form {
         margin-block: 24px;
         font-size: 14px;
+
+        &:first-of-type {
+            margin-top: 32px;
+        }
     }
 
     .panel-tip {
@@ -145,7 +155,7 @@
 
     .panel-editor {
         display: grid;
-        grid-template-rows: 1fr auto;
+        position: relative;
         overflow: hidden;
         height: 180px;
         border: 1px solid var(--color-border-light);
@@ -158,15 +168,16 @@
         }
 
         > textarea {
-            padding: 8px 8px 0;
+            padding: 8px;
             line-height: 24px;
         }
     }
 
     .panel-count {
-        padding: 4px 8px;
+        position: absolute;
+        right: 8px;
+        bottom: 4px;
         font-size: 12px;
-        text-align: right;
         color: var(--color-gray);
     }
 
