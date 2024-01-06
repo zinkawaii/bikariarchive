@@ -1,12 +1,24 @@
 <script setup>
     const modelValue = defineModel();
     const props = defineProps({
-        count: Number
+        total: Number,
+        sizes: {
+            type: Number,
+            default: 10
+        },
+        scrollTo: String,
+        scrollOffset: {
+            type: Number,
+            default: 64
+        }
     });
+
+    //组件根元素
+    const pagina = ref();
 
     //总页数
     const totalPages = computed(() => {
-        return Math.ceil(props.count / 10);
+        return Math.ceil(props.total / props.sizes);
     });
 
     //中间页选项
@@ -20,10 +32,26 @@
             (page < total - 1)         && page + 1
         ].filter((i) => i);
     });
+
+    //滑动根元素
+    const scrollElement = computed(() => {
+        return pagina.value.closest(props.scrollTo);
+    });
+
+    //切换页数时滑动到指定元素的起始位置
+    watch(modelValue, () => {
+        if (scrollElement.value) {
+            const pos = getPosition(scrollElement.value);
+            window.scrollTo({
+                top: pos.top - props.scrollOffset,
+                behavior: "smooth"
+            });
+        }
+    });
 </script>
 
 <template>
-    <div class="mb-pagination">
+    <div ref="pagina" class="mb-pagination">
         <a class="pagina-arr" :class="{ disabled: modelValue === 1 }" @click="modelValue--">
             <fa-icon icon="chevron-left"/>
         </a>

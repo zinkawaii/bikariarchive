@@ -67,7 +67,7 @@
             <a class="btn" @click="postComment"><fa-icon icon="comment-dots"/> 发表评论</a>
         </div>
         <comment-item v-for="item in comments" :key="item.id" :data="item" @update="getComments"/>
-        <mb-pagination v-if="count.main > 0" :count="count.main" v-model="page"/>
+        <mb-pagination v-if="count.main > 0" :total="count.main" scroll-to=".z-comment" v-model="page"/>
     </div>
 </template>
 
