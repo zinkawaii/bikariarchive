@@ -6,30 +6,19 @@
     const verify = ref();
     const password = ref();
 
-    const tip = ref({
-        nickname: "",
-        email: "",
-        verify: "",
-        password: "",
-        clear() {
-            this.nickname = "";
-            this.email = "";
-            this.verify = "";
-            this.password = "";
-        }
-    });
     const verifyStage = ref({
         stage: 0,
         delay: 0
     });
 
-    const checker = {
+    const checker = new Checker({
         nickname: {
             target: nickname,
+            required: true,
             reg: /^[\w\u4e00-\u9fa5]*$/,
             message: "昵称不可包含非法字符",
-            validate() {
-                const count = getByteLength(this.target.value);
+            validate(value) {
+                const count = getByteLength(value);
                 if (count === 0) {
                     return "昵称不能为空";
                 }
@@ -40,32 +29,24 @@
         },
         email: {
             target: email,
+            required: true,
             reg: /^[\w-]+@[\w-]+(.[\w-]+)+$/,
             message: "邮箱格式不正确"
         },
         password: {
             target: password,
+            required: true,
             reg: /^[\w]*$/,
             message: "密码仅由大小写字母、数字以及下划线组成",
-            validate() {
-                const count = getByteLength(this.target.value);
+            validate(value) {
+                const count = getByteLength(value);
                 if (count < 6 || count > 18) {
                     return "密码位数必须在6-18位之间";
                 }
             }
-        },
-        all() {
-            for (const key of ["nickname", "email", "password"]) {
-                const { target, reg, message } = this[key];
-                const msg = !reg.test(target.value) ? message : this[key].validate?.();
-                if (msg?.length > 0) {
-                    tip.value[key] = `* ${msg}`;
-                    return false;
-                }
-            }
-            return true;
         }
-    };
+    });
+    const { tips } = checker;
 
     //验证码输入限制
     function verifyInput(event) {
@@ -75,7 +56,7 @@
 
     //发送验证码
     function verifySend() {
-        if (!checker.email()) return;
+        if (!checker.exec("email")) return;
 
         verifyStage.value.stage = 1;
 
@@ -112,8 +93,8 @@
 
     //提交
     function submit() {
-        tip.value.clear();
-        if (checker.all()) {
+        checker.clearTips();
+        if (checker.exec()) {
             register();
         }
     }
@@ -134,16 +115,16 @@
                     emit("success");
                     break;
                 case 1:
-                    tip.value.email = "* 该邮箱已注册";
+                    tips.value.email = "* 该邮箱已注册";
                     break;
                 case 2:
-                    tip.value.verify = "* 验证码不存在";
+                    tips.value.verify = "* 验证码不存在";
                     break;
                 case 3:
-                    tip.value.verify = "* 验证码已过期";
+                    tips.value.verify = "* 验证码已过期";
                     break;
                 case 4:
-                    tip.value.password = "* 验证码不正确";
+                    tips.value.verify = "* 验证码不正确";
                     break;
             }
         });
@@ -154,24 +135,24 @@
     <coco-input
         type="text"
         placeholder="昵称"
-        :warn-tip="tip.nickname"
+        :warn-tip="tips.nickname"
         v-model="nickname"
-        @blur="tip.nickname = ``"
+        @blur="tips.nickname = ``"
     />
     <coco-input
         type="text"
         placeholder="电子邮箱"
-        :warn-tip="tip.email"
+        :warn-tip="tips.email"
         v-model="email"
-        @blur="tip.email = ``"
+        @blur="tips.email = ``"
     />
     <div class="sign-verify">
         <coco-input
-            type="number"
+            type="text"
             placeholder="验证码"
-            :warn-tip="tip.verify"
+            :warn-tip="tips.verify"
             v-model="verify"
-            @blur="tip.verify = ``"
+            @blur="tips.verify = ``"
             @input="verifyInput"
         />
         <a :class="[`btn`, { disabled: verifyStage.stage > 0 }]" @click="verifySend">{{
@@ -183,9 +164,9 @@
     <coco-input
         type="password"
         placeholder="密码"
-        :warn-tip="tip.password"
+        :warn-tip="tips.password"
         v-model="password"
-        @blur="tip.password = ``"
+        @blur="tips.password = ``"
         @keyup.enter="submit"
     />
 </template>

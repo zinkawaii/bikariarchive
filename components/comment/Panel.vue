@@ -5,20 +5,14 @@
     const comment = ref("");
     const maxLength = 512;
 
-    const tip = ref({
-        nickname: "",
-        email: "",
-        address: ""
-    });
-
-    const checker = {
+    const checker = new Checker({
         nickname: {
             target: nickname,
             required: true,
             reg: /^[\w\u4e00-\u9fa5]*$/,
             message: "昵称不可包含非法字符",
-            validate() {
-                const count = getByteLength(this.target.value);
+            validate(value) {
+                const count = getByteLength(value);
                 if (count === 0) {
                     return "昵称不能为空";
                 }
@@ -36,21 +30,9 @@
             target: address,
             reg: /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?$/,
             message: "网址格式不正确"
-        },
-        all() {
-            for (const key of ["nickname", "email", "address"]) {
-                const { target, required, reg, message } = this[key];
-                if (required || target.value) {
-                    const msg = !reg.test(target.value) ? message : this[key].validate?.();
-                    if (msg?.length > 0) {
-                        tip.value[key] = `* ${msg}`;
-                        return false;
-                    }
-                }
-            }
-            return true;
         }
-    };
+    });
+    const { tips } = checker;
 
     //标题
     const title = computed(() => {
@@ -60,7 +42,7 @@
 
     //提交
     function submit() {
-        if (checker.all()) {
+        if (checker.exec()) {
             postComment();
         }
     }
@@ -69,7 +51,7 @@
     const postComment = Zin.debounce(() => {
         Zjax.post("/api/comment", {
             body: {
-                path: location.pathname,
+                path: commentPanelStore.path,
                 parent: commentPanelStore.replyId,
                 content: comment.value,
                 nickname: nickname.value,
@@ -90,15 +72,15 @@
             <fa-icon class="xmark" icon="xmark" @click="commentPanelStore.close()"/>
             <coco-title>{{ title }}</coco-title>
             <div class="panel-form">
-                <coco-input placeholder="昵称" :warn-tip="tip.nickname" v-model="nickname" @blur="tip.nickname = ``"/>
+                <coco-input placeholder="昵称" :warn-tip="tips.nickname" v-model="nickname" @blur="tips.nickname = ``"/>
                 <p class="panel-tip">必填，用于展示评论昵称</p>
             </div>
             <div class="panel-form">
-                <coco-input placeholder="邮箱" :warn-tip="tip.email" v-model="email" @blur="tip.email = ``"/>
+                <coco-input placeholder="邮箱" :warn-tip="tips.email" v-model="email" @blur="tips.email = ``"/>
                 <p class="panel-tip">选填，用于从 Cravatar 服务获取头像与评论回复通知</p>
             </div>
             <div class="panel-form">
-                <coco-input placeholder="网址" :warn-tip="tip.address" v-model="address" @blur="tip.address = ``"/>
+                <coco-input placeholder="网址" :warn-tip="tips.address" v-model="address" @blur="tips.address = ``"/>
                 <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
             </div>
             <div class="panel-form">

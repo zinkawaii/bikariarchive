@@ -4,6 +4,7 @@ export const useCommentPanelStore = defineStore("comment-panel", {
         nickname: "",
         email: "",
         address: "",
+        path: "",
         replyId: "",
         replyName: "",
         onReply: null
@@ -15,6 +16,7 @@ export const useCommentPanelStore = defineStore("comment-panel", {
             onReply = null
         }) {
             this.isOpened = true;
+            this.path = location.pathname;
             this.replyId = replyId;
             this.replyName = replyName;
             this.onReply = onReply;
