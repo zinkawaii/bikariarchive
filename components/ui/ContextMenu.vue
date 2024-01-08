@@ -20,8 +20,7 @@
             icon: "arrow-up",
             action: createAction(() => {
                 window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
+                    top: 0
                 });
             })
         },

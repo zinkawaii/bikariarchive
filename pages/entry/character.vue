@@ -39,18 +39,16 @@
                     <div class="talent-header">
                         <template v-if="item.type === `超能力`">
                             <h3>{{ item.name.zh }}</h3>
-                            <div>
-                                <nuxt-link
-                                    v-for="cls in item.class"
-                                    class="tag talent-tag"
-                                    :to="toEntry(`${cls}系`)"
-                                >{{ cls }}</nuxt-link>
-                                <nuxt-link
-                                    class="tag talent-tag"
-                                    :to="toEntry(`能力评级`)"
-                                >Star {{ item.star }}</nuxt-link>
-                                <span class="tag talent-tag">{{ item.name.en }}</span>
-                            </div>
+                            <nuxt-link
+                                v-for="cls in item.class"
+                                class="tag talent-tag"
+                                :to="toEntry(`${cls}系`)"
+                            >{{ cls }}</nuxt-link>
+                            <nuxt-link
+                                class="tag talent-tag"
+                                :to="toEntry(`能力评级`)"
+                            >Star {{ item.star }}</nuxt-link>
+                            <span class="tag talent-tag">{{ item.name.en }}</span>
                         </template>
                         <template v-else>
                             <h3>{{ item.name }}</h3>

@@ -143,7 +143,6 @@
     .sign-title {
         position: relative;
         margin-bottom: 12px;
-        font-family: var(--font-smooth);
         font-size: 28px;
 
         &::after {

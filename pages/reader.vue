@@ -126,19 +126,26 @@
                 <fa-icon icon="chevron-left"/>
                 <span>{{ toLast }}</span>
             </nuxt-link>
-            <div class="novel-title">
-                <h1>{{ art.title }}</h1>
-                <div class="novel-information">
-                    <span>{{ state.readCount }} 阅读 ／ {{ art.wordCount }} 字</span>
-                    <span class="novel-date">
+            <div>
+                <h1 class="novel-title">{{ art.title }}</h1>
+                <ul class="novel-information">
+                    <li>
+                        <fa-icon icon="eye"/>
+                        <span>{{ state.readCount }} 阅读</span>
+                    </li>
+                    <li>
+                        <fa-icon icon="pen-to-square"/>
+                        <span>{{ art.wordCount }} 字</span>
+                    </li>
+                    <li>
                         <fa-icon icon="pen"/>
                         <time>{{ art.publishDate }}</time>
-                    </span>
-                    <span class="novel-date">
+                    </li>
+                    <li>
                         <fa-icon :icon="[`far`, `clock`]"/>
                         <time>{{ art.updateDate }}</time>
-                    </span>
-                </div>
+                    </li>
+                </ul>
             </div>
             <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
                 <span>{{ toNext }}</span>
@@ -166,38 +173,34 @@
 
 <style lang="scss" scoped>
     .novel-header {
-        display: flex;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
         margin-bottom: 8px;
         padding-bottom: 16px;
         border-bottom: 1px solid var(--color-border);
     }
 
     .novel-title {
-        flex: 1;
+        padding-block: 8px;
+        font-size: 24px;
+        line-height: 36px;
         text-align: center;
-
-        > h1 {
-            padding-block: 8px;
-            font-size: 24px;
-            font-weight: bold;
-            line-height: 36px;
-        }
     }
 
     .novel-information {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        column-gap: 20px;
+        column-gap: 18px;
         font-size: 12px;
         line-height: 20px;
         color: var(--color-gray);
-    }
 
-    .novel-date {
-        display: flex;
-        align-items: center;
-        gap: 4px;
+        > li {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
     }
 
     .novel-text {
@@ -215,8 +218,8 @@
         align-items: center;
         justify-content: center;
         gap: 0.5em;
-        padding-block: 3px;
         font-size: 13px;
+        line-height: 32px;
         color: var(--color-border);
 
         &::before, &::after {

@@ -43,8 +43,7 @@
         if (scrollElement.value) {
             const pos = getPosition(scrollElement.value);
             window.scrollTo({
-                top: pos.top - props.scrollOffset,
-                behavior: "smooth"
+                top: pos.top - props.scrollOffset
             });
         }
     });

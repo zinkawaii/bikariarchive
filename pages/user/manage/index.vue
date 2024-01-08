@@ -35,6 +35,7 @@
     }
 
     .manage-link {
+        display: grid;
         height: 72px;
         padding: 16px;
         border-radius: 8px;
@@ -44,7 +45,6 @@
         transition: all 0.4s;
 
         .title {
-            display: block;
             font-family: var(--font-smooth);
             text-shadow: var(--text-shadow);
         }

@@ -128,7 +128,7 @@
                 password: password.value
             }
         })
-        .then(async (res) => {
+        .then((res) => {
             switch (res.error) {
                 case 0:
                     emit("success");

@@ -9,7 +9,7 @@
 
 <template>
     <div class="coco-input">
-        <input class="input-entity" required v-bind="$attrs" v-model="modelValue"/>
+        <input class="input-entity" required title v-bind="$attrs" v-model="modelValue"/>
         <div class="input-underline"></div>
         <span class="input-placeholder" :class="{ warn: warn || warnTip }">{{ warnTip || placeholder }}</span>
     </div>

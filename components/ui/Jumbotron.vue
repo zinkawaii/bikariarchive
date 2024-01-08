@@ -55,8 +55,7 @@
     //点击箭头
     function toBottom() {
         window.scrollTo({
-            top: window.innerHeight * 0.72,
-            behavior: "smooth"
+            top: window.innerHeight * 0.72
         });
     }
 </script>
@@ -93,10 +92,13 @@
         align-content: center;
         position: absolute;
         inset: 0;
-        font-family: "Noto Serif JP";
         text-align: center;
         text-shadow: 0 0 12px rgb(0 0 0 / 66%);
         color: white;
+
+        > * {
+            font-family: "Noto Serif JP";
+        }
     }
 
     .jumbo-title {

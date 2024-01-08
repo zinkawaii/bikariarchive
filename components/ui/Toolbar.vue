@@ -8,8 +8,7 @@
 
     function scrollToTop() {
         window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+            top: 0
         });
     }
 </script>

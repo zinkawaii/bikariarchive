@@ -102,18 +102,14 @@
     </div>
     <div v-if="searchWord.length > 0" class="content-widget" z-main>
         <div class="search-statistics">
-            <div class="title">
-                “{{ searchWord }}”的检索结果
-            </div>
-            <div class="text">
-                共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次
-            </div>
+            <h2>"{{ searchWord }}"的检索结果</h2>
+            <span>共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次</span>
         </div>
         <div class="search-results">
-            <nuxt-link v-for="item in displayResults" class="result-item" :to="`/book/bikari/${item.index}`">
-                <div class="result-title">
+            <nuxt-link v-for="item in displayResults" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
+                <h3 class="result-title">
                     {{ item.title }}
-                </div>
+                </h3>
                 <span class="result-volume">{{ item.volume }}</span>
                 <article class="result-part">
                     <p v-for="part in item.parts" v-html="part"></p>
@@ -176,12 +172,12 @@
     }
 
     .search-statistics {
-        .title {
+        > h2 {
             padding-bottom: 4px;
             font-size: 23px;
         }
 
-        .text {
+        > span {
             font-size: 15px;
             color: var(--color-gray);
         }

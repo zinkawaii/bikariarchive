@@ -17,7 +17,7 @@
         align-items: center;
         padding-right: 8px;
         border: 1px solid var(--color-theme-dark);
-        border-radius: 16px;
+        border-radius: var(--circle-radius);
         background-color: var(--color-background);
         font-size: 14px;
         vertical-align: middle;

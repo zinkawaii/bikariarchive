@@ -44,12 +44,9 @@
 
 <style lang="scss">
     .entry-header {
+        margin-bottom: 8px;
         padding-bottom: 8px;
         border-bottom: 1px solid var(--color-border);
-    }
-
-    .entry-title, .entry-article :is(h1, h2, h3) {
-        font-weight: bold;
     }
 
     .entry-main {
@@ -79,6 +76,9 @@
     }
 
     .entry-article {
+        display: grid;
+        gap: 16px;
+
         h2 {
             margin-bottom: 8px;
             padding-bottom: 8px;
@@ -86,19 +86,18 @@
         }
 
         h3 {
-            margin-top: 4px;
-            padding: 4px 0 0 18px;
+            margin: 8px 0 0 12px;
             line-height: 26px;
 
             &::before {
-                content: "· ";
+                content: "·";
+                font-weight: bold;
             }
         }
     }
 
     .entry-section {
         overflow: auto;
-        margin-top: 8px;
     }
 
     .entry-known {

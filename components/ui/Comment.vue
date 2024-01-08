@@ -15,12 +15,13 @@
 
     //获取评论
     function getComments() {
-        $fetch("/api/comments", {
+        useFetch("/api/comments", {
             query: {
                 path: route.path,
                 page: page.value
             }
         })
+        .then((res) => res.data.value)
         .then(({ error, totalCount, mainCount, data }) => {
             if (error !== 0) return;
 
@@ -76,10 +77,6 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-
-        > h2 {
-            font-family: var(--font-smooth);
-        }
     }
 
     .mb-pagination {

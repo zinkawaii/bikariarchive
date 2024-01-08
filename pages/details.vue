@@ -63,15 +63,14 @@
     }
 
     .detail-header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        display: grid;
+        justify-items: center;
         gap: 8px;
         padding: 16px 24px 12px;
         border: 1px solid var(--color-border-light);
         border-left: 32px solid var(--color-theme);
         background-color: var(--color-background);
-        font-weight: bold;
+        font-family: var(--font-smooth);
     }
 
     .detail-image {

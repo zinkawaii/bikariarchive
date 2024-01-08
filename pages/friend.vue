@@ -5,26 +5,26 @@
         title: "友情链接"
     });
 
-    const schema = `{
-  title: "微光茶馆"
-  link: "https://bikariarchive.xyz"
-  icon: "https://cravatar.cn/avatar/ECB2EA87C4532F007838D86D02798F89"
+    const schema = `export default {
+  title: "微光茶馆",
+  link: "https://bikariarchive.xyz",
+  icon: "https://cravatar.cn/avatar/ECB2EA87C4532F007838D86D02798F89",
   description: "虚幻的幸福"
-}`;
+};`;
 </script>
 
 <template>
     <div class="content-widget" z-main>
-        <div class="friend-list">
-            <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.link" target="_blank">
-                <nuxt-img class="friend-avatar" :src="item.icon" loading="lazy"/>
-                <div class="friend-info">
-                    <div class="content-h2 text-truncate friend-title">{{ item.title }}</div>
-                    <span class="friend-desc">{{ item.description }}</span>
-                </div>
-            </nuxt-link>
-        </div>
         <div class="novel-text">
+            <div class="friend-list">
+                <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.link" target="_blank">
+                    <nuxt-img class="friend-avatar" :src="item.icon" loading="lazy"/>
+                    <div class="friend-info">
+                        <div class="content-h2 text-truncate friend-title">{{ item.title }}</div>
+                        <span class="friend-desc">{{ item.description }}</span>
+                    </div>
+                </nuxt-link>
+            </div>
             <h2>交换基准</h2>
             <ul>
                 <li>全站 HTTPS，可正常访问；</li>

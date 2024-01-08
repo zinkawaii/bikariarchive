@@ -97,6 +97,7 @@
 }
 
 html {
+    scroll-behavior: smooth;
     scrollbar-gutter: stable;
 }
 
@@ -106,6 +107,10 @@ body {
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;
     color: var(--color-text);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-smooth);
 }
 
 h1 {
@@ -304,22 +309,22 @@ textarea {
     }
 }
 
-.text-gray {
-    color: var(--color-gray);
-}
-
-.text-primary {
-    color: var(--color-theme-text);
+.text-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .text-center {
     text-align: center;
 }
 
-.text-truncate {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.text-gray {
+    color: var(--color-gray);
+}
+
+.text-primary {
+    color: var(--color-theme-text);
 }
 
 .cursor-pointer {
@@ -410,10 +415,13 @@ textarea {
 .novel-text {
     h2 {
         position: relative;
-        margin-block: 16px 4px;
+        margin-block: 24px 4px;
         padding-left: 16px;
-        font-family: var(--font-smooth);
         line-height: 36px;
+
+        &:first-child {
+            margin-top: 16px;
+        }
 
         &::before {
             content: "";
@@ -428,7 +436,6 @@ textarea {
 
     h3 {
         margin-block: 12px 4px;
-        font-family: var(--font-smooth);
         line-height: 24px;
     }
 
