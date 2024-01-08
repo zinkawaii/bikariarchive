@@ -236,7 +236,7 @@
         border: 1px solid var(--color-border);
         border-radius: 4px;
         font-size: 14px;
-        line-height: 2;
+        line-height: 2em;
         word-break: break-word;
 
         .meta {

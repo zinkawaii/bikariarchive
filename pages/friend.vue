@@ -27,11 +27,15 @@
             </div>
             <h2>交换基准</h2>
             <ul>
-                <li>全站 HTTPS，可正常访问；</li>
-                <li>原创文章大于 7 篇，言之有物；</li>
-                <li>拥有独立域名，而不是公有子域名或免费域名（如 <code>github.io</code> <code>vercel.app</code> <code>.tk</code> <code>.ml</code> <code>.cf</code> 等）。</li>
+                <li>网站以个人为主体，公开内容符合中国大陆的法律法规；</li>
+                <li>拥有独立域名，全站 HTTPS，首屏加载时长不超过 30 秒；</li>
+                <li>建站时间在 1 年以上，原创文章大于 14 篇，言之有物。</li>
             </ul>
-            <h2>本站信息</h2>
+            <blockquote>
+                <p>友链展示顺序可能会凭借个人喜好进行加权，也可能单纯按照时间排布。</p>
+            </blockquote>
+            <h2>申请格式</h2>
+            <p>按照以下 Schema，使用你擅长的编程或标记语言将结构化的站点信息进行导出，并放置在评论的底部。</p>
             <mb-code lang="js">{{ schema }}</mb-code>
         </div>
     </div>

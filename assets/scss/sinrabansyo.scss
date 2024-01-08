@@ -125,10 +125,6 @@ h3 {
     font-size: 20px;
 }
 
-p {
-    line-height: 2em;
-}
-
 a {
     text-decoration: none;
     color: inherit;
@@ -404,6 +400,10 @@ textarea {
 
 /* ---------------------------------------------------------------- */
 
+:where(.novel-text, .entry-article) p {
+    line-height: 2em;
+}
+
 :where(.intro-synopsis, .novel-text, .entry-article, .result-part) p {
     text-indent: 2em;
 }
@@ -439,7 +439,7 @@ textarea {
         line-height: 24px;
     }
 
-    li {
+    ul {
         margin-left: 2em;
         line-height: 2em;
         list-style-type: disc;

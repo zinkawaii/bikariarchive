@@ -101,8 +101,8 @@
                 <coco-input placeholder="网址" :warn-tip="tip.address" v-model="address" @blur="tip.address = ``"/>
                 <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
             </div>
-            <div class="panel-form panel-editor">
-                <textarea placeholder="说点什么吧~" :maxlength="maxLength" v-model="comment"></textarea>
+            <div class="panel-form">
+                <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="comment"></textarea>
                 <div class="panel-count">{{ comment.length }} / {{ maxLength }}</div>
             </div>
             <a class="btn panel-publish" :class="{ disabled: !comment.length }" @click="submit"><fa-icon icon="paper-plane"/> 发表评论</a>
@@ -134,6 +134,7 @@
     }
 
     .panel-form {
+        position: relative;
         margin-block: 24px;
         font-size: 14px;
 
@@ -154,22 +155,18 @@
     }
 
     .panel-editor {
-        display: grid;
-        position: relative;
-        overflow: hidden;
+        display: block;
+        width: 100%;
         height: 180px;
+        padding: 6px 8px;
         border: 1px solid var(--color-border-light);
         border-radius: 4px;
         background-color: var(--color-background);
+        line-height: 24px;
         transition: all 0.4s;
 
-        &:focus-within {
+        &:focus {
             border-color: var(--color-theme-dark);
-        }
-
-        > textarea {
-            padding: 8px;
-            line-height: 24px;
         }
     }
 

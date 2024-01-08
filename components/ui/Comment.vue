@@ -9,19 +9,18 @@
     });
     const page = ref(1);
 
-    watch(() => [route.path, page.value], getComments, {
-        immediate: true
+    onMounted(() => {
+        watchImmediate(() => [route.path, page.value], getComments);
     });
 
     //获取评论
     function getComments() {
-        useFetch("/api/comments", {
+        Zjax.get("/api/comments", {
             query: {
                 path: route.path,
                 page: page.value
             }
         })
-        .then((res) => res.data.value)
         .then(({ error, totalCount, mainCount, data }) => {
             if (error !== 0) return;
 

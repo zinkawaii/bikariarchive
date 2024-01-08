@@ -32,12 +32,9 @@
         box-shadow: var(--box-shadow);
         background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
         font-size: 14px;
+        line-height: 24px;
         text-align: center;
         text-shadow: var(--text-shadow);
         color: white;
-
-        > p {
-            line-height: 24px;
-        }
     }
 </style>

@@ -107,9 +107,7 @@
         </div>
         <div class="search-results">
             <nuxt-link v-for="item in displayResults" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
-                <h3 class="result-title">
-                    {{ item.title }}
-                </h3>
+                <h3>{{ item.title }}</h3>
                 <span class="result-volume">{{ item.volume }}</span>
                 <article class="result-part">
                     <p v-for="part in item.parts" v-html="part"></p>
@@ -172,10 +170,8 @@
     }
 
     .search-statistics {
-        > h2 {
-            padding-bottom: 4px;
-            font-size: 23px;
-        }
+        display: grid;
+        gap: 4px;
 
         > span {
             font-size: 15px;
@@ -194,7 +190,7 @@
         border: 1px solid transparent;
         border-left-width: 16px;
         border-radius: 8px;
-        transition: all 0.2s;
+        transition: all 0.25s;
 
         &:hover {
             border-color: var(--color-border-light);
@@ -203,22 +199,16 @@
         }
     }
 
-    .result-title {
-        font-size: 19px;
-    }
-
     .result-volume {
         display: inline-block;
-        padding-block: 4px;
         font-size: 15px;
+        line-height: 28px;
         color: var(--color-gray);
     }
 
     .result-part {
-        p {
-            font-size: 13px;
-            line-height: 21px;
-        }
+        font-size: 13px;
+        line-height: 22px;
 
         :deep(.light) {
             color: var(--color-danger);
