@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="comment-reply">
-            <comment-item v-for="item in data.children" :data="item" @update="$emit(`update`)"/>
+            <comment-item v-for="item in data.children" :key="item.id" :data="item" @update="$emit(`update`)"/>
         </div>
     </section>
 </template>

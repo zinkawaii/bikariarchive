@@ -30,7 +30,7 @@ export default defineCustomHandler(async (event) => {
     query?.exec?.();
 
     const title = "注册验证码";
-    const content = Mail.template("verify", verify);
+    const content = await Mail.template("verify", verify);
 
     await Mail.send(email, title, content)
     .catch(() => {

@@ -24,9 +24,9 @@ export default {
     },
 
     //邮件模板
-    template(key: string, ...args: string[]) {
+    async template(key: string, ...args: string[]) {
         //读取文本
-        const file = fs.readFileSync(r(`data/mail/${key}.txt`));
+        const file = await fs.readFile(r(`data/mail/${key}.txt`));
 
         //参数替换
         return args.reduce((mail, word, index) => {

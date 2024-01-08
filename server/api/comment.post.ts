@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import Mail from "~/server/core/Mail";
 
 interface PostCommentResponse extends BaseResponse {}
 
@@ -39,13 +40,21 @@ export default defineCustomHandler(async (event) => {
         });
 
         //更新所回复评论的数据（如果有）
-        await CommentDataModel.findOneAndUpdate({
+        const res = await CommentDataModel.findOneAndUpdate({
             _id: parent
         }, {
             $push: {
                 children: comment._id
             }
-        });
+        }) as any;
+
+        //对被回复评论进行邮件通知
+        if (res !== null && res.email.length > 0 && res.email !== email) {
+            Mail.template("comment-reply", content, path).then((text) => {
+                const title = `@${nickname} 回复了您的评论`;
+                Mail.send(res.email, title, text);
+            });
+        }
     }
     else {
         //路径格式错误
