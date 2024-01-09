@@ -3,8 +3,12 @@
         title: "404"
     });
 
+    const route = useRoute();
     const router = useRouter();
     const time = ref(4);
+
+    //隐藏评论区
+    route.meta.comment = false;
 
     Zin.setInterval(() => {
         time.value--;
