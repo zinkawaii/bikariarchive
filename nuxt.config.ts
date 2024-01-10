@@ -22,8 +22,8 @@ export default defineNuxtConfig({
     },
     css: [
         "@fortawesome/fontawesome-svg-core/styles.css",
-        "prism-themes/themes/prism-one-dark.min.css",
-        "~/assets/scss/sinrabansyo.scss"
+        "~/assets/scss/sinrabansyo.scss",
+        "~/assets/scss/atom.scss"
     ],
     components: [
         {

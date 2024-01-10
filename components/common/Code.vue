@@ -57,7 +57,7 @@
         justify-content: space-between;
         padding-inline: 12px;
         background: var(--color-theme);
-        font-weight: bold;
+        font-family: var(--font-smooth);
         line-height: 28px;
         color: var(--color-theme-text);
     }
