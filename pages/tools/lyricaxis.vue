@@ -217,11 +217,11 @@
             @ended="audioEnded"
             @timeupdate="audioTimeupdate"
         ></audio>
-        <a class="btn" @click="upload">上传</a>
-        <a :class="[`btn`, { disabled: state.invalid }]" @click="play">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</a>
+        <mb-button @click="upload">上传</mb-button>
+        <mb-button :disabled="state.invalid" @click="play">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</mb-button>
         <span>
-            <a :class="[`btn`, { disabled: state.invalid }]" @click="exporter">导出</a>
-            <a :class="[`btn`, { disabled: state.invalid }]" @click="axis">{{ state.axising ? "结束打轴" : "开始打轴" }}</a>
+            <mb-button :disabled="state.invalid" @click="exporter">导出</mb-button>
+            <mb-button :disabled="state.invalid" @click="axis">{{ state.axising ? "结束打轴" : "开始打轴" }}</mb-button>
         </span>
         <div>
             <span class="lyric-time">{{ timeFormat(state.current) }}</span>
@@ -254,8 +254,8 @@
                 </p>
             </article>
             <ul class="lyric-handle">
-                <li><a class="btn" @click="undo">回退</a></li>
-                <li><a class="btn" @click="sign">标记</a></li>
+                <li><mb-button @click="undo">回退</mb-button></li>
+                <li><mb-button @click="sign">标记</mb-button></li>
             </ul>
         </div>
     </div>

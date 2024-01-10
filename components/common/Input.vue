@@ -145,7 +145,7 @@
         width: 100%;
         border: 1px solid var(--color-border);
         border-radius: 4px;
-        line-height: 28px;
+        line-height: calc(2em - 2px);
         text-align: center;
     }
 </style>

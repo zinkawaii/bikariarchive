@@ -87,7 +87,7 @@
                 <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="comment"></textarea>
                 <div class="panel-count">{{ comment.length }} / {{ maxLength }}</div>
             </div>
-            <a class="btn panel-publish" :class="{ disabled: !comment.length }" @click="submit"><fa-icon icon="paper-plane"/> 发表评论</a>
+            <mb-button full round icon="paper-plane" :disabled="!comment.length" @click="submit">发表评论</mb-button>
         </div>
     </transition>
     <mb-mask :when="commentPanelStore.isOpened" @click="commentPanelStore.close()"/>
@@ -158,10 +158,5 @@
         bottom: 4px;
         font-size: 12px;
         color: var(--color-gray);
-    }
-
-    .panel-publish {
-        width: 100%;
-        border-radius: var(--circle-radius);
     }
 </style>

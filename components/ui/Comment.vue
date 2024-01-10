@@ -63,8 +63,8 @@
 <template>
     <div class="content-widget z-comment" z-main>
         <div class="comment-title">
-            <h2>评论 <span class="text-gray">{{ count.total }}</span></h2>
-            <a class="btn" @click="postComment"><fa-icon icon="comment-dots"/> 发表评论</a>
+            <h2>评论<span class="text-gray">{{ count.total }}</span></h2>
+            <mb-button icon="comment-dots" @click="postComment">发表评论</mb-button>
         </div>
         <comment-item v-for="item in comments" :key="item.id" :data="item" @update="getComments"/>
         <mb-pagination v-if="count.main > 0" :total="count.main" scroll-to=".z-comment" v-model="page"/>
@@ -76,6 +76,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        span {
+            margin-left: 0.5em;
+        }
     }
 
     .mb-pagination {

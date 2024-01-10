@@ -353,35 +353,6 @@ textarea {
 
 /* ---------------------------------------------------------------- */
 
-/* 按钮 */
-.btn {
-    display: inline-block;
-    padding-inline: 12px;
-    border: 1px solid var(--color-theme-dark);
-    border-radius: 3px;
-    line-height: 2em;
-    text-align: center;
-    color: var(--color-theme-text);
-    transition: all 0.4s;
-    cursor: pointer;
-    user-select: none;
-
-    &:hover {
-        background-color: var(--color-theme-dark);
-        color: white;
-    }
-
-    &.disabled {
-        border-color: var(--color-border);
-        color: var(--color-border);
-        pointer-events: none;
-    }
-
-    & + & {
-        margin-inline-start: 0.5em;
-    }
-}
-
 /* 关闭按钮 */
 .xmark {
     position: absolute;

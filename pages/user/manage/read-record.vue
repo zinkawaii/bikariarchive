@@ -111,8 +111,8 @@
                 <div class="manage-cursor" :class="{ active: index === que.current }" @click="que.current = index"></div>
             </div>
         </div>
-        <a :class="[`btn`, { disabled: querying }]" @click="query">查询</a>
-        <a :class="[`btn`, { disabled: !data.length }]" @click="clear">清空</a>
+        <mb-button :disabled="querying" @click="query">查询</mb-button>
+        <mb-button :disabled="!data.length" @click="clear">清空</mb-button>
     </div>
     <div class="manage-table-wrapper" :hidden="!data.length">
         <table class="manage-table">
@@ -135,8 +135,8 @@
                         <td>{{ item.index }}</td>
                         <td>{{ item.user?.uid || "--" }}</td>
                         <td class="manage-operators">
-                            <a class="btn" @click="edit(item)"><fa-icon icon="pencil"/></a>
-                            <a class="btn" @click="remove(item, index)"><fa-icon icon="trash-can"/></a>
+                            <mb-button icon="pencil" @click="edit(item)"/>
+                            <mb-button icon="trash-can" @click="remove(item, index)"/>
                         </td>
                     </tr>
                 </transition-group>
@@ -206,7 +206,7 @@
     .manage-operators {
         text-wrap: nowrap;
 
-        > a {
+        > button {
             width: 24px;
             padding: 0;
             line-height: 22px;

@@ -176,9 +176,9 @@
                     <option v-for="(data, index) in params.data.value" :value="index">{{ data.name }}</option>
                 </select>
                 <div class="excalc-param-handlers">
-                    <a class="btn" :class="{ disabled: params.current.value === void(0) }" @click="params.save">保存</a>
-                    <a class="btn" @click="params.add">新建</a>
-                    <a class="btn" :class="{ disabled: params.current.value === void(0) }" @click="params.remove">删除</a>
+                    <mb-button :disabled="params.current.value === void(0)" @click="params.save">保存</mb-button>
+                    <mb-button @click="params.add">新建</mb-button>
+                    <mb-button :disabled="params.current.value === void(0)" @click="params.remove">删除</mb-button>
                 </div>
             </div>
             <div class="excalc-label">
@@ -203,7 +203,7 @@
                 <span>次数</span>
                 <mb-input type="number" v-model="state.times"/>
             </label>
-            <a class="btn" @click="roll">Roll</a>
+            <mb-button full @click="roll">Roll</mb-button>
             <label>
                 <span>斩杀率</span>
                 <mb-input type="number" readonly v-model="kill_rate"/>
@@ -221,7 +221,7 @@
     </div>
     <div class="excalc-bottom">
         <div class="excalc-tools">
-            <a class="btn" @click="addBuki">添加武器</a>
+            <mb-button @click="addBuki">添加武器</mb-button>
         </div>
         <div class="navbox-wrapper">
             <table class="excalc-table">
@@ -241,7 +241,7 @@
                     <td><mb-input type="number" :accuracy="2" v-model="item.accuracy_rate"/></td>
                     <td><mb-input type="number" :accuracy="2" v-model="item.crit_rate"/></td>
                     <td><mb-input type="number" :accuracy="2" v-model="item.crit_damage"/></td>
-                    <td><a class="btn excalc-delete" @click="removeBuki(index)">删除</a></td>
+                    <td><mb-button class="excalc-delete" @click="removeBuki(index)">删除</mb-button></td>
                 </tr>
             </table>
         </div>
@@ -253,10 +253,6 @@
         display: flex;
         justify-content: space-between;
         gap: 32px;
-    }
-
-    .btn {
-        line-height: 28px;
     }
 
     .excalc-param-selector {
@@ -306,7 +302,7 @@
     .excalc-tools {
         pointer-events: none;
 
-        > .btn {
+        > button {
             pointer-events: auto;
         }
     }

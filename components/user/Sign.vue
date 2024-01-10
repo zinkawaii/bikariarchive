@@ -67,7 +67,7 @@
                             <div>
                                 <span class="user-nickname">{{ userStore.nickname }}</span>
                                 <div class="user-tool">
-                                    <a class="btn" @click="logout">退出登录</a>
+                                    <mb-button @click="logout">退出登录</mb-button>
                                 </div>
                             </div>
                             <nuxt-link :to="toSpace"><nuxt-img class="user-icon" src="/garden/icon/default.png"/></nuxt-link>

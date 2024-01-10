@@ -266,8 +266,8 @@
             </div>
         </div>
         <div class="namae-operator">
-            <a class="btn" :class="{ disabled: !isJnmLoaded }" @click="generate">生成</a>
-            <a class="btn" @click="clear">清除结果</a>
+            <mb-button :disabled="!isJnmLoaded" @click="generate">生成</mb-button>
+            <mb-button @click="clear">清除结果</mb-button>
         </div>
     </form>
     <div v-if="!isResultEmpty" class="div-table namae-result">

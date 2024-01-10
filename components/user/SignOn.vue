@@ -155,11 +155,11 @@
             @blur="tips.verify = ``"
             @input="verifyInput"
         />
-        <a :class="[`btn`, { disabled: verifyStage.stage > 0 }]" @click="verifySend">{{
+        <mb-button :disabled="verifyStage.stage > 0" @click="verifySend">{{
             verifyStage.stage === 1 ? "发送中……" :
             verifyStage.stage === 2 ? `已发送(${verifyStage.delay})` :
             "发送验证码"
-        }}</a>
+        }}</mb-button>
     </div>
     <coco-input
         type="password"
