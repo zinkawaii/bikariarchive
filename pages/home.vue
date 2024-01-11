@@ -1,9 +1,10 @@
 <script setup>
     import jArticle from "~/dist/json/Article.json";
 
+    const config = useRuntimeConfig();
     useHead({
         title: "主页",
-        link: { rel: "canonical", href: "https://bikariarchive.xyz" }
+        link: { rel: "canonical", href: `https://${config.public.domain}` }
     });
 
     const intro = ref({

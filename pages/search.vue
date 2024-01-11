@@ -107,7 +107,7 @@
         </div>
         <div class="search-results">
             <nuxt-link v-for="item in displayResults" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
-                <h3>{{ item.title }}</h3>
+                <h3 class="result-title">{{ item.title }}</h3>
                 <span class="result-volume">{{ item.volume }}</span>
                 <article class="result-part">
                     <p v-for="part in item.parts" v-html="part"></p>
@@ -199,14 +199,17 @@
         }
     }
 
-    .result-volume {
-        display: inline-block;
-        font-size: 15px;
+    .result-title {
         line-height: 28px;
+    }
+
+    .result-volume {
+        font-size: 15px;
         color: var(--color-gray);
     }
 
     .result-part {
+        padding-block: 4px;
         font-size: 13px;
         line-height: 22px;
 

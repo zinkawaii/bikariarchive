@@ -175,9 +175,7 @@
     .novel-header {
         display: grid;
         grid-template-columns: auto 1fr auto;
-        margin-bottom: 8px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid var(--color-border);
+        margin-bottom: 16px;
     }
 
     .novel-title {

@@ -44,8 +44,8 @@
 <style lang="scss" scoped>
     .friend-list {
         display: grid;
-        grid: auto / repeat(auto-fill, minmax(256px, 1fr));
-        grid-gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+        gap: 16px;
     }
 
     .friend-item {

@@ -286,13 +286,12 @@
     }
 
     .calendar-week {
+        margin-bottom: 4px;
         padding-block: 6px;
         border-bottom: 1px dashed var(--color-theme-dark);
     }
 
     .calendar-date {
-        padding-top: 4px;
-
         > a {
             display: flex;
             flex-direction: column;
