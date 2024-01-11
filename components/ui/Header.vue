@@ -2,6 +2,51 @@
     const router = useRouter();
     const word = ref("");
 
+    const navList = [
+        {
+            title: "主页",
+            icon: "house",
+            to: { name: "home" }
+        },
+        {
+            title: "目录",
+            icon: "book-open",
+            to: { name: "catalogue" }
+        },
+        {
+            title: "情报",
+            icon: "sitemap",
+            to: { name: "details" }
+        },
+        {
+            title: "机场",
+            icon: "paper-plane",
+            children: [
+                {
+                    title: "友情链接",
+                    icon: "link",
+                    to: { name: "friend" }
+                }
+            ]
+        },
+        {
+            title: "营业",
+            icon: "mug-saucer",
+            children: [
+                {
+                    title: "借物表",
+                    icon: "person-praying",
+                    to: { name: "borrowing" }
+                },
+                {
+                    title: "神殿",
+                    icon: "torii-gate",
+                    to: { name: "chanrina" }
+                }
+            ]
+        }
+    ];
+
     function search() {
         router.push(toSearch(word.value));
         word.value = "";
@@ -14,30 +59,20 @@
             <nuxt-link :to="{ name: `home` }">BikariArchive</nuxt-link>
         </div>
         <nav class="nav-list">
-            <nuxt-link :to="{ name: `home` }">
-                <fa-icon icon="house"/>
-                <span>主页</span>
-            </nuxt-link>
-            <nuxt-link :to="{ name: `catalogue` }">
-                <fa-icon icon="book-open"/>
-                <span>目录</span>
-            </nuxt-link>
-            <nuxt-link :to="{ name: `details` }">
-                <fa-icon icon="sitemap"/>
-                <span>情报</span>
-            </nuxt-link>
-            <nuxt-link :to="{ name: `friend` }">
-                <fa-icon icon="link"/>
-                <span>友链</span>
-            </nuxt-link>
-            <nuxt-link :to="{ name: `borrowing` }">
-                <fa-icon icon="person-praying"/>
-                <span>借物表</span>
-            </nuxt-link>
-            <nuxt-link :to="{ name: `chanrina` }">
-                <fa-icon icon="torii-gate"/>
-                <span>神殿</span>
-            </nuxt-link>
+            <div v-for="{ title, icon, to, children } in navList" class="nav-item">
+                <nuxt-link class="nav-link" :to="to">
+                    <fa-icon :icon="icon"/>
+                    <span>{{ title }}</span>
+                </nuxt-link>
+                <div v-if="children?.length > 0" class="nav-popup-wrapper">
+                    <div class="nav-popup">
+                        <nuxt-link v-for="child in children" :to="child.to">
+                            <fa-icon :icon="child.icon"/>
+                            <span>{{ child.title }}</span>
+                        </nuxt-link>
+                    </div>
+                </div>
+            </div>
         </nav>
         <form class="search-wrapper" @submit.prevent="search">
             <input class="keyword" type="search" placeholder="输入关键词..." v-model="word"/>
@@ -53,6 +88,7 @@
         display: grid;
         grid-template-columns: 1fr auto auto;
         position: sticky;
+        overflow-x: clip;
         top: 0;
         height: 64px;
         min-width: var(--size-min-width);
@@ -73,7 +109,7 @@
     $title: 297px;
     $item-max: 60px;
     $item-min: 48px;
-    $count: 6;
+    $count: 5;
     $nav-max: $item-max * $count;
     $nav-min: $item-min * $count;
     $padding: 16px * 2;
@@ -110,36 +146,103 @@
     .nav-list {
         display: flex;
 
-        > a {
-            display: grid;
-            align-content: center;
-            justify-items: center;
-            gap: 4px;
-            width: $item-max;
-            color: white;
-            filter: drop-shadow(var(--text-shadow));
+        @media (width < #{$min}) {
+            display: none;
+        }
+    }
 
-            > svg {
-                transition: translate 0.2s;
-            }
+    .nav-item {
+        display: grid;
+        justify-items: center;
+        position: relative;
+    }
 
-            &:hover > svg {
-                translate: 0 -4px;
-            }
+    .nav-link {
+        display: grid;
+        justify-items: center;
+        gap: 4px;
+        width: $item-max;
+        margin: auto;
+        color: white;
+        filter: drop-shadow(var(--text-shadow));
+
+        > svg {
+            transition: translate 0.2s;
+        }
+
+        &:hover > svg {
+            translate: 0 -4px;
         }
 
         @media (width < #{$max}) {
-            > a {
-                width: $item-min;
-            }
+            width: $item-min;
 
             span {
                 display: none;
             }
         }
+    }
 
-        @media (width < #{$min}) {
-            display: none;
+    .nav-popup-wrapper {
+        position: absolute;
+        opacity: 0;
+        top: 50px;
+        padding: 8px;
+        transform-origin: top;
+        transition: all 0.25s;
+        scale: 1 0.66;
+        filter: drop-shadow(2px 2px 8px rgb(0 0 0 / 32%));
+        pointer-events: none;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 4px 0;
+            width: 10px;
+            aspect-ratio: 1;
+            margin-inline: auto;
+            background-color: var(--color-background-alpha);
+            clip-path: polygon(0 0, 0 100%, 100% 0);
+            rotate: 45deg;
+        }
+
+        :hover + &, &:hover {
+            opacity: 1;
+            scale: 1;
+            pointer-events: auto;
+        }
+    }
+
+    .nav-popup {
+        display: grid;
+        width: 112px;
+        padding: 6px;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        background-color: var(--color-background-alpha);
+
+        [z-dark] & {
+            border-color: var(--color-border-light);
+        }
+
+        > a {
+            display: grid;
+            grid-template-columns: 16px 1fr;
+            gap: 6px;
+            padding-inline: 10px;
+            border-radius: 8px;
+            line-height: 32px;
+            word-break: keep-all;
+            transition: all 0.25s;
+
+            &:hover {
+                background-color: var(--color-theme);
+                color: white;
+            }
+        }
+
+        svg {
+            margin: auto;
         }
     }
 

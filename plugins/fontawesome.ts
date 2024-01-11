@@ -28,6 +28,7 @@ library.add(
     fas.faHouse,
     fas.faLink,
     fas.faMoon,
+    fas.faMugSaucer,
     fas.faPaperPlane,
     fas.faPaste,
     fas.faPen,

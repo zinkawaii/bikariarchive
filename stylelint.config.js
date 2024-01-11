@@ -71,6 +71,8 @@ const order = [
             "position",
             "visibility",
             "overflow",
+            "overflow-x",
+            "overflow-y",
             "opacity",
             "inset",
             "top",
