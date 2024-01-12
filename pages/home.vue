@@ -100,9 +100,7 @@
                     </nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to="/feed" title="RSS">
-                        <fa-icon icon="rss"/>
-                    </nuxt-link>
+                    <a href="/feed" title="RSS"><fa-icon icon="rss"/></a>
                 </li>
             </ul>
         </div>
