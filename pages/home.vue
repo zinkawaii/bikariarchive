@@ -1,43 +1,32 @@
 <script setup>
-    import jArticle from "~/dist/json/Article.json";
-
     const config = useRuntimeConfig();
     useHead({
         title: "主页",
         link: { rel: "canonical", href: `https://${config.public.domain}` }
     });
 
-    const intro = ref({
-        status: 0,
-        novel: [...Object.keys(jArticle)],
-        layer: ["outer", "inner"],
-        translate: []
-    });
-
-    //表里互换
-    function exchange() {
-        intro.value.status ^= 1;
-
-        //首位小说入队尾
-        const novel = intro.value.novel.shift();
-        intro.value.novel.push(novel);
-
-        //交换层级
-        const { status, layer } = intro.value;
-        layer.reverse();
-
-        //旋转动画
-        Zin.setInterval((t) => {
-            const angle = Math.PI / 4 - (t + 1) * (Math.PI / 24);
-            const sin = 12 * Math.sqrt(2) * Math.sin(angle);
-            const cos = 12 * Math.sqrt(2) * Math.cos(angle);
-            intro.value.translate[status] = `${cos + 12}px ${sin + 12}px`;
-            intro.value.translate[1 - status] = `${-cos + 12}px ${-sin + 12}px`;
-        }, {
-            duration: 6,
-            times: 24
-        });
-    }
+    const profileLinks = [
+        {
+            title: "Github",
+            to: "https://github.com/KazariEX",
+            icon: "fab fa-github"
+        },
+        {
+            title: "Twitter",
+            to: "https://twitter.com/KazariEX_0929",
+            icon: "fab fa-twitter"
+        },
+        {
+            title: "BiliBili",
+            to: "https://space.bilibili.com/37810541",
+            icon: "fab fa-bilibili"
+        },
+        {
+            title: "RSS",
+            to: "/feed",
+            icon: "rss"
+        }
+    ];
 </script>
 
 <template>
@@ -54,15 +43,7 @@
                 这里是我的个人网站，主要用于发布小说正文，所有文章均可在<coco-link :to="{ name: `catalogue` }">目录页</coco-link>索引并浏览。<coco-link :to="{ name: `details` }">情报页</coco-link>整理并展示了目前部分可以公开的设定。<coco-link :to="{ name: `search` }">检索页</coco-link>可在全文范围内对特定关键词进行检索。
             </p>
         </div>
-        <div class="home-introduction">
-            <home-intro-card
-                v-for="i in 2"
-                :style="{ translate: intro.translate[i - 1] }"
-                :layer="intro.layer[i - 1]"
-                :novel="intro.novel[intro.status ? 2 - i : i - 1]"
-                @exchange="exchange"
-            />
-        </div>
+        <home-introduction />
         <div class="content-table">
             <a class="profile-avatar">
                 <nuxt-img :src="$config.public.avatar"/>
@@ -84,23 +65,10 @@
                 </tbody>
             </table>
             <ul class="profile-link">
-                <li>
-                    <nuxt-link to="https://github.com/KazariEX" title="Github" target="_blank">
-                        <fa-icon icon="fab fa-github"/>
+                <li v-for="{ title, to, icon } in profileLinks">
+                    <nuxt-link :to="to" :title="title" target="_blank">
+                        <fa-icon :icon="icon"/>
                     </nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to="https://twitter.com/KazariEX_0929" title="Twitter" target="_blank">
-                        <fa-icon icon="fab fa-twitter"/>
-                    </nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to="https://space.bilibili.com/37810541" title="BiliBili" target="_blank">
-                        <fa-icon icon="fab fa-bilibili"/>
-                    </nuxt-link>
-                </li>
-                <li>
-                    <a href="/feed" title="RSS"><fa-icon icon="rss"/></a>
                 </li>
             </ul>
         </div>
@@ -134,10 +102,6 @@
 
     .home-welcome {
         grid-area: A;
-    }
-
-    .home-introduction {
-        position: relative;
     }
 
     .profile-table {
@@ -208,10 +172,6 @@
     @container main (width < 768px) {
         .home-brief {
             grid-template: "A" "B" "C";
-        }
-
-        .home-introduction {
-            height: 332px;
         }
     }
 

@@ -57,7 +57,8 @@
         position: absolute;
         width: calc(100% - $gap);
         height: calc(100% - $gap);
-        transition: filter 0.144s;
+        transition-property: filter, translate;
+        transition-duration: 0.25s;
 
         &[layer="outer"] {
             z-index: 1;
