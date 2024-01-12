@@ -19,17 +19,6 @@
             to: { name: "details" }
         },
         {
-            title: "机场",
-            icon: "paper-plane",
-            children: [
-                {
-                    title: "友情链接",
-                    icon: "link",
-                    to: { name: "friend" }
-                }
-            ]
-        },
-        {
             title: "营业",
             icon: "mug-saucer",
             children: [
@@ -42,6 +31,17 @@
                     title: "神殿",
                     icon: "torii-gate",
                     to: { name: "chanrina" }
+                }
+            ]
+        },
+        {
+            title: "链接",
+            icon: "link",
+            children: [
+                {
+                    title: "友情链接",
+                    icon: "link",
+                    to: { name: "friend" }
                 }
             ]
         }
