@@ -24,9 +24,8 @@
     "dayjs": "^1.11.10",
     "lunisolar": "^2.4.0",
     "prismjs": "^1.29.0",
-    "vue": "^3.4.11",
-    "vue-router": "^4.2.5",
-    "vue3-runtime-template": "^1.0.2"
+    "vue": "^3.4.13",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@kikiutils/nuxt-session": "^2.0.2",
@@ -46,7 +45,7 @@
     "chokidar": "^3.5.3",
     "consola": "^3.2.3",
     "eslint": "^8.56.0",
-    "eslint-plugin-vue": "^9.20.0",
+    "eslint-plugin-vue": "^9.20.1",
     "feed": "^4.2.2",
     "front-matter": "^4.0.2",
     "fs-extra": "^11.2.0",

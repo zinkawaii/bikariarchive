@@ -1,19 +1,3 @@
-<script>
-    import VRuntimeTemplate from "vue3-runtime-template";
-    import { CocoLink, MbCode, MbGallery, MbImage, NuxtImg } from "#components";
-
-    //需要导入文章的组件
-    export default {
-        components: {
-            "coco-link": CocoLink,
-            "mb-code": MbCode,
-            "mb-gallery": MbGallery,
-            "mb-image": MbImage,
-            "nuxt-img": NuxtImg
-        }
-    };
-</script>
-
 <script setup>
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();
@@ -152,10 +136,7 @@
                 <fa-icon icon="chevron-right"/>
             </nuxt-link>
         </header>
-        <article v-if="art.runtime" class="novel-text">
-            <v-runtime-template :template="state.content"/>
-        </article>
-        <article v-else class="novel-text" v-html="state.content"></article>
+        <novel-article class="novel-text" :content="state.content" :enabled="art.runtime"/>
         <footer class="novel-footer">
             <p v-if="art.ending" class="novel-endding">THE END</p>
             <div class="novel-copyright">
@@ -205,10 +186,6 @@
         padding-inline: 32px;
         font-family: v-bind("fontFamily");
         font-size: v-bind("fontSize");
-
-        :deep(.mb-gallery) {
-            margin-block: 16px;
-        }
     }
 
     .novel-endding {

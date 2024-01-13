@@ -183,7 +183,7 @@ button, label, select {
     cursor: pointer;
 }
 
-input, textarea, select, option {
+button, input, textarea, select, option {
     background-color: var(--color-background);
     color: inherit;
 }
@@ -419,6 +419,10 @@ textarea {
     em {
         font-style: normal;
         color: var(--color-theme-text);
+    }
+
+    .mb-gallery {
+        margin-block: 16px;
     }
 }
 
