@@ -65,10 +65,11 @@
             })
         },
         {
-            title: "打开设置",
-            icon: "gear",
+            title: "昼夜切换",
+            icon: computed(() => (settingStore.isDarkMode ? "sun" : "moon")),
             action: createAction(() => {
-                settingStore.open();
+                const value = settingStore.isDarkMode ? 1 : 2;
+                settingStore.set("dark-mode", value);
             })
         }
     ]);

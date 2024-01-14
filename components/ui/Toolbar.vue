@@ -6,9 +6,10 @@
         return settingStore.get("ui-collapse");
     });
 
-    function toggleDarkmode() {
-        const value = settingStore.isDarkMode ? 1 : 2;
-        settingStore.set("dark-mode", value);
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0
+        });
     }
 </script>
 
@@ -21,11 +22,11 @@
             <a class="tool-item" @click="settingStore.open()">
                 <fa-icon icon="gear"/>
             </a>
-            <a class="tool-item" @click="toggleDarkmode">
-                <fa-icon :icon="settingStore.isDarkMode ? `sun` : `moon`"/>
-            </a>
             <a class="tool-item" @click="signerStore.toggle()">
                 <fa-icon icon="user"/>
+            </a>
+            <a class="tool-item" @click="scrollToTop">
+                <fa-icon icon="arrow-up"/>
             </a>
         </div>
         <a class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
