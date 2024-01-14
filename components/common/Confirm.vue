@@ -1,6 +1,12 @@
 <script setup>
     const confirmStore = useConfirmStore();
 
+    //添加遮罩层
+    useMask({
+        isOpened: () => confirmStore.isOpened,
+        onclick: () => res(false)
+    });
+
     //键盘监听
     useEventListener("keyup", (event) => {
         if (confirmStore.isOpened) {
@@ -29,7 +35,6 @@
             </div>
         </div>
     </transition>
-    <mb-mask :when="confirmStore.isOpened" @click="res(false)"/>
 </template>
 
 <style lang="scss" scoped>

@@ -1,6 +1,12 @@
 <script setup>
     const settingStore = useSettingStore();
 
+    //添加遮罩层
+    useMask({
+        isOpened: () => settingStore.isOpened,
+        onclick: () => settingStore.close()
+    });
+
     //键值与显示值的映射表
     const ShortMap = new Map([
         ["Control",    "Ctrl"],
@@ -60,7 +66,6 @@
             <setting-form title="字体大小" type="select" name="font-size" :options="[`小`, `中`, `大`]"/>
         </div>
     </transition>
-    <mb-mask :when="settingStore.isOpened" @click="settingStore.close()"/>
 </template>
 
 <style lang="scss" scoped>

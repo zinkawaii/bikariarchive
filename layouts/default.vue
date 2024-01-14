@@ -14,6 +14,7 @@
         </main>
         <z-sidebar />
     </div>
+    <z-mask />
     <z-setting />
     <user-sign />
     <comment-panel />
@@ -62,7 +63,7 @@
         z-index: 256;
     }
 
-    .mb-mask {
+    .z-mask {
         z-index: 511;
     }
 

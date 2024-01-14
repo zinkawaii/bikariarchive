@@ -1,24 +1,19 @@
 <script setup>
-    defineProps({
-        when: {
-            type: Boolean,
-            required: true
-        },
-        duration: {
-            type: Number,
-            default: 400
-        }
+    const maskStore = useMaskStore();
+
+    const duration = computed(() => {
+        return maskStore.duration / 1000 + "s";
     });
 </script>
 
 <template>
     <transition name="mask">
-        <div v-if="when" class="mb-mask"></div>
+        <div v-if="maskStore.isOpened" class="z-mask" @click="maskStore.onclick()"></div>
     </transition>
 </template>
 
 <style lang="scss" scoped>
-    .mb-mask {
+    .z-mask {
         position: fixed;
         opacity: 0.5;
         inset: 0;
@@ -26,7 +21,7 @@
     }
 
     .mask-enter-active, .mask-leave-active {
-        transition: opacity v-bind("duration / 1000 + `s`");
+        transition: opacity v-bind("duration");
     }
 
     .mask-enter-from, .mask-leave-to {

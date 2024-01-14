@@ -5,6 +5,12 @@
     const comment = ref("");
     const maxLength = 512;
 
+    //添加遮罩层
+    useMask({
+        isOpened: () => commentPanelStore.isOpened,
+        onclick: () => commentPanelStore.close()
+    });
+
     const checker = new Checker({
         nickname: {
             target: nickname,
@@ -90,7 +96,6 @@
             <mb-button full round icon="paper-plane" :disabled="!comment.length" @click="submit">发表评论</mb-button>
         </div>
     </transition>
-    <mb-mask :when="commentPanelStore.isOpened" @click="commentPanelStore.close()"/>
 </template>
 
 <style lang="scss" scoped>

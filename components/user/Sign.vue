@@ -7,6 +7,12 @@
     //当前视图
     const currentView = ref();
 
+    //添加遮罩层
+    useMask({
+        isOpened: () => signerStore.isOpened,
+        onclick: () => signerStore.close()
+    });
+
     //根据登录状态切换视图
     watch(() => userStore.isLogin, (value) => {
         currentView.value = value ? "profile" : "login";
@@ -78,7 +84,6 @@
             <fa-icon class="xmark" icon="xmark" @click="signerStore.close"/>
         </div>
     </transition>
-    <mb-mask :when="signerStore.isOpened" @click="signerStore.close"/>
 </template>
 
 <style lang="scss" scoped>

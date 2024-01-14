@@ -3,6 +3,12 @@
     const $i = storeToRefs(imageViewerStore).target;
     const $v = ref();
 
+    //添加遮罩层
+    useMask({
+        isOpened: () => imageViewerStore.isOpened,
+        onclick: () => closeViewer()
+    });
+
     //放大后占窗口比率
     const rate = 0.9;
 
@@ -158,7 +164,6 @@
             @mousewheel.prevent="onMouseWheel"
         />
     </transition>
-    <mb-mask :when="imageViewerStore.isOpened" @click="closeViewer" @mousewheel.prevent/>
 </template>
 
 <style lang="scss" scoped>
