@@ -88,12 +88,17 @@
 
         //回到原位
         const { left, top, width, height } = $i.value.getBoundingClientRect();
-        const animation = $img.value.animate({
-            top: top + "px",
-            left: left + "px",
+        const { scrollX: x, scrollY: y } = window;
+
+        const animation = $img.value.animate([{
+            top: y + $img.value.y + "px",
+            left: x + $img.value.x + "px"
+        }, {
+            top: y + top + "px",
+            left: x + left + "px",
             width: width + "px",
             height: height + "px"
-        }, animationOptions);
+        }], animationOptions);
 
         //结束关闭
         animation.onfinish = () => {
@@ -169,9 +174,10 @@
 <style lang="scss" scoped>
     .mb-image-viewer {
         position: fixed;
+        transition: all 0.4s;
     }
 
-    .move-enter-active, .move-leave-active {
-        transition: all 0.4s;
+    .move-leave-active {
+        position: absolute;
     }
 </style>
