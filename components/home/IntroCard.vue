@@ -41,9 +41,9 @@
             <p v-for="line in synopsis">{{ line }}</p>
         </div>
         <div class="intro-record">
-            <span class="front">&gt;</span>
+            <span>&gt;</span>
             <coco-link :to="record.link">{{ record.title }}</coco-link>
-            <span class="rear">&lt;</span>
+            <span>&lt;</span>
         </div>
     </div>
 </template>
@@ -97,8 +97,12 @@
 
     .intro-record {
         padding-top: 8px;
-        border-top: 1px solid var(--color-border);
+        border-top: 1px solid var(--color-border-light);
         text-align: center;
+
+        span {
+            color: var(--color-gray);
+        }
 
         a {
             margin-inline: 20px;

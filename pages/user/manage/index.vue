@@ -77,10 +77,6 @@
         text-align: center;
 
         tr {
-            &:nth-child(even) > th {
-                background-color: var(--color-theme-light);
-            }
-
             &.v-enter-active,
             &.v-leave-active {
                 transition: all 0.4s;

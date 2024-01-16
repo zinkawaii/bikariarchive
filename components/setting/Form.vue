@@ -44,6 +44,7 @@
         display: grid;
         grid-template-columns: 0.8fr 1fr;
         align-items: center;
+        gap: 8px;
         padding-bottom: 8px;
         border-bottom: 1px solid var(--color-border-light);
     }

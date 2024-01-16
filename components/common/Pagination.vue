@@ -61,7 +61,7 @@
                 @click="modelValue = 1"
             >1</a>
             <a
-                v-if="modelValue > 3"
+                v-show="modelValue > 3"
                 class="pagina-item"
                 @click="modelValue -= 2"
             >...</a>
@@ -73,7 +73,7 @@
                 >{{ i }}</a>
             </li>
             <a
-                v-if="modelValue < totalPages - 2"
+                v-show="modelValue < totalPages - 2"
                 class="pagina-item"
                 @click="modelValue += 2"
             >...</a>

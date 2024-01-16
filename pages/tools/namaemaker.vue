@@ -231,7 +231,7 @@
 </script>
 
 <template>
-    <form class="namae-form" autocomplete="off">
+    <div class="namae-form">
         <div class="namae-option">
             <span>介绍</span>
             <p class="p-small">本页面用于生成日文名，数据库与随机算法均来自<coco-link to="https://namaemaker.net" target="_blank">namaemaker.net</coco-link></p>
@@ -269,7 +269,7 @@
             <mb-button :disabled="!isJnmLoaded" @click="generate">生成</mb-button>
             <mb-button @click="clear">清除结果</mb-button>
         </div>
-    </form>
+    </div>
     <div v-if="!isResultEmpty" class="div-table namae-result">
         <dl class="namae-col">
             <template v-for="item in result[0]">

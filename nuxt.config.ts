@@ -18,7 +18,8 @@ export default defineNuxtConfig({
             templateParams: {
                 separator: "-"
             }
-        }
+        },
+        rootId: "z-root"
     },
     css: [
         "@fortawesome/fontawesome-svg-core/styles.css",
