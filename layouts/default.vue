@@ -47,10 +47,6 @@
         z-index: -1;
     }
 
-    .z-jumbotron {
-        z-index: 64;
-    }
-
     .z-header {
         z-index: 64;
     }

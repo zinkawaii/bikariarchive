@@ -32,7 +32,7 @@
 <template>
     <client-only>
         <teleport to=".jumbotron-wrapper">
-            <z-jumbotron />
+            <home-jumbotron />
         </teleport>
     </client-only>
     <div class="content-widget home-brief" z-main>

@@ -61,7 +61,7 @@
 </script>
 
 <template>
-    <div class="z-jumbotron">
+    <div class="home-jumbotron">
         <div class="jumbo-background" :style="style"></div>
         <div class="jumbo-banner">
             <h1 class="jumbo-title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
@@ -74,7 +74,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .z-jumbotron {
+    .home-jumbotron {
         position: relative;
         overflow: hidden;
     }
