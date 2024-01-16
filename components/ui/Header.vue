@@ -19,6 +19,17 @@
             to: { name: "details" }
         },
         {
+            title: "档案",
+            icon: "box-archive",
+            children: [
+                {
+                    title: "神殿",
+                    icon: "torii-gate",
+                    to: { name: "chanrina" }
+                }
+            ]
+        },
+        {
             title: "营业",
             icon: "mug-saucer",
             children: [
@@ -28,9 +39,9 @@
                     to: { name: "borrowing" }
                 },
                 {
-                    title: "神殿",
-                    icon: "torii-gate",
-                    to: { name: "chanrina" }
+                    title: "更新日志",
+                    icon: "clock-rotate-left",
+                    to: { name: "update" }
                 }
             ]
         },

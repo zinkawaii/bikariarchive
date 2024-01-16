@@ -18,6 +18,7 @@ library.add(
     fas.faArrowRight,
     fas.faBullhorn,
     fas.faBookOpen,
+    fas.faBoxArchive,
     fas.faChevronLeft,
     fas.faChevronRight,
     fas.faChevronDown,

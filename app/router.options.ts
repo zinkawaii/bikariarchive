@@ -54,6 +54,14 @@ export default <RouterConfig> {
             component: () => import("~/pages/search.vue")
         },
         {
+            name: "update",
+            path: "/update",
+            component: () => import("~/pages/update.vue"),
+            meta: {
+                comment: true
+            }
+        },
+        {
             name: "entry",
             path: "/:title",
             component: () => import("~/pages/entry/index.vue"),
