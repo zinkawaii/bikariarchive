@@ -7,23 +7,22 @@
     });
 
     const style = ref({
-        translate: 0
-    });
-
-    let x, y;
-    const bg_func = Zin.throttle((event) => {
-        if (window.scrollY > window.innerHeight) return;
-        if (event.x && event.y) {
-            x = (window.innerWidth / 2 - event.x) / 20;
-            y = (window.innerHeight / 2 - event.y) / 20;
+        background: {
+            translate: 0
+        },
+        title: {
+            translate: 0
         }
-
-        //滑动时强制更新
-        style.value = { translate: `${x}px ${y + window.scrollY}px` };
     });
 
-    //背景相对鼠标移动与视差
-    useEventListener("mousemove", bg_func);
+    const bg_func = Zin.throttle(() => {
+        if (window.scrollY > window.innerHeight) return;
+
+        style.value.background = { translate: `0 ${window.scrollY}px` };
+        style.value.title = { translate: `0 ${window.scrollY / 2}px` };
+    });
+
+    //滚动视差
     useEventListener("scroll", bg_func);
 
     //标题打字特效
@@ -62,8 +61,8 @@
 
 <template>
     <div class="home-jumbotron">
-        <div class="jumbo-background" :style="style"></div>
-        <div class="jumbo-banner">
+        <div class="jumbo-background" :style="style.background"></div>
+        <div class="jumbo-banner" :style="style.title">
             <h1 class="jumbo-title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
             <h2 class="jumbo-phrase" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
         </div>
@@ -102,7 +101,9 @@
     }
 
     .jumbo-title {
+        margin-bottom: 16px;
         font-size: 72px;
+        line-height: 1em;
     }
 
     .jumbo-phrase {
