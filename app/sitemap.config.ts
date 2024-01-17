@@ -10,6 +10,7 @@ export default {
         "/friend",
         "/home",
         "/search",
+        "/update",
         "/tools/excalc",
         "/tools/lyricaxis",
         "/tools/namaemaker",
