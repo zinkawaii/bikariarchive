@@ -324,26 +324,6 @@ textarea {
     visibility: hidden;
 }
 
-/* 导航表格 */
-.navbox-wrapper {
-    overflow: auto;
-    border: 1px solid var(--color-border);
-}
-
-.navbox-table {
-    width: 100%;
-    border: 1px solid var(--color-border);
-    border-spacing: 2px;
-}
-
-.navbox-ceil-odd {
-    background-color: var(--color-theme-light);
-}
-
-.navbox-ceil-even {
-    background-color: var(--color-theme);
-}
-
 /* ---------------------------------------------------------------- */
 
 /* 关闭按钮 */

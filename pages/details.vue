@@ -13,40 +13,38 @@
                 <nuxt-img class="detail-image" :src="block.icon"/>
                 <span>{{ block.title }}</span>
             </div>
-            <div class="navbox-wrapper detail-table">
-                <table>
-                    <colgroup>
-                        <col width="15%"/>
-                        <col width="20%"/>
-                        <col />
-                    </colgroup>
-                    <tbody>
-                        <template v-for="x in block.children">
-                            <tr>
-                                <th colspan="3">{{ x.title }}</th>
+            <coco-table class="detail-table">
+                <colgroup>
+                    <col width="15%"/>
+                    <col width="20%"/>
+                    <col />
+                </colgroup>
+                <tbody>
+                    <template v-for="x in block.children">
+                        <tr>
+                            <th colspan="3">{{ x.title }}</th>
+                        </tr>
+                        <template v-for="y in x.children">
+                            <tr v-for="(z, i) in y.children">
+                                <th v-if="i === 0" :rowspan="y.children.length">{{ y.title }}</th>
+                                <th>{{ z.title }}</th>
+                                <td>
+                                    <span v-for="title in z.children" class="detail-link">
+                                        <coco-link
+                                            v-if="(typeof title) === `object`"
+                                            :to="toEntry(title[0])"
+                                        >{{ title[1] }}</coco-link>
+                                        <coco-link
+                                            v-else
+                                            :to="toEntry(title)"
+                                        >{{ title }}</coco-link>
+                                    </span>
+                                </td>
                             </tr>
-                            <template v-for="y in x.children">
-                                <tr v-for="(z, i) in y.children">
-                                    <th v-if="i === 0" :rowspan="y.children.length">{{ y.title }}</th>
-                                    <th>{{ z.title }}</th>
-                                    <td>
-                                        <span v-for="title in z.children" class="detail-link">
-                                            <coco-link
-                                                v-if="(typeof title) === `object`"
-                                                :to="toEntry(title[0])"
-                                            >{{ title[1] }}</coco-link>
-                                            <coco-link
-                                                v-else
-                                                :to="toEntry(title)"
-                                            >{{ title }}</coco-link>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </template>
                         </template>
-                    </tbody>
-                </table>
-            </div>
+                    </template>
+                </tbody>
+            </coco-table>
         </div>
     </coco-widget>
 </template>
@@ -82,10 +80,6 @@
 
     .detail-table {
         flex: 1;
-
-        > table {
-            min-width: 616px;
-        }
 
         th {
             text-wrap: nowrap;

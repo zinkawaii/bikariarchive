@@ -8,34 +8,31 @@
 
 <template>
     <coco-widget title="神殿">
-        <div class="navbox-wrapper">
-            <table class="chanrina-table">
-                <tbody>
-                    <tr>
-                        <th>姓名</th>
-                        <th>日文名</th>
-                        <th>萌点</th>
-                        <th>番剧</th>
-                        <th width="96px">上映时间</th>
-                        <th width="32px"><fa-icon icon="link"/></th>
-                    </tr>
-                    <tr v-for="{ name, special, link, bangumi, date } in jChanrina.characters">
-                        <td>{{ name.zh }}</td>
-                        <td>{{ name.jp }}</td>
-                        <td>{{ special.join("、") || "--" }}</td>
-                        <td>{{ bangumi }}</td>
-                        <td>{{ date }}</td>
-                        <td><nuxt-link v-if="link" :to="link" target="_blank"><fa-icon icon="arrow-up-right-from-square"/></nuxt-link></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <coco-table class="chanrina-table" :min-width="720">
+            <tbody>
+                <tr>
+                    <th>姓名</th>
+                    <th>日文名</th>
+                    <th>萌点</th>
+                    <th>番剧</th>
+                    <th width="96px">上映时间</th>
+                    <th width="32px"><fa-icon icon="link"/></th>
+                </tr>
+                <tr v-for="{ name, special, link, bangumi, date } in jChanrina.characters">
+                    <td>{{ name.zh }}</td>
+                    <td>{{ name.jp }}</td>
+                    <td>{{ special.join("、") || "--" }}</td>
+                    <td>{{ bangumi }}</td>
+                    <td>{{ date }}</td>
+                    <td><nuxt-link v-if="link" :to="link" target="_blank"><fa-icon icon="arrow-up-right-from-square"/></nuxt-link></td>
+                </tr>
+            </tbody>
+        </coco-table>
     </coco-widget>
 </template>
 
 <style lang="scss" scoped>
     .chanrina-table {
-        min-width: 720px;
         font-size: 14px;
         text-align: center;
     }

@@ -223,8 +223,8 @@
         <div class="excalc-tools">
             <mb-button @click="addBuki">添加武器</mb-button>
         </div>
-        <div class="navbox-wrapper">
-            <table class="excalc-table">
+        <coco-table class="excalc-table">
+            <tbody>
                 <tr>
                     <th>武器名称</th>
                     <th>伤害</th>
@@ -243,8 +243,8 @@
                     <td><mb-input type="number" :accuracy="2" v-model="item.crit_damage"/></td>
                     <td><mb-button class="excalc-delete" @click="removeBuki(index)">删除</mb-button></td>
                 </tr>
-            </table>
-        </div>
+            </tbody>
+        </coco-table>
     </div>
 </template>
 
@@ -308,8 +308,6 @@
     }
 
     .excalc-table {
-        min-width: 616px;
-
         td {
             padding-block: 4px;
         }
