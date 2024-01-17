@@ -14,7 +14,7 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget title="友情链接">
         <div class="novel-text">
             <div class="friend-list">
                 <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.link" target="_blank">
@@ -38,7 +38,7 @@
             <p>按照以下 Schema，使用你擅长的编程或标记语言将结构化的站点信息进行导出，并放置在评论的底部。</p>
             <mb-code lang="js">{{ schema }}</mb-code>
         </div>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>

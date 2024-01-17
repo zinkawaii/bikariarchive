@@ -100,7 +100,7 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget>
         <div class="manage-flex">
             <div v-for="item, index in que.list">
                 <form class="manage-form" :name="item.title">
@@ -113,7 +113,7 @@
         </div>
         <mb-button :disabled="querying" @click="query">查询</mb-button>
         <mb-button :disabled="!data.length" @click="clear">清空</mb-button>
-    </div>
+    </coco-widget>
     <div class="manage-table-wrapper" :hidden="!data.length">
         <table class="manage-table">
             <tbody>

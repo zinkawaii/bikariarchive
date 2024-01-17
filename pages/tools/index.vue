@@ -1,5 +1,5 @@
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget>
         <nuxt-page />
-    </div>
+    </coco-widget>
 </template>

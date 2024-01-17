@@ -1,9 +1,13 @@
 <script setup>
     import jChanrina from "~/assets/json/Chanrina.json";
+
+    useHead({
+        title: "神殿"
+    });
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget title="神殿">
         <div class="navbox-wrapper">
             <table class="chanrina-table">
                 <tbody>
@@ -26,7 +30,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>

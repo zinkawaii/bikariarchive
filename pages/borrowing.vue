@@ -7,8 +7,7 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
-        <p class="p-small text-gray borrowing-tip">* 除本借物表所标注的素材外，其余所有（底部或含有画师标签的）图片均为《微光茶馆》及其衍生作品的原创稿件。</p>
+    <coco-widget title="借物表">
         <table class="navbox-table">
             <tbody>
                 <tr>
@@ -25,13 +24,14 @@
                 </template>
             </tbody>
         </table>
-    </div>
+        <p class="borrowing-tip">* 除本借物表所标注的素材外，其余所有（底部或含有画师标签的）图片均为《微光茶馆》及其衍生作品的原创稿件。</p>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>
-    @media (width >= 1024px) {
-        .borrowing-tip {
-            margin-top: -16px;
-        }
+    .borrowing-tip {
+        font-size: 14px;
+        line-height: 2em;
+        color: gray;
     }
 </style>

@@ -61,14 +61,14 @@
 </script>
 
 <template>
-    <div class="content-widget z-comment" z-main>
+    <coco-widget class="z-comment">
         <div class="comment-title">
             <h2>评论<span class="text-gray">{{ count.total }}</span></h2>
             <mb-button icon="comment-dots" @click="postComment">发表评论</mb-button>
         </div>
         <comment-item v-for="item in comments" :key="item.id" :data="item" @update="getComments"/>
         <mb-pagination v-if="count.main > 0" :total="count.main" scroll-to=".z-comment" v-model="page"/>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>

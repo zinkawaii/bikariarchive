@@ -22,7 +22,7 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget>
         <p class="text-center">你访问了一个不存在的页面！将在 {{ time }} 秒后<coco-link :to="{ name: `home` }">返回主页</coco-link>。</p>
-    </div>
+    </coco-widget>
 </template>

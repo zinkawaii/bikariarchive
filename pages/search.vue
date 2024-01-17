@@ -83,7 +83,7 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget title="全文检索">
         <form class="search-form" @submit.prevent="fullTextSearch()">
             <input class="search-input" type="search" v-model="word"/>
             <button class="search-button">全文检索</button>
@@ -99,8 +99,8 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <div v-if="searchWord.length > 0" class="content-widget" z-main>
+    </coco-widget>
+    <coco-widget v-if="searchWord.length > 0">
         <div class="search-statistics">
             <h2>"{{ searchWord }}"的检索结果</h2>
             <span>共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次</span>
@@ -116,7 +116,7 @@
             </nuxt-link>
         </div>
         <mb-pagination :total="results.length" scroll-to=".content-widget" v-model="page"/>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>

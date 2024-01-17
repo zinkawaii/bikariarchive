@@ -104,7 +104,7 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget>
         <header class="novel-header">
             <nuxt-link class="novel-wrap-top" :class="toLastClass" :to="toLastChapter">
                 <fa-icon icon="chevron-left"/>
@@ -145,7 +145,7 @@
                 <p><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></p>
             </div>
         </footer>
-    </div>
+    </coco-widget>
     <div class="novel-wrap-bottom">
         <nuxt-link :class="toLastClass" :to="toLastChapter">{{ toLast }}</nuxt-link>
         <nuxt-link :class="toNextClass" :to="toNextChapter">{{ toNext }}</nuxt-link>

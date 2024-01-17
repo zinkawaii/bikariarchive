@@ -36,9 +36,9 @@
 </script>
 
 <template>
-    <div v-if="isExist" class="content-widget" z-main>
+    <coco-widget v-if="isExist">
         <component :is="template" :data="data"/>
-    </div>
+    </coco-widget>
     <Unknown v-else />
 </template>
 

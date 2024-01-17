@@ -35,7 +35,7 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget title="目录">
         <div class="catalogue-shelf">
             <ul class="shelf-wrapper" :style="{ translate: curOrder.novel * -144 + `px` }">
                 <li v-for="({ title, cover }, key, i) in jArticle">
@@ -74,7 +74,7 @@
                 </li>
             </ul>
         </fieldset>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>

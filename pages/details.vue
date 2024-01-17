@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget title="情报">
         <div v-for="block in jEntry.blocks" class="detail-block">
             <div class="detail-header">
                 <nuxt-img class="detail-image" :src="block.icon"/>
@@ -48,7 +48,7 @@
                 </table>
             </div>
         </div>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>

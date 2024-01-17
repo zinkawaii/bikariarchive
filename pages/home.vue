@@ -35,7 +35,7 @@
             <home-jumbotron />
         </teleport>
     </client-only>
-    <div class="content-widget home-brief" z-main>
+    <coco-widget class="home-brief">
         <div class="content-table home-welcome">
             <p>
                 <i class="home-qrcode"></i>
@@ -72,7 +72,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </coco-widget>
     <div class="home-complex">
         <home-update />
         <home-calendar />

@@ -7,12 +7,12 @@
 </script>
 
 <template>
-    <div class="content-widget" z-main>
+    <coco-widget title="更新日志">
         <ul class="update-list">
             <li v-for="{ date, version, content } in jUpdate" class="update-item">
                 <div class="update-title">
                     <h2><time>{{ date }}</time></h2>
-                    <code class="update-version">v{{ version }}</code>
+                    <code v-if="version" class="update-version">v{{ version }}</code>
                 </div>
                 <div class="update-content">
                     <p v-for="(text, i) in content" class="p-small">
@@ -22,7 +22,7 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>
