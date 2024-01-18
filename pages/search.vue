@@ -177,6 +177,10 @@
             font-size: 15px;
             color: var(--color-gray);
         }
+
+        @media (width < 1024px) {
+            margin: 8px;
+        }
     }
 
     .search-results {

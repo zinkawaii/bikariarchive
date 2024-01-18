@@ -22,12 +22,12 @@ export default defineCustomHandler(async (event) => {
         const limit = 10;
 
         //总评论数
-        res.totalCount = await CommentDataModel.count({
+        res.totalCount = await CommentDataModel.countDocuments({
             path
         });
 
         //主评论数
-        res.mainCount = await CommentDataModel.count({
+        res.mainCount = await CommentDataModel.countDocuments({
             path,
             parent: null
         });

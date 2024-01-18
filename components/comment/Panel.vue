@@ -109,6 +109,12 @@
         padding: 32px;
         border-radius: 16px;
         background-color: var(--color-background);
+
+        @media (width < 425px) {
+            height: 100vh;
+            padding: 16px;
+            border-radius: 0;
+        }
     }
 
     .scale-enter-active, .scale-leave-active {

@@ -160,7 +160,7 @@
     }
 
     .novel-title {
-        padding-block: 8px;
+        padding-bottom: 8px;
         font-size: 24px;
         line-height: 36px;
         text-align: center;
@@ -183,7 +183,7 @@
     }
 
     .novel-text {
-        padding-inline: 32px;
+        padding-inline: var(--cw-padding);
         font-family: v-bind("fontFamily");
         font-size: v-bind("fontSize");
     }
@@ -251,12 +251,6 @@
             text-shadow: var(--text-shadow);
             color: white;
             cursor: pointer;
-        }
-    }
-
-    @media (width >= 1024px) {
-        .novel-header {
-            margin-top: -16px;
         }
     }
 

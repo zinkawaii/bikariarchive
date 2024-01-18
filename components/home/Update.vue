@@ -15,7 +15,7 @@
     @container main (width < 596px) {
         .home-update {
             width: 100%;
-            padding-inline: 16px;
+            padding-inline: var(--cw-gap);
         }
 
         :deep(.recent-article) {

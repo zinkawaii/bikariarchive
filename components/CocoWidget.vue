@@ -15,19 +15,12 @@
 
 <style lang="scss" scoped>
     .coco-widget {
-        padding: 32px;
-
-        @media (width < 1024px) {
-            padding: 16px;
-        }
+        padding: var(--cw-padding);
     }
 
     .cw-header {
-        margin-bottom: 24px;
-
-        @media (width < 1024px) {
-            margin-bottom: 12px;
-        }
+        margin-block: calc(-1 * var(--cw-padding) + 2px) var(--cw-gap);
+        padding-top: var(--cw-gap);
     }
 
     .cw-title {

@@ -23,6 +23,11 @@
             icon: "box-archive",
             children: [
                 {
+                    title: "借物表",
+                    icon: "person-praying",
+                    to: { name: "borrowing" }
+                },
+                {
                     title: "神殿",
                     icon: "torii-gate",
                     to: { name: "chanrina" }
@@ -33,11 +38,6 @@
             title: "营业",
             icon: "mug-saucer",
             children: [
-                {
-                    title: "借物表",
-                    icon: "person-praying",
-                    to: { name: "borrowing" }
-                },
                 {
                     title: "更新日志",
                     icon: "clock-rotate-left",
@@ -120,7 +120,7 @@
     $title: 297px;
     $item-max: 60px;
     $item-min: 48px;
-    $count: 5;
+    $count: 6;
     $nav-max: $item-max * $count;
     $nav-min: $item-min * $count;
     $padding: 16px * 2;

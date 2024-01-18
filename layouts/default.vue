@@ -9,7 +9,7 @@
     <div class="sotomi">
         <main class="nakami">
             <slot></slot>
-            <z-comment v-if="$route.meta.comment"/>
+            <comment-area v-if="$route.meta.comment"/>
             <z-footer />
         </main>
         <z-sidebar />
@@ -98,7 +98,7 @@
     @media (width < 1024px) {
         .sotomi {
             flex-direction: column;
-            padding: 16px 8px;
+            padding: 12px;
         }
 
         .nakami {

@@ -53,17 +53,15 @@
     .detail-block {
         display: flex;
         align-items: flex-start;
-        gap: 32px;
-
-        & + & {
-            margin-top: 32px;
-        }
+        gap: var(--cw-gap);
+        margin-top: var(--cw-gap);
     }
 
     .detail-header {
         display: grid;
         justify-items: center;
         gap: 8px;
+        margin-inline: auto;
         padding: 16px 24px 12px;
         border: 1px solid var(--color-border-light);
         border-left: 32px solid var(--color-theme);
@@ -91,12 +89,6 @@
             &::before {
                 content: " • ";
             }
-        }
-    }
-
-    @media (width < 1024px) {
-        .detail-block {
-            gap: 16px;
         }
     }
 

@@ -2,7 +2,13 @@
     import ClipboardJS from "clipboard";
     import prism from "prismjs";
 
-    const props = defineProps(["lang"]);
+    const props = defineProps({
+        lang: {
+            type: String,
+            default: "js"
+        }
+    });
+
     const slots = useSlots();
     const code = ref();
     const $Code = ref();
@@ -26,7 +32,7 @@
 <template>
     <div class="mb-code">
         <div class="code-header">
-            <span>{{ lang }}</span>
+            <span>{{ lang.toUpperCase() }}</span>
             <span class="code-copy" @click="copy"><fa-icon icon="paste"/></span>
         </div>
         <div class="code-area" :class="{ expanded: isExpand }">

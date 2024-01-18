@@ -30,8 +30,9 @@
 
 <style lang="scss" scoped>
     .borrowing-tip {
+        margin-top: 2px;
         font-size: 14px;
-        line-height: 2em;
+        line-height: 24px;
         color: gray;
     }
 </style>

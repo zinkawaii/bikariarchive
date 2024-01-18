@@ -61,7 +61,7 @@
 </script>
 
 <template>
-    <coco-widget class="z-comment">
+    <coco-widget class="comment-area">
         <div class="comment-title">
             <h2>评论<span class="text-gray">{{ count.total }}</span></h2>
             <mb-button icon="comment-dots" @click="postComment">发表评论</mb-button>

@@ -97,7 +97,7 @@
         grid-template:
             "A A"
             "B C" / 1fr 40%;
-        gap: 32px;
+        gap: var(--cw-gap);
     }
 
     .home-welcome {
@@ -116,12 +116,10 @@
 
     .profile-avatar {
         display: block;
-        width: 80%;
-        max-width: 256px;
-        margin: auto;
-        margin-bottom: -24px;
+        width: min(80%, 256px);
+        aspect-ratio: 1;
+        margin: -32px auto 8px;
         border-radius: 100%;
-        translate: 0 -32px;
         filter: drop-shadow(4px 12px 8px rgb(0 0 0 / 24%));
 
         &:hover {
@@ -132,7 +130,6 @@
 
         > img {
             border-radius: inherit;
-            transition: all 0.4s;
         }
 
         @keyframes profile-avatar-jump {
@@ -177,10 +174,7 @@
 
     @container main (width < 596px) {
         .home-complex {
-            grid-template:
-                "A"
-                "B"
-                "C";
+            grid-template: "A" "B" "C";
         }
     }
 </style>

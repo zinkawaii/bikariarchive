@@ -114,7 +114,7 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 32px;
 }
 
 h2 {
@@ -242,10 +242,22 @@ textarea {
 
 /* 通用内容部件 */
 .content-widget {
+    --cw-padding: 32px;
+    --cw-gap: 24px;
+
     border: var(--border-theme-group);
     border-radius: 16px;
     box-shadow: var(--box-shadow);
     background-color: var(--color-background-alpha);
+
+    @media (width < 1024px) {
+        --cw-padding: 24px;
+    }
+
+    @media (width < 425px) {
+        --cw-padding: 16px;
+        --cw-gap: 16px;
+    }
 }
 
 /* 通用内容盒 */
