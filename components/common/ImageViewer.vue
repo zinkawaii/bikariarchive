@@ -2,6 +2,9 @@
     const imageViewerStore = useImageViewerStore();
     const $i = storeToRefs(imageViewerStore).target;
     const $v = ref();
+    const $img = computed(() => {
+        return $v.value.$el;
+    });
 
     //添加遮罩层
     useMask({
@@ -12,13 +15,13 @@
     //放大后占窗口比率
     const rate = 0.9;
 
-    //鼠标是否按住，起始位置
-    let isPressing = false;
+    //起始位置
     let mouseX = 0;
     let mouseY = 0;
     let imageX = 0;
     let imageY = 0;
 
+    //动画配置
     const animationOptions = {
         duration: 400,
         easing: "ease",
@@ -33,8 +36,29 @@
         height: 0
     });
 
-    const $img = computed(() => {
-        return $v.value.$el;
+    //鼠标拖动时
+    const { isPressed } = useHold($v, {
+        filter: (event) => event.button === 0,
+        onMousedown(event) {
+            event.preventDefault();
+            mouseX = event.pageX;
+            mouseY = event.pageY;
+            ({
+                left: imageX,
+                top: imageY
+            } = $img.value.getBoundingClientRect());
+        },
+        onMousemove(event) {
+            if (imageViewerStore.isOpened) {
+                $img.value.animate({
+                    top: imageY - mouseY + event.pageY + "px",
+                    left: imageX - mouseX + event.pageX + "px"
+                }, {
+                    duration: 0,
+                    fill: "forwards"
+                });
+            }
+        }
     });
 
     //按下ESC键关闭
@@ -81,16 +105,14 @@
 
     //关闭时
     function closeViewer() {
+        if (!imageViewerStore.isOpened) return;
         imageViewerStore.close();
-
-        //开始关闭
-        isPressing = true;
 
         //回到原位
         const { left, top, width, height } = $i.value.getBoundingClientRect();
         const { scrollX: x, scrollY: y } = window;
 
-        const animation = $img.value.animate([{
+        $img.value.animate([{
             top: y + $img.value.y + "px",
             left: x + $img.value.x + "px"
         }, {
@@ -99,47 +121,11 @@
             width: width + "px",
             height: height + "px"
         }], animationOptions);
-
-        //结束关闭
-        animation.onfinish = () => {
-            isPressing = false;
-        };
     }
-
-    function onMouseDown(event) {
-        if (event.button === 0) {
-            event.preventDefault();
-            isPressing = true;
-            mouseX = event.pageX;
-            mouseY = event.pageY;
-            ({
-                left: imageX,
-                top: imageY
-            } = $img.value.getBoundingClientRect());
-        }
-    }
-
-    //鼠标移动时
-    useEventListener("mousemove", Zin.throttle((event) => {
-        if (imageViewerStore.isOpened && isPressing && event.button === 0) {
-            $img.value.animate({
-                top: imageY - mouseY + event.pageY + "px",
-                left: imageX - mouseX + event.pageX + "px"
-            }, {
-                duration: 0,
-                fill: "forwards"
-            });
-        }
-    }));
-
-    //鼠标松开时
-    useEventListener("mouseup", () => {
-        isPressing = false;
-    });
 
     //鼠标滚动时
     function onMouseWheel(event) {
-        if (isPressing) return;
+        if (isPressed.value) return;
 
         //缩放比率
         const rate = event.deltaY < 0 ? 1.5 : 0.667;
@@ -165,7 +151,6 @@
             class="mb-image-viewer"
             :src="$i.src"
             :style="imageStyle"
-            @mousedown="onMouseDown"
             @mousewheel.prevent="onMouseWheel"
         />
     </transition>
@@ -179,5 +164,6 @@
 
     .move-leave-active {
         position: absolute;
+        pointer-events: none;
     }
 </style>

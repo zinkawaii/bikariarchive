@@ -62,7 +62,7 @@ const Zin = new class Z {
     }
 
     //防抖（立即执行）
-    debounce<T extends () => any>(func: T, {
+    debounce<T extends (...args: any[]) => any>(func: T, {
         delay = 1500,
         immediate = true
     } = {}) {
@@ -153,7 +153,7 @@ const Zin = new class Z {
     }
 
     //节流
-    throttle<T extends () => any>(func: T, delay: number) {
+    throttle<T extends (...args: any[]) => any>(func: T, delay?: number) {
         //根据延迟时长
         if (delay && delay > 0) {
             let timer = null;

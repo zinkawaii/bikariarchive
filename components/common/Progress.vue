@@ -1,13 +1,12 @@
 <script setup>
+    const modelValue = defineModel();
     const emit = defineEmits([
-        "update:modelValue",
         "progress",
         "change",
         "dragstart",
         "dragend"
     ]);
     const props = defineProps([
-        "modelValue",
         "title"
     ]);
 
@@ -15,51 +14,39 @@
     let p_left = 0;
     const self = ref();
     const rate = ref(0);
-    const dragging = ref(false);
-
-    //全局事件绑定
-    useEventListener("mousemove", onMouseMove);
-    useEventListener("mouseup", onMouseUp);
 
     //显示的进度
     const displayRate = computed(() => {
-        return Math.max(0, Math.min(1, dragging.value ? rate.value : props.modelValue));
+        return Math.max(0, Math.min(1, isPressed.value ? rate.value : modelValue.value));
     });
 
-    //鼠标按下时
-    function onMouseDown(event) {
-        ({
-            width: p_width,
-            left: p_left
-        } = self.value.getBoundingClientRect());
-        emit("dragstart");
-        dragging.value = true;
+    //鼠标拖动时
+    const { isPressed } = useHold(self, {
+        filter: (event) => event.button === 0,
+        onMousedown(event) {
+            ({
+                width: p_width,
+                left: p_left
+            } = self.value.getBoundingClientRect());
+            emit("dragstart");
 
-        //进度预变化
-        onMouseMove(event);
-    }
-
-    //鼠标移动时
-    function onMouseMove(event) {
-        if (dragging.value) {
+            //进度预变化
+            this.onMousemove(event);
+        },
+        onMousemove(event) {
             rate.value = Math.max(0, Math.min(1, (event.clientX - p_left) / p_width));
             emit("progress", { rate: rate.value });
-        }
-    }
-
-    //鼠标松开时
-    function onMouseUp() {
-        if (dragging.value) {
+        },
+        onMouseup() {
+            modelValue.value = rate.value;
             emit("dragend");
-            emit("update:modelValue", rate.value);
             emit("change", { rate: rate.value });
-            dragging.value = false;
         }
-    }
+    });
 </script>
 
 <template>
-    <div ref="self" class="mb-progress" @mousedown="onMouseDown">
+    <div ref="self" class="mb-progress">
         <span class="progress-bar" :style="{ transform: `scaleX(${displayRate})` }"></span>
         <span class="progress-title">{{ title }}</span>
     </div>
