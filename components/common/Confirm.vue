@@ -4,7 +4,7 @@
     //添加遮罩层
     useMask({
         isOpened: () => confirmStore.isOpened,
-        onclick: () => res(false)
+        onClick: () => res(false)
     });
 
     //键盘监听

@@ -9,7 +9,7 @@
     //添加遮罩层
     useMask({
         isOpened: () => imageViewerStore.isOpened,
-        onclick: () => closeViewer()
+        onClick: () => closeViewer()
     });
 
     //放大后占窗口比率

@@ -4,7 +4,7 @@
     //添加遮罩层
     useMask({
         isOpened: () => settingStore.isOpened,
-        onclick: () => settingStore.close()
+        onClick: () => settingStore.close()
     });
 
     //键值与显示值的映射表

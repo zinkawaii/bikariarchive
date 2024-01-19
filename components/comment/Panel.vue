@@ -8,7 +8,7 @@
     //添加遮罩层
     useMask({
         isOpened: () => commentPanelStore.isOpened,
-        onclick: () => commentPanelStore.close()
+        onClick: () => commentPanelStore.close()
     });
 
     const checker = new Checker({

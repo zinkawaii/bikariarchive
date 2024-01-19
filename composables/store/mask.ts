@@ -2,19 +2,19 @@ export const useMaskStore = defineStore("mask", {
     state: () => ({
         isOpened: null,
         duration: 0,
-        onclick: null
+        onClick: null
     })
 });
 
 export function useMask({
     isOpened = null,
     duration = 400,
-    onclick = null
+    onClick = null
 } = {}) {
     const maskStore = useMaskStore();
     whenever(isOpened, () => {
         maskStore.isOpened = computed(isOpened);
         maskStore.duration = duration;
-        maskStore.onclick = onclick;
+        maskStore.onClick = onClick;
     });
 }

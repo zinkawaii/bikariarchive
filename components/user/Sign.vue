@@ -10,7 +10,7 @@
     //添加遮罩层
     useMask({
         isOpened: () => signerStore.isOpened,
-        onclick: () => signerStore.close()
+        onClick: () => signerStore.close()
     });
 
     //根据登录状态切换视图
