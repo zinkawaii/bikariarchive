@@ -2,8 +2,9 @@
     const commentPanelStore = useCommentPanelStore();
 
     const { nickname, email, address } = storeToRefs(commentPanelStore);
-    const comment = ref("");
     const maxLength = 512;
+    const comment = ref("");
+    const sending = ref(false);
 
     //添加遮罩层
     useMask({
@@ -55,6 +56,8 @@
 
     //发表评论
     const postComment = Zin.debounce(() => {
+        sending.value = true;
+
         Zjax.post("/api/comment", {
             body: {
                 path: commentPanelStore.path,
@@ -67,6 +70,7 @@
         })
         .then(() => {
             comment.value = "";
+            sending.value = false;
             commentPanelStore.close(true);
         });
     });
@@ -93,7 +97,12 @@
                 <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="comment"></textarea>
                 <div class="panel-count">{{ comment.length }} / {{ maxLength }}</div>
             </div>
-            <mb-button full round icon="paper-plane" :disabled="!comment.length" @click="submit">发表评论</mb-button>
+            <mb-button
+                full round
+                icon="paper-plane"
+                :disabled="!comment.length || sending"
+                @click="submit"
+            >{{ sending ? "发送中……" : "发表评论" }}</mb-button>
         </div>
     </transition>
 </template>
