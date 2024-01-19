@@ -162,14 +162,14 @@
         height: 36px;
         margin-block: 1em;
         padding-inline: 1em;
-        border: 1px solid var(--color-border-dark);
+        border: 1px solid var(--color-border-light);
         border-radius: 8px;
         background-color: var(--color-background);
         font-size: 14px;
 
         .title {
             padding-right: 1em;
-            border-right: 1px solid var(--color-border-dark);
+            border-right: 1px solid var(--color-border-light);
         }
     }
 
@@ -194,7 +194,7 @@
             display: block;
             height: 6px;
             border-radius: 3px;
-            box-shadow: 2px 2px 0 var(--color-border-light);
+            box-shadow: 2px 2px 0 var(--color-border-lighter);
             background-color: var(--bg);
         }
 

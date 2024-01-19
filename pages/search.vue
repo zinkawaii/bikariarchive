@@ -125,7 +125,7 @@
         justify-content: center;
         overflow: hidden;
         height: 36px;
-        border: 1px solid var(--color-border);
+        border: 1px solid var(--color-border-light);
         border-radius: 16px;
     }
 
@@ -145,7 +145,7 @@
 
     .search-history {
         margin-top: 16px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 
     .history-title {
@@ -175,7 +175,7 @@
 
         > span {
             font-size: 15px;
-            color: var(--color-gray);
+            color: var(--color-text-info);
         }
 
         @media (width < 1024px) {
@@ -197,7 +197,7 @@
         transition: all 0.25s;
 
         &:hover {
-            border-color: var(--color-border-light);
+            border-color: var(--color-border-lighter);
             border-left-color: var(--color-theme);
             background-color: var(--color-background);
         }
@@ -209,7 +209,7 @@
 
     .result-volume {
         font-size: 15px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 
     .result-part {
@@ -225,6 +225,6 @@
     .result-count {
         float: right;
         font-size: 14px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 </style>

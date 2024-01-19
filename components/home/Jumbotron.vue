@@ -15,15 +15,13 @@
         }
     });
 
-    const bg_func = Zin.throttle(() => {
+    //滚动视差
+    useEventListener("scroll", Zin.throttle(() => {
         if (window.scrollY > window.innerHeight) return;
 
         style.value.background = { translate: `0 ${window.scrollY}px` };
         style.value.title = { translate: `0 ${window.scrollY / 2}px` };
-    });
-
-    //滚动视差
-    useEventListener("scroll", bg_func);
+    }));
 
     //标题打字特效
     onMounted(async () => {

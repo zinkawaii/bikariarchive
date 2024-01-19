@@ -57,7 +57,7 @@
             height: 32px;
             margin: 0 0 -1px;
             padding: 3px 12px 6px;
-            border: 1px solid var(--color-border-light);
+            border: 1px solid var(--color-border-lighter);
             border-top: 4px solid var(--color-theme);
             border-bottom: 0;
             background-color: var(--color-background);
@@ -65,11 +65,11 @@
         }
 
         &:not(.active) {
-            color: var(--color-gray);
+            color: var(--color-text-info);
             cursor: pointer;
 
             & + & {
-                border-left: 1px solid var(--color-border-light);
+                border-left: 1px solid var(--color-border-lighter);
             }
         }
     }
@@ -77,7 +77,7 @@
     .tab-content {
         min-height: 64px;
         padding: 8px;
-        border: 1px solid var(--color-border-light);
+        border: 1px solid var(--color-border-lighter);
         background-color: var(--color-background);
     }
 </style>

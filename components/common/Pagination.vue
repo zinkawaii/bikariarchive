@@ -95,7 +95,7 @@
         display: flex;
         justify-content: center;
         font-size: 14px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
         user-select: none;
 
         a {
@@ -103,7 +103,7 @@
             place-items: center;
             height: 2em;
             margin-inline: 4px;
-            border: 1px solid var(--color-border-light);
+            border: 1px solid var(--color-border-lighter);
             background-color: var(--color-background);
             transition: border-color 0.25s;
 

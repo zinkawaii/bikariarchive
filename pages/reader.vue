@@ -173,7 +173,7 @@
         column-gap: 18px;
         font-size: 12px;
         line-height: 20px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
 
         > li {
             display: flex;
@@ -195,7 +195,7 @@
         gap: 0.5em;
         font-size: 13px;
         line-height: 32px;
-        color: var(--color-border);
+        color: var(--color-info-light-3);
 
         &::before, &::after {
             content: "";

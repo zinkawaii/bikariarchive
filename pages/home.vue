@@ -110,7 +110,7 @@
         text-align: center;
 
         td {
-            border-bottom: 1px solid var(--color-border-light);
+            border-bottom: 1px solid var(--color-border-lighter);
         }
     }
 
@@ -151,7 +151,7 @@
             justify-content: center;
             width: 24px;
             height: 24px;
-            border: 1px solid var(--color-border-light);
+            border: 1px solid var(--color-border-lighter);
             border-radius: 4px;
             font-size: 16px;
             color: var(--color-theme-dark);

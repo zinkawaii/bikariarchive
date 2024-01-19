@@ -305,7 +305,7 @@
 
             &.sub {
                 opacity: 0.75;
-                color: var(--color-gray);
+                color: var(--color-text-info);
             }
 
             &.special {
@@ -348,7 +348,7 @@
         .title {
             font-size: 12px;
             line-height: 16px;
-            color: var(--color-gray);
+            color: var(--color-text-info);
 
             &::before, &::after {
                 content: "——";
@@ -358,7 +358,7 @@
 
         .none {
             line-height: 32px;
-            color: var(--color-gray);
+            color: var(--color-text-info);
         }
     }
 
@@ -413,6 +413,6 @@
         margin: auto;
         font-size: 48px;
         font-weight: bold;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 </style>

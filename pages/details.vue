@@ -63,7 +63,7 @@
         gap: 8px;
         margin-inline: auto;
         padding: 16px 24px 12px;
-        border: 1px solid var(--color-border-light);
+        border: 1px solid var(--color-border-lighter);
         border-left: 32px solid var(--color-theme);
         background-color: var(--color-background);
         font-family: var(--font-smooth);

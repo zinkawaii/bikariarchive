@@ -83,7 +83,7 @@
 
         > li {
             padding-inline: 12px;
-            border: 1px solid var(--color-border-light);
+            border: 1px solid var(--color-border-lighter);
             border-radius: 12px;
             line-height: 24px;
             word-break: keep-all;
@@ -97,11 +97,11 @@
 
     .intro-record {
         padding-top: 8px;
-        border-top: 1px solid var(--color-border-light);
+        border-top: 1px solid var(--color-border-lighter);
         text-align: center;
 
         span {
-            color: var(--color-gray);
+            color: var(--color-text-info);
         }
 
         a {

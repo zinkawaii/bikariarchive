@@ -32,7 +32,7 @@
 <template>
     <div class="mb-code">
         <div class="code-header">
-            <span>{{ lang.toUpperCase() }}</span>
+            <span class="text-uppercase">{{ lang }}</span>
             <span class="code-copy" @click="copy"><fa-icon icon="paste"/></span>
         </div>
         <div class="code-area" :class="{ expanded: isExpand }">
@@ -52,7 +52,7 @@
     .mb-code {
         position: relative;
         overflow: hidden;
-        border: 1px solid var(--color-border-light);
+        border: 1px solid var(--color-border-lighter);
         border-radius: 8px;
         background-color: var(--color-background);
     }
@@ -79,7 +79,7 @@
 
         > pre {
             padding: 8px;
-            font-family: consolas;
+            font-family: var(--font-consolas);
         }
 
         &.expanded {
@@ -93,13 +93,13 @@
 
     .code-line {
         text-align: right;
-        color: var(--color-gray);
+        color: var(--color-text-info);
         user-select: none;
     }
 
     .code-content {
         overflow: auto hidden;
-        border-left: 1px solid var(--color-border-light);
+        border-left: 1px solid var(--color-border-lighter);
 
         &::-webkit-scrollbar {
             display: none;

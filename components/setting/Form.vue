@@ -46,7 +46,7 @@
         align-items: center;
         gap: 8px;
         padding-bottom: 8px;
-        border-bottom: 1px solid var(--color-border-light);
+        border-bottom: 1px solid var(--color-border-lighter);
     }
 
     .form-title {
@@ -55,7 +55,7 @@
 
     .form-desc {
         font-size: 12px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 
     .form-area {

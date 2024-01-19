@@ -68,7 +68,7 @@
         pointer-events: auto;
 
         &:hover {
-            background-color: var(--color-gray);
+            background-color: var(--color-text-info);
         }
     }
 </style>

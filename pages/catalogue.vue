@@ -93,7 +93,7 @@
         display: grid;
         justify-items: center;
         margin-inline: 8px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 
     .shelf-cover {
@@ -174,7 +174,7 @@
 
             .date {
                 font-size: 14px;
-                color: var(--color-gray);
+                color: var(--color-text-info);
             }
         }
     }

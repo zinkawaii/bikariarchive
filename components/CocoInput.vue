@@ -47,7 +47,7 @@
 
     .input-underline {
         height: 1px;
-        background-color: var(--color-border-light);
+        background-color: var(--color-border-lighter);
 
         &::before {
             content: "";
@@ -63,7 +63,7 @@
         position: absolute;
         top: 4px;
         left: 4px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
         transition: all 0.25s;
         pointer-events: none;
 

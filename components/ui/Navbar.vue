@@ -86,7 +86,6 @@
             border-radius: 12px;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
-            color: var(--color-text);
 
             > svg {
                 width: 48px;

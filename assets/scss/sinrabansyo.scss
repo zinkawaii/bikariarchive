@@ -1,80 +1,5 @@
 @import "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&display=swap";
-
-:root {
-    --color-text             : rgb(36 33 30); /* 文本色 */
-    --color-link             : rgb(63 81 181); /* 超链接色 */
-    --color-danger           : rgb(245 64 64); /* 警告色 */
-    --color-gray             : rgb(152 152 152); /* 灰色 */
-    --color-gray-dark        : rgb(120 120 120); /* 灰色-深 */
-    --color-border           : rgb(168 168 168); /* 边框色 */
-    --color-border-light     : rgb(216 216 216); /* 边框色-浅 */
-    --color-border-dark      : rgb(51 51 51); /* 边框色-深 */
-    --color-background       : rgb(248 248 248); /* 背景色 */
-    --color-background-alpha : rgb(248 248 248 / 88%); /* 背景色-透明 */
-    --color-selection-bg     : rgb(119 184 233 / 66%); /* 选区背景色 */
-    --color-tag-bg           : rgb(216 216 216); /* 标签背景色 */
-    --color-tag-text         : rgb(96 93 90); /* 标签文本色 */
-    --color-theme            : hsl(var(--theme-h) var(--theme-s) var(--theme-l)); /* 主题色 */
-    --color-theme-light      : hsl(var(--theme-h) var(--theme-s-light) var(--theme-l-light)); /* 主题色-浅 */
-    --color-theme-dark       : hsl(var(--theme-h) var(--theme-s-dark) var(--theme-l-dark)); /* 主题色-深 */
-    --color-theme-text       : hsl(var(--theme-h) var(--theme-s-text) var(--theme-l-text)); /* 主题色-文本 */
-    --border-theme-group     : 2px solid var(--color-theme-dark); /* 内容组边框 */
-    --box-shadow             : 0 0 4px 0 rgb(0 0 0 / 32%); /* 块盒阴影 */
-    --box-shadow-dark        : 0 0 8px 0 rgb(0 0 0 / 32%); /* 块盒阴影-深 */
-    --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%); /* 白字阴影 */
-    --size-min-width         : 320px;
-    --theme-s                : 100%;
-    --theme-s-light          : 100%;
-    --theme-s-dark           : 60%;
-    --theme-s-text           : 53%;
-    --theme-l                : 90%;
-    --theme-l-light          : 95%;
-    --theme-l-dark           : 75%;
-    --theme-l-text           : 67%;
-    --font                   :
-        system-ui, -apple-system, blinkmacsystemfont, "Helvetica Neue",
-        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Source Han Sans CN", sans-serif;
-    --font-smooth            : tengxiang, var(--font);
-    --circle-radius          : calc(1px * infinity);
-}
-
-[theme="hatsusora"] {
-    --theme-h       : 196;
-    --theme-l       : 80%;
-    --theme-l-light : 90%;
-    --theme-l-dark  : 67%;
-    --theme-l-text  : 53%;
-}
-
-[theme="ayame"] {
-    --theme-h: 256;
-}
-
-[theme="sakura"] {
-    --theme-h: 0;
-}
-
-[z-dark] {
-    --color-text             : rgb(255 255 255 / 88%); /* 文本色 */
-    --color-link             : rgb(88 160 255); /* 超链接色 */
-    --color-gray-dark        : rgb(184 184 184); /* 灰色-深 */
-    --color-border           : rgb(136 136 136); /* 边框色 */
-    --color-border-light     : rgb(83 83 83); /* 边框色-浅 */
-    --color-border-dark      : rgb(216 216 216); /* 边框色-深 */
-    --color-background       : rgb(48 48 48); /* 背景色 */
-    --color-background-alpha : rgb(48 48 48 / 88%); /* 背景色-透明 */
-    --color-tag-bg           : rgb(88 88 88); /* 标签背景色 */
-    --color-tag-text         : rgb(196 193 190); /* 标签文本色 */
-    --theme-h                : 196;
-    --theme-s                : 66%;
-    --theme-s-light          : 66%;
-    --theme-s-dark           : 66%;
-    --theme-s-text           : 75%;
-    --theme-l                : 45%;
-    --theme-l-light          : 53%;
-    --theme-l-dark           : 60%;
-    --theme-l-text           : 66%;
-}
+@import "var";
 
 @font-face {
     font-family: TengXiang;
@@ -106,7 +31,7 @@ body {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;
-    color: var(--color-text);
+    color: var(--color-text-primary);
 }
 
 h1, h2, h3 {
@@ -139,7 +64,7 @@ rt {
 blockquote {
     margin: 1em 2em;
     padding: 0.75em 1em;
-    border-block: 1px solid var(--color-border-light);
+    border-block: 1px solid var(--color-border-lighter);
     border-inline: 4px solid var(--color-theme);
     border-radius: 4px;
     background-color: var(--color-background);
@@ -151,7 +76,7 @@ code {
     border-radius: 4px;
     box-decoration-break: clone;
     background-color: color-mix(in srgb, var(--color-tag-bg), transparent 66%);
-    font-family: consolas;
+    font-family: var(--font-consolas);
     color: var(--color-theme-text);
 }
 
@@ -202,7 +127,7 @@ textarea {
 }
 
 ::placeholder {
-    color: var(--color-gray);
+    color: var(--color-text-info);
 }
 
 ::selection {
@@ -245,7 +170,7 @@ textarea {
     --cw-padding: 32px;
     --cw-gap: 24px;
 
-    border: var(--border-theme-group);
+    border: 2px solid var(--color-theme-dark);
     border-radius: 16px;
     box-shadow: var(--box-shadow);
     background-color: var(--color-background-alpha);
@@ -263,7 +188,7 @@ textarea {
 /* 通用内容盒 */
 .content-table {
     padding: 16px;
-    border: 1px solid var(--color-border-light);
+    border: 1px solid var(--color-border-lighter);
     border-left: 32px solid var(--color-theme);
     background-color: var(--color-background);
     font-size: 14px;
@@ -321,11 +246,15 @@ textarea {
 }
 
 .text-gray {
-    color: var(--color-gray);
+    color: var(--color-text-info);
 }
 
 .text-primary {
     color: var(--color-theme-text);
+}
+
+.text-uppercase {
+    text-transform: uppercase;
 }
 
 .cursor-pointer {
@@ -345,7 +274,7 @@ textarea {
     right: 0.5em;
     width: 1em;
     font-size: 32px;
-    color: var(--color-border);
+    color: var(--color-info-light-5);
     transition: rotate 0.25s;
     cursor: pointer;
 

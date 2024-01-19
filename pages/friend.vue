@@ -53,7 +53,7 @@
         gap: 16px;
         height: 112px;
         padding: 16px;
-        border: 1px solid var(--color-border-light);
+        border: 1px solid var(--color-border-lighter);
         border-radius: 16px;
         background-color: var(--color-background);
         transition: border 0.25s;
@@ -82,7 +82,7 @@
     .friend-title {
         margin-bottom: 4px;
         padding-bottom: 4px;
-        border-bottom: 1px solid var(--color-border-light);
+        border-bottom: 1px solid var(--color-border-lighter);
         transition: color 0.25s;
     }
 
@@ -93,7 +93,7 @@
         font-size: 14px;
         line-height: 22px;
         text-overflow: ellipsis;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 
     .novel-text {

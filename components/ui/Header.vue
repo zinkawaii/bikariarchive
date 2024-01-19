@@ -66,10 +66,10 @@
 
 <template>
     <header class="z-header">
-        <div class="title-wrapper">
+        <div class="header-title">
             <nuxt-link :to="{ name: `home` }">BikariArchive</nuxt-link>
         </div>
-        <nav class="nav-list">
+        <nav class="header-nav">
             <div v-for="{ title, icon, to, children } in navList" class="nav-item">
                 <nuxt-link class="nav-link" :to="to">
                     <fa-icon :icon="icon"/>
@@ -85,9 +85,9 @@
                 </div>
             </div>
         </nav>
-        <form class="search-wrapper" @submit.prevent="search">
-            <input class="keyword" type="search" placeholder="输入关键词..." v-model="word"/>
-            <button class="search">
+        <form class="header-search" @submit.prevent="search">
+            <input type="search" placeholder="输入关键词..." v-model="word"/>
+            <button>
                 <fa-icon icon="search"/>
             </button>
         </form>
@@ -127,7 +127,7 @@
     $max: $title + $nav-max + $padding;
     $min: $title + $nav-min + $padding;
 
-    .title-wrapper {
+    .header-title {
         display: flex;
         width: 100%;
         margin-right: auto;
@@ -154,7 +154,7 @@
         }
     }
 
-    .nav-list {
+    .header-nav {
         display: flex;
 
         @media (width < #{$min}) {
@@ -233,7 +233,7 @@
         background-color: var(--color-background-alpha);
 
         [z-dark] & {
-            border-color: var(--color-border-light);
+            border-color: var(--color-border-lighter);
         }
 
         > a {
@@ -257,28 +257,28 @@
         }
     }
 
-    .search-wrapper {
+    .header-search {
         display: flex;
         overflow: hidden;
         margin: auto 16px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
-    }
 
-    .keyword {
-        width: 160px;
-        padding-inline: 8px;
-        line-height: 28px;
-    }
+        > input {
+            width: 160px;
+            padding-inline: 8px;
+            line-height: 28px;
+        }
 
-    .search {
-        width: 48px;
-        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
-        color: white;
+        > button {
+            width: 48px;
+            background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
+            color: white;
+        }
     }
 
     @media (width < 1024px) {
-        .search-wrapper {
+        .header-search {
             display: none;
         }
     }

@@ -174,7 +174,7 @@
         gap: 4px;
         margin-top: 8px;
         padding-top: 8px;
-        border-top: 1px solid var(--color-border-light);
+        border-top: 1px solid var(--color-border-lighter);
     }
 
     .menu-item {

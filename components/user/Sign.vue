@@ -169,7 +169,7 @@
         font-size: 12px;
         line-height: 1.5em;
         text-align: right;
-        color: var(--color-gray-dark);
+        color: var(--color-info-dark-2);
 
         &:hover {
             color: var(--color-theme-text);

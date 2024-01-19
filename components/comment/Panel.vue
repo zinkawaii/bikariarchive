@@ -140,7 +140,7 @@
         padding: 4px;
         font-size: 12px;
         line-height: 18px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
 
         &::before {
             content: "• ";
@@ -152,11 +152,11 @@
         width: 100%;
         height: 180px;
         padding: 6px 8px;
-        border: 1px solid var(--color-border-light);
+        border: 1px solid var(--color-border-lighter);
         border-radius: 4px;
         background-color: var(--color-background);
         line-height: 24px;
-        transition: all 0.4s;
+        transition: border-color 0.4s;
 
         &:focus {
             border-color: var(--color-theme-dark);
@@ -168,6 +168,6 @@
         right: 8px;
         bottom: 4px;
         font-size: 12px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 </style>

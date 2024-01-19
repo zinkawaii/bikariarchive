@@ -279,13 +279,13 @@
     .lyric-time {
         width: 54px;
         text-align: center;
-        color: var(--color-gray);
+        color: var(--color-text-info);
     }
 
     .lyric-control {
         flex: 1;
         height: 32px;
-        box-shadow: 0 6px 12px -8px var(--color-gray);
+        box-shadow: 0 6px 12px -8px var(--color-text-info);
         z-index: 1;
     }
 
@@ -297,7 +297,7 @@
 
     .lyric-textarea {
         padding: 8px 16px;
-        border: 1px solid var(--color-border-light);
+        border: 1px solid var(--color-border-lighter);
         border-radius: 8px;
         background-color: var(--color-background);
         font-size: 14px;
@@ -324,7 +324,7 @@
             user-select: none;
 
             &.sign {
-                color: var(--color-gray);
+                color: var(--color-text-info);
             }
 
             &.light {
@@ -332,7 +332,7 @@
             }
 
             &:hover {
-                background-color: var(--color-theme-light);
+                background-color: var(--color-info-light-8);
             }
         }
 

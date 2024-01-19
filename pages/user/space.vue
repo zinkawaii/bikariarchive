@@ -108,7 +108,7 @@
         &:focus {
             box-shadow: 0 2px 4px inset rgb(35 54 86 / 30%);
             background-color: var(--color-background);
-            color: var(--color-text);
+            color: var(--color-text-primary);
         }
     }
 

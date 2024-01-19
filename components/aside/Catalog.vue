@@ -91,7 +91,7 @@
         color: var(--color-text);
 
         &:hover {
-            background-color: var(--color-border);
+            background-color: var(--color-info-light-5);
             color: white;
         }
 

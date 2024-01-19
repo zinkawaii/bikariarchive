@@ -122,7 +122,7 @@
         display: flex;
         gap: 16px;
         font-size: 14px;
-        color: var(--color-gray);
+        color: var(--color-text-info);
 
         > a {
             opacity: 0;
@@ -131,7 +131,7 @@
     }
 
     .comment-reply {
-        border-bottom: 1px solid var(--color-border-light);
+        border-bottom: 1px solid var(--color-border-lighter);
 
         & .comment-item:last-child & {
             border: 0;

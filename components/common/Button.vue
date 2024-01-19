@@ -32,7 +32,7 @@
 
         &[disabled] {
             border-color: var(--color-border);
-            color: var(--color-border);
+            color: var(--color-text-disabled);
             pointer-events: none;
         }
 
