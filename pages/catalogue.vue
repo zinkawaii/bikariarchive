@@ -134,8 +134,8 @@
         border-top: 1px solid var(--color-border);
 
         > legend {
+            margin: auto;
             padding-inline: 8px;
-            text-align: center;
         }
     }
 

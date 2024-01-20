@@ -98,7 +98,7 @@
     }
 
     .input-line {
-        width: 100%;
+        flex: 1;
         text-align: center;
     }
 

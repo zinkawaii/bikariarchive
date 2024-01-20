@@ -60,12 +60,13 @@
 
     .form-area {
         display: flex;
-        gap: 16px;
+        column-gap: 16px;
         overflow: hidden;
         padding-inline: 16px;
         border: 1px solid var(--color-border);
         border-radius: 16px;
         line-height: 38px;
+        word-break: keep-all;
     }
 
     .form-select {

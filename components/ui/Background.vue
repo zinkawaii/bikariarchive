@@ -13,6 +13,7 @@
         position: fixed;
         inset: 0;
         width: 100vw;
+        height: 100lvh;
         background-image: v-bind("image");
         background-position: center;
         background-repeat: no-repeat;
