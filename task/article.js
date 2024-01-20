@@ -2,6 +2,7 @@ import cheerio from "cheerio";
 import chokidar from "chokidar";
 import consola from "consola";
 import dayjs from "dayjs";
+import entities from "html-entities";
 import fm from "front-matter";
 import fs from "fs-extra";
 import * as glob from "glob";
@@ -14,7 +15,7 @@ marked.use({
             return `<h${level}>${text}</h${level}>\n`;
         },
         code(code, infostring) {
-            return `<mb-code lang="${infostring}"><pre>${code}</pre></mb-code>\n`;
+            return `<mb-code lang="${infostring}"><pre>${entities.encode(code)}</pre></mb-code>\n`;
         },
         link(href, title, text) {
             let extra;

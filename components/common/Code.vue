@@ -13,7 +13,7 @@
     const code = ref();
     const $Code = ref();
 
-    const source = slots.default()[0].children;
+    const source = slots.default()[0].children ?? "";
     const lines = source.split("\n").length;
     const lineStr = Array.from({ length: lines }).map((_, i) => i + 1).join("\n");
 

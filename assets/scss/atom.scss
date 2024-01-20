@@ -151,6 +151,12 @@
     }
 }
 
+.language-html .token {
+    &.tag {
+        background-color: transparent;
+    }
+}
+
 .language-js .token {
     &.operator {
         color: var(--hue-3);
