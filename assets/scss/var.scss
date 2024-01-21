@@ -2,14 +2,14 @@
     --color-text-primary     : rgb(33 30 31); /* 文本色 - 主要 */
     --color-text-regular     : rgb(66 60 62); /* 文本色 - 常规 */
     --color-text-secondary   : rgb(99 90 93); /* 文本色 - 次要 */
-    --color-text-info        : rgb(152 152 152); /* 文本色 - 灰色 */
+    --color-text-info        : rgb(148 148 148); /* 文本色 - 灰色 */
     --color-text-disabled    : rgb(168 168 168); /* 文本色 - 禁用 */
     --color-link             : rgb(63 81 181); /* 超链接色 */
     --color-danger           : rgb(245 64 64); /* 警告色 */
-    --color-info             : rgb(152 152 152);
-    --color-info-light-3     : rgb(175 175 175);
-    --color-info-light-5     : rgb(198 198 198);
-    --color-info-light-7     : rgb(221 221 221);
+    --color-info             : rgb(148 148 148);
+    --color-info-light-3     : rgb(172 172 172);
+    --color-info-light-5     : rgb(196 196 196);
+    --color-info-light-7     : rgb(220 220 220);
     --color-info-light-8     : rgb(232 232 232);
     --color-info-light-9     : rgb(244 244 244);
     --color-info-dark-2      : rgb(112 112 112);
@@ -19,12 +19,11 @@
     --color-border-dark      : rgb(144 144 144);
     --color-border-darker    : rgb(120 120 120);
     --color-background       : rgb(248 248 248); /* 背景色 */
-    --color-background-alpha : rgb(248 248 248 / 88%); /* 背景色-透明 */
+    --color-background-tag   : rgb(216 216 216); /* 背景色 - 标签 */
+    --color-background-alpha : rgb(248 248 248 / 84%); /* 背景色 - 透明 */
     --color-selection-bg     : rgb(119 184 233 / 66%); /* 选区背景色 */
-    --color-tag-bg           : rgb(216 216 216); /* 标签背景色 */
-    --color-tag-text         : rgb(96 93 90); /* 标签文本色 */
     --box-shadow             : 0 0 4px 0 rgb(0 0 0 / 32%); /* 块盒阴影 */
-    --box-shadow-dark        : 0 0 8px 0 rgb(0 0 0 / 32%); /* 块盒阴影-深 */
+    --box-shadow-dark        : 0 0 8px 0 rgb(0 0 0 / 32%); /* 块盒阴影 - 深 */
     --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%); /* 白字阴影 */
     --font                   :
         system-ui, -apple-system, blinkmacsystemfont, "Helvetica Neue",
@@ -57,24 +56,22 @@
     --color-text-primary     : rgb(255 255 255 / 88%); /* 文本色 */
     --color-text-regular     : rgb(237 241 243 / 88%); /* 文本色 - 常规 */
     --color-text-secondary   : rgb(204 210 213 / 88%); /* 文本色 - 次要 */
-    --color-text-disabled    : rgb(136 136 136); /* 文本色 - 禁用 */
+    --color-text-disabled    : rgb(130 130 130); /* 文本色 - 禁用 */
     --color-link             : rgb(88 160 255); /* 超链接色 */
-    --color-info             : rgb(152 152 152);
-    --color-info-light-3     : rgb(129 129 129);
-    --color-info-light-5     : rgb(106 106 106);
-    --color-info-light-7     : rgb(83 83 83);
-    --color-info-light-8     : rgb(72 72 72);
-    --color-info-light-9     : rgb(60 60 60);
-    --color-info-dark-2      : rgb(192 192 192);
-    --color-border           : rgb(120 120 120);
-    --color-border-light     : rgb(104 104 104);
-    --color-border-lighter   : rgb(88 88 88);
-    --color-border-dark      : rgb(160 160 160);
-    --color-border-darker    : rgb(184 184 184);
-    --color-background       : rgb(48 48 48); /* 背景色 */
-    --color-background-alpha : rgb(48 48 48 / 88%); /* 背景色-透明 */
-    --color-tag-bg           : rgb(88 88 88); /* 标签背景色 */
-    --color-tag-text         : rgb(196 193 190); /* 标签文本色 */
+    --color-info-light-3     : rgb(124 124 124);
+    --color-info-light-5     : rgb(100 100 100);
+    --color-info-light-7     : rgb(76 76 76);
+    --color-info-light-8     : rgb(64 64 64);
+    --color-info-light-9     : rgb(52 52 52);
+    --color-info-dark-2      : rgb(184 184 184);
+    --color-border           : rgb(112 112 112);
+    --color-border-light     : rgb(96 96 96);
+    --color-border-lighter   : rgb(80 80 80);
+    --color-border-dark      : rgb(152 152 152);
+    --color-border-darker    : rgb(176 176 176);
+    --color-background       : rgb(42 42 42); /* 背景色 */
+    --color-background-tag   : rgb(82 82 82); /* 背景色 - 标签 */
+    --color-background-alpha : rgb(42 42 42 / 84%); /* 背景色 - 透明 */
     --color-theme            : hwb(196deg 15% 25%);
     --color-theme-dark       : hwb(196deg 34% 14%);
     --color-theme-text       : hwb(196deg 40% 9%);

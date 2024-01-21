@@ -227,8 +227,8 @@ textarea {
 
 .tag {
     box-decoration-break: clone;
-    background-color: var(--color-tag-bg);
-    color: var(--color-tag-text);
+    background-color: var(--color-background-tag);
+    color: var(--color-text-secondary);
 
     &:is(a):hover {
         color: var(--color-theme-text);

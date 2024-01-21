@@ -70,7 +70,7 @@
 
     .tool-progress, .tool-arrow-top {
         position: absolute;
-        opacity: var(--o0);
+        opacity: var(--op0);
         inset: 0;
         margin: auto;
         animation: scroll-progress linear;
@@ -78,8 +78,8 @@
     }
 
     .tool-progress {
-        --o1: 1;
-        --o0: 0;
+        --op1: 1;
+        --op0: 0;
 
         font-family: var(--font-smooth);
         font-size: 14px;
@@ -98,16 +98,16 @@
         }
 
         :hover > & {
-            --o1: 0;
+            --op1: 0;
         }
     }
 
     .tool-arrow-top {
-        --o1: 0;
-        --o0: 1;
+        --op1: 0;
+        --op0: 1;
 
         :hover > & {
-            --o1: 1;
+            --op1: 1;
         }
     }
 
@@ -115,11 +115,11 @@
         0% {
             --scroll-progress: 0;
 
-            opacity: var(--o1);
+            opacity: var(--op1);
         }
 
         99.9999999% {
-            opacity: var(--o1);
+            opacity: var(--op1);
         }
 
         100% {
