@@ -66,21 +66,27 @@ const Zin = new class Z {
         delay = 1500,
         immediate = true
     } = {}) {
+        const messageStore = useMessageStore();
         let timer;
         return immediate ?
             function(...args: Parameters<T>) {
-                timer ? clearTimeout(timer) : func.apply(this, args);
+                timer ? clearAndMessage() : func.apply(this, args);
                 timer = setTimeout(() => {
                     timer = null;
                 }, delay);
             } :
             function(...args: Parameters<T>) {
-                clearTimeout(timer);
+                timer && clearAndMessage();
                 timer = setTimeout(() => {
                     func.apply(this, args);
                     timer = null;
                 }, delay);
             };
+
+        function clearAndMessage() {
+            clearTimeout(timer);
+            messageStore.show("debounce", `防抖机制生效中 (Delay: ${delay})`);
+        }
     }
 
     //从字符串或对象下载文本文件

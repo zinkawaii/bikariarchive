@@ -2,6 +2,7 @@ export * from "./comment-panel";
 export * from "./confirm";
 export * from "./image-viewer";
 export * from "./mask";
+export * from "./message";
 export * from "./read-record";
 export * from "./search-history";
 export * from "./setting";

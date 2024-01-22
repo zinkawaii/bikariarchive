@@ -75,7 +75,7 @@ code {
     border: 1px solid var(--color-border);
     border-radius: 4px;
     box-decoration-break: clone;
-    background-color: color-mix(in srgb, var(--color-tag-bg), transparent 66%);
+    background-color: color-mix(in srgb, var(--color-background-tag), transparent 66%);
     font-family: var(--font-consolas);
     color: var(--color-theme-text);
 }

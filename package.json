@@ -60,7 +60,7 @@
     "nuxt-mongoose": "^1.0.4",
     "nuxt-simple-robots": "4.0.0-rc.13",
     "nuxt-simple-sitemap": "^4.4.1",
-    "nuxt-site-config": "^2.2.6",
+    "nuxt-site-config": "^2.2.8",
     "sass": "^1.70.0",
     "stylelint": "^16.2.0",
     "stylelint-config-html": "^1.1.0",

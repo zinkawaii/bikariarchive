@@ -21,6 +21,7 @@
     <mb-image-viewer />
     <mb-confirm />
     <mb-fps />
+    <message-area />
     <z-context-menu />
     <z-loader />
 </template>
@@ -84,6 +85,10 @@
     }
 
     .mb-fps {
+        z-index: 512;
+    }
+
+    .message-area {
         z-index: 768;
     }
 

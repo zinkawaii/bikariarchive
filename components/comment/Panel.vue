@@ -1,5 +1,6 @@
 <script setup>
     const commentPanelStore = useCommentPanelStore();
+    const messageStore = useMessageStore();
 
     const { nickname, email, address } = storeToRefs(commentPanelStore);
     const maxLength = 512;
@@ -70,8 +71,13 @@
         })
         .then(() => {
             comment.value = "";
-            sending.value = false;
             commentPanelStore.close(true);
+        })
+        .catch(() => {
+            messageStore.show("comment-error", "评论发送失败");
+        })
+        .finally(() => {
+            sending.value = false;
         });
     });
 </script>
