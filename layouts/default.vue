@@ -12,7 +12,7 @@
             <comment-area v-if="$route.meta.comment"/>
             <z-footer />
         </main>
-        <z-sidebar />
+        <z-sidebar v-show="!$route.meta.fullArea"/>
     </div>
     <z-mask />
     <z-setting />
@@ -29,9 +29,10 @@
 <style lang="scss">
     .sotomi {
         display: flex;
-        justify-content: center;
         gap: 24px;
         min-width: var(--size-min-width);
+        max-width: 1396px;
+        margin: auto;
         padding: 32px;
     }
 
@@ -41,7 +42,6 @@
         flex: 1;
         flex-direction: column;
         gap: 24px;
-        max-width: 1028px;
     }
 
     .z-background {
