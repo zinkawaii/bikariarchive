@@ -167,8 +167,8 @@ textarea {
 
 /* 通用内容部件 */
 .content-widget {
-    --cw-padding: 32px;
-    --cw-gap: 24px;
+    --cw-large: 32px;
+    --cw-medium: 24px;
 
     border: 2px solid var(--color-theme-dark);
     border-radius: 16px;
@@ -176,12 +176,12 @@ textarea {
     background-color: var(--color-background-alpha);
 
     @media (width < 1024px) {
-        --cw-padding: 24px;
+        --cw-large: 24px;
     }
 
     @media (width < 425px) {
-        --cw-padding: 16px;
-        --cw-gap: 16px;
+        --cw-large: 16px;
+        --cw-medium: 16px;
     }
 }
 
@@ -341,14 +341,5 @@ textarea {
 
     .mb-gallery {
         margin-block: 16px;
-    }
-}
-
-/* ---------------------------------------------------------------- */
-
-/* 媒体查询 */
-@media (width < 1024px) {
-    .content-group {
-        padding: 16px;
     }
 }

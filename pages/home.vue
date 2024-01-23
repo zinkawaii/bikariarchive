@@ -97,7 +97,7 @@
         grid-template:
             "A A"
             "B C" / 1fr 40%;
-        gap: var(--cw-gap);
+        gap: var(--cw-medium);
     }
 
     .home-welcome {

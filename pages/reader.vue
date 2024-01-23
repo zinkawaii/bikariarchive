@@ -183,7 +183,7 @@
     }
 
     .novel-text {
-        padding-inline: var(--cw-padding);
+        padding-inline: var(--cw-large);
         font-family: v-bind("fontFamily");
         font-size: v-bind("fontSize");
     }

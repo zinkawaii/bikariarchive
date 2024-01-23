@@ -9,13 +9,12 @@
     .home-update {
         grid-area: A;
         width: 256px;
-        padding: 16px 32px;
+        padding: 16px var(--cw-large);
     }
 
     @container main (width < 596px) {
         .home-update {
             width: 100%;
-            padding-inline: var(--cw-gap);
         }
 
         :deep(.recent-article) {

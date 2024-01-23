@@ -53,8 +53,8 @@
     .detail-block {
         display: flex;
         align-items: flex-start;
-        gap: var(--cw-gap);
-        margin-top: var(--cw-gap);
+        gap: var(--cw-medium);
+        margin-top: var(--cw-medium);
     }
 
     .detail-header {
