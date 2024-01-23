@@ -176,9 +176,9 @@
                     <option v-for="(data, index) in params.data.value" :value="index">{{ data.name }}</option>
                 </select>
                 <div class="excalc-param-handlers">
-                    <mb-button :disabled="params.current.value === void(0)" @click="params.save">保存</mb-button>
-                    <mb-button @click="params.add">新建</mb-button>
-                    <mb-button :disabled="params.current.value === void(0)" @click="params.remove">删除</mb-button>
+                    <mb-button :disabled="params.current.value === void(0)" @click="params.save()">保存</mb-button>
+                    <mb-button @click="params.add()">新建</mb-button>
+                    <mb-button :disabled="params.current.value === void(0)" @click="params.remove()">删除</mb-button>
                 </div>
             </div>
             <div class="excalc-label">
@@ -241,7 +241,7 @@
                     <td><mb-input type="number" :accuracy="2" v-model="item.accuracy_rate"/></td>
                     <td><mb-input type="number" :accuracy="2" v-model="item.crit_rate"/></td>
                     <td><mb-input type="number" :accuracy="2" v-model="item.crit_damage"/></td>
-                    <td><mb-button class="excalc-delete" @click="removeBuki(index)">删除</mb-button></td>
+                    <td><mb-button class="excalc-delete" :disabled="state.buki.length <= 1" @click="removeBuki(index)">删除</mb-button></td>
                 </tr>
             </tbody>
         </coco-table>
