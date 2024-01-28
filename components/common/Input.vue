@@ -132,6 +132,7 @@
 <template>
     <input
         ref="entity"
+        class="mb-input"
         :value="modelValue"
         :readonly="readonly"
         @input="input"
@@ -140,7 +141,7 @@
 </template>
 
 <style lang="scss" scoped>
-    input {
+    .mb-input {
         flex: 1;
         width: 100%;
         border: 1px solid var(--color-border-light);

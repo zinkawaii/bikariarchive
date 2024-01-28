@@ -43,7 +43,7 @@ export default defineCustomHandler(async (event) => {
             const position = [];
             for (let i = 0; i < lines.length; i++) {
                 let pos = -1;
-                const line = lines.eq(i).text().toString();
+                const line = lines.eq(i).text();
 
                 do {
                     pos = line.indexOf(word, pos + 1);

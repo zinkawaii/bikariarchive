@@ -48,7 +48,7 @@
 <template>
     <div ref="self" class="mb-progress">
         <span class="progress-bar" :style="{ transform: `scaleX(${displayRate})` }"></span>
-        <span class="progress-title">{{ title }}</span>
+        <span class="text-truncate progress-title">{{ title }}</span>
     </div>
 </template>
 
@@ -70,11 +70,8 @@
     }
 
     .progress-title {
-        overflow: hidden;
         opacity: 0.5;
         margin: auto;
-        white-space: nowrap;
-        text-overflow: ellipsis;
         user-select: none;
     }
 </style>

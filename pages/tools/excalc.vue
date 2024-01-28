@@ -257,6 +257,7 @@
 
     .excalc-param-selector {
         flex: 1;
+        height: 2em;
         padding: 3px;
         border: 1px solid var(--color-border-light);
         border-radius: 4px;

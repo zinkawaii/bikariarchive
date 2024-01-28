@@ -64,7 +64,7 @@
         overflow: hidden;
         padding-inline: 16px;
         border: 1px solid var(--color-border);
-        border-radius: 16px;
+        border-radius: var(--circle-radius);
         line-height: 38px;
         word-break: keep-all;
     }

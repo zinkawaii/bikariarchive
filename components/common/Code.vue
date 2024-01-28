@@ -1,5 +1,4 @@
 <script setup>
-    import ClipboardJS from "clipboard";
     import prism from "prismjs";
 
     const props = defineProps({
@@ -9,6 +8,7 @@
         }
     });
 
+    const messageStore = useMessageStore();
     const slots = useSlots();
     const code = ref();
     const $Code = ref();
@@ -25,7 +25,8 @@
 
     //复制
     function copy() {
-        ClipboardJS.copy($Code.value);
+        navigator.clipboard.writeText($Code.value.textContent);
+        messageStore.show("copy", "代码已复制");
     }
 </script>
 
@@ -37,10 +38,10 @@
         </div>
         <div class="code-area" :class="{ expanded: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
-            <template v-if="!code">
+            <pre v-if="code" ref="$Code" class="code-content" :class="`language-${lang}`" v-html="code"></pre>
+            <template v-else>
                 <slot></slot>
             </template>
-            <pre v-else ref="$Code" class="code-content" :class="`language-${lang}`" v-html="code"></pre>
         </div>
         <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
             <fa-icon :icon="`angles-${isExpand ? `up` : `down`}`"/>

@@ -1,3 +1,5 @@
+type AnyFunc = (...args: any[]) => any;
+
 const Zin = new class Z {
     //默认动画配置
     DEFAULT_ANIME_OPTION = {
@@ -62,26 +64,28 @@ const Zin = new class Z {
     }
 
     //防抖（立即执行）
-    debounce<T extends (...args: any[]) => any>(func: T, {
+    debounce<T extends AnyFunc>(func: T, {
         delay = 1500,
         immediate = true
     } = {}) {
         const messageStore = useMessageStore();
         let timer;
-        return immediate ?
-            function(...args: Parameters<T>) {
+        return <(...args: Parameters<T>) => void> (
+            immediate ?
+            function(...args) {
                 timer ? clearAndMessage() : func.apply(this, args);
                 timer = setTimeout(() => {
                     timer = null;
                 }, delay);
             } :
-            function(...args: Parameters<T>) {
+            function(...args) {
                 timer && clearAndMessage();
                 timer = setTimeout(() => {
                     func.apply(this, args);
                     timer = null;
                 }, delay);
-            };
+            }
+        );
 
         function clearAndMessage() {
             clearTimeout(timer);
@@ -113,7 +117,7 @@ const Zin = new class Z {
     }
 
     //立即运行并返回函数
-    iife<T extends () => any>(func: T, ...args: Parameters<T>) {
+    iife<T extends AnyFunc>(func: T, ...args: Parameters<T>) {
         func.apply(this, args);
         return func;
     }
@@ -159,7 +163,7 @@ const Zin = new class Z {
     }
 
     //节流
-    throttle<T extends (...args: any[]) => any>(func: T, delay?: number) {
+    throttle<T extends AnyFunc>(func: T, delay?: number) {
         //根据延迟时长
         if (delay && delay > 0) {
             let timer = null;

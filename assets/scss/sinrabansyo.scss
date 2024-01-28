@@ -235,22 +235,22 @@ textarea {
     }
 }
 
-.text-truncate {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.text-center {
-    text-align: center;
-}
-
 .text-gray {
     color: var(--color-text-info);
 }
 
 .text-primary {
     color: var(--color-theme-text);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .text-uppercase {

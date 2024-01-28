@@ -33,7 +33,7 @@
         </select>
         <ul class="catalog-list">
             <li v-for="{ index, title } in jChapter">
-                <nuxt-link class="catalog-link" :to="{ params: { index } }">{{ title }}</nuxt-link>
+                <nuxt-link class="text-truncate catalog-link" :to="{ params: { index } }">{{ title }}</nuxt-link>
             </li>
         </ul>
     </aside-widget>
@@ -82,12 +82,9 @@
     }
 
     .catalog-link {
-        overflow: hidden;
         padding: 6px 0 6px 12px;
         border-radius: 8px;
         font-size: 14px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
         color: var(--color-text);
 
         &:hover {

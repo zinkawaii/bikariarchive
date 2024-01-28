@@ -17,6 +17,7 @@ export default {
         "PetalBot",
         "Researchscan",
         "SemrushBot",
+        "serpstatbot",
         "spbot",
         "Uptimebot",
         "ZoominfoBot"
