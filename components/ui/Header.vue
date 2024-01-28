@@ -70,20 +70,18 @@
             <nuxt-link :to="{ name: `home` }">BikariArchive</nuxt-link>
         </div>
         <nav class="header-nav">
-            <div v-for="{ title, icon, to, children } in navList" class="nav-item">
+            <mb-popper v-for="{ title, icon, to, children } in navList">
                 <nuxt-link class="nav-link" :to="to">
                     <fa-icon :icon="icon"/>
                     <span>{{ title }}</span>
                 </nuxt-link>
-                <div v-if="children?.length > 0" class="nav-popup-wrapper">
-                    <div class="nav-popup">
-                        <nuxt-link v-for="child in children" :to="child.to">
-                            <fa-icon :icon="child.icon"/>
-                            <span>{{ child.title }}</span>
-                        </nuxt-link>
-                    </div>
-                </div>
-            </div>
+                <template v-if="children?.length" #floating>
+                    <nuxt-link v-for="child in children" class="nav-pop" :to="child.to">
+                        <fa-icon :icon="child.icon"/>
+                        <span>{{ child.title }}</span>
+                    </nuxt-link>
+                </template>
+            </mb-popper>
         </nav>
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
@@ -156,16 +154,11 @@
 
     .header-nav {
         display: flex;
+        margin-block: auto;
 
         @media (width < #{$min}) {
             display: none;
         }
-    }
-
-    .nav-item {
-        display: grid;
-        justify-items: center;
-        position: relative;
     }
 
     .nav-link {
@@ -194,65 +187,23 @@
         }
     }
 
-    .nav-popup-wrapper {
-        position: absolute;
-        opacity: 0;
-        top: 50px;
-        padding: 8px;
-        transform-origin: top;
-        transition: all 0.25s;
-        scale: 1 0.66;
-        filter: drop-shadow(2px 2px 8px rgb(0 0 0 / 32%));
-        pointer-events: none;
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 4px 0;
-            width: 10px;
-            aspect-ratio: 1;
-            margin-inline: auto;
-            background-color: var(--color-background-alpha);
-            clip-path: polygon(0 0, 0 100%, 100% 0);
-            rotate: 45deg;
-        }
-
-        :hover + &, &:hover {
-            opacity: 1;
-            scale: 1;
-            pointer-events: auto;
-        }
-    }
-
-    .nav-popup {
+    .nav-pop {
         display: grid;
-        width: 112px;
-        padding: 6px;
-        border: 1px solid transparent;
-        border-radius: 12px;
-        background-color: var(--color-background-alpha);
+        grid-template-columns: 16px 1fr;
+        gap: 6px;
+        width: 100px;
+        padding-inline: 10px;
+        border-radius: 8px;
+        line-height: 32px;
+        word-break: keep-all;
+        transition: all 0.25s;
 
-        [z-dark] & {
-            border-color: var(--color-border-lighter);
+        &:hover {
+            background-color: var(--color-theme);
+            color: white;
         }
 
-        > a {
-            display: grid;
-            grid-template-columns: 16px 1fr;
-            gap: 6px;
-            padding-inline: 10px;
-            border-radius: 8px;
-            line-height: 32px;
-            word-break: keep-all;
-            transition: all 0.25s;
-
-            &:hover {
-                background-color: var(--color-theme);
-                color: white;
-            }
-        }
-
-        svg {
+        > svg {
             margin: auto;
         }
     }
