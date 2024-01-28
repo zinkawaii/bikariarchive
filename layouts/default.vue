@@ -6,13 +6,13 @@
     <z-header />
     <z-navbar />
     <z-toolbar />
-    <div class="sotomi">
+    <div :class="[`sotomi`, { [`full-page`]: $route.meta.fullPage }]">
         <main class="nakami">
             <slot></slot>
             <comment-area v-if="$route.meta.comment"/>
             <z-footer />
         </main>
-        <z-sidebar v-show="!$route.meta.fullArea"/>
+        <z-sidebar />
     </div>
     <z-mask />
     <z-setting />
@@ -29,11 +29,20 @@
 <style lang="scss">
     .sotomi {
         display: flex;
+        justify-content: center;
         gap: 24px;
         min-width: var(--size-min-width);
-        max-width: 1396px;
-        margin: auto;
         padding: 32px;
+    }
+
+    .full-page {
+        > .nakami {
+            max-width: 1308px;
+        }
+
+        > .z-sidebar {
+            display: none;
+        }
     }
 
     .nakami {
@@ -42,6 +51,7 @@
         flex: 1;
         flex-direction: column;
         gap: 24px;
+        max-width: 1028px;
     }
 
     .z-background {
