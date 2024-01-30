@@ -298,15 +298,15 @@ textarea {
 }
 
 .novel-text {
+    :first-child {
+        margin-top: 0;
+    }
+
     h2 {
         position: relative;
         margin-block: 24px 4px;
         padding-left: 16px;
         line-height: 36px;
-
-        &:first-child {
-            margin-top: 16px;
-        }
 
         &::before {
             content: "";
@@ -324,10 +324,22 @@ textarea {
         line-height: 24px;
     }
 
-    ul {
+
+    ol, ul {
         margin-left: 2em;
         line-height: 2em;
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+
+    ul {
         list-style-type: disc;
+    }
+
+    strong {
+        font-weight: bold;
     }
 
     em {
@@ -341,5 +353,28 @@ textarea {
 
     .mb-gallery {
         margin-block: 16px;
+    }
+}
+
+.comment-content {
+    blockquote {
+        margin-inline: 0;
+    }
+
+    p {
+        text-indent: 0;
+    }
+
+    pre {
+        margin-top: 11px;
+        font-family: var(--font-consolas);
+        font-size: 14px;
+        line-height: 20px;
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+
+    .sanitized {
+        color: var(--color-text-disabled);
     }
 }

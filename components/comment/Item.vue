@@ -57,7 +57,7 @@
                     <a class="comment-nickname">{{ recipient }}</a>
                 </template>
             </div>
-            <p class="comment-content">{{ data.content }}</p>
+            <div v-marked="data.content" class="novel-text comment-content"></div>
             <div class="comment-operator">
                 <span>{{ elapsed }}</span>
                 <a @click="replyComment">回复</a>
@@ -112,10 +112,7 @@
     }
 
     .comment-content {
-        padding-block: 7px;
-        line-height: 28px;
-        white-space: pre-wrap;
-        word-break: break-word;
+        margin-block: 0.5em;
     }
 
     .comment-operator {

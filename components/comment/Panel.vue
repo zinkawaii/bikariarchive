@@ -101,6 +101,7 @@
             </div>
             <div class="panel-form">
                 <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="comment"></textarea>
+                <p class="panel-tip">支持部分 Markdown 语法</p>
                 <div class="panel-count">{{ comment.length }} / {{ maxLength }}</div>
             </div>
             <mb-button
@@ -181,7 +182,7 @@
     .panel-count {
         position: absolute;
         right: 8px;
-        bottom: 4px;
+        bottom: 30px;
         font-size: 12px;
         color: var(--color-text-info);
     }
