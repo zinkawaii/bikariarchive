@@ -11,6 +11,12 @@
       "link": "https://shape.kloudy.cn",
       "icon": "https://api.kloudy.cn/img/icon.webp",
       "description": "Stay Hungry, Stay Foolish"
+    },
+    {
+      "title": "纸鹿摸鱼处",
+      "link": "https://blog.zhilu.cyou",
+      "icon": "https://cravatar.cn/avatar/13aa912754e6bb5e671f3e6654e4712d?s=100",
+      "description": "纸鹿至麓不知路，支炉制露不止漉"
     }
   ]
 }
