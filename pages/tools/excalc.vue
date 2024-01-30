@@ -170,12 +170,14 @@
 <template>
     <div class="excalc-top">
         <div class="excalc-power">
-            <div class="excalc-label">
-                <span>参数</span>
-                <select class="excalc-param-selector" v-model="params.current.value" @change="params.change">
-                    <option v-for="(data, index) in params.data.value" :value="index">{{ data.name }}</option>
-                </select>
-                <div class="excalc-param-handlers">
+            <div class="excalc-param">
+                <div class="excalc-label">
+                    <span>参数</span>
+                    <select class="excalc-param-selector" v-model="params.current.value" @change="params.change">
+                        <option v-for="(data, index) in params.data.value" :value="index">{{ data.name }}</option>
+                    </select>
+                </div>
+                <div class="excalc-param-handler">
                     <mb-button :disabled="params.current.value === void(0)" @click="params.save()">保存</mb-button>
                     <mb-button @click="params.add()">新建</mb-button>
                     <mb-button :disabled="params.current.value === void(0)" @click="params.remove()">删除</mb-button>
@@ -255,22 +257,27 @@
         gap: 32px;
     }
 
+    .excalc-label {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        &:nth-child(n + 2) {
+            margin-top: 16px;
+        }
+    }
+
+    .excalc-param {
+        display: grid;
+        gap: 16px;
+    }
+
     .excalc-param-selector {
         flex: 1;
         height: 2em;
         padding: 3px;
         border: 1px solid var(--color-border-light);
         border-radius: 4px;
-    }
-
-    .excalc-label {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-
-        & + & {
-            margin-top: 16px;
-        }
     }
 
     .excalc-main {
@@ -319,6 +326,10 @@
     }
 
     @container main (width >= 596px) {
+        .excalc-param {
+            grid-template-columns: 1fr auto;
+        }
+
         .excalc-power {
             max-width: 512px;
         }
@@ -328,6 +339,10 @@
         .excalc-top {
             flex-direction: column;
             gap: 16px;
+        }
+
+        .excalc-param-handler {
+            margin-left: 48px;
         }
 
         .excalc-bottom {

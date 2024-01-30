@@ -22,7 +22,6 @@
     }
 
     .coco-table {
-        width: 100%;
         border-spacing: 2px;
     }
 </style>

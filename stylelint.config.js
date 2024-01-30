@@ -412,7 +412,7 @@ export default {
         "no-invalid-position-at-import-rule": null,
         "selector-id-pattern": null,
         "selector-pseudo-class-no-unknown": [true, {
-            ignorePseudoClasses: ["deep"]
+            ignorePseudoClasses: ["deep", "slotted"]
         }],
         "order/order": [
             "custom-properties",

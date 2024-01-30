@@ -29,7 +29,7 @@
         padding-top: 2px;
         border: 1px solid var(--color-border-light);
         border-radius: var(--circle-radius);
-        box-shadow: var(--box-shadow);
+        box-shadow: var(--box-shadow-dark);
         background-color: var(--color-background);
         cursor: pointer;
         pointer-events: auto;

@@ -102,7 +102,7 @@
         height: 64px;
         min-width: var(--size-min-width);
         padding-inline: 16px;
-        box-shadow: var(--box-shadow-dark);
+        box-shadow: var(--box-shadow-darker);
         background:
             linear-gradient(
                 to right,

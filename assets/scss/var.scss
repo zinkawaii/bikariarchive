@@ -22,9 +22,10 @@
     --color-background-tag   : rgb(216 216 216); /* 背景色 - 标签 */
     --color-background-alpha : rgb(248 248 248 / 88%); /* 背景色 - 透明 */
     --color-selection-bg     : rgb(119 184 233 / 66%); /* 选区背景色 */
-    --box-shadow             : 0 0 4px 0 rgb(0 0 0 / 32%); /* 块盒阴影 */
-    --box-shadow-dark        : 0 0 8px 0 rgb(0 0 0 / 32%); /* 块盒阴影 - 深 */
-    --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%); /* 白字阴影 */
+    --box-shadow             : 0 0 4px 0 rgb(0 0 0 / 32%);
+    --box-shadow-dark        : 0 0 8px 0 rgb(0 0 0 / 16%);
+    --box-shadow-darker      : 0 0 8px 0 rgb(0 0 0 / 32%);
+    --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%);
     --font                   :
         system-ui, -apple-system, blinkmacsystemfont, "Helvetica Neue",
         "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Source Han Sans CN", sans-serif;

@@ -17,11 +17,11 @@
             }
         },
         components: {
-            "coco-link": CocoLink,
-            "mb-code": MbCode,
-            "mb-gallery": MbGallery,
-            "mb-image": MbImage,
-            "nuxt-img": NuxtImg
+            CocoLink,
+            MbCode,
+            MbGallery,
+            MbImage,
+            NuxtImg
         },
         render() {
             const { content, enabled, tag } = this;
