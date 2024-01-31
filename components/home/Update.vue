@@ -17,7 +17,7 @@
             width: 100%;
         }
 
-        :deep(.recent-article) {
+        .recent-article {
             display: grid;
             grid-template-columns: 1fr 1fr;
             column-gap: 16px;

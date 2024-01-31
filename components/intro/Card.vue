@@ -6,11 +6,6 @@
 
     const readRecordStore = useReadRecordStore();
 
-    //简介
-    const synopsis = computed(() => {
-        return jArticle[props.novel].synopsis.split("\n");
-    });
-
     //阅读记录
     const record = computed(() => {
         const data = readRecordStore.get(props.novel);
@@ -34,12 +29,7 @@
 <template>
     <div class="content-table intro-card" :layer="layer" @click="exchange">
         <h2 class="content-h2">{{ jArticle[novel].title }}</h2>
-        <ul class="intro-tag">
-            <li v-for="tag in jArticle[novel].tag">{{ tag }}</li>
-        </ul>
-        <div class="intro-synopsis">
-            <p v-for="line in synopsis">{{ line }}</p>
-        </div>
+        <intro-content :novel="novel"/>
         <div class="intro-record">
             <span>&gt;</span>
             <coco-link :to="record.link">{{ record.title }}</coco-link>
@@ -71,31 +61,12 @@
         }
     }
 
-    .intro-tag {
-        display: flex;
-        gap: 12px;
-        overflow: auto;
-        margin-block: 8px;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        > li {
-            padding-inline: 12px;
-            border: 1px solid var(--color-border-lighter);
-            border-radius: 12px;
-            line-height: 24px;
-            word-break: keep-all;
-        }
-    }
-
-    .intro-synopsis {
-        flex: 1;
-        overflow: auto;
+    .intro-content {
+        margin-top: 8px;
     }
 
     .intro-record {
+        margin-top: auto;
         padding-top: 8px;
         border-top: 1px solid var(--color-border-lighter);
         text-align: center;

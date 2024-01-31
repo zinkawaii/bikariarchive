@@ -11,14 +11,18 @@
         volume: 0
     });
 
+    const jNovel = computed(() => {
+        return jArticle[novel.value];
+    });
+
     const volumes = computed(() => {
-        return jArticle[novel.value].volumes.map((item) => {
+        return jNovel.value.volumes.map((item) => {
             return item.title;
         });
     });
 
     const chapters = computed(() => {
-        return jArticle[novel.value].chapters.filter((c) => {
+        return jNovel.value.chapters.filter((c) => {
             return curOrder.value.volume === c.volume;
         });
     });
@@ -52,17 +56,23 @@
                 </li>
             </ul>
         </div>
-        <fieldset v-show="volumes.length" class="catalogue-fieldset">
-            <legend class="content-h2">卷册列表</legend>
-            <ul class="catalogue-volume">
-                <li v-for="(title, i) in volumes">
-                    <a
-                        :class="{ checked: curOrder.volume === i }"
-                        @click="selectVolume(i)"
-                    >{{ title }}</a>
-                </li>
-            </ul>
-        </fieldset>
+        <div class="catalogue-section">
+            <fieldset class="catalogue-fieldset">
+                <legend class="content-h2">{{ jNovel.title }}</legend>
+                <intro-content :novel="novel"/>
+            </fieldset>
+            <fieldset v-show="volumes.length" class="catalogue-fieldset">
+                <legend class="content-h2">卷册列表</legend>
+                <ul class="catalogue-volume">
+                    <li v-for="(title, i) in volumes">
+                        <a
+                            :class="{ checked: curOrder.volume === i }"
+                            @click="selectVolume(i)"
+                        >{{ title }}</a>
+                    </li>
+                </ul>
+            </fieldset>
+        </div>
         <fieldset v-show="chapters.length" class="catalogue-fieldset">
             <legend class="content-h2">章节列表</legend>
             <ul class="catalogue-chapter">
@@ -128,7 +138,13 @@
         }
     }
 
+    .catalogue-section {
+        display: flex;
+        column-gap: 32px;
+    }
+
     .catalogue-fieldset {
+        flex: 1;
         margin-top: 16px;
         padding-top: 8px;
         border-top: 1px solid var(--color-border);
@@ -141,7 +157,7 @@
 
     .catalogue-volume {
         display: grid;
-        grid: auto / repeat(auto-fit, minmax(min(144px, 100%), 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
 
         a {
             display: flex;
@@ -183,6 +199,12 @@
         .catalogue-chapter {
             columns: 2;
             column-gap: 2em;
+        }
+    }
+
+    @container main (width < 768px) {
+        .catalogue-section {
+            flex-direction: column;
         }
     }
 </style>

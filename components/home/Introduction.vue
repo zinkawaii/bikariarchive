@@ -24,7 +24,7 @@
 
 <template>
     <div class="home-introduction">
-        <home-intro-card
+        <intro-card
             v-for="i in 2"
             :style="{ translate: intro.translate[i - 1] }"
             :layer="intro.layer[i - 1]"
