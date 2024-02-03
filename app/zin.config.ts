@@ -3,7 +3,7 @@ const server = {
         env: process.env.NODE_ENV,
         address: "<!-- ??? -->",
         mail: {
-            name: "微光茶馆",
+            name: "微光档案",
             host: "smtp.qq.com",
             port: 465,
             auth: {

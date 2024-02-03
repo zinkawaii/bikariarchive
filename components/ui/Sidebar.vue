@@ -27,7 +27,7 @@
         </aside-widget>
         <aside-widget title="公告" icon="bullhorn">
             <p class="p-small">
-                欢迎来到<span class="text-primary">微光茶馆</span>！(｡･ ω&lt;)ゞ♡<br />
+                欢迎来到<span class="text-primary">微光档案</span>！(｡･ ω&lt;)ゞ♡<br />
                 小说正在缓慢更新中……
             </p>
         </aside-widget>

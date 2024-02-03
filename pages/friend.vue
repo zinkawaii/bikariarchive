@@ -6,7 +6,7 @@
     });
 
     const schema = `export default {
-  title: "微光茶馆",
+  title: "微光档案",
   link: "https://bikariarchive.xyz",
   icon: "https://cravatar.cn/avatar/ECB2EA87C4532F007838D86D02798F89",
   description: "虚幻的幸福"

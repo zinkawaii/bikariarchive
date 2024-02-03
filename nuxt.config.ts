@@ -82,7 +82,7 @@ export default defineNuxtConfig({
         "@vueuse/nuxt"
     ],
     site: {
-        name: "微光茶馆",
+        name: "微光档案",
         url: `https://${clientConfig.domain}`,
         defaultLocale: "zh-CN",
         indexable: true
