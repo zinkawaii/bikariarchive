@@ -19,7 +19,8 @@ export default defineNuxtConfig({
                 separator: "-"
             }
         },
-        rootId: "z-root"
+        rootId: "z-root",
+        viewTransition: true
     },
     css: [
         "@fortawesome/fontawesome-svg-core/styles.css",
@@ -66,8 +67,7 @@ export default defineNuxtConfig({
         public: clientConfig
     },
     vue: {
-        runtimeCompiler: true,
-        defineModel: true
+        runtimeCompiler: true
     },
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
