@@ -35,7 +35,7 @@
 
 <template>
     <div class="space-header">
-        <img class="space-icon" src="/garden/icon/default.png"/>
+        <mb-image class="space-icon" src="/garden/icon/default.png"/>
         <div class="space-title">
             <span class="space-nickname">{{ userStore.nickname }}</span>
         </div>

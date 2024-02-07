@@ -145,7 +145,7 @@
 
 <template>
     <transition name="move">
-        <nuxt-img
+        <mb-image
             v-if="imageViewerStore.isOpened"
             ref="$v"
             class="mb-image-viewer"

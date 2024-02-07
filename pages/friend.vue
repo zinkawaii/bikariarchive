@@ -18,7 +18,7 @@
         <div class="novel-text">
             <div class="friend-list">
                 <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.link" target="_blank">
-                    <nuxt-img class="friend-avatar" :src="item.icon" loading="lazy"/>
+                    <mb-image class="friend-avatar" :src="item.icon" loading="lazy"/>
                     <div class="friend-info">
                         <div class="content-h2 text-truncate friend-title">{{ item.title }}</div>
                         <span class="friend-desc">{{ item.description }}</span>

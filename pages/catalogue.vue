@@ -48,7 +48,7 @@
                         :class="{ checked: novel === key }"
                         @click="selectNovel(key, i)"
                         ><div class="shelf-cover">
-                            <nuxt-img v-if="cover" :src="cover"/>
+                            <mb-image v-if="cover" :src="cover"/>
                             <div v-else class="shelf-placeholder">Cover.</div>
                         </div>
                         <span class="shelf-title">{{ title.split("-")[0] }}</span>

@@ -21,7 +21,7 @@
 <template>
     <aside class="z-sidebar" :class="{ hidden: !display }">
         <aside-widget class="aside-profile">
-            <nuxt-img class="aside-avatar" :src="$config.public.avatar"/>
+            <mb-image class="aside-avatar" :src="$config.public.avatar"/>
             <span class="content-h2 aside-author">{{ $config.public.author }}</span>
             <p class="p-small">うたかたなしあわせ</p>
         </aside-widget>

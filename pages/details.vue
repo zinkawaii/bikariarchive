@@ -10,7 +10,7 @@
     <coco-widget title="情报">
         <div v-for="block in jEntry.blocks" class="detail-block">
             <div class="detail-header">
-                <nuxt-img class="detail-image" :src="block.icon"/>
+                <mb-image class="detail-image" :src="block.icon"/>
                 <span>{{ block.title }}</span>
             </div>
             <coco-table class="detail-table">

@@ -46,7 +46,7 @@
         <home-introduction />
         <div class="content-table">
             <a class="profile-avatar">
-                <nuxt-img :src="$config.public.avatar"/>
+                <mb-image :src="$config.public.avatar"/>
             </a>
             <table class="profile-table">
                 <tbody>

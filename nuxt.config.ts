@@ -75,7 +75,6 @@ export default defineNuxtConfig({
         ["nuxt-simple-sitemap", sitemapConfig],
         ["nuxt-simple-robots", robotsConfig],
         "nuxt-site-config",
-        "@nuxt/image",
         "@nuxtseo/module",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
