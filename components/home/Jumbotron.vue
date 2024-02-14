@@ -94,18 +94,17 @@
         color: white;
 
         > * {
+            height: 1em;
             font-family: "Noto Serif JP";
         }
     }
 
     .jumbo-title {
-        margin-bottom: 16px;
         font-size: 72px;
-        line-height: 1em;
     }
 
     .jumbo-phrase {
-        height: 1.4em;
+        margin-block: 32px;
     }
 
     .main-typing::after, .sub-typing::after {
@@ -144,9 +143,7 @@
         display: flex;
         position: absolute;
         opacity: 0;
-        bottom: 0;
-        width: 100%;
-        height: 20%;
+        inset: 80% 0 0;
         background: linear-gradient(transparent, rgb(0 0 0 / 50%));
         font-size: 64px;
         color: white;
