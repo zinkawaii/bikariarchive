@@ -64,7 +64,7 @@ export default <RouterConfig> {
         {
             name: "entry",
             path: "/:title",
-            component: () => import("~/pages/entry/index.vue"),
+            component: () => import("~/pages/entry.vue"),
             meta: {
                 comment: true
             }
