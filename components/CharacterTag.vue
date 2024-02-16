@@ -19,6 +19,7 @@
         border: 1px solid var(--color-theme-dark);
         border-radius: var(--circle-radius);
         background-color: var(--color-background);
+        font-family: var(--font);
         font-size: 14px;
         vertical-align: middle;
         color: var(--color-theme-text);

@@ -1,10 +1,7 @@
 <script setup>
     const props = defineProps({
         placeholder: String,
-        viewable: {
-            type: Boolean,
-            default: false
-        }
+        viewable: Boolean
     });
 
     const imageViewerStore = useImageViewerStore();

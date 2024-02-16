@@ -72,10 +72,10 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
-        ["nuxt-simple-sitemap", sitemapConfig],
         ["nuxt-simple-robots", robotsConfig],
+        ["@nuxtjs/sitemap", sitemapConfig],
         "nuxt-site-config",
-        "@nuxtseo/module",
+        "@nuxtjs/seo",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
         "@vueuse/nuxt"

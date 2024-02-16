@@ -1,7 +1,8 @@
+import type { ModuleOptions } from "@nuxtjs/sitemap";
 import jArticle from "../dist/json/Article.json";
 import jEntry from "../assets/json/Entry.json";
 
-export default {
+export default <ModuleOptions> {
     excludeAppSources: true,
     urls: () => [
         "/borrowing",
