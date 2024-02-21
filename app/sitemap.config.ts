@@ -20,6 +20,6 @@ export default <ModuleOptions> {
                 return `/book/${novel}/${item.index}`;
             });
         }),
-        ...Object.values(jEntry.category)
-    ].flat(1)
+        ...Object.values(jEntry.all)
+    ]
 };
