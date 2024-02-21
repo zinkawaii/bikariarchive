@@ -29,16 +29,7 @@
                                 <th v-if="i === 0" :rowspan="y.children.length">{{ y.title }}</th>
                                 <th>{{ z.title }}</th>
                                 <td>
-                                    <span v-for="title in z.children" class="detail-link">
-                                        <coco-link
-                                            v-if="(typeof title) === `object`"
-                                            :to="toEntry(title[0])"
-                                        >{{ title[1] }}</coco-link>
-                                        <coco-link
-                                            v-else
-                                            :to="toEntry(title)"
-                                        >{{ title }}</coco-link>
-                                    </span>
+                                    <detail-link v-for="title in z.children" :title="title"/>
                                 </td>
                             </tr>
                         </template>
