@@ -1,5 +1,5 @@
 <script setup>
-    import jEntry from "~/assets/json/Entry.json";
+    import jEntry from "~/dist/json/Entry.json";
 
     useHead({
         title: "情报"

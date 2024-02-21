@@ -1,6 +1,6 @@
 <script setup>
     import { EntryKnownAbility } from "#components";
-    import jEntry from "~/assets/json/Entry.json";
+    import jEntry from "~/dist/json/Entry.json";
     import Unknown from "./unknown.vue";
 
     const route = useRoute();

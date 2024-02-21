@@ -1,4 +1,5 @@
 import fs from "fs-extra";
+import jEntry from "~/dist/json/Entry.json";
 
 interface GetEntryResponse extends BaseResponse {
     [key: string]: any
@@ -11,8 +12,7 @@ export default defineCustomHandler(async (event) => {
         title
     } = getQueryValues(event);
 
-    const folders = ["area", "character", "concept"];
-    if (folders.includes(category)) {
+    if (Object.keys(jEntry.category).includes(category)) {
         const path = r(`data/${category}/${title}.json`);
         const isExist = await fs.exists(path);
 

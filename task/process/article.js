@@ -1,71 +1,19 @@
 import cheerio from "cheerio";
 import chokidar from "chokidar";
-import consola from "consola";
 import dayjs from "dayjs";
-import entities from "html-entities";
 import fm from "front-matter";
 import fs from "fs-extra";
 import * as glob from "glob";
-import * as marked from "marked";
 import * as path from "path";
+import marked from "./marked.js";
+import { r, timer } from "./utils.js";
 
-marked.use({
-    renderer: {
-        heading(text, level) {
-            return `<h${level}>${text}</h${level}>\n`;
-        },
-        code(code, infostring) {
-            return `<mb-code lang="${infostring}"><pre>${entities.encode(code)}</pre></mb-code>\n`;
-        },
-        link(href, title, text) {
-            let extra;
-            if (!href.startsWith("/")) {
-                extra = `target="_blank" rel="noopener noreferrer nofollow"`;
-            }
-            return `<a class="coco-link" href="${href}" ${title ? `title=${title}` : ""} ${extra}>${text}</a>`;
-        },
-        text(text) {
-            return text.replaceAll("\n", "");
-        }
-    },
-    extensions: [
-        {
-            name: "ruby",
-            level: "inline",
-            start(src) {
-                return src.match(/\{/)?.index;
-            },
-            tokenizer(src, tokens) {
-                const rule = /^\{([^{\n]*?)\|([^}\n]*?)\}/;
-                const match = rule.exec(src);
-                if (match) {
-                    return {
-                        type: "ruby",
-                        raw: match[0],
-                        ruby: this.lexer.inlineTokens(match[1].trim()),
-                        rt: this.lexer.inlineTokens(match[2].trim())
-                    };
-                }
-            },
-            renderer(token) {
-                return `<ruby>${this.parser.parseInline(token.ruby)}<rt>${this.parser.parseInline(token.rt)}</rt></ruby>`;
-            },
-            childTokens: ["ruby", "rt"]
-        }
-    ],
-    hooks: {
-        postprocess(html) {
-            return html.replaceAll(/(?<=\n)<br(\s*)\/>/g, "<p><br /></p>");
-        }
-    }
-});
+const srcDir = r("data/novel");
+const outDir = r("dist/novel");
 
-const srcDir = "../data/novel";
-const outDir = "../dist/novel";
-
-const metaSrcDir = "../assets/json/Article.json";
-const metaOutDir = "../dist/json/Article.json";
-const mapOutDir = "../dist/json/Artmap.json";
+const metaSrcDir = r("assets/json/Article.json");
+const metaOutDir = r("dist/json/Article.json");
+const mapOutDir = r("dist/json/Artmap.json");
 
 const jMeta = JSON.parse(fs.readFileSync(metaSrcDir));
 const jMap = {};
@@ -94,7 +42,7 @@ function simpleParse(pathname) {
     const result = marked.parse(body);
 
     //写入文件
-    const outPath = pathname.replaceAll("\\", "/").replace(srcDir, outDir).replace(".md", ".txt");
+    const outPath = r(pathname).replace(srcDir, outDir).replace(".md", ".txt");
     fs.outputFileSync(outPath, result);
 
     const match = path.basename(path.resolve(pathname, "..")).match(re);
@@ -173,22 +121,4 @@ function dateFormat(obj, keys) {
             obj[key] = dayjs(obj[key]).format("YYYY-MM-DD");
         }
     });
-}
-
-//统计执行时长
-function timer(sign, func) {
-    return async function(...arg) {
-        //开始标记
-        performance.mark("start");
-
-        //运行函数
-        await func.call(this, ...arg);
-
-        //结束标记
-        performance.mark("end");
-
-        //计算时长
-        const measure = performance.measure("full", "start", "end");
-        consola.success(`${sign} -- ${measure.duration.toFixed(0)}ms`);
-    };
 }
