@@ -11,27 +11,22 @@
 
     const { title } = route.params;
     const isExist = ref(false);
-    let category = "";
     let data = null;
 
-    for (const key in jEntry.category) {
-        const jList = jEntry.category[key];
-        if (jList.includes(title)) {
-            category = key;
+    if (jEntry.all.includes(title)) {
+        //获取数据
+        ({ data } = await useFetch("/api/entry", {
+            query: {
+                title
+            }
+        }));
 
-            //获取数据
-            ({ data } = await useFetch("/api/entry", {
-                query: {
-                    category,
-                    title
-                }
-            }));
-
+        if (!data.value.error) {
             //设置标题
             useHead({ title });
 
+            //词条存在
             isExist.value = true;
-            break;
         }
     }
 </script>

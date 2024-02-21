@@ -22,10 +22,10 @@ const re = /^(.*?)\.(\d+)$/;
 
 (async () => {
     //从元信息和Front Matter生成全文和Article.json
-    await timer("Meta-Info", generateMetaInfo)();
+    await timer("Article", generateMetaInfo)();
 
     //解析函数
-    const parse = timer("Markdown", (pathname) => {
+    const parse = timer("Article", (pathname) => {
         simpleParse(pathname);
         outputFile();
     });
@@ -105,7 +105,7 @@ function outputFile() {
     for (const key in jNeta) {
         const jChapter = Object.values(jNeta[key].chapters);
         jNeta[key].chapters = jChapter;
-        jNeta[key].$map = jChapter.map((c, i) => {
+        jNeta[key].$seq = jChapter.map((c, i) => {
             return c.index;
         });
     }

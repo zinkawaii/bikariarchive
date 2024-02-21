@@ -43,7 +43,7 @@ class Article implements WithMetaAttrs {
             const jNovel = jArticle[novel];
             const jChapter = jNovel.chapters;
 
-            const order = jNovel.$map.indexOf(index);
+            const order = jNovel.$seq.indexOf(index);
             if (order === -1) {
                 return;
             }
