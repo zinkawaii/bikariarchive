@@ -26,7 +26,7 @@
     "marked": "^12.0.0",
     "prismjs": "^1.29.0",
     "vue": "^3.4.19",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@kikiutils/nuxt-session": "^2.0.2",
@@ -37,6 +37,7 @@
     "@stylistic/stylelint-plugin": "^2.1.0",
     "@types/dompurify": "^3.0.5",
     "@types/fs-extra": "^11.0.4",
+    "@types/md5": "^2.3.5",
     "@types/node-schedule": "^2.1.6",
     "@types/nodemailer": "^6.4.14",
     "@types/prismjs": "^1.26.3",

@@ -62,7 +62,7 @@
                     </template>
                 </mb-tab>
             </section>
-            <template v-if="category === `character`">
+            <template v-if="data.category === `character`">
                 <section class="entry-section">
                     <h2>能力</h2>
                     <template v-if="data.talent?.length > 0">

@@ -16,6 +16,8 @@ export default defineCustomHandler(async (event) => {
         const path = r(`data/${category}/${title}.json`);
         const file = await fs.readFile(path);
         const data = JSON.parse(file.toString());
+
+        res.category = category;
         Object.assign(res, data);
     }
     else {
