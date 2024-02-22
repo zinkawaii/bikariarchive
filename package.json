@@ -4,7 +4,7 @@
   "scripts": {
     "deploy": "cd .output && pm2 restart server/index.mjs",
     "dev": "nuxi dev --no-qr",
-    "build": "nuxi build",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation\" nuxi build",
     "prepare": "nuxi prepare",
     "preview": "nuxi preview",
     "eslint": "eslint **/*.{vue,ts}",
@@ -57,6 +57,7 @@
     "cheerio": "1.0.0-rc.12",
     "chokidar": "^3.6.0",
     "consola": "^3.2.3",
+    "cross-env": "^7.0.3",
     "eslint": "^8.56.0",
     "eslint-plugin-vue": "^9.21.1",
     "feed": "^4.2.2",
