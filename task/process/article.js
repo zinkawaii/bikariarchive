@@ -6,7 +6,7 @@ import fs from "fs-extra";
 import * as glob from "glob";
 import * as path from "path";
 import marked from "./marked.js";
-import { r, timer } from "./utils.js";
+import { r, timer } from "../utils.js";
 
 const srcDir = r("data/novel");
 const outDir = r("dist/novel");
@@ -31,8 +31,10 @@ const re = /^(.*?)\.(\d+)$/;
     });
 
     //监听
-    chokidar.watch([`${srcDir}/**/*.md`])
-    .on("change", parse);
+    if (process.argv.includes("--watch")) {
+        chokidar.watch([`${srcDir}/**/*.md`])
+        .on("change", parse);
+    }
 })();
 
 //单文件解析

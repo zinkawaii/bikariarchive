@@ -1,7 +1,7 @@
 import chokidar from "chokidar";
 import fs from "fs-extra";
 import * as path from "path";
-import { r, timer } from "./utils.js";
+import { r, timer } from "../utils.js";
 
 const folders = [
     "area",

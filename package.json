@@ -9,8 +9,13 @@
     "preview": "nuxi preview",
     "eslint": "eslint **/*.{vue,ts}",
     "stylelint": "stylelint **/*.{vue,scss}",
-    "task:abbrlink": "cd task && nodemon abbrlink.js",
-    "task:process": "cd task/process && nodemon index.js"
+    "git:stash": "git add -A && git stash",
+    "git:stash/pop": "git stash pop && git reset",
+    "task:abbrlink": "cd task && node abbrlink.js",
+    "task:build": "pnpm run git:stash && pnpm run task:process && pnpm run build && pnpm run git:stash/pop",
+    "task:deploy": "cd task && node deploy.js",
+    "task:process": "cd task/process && node index.js",
+    "task:process/watch": "cd task/process && nodemon --exec \"node index.js --watch\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -41,6 +46,9 @@
     "@types/node-schedule": "^2.1.6",
     "@types/nodemailer": "^6.4.14",
     "@types/prismjs": "^1.26.3",
+    "@types/prompts": "^2.4.9",
+    "@types/ssh2-sftp-client": "^9.0.3",
+    "@types/tar": "^6.1.11",
     "@typescript-eslint/parser": "^7.0.2",
     "@vueuse/core": "^10.8.0",
     "@vueuse/nuxt": "^10.8.0",
@@ -64,10 +72,13 @@
     "nuxt-mongoose": "^1.0.5",
     "nuxt-simple-robots": "4.0.0-rc.14",
     "nuxt-site-config": "^2.2.9",
+    "prompts": "^2.4.2",
     "sass": "^1.71.1",
+    "ssh2-sftp-client": "^10.0.3",
     "stylelint": "^16.2.1",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-standard-scss": "^13.0.0",
-    "stylelint-order": "^6.0.4"
+    "stylelint-order": "^6.0.4",
+    "tar": "^6.2.0"
   }
 }
