@@ -18,7 +18,7 @@
 
     //总页数
     const totalPages = computed(() => {
-        return Math.ceil(props.total / props.sizes);
+        return Math.max(1, Math.ceil(props.total / props.sizes));
     });
 
     //中间页选项
