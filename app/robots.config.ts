@@ -5,6 +5,7 @@ export default {
         "aiHitBot",
         "BLEXBot",
         "Barkrowler",
+        "CCBot",
         "DnyzBot",
         "DotBot",
         "ExtLinksBot",
