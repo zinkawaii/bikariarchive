@@ -39,12 +39,16 @@ const re = /^(.*?)\.(\d+)$/;
 
 //单文件解析
 function simpleParse(pathname) {
+    //转绝对路径
+    pathname = path.resolve(pathname);
+
+    //处理文件
     const file = fs.readFileSync(pathname);
     const { attributes, body } = fm(file.toString());
     const result = marked.parse(body);
 
     //写入文件
-    const outPath = r(pathname).replace(srcDir, outDir).replace(".md", ".txt");
+    const outPath = pathname.replace(srcDir, outDir).replace(".md", ".txt");
     fs.outputFileSync(outPath, result);
 
     const match = path.basename(path.resolve(pathname, "..")).match(re);
