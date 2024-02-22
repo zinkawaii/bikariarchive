@@ -38,7 +38,7 @@ const client = sftp.client;
 await timer("连接服务器", async () => {
     await sftp.connect({
         host: "<!-- ??? -->",
-        port: 22,
+        port: 1177,
         username: "<!-- ??? -->",
         password: "<!-- ??? -->"
     });
