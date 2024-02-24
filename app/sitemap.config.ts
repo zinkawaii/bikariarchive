@@ -21,5 +21,5 @@ export default <ModuleOptions> {
             });
         }),
         ...Object.values(jEntry.all)
-    ]
+    ].flat(1)
 };
