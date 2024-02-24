@@ -2,8 +2,7 @@ import path from "path";
 
 //获取绝对路径
 export function r(url: string) {
-    const prefix = (process.env.NODE_ENV === "development") ? "./" : "../";
-    return path.resolve(prefix, url);
+    return path.resolve("./", url);
 }
 
 //获取查询参数
