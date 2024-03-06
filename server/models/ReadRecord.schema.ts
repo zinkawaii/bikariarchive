@@ -1,7 +1,7 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 
-export const ReadRecordModel = defineMongooseModel({
+export const ReadRecordModel = defineMongooseModel<ReadRecord>({
     name: "ReadRecord",
     schema: {
         ip: {
@@ -22,7 +22,7 @@ export const ReadRecordModel = defineMongooseModel({
             index: true
         },
         user: {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "UserData"
         }
     },

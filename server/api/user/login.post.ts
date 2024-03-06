@@ -22,7 +22,7 @@ export default defineCustomHandler(async (event) => {
             { nickname: acc },
             { email: acc }
         ]
-    }, "uid nickname identity sign hash salt") as any;
+    }, "uid nickname identity sign hash salt");
 
     if (result) {
         const {

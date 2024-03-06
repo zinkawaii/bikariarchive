@@ -1,7 +1,7 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 
-export const CommentDataModel = defineMongooseModel({
+export const CommentDataModel = defineMongooseModel<CommentData>({
     name: "CommentData",
     schema: {
         path: {
@@ -10,11 +10,11 @@ export const CommentDataModel = defineMongooseModel({
             index: true
         },
         parent: {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "CommentData"
         },
         children: {
-            type: [Schema.Types.ObjectId],
+            type: [Types.ObjectId],
             ref: "CommentData"
         },
         content: {
@@ -37,11 +37,11 @@ export const CommentDataModel = defineMongooseModel({
             type: String
         },
         ip: {
-            type: String,
+            type: Number,
             required: true
         },
         user: {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "UserData"
         }
     },

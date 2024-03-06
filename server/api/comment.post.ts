@@ -46,7 +46,7 @@ export default defineCustomHandler(async (event) => {
             $push: {
                 children: comment._id
             }
-        }) as any;
+        });
 
         //对被回复评论进行邮件通知
         if (res !== null && res.email.length > 0 && res.email !== email) {

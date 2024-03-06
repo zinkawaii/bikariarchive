@@ -1,6 +1,6 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
 
-export const TempVerifyModel = defineMongooseModel({
+export const TempVerifyModel = defineMongooseModel<TempVerify>({
     name: "TempVerify",
     schema: {
         email: {

@@ -12,7 +12,7 @@ export default defineCustomHandler(async (event) => {
 
     const result = await UserDataModel.findOne({
         uid: session.uid
-    }, "nickname identity sign") as any;
+    }, "nickname identity sign");
 
     if (result) {
         res.uid = session.uid;

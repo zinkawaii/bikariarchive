@@ -1,7 +1,7 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 
-export const SearchRecordModel = defineMongooseModel({
+export const SearchRecordModel = defineMongooseModel<SearchRecord>({
     name: "SearchRecord",
     schema: {
         ip: {
@@ -17,7 +17,7 @@ export const SearchRecordModel = defineMongooseModel({
             required: true
         },
         user: {
-            type: Schema.Types.ObjectId,
+            type: Types.ObjectId,
             ref: "UserData"
         }
     },

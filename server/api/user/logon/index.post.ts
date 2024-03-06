@@ -24,7 +24,7 @@ export default defineCustomHandler(async (event) => {
 
         if (!result) {
             //查询数据库中是否已存在该邮箱未处理的验证码
-            const result = await TempVerifyModel.findOne({ email }) as any;
+            const result = await TempVerifyModel.findOne({ email });
 
             if (result) {
                 if (result.time.getTime() + 1800000 >= Date.now()) {

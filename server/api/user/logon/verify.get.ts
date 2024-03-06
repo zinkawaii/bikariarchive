@@ -9,7 +9,7 @@ export default defineCustomHandler(async (event) => {
     let verify = String(Math.floor(Math.random() * 1000000)).padStart(6, "0");
 
     //查询数据库中是否已存在该邮箱未处理的验证码
-    const result = await TempVerifyModel.findOne({ email }) as any;
+    const result = await TempVerifyModel.findOne({ email });
 
     let query = null;
     if (result) {

@@ -1,6 +1,6 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
 
-export const UserDataModel = defineMongooseModel({
+export const UserDataModel = defineMongooseModel<UserData>({
     name: "UserData",
     schema: {
         uid: {
