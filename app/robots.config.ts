@@ -2,6 +2,7 @@ export default {
     groups: [
         "AhrefsBot",
         "AhrefsSiteAudit",
+        "Amazonbot",
         "aiHitBot",
         "BLEXBot",
         "Barkrowler",

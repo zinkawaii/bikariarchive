@@ -3,9 +3,6 @@ import { Marked } from "marked";
 
 export default new Marked({
     renderer: {
-        heading(text, level) {
-            return `<h${level}>${text}</h${level}>\n`;
-        },
         code(code, infostring) {
             return `<mb-code lang="${infostring}"><pre>${entities.encode(code)}</pre></mb-code>\n`;
         },

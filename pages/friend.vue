@@ -80,8 +80,8 @@
     }
 
     .friend-title {
-        margin-bottom: 4px;
-        padding-bottom: 4px;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
         border-bottom: 1px solid var(--color-border-lighter);
         transition: color 0.25s;
     }
@@ -91,7 +91,7 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         font-size: 14px;
-        line-height: 22px;
+        line-height: 21px;
         text-overflow: ellipsis;
         color: var(--color-text-info);
     }

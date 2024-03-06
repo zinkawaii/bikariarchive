@@ -6,7 +6,7 @@ type CheckerEntries = Record<string, {
     validate?: (value: string) => string
 }>;
 
-export class Checker<T extends CheckerEntries> {
+class Checker<T extends CheckerEntries> {
     entries: T;
     tips: Ref<Record<keyof T, string>>;
 
@@ -20,8 +20,8 @@ export class Checker<T extends CheckerEntries> {
 
     exec(key = "") {
         return (key in this.entries) ?
-            this.simpleCheck(key) :
-            Object.keys(this.entries).every((key) => this.simpleCheck(key));
+            this.singlyCheck(key) :
+            Object.keys(this.entries).every((key) => this.singlyCheck(key));
     }
 
     clearTips() {
@@ -30,7 +30,7 @@ export class Checker<T extends CheckerEntries> {
         }
     }
 
-    private simpleCheck(key: keyof T) {
+    private singlyCheck(key: keyof T) {
         const { target, required, reg, message, validate } = this.entries[key];
         if (required || target.value) {
             const msg = !reg.test(target.value) ? message : validate?.(target.value);
@@ -42,3 +42,5 @@ export class Checker<T extends CheckerEntries> {
         return true;
     }
 }
+
+export default Checker;

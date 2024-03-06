@@ -13,19 +13,19 @@ type WithMetaAttrs = Partial<{
 }>;
 
 class Article implements WithMetaAttrs {
-    novel        = "";    //小说名
-    volume       = -1;    //卷序号
-    order        = -1;    //章序号
-    orderInVol   = -1;    //章序号（卷内）
-    index        = "";    //章文件名
-    title        = "";    //章节名
-    date         = null;  //日期
-    updated      = null;  //更新日期
-    refactored   = null;  //重构日期
-    ending       = false; //终章标记
-    runtime      = false; //运行时
-    wordCount    = 0;     //字数
-    error        = true;  //错误信息
+    novel       = "";    //小说名
+    volume      = -1;    //卷序号
+    order       = -1;    //章序号
+    orderInVol  = -1;    //章序号（卷内）
+    index       = "";    //章文件名
+    title       = "";    //章节名
+    date        = null;  //日期
+    updated     = null;  //更新日期
+    refactored  = null;  //重构日期
+    ending      = false; //终章标记
+    runtime     = false; //运行时
+    wordCount   = 0;     //字数
+    error       = true;  //错误信息
 
     constructor(novel: string, index: string) {
         if (novel && index) {

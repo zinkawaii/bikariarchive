@@ -49,20 +49,15 @@
         }
     };
 
-    if (process.browser) {
-        //键盘松开时
-        const onKeyup = (event) => {
-            if (!art.isFirst && event.key === settingStore.get("shortcut-last")) {
-                router.push(toLastChapter);
-            }
-            else if (!art.isLast && event.key === settingStore.get("shortcut-next")) {
-                router.push(toNextChapter);
-            }
-        };
-
-        //上下章快捷键
-        useEventListener("keyup", onKeyup);
-    }
+    //上下章快捷键
+    useEventListener("keyup", (event) => {
+        if (!art.isFirst && event.key === settingStore.get("shortcut-last")) {
+            router.push(toLastChapter);
+        }
+        else if (!art.isLast && event.key === settingStore.get("shortcut-next")) {
+            router.push(toNextChapter);
+        }
+    });
 
     //字体系列
     const fontFamily = computed(() => {
