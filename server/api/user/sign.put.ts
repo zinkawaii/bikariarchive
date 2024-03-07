@@ -1,9 +1,9 @@
-interface GetUserSignResponse extends BaseResponse {
+interface PutUserSignResponse extends BaseResponse {
     content?: string
 }
 
 export default defineCustomHandler(async (event) => {
-    const res: GetUserSignResponse = { error: 0 };
+    const res: PutUserSignResponse = { error: 0 };
     const { session } = event.context;
     const { content } = await readBody(event);
 
