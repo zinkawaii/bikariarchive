@@ -61,6 +61,12 @@ function simpleParse(pathname) {
     const runtime = [...$("*")].some((e) => e?.name?.includes("-")) || void(0);
     const wordCount = $("p").text().length;
 
+    //完结状态
+    const { ending } = attributes;
+    if (ending) {
+        jMeta[novel].volumes[volume].ending = true;
+    }
+
     //日期格式化
     dateFormat(attributes, ["date", "updated", "refactored"]);
 

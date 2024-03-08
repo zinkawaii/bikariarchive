@@ -16,7 +16,8 @@ declare module "~/dist/json/Article.json" {
     }
 
     export interface JVolume {
-        title: string
+        title: string,
+        ending: boolean
     }
 
     export interface JChapter {
@@ -26,6 +27,7 @@ declare module "~/dist/json/Article.json" {
         date?: string,
         refactored?: string,
         updated?: string,
+        ending?: boolean,
         runtime?: boolean,
         wordCount: number
     }

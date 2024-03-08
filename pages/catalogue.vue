@@ -21,12 +21,6 @@
         });
     });
 
-    const chapters = computed(() => {
-        return jNovel.value.chapters.filter((c) => {
-            return curOrder.value.volume === c.volume;
-        });
-    });
-
     function selectNovel(key, i) {
         novel.value = key;
         curOrder.value.novel = i;
@@ -61,7 +55,7 @@
                 <legend class="content-h2">{{ jNovel.title }}</legend>
                 <intro-content :novel="novel"/>
             </fieldset>
-            <fieldset v-show="volumes.length" class="catalogue-fieldset">
+            <fieldset class="catalogue-fieldset">
                 <legend class="content-h2">卷册列表</legend>
                 <ul class="catalogue-volume">
                     <li v-for="(title, i) in volumes">
@@ -73,16 +67,9 @@
                 </ul>
             </fieldset>
         </div>
-        <fieldset v-show="chapters.length" class="catalogue-fieldset">
+        <fieldset class="catalogue-fieldset">
             <legend class="content-h2">章节列表</legend>
-            <ul class="catalogue-chapter">
-                <li v-for="chapter in chapters">
-                    <nuxt-link :to="{ name: `reader`, params: { novel, index: chapter.index }}">
-                        <span class="text-truncate">{{ chapter.title }}</span>
-                        <time class="date">{{ chapter.refactored ?? chapter.date ?? "很久以前" }}</time>
-                    </nuxt-link>
-                </li>
-            </ul>
+            <catalogue-chapter :novel="novel" :volume="curOrder.volume"/>
         </fieldset>
     </coco-widget>
 </template>
@@ -173,32 +160,6 @@
             &.checked {
                 color: var(--color-theme-text);
             }
-        }
-    }
-
-    .catalogue-chapter {
-        a {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 8px;
-            border-bottom: 1px dashed var(--color-border-light);
-            line-height: 36px;
-
-            &:hover {
-                color: var(--color-theme-text);
-            }
-
-            .date {
-                font-size: 14px;
-                color: var(--color-text-info);
-            }
-        }
-    }
-
-    @container main (width >= 596px) {
-        .catalogue-chapter {
-            columns: 2;
-            column-gap: 2em;
         }
     }
 
