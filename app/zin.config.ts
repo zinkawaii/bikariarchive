@@ -1,3 +1,5 @@
+import merge from "merge";
+
 const server = {
     global: {
         env: process.env.NODE_ENV,
@@ -29,7 +31,13 @@ const server = {
             }
         }
     },
-    development: {},
+    development: {
+        mongoose: {
+            options: {
+                dbName: "<!-- ??? -->"
+            }
+        }
+    },
     production: {}
 };
 
@@ -46,5 +54,6 @@ const client = {
     }
 };
 
-export const serverConfig = { ...server.global, ...server[process.env.NODE_ENV] };
-export const clientConfig = { ...client.global, ...client[process.env.NODE_ENV] };
+const env = process.env.NODE_ENV;
+export const serverConfig = merge.recursive(server.global, server[env]);
+export const clientConfig = merge.recursive(client.global, client[env]);
