@@ -56,10 +56,7 @@ export default <RouterConfig> {
         {
             name: "update",
             path: "/update",
-            component: () => import("~/pages/update.vue"),
-            meta: {
-                comment: true
-            }
+            component: () => import("~/pages/update.vue")
         },
         {
             name: "entry",
