@@ -14,7 +14,7 @@ declare global {
         nickname: string,
         email: string,
         address: string,
-        ip: number,
+        ip: string,
         user: ObjectId
     }
 

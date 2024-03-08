@@ -37,7 +37,7 @@ export const CommentDataModel = defineMongooseModel<CommentData>({
             type: String
         },
         ip: {
-            type: Number,
+            type: String,
             required: true
         },
         user: {
