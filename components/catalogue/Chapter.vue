@@ -1,9 +1,6 @@
 <script setup>
     const catalogueStore = useCatalogueStore();
-    const { novel, jVolume, jChapters } = storeToRefs(catalogueStore);
-
-    //信息类型
-    const infoType = ref(1);
+    const { infoType, jVolume, jChapters } = storeToRefs(catalogueStore);
 
     //总字数
     const totalCount = computed(() => {
@@ -50,15 +47,8 @@
         </div>
     </div>
     <ul class="catalogue-chapter">
-        <li v-for="{ index, title, date, refactored, wordCount }, i in jChapters">
-            <nuxt-link :to="{ name: `reader`, params: { novel, index }}">
-                <span class="info order">{{ i + 1 }}.</span>
-                <span class="text-truncate">{{ title }}</span>
-                <span class="info">
-                    <template v-if="infoType === 0">{{ wordCount }} 字</template>
-                    <template v-else-if="infoType === 1">{{ date ?? refactored ?? "很久以前" }}</template>
-                </span>
-            </nuxt-link>
+        <li v-for="_, i in jChapters">
+            <catalogue-chapter-item :i="i"/>
         </li>
     </ul>
 </template>
@@ -105,27 +95,6 @@
         @container main (width >= 596px) {
             columns: 2;
             column-gap: 2em;
-        }
-
-        a {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 8px;
-            border-bottom: 1px dashed var(--color-border-light);
-            line-height: 36px;
-
-            &:hover {
-                color: var(--color-theme-text);
-            }
-
-            .order {
-                font-style: italic;
-            }
-
-            .info {
-                font-size: 14px;
-                color: var(--color-text-info);
-            }
         }
     }
 </style>

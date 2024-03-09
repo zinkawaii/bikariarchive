@@ -6,7 +6,8 @@ export const useCatalogueStore = defineStore("catalogue", {
         curOrder: {
             novel: 0,
             volume: 0
-        }
+        },
+        infoType: 1
     }),
     getters: {
         jNovel() {
