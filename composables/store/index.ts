@@ -1,3 +1,4 @@
+export * from "./catalogue";
 export * from "./comment-panel";
 export * from "./confirm";
 export * from "./image-viewer";

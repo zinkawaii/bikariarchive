@@ -1,38 +1,20 @@
-<script lang="ts" setup>
-    import jArticle from "~/dist/json/Article.json";
-
-    const props = defineProps<{
-        novel: string,
-        volume: number
-    }>();
+<script setup>
+    const catalogueStore = useCatalogueStore();
+    const { novel, jVolume, jChapters } = storeToRefs(catalogueStore);
 
     //信息类型
     const infoType = ref(1);
 
-    const jNovel = computed(() => {
-        return jArticle[props.novel];
-    });
-
-    const jVolume = computed(() => {
-        return jNovel.value.volumes[props.volume];
-    });
-
-    const chapters = computed(() => {
-        return jNovel.value.chapters.filter((c) => {
-            return props.volume === c.volume;
-        });
-    });
-
     //总字数
     const totalCount = computed(() => {
-        return chapters.value.reduce((res, c) => {
+        return jChapters.value.reduce((res, c) => {
             return res + c.wordCount;
         }, 0);
     });
 
     //最近更新
     const lastUpdated = computed(() => {
-        return chapters.value.reduce(([date, prev], curr) => {
+        return jChapters.value.reduce(([date, prev], curr) => {
             const a = prev.updated ?? prev.date ?? prev.refactored ?? "";
             const b = curr.updated ?? curr.date ?? curr.refactored ?? "";
             return a.localeCompare(b) > 0 ? [a, prev] : [b, curr];
@@ -68,8 +50,9 @@
         </div>
     </div>
     <ul class="catalogue-chapter">
-        <li v-for="{ index, title, date, refactored, wordCount } in chapters">
+        <li v-for="{ index, title, date, refactored, wordCount }, i in jChapters">
             <nuxt-link :to="{ name: `reader`, params: { novel, index }}">
+                <span class="info order">{{ i + 1 }}.</span>
                 <span class="text-truncate">{{ title }}</span>
                 <span class="info">
                     <template v-if="infoType === 0">{{ wordCount }} 字</template>
@@ -126,13 +109,17 @@
 
         a {
             display: grid;
-            grid-template-columns: 1fr auto;
+            grid-template-columns: auto 1fr auto;
             gap: 8px;
             border-bottom: 1px dashed var(--color-border-light);
             line-height: 36px;
 
             &:hover {
                 color: var(--color-theme-text);
+            }
+
+            .order {
+                font-style: italic;
             }
 
             .info {
