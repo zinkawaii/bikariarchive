@@ -44,7 +44,11 @@ const server = {
 const client = {
     global: {
         author: "山吹色御守",
-        avatar: "/garden/avatar/tsumugi.webp"
+        avatar: "/garden/avatar/tsumugi.webp",
+        jumbotron: {
+            main: "微光茶館",
+            sub: "微かの力を尽くして、光の導いた彼方へ"
+        }
     },
     development: {
         domain: "zinkawaii"

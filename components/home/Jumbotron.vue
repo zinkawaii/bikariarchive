@@ -25,8 +25,8 @@
 
     //标题打字特效
     onMounted(async () => {
-        const main = "微光茶館";
-        const sub = "微かの力を尽くして、光の導いた彼方へ";
+        const config = useRuntimeConfig();
+        const { main, sub } = config.public.jumbotron;
 
         //主标题
         title.value.isMainTyping = true;

@@ -75,6 +75,7 @@ export default defineNuxtConfig({
         ["nuxt-simple-robots", robotsConfig],
         ["@nuxtjs/sitemap", sitemapConfig],
         "nuxt-site-config",
+        "@nuxtjs/google-fonts",
         "@nuxtjs/seo",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
@@ -85,5 +86,14 @@ export default defineNuxtConfig({
         url: `https://${clientConfig.domain}`,
         defaultLocale: "zh-CN",
         indexable: true
+    },
+    googleFonts: {
+        display: "swap",
+        text: [...new Set(clientConfig.jumbotron.main + clientConfig.jumbotron.sub)].join(""),
+        families: {
+            "Noto+Serif+JP": {
+                wght: 500
+            }
+        }
     }
 });
