@@ -11,11 +11,12 @@
 
     //最近更新
     const lastUpdated = computed(() => {
-        return jChapters.value.reduce(([date, prev], curr) => {
-            const a = prev.updated ?? prev.date ?? prev.refactored ?? "";
-            const b = curr.updated ?? curr.date ?? curr.refactored ?? "";
-            return a.localeCompare(b) > 0 ? [a, prev] : [b, curr];
-        }, ["很久以前", {}])[0];
+        return (jChapters.value.length > 0) ?
+            jChapters.value.reduce((prev, curr) => {
+                const a = prev.updated || prev.date;
+                const b = curr.updated || curr.date;
+                return a.localeCompare(b) > 0 ? prev : curr;
+            }).updateDate : Article.FARAWAY;
     });
 
     //状态
@@ -47,8 +48,8 @@
         </div>
     </div>
     <ul class="catalogue-chapter">
-        <li v-for="_, i in jChapters">
-            <catalogue-chapter-item :i="i"/>
+        <li v-for="chapter in jChapters">
+            <catalogue-chapter-item :chapter="chapter"/>
         </li>
     </ul>
 </template>

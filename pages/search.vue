@@ -33,9 +33,8 @@
         const { error, results: res } = data;
         if (error !== 0) return;
 
-        const art = new Article();
         for (const item of res) {
-            art.init("bikari", item.index);
+            const art = Article.for("bikari", item.index);
             const parts = item.parts.map((part) => {
                 return part.replaceAll(w, `<span class="light">${w}</span>`);
             });

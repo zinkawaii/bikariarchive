@@ -1,6 +1,4 @@
 <script setup>
-    import jArticle from "~/dist/json/Article.json";
-
     const props = defineProps({
         type: String,
         limit: Number,
@@ -13,16 +11,9 @@
     });
 
     const jRecent = computed(() => {
-        return Object.entries(jArticle)
-            .filter(([, { type }]) => type === props.type)
-            .map(([novel, { chapters }]) => {
-                return chapters.map((c) => ({
-                    ...c,
-                    novel
-                }));
-            })
-            .flat(1)
-            .filter((c) => Reflect.has(c, "date"))
+        return Object.values(jArticle)
+            .filter(({ type }) => type === props.type)
+            .flatMap(({ chapters }) => chapters)
             .sort((a, b) => {
                 const x = sortByUpdated.value && a.updated || a.date;
                 const y = sortByUpdated.value && b.updated || b.date;
@@ -34,8 +25,8 @@
 
 <template>
     <ul class="recent-article">
-        <li v-for="{ index, title, date, updated, volume, novel } in jRecent" class="recent-item">
-            <coco-link class="text-truncate recent-title" :to="{ name: `reader`, params: { novel, index } }">{{ title }}</coco-link>
+        <li v-for="{ title, date, updated, volume, novel, route } in jRecent" class="recent-item">
+            <coco-link class="text-truncate recent-title" :to="route">{{ title }}</coco-link>
             <div class="recent-info">
                 <span class="text-truncate">{{ jArticle[novel].volumes[volume].title }}</span>
                 <time>{{ sortByUpdated && updated || date }}</time>

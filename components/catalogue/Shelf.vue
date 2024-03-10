@@ -1,6 +1,4 @@
 <script setup>
-    import jArticle from "~/dist/json/Article.json";
-
     const catalogueStore = useCatalogueStore();
     const { novel, curOrder } = storeToRefs(catalogueStore);
 </script>

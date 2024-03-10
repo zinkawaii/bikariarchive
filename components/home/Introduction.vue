@@ -1,6 +1,4 @@
 <script setup>
-    import jArticle from "~/dist/json/Article.json";
-
     const intro = ref({
         status: 0,
         novel: [...Object.keys(jArticle)],

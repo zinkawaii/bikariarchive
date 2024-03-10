@@ -1,6 +1,6 @@
 import type { H3Event } from "h3";
 import { Feed } from "feed";
-import jArticle from "~/dist/json/Article.json";
+import { jArticle } from "~/utils/Article";
 
 const config = useRuntimeConfig();
 
@@ -24,21 +24,12 @@ function createFeed() {
         }
     });
 
-    const jChapters = [];
-    for (const novel in jArticle) {
-        jChapters.push(...jArticle[novel].chapters.map((item) => {
-            return {
-                ...item,
-                novel
-            };
-        }));
-    }
-
-    jChapters
+    Object.values(jArticle)
+    .flatMap(({ chapters }) => chapters)
     .filter((c) => c.date)
     .sort((a, b) => {
-        const x = a.updated ?? a.date;
-        const y = b.updated ?? b.date;
+        const x = a.updated || a.date;
+        const y = b.updated || b.date;
         return y.localeCompare(x);
     })
     .slice(0, 10)
@@ -46,7 +37,7 @@ function createFeed() {
         feed.addItem({
             title: c.title,
             link: `https://${config.public.domain}/book/${c.novel}/${c.index}`,
-            date: new Date(c.updated ?? c.date),
+            date: new Date(c.updated || c.date),
             published: new Date(c.date)
         });
     });

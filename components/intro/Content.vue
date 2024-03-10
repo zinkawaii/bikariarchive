@@ -1,15 +1,6 @@
 <script setup>
-    import jArticle from "~/dist/json/Article.json";
-
     const props = defineProps({
         novel: String
-    });
-
-    //字数
-    const wordCount = computed(() => {
-        return jArticle[props.novel].chapters.reduce((res, item) => {
-            return res + item.wordCount;
-        }, 0);
     });
 
     //简介

@@ -1,4 +1,4 @@
-import jArticle, { type JChapter, type JVolume } from "~/dist/json/Article.json";
+import type Article from "~/utils/Article";
 
 export const useCatalogueStore = defineStore("catalogue", {
     state: () => ({
@@ -16,7 +16,7 @@ export const useCatalogueStore = defineStore("catalogue", {
         jVolume(): JVolume {
             return this.jNovel.volumes[this.curOrder.volume];
         },
-        jChapters(): JChapter[] {
+        jChapters(): Article[] {
             return this.jNovel.chapters.filter((c) => {
                 return this.curOrder.volume === c.volume;
             });

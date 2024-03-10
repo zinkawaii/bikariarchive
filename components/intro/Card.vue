@@ -1,6 +1,4 @@
 <script setup>
-    import jArticle from "~/dist/json/Article.json";
-
     const emits = defineEmits(["exchange"]);
     const props = defineProps(["layer", "novel"]);
 

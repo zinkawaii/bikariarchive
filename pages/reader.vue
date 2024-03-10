@@ -8,13 +8,7 @@
     const { novel, index } = route.params;
 
     //初始化
-    const art = new Article(novel, index);
-
-    //错误跳转
-    if (art.error) {
-        router.replace({ name: "catalogue" });
-        throw "Article Not Found (404)";
-    }
+    const art = Article.for(novel, index);
 
     //设置元信息
     useSeoMeta({
@@ -32,30 +26,22 @@
     });
 
     //上一章
-    const toLast = art.isFirstInVol ? "上一卷" : "上一章";
-    const toLastClass = { invisible: art.isFirst };
-    const toLastChapter = art.isFirst ? {} : {
-        params: {
-            index: art.lastIndex
-        }
-    };
+    const toPrev = art.isFirstInVol ? "上一卷" : "上一章";
+    const toPrevClass = { invisible: art.isFirst };
+    const toPrevRoute = art.prev?.route;
 
     //下一章
     const toNext = art.isLastInVol ? "下一卷" : "下一章";
     const toNextClass = { invisible: art.isLast };
-    const toNextChapter = art.isLast ? {} : {
-        params: {
-            index: art.nextIndex
-        }
-    };
+    const toNextRoute = art.next?.route;
 
     //上下章快捷键
     useEventListener("keyup", (event) => {
         if (!art.isFirst && event.key === settingStore.get("shortcut-last")) {
-            router.push(toLastChapter);
+            router.push(toPrevRoute);
         }
         else if (!art.isLast && event.key === settingStore.get("shortcut-next")) {
-            router.push(toNextChapter);
+            router.push(toNextRoute);
         }
     });
 
@@ -101,9 +87,9 @@
 <template>
     <coco-widget>
         <header class="novel-header">
-            <nuxt-link class="novel-wrap-top" :class="toLastClass" :to="toLastChapter">
+            <nuxt-link class="novel-wrap-top" :class="toPrevClass" :to="toPrevRoute">
                 <fa-icon icon="chevron-left"/>
-                <span>{{ toLast }}</span>
+                <span>{{ toPrev }}</span>
             </nuxt-link>
             <div>
                 <h1 class="novel-title">{{ art.title }}</h1>
@@ -126,7 +112,7 @@
                     </li>
                 </ul>
             </div>
-            <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextChapter">
+            <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextRoute">
                 <span>{{ toNext }}</span>
                 <fa-icon icon="chevron-right"/>
             </nuxt-link>
@@ -142,8 +128,8 @@
         </footer>
     </coco-widget>
     <div class="novel-wrap-bottom">
-        <nuxt-link :class="toLastClass" :to="toLastChapter">{{ toLast }}</nuxt-link>
-        <nuxt-link :class="toNextClass" :to="toNextChapter">{{ toNext }}</nuxt-link>
+        <nuxt-link :class="toPrevClass" :to="toPrevRoute">{{ toPrev }}</nuxt-link>
+        <nuxt-link :class="toNextClass" :to="toNextRoute">{{ toNext }}</nuxt-link>
     </div>
 </template>
 

@@ -1,12 +1,10 @@
 <script setup>
-    import jArticle from "~/dist/json/Article.json";
-
     const route = useRoute();
 
     //当前章节
     const art = computed(() => {
         const { novel, index } = route.params;
-        return new Article(novel, index);
+        return Article.for(novel, index);
     });
 
     //当前选中卷
@@ -21,7 +19,7 @@
     });
 
     //本卷章节
-    const jChapter = computed(() => {
+    const jChapters = computed(() => {
         return jNovel.value.chapters.filter((c) => c.volume === currentVolume.value);
     });
 </script>
@@ -32,8 +30,8 @@
             <option v-for="({ title }, i) in jNovel.volumes" :value="i">{{ title }}</option>
         </select>
         <ul class="catalog-list">
-            <li v-for="{ index, title } in jChapter">
-                <nuxt-link class="text-truncate catalog-link" :to="{ params: { index } }">{{ title }}</nuxt-link>
+            <li v-for="c in jChapters">
+                <nuxt-link class="text-truncate catalog-link" :to="c.route">{{ c.title }}</nuxt-link>
             </li>
         </ul>
     </aside-widget>

@@ -115,11 +115,7 @@ function outputFile() {
     const jNeta = structuredClone(jMeta);
 
     for (const key in jNeta) {
-        const jChapter = Object.values(jNeta[key].chapters);
-        jNeta[key].chapters = jChapter;
-        jNeta[key].$seq = jChapter.map((c, i) => {
-            return c.index;
-        });
+        jNeta[key].chapters = Object.values(jNeta[key].chapters);
     }
 
     fs.outputFileSync(metaOutDir, JSON.stringify(jNeta));

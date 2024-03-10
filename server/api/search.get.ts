@@ -1,7 +1,6 @@
 import * as cheerio from "cheerio";
 import dayjs from "dayjs";
-import Article from "~/utils/Article";
-import jArticle from "~/dist/json/Article.json";
+import { jArticle } from "~/utils/Article";
 
 interface GetArticleResponse extends BaseResponse {
     results?: SearchResult[]
@@ -25,13 +24,10 @@ export default defineCustomHandler(async (event) => {
         word = word.slice(0, 64);
 
         const jNovel = jArticle.bikari;
-        const jChapter = jNovel.chapters;
+        const jChapters = jNovel.chapters;
 
         //按章节遍历
-        for (const item of jChapter) {
-            //初始化
-            const art = new Article("bikari", item.index);
-
+        for (const art of jChapters) {
             //读取整章
             const text = await readArticle(art);
             if (!text) continue;

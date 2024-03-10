@@ -1,32 +1,28 @@
 <script setup>
     const props = defineProps({
-        i: Number
+        chapter: Article
     });
 
     const catalogueStore = useCatalogueStore();
     const readRecordStore = useReadRecordStore();
-    const { novel, infoType, jChapters } = storeToRefs(catalogueStore);
-
-    const chapter = computed(() => {
-        return jChapters.value[props.i];
-    });
+    const { novel, infoType } = storeToRefs(catalogueStore);
 
     //最近阅读
     const isLastRead = computed(() => {
-        return chapter.value.index === readRecordStore.get(novel.value).index;
+        return props.chapter.index === readRecordStore.get(novel.value).index;
     });
 </script>
 
 <template>
-    <nuxt-link class="cacha-item" :to="{ name: `reader`, params: { novel, index: chapter.index }}">
-        <span class="font-italic text-gray">{{ i + 1 }}.</span>
+    <nuxt-link class="cacha-item" :to="chapter.route">
+        <span class="font-italic text-gray">{{ chapter.orderInVol + 1 }}.</span>
         <span class="text-truncate cacha-title">{{ chapter.title }}</span>
         <ul class="cacha-tags">
             <li v-if="isLastRead" tag="last-read">最近阅读</li>
         </ul>
         <span class="text-gray">
             <template v-if="infoType === 0">{{ chapter.wordCount }} 字</template>
-            <template v-else-if="infoType === 1">{{ chapter.date ?? chapter.refactored ?? "很久以前" }}</template>
+            <template v-else-if="infoType === 1">{{ chapter.publishDate }}</template>
         </span>
     </nuxt-link>
 </template>
@@ -57,9 +53,9 @@
         text-wrap: nowrap;
 
         > li {
-            padding-inline: 6px;
+            padding-inline: 7px;
             border: 1px solid var(--color);
-            border-radius: 6px;
+            border-radius: 4px;
             font-size: 13px;
             color: var(--color);
 

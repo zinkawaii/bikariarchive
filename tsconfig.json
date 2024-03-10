@@ -2,9 +2,6 @@
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "noImplicitThis": false,
-    "strict": false,
-    "types": [
-      "./types/index.d.ts"
-    ]
+    "strict": false
   }
 }
