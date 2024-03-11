@@ -75,6 +75,7 @@ export default defineNuxtConfig({
         ["nuxt-simple-robots", robotsConfig],
         ["@nuxtjs/sitemap", sitemapConfig],
         "nuxt-site-config",
+        "@nuxt/image",
         "@nuxtjs/google-fonts",
         "@nuxtjs/seo",
         "@pinia/nuxt",

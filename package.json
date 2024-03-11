@@ -36,6 +36,7 @@
   "devDependencies": {
     "@kikiutils/nuxt-session": "^2.0.2",
     "@nuxt/devtools": "^1.0.8",
+    "@nuxt/image": "^1.4.0",
     "@nuxtjs/google-fonts": "^3.1.3",
     "@nuxtjs/seo": "2.0.0-rc.8",
     "@nuxtjs/sitemap": "^5.1.2",
