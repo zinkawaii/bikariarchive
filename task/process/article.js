@@ -1,8 +1,8 @@
-import cheerio from "cheerio";
 import chokidar from "chokidar";
 import dayjs from "dayjs";
 import fm from "front-matter";
 import fs from "fs-extra";
+import $ from "node-html-parser";
 import * as glob from "glob";
 import * as path from "path";
 import marked from "./marked.js";
@@ -57,9 +57,11 @@ function simpleParse(pathname) {
     const filename = path.basename(pathname, ".md");
 
     //解析内容
-    const $ = cheerio.load(result);
-    const runtime = [...$("*")].some((e) => e?.name?.includes("-")) || void(0);
-    const wordCount = $("p").text().length;
+    const doc = $.parse(result);
+    const runtime = [...doc.querySelectorAll("*")].some((e) => e.tagName.includes("-"));
+    const wordCount = doc.querySelectorAll("p").reduce((res, p) => {
+        return res + p.textContent.length;
+    }, 0);
 
     //完结状态
     const { ending } = attributes;

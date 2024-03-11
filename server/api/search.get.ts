@@ -1,4 +1,4 @@
-import * as cheerio from "cheerio";
+import $ from "node-html-parser";
 import dayjs from "dayjs";
 import { jArticle } from "~/utils/Article";
 
@@ -33,13 +33,13 @@ export default defineCustomHandler(async (event) => {
             if (!text) continue;
 
             //开始检索
-            const $ = cheerio.load(text);
-            const lines = $("p");
+            const doc = $.parse(text);
+            const lines = doc.querySelectorAll("p");
 
             const position = [];
             for (let i = 0; i < lines.length; i++) {
                 let pos = -1;
-                const line = lines.eq(i).text();
+                const line = lines[i].textContent;
 
                 do {
                     pos = line.indexOf(word, pos + 1);
@@ -58,7 +58,7 @@ export default defineCustomHandler(async (event) => {
                 //前后文
                 const start = Math.max(line - 1, 0);
                 const end = Math.min(line + 2, lines.length);
-                const parts = [...new Array(end - start)].map((_, i) => lines.eq(i + start).html());
+                const parts = [...new Array(end - start)].map((_, i) => lines[i + start].outerHTML);
 
                 res.results.push({
                     index: art.index,

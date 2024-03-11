@@ -115,9 +115,6 @@ devDependencies:
   '@zinkawaii/stylelint-config':
     specifier: ^0.0.1
     version: 0.0.1
-  cheerio:
-    specifier: 1.0.0-rc.12
-    version: 1.0.0-rc.12
   chokidar:
     specifier: ^3.6.0
     version: 3.6.0
@@ -157,6 +154,9 @@ devDependencies:
   nanoid:
     specifier: ^5.0.6
     version: 5.0.6
+  node-html-parser:
+    specifier: ^6.1.12
+    version: 6.1.12
   node-schedule:
     specifier: ^2.1.1
     version: 2.1.1
@@ -5879,6 +5879,11 @@ packages:
       function-bind: 1.1.2
     dev: true
 
+  /he@1.2.0:
+    resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
+    hasBin: true
+    dev: true
+
   /hex-rgb@4.3.0:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
@@ -7239,6 +7244,13 @@ packages:
       which: 4.0.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /node-html-parser@6.1.12:
+    resolution: {integrity: sha512-/bT/Ncmv+fbMGX96XG9g05vFt43m/+SYKIs9oAemQVYyVcZmDAI2Xq/SbNcpOA35eF0Zk2av3Ksf+Xk8Vt8abA==}
+    dependencies:
+      css-select: 5.1.0
+      he: 1.2.0
     dev: true
 
   /node-releases@2.0.14:
