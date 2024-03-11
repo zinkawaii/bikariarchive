@@ -1,4 +1,4 @@
-export const useSearchHistoryStore = defineStore("seach-history", {
+export const useSearchHistoryStore = defineStore("search-history", {
     state: () => ({
         history: []
     }),
