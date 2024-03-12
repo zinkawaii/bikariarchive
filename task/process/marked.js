@@ -22,10 +22,10 @@ export default new Marked({
             name: "ruby",
             level: "inline",
             start(src) {
-                return src.match(/\{/)?.index;
+                return src.match(/\|/)?.index;
             },
             tokenizer(src, tokens) {
-                const rule = /^\{([^{\n]*?)\|([^}\n]*?)\}/;
+                const rule = /^\|([^\n]*?)<([^\n]*?)>\|/;
                 const match = rule.exec(src);
                 if (match) {
                     return {
