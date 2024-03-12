@@ -1,8 +1,8 @@
 <script setup>
     const interval = 30;
+    let count = 0;
     let last = 0;
     let now = performance.now();
-    let count = 0;
 
     const displayValue = ref(60);
 

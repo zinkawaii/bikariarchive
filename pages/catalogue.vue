@@ -4,7 +4,7 @@
     });
 
     const catalogueStore = useCatalogueStore();
-    const { novel, jNovel } = storeToRefs(catalogueStore);
+    const { novel, jNovel, jChapters } = storeToRefs(catalogueStore);
 </script>
 
 <template>
@@ -15,12 +15,12 @@
                 <legend class="content-h2">{{ jNovel.title }}</legend>
                 <intro-content :novel="novel"/>
             </fieldset>
-            <fieldset class="catalogue-fieldset">
+            <fieldset v-show="jNovel.volumes.length" class="catalogue-fieldset">
                 <legend class="content-h2">卷册列表</legend>
                 <catalogue-volume />
             </fieldset>
         </div>
-        <fieldset class="catalogue-fieldset">
+        <fieldset v-show="jChapters.length" class="catalogue-fieldset">
             <legend class="content-h2">章节列表</legend>
             <catalogue-chapter />
         </fieldset>

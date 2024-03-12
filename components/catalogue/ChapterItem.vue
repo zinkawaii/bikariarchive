@@ -9,7 +9,7 @@
 
     //最近阅读
     const isLastRead = computed(() => {
-        return props.chapter.index === readRecordStore.get(novel.value).index;
+        return props.chapter.index === readRecordStore.get(novel.value)?.index;
     });
 </script>
 

@@ -5,30 +5,28 @@
 
     const route = useRoute();
     const router = useRouter();
+    const session = useSessionStorage("search-result", {});
     const searchHistoryStore = useSearchHistoryStore();
 
-    const word = ref("");
+    const inputWord = ref("");
     const searchWord = ref("");
     const results = ref([]);
     const page = ref(0);
     const { history } = searchHistoryStore;
 
     //全文检索
-    const fullTextSearch = Zin.debounce(async (w = word.value) => {
-        if (!(w?.length > 0)) return;
+    const fullTextSearch = Zin.debounce(async (word = inputWord.value) => {
+        if (!word?.length) return;
 
         //限制长度
-        w = w.slice(0, 64);
-
-        //会话存储对象
-        const session = useSessionStorage("search-result", {});
+        word = word.slice(0, 64);
 
         //获取数据
-        const data = session.value[w] ?? (await useFetch("/api/search", { query: { word: w } })).data.value;
+        const data = session.value[word] ?? (await useFetch("/api/search", { query: { word } })).data.value;
 
         results.value.length = 0;
-        searchWord.value = w;
-        router.replace({ query: { word: w } });
+        searchWord.value = word;
+        router.replace({ query: { word } });
 
         const { error, results: res } = data;
         if (error !== 0) return;
@@ -36,7 +34,7 @@
         for (const item of res) {
             const art = Article.for("bikari", item.index);
             const parts = item.parts.map((part) => {
-                return part.replaceAll(w, `<span class="light">${w}</span>`);
+                return part.replaceAll(word, `<span class="light">${word}</span>`);
             });
 
             results.value.push({
@@ -49,10 +47,10 @@
         }
 
         //写入历史记录
-        searchHistoryStore.push(w);
+        searchHistoryStore.push(word);
 
         //写入会话存储
-        session.value[w] = data;
+        session.value[word] = data;
 
         //重置到第一页
         page.value = 1;
@@ -60,7 +58,7 @@
 
     //带参数进入页面时
     watch(() => route.query.word, (value) => {
-        word.value = value;
+        inputWord.value = value;
         fullTextSearch(value);
     }, {
         immediate: true
@@ -84,7 +82,7 @@
 <template>
     <coco-widget title="全文检索">
         <form class="search-form" @submit.prevent="fullTextSearch()">
-            <input class="search-input" type="search" v-model="word"/>
+            <input class="search-input" type="search" v-model="inputWord"/>
             <button class="search-button">全文检索</button>
         </form>
         <div class="search-history">

@@ -19,8 +19,7 @@ export default defineNuxtConfig({
                 separator: "-"
             }
         },
-        rootId: "z-root",
-        viewTransition: true
+        rootId: "z-root"
     },
     css: [
         "@fortawesome/fontawesome-svg-core/styles.css",

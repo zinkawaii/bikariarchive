@@ -10,6 +10,7 @@ export default defineCustomHandler(async (event) => {
     const res: GetArticleResponse = { error: 0 };
     const { novel, index } = getQueryValues(event);
 
+    //初始化
     const art = Article.for(novel, index);
 
     //读取文章
