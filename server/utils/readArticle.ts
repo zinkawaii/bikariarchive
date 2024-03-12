@@ -6,7 +6,7 @@ export async function readArticle(art: Article): Promise<string> {
     return new Promise((resolve, reject) => {
         const { novel, volume, index } = art;
         const filename = jArtmap[novel][index];
-        const path = r(`dist/novel/${novel[0].toUpperCase() + novel.slice(1)}.${volume}/${filename}.txt`);
+        const path = r(`dist/novel/${novel}.${volume}/${filename}.txt`);
         fs.readFile(path, (err, data) => {
             if (err) {
                 reject(err);

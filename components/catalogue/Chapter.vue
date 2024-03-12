@@ -21,7 +21,7 @@
 
     //状态
     const updateState = computed(() => {
-        return jVolume.value?.ending ? "已完结" : "连载中";
+        return jChapters.value.some((c) => c.ending) ? "已完结" : "连载中";
     });
 </script>
 

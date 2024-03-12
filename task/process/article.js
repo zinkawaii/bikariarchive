@@ -52,22 +52,16 @@ function simpleParse(pathname) {
     fs.outputFileSync(outPath, result);
 
     const match = path.basename(path.resolve(pathname, "..")).match(re);
-    const novel = match[1].toLowerCase();
+    const novel = match[1];
     const volume = Number(match[2]);
     const filename = path.basename(pathname, ".md");
 
     //解析内容
     const doc = $.parse(result);
-    const runtime = [...doc.querySelectorAll("*")].some((e) => e.tagName.includes("-"));
+    const runtime = doc.querySelectorAll("*").some((e) => e.tagName.includes("-"));
     const wordCount = doc.querySelectorAll("p").reduce((res, p) => {
         return res + p.textContent.length;
     }, 0);
-
-    //完结状态
-    const { ending } = attributes;
-    if (ending) {
-        jMeta[novel].volumes[volume].ending = true;
-    }
 
     //日期格式化
     dateFormat(attributes, ["date", "updated", "refactored"]);
