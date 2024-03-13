@@ -1,20 +1,21 @@
+import gitignore from "eslint-config-flat-gitignore";
 import stylistic from "@stylistic/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
 import vueParser from "vue-eslint-parser";
 import vuePlugin from "eslint-plugin-vue";
 import zin from "@zinkawaii/eslint-config";
 
 export default [
+    gitignore(),
     {
         files: [
-            "**/*.{js,ts,vue}"
-        ],
-        ignores: [
-            ".nuxt/**/*"
+            "**/*.?([cm])[jt]s?(x)",
+            "**/*.vue"
         ],
         languageOptions: {
             parser: vueParser,
             parserOptions: {
-                parser: "@typescript-eslint/parser"
+                parser: tsParser
             }
         },
         plugins: {
@@ -22,10 +23,10 @@ export default [
             stylistic: stylistic
         },
         rules: {
-            ...zin.stylistic,
-            ...zin.vue,
+            ...zin.standard,
             ...zin.recommended,
-            ...zin.standard
+            ...zin.stylistic,
+            ...zin.vue
         }
     }
 ];
