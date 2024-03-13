@@ -19,11 +19,9 @@
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/vue-fontawesome": "^3.0.6",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
     "dayjs": "^1.11.10",
@@ -53,6 +51,7 @@
     "@types/ssh2-sftp-client": "^9.0.3",
     "@types/tar": "^6.1.11",
     "@typescript-eslint/parser": "^7.2.0",
+    "@vesp/nuxt-fontawesome": "^1.0.4",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
     "@zinkawaii/eslint-config": "^0.0.2",

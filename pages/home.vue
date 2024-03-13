@@ -9,17 +9,17 @@
         {
             title: "Github",
             to: "https://github.com/KazariEX",
-            icon: "fab fa-github"
+            icon: ["fab", "github"]
         },
         {
             title: "Twitter",
             to: "https://twitter.com/KazariEX_0929",
-            icon: "fab fa-twitter"
+            icon: ["fab", "twitter"]
         },
         {
             title: "BiliBili",
             to: "https://space.bilibili.com/37810541",
-            icon: "fab fa-bilibili"
+            icon: ["fab", "bilibili"]
         },
         {
             title: "RSS",
@@ -67,7 +67,7 @@
             <ul class="profile-link">
                 <li v-for="{ title, to, icon } in profileLinks">
                     <nuxt-link :to="to" :title="title" target="_blank">
-                        <fa-icon :icon="icon"/>
+                        <fa :icon="icon"/>
                     </nuxt-link>
                 </li>
             </ul>

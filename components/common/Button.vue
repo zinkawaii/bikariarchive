@@ -6,7 +6,7 @@
 
 <template>
     <button class="mb-button">
-        <fa-icon v-if="icon?.length > 0" :icon="icon"/>
+        <fa v-if="icon?.length > 0" :icon="icon"/>
         <span v-if="$slots.default"><slot></slot></span>
     </button>
 </template>

@@ -85,7 +85,7 @@
 <template>
     <transition name="scale">
         <div v-if="commentPanelStore.isOpened" class="comment-panel">
-            <fa-icon class="xmark" icon="xmark" @click="commentPanelStore.close()"/>
+            <fa class="xmark" icon="xmark" @click="commentPanelStore.close()"/>
             <coco-title>{{ title }}</coco-title>
             <div class="panel-form">
                 <coco-input placeholder="昵称" :warn-tip="tips.nickname" v-model="nickname" @blur="tips.nickname = ``"/>

@@ -22,7 +22,7 @@ export default defineNuxtConfig({
         rootId: "z-root"
     },
     css: [
-        "@fortawesome/fontawesome-svg-core/styles.css",
+        "~/assets/scss/var.scss",
         "~/assets/scss/sinrabansyo.scss",
         "~/assets/scss/atom.scss"
     ],
@@ -39,11 +39,6 @@ export default defineNuxtConfig({
             prefix: "mb"
         }
     ],
-    build: {
-        transpile: [
-            "@fortawesome/vue-fontawesome"
-        ]
-    },
     devServer: {
         https: {
             key: "<!-- ??? -->",
@@ -79,6 +74,7 @@ export default defineNuxtConfig({
         "@nuxtjs/seo",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
+        "@vesp/nuxt-fontawesome",
         "@vueuse/nuxt"
     ],
     site: {
@@ -94,6 +90,59 @@ export default defineNuxtConfig({
             "Noto+Serif+JP": {
                 wght: 500
             }
+        }
+    },
+    fontawesome: {
+        component: "fa",
+        icons: {
+            brands: [
+                "bilibili",
+                "github",
+                "twitter"
+            ],
+            regular: [
+                "clock"
+            ],
+            solid: [
+                "angles-down",
+                "angles-up",
+                "arrow-right",
+                "arrow-up",
+                "arrow-up-right-from-square",
+                "bullhorn",
+                "book-open",
+                "box-archive",
+                "chevron-down",
+                "chevron-left",
+                "chevron-right",
+                "clock-rotate-left",
+                "comment-dots",
+                "eye",
+                "gear",
+                "house",
+                "info-circle",
+                "link",
+                "moon",
+                "mug-saucer",
+                "paper-plane",
+                "paste",
+                "pen",
+                "pen-to-square",
+                "pencil",
+                "person-praying",
+                "quote-left",
+                "quote-right",
+                "rotate-right",
+                "rss",
+                "search",
+                "sitemap",
+                "subway",
+                "sun",
+                "trash-can",
+                "torii-gate",
+                "user",
+                "xmark"
+            ]
         }
     }
 });

@@ -88,33 +88,33 @@
     <coco-widget>
         <header class="novel-header">
             <nuxt-link class="novel-wrap-top" :class="toPrevClass" :to="toPrevRoute">
-                <fa-icon icon="chevron-left"/>
+                <fa icon="chevron-left"/>
                 <span>{{ toPrev }}</span>
             </nuxt-link>
             <div>
                 <h1 class="novel-title">{{ art.title }}</h1>
                 <ul class="novel-information">
                     <li>
-                        <fa-icon icon="eye"/>
+                        <fa icon="eye"/>
                         <span>{{ state.readCount }} 阅读</span>
                     </li>
                     <li>
-                        <fa-icon icon="pen-to-square"/>
+                        <fa icon="pen-to-square"/>
                         <span>{{ art.wordCount }} 字</span>
                     </li>
                     <li>
-                        <fa-icon icon="pen"/>
+                        <fa icon="pen"/>
                         <time>{{ art.publishDate }}</time>
                     </li>
                     <li>
-                        <fa-icon :icon="[`far`, `clock`]"/>
+                        <fa :icon="[`far`, `clock`]"/>
                         <time>{{ art.updateDate }}</time>
                     </li>
                 </ul>
             </div>
             <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextRoute">
                 <span>{{ toNext }}</span>
-                <fa-icon icon="chevron-right"/>
+                <fa icon="chevron-right"/>
             </nuxt-link>
         </header>
         <novel-article class="novel-text" :content="state.content" :enabled="art.runtime"/>

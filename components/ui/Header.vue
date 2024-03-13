@@ -72,12 +72,12 @@
         <nav class="header-nav">
             <mb-popper v-for="{ title, icon, to, children } in navList">
                 <nuxt-link class="nav-link" :to="to">
-                    <fa-icon :icon="icon"/>
+                    <fa :icon="icon"/>
                     <span>{{ title }}</span>
                 </nuxt-link>
                 <template v-if="children?.length" #floating>
                     <nuxt-link v-for="child in children" class="nav-pop" :to="child.to">
-                        <fa-icon :icon="child.icon"/>
+                        <fa :icon="child.icon"/>
                         <span>{{ child.title }}</span>
                     </nuxt-link>
                 </template>
@@ -86,7 +86,7 @@
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
             <button>
-                <fa-icon icon="search"/>
+                <fa icon="search"/>
             </button>
         </form>
     </header>

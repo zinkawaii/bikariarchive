@@ -7,25 +7,25 @@
         <ul class="nav-list">
             <li class="nav-item">
                 <nuxt-link :to="{ name: `home` }">
-                    <fa-icon icon="house"/>
+                    <fa icon="house"/>
                     <span>主页</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
                 <nuxt-link :to="{ name: `catalogue` }">
-                    <fa-icon icon="book-open"/>
+                    <fa icon="book-open"/>
                     <span>目录</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
                 <nuxt-link :to="{ name: `details` }">
-                    <fa-icon icon="sitemap"/>
+                    <fa icon="sitemap"/>
                     <span>情报</span>
                 </nuxt-link>
             </li>
             <li class="nav-item">
                 <nuxt-link :to="{ name: `search` }">
-                    <fa-icon icon="search"/>
+                    <fa icon="search"/>
                     <span>检索</span>
                 </nuxt-link>
             </li>

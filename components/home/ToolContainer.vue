@@ -21,7 +21,7 @@
     <div class="home-tool-container">
         <nuxt-link v-for="link in links" class="home-tool" :to="link.href">
             <span>{{ link.title || "卖萌中……" }}</span>
-            <fa-icon icon="arrow-right"/>
+            <fa icon="arrow-right"/>
         </nuxt-link>
     </div>
 </template>

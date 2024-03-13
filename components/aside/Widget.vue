@@ -8,7 +8,7 @@
 <template>
     <div class="content-widget aside-widget">
         <h2 v-if="title" class="content-h2 aside-title">
-            <fa-icon :icon="icon"/>
+            <fa :icon="icon"/>
             <span>{{ title }}</span>
         </h2>
         <slot></slot>

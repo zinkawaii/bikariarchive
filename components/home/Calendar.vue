@@ -179,8 +179,8 @@
             <div class="calendar-header">
                 <span class="calendar-month">{{ state.month + 1 }}° {{ monthMap[state.month][0] }}</span>
                 <span class="text-primary">「{{ monthMap[state.month][1] }}」</span>
-                <a :class="{ hidden: isFirstMonth }" @click="toLastMonth"><fa-icon icon="chevron-left"/></a>
-                <a :class="{ hidden: isLastMonth }" @click="toNextMonth"><fa-icon icon="chevron-right"/></a>
+                <a :class="{ hidden: isFirstMonth }" @click="toLastMonth"><fa icon="chevron-left"/></a>
+                <a :class="{ hidden: isLastMonth }" @click="toNextMonth"><fa icon="chevron-right"/></a>
             </div>
             <ul class="calendar-week">
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
@@ -207,9 +207,9 @@
                 <div class="calendar-section">
                     <div class="title">事件</div>
                     <div v-if="currentDate.event?.mono" class="calendar-event">
-                        <fa-icon icon="quote-left"/>
+                        <fa icon="quote-left"/>
                         <span>{{ currentDate.event.mono }}</span>
-                        <fa-icon icon="quote-right"/>
+                        <fa icon="quote-right"/>
                     </div>
                     <span v-else class="none">No Special.</span>
                 </div>
