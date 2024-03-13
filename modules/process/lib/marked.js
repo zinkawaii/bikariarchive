@@ -1,10 +1,10 @@
-import entities from "html-entities";
+import { encode } from "html-entities";
 import { Marked } from "marked";
 
 export default new Marked({
     renderer: {
         code(code, infostring) {
-            return `<mb-code lang="${infostring}"><pre>${entities.encode(code)}</pre></mb-code>\n`;
+            return `<mb-code lang="${infostring}"><pre>${encode(code)}</pre></mb-code>\n`;
         },
         link(href, title, text) {
             let extra;

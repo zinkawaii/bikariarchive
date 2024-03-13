@@ -1,10 +1,4 @@
 import consola from "consola";
-import { resolve } from "path";
-
-//从根目录合并路径
-export function r(path) {
-    return resolve("../../", path);
-}
 
 //统计执行时长
 export function timer(sign, func) {

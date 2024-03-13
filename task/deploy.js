@@ -3,7 +3,7 @@ import consola from "consola";
 import fs from "fs-extra";
 import prompts from "prompts";
 import tar from "tar";
-import { timer } from "./utils.js";
+import { timer } from "@bikari/shared";
 
 const options = await prompts([
     {

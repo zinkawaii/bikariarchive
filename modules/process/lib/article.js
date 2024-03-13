@@ -5,8 +5,9 @@ import fs from "fs-extra";
 import $ from "node-html-parser";
 import * as glob from "glob";
 import * as path from "path";
-import marked from "./marked.js";
-import { r, timer } from "../utils.js";
+import marked from "./marked";
+import { r } from "../utils";
+import { timer } from "@bikari/shared";
 
 const srcDir = r("data/novel");
 const outDir = r("dist/novel");
@@ -20,22 +21,20 @@ const jMap = {};
 
 const re = /^(.*?)\.(\d+)$/;
 
-(async () => {
-    //从元信息和Front Matter生成全文和Article.json
-    await timer("Article", generateMetaInfo)();
+export default {
+    async build() {
+        await timer("Article", generateMetaInfo)();
+    },
+    watch() {
+        const parse = timer("Article", (pathname) => {
+            simpleParse(pathname);
+            outputFile();
+        });
 
-    //解析函数
-    const parse = timer("Article", (pathname) => {
-        simpleParse(pathname);
-        outputFile();
-    });
-
-    //监听
-    if (process.argv.includes("--watch")) {
         chokidar.watch([`${srcDir}/**/*.md`])
         .on("change", parse);
     }
-})();
+};
 
 //单文件解析
 function simpleParse(pathname) {
@@ -89,6 +88,7 @@ function simpleParse(pathname) {
     };
 }
 
+//从元信息和Front Matter生成全文和Article.json
 function generateMetaInfo() {
     const filelist = glob.globSync(`${srcDir}/**/*.md`);
 

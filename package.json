@@ -12,10 +12,8 @@
     "git:stash": "git add -A && git stash",
     "git:stash/pop": "git stash pop && git reset",
     "task:abbrlink": "cd task && node abbrlink.js",
-    "task:build": "pnpm run git:stash && pnpm run fix:sharp && pnpm run task:process && pnpm run build && pnpm run git:stash/pop",
+    "task:build": "pnpm run git:stash && pnpm run fix:sharp && pnpm run build && pnpm run git:stash/pop",
     "task:deploy": "cd task && node deploy.js",
-    "task:process": "cd task/process && node index.js",
-    "task:process/watch": "cd task/process && nodemon --exec \"node index.js --watch\"",
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
   "dependencies": {
@@ -33,6 +31,7 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@bikari/shared": "workspace:^",
     "@kikiutils/nuxt-session": "^2.0.2",
     "@nuxt/devtools": "^1.0.8",
     "@nuxt/image": "^1.4.0",
