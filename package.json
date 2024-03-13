@@ -12,10 +12,11 @@
     "git:stash": "git add -A && git stash",
     "git:stash/pop": "git stash pop && git reset",
     "task:abbrlink": "cd task && node abbrlink.js",
-    "task:build": "pnpm run git:stash && pnpm run task:process && pnpm run build && pnpm run git:stash/pop",
+    "task:build": "pnpm run git:stash && pnpm run fix:sharp && pnpm run task:process && pnpm run build && pnpm run git:stash/pop",
     "task:deploy": "cd task && node deploy.js",
     "task:process": "cd task/process && node index.js",
-    "task:process/watch": "cd task/process && nodemon --exec \"node index.js --watch\""
+    "task:process/watch": "cd task/process && nodemon --exec \"node index.js --watch\"",
+    "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
