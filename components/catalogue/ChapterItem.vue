@@ -18,6 +18,7 @@
         <span class="font-italic text-gray">{{ chapter.orderInVol + 1 }}.</span>
         <span class="text-truncate cacha-title">{{ chapter.title }}</span>
         <ul class="cacha-tags">
+            <li v-if="chapter.draft" tag="draft">草稿</li>
             <li v-if="isLastRead" tag="last-read">最近阅读</li>
         </ul>
         <span class="text-gray">
@@ -58,6 +59,10 @@
             border-radius: 4px;
             font-size: 13px;
             color: var(--color);
+
+            &[tag="draft"] {
+                --color: rgb(232 84 232);
+            }
 
             &[tag="last-read"] {
                 --color: var(--color-warning);

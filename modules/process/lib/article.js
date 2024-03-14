@@ -7,7 +7,7 @@ import * as glob from "glob";
 import * as path from "path";
 import marked from "./marked";
 import { r } from "../utils";
-import { timer } from "@bikari/shared";
+import { isDev, timer } from "@bikari/shared";
 
 const srcDir = r("data/novel");
 const outDir = r("dist/novel");
@@ -44,6 +44,9 @@ function simpleParse(pathname) {
     //处理文件
     const file = fs.readFileSync(pathname);
     const { attributes, body } = fm(file.toString());
+
+    //生产环境下忽略草稿文件
+    if (attributes.draft && !isDev) return;
     const result = marked.parse(body);
 
     //写入文件

@@ -1,5 +1,8 @@
 import consola from "consola";
 
+//是否为开发环境
+export const isDev = process.env.NODE_ENV === "development";
+
 //统计执行时长
 export function timer(sign, func) {
     return async function(...arg) {

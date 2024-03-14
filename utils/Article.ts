@@ -27,6 +27,7 @@ export interface JChapter {
     date?: string,
     refactored?: string,
     updated?: string,
+    draft?: boolean,
     ending?: boolean,
     runtime?: boolean,
     wordCount: number
@@ -42,7 +43,8 @@ class Article implements JChapter {
     date       = "";    //日期
     updated    = "";    //更新日期
     refactored = "";    //重构日期
-    ending     = false; //终章标记
+    draft      = false; //草稿
+    ending     = false; //终章
     runtime    = false; //运行时
     wordCount  = 0;     //字数
 
