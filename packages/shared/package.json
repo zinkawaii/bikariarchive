@@ -1,3 +1,5 @@
 {
-  "name": "@bikari/shared"
+  "name": "@bikari/shared",
+  "type": "module",
+  "main": "index.js"
 }

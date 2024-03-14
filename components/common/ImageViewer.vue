@@ -21,13 +21,6 @@
     let imageX = 0;
     let imageY = 0;
 
-    //动画配置
-    const animationOptions = {
-        duration: 400,
-        easing: "ease",
-        fill: "forwards"
-    };
-
     //图片样式
     const imageStyle = ref({
         top: 0,
@@ -99,7 +92,7 @@
                 left: `calc(50% - ${Math.floor(finalWidth / 2)}px)`,
                 width: Math.floor(finalWidth) + "px",
                 height: Math.floor(finalHeight) + "px"
-            }, animationOptions);
+            }, Zin.DEFAULT_ANIME_OPTION);
         });
     });
 
@@ -120,7 +113,7 @@
             left: x + left + "px",
             width: width + "px",
             height: height + "px"
-        }], animationOptions);
+        }], Zin.DEFAULT_ANIME_OPTION);
     }
 
     //鼠标滚动时
@@ -139,7 +132,7 @@
             top: finalY + "px",
             width: width * rate + "px",
             height: height * rate + "px"
-        }, animationOptions);
+        }, Zin.DEFAULT_ANIME_OPTION);
     }
 </script>
 

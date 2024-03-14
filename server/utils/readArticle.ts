@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import Article from "~/utils/Article";
 import jArtmap from "~/dist/json/Artmap.json";
 
-export async function readArticle(art: Article): Promise<string> {
+export function readArticle(art: Article): Promise<string> {
     return new Promise((resolve, reject) => {
         const { novel, volume, index } = art;
         const filename = jArtmap[novel][index];

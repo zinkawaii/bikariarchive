@@ -142,8 +142,8 @@ const Zin = new class Z {
         return new Promise<void>((resolve, reject) => {
             try {
                 let t = 0;
-                recursion();
                 const { pause } = useIntervalFn(recursion, duration);
+                recursion();
 
                 function recursion() {
                     if (times >= 0 && t === times) {
@@ -189,24 +189,6 @@ const Zin = new class Z {
                 }
             };
         }
-    }
-
-    //性能计时
-    async timer(sign: string, func: () => any, times = 1) {
-        //开始标记
-        performance.mark("start");
-
-        //运行函数
-        for (let i = 0; i < times; i++) {
-            await func();
-        }
-
-        //结束标记
-        performance.mark("end");
-
-        //计算时长
-        const measure = performance.measure("full", "start", "end");
-        console.info(`${sign} -- ${measure.duration.toFixed(0)}ms`);
     }
 };
 

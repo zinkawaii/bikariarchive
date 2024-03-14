@@ -1,15 +1,17 @@
 <script setup>
     import jFriend from "~/assets/json/Friend.json";
 
+    const config = useRuntimeConfig();
+
     useHead({
         title: "友情链接"
     });
 
     const schema = `export default {
-  title: "微光档案",
-  link: "https://bikari.top",
+  title: "${config.public.title}",
+  link: "https://${config.public.domain}",
   icon: "https://cravatar.cn/avatar/ECB2EA87C4532F007838D86D02798F89",
-  description: "虚幻的幸福"
+  description: "${config.public.description}"
 };`;
 </script>
 

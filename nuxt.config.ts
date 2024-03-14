@@ -78,7 +78,7 @@ export default defineNuxtConfig({
         "@vueuse/nuxt"
     ],
     site: {
-        name: "微光档案",
+        name: clientConfig.title,
         url: `https://${clientConfig.domain}`,
         defaultLocale: "zh-CN",
         indexable: true
