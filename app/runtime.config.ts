@@ -2,8 +2,6 @@ import merge from "merge";
 
 const server = {
     global: {
-        env: process.env.NODE_ENV,
-        address: "<!-- ??? -->",
         mail: {
             name: "微光档案",
             host: "smtp.qq.com",
