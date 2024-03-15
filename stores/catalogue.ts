@@ -1,3 +1,4 @@
+import type { JVolume } from "@bikari/process";
 import type Article from "~/utils/Article";
 
 export const useCatalogueStore = defineStore("catalogue", {

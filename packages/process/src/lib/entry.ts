@@ -1,8 +1,6 @@
-import chokidar from "chokidar";
 import fs from "fs-extra";
 import * as path from "path";
-import { r } from "../utils";
-import { timer } from "@bikari/shared";
+import { r, timer } from "@bikari/shared";
 
 const folders = [
     "area",
@@ -14,7 +12,7 @@ const metaSrcDir = r("assets/json/Entry.json");
 const metaOutDir = r("dist/json/Entry.json");
 const mapOutDir = r("dist/json/Entrimap.json");
 
-const jEntry = JSON.parse(fs.readFileSync(metaSrcDir));
+const jEntry = JSON.parse(fs.readFileSync(metaSrcDir).toString());
 const jMap = {};
 
 export default {

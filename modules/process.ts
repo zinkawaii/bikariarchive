@@ -1,6 +1,5 @@
 import { defineNuxtModule } from "nuxt/kit";
-import article from "./lib/article";
-import entry from "./lib/entry";
+import { article, entry } from "@bikari/process";
 
 export default defineNuxtModule({
     meta: {

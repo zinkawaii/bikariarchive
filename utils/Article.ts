@@ -1,37 +1,9 @@
 import ArticleJson from "~/dist/json/Article.json";
+import type { JNovel, JChapter } from "@bikari/process";
 
 const jArticle: {
-    [novel: string]: JNovel
+    [novel: string]: JNovel<Article>
 } = ArticleJson as any;
-
-export interface JNovel {
-    author: string,
-    title: string,
-    type: "novel" | "blog",
-    tag: string[],
-    synopsis: string,
-    cover: string,
-    volumes: JVolume[],
-    chapters: Article[]
-}
-
-export interface JVolume {
-    title: string,
-    ending: boolean
-}
-
-export interface JChapter {
-    index: string,
-    volume: number,
-    title: string,
-    date?: string,
-    refactored?: string,
-    updated?: string,
-    draft?: boolean,
-    ending?: boolean,
-    runtime?: boolean,
-    wordCount: number
-}
 
 class Article implements JChapter {
     novel      = "";    //小说名

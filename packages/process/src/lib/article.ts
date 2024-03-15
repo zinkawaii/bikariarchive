@@ -6,8 +6,8 @@ import $ from "node-html-parser";
 import * as glob from "glob";
 import * as path from "path";
 import marked from "./marked";
-import { r } from "../utils";
-import { isDev, timer } from "@bikari/shared";
+import type { FrontMatter } from "../types";
+import { isDev, r, timer } from "@bikari/shared";
 
 const srcDir = r("data/novel");
 const outDir = r("dist/novel");
@@ -16,7 +16,7 @@ const metaSrcDir = r("assets/json/Article.json");
 const metaOutDir = r("dist/json/Article.json");
 const mapOutDir = r("dist/json/Artmap.json");
 
-const jMeta = JSON.parse(fs.readFileSync(metaSrcDir));
+const jMeta = JSON.parse(fs.readFileSync(metaSrcDir).toString());
 const jMap = {};
 
 const re = /^(.*?)\.(\d+)$/;
@@ -43,11 +43,11 @@ function simpleParse(pathname) {
 
     //处理文件
     const file = fs.readFileSync(pathname);
-    const { attributes, body } = fm(file.toString());
+    const { attributes, body } = fm<FrontMatter>(file.toString());
 
     //生产环境下忽略草稿文件
     if (attributes.draft && !isDev) return;
-    const result = marked.parse(body);
+    const result = marked.parse(body) as string;
 
     //写入文件
     const outPath = pathname.replace(srcDir, outDir).replace(".md", ".txt");

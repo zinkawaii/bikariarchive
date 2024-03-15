@@ -1,6 +1,6 @@
 <script setup>
     const catalogueStore = useCatalogueStore();
-    const { infoType, jVolume, jChapters } = storeToRefs(catalogueStore);
+    const { infoType, jChapters } = storeToRefs(catalogueStore);
 
     //总字数
     const totalCount = computed(() => {
