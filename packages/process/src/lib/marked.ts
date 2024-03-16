@@ -25,7 +25,7 @@ export default new Marked({
                 return src.match(/\|/)?.index;
             },
             tokenizer(src, tokens) {
-                const rule = /^\|([^\n]*?)<([^\n]*?)>\|/;
+                const rule = /^\|([^\n]*?)\(([^\n]*?)\)\|/;
                 const match = rule.exec(src);
                 if (match) {
                     return {
