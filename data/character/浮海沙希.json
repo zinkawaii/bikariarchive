@@ -14,5 +14,11 @@
     ]
   ],
   "illustration": [],
-  "talent": []
+  "talent": [],
+  "relationship": [
+    {
+      "name": "浮海拓马",
+      "relation": "父亲"
+    }
+  ]
 }
