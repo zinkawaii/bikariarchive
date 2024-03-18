@@ -1,6 +1,5 @@
-import fs from "fs-extra";
 import * as path from "path";
-import { r, timer } from "@bikari/shared";
+import Processor from "./processor";
 
 const folders = [
     "area",
@@ -8,27 +7,36 @@ const folders = [
     "concept"
 ];
 
-const metaSrcDir = r("assets/json/Entry.json");
-const metaOutDir = r("dist/json/Entry.json");
-const mapOutDir = r("dist/json/Entrimap.json");
+export default new Processor({
+    sign: "Entry",
+    source: {
+        src: "data",
+        out: "dist",
+        pattern: `{${folders.join(",")}}/*.md`
+    },
+    meta: {
+        src: "assets/json/Entry.json",
+        out: "dist/json/Entry.json"
+    },
+    map: {
+        out: "dist/json/Entrimap.json"
+    },
+    generate(filelist) {
+        this.jMeta.all = [];
 
-const jEntry = JSON.parse(fs.readFileSync(metaSrcDir).toString());
-const jMap = {};
+        for (const filename of filelist) {
+            const name = path.basename(filename, ".md");
+            this.jMeta.all.push(name);
 
-export default {
-    build: timer("Entry", () => {
-        jEntry.all = [];
+            for (const folder of folders) {
+                if (filename.includes(folder)) {
+                    this.jMap[name] = folder;
+                    break;
+                }
+            }
+        }
+    },
+    parse(filename: string) {
 
-        folders.forEach((category) => {
-            const filenames = fs.readdirSync(r(`data/${category}`));
-            filenames.forEach((filename) => {
-                const name = path.basename(filename, ".json");
-                jEntry.all.push(name);
-                jMap[name] = category;
-            });
-        });
-
-        fs.outputFileSync(metaOutDir, JSON.stringify(jEntry));
-        fs.outputFileSync(mapOutDir, JSON.stringify(jMap));
-    })
-};
+    }
+});
