@@ -1,5 +1,9 @@
+import dot from "dot-object";
+import fm from "front-matter";
+import fs from "fs-extra";
 import * as path from "path";
 import Processor from "./processor";
+import { entryMarked } from "../marked";
 
 const folders = [
     "area",
@@ -37,6 +41,17 @@ export default new Processor({
         }
     },
     parse(filename: string) {
+        //处理文件
+        const file = fs.readFileSync(filename);
+        const { attributes, body } = fm<any>(file.toString());
+        const result = entryMarked.parse(body) as any;
 
+        for (const key in result) {
+            dot.str(key, result[key], attributes);
+        }
+
+        //写入文件
+        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".json");
+        fs.outputFileSync(outPath, JSON.stringify(attributes));
     }
 });

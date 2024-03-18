@@ -5,7 +5,7 @@ import $ from "node-html-parser";
 import * as path from "path";
 import Processor from "./processor";
 import { articleMarked } from "../marked";
-import type { FrontMatter } from "../types";
+import type { ArticleFrontMatter } from "../types";
 import { isDev } from "@bikari/shared";
 
 const re = /^(.*?)\.(\d+)$/;
@@ -39,7 +39,7 @@ export default new Processor({
     parse(filename) {
         //处理文件
         const file = fs.readFileSync(filename);
-        const { attributes, body } = fm<FrontMatter>(file.toString());
+        const { attributes, body } = fm<ArticleFrontMatter>(file.toString());
 
         //生产环境下忽略草稿文件
         if (attributes.draft && !isDev) return;

@@ -39,14 +39,12 @@
         <article class="entry-article">
             <section class="entry-section entry-main">
                 <div class="left">
-                    <div class="entry-summary">
-                        <p v-for="text in splitByNewline(data.summary)" v-html="text"></p>
-                    </div>
+                    <div class="entry-text" v-html="data.summary"></div>
                     <div v-if="data.info?.length > 0" class="div-table entry-brief">
                         <dl v-for="i in data.info.length">
-                            <template v-for="item in data.info[i - 1]">
-                                <dt>{{ item[0] }}</dt>
-                                <dd>{{ item[1] }}</dd>
+                            <template v-for="value, key in data.info[i - 1]">
+                                <dt>{{ key }}</dt>
+                                <dd>{{ value }}</dd>
                             </template>
                         </dl>
                     </div>
@@ -85,7 +83,7 @@
                                     <h3>{{ item.name }}</h3>
                                 </template>
                             </div>
-                            <p v-for="text in splitByNewline(item.content)" v-html="text"></p>
+                            <div class="entry-text" v-html="item.content"></div>
                         </div>
                     </template>
                     <p v-else>未知。</p>
@@ -104,9 +102,7 @@
             <section v-for="item in data.details" class="entry-section">
                 <h2>{{ item.title }}</h2>
                 <component v-if="item.component" :is="components[item.component]" v-bind="item.attrs"/>
-                <template v-else>
-                    <p v-for="text in splitByNewline(item.content)" v-html="text"></p>
-                </template>
+                <div v-else class="entry-text" v-html="item.content"></div>
             </section>
         </article>
     </coco-widget>

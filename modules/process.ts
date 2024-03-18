@@ -11,6 +11,7 @@ export default defineNuxtModule({
 
         if (nuxt.options.dev) {
             article.watch();
+            entry.watch();
         }
     }
 });

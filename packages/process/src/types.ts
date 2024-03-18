@@ -1,12 +1,5 @@
-export interface FrontMatter {
-    title: string,
-    abbrlink?: string,
-    date?: string,
-    refactored?: string,
-    updated?: string,
-    draft?: boolean,
-    ending?: boolean,
-    runtime?: boolean
+export interface JArticle<T> {
+    [novel: string]: JNovel<T>
 }
 
 export interface JNovel<T> {
@@ -25,8 +18,19 @@ export interface JVolume {
     ending: boolean
 }
 
-export interface JChapter extends FrontMatter {
+export interface JChapter extends ArticleFrontMatter {
     index: string,
     volume: number,
     wordCount: number
+}
+
+export interface ArticleFrontMatter {
+    title: string,
+    abbrlink?: string,
+    date?: string,
+    refactored?: string,
+    updated?: string,
+    draft?: boolean,
+    ending?: boolean,
+    runtime?: boolean
 }

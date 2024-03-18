@@ -1,9 +1,7 @@
 import ArticleJson from "~/dist/json/Article.json";
-import type { JNovel, JChapter } from "@bikari/process";
+import type { JArticle, JChapter } from "@bikari/process";
 
-const jArticle: {
-    [novel: string]: JNovel<Article>
-} = ArticleJson as any;
+const jArticle: JArticle<Article> = ArticleJson as any;
 
 class Article implements JChapter {
     novel      = "";    //小说名

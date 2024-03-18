@@ -13,7 +13,7 @@ export default defineCustomHandler(async (event) => {
 
     if (title in jMap) {
         const category = jMap[title];
-        const path = r(`data/${category}/${title}.json`);
+        const path = r(`dist/${category}/${title}.json`);
         const file = await fs.readFile(path);
         const data = JSON.parse(file.toString());
 
