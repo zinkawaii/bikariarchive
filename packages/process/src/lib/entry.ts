@@ -1,4 +1,4 @@
-import dot from "dot-object";
+import { setProperty } from "dot-prop";
 import fm from "front-matter";
 import fs from "fs-extra";
 import * as path from "path";
@@ -47,7 +47,7 @@ export default new Processor({
         const result = entryMarked.parse(body) as any;
 
         for (const key in result) {
-            dot.str(key, result[key], attributes);
+            setProperty(attributes, key, result[key]);
         }
 
         //写入文件
