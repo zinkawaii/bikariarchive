@@ -4,29 +4,6 @@
         title: "主页",
         link: { rel: "canonical", href: `https://${config.public.domain}` }
     });
-
-    const profileLinks = [
-        {
-            title: "Github",
-            to: "https://github.com/KazariEX",
-            icon: ["fab", "github"]
-        },
-        {
-            title: "Twitter",
-            to: "https://twitter.com/KazariEX_0929",
-            icon: ["fab", "twitter"]
-        },
-        {
-            title: "BiliBili",
-            to: "https://space.bilibili.com/37810541",
-            icon: ["fab", "bilibili"]
-        },
-        {
-            title: "RSS",
-            to: "/feed",
-            icon: "rss"
-        }
-    ];
 </script>
 
 <template>
@@ -44,34 +21,7 @@
             </p>
         </div>
         <home-introduction />
-        <div class="content-table">
-            <a class="profile-avatar">
-                <mb-image :src="$config.public.avatar"/>
-            </a>
-            <table class="profile-table">
-                <tbody>
-                    <tr>
-                        <th width="40%">作者</th>
-                        <td>{{ $config.public.author }}</td>
-                    </tr>
-                    <tr>
-                        <th>个人群</th>
-                        <td><coco-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</coco-link></td>
-                    </tr>
-                    <tr>
-                        <th>读者群</th>
-                        <td><coco-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</coco-link></td>
-                    </tr>
-                </tbody>
-            </table>
-            <ul class="profile-link">
-                <li v-for="{ title, to, icon } in profileLinks">
-                    <nuxt-link :to="to" :title="title" target="_blank">
-                        <fa :icon="icon"/>
-                    </nuxt-link>
-                </li>
-            </ul>
-        </div>
+        <home-profile />
     </coco-widget>
     <div class="home-complex">
         <home-update />
@@ -102,60 +52,6 @@
 
     .home-welcome {
         grid-area: A;
-    }
-
-    .profile-table {
-        border-spacing: 8px;
-        font-size: 16px;
-        text-align: center;
-
-        td {
-            border-bottom: 1px solid var(--color-border-lighter);
-        }
-    }
-
-    .profile-avatar {
-        display: block;
-        width: min(80%, 256px);
-        aspect-ratio: 1;
-        margin: -32px auto 8px;
-        border-radius: 100%;
-        filter: drop-shadow(4px 12px 8px rgb(0 0 0 / 24%));
-
-        &:hover {
-            > img {
-                animation: profile-avatar-jump 0.4s ease;
-            }
-        }
-
-        > img {
-            border-radius: inherit;
-        }
-
-        @keyframes profile-avatar-jump {
-            50% {
-                transform: rotateY(90deg) translateY(-32px);
-            }
-        }
-    }
-
-    .profile-link {
-        display: flex;
-        justify-content: flex-end;
-        gap: 8px;
-        padding-inline: 8px;
-
-        a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            border: 1px solid var(--color-border-lighter);
-            border-radius: 4px;
-            font-size: 16px;
-            color: var(--color-theme-dark);
-        }
     }
 
     .home-complex {
