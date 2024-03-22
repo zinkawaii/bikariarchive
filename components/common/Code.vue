@@ -5,23 +5,31 @@
         lang: {
             type: String,
             default: "js"
+        },
+        raw: {
+            type: String,
+            default: ""
         }
     });
 
     const messageStore = useMessageStore();
-    const slots = useSlots();
-    const code = ref();
+    const isExpand = ref(false);
     const $Code = ref();
 
-    const source = slots.default()[0].children ?? "";
-    const lines = source.split("\n").length;
-    const lineStr = Array.from({ length: lines }).map((_, i) => i + 1).join("\n");
+    //行数
+    const lines = computed(() => {
+        return props.raw.split("\n").length;
+    });
 
-    //代码高亮
-    code.value = prism.highlight(source, prism.languages[props.lang], props.lang);
+    //行号
+    const lineStr = computed(() => {
+        return Array.from({ length: lines.value }).map((_, i) => i + 1).join("\n");
+    });
 
-    //折叠与展开
-    const isExpand = ref(false);
+    //代码
+    const code = computed(() => {
+        return prism.highlight(props.raw, prism.languages[props.lang], props.lang);
+    });
 
     //复制
     function copy() {
@@ -34,14 +42,11 @@
     <div class="mb-code">
         <div class="code-header">
             <span class="text-uppercase">{{ lang }}</span>
-            <span class="code-copy" @click="copy"><fa icon="paste"/></span>
+            <a @click="copy"><fa icon="paste"/></a>
         </div>
         <div class="code-area" :class="{ expanded: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
-            <pre v-if="code" ref="$Code" class="code-content" :class="`language-${lang}`" v-html="code"></pre>
-            <template v-else>
-                <slot></slot>
-            </template>
+            <pre ref="$Code" class="code-content" :class="`language-${lang}`" v-html="code"></pre>
         </div>
         <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
             <fa :icon="`angles-${isExpand ? `up` : `down`}`"/>
@@ -64,12 +69,9 @@
         padding-inline: 12px;
         background: var(--color-theme);
         font-family: var(--font-smooth);
+        font-size: 1rem;
         line-height: 28px;
         color: var(--color-theme-text);
-    }
-
-    .code-copy {
-        cursor: pointer;
     }
 
     .code-area {

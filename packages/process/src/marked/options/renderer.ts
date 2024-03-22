@@ -3,7 +3,7 @@ import { RendererObject } from "marked";
 
 export default <RendererObject> {
     code(code, infostring) {
-        return `<mb-code lang="${infostring}"><pre>${encode(code)}</pre></mb-code>\n`;
+        return `<mb-code lang="${infostring}" raw="${encode(code)}"/>\n`;
     },
     link(href, title, text) {
         let extra;
