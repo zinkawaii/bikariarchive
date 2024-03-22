@@ -95,7 +95,6 @@
 
         > * {
             height: 1em;
-            font-family: "Noto Serif JP";
         }
     }
 
@@ -104,7 +103,7 @@
     }
 
     .jumbo-phrase {
-        margin-block: 32px;
+        margin-block: 32px 8px;
     }
 
     .main-typing::after, .sub-typing::after {
