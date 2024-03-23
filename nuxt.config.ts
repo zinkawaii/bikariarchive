@@ -1,4 +1,5 @@
 import { serverConfig, clientConfig } from "./app/runtime.config";
+import iconConfig from "./app/icon.config";
 import sitemapConfig from "./app/sitemap.config";
 import robotsConfig from "./app/robots.config";
 
@@ -23,8 +24,7 @@ export default defineNuxtConfig({
     },
     css: [
         "~/assets/scss/var.scss",
-        "~/assets/scss/sinrabansyo.scss",
-        "~/assets/scss/atom.scss"
+        "~/assets/scss/sinrabansyo.scss"
     ],
     components: [
         {
@@ -68,13 +68,14 @@ export default defineNuxtConfig({
         ["nuxt-mongoose", serverConfig.mongoose],
         ["nuxt-simple-robots", robotsConfig],
         ["@nuxtjs/sitemap", sitemapConfig],
+        ["@vesp/nuxt-fontawesome", iconConfig],
+        "nuxt-shiki",
         "nuxt-site-config",
         "@nuxt/image",
         "@nuxtjs/google-fonts",
         "@nuxtjs/seo",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
-        "@vesp/nuxt-fontawesome",
         "@vueuse/nuxt"
     ],
     site: {
@@ -91,57 +92,11 @@ export default defineNuxtConfig({
             }
         }
     },
-    fontawesome: {
-        component: "fa",
-        icons: {
-            brands: [
-                "bilibili",
-                "github",
-                "twitter"
-            ],
-            regular: [
-                "clock"
-            ],
-            solid: [
-                "angles-down",
-                "angles-up",
-                "arrow-right",
-                "arrow-up",
-                "arrow-up-right-from-square",
-                "bullhorn",
-                "book-open",
-                "box-archive",
-                "chevron-down",
-                "chevron-left",
-                "chevron-right",
-                "clock-rotate-left",
-                "comment-dots",
-                "eye",
-                "gear",
-                "house",
-                "info-circle",
-                "link",
-                "moon",
-                "mug-saucer",
-                "paper-plane",
-                "paste",
-                "pen",
-                "pen-to-square",
-                "pencil",
-                "person-praying",
-                "quote-left",
-                "quote-right",
-                "rotate-right",
-                "rss",
-                "search",
-                "sitemap",
-                "subway",
-                "sun",
-                "trash-can",
-                "torii-gate",
-                "user",
-                "xmark"
-            ]
+    shiki: {
+        bundledLangs: ["css", "html", "js", "json", "yaml"],
+        defaultTheme: {
+            light: "min-light",
+            dark: "one-dark-pro"
         }
     }
 });

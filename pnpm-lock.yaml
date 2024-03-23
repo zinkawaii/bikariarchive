@@ -35,9 +35,6 @@ importers:
       marked:
         specifier: ^12.0.1
         version: 12.0.1
-      prismjs:
-        specifier: ^1.29.0
-        version: 1.29.0
       vue:
         specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.3)
@@ -87,9 +84,6 @@ importers:
       '@types/nodemailer':
         specifier: ^6.4.14
         version: 6.4.14
-      '@types/prismjs':
-        specifier: ^1.26.3
-        version: 1.26.3
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
@@ -177,6 +171,9 @@ importers:
       nuxt-mongoose:
         specifier: ^1.0.5
         version: 1.0.5(@nuxt/devtools@1.1.3)(@vue/compiler-core@3.4.21)(nuxt@3.11.1)(postcss@8.4.38)(vite@5.2.2)(vue@3.4.21)(webpack@5.91.0)
+      nuxt-shiki:
+        specifier: ^0.2.1
+        version: 0.2.1
       nuxt-simple-robots:
         specifier: 4.0.0-rc.14
         version: 4.0.0-rc.14(@nuxt/devtools@1.1.3)(@vue/compiler-core@3.4.21)(nuxt@3.11.1)(postcss@8.4.38)(vite@5.2.2)(vue@3.4.21)(webpack@5.91.0)
@@ -2957,10 +2954,6 @@ packages:
     resolution: {integrity: sha512-fUWthHO9k9DSdPCSPRqcu6TWhYyxTBg382vlNIttSe9M7XfsT06y0f24KHXtbnijPGGRIcVvdKHTNikOI6qiHA==}
     dependencies:
       '@types/node': 20.11.30
-    dev: true
-
-  /@types/prismjs@1.26.3:
-    resolution: {integrity: sha512-A0D0aTXvjlqJ5ZILMz3rNfDBOx9hHxLZYv2by47Sm/pqW35zzjusrZTryatjN/Rf8Us2gZrJD+KeHbUSTux1Cw==}
     dev: true
 
   /@types/prompts@2.4.9:
@@ -7935,6 +7928,17 @@ packages:
       - webpack
     dev: true
 
+  /nuxt-shiki@0.2.1:
+    resolution: {integrity: sha512-LWFgojb3autTMb+kpiwRQLHnM9getFHicWxGWU+UExFTydqm1CGC8oeAcZXweSUG9tm6nkpU/MNcAotCeVmXOg==}
+    dependencies:
+      '@nuxt/kit': 3.11.1
+      shiki: 1.2.0
+      unwasm: 0.3.8
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
   /nuxt-simple-robots@4.0.0-rc.14(@nuxt/devtools@1.1.3)(@vue/compiler-core@3.4.21)(nuxt@3.11.1)(postcss@8.4.38)(vite@5.2.2)(vue@3.4.21)(webpack@5.91.0):
     resolution: {integrity: sha512-jJxOIGAj/wKvfSf/jblx3Jgwd+OzFVgfk+pVqsVZ0tsownqXdboBHCifEjkwAiJsb501100MefXb7Vmq2xu1VQ==}
     dependencies:
@@ -8973,11 +8977,6 @@ packages:
     resolution: {integrity: sha512-mQUvGU6aUFQ+rNvTIAcZuWGRT9a6f6Yrg9bHs4ImKF+HZCEK+plBvnAZYSIQztknZF2qnzNtr6F8s0+IuptdlQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
     dev: true
-
-  /prismjs@1.29.0:
-    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
-    engines: {node: '>=6'}
-    dev: false
 
   /proc-log@3.0.0:
     resolution: {integrity: sha512-++Vn7NS4Xf9NacaU9Xq3URUuqZETPsf8L4j5/ckhaRYsfPeRyzGw+iDjFhV/Jr3uNmTvvddEJFWh5R1gRgUH8A==}

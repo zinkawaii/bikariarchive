@@ -1,7 +1,5 @@
 import DOMPurify from "dompurify";
 import { Marked } from "marked";
-import Prism from "prismjs";
-import "prismjs/components/prism-yaml";
 
 const purifyOptions: DOMPurify.Config = {
     ALLOWED_TAGS: [
@@ -11,25 +9,30 @@ const purifyOptions: DOMPurify.Config = {
 };
 
 const zmark = new Marked({
+    async walkTokens(token) {
+        if (token.type !== "code") return;
+        const codeRef = await useHighlighted(token.text, { lang: token.lang, ...highlightOptions });
+        token.text = codeRef.value || await until(codeRef).changed();
+    },
     renderer: {
         code(code, infostring) {
-            let html = code;
-            if (infostring in Prism.languages) {
-                html = Prism.highlight(code, Prism.languages[infostring], infostring);
-            }
-
-            return `<pre>\`\`\`${infostring}\n${html}\n\`\`\`</pre>`;
+            return `<pre class="shiki">\`\`\`${infostring}\n${code}\n\`\`\`</pre>`;
         }
     },
+    async: true,
     breaks: true
 });
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.directive("marked", {
-        mounted(el, binding) {
+        async beforeMount(el, binding) {
+            el.innerHTML = `<p class="sanitized">好像说了什么，但是被清除了</p>`;
+
             const sanitized = DOMPurify.sanitize(binding.value, purifyOptions) as string;
-            const html = zmark.parse(sanitized) || `<p class="sanitized">好像说了什么，但是被清除了</p>`;
-            el.innerHTML = html;
+            const html = await zmark.parse(sanitized);
+            if (html.length) {
+                el.innerHTML = html;
+            }
         }
     });
 });

@@ -1,6 +1,4 @@
 <script setup>
-    import prism from "prismjs";
-
     const props = defineProps({
         lang: {
             type: String,
@@ -16,6 +14,9 @@
     const isExpand = ref(false);
     const $Code = ref();
 
+    //代码
+    const code = await useHighlighted(props.raw, { lang: props.lang, ...highlightOptions });
+
     //行数
     const lines = computed(() => {
         return props.raw.split("\n").length;
@@ -24,11 +25,6 @@
     //行号
     const lineStr = computed(() => {
         return Array.from({ length: lines.value }).map((_, i) => i + 1).join("\n");
-    });
-
-    //代码
-    const code = computed(() => {
-        return prism.highlight(props.raw, prism.languages[props.lang], props.lang);
     });
 
     //复制
@@ -46,7 +42,7 @@
         </div>
         <div class="code-area" :class="{ expanded: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
-            <pre ref="$Code" class="code-content" :class="`language-${lang}`" v-html="code"></pre>
+            <pre ref="$Code" class="shiki code-content" v-html="code || props.raw"></pre>
         </div>
         <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
             <fa :icon="`angles-${isExpand ? `up` : `down`}`"/>
@@ -106,10 +102,6 @@
 
         &::-webkit-scrollbar {
             display: none;
-        }
-
-        :deep(.token.operator) {
-            background-color: transparent;
         }
     }
 
