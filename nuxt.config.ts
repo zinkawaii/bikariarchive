@@ -85,10 +85,9 @@ export default defineNuxtConfig({
     },
     googleFonts: {
         display: "swap",
-        text: [...new Set(clientConfig.jumbotron.main + clientConfig.jumbotron.sub)].join(""),
         families: {
-            "Noto+Serif+JP": {
-                wght: 500
+            "Source Code Pro": {
+                regular: 400
             }
         }
     },

@@ -73,7 +73,7 @@ code {
     border-radius: 4px;
     box-decoration-break: clone;
     background-color: color-mix(in srgb, var(--color-background-tag), transparent 66%);
-    font-family: var(--font-consolas);
+    font-family: var(--font-code);
     color: var(--color-theme-text);
 }
 
@@ -369,7 +369,7 @@ textarea {
     pre {
         margin-top: 7px;
         padding-top: 4px;
-        font-family: var(--font-consolas);
+        font-family: var(--font-code);
         font-size: 14px;
         line-height: 20px;
         white-space: pre-wrap;

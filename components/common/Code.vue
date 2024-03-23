@@ -82,7 +82,7 @@
 
         > pre {
             padding: 8px;
-            font-family: var(--font-consolas);
+            font-family: var(--font-code);
         }
 
         &.expanded {
