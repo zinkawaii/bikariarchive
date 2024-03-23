@@ -25,21 +25,6 @@ export default new Processor({
     map: {
         out: "dist/json/Entrimap.json"
     },
-    generate(filelist) {
-        this.jMeta.all = [];
-
-        for (const filename of filelist) {
-            const name = path.basename(filename, ".md");
-            this.jMeta.all.push(name);
-
-            for (const folder of folders) {
-                if (filename.includes(folder)) {
-                    this.jMap[name] = folder;
-                    break;
-                }
-            }
-        }
-    },
     parse(filename: string) {
         //处理文件
         const file = fs.readFileSync(filename);
@@ -53,5 +38,20 @@ export default new Processor({
         //写入文件
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".json");
         fs.outputFileSync(outPath, JSON.stringify(attributes));
+    },
+    beforeGenerate(filelist) {
+        this.jMeta.all = [];
+
+        for (const filename of filelist) {
+            const name = path.basename(filename, ".md");
+            this.jMeta.all.push(name);
+
+            for (const folder of folders) {
+                if (filename.includes(folder)) {
+                    this.jMap[name] = folder;
+                    break;
+                }
+            }
+        }
     }
 });

@@ -1,5 +1,5 @@
 @font-face {
-    font-family: TengXiang;
+    font-family: "Teng Xiang";
     font-display: swap;
     src: url("/fonts/TengXQJianYuan-w3.ttf") format("truetype");
 }
@@ -10,7 +10,6 @@
     margin: 0;
     padding: 0;
     border: 0;
-    outline: none;
     font: inherit;
 }
 
@@ -73,7 +72,7 @@ code {
     border-radius: 4px;
     box-decoration-break: clone;
     background-color: color-mix(in srgb, var(--color-background-tag), transparent 66%);
-    font-family: var(--font-code);
+    font-family: var(--font-consolas);
     color: var(--color-theme-text);
 }
 
@@ -212,8 +211,8 @@ textarea {
         display: grid;
         flex: 1;
         grid-template-columns: var(--dt-fr, 1fr) var(--dd-fr, 1fr);
-        align-items: center;
         row-gap: 2px;
+        margin-bottom: auto;
     }
 }
 
@@ -286,6 +285,13 @@ textarea {
 
 /* ---------------------------------------------------------------- */
 
+/* 代码高亮 */
+[z-dark] .shiki span {
+    color: var(--shiki-dark) !important;
+}
+
+/* ---------------------------------------------------------------- */
+
 :where(.novel-text, .entry-article) p {
     line-height: 2em;
 }
@@ -299,13 +305,13 @@ textarea {
 }
 
 .novel-text {
-    :first-child {
+    > :first-child {
         margin-top: 0;
     }
 
     h2 {
         position: relative;
-        margin-block: 24px 4px;
+        margin-block: 24px 12px;
         padding-left: 16px;
         line-height: 36px;
 
@@ -313,18 +319,17 @@ textarea {
             content: "";
             display: block;
             position: absolute;
-            inset: 4px 0;
+            inset: 0;
             width: 6px;
-            border-radius: 3px;
+            border-radius: 2px;
             background-color: var(--color-theme-dark);
         }
     }
 
     h3 {
-        margin-block: 12px 4px;
+        margin-block: 16px 8px;
         line-height: 24px;
     }
-
 
     ol, ul {
         margin-left: 2em;
@@ -349,7 +354,7 @@ textarea {
     }
 
     .mb-code {
-        margin-block: 1em;
+        margin-block: 16px;
     }
 
     .mb-gallery {
@@ -357,7 +362,7 @@ textarea {
     }
 }
 
-.comment-content {
+.comment-text {
     blockquote {
         margin-inline: 0;
     }
@@ -379,8 +384,4 @@ textarea {
     .sanitized {
         color: var(--color-text-disabled);
     }
-}
-
-[z-dark] .shiki span {
-    color: var(--shiki-dark) !important;
 }

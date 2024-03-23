@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import InnerCode from "~/server/core/InnerCode";
 
 interface GetLogonResponse extends BaseResponse {
     uid?: number,

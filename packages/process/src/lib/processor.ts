@@ -19,7 +19,7 @@ interface ProcessorOptions<T> {
         out: string
     },
     parse: (this: T, filename: string) => void,
-    generate: (this: T, filelist: string[]) => string[] | void,
+    beforeGenerate: (this: T, filelist: string[]) => string[] | void,
     beforeOutputMeta?: (this: T) => any
 }
 
@@ -78,7 +78,7 @@ export default class Processor {
         });
 
         //运行元数据生成函数，返回可能经过处理的文件列表
-        filelist = this.options.generate.call(this, filelist) || filelist;
+        filelist = this.options.beforeGenerate.call(this, filelist) || filelist;
 
         //顺序处理源文件
         filelist.forEach((filename) => this.options.parse.call(this, filename));

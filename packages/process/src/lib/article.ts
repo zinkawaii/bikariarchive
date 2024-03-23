@@ -24,18 +24,6 @@ export default new Processor({
     map: {
         out: "dist/json/Artmap.json"
     },
-    generate(filelist) {
-        for (const key in this.jMeta) {
-            //编号与文件名的映射表
-            this.jMap[key] = {};
-
-            //章节对象集合
-            this.jMeta[key].chapters = {};
-        }
-
-        //按字母顺序解析章节
-        return filelist.sort((a, b) => a.localeCompare(b));
-    },
     parse(filename) {
         //处理文件
         const file = fs.readFileSync(filename);
@@ -85,6 +73,18 @@ export default new Processor({
             wordCount,
             ...attributes
         };
+    },
+    beforeGenerate(filelist) {
+        for (const key in this.jMeta) {
+            //编号与文件名的映射表
+            this.jMap[key] = {};
+
+            //章节对象集合
+            this.jMeta[key].chapters = {};
+        }
+
+        //按字母顺序解析章节
+        return filelist.sort((a, b) => a.localeCompare(b));
     },
     beforeOutputMeta() {
         const jNeta = structuredClone(this.jMeta);

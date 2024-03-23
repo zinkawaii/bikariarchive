@@ -1,5 +1,4 @@
 import nodemailer from "nodemailer";
-import fs from "fs-extra";
 import { useCompiler } from "#vue-email";
 
 export async function sendMail(options: {

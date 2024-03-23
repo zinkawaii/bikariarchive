@@ -1,6 +1,6 @@
 import md5 from "md5";
 
-export default {
+export const InnerCode = {
     //输入字符串（密码），生成返回哈希和盐值
     create(str: string) {
         const salt = md5(Date.now().toString());

@@ -30,8 +30,9 @@
     --font                   :
         system-ui, -apple-system, blinkmacsystemfont, "Helvetica Neue",
         "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Source Han Sans CN", sans-serif;
+    --font-consolas          : consolas, var(--font-code);
     --font-code              : "Source Code Pro", var(--font);
-    --font-smooth            : tengxiang, var(--font);
+    --font-smooth            : "Teng Xiang", var(--font);
     --circle-radius          : calc(1px * infinity);
     --size-min-width         : 320px;
 }

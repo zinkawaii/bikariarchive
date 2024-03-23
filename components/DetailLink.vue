@@ -3,22 +3,17 @@
 
     const props = defineProps(["title"]);
 
+    //有无别名
     const isArray = Array.isArray(props.title);
 
     //词条名称
-    const name = computed(() => {
-        return isArray ? props.title[0] : props.title;
-    });
+    const name = isArray ? props.title[0] : props.title;
 
     //显示名称
-    const displayName = computed(() => {
-        return isArray ? props.title[1] : props.title;
-    });
+    const displayName = isArray ? props.title[1] : props.title;
 
     //是否存在
-    const isExist = computed(() => {
-        return jEntry.all.includes(name.value);
-    });
+    const isExist = jEntry.all.includes(name);
 </script>
 
 <template>

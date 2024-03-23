@@ -57,7 +57,7 @@
                     <a class="comment-nickname">{{ recipient }}</a>
                 </template>
             </div>
-            <div v-marked="data.content" class="novel-text comment-content"></div>
+            <div v-marked="data.content" class="novel-text comment-text"></div>
             <div class="comment-operator">
                 <span>{{ elapsed }}</span>
                 <a @click="replyComment">回复</a>
@@ -111,7 +111,7 @@
         color: var(--color-theme-text);
     }
 
-    .comment-content {
+    .comment-text {
         margin-block: 0.5em;
     }
 

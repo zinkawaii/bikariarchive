@@ -1,5 +1,3 @@
-import InnerCode from "~/server/core/InnerCode";
-
 interface PostLoginResponse extends BaseResponse {
     uid?: number,
     nickname?: string,
