@@ -1,5 +1,3 @@
-import Mail from "~/server/core/Mail";
-
 export default defineCustomHandler(async (event) => {
     const res: BaseResponse = { error: 0 };
     const { email } = getQueryValues(event);
@@ -29,10 +27,13 @@ export default defineCustomHandler(async (event) => {
     //执行查询
     query?.exec?.();
 
-    const title = "注册验证码";
-    const content = await Mail.template("verify", verify);
-
-    await Mail.send(email, title, content)
+    //发送验证码
+    await sendMail({
+        to: email,
+        title: "注册验证码",
+        template: "verify",
+        props: { verify }
+    })
     .catch(() => {
         res.error = 1;
     });

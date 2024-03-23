@@ -50,9 +50,11 @@ export default defineCustomHandler(async (event) => {
 
         //对被回复评论进行邮件通知
         if (res !== null && res.email.length > 0 && res.email !== email) {
-            Mail.template("comment-reply", content, path).then((text) => {
-                const title = `@${nickname} 回复了您的评论`;
-                Mail.send(res.email, title, text);
+            sendMail({
+                to: res.email,
+                title: `@${nickname} 回复了您的评论`,
+                template: "comment-reply",
+                props: { content, path }
             });
         }
     }

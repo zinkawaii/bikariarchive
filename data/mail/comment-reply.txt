@@ -1,6 +1,0 @@
-<p>
-    {0}
-</p>
-<p>
-    https://bikariarchive.xyz{1}
-</p>
