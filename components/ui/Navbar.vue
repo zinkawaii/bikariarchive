@@ -1,32 +1,37 @@
 <script setup>
     const settingStore = useSettingStore();
+
+    const links = [
+        {
+            title: "主页",
+            name: "home",
+            icon: "house"
+        },
+        {
+            title: "目录",
+            name: "catalogue",
+            icon: "book-open"
+        },
+        {
+            title: "情报",
+            name: "details",
+            icon: "sitemap"
+        },
+        {
+            title: "检索",
+            name: "search",
+            icon: "search"
+        }
+    ];
 </script>
 
 <template>
     <nav class="z-navbar" :class="{ collapse: settingStore.get(`ui-collapse`) }">
         <ul class="nav-list">
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `home` }">
-                    <fa icon="house"/>
-                    <span>主页</span>
-                </nuxt-link>
-            </li>
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `catalogue` }">
-                    <fa icon="book-open"/>
-                    <span>目录</span>
-                </nuxt-link>
-            </li>
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `details` }">
-                    <fa icon="sitemap"/>
-                    <span>情报</span>
-                </nuxt-link>
-            </li>
-            <li class="nav-item">
-                <nuxt-link :to="{ name: `search` }">
-                    <fa icon="search"/>
-                    <span>检索</span>
+            <li v-for="{ title, name, icon } in links" class="nav-item">
+                <nuxt-link class="nav-link" :to="{ name }">
+                    <fa :icon="icon"/>
+                    <span>{{ title }}</span>
                 </nuxt-link>
             </li>
         </ul>
@@ -37,15 +42,15 @@
     .z-navbar {
         position: fixed;
         top: calc(50% - 144px);
-        left: -16px;
-        width: 64px;
+        width: 48px;
         box-shadow: 4px 4px 8px rgb(0 0 0 / 33%);
+        background-color: var(--color-background);
         transition: all 0.4s;
 
         &:hover {
-            width: 132px;
+            width: 116px;
 
-            .nav-item span {
+            .nav-link > span {
                 opacity: 1;
             }
         }
@@ -65,38 +70,35 @@
         display: flex;
         height: 64px;
         padding-left: 16px;
-        background-color: var(--color-background);
         transition: margin-left 0.4s;
         user-select: none;
 
-        &:hover {
-            margin-left: 16px;
+        &:not(:hover) {
+            margin-left: -16px;
+        }
+    }
 
-            > a {
-                background-color: rgb(64 64 64);
-                color: white;
-            }
+    .nav-link {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        gap: 4px;
+        border-radius: 12px 0 0 12px;
+        word-break: keep-all;
+
+        :hover > & {
+            background-color: rgb(64 64 64);
+            color: white;
         }
 
-        > a {
-            display: flex;
-            flex: 1;
-            align-items: center;
-            gap: 4px;
-            border-radius: 12px;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
+        > svg {
+            width: 48px;
+            font-size: 21px;
+        }
 
-            > svg {
-                width: 48px;
-                font-size: 21px;
-            }
-
-            > span {
-                opacity: 0;
-                word-break: keep-all;
-                transition: all 0.4s;
-            }
+        > span {
+            opacity: 0;
+            transition: all 0.4s;
         }
     }
 </style>
