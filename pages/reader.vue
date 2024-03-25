@@ -20,11 +20,6 @@
         ogNovelCategory: art.novelInfo.tag.join(",")
     });
 
-    const state = ref({
-        readCount: 0,
-        content: ""
-    });
-
     //上一章
     const toPrev = art.isFirstInVol ? "上一卷" : "上一章";
     const toPrevClass = { invisible: art.isFirst };
@@ -70,18 +65,12 @@
     });
 
     //获取正文
-    const { data } = await useFetch("/api/article", {
+    const { pending, data: post } = useLazyFetch("/api/article", {
         query: {
             novel,
             index
         }
     });
-
-    const { error, content, readCount } = data.value;
-    if (error === 0) {
-        state.value.content = content;
-        state.value.readCount = readCount;
-    }
 </script>
 
 <template>
@@ -96,7 +85,7 @@
                 <ul class="novel-information">
                     <li>
                         <fa icon="eye"/>
-                        <span>{{ state.readCount }} 阅读</span>
+                        <span>{{ post?.readCount || 0 }} 阅读</span>
                     </li>
                     <li>
                         <fa icon="pen-to-square"/>
@@ -117,7 +106,8 @@
                 <fa icon="chevron-right"/>
             </nuxt-link>
         </header>
-        <novel-article class="novel-text" :content="state.content" :enabled="art.runtime"/>
+        <mb-skeleton v-if="pending" animated/>
+        <novel-article v-else class="novel-text" :content="post.content" :enabled="art.runtime"/>
         <footer class="novel-footer">
             <p v-if="art.ending" class="novel-endding">THE END</p>
             <div class="novel-copyright">
@@ -163,8 +153,11 @@
         }
     }
 
-    .novel-text {
+    .mb-skeleton, .novel-text {
         padding-inline: var(--cw-large);
+    }
+
+    .novel-text {
         font-family: v-bind("fontFamily");
         font-size: v-bind("fontSize");
     }
