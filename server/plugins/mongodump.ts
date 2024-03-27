@@ -1,3 +1,4 @@
+import consola from "consola";
 import dayjs from "dayjs";
 import schedule from "node-schedule";
 import { exec } from "child_process";
@@ -24,10 +25,10 @@ export default defineNitroPlugin((app) => {
         //运行命令
         exec(`mongodump -u=${options.user} -p=${options.pass} -d=${options.dbName} --archive="${path}" --authenticationDatabase admin`, (err, stdout, stderr) => {
             if (err) {
-                console.error(err);
+                consola.error(err);
             }
             else {
-                console.log("数据库备份成功！");
+                consola.success("数据库备份成功！");
             }
         });
     });

@@ -48,7 +48,7 @@ export default defineNuxtConfig({
         port: 443
     },
     devtools: {
-        enabled: false
+        enabled: true
     },
     experimental: {
         viewTransition: true

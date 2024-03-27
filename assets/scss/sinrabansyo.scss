@@ -58,12 +58,12 @@ rt {
 }
 
 blockquote {
-    margin: 1em 2em;
-    padding: 0.75em 1em;
+    margin-block: 16px;
+    padding: 12px 16px;
     border-block: 1px solid var(--color-border-lighter);
     border-inline: 4px solid var(--color-theme);
-    border-radius: 4px;
     background-color: var(--color-background);
+    font-size: 14px;
 }
 
 code {
@@ -287,7 +287,7 @@ textarea {
 
 /* 代码高亮 */
 [z-dark] .shiki span {
-    color: var(--shiki-dark) !important;
+    color: var(--shiki-dark) !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* ---------------------------------------------------------------- */

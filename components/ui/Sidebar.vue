@@ -3,18 +3,12 @@
     const settingStore = useSettingStore();
 
     //边栏显隐与UI折叠
-    const hidden = ref(false);
-    watch(() => [
-        settingStore.setting["sidebar-display"],
-        settingStore.setting["ui-collapse"]
-    ], ([s, u]) => {
-        hidden.value = {
-            0: u,
+    const hidden = computed(() => {
+        return {
+            0: settingStore.setting["ui-collapse"],
             1: false,
             2: true
-        }[s];
-    }, {
-        immediate: true
+        }[settingStore.setting["sidebar-display"]];
     });
 </script>
 
@@ -43,12 +37,25 @@
 <style lang="scss" scoped>
     .z-sidebar {
         width: 256px;
+
+        @media (width >= 1024px) {
+            &.hidden {
+                display: none;
+            }
+        }
+
+        @media (width < 1024px) {
+            margin: auto;
+        }
+
+        > :first-child {
+            margin-top: 0;
+        }
     }
 
     .aside-profile {
         display: grid;
         justify-items: center;
-        margin-top: 0;
     }
 
     .aside-avatar {
@@ -68,17 +75,5 @@
 
     .aside-update {
         font-size: 14px;
-    }
-
-    @media (width >= 1024px) {
-        .z-sidebar.hidden {
-            display: none;
-        }
-    }
-
-    @media (width < 1024px) {
-        .z-sidebar {
-            margin: auto;
-        }
     }
 </style>

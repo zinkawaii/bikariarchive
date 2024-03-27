@@ -59,7 +59,7 @@
 
 <template>
     <div class="home-jumbotron">
-        <div class="jumbo-background" :style="style.background"></div>
+        <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp" :style="style.background"/>
         <div class="jumbo-banner" :style="style.title">
             <h1 class="jumbo-title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
             <h2 class="jumbo-phrase" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
@@ -76,12 +76,9 @@
         overflow: hidden;
     }
 
-    .jumbo-background {
+    .jumbo-image {
         height: 72vh;
-        background-image: url("/garden/jumbotron.webp");
-        background-position: center;
-        background-size: cover;
-        scale: 1.1;
+        object-fit: cover;
     }
 
     .jumbo-banner {
