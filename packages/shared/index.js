@@ -6,7 +6,7 @@ export const isDev = process.env.NODE_ENV === "development";
 
 //从根目录合并路径
 export function r(path) {
-    return resolve("./", path);
+    return resolve(isDev ? "./" : "../", path);
 }
 
 //统计执行时长

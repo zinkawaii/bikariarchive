@@ -38,15 +38,15 @@ export default class Processor {
     constructor(
         public options: ProcessorOptions<Processor>
     ) {
-        this.metaSrcDir = r(options.meta.src);
-        this.metaOutDir = r(options.meta.out);
-        this.mapOutDir = r(options.map.out);
+        this.metaSrcDir = resolve(options.meta.src);
+        this.metaOutDir = resolve(options.meta.out);
+        this.mapOutDir = resolve(options.map.out);
 
         this.jMeta = JSON.parse(fs.readFileSync(this.metaSrcDir).toString());
         this.jMap = {};
 
-        this.sourceSrcDir = r(options.source.src);
-        this.sourceOutDir = r(options.source.out);
+        this.sourceSrcDir = resolve(options.source.src);
+        this.sourceOutDir = resolve(options.source.out);
         this.sources = resolve(this.sourceSrcDir, options.source.pattern);
     }
 
