@@ -1,9 +1,7 @@
 import path from "path";
 
 //获取绝对路径
-export function r(url: string) {
-    return path.resolve("./", url);
-}
+export { r } from "@bikari/shared";
 
 //获取查询参数
 export function getQueryValues(event: any) {
