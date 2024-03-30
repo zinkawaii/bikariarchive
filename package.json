@@ -34,7 +34,7 @@
     "@bikari/process": "workspace:^",
     "@bikari/shared": "workspace:^",
     "@kikiutils/nuxt-session": "^2.0.3",
-    "@nuxt/devtools": "^1.1.4",
+    "@nuxt/devtools": "^1.1.5",
     "@nuxt/image": "^1.4.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/seo": "2.0.0-rc.10",
@@ -67,12 +67,12 @@
     "feed": "^4.2.2",
     "front-matter": "^4.0.2",
     "fs-extra": "^11.2.0",
-    "glob": "^10.3.10",
+    "glob": "^10.3.12",
     "html-entities": "^2.5.2",
     "md5": "^2.3.0",
     "merge": "^2.1.1",
     "nanoid": "^5.0.6",
-    "node-html-parser": "^6.1.12",
+    "node-html-parser": "^6.1.13",
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.13",
     "nuxt": "^3.11.1",
@@ -86,5 +86,8 @@
     "stylelint": "^16.3.1",
     "tar": "^6.2.1",
     "tsup": "^8.0.2"
+  },
+  "overrides": {
+    "nanoid": "3.3.7"
   }
 }
