@@ -99,7 +99,6 @@
     }
 
     .novel-text {
-        margin-bottom: -1em;
         font-size: 14px;
     }
 </style>

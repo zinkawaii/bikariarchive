@@ -305,10 +305,6 @@ textarea {
 }
 
 .novel-text {
-    > :first-child {
-        margin-top: 0;
-    }
-
     h2 {
         position: relative;
         margin-block: 24px 12px;
@@ -344,13 +340,17 @@ textarea {
         list-style-type: disc;
     }
 
-    strong {
-        font-weight: bold;
+    del {
+        filter: blur(0.25em);
     }
 
     em {
         font-style: normal;
         color: var(--color-theme-text);
+    }
+
+    strong {
+        font-weight: bold;
     }
 
     .mb-code {
@@ -359,6 +359,14 @@ textarea {
 
     .mb-gallery {
         margin-block: 16px;
+    }
+
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
     }
 }
 
