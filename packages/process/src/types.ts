@@ -15,6 +15,7 @@ export interface JNovel<T> {
 
 export interface JVolume {
     title: string,
+    cover: string,
     ending: boolean
 }
 
