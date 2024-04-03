@@ -48,17 +48,11 @@
         return replyName ? `回复 @${replyName}` : "评论";
     });
 
-    //提交
-    function submit() {
-        if (checker.exec()) {
-            postComment();
-        }
-    }
-
     //发表评论
-    const postComment = Zin.debounce(() => {
-        sending.value = true;
+    function postComment() {
+        if (!checker.exec()) return;
 
+        sending.value = true;
         Zjax.post("/api/comment", {
             body: {
                 path: commentPanelStore.path,
@@ -79,7 +73,7 @@
         .finally(() => {
             sending.value = false;
         });
-    });
+    }
 </script>
 
 <template>
@@ -108,7 +102,7 @@
                 full round
                 icon="paper-plane"
                 :disabled="!comment.length || sending"
-                @click="submit"
+                @click="postComment"
             >{{ sending ? "发送中……" : "发表评论" }}</mb-button>
         </div>
     </transition>

@@ -4,7 +4,7 @@
     const userStore = useUserStore();
 
     const sign = ref(userStore.sign);
-    const sign_old = ref();
+    const oldSign = ref();
 
     //UID校验
     if (userStore.uid !== Number(route.params.uid)) {
@@ -17,8 +17,8 @@
     });
 
     //更新签名
-    const signUpdate = Zin.debounce(() => {
-        if (sign.value === sign_old.value) return;
+    const updateSign = Zin.debounce(() => {
+        if (sign.value === oldSign.value) return;
 
         Zjax.put("/api/user/sign", {
             body: {
@@ -30,6 +30,8 @@
                 userStore.sign = sign.value;
             }
         });
+    }, {
+        title: "更新签名"
     });
 </script>
 
@@ -43,8 +45,8 @@
             class="space-sign"
             placeholder="在这里输入你的个性签名……"
             v-model="sign"
-            @focus="sign_old = sign"
-            @blur="signUpdate"
+            @focus="oldSign = sign"
+            @blur="updateSign"
             @keyup.enter="$event.target.blur()"
         />
     </div>

@@ -35,6 +35,8 @@
                     break;
             }
         });
+    }, {
+        title: "登录"
     });
 </script>
 

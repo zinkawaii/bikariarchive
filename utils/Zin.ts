@@ -66,7 +66,8 @@ const Zin = new class Z {
     //防抖（立即执行）
     debounce<T extends AnyFunc>(func: T, {
         delay = 1500,
-        immediate = true
+        immediate = true,
+        title = null
     } = {}) {
         const messageStore = useMessageStore();
         let timer;
@@ -89,7 +90,7 @@ const Zin = new class Z {
 
         function clearAndMessage() {
             clearTimeout(timer);
-            messageStore.show("debounce", `防抖机制生效中 (Delay: ${delay})`);
+            title && messageStore.show("debounce", `你的${title}速度太快了！`);
         }
     }
 
