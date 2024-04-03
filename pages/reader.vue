@@ -111,9 +111,17 @@
         <footer class="novel-footer">
             <p v-if="art.ending" class="novel-endding">THE END</p>
             <div class="novel-copyright">
-                <p><span class="meta">本章作者</span><coco-link :to="{ name: `home` }">{{ art.novelInfo.author }}</coco-link></p>
-                <p><span class="meta">本章链接</span><coco-link :to="route.path">https://{{ $config.public.domain + route.path }}</coco-link></p>
-                <p><span class="meta">版权声明</span><span>本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</span></p>
+                <nuxt-img class="copyright-avatar" :src="$config.public.avatar"/>
+                <div class="right">
+                    <div class="copyright-crumb">
+                        <span>{{ art.novelInfo.title }}</span>
+                        <fa class="text-gray" icon="chevron-right"/>
+                        <span>{{ art.volumeInfo.title }}</span>
+                        <fa class="text-gray" icon="chevron-right"/>
+                        <span>{{ art.title }}</span>
+                    </div>
+                    <p class="text-gray">本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</p>
+                </div>
             </div>
         </footer>
     </coco-widget>
@@ -153,10 +161,6 @@
         }
     }
 
-    .mb-skeleton, .novel-text {
-        padding-inline: var(--cw-large);
-    }
-
     .novel-text {
         font-family: v-bind("fontFamily");
         font-size: v-bind("fontSize");
@@ -180,22 +184,34 @@
     }
 
     .novel-copyright {
+        display: flex;
+        overflow: auto;
         margin-top: 16px;
-        padding: 8px 16px;
-        border: 1px solid var(--color-border);
-        border-radius: 4px;
+        border: 1px solid var(--color-border-lighter);
+        border-radius: var(--circle-radius);
+        background-color: var(--color-background);
         font-size: 14px;
         line-height: 2em;
-        word-break: break-word;
 
-        .meta {
-            font-weight: bold;
-            color: var(--color-theme-text);
-
-            &::after {
-                content: "：";
-            }
+        &::-webkit-scrollbar {
+            display: none;
         }
+
+        .right {
+            padding: 12px 16px;
+            text-wrap: nowrap;
+        }
+    }
+
+    .copyright-avatar {
+        width: 80px;
+        border-radius: var(--circle-radius);
+    }
+
+    .copyright-crumb {
+        display: flex;
+        align-items: center;
+        gap: 6px;
     }
 
     .novel-wrap-top {
@@ -228,13 +244,15 @@
         }
     }
 
+    @container main (width >= 768px) {
+        .mb-skeleton, .novel-text {
+            padding-inline: var(--cw-large);
+        }
+    }
+
     @container main (width < 768px) {
         .novel-wrap-top > span {
             display: none;
-        }
-
-        .novel-text {
-            padding: 0;
         }
     }
 </style>
