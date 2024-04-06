@@ -6,23 +6,6 @@
         isSubTyping: false
     });
 
-    const style = ref({
-        background: {
-            translate: 0
-        },
-        title: {
-            translate: 0
-        }
-    });
-
-    //滚动视差
-    useEventListener("scroll", Zin.throttle(() => {
-        if (window.scrollY > window.innerHeight) return;
-
-        style.value.background = { translate: `0 ${window.scrollY}px` };
-        style.value.title = { translate: `0 ${window.scrollY / 2}px` };
-    }));
-
     //标题打字特效
     onMounted(async () => {
         const config = useRuntimeConfig();
@@ -33,7 +16,7 @@
         await Zin.setInterval((t) => {
             title.value.main = main.slice(0, t);
         }, {
-            duration: 150,
+            duration: 125,
             times: main.length + 1
         });
         title.value.isMainTyping = false;
@@ -43,7 +26,7 @@
         await Zin.setInterval((t) => {
             title.value.sub = sub.slice(0, t);
         }, {
-            duration: 125,
+            duration: 100,
             times: sub.length + 1
         });
         title.value.isSubTyping = false;
@@ -59,8 +42,8 @@
 
 <template>
     <div class="home-jumbotron">
-        <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp" :style="style.background"/>
-        <div class="jumbo-banner" :style="style.title">
+        <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp"/>
+        <div class="jumbo-banner">
             <h1 class="jumbo-title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
             <h2 class="jumbo-phrase" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
         </div>
@@ -71,13 +54,18 @@
 </template>
 
 <style lang="scss" scoped>
+    $h: 72vh;
+
     .home-jumbotron {
-        position: relative;
-        overflow: hidden;
+        height: $h * 2;
+        margin-bottom: -$h;
+        clip-path: inset(0 0 50% 0);
     }
 
     .jumbo-image {
-        height: 72vh;
+        position: sticky;
+        top: 0;
+        height: 50%;
         object-fit: cover;
     }
 
@@ -85,13 +73,22 @@
         display: grid;
         align-content: center;
         position: absolute;
-        inset: 0;
+        inset: 0 0 (100vh - $h);
         text-align: center;
         text-shadow: 0 0 12px rgb(0 0 0 / 66%);
         color: white;
+        animation: jumbo-parallax linear forwards;
+        animation-timeline: view();
+        animation-range: exit;
 
         > * {
             height: 1em;
+        }
+    }
+
+    @keyframes jumbo-parallax {
+        to {
+            translate: 0 calc($h / 2);
         }
     }
 
@@ -139,18 +136,17 @@
         display: flex;
         position: absolute;
         opacity: 0;
-        inset: 80% 0 0;
-        background: linear-gradient(transparent, rgb(0 0 0 / 50%));
+        inset: ($h - 14vh) 0 (100vh - $h);
+        background: linear-gradient(transparent, black);
         font-size: 64px;
         color: white;
         transition: all 0.4s;
 
         &:hover {
-            opacity: 1;
+            opacity: 0.5;
         }
 
         > svg {
-            opacity: 0.5;
             margin: auto;
         }
     }
