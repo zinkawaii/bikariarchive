@@ -11,7 +11,7 @@ const purifyOptions: DOMPurify.Config = {
 const zmark = new Marked({
     async walkTokens(token) {
         if (token.type !== "code") return;
-        const codeRef = await useHighlighted(token.text, { lang: token.lang, ...highlightOptions });
+        const codeRef = await useShikiHighlighted(token.text, { lang: token.lang, ...highlightOptions });
         token.text = codeRef.value || await until(codeRef).changed();
     },
     renderer: {

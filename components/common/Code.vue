@@ -15,7 +15,7 @@
     const $Code = ref();
 
     //代码
-    const code = await useHighlighted(props.raw, { lang: props.lang, ...highlightOptions });
+    const code = await useShikiHighlighted(props.raw, { lang: props.lang, ...highlightOptions });
 
     //行数
     const lines = computed(() => {
