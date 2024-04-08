@@ -26,6 +26,7 @@ export default {
             "eye",
             "gear",
             "house",
+            "house-chimney",
             "info-circle",
             "link",
             "moon",

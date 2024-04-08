@@ -32,15 +32,17 @@
         justify-content: center;
         gap: 24px;
         min-width: var(--size-min-width);
-        padding: 32px;
+        padding: var(--sotomi-padding, 32px);
     }
 
     .full-page {
-        > .nakami {
-            max-width: 1308px;
+        padding: 0;
+
+        .nakami {
+            max-width: none;
         }
 
-        > .z-sidebar {
+        .z-footer, .z-sidebar {
             display: none;
         }
     }
@@ -112,8 +114,9 @@
 
     @media (width < 1024px) {
         .sotomi {
+            --sotomi-padding: 12px;
+
             flex-direction: column;
-            padding: 12px;
         }
 
         .nakami {

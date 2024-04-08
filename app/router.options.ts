@@ -3,6 +3,14 @@ import type { RouterConfig } from "@nuxt/schema";
 export default <RouterConfig> {
     routes: () => [
         {
+            name: "about",
+            path: "/about",
+            component: () => import("~/pages/about.vue"),
+            meta: {
+                fullPage: true
+            }
+        },
+        {
             name: "borrowing",
             path: "/borrowing",
             component: () => import("~/pages/borrowing.vue")

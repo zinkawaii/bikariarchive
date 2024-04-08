@@ -42,6 +42,11 @@
                     title: "更新日志",
                     icon: "clock-rotate-left",
                     to: { name: "update" }
+                },
+                {
+                    title: "关于",
+                    icon: "info-circle",
+                    to: { name: "about" }
                 }
             ]
         },
@@ -127,8 +132,6 @@
 
     .header-title {
         display: flex;
-        width: 100%;
-        margin-right: auto;
         padding-inline: 16px;
 
         > a {
@@ -215,6 +218,10 @@
         border-radius: 8px;
         box-shadow: var(--box-shadow);
 
+        @media (width < 1024px) {
+            display: none;
+        }
+
         > input {
             width: 160px;
             padding-inline: 8px;
@@ -225,12 +232,6 @@
             width: 48px;
             background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
             color: white;
-        }
-    }
-
-    @media (width < 1024px) {
-        .header-search {
-            display: none;
         }
     }
 </style>
