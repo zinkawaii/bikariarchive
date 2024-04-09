@@ -16,8 +16,8 @@
 <template>
     <div class="azur-wrapper">
         <div class="azur-cover"></div>
+        <div class="azur-fixed"></div>
         <div class="azur-header">
-            <div class="azur-header-background"></div>
             <div class="azur-header-corner"></div>
             <nuxt-link class="azur-header-return" :to="{ name: `home` }">
                 <div class="azur-header-arrow"><i></i></div>
@@ -132,18 +132,23 @@
         scale: -1 1;
     }
 
-    .azur-header {
-        position: absolute;
-        width: 100%;
-        height: 65px;
-    }
-
-    .azur-header-background {
+    .azur-fixed {
         position: absolute;
         inset: 0;
+        height: 65px;
         border-bottom: 2px solid var(--azur-gray-1);
         background-color: var(--azur-darkblue-1);
         mask-image: linear-gradient(to right, rgb(0 0 0 / 75%), transparent 75%);
+    }
+
+    .azur-header {
+        animation: azur-slide-down 0.4s backwards;
+    }
+
+    @keyframes azur-slide-down {
+        from {
+            translate: 0 -100%;
+        }
     }
 
     .azur-header-corner {
@@ -372,6 +377,16 @@
         height: 27%;
     }
 
+    .azur-block, .azur-center {
+        animation: azur-slide-in 0.4s backwards;
+    }
+
+    @keyframes azur-slide-in {
+        from {
+            translate: 100% 0;
+        }
+    }
+
     .azur-block {
         display: grid;
         grid-template-rows: auto 1fr;
@@ -508,6 +523,7 @@
         flex: 1;
         position: relative;
         margin-left: -28px;
+        animation-delay: 0.1s;
 
         &::before {
             content: "";
@@ -585,9 +601,11 @@
 
     .azur-data {
         height: 37%;
+        animation-delay: 0.2s;
     }
 
     .azur-signature {
         height: 26%;
+        animation-delay: 0.3s;
     }
 </style>
