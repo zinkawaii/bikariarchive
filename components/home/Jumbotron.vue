@@ -77,7 +77,7 @@
         text-align: center;
         text-shadow: 0 0 12px rgb(0 0 0 / 66%);
         color: white;
-        animation: jumbo-parallax linear forwards;
+        animation: jumbo-parallax linear;
         animation-timeline: view();
         animation-range: exit;
 
