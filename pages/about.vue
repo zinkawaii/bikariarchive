@@ -109,6 +109,7 @@
         --azur-blue-1: rgb(97 153 245);
         --azur-blue-2: rgb(132 230 255);
         --azur-blue-3: rgb(197 219 255);
+        --azur-blue-2-alpha: rgb(194 243 255 / 75%);
         --azur-darkblue-1: rgb(33 36 45);
         --azur-darkblue-2: rgb(33 28 60);
         --azur-darkblue-3: rgb(45 45 88);
@@ -116,15 +117,16 @@
         --azur-text-black: rgb(0 0 24);
         --azur-text-gray: rgb(255 255 255 / 66%);
         --azur-text-white: rgb(255 255 255);
+        --azur-full-height: calc(100dvh - 64px);
 
-        position: relative;
+        container-type: size;
         overflow: hidden;
-        height: calc(100dvh - 64px);
+        height: var(--azur-full-height);
         color: var(--azur-text-white);
     }
 
     .azur-cover {
-        position: absolute;
+        position: fixed;
         inset: 0;
         background-image: url("/garden/maestrale/cover.webp");
         background-position: center;
@@ -133,7 +135,7 @@
     }
 
     .azur-fixed {
-        position: absolute;
+        position: fixed;
         inset: 0;
         height: 65px;
         border-bottom: 2px solid var(--azur-gray-1);
@@ -142,7 +144,9 @@
     }
 
     .azur-header {
+        position: absolute;
         animation: azur-slide-down 0.4s backwards;
+        z-index: 1;
     }
 
     @keyframes azur-slide-down {
@@ -314,14 +318,14 @@
     }
 
     .azur-body {
-        position: absolute;
-        inset: 0 0 0 45%;
+        position: fixed;
+        inset: 0 0 0 max(0px, calc(100vw - 87.5cqh));
     }
 
     :where(.azur-body-top, .azur-body-bottom) {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 4%;
         height: 50%;
         padding-left: 32px;
 
@@ -340,7 +344,7 @@
             left: 14px;
             width: 4px;
             height: 35%;
-            background-color: color-mix(in srgb, var(--azur-blue-2), rgb(255 255 255 / 50%));
+            background-color: var(--azur-blue-2-alpha);
         }
     }
 
@@ -355,6 +359,7 @@
 
         [reset] {
             transform: skewX(-30deg);
+            transform-origin: bottom;
         }
     }
 
@@ -370,6 +375,7 @@
 
         [reset] {
             transform: skewX(30deg);
+            transform-origin: top;
         }
     }
 
@@ -390,18 +396,17 @@
     .azur-block {
         display: grid;
         grid-template-rows: auto 1fr;
-        position: relative;
     }
 
     .azur-block-title {
         display: flex;
         align-items: flex-end;
-        gap: 1px;
+        gap: 4px;
         position: relative;
         width: fit-content;
         height: 22px;
         min-width: 112px;
-        padding-inline: 12px 14px;
+        padding-inline: 6px 14px;
         font-weight: bold;
         color: var(--azur-text-black);
 
@@ -429,7 +434,7 @@
         .azur-body-bottom & {
             $w: 26px;
 
-            gap: 7px;
+            gap: 10px;
             padding-right: 21px;
 
             &::before {
@@ -471,7 +476,7 @@
 
     .azur-block-content {
         height: 100%;
-        padding: 14px 0 0 31px;
+        padding: 14px 0 0 26px;
     }
 
     .azur-resume {
@@ -480,8 +485,8 @@
         .azur-block-content {
             display: flex;
             justify-content: space-between;
-            max-width: 547cqh;
-            padding: 0 22cqh;
+            max-width: calc(0.638 * var(--azur-full-height) - 32px);
+            padding: 0 0 0 12cqh;
         }
     }
 
@@ -504,6 +509,10 @@
     .azur-uid, .azur-level {
         display: flex;
         gap: 0.25em;
+
+        > span:first-child {
+            color: var(--azur-text-gray);
+        }
     }
 
     .azur-level {
@@ -521,8 +530,7 @@
     .azur-center {
         container-type: size;
         flex: 1;
-        position: relative;
-        margin-left: -28px;
+        margin-left: -32px;
         animation-delay: 0.1s;
 
         &::before {
@@ -540,11 +548,11 @@
             "A B" 1fr
             "A C" auto
             "A D" auto / auto 1fr;
-        align-items: flex-end;
-        column-gap: 48cqh;
+        justify-items: flex-end;
         position: absolute;
         bottom: 0;
-        padding: 0 0 6cqh 27cqh;
+        width: 322cqh;
+        margin: 0 0 6cqh -32cqh;
         font-family: var(--font-smooth);
     }
 
@@ -575,7 +583,6 @@
     }
 
     .azur-rank {
-        place-self: flex-start flex-end;
         font-size: 18cqh;
         color: var(--azur-blue-3);
     }
