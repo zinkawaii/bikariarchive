@@ -6,11 +6,15 @@
     });
 
     const today = dayjs();
-    const birthday = dayjs(`${today.year() - 1}-09-29`);
+    const year = today.year();
 
-    const level = today.year() - 2003;
-    const total = today.isLeapYear() ? 366 : 365;
-    const exp = today.diff(birthday, "day") % total;
+    const birth = "09-29";
+    const isBefore = today.isBefore(`${year}-${birth}`);
+    const birthday = dayjs(`${year - (isBefore ? 1 : 0)}-${birth}`);
+
+    const level = year - 2003 + (isBefore ? 0 : 1);
+    const total = today.isLeapYear() && isBefore ? 366 : 365;
+    const exp = today.diff(birthday, "day");
 </script>
 
 <template>
@@ -41,7 +45,7 @@
                     <div class="azur-block-wrapper">
                         <div class="azur-block-content">
                             <div class="azur-resume-part">
-                                <span class="azur-author" reset>山吹色御守</span>
+                                <span class="azur-author" reset>{{ $config.public.author }}</span>
                                 <div class="azur-uid" reset>
                                     <span>UID:</span>
                                     <span>37810541</span>
@@ -64,7 +68,7 @@
                 <div class="azur-center">
                     <div class="azur-float" reset>
                         <div class="azur-appella">
-                            <icon name="fa6-solid:house-chimney"/>
+                            <icon name="emojione-monotone:bed"/>
                             <ruby>蹲家<rt>HIKIKOMORI</rt></ruby>
                         </div>
                         <div class="azur-rank">
@@ -552,6 +556,7 @@
         position: absolute;
         bottom: 0;
         width: 322cqh;
+        height: 218cqh;
         margin: 0 0 6cqh -32cqh;
         font-family: var(--font-smooth);
     }
@@ -560,12 +565,11 @@
         display: grid;
         grid-area: A;
         justify-items: center;
-        gap: 18cqh;
         width: fit-content;
         padding-top: 6cqh;
 
         > svg {
-            font-size: 135cqh;
+            font-size: 152cqh;
             filter: drop-shadow(0 0 24cqh var(--azur-darkblue-3));
         }
 

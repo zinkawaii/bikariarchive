@@ -2,7 +2,7 @@ import SftpClient from "ssh2-sftp-client";
 import consola from "consola";
 import fs from "fs-extra";
 import prompts from "prompts";
-import tar from "tar";
+import * as tar from "tar";
 import { timer } from "@bikari/shared";
 
 const options = await prompts([

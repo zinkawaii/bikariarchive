@@ -235,6 +235,10 @@ textarea {
     font-style: italic;
 }
 
+.text-danger {
+    color: var(--color-danger);
+}
+
 .text-gray {
     color: var(--color-text-info);
 }
@@ -373,6 +377,10 @@ textarea {
 .comment-text {
     blockquote {
         margin-inline: 0;
+    }
+
+    img {
+        max-width: 411px;
     }
 
     p {

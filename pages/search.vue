@@ -34,7 +34,7 @@
         for (const item of res) {
             const art = Article.for("bikari", item.index);
             const parts = item.parts.map((part) => {
-                return part.replaceAll(word, `<span class="light">${word}</span>`);
+                return part.replaceAll(word, `<span class="text-danger">${word}</span>`);
             });
 
             results.value.push({
@@ -54,6 +54,8 @@
 
         //重置到第一页
         page.value = 1;
+    }, {
+        title: "检索"
     });
 
     //带参数进入页面时
@@ -112,7 +114,7 @@
                 <span class="result-count">本章共出现{{ item.count }}次</span>
             </nuxt-link>
         </div>
-        <mb-pagination :total="results.length" scroll-to=".content-widget" v-model="page"/>
+        <mb-pagination :total="results.length" scroll-target=".content-widget" v-model="page"/>
     </coco-widget>
 </template>
 
@@ -213,10 +215,6 @@
         padding-block: 4px;
         font-size: 13px;
         line-height: 22px;
-
-        :deep(.light) {
-            color: var(--color-danger);
-        }
     }
 
     .result-count {

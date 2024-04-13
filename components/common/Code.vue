@@ -35,7 +35,7 @@
 </script>
 
 <template>
-    <div class="mb-code">
+    <figure class="mb-code">
         <div class="code-header">
             <span class="text-uppercase">{{ lang }}</span>
             <a @click="copy"><icon name="fa6-solid:paste"/></a>
@@ -47,7 +47,7 @@
         <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
             <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
         </div>
-    </div>
+    </figure>
 </template>
 
 <style lang="scss" scoped>

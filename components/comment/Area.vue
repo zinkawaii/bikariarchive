@@ -70,7 +70,7 @@
             </mb-button>
         </div>
         <comment-item v-for="item in comments" :key="item.id" :data="item" @update="getComments"/>
-        <mb-pagination v-if="count.main > 0" :total="count.main" scroll-to=".z-comment" v-model="page"/>
+        <mb-pagination v-if="count.main > 0" :total="count.main" scroll-target=".z-comment" v-model="page"/>
     </coco-widget>
 </template>
 
@@ -82,7 +82,7 @@
     }
 
     .comment-count {
-            margin-left: 0.5em;
+        margin-left: 0.5em;
         color: var(--color-text-info);
     }
 
