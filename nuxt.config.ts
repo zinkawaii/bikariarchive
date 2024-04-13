@@ -9,7 +9,8 @@ export default defineNuxtConfig({
             charset: "utf-8",
             viewport: "width=device-width, initial-scale=1",
             link: [
-                { rel: "icon", href: "/garden/favicon.ico" }
+                { rel: "icon", href: "/garden/favicon.ico" },
+                { rel: "alternate", type: "application/atom+xml", title: clientConfig.title, href: "/feed" }
             ],
             meta: [
                 { "http-equiv": "Cache-Control", content: "no-siteapp" },
