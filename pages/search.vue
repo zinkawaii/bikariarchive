@@ -108,9 +108,7 @@
             <nuxt-link v-for="item in displayResults" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
                 <h3 class="result-title">{{ item.title }}</h3>
                 <span class="result-volume">{{ item.volume }}</span>
-                <article class="result-part">
-                    <p v-for="part in item.parts" v-html="part"></p>
-                </article>
+                <article class="result-part" v-html="item.parts.join(``)"></article>
                 <span class="result-count">本章共出现{{ item.count }}次</span>
             </nuxt-link>
         </div>
