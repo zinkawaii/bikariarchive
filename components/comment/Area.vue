@@ -63,8 +63,11 @@
 <template>
     <coco-widget class="comment-area">
         <div class="comment-title">
-            <h2>评论<span class="text-gray">{{ count.total }}</span></h2>
-            <mb-button icon="comment-dots" @click="postComment">发表评论</mb-button>
+            <h2>评论<span class="comment-count">{{ count.total }}</span></h2>
+            <mb-button @click="postComment">
+                <fa icon="comment-dots"/>
+                <span>发表评论</span>
+            </mb-button>
         </div>
         <comment-item v-for="item in comments" :key="item.id" :data="item" @update="getComments"/>
         <mb-pagination v-if="count.main > 0" :total="count.main" scroll-to=".z-comment" v-model="page"/>
@@ -76,10 +79,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
 
-        span {
+    .comment-count {
             margin-left: 0.5em;
-        }
+        color: var(--color-text-info);
     }
 
     .mb-pagination {

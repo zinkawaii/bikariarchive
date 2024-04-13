@@ -1,25 +1,24 @@
 <script setup>
-    defineProps({
-        icon: String
-    });
+
 </script>
 
 <template>
     <button class="mb-button">
-        <fa v-if="icon?.length > 0" :icon="icon"/>
-        <span v-if="$slots.default"><slot></slot></span>
+        <slot></slot>
     </button>
 </template>
 
 <style lang="scss" scoped>
     .mb-button {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4em;
         padding-inline: 12px;
         border: 1px solid var(--color-theme-dark);
         border-radius: 4px;
         background-color: transparent;
         line-height: calc(2em - 2px);
-        text-align: center;
         color: var(--color-theme-text);
         transition: all 0.4s;
         cursor: pointer;
@@ -46,10 +45,6 @@
 
         & + & {
             margin-inline-start: 0.5em;
-        }
-
-        svg + span {
-            margin-left: 0.4em;
         }
     }
 </style>

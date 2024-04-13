@@ -135,8 +135,12 @@
                         <td>{{ item.index }}</td>
                         <td>{{ item.user?.uid || "--" }}</td>
                         <td class="manage-operators">
-                            <mb-button icon="pencil" @click="edit(item)"/>
-                            <mb-button icon="trash-can" @click="remove(item, index)"/>
+                            <mb-button @click="edit(item)">
+                                <fa icon="pencil"/>
+                            </mb-button>
+                            <mb-button @click="remove(item, index)">
+                                <fa icon="trash-can"/>
+                            </mb-button>
                         </td>
                     </tr>
                 </transition-group>

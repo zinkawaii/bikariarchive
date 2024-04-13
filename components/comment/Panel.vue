@@ -100,10 +100,11 @@
             </div>
             <mb-button
                 full round
-                icon="paper-plane"
                 :disabled="!comment.length || sending"
                 @click="postComment"
-            >{{ sending ? "发送中……" : "发表评论" }}</mb-button>
+                ><fa icon="paper-plane"/>
+                <span>{{ sending ? "发送中……" : "发表评论" }}</span>
+            </mb-button>
         </div>
     </transition>
 </template>
