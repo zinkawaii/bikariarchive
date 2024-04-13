@@ -38,14 +38,14 @@
     <div class="mb-code">
         <div class="code-header">
             <span class="text-uppercase">{{ lang }}</span>
-            <a @click="copy"><fa icon="paste"/></a>
+            <a @click="copy"><icon name="fa6-solid:paste"/></a>
         </div>
         <div class="code-area" :class="{ expanded: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
             <pre ref="$Code" class="shiki code-content" v-html="code || props.raw"></pre>
         </div>
         <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
-            <fa :icon="`angles-${isExpand ? `up` : `down`}`"/>
+            <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
         </div>
     </div>
 </template>

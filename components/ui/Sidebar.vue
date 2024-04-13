@@ -21,7 +21,7 @@
         </aside-widget>
         <aside-widget title="公告">
             <template #icon>
-                <fa icon="bullhorn"/>
+                <icon name="fa6-solid:bullhorn"/>
             </template>
             <p class="p-small">
                 欢迎来到<span class="text-primary">{{ $config.public.title }}</span>！(｡･ ω&lt;)ゞ♡<br />
@@ -32,7 +32,7 @@
             <aside-catalog v-if="route.name === `reader`"/>
             <aside-widget class="aside-update" title="最近更新">
                 <template #icon>
-                    <fa icon="clock-rotate-left"/>
+                    <icon name="fa6-solid:clock-rotate-left"/>
                 </template>
                 <recent-article type="blog" :limit="5" sort-by="updated"/>
             </aside-widget>

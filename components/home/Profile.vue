@@ -3,22 +3,22 @@
         {
             title: "Github",
             to: "https://github.com/KazariEX",
-            icon: ["fab", "github"]
+            icon: "fa6-brands:github"
         },
         {
             title: "Twitter",
             to: "https://twitter.com/KazariEX_0929",
-            icon: ["fab", "twitter"]
+            icon: "fa6-brands:twitter"
         },
         {
             title: "BiliBili",
             to: "https://space.bilibili.com/37810541",
-            icon: ["fab", "bilibili"]
+            icon: "fa6-brands:bilibili"
         },
         {
             title: "RSS",
             to: "/feed",
-            icon: "rss"
+            icon: "fa6-solid:rss"
         }
     ];
 </script>
@@ -47,7 +47,7 @@
         <ul class="profile-link">
             <li v-for="{ title, to, icon } in links">
                 <nuxt-link :to="to" :title="title" target="_blank">
-                    <fa :icon="icon"/>
+                    <icon :name="icon"/>
                 </nuxt-link>
             </li>
         </ul>

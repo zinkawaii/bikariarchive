@@ -1,5 +1,4 @@
 import { serverConfig, clientConfig } from "./app/runtime.config";
-import iconConfig from "./app/icon.config";
 import sitemapConfig from "./app/sitemap.config";
 import robotsConfig from "./app/robots.config";
 
@@ -69,7 +68,7 @@ export default defineNuxtConfig({
         ["nuxt-mongoose", serverConfig.mongoose],
         ["nuxt-simple-robots", robotsConfig],
         ["@nuxtjs/sitemap", sitemapConfig],
-        ["@vesp/nuxt-fontawesome", iconConfig],
+        "nuxt-icon",
         "nuxt-shiki",
         "nuxt-site-config",
         "@nuxt/image",

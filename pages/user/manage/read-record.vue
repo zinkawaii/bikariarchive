@@ -136,10 +136,10 @@
                         <td>{{ item.user?.uid || "--" }}</td>
                         <td class="manage-operators">
                             <mb-button @click="edit(item)">
-                                <fa icon="pencil"/>
+                                <icon name="fa6-solid:pencil"/>
                             </mb-button>
                             <mb-button @click="remove(item, index)">
-                                <fa icon="trash-can"/>
+                                <icon name="fa6-solid:trash-can"/>
                             </mb-button>
                         </td>
                     </tr>
@@ -212,8 +212,8 @@
 
         > button {
             width: 24px;
+            aspect-ratio: 1;
             padding: 0;
-            line-height: 22px;
         }
     }
 </style>

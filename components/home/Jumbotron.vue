@@ -48,7 +48,7 @@
             <h2 class="jumbo-phrase" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
         </div>
         <a class="jumbo-hide" @click="toBottom">
-            <fa icon="chevron-down"/>
+            <icon name="fa6-solid:chevron-down"/>
         </a>
     </div>
 </template>

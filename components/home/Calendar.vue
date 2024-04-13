@@ -179,8 +179,8 @@
             <div class="calendar-header">
                 <span class="calendar-month">{{ state.month + 1 }}° {{ monthMap[state.month][0] }}</span>
                 <span class="text-primary">「{{ monthMap[state.month][1] }}」</span>
-                <a :class="{ hidden: isFirstMonth }" @click="toLastMonth"><fa icon="chevron-left"/></a>
-                <a :class="{ hidden: isLastMonth }" @click="toNextMonth"><fa icon="chevron-right"/></a>
+                <a :class="{ hidden: isFirstMonth }" @click="toLastMonth"><icon name="fa6-solid:chevron-left"/></a>
+                <a :class="{ hidden: isLastMonth }" @click="toNextMonth"><icon name="fa6-solid:chevron-right"/></a>
             </div>
             <ul class="calendar-week">
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
@@ -207,9 +207,9 @@
                 <div class="calendar-section">
                     <div class="title">事件</div>
                     <div v-if="currentDate.event?.mono" class="calendar-event">
-                        <fa icon="quote-left"/>
+                        <icon name="fa6-solid:quote-left"/>
                         <span>{{ currentDate.event.mono }}</span>
-                        <fa icon="quote-right"/>
+                        <icon name="fa6-solid:quote-right"/>
                     </div>
                     <span v-else class="none">No Special.</span>
                 </div>
@@ -256,12 +256,13 @@
     .calendar-header {
         display: grid;
         grid-template-columns: auto 1fr auto auto;
+        padding-inline: 12px 4px;
         border-radius: 12px;
         background-color: var(--color-theme);
         line-height: 28px;
 
         > a {
-            padding-inline: 12px;
+            padding-inline: 8px;
             color: var(--color-theme-text);
             transition: all 0.15s;
 
@@ -273,7 +274,6 @@
     }
 
     .calendar-month {
-        padding-left: 12px;
         font-size: 16px;
         font-weight: bold;
     }
@@ -367,7 +367,7 @@
 
         > svg {
             padding-inline: 3px;
-            font-size: 12px;
+            font-size: 16px;
             color: var(--color-theme-dark);
 
             &:nth-of-type(1) {

@@ -5,58 +5,58 @@
     const navList = [
         {
             title: "主页",
-            icon: "house",
+            icon: "fa6-solid:house",
             to: { name: "home" }
         },
         {
             title: "目录",
-            icon: "book-open",
+            icon: "fa6-solid:book-open",
             to: { name: "catalogue" }
         },
         {
             title: "情报",
-            icon: "sitemap",
+            icon: "fa6-solid:sitemap",
             to: { name: "details" }
         },
         {
             title: "档案",
-            icon: "box-archive",
+            icon: "fa6-solid:box-archive",
             children: [
                 {
                     title: "借物表",
-                    icon: "person-praying",
+                    icon: "fa6-solid:person-praying",
                     to: { name: "borrowing" }
                 },
                 {
                     title: "神殿",
-                    icon: "torii-gate",
+                    icon: "fa6-solid:torii-gate",
                     to: { name: "chanrina" }
                 }
             ]
         },
         {
             title: "营业",
-            icon: "mug-saucer",
+            icon: "fa6-solid:mug-saucer",
             children: [
                 {
                     title: "更新日志",
-                    icon: "clock-rotate-left",
+                    icon: "fa6-solid:clock-rotate-left",
                     to: { name: "update" }
                 },
                 {
                     title: "关于",
-                    icon: "info-circle",
+                    icon: "fa-solid:info-circle",
                     to: { name: "about" }
                 }
             ]
         },
         {
             title: "链接",
-            icon: "link",
+            icon: "fa6-solid:link",
             children: [
                 {
                     title: "友情链接",
-                    icon: "link",
+                    icon: "fa-solid:user-friends",
                     to: { name: "friend" }
                 }
             ]
@@ -77,12 +77,12 @@
         <nav class="header-nav">
             <mb-popper v-for="{ title, icon, to, children } in navList">
                 <nuxt-link class="nav-link" :to="to">
-                    <fa :icon="icon"/>
+                    <icon :name="icon" :width="null"/>
                     <span>{{ title }}</span>
                 </nuxt-link>
                 <template v-if="children?.length" #floating>
                     <nuxt-link v-for="child in children" class="nav-pop" :to="child.to">
-                        <fa :icon="child.icon"/>
+                        <icon :name="child.icon"/>
                         <span>{{ child.title }}</span>
                     </nuxt-link>
                 </template>
@@ -91,7 +91,7 @@
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
             <button>
-                <fa icon="search"/>
+                <icon name="fa-solid:search"/>
             </button>
         </form>
     </header>
@@ -212,24 +212,25 @@
     }
 
     .header-search {
-        display: flex;
+        display: grid;
+        grid-template-columns: 160px 48px;
         overflow: hidden;
         margin: auto 16px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
+        line-height: 28px;
 
         @media (width < 1024px) {
             display: none;
         }
 
         > input {
-            width: 160px;
             padding-inline: 8px;
-            line-height: 28px;
         }
 
         > button {
-            width: 48px;
+            display: grid;
+            place-items: center;
             background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
             color: white;
         }

@@ -77,33 +77,33 @@
     <coco-widget>
         <header class="novel-header">
             <nuxt-link class="novel-wrap-top" :class="toPrevClass" :to="toPrevRoute">
-                <fa icon="chevron-left"/>
+                <icon name="fa6-solid:chevron-left"/>
                 <span>{{ toPrev }}</span>
             </nuxt-link>
             <div>
                 <h1 class="novel-title">{{ art.title }}</h1>
                 <ul class="novel-information">
                     <li>
-                        <fa icon="eye"/>
+                        <icon name="fa6-solid:eye"/>
                         <span>{{ post?.readCount || 0 }} 阅读</span>
                     </li>
                     <li>
-                        <fa icon="pen-to-square"/>
+                        <icon name="nonicons:keyword-16"/>
                         <span>{{ art.wordCount }} 字</span>
                     </li>
                     <li>
-                        <fa icon="pen"/>
+                        <icon name="fa6-solid:pen"/>
                         <time>{{ art.publishDate }}</time>
                     </li>
                     <li>
-                        <fa :icon="[`far`, `clock`]"/>
+                        <icon name="fa6-solid:clock-rotate-left"/>
                         <time>{{ art.updateDate }}</time>
                     </li>
                 </ul>
             </div>
             <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextRoute">
                 <span>{{ toNext }}</span>
-                <fa icon="chevron-right"/>
+                <icon name="fa6-solid:chevron-right"/>
             </nuxt-link>
         </header>
         <mb-skeleton v-if="pending" animated/>
@@ -115,9 +115,9 @@
                 <div class="right">
                     <div class="copyright-crumb">
                         <span>{{ art.novelInfo.title }}</span>
-                        <fa class="text-gray" icon="chevron-right"/>
+                        <icon class="text-gray" name="fa6-solid:chevron-right"/>
                         <span>{{ art.volumeInfo.title }}</span>
-                        <fa class="text-gray" icon="chevron-right"/>
+                        <icon class="text-gray" name="fa6-solid:chevron-right"/>
                         <span>{{ art.title }}</span>
                     </div>
                     <p class="text-gray">本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</p>

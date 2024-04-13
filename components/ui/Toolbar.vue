@@ -10,20 +10,20 @@
 <template>
     <div class="z-toolbar" :class="{ collapse }">
         <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
-            <fa icon="subway"/>
+            <icon name="fa-solid:subway"/>
         </nuxt-link>
         <a class="tool-item" @click="settingStore.open()">
-            <fa icon="gear"/>
+            <icon name="fa6-solid:gear"/>
         </a>
         <a class="tool-item" @click="signerStore.toggle()">
-            <fa icon="user"/>
+            <icon name="fa6-solid:user"/>
         </a>
         <a class="tool-item" href="#">
             <span class="tool-progress"></span>
-            <fa class="tool-arrow-top" icon="arrow-up"/>
+            <icon class="tool-arrow-top" name="fa6-solid:arrow-up"/>
         </a>
         <a class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
-            <fa :icon="`chevron-${collapse ? `left` : `right`}`"/>
+            <icon :name="`fa6-solid:chevron-${collapse ? `left` : `right`}`"/>
         </a>
     </div>
 </template>

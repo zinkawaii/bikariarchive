@@ -23,10 +23,9 @@
     }
 
     .aside-title {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         margin-bottom: 4px;
-
-        > span {
-            padding-left: 6px;
-        }
     }
 </style>

@@ -53,14 +53,14 @@
                     <div v-if="currentView === `login`">
                         <div class="sign-header">
                             <h2 class="sign-title">登录</h2>
-                            <a class="sign-have" @click="currentView = `logon`">没有账号？立即注册<fa icon="chevron-right"/></a>
+                            <a class="sign-have" @click="currentView = `logon`">没有账号？立即注册<icon name="fa6-solid:chevron-right"/></a>
                         </div>
                         <user-sign-in />
                     </div>
                     <div v-else-if="currentView === `logon`">
                         <div class="sign-header">
                             <h2 class="sign-title">注册</h2>
-                            <a class="sign-have" @click="currentView = `login`">已有账号，前往登录<fa icon="chevron-right"/></a>
+                            <a class="sign-have" @click="currentView = `login`">已有账号，前往登录<icon name="fa6-solid:chevron-right"/></a>
                         </div>
                         <user-sign-on @success="currentView = `login`"/>
                     </div>
@@ -81,7 +81,7 @@
                     </div>
                 </transition>
             </div>
-            <fa class="xmark" icon="xmark" @click="signerStore.close"/>
+            <icon class="xmark" name="fa6-solid:xmark" @click="signerStore.close"/>
         </div>
     </transition>
 </template>

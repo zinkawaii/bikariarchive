@@ -65,7 +65,7 @@
         <div class="comment-title">
             <h2>评论<span class="comment-count">{{ count.total }}</span></h2>
             <mb-button @click="postComment">
-                <fa icon="comment-dots"/>
+                <icon name="fa6-solid:comment-dots"/>
                 <span>发表评论</span>
             </mb-button>
         </div>

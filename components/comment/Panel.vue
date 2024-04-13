@@ -79,7 +79,7 @@
 <template>
     <transition name="scale">
         <div v-if="commentPanelStore.isOpened" class="comment-panel">
-            <fa class="xmark" icon="xmark" @click="commentPanelStore.close()"/>
+            <icon class="xmark" name="fa6-solid:xmark" @click="commentPanelStore.close()"/>
             <coco-title>{{ title }}</coco-title>
             <div class="panel-form">
                 <coco-input placeholder="昵称" :warn-tip="tips.nickname" v-model="nickname" @blur="tips.nickname = ``"/>
@@ -102,7 +102,7 @@
                 full round
                 :disabled="!comment.length || sending"
                 @click="postComment"
-                ><fa icon="paper-plane"/>
+                ><icon name="fa6-solid:paper-plane"/>
                 <span>{{ sending ? "发送中……" : "发表评论" }}</span>
             </mb-button>
         </div>

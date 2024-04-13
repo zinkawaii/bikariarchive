@@ -64,7 +64,7 @@
                 <div class="azur-center">
                     <div class="azur-float" reset>
                         <div class="azur-appella">
-                            <fa icon="house-chimney"/>
+                            <icon name="fa6-solid:house-chimney"/>
                             <ruby>蹲家<rt>HIKIKOMORI</rt></ruby>
                         </div>
                         <div class="azur-rank">

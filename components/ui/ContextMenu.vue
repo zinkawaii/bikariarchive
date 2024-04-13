@@ -5,19 +5,19 @@
 
     const toolItems = [
         {
-            icon: "chevron-left",
+            icon: "fa6-solid:chevron-left",
             action: createAction(() => {
                 router.back();
             })
         },
         {
-            icon: "chevron-right",
+            icon: "fa6-solid:chevron-right",
             action: createAction(() => {
                 router.forward();
             })
         },
         {
-            icon: "arrow-up",
+            icon: "fa6-solid:arrow-up",
             action: createAction(() => {
                 window.scrollTo({
                     top: 0
@@ -25,7 +25,7 @@
             })
         },
         {
-            icon: "rotate-right",
+            icon: "fa6-solid:rotate-right",
             action: createAction(() => {
                 location.reload();
             })
@@ -35,21 +35,21 @@
     const textItems = [
         {
             title: "复制",
-            icon: "paste",
+            icon: "fa6-solid:paste",
             action: createAction(() => {
                 navigator.clipboard.writeText(textSelection.text.value);
             })
         },
         {
             title: "站内词条",
-            icon: "sitemap",
+            icon: "fa6-solid:sitemap",
             action: createAction(() => {
                 router.push(toEntry(textSelection.text.value));
             })
         },
         {
             title: "全文检索",
-            icon: "search",
+            icon: "fa-solid:search",
             action: createAction(() => {
                 router.push(toSearch(textSelection.text.value));
             })
@@ -59,14 +59,14 @@
     const menuItems = ref([
         {
             title: "返回主页",
-            icon: "house",
+            icon: "fa6-solid:house",
             action: createAction(() => {
                 router.push({ name: "home" });
             })
         },
         {
             title: "昼夜切换",
-            icon: computed(() => (settingStore.isDarkMode ? "sun" : "moon")),
+            icon: computed(() => (settingStore.isDarkMode ? "fa6-solid:sun" : "fa6-solid:moon")),
             action: createAction(() => {
                 const value = settingStore.isDarkMode ? 1 : 2;
                 settingStore.set("dark-mode", value);
@@ -119,18 +119,18 @@
     <div v-show="state" ref="$Menu" class="content-widget z-context-menu">
         <menu class="menu-tool-bar">
             <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
-                <fa :icon="icon"/>
+                <icon :name="icon"/>
             </li>
         </menu>
         <menu v-if="textSelection.text.value" class="menu-list">
             <li v-for="{ title, icon, action } in textItems" class="menu-item" @click="action">
-                <fa :icon="icon"/>
+                <icon :name="icon"/>
                 <span>{{ title }}</span>
             </li>
         </menu>
         <menu class="menu-list">
             <li v-for="{ title, icon, action } in menuItems" class="menu-item" @click="action">
-                <fa :icon="icon"/>
+                <icon :name="icon"/>
                 <span>{{ title }}</span>
             </li>
         </menu>

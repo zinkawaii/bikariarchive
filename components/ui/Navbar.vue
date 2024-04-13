@@ -5,22 +5,22 @@
         {
             title: "主页",
             name: "home",
-            icon: "house"
+            icon: "fa6-solid:house"
         },
         {
             title: "目录",
             name: "catalogue",
-            icon: "book-open"
+            icon: "fa6-solid:book-open"
         },
         {
             title: "情报",
             name: "details",
-            icon: "sitemap"
+            icon: "fa6-solid:sitemap"
         },
         {
             title: "检索",
             name: "search",
-            icon: "search"
+            icon: "fa-solid:search"
         }
     ];
 </script>
@@ -30,7 +30,7 @@
         <ul class="nav-list">
             <li v-for="{ title, name, icon } in links" class="nav-item">
                 <nuxt-link class="nav-link" :to="{ name }">
-                    <fa :icon="icon"/>
+                    <icon :name="icon"/>
                     <span>{{ title }}</span>
                 </nuxt-link>
             </li>
