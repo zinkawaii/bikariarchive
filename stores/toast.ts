@@ -1,6 +1,6 @@
-type MessageType = "error" | "info" | "success";
+type ToastType = "error" | "info" | "success";
 
-const iconInfos: Record<MessageType, {
+const iconInfos: Record<ToastType, {
     name: string,
     color: string
 }> = {
@@ -18,12 +18,12 @@ const iconInfos: Record<MessageType, {
     }
 };
 
-export const useMessageStore = defineStore("message", {
+export const useToastStore = defineStore("toast", {
     state: () => ({
         map: new Map()
     }),
     actions: {
-        show(key: string, content: string, type: MessageType = "info") {
+        show(key: string, content: string, type: ToastType = "info") {
             const hash = Math.random().toString(36);
             for (const item of this.map) {
                 if (item[0].startsWith(key)) {

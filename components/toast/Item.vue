@@ -5,7 +5,7 @@
         content: String
     });
 
-    const messageStore = useMessageStore();
+    const toastStore = useToastStore();
 
     onMounted(async () => {
         await Zin.setTimeout(5000);
@@ -13,22 +13,22 @@
     });
 
     function remove() {
-        messageStore.remove(props.name);
+        toastStore.remove(props.name);
     }
 </script>
 
 <template>
-    <div class="message-item" @click="remove">
-        <div class="message-content">
+    <div class="toast-item" @click="remove">
+        <div class="toast-content">
             <icon v-if="iconInfo" :name="iconInfo.name" size="20" :style="{ color: iconInfo.color }"/>
             <span>{{ content }}</span>
         </div>
-        <div class="message-progress"></div>
+        <div class="toast-progress"></div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .message-item {
+    .toast-item {
         overflow: hidden;
         margin-bottom: 16px;
         padding-top: 2px;
@@ -40,7 +40,7 @@
         pointer-events: auto;
     }
 
-    .message-content {
+    .toast-content {
         display: flex;
         align-items: center;
         gap: 4px;
@@ -53,7 +53,7 @@
         }
     }
 
-    .message-progress {
+    .toast-progress {
         height: 2px;
         background-color: var(--color-theme);
         transform-origin: left;

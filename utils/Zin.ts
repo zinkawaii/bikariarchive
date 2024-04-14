@@ -69,18 +69,18 @@ const Zin = new class Z {
         immediate = true,
         title = null
     } = {}) {
-        const messageStore = useMessageStore();
+        const toastStore = useToastStore();
         let timer;
         return <(...args: Parameters<T>) => void> (
             immediate ?
             function(...args) {
-                timer ? clearAndMessage() : func.apply(this, args);
+                timer ? clearAndToast() : func.apply(this, args);
                 timer = setTimeout(() => {
                     timer = null;
                 }, delay);
             } :
             function(...args) {
-                timer && clearAndMessage();
+                timer && clearAndToast();
                 timer = setTimeout(() => {
                     func.apply(this, args);
                     timer = null;
@@ -88,9 +88,9 @@ const Zin = new class Z {
             }
         );
 
-        function clearAndMessage() {
+        function clearAndToast() {
             clearTimeout(timer);
-            title && messageStore.show("debounce", `你的${title}速度太快了！`);
+            title && toastStore.show("debounce", `你的${title}速度太快了！`);
         }
     }
 

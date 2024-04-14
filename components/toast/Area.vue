@@ -1,9 +1,9 @@
 <script setup>
-    const messageStore = useMessageStore();
+    const toastStore = useToastStore();
 
-    const messageList = computed(() => {
+    const toastList = computed(() => {
         const res = [];
-        for (const item of messageStore.map) {
+        for (const item of toastStore.map) {
             res.unshift(item);
         }
         return res;
@@ -11,10 +11,10 @@
 </script>
 
 <template>
-    <div class="message-area">
-        <transition-group name="msg">
-            <message-item
-                v-for="[key, { icon, content }] in messageList"
+    <div class="toast-area">
+        <transition-group name="toast">
+            <toast-item
+                v-for="[key, { icon, content }] in toastList"
                 :key="key"
                 :name="key"
                 :icon-info="icon"
@@ -25,7 +25,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .message-area {
+    .toast-area {
         display: grid;
         justify-items: center;
         position: fixed;
@@ -34,12 +34,12 @@
         inset-inline: 0;
     }
 
-    .msg-enter-active, .msg-leave-active {
+    .toast-enter-active, .toast-leave-active {
         transform-origin: top;
         transition: all 0.4s;
     }
 
-    .msg-enter-from, .msg-leave-to {
+    .toast-enter-from, .toast-leave-to {
         opacity: 0;
         margin-bottom: -38px;
         scale: 0;

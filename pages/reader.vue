@@ -1,5 +1,5 @@
 <script setup>
-    const messageStore = useMessageStore();
+    const toastStore = useToastStore();
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();
     const route = useRoute();
@@ -85,10 +85,10 @@
         await execute();
         switch (post.value.error) {
             case 1:
-                messageStore.show("article-password-error", "密码错误", "error");
+                toastStore.show("article-password-error", "密码错误", "error");
                 break;
             default:
-                messageStore.show("article-password-right", "密码正确", "success");
+                toastStore.show("article-password-right", "密码正确", "success");
                 decrypted.value = true;
         }
     }, {

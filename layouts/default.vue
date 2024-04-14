@@ -21,7 +21,7 @@
     <mb-image-viewer />
     <mb-confirm />
     <mb-fps />
-    <message-area />
+    <toast-area />
     <z-context-menu />
     <z-loader />
 </template>
@@ -100,7 +100,7 @@
         z-index: 512;
     }
 
-    .message-area {
+    .toast-area {
         z-index: 768;
     }
 
