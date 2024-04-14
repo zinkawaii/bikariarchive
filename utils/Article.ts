@@ -14,6 +14,7 @@ class Article implements JChapter {
     updated    = "";    //更新日期
     refactored = "";    //重构日期
     draft      = false; //草稿
+    encrypted  = false; //加密
     ending     = false; //终章
     runtime    = false; //运行时
     wordCount  = 0;     //字数

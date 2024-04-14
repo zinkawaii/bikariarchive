@@ -19,9 +19,10 @@ export interface JVolume {
     ending: boolean
 }
 
-export interface JChapter extends ArticleFrontMatter {
+export interface JChapter extends Omit<ArticleFrontMatter, "abbrlink" | "password"> {
     index: string,
     volume: number,
+    encrypted?: boolean,
     wordCount: number
 }
 
@@ -33,5 +34,6 @@ export interface ArticleFrontMatter {
     updated?: string,
     draft?: boolean,
     ending?: boolean,
+    password?: string,
     runtime?: boolean
 }

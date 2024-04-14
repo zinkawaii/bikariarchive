@@ -44,13 +44,18 @@ export default new Processor({
 
         //解析内容
         const doc = $.parse(result);
-        const runtime = doc.querySelectorAll("*").some((e) => e.tagName.includes("-"));
+        const runtime = doc.querySelectorAll("*").some((e) => e.tagName.includes("-")) || void(0);
         const wordCount = doc.querySelectorAll("p").reduce((res, p) => {
             return res + p.textContent.length;
         }, 0);
 
+        //加密内容
+        const { password } = attributes;
+        const encrypted = Boolean(password) || void(0);
+        delete attributes.password;
+
         //日期格式化
-        dateFormat(attributes, ["date", "updated", "refactored"]);
+        formatDate(attributes, ["date", "updated", "refactored"]);
 
         //生成映射
         let index = "";
@@ -63,12 +68,16 @@ export default new Processor({
                 delete attributes.abbrlink;
                 break;
         }
-        this.jMap[novel][index] = name;
+        this.jMap[novel][index] = {
+            name,
+            password
+        };
 
         //写入数据
         this.jMeta[novel].chapters[name] = {
             index,
             volume,
+            encrypted,
             runtime,
             wordCount,
             ...attributes
@@ -97,7 +106,7 @@ export default new Processor({
 });
 
 //日期格式化
-function dateFormat(obj, keys) {
+function formatDate(obj, keys) {
     keys.forEach((key) => {
         if (Reflect.has(obj, key)) {
             obj[key] = dayjs(obj[key]).format("YYYY-MM-DD");

@@ -1,4 +1,5 @@
 <script setup>
+    const messageStore = useMessageStore();
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();
     const route = useRoute();
@@ -64,12 +65,34 @@
         title: art.title
     });
 
+    //密码
+    const password = ref();
+    const decrypted = ref(false);
+
     //获取正文
-    const { pending, data: post } = useLazyFetch("/api/article", {
+    const { execute, pending, data: post } = useLazyFetch("/api/article", {
         query: {
             novel,
-            index
+            index,
+            password
+        },
+        immediate: !art.encrypted,
+        watch: false
+    });
+
+    //防抖化请求
+    const debouncedExecute = Zin.debounce(async () => {
+        await execute();
+        switch (post.value.error) {
+            case 1:
+                messageStore.show("article-password-error", "密码错误");
+                break;
+            default:
+                messageStore.show("article-password-right", "密码正确");
+                decrypted.value = true;
         }
+    }, {
+        title: "请求"
     });
 </script>
 
@@ -85,7 +108,7 @@
                 <ul class="novel-information">
                     <li>
                         <icon name="fa6-solid:eye"/>
-                        <span>{{ post?.readCount || 0 }} 阅读</span>
+                        <span>{{ post?.readCount ?? "?" }} 阅读</span>
                     </li>
                     <li>
                         <icon name="nonicons:keyword-16"/>
@@ -106,8 +129,20 @@
                 <icon name="fa6-solid:chevron-right"/>
             </nuxt-link>
         </header>
-        <mb-skeleton v-if="pending" animated/>
-        <novel-article v-else class="novel-text" :content="post.content" :enabled="art.runtime"/>
+        <template v-if="art.encrypted && !decrypted">
+            <p class="novel-encrypted">
+                <icon name="solar:lock-password-bold"/>
+                <span>文章已加密，请输入正确的密码后查看内容</span>
+                <icon name="solar:lock-password-bold"/>
+            </p>
+            <form class="novel-decrypt" @submit.prevent="debouncedExecute">
+                <coco-input type="password" placeholder="密码" v-model="password"/>
+            </form>
+        </template>
+        <template v-else>
+            <mb-skeleton v-if="pending" animated/>
+            <novel-article v-else class="novel-text" :content="post.content" :enabled="art.runtime"/>
+        </template>
         <footer class="novel-footer">
             <p v-if="art.ending" class="novel-endding">THE END</p>
             <div class="novel-copyright">
@@ -159,6 +194,23 @@
             align-items: center;
             gap: 4px;
         }
+    }
+
+    .novel-encrypted {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25em;
+        font-size: 14px;
+        line-height: 22px;
+        text-align: center;
+        color: var(--color-text-info);
+    }
+
+    .novel-decrypt {
+        max-width: 616px;
+        margin-inline: auto;
+        padding-block: 32px;
     }
 
     .novel-text {

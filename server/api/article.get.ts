@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import Article from "~/utils/Article";
+import ArtMap from "~/dist/json/Artmap.json";
 
 interface GetArticleResponse extends BaseResponse {
     content?: string,
@@ -8,10 +9,16 @@ interface GetArticleResponse extends BaseResponse {
 
 export default defineCustomHandler(async (event) => {
     const res: GetArticleResponse = { error: 0 };
-    const { novel, index } = getQueryValues(event);
+    const { novel, index, password } = getQueryValues(event);
 
     //初始化
     const art = Article.for(novel, index);
+
+    //验证密码
+    if (art.encrypted && password !== ArtMap[novel][index].password) {
+        res.error = 1;
+        return res;
+    }
 
     //读取文章
     const file = await readArticle(art);
