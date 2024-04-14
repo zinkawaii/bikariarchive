@@ -13,7 +13,13 @@
 <template>
     <div class="message-area">
         <transition-group name="msg">
-            <message-item v-for="[key, content] in messageList" :key="key" :name="key">{{ content }}</message-item>
+            <message-item
+                v-for="[key, { icon, content }] in messageList"
+                :key="key"
+                :name="key"
+                :icon-info="icon"
+                :content="content"
+            />
         </transition-group>
     </div>
 </template>

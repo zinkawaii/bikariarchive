@@ -30,7 +30,7 @@
     //复制
     function copy() {
         navigator.clipboard.writeText($Code.value.textContent);
-        messageStore.show("copy", "代码已复制");
+        messageStore.show("copy", "代码已复制", "success");
     }
 </script>
 

@@ -68,7 +68,7 @@
             commentPanelStore.close(true);
         })
         .catch(() => {
-            messageStore.show("comment-error", "评论发送失败");
+            messageStore.show("comment-error", "评论发送失败", "error");
         })
         .finally(() => {
             sending.value = false;

@@ -85,10 +85,10 @@
         await execute();
         switch (post.value.error) {
             case 1:
-                messageStore.show("article-password-error", "密码错误");
+                messageStore.show("article-password-error", "密码错误", "error");
                 break;
             default:
-                messageStore.show("article-password-right", "密码正确");
+                messageStore.show("article-password-right", "密码正确", "success");
                 decrypted.value = true;
         }
     }, {

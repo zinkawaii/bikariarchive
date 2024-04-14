@@ -1,6 +1,8 @@
 <script setup>
     const props = defineProps({
-        name: String
+        name: String,
+        iconInfo: Object,
+        content: String
     });
 
     const messageStore = useMessageStore();
@@ -17,7 +19,10 @@
 
 <template>
     <div class="message-item" @click="remove">
-        <span class="message-content"><slot></slot></span>
+        <div class="message-content">
+            <icon v-if="iconInfo" :name="iconInfo.name" size="20" :style="{ color: iconInfo.color }"/>
+            <span>{{ content }}</span>
+        </div>
         <div class="message-progress"></div>
     </div>
 </template>
@@ -36,9 +41,16 @@
     }
 
     .message-content {
-        padding-inline: 18px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding-inline: 14px;
         font-size: 14px;
         line-height: 32px;
+
+        > span {
+            padding-inline: 4px;
+        }
     }
 
     .message-progress {

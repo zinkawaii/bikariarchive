@@ -12,7 +12,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         return false;
     }
     else if (userStore.identity < (to.meta.identity as number)) {
-        messageStore.show("identity-error", "无访问权限 (Limit Code: 143)");
+        messageStore.show("identity-error", "无访问权限 (Limit Code: 143)", "error");
         return false;
     }
 });
