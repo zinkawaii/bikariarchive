@@ -2,15 +2,23 @@
     const commentPanelStore = useCommentPanelStore();
     const route = useRoute();
 
-    const comments = ref();
+    const $ = ref();
+    const comments = ref(null);
     const count = ref({
         total: 0,
         main: 0
     });
     const page = ref(1);
 
-    onMounted(() => {
-        watchImmediate(() => [route.path, page.value], getComments);
+    //视口懒加载
+    watchImmediate(() => [route.path, page.value], () => {
+        comments.value = null;
+        const { stop } = useIntersectionObserver($, ([{ isIntersecting }]) => {
+            if (isIntersecting) {
+                getComments();
+                stop();
+            }
+        });
     });
 
     //获取评论
@@ -61,7 +69,7 @@
 </script>
 
 <template>
-    <coco-widget class="comment-area">
+    <coco-widget ref="$" class="comment-area">
         <div class="comment-title">
             <h2>评论<span class="comment-count">{{ count.total }}</span></h2>
             <mb-button @click="postComment">
@@ -69,6 +77,7 @@
                 <span>发表评论</span>
             </mb-button>
         </div>
+        <mb-skeleton v-if="!comments"/>
         <comment-item v-for="item in comments" :key="item.id" :data="item" @update="getComments"/>
         <mb-pagination v-if="count.main > 0" :total="count.main" scroll-target=".z-comment" v-model="page"/>
     </coco-widget>
@@ -86,7 +95,7 @@
         color: var(--color-text-info);
     }
 
-    .mb-pagination {
+    .mb-skeleton, .mb-pagination {
         margin-top: 21px;
     }
 </style>
