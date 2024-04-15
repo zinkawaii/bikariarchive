@@ -24,45 +24,6 @@ const Zin = new class Z {
         return (hour >= 6 && hour < 18) ? this.PERIOD_DAY : this.PERIOD_NIGHT;
     }
 
-    //创建Fragment
-    createFragment() {
-        return document.createDocumentFragment();
-    }
-
-    //用虚拟DOM创建元素
-    createNode(tag, attrs, ...children) {
-        //初始化
-        const node = {
-            function: () => tag(),
-            string: () => document.createElement(tag, {
-                is: attrs?.is
-            })
-        }[typeof tag]?.() || tag;
-
-        //属性
-        for (const key in attrs) {
-            const val = attrs[key];
-            if (key.startsWith("on")) {
-                node[key] = val;
-            }
-            else if (val !== false && val !== null && val !== void(0)) {
-                node.setAttribute(key, val);
-            }
-        }
-
-        //子元素
-        children.forEach((child) => {
-            if (typeof child === "object") {
-                node.appendChild(child);
-            }
-            else {
-                node.appendChild(new Text(child));
-            }
-        });
-
-        return node;
-    }
-
     //防抖（立即执行）
     debounce<T extends AnyFunc>(func: T, {
         delay = 1500,
@@ -90,7 +51,7 @@ const Zin = new class Z {
 
         function clearAndToast() {
             clearTimeout(timer);
-            title && toastStore.show("debounce", `你的${title}速度太快了！`);
+            title && toastStore.show("debounce", `你的${title}速度太快了~`);
         }
     }
 
@@ -117,20 +78,14 @@ const Zin = new class Z {
         URL.revokeObjectURL(url);
     }
 
-    //立即运行并返回函数
-    iife<T extends AnyFunc>(func: T, ...args: Parameters<T>) {
-        func.apply(this, args);
-        return func;
-    }
-
     //生成随机整数
     randInt(from: number, to: number) {
         return Math.floor(Math.random() * (to - from + 1) + from);
     }
 
     //延时执行函数
-    setTimeout(duration: number): Promise<void> {
-        return new Promise((resolve, reject) => {
+    setTimeout(duration: number) {
+        return new Promise<void>((resolve, reject) => {
             setTimeout(resolve, duration);
         });
     }

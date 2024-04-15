@@ -24,7 +24,7 @@
     "dompurify": "^3.1.0",
     "lunisolar": "^2.5.0",
     "marked": "^12.0.1",
-    "vue": "^3.4.21",
+    "vue": "^3.4.22",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "dot-prop": "^8.0.2",
     "eslint": "^9.0.0",
     "eslint-config-flat-gitignore": "^0.1.5",
-    "eslint-plugin-vue": "^9.24.1",
+    "eslint-plugin-vue": "^9.25.0",
     "feed": "^4.2.2",
     "front-matter": "^4.0.2",
     "fs-extra": "^11.2.0",
@@ -81,7 +81,7 @@
     "sass": "^1.75.0",
     "ssh2-sftp-client": "^10.0.3",
     "stylelint": "^16.3.1",
-    "tar": "^7.0.0",
+    "tar": "^7.0.1",
     "tsup": "^8.0.2"
   }
 }

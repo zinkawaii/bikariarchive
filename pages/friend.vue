@@ -18,7 +18,7 @@
 <template>
     <coco-widget title="友情链接">
         <div class="novel-text">
-            <mb-skeleton v-if="pending"/>
+            <mb-skeleton v-if="pending" animated/>
             <div v-else class="friend-list">
                 <nuxt-link v-for="item in data.list" class="friend-item" :to="item.link" target="_blank">
                     <mb-image class="friend-avatar" :src="item.icon" loading="lazy"/>
