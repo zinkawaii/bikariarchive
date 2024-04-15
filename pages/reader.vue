@@ -140,7 +140,7 @@
             </form>
         </template>
         <template v-else>
-            <mb-skeleton v-if="pending" animated/>
+            <mb-skeleton v-if="pending"/>
             <novel-article v-else class="novel-text" :content="post.content" :enabled="art.runtime"/>
         </template>
         <footer class="novel-footer">

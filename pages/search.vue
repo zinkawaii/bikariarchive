@@ -121,7 +121,7 @@
             <span>共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次</span>
         </div>
         <div class="search-results">
-            <mb-skeleton v-if="pending" animated/>
+            <mb-skeleton v-if="pending"/>
             <nuxt-link v-for="item in displayResults" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
                 <h3 class="result-title">{{ item.title }}</h3>
                 <span class="result-volume">{{ item.volume }}</span>
