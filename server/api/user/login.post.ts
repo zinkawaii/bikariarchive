@@ -5,8 +5,7 @@ interface PostLoginResponse extends BaseResponse {
     sign?: string
 }
 
-export default defineCustomHandler(async (event) => {
-    const res: PostLoginResponse = { error: 0 };
+export default defineCustomHandler<PostLoginResponse>(async (event, res) => {
     const { session } = event.context;
     const {
         account: acc,
@@ -53,6 +52,4 @@ export default defineCustomHandler(async (event) => {
         //账号不存在
         res.error = 1;
     }
-
-    return res;
 });

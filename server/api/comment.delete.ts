@@ -1,7 +1,6 @@
 interface DeleteCommentResponse extends BaseResponse {}
 
-export default defineCustomHandler(async (event) => {
-    const res: DeleteCommentResponse = { error: 0 };
+export default defineCustomHandler<DeleteCommentResponse>(async (event, res) => {
     const {
         id
     } = await readBody(event);
@@ -24,6 +23,4 @@ export default defineCustomHandler(async (event) => {
             children: id
         }
     });
-
-    return res;
 });

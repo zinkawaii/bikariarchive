@@ -5,8 +5,7 @@ interface GetEntryResponse extends BaseResponse {
     [key: string]: any
 }
 
-export default defineCustomHandler(async (event) => {
-    const res: GetEntryResponse = { error: 0 };
+export default defineCustomHandler<GetEntryResponse>(async (event, res) => {
     const {
         title
     } = getQueryValues(event);
@@ -24,6 +23,4 @@ export default defineCustomHandler(async (event) => {
         //词条不存在
         res.error = 1;
     }
-
-    return res;
 });

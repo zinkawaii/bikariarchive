@@ -15,7 +15,7 @@
 
     //获取评论
     function getComments() {
-        Zjax.get("/api/comments", {
+        Zjax.get("/api/comment", {
             query: {
                 path: route.path,
                 page: page.value

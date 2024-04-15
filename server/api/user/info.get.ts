@@ -6,8 +6,7 @@ interface GetUserInfoResponse extends BaseResponse {
     isLogin?: boolean
 }
 
-export default defineCustomHandler(async (event) => {
-    const res: GetUserInfoResponse = { error: 0 };
+export default defineCustomHandler<GetUserInfoResponse>(async (event, res) => {
     const { session } = event.context;
 
     const result = await UserDataModel.findOne({
@@ -24,6 +23,4 @@ export default defineCustomHandler(async (event) => {
     else {
         res.isLogin = false;
     }
-
-    return res;
 });

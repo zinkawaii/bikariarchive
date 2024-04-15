@@ -12,11 +12,7 @@ interface SearchResult {
     parts: string[]
 }
 
-export default defineCustomHandler(async (event) => {
-    const res: GetArticleResponse = {
-        error: 0,
-        results: []
-    };
+export default defineCustomHandler<GetArticleResponse>(async (event, res) => {
     let { word } = getQueryValues(event);
 
     if (word && word.length > 0) {
@@ -27,6 +23,7 @@ export default defineCustomHandler(async (event) => {
         const jChapters = jNovel.chapters;
 
         //按章节遍历
+        res.results = [];
         for (const art of jChapters) {
             //读取整章
             const text = await readArticle(art);

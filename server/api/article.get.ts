@@ -7,8 +7,7 @@ interface GetArticleResponse extends BaseResponse {
     readCount?: number
 }
 
-export default defineCustomHandler(async (event) => {
-    const res: GetArticleResponse = { error: 0 };
+export default defineCustomHandler<GetArticleResponse>(async (event, res) => {
     const { novel, index, password } = getQueryValues(event);
 
     //初始化
@@ -17,7 +16,7 @@ export default defineCustomHandler(async (event) => {
     //验证密码
     if (art.encrypted && password !== ArtMap[novel][index].password) {
         res.error = 1;
-        return res;
+        return;
     }
 
     //读取文章
@@ -81,6 +80,4 @@ export default defineCustomHandler(async (event) => {
             user: user?._id
         });
     })();
-
-    return res;
 });

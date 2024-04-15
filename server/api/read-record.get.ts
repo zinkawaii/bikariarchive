@@ -2,8 +2,7 @@ interface GetReadRecordResponse extends BaseResponse {
     data?: any[]
 }
 
-export default defineCustomHandler(async (event) => {
-    const res: GetReadRecordResponse = { error: 0 };
+export default defineCustomHandler<GetReadRecordResponse>(async (event, res) => {
     const query = getQueryValues(event);
 
     //权限验证
@@ -32,6 +31,4 @@ export default defineCustomHandler(async (event) => {
         //符号不一致
         res.error = 1;
     }
-
-    return res;
 });

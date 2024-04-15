@@ -1,5 +1,4 @@
-export default defineCustomHandler(async (event) => {
-    const res: BaseResponse = { error: 0 };
+export default defineCustomHandler(async (event, res) => {
     const { email } = getQueryValues(event);
 
     //预生成验证码
@@ -37,6 +36,4 @@ export default defineCustomHandler(async (event) => {
     .catch(() => {
         res.error = 1;
     });
-
-    return res;
 });

@@ -1,5 +1,4 @@
-export default defineCustomHandler(async (event) => {
-    const res: BaseResponse = { error: 0 };
+export default defineCustomHandler(async (event, res) => {
     const { id } = await readBody(event);
 
     //权限验证
@@ -14,6 +13,4 @@ export default defineCustomHandler(async (event) => {
         //ID不存在
         res.error = 1;
     }
-
-    return res;
 });

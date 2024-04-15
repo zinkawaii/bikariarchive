@@ -3,8 +3,7 @@ import Mail from "~/server/core/Mail";
 
 interface PostCommentResponse extends BaseResponse {}
 
-export default defineCustomHandler(async (event) => {
-    const res: PostCommentResponse = { error: 0 };
+export default defineCustomHandler<PostCommentResponse>(async (event, res) => {
     let {
         path,
         parent,
@@ -62,6 +61,4 @@ export default defineCustomHandler(async (event) => {
         //路径格式错误
         res.error = 1;
     }
-
-    return res;
 });

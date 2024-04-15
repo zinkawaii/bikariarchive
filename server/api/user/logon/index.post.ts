@@ -6,8 +6,7 @@ interface GetLogonResponse extends BaseResponse {
     identity?: number
 }
 
-export default defineCustomHandler(async (event) => {
-    const res: GetLogonResponse = { error: 0 };
+export default defineCustomHandler<GetLogonResponse>(async (event, res) => {
     const { session } = event.context;
     const {
         nickname,
@@ -86,8 +85,6 @@ export default defineCustomHandler(async (event) => {
         //表单验证失败
         res.error = 100;
     }
-
-    return res;
 });
 
 //服务端验证

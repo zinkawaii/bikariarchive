@@ -2,8 +2,7 @@ interface PutUserSignResponse extends BaseResponse {
     content?: string
 }
 
-export default defineCustomHandler(async (event) => {
-    const res: PutUserSignResponse = { error: 0 };
+export default defineCustomHandler<PutUserSignResponse>(async (event, res) => {
     const { session } = event.context;
     const { content } = await readBody(event);
 
@@ -23,6 +22,4 @@ export default defineCustomHandler(async (event) => {
         //用户未登录
         res.error = 1;
     }
-
-    return res;
 });

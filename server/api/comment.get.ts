@@ -9,8 +9,7 @@ interface GetCommentsResponse extends BaseResponse {
 //需要获取的属性
 const select = "_id content children time nickname email address";
 
-export default defineCustomHandler(async (event) => {
-    const res: GetCommentsResponse = { error: 0 };
+export default defineCustomHandler<GetCommentsResponse>(async (event, res) => {
     let {
         path,
         page
@@ -51,8 +50,6 @@ export default defineCustomHandler(async (event) => {
         //路径格式错误
         res.error = 1;
     }
-
-    return res;
 });
 
 //递归解引用
