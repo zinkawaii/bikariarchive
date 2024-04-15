@@ -90,7 +90,7 @@
         </nav>
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
-            <button>
+            <button title="全文检索">
                 <icon name="fa-solid:search"/>
             </button>
         </form>

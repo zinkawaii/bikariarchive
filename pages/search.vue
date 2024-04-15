@@ -7,6 +7,7 @@
     const router = useRouter();
     const session = useSessionStorage("search-result", {});
     const searchHistoryStore = useSearchHistoryStore();
+    const toastStore = useToastStore();
 
     const inputWord = ref("");
     const searchWord = ref("");
@@ -14,19 +15,33 @@
     const page = ref(0);
     const { history } = searchHistoryStore;
 
+    const { execute, pending, data: fetchData } = useLazyFetch("/api/search", {
+        query: {
+            word: searchWord
+        },
+        watch: false
+    });
+
     //全文检索
     const fullTextSearch = Zin.debounce(async (word = inputWord.value) => {
-        if (!word?.length) return;
+        if (!word?.length) {
+            toastStore.show("search-empty", "请输入内容");
+            return;
+        }
 
         //限制长度
         word = word.slice(0, 64);
 
-        //获取数据
-        const data = session.value[word] ?? (await useFetch("/api/search", { query: { word } })).data.value;
-
+        //预更新数据
         results.value.length = 0;
         searchWord.value = word;
         router.replace({ query: { word } });
+
+        //从会话存储中读取或发送请求
+        const data = session.value[word] ?? (
+            await execute(),
+            fetchData.value
+        );
 
         const { error, results: res } = data;
         if (error !== 0) return;
@@ -59,11 +74,12 @@
     });
 
     //带参数进入页面时
-    watch(() => route.query.word, (value) => {
+    watchImmediate(() => route.query.word, (value) => {
         inputWord.value = value;
-        fullTextSearch(value);
-    }, {
-        immediate: true
+        value ? (value !== searchWord.value) && fullTextSearch(value) : (
+            searchWord.value = "",
+            results.value.length = 0
+        );
     });
 
     //分页显示结果
@@ -99,12 +115,13 @@
             </ul>
         </div>
     </coco-widget>
-    <coco-widget v-if="searchWord.length > 0">
+    <coco-widget v-if="searchWord.length">
         <div class="search-statistics">
             <h2>"{{ searchWord }}"的检索结果</h2>
             <span>共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次</span>
         </div>
         <div class="search-results">
+            <mb-skeleton v-if="pending" animated/>
             <nuxt-link v-for="item in displayResults" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
                 <h3 class="result-title">{{ item.title }}</h3>
                 <span class="result-volume">{{ item.volume }}</span>
