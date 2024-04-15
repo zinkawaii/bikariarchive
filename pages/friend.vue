@@ -1,11 +1,11 @@
 <script setup>
-    import jFriend from "~/assets/json/Friend.json";
-
     const config = useRuntimeConfig();
 
     useHead({
         title: "友情链接"
     });
+
+    const { pending, data } = useLazyFetch("/api/friend");
 
     const schema = `export default {
   title: "${config.public.title}",
@@ -18,8 +18,9 @@
 <template>
     <coco-widget title="友情链接">
         <div class="novel-text">
-            <div class="friend-list">
-                <nuxt-link v-for="item in jFriend.list" class="friend-item" :to="item.link" target="_blank">
+            <mb-skeleton v-if="pending"/>
+            <div v-else class="friend-list">
+                <nuxt-link v-for="item in data.list" class="friend-item" :to="item.link" target="_blank">
                     <mb-image class="friend-avatar" :src="item.icon" loading="lazy"/>
                     <div class="friend-info">
                         <div class="content-h2 text-truncate friend-title">{{ item.title }}</div>

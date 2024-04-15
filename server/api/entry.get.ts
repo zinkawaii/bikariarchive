@@ -13,8 +13,7 @@ export default defineCustomHandler<GetEntryResponse>(async (event, res) => {
     if (title in jMap) {
         const category = jMap[title];
         const path = r(`dist/${category}/${title}.json`);
-        const file = await fs.readFile(path);
-        const data = JSON.parse(file.toString());
+        const data = await fs.readJson(path);
 
         res.category = category;
         Object.assign(res, data);

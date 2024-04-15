@@ -42,7 +42,7 @@ export default class Processor {
         this.metaOutDir = resolve(options.meta.out);
         this.mapOutDir = resolve(options.map.out);
 
-        this.jMeta = JSON.parse(fs.readFileSync(this.metaSrcDir).toString());
+        this.jMeta = fs.readJsonSync(this.metaSrcDir);
         this.jMap = {};
 
         this.sourceSrcDir = resolve(options.source.src);
