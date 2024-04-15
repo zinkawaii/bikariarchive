@@ -35,7 +35,7 @@ export const useSettingStore = defineStore("setting", () => {
     function listen(key: string, handler: WatchCallback, options: WatchOptions & {
         viewTransition: boolean
     }) {
-        watch(() => setting.value[key], (newVal, oldVal, onCleanup) => {
+        watchImmediate(() => setting.value[key], (newVal, oldVal, onCleanup) => {
             const fn = handler.bind(null, newVal, oldVal, onCleanup);
 
             if (//首屏加载时不应用视图转换
@@ -47,10 +47,7 @@ export const useSettingStore = defineStore("setting", () => {
                 document.startViewTransition(fn);
             }
             else fn();
-        }, {
-            immediate: true,
-            ...options
-        });
+        }, options);
     }
 
     //打开设置

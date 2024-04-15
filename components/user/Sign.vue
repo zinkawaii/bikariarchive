@@ -14,10 +14,8 @@
     });
 
     //根据登录状态切换视图
-    watch(() => userStore.isLogin, (value) => {
+    watchImmediate(() => userStore.isLogin, (value) => {
         currentView.value = value ? "profile" : "login";
-    }, {
-        immediate: true
     });
 
     //路径变更时收起
