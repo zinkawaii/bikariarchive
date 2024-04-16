@@ -15,8 +15,7 @@ export default defineCustomHandler<GetArticleResponse>(async (event, res) => {
 
     //验证密码
     if (art.encrypted && password !== ArtMap[novel][index].password) {
-        res.error = 1;
-        return;
+        return 1;
     }
 
     //读取文章
@@ -24,7 +23,7 @@ export default defineCustomHandler<GetArticleResponse>(async (event, res) => {
     res.content = file.toString();
 
     //获取阅读量
-    const result = await ReadRecordModel.find({
+    const qRecord = await ReadRecordModel.find({
         novel,
         index
     }, "ip time");
@@ -37,7 +36,7 @@ export default defineCustomHandler<GetArticleResponse>(async (event, res) => {
             time: number
         }
     } = {};
-    result.forEach((record: any) => {
+    qRecord.forEach((record: any) => {
         const ip = record.ip;
         if (ip in rlist) {
             const next = record.time.getTime();

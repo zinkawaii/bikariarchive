@@ -15,41 +15,42 @@ export default defineCustomHandler<GetCommentsResponse>(async (event, res) => {
         page
     } = getQueryValues(event);
 
+    //获取严格路径
     path = getStrictPath(path);
-    if (path) {
-        //单页评论数
-        const limit = 10;
 
-        //总评论数
-        res.totalCount = await CommentDataModel.countDocuments({
-            path
-        });
-
-        //主评论数
-        res.mainCount = await CommentDataModel.countDocuments({
-            path,
-            parent: null
-        });
-
-        //获取主评论
-        const data = await CommentDataModel.find({
-            path,
-            parent: null
-        }, select)
-        .sort({ time: "desc" })
-        .skip((Number(page) - 1) * limit)
-        .limit(limit);
-
-        //获取子评论
-        await deference(data);
-
-        res.data = [];
-        dataClone(res.data, data);
+    //路径格式错误
+    if (!path) {
+        return 1;
     }
-    else {
-        //路径格式错误
-        res.error = 1;
-    }
+
+    //单页评论数
+    const limit = 10;
+
+    //总评论数
+    res.totalCount = await CommentDataModel.countDocuments({
+        path
+    });
+
+    //主评论数
+    res.mainCount = await CommentDataModel.countDocuments({
+        path,
+        parent: null
+    });
+
+    //获取主评论
+    const data = await CommentDataModel.find({
+        path,
+        parent: null
+    }, select)
+    .sort({ time: "desc" })
+    .skip((Number(page) - 1) * limit)
+    .limit(limit);
+
+    //获取子评论
+    await deference(data);
+
+    res.data = [];
+    dataClone(res.data, data);
 });
 
 //递归解引用

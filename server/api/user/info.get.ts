@@ -9,15 +9,15 @@ interface GetUserInfoResponse extends BaseResponse {
 export default defineCustomHandler<GetUserInfoResponse>(async (event, res) => {
     const { session } = event.context;
 
-    const result = await UserDataModel.findOne({
+    const qUser = await UserDataModel.findOne({
         uid: session.uid
     }, "nickname identity sign");
 
-    if (result) {
+    if (qUser) {
         res.uid = session.uid;
-        res.nickname = result.nickname;
-        res.identity = result.identity;
-        res.sign = result.sign;
+        res.nickname = qUser.nickname;
+        res.identity = qUser.identity;
+        res.sign = qUser.sign;
         res.isLogin = true;
     }
     else {

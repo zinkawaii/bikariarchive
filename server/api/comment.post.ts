@@ -1,64 +1,67 @@
 import dayjs from "dayjs";
-import Mail from "~/server/core/Mail";
 
-interface PostCommentResponse extends BaseResponse {}
+interface PostCommentBody {
+    path: string,
+    parent: string,
+    content: string,
+    nickname: string,
+    email: string,
+    address: string
+}
 
-export default defineCustomHandler<PostCommentResponse>(async (event, res) => {
-    let {
+export default defineCustomHandler(async (event, res) => {
+    const body = await readBody<PostCommentBody>(event);
+
+    //获取严格路径
+    const path = getStrictPath(body.path);
+
+    //路径格式错误
+    if (!path) {
+        return 1;
+    }
+
+    //获取时间，UID
+    const time = dayjs.tz();
+    const uid = event.context.session?.uid;
+
+    //规制参数类型
+    const parent = body.parent || void(0);
+
+    //获取用户
+    const qUser = await UserDataModel.findOne({ uid });
+
+    //将评论数据写入数据库
+    const qComment = await CommentDataModel.create({
         path,
         parent,
-        content,
-        nickname,
-        email,
-        address
-    } = await readBody(event);
+        content: body.content,
+        time,
+        nickname: body.nickname,
+        email: body.email,
+        address: body.address,
+        ip: getRequestIP(event, { xForwardedFor: true }),
+        user: qUser?._id
+    });
 
-    path = getStrictPath(path);
-    if (path) {
-        //获取时间，UID
-        const time = dayjs.tz();
-        const uid = event.context.session?.uid;
+    //更新所回复评论的数据（如果有）
+    const qParent = await CommentDataModel.findOneAndUpdate({
+        _id: parent
+    }, {
+        $push: {
+            children: qComment._id
+        }
+    });
 
-        //获取用户
-        const user = await UserDataModel.findOne({ uid });
-
-        //规制参数类型
-        parent = parent || void(0);
-
-        //将评论数据写入数据库
-        const comment = await CommentDataModel.create({
-            path,
-            parent,
-            content,
-            time,
-            nickname,
-            email,
-            address,
-            ip: getRequestIP(event, { xForwardedFor: true }),
-            user: user?._id
-        });
-
-        //更新所回复评论的数据（如果有）
-        const res = await CommentDataModel.findOneAndUpdate({
-            _id: parent
-        }, {
-            $push: {
-                children: comment._id
+    //对被回复评论进行邮件通知
+    if (qParent?.email && qParent.email !== body.email) {
+        sendMail({
+            to: qParent.email,
+            title: `@${body.nickname} 回复了您的评论`,
+            template: "comment-reply",
+            props: {
+                content: body.content,
+                path
             }
         });
-
-        //对被回复评论进行邮件通知
-        if (res !== null && res.email.length > 0 && res.email !== email) {
-            sendMail({
-                to: res.email,
-                title: `@${nickname} 回复了您的评论`,
-                template: "comment-reply",
-                props: { content, path }
-            });
-        }
-    }
-    else {
-        //路径格式错误
-        res.error = 1;
     }
 });

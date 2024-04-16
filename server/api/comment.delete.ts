@@ -1,9 +1,9 @@
-interface DeleteCommentResponse extends BaseResponse {}
+interface DeleteCommentBody {
+    id: string
+}
 
-export default defineCustomHandler<DeleteCommentResponse>(async (event, res) => {
-    const {
-        id
-    } = await readBody(event);
+export default defineCustomHandler(async (event, res) => {
+    const { id } = await readBody<DeleteCommentBody>(event);
 
     //权限验证
     identityValidate(event, 9);

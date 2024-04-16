@@ -10,16 +10,15 @@ export default defineCustomHandler<GetEntryResponse>(async (event, res) => {
         title
     } = getQueryValues(event);
 
-    if (title in jMap) {
-        const category = jMap[title];
-        const path = r(`dist/${category}/${title}.json`);
-        const data = await fs.readJson(path);
+    //词条不存在
+    if (!(title in jMap)) {
+        return 1;
+    }
 
-        res.category = category;
-        Object.assign(res, data);
-    }
-    else {
-        //词条不存在
-        res.error = 1;
-    }
+    const category = jMap[title];
+    const path = r(`dist/${category}/${title}.json`);
+    const data = await fs.readJson(path);
+
+    res.category = category;
+    Object.assign(res, data);
 });

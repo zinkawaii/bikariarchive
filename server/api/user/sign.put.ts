@@ -1,25 +1,28 @@
+interface PutUserSignBody {
+    content: string
+}
+
 interface PutUserSignResponse extends BaseResponse {
     content?: string
 }
 
 export default defineCustomHandler<PutUserSignResponse>(async (event, res) => {
     const { session } = event.context;
-    const { content } = await readBody(event);
+    const { content } = await readBody<PutUserSignBody>(event);
 
-    if (session.uid > 0) {
-        const result = await UserDataModel.updateOne({
-            uid: session.uid
-        }, {
-            sign: content
-        });
-
-        if (result.matchedCount === 0) {
-            //找不到用户
-            res.error = 2;
-        }
+    //用户未登录
+    if (session.uid <= 0) {
+        return 1;
     }
-    else {
-        //用户未登录
-        res.error = 1;
+
+    const qUser = await UserDataModel.updateOne({
+        uid: session.uid
+    }, {
+        sign: content
+    });
+
+    //找不到用户
+    if (qUser.matchedCount === 0) {
+        return 2;
     }
 });

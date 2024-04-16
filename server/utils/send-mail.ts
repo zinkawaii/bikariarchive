@@ -6,7 +6,7 @@ export async function sendMail(options: {
     title: string,
     template: string,
     props: Record<string, any>
-} = {}) {
+}) {
     const config = useRuntimeConfig();
 
     //创建连接

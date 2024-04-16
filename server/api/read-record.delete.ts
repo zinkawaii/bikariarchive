@@ -1,5 +1,9 @@
+interface DeleteReadRecordBody {
+    id: string
+}
+
 export default defineCustomHandler(async (event, res) => {
-    const { id } = await readBody(event);
+    const { id } = await readBody<DeleteReadRecordBody>(event);
 
     //权限验证
     identityValidate(event, 9);
@@ -11,6 +15,6 @@ export default defineCustomHandler(async (event, res) => {
     }
     catch (err) {
         //ID不存在
-        res.error = 1;
+        return 1;
     }
 });
