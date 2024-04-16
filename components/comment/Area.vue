@@ -10,10 +10,13 @@
     });
     const page = ref(1);
 
-    //视口懒加载
+    //相对视口懒加载
+    let stop = null;
     watchImmediate(() => [route.path, page.value], () => {
         comments.value = null;
-        const { stop } = useIntersectionObserver($, ([{ isIntersecting }]) => {
+
+        //终止未触发的观测器
+        stop?.(), { stop } = useIntersectionObserver($, ([{ isIntersecting }]) => {
             if (isIntersecting) {
                 getComments();
                 stop();
