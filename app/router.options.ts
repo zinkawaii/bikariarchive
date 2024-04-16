@@ -49,6 +49,11 @@ export default <RouterConfig> {
             component: () => import("~/pages/home.vue")
         },
         {
+            name: "compact",
+            path: "/compact",
+            component: () => import("~/pages/compact.vue")
+        },
+        {
             name: "reader",
             path: "/book/:novel/:index",
             component: () => import("~/pages/reader.vue"),

@@ -44,6 +44,11 @@
                     to: { name: "update" }
                 },
                 {
+                    title: "站点协议",
+                    icon: "teenyicons:contract-solid",
+                    to: { name: "compact" }
+                },
+                {
                     title: "关于",
                     icon: "fa-solid:info-circle",
                     to: { name: "about" }
