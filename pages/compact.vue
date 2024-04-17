@@ -21,9 +21,11 @@
             </blockquote>
             <h2>隐私政策</h2>
             <p>本站仅在以下情况收集个人信息：</p>
-            <p v-for="text, i in behaviors">
-                <strong class="text-gray">{{ i + 1 }}.</strong> 用户<em>{{ text }}</em>时{{ i === behaviors.length - 1 ? "。" : "；" }}
-            </p>
+            <ol>
+                <li v-for="text, i in behaviors">
+                    <p>用户<em>{{ text }}</em>时{{ i === behaviors.length - 1 ? "。" : "；" }}</p>
+                </li>
+            </ol>
             <p>本站收集用户的 IP 地址，以用于检测恶意访问、爬取、DDOS 攻击等情况并作相应的防御；同时，在阅读页根据 IP 地址与访问时间统计并展示阅读量。</p>
             <p>在发表评论时，评论者的邮箱不会被公开展示，仅返回 <code>md5</code> 结果。</p>
             <p>在存储密码时，本站采用了不可逆算法，包括本人在内的任何人都无法获取密码明文。</p>

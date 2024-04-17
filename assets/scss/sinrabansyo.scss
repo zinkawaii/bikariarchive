@@ -336,15 +336,21 @@ textarea {
     }
 
     ol, ul {
-        margin-left: 2em;
         line-height: 2em;
     }
 
     ol {
+        padding-left: 3em;
         list-style-type: decimal;
+
+        > li::marker {
+            font-weight: bold;
+            color: var(--color-theme-text);
+        }
     }
 
     ul {
+        padding-left: 2em;
         list-style-type: disc;
     }
 
@@ -381,6 +387,10 @@ textarea {
 .comment-text {
     blockquote {
         margin-inline: 0;
+    }
+
+    ol {
+        padding-left: 2em;
     }
 
     img {
