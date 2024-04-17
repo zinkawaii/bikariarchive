@@ -15,7 +15,7 @@
 <template>
     <aside class="z-sidebar" :class="{ hidden }">
         <aside-widget class="aside-profile">
-            <mb-image class="aside-avatar" :src="$config.public.avatar"/>
+            <mb-image class="aside-avatar" :src="$config.public.avatar" alt="avatar"/>
             <span class="content-h2 aside-author">{{ $config.public.author }}</span>
             <p class="p-small">うたかたなしあわせ</p>
         </aside-widget>

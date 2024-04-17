@@ -21,7 +21,7 @@
             <mb-skeleton v-if="pending"/>
             <div v-else class="friend-list">
                 <nuxt-link v-for="item in data.list" class="friend-item" :to="item.link" target="_blank">
-                    <mb-image class="friend-avatar" :src="item.icon" loading="lazy"/>
+                    <mb-image class="friend-avatar" :src="item.icon" :alt="item.title" loading="lazy"/>
                     <div class="friend-info">
                         <div class="content-h2 text-truncate friend-title">{{ item.title }}</div>
                         <span class="friend-desc">{{ item.description }}</span>

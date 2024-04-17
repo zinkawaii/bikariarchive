@@ -42,7 +42,7 @@
 
 <template>
     <div class="home-jumbotron">
-        <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp"/>
+        <mb-image class="jumbo-image" src="/garden/jumbotron.webp" alt="jumbotron"/>
         <div class="jumbo-banner">
             <h1 class="jumbo-title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
             <h2 class="jumbo-phrase" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>

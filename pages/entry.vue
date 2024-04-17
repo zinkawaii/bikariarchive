@@ -55,7 +55,7 @@
                     :item="data.illustration.map(item => item.title)"
                     ><template v-for="item in data.illustration" #[item.title]>
                         <mb-gallery :illustrator="item.illustrator">
-                            <mb-image :src="item.src" viewable/>
+                            <mb-image :src="item.src" :alt="item.title" viewable/>
                         </mb-gallery>
                     </template>
                 </mb-tab>
