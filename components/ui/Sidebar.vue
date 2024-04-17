@@ -30,7 +30,7 @@
         </aside-widget>
         <div class="aside-sticky">
             <aside-catalog v-if="route.name === `reader`"/>
-            <aside-widget class="aside-update" title="最近更新">
+            <aside-widget class="text-small" title="最近更新">
                 <template #icon>
                     <icon name="fa6-solid:clock-rotate-left"/>
                 </template>
@@ -77,9 +77,5 @@
     .aside-sticky {
         position: sticky;
         top: 80px;
-    }
-
-    .aside-update {
-        font-size: 14px;
     }
 </style>

@@ -68,12 +68,9 @@
         padding-top: 8px;
         border-top: 1px solid var(--color-border-lighter);
         text-align: center;
+        color: var(--color-text-info);
 
-        span {
-            color: var(--color-text-info);
-        }
-
-        a {
+        > a {
             margin-inline: 20px;
             transition: all 0.2s;
 

@@ -231,7 +231,7 @@
 </script>
 
 <template>
-    <div class="namae-form">
+    <div class="p-small">
         <div class="namae-option">
             <span>介绍</span>
             <p class="p-small">本页面用于生成日文名，数据库与随机算法均来自<coco-link to="https://namaemaker.net" target="_blank">namaemaker.net</coco-link></p>
@@ -287,11 +287,6 @@
 </template>
 
 <style lang="scss" scoped>
-    .namae-form {
-        font-size: 14px;
-        line-height: 24px;
-    }
-
     .namae-option {
         display: flex;
         gap: 1.6em;

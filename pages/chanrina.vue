@@ -8,7 +8,7 @@
 
 <template>
     <coco-widget title="神殿">
-        <coco-table class="chanrina-table" :min-width="720">
+        <coco-table class="text-small text-center" :min-width="720">
             <tbody>
                 <tr>
                     <th>姓名</th>
@@ -30,10 +30,3 @@
         </coco-table>
     </coco-widget>
 </template>
-
-<style lang="scss" scoped>
-    .chanrina-table {
-        font-size: 14px;
-        text-align: center;
-    }
-</style>

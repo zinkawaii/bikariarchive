@@ -208,7 +208,7 @@
 </script>
 
 <template>
-    <div class="lyric-player">
+    <div class="text-small">
         <audio
             ref="$Audio"
             :src="state.src"
@@ -217,16 +217,16 @@
             @ended="audioEnded"
             @timeupdate="audioTimeupdate"
         ></audio>
-        <mb-button @click="upload">上传</mb-button>
-        <mb-button :disabled="state.invalid" @click="play">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</mb-button>
-        <span>
+        <div class="lyric-operator">
+            <mb-button @click="upload">上传</mb-button>
+            <mb-button :disabled="state.invalid" @click="play">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</mb-button>
             <mb-button :disabled="state.invalid" @click="exporter">导出</mb-button>
             <mb-button :disabled="state.invalid" @click="axis">{{ state.axising ? "结束打轴" : "开始打轴" }}</mb-button>
-        </span>
-        <div>
+        </div>
+        <div class="lyric-control">
             <span class="lyric-time">{{ timeFormat(state.current) }}</span>
             <mb-progress
-                class="lyric-control"
+                class="lyric-progress"
                 :title="state.filename || `- 请上传歌曲 -`"
                 v-model="state.rate"
                 @progress="controlProgress"
@@ -253,7 +253,7 @@
                     <span>{{ item.content }}</span>
                 </p>
             </article>
-            <ul class="lyric-handle">
+            <ul class="lyric-handler">
                 <li><mb-button @click="undo">回退</mb-button></li>
                 <li><mb-button @click="sign">标记</mb-button></li>
             </ul>
@@ -262,18 +262,16 @@
 </template>
 
 <style lang="scss" scoped>
-    .lyric-player {
-        font-size: 14px;
+    .lyric-operator {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto;
+        justify-items: flex-end;
+    }
 
-        > span {
-            float: right;
-        }
-
-        > div {
-            display: flex;
-            align-items: center;
-            margin-top: 16px;
-        }
+    .lyric-control {
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
     }
 
     .lyric-time {
@@ -282,7 +280,7 @@
         color: var(--color-text-info);
     }
 
-    .lyric-control {
+    .lyric-progress {
         flex: 1;
         height: 32px;
         box-shadow: 0 6px 12px -8px var(--color-text-info);
@@ -341,7 +339,7 @@
         }
     }
 
-    .lyric-handle {
+    .lyric-handler {
         display: flex;
         flex-direction: column;
         gap: 8px;

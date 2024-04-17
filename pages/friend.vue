@@ -17,7 +17,7 @@
 
 <template>
     <coco-widget title="友情链接">
-        <div class="novel-text">
+        <div class="novel-text text-small">
             <mb-skeleton v-if="pending"/>
             <div v-else class="friend-list">
                 <nuxt-link v-for="item in data.list" class="friend-item" :to="item.link" target="_blank">
@@ -97,9 +97,5 @@
         line-height: 21px;
         text-overflow: ellipsis;
         color: var(--color-text-info);
-    }
-
-    .novel-text {
-        font-size: 14px;
     }
 </style>
