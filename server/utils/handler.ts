@@ -1,6 +1,6 @@
 import type { H3Event } from "h3";
 
-export const defineCustomHandler = <T extends BaseResponse> (
+export const defineWrappedHandler = <T extends BaseResponse> (
     handler: (event: H3Event<Request>, res: T) => Promise<number | void>
 ) => defineEventHandler(async (event) => {
     try {

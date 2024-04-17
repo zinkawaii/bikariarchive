@@ -7,7 +7,7 @@ interface GetArticleResponse extends BaseResponse {
     readCount?: number
 }
 
-export default defineCustomHandler<GetArticleResponse>(async (event, res) => {
+export default defineWrappedHandler<GetArticleResponse>(async (event, res) => {
     const { novel, index, password } = getQueryValues(event);
 
     //初始化

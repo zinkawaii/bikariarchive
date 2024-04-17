@@ -2,7 +2,7 @@ interface GetReadRecordResponse extends BaseResponse {
     data?: any[]
 }
 
-export default defineCustomHandler<GetReadRecordResponse>(async (event, res) => {
+export default defineWrappedHandler<GetReadRecordResponse>(async (event, res) => {
     const query = getQueryValues(event);
 
     //权限验证

@@ -9,7 +9,7 @@ interface GetCommentsResponse extends BaseResponse {
 //需要获取的属性
 const select = "_id content children time nickname email address";
 
-export default defineCustomHandler<GetCommentsResponse>(async (event, res) => {
+export default defineWrappedHandler<GetCommentsResponse>(async (event, res) => {
     let {
         path,
         page

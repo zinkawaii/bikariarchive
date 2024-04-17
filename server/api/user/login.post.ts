@@ -10,7 +10,7 @@ interface PostLoginResponse extends BaseResponse {
     sign?: string
 }
 
-export default defineCustomHandler<PostLoginResponse>(async (event, res) => {
+export default defineWrappedHandler<PostLoginResponse>(async (event, res) => {
     const { session } = event.context;
     const {
         account: acc,
