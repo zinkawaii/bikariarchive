@@ -1,4 +1,4 @@
-import type { JVolume } from "@bikari/process";
+import type { JNovel, JVolume } from "@bikari/process";
 import type Article from "~/utils/Article";
 
 export const useCatalogueStore = defineStore("catalogue", {
@@ -11,7 +11,7 @@ export const useCatalogueStore = defineStore("catalogue", {
         infoType: 1
     }),
     getters: {
-        jNovel() {
+        jNovel(): JNovel<Article> {
             return jArticle[this.novel];
         },
         jVolume(): JVolume {

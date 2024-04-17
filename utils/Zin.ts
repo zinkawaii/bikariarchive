@@ -1,5 +1,3 @@
-type AnyFunc = (...args: any[]) => any;
-
 const Zin = new class Z {
     //默认动画配置
     DEFAULT_ANIME_OPTION = {
@@ -25,14 +23,14 @@ const Zin = new class Z {
     }
 
     //防抖（立即执行）
-    debounce<T extends AnyFunc>(func: T, {
+    debounce<T extends unknown[]>(func: (...args: T) => void, {
         delay = 1500,
         immediate = true,
         title = null
     } = {}) {
         const toastStore = useToastStore();
         let timer;
-        return <(...args: Parameters<T>) => void> (
+        return <(this: unknown, ...args: T) => void> (
             immediate ?
             function(...args) {
                 timer ? clearAndToast() : func.apply(this, args);
@@ -119,11 +117,11 @@ const Zin = new class Z {
     }
 
     //节流
-    throttle<T extends AnyFunc>(func: T, delay?: number) {
+    throttle<T extends unknown[]>(func: (...args: T) => void, delay?: number) {
         //根据延迟时长
         if (delay && delay > 0) {
             let timer = null;
-            return function(...args: Parameters<T>) {
+            return function(this: unknown, ...args: T) {
                 if (!timer) {
                     func.apply(this, args);
                     timer = setTimeout(() => {
@@ -135,7 +133,7 @@ const Zin = new class Z {
         //根据屏幕刷新率
         else {
             let running = false;
-            return function(...args: Parameters<T>) {
+            return function(this: unknown, ...args: T) {
                 if (!running) {
                     running = true;
                     requestAnimationFrame(() => {
