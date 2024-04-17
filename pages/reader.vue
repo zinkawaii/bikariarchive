@@ -33,6 +33,8 @@
 
     //上下章快捷键
     useEventListener("keyup", (event) => {
+        if (isFocusedEditable()) return;
+
         if (!art.isFirst && event.key === settingStore.get("shortcut-last")) {
             router.push(toPrevRoute);
         }

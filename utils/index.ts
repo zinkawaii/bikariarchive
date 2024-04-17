@@ -14,6 +14,16 @@ export function getPosition(element: HTMLElement) {
     };
 }
 
+//判断焦点是否位于可编辑元素内
+export function isFocusedEditable() {
+    const focusedElement = document.activeElement;
+    const tagName = focusedElement.tagName.toLowerCase();
+    return (
+        ["input", "textarea"].includes(tagName) ||
+        focusedElement.hasAttribute("contenteditable")
+    );
+}
+
 //以换行符切分字符串
 export function splitByNewline(text: string) {
     return text?.split("\n");

@@ -26,9 +26,12 @@
 
 <template>
     <aside-widget class="aside-catalog">
-        <select class="content-h2 catalog-volume" v-model="currentVolume">
-            <option v-for="({ title }, i) in jNovel.volumes" :value="i">{{ title }}</option>
-        </select>
+        <form class="catalog-volume">
+            <select class="content-h2 catalog-selector" v-model="currentVolume">
+                <option v-for="({ title }, i) in jNovel.volumes" :value="i">{{ title }}</option>
+            </select>
+            <span class="catalog-underline"></span>
+        </form>
         <ul class="catalog-list">
             <li v-for="c in jChapters">
                 <nuxt-link class="text-truncate catalog-link" :to="c.route">{{ c.title }}</nuxt-link>
@@ -47,15 +50,32 @@
     }
 
     .catalog-volume {
+        display: grid;
         margin: 8px 16px;
+    }
+
+    .catalog-selector {
         padding-block: 8px;
         border-bottom: 1px solid var(--color-border);
         background-color: transparent;
 
+        &:focus + .catalog-underline {
+            scale: 1;
+        }
+
         > option {
-            font-family: initial;
+            font-family: var(--font);
             font-size: 1rem;
         }
+    }
+
+    .catalog-underline {
+        height: 1px;
+        margin-top: -1px;
+        background-color: var(--color-theme-dark);
+        transform-origin: left;
+        transition: all 0.4s;
+        scale: 0 1;
     }
 
     .catalog-list {
