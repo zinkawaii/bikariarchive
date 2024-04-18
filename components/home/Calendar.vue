@@ -1,11 +1,7 @@
 <script setup>
     import dayjs from "dayjs";
     import lunisolar from "lunisolar";
-    import zhCn from "lunisolar/locale/zh-cn";
     import jTimeline from "~/assets/json/Timeline.json";
-
-    //简中语言包
-    lunisolar.locale(zhCn);
 
     //月份别名
     const monthMap = [
