@@ -46,8 +46,8 @@ const client = {
         avatar: "/garden/avatar/tsumugi.webp",
         description: "虚幻的幸福",
         jumbotron: {
-            main: "微光茶馆",
-            sub: "微かの力を尽くして、光の届いた彼方へ"
+            title: "微光茶馆",
+            summary: "微かの力を尽くして、光の届いた彼方へ"
         }
     },
     development: {

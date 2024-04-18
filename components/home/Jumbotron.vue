@@ -1,35 +1,29 @@
 <script setup>
-    const title = ref({
-        main: "",
-        sub: "",
-        isMainTyping: false,
-        isSubTyping: false
-    });
+    const config = useRuntimeConfig();
 
-    //标题打字特效
-    onMounted(async () => {
-        const config = useRuntimeConfig();
-        const { main, sub } = config.public.jumbotron;
+    const duration = 400;
+    const titleDelay = 80;
+    const summaryDelay = 20;
+    const { title, summary } = config.public.jumbotron;
+    const titleChars = title.split("");
+    const summaryChars = ref([]);
+    const isCrossing = ref(true);
+    const isJumping = ref(false);
 
-        //主标题
-        title.value.isMainTyping = true;
-        await Zin.setInterval((t) => {
-            title.value.main = main.slice(0, t);
+    //标题动效
+    Zin.setTimeout(duration + titleDelay)
+    .then(async () => {
+        isJumping.value = true;
+        await Zin.setInterval((i) => {
+            const char = summary[i];
+            summaryChars.value.push(char);
         }, {
-            duration: 125,
-            times: main.length + 1
+            duration: summaryDelay,
+            times: summary.length
         });
-        title.value.isMainTyping = false;
-
-        //副标题
-        title.value.isSubTyping = true;
-        await Zin.setInterval((t) => {
-            title.value.sub = sub.slice(0, t);
-        }, {
-            duration: 100,
-            times: sub.length + 1
-        });
-        title.value.isSubTyping = false;
+        await Zin.setTimeout(duration);
+        isCrossing.value = false;
+        isJumping.value = false;
     });
 
     //点击箭头
@@ -44,8 +38,18 @@
     <div class="home-jumbotron">
         <mb-image class="jumbo-image" src="/garden/jumbotron.webp" alt="jumbotron"/>
         <div class="jumbo-banner">
-            <h1 class="jumbo-title" :class="{ [`main-typing`]: title.isMainTyping }">{{ title.main }}</h1>
-            <h2 class="jumbo-phrase" :class="{ [`sub-typing`]: title.isSubTyping }">{{ title.sub }}</h2>
+            <h1 class="jumbo-title">
+                <template v-if="isCrossing">
+                    <span v-for="char, i in titleChars" class="jumbo-char" :style="{ animationDelay: i * titleDelay + `ms` }">{{ char }}</span>
+                </template>
+                <template v-else>{{ title }}</template>
+            </h1>
+            <h2 class="jumbo-phrase">
+                <template v-if="isCrossing || isJumping">
+                    <span v-for="char in summaryChars" class="jumbo-char">{{ char }}</span>
+                </template>
+                <template v-else>{{ summary }}</template>
+            </h2>
         </div>
         <a class="jumbo-hide" @click="toBottom">
             <icon name="fa6-solid:chevron-down"/>
@@ -80,10 +84,6 @@
         animation: jumbo-parallax linear;
         animation-timeline: view();
         animation-range: exit;
-
-        > * {
-            height: 1em;
-        }
     }
 
     @keyframes jumbo-parallax {
@@ -92,43 +92,76 @@
         }
     }
 
+    .jumbo-title, .jumbo-phrase {
+        height: 1em;
+    }
+
     .jumbo-title {
         font-size: 72px;
+
+        > .jumbo-char {
+            &:nth-child(2n) {
+                animation-name: jumbo-char-cross-up;
+            }
+
+            &:nth-child(2n + 1) {
+                animation-name: jumbo-char-cross-down;
+            }
+        }
     }
 
     .jumbo-phrase {
         margin-block: 32px 8px;
+
+        > .jumbo-char {
+            animation-name: jumbo-char-jump;
+        }
     }
 
-    .main-typing::after, .sub-typing::after {
-        content: "";
+    .jumbo-char {
         display: inline-block;
-        height: 1em;
-        outline: 1px solid white;
-        vertical-align: middle;
-        animation: cursor-flash 1s forwards infinite;
-        translate: 4px -0.12em;
+        opacity: 0;
+        animation: 0.4s ease-out both;
     }
 
-    @keyframes cursor-flash {
-        0% {
-            opacity: 0;
+    @keyframes jumbo-char-cross-up {
+        from {
+            translate: 0 50%;
         }
 
-        15% {
+        to {
             opacity: 1;
+            translate: 0;
+        }
+    }
+
+    @keyframes jumbo-char-cross-down {
+        from {
+            translate: 0 -50%;
+        }
+
+        to {
+            opacity: 1;
+            translate: 0;
+        }
+    }
+
+    @keyframes jumbo-char-jump {
+        0% {
+            translate: 0 133%;
         }
 
         50% {
-            opacity: 1;
+            translate: 0 -33%;
         }
 
-        65% {
-            opacity: 0;
+        75% {
+            translate: 0 16.7%;
         }
 
         100% {
-            opacity: 0;
+            opacity: 1;
+            translate: 0;
         }
     }
 
