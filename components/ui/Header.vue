@@ -1,4 +1,5 @@
 <script setup>
+    const route = useRoute();
     const router = useRouter();
     const word = ref("");
 
@@ -68,6 +69,12 @@
         }
     ];
 
+    const breadcrumb = computed(() => {
+        return route.meta.breadcrumb ?? {
+            name: "home"
+        };
+    });
+
     function search() {
         router.push(toSearch(word.value));
         word.value = "";
@@ -76,8 +83,12 @@
 
 <template>
     <header class="z-header">
-        <div class="header-title">
-            <nuxt-link :to="{ name: `home` }">BikariArchive</nuxt-link>
+        <div class="header-logo-wrapper">
+            <nuxt-link class="header-logo" :to="breadcrumb">
+                <span class="logo-aside">Bikari</span>
+                <span class="logo-center">A</span>
+                <span class="logo-aside">rchive</span>
+            </nuxt-link>
         </div>
         <nav class="header-nav">
             <mb-popper v-for="{ title, icon, to, children } in navList">
@@ -135,29 +146,67 @@
     $max: $title + $nav-max + $padding;
     $min: $title + $nav-min + $padding;
 
-    .header-title {
+    .header-logo-wrapper {
         display: flex;
         padding-inline: 16px;
-
-        > a {
-            margin: auto;
-            font-family: var(--font-smooth);
-            font-size: 32px;
-            text-shadow: 1px 1px 4px rgb(0 0 0 / 50%);
-            color: white;
-
-            &::before {
-                content: "ʚ";
-            }
-
-            &::after {
-                content: "ɞ";
-            }
-        }
 
         @media (width >= #{$min}) {
             max-width: 456px;
         }
+    }
+
+    .header-logo {
+        display: flex;
+        margin: auto;
+        font-family: var(--font-smooth);
+        font-size: 32px;
+        text-shadow: 1px 1px 4px rgb(0 0 0 / 50%);
+        color: white;
+
+        &:hover {
+            > .logo-aside {
+                opacity: 0.88;
+                color: rgb(224 224 224);
+            }
+
+            > .logo-center {
+                translate: 0 -2px;
+            }
+
+            &::before, &::after {
+                animation: logo-flap 0.25s infinite;
+            }
+        }
+
+        &::before {
+            content: "ʚ";
+            transform-origin: right;
+        }
+
+        &::after {
+            content: "ɞ";
+            transform-origin: left;
+            rotate: 0 30deg;
+        }
+    }
+
+    @keyframes logo-flap {
+        0% {
+            rotate: 0;
+        }
+
+        50% {
+            rotate: y 30deg;
+        }
+    }
+
+    .logo-aside {
+        transition: all 0.25s;
+    }
+
+    .logo-center {
+        color: white;
+        transition: all 0.25s;
     }
 
     .header-nav {

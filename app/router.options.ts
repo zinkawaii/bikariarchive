@@ -58,7 +58,10 @@ export default <RouterConfig> {
             path: "/book/:novel/:index",
             component: () => import("~/pages/reader.vue"),
             meta: {
-                comment: true
+                comment: true,
+                breadcrumb: {
+                    name: "catalogue"
+                }
             }
         },
         {
@@ -76,7 +79,10 @@ export default <RouterConfig> {
             path: "/:title",
             component: () => import("~/pages/entry.vue"),
             meta: {
-                comment: true
+                comment: true,
+                breadcrumb: {
+                    name: "details"
+                }
             }
         },
         {
