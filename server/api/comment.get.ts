@@ -1,9 +1,9 @@
 import md5 from "md5";
 
 interface GetCommentsResponse extends BaseResponse {
-    totalCount?: number,
-    mainCount?: number,
-    data?: any[]
+    totalCount?: number;
+    mainCount?: number;
+    data?: any[];
 }
 
 //需要获取的属性
@@ -67,7 +67,7 @@ async function deference(parent) {
 }
 
 //递归处理数据
-async function dataClone(target, source) {
+function dataClone(target, source) {
     for (const item of source) {
         const i = {
             id: item._id,

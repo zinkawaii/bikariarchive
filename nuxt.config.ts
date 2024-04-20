@@ -1,4 +1,4 @@
-import { serverConfig, clientConfig } from "./app/runtime.config";
+import { clientConfig, serverConfig } from "./app/runtime.config";
 import sitemapConfig from "./app/sitemap.config";
 import robotsConfig from "./app/robots.config";
 

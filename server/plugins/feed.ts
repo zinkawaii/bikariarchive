@@ -5,7 +5,7 @@ import { jArticle } from "~/utils/Article";
 const config = useRuntimeConfig();
 
 export default defineNitroPlugin((nitroApp) => {
-    nitroApp.router.get("/feed", defineEventHandler(async (event: H3Event) => {
+    nitroApp.router.get("/feed", defineEventHandler((event: H3Event) => {
         setHeader(event, "content-type", "application/xml");
         setHeader(event, "cache-control", 60 * 15);
         const feed = createFeed();

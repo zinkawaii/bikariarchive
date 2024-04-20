@@ -1,5 +1,5 @@
-import { defineMongooseModel } from "#nuxt/mongoose";
 import { Types } from "mongoose";
+import { defineMongooseModel } from "#nuxt/mongoose";
 
 export const ReadRecordModel = defineMongooseModel<ReadRecord>({
     name: "ReadRecord",

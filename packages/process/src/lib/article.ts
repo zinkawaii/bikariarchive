@@ -1,12 +1,12 @@
+import * as path from "node:path";
 import dayjs from "dayjs";
 import fm from "front-matter";
 import fs from "fs-extra";
 import $ from "node-html-parser";
-import * as path from "path";
-import Processor from "./processor";
+import { isDev } from "@bikari/shared";
 import { articleMarked } from "../marked";
 import type { ArticleFrontMatter } from "../types";
-import { isDev } from "@bikari/shared";
+import Processor from "./processor";
 
 const re = /^(.*?)\.(\d+)$/;
 
@@ -44,14 +44,12 @@ export default new Processor({
 
         //解析内容
         const doc = $.parse(result);
-        const runtime = doc.querySelectorAll("*").some((e) => e.tagName.includes("-")) || void(0);
-        const wordCount = doc.querySelectorAll("p").reduce((res, p) => {
-            return res + p.textContent.length;
-        }, 0);
+        const runtime = doc.querySelectorAll("*").some((e) => e.tagName.includes("-")) || void 0;
+        const wordCount = doc.querySelectorAll("p").reduce((res, p) => res + p.textContent.length, 0);
 
         //加密内容
         const { password } = attributes;
-        const encrypted = Boolean(password) || void(0);
+        const encrypted = Boolean(password) || void 0;
         delete attributes.password;
 
         //日期格式化

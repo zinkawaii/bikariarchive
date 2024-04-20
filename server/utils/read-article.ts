@@ -1,5 +1,5 @@
 import fs from "fs-extra";
-import Article from "~/utils/Article";
+import type Article from "~/utils/Article";
 import jArtmap from "~/dist/json/Artmap.json";
 
 export function readArticle(art: Article): Promise<string> {

@@ -1,8 +1,8 @@
 interface DeleteCommentBody {
-    id: string
+    id: string;
 }
 
-export default defineWrappedHandler(async (event, res) => {
+export default defineWrappedHandler(async (event) => {
     const { id } = await readBody<DeleteCommentBody>(event);
 
     //权限验证

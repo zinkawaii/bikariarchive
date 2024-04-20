@@ -1,12 +1,12 @@
 interface MouseFn {
-    (event: MouseEvent): void
+    (event: MouseEvent): void;
 }
 
 export default function(el: MaybeRefOrGetter<HTMLElement>, options: {
-    filter?: (event: MouseEvent) => boolean,
-    onMousedown?: MouseFn,
-    onMousemove?: MouseFn,
-    onMouseup?: MouseFn
+    filter?: (event: MouseEvent) => boolean;
+    onMousedown?: MouseFn;
+    onMousemove?: MouseFn;
+    onMouseup?: MouseFn;
 } = {}) {
     const isPressed = ref(false);
 

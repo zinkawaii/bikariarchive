@@ -1,5 +1,5 @@
+import { resolve } from "node:path";
 import consola from "consola";
-import { resolve } from "path";
 
 //是否为开发环境
 export const isDev = process.env.NODE_ENV === "development";

@@ -31,14 +31,14 @@ const Zin = new class Z {
         const toastStore = useToastStore();
         let timer;
         return <(this: unknown, ...args: T) => void> (
-            immediate ?
-            function(...args) {
+            immediate
+            ? function(...args) {
                 timer ? clearAndToast() : func.apply(this, args);
                 timer = setTimeout(() => {
                     timer = null;
                 }, delay);
-            } :
-            function(...args) {
+            }
+            : function(...args) {
                 timer && clearAndToast();
                 timer = setTimeout(() => {
                     func.apply(this, args);
@@ -83,7 +83,7 @@ const Zin = new class Z {
 
     //延时执行函数
     setTimeout(duration: number) {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>((resolve) => {
             setTimeout(resolve, duration);
         });
     }
@@ -96,8 +96,9 @@ const Zin = new class Z {
         return new Promise<void>((resolve, reject) => {
             try {
                 let t = 0;
-                const { pause } = useIntervalFn(recursion, duration);
-                recursion();
+                const { pause } = useIntervalFn(recursion, duration, {
+                    immediateCallback: true
+                });
 
                 function recursion() {
                     if (times >= 0 && t === times) {
@@ -144,6 +145,6 @@ const Zin = new class Z {
             };
         }
     }
-};
+}();
 
 export default Zin;

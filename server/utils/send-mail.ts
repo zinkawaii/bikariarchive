@@ -2,10 +2,10 @@ import nodemailer from "nodemailer";
 import { useCompiler } from "#vue-email";
 
 export async function sendMail(options: {
-    to: string,
-    title: string,
-    template: string,
-    props: Record<string, any>
+    to: string;
+    title: string;
+    template: string;
+    props: Record<string, any>;
 }) {
     const config = useRuntimeConfig();
 

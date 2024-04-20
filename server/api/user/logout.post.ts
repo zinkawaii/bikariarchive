@@ -1,3 +1,3 @@
-export default defineWrappedHandler(async (event) => {
+export default defineWrappedHandler((event) => {
     clearH3EventContextSession(event);
 });

@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import jMap from "~/dist/json/Entrimap.json";
 
 interface GetEntryResponse extends BaseResponse {
-    [key: string]: any
+    [key: string]: any;
 }
 
 export default defineWrappedHandler<GetEntryResponse>(async (event, res) => {

@@ -5,7 +5,7 @@
 
 <template>
     <div class="catalogue-shelf">
-        <ul class="shelf-wrapper" :style="{ translate: curOrder.novel * -144 + `px` }">
+        <ul class="shelf-wrapper" :style="{ translate: `${curOrder.novel * -144}px` }">
             <li v-for="({ title, cover }, key, i) in jArticle">
                 <a
                     class="shelf-novel"

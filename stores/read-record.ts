@@ -7,8 +7,8 @@ export const useReadRecordStore = defineStore("read-record", {
             return this.record[novel];
         },
         set(novel: string, data: {
-            index: string,
-            title: string
+            index: string;
+            title: string;
         }) {
             this.record[novel] = data;
         }

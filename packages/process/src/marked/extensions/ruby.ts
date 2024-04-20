@@ -6,7 +6,7 @@ export default <TokenizerAndRendererExtension> {
     start(src) {
         return src.match(/\|/)?.index;
     },
-    tokenizer(src, tokens) {
+    tokenizer(src) {
         const rule = /^\|([^\n]*?)\(([^\n]*?)\)\|/;
         const match = rule.exec(src);
         if (match) {

@@ -8,14 +8,14 @@
     });
 
     //键值与显示值的映射表
-    const ShortMap = new Map([
-        ["Control",    "Ctrl"],
-        [" ",          "SpaceBar"],
-        ["ArrowLeft",  "←"],
-        ["ArrowUp",    "↑"],
-        ["ArrowRight", "→"],
-        ["ArrowDown",  "↓"]
-    ]);
+    const shortMap = {
+        " ": "SpaceBar",
+        ArrowLeft: "←",
+        ArrowUp: "↑",
+        ArrowRight: "→",
+        ArrowDown: "↓",
+        Control: "Ctrl"
+    };
 
     const shortcuts = ref({
         "shortcut-last": keyToStr(settingStore.get("shortcut-last")),
@@ -35,7 +35,7 @@
 
     //键值 → 显示值
     function keyToStr(key) {
-        let str = ShortMap.get(key) || key;
+        let str = shortMap[key] || key;
         if (str.match(/^[a-z]{1}$/)) {
             str = str.toUpperCase();
         }

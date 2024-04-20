@@ -17,7 +17,7 @@
         nickname: {
             target: nickname,
             required: true,
-            reg: /^[\w\u4e00-\u9fa5]*$/,
+            reg: /^[\w\u4E00-\u9FA5]*$/,
             message: "昵称不可包含非法字符",
             validate(value) {
                 const count = getByteLength(value);
@@ -36,7 +36,7 @@
         },
         address: {
             target: address,
-            reg: /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?$/,
+            reg: /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\\/?%&=]*)?$/,
             message: "网址格式不正确"
         }
     });

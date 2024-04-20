@@ -1,5 +1,5 @@
 interface GetReadRecordResponse extends BaseResponse {
-    data?: any[]
+    data?: any[];
 }
 
 export default defineWrappedHandler<GetReadRecordResponse>(async (event, res) => {

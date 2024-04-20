@@ -58,6 +58,6 @@ const client = {
     }
 };
 
-const env = process.env.NODE_ENV;
+const env = import.meta.env.NODE_ENV;
 export const serverConfig = merge.recursive(server.global, server[env]);
 export const clientConfig = merge.recursive(client.global, client[env]);

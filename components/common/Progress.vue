@@ -1,24 +1,19 @@
 <script setup>
-    const modelValue = defineModel();
+    const props = defineProps([
+        "title"
+    ]);
     const emit = defineEmits([
         "progress",
         "change",
         "dragstart",
         "dragend"
     ]);
-    const props = defineProps([
-        "title"
-    ]);
+    const modelValue = defineModel();
 
     let p_width = 0;
     let p_left = 0;
     const self = ref();
     const rate = ref(0);
-
-    //显示的进度
-    const displayRate = computed(() => {
-        return Math.max(0, Math.min(1, isPressed.value ? rate.value : modelValue.value));
-    });
 
     //鼠标拖动时
     const { isPressed } = useHold(self, {
@@ -42,6 +37,11 @@
             emit("dragend");
             emit("change", { rate: rate.value });
         }
+    });
+
+    //显示的进度
+    const displayRate = computed(() => {
+        return Math.max(0, Math.min(1, isPressed.value ? rate.value : modelValue.value));
     });
 </script>
 

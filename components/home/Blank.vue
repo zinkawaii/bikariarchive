@@ -25,8 +25,8 @@
 
 <template>
     <div class="content-widget home-blank">
-        <div>空白板</div>
-        <textarea :placeholder="serifs[i]"></textarea>
+        <div class="blank-title">空白板</div>
+        <textarea class="blank-editor" :placeholder="serifs[i]"></textarea>
     </div>
 </template>
 
@@ -35,20 +35,20 @@
         display: grid;
         grid-template-rows: auto 1fr;
         padding: 4px;
+    }
 
-        > div {
-            border-radius: 12px;
-            background-color: var(--color-theme);
-            font-weight: bold;
-            line-height: 28px;
-            text-align: center;
-        }
+    .blank-title {
+        border-radius: 12px;
+        background-color: var(--color-theme);
+        font-weight: bold;
+        line-height: 28px;
+        text-align: center;
+    }
 
-        > textarea {
-            padding: 4px;
-            background-color: transparent;
-            font-size: 14px;
-            line-height: 24px;
-        }
+    .blank-editor {
+        padding: 4px;
+        background-color: transparent;
+        font-size: 14px;
+        line-height: 24px;
     }
 </style>

@@ -3,7 +3,7 @@ import type { WatchCallback, WatchOptions } from "vue";
 export const useSettingStore = defineStore("setting", () => {
     const isOpened = ref(false);
     const setting = ref({
-        "theme": 2,
+        theme: 2,
         "dark-mode": 0,
         "sidebar-display": 0,
         "shortcut-last": "ArrowLeft",
@@ -33,14 +33,14 @@ export const useSettingStore = defineStore("setting", () => {
 
     //监听
     function listen(key: string, handler: WatchCallback, options: WatchOptions & {
-        viewTransition: boolean
+        viewTransition: boolean;
     }) {
         watchImmediate(() => setting.value[key], (newVal, oldVal, onCleanup) => {
             const fn = handler.bind(null, newVal, oldVal, onCleanup);
 
             if (//首屏加载时不应用视图转换
-                oldVal !== void(0)
-                && process.browser
+                oldVal !== void 0
+                && import.meta.browser
                 && options?.viewTransition
                 && document.startViewTransition
             ) {

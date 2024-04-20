@@ -1,12 +1,18 @@
 import type { TokenizerAndRendererExtension } from "marked";
 
+declare module "marked" {
+    interface MarkedOptions {
+        slots: Record<string, string>;
+    }
+}
+
 export default <TokenizerAndRendererExtension> {
     name: "slot",
     level: "block",
     start(src) {
         return src.match(/</)?.index;
     },
-    tokenizer(src, tokens) {
+    tokenizer(src) {
         const rule = /^<<\s+([^\n]*)\n([\s\S]*?)<<(?:\n|$)/;
         const match = rule.exec(src);
         if (match) {
@@ -22,7 +28,6 @@ export default <TokenizerAndRendererExtension> {
         }
     },
     renderer(token) {
-        // @ts-ignore
         this.parser.options.slots[token.title] = this.parser.parse(token.tokens);
         return "";
     }

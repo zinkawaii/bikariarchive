@@ -1,10 +1,10 @@
 <script setup>
-    const modelValue = defineModel();
     const props = defineProps({
         placeholder: String,
         warn: Boolean,
         warnTip: String
     });
+    const modelValue = defineModel();
 </script>
 
 <template>

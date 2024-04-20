@@ -3,8 +3,8 @@ import Article from "~/utils/Article";
 import ArtMap from "~/dist/json/Artmap.json";
 
 interface GetArticleResponse extends BaseResponse {
-    content?: string,
-    readCount?: number
+    content?: string;
+    readCount?: number;
 }
 
 export default defineWrappedHandler<GetArticleResponse>(async (event, res) => {
@@ -32,9 +32,9 @@ export default defineWrappedHandler<GetArticleResponse>(async (event, res) => {
     const interval = 8 * 60 * 60 * 1000;
     const rlist: {
         [T: string]: {
-            count: number,
-            time: number
-        }
+            count: number;
+            time: number;
+        };
     } = {};
     qRecord.forEach((record: any) => {
         const ip = record.ip;

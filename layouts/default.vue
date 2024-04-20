@@ -6,7 +6,7 @@
     <z-header />
     <z-navbar />
     <z-toolbar />
-    <div :class="[`sotomi`, { [`full-page`]: $route.meta.fullPage }]">
+    <div class="sotomi" :class="[{ [`full-page`]: $route.meta.fullPage }]">
         <main class="nakami">
             <slot></slot>
             <comment-area v-if="$route.meta.comment"/>

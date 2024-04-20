@@ -3,9 +3,7 @@
     const { curOrder, jNovel } = storeToRefs(catalogueStore);
 
     const volumes = computed(() => {
-        return jNovel.value.volumes.map((item) => {
-            return item.title;
-        });
+        return jNovel.value.volumes.map((item) => item.title);
     });
 </script>
 

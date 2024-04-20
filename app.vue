@@ -1,6 +1,6 @@
 <script setup>
     //浏览器环境下
-    if (process.browser) {
+    if (import.meta.browser) {
         const settingStore = useSettingStore();
 
         //移动端

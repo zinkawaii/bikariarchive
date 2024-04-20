@@ -1,8 +1,8 @@
 <script setup>
     import dayjs from "dayjs";
 
-    const emit = defineEmits(["update"]);
     const props = defineProps(["data"]);
+    const emit = defineEmits(["update"]);
 
     const commentPanelStore = useCommentPanelStore();
     const confirmStore = useConfirmStore();

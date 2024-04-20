@@ -3,13 +3,13 @@ import dayjs from "dayjs";
 import { jArticle } from "~/utils/Article";
 
 interface GetArticleResponse extends BaseResponse {
-    results?: SearchResult[]
+    results?: SearchResult[];
 }
 
 interface SearchResult {
-    index: string,
-    count: number,
-    parts: string[]
+    index: string;
+    count: number;
+    parts: string[];
 }
 
 export default defineWrappedHandler<GetArticleResponse>(async (event, res) => {
@@ -59,7 +59,7 @@ export default defineWrappedHandler<GetArticleResponse>(async (event, res) => {
             //前后文
             const start = Math.max(line - 1, 0);
             const end = Math.min(line + 2, lines.length);
-            const parts = [...new Array(end - start)].map((_, i) => lines[i + start].outerHTML);
+            const parts = [...Array(end - start)].map((_, i) => lines[i + start].outerHTML);
 
             res.results.push({
                 index: art.index,

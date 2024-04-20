@@ -1,9 +1,9 @@
+import { exec } from "node:child_process";
 import consola from "consola";
 import dayjs from "dayjs";
 import schedule from "node-schedule";
-import { exec } from "child_process";
 
-export default defineNitroPlugin((app) => {
+export default defineNitroPlugin(() => {
     const config = useRuntimeConfig();
     const { options } = config.mongoose;
 
@@ -23,7 +23,7 @@ export default defineNitroPlugin((app) => {
         const path = r(`server/backup/${date.format("YYMMDD")}.archive`);
 
         //运行命令
-        exec(`mongodump -u=${options.user} -p=${options.pass} -d=${options.dbName} --archive="${path}" --authenticationDatabase admin`, (err, stdout, stderr) => {
+        exec(`mongodump -u=${options.user} -p=${options.pass} -d=${options.dbName} --archive="${path}" --authenticationDatabase admin`, (err) => {
             if (err) {
                 consola.error(err);
             }

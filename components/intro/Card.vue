@@ -1,6 +1,6 @@
 <script setup>
-    const emits = defineEmits(["exchange"]);
     const props = defineProps(["layer", "novel"]);
+    const emits = defineEmits(["exchange"]);
 
     const readRecordStore = useReadRecordStore();
 

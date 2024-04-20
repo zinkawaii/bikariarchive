@@ -1,15 +1,15 @@
 interface ZjaxOptions {
-    body?: any,
-    query?: any,
-    timeout?: number
+    body?: any;
+    query?: any;
+    timeout?: number;
 }
 
 //创建请求
 const createRequest = (method: string) => (url: string, options?: ZjaxOptions) => request(method, url, options);
 
 export default function Zjax(options: {
-    url: string,
-    method: string
+    url: string;
+    method: string;
 } & ZjaxOptions) {
     return request(options.method, options.url, options);
 }

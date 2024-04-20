@@ -79,11 +79,9 @@
     }
 
     .catalog-list {
-        display: grid;
-        gap: 4px;
         overflow: hidden scroll;
         overscroll-behavior: contain;
-        padding: 0 8px 12px 12px;
+        padding: 0 7px 8px 12px;
 
         &::-webkit-scrollbar {
             width: 5px;
@@ -100,6 +98,7 @@
     }
 
     .catalog-link {
+        margin-bottom: 4px;
         padding: 6px 0 6px 12px;
         border-radius: 8px;
         font-size: 14px;

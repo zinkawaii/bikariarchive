@@ -69,13 +69,13 @@
         display: flex;
         gap: 0.75em;
 
-        > span:first-child {
-            font-weight: bold;
-            color: var(--color-theme-text);
-        }
-
         &:last-child {
             margin-left: auto;
+        }
+
+        > :first-child {
+            font-weight: bold;
+            color: var(--color-theme-text);
         }
     }
 
@@ -83,7 +83,7 @@
         display: flex;
         gap: 0.75em;
 
-        > label:has(> :checked) {
+        > :has(> :checked) {
             color: var(--color-theme-dark);
         }
 

@@ -84,7 +84,9 @@
 
     //清空结果
     function clear() {
-        result.value.forEach((colume) => colume.length = 0);
+        for (const colume of result.value) {
+            colume.length = 0;
+        }
     }
 
     const isResultEmpty = computed(() => {

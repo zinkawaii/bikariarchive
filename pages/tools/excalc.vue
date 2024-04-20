@@ -67,7 +67,7 @@
                     this.change();
                 }
                 else {
-                    this.current.value = void(0);
+                    this.current.value = void 0;
                     this.init();
                 }
 
@@ -115,12 +115,12 @@
     const score = computed(() => {
         const powers =
             state.value.power.main.reduce((prev, ship) => {
-                return prev += ship;
+                return prev + ship;
             }, 0) +
             state.value.power.pioneer.reduce((prev, ship) => {
-                return prev += ship;
+                return prev + ship;
             }, 0);
-        return Number.parseInt((5000 / Math.pow(state.value.time + 50, 0.36) - Math.pow(powers, 0.6)) * 10);
+        return Number.parseInt((5000 / (state.value.time + 50) ** 0.36 - powers ** 0.6) * 10);
     });
 
     //添加武器
@@ -153,16 +153,10 @@
             }
         }
 
-        if (state.value.times > 0) {
-            kill_rate.value = kill / state.value.times;
-        }
-        else {
-            kill_rate.value = 0;
-        }
+        kill_rate.value = (state.value.times) > 0 ? kill / state.value.times : 0;
 
         function isRateEffect(rate) {
-            if (Math.random() * 100 < rate) return true;
-            else return false;
+            return Math.random() * 100 < rate;
         }
     }
 </script>
@@ -178,9 +172,9 @@
                     </select>
                 </div>
                 <div class="excalc-param-handler">
-                    <mb-button :disabled="params.current.value === void(0)" @click="params.save()">保存</mb-button>
+                    <mb-button :disabled="params.current.value === void 0" @click="params.save()">保存</mb-button>
                     <mb-button @click="params.add()">新建</mb-button>
-                    <mb-button :disabled="params.current.value === void(0)" @click="params.remove()">删除</mb-button>
+                    <mb-button :disabled="params.current.value === void 0" @click="params.remove()">删除</mb-button>
                 </div>
             </div>
             <div class="excalc-label">

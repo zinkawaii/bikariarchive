@@ -1,15 +1,15 @@
 import dayjs from "dayjs";
 
 interface PostCommentBody {
-    path: string,
-    parent: string,
-    content: string,
-    nickname: string,
-    email: string,
-    address: string
+    path: string;
+    parent: string;
+    content: string;
+    nickname: string;
+    email: string;
+    address: string;
 }
 
-export default defineWrappedHandler(async (event, res) => {
+export default defineWrappedHandler(async (event) => {
     const body = await readBody<PostCommentBody>(event);
 
     //获取严格路径
@@ -25,7 +25,7 @@ export default defineWrappedHandler(async (event, res) => {
     const uid = event.context.session?.uid;
 
     //规制参数类型
-    const parent = body.parent || void(0);
+    const parent = body.parent || void (0);
 
     //获取用户
     const qUser = await UserDataModel.findOne({ uid });

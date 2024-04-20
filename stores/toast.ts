@@ -1,8 +1,8 @@
 type ToastType = "error" | "info" | "success";
 
 const iconInfos: Record<ToastType, {
-    name: string,
-    color: string
+    name: string;
+    color: string;
 }> = {
     error: {
         name: "ooui:clear",

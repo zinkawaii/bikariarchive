@@ -1,13 +1,13 @@
 interface PostLoginBody {
-    account: string,
-    password: string
+    account: string;
+    password: string;
 }
 
 interface PostLoginResponse extends BaseResponse {
-    uid?: number,
-    nickname?: string,
-    identity?: number,
-    sign?: string
+    uid?: number;
+    nickname?: string;
+    identity?: number;
+    sign?: string;
 }
 
 export default defineWrappedHandler<PostLoginResponse>(async (event, res) => {

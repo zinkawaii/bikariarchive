@@ -1,23 +1,23 @@
-import ArticleJson from "~/dist/json/Article.json";
 import type { JArticle, JChapter } from "@bikari/process";
+import ArticleJson from "~/dist/json/Article.json";
 
 const jArticle: JArticle<Article> = ArticleJson as any;
 
 class Article implements JChapter {
-    novel      = "";    //小说名
-    volume     = -1;    //卷序号
-    order      = -1;    //章序号
-    orderInVol = -1;    //章序号（卷内）
-    index      = "";    //章文件名
-    title      = "";    //章节名
-    date       = "";    //日期
-    updated    = "";    //更新日期
-    refactored = "";    //重构日期
-    draft      = false; //草稿
-    encrypted  = false; //加密
-    ending     = false; //终章
-    runtime    = false; //运行时
-    wordCount  = 0;     //字数
+    novel = "";        //小说名
+    volume = -1;       //卷序号
+    order = -1;        //章序号
+    orderInVol = -1;   //章序号（卷内）
+    index = "";        //章文件名
+    title = "";        //章节名
+    date = "";         //日期
+    updated = "";      //更新日期
+    refactored = "";   //重构日期
+    draft = false;     //草稿
+    encrypted = false; //加密
+    ending = false;    //终章
+    runtime = false;   //运行时
+    wordCount = 0;     //字数
 
     private constructor(novel: string, order: number) {
         const jNovel = jArticle[novel];
@@ -80,11 +80,11 @@ class Article implements JChapter {
     }
 
     get isFirstInVol() {
-        return (this.prev?.volume ?? -Infinity) < this.volume;
+        return (this.prev?.volume ?? Number.NEGATIVE_INFINITY) < this.volume;
     }
 
     get isLastInVol() {
-        return (this.next?.volume ?? Infinity) > this.volume;
+        return (this.next?.volume ?? Number.POSITIVE_INFINITY) > this.volume;
     }
 
     static FARAWAY = "很久以前";

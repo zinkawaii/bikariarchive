@@ -15,7 +15,7 @@
         nickname: {
             target: nickname,
             required: true,
-            reg: /^[\w\u4e00-\u9fa5]*$/,
+            reg: /^[\w\u4E00-\u9FA5]*$/,
             message: "昵称不可包含非法字符",
             validate(value) {
                 const count = getByteLength(value);
@@ -91,14 +91,6 @@
         }
     }
 
-    //提交
-    function submit() {
-        checker.clearTips();
-        if (checker.exec()) {
-            register();
-        }
-    }
-
     //注册
     const register = Zin.debounce(() => {
         Zjax.post("/api/user/logon", {
@@ -131,6 +123,14 @@
     }, {
         title: "注册"
     });
+
+    //提交
+    function submit() {
+        checker.clearTips();
+        if (checker.exec()) {
+            register();
+        }
+    }
 </script>
 
 <template>

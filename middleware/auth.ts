@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware(async (to, from) => {
+export default defineNuxtRouteMiddleware(async (to) => {
     const toastStore = useToastStore();
     const signerStore = useSignerStore();
     const userStore = useUserStore();

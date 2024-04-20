@@ -1,19 +1,19 @@
 import dayjs from "dayjs";
 
 interface GetLoginBody {
-    nickname: string,
-    email: string,
-    verify: string,
-    password: string
+    nickname: string;
+    email: string;
+    verify: string;
+    password: string;
 }
 
 interface GetLogonResponse extends BaseResponse {
-    uid?: number,
-    nickname?: string,
-    identity?: number
+    uid?: number;
+    nickname?: string;
+    identity?: number;
 }
 
-export default defineWrappedHandler<GetLogonResponse>(async (event, res) => {
+export default defineWrappedHandler<GetLogonResponse>(async (event) => {
     const { session } = event.context;
     const {
         nickname,
@@ -23,7 +23,7 @@ export default defineWrappedHandler<GetLogonResponse>(async (event, res) => {
     } = await readBody<GetLoginBody>(event);
 
     //表单验证失败
-    if (!check_params(nickname, email, password)) {
+    if (!validate(nickname, email, password)) {
         return 100;
     }
 
@@ -56,8 +56,8 @@ export default defineWrappedHandler<GetLogonResponse>(async (event, res) => {
     //验证成功，从数据库中删除临时数据
     TempVerifyModel.deleteOne({ email }).exec();
 
-    //UID等
-    const uid = create_uid();
+    //UID
+    const uid = createUid();
 
     //性别
     const sex = 0;
@@ -89,19 +89,14 @@ export default defineWrappedHandler<GetLogonResponse>(async (event, res) => {
 });
 
 //服务端验证
-function check_params(nickname: string, email: string, password: string) {
-    if (
-        (/^[\w\u4e00-\u9fa5]{0,18}$/).test(nickname) &&
-        (/^[\w-]+@[\w-]+(.[\w-]+)+$/).test(email) &&
-        (/^[\w]{6,18}$/).test(password)
-    ) {
-        return true;
-    }
-    else return false;
+function validate(nickname: string, email: string, password: string) {
+    return (/^[\w\u4E00-\u9FA5]{0,18}$/).test(nickname) &&
+           (/^[\w-]+@[\w-]+(.[\w-]+)+$/).test(email) &&
+           (/^[\w]{6,18}$/).test(password);
 }
 
 //UID生成
-function create_uid() {
+function createUid() {
     const uid = Math.floor(Math.random() * (100000 - 10000) + 10000);
     return uid;
 }

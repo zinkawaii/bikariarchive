@@ -2,6 +2,13 @@
     import { CocoLink, MbCode, MbGallery, MbImage, NuxtImg } from "#components";
 
     export default {
+        components: {
+            CocoLink,
+            MbCode,
+            MbGallery,
+            MbImage,
+            NuxtImg
+        },
         props: {
             content: {
                 type: String,
@@ -15,13 +22,6 @@
                 type: String,
                 default: "article"
             }
-        },
-        components: {
-            CocoLink,
-            MbCode,
-            MbGallery,
-            MbImage,
-            NuxtImg
         },
         render() {
             const { content, enabled, tag } = this;

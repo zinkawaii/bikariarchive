@@ -1,8 +1,8 @@
 <script setup>
-    const modelValue = defineModel();
     const props = defineProps({
         value: {}
     });
+    const modelValue = defineModel();
 </script>
 
 <template>

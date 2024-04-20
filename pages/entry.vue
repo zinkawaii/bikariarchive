@@ -1,10 +1,9 @@
 <script setup>
+    import Unknown from "./unknown.vue";
     import { EntryKnownAbility } from "#components";
     import jEntry from "~/dist/json/Entry.json";
-    import Unknown from "./unknown.vue";
 
     const route = useRoute();
-
     const components = {
         "known-ability": EntryKnownAbility
     };

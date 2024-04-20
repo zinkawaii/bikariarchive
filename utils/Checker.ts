@@ -1,9 +1,9 @@
 type CheckerEntries = Record<string, {
-    target: Ref<string>,
-    required?: boolean,
-    reg: RegExp,
-    message: string,
-    validate?: (value: string) => string
+    target: Ref<string>;
+    required?: boolean;
+    reg: RegExp;
+    message: string;
+    validate?: (value: string) => string;
 }>;
 
 class Checker<T extends CheckerEntries> {
@@ -19,9 +19,9 @@ class Checker<T extends CheckerEntries> {
     }
 
     exec(key = "") {
-        return (key in this.entries) ?
-            this.singlyCheck(key) :
-            Object.keys(this.entries).every((key) => this.singlyCheck(key));
+        return (key in this.entries)
+            ? this.singlyCheck(key)
+            : Object.keys(this.entries).every((key) => this.singlyCheck(key));
     }
 
     clearTips() {

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
     const props = defineProps<{
-        title: string,
-        type?: string,
-        name?: string,
-        desc?: string,
-        options?: string[]
+        title: string;
+        type?: string;
+        name?: string;
+        desc?: string;
+        options?: string[];
     }>();
 
     const settingStore = useSettingStore();

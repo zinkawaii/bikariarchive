@@ -1,26 +1,26 @@
+import { resolve } from "node:path";
 import chokidar from "chokidar";
 import fs from "fs-extra";
-import { resolve } from "path";
 import { globSync } from "glob";
-import { r, timer } from "@bikari/shared";
+import { timer } from "@bikari/shared";
 
 interface ProcessorOptions<T> {
-    sign: string,
+    sign: string;
     source: {
-        src: string,
-        out: string,
-        pattern: string
-    },
+        src: string;
+        out: string;
+        pattern: string;
+    };
     meta: {
-        src: string,
-        out: string
-    },
+        src: string;
+        out: string;
+    };
     map: {
-        out: string
-    },
-    parse: (this: T, filename: string) => void,
-    beforeGenerate: (this: T, filelist: string[]) => string[] | void,
-    beforeOutputMeta?: (this: T) => any
+        out: string;
+    };
+    parse: (this: T, filename: string) => void;
+    beforeGenerate: (this: T, filelist: string[]) => string[] | void;
+    beforeOutputMeta?: (this: T) => any;
 }
 
 export default class Processor {

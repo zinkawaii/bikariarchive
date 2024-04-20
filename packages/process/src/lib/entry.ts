@@ -1,9 +1,9 @@
+import * as path from "node:path";
 import { setProperty } from "dot-prop";
 import fm from "front-matter";
 import fs from "fs-extra";
-import * as path from "path";
-import Processor from "./processor";
 import { entryMarked } from "../marked";
+import Processor from "./processor";
 
 const folders = [
     "area",

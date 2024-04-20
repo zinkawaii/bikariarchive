@@ -1,5 +1,5 @@
 import { encode } from "html-entities";
-import { RendererObject } from "marked";
+import type { RendererObject } from "marked";
 
 export default <RendererObject> {
     code(code, infostring) {

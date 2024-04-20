@@ -1,5 +1,4 @@
 <script setup>
-    const emit = defineEmits(["update:modelValue"]);
     const props = defineProps({
         modelValue: {
             type: [String, Number],
@@ -18,9 +17,12 @@
             default: 0
         }
     });
+    const emit = defineEmits(["update:modelValue"]);
 
-    const entity = ref();
+    //组件根元素
+    const $ = ref();
 
+    //更新前的旧值
     let oldValue = props.modelValue;
 
     //格式化器
@@ -50,9 +52,7 @@
 
                 return i + d;
             }
-            else {
-                return oldValue;
-            }
+            else return oldValue;
         },
 
         //失焦时
@@ -74,9 +74,7 @@
 
                 return i + d;
             }
-            else {
-                return oldValue;
-            }
+            else return oldValue;
         }
     }, {
         get(target, p) {
@@ -100,7 +98,7 @@
     //挂载完成时
     onMounted(() => {
         blur({
-            target: entity.value
+            target: $.value
         });
     });
 
@@ -131,7 +129,7 @@
 
 <template>
     <input
-        ref="entity"
+        ref="$"
         class="mb-input"
         :value="modelValue"
         :readonly="readonly"

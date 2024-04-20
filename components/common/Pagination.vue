@@ -1,5 +1,4 @@
 <script setup>
-    const modelValue = defineModel();
     const props = defineProps({
         total: Number,
         sizes: {
@@ -12,6 +11,7 @@
             default: 64
         }
     });
+    const modelValue = defineModel();
 
     //组件根元素
     const $ = ref();
@@ -27,9 +27,9 @@
         const total = totalPages.value;
 
         return [
-            (page > 2)                 && page - 1,
+            (page > 2) && page - 1,
             (page > 1 && page < total) && page,
-            (page < total - 1)         && page + 1
+            (page < total - 1) && page + 1
         ].filter((i) => i);
     });
 
