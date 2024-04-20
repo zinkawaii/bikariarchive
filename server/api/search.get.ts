@@ -16,7 +16,7 @@ export default defineWrappedHandler<GetArticleResponse>(async (event, res) => {
     let { word } = getQueryValues(event);
 
     //空关键词
-    if (word && word.length > 0) {
+    if (!word?.length) {
         return 1;
     }
 
