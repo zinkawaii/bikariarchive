@@ -43,7 +43,7 @@
             }
         }
         catch {
-            toastStore.show("logout-error", "退出登录失败", "error");
+            toastStore.error("logout-error", "退出登录失败");
         }
     }
 </script>

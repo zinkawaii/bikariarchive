@@ -87,10 +87,10 @@
         await execute();
         switch (post.value.error) {
             case 1:
-                toastStore.show("article-password-error", "密码错误", "error");
+                toastStore.error("article-password-error", "密码错误");
                 break;
             default:
-                toastStore.show("article-password-right", "密码正确", "success");
+                toastStore.success("article-password-right", "密码正确");
                 decrypted.value = true;
         }
     }, {

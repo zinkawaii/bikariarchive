@@ -68,7 +68,7 @@
             commentPanelStore.close(true);
         }
         catch {
-            toastStore.show("comment-error", "评论发送失败", "error");
+            toastStore.error("comment-error", "评论发送失败");
         }
         finally {
             sending.value = false;

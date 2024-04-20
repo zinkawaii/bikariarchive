@@ -30,7 +30,7 @@
             userStore.sign = sign.value;
         }
         catch {
-            toastStore.show("sign-update-error", "签名更新失败", "error");
+            toastStore.error("sign-update-error", "签名更新失败");
         }
     }, {
         title: "更新签名"

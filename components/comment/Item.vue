@@ -43,7 +43,7 @@
             emit("update");
         }
         catch {
-            toastStore.show("comment-delete-error", "评论删除失败", "error");
+            toastStore.error("comment-delete-error", "评论删除失败");
         }
     }
 </script>

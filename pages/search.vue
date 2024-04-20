@@ -25,7 +25,7 @@
     //全文检索
     const fullTextSearch = Zin.debounce(async (word = inputWord.value) => {
         if (!word?.length) {
-            toastStore.show("search-empty", "请输入内容");
+            toastStore.info("search-empty", "请输入内容");
             return;
         }
 

@@ -38,6 +38,15 @@ export const useToastStore = defineStore("toast", {
         },
         remove(key: string) {
             this.map.delete(key);
+        },
+        error(key: string, content: string) {
+            this.show(key, content, "error");
+        },
+        info(key: string, content: string) {
+            this.show(key, content, "info");
+        },
+        success(key: string, content: string) {
+            this.show(key, content, "success");
         }
     }
 });

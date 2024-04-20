@@ -38,7 +38,7 @@
             }
         }
         catch {
-            toastStore.show("login-error", "登录失败", "error");
+            toastStore.error("login-error", "登录失败");
         }
     }, {
         title: "登录"

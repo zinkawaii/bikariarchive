@@ -49,7 +49,7 @@ const Zin = new class Z {
 
         function clearAndToast() {
             clearTimeout(timer);
-            title && toastStore.show("debounce", `你的${title}速度太快了~`);
+            title && toastStore.info("debounce", `你的${title}速度太快了~`);
         }
     }
 
