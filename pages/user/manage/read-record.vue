@@ -36,7 +36,7 @@
     async function exactQuery(from, to) {
         //开始查询
         querying.value = true;
-        const result = await Zjax.get("/api/read-record", {
+        const res = await Zjax.get("/api/read-record", {
             query: {
                 from,
                 to
@@ -45,7 +45,7 @@
 
         //结束查询
         querying.value = false;
-        return result;
+        return res;
     }
 
     //查询
@@ -79,18 +79,12 @@
 
     //删除
     async function remove(item, index) {
-        const res = await Zjax.delete("/api/read-record", {
+        await Zjax.delete("/api/read-record", {
             body: {
                 id: item._id
             }
         });
-
-        switch (res.error) {
-            case 0: {
-                data.value.splice(index, 1);
-                break;
-            }
-        }
+        data.value.splice(index, 1);
     }
 
     //时间格式化

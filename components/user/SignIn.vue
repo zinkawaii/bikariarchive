@@ -1,4 +1,5 @@
 <script setup>
+    const toastStore = useToastStore();
     const userStore = useUserStore();
 
     const nickname = ref();
@@ -9,14 +10,15 @@
         password: false
     });
 
-    const submit = Zin.debounce(() => {
-        Zjax.post("/api/user/login", {
-            body: {
-                account: nickname.value,
-                password: password.value
-            }
-        })
-        .then((res) => {
+    const submit = Zin.debounce(async () => {
+        try {
+            const res = await Zjax.post("/api/user/login", {
+                body: {
+                    account: nickname.value,
+                    password: password.value
+                }
+            });
+
             switch (res.error) {
                 case 0:
                     userStore.$patch({
@@ -34,7 +36,10 @@
                     warn.value.password = true;
                     break;
             }
-        });
+        }
+        catch {
+            toastStore.show("login-error", "登录失败", "error");
+        }
     }, {
         title: "登录"
     });

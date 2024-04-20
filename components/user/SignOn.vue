@@ -1,6 +1,8 @@
 <script setup>
     const emit = defineEmits(["success"]);
 
+    const toastStore = useToastStore();
+
     const nickname = ref();
     const email = ref();
     const verify = ref();
@@ -55,23 +57,28 @@
     }
 
     //发送验证码
-    function verifySend() {
+    async function verifySend() {
         if (!checker.exec("email")) return;
 
         verifyStage.value.stage = 1;
 
-        Zjax.get("/api/user/logon/verify", {
-            query: {
-                email: email.value
-            }
-        })
-        .then((res) => {
-            switch (res.error) {
-                case 0: {
-                    return successed();
+        try {
+            const { error } = await Zjax.get("/api/user/logon/verify", {
+                query: {
+                    email: email.value
                 }
+            });
+
+            switch (error) {
+                case 1:
+                    return failed();
+                default:
+                    return successed();
             }
-        });
+        }
+        catch {
+            failed();
+        }
 
         //发送成功
         function successed() {
@@ -89,23 +96,26 @@
                 verifyStage.value.stage = 0;
             });
         }
+
+        //发送失败
+        function failed() {
+            toastStore.show("verify-send-error", "验证码发送失败", "error");
+        }
     }
 
     //注册
-    const register = Zin.debounce(() => {
-        Zjax.post("/api/user/logon", {
-            body: {
-                nickname: nickname.value,
-                email: email.value,
-                verify: verify.value,
-                password: password.value
-            }
-        })
-        .then((res) => {
-            switch (res.error) {
-                case 0:
-                    emit("success");
-                    break;
+    const register = Zin.debounce(async () => {
+        try {
+            const { error } = await Zjax.post("/api/user/logon", {
+                body: {
+                    nickname: nickname.value,
+                    email: email.value,
+                    verify: verify.value,
+                    password: password.value
+                }
+            });
+
+            switch (error) {
                 case 1:
                     tips.value.email = "* 该邮箱已注册";
                     break;
@@ -118,8 +128,13 @@
                 case 4:
                     tips.value.verify = "* 验证码不正确";
                     break;
+                default:
+                    emit("success");
             }
-        });
+        }
+        catch {
+            toastStore.show("logon-error", "注册失败", "error");
+        }
     }, {
         title: "注册"
     });

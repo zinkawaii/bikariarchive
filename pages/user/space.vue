@@ -1,6 +1,7 @@
 <script setup>
     const route = useRoute();
     const router = useRouter();
+    const toastStore = useToastStore();
     const userStore = useUserStore();
 
     const sign = ref(userStore.sign);
@@ -17,19 +18,20 @@
     });
 
     //更新签名
-    const updateSign = Zin.debounce(() => {
+    const updateSign = Zin.debounce(async () => {
         if (sign.value === oldSign.value) return;
 
-        Zjax.put("/api/user/sign", {
-            body: {
-                content: sign.value
-            }
-        })
-        .then((res) => {
-            if (!res.error) {
-                userStore.sign = sign.value;
-            }
-        });
+        try {
+            Zjax.put("/api/user/sign", {
+                body: {
+                    content: sign.value
+                }
+            });
+            userStore.sign = sign.value;
+        }
+        catch {
+            toastStore.show("sign-update-error", "签名更新失败", "error");
+        }
     }, {
         title: "更新签名"
     });

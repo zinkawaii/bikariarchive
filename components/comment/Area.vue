@@ -25,42 +25,40 @@
     });
 
     //获取评论
-    function getComments() {
-        Zjax.get("/api/comment", {
+    async function getComments() {
+        const { error, totalCount, mainCount, data } = await Zjax.get("/api/comment", {
             query: {
                 path: route.path,
                 page: page.value
             }
-        })
-        .then(({ error, totalCount, mainCount, data }) => {
-            if (error !== 0) return;
-
-            //评论数
-            count.value.total = totalCount;
-            count.value.main = mainCount;
-
-            for (const x of data) {
-                //子评论回归指向
-                (function func(x) {
-                    for (const y of x.children) {
-                        y.parent = x;
-                        func(y);
-                    }
-                })(x);
-
-                //将嵌套子评论拍平
-                for (const y of x.children) {
-                    if (y.children.length > 0) {
-                        x.children.push(...y.children);
-                        y.children.length = 0;
-                    }
-                }
-
-                //按时间排序
-                x.children.sort((a, b) => a.time.localeCompare(b.time));
-            }
-            comments.value = data;
         });
+        if (error !== 0) return;
+
+        //评论数
+        count.value.total = totalCount;
+        count.value.main = mainCount;
+
+        for (const item of data) {
+            //子评论回归指向
+            (function func(parent) {
+                for (const child of parent.children) {
+                    child.parent = parent;
+                    func(child);
+                }
+            })(item);
+
+            //将嵌套子评论拍平
+            for (const child of item.children) {
+                if (child.children.length > 0) {
+                    item.children.push(...child.children);
+                    child.children.length = 0;
+                }
+            }
+
+            //按时间排序
+            item.children.sort((a, b) => a.time.localeCompare(b.time));
+        }
+        comments.value = data;
     }
 
     //发表评论

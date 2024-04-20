@@ -2,6 +2,7 @@
     const route = useRoute();
     const router = useRouter();
     const signerStore = useSignerStore();
+    const toastStore = useToastStore();
     const userStore = useUserStore();
 
     //当前视图
@@ -32,13 +33,18 @@
     }));
 
     //退出登录
-    function logout() {
-        Zjax.post("/api/user/logout").then(() => {
+    async function logout() {
+        try {
+            await Zjax.post("/api/user/logout");
+
             userStore.reset();
             if (route.meta.identity > 0) {
                 router.push({ name: "home" });
             }
-        });
+        }
+        catch {
+            toastStore.show("logout-error", "退出登录失败", "error");
+        }
     }
 </script>
 

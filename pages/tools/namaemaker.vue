@@ -7,7 +7,7 @@
     const isJnmLoaded = ref(false);
 
     //从静态资源服务器读取数据，防止打包文件过大
-    if (process.browser) {
+    if (import.meta.browser) {
         Zjax.get("/json/Jnm.json").then((data) => {
             Jnm = data;
             isJnmLoaded.value = true;

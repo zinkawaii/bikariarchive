@@ -49,30 +49,30 @@
     });
 
     //发表评论
-    function postComment() {
+    async function postComment() {
         if (!checker.exec()) return;
 
         sending.value = true;
-        Zjax.post("/api/comment", {
-            body: {
-                path: commentPanelStore.path,
-                parent: commentPanelStore.replyId,
-                content: comment.value,
-                nickname: nickname.value,
-                email: email.value,
-                address: address.value
-            }
-        })
-        .then(() => {
+        try {
+            await Zjax.post("/api/comment", {
+                body: {
+                    path: commentPanelStore.path,
+                    parent: commentPanelStore.replyId,
+                    content: comment.value,
+                    nickname: nickname.value,
+                    email: email.value,
+                    address: address.value
+                }
+            });
             comment.value = "";
             commentPanelStore.close(true);
-        })
-        .catch(() => {
+        }
+        catch {
             toastStore.show("comment-error", "评论发送失败", "error");
-        })
-        .finally(() => {
+        }
+        finally {
             sending.value = false;
-        });
+        }
     }
 </script>
 

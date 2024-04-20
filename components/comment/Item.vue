@@ -6,6 +6,7 @@
 
     const commentPanelStore = useCommentPanelStore();
     const confirmStore = useConfirmStore();
+    const toastStore = useToastStore();
     const userStore = useUserStore();
 
     //相对时间
@@ -31,17 +32,18 @@
 
     //删除评论
     async function removeComment() {
-        if (await confirmStore.show("是否删除这条评论？")) {
-            Zjax.delete("/api/comment", {
+        if (!await confirmStore.show("是否删除这条评论？")) return;
+
+        try {
+            await Zjax.delete("/api/comment", {
                 body: {
                     id: props.data.id
                 }
-            })
-            .then(({ error }) => {
-                if (error === 0) {
-                    emit("update");
-                }
             });
+            emit("update");
+        }
+        catch {
+            toastStore.show("comment-delete-error", "评论删除失败", "error");
         }
     }
 </script>
