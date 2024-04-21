@@ -13,7 +13,7 @@ const zmark = new Marked({
         if (token.type !== "code") return;
         const shiki = await getShikiHighlighter();
         try {
-            shiki.getLanguage(token.lang);
+            await loadShikiLanguages(shiki, token.lang);
         }
         catch (err) {
             console.error(err);

@@ -69,7 +69,6 @@ export default defineNuxtConfig({
         ["nuxt-simple-robots", robotsConfig],
         ["@nuxtjs/sitemap", sitemapConfig],
         "nuxt-icon",
-        "nuxt-shiki",
         "nuxt-site-config",
         "@nuxt/image",
         "@nuxtjs/google-fonts",
@@ -77,7 +76,8 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
         "@vue-email/nuxt",
-        "@vueuse/nuxt"
+        "@vueuse/nuxt",
+        "@zinkawaii/nuxt-shiki"
     ],
     site: {
         name: clientConfig.title,
@@ -94,7 +94,7 @@ export default defineNuxtConfig({
         }
     },
     shiki: {
-        bundledLangs: ["css", "html", "js", "json", "yaml"],
+        dynamic: true,
         defaultTheme: {
             light: "min-light",
             dark: "one-dark-pro"
