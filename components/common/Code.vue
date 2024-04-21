@@ -14,6 +14,10 @@
     const isExpand = ref(false);
     const $Code = ref();
 
+    //语言
+    const shiki = await getShikiHighlighter();
+    await loadShikiLanguages(shiki, props.lang);
+
     //代码
     const code = await useShikiHighlighted(props.raw, { lang: props.lang, ...highlightOptions });
 
