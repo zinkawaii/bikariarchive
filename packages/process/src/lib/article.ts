@@ -68,7 +68,7 @@ export default new Processor({
         }
         this.jMap[novel][index] = {
             name,
-            password
+            password: String(password)
         };
 
         //写入数据
