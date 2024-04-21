@@ -18,7 +18,7 @@ interface ProcessorOptions<T> {
     map: {
         out: string;
     };
-    parse: (this: T, filename: string) => void;
+    parse: (this: T, filename: string) => Promise<void>;
     beforeGenerate: (this: T, filelist: string[]) => string[] | void;
     beforeOutputMeta?: (this: T) => any;
 }
@@ -51,12 +51,12 @@ export default class Processor {
     }
 
     build() {
-        return timer(this.options.sign, () => this.generate())();
+        return timer(this.options.sign, this.generate.bind(this))();
     }
 
     watch() {
-        const parse = timer(this.options.sign, (filename) => {
-            this.options.parse.call(this, filename);
+        const parse = timer(this.options.sign, async (filename: string) => {
+            await this.options.parse.call(this, filename);
             this.outputMeta();
         });
 
@@ -71,7 +71,7 @@ export default class Processor {
         fs.outputFileSync(this.mapOutDir, JSON.stringify(this.jMap));
     }
 
-    private generate() {
+    private async generate() {
         //获取文件列表
         let filelist = globSync(this.sources, {
             windowsPathsNoEscape: true
@@ -81,7 +81,9 @@ export default class Processor {
         filelist = this.options.beforeGenerate.call(this, filelist) || filelist;
 
         //顺序处理源文件
-        filelist.forEach((filename) => this.options.parse.call(this, filename));
+        await Promise.all(
+            filelist.map((filename) => this.options.parse.call(this, filename))
+        );
 
         //输出元数据文件
         this.outputMeta();

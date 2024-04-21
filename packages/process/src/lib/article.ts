@@ -1,11 +1,10 @@
 import * as path from "node:path";
 import dayjs from "dayjs";
-import fm from "front-matter";
 import fs from "fs-extra";
 import $ from "node-html-parser";
 import { isDev } from "@bikari/shared";
-import { articleMarked } from "../marked";
 import type { ArticleFrontMatter } from "../types";
+import { parseArticle } from "../remark";
 import Processor from "./processor";
 
 const re = /^(.*?)\.(\d+)$/;
@@ -24,18 +23,17 @@ export default new Processor({
     map: {
         out: "dist/json/Artmap.json"
     },
-    parse(filename) {
+    async parse(filename) {
         //处理文件
         const file = fs.readFileSync(filename);
-        const { attributes, body } = fm<ArticleFrontMatter>(file.toString());
+        const { attributes, content } = await parseArticle<ArticleFrontMatter>(file.toString());
 
         //生产环境下忽略草稿文件
         if (attributes.draft && !isDev) return;
-        const result = articleMarked.parse(body) as string;
 
         //写入文件
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".txt");
-        fs.outputFileSync(outPath, result);
+        fs.outputFileSync(outPath, content);
 
         const match = path.basename(path.resolve(filename, "..")).match(re);
         const novel = match[1];
@@ -43,7 +41,7 @@ export default new Processor({
         const name = path.basename(filename, ".md");
 
         //解析内容
-        const doc = $.parse(result);
+        const doc = $.parse(content);
         const runtime = doc.querySelectorAll("*").some((e) => e.tagName.includes("-")) || void 0;
         const wordCount = doc.querySelectorAll("p").reduce((res, p) => res + p.textContent.length, 0);
 

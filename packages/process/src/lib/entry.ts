@@ -1,8 +1,6 @@
 import * as path from "node:path";
-import { setProperty } from "dot-prop";
-import fm from "front-matter";
 import fs from "fs-extra";
-import { entryMarked } from "../marked";
+import { parseEntry } from "../remark";
 import Processor from "./processor";
 
 const folders = [
@@ -25,15 +23,10 @@ export default new Processor({
     map: {
         out: "dist/json/Entrimap.json"
     },
-    parse(filename: string) {
+    async parse(filename: string) {
         //处理文件
         const file = fs.readFileSync(filename);
-        const { attributes, body } = fm<any>(file.toString());
-        const result = entryMarked.parse(body) as any;
-
-        for (const key in result) {
-            setProperty(attributes, key, result[key]);
-        }
+        const attributes = await parseEntry(file.toString());
 
         //写入文件
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".json");
