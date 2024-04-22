@@ -90,16 +90,16 @@
     }
 
     //进度正在改变时
-    function controlProgress(event) {
+    function controlProgress(rate) {
         if (!state.value.invalid) {
-            state.value.current = state.value.duration * event.rate;
+            state.value.current = state.value.duration * rate;
         }
     }
 
     //进度改变时
-    function controlChange(event) {
+    function controlChange(rate) {
         if (!state.value.invalid) {
-            $Audio.value.currentTime = state.value.duration * event.rate;
+            $Audio.value.currentTime = state.value.duration * rate;
         }
         else {
             //音频无效，进度归零

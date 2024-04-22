@@ -1,13 +1,10 @@
-<script setup>
-    const props = defineProps({
-        rows: {
-            type: Number,
-            default: 5
-        },
-        animated: {
-            type: Boolean,
-            default: true
-        }
+<script lang="ts" setup>
+    withDefaults(defineProps<{
+        rows?: number;
+        animated?: boolean;
+    }>(), {
+        rows: 5,
+        animated: true
     });
 </script>
 

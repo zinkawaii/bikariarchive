@@ -1,14 +1,24 @@
-<script setup>
-
+<script lang="ts" setup>
+    defineProps<{
+        disabled?: boolean;
+        full?: boolean;
+        round?: boolean;
+    }>();
 </script>
 
 <template>
-    <button class="mb-button">
-        <slot></slot>
+    <button
+        class="mb-button"
+        :class="{
+            [`is-disabled`]: disabled,
+            [`is-full`]: full,
+            [`is-round`]: round
+        }"
+        ><slot></slot>
     </button>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .mb-button {
         display: inline-flex;
         align-items: center;
@@ -29,17 +39,17 @@
             color: white;
         }
 
-        &[disabled] {
+        &.is-disabled {
             border-color: var(--color-border);
             color: var(--color-text-disabled);
             pointer-events: none;
         }
 
-        &[full] {
+        &.is-full {
             width: 100%;
         }
 
-        &[round] {
+        &.is-round {
             border-radius: var(--circle-radius);
         }
 

@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const imageViewerStore = useImageViewerStore();
     const $i = storeToRefs(imageViewerStore).target;
     const $v = ref();
@@ -23,10 +23,10 @@
 
     //图片样式
     const imageStyle = ref({
-        top: 0,
-        left: 0,
-        width: 0,
-        height: 0
+        top: "",
+        left: "",
+        width: "",
+        height: ""
     });
 
     //鼠标拖动时
@@ -80,10 +80,9 @@
 
         //计算最终宽高
         const ratio = width / height;
-        const [finalWidth, finalHeight] = {
-            [false]: [fixedWidth, fixedWidth / ratio],
-            [true]: [fixedHeight * ratio, fixedHeight]
-        }[fixedWidth / fixedHeight > ratio];
+        const [finalWidth, finalHeight] = (fixedWidth / fixedHeight > ratio)
+            ? [fixedHeight * ratio, fixedHeight]
+            : [fixedWidth, fixedWidth / ratio];
 
         //移动至屏幕中心
         nextTick(() => {
@@ -117,7 +116,7 @@
     }
 
     //鼠标滚动时
-    function onMouseWheel(event) {
+    function onMouseWheel(event: WheelEvent) {
         if (isPressed.value) return;
 
         //缩放比率

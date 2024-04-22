@@ -1,8 +1,8 @@
-<script setup>
-    const props = defineProps({
-        value: {}
-    });
-    const modelValue = defineModel();
+<script lang="ts" setup>
+    defineProps<{
+        value: any;
+    }>();
+    const modelValue = defineModel<any>();
 </script>
 
 <template>

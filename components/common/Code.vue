@@ -1,13 +1,11 @@
-<script setup>
-    const props = defineProps({
-        lang: {
-            type: String,
-            default: "js"
-        },
-        raw: {
-            type: String,
-            default: ""
-        }
+<script lang="ts" setup>
+    import type { BundledLanguage } from "shiki";
+
+    const props = withDefaults(defineProps<{
+        lang?: BundledLanguage;
+        raw?: string;
+    }>(), {
+        lang: "js"
     });
 
     const toastStore = useToastStore();

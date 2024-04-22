@@ -1,10 +1,7 @@
-<script setup>
-    const props = defineProps({
-        illustrator: {
-            type: String,
-            required: true
-        }
-    });
+<script lang="ts" setup>
+    defineProps<{
+        illustrator: string;
+    }>();
 </script>
 
 <template>

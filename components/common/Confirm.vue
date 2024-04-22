@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const confirmStore = useConfirmStore();
 
     //添加遮罩层
@@ -20,7 +20,7 @@
     });
 
     //返回判断结果
-    function res(state) {
+    function res(state: boolean) {
         confirmStore.hide(state);
     }
 </script>

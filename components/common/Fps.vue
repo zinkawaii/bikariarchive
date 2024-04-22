@@ -1,20 +1,16 @@
-<script setup>
-    const interval = 30;
+<script lang="ts" setup>
     let count = 0;
-    let last = 0;
-    let now = performance.now();
-
+    let time = 0;
     const displayValue = ref(60);
 
-    onMounted(function render() {
+    useRafFn(({ delta }) => {
         count++;
-        if (count >= interval) {
-            last = now;
-            now = performance.now();
-            displayValue.value = Math.round(1000 * count / (now - last));
+        time += delta;
+        if (time >= 1000) {
+            time -= 1000;
+            displayValue.value = count;
             count = 0;
         }
-        window.requestAnimationFrame(render);
     });
 </script>
 

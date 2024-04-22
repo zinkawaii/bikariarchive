@@ -1,16 +1,12 @@
-<script setup>
-    const props = defineProps({
-        viewable: Boolean
-    });
-
+<script lang="ts" setup>
     const imageViewerStore = useImageViewerStore();
     const $ = ref();
 
     function openViewer() {
-        props.viewable && imageViewerStore.open($.value.$el);
+        imageViewerStore.open($.value.$el);
     }
 </script>
 
 <template>
-    <nuxt-img ref="$" class="mb-image" :class="{ [`cursor-pointer`]: viewable }" @click="openViewer"/>
+    <nuxt-img ref="$" class="cursor-pointer" @click="openViewer"/>
 </template>

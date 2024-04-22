@@ -1,14 +1,14 @@
-<script setup>
-    const props = defineProps([
-        "title"
-    ]);
-    const emit = defineEmits([
-        "progress",
-        "change",
-        "dragstart",
-        "dragend"
-    ]);
-    const modelValue = defineModel();
+<script lang="ts" setup>
+    defineProps<{
+        title: string;
+    }>();
+    const emit = defineEmits<{
+        progress: [rate: number];
+        change: [rate: number];
+        dragstart: [];
+        dragend: [];
+    }>();
+    const modelValue = defineModel<number>();
 
     let p_width = 0;
     let p_left = 0;
@@ -30,12 +30,12 @@
         },
         onMousemove(event) {
             rate.value = Math.max(0, Math.min(1, (event.clientX - p_left) / p_width));
-            emit("progress", { rate: rate.value });
+            emit("progress", rate.value);
         },
         onMouseup() {
             modelValue.value = rate.value;
             emit("dragend");
-            emit("change", { rate: rate.value });
+            emit("change", rate.value);
         }
     });
 

@@ -1,21 +1,12 @@
-<script setup>
-    const props = defineProps({
-        modelValue: {
-            type: [String, Number],
-            required: true
-        },
-        readonly: {
-            type: Boolean,
-            default: false
-        },
-        type: {
-            type: String,
-            default: "text"
-        },
-        accuracy: {
-            type: Number,
-            default: 0
-        }
+<script lang="ts" setup>
+    const props = withDefaults(defineProps<{
+        modelValue: string | number;
+        readonly?: boolean;
+        type?: string;
+        accuracy?: number;
+    }>(), {
+        type: "text",
+        accuracy: 0
     });
     const emit = defineEmits(["update:modelValue"]);
 
@@ -35,22 +26,12 @@
             const match = String(value).match(this.re);
 
             if (match) {
-                let i = match[1] ?? "";
-                let d = match[2] ?? "";
+                const i = Number.parseInt(match[1]);
+                const d = match[2]?.slice(0, props.accuracy + 1) || "";
 
-                //整数
-                if (i === "") {
-                    i = 0;
-                }
-                else if (i.length > 1 && i.startsWith("0")) {
-                    i = i.slice(1);
-                }
+                console.log(i, Number.isNaN(i), d, i + d);
 
-                //小数
-                const accuracy = Number(props.accuracy);
-                d = d.slice(0, accuracy + 1);
-
-                return i + d;
+                return Number.isNaN(i) ? d : i + d;
             }
             else return oldValue;
         },
@@ -60,17 +41,8 @@
             const match = String(value).match(this.re);
 
             if (match) {
-                const i = match[1] ?? "";
-                let d = match[2] ?? "";
-
-                //小数
-                const accuracy = props.accuracy;
-                if (accuracy > 0) {
-                    if (d === "") {
-                        d = ".";
-                    }
-                    d = d.padEnd(accuracy + 1, "0");
-                }
+                const i = Number.parseInt(match[1]) || "0";
+                const d = props.accuracy > 0 ? (match[2] || ".").padEnd(props.accuracy + 1, "0") : "";
 
                 return i + d;
             }

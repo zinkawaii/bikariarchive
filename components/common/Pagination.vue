@@ -1,17 +1,14 @@
-<script setup>
-    const props = defineProps({
-        total: Number,
-        sizes: {
-            type: Number,
-            default: 10
-        },
-        scrollTarget: String,
-        scrollOffset: {
-            type: Number,
-            default: 64
-        }
+<script lang="ts" setup>
+    const props = withDefaults(defineProps<{
+        total: number;
+        sizes?: number;
+        scrollTarget?: string;
+        scrollOffset?: number;
+    }>(), {
+        sizes: 10,
+        scrollOffset: 64
     });
-    const modelValue = defineModel();
+    const modelValue = defineModel<number>();
 
     //组件根元素
     const $ = ref();
