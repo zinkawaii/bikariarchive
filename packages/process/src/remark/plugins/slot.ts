@@ -36,15 +36,17 @@ export default function() {
                 );
             }
 
-            const res: any = u("slot", {
-                path: startMatch[1].trim(),
+            const res = u("slot", {
                 data: {
-                    hName: "slot"
+                    hName: "slot",
+                    hProperties: {
+                        path: startMatch[1].trim()
+                    }
                 }
             }, [
                 u("paragraph", children)
             ]);
-            parent.children.splice(index, 1, res);
+            parent.children.splice(index, 1, res as any);
             return index + 1;
         });
     };

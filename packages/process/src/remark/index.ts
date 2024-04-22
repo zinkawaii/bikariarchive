@@ -13,7 +13,6 @@ import attributes from "./plugins/attributes";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import codeHandler from "./handlers/code";
-import slotHandler from "./handlers/slot";
 
 const externalOptions: ExternalOptions = {
     rel: ["noopener", "noreferrer", "nofollow"],
@@ -23,8 +22,7 @@ const externalOptions: ExternalOptions = {
 const rehypeOptions = {
     allowDangerousHtml: true,
     handlers: {
-        code: codeHandler,
-        slot: slotHandler
+        code: codeHandler
     }
 };
 
