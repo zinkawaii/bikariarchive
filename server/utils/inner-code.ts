@@ -1,11 +1,10 @@
-import md5 from "md5";
+import { MD5 } from "crypto-es/lib/md5";
 
 export const InnerCode = {
     //输入字符串（密码），生成返回哈希和盐值
     create(str: string) {
-        const salt = md5(Date.now().toString());
-        let hash = md5(str) + salt;
-        hash = md5(hash);
+        const salt = MD5(Date.now().toString()).toString();
+        const hash = MD5(MD5(str) + salt).toString();
         return {
             hash,
             salt
@@ -14,8 +13,7 @@ export const InnerCode = {
 
     //输入字符串（密码）和盐值，返回哈希用于校验
     encrypt(str: string, salt: string) {
-        let hash = md5(str) + salt;
-        hash = md5(hash);
+        const hash = MD5(MD5(str) + salt).toString();
         return hash;
     }
 };

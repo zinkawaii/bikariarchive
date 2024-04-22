@@ -1,4 +1,4 @@
-import md5 from "md5";
+import { MD5 } from "crypto-es/lib/md5";
 
 interface GetCommentsResponse extends BaseResponse {
     totalCount?: number;
@@ -75,7 +75,7 @@ function dataClone(target, source) {
             content: item.content,
             time: item.time,
             nickname: item.nickname,
-            avatar: `https://cravatar.cn/avatar/${md5(item.email)}?d=404`,
+            avatar: `https://cravatar.cn/avatar/${MD5(item.email)}?d=404`,
             address: item.address
         };
         target.push(i);
