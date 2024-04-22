@@ -1,4 +1,7 @@
 <script setup>
+    defineOptions({
+        inheritAttrs: false
+    });
     const props = defineProps({
         placeholder: String,
         warn: Boolean,
