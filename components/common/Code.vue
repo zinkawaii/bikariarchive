@@ -15,8 +15,9 @@
     const $Code = ref();
 
     //语言
-    const shiki = await getShikiHighlighter();
-    await loadShikiLanguages(shiki, props.lang);
+    getShikiHighlighter().then((shiki) => {
+        loadShikiLanguages(shiki, props.lang);
+    });
 
     //代码
     const code = await useShikiHighlighted(props.raw, { lang: props.lang, ...highlightOptions });
