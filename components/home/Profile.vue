@@ -26,7 +26,7 @@
 <template>
     <div class="content-table home-profile">
         <a class="profile-avatar">
-            <mb-image :src="$config.public.avatar" alt="avatar"/>
+            <nuxt-img :src="$config.public.avatar" alt="avatar"/>
         </a>
         <table class="profile-table">
             <tbody>

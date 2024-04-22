@@ -39,7 +39,7 @@
 
 <template>
     <div class="space-header">
-        <mb-image class="space-icon" src="/garden/icon/default.png" :alt="userStore.nickname"/>
+        <nuxt-img class="space-icon" src="/garden/icon/default.png" :alt="userStore.nickname"/>
         <div class="space-title">
             <span class="space-nickname">{{ userStore.nickname }}</span>
         </div>

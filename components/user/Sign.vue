@@ -80,7 +80,7 @@
                                     <mb-button @click="logout">退出登录</mb-button>
                                 </div>
                             </div>
-                            <nuxt-link :to="toSpace"><mb-image class="user-avatar" src="/garden/icon/default.png" alt="avatar"/></nuxt-link>
+                            <nuxt-link :to="toSpace"><nuxt-img class="user-avatar" src="/garden/icon/default.png" alt="avatar"/></nuxt-link>
                         </div>
                     </div>
                 </transition>
@@ -203,6 +203,7 @@
 
     .user-avatar {
         width: 72px;
+        aspect-ratio: 1;
         border-radius: 100%;
         box-shadow: var(--box-shadow);
     }
