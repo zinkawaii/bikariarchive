@@ -44,7 +44,7 @@ export default defineNuxtConfig({
             key: "<!-- ??? -->",
             cert: "<!-- ??? -->"
         },
-        host: "<!-- ??? -->",
+        host: clientConfig.domain,
         port: 443
     },
     devtools: {
@@ -82,6 +82,7 @@ export default defineNuxtConfig({
     site: {
         name: clientConfig.title,
         url: `https://${clientConfig.domain}`,
+        description: clientConfig.description,
         defaultLocale: "zh-CN",
         indexable: true
     },
