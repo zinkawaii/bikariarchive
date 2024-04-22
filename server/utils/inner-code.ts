@@ -1,4 +1,6 @@
-import { MD5 } from "crypto-es/lib/md5";
+import CryptoES from "crypto-es";
+
+const { MD5 } = CryptoES;
 
 export const InnerCode = {
     //输入字符串（密码），生成返回哈希和盐值
