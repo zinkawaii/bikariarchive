@@ -6,7 +6,7 @@
 
     const isHidden = ref(false);
 
-    //边栏显隐与UI折叠
+    //边栏显隐与 UI 折叠
     watchImmediate(() => [
         settingStore.setting["ui-collapse"],
         settingStore.setting["sidebar-display"]
@@ -15,16 +15,17 @@
             const nakamiState = Flip.getState(".nakami");
             nextTick(() => {
                 Flip.from(nakamiState, {
-                    duration: 0.4
+                    duration: 0.4,
+                    ease: "back.out"
                 });
             });
-
-            isHidden.value = {
-                0: collapse,
-                1: false,
-                2: true
-            }[display];
         }
+
+        isHidden.value = {
+            0: collapse,
+            1: false,
+            2: true
+        }[display];
     });
 </script>
 

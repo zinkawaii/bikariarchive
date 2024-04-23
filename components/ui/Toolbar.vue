@@ -1,14 +1,32 @@
 <script setup>
+    const gsap = useGsap();
     const signerStore = useSignerStore();
     const settingStore = useSettingStore();
 
-    const collapse = computed(() => {
-        return settingStore.get("ui-collapse");
+    const collapse = computed(() => settingStore.get("ui-collapse"));
+
+    onMounted(() => {
+        const items = [...document.querySelectorAll(".tool-item")].slice(0, -1);
+
+        watchEffect(() => {
+            const tl = gsap.timeline({
+                defaults: {
+                    duration: 0.4,
+                    ease: `back.${collapse.value ? `in` : `out`}`
+                }
+            });
+
+            const sortedItems = collapse.value ? items : items.toReversed();
+            for (const item of sortedItems) {
+                tl.to(item, { x: collapse.value ? 60 : 0 }, "<0.05");
+            }
+            tl.play();
+        });
     });
 </script>
 
 <template>
-    <div class="z-toolbar" :class="{ collapse }">
+    <div class="z-toolbar">
         <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
             <icon name="fa-solid:subway"/>
         </nuxt-link>
@@ -36,12 +54,6 @@
         right: 24px;
         bottom: 32px;
         pointer-events: none;
-
-        &.collapse > .tool-item:not(:last-child) {
-            opacity: 0;
-            transform: translateX(60px);
-            pointer-events: none;
-        }
     }
 
     .tool-item {
@@ -54,7 +66,6 @@
         box-shadow: var(--box-shadow);
         background-color: var(--color-theme-dark);
         color: white;
-        transition: all 0.4s;
         pointer-events: auto;
 
         &:hover {
