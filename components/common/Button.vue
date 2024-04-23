@@ -24,7 +24,7 @@
         align-items: center;
         justify-content: center;
         gap: 0.4em;
-        padding-inline: 12px;
+        padding-inline: 0.75em;
         border: 1px solid var(--color-theme-dark);
         border-radius: 4px;
         background-color: transparent;

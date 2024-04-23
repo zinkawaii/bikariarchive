@@ -3,16 +3,11 @@
         title: "日文名发生装置"
     });
 
+    const toastStore = useToastStore();
+
     let Jnm = null;
     const isJnmLoaded = ref(false);
-
-    //从静态资源服务器读取数据，防止打包文件过大
-    if (import.meta.browser) {
-        Zjax.get("/json/Jnm.json").then((data) => {
-            Jnm = data;
-            isJnmLoaded.value = true;
-        });
-    }
+    const isJnmLoading = ref(false);
 
     //数量
     const counter = ref({
@@ -57,6 +52,17 @@
 
     //生成
     function generate() {
+        //从静态资源服务器读取数据，防止打包文件过大
+        if (!isJnmLoaded.value) {
+            isJnmLoading.value = true;
+            return Zjax.get("/json/Jnm.json").then((data) => {
+                Jnm = data;
+                isJnmLoaded.value = true;
+                isJnmLoading.value = false;
+                toastStore.success("jnm-loaded", "数据集已加载");
+            });
+        }
+
         const count = counter.value.current;
         const sex = gender.value.current;
 
@@ -235,7 +241,7 @@
     <div class="p-small">
         <div class="namae-option">
             <span>介绍</span>
-            <p class="p-small">本页面用于生成日文名，数据库与随机算法均来自<coco-link to="https://namaemaker.net" target="_blank">namaemaker.net</coco-link></p>
+            <p class="p-small">本页面用于生成日文名，数据集与随机算法均来自 <coco-link to="https://namaemaker.net" target="_blank">namaemaker.net</coco-link></p>
         </div>
         <div class="namae-option">
             <span>数量</span>
@@ -267,11 +273,20 @@
             </div>
         </div>
         <div class="namae-operator">
-            <mb-button :disabled="!isJnmLoaded" @click="generate">
-                <template v-if="!isJnmLoaded">加载中</template>
-                <template v-else>生成</template>
+            <mb-button :disabled="isJnmLoading" @click="generate">
+                <template v-if="!isJnmLoaded || isJnmLoading">
+                    <icon :name="isJnmLoading ? `mingcute:loading-fill` : `fa6-solid:download`"/>
+                    <span>加载</span>
+                </template>
+                <template v-else>
+                    <icon name="iconamoon:star-bold"/>
+                    <span>生成</span>
+                </template>
             </mb-button>
-            <mb-button :disabled="isResultEmpty" @click="clear">清除结果</mb-button>
+            <mb-button :disabled="isResultEmpty" @click="clear">
+                <icon name="fa6-solid:trash-can"/>
+                <span>清除结果</span>
+            </mb-button>
         </div>
     </div>
     <div v-if="!isResultEmpty" class="div-table namae-result">
