@@ -120,7 +120,7 @@
 
 <template>
     <transition-scale :duration="0.25">
-        <div v-if="state" ref="$Menu" class="content-widget z-context-menu">
+        <div v-show="state" ref="$Menu" class="content-widget z-context-menu">
             <menu class="menu-tool-bar">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
                     <icon :name="icon"/>

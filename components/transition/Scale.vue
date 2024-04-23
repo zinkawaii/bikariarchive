@@ -11,10 +11,19 @@
 
     const gsap = useGsap();
 
+    const fromState = computed(() => ({
+        opacity: 0,
+        scale: props.scale
+    }));
+
+    const toState = computed(() => ({
+        opacity: 1,
+        scale: 1
+    }));
+
     async function onEnter(el, done) {
-        await gsap.from(el, {
-            opacity: 0,
-            scale: props.scale,
+        await gsap.fromTo(el, fromState.value, {
+            ...toState.value,
             duration: props.duration,
             ease: `${props.ease}.out`
         });
@@ -22,9 +31,8 @@
     }
 
     async function onLeave(el, done) {
-        await gsap.to(el, {
-            opacity: 0,
-            scale: props.scale,
+        await gsap.fromTo(el, toState.value, {
+            ...fromState.value,
             duration: props.duration,
             ease: `${props.ease}.in`
         });
