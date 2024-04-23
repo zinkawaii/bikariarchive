@@ -1,14 +1,30 @@
 <script setup>
+    import { Flip } from "gsap/all";
+
     const route = useRoute();
     const settingStore = useSettingStore();
 
+    const isHidden = ref(false);
+
     //边栏显隐与UI折叠
-    const hidden = computed(() => {
-        return {
-            0: settingStore.setting["ui-collapse"],
-            1: false,
-            2: true
-        }[settingStore.setting["sidebar-display"]];
+    watchImmediate(() => [
+        settingStore.setting["ui-collapse"],
+        settingStore.setting["sidebar-display"]
+    ], ([collapse, display]) => {
+        if (import.meta.browser) {
+            const nakamiState = Flip.getState(".nakami");
+            nextTick(() => {
+                Flip.from(nakamiState, {
+                    duration: 0.4
+                });
+            });
+
+            isHidden.value = {
+                0: collapse,
+                1: false,
+                2: true
+            }[display];
+        }
     });
 </script>
 
@@ -66,6 +82,7 @@
 
     .aside-avatar {
         width: 96px;
+        aspect-ratio: 1;
         border-radius: 24px;
         box-shadow: var(--box-shadow);
     }

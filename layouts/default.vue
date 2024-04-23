@@ -54,6 +54,7 @@
         flex-direction: column;
         gap: 24px;
         max-width: 1028px;
+        z-index: 1;
     }
 
     .z-background {
