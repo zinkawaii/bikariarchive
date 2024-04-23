@@ -33,7 +33,7 @@
 </script>
 
 <template>
-    <transition @enter="onEnter" @leave="onLeave">
+    <transition :css="false" @enter="onEnter" @leave="onLeave">
         <slot></slot>
     </transition>
 </template>

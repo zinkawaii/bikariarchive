@@ -87,7 +87,8 @@
 
         nextTick(() => {
             //获取宽高
-            const { width, height } = $Menu.value.getBoundingClientRect();
+            const width = $Menu.value.offsetWidth;
+            const height = $Menu.value.offsetHeight;
 
             //计算位置
             let { x, y } = event;
@@ -116,25 +117,27 @@
 </script>
 
 <template>
-    <div v-show="state" ref="$Menu" class="content-widget z-context-menu">
-        <menu class="menu-tool-bar">
-            <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
-                <icon :name="icon"/>
-            </li>
-        </menu>
-        <menu v-if="textSelection.text.value" class="menu-list">
-            <li v-for="{ title, icon, action } in textItems" class="menu-item" @click="action">
-                <icon :name="icon"/>
-                <span>{{ title }}</span>
-            </li>
-        </menu>
-        <menu class="menu-list">
-            <li v-for="{ title, icon, action } in menuItems" class="menu-item" @click="action">
-                <icon :name="icon"/>
-                <span>{{ title }}</span>
-            </li>
-        </menu>
-    </div>
+    <transition-scale :duration="0.25">
+        <div v-if="state" ref="$Menu" class="content-widget z-context-menu">
+            <menu class="menu-tool-bar">
+                <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
+                    <icon :name="icon"/>
+                </li>
+            </menu>
+            <menu v-if="textSelection.text.value" class="menu-list">
+                <li v-for="{ title, icon, action } in textItems" class="menu-item" @click="action">
+                    <icon :name="icon"/>
+                    <span>{{ title }}</span>
+                </li>
+            </menu>
+            <menu class="menu-list">
+                <li v-for="{ title, icon, action } in menuItems" class="menu-item" @click="action">
+                    <icon :name="icon"/>
+                    <span>{{ title }}</span>
+                </li>
+            </menu>
+        </div>
+    </transition-scale>
 </template>
 
 <style lang="scss" scoped>
