@@ -1,11 +1,6 @@
 <script setup>
-    const config = useRuntimeConfig();
     useHead({
-        title: "主页",
-        link: { rel: "canonical", href: `https://${config.public.domain}` },
-        meta: [
-            { name: "baidu-site-verification", content: "codeva-FPt2uewYuQ" }
-        ]
+        title: "主页"
     });
 </script>
 
