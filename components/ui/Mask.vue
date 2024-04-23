@@ -24,6 +24,14 @@
         transition: opacity v-bind("duration");
     }
 
+    .mask-enter-active {
+        transition-timing-function: cubic-bezier(0, 0.43, 0.37, 1);
+    }
+
+    .mask-leave-active {
+        transition-timing-function: cubic-bezier(0.43, 0, 1, 0.87);
+    }
+
     .mask-enter-from, .mask-leave-to {
         opacity: 0;
     }

@@ -44,7 +44,7 @@
 </script>
 
 <template>
-    <transition name="slide-fade">
+    <transition-scale>
         <div v-if="settingStore.isOpened" class="z-setting">
             <icon class="xmark" name="fa6-solid:xmark" @click="settingStore.close()"/>
             <coco-title>全局设置</coco-title>
@@ -65,7 +65,7 @@
             <setting-form title="字体选择" type="select" name="font-family" :options="[`默认`, `宋体`, `楷体`]"/>
             <setting-form title="字体大小" type="select" name="font-size" :options="[`小`, `中`, `大`]"/>
         </div>
-    </transition>
+    </transition-scale>
 </template>
 
 <style lang="scss" scoped>
@@ -78,15 +78,6 @@
         padding: 32px;
         border-radius: 16px;
         background-color: var(--color-background);
-    }
-
-    .slide-fade-enter-active, .slide-fade-leave-active {
-        transition: all 0.4s;
-    }
-
-    .slide-fade-enter-from, .slide-fade-leave-to {
-        opacity: 0;
-        translate: 0 -25%;
     }
 
     .mb-form {

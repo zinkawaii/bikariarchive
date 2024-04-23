@@ -18,13 +18,13 @@
     "task:process:dev": "cross-env NODE_ENV=\"development\" node --watch scripts/process.js",
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
-  "packageManager": "pnpm@9.0.4",
+  "packageManager": "pnpm@9.0.5",
   "dependencies": {
     "dayjs": "^1.11.10",
     "dompurify": "^3.1.0",
     "lunisolar": "^2.5.0",
     "marked": "^12.0.2",
-    "vue": "^3.4.23",
+    "vue": "^3.4.24",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "@bikari/shared": "workspace:^",
     "@kikiutils/nuxt-session": "^2.0.4",
     "@nuxt/devtools": "^1.2.0",
-    "@nuxt/image": "^1.5.0",
+    "@nuxt/image": "^1.6.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/seo": "2.0.0-rc.10",
     "@nuxtjs/sitemap": "^5.1.4",
@@ -49,6 +49,7 @@
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
     "@zinkawaii/eslint-config": "^0.1.0",
+    "@zinkawaii/nuxt-gsap": "^0.1.0",
     "@zinkawaii/nuxt-shiki": "^0.4.0",
     "@zinkawaii/stylelint-config": "^0.1.1",
     "chokidar": "^3.6.0",
@@ -56,7 +57,7 @@
     "cross-env": "^7.0.3",
     "crypto-es": "^2.1.0",
     "dot-prop": "^8.0.2",
-    "eslint": "^9.1.0",
+    "eslint": "^9.1.1",
     "feed": "^4.2.2",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.12",

@@ -77,6 +77,7 @@ export default defineNuxtConfig({
         "@pinia-plugin-persistedstate/nuxt",
         "@vue-email/nuxt",
         "@vueuse/nuxt",
+        "@zinkawaii/nuxt-gsap",
         "@zinkawaii/nuxt-shiki"
     ],
     site: {
@@ -100,5 +101,10 @@ export default defineNuxtConfig({
             light: "min-light",
             dark: "one-dark-pro"
         }
+    },
+    gsap: {
+        plugins: [
+            "Flip"
+        ]
     }
 });

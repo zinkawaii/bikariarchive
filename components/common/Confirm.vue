@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <transition name="slide-fade">
+    <transition-scale>
         <div v-if="confirmStore.isOpened" class="mb-confirm">
             <div class="confirm-content">{{ confirmStore.content }}</div>
             <div class="confirm-button-group">
@@ -34,7 +34,7 @@
                 <mb-button @click="res(true)">确定</mb-button>
             </div>
         </div>
-    </transition>
+    </transition-scale>
 </template>
 
 <style lang="scss" scoped>
@@ -49,15 +49,6 @@
         border-radius: 8px;
         background-color: var(--color-background-alpha);
         font-size: 14px;
-    }
-
-    .slide-fade-enter-active, .slide-fade-leave-active {
-        transition: all 0.4s;
-    }
-
-    .slide-fade-enter-from, .slide-fade-leave-to {
-        opacity: 0;
-        translate: 0 -100%;
     }
 
     .confirm-content {

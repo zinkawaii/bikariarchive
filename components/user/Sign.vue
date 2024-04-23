@@ -49,7 +49,7 @@
 </script>
 
 <template>
-    <transition name="scale">
+    <transition-scale>
         <div v-if="signerStore.isOpened" class="user-sign">
             <div class="sign-innerworld"></div>
             <div class="sign-wrapper">
@@ -87,7 +87,7 @@
             </div>
             <icon class="xmark" name="fa6-solid:xmark" @click="signerStore.close"/>
         </div>
-    </transition>
+    </transition-scale>
 </template>
 
 <style lang="scss" scoped>
@@ -103,15 +103,6 @@
         background-color: var(--color-background-alpha);
         backdrop-filter: blur(4px);
         font-size: 14px;
-    }
-
-    .scale-enter-active, .scale-leave-active {
-        transition: all 0.4s;
-    }
-
-    .scale-enter-from, .scale-leave-to {
-        opacity: 0;
-        scale: 0.75;
     }
 
     .fade-enter-active, .fade-leave-active {

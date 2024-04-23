@@ -77,7 +77,7 @@
 </script>
 
 <template>
-    <transition name="scale">
+    <transition-scale>
         <div v-if="commentPanelStore.isOpened" class="comment-panel">
             <icon class="xmark" name="fa6-solid:xmark" @click="commentPanelStore.close()"/>
             <coco-title>{{ title }}</coco-title>
@@ -106,7 +106,7 @@
                 <span>{{ sending ? "发送中……" : "发表评论" }}</span>
             </mb-button>
         </div>
-    </transition>
+    </transition-scale>
 </template>
 
 <style lang="scss" scoped>
@@ -126,15 +126,6 @@
             padding: 16px;
             border-radius: 0;
         }
-    }
-
-    .scale-enter-active, .scale-leave-active {
-        transition: all 0.4s;
-    }
-
-    .scale-enter-from, .scale-leave-to {
-        opacity: 0;
-        scale: 0.75;
     }
 
     .panel-form {
