@@ -48,7 +48,7 @@
 
 <template>
     <div ref="$" class="mb-pagination">
-        <a class="pagina-arr" :class="{ disabled: modelValue === 1 }" @click="modelValue--">
+        <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === 1 }" @click="modelValue--">
             <icon name="fa6-solid:chevron-left"/>
         </a>
         <ul class="pagina-list">
@@ -81,7 +81,7 @@
                 @click="modelValue = totalPages"
             >{{ totalPages }}</a>
         </ul>
-        <a class="pagina-arr" :class="{ disabled: modelValue === totalPages }" @click="modelValue++">
+        <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === totalPages }" @click="modelValue++">
             <icon name="fa6-solid:chevron-right"/>
         </a>
     </div>
@@ -94,26 +94,26 @@
         font-size: 14px;
         color: var(--color-text-info);
         user-select: none;
+    }
 
-        a {
-            display: grid;
-            place-items: center;
-            height: 2em;
-            margin-inline: 4px;
-            border: 1px solid var(--color-border-lighter);
-            background-color: var(--color-background);
-            transition: border-color 0.25s;
+    .pagina-arr, .pagina-item {
+        display: grid;
+        place-items: center;
+        height: 2em;
+        margin-inline: 4px;
+        border: 1px solid var(--color-border-lighter);
+        background-color: var(--color-background);
+        transition: border-color 0.25s;
 
-            &:not(.active):hover {
-                border-width: 2px;
-                border-color: var(--color-theme-dark);
-                color: var(--color-theme-text);
-            }
+        &:not(.active):hover {
+            border-width: 2px;
+            border-color: var(--color-theme-dark);
+            color: var(--color-theme-text);
+        }
 
-            &.disabled {
-                opacity: 0.5;
-                pointer-events: none;
-            }
+        &.is-disabled {
+            opacity: 0.5;
+            pointer-events: none;
         }
     }
 

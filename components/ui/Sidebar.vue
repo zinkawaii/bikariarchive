@@ -13,7 +13,7 @@
 </script>
 
 <template>
-    <aside class="z-sidebar" :class="{ hidden }">
+    <aside class="z-sidebar" :class="{ [`is-hidden`]: isHidden }">
         <aside-widget class="aside-profile">
             <nuxt-img class="aside-avatar" :src="$config.public.avatar" alt="avatar"/>
             <span class="content-h2 aside-author">{{ $config.public.author }}</span>
@@ -45,7 +45,7 @@
         width: 256px;
 
         @media (width >= 1024px) {
-            &.hidden {
+            &.is-hidden {
                 display: none;
             }
         }

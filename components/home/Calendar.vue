@@ -175,8 +175,8 @@
             <div class="calendar-header">
                 <span class="calendar-month">{{ state.month + 1 }}° {{ monthMap[state.month][0] }}</span>
                 <span class="text-primary">「{{ monthMap[state.month][1] }}」</span>
-                <a :class="{ hidden: isFirstMonth }" @click="toLastMonth"><icon name="fa6-solid:chevron-left"/></a>
-                <a :class="{ hidden: isLastMonth }" @click="toNextMonth"><icon name="fa6-solid:chevron-right"/></a>
+                <a :class="{ [`is-hidden`]: isFirstMonth }" @click="toLastMonth"><icon name="fa6-solid:chevron-left"/></a>
+                <a :class="{ [`is-hidden`]: isLastMonth }" @click="toNextMonth"><icon name="fa6-solid:chevron-right"/></a>
             </div>
             <ul class="calendar-week">
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
@@ -262,7 +262,7 @@
             color: var(--color-theme-text);
             transition: all 0.15s;
 
-            &.hidden {
+            &.is-hidden {
                 opacity: 0;
                 pointer-events: none;
             }
