@@ -1,6 +1,7 @@
 <script setup>
     const router = useRouter();
     const settingStore = useSettingStore();
+    const toastStore = useToastStore();
     const textSelection = useTextSelection();
 
     const toolItems = [
@@ -38,6 +39,7 @@
             icon: "fa6-solid:paste",
             action: createAction(() => {
                 navigator.clipboard.writeText(textSelection.text.value);
+                toastStore.success("copy", "文本已复制");
             })
         },
         {

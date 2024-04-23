@@ -91,8 +91,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(@antfu/eslint-config@2.15.0(@vue/compiler-sfc@3.4.24)(eslint@9.1.1)(svelte@4.2.15)(typescript@5.4.5))
       '@zinkawaii/nuxt-gsap':
-        specifier: ^0.1.0
-        version: 0.1.0(rollup@4.16.3)
+        specifier: ^0.1.1
+        version: 0.1.1(rollup@4.16.3)
       '@zinkawaii/nuxt-shiki':
         specifier: ^0.4.0
         version: 0.4.0(rollup@4.16.3)
@@ -2303,8 +2303,8 @@ packages:
     peerDependencies:
       '@antfu/eslint-config': ^2.15.0
 
-  '@zinkawaii/nuxt-gsap@0.1.0':
-    resolution: {integrity: sha512-ZAU94H8AfPgW5Tf29ME/y/MIl6kc28TDI9bWnBiI2QoOHbxn7Tm2sRSn3TOFRnZdyZtKHHs2uEIWYmvIcg9U/g==}
+  '@zinkawaii/nuxt-gsap@0.1.1':
+    resolution: {integrity: sha512-42ZC5CvTNUH721Gj7Otpmt0RY8kJuoPECEnFk8I6GRpuFifg/JRP/DPRdH5GLzLslaxF1uuITu+2A9gEpx+1RA==}
 
   '@zinkawaii/nuxt-shiki@0.4.0':
     resolution: {integrity: sha512-oqZoGIKwFEm1TjiwKk1garxzXYqsDuTWh8fMqrP21JTcQo+vgEcBO1LuKVDVn/lAb4CG4DqsjrB6zOfMsA16EA==}
@@ -9809,7 +9809,7 @@ snapshots:
     dependencies:
       '@antfu/eslint-config': 2.15.0(@vue/compiler-sfc@3.4.24)(eslint@9.1.1)(svelte@4.2.15)(typescript@5.4.5)
 
-  '@zinkawaii/nuxt-gsap@0.1.0(rollup@4.16.3)':
+  '@zinkawaii/nuxt-gsap@0.1.1(rollup@4.16.3)':
     dependencies:
       '@nuxt/kit': 3.11.2(rollup@4.16.3)
       gsap: 3.12.5

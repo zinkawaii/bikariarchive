@@ -6,23 +6,23 @@ import frontmatter from "remark-frontmatter";
 import externalLinks, { type Options as ExternalOptions } from "rehype-external-links";
 import gfm from "remark-gfm";
 import mdc from "remark-mdc";
-import rehype from "remark-rehype";
+import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import raw from "rehype-raw";
 import stringify from "rehype-stringify";
 import attributes from "./plugins/attributes";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
-import codeHandler from "./handlers/code";
+import code from "./handlers/code";
 
 const externalOptions: ExternalOptions = {
     rel: ["noopener", "noreferrer", "nofollow"],
     target: "_blank"
 };
 
-const rehypeOptions = {
+const rehypeOptions: RehypeOptions = {
     allowDangerousHtml: true,
     handlers: {
-        code: codeHandler
+        code
     }
 };
 

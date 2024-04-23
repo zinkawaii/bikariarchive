@@ -49,7 +49,7 @@
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
     "@zinkawaii/eslint-config": "^0.1.0",
-    "@zinkawaii/nuxt-gsap": "^0.1.0",
+    "@zinkawaii/nuxt-gsap": "^0.1.1",
     "@zinkawaii/nuxt-shiki": "^0.4.0",
     "@zinkawaii/stylelint-config": "^0.1.1",
     "chokidar": "^3.6.0",

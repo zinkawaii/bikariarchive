@@ -29,6 +29,7 @@
         border-radius: 4px;
         background-color: transparent;
         line-height: calc(2em - 2px);
+        vertical-align: middle;
         color: var(--color-theme-text);
         transition: all 0.4s;
         cursor: pointer;

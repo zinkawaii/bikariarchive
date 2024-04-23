@@ -50,6 +50,11 @@
     //结果
     const result = ref([[], []]);
 
+    //结果是否为空
+    const isResultEmpty = computed(() => {
+        return result.value.every((col) => !col.length);
+    });
+
     //生成
     function generate() {
         const count = counter.value.current;
@@ -62,8 +67,8 @@
         const pre_first_kana = specific.value.first.kana || specific.value.first.kanji;
 
         //分列生成
-        result.value.forEach((colume, index) => {
-            colume.length = 0;
+        result.value.forEach((col, index) => {
+            col.length = 0;
             for (let i = Math.ceil(count / result.value.length * index); i < Math.ceil(count / result.value.length * (index + 1)); i++) {
                 const {
                     last = pre_last_kanji,
@@ -74,7 +79,7 @@
                     first_kana = pre_first_kana
                 } = pre_first_kana ? {} : getFirstName(sex);
 
-                colume.push({
+                col.push({
                     kanji: last + " " + first,
                     kana: last_kana + "　" + first_kana
                 });
@@ -84,16 +89,10 @@
 
     //清空结果
     function clear() {
-        for (const colume of result.value) {
-            colume.length = 0;
+        for (const col of result.value) {
+            col.length = 0;
         }
     }
-
-    const isResultEmpty = computed(() => {
-        return result.value.reduce((previous, current) => {
-            return previous + current.length;
-        }, 0) === 0;
-    });
 
     //姓
     function getLastName() {
@@ -268,8 +267,11 @@
             </div>
         </div>
         <div class="namae-operator">
-            <mb-button :disabled="!isJnmLoaded" @click="generate">生成</mb-button>
-            <mb-button @click="clear">清除结果</mb-button>
+            <mb-button :disabled="!isJnmLoaded" @click="generate">
+                <template v-if="!isJnmLoaded">加载中</template>
+                <template v-else>生成</template>
+            </mb-button>
+            <mb-button :disabled="isResultEmpty" @click="clear">清除结果</mb-button>
         </div>
     </div>
     <div v-if="!isResultEmpty" class="div-table namae-result">

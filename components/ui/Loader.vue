@@ -7,12 +7,12 @@
 </script>
 
 <template>
-    <Transition name="fade">
+    <transition name="fade">
         <div v-if="loading" class="z-loader">
             <div class="loader-graph"></div>
             <div class="loader-shadow"></div>
         </div>
-    </Transition>
+    </transition>
 </template>
 
 <style lang="scss" scoped>
