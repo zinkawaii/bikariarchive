@@ -54,7 +54,7 @@
                     :item="data.illustration.map(item => item.title)"
                     ><template v-for="item in data.illustration" #[item.title]>
                         <mb-gallery :illustrator="item.illustrator">
-                            <nuxt-img :src="item.src" :alt="item.title"/>
+                            <mb-image :src="item.src" :alt="item.title"/>
                         </mb-gallery>
                     </template>
                 </mb-tab>
