@@ -274,8 +274,9 @@
         </div>
         <div class="namae-operator">
             <mb-button :disabled="isJnmLoading" @click="generate">
-                <template v-if="!isJnmLoaded || isJnmLoading">
-                    <icon :name="isJnmLoading ? `mingcute:loading-fill` : `fa6-solid:download`"/>
+                <template v-if="isJnmLoading || !isJnmLoaded">
+                    <icon v-if="isJnmLoading" v-gsap.rotate name="mingcute:loading-fill"/>
+                    <icon v-else name="fa6-solid:download"/>
                     <span>加载</span>
                 </template>
                 <template v-else>
