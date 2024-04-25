@@ -10,33 +10,37 @@ export default function(el: MaybeRefOrGetter<HTMLElement>, options: {
 } = {}) {
     const isPressed = ref(false);
 
-    //鼠标按下时
-    useEventListener(el, "mousedown", (event) => {
-        execWithFilter(event, () => {
-            options.onMousedown?.(event);
-            isPressed.value = true;
+    const scope = effectScope();
+    scope.run(() => {
+        //鼠标按下时
+        useEventListener(el, "mousedown", (event) => {
+            execWithFilter(event, () => {
+                options.onMousedown?.(event);
+                isPressed.value = true;
+            });
+        });
+
+        //鼠标移动时
+        useEventListener("mousemove", Zin.throttle((event) => {
+            if (isPressed.value) {
+                execWithFilter(event, () => {
+                    options.onMousemove?.(event);
+                    isPressed.value = true;
+                });
+            }
+        }));
+
+        //鼠标松开时
+        useEventListener("mouseup", (event) => {
+            if (isPressed.value) {
+                options.onMouseup?.(event);
+                isPressed.value = false;
+            }
         });
     });
 
-    //鼠标移动时
-    useEventListener("mousemove", Zin.throttle((event) => {
-        if (isPressed.value) {
-            execWithFilter(event, () => {
-                options.onMousemove?.(event);
-                isPressed.value = true;
-            });
-        }
-    }));
-
-    //鼠标松开时
-    useEventListener("mouseup", (event) => {
-        if (isPressed.value) {
-            options.onMouseup?.(event);
-            isPressed.value = false;
-        }
-    });
-
     return {
+        cleanup: () => scope.stop(),
         isPressed
     };
 
