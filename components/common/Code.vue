@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import type { BundledLanguage } from "shiki";
+    import CryptoES from "crypto-es";
 
     const props = withDefaults(defineProps<{
         lang?: BundledLanguage;
@@ -12,13 +13,18 @@
     const isExpand = ref(false);
     const $Code = ref();
 
-    //语言
-    getShikiHighlighter().then((shiki) => {
-        loadShikiLanguages(shiki, props.lang);
-    });
-
     //代码
-    const code = await useShikiHighlighted(props.raw, { lang: props.lang, ...highlightOptions });
+    const { data: code } = await useLazyAsyncData(
+        CryptoES.MD5(props.raw).toString(),
+        async () => {
+            const shiki = await getShikiHighlighter();
+            await loadShikiLanguages(shiki, props.lang);
+            return shiki.highlight(props.raw, {
+                lang: props.lang,
+                ...highlightOptions
+            });
+        }
+    );
 
     //行数
     const lines = computed(() => {

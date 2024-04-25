@@ -20,11 +20,12 @@
   },
   "packageManager": "pnpm@9.0.5",
   "dependencies": {
+    "crypto-es": "^2.1.0",
     "dayjs": "^1.11.10",
     "dompurify": "^3.1.0",
     "lunisolar": "^2.5.0",
     "marked": "^12.0.2",
-    "vue": "^3.4.24",
+    "vue": "^3.4.25",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
@@ -55,7 +56,6 @@
     "chokidar": "^3.6.0",
     "consola": "^3.2.3",
     "cross-env": "^7.0.3",
-    "crypto-es": "^2.1.0",
     "dot-prop": "^8.0.2",
     "eslint": "^9.1.1",
     "feed": "^4.2.2",
