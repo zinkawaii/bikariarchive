@@ -25,9 +25,9 @@
 </script>
 
 <template>
-    <div class="content-table intro-card" :layer="layer" @click="exchange">
+    <div class="content-table intro-card" :layer @click="exchange">
         <h2 class="content-h2">{{ jArticle[novel].title }}</h2>
-        <intro-content :novel="novel"/>
+        <intro-content :novel/>
         <div class="intro-record">
             <span>&gt;</span>
             <coco-link :to="record.link">{{ record.title }}</coco-link>

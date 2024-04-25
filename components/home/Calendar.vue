@@ -213,7 +213,7 @@
                     <div class="title">关键人物</div>
                     <div v-if="currentDate.event?.heroine" class="calendar-heroine">
                         <div class="heroine-wrapper">
-                            <character-tag v-for="heroine in currentDate.event.heroine" :name="heroine" />
+                            <character-tag v-for="heroine in currentDate.event.heroine" :name="heroine"/>
                         </div>
                     </div>
                     <span v-else class="none">No Character.</span>

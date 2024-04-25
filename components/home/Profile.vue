@@ -46,7 +46,7 @@
         </table>
         <ul class="profile-link">
             <li v-for="{ title, to, icon } in links">
-                <nuxt-link :to="to" :title="title" target="_blank">
+                <nuxt-link :to :title target="_blank">
                     <icon :name="icon"/>
                 </nuxt-link>
             </li>

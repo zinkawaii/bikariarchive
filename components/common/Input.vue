@@ -104,7 +104,7 @@
         ref="$"
         class="mb-input"
         :value="modelValue"
-        :readonly="readonly"
+        :readonly
         @input="input"
         @blur="blur"
     />

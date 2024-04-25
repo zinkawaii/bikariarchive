@@ -56,7 +56,7 @@
                 <input
                     v-for="(value, name) in shortcuts"
                     class="input-line"
-                    :value="value"
+                    :value
                     @keypress.stop="onShortcutKeypress(name)"
                     @keyup.stop="onShortcutKeyup(name, $event)"
                 />

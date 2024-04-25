@@ -7,7 +7,7 @@
 
 <template>
     <label class="mb-radio">
-        <input class="radio-entity" type="radio" :value="value" v-model="modelValue"/>
+        <input class="radio-entity" type="radio" :value v-model="modelValue"/>
         <span class="radio-title"><slot></slot></span>
     </label>
 </template>

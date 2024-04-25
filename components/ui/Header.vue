@@ -92,7 +92,7 @@
         </div>
         <nav class="header-nav">
             <mb-popper v-for="{ title, icon, to, children } in navList">
-                <nuxt-link class="nav-link" :to="to">
+                <nuxt-link class="nav-link" :to>
                     <icon :name="icon" :width="null"/>
                     <span>{{ title }}</span>
                 </nuxt-link>

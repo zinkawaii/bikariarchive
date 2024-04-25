@@ -29,7 +29,7 @@
                                 <th v-if="i === 0" :rowspan="y.children.length">{{ y.title }}</th>
                                 <th>{{ z.title }}</th>
                                 <td>
-                                    <detail-link v-for="title in z.children" :title="title"/>
+                                    <detail-link v-for="title in z.children" :title/>
                                 </td>
                             </tr>
                         </template>

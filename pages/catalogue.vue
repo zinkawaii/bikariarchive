@@ -13,7 +13,7 @@
         <div class="catalogue-section">
             <fieldset class="catalogue-fieldset">
                 <legend class="content-h2">{{ jNovel.title }}</legend>
-                <intro-content :novel="novel"/>
+                <intro-content :novel/>
             </fieldset>
             <fieldset v-show="jNovel.volumes.length" class="catalogue-fieldset">
                 <legend class="content-h2">卷册列表</legend>

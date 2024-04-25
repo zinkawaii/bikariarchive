@@ -15,10 +15,10 @@
         <transition-group name="toast">
             <toast-item
                 v-for="[key, { icon, content }] in toastList"
-                :key="key"
+                :key
                 :name="key"
                 :icon-info="icon"
-                :content="content"
+                :content
             />
         </transition-group>
     </div>

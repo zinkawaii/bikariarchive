@@ -49,7 +49,7 @@
     </div>
     <ul class="catalogue-chapter">
         <li v-for="chapter in jChapters">
-            <catalogue-chapter-item :chapter="chapter"/>
+            <catalogue-chapter-item :chapter/>
         </li>
     </ul>
 </template>

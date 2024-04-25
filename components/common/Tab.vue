@@ -19,7 +19,7 @@
         <div class="tab-content">
             <template v-for="(name, i) in item">
                 <div v-show="selectedIndex === i">
-                    <slot :name="name"></slot>
+                    <slot :name></slot>
                 </div>
             </template>
         </div>
