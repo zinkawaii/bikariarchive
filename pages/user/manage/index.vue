@@ -20,11 +20,7 @@
             <span class="sub">{{ view.sub }}</span>
         </nuxt-link>
     </div>
-    <nuxt-page v-slot="{ Component }">
-        <keep-alive>
-            <component :is="Component"/>
-        </keep-alive>
-    </nuxt-page>
+    <nuxt-page keepalive/>
 </template>
 
 <style lang="scss" scoped>
