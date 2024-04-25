@@ -11,7 +11,7 @@
 
     const toastStore = useToastStore();
     const isExpand = ref(false);
-    const $Code = ref();
+    const $code = ref();
 
     //代码
     const { data: code } = await useLazyAsyncData(
@@ -38,7 +38,7 @@
 
     //复制
     function copy() {
-        navigator.clipboard.writeText($Code.value.textContent);
+        navigator.clipboard.writeText($code.value.textContent);
         toastStore.success("copy", "代码已复制");
     }
 </script>
@@ -51,7 +51,7 @@
         </div>
         <div class="code-area" :class="{ expanded: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
-            <pre ref="$Code" class="shiki code-content" v-html="code || props.raw"></pre>
+            <pre ref="$code" class="shiki code-content" v-html="code || props.raw"></pre>
         </div>
         <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
             <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>

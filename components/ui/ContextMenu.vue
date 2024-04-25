@@ -78,7 +78,7 @@
 
     //显示状态
     const state = ref(false);
-    const $Menu = ref();
+    const $menu = ref();
 
     useEventListener("contextmenu", (event) => {
         //显示菜单
@@ -89,16 +89,16 @@
 
         nextTick(() => {
             //获取宽高
-            const width = $Menu.value.offsetWidth;
-            const height = $Menu.value.offsetHeight;
+            const width = $menu.value.offsetWidth;
+            const height = $menu.value.offsetHeight;
 
             //计算位置
             let { x, y } = event;
             x -= (width + x > window.innerWidth) ? width : 0;
             y -= (height + y > window.innerHeight) ? height : 0;
 
-            $Menu.value.style.left = x + "px";
-            $Menu.value.style.top = y + "px";
+            $menu.value.style.left = x + "px";
+            $menu.value.style.top = y + "px";
         });
     });
 
@@ -120,7 +120,7 @@
 
 <template>
     <transition-scale :duration="0.25">
-        <div v-show="state" ref="$Menu" class="content-widget z-context-menu">
+        <div v-show="state" ref="$menu" class="content-widget z-context-menu">
             <menu class="menu-tool-bar">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
                     <icon :name="icon"/>

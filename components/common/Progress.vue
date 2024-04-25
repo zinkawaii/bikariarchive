@@ -12,17 +12,17 @@
 
     let p_width = 0;
     let p_left = 0;
-    const self = ref();
+    const $self = ref();
     const rate = ref(0);
 
     //鼠标拖动时
-    const { isPressed } = useHold(self, {
+    const { isPressed } = useHold($self, {
         filter: (event) => event.button === 0,
         onMousedown(event) {
             ({
                 width: p_width,
                 left: p_left
-            } = self.value.getBoundingClientRect());
+            } = $self.value.getBoundingClientRect());
             emit("dragstart");
 
             //进度预变化
@@ -46,7 +46,7 @@
 </script>
 
 <template>
-    <div ref="self" class="mb-progress">
+    <div ref="$self" class="mb-progress">
         <span class="progress-bar" :style="{ transform: `scaleX(${displayRate})` }"></span>
         <span class="text-truncate progress-title">{{ title }}</span>
     </div>

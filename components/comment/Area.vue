@@ -2,7 +2,7 @@
     const commentPanelStore = useCommentPanelStore();
     const route = useRoute();
 
-    const $ = ref();
+    const $self = ref();
     const comments = ref(null);
     const count = ref({
         total: 0,
@@ -16,7 +16,7 @@
         comments.value = null;
 
         //终止未触发的观测器
-        stop?.(), { stop } = useIntersectionObserver($, ([{ isIntersecting }]) => {
+        stop?.(), { stop } = useIntersectionObserver($self, ([{ isIntersecting }]) => {
             if (isIntersecting) {
                 getComments();
                 stop();
@@ -70,7 +70,7 @@
 </script>
 
 <template>
-    <coco-widget ref="$" class="comment-area">
+    <coco-widget ref="$self" class="comment-area">
         <div class="comment-title">
             <h2>评论<span class="comment-count">{{ count.total }}</span></h2>
             <mb-button @click="postComment">

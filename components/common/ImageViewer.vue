@@ -1,9 +1,9 @@
 <script lang="ts" setup>
     const imageViewerStore = useImageViewerStore();
-    const $i = storeToRefs(imageViewerStore).target;
-    const $v = ref();
-    const $img = computed(() => {
-        return $v.value.$el;
+    const $origin = storeToRefs(imageViewerStore).target;
+    const $viewer = ref();
+    const $image = computed(() => {
+        return $viewer.value.$el;
     });
 
     //添加遮罩层
@@ -30,7 +30,7 @@
     });
 
     //鼠标拖动时
-    const { isPressed } = useHold($v, {
+    const { isPressed } = useHold($viewer, {
         filter: (event) => event.button === 0,
         onMousedown(event) {
             event.preventDefault();
@@ -39,11 +39,11 @@
             ({
                 left: imageX,
                 top: imageY
-            } = $img.value.getBoundingClientRect());
+            } = $image.value.getBoundingClientRect());
         },
         onMousemove(event) {
             if (imageViewerStore.isOpened) {
-                $img.value.animate({
+                $image.value.animate({
                     top: imageY - mouseY + event.pageY + "px",
                     left: imageX - mouseX + event.pageX + "px"
                 }, {
@@ -66,7 +66,7 @@
         if (!state) return;
 
         //起始位置
-        const { left, top, width, height } = $i.value.getBoundingClientRect();
+        const { left, top, width, height } = $origin.value.getBoundingClientRect();
         imageStyle.value.left = left + "px";
         imageStyle.value.top = top + "px";
 
@@ -86,7 +86,7 @@
 
         //移动至屏幕中心
         nextTick(() => {
-            $img.value.animate({
+            $image.value.animate({
                 top: `calc(50% - ${Math.floor(finalHeight / 2)}px)`,
                 left: `calc(50% - ${Math.floor(finalWidth / 2)}px)`,
                 width: Math.floor(finalWidth) + "px",
@@ -101,12 +101,12 @@
         imageViewerStore.close();
 
         //回到原位
-        const { left, top, width, height } = $i.value.getBoundingClientRect();
+        const { left, top, width, height } = $origin.value.getBoundingClientRect();
         const { scrollX: x, scrollY: y } = window;
 
-        $img.value.animate([{
-            top: y + $img.value.y + "px",
-            left: x + $img.value.x + "px"
+        $image.value.animate([{
+            top: y + $image.value.y + "px",
+            left: x + $image.value.x + "px"
         }, {
             top: y + top + "px",
             left: x + left + "px",
@@ -122,11 +122,11 @@
         //缩放比率
         const rate = event.deltaY < 0 ? 1.5 : 0.667;
 
-        const { left, top, width, height } = $img.value.getBoundingClientRect();
+        const { left, top, width, height } = $image.value.getBoundingClientRect();
         const finalX = left - (event.clientX - left) * ((rate - 1) / 1);
         const finalY = top - (event.clientY - top) * ((rate - 1) / 1);
 
-        $img.value.animate({
+        $image.value.animate({
             left: finalX + "px",
             top: finalY + "px",
             width: width * rate + "px",
@@ -139,9 +139,9 @@
     <transition name="move">
         <nuxt-img
             v-if="imageViewerStore.isOpened"
-            ref="$v"
+            ref="$viewer"
             class="mb-image-viewer"
-            :src="$i.src"
+            :src="$origin.src"
             :style="imageStyle"
             @mousewheel.prevent="onMouseWheel"
         />

@@ -24,12 +24,12 @@
         current: 0
     });
 
-    const $Audio = ref();
+    const $audio = ref();
 
     //音频可以播放
     function audioCanplay() {
         state.value.invalid = false;
-        state.value.duration = $Audio.value.duration;
+        state.value.duration = $audio.value.duration;
     }
 
     //音频错误
@@ -45,7 +45,7 @@
     //音频播放时
     function audioTimeupdate() {
         if (!state.value.dragging) {
-            state.value.current = $Audio.value.currentTime;
+            state.value.current = $audio.value.currentTime;
 
             //进度条
             const rate = state.value.current / state.value.duration;
@@ -82,10 +82,10 @@
     //播放 & 暂停
     function play() {
         if (state.value.playing ^= 1) {
-            $Audio.value.play();
+            $audio.value.play();
         }
         else {
-            $Audio.value.pause();
+            $audio.value.pause();
         }
     }
 
@@ -99,7 +99,7 @@
     //进度改变时
     function controlChange(rate) {
         if (!state.value.invalid) {
-            $Audio.value.currentTime = state.value.duration * rate;
+            $audio.value.currentTime = state.value.duration * rate;
         }
         else {
             //音频无效，进度归零
@@ -157,7 +157,7 @@
         } = lyric.value.data;
 
         //回到两句前的时间点
-        $Audio.value.currentTime = target?.time || 0;
+        $audio.value.currentTime = target?.time || 0;
 
         if (last) {
             last.sign = false;
@@ -210,7 +210,7 @@
 <template>
     <div class="text-small">
         <audio
-            ref="$Audio"
+            ref="$audio"
             :src="state.src"
             @canplay="audioCanplay"
             @error="audioError"

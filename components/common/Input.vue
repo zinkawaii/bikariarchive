@@ -11,7 +11,7 @@
     const emit = defineEmits(["update:modelValue"]);
 
     //组件根元素
-    const $ = ref();
+    const $self = ref();
 
     //更新前的旧值
     let oldValue = props.modelValue;
@@ -70,7 +70,7 @@
     //挂载完成时
     onMounted(() => {
         blur({
-            target: $.value
+            target: $self.value
         });
     });
 
@@ -101,7 +101,7 @@
 
 <template>
     <input
-        ref="$"
+        ref="$self"
         class="mb-input"
         :value="modelValue"
         :readonly
