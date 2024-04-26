@@ -20,7 +20,7 @@ export default defineNitroPlugin(() => {
         const date = dayjs.tz();
 
         //备份路径
-        const path = r(`server/backup/${date.format("YYMMDD")}.archive`);
+        const path = r(`/server/backup/${date.format("YYMMDD")}.archive`);
 
         //运行命令
         exec(`mongodump -u=${options.user} -p=${options.pass} -d=${options.dbName} --archive="${path}" --authenticationDatabase admin`, (err) => {
