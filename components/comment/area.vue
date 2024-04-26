@@ -12,7 +12,7 @@
 
     //相对视口懒加载
     let stop = null;
-    watchImmediate(() => [route.path, page.value], () => {
+    watchImmediate([() => route.path, page], () => {
         comments.value = null;
 
         //终止未触发的观测器
