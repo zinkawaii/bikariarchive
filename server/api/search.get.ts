@@ -12,7 +12,7 @@ interface SearchResult {
     parts: string[];
 }
 
-export default defineWrappedHandler<GetArticleResponse>(async (event, res) => {
+export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     let { word } = getQueryValues(event);
 
     //空关键词

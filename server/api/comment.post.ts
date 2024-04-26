@@ -9,7 +9,7 @@ interface PostCommentBody {
     address: string;
 }
 
-export default defineWrappedHandler(async (event) => {
+export default defineJEventHandler(async (event) => {
     const body = await readBody<PostCommentBody>(event);
 
     //获取严格路径

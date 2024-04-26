@@ -13,7 +13,7 @@ interface GetLogonResponse extends BaseResponse {
     identity?: number;
 }
 
-export default defineWrappedHandler<GetLogonResponse>(async (event) => {
+export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const { session } = event.context;
     const {
         nickname,

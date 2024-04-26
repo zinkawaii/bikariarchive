@@ -6,7 +6,7 @@ interface PutUserSignResponse extends BaseResponse {
     content?: string;
 }
 
-export default defineWrappedHandler<PutUserSignResponse>(async (event) => {
+export default defineJEventHandler<PutUserSignResponse>(async (event) => {
     const { session } = event.context;
     const { content } = await readBody<PutUserSignBody>(event);
 

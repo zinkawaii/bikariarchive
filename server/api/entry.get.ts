@@ -5,7 +5,7 @@ interface GetEntryResponse extends BaseResponse {
     [key: string]: any;
 }
 
-export default defineWrappedHandler<GetEntryResponse>(async (event, res) => {
+export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
     const {
         title
     } = getQueryValues(event);

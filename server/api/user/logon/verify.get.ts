@@ -1,4 +1,4 @@
-export default defineWrappedHandler(async (event) => {
+export default defineJEventHandler(async (event) => {
     const { email } = getQueryValues(event);
 
     //预生成验证码

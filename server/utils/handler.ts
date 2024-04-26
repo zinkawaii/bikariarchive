@@ -1,8 +1,13 @@
 import type { H3Event } from "h3";
+import type { CachedEventHandlerOptions } from "nitropack";
 
-export const defineWrappedHandler = <T extends BaseResponse> (
-    handler: (event: H3Event<Request>, res: T) => any | Promise<any>
-) => defineEventHandler(async (event) => {
+interface Handler<T> {
+    (event: H3Event<Request>, res: T): Awaited<any>;
+}
+
+const createHandler = <T extends BaseResponse>(
+    handler: Handler<T>
+) => async (event: H3Event) => {
     try {
         const res = { error: 0 } as T;
         res.error = await handler(event, res) || 0;
@@ -12,4 +17,13 @@ export const defineWrappedHandler = <T extends BaseResponse> (
         console.error(err);
         event.node.res.writeHead(err.statusCode ?? 500).end();
     }
-});
+};
+
+export const defineJEventHandler = <T extends BaseResponse>(
+    handler: Handler<T>
+) => defineEventHandler(createHandler<T>(handler));
+
+export const defineJCachedEventHandler = <T extends BaseResponse>(
+    handler: Handler<T>,
+    options?: CachedEventHandlerOptions
+) => defineCachedEventHandler(createHandler<T>(handler), options);

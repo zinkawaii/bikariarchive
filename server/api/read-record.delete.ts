@@ -2,7 +2,7 @@ interface DeleteReadRecordBody {
     id: string;
 }
 
-export default defineWrappedHandler(async (event) => {
+export default defineJEventHandler(async (event) => {
     const { id } = await readBody<DeleteReadRecordBody>(event);
 
     //权限验证

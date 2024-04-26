@@ -6,7 +6,7 @@ interface GetUserInfoResponse extends BaseResponse {
     isLogin?: boolean;
 }
 
-export default defineWrappedHandler<GetUserInfoResponse>(async (event, res) => {
+export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
     const { session } = event.context;
 
     const qUser = await UserDataModel.findOne({
