@@ -63,7 +63,7 @@
         verifyStage.value.stage = 1;
 
         try {
-            const { error } = await Zjax.get("/api/user/logon/verify", {
+            const { error } = await $fetch("/api/user/logon/verify", {
                 query: {
                     email: email.value
                 }
@@ -106,7 +106,8 @@
     //注册
     const register = Zin.debounce(async () => {
         try {
-            const { error } = await Zjax.post("/api/user/logon", {
+            const { error } = await $fetch("/api/user/logon", {
+                method: "post",
                 body: {
                     nickname: nickname.value,
                     email: email.value,

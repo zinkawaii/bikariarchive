@@ -35,7 +35,9 @@
     //退出登录
     async function logout() {
         try {
-            await Zjax.post("/api/user/logout");
+            await $fetch("/api/user/logout", {
+                method: "post"
+            });
 
             userStore.reset();
             if (route.meta.identity > 0) {

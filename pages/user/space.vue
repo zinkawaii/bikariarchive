@@ -22,7 +22,8 @@
         if (sign.value === oldSign.value) return;
 
         try {
-            Zjax.put("/api/user/sign", {
+            $fetch("/api/user/sign", {
+                method: "put",
                 body: {
                     content: sign.value
                 }

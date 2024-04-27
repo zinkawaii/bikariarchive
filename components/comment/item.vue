@@ -35,7 +35,8 @@
         if (!await confirmStore.show("是否删除这条评论？")) return;
 
         try {
-            await Zjax.delete("/api/comment", {
+            await $fetch("/api/comment", {
+                method: "delete",
                 body: {
                     id: props.data.id
                 }

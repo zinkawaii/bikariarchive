@@ -54,7 +54,8 @@
 
         sending.value = true;
         try {
-            await Zjax.post("/api/comment", {
+            await $fetch("/api/comment", {
+                method: "post",
                 body: {
                     path: commentPanelStore.path,
                     parent: commentPanelStore.replyId,

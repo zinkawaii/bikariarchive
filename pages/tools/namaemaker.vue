@@ -55,7 +55,7 @@
         //从静态资源服务器读取数据，防止打包文件过大
         if (!isJnmLoaded.value) {
             isJnmLoading.value = true;
-            return Zjax.get("/json/Jnm.json").then((data) => {
+            return $fetch("/json/Jnm.json").then((data) => {
                 Jnm = data;
                 isJnmLoaded.value = true;
                 isJnmLoading.value = false;

@@ -12,7 +12,8 @@
 
     const submit = Zin.debounce(async () => {
         try {
-            const res = await Zjax.post("/api/user/login", {
+            const res = await $fetch("/api/user/login", {
+                method: "post",
                 body: {
                     account: nickname.value,
                     password: password.value

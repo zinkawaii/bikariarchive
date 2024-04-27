@@ -26,7 +26,7 @@
 
     //获取评论
     async function getComments() {
-        const { error, totalCount, mainCount, data } = await Zjax.get("/api/comment", {
+        const { error, totalCount, mainCount, data } = await $fetch("/api/comment", {
             query: {
                 path: route.path,
                 page: page.value
