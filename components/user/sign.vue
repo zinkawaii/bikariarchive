@@ -1,8 +1,6 @@
 <script setup>
     const route = useRoute();
-    const router = useRouter();
     const signerStore = useSignerStore();
-    const toastStore = useToastStore();
     const userStore = useUserStore();
 
     //当前视图
@@ -23,31 +21,6 @@
     watch(() => route.path, () => {
         signerStore.close();
     });
-
-    //空间链接
-    const toSpace = computed(() => ({
-        name: "space",
-        params: {
-            uid: userStore.uid ?? -1
-        }
-    }));
-
-    //退出登录
-    async function logout() {
-        try {
-            await $fetch("/api/user/logout", {
-                method: "post"
-            });
-
-            userStore.reset();
-            if (route.meta.identity > 0) {
-                router.push({ name: "home" });
-            }
-        }
-        catch {
-            toastStore.error("logout-error", "退出登录失败");
-        }
-    }
 </script>
 
 <template>
@@ -75,15 +48,7 @@
                             <h2 class="sign-title">资料卡</h2>
                             <span class="sign-have">{{ userStore.sign }}</span>
                         </div>
-                        <div class="user-profile">
-                            <div>
-                                <span class="user-nickname">{{ userStore.nickname }}</span>
-                                <div class="user-tool">
-                                    <mb-button @click="logout">退出登录</mb-button>
-                                </div>
-                            </div>
-                            <nuxt-link :to="toSpace"><nuxt-img class="user-avatar" src="/garden/icon/default.png" alt="avatar"/></nuxt-link>
-                        </div>
+                        <user-sign-profile />
                     </div>
                 </transition>
             </div>
@@ -175,30 +140,6 @@
 
     :deep(.coco-input) {
         margin-top: 22px;
-    }
-
-    .user-profile {
-        display: flex;
-        gap: 1em;
-        margin-top: 1em;
-
-        > div {
-            display: grid;
-            flex: 1;
-            place-items: center flex-end;
-        }
-    }
-
-    .user-nickname {
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .user-avatar {
-        width: 72px;
-        aspect-ratio: 1;
-        border-radius: 100%;
-        box-shadow: var(--box-shadow);
     }
 
     @media (width < 425px) {
