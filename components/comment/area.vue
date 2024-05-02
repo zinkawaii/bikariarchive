@@ -1,4 +1,7 @@
-<script setup>
+<script lang="ts" setup>
+    import type { CommentData } from "~/server/types/api/comment";
+    import type { WithParent } from "~/types";
+
     const commentPanelStore = useCommentPanelStore();
     const route = useRoute();
 
@@ -37,8 +40,12 @@
         //评论数
         count.value.total = totalCount;
         count.value.main = mainCount;
+        comments.value = processComments(data);
+    }
 
-        for (const item of data) {
+    //处理评论
+    function processComments<T extends CommentData>(comments: T[]) {
+        return (comments as WithParent<T>[]).map((item) => {
             //子评论回归指向
             (function func(parent) {
                 for (const child of parent.children) {
@@ -57,8 +64,9 @@
 
             //按时间排序
             item.children.sort((a, b) => a.time.localeCompare(b.time));
-        }
-        comments.value = data;
+
+            return item;
+        });
     }
 
     //发表评论

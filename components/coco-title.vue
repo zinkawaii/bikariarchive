@@ -2,7 +2,7 @@
     <h2 class="content-h2 coco-title"><slot></slot></h2>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .coco-title {
         width: fit-content;
         margin-bottom: 4px;

@@ -1,21 +1,18 @@
-<script setup>
-    const props = defineProps({
-        danger: {
-            type: Boolean,
-            default: false
-        }
-    });
+<script lang="ts" setup>
+    defineProps<{
+        danger?: boolean;
+    }>();
 </script>
 
 <template>
-    <nuxt-link class="coco-link" :class="{ danger }"><slot></slot></nuxt-link>
+    <nuxt-link class="coco-link" :class="{ [`is-danger`]: danger }"><slot></slot></nuxt-link>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .coco-link {
         color: var(--color-link);
 
-        &.danger {
+        &.is-danger {
             color: var(--color-danger);
         }
     }

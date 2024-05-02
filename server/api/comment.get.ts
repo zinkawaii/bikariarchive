@@ -1,15 +1,10 @@
 import CryptoES from "crypto-es";
-
-interface GetCommentsResponse extends BaseResponse {
-    totalCount?: number;
-    mainCount?: number;
-    data?: any[];
-}
+import type { CommentData, GetCommentResponse } from "~/server/types/api/comment";
 
 //需要获取的属性
 const select = "_id content children time nickname email address";
 
-export default defineJEventHandler<GetCommentsResponse>(async (event, res) => {
+export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
     let {
         path,
         page
@@ -49,8 +44,7 @@ export default defineJEventHandler<GetCommentsResponse>(async (event, res) => {
     //获取子评论
     await deference(data);
 
-    res.data = [];
-    dataClone(res.data, data);
+    res.data = dataClone([], data);
 });
 
 //递归解引用
@@ -67,7 +61,7 @@ async function deference(parent) {
 }
 
 //递归处理数据
-function dataClone(target, source) {
+function dataClone(target: CommentData[], source) {
     for (const item of source) {
         const i = {
             id: item._id,
@@ -83,4 +77,5 @@ function dataClone(target, source) {
             dataClone(i.children, item.children);
         }
     }
+    return target;
 }

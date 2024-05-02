@@ -1,20 +1,29 @@
+import type { WatchSource } from "vue";
+
+interface MaskInfo {
+    onClick: () => any;
+}
+
 export const useMaskStore = defineStore("mask", {
     state: () => ({
-        isOpened: null,
-        duration: 0,
-        onClick: null
+        list: [] as MaskInfo[]
     })
 });
 
-export function useMask({
-    isOpened = null,
-    duration = 400,
-    onClick = null
-} = {}) {
+export function useMask(options: MaskInfo & {
+    isOpened: WatchSource<boolean>;
+}) {
     const maskStore = useMaskStore();
-    whenever(isOpened, () => {
-        maskStore.isOpened = computed(isOpened);
-        maskStore.duration = duration;
-        maskStore.onClick = onClick;
+    const { isOpened } = options;
+
+    whenever(isOpened, async () => {
+        const info: MaskInfo = {
+            onClick: options.onClick
+        };
+
+        maskStore.list.push(info);
+        await until(isOpened).toBe(false);
+        const i = maskStore.list.indexOf(info);
+        maskStore.list.splice(i, 1);
     });
 }

@@ -1,12 +1,12 @@
-<script setup>
+<script lang="ts" setup>
     const emit = defineEmits(["success"]);
 
     const toastStore = useToastStore();
 
-    const nickname = ref();
-    const email = ref();
-    const verify = ref();
-    const password = ref();
+    const nickname = ref("");
+    const email = ref("");
+    const verify = ref("");
+    const password = ref("");
 
     const verifyStage = ref({
         stage: 0,
@@ -25,7 +25,7 @@
                     return "昵称不能为空";
                 }
                 else if (count > 24) {
-                    return "昵称长度不能超过24个字符";
+                    return "昵称长度不能超过 24 个字符";
                 }
             }
         },
@@ -35,6 +35,12 @@
             reg: /^[\w-]+@[\w-]+(.[\w-]+)+$/,
             message: "邮箱格式不正确"
         },
+        verify: {
+            target: verify,
+            required: true,
+            reg: /.+/,
+            message: "请输入验证码"
+        },
         password: {
             target: password,
             required: true,
@@ -43,7 +49,7 @@
             validate(value) {
                 const count = getByteLength(value);
                 if (count < 6 || count > 18) {
-                    return "密码位数必须在6-18位之间";
+                    return "密码位数必须在 6-18 位之间";
                 }
             }
         }

@@ -1,7 +1,7 @@
-<script setup>
-    const props = defineProps({
-        novel: String
-    });
+<script lang="ts" setup>
+    const props = defineProps<{
+        novel: string;
+    }>();
 
     //简介
     const synopsis = computed(() => {

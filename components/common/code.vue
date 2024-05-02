@@ -49,7 +49,7 @@
             <span class="text-uppercase">{{ lang }}</span>
             <a @click="copy"><icon name="fa6-solid:paste"/></a>
         </div>
-        <div class="code-area" :class="{ expanded: isExpand }">
+        <div class="code-area" :class="{ [`is-expand`]: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
             <pre ref="$code" class="shiki code-content" v-html="code || props.raw"></pre>
         </div>
@@ -90,7 +90,7 @@
             font-family: var(--font-code);
         }
 
-        &.expanded {
+        &.is-expand {
             max-height: none;
 
             > .code-content {

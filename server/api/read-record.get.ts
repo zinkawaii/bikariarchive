@@ -1,6 +1,4 @@
-interface GetReadRecordResponse extends BaseResponse {
-    data?: any[];
-}
+import type { GetReadRecordResponse } from "~/server/types/api/read-record";
 
 export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => {
     const query = getQueryValues(event);

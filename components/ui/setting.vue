@@ -1,4 +1,6 @@
-<script setup>
+<script lang="ts" setup>
+    import type { SettingField } from "~/types/setting";
+
     const settingStore = useSettingStore();
 
     //添加遮罩层
@@ -23,18 +25,18 @@
     });
 
     //键盘按下时
-    function onShortcutKeypress(name) {
+    function onShortcutKeypress(name: string) {
         shortcuts.value[name] = "";
     }
 
     //键盘松开时
-    function onShortcutKeyup(name, event) {
+    function onShortcutKeyup(name: SettingField, event: KeyboardEvent) {
         shortcuts.value[name] = keyToStr(event.key);
         settingStore.set(name, event.key);
     }
 
     //键值 → 显示值
-    function keyToStr(key) {
+    function keyToStr(key: string) {
         let str = shortMap[key] || key;
         if (str.match(/^[a-z]{1}$/)) {
             str = str.toUpperCase();
@@ -78,9 +80,15 @@
         padding: 32px;
         border-radius: 16px;
         background-color: var(--color-background);
+
+        @media (width < 425px) {
+            height: 100dvh;
+            padding: 16px;
+            border-radius: 0;
+        }
     }
 
-    .mb-form {
+    .setting-form {
         margin-top: 16px;
 
         + h2 {
@@ -91,13 +99,5 @@
     .input-line {
         flex: 1;
         text-align: center;
-    }
-
-    @media (width < 425px) {
-        .z-setting {
-            height: 100vh;
-            padding: 16px;
-            border-radius: 0;
-        }
     }
 </style>

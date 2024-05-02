@@ -9,7 +9,7 @@ export const useUserStore = defineStore("user", () => {
     const getInfo = useFetch("/api/user/info");
 
     getInfo.then(({ data }) => {
-        const info: any = data.value;
+        const info = data.value;
 
         if (info.isLogin) {
             uid.value = info.uid;

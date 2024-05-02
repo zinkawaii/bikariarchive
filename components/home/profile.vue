@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const links = [
         {
             title: "Github",

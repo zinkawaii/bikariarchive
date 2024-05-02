@@ -1,9 +1,12 @@
-<script setup>
-    const route = useRoute();
+<script lang="ts" setup>
+    const params = useRouteParams<{
+        novel: string;
+        index: string;
+    }>();
 
     //当前章节
     const art = computed(() => {
-        const { novel, index } = route.params;
+        const { novel, index } = params.value;
         return Article.for(novel, index);
     });
 

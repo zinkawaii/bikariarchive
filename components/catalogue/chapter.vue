@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const catalogueStore = useCatalogueStore();
     const { infoType, jChapters } = storeToRefs(catalogueStore);
 

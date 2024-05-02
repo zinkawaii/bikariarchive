@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     import dayjs from "dayjs";
     import lunisolar from "lunisolar";
     import jTimeline from "~/assets/json/Timeline.json";
@@ -53,15 +53,9 @@
         //添加上月日期
         const weekday = (firstDay.day() + 6) % 7;
         if (weekday > 0) {
-            let y, m;
-            if (month === 0) {
-                y = year - 1;
-                m = 11;
-            }
-            else {
-                y = year;
-                m = month - 1;
-            }
+            const [y, m] = month === 0
+                ? [year - 1, 0]
+                : [year, month - 1];
 
             const firstDay = dayjs(new Date(y, m));
             const count = firstDay.daysInMonth();
@@ -75,15 +69,9 @@
         const total = 42;
         const length = dates.length;
         if (length < total) {
-            let y, m;
-            if (month === 11) {
-                y = year + 1;
-                m = 0;
-            }
-            else {
-                y = year;
-                m = month + 1;
-            }
+            const [y, m] = month === 11
+                ? [year + 1, 0]
+                : [year, month + 1];
 
             for (let i = 0; i < total - length; i++) {
                 dates.push(createDate(y, m, i + 1));
@@ -137,7 +125,7 @@
     }
 
     //创建日期对象
-    function createDate(year, month, day) {
+    function createDate(year: number, month: number, day: number) {
         const base = new Date(year, month, day);
 
         const solar = dayjs(base);

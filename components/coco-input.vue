@@ -1,18 +1,18 @@
-<script setup>
+<script lang="ts" setup>
     defineOptions({
         inheritAttrs: false
     });
-    const props = defineProps({
-        placeholder: String,
-        warn: Boolean,
-        warnTip: String
-    });
+    defineProps<{
+        placeholder: string;
+        warn?: boolean;
+        warnTip?: string;
+    }>();
     const modelValue = defineModel();
 </script>
 
 <template>
     <div class="coco-input">
-        <input class="input-entity" required title v-bind="$attrs" v-model="modelValue"/>
+        <input class="input-entity" required title="" v-bind="$attrs" v-model="modelValue"/>
         <div class="input-underline"></div>
         <span class="input-placeholder" :class="{ warn: warn || warnTip }">{{ warnTip || placeholder }}</span>
     </div>

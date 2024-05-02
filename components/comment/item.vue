@@ -1,8 +1,14 @@
-<script setup>
+<script lang="ts" setup>
     import dayjs from "dayjs";
+    import type { CommentData } from "~/server/types/api/comment";
+    import type { WithParent } from "~/types";
 
-    const props = defineProps(["data"]);
-    const emit = defineEmits(["update"]);
+    const props = defineProps<{
+        data: WithParent<CommentData>;
+    }>();
+    const emit = defineEmits<{
+        update: [];
+    }>();
 
     const commentPanelStore = useCommentPanelStore();
     const confirmStore = useConfirmStore();

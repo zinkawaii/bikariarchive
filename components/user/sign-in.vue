@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const toastStore = useToastStore();
     const userStore = useUserStore();
 

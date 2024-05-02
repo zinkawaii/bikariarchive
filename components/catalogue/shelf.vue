@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const catalogueStore = useCatalogueStore();
     const { novel, curOrder } = storeToRefs(catalogueStore);
 </script>
@@ -10,7 +10,7 @@
                 <a
                     class="shelf-novel"
                     :class="{ checked: novel === key }"
-                    @click="catalogueStore.selectNovel(key, i)"
+                    @click="catalogueStore.selectNovel(key as string, i)"
                     ><div class="shelf-cover">
                         <nuxt-img v-if="cover" :src="cover" :alt="title"/>
                         <div v-else class="shelf-placeholder">Cover.</div>

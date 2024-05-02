@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+    import type { SettingField } from "~/types/setting";
+
     const props = defineProps<{
         title: string;
         type?: string;
-        name?: string;
+        name?: SettingField;
         desc?: string;
         options?: string[];
     }>();
@@ -20,7 +22,7 @@
 </script>
 
 <template>
-    <div class="mb-form">
+    <div class="setting-form">
         <div>
             <div class="form-title">{{ title }}</div>
             <div class="form-desc">{{ desc }}</div>
@@ -40,7 +42,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .mb-form {
+    .setting-form {
         display: grid;
         grid-template-columns: 0.8fr 1fr;
         align-items: center;

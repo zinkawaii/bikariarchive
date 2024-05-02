@@ -1,10 +1,4 @@
-interface PutUserSignBody {
-    content: string;
-}
-
-interface PutUserSignResponse extends BaseResponse {
-    content?: string;
-}
+import type { PutUserSignBody, PutUserSignResponse } from "~/server/types/api/user/sign";
 
 export default defineJEventHandler<PutUserSignResponse>(async (event) => {
     const { session } = event.context;

@@ -1,9 +1,6 @@
-type ToastType = "error" | "info" | "success";
+import type { ToastIconInfo, ToastItem, ToastType } from "~/types/toast";
 
-const iconInfos: Record<ToastType, {
-    name: string;
-    color: string;
-}> = {
+const iconInfos: Record<ToastType, ToastIconInfo> = {
     error: {
         name: "ooui:clear",
         color: "var(--color-danger)"
@@ -20,7 +17,7 @@ const iconInfos: Record<ToastType, {
 
 export const useToastStore = defineStore("toast", {
     state: () => ({
-        map: new Map()
+        map: new Map<string, ToastItem>()
     }),
     actions: {
         show(key: string, content: string, type: ToastType = "info") {

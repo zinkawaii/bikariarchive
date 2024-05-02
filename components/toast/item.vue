@@ -1,9 +1,11 @@
-<script setup>
-    const props = defineProps({
-        name: String,
-        iconInfo: Object,
-        content: String
-    });
+<script lang="ts" setup>
+    import type { ToastIconInfo } from "~/types/toast";
+
+    const props = defineProps<{
+        name: string;
+        iconInfo: ToastIconInfo;
+        content: string;
+    }>();
 
     const toastStore = useToastStore();
 

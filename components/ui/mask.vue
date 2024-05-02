@@ -1,15 +1,16 @@
-<script setup>
+<script lang="ts" setup>
     const maskStore = useMaskStore();
-
-    const duration = computed(() => {
-        return maskStore.duration / 1000 + "s";
-    });
 </script>
 
 <template>
-    <transition name="mask">
-        <div v-if="maskStore.isOpened" class="z-mask" @click="maskStore.onClick()"></div>
-    </transition>
+    <transition-group name="mask">
+        <div
+            v-for="{ onClick }, i in maskStore.list"
+            :key="i"
+            class="z-mask"
+            @click="onClick"
+        ></div>
+    </transition-group>
 </template>
 
 <style lang="scss" scoped>
@@ -21,7 +22,7 @@
     }
 
     .mask-enter-active, .mask-leave-active {
-        transition: opacity v-bind("duration");
+        transition: opacity 0.4s;
     }
 
     .mask-enter-active {

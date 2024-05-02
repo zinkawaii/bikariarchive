@@ -1,6 +1,4 @@
-interface DeleteCommentBody {
-    id: string;
-}
+import type { DeleteCommentBody } from "~/server/types/api/comment";
 
 export default defineJEventHandler(async (event) => {
     const { id } = await readBody<DeleteCommentBody>(event);

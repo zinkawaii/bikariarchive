@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const route = useRoute();
     const signerStore = useSignerStore();
     const userStore = useUserStore();
@@ -145,7 +145,7 @@
     @media (width < 425px) {
         .user-sign {
             flex-direction: column;
-            height: 100%;
+            height: 100dvh;
             border-radius: 0;
         }
 

@@ -1,9 +1,9 @@
-<script setup>
+<script lang="ts" setup>
     const timerStore = useTimerStore();
-    const startDate = new Date("2022/09/30");
+    const startTime = new Date("2022/09/30").getTime();
 
     const time = computed(() => {
-        const sub = Math.floor((timerStore.now - startDate) / 1000);
+        const sub = Math.floor((timerStore.now.getTime() - startTime) / 1000);
         const d = Math.floor(sub / 60 / 60 / 24);
         const h = Math.floor(sub / 60 / 60) - 24 * d;
         const m = Math.floor(sub % 3600 / 60);

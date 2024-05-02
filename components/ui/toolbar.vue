@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const gsap = useGsap();
     const signerStore = useSignerStore();
     const settingStore = useSettingStore();

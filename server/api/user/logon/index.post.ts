@@ -1,17 +1,5 @@
 import dayjs from "dayjs";
-
-interface GetLoginBody {
-    nickname: string;
-    email: string;
-    verify: string;
-    password: string;
-}
-
-interface GetLogonResponse extends BaseResponse {
-    uid?: number;
-    nickname?: string;
-    identity?: number;
-}
+import type { GetLoginBody, GetLogonResponse } from "~/server/types/api/user/logon";
 
 export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const { session } = event.context;

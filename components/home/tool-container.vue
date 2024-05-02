@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const links = [
         {
             title: "日文名发生装置",
@@ -20,8 +20,8 @@
 <template>
     <div class="home-tool-container">
         <nuxt-link v-for="link in links" class="home-tool" :to="link.href">
-            <span>{{ link.title || "卖萌中……" }}</span>
-            <icon name="fa6-solid:arrow-right"/>
+            <span class="tool-title">{{ link.title || "卖萌中……" }}</span>
+            <icon class="tool-arrow" name="fa6-solid:arrow-right"/>
         </nuxt-link>
     </div>
 </template>
@@ -33,9 +33,9 @@
         grid-gap: 16px;
     }
 
-    .home-tool {
-        $shadow: 1px 1px 4px black;
+    $shadow: 1px 1px 4px black;
 
+    .home-tool {
         position: relative;
         height: 64px;
         border-radius: 8px;
@@ -46,38 +46,6 @@
         word-break: keep-all;
         text-shadow: $shadow;
         color: white;
-
-        span {
-            display: block;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transition: all 0.4s;
-            translate: -50% -50%;
-
-            &::before {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 8px;
-                left: -8px;
-                width: 0;
-                height: 16px;
-                background-color: rgb(0 0 0 / 25%);
-                transition: all 0.4s;
-                z-index: -1;
-            }
-        }
-
-        svg {
-            position: absolute;
-            opacity: 0;
-            right: 8px;
-            bottom: 4px;
-            font-size: 24px;
-            transition: all 0.4s;
-            filter: drop-shadow($shadow);
-        }
 
         &:hover {
             span {
@@ -100,5 +68,37 @@
                 background-image: url("/garden/background/tool_#{$i}.png");
             }
         }
+    }
+
+    .tool-title {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transition: all 0.4s;
+        translate: -50% -50%;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 8px;
+            left: -8px;
+            width: 0;
+            height: 16px;
+            background-color: rgb(0 0 0 / 25%);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+    }
+
+    .tool-arrow {
+        position: absolute;
+        opacity: 0;
+        right: 8px;
+        bottom: 4px;
+        font-size: 24px;
+        transition: all 0.4s;
+        filter: drop-shadow($shadow);
     }
 </style>

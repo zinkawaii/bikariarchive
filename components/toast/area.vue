@@ -1,12 +1,8 @@
-<script setup>
+<script lang="ts" setup>
     const toastStore = useToastStore();
 
     const toastList = computed(() => {
-        const res = [];
-        for (const item of toastStore.map) {
-            res.unshift(item);
-        }
-        return res;
+        return [...toastStore.map].toReversed();
     });
 </script>
 

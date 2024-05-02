@@ -29,7 +29,7 @@
     <transition-scale>
         <div v-if="confirmStore.isOpened" class="mb-confirm">
             <div class="confirm-content">{{ confirmStore.content }}</div>
-            <div class="confirm-button-group">
+            <div class="confirm-operator">
                 <mb-button @click="res(false)">取消</mb-button>
                 <mb-button @click="res(true)">确定</mb-button>
             </div>
@@ -57,12 +57,12 @@
         text-align: center;
     }
 
-    .confirm-button-group {
+    .confirm-operator {
         display: flex;
         justify-content: center;
         gap: 8px;
 
-        > button {
+        > .mb-button {
             flex: 1;
             width: 96px;
         }

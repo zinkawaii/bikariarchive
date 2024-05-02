@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { CocoLink, MbCode, MbGallery, MbImage, NuxtImg } from "#components";
 
     export default {

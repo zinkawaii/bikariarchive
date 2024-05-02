@@ -1,13 +1,13 @@
-<script setup>
-    const props = defineProps({
-        name: String
-    });
+<script lang="ts" setup>
+    defineProps<{
+        name: string;
+    }>();
 </script>
 
 <template>
     <nuxt-link class="character-tag" :to="toEntry(name)">
-        <nuxt-img :src="`/garden/icon/${name}.png`" :alt="name" placeholder="/garden/icon/unknown.png"/>
-        <span>{{ name }}</span>
+        <nuxt-img class="tag-icon" :src="`/garden/icon/${name}.png`" :alt="name" placeholder="/garden/icon/unknown.png"/>
+        <span class="tag-name">{{ name }}</span>
     </nuxt-link>
 </template>
 
@@ -23,17 +23,17 @@
         font-size: 14px;
         vertical-align: middle;
         color: var(--color-theme-text);
+    }
 
-        img {
-            width: 2em;
-            height: 2em;
-            margin: 2px;
-            border-radius: 100%;
-        }
+    .tag-icon {
+        width: 2em;
+        height: 2em;
+        margin: 2px;
+        border-radius: 100%;
+    }
 
-        span {
-            padding-inline: 5px;
-            text-wrap: nowrap;
-        }
+    .tag-name {
+        padding-inline: 5px;
+        text-wrap: nowrap;
     }
 </style>

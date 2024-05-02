@@ -1,7 +1,9 @@
-<script setup>
-    const props = defineProps({
-        chapter: Article
-    });
+<script lang="ts" setup>
+    import type { Article } from "~/utils/Article";
+
+    const props = defineProps<{
+        chapter: Article;
+    }>();
 
     const catalogueStore = useCatalogueStore();
     const readRecordStore = useReadRecordStore();

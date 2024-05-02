@@ -1,9 +1,9 @@
-<script setup>
+<script lang="ts" setup>
     import jAbility from "~/assets/json/Ability.json";
 
-    const props = defineProps({
-        classification: String
-    });
+    const props = defineProps<{
+        classification: string;
+    }>();
 
     const filterList = jAbility.items.filter((item) => {
         return item.class.includes(props.classification);

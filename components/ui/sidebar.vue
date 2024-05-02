@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     import { Flip } from "gsap/all";
 
     const route = useRoute();
@@ -7,10 +7,10 @@
     const isHidden = ref(false);
 
     //边栏显隐与 UI 折叠
-    watchImmediate(() => [
-        settingStore.setting["ui-collapse"],
-        settingStore.setting["sidebar-display"]
-    ], ([collapse, display]) => {
+    watchEffect(() => {
+        const collapse = settingStore.get("ui-collapse");
+        const display = settingStore.get("sidebar-display");
+
         if (import.meta.browser) {
             const nakamiState = Flip.getState(".nakami");
             nextTick(() => {

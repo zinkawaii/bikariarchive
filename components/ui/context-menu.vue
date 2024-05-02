@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const router = useRouter();
     const settingStore = useSettingStore();
     const toastStore = useToastStore();
@@ -104,15 +104,15 @@
 
     //鼠标按下时
     useEventListener("mousedown", (event) => {
-        if (state.value && !event.target.closest(".z-context-menu")) {
+        if (state.value && !(event.target as HTMLElement).closest(".z-context-menu")) {
             state.value = false;
         }
     });
 
     //创建菜单行为
-    function createAction(handler) {
+    function createAction(handler: () => void) {
         return function() {
-            handler.call(this);
+            handler();
             state.value = false;
         };
     }

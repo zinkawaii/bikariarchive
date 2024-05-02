@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const i = ref(0);
     const serifs = [
         "あと少しだけでいい 満ち足りない",

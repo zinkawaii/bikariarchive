@@ -1,8 +1,10 @@
 import type { WatchCallback, WatchOptions } from "vue";
+import type { PickAsType } from "~/types";
+import type { Setting, SettingField } from "~/types/setting";
 
 export const useSettingStore = defineStore("setting", () => {
     const isOpened = ref(false);
-    const setting = ref({
+    const setting = ref<Setting>({
         theme: 2,
         "dark-mode": 0,
         "sidebar-display": 0,
@@ -19,15 +21,15 @@ export const useSettingStore = defineStore("setting", () => {
         2: true
     }[setting.value["dark-mode"]] ?? (Zin.period === Zin.PERIOD_NIGHT)));
 
-    function get(key: string) {
+    function get<K extends SettingField>(key: K) {
         return setting.value[key];
     }
 
-    function set(key: string, value: any) {
+    function set<K extends SettingField, V extends Setting[K]>(key: K, value: V) {
         setting.value[key] = value;
     }
 
-    function toggle(key: string, value?: boolean) {
+    function toggle<K extends keyof PickAsType<Setting, boolean>, V extends Setting[K]>(key: K, value?: V) {
         setting.value[key] = value ?? !setting.value[key];
     }
 

@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const image = `url(/garden/background/bg_${
         Zin.period === Zin.PERIOD_DAY ? "day" : "night"
     }.webp)`;

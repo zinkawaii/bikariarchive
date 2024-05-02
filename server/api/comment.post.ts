@@ -1,13 +1,5 @@
 import dayjs from "dayjs";
-
-interface PostCommentBody {
-    path: string;
-    parent: string;
-    content: string;
-    nickname: string;
-    email: string;
-    address: string;
-}
+import type { PostCommentBody } from "~/server/types/api/comment";
 
 export default defineJEventHandler(async (event) => {
     const body = await readBody<PostCommentBody>(event);

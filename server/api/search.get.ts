@@ -1,18 +1,9 @@
 import $ from "node-html-parser";
 import dayjs from "dayjs";
 import { jArticle } from "~/utils/Article";
+import type { GetSearchResponse } from "~/server/types/api/search";
 
-interface GetArticleResponse extends BaseResponse {
-    results?: SearchResult[];
-}
-
-interface SearchResult {
-    index: string;
-    count: number;
-    parts: string[];
-}
-
-export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
+export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
     let { word } = getQueryValues(event);
 
     //空关键词

@@ -1,10 +1,4 @@
-interface GetUserInfoResponse extends BaseResponse {
-    uid?: number;
-    nickname?: string;
-    identity?: number;
-    sign?: string;
-    isLogin?: boolean;
-}
+import type { GetUserInfoResponse } from "~/server/types/api/user/info";
 
 export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
     const { session } = event.context;

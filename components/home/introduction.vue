@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const intro = ref({
         status: 0,
         novel: Object.keys(jArticle),

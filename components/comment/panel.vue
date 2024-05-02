@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const commentPanelStore = useCommentPanelStore();
     const toastStore = useToastStore();
 
@@ -123,7 +123,7 @@
         background-color: var(--color-background);
 
         @media (width < 425px) {
-            height: 100vh;
+            height: 100dvh;
             padding: 16px;
             border-radius: 0;
         }

@@ -1,6 +1,11 @@
-<script setup>
-    const props = defineProps(["layer", "novel"]);
-    const emits = defineEmits(["exchange"]);
+<script lang="ts" setup>
+    const props = defineProps<{
+        layer: string;
+        novel: string;
+    }>();
+    const emits = defineEmits<{
+        exchange: [];
+    }>();
 
     const readRecordStore = useReadRecordStore();
 

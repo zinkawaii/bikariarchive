@@ -1,9 +1,8 @@
-<script setup>
-    const props = defineProps({
-        minWidth: {
-            type: Number,
-            default: 616
-        }
+<script lang="ts" setup>
+    withDefaults(defineProps<{
+        minWidth?: number;
+    }>(), {
+        minWidth: 616
     });
 </script>
 

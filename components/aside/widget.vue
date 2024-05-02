@@ -1,8 +1,8 @@
-<script setup>
-    const props = defineProps({
-        title: String,
-        icon: String
-    });
+<script lang="ts" setup>
+    defineProps<{
+        title?: string;
+        icon?: string;
+    }>();
 </script>
 
 <template>

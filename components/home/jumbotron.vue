@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const config = useRuntimeConfig();
 
     const duration = 400;

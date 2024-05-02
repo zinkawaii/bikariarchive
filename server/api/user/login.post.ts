@@ -1,14 +1,4 @@
-interface PostLoginBody {
-    account: string;
-    password: string;
-}
-
-interface PostLoginResponse extends BaseResponse {
-    uid?: number;
-    nickname?: string;
-    identity?: number;
-    sign?: string;
-}
+import type { PostLoginBody, PostLoginResponse } from "~/server/types/api/user/login";
 
 export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
     const { session } = event.context;

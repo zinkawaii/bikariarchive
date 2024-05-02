@@ -1,7 +1,8 @@
 import { Types } from "mongoose";
 import { defineMongooseModel } from "#nuxt/mongoose";
+import type { ReadRecordSchema } from "~/server/types/model";
 
-export const ReadRecordModel = defineMongooseModel<ReadRecord>({
+export const ReadRecordModel = defineMongooseModel<ReadRecordSchema>({
     name: "ReadRecord",
     schema: {
         ip: {

@@ -18,18 +18,18 @@
     "task:process:dev": "cross-env NODE_ENV=\"development\" node --watch scripts/process.js",
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
-  "packageManager": "pnpm@9.0.5",
+  "packageManager": "pnpm@9.0.6",
   "dependencies": {
     "crypto-es": "^2.1.0",
-    "dayjs": "^1.11.10",
-    "dompurify": "^3.1.0",
+    "dayjs": "^1.11.11",
+    "dompurify": "^3.1.1",
     "lunisolar": "^2.5.0",
     "marked": "^12.0.2",
-    "vue": "^3.4.25",
+    "vue": "^3.4.26",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.15.0",
+    "@antfu/eslint-config": "^2.16.0",
     "@bikari/process": "workspace:^",
     "@bikari/shared": "workspace:^",
     "@kikiutils/nuxt-session": "^2.0.4",
@@ -90,6 +90,6 @@
     "unified": "^11.0.4",
     "unist-builder": "^4.0.0",
     "unist-util-visit": "^5.0.0",
-    "yaml": "^2.4.1"
+    "yaml": "^2.4.2"
   }
 }

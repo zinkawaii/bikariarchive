@@ -1,9 +1,6 @@
 import fs from "fs-extra";
 import jMap from "~/dist/json/Entrimap.json";
-
-interface GetEntryResponse extends BaseResponse {
-    [key: string]: any;
-}
+import type { GetEntryResponse } from "~/server/types/api/entry";
 
 export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
     const {

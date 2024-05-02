@@ -1,9 +1,9 @@
-<script setup>
-    const props = defineProps({
-        type: String,
-        limit: Number,
-        sortBy: String
-    });
+<script lang="ts" setup>
+    const props = defineProps<{
+        type: string;
+        limit: number;
+        sortBy?: string;
+    }>();
 
     //是否按更新日期排序
     const sortByUpdated = computed(() => {

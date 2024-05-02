@@ -9,7 +9,7 @@ export const useSignerStore = defineStore("signer", {
         close() {
             this.isOpened = false;
         },
-        toggle(state: boolean) {
+        toggle(state?: boolean) {
             this.isOpened = state ?? !this.isOpened;
         }
     }

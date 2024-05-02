@@ -1,11 +1,7 @@
 import dayjs from "dayjs";
+import type { GetArticleResponse } from "~/server/types/api/article";
 import Article from "~/utils/Article";
 import ArtMap from "~/dist/json/Artmap.json";
-
-interface GetArticleResponse extends BaseResponse {
-    content?: string;
-    readCount?: number;
-}
 
 export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     const { novel, index, password } = getQueryValues(event);
@@ -36,7 +32,7 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
             time: number;
         };
     } = {};
-    qRecord.forEach((record: any) => {
+    for (const record of qRecord) {
         const ip = record.ip;
         if (ip in rlist) {
             const next = record.time.getTime();
@@ -54,7 +50,7 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
                 time: record.time.getTime()
             };
         }
-    });
+    }
 
     //统计阅读量
     res.readCount = 0;
