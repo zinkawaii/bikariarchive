@@ -34,9 +34,9 @@ export async function parseArticle<T>(text: string) {
         .use(gfm)
         .use(mdc)
         .use(ruby)
-        .use(externalLinks, externalOptions)
         .use(rehype, rehypeOptions)
         .use(raw)
+        .use(externalLinks, externalOptions)
         .use(stringify);
 
     const result = await processor.process(text);
@@ -54,9 +54,9 @@ export async function parseEntry(text: string) {
         .use(gfm)
         .use(ruby)
         .use(slot)
-        .use(externalLinks, externalOptions)
         .use(rehype, rehypeOptions)
         .use(raw)
+        .use(externalLinks, externalOptions)
         .use(stringify);
 
     const result = await processor.process(text);
