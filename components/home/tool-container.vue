@@ -65,7 +65,7 @@
 
         @for $i from 1 through 5 {
             &:nth-child(#{$i}) {
-                background-image: url("/garden/background/tool_#{$i}.png");
+                background-image: url("/garden/background/tool_#{$i}.webp");
             }
         }
     }
