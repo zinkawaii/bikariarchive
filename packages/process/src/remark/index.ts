@@ -16,7 +16,10 @@ import code from "./handlers/code";
 
 const externalOptions: ExternalOptions = {
     rel: ["noopener", "noreferrer", "nofollow"],
-    target: "_blank"
+    target: "_blank",
+    properties: {
+        class: "plain-link"
+    }
 };
 
 const rehypeOptions: RehypeOptions = {

@@ -35,7 +35,7 @@
         <intro-content :novel/>
         <div class="intro-record">
             <span>&gt;</span>
-            <coco-link :to="record.link">{{ record.title }}</coco-link>
+            <plain-link :to="record.link">{{ record.title }}</plain-link>
             <span>&lt;</span>
         </div>
     </div>

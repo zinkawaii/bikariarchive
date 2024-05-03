@@ -1,13 +1,13 @@
 <script lang="ts">
-    import { CocoLink, MbCode, MbGallery, MbImage, NuxtImg } from "#components";
+    import { MbCode, MbGallery, MbImage, NuxtImg, PlainLink } from "#components";
 
     export default {
         components: {
-            CocoLink,
             MbCode,
             MbGallery,
             MbImage,
-            NuxtImg
+            NuxtImg,
+            PlainLink
         },
         props: {
             content: {

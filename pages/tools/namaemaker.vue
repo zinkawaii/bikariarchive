@@ -241,7 +241,7 @@
     <div class="p-small">
         <div class="namae-option">
             <span>介绍</span>
-            <p class="p-small">本页面用于生成日文名，数据集与随机算法均来自 <coco-link to="https://namaemaker.net" target="_blank">namaemaker.net</coco-link></p>
+            <p class="p-small">本页面用于生成日文名，数据集与随机算法均来自 <plain-link to="https://namaemaker.net" target="_blank">namaemaker.net</plain-link></p>
         </div>
         <div class="namae-option">
             <span>数量</span>

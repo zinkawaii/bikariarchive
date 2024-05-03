@@ -18,8 +18,8 @@
                 <template v-for="element in jBorrowing.list">
                     <tr v-for="(item, i) in element.items">
                         <th v-if="i === 0" :rowspan="element.items.length">{{ element.title }}</th>
-                        <td><coco-link :to="item.src.link" target="_blank">{{ item.src.name }}</coco-link></td>
-                        <td><coco-link :to="item.creator.link" target="_blank">{{ item.creator.name }}</coco-link></td>
+                        <td><plain-link :to="item.src.link" target="_blank">{{ item.src.name }}</plain-link></td>
+                        <td><plain-link :to="item.creator.link" target="_blank">{{ item.creator.name }}</plain-link></td>
                     </tr>
                 </template>
             </tbody>

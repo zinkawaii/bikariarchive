@@ -18,6 +18,6 @@
 
 <template>
     <span class="detail-link">
-        <coco-link :danger="!isExist" :to="toEntry(name)">{{ displayName }}</coco-link>
+        <plain-link :danger="!isExist" :to="toEntry(name)">{{ displayName }}</plain-link>
     </span>
 </template>

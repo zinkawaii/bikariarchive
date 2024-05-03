@@ -15,7 +15,7 @@
             <p>
                 <i class="home-qrcode"></i>
                 <span class="content-h2">欢迎来到{{ $config.public.title }}！</span><br />
-                这里是我的个人网站，主要用于发布小说正文，所有文章均可在<coco-link :to="{ name: `catalogue` }">目录页</coco-link>索引并浏览。<coco-link :to="{ name: `details` }">情报页</coco-link>整理并展示了目前部分可以公开的设定。<coco-link :to="{ name: `search` }">检索页</coco-link>可在全文范围内对特定关键词进行检索。
+                这里是我的个人网站，主要用于发布小说正文，所有文章均可在<plain-link :to="{ name: `catalogue` }">目录页</plain-link>索引并浏览。<plain-link :to="{ name: `details` }">情报页</plain-link>整理并展示了目前部分可以公开的设定。<plain-link :to="{ name: `search` }">检索页</plain-link>可在全文范围内对特定关键词进行检索。
             </p>
         </div>
         <home-introduction />

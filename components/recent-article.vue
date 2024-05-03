@@ -26,7 +26,7 @@
 <template>
     <ul class="recent-article">
         <li v-for="{ title, date, updated, volume, novel, route } in jRecent" class="recent-item">
-            <coco-link class="text-truncate recent-title" :to="route">{{ title }}</coco-link>
+            <plain-link class="text-truncate recent-title" :to="route">{{ title }}</plain-link>
             <div class="recent-info">
                 <span class="text-truncate">{{ jArticle[novel].volumes[volume].title }}</span>
                 <time>{{ sortByUpdated && updated || date }}</time>

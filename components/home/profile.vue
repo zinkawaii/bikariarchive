@@ -36,11 +36,11 @@
                 </tr>
                 <tr>
                     <th>个人群</th>
-                    <td><coco-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</coco-link></td>
+                    <td><plain-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</plain-link></td>
                 </tr>
                 <tr>
                     <th>读者群</th>
-                    <td><coco-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</coco-link></td>
+                    <td><plain-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</plain-link></td>
                 </tr>
             </tbody>
         </table>

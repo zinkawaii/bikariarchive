@@ -5,11 +5,11 @@
 </script>
 
 <template>
-    <nuxt-link class="coco-link" :class="{ [`is-danger`]: danger }"><slot></slot></nuxt-link>
+    <nuxt-link class="plain-link" :class="{ [`is-danger`]: danger }"><slot></slot></nuxt-link>
 </template>
 
-<style lang="scss" scoped>
-    .coco-link {
+<style lang="scss">
+    .plain-link {
         color: var(--color-link);
 
         &.is-danger {
