@@ -4,12 +4,31 @@
     useHead({
         title: "更新日志"
     });
+
+    const totalYears = [2024, 2023];
+    const currentYearIdx = ref(0);
+
+    const filteredUpdates = computed(() => {
+        const currentYear = totalYears[currentYearIdx.value];
+        return jUpdate.filter((item) => {
+            return item.date.startsWith(currentYear);
+        });
+    });
 </script>
 
 <template>
     <coco-widget title="更新日志">
+        <div class="update-years">
+            <div class="update-thumb" :style="{ translate: `${currentYearIdx * 88}px` }"></div>
+            <a
+                v-for="year, i in totalYears"
+                class="update-year"
+                :class="{ [`is-checked`]: totalYears[currentYearIdx] === year }"
+                @click="currentYearIdx = i"
+            >{{ year }}</a>
+        </div>
         <ul class="update-list">
-            <li v-for="{ date, version, content } in jUpdate" class="update-item">
+            <li v-for="{ date, version, content } in filteredUpdates" class="update-item">
                 <div class="update-title">
                     <h2><time>{{ date }}</time></h2>
                     <code v-if="version" class="update-version">v{{ version }}</code>
@@ -26,25 +45,59 @@
 </template>
 
 <style lang="scss" scoped>
+    .update-years {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        position: relative;
+        height: 32px;
+        margin-bottom: 16px;
+    }
+
+    .update-year {
+        position: relative;
+        width: 72px;
+        margin-left: 8px;
+        font-family: var(--font-smooth);
+        font-size: 28px;
+        text-align: center;
+        transition: all 0.25s;
+
+        &:not(.is-checked) {
+            opacity: 0.5;
+            font-size: 24px;
+        }
+    }
+
+    .update-thumb {
+        position: absolute;
+        bottom: 0;
+        width: 36px;
+        height: 16px;
+        border-radius: 16px 32px 64px 24px / 16px 16px 24px 32px;
+        background-image: linear-gradient(to right, var(--color-theme-dark), transparent);
+        transition: all 0.25s;
+    }
+
     .update-list {
         display: grid;
-        gap: 1em;
-        margin-left: 1em;
-        padding-left: 1em;
+        gap: 1rem;
+        margin-left: 1rem;
+        padding-left: 1rem;
         border-left: 2px solid var(--color-theme-dark);
 
         @media (width < 425px) {
-            margin-left: 0.5em;
+            margin-left: 0.5rem;
         }
     }
 
     .update-title {
         display: flex;
         align-items: center;
-        gap: 0.5em;
+        gap: 0.5rem;
         position: relative;
-        padding-left: 0.5em;
-        line-height: 3em;
+        padding-left: 0.5rem;
+        line-height: 3rem;
 
         &::before {
             content: "";
@@ -55,7 +108,7 @@
             border: 2px solid var(--color-theme-dark);
             border-radius: var(--circle-radius);
             background-color: var(--color-background);
-            translate: -2em;
+            translate: -2rem;
         }
     }
 
@@ -67,8 +120,8 @@
     .update-content {
         --shadow: 6%;
 
-        padding: 0.8em 1em;
-        border-radius: 1.5em;
+        padding: 0.8rem 1rem;
+        border-radius: 1.5rem;
         box-shadow: 6px 6px rgb(0 0 0 / var(--shadow));
         background-color: var(--color-background);
 
