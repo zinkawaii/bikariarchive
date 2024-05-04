@@ -46,7 +46,7 @@ export default new Processor({
         const wordCount = doc.querySelectorAll("p").reduce((res, p) => res + p.textContent.length, 0);
 
         //加密内容
-        const { password } = attributes;
+        const password = String(attributes.password || "") || void 0;
         const encrypted = Boolean(password) || void 0;
         delete attributes.password;
 
@@ -66,7 +66,7 @@ export default new Processor({
         }
         this.jMap[novel][index] = {
             name,
-            password: String(password)
+            password
         };
 
         //写入数据
