@@ -5,8 +5,10 @@ import jEntry from "../dist/json/Entry.json";
 export default <ModuleOptions> {
     excludeAppSources: true,
     urls: () => [
+        "/about",
         "/borrowing",
         "/catalogue",
+        "/compact",
         "/details",
         "/friend",
         "/home",
