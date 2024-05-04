@@ -136,8 +136,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       nanoid:
-        specifier: ^3.3.7
-        version: 3.3.7
+        specifier: ^5.0.7
+        version: 5.0.7
       node-html-parser:
         specifier: ^6.1.13
         version: 6.1.13
