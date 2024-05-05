@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <nav class="z-navbar" :class="{ collapse: settingStore.setting[`ui-collapse`] }">
+    <nav class="z-navbar" :class="{ [`is-collapse`]: settingStore.setting[`ui-collapse`] }">
         <ul class="nav-list">
             <li v-for="{ title, name, icon } in links" class="nav-item">
                 <nuxt-link class="nav-link" :to="{ name }">
@@ -55,7 +55,7 @@
             }
         }
 
-        &.collapse {
+        &.is-collapse {
             opacity: 0;
             transform: translateX(-48px);
         }
