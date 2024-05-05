@@ -95,6 +95,12 @@ export default defineNuxtConfig({
             }
         }
     },
+    splittedFonts: {
+        fonts: [{
+            name: "Teng Xiang",
+            path: "./public/fonts/TengXQJianYuan-w3.ttf"
+        }]
+    },
     shiki: {
         dynamic: true,
         defaultTheme: {
