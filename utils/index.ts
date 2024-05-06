@@ -14,6 +14,19 @@ export function getPosition(element: HTMLElement) {
     };
 }
 
+//获取单个数组的随机项
+export function getRandomItem(arr: any[]) {
+    const i = Zin.randInt(0, arr.length);
+    return arr[i];
+}
+
+//获取多个数组的同下标随机项
+export function getRandomItems(...arrs: any[][]) {
+    const length = arrs.reduce((res, arr) => Math.min(res, arr.length), Number.POSITIVE_INFINITY);
+    const i = Zin.randInt(0, length);
+    return arrs.map((arr) => arr[i]);
+}
+
 //判断焦点是否位于可编辑元素内
 export function isFocusedEditable() {
     const focusedElement = document.activeElement;

@@ -43,11 +43,20 @@
     });
 
     //结果
-    const result = ref([[], []]);
+    const results = ref([]);
+
+    //分列结果
+    const chunkedResults = computed(() => {
+        const median = Math.ceil(results.value.length / 2);
+        return [
+            results.value.slice(0, median),
+            results.value.slice(median)
+        ];
+    });
 
     //结果是否为空
     const isResultEmpty = computed(() => {
-        return result.value.every((col) => !col.length);
+        return results.value.length === 0;
     });
 
     //生成
@@ -63,8 +72,8 @@
             });
         }
 
-        const count = counter.value.current;
-        const sex = gender.value.current;
+        //清空结果
+        clear();
 
         //指定汉字与假名
         const pre_last_kanji = specific.value.last.kanji || specific.value.last.kana;
@@ -72,50 +81,40 @@
         const pre_first_kanji = specific.value.first.kanji || specific.value.first.kana;
         const pre_first_kana = specific.value.first.kana || specific.value.first.kanji;
 
-        //分列生成
-        result.value.forEach((col, index) => {
-            col.length = 0;
-            for (let i = Math.ceil(count / result.value.length * index); i < Math.ceil(count / result.value.length * (index + 1)); i++) {
-                const {
-                    last = pre_last_kanji,
-                    last_kana = pre_last_kana
-                } = pre_last_kana ? {} : getLastName();
-                const {
-                    first = pre_first_kanji,
-                    first_kana = pre_first_kana
-                } = pre_first_kana ? {} : getFirstName(sex);
+        const count = counter.value.current;
+        const sex = gender.value.current;
 
-                col.push({
-                    kanji: last + " " + first,
-                    kana: last_kana + "　" + first_kana
-                });
-            }
-        });
+        for (let i = 0; i < count; i++) {
+            const {
+                last = pre_last_kanji,
+                last_kana = pre_last_kana
+            } = pre_last_kana ? {} : getLastName();
+            const {
+                first = pre_first_kanji,
+                first_kana = pre_first_kana
+            } = pre_first_kana ? {} : getFirstName(sex);
+
+            results.value.push({
+                kanji: last + " " + first,
+                kana: last_kana + "　" + first_kana
+            });
+        }
     }
 
     //清空结果
     function clear() {
-        for (const col of result.value) {
-            col.length = 0;
-        }
+        results.value.length = 0;
     }
 
     //姓
     function getLastName() {
-        let kanji, i;
-
         const r = Math.floor(100 * Math.random());
-        const kana = r < 10 ? (i = Math.floor(Math.random() * Jnm["01"].length),
-        kanji = Jnm["01"][i],
-        Jnm["01_kana"][i]) : r < 55 ? (i = Math.floor(Math.random() * Jnm["02"].length),
-        kanji = Jnm["02"][i],
-        Jnm["02_kana"][i]) : r < 65 ? (i = Math.floor(Math.random() * Jnm["03"].length),
-        kanji = Jnm["03"][i],
-        Jnm["03_kana"][i]) : r < 70 ? (i = Math.floor(Math.random() * Jnm["04"].length),
-        kanji = Jnm["04"][i],
-        Jnm["04_kana"][i]) : (i = Math.floor(Math.random() * Jnm["23"].length),
-        kanji = Jnm["23"][i],
-        Jnm["23_kana"][i]);
+        const [kanji, kana] = r < 10 ?
+            getRandomItems(Jnm["01"], Jnm["01_kana"]) : r < 55 ?
+            getRandomItems(Jnm["02"], Jnm["02_kana"]) : r < 65 ?
+            getRandomItems(Jnm["03"], Jnm["03_kana"]) : r < 70 ?
+            getRandomItems(Jnm["04"], Jnm["04_kana"]) :
+            getRandomItems(Jnm["23"], Jnm["23_kana"]);
 
         return {
             last: kanji,
@@ -125,111 +124,52 @@
 
     //名
     function getFirstName(gender) {
-        let r, i, m, n, a, b;
-        if (gender === "male") {
-            if ((r = Math.floor(1e3 * Math.random())) < 100) {
-                i = Math.floor(Math.random() * Jnm["05"].length),
-                a = Jnm["05"][i],
-                b = Jnm["05_kana"][i];
-            }
-            else if (r < 540) {
-                if ((r = Math.floor(100 * Math.random())) < 70) {
-                    i = Math.floor(Math.random() * Jnm["06"].length),
-                    a = Jnm["06"][i],
-                    b = Jnm["06_kana"][i];
-                }
-                else {
-                    do {
-                        m = Math.floor(Math.random() * Jnm["11"].length),
-                        n = Math.floor(Math.random() * Jnm["12"].length),
-                        a = Jnm["11"][m] + Jnm["12"][n],
-                        b = Jnm["11_kana"][m] + Jnm["12_kana"][n];
-                    } while (!Jnm["13_kana"].includes(b));
-                }
-            }
-            else if (r < 649) {
-                if ((r = Math.floor(100 * Math.random())) < 70) {
-                    i = Math.floor(Math.random() * Jnm["07"].length),
-                    a = Jnm["07"][i],
-                    b = Jnm["07_kana"][i];
-                }
-                else {
-                    do {
-                        i = Math.floor(Math.random() * Jnm["11"].length),
-                        m = Math.floor(Math.random() * Jnm["26"].length),
-                        n = Math.floor(Math.random() * Jnm["12"].length),
-                        a = Jnm["11"][i] + Jnm["26"][m] + Jnm["12"][n],
-                        b = Jnm["11_kana"][i] + Jnm["26_kana"][m] + Jnm["12_kana"][n];
-                    } while (!Jnm["13_kana"].includes(b));
-                }
-            }
-            else if (r < 650) {
-                i = Math.floor(Math.random() * Jnm["08"].length),
-                a = Jnm["08"][i],
-                b = Jnm["08_kana"][i];
-            }
-            else if (n < 700) {
-                i = Math.floor(Math.random() * Jnm["13_kana"].length),
-                a = b = Jnm["13_kana"][i];
+        let a, b;
+        const [k05, k06, k07, k08, k11, k12, k13, k24, k26] = gender === "male" ?
+            ["05", "06", "07", "08", "11", "12", "13", "24", "26"] :
+            ["14", "15", "16", "17", "20", "21", "22", "25", "27"];
+
+        const r = Zin.randInt(0, 1000);
+        if (r < 100) {
+            [a, b] = getRandomItems(Jnm[k05], Jnm[`${k05}_kana`]);
+        }
+        else if (r < 540) {
+            if (Zin.randInt(0, 100) < 70) {
+                [a, b] = getRandomItems(Jnm[k06], Jnm[`${k06}_kana`]);
             }
             else {
-                i = Math.floor(Math.random() * Jnm["24"].length),
-                a = Jnm["24"][i],
-                b = Jnm["24_kana"][i];
+                do {
+                    const [m1, m2] = getRandomItems(Jnm[k11], Jnm[`${k11}_kana`]);
+                    const [n1, n2] = getRandomItems(Jnm[k12], Jnm[`${k12}_kana`]);
+                    a = m1 + n1;
+                    b = m2 + n2;
+                } while (!Jnm[`${k13}_kana`].includes(b));
             }
         }
-        else if (gender === "female") {
-            if ((r = Math.floor(1e3 * Math.random())) < 100) {
-                i = Math.floor(Math.random() * Jnm["14"].length),
-                a = Jnm["14"][i],
-                b = Jnm["14_kana"][i];
-            }
-            else if (r < 540) {
-                if ((r = Math.floor(100 * Math.random())) < 70) {
-                    i = Math.floor(Math.random() * Jnm["15"].length),
-                    a = Jnm["15"][i],
-                    b = Jnm["15_kana"][i];
-                }
-                else {
-                    do {
-                        m = Math.floor(Math.random() * Jnm["20"].length),
-                        n = Math.floor(Math.random() * Jnm["21"].length),
-                        a = Jnm["20"][m] + Jnm["21"][n],
-                        b = Jnm["20_kana"][m] + Jnm["21_kana"][n];
-                    } while (!Jnm["22_kana"].includes(b));
-                }
-            }
-            else if (r < 649) {
-                if ((r = Math.floor(100 * Math.random())) < 70) {
-                    i = Math.floor(Math.random() * Jnm["16"].length),
-                    a = Jnm["16"][i],
-                    b = Jnm["16_kana"][i];
-                }
-                else {
-                    do {
-                        i = Math.floor(Math.random() * Jnm["20"].length),
-                        m = Math.floor(Math.random() * Jnm["27"].length),
-                        n = Math.floor(Math.random() * Jnm["21"].length),
-                        a = Jnm["20"][i] + Jnm["27"][m] + Jnm["21"][n],
-                        b = Jnm["20_kana"][i] + Jnm["27_kana"][m] + Jnm["21_kana"][n];
-                    } while (!Jnm["22_kana"].includes(b));
-                }
-            }
-            else if (r < 650) {
-                i = Math.floor(Math.random() * Jnm["17"].length),
-                a = Jnm["17"][i],
-                b = Jnm["17_kana"][i];
-            }
-            else if (r < 700) {
-                i = Math.floor(Math.random() * Jnm["22_kana"].length),
-                a = b = Jnm["22_kana"][i];
+        else if (r < 649) {
+            if (Zin.randInt(0, 100) < 70) {
+                [a, b] = getRandomItems(Jnm[k07], Jnm[`${k07}_kana`]);
             }
             else {
-                i = Math.floor(Math.random() * Jnm["25"].length),
-                a = Jnm["25"][i],
-                b = Jnm["25_kana"][i];
+                do {
+                    const [i1, i2] = getRandomItems(Jnm[k11], Jnm[`${k11}_kana`]);
+                    const [m1, m2] = getRandomItems(Jnm[k26], Jnm[`${k26}_kana`]);
+                    const [n1, n2] = getRandomItems(Jnm[k12], Jnm[`${k12}_kana`]);
+                    a = i1 + m1 + n1;
+                    b = i2 + m2 + n2;
+                } while (!Jnm[`${k13}_kana`].includes(b));
             }
         }
+        else if (r < 650) {
+            [a, b] = getRandomItems(Jnm[k08], Jnm[`${k08}_kana`]);
+        }
+        else if (r < 700) {
+            a = b = getRandomItem(Jnm[`${k13}_kana`]);
+        }
+        else {
+            [a, b] = getRandomItems(Jnm[k24], Jnm[`${k24}_kana`]);
+        }
+
         return {
             first: a,
             first_kana: b
@@ -291,14 +231,8 @@
         </div>
     </div>
     <div v-if="!isResultEmpty" class="div-table namae-result">
-        <dl class="namae-col">
-            <template v-for="item in result[0]">
-                <dt>{{ item.kanji }}</dt>
-                <dd>{{ item.kana }}</dd>
-            </template>
-        </dl>
-        <dl class="namae-col">
-            <template v-for="item in result[1]">
+        <dl v-for="chunk in chunkedResults" class="namae-col">
+            <template v-for="item in chunk">
                 <dt>{{ item.kanji }}</dt>
                 <dd>{{ item.kana }}</dd>
             </template>
