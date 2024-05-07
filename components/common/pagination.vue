@@ -51,7 +51,7 @@
         <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === 1 }" @click="modelValue--">
             <icon name="fa6-solid:chevron-left"/>
         </a>
-        <ul class="pagina-list">
+        <div class="pagina-list">
             <a
                 class="pagina-item"
                 :class="{ active: modelValue === 1 }"
@@ -62,13 +62,12 @@
                 class="pagina-item"
                 @click="modelValue -= 2"
             >...</a>
-            <li v-for="i in middleCount">
-                <a
-                    class="pagina-item"
-                    :class="{ active: modelValue === i }"
-                    @click="modelValue = i"
-                >{{ i }}</a>
-            </li>
+            <a
+                v-for="i in middleCount"
+                class="pagina-item"
+                :class="{ active: modelValue === i }"
+                @click="modelValue = i"
+            >{{ i }}</a>
             <a
                 v-show="modelValue < totalPages - 2"
                 class="pagina-item"
@@ -80,7 +79,7 @@
                 :class="{ active: modelValue === totalPages }"
                 @click="modelValue = totalPages"
             >{{ totalPages }}</a>
-        </ul>
+        </div>
         <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === totalPages }" @click="modelValue++">
             <icon name="fa6-solid:chevron-right"/>
         </a>
