@@ -10,9 +10,14 @@
 <template>
     <div class="mb-popper">
         <slot></slot>
-        <div v-if="$slots.floating || plaintext" class="popper-outer" :class="`is-${direction}`">
-            <div class="popper-inner">
-                <span v-if="plaintext" class="popper-plain">{{ plaintext }}</span>
+        <div
+            v-if="$slots.floating || plaintext"
+            class="popper-outer"
+            :class="[`is-${direction}`, {
+                [`is-plain`]: plaintext
+            }]"
+            ><div class="popper-inner">
+                <template v-if="plaintext">{{ plaintext }}</template>
                 <slot v-else name="floating"></slot>
             </div>
         </div>
@@ -83,7 +88,7 @@
             }
         }
 
-        :hover > & {
+        :hover + &.is-plain, :hover > &:not(.is-plain) {
             opacity: 1;
             scale: 1;
             pointer-events: auto;
@@ -105,14 +110,13 @@
         border: 1px solid var(--color-border-lighter);
         border-radius: 12px;
         background-color: var(--color-background);
-    }
 
-    .popper-plain {
-        padding-inline: 6px;
-        font-size: 14px;
-        line-height: 20px;
-        text-wrap: nowrap;
-        color: var(--color-text-secondary);
-        user-select: none;
+        .is-plain > & {
+            padding-inline: 14px;
+            font-size: 14px;
+            line-height: 20px;
+            text-wrap: nowrap;
+            color: var(--color-text-secondary);
+        }
     }
 </style>
