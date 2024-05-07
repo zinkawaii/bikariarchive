@@ -6,7 +6,7 @@
     const collapse = computed(() => settingStore.get("ui-collapse"));
 
     onMounted(() => {
-        const items = [...document.querySelectorAll(".tool-item")].slice(0, -1);
+        const items = [...document.querySelectorAll(".z-toolbar > .mb-popper")].slice(0, -1);
 
         watchEffect(() => {
             const tl = gsap.timeline({
@@ -27,22 +27,32 @@
 
 <template>
     <div class="z-toolbar">
-        <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
-            <icon name="fa-solid:subway"/>
-        </nuxt-link>
-        <a class="tool-item" @click="settingStore.open()">
-            <icon name="fa6-solid:gear"/>
-        </a>
-        <a class="tool-item" @click="signerStore.toggle()">
-            <icon name="fa6-solid:user"/>
-        </a>
-        <a class="tool-item" href="#">
-            <span class="tool-progress"></span>
-            <icon class="tool-arrow-top" name="fa6-solid:arrow-up"/>
-        </a>
-        <a class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
-            <icon :name="`fa6-solid:chevron-${collapse ? `left` : `right`}`"/>
-        </a>
+        <mb-popper direction="left" plaintext="开往">
+            <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
+                <icon name="fa-solid:subway"/>
+            </nuxt-link>
+        </mb-popper>
+        <mb-popper direction="left" plaintext="设置">
+            <a class="tool-item" @click="settingStore.open()">
+                <icon name="fa6-solid:gear"/>
+            </a>
+        </mb-popper>
+        <mb-popper direction="left" plaintext="用户">
+            <a class="tool-item" @click="signerStore.toggle()">
+                <icon name="fa6-solid:user"/>
+            </a>
+        </mb-popper>
+        <mb-popper direction="left" plaintext="回到顶部">
+            <a class="tool-item" href="#">
+                <span class="tool-progress"></span>
+                <icon class="tool-arrow-top" name="fa6-solid:arrow-up"/>
+            </a>
+        </mb-popper>
+        <mb-popper direction="left" plaintext="收起">
+            <a class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
+                <icon :name="`fa6-solid:chevron-${collapse ? `left` : `right`}`"/>
+            </a>
+        </mb-popper>
     </div>
 </template>
 
