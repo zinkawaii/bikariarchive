@@ -37,7 +37,7 @@
                 <mb-button @click="logout">退出登录</mb-button>
             </div>
         </div>
-        <nuxt-link :to="toSpace"><nuxt-img class="sign-avatar" src="/garden/icon/default.png" alt="avatar"/></nuxt-link>
+        <nuxt-link :to="toSpace"><nuxt-img class="sign-avatar" src="/garden/icon/default.png" alt="[avatar]"/></nuxt-link>
     </div>
 </template>
 

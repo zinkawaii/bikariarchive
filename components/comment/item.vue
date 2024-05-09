@@ -41,7 +41,7 @@
 
 <template>
     <section class="comment-item">
-        <nuxt-img class="comment-avatar" :src="data.avatar" :alt="data.nickname" placeholder="/garden/icon/default.png"/>
+        <nuxt-img class="comment-avatar" :src="data.avatar" alt="[avatar]" placeholder="/garden/icon/default.png"/>
         <div class="comment-main">
             <div class="comment-header">
                 <nuxt-link class="comment-nickname" :to="data.address" target="_blank">{{ data.nickname }}</nuxt-link>

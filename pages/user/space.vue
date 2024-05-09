@@ -40,7 +40,7 @@
 
 <template>
     <div class="space-header">
-        <nuxt-img class="space-icon" src="/garden/icon/default.png" :alt="userStore.nickname"/>
+        <nuxt-img class="space-avatar" src="/garden/icon/default.png" alt="[avatar]"/>
         <div class="space-title">
             <span class="space-nickname">{{ userStore.nickname }}</span>
         </div>
@@ -75,7 +75,7 @@
         translate: 0 var(--s);
     }
 
-    .space-icon {
+    .space-avatar {
         grid-area: A;
         width: 64px;
         border: 3px solid rgb(255 255 255 / 50%);

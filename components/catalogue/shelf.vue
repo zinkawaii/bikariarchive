@@ -12,7 +12,7 @@
                     :class="{ checked: novel === key }"
                     @click="catalogueStore.selectNovel(key as string, i)"
                     ><div class="shelf-cover">
-                        <nuxt-img v-if="cover" :src="cover" :alt="title"/>
+                        <nuxt-img v-if="cover" :src="cover" alt="[cover]"/>
                         <div v-else class="shelf-placeholder">Cover.</div>
                     </div>
                     <span class="shelf-title">{{ title.split("-")[0] }}</span>

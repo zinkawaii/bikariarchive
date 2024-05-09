@@ -10,7 +10,7 @@
     <coco-widget title="情报">
         <div v-for="block in jEntry.blocks" class="detail-block">
             <div class="detail-header">
-                <nuxt-img class="detail-image" :src="block.icon" :alt="block.title"/>
+                <nuxt-img class="detail-icon" :src="block.icon" alt="[icon]"/>
                 <span>{{ block.title }}</span>
             </div>
             <coco-table class="detail-table">
@@ -60,7 +60,7 @@
         font-family: var(--font-smooth);
     }
 
-    .detail-image {
+    .detail-icon {
         width: 100px;
         height: 100px;
         border-radius: 100%;

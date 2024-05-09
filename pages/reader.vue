@@ -148,7 +148,7 @@
         <footer class="novel-footer">
             <p v-if="art.ending" class="novel-endding">THE END</p>
             <div class="novel-copyright">
-                <nuxt-img class="copyright-avatar" :src="$config.public.avatar" alt="avatar"/>
+                <nuxt-img class="copyright-avatar" :src="$config.public.avatar" alt="[avatar]"/>
                 <div class="right">
                     <div class="copyright-crumb">
                         <span>{{ art.novelInfo.title }}</span>
