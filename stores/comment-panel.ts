@@ -6,26 +6,20 @@ export const useCommentPanelStore = defineStore("comment-panel", {
         address: "",
         path: "",
         replyId: "",
-        replyName: "",
-        onReply: null
+        replyName: ""
     }),
     actions: {
         open({
             replyId = "",
-            replyName = "",
-            onReply = null
-        }) {
+            replyName = ""
+        } = {}) {
             this.isOpened = true;
             this.path = location.pathname;
             this.replyId = replyId;
             this.replyName = replyName;
-            this.onReply = onReply;
         },
-        close(success = false) {
+        close() {
             this.isOpened = false;
-            if (success && this.onReply) {
-                this.onReply();
-            }
         }
     },
     persist: {

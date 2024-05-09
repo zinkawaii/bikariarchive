@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+    const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
-    const toastStore = useToastStore();
 
     const { nickname, email, address } = storeToRefs(commentPanelStore);
     const maxLength = 512;
@@ -49,27 +49,21 @@
     });
 
     //发表评论
-    async function postComment() {
+    async function sendComment() {
         if (!checker.exec()) return;
 
         sending.value = true;
         try {
-            await $fetch("/api/comment", {
-                method: "post",
-                body: {
-                    path: commentPanelStore.path,
-                    parent: commentPanelStore.replyId,
-                    content: comment.value,
-                    nickname: nickname.value,
-                    email: email.value,
-                    address: address.value
-                }
+            await commentStore.send({
+                path: commentPanelStore.path,
+                parent: commentPanelStore.replyId,
+                content: comment.value,
+                nickname: nickname.value,
+                email: email.value,
+                address: address.value
             });
             comment.value = "";
-            commentPanelStore.close(true);
-        }
-        catch {
-            toastStore.error("comment-error", "评论发送失败");
+            commentPanelStore.close();
         }
         finally {
             sending.value = false;
@@ -102,7 +96,7 @@
             <mb-button
                 full round
                 :disabled="!comment.length || sending"
-                @click="postComment"
+                @click="sendComment"
                 ><icon name="fa6-solid:paper-plane"/>
                 <span>{{ sending ? "发送中……" : "发表评论" }}</span>
             </mb-button>

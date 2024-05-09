@@ -6,13 +6,10 @@
     const props = defineProps<{
         data: WithParent<CommentData>;
     }>();
-    const emit = defineEmits<{
-        update: [];
-    }>();
 
+    const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
     const confirmStore = useConfirmStore();
-    const toastStore = useToastStore();
     const userStore = useUserStore();
 
     //相对时间
@@ -29,29 +26,16 @@
     function replyComment() {
         commentPanelStore.open({
             replyId: props.data.id,
-            replyName: props.data.nickname,
-            onReply() {
-                emit("update");
-            }
+            replyName: props.data.nickname
         });
     }
 
     //删除评论
     async function removeComment() {
         if (!await confirmStore.show("是否删除这条评论？")) return;
-
-        try {
-            await $fetch("/api/comment", {
-                method: "delete",
-                body: {
-                    id: props.data.id
-                }
-            });
-            emit("update");
-        }
-        catch {
-            toastStore.error("comment-delete-error", "评论删除失败");
-        }
+        commentStore.remove({
+            id: props.data.id
+        });
     }
 </script>
 
@@ -74,7 +58,7 @@
             </div>
         </div>
         <div class="comment-reply">
-            <comment-item v-for="item in data.children" :key="item.id" :data="item" @update="$emit(`update`)"/>
+            <comment-item v-for="item in data.children" :key="item.id" :data="item"/>
         </div>
     </section>
 </template>
