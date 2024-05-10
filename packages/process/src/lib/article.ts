@@ -32,7 +32,7 @@ export default new Processor({
         if (attributes.draft && !isDev) return;
 
         //写入文件
-        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".txt");
+        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".html");
         fs.outputFileSync(outPath, content);
 
         const match = path.basename(path.resolve(filename, "..")).match(re);
@@ -103,9 +103,9 @@ export default new Processor({
 
 //日期格式化
 function formatDate(obj, keys) {
-    keys.forEach((key) => {
+    for (const key of keys) {
         if (Reflect.has(obj, key)) {
             obj[key] = dayjs(obj[key]).format("YYYY-MM-DD");
         }
-    });
+    }
 }
