@@ -3,55 +3,64 @@
         title: "歌词打轴"
     });
 
-    const state = ref({
-        //音频相关
-        src: "",
-        filename: "",
-        invalid: true,
-        playing: false,
-        duration: 0,
-        current: 0,
-        rate: 0,
-        dragging: false,
+    //文件名
+    const filename = ref("");
 
-        //打轴相关
-        axising: false
-    });
+    //是否有效
+    const invalid = ref(true);
 
-    const lyric = ref({
-        raw: "",
-        data: [],
-        current: 0
-    });
+    //当前时长
+    const currentTime = ref(0);
 
-    const $audio = ref();
+    //总时长
+    const duration = ref(0);
+
+    //播放进度
+    const progress = ref(0);
+
+    //是否正在播放
+    const [isPlaying, togglePlaying] = useToggle(false);
+
+    //是否正在拖动
+    const [isDragging, toggleDragging] = useToggle(false);
+
+    //是否正在打轴
+    const [isAxising, toggleAxising] = useToggle(false);
+
+    //纯文本
+    const raw = ref("");
+
+    //歌词列表
+    const lyrics = ref([]);
+
+    //当前歌词序号
+    const currentLyric = ref(0);
+
+    //音频对象
+    const $audio = import.meta.browser ? new Audio() : null;
 
     //音频可以播放
-    function audioCanplay() {
-        state.value.invalid = false;
-        state.value.duration = $audio.value.duration;
-    }
+    useEventListener($audio, "canplay", () => {
+        invalid.value = false;
+        duration.value = $audio.duration;
+    });
 
     //音频错误
-    function audioError() {
-        state.value.filename = "";
-    }
+    useEventListener($audio, "error", () => {
+        filename.value = "";
+    });
 
     //音频结束播放
-    function audioEnded() {
-        state.value.playing = false;
-    }
+    useEventListener($audio, "ended", () => {
+        togglePlaying(false);
+    });
 
     //音频播放时
-    function audioTimeupdate() {
-        if (!state.value.dragging) {
-            state.value.current = $audio.value.currentTime;
-
-            //进度条
-            const rate = state.value.current / state.value.duration;
-            state.value.rate = rate;
-        }
-    }
+    useEventListener($audio, "timeupdate", () => {
+        if (isDragging.value) return;
+        currentTime.value = $audio.currentTime;
+        progress.value = currentTime.value / duration.value;
+    });
 
     //上传
     function upload() {
@@ -65,61 +74,60 @@
         .then((handle) => handle[0].getFile())
         .then((file) => {
             //状态初始化
-            state.value.filename = file.name;
-            state.value.invalid = true;
-            state.value.playing = false;
-            state.value.duration = 0;
-            state.value.current = 0;
-            state.value.axising = false;
-            state.value.rate = 0;
+            filename.value = file.name;
+            invalid.value = true;
+            currentTime.value = 0;
+            duration.value = 0;
+            progress.value = 0;
+            isPlaying.value = false;
+            isAxising.value = false;
 
             //链接
-            URL.revokeObjectURL(state.value.src);
-            state.value.src = URL.createObjectURL(file);
+            URL.revokeObjectURL($audio.src);
+            $audio.src = URL.createObjectURL(file);
         });
     }
 
     //播放 & 暂停
-    function play() {
-        if (state.value.playing ^= 1) {
-            $audio.value.play();
+    watch(isPlaying, (val) => {
+        if (val) {
+            $audio.play();
         }
         else {
-            $audio.value.pause();
+            $audio.pause();
         }
-    }
+    });
 
     //进度正在改变时
-    function controlProgress(rate) {
-        if (!state.value.invalid) {
-            state.value.current = state.value.duration * rate;
+    function onControlProgress(rate) {
+        if (!invalid.value) {
+            currentTime.value = duration.value * rate;
         }
     }
 
     //进度改变时
-    function controlChange(rate) {
-        if (!state.value.invalid) {
-            $audio.value.currentTime = state.value.duration * rate;
+    function onControlChange(rate) {
+        if (!invalid.value) {
+            $audio.currentTime = duration.value * rate;
         }
         else {
             //音频无效，进度归零
-            state.value.rate = 0;
+            progress.value = 0;
         }
     }
 
     //导出
     function exporter() {
         const output = getCompileText();
-        Zin.download(output, "blob", `${state.value.filename}.lrc`);
+        Zin.download(output, {
+            filename: `${filename.value}.lrc`
+        });
     }
 
     //打轴
-    function axis() {
-        if (state.value.axising ^= 1) {
-            //清空数据
-            lyric.value.data.length = 0;
-
-            lyric.value.raw.split("\n").forEach((line, index) => {
+    watch(isAxising, (val) => {
+        if (val) {
+            lyrics.value = raw.value.split("\n").map((line) => {
                 let sign = false;
                 let time = 0;
                 let timed = "";
@@ -130,34 +138,32 @@
                     time = match[1] * 60 + match[2] * 1;
                     timed = match[0];
                 }
-
-                lyric.value.data.push({
-                    index,
+                return {
                     sign,
                     time,
                     timed,
                     content: line.replace(re, "") || "　"
-                });
+                };
             });
         }
         else {
             //复制歌词
-            lyric.value.raw = getCompileText();
+            raw.value = getCompileText();
 
             //初始化序号
-            lyric.value.current = 0;
+            currentLyric.value = 0;
         }
-    }
+    });
 
     //回退
     function undo() {
         const {
-            [lyric.value.current - 1]: last,
-            [lyric.value.current - 2]: target
-        } = lyric.value.data;
+            [currentLyric.value - 1]: last,
+            [currentLyric.value - 2]: target
+        } = lyrics.value;
 
         //回到两句前的时间点
-        $audio.value.currentTime = target?.time || 0;
+        $audio.currentTime = target?.time || 0;
 
         if (last) {
             last.sign = false;
@@ -165,14 +171,14 @@
             last.timed = "";
 
             //指向不存在的序号时不再减少
-            lyric.value.current--;
+            currentLyric.value--;
         }
     }
 
     //标记
     function sign() {
-        const time = state.value.current;
-        const current = lyric.value.data[lyric.value.current];
+        const time = currentTime.value;
+        const current = lyrics.value[currentLyric.value];
 
         if (current) {
             const m = time / 60;
@@ -188,19 +194,19 @@
             }]`;
 
             //指向不存在的序号时不再增加
-            lyric.value.current++;
+            currentLyric.value++;
         }
     }
 
     //获取打轴结果
     function getCompileText() {
-        return lyric.value.data.map((item) => {
+        return lyrics.value.map((item) => {
             return item.timed + item.content;
         }).join("\n");
     }
 
     //时间格式化
-    function timeFormat(time) {
+    function formatTime(time) {
         const m = time / 60;
         const s = time % 60;
         return `${String(Math.floor(m)).padStart(2, "0")}:${String(Math.floor(s)).padStart(2, "0")}`;
@@ -209,46 +215,39 @@
 
 <template>
     <div class="text-small">
-        <audio
-            ref="$audio"
-            :src="state.src"
-            @canplay="audioCanplay"
-            @error="audioError"
-            @ended="audioEnded"
-            @timeupdate="audioTimeupdate"
-        ></audio>
         <div class="lyric-operator">
             <mb-button @click="upload">上传</mb-button>
-            <mb-button :disabled="state.invalid" @click="play">{{ !state.invalid && state.playing ? "暂停" : "播放" }}</mb-button>
-            <mb-button :disabled="state.invalid" @click="exporter">导出</mb-button>
-            <mb-button :disabled="state.invalid" @click="axis">{{ state.axising ? "结束打轴" : "开始打轴" }}</mb-button>
+            <mb-button :disabled="invalid" @click="togglePlaying()">{{ !invalid && isPlaying ? "暂停" : "播放" }}</mb-button>
+            <mb-button :disabled="invalid" @click="exporter">导出</mb-button>
+            <mb-button :disabled="invalid" @click="toggleAxising()">{{ isAxising ? "结束打轴" : "开始打轴" }}</mb-button>
         </div>
         <div class="lyric-control">
-            <span class="lyric-time">{{ timeFormat(state.current) }}</span>
+            <span class="lyric-time">{{ formatTime(currentTime) }}</span>
             <mb-progress
                 class="lyric-progress"
-                :title="state.filename || `- 请上传歌曲 -`"
-                v-model="state.rate"
-                @progress="controlProgress"
-                @change="controlChange"
-                @dragstart="state.dragging = true"
-                @dragend="state.dragging = false"
+                :title="filename || `- 请上传歌曲 -`"
+                v-model="progress"
+                @progress="onControlProgress"
+                @change="onControlChange"
+                @dragstart="toggleDragging(true)"
+                @dragend="toggleDragging(false)"
             />
-            <span class="lyric-time">{{ timeFormat(state.duration) }}</span>
+            <span class="lyric-time">{{ formatTime(duration) }}</span>
         </div>
     </div>
     <div class="lyric-main">
-        <textarea class="lyric-textarea lyric-editor" placeholder="在这里输入歌词……" v-model="lyric.raw"></textarea>
-        <div class="lyric-textarea lyric-compile" :class="{ show: state.axising }">
+        <textarea class="lyric-textarea lyric-editor" placeholder="在这里输入歌词……" v-model="raw"></textarea>
+        <div v-show="isAxising" class="lyric-textarea lyric-compile">
             <article>
                 <p
-                    v-for="item in lyric.data"
-                    :key="item.index"
+                    v-for="item, i in lyrics"
+                    :key="i"
+                    class="lyric-item"
                     :class="{
-                        light: lyric.current === item.index,
+                        light: currentLyric === i,
                         sign: item.sign
                     }"
-                    @click="lyric.current = item.index"
+                    @click="currentLyric = i"
                    ><time>{{ item.timed }}</time>
                     <span>{{ item.content }}</span>
                 </p>
@@ -309,33 +308,28 @@
     }
 
     .lyric-compile {
-        display: none;
         position: absolute;
         overflow: auto;
         inset: 0;
+    }
 
-        p {
-            margin-inline: -8px;
-            padding-inline: 8px;
-            border-radius: 8px;
-            line-height: 24px;
-            user-select: none;
+    .lyric-item {
+        margin-inline: -8px;
+        padding-inline: 8px;
+        border-radius: 8px;
+        line-height: 24px;
+        user-select: none;
 
-            &.sign {
-                color: var(--color-text-info);
-            }
-
-            &.light {
-                color: var(--color-theme-text);
-            }
-
-            &:hover {
-                background-color: var(--color-info-light-8);
-            }
+        &.sign {
+            color: var(--color-text-info);
         }
 
-        &.show {
-            display: block;
+        &.light {
+            color: var(--color-theme-text);
+        }
+
+        &:hover {
+            background-color: var(--color-info-light-8);
         }
     }
 

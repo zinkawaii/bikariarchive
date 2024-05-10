@@ -54,18 +54,18 @@ const Zin = new class Z {
     }
 
     //从字符串或对象下载文本文件
-    download(data, type, filename) {
-        let blob;
-        if (type === "blob") {
-            blob = new Blob([data], {
-                type: "text/plain;charset=utf-8"
-            });
+    download(data: any, {
+        type = "",
+        filename = ""
+    } = {}) {
+        let mime = "text/plain";
+        switch (type) {
+            case "json":
+                data = JSON.stringify(data);
+                mime = "application/json";
+                break;
         }
-        else if (type === "json") {
-            blob = new Blob([JSON.stringify(data)], {
-                type: "application/json"
-            });
-        }
+        const blob = new Blob([data], { type: mime });
 
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
