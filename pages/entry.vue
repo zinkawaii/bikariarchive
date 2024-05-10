@@ -4,30 +4,23 @@
     import jEntry from "~/dist/json/Entry.json";
 
     const route = useRoute();
+    const { title } = route.params;
+    const isExist = jEntry.all.includes(title);
+
+    useHead({
+        title
+    });
+
     const components = {
         "known-ability": EntryKnownAbility
     };
 
-    const { title } = route.params;
-    const isExist = ref(false);
-    let data = null;
-
-    if (jEntry.all.includes(title)) {
-        //获取数据
-        ({ data } = await useFetch("/api/entry", {
-            query: {
-                title
-            }
-        }));
-
-        if (!data.value.error) {
-            //设置标题
-            useHead({ title });
-
-            //词条存在
-            isExist.value = true;
-        }
-    }
+    const { data } = await useFetch("/api/entry", {
+        query: {
+            title
+        },
+        immediate: isExist
+    });
 </script>
 
 <template>
@@ -105,7 +98,7 @@
             </section>
         </article>
     </coco-widget>
-    <Unknown v-else />
+    <Unknown v-else/>
 </template>
 
 <style lang="scss" scoped>
