@@ -92,7 +92,7 @@
             verifyStage.value.stage = 2;
             verifyStage.value.delay = max + 1;
 
-            Zin.setInterval(() => {
+            Zin.interval(() => {
                 verifyStage.value.delay--;
             }, {
                 duration: 1000,

@@ -10,7 +10,7 @@
     //隐藏评论区
     route.meta.comment = false;
 
-    Zin.setInterval(() => {
+    Zin.interval(() => {
         time.value--;
     }, {
         duration: 1000,

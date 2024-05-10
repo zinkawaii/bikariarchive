@@ -10,7 +10,7 @@
     const toastStore = useToastStore();
 
     onMounted(async () => {
-        await Zin.setTimeout(5000);
+        await Zin.delay(5000);
         remove();
     });
 

@@ -53,6 +53,13 @@ const Zin = new class Z {
         }
     }
 
+    //延时执行函数
+    delay(duration: number) {
+        return new Promise<void>((resolve) => {
+            setTimeout(resolve, duration);
+        });
+    }
+
     //从字符串或对象下载文本文件
     download(data: any, {
         type = "",
@@ -76,20 +83,8 @@ const Zin = new class Z {
         URL.revokeObjectURL(url);
     }
 
-    //生成随机整数
-    randInt(from: number, to: number) {
-        return Math.floor(Math.random() * (to - from + 1) + from);
-    }
-
-    //延时执行函数
-    setTimeout(duration: number) {
-        return new Promise<void>((resolve) => {
-            setTimeout(resolve, duration);
-        });
-    }
-
     //按照一定时间和次数循环执行函数
-    setInterval(func: (time: number) => void, {
+    interval(func: (time: number) => void, {
         duration = 1000,
         times = -1
     } = {}) {
@@ -115,6 +110,11 @@ const Zin = new class Z {
                 reject(err);
             }
         });
+    }
+
+    //生成随机整数
+    randInt(from: number, to: number) {
+        return Math.floor(Math.random() * (to - from + 1) + from);
     }
 
     //节流

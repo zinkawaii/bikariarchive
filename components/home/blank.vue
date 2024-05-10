@@ -15,7 +15,7 @@
 
     //每7秒随机显示
     onMounted(() => {
-        Zin.setInterval(() => {
+        Zin.interval(() => {
             i.value = Zin.randInt(0, serifs.length - 1);
         }, {
             duration: 7000

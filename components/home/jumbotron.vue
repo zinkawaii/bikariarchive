@@ -11,17 +11,17 @@
     const isJumping = ref(false);
 
     //标题动效
-    Zin.setTimeout(duration + titleDelay)
+    Zin.delay(duration + titleDelay)
     .then(async () => {
         isJumping.value = true;
-        await Zin.setInterval((i) => {
+        await Zin.interval((i) => {
             const char = summary[i];
             summaryChars.value.push(char);
         }, {
             duration: summaryDelay,
             times: summary.length
         });
-        await Zin.setTimeout(duration);
+        await Zin.delay(duration);
         isCrossing.value = false;
         isJumping.value = false;
     });
