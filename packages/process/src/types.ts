@@ -37,3 +37,54 @@ export interface ArticleFrontMatter {
     password?: string;
     runtime?: boolean;
 }
+
+export interface jEntry {
+    title: string;
+    summary?: string;
+    info?: Record<string, string>[];
+    illustration?: EntryIllustration[];
+    talent?: EntryTalent[];
+    relationship?: EntryRelationship[];
+    details?: EntryDetail[];
+}
+
+export interface EntryIllustration {
+    title: string;
+    src: string;
+    illustrator: string;
+}
+
+export enum EntryTalentType {
+    NOURYOKU = "超能力",
+    TAISHITSU = "体质",
+    GANBOU = "愿望"
+}
+
+export type EntryTalent = {
+    content: string;
+} & ({
+    type: EntryTalentType.NOURYOKU;
+    name: {
+        zh: string;
+        jp: string;
+        en: string;
+    };
+    star: number;
+    class: string[];
+} | {
+    type: Exclude<EntryTalentType, EntryTalentType.NOURYOKU>;
+    name: string;
+});
+
+export interface EntryRelationship {
+    name: string;
+    relation: string;
+    content: string;
+}
+
+export interface EntryDetail {
+    title: string;
+    component?: string;
+    attrs?: Record<string, any>;
+    content?: string;
+}
