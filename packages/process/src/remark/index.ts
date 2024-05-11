@@ -42,6 +42,9 @@ export async function parseArticle<T>(text: string) {
         .use(externalLinks, externalOptions)
         .use(stringify);
 
+    //文本预处理
+    text = text.replaceAll(/(?<=\n)<br(\s*)\/?>/g, "<p><br /></p>\n");
+
     const result = await processor.process(text);
     return {
         attributes: result.data as T,
