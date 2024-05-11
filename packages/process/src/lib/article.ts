@@ -32,7 +32,7 @@ export default new Processor({
         if (attributes.draft && !isDev) return;
 
         //写入文件
-        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".html");
+        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".txt");
         fs.outputFileSync(outPath, content);
 
         const match = path.basename(path.resolve(filename, "..")).match(re);
