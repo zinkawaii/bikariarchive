@@ -1,5 +1,4 @@
 <script setup>
-    import { EntryTalentType } from "@bikari/process";
     import Unknown from "./unknown.vue";
     import { EntryKnownAbility } from "#components";
     import jEntry from "~/dist/json/Entry.json";
@@ -59,7 +58,7 @@
                     <template v-if="data.talent?.length > 0">
                         <div v-for="item in data.talent">
                             <div class="talent-header">
-                                <template v-if="item.type === EntryTalentType.NOURYOKU">
+                                <template v-if="item.type === `超能力`">
                                     <h3>{{ item.name.zh }}</h3>
                                     <nuxt-link
                                         v-for="cls in item.class"
