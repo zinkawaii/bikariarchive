@@ -1,19 +1,15 @@
 import type { H3Event } from "h3";
 import { Feed } from "feed";
-import { jArticle } from "~/utils/Article";
+import { Article } from "~/utils/Article";
 
-const config = useRuntimeConfig();
+export default defineEventHandler(async (event: H3Event) => {
+    setHeaders(event, {
+        "content-type": "application/xml",
+        "cache-control": 60 * 15
+    });
 
-export default defineNitroPlugin((nitroApp) => {
-    nitroApp.router.get("/feed", defineEventHandler((event: H3Event) => {
-        setHeader(event, "content-type", "application/xml");
-        setHeader(event, "cache-control", 60 * 15);
-        const feed = createFeed();
-        return feed.atom1();
-    }));
-});
+    const config = useRuntimeConfig();
 
-function createFeed() {
     const feed = new Feed({
         id: "BikariArchive",
         title: "BikariArchive",
@@ -24,7 +20,7 @@ function createFeed() {
         }
     });
 
-    Object.values(jArticle)
+    Object.values(Article.meta)
     .flatMap(({ chapters }) => chapters)
     .filter((c) => c.date)
     .sort((a, b) => {
@@ -42,5 +38,5 @@ function createFeed() {
         });
     });
 
-    return feed;
-}
+    return feed.atom1();
+});
