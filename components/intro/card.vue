@@ -31,7 +31,7 @@
 
 <template>
     <div class="content-table intro-card" :layer @click="exchange">
-        <h2 class="content-h2">{{ jArticle[novel].title }}</h2>
+        <h2 class="content-h2">{{ Article.meta[novel].title }}</h2>
         <intro-content :novel/>
         <div class="intro-record">
             <span>&gt;</span>

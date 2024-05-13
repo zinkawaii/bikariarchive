@@ -5,14 +5,14 @@
 
     //简介
     const synopsis = computed(() => {
-        return jArticle[props.novel].synopsis.split("\n");
+        return Article.meta[props.novel].synopsis.split("\n");
     });
 </script>
 
 <template>
     <div class="intro-content">
         <ul class="intro-tag">
-            <li v-for="tag in jArticle[novel].tag">{{ tag }}</li>
+            <li v-for="tag in Article.meta[novel].tag">{{ tag }}</li>
         </ul>
         <div class="intro-synopsis">
             <p v-for="line in synopsis" class="p-small">{{ line }}</p>

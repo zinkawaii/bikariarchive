@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     const intro = ref({
         status: 0,
-        novel: Object.keys(jArticle),
+        novel: Object.keys(Article.meta),
         layer: ["outer", "inner"],
         translate: []
     });

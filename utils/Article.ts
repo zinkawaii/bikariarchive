@@ -1,9 +1,7 @@
-import type { JArticle, JChapter } from "@bikari/process";
-import ArticleJson from "~/dist/json/Article.json";
+import type { JArticle, JArtmap, JChapter } from "@bikari/process";
+import jArticle from "~/dist/json/Article.json";
 
-const jArticle: JArticle<Article> = ArticleJson as any;
-
-class Article implements JChapter {
+export class Article implements JChapter {
     novel = "";        //小说名
     volume = -1;       //卷序号
     order = -1;        //章序号
@@ -20,7 +18,7 @@ class Article implements JChapter {
     wordCount = 0;     //字数
 
     private constructor(novel: string, order: number) {
-        const jNovel = jArticle[novel];
+        const jNovel = Article.meta[novel];
 
         //转置类型
         const jChapters = jNovel.chapters as JChapter[];
@@ -56,7 +54,7 @@ class Article implements JChapter {
     }
 
     get novelInfo() {
-        return jArticle[this.novel];
+        return Article.meta[this.novel];
     }
 
     get volumeInfo() {
@@ -89,9 +87,11 @@ class Article implements JChapter {
 
     static FARAWAY = "很久以前";
 
+    static meta: JArticle<Article>;
+
     //根据参数获取章节单例
     static for(novel: string, index: string) {
-        const jNovel = jArticle[novel];
+        const jNovel = this.meta[novel];
         if (!jNovel) {
             throw new Error("[novel] is invalid.");
         }
@@ -106,17 +106,12 @@ class Article implements JChapter {
     }
 }
 
-//类化章节项
-for (const novel in jArticle) {
-    const jNovel = jArticle[novel];
+//将元数据引用注入原型
+Article.meta = jArticle as any;
 
+//类化章节项
+for (const [novel, jNovel] of Object.entries(Article.meta)) {
     jNovel.chapters = jNovel.chapters.map((item) => {
         return Article.for(novel, item.index);
     });
 }
-
-export default Article;
-export {
-    Article,
-    jArticle
-};

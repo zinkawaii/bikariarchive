@@ -1,5 +1,5 @@
 import type { JNovel, JVolume } from "@bikari/process";
-import type Article from "~/utils/Article";
+import { Article } from "~/utils/Article";
 
 export const useCatalogueStore = defineStore("catalogue", {
     state: () => ({
@@ -12,7 +12,7 @@ export const useCatalogueStore = defineStore("catalogue", {
     }),
     getters: {
         jNovel(): JNovel<Article> {
-            return jArticle[this.novel];
+            return Article.meta[this.novel];
         },
         jVolume(): JVolume {
             return this.jNovel.volumes[this.curOrder.volume];

@@ -1,6 +1,6 @@
 import $ from "node-html-parser";
 import dayjs from "dayjs";
-import { jArticle } from "~/utils/Article";
+import { Article } from "~/utils/Article";
 import type { GetSearchResponse } from "~/server/types/api/search";
 
 export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
@@ -14,7 +14,7 @@ export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
     //限制长度
     word = word.slice(0, 64);
 
-    const jNovel = jArticle.bikari;
+    const jNovel = Article.meta.bikari;
     const jChapters = jNovel.chapters;
 
     //按章节遍历

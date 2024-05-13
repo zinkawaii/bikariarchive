@@ -6,7 +6,7 @@
 <template>
     <div class="catalogue-shelf">
         <ul class="shelf-wrapper" :style="{ translate: `${curOrder.novel * -144}px` }">
-            <li v-for="({ title, cover }, key, i) in jArticle">
+            <li v-for="({ title, cover }, key, i) in Article.meta">
                 <a
                     class="shelf-novel"
                     :class="{ checked: novel === key }"

@@ -38,6 +38,15 @@ export interface ArticleFrontMatter {
     runtime?: boolean;
 }
 
+export interface JArtmap {
+    [novel: string]: {
+        [index: string]: {
+            name: string;
+            password: string;
+        };
+    };
+}
+
 export interface jEntry {
     title: string;
     summary?: string;

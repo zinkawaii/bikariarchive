@@ -11,7 +11,7 @@
     });
 
     const jRecent = computed(() => {
-        return Object.values(jArticle)
+        return Object.values(Article.meta)
             .filter(({ type }) => type === props.type)
             .flatMap(({ chapters }) => chapters)
             .sort((a, b) => {
@@ -28,7 +28,7 @@
         <li v-for="{ title, date, updated, volume, novel, route } in jRecent" class="recent-item">
             <plain-link class="text-truncate recent-title" :to="route">{{ title }}</plain-link>
             <div class="recent-info">
-                <span class="text-truncate">{{ jArticle[novel].volumes[volume].title }}</span>
+                <span class="text-truncate">{{ Article.meta[novel].volumes[volume].title }}</span>
                 <time>{{ sortByUpdated && updated || date }}</time>
             </div>
         </li>

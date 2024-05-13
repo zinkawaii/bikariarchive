@@ -18,7 +18,7 @@
 
     //当前小说
     const jNovel = computed(() => {
-        return jArticle[art.value.novel];
+        return Article.meta[art.value.novel];
     });
 
     //本卷章节
