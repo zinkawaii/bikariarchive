@@ -11,6 +11,7 @@ declare module "vue-router" {
     interface RouteMeta {
         breadcrumb?: RouteLocationRaw;
         comment?: boolean;
+        widePage?: boolean;
         fullPage?: boolean;
         identity?: number;
     }

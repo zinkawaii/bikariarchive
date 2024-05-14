@@ -6,8 +6,13 @@
     <z-header />
     <z-navbar />
     <z-toolbar />
-    <div class="sotomi" :class="[{ [`full-page`]: $route.meta.fullPage }]">
-        <main class="nakami">
+    <div
+        class="sotomi"
+        :class="{
+            [`wide-page`]: $route.meta.widePage,
+            [`full-page`]: $route.meta.fullPage
+        }"
+        ><main class="nakami">
             <slot></slot>
             <comment-area v-if="$route.meta.comment"/>
             <z-footer />
@@ -33,6 +38,16 @@
         gap: 24px;
         min-width: var(--size-min-width);
         padding: var(--sotomi-padding, 32px);
+    }
+
+    .wide-page {
+        .nakami {
+            max-width: 1308px;
+        }
+
+        .z-sidebar {
+            display: none;
+        }
     }
 
     .full-page {
