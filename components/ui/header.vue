@@ -28,6 +28,11 @@
                     to: { name: "borrowing" }
                 },
                 {
+                    title: "番剧",
+                    icon: "fa6-brands:bilibili",
+                    to: { name: "bangumi" }
+                },
+                {
                     title: "神殿",
                     icon: "fa6-solid:torii-gate",
                     to: { name: "chanrina" }

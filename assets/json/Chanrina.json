@@ -37,7 +37,7 @@
       },
       "special": [],
       "bangumi": "食梦者玛利",
-      "date": "2011-01-07"
+      "date": "2011-01-06"
     },
     {
       "name": {
@@ -69,7 +69,7 @@
       "special": [],
       "link": "https://www.inuboku.tv/character/chara_ririchiyo.html",
       "bangumi": "妖狐×仆SS",
-      "date": "2012-01-13"
+      "date": "2012-01-12"
     },
     {
       "name": {
@@ -80,7 +80,7 @@
       "special": [],
       "link": "http://www.accel-world.net/character.php",
       "bangumi": "加速世界",
-      "date": "2012-04-07"
+      "date": "2012-04-06"
     },
     {
       "name": {
@@ -91,7 +91,7 @@
       "special": [],
       "link": "https://www.tbs.co.jp/anime/nakaimo/chara/",
       "bangumi": "三人行必有我妹",
-      "date": "2012-07-06"
+      "date": "2012-07-05"
     },
     {
       "name": {
@@ -132,16 +132,6 @@
     },
     {
       "name": {
-        "zh": "樱/拉普拉斯魔",
-        "jp": "桜",
-        "en": "Sakura"
-      },
-      "special": [],
-      "bangumi": "如果折断她的旗",
-      "date": "2013-04-06"
-    },
-    {
-      "name": {
         "zh": "晓凪沙",
         "jp": "暁 凪沙",
         "en": "Akatsuki Nagisa"
@@ -166,6 +156,16 @@
     },
     {
       "name": {
+        "zh": "樱/拉普拉斯魔",
+        "jp": "桜",
+        "en": "Sakura"
+      },
+      "special": [],
+      "bangumi": "如果折断她的旗",
+      "date": "2014-04-06"
+    },
+    {
+      "name": {
         "zh": "蓝原延珠",
         "jp": "藍原 延珠",
         "en": "Aihara Enju"
@@ -184,7 +184,7 @@
       "special": [],
       "link": "https://movie.trinity-7.com/ea/profile/#lilim",
       "bangumi": "Trinity Seven 魔道书7使者",
-      "date": "2014-10-08"
+      "date": "2014-10-07"
     },
     {
       "name": {
@@ -319,7 +319,7 @@
       },
       "special": [],
       "link": "https://you-zitsu.com/1st/character/",
-      "bangumi": "欢迎来到实力至上主义的教室",
+      "bangumi": "欢迎来到实力至上主义教室",
       "date": "2017-07-12"
     },
     {
@@ -330,7 +330,7 @@
       },
       "special": [],
       "link": "https://www.ryuoh-anime.com/chara/02ai.html",
-      "bangumi": "龙王的工作",
+      "bangumi": "龙王的工作！",
       "date": "2018-01-08"
     },
     {
@@ -390,7 +390,7 @@
       "special": [],
       "link": "http://shieldhero-anime.jp/#Char",
       "bangumi": "盾之勇者成名录",
-      "date": "2019-01-02"
+      "date": "2019-01-09"
     },
     {
       "name": {
@@ -402,7 +402,7 @@
         "女王"
       ],
       "link": "https://hensuki.com/character/",
-      "bangumi": "只要长得可爱，即使是变态你也喜欢吗",
+      "bangumi": "只要长得可爱，即使是变态你也喜欢吗？",
       "date": "2019-07-08"
     },
     {
@@ -424,7 +424,7 @@
       },
       "special": [],
       "link": "http://choyoyu.com/character/",
-      "bangumi": "超人高中生即便在异世界也能从容生存！",
+      "bangumi": "超人高中生们即便在异世界也能从容生存！",
       "date": "2019-10-03"
     },
     {
@@ -514,7 +514,7 @@
       },
       "special": [],
       "link": "https://shachikusan.com/character/",
-      "bangumi": "社畜小姐想被幽灵幼女治愈",
+      "bangumi": "社畜小姐想被幽灵幼女治愈。",
       "date": "2022-04-07"
     },
     {
@@ -525,7 +525,7 @@
       },
       "special": [],
       "link": "https://shikimori-anime.com/character/hachimitsu.html",
-      "bangumi": "我家女友可不止可爱呢",
+      "bangumi": "式守同学不只可爱而已",
       "date": "2022-04-09"
     },
     {
@@ -549,7 +549,7 @@
       },
       "special": [],
       "link": "https://shadow-garden.jp/character/#chara9_claire",
-      "bangumi": "想要成为影之实力者",
+      "bangumi": "想要成为影之实力者！",
       "date": "2022-10-05"
     },
     {

@@ -11,6 +11,14 @@ export default <RouterConfig> {
             }
         },
         {
+            name: "bangumi",
+            path: "/bangumi",
+            component: () => import("~/pages/bangumi.vue"),
+            meta: {
+                widePage: true
+            }
+        },
+        {
             name: "borrowing",
             path: "/borrowing",
             component: () => import("~/pages/borrowing.vue")
