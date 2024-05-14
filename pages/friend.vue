@@ -1,9 +1,9 @@
 <script setup>
-    const config = useRuntimeConfig();
-
     useHead({
         title: "友情链接"
     });
+
+    const config = useRuntimeConfig();
 
     const { pending, data } = useLazyFetch("/api/friend");
 

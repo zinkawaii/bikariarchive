@@ -140,14 +140,14 @@
         let kill = 0;
         for (let t = 0; t < state.value.times; t++) {
             let hp = 0;
-            state.value.buki.forEach((buki) => {
+            for (const buki of state.value.buki) {
                 for (let i = 0; i < buki.hit; i++) {
                     //命中
                     if (isRateEffect(buki.accuracy_rate) === false) continue;
                     //暴击
                     hp += buki.damage * (isRateEffect(buki.crit_rate) ? (buki.crit_damage / 100) : 1);
                 }
-            });
+            }
             if (hp >= state.value.health) {
                 kill++;
             }

@@ -56,7 +56,7 @@
                 <section class="entry-section">
                     <h2>能力</h2>
                     <template v-if="data.talent?.length > 0">
-                        <div v-for="item in data.talent">
+                        <template v-for="item in data.talent">
                             <div class="talent-header">
                                 <template v-if="item.type === `超能力`">
                                     <h3>{{ item.name.zh }}</h3>
@@ -76,7 +76,7 @@
                                 </template>
                             </div>
                             <div class="entry-text" v-html="item.content"></div>
-                        </div>
+                        </template>
                     </template>
                     <p v-else>未知。</p>
                 </section>
@@ -87,7 +87,7 @@
                             <h3><character-tag :name="item.name"/></h3>
                             <span class="relation-ship">：{{ item.relation }}</span>
                         </div>
-                        <p>{{ item.description }}</p>
+                        <div class="entry-text" v-html="item.content"></div>
                     </div>
                 </section>
             </template>
@@ -145,7 +145,7 @@
         }
 
         h3 {
-            margin: 8px 0 0 12px;
+            margin: 8px 0 4px 12px;
             line-height: 26px;
 
             &::before {

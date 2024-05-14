@@ -12,7 +12,6 @@ export default defineNuxtPlugin(() => {
         {
             name: "rotate",
             effect(targets, config) {
-                console.log(config);
                 return gsap.to(targets, config);
             },
             defaults: {

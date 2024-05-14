@@ -7,7 +7,7 @@
         warn?: boolean;
         warnTip?: string;
     }>();
-    const modelValue = defineModel();
+    const modelValue = defineModel<string>();
 </script>
 
 <template>

@@ -60,16 +60,15 @@
     });
 
     //生成
-    function generate() {
+    async function generate() {
         //从静态资源服务器读取数据，防止打包文件过大
         if (!isJnmLoaded.value) {
             isJnmLoading.value = true;
-            return $fetch("/json/Jnm.json").then((data) => {
-                Jnm = data;
-                isJnmLoaded.value = true;
-                isJnmLoading.value = false;
-                toastStore.success("jnm-loaded", "数据集已加载");
-            });
+            Jnm = await $fetch("/json/Jnm.json");
+            isJnmLoading.value = false;
+            isJnmLoaded.value = true;
+            toastStore.success("jnm-loaded", "数据集已加载");
+            return;
         }
 
         //清空结果
