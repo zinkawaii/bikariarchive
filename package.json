@@ -57,6 +57,7 @@
     "cn-font-split": "^4.11.3",
     "consola": "^3.2.3",
     "cross-env": "^7.0.3",
+    "defu": "^6.1.4",
     "dot-prop": "^9.0.0",
     "eslint": "^9.2.0",
     "feed": "^4.2.2",

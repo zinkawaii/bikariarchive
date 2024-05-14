@@ -1,4 +1,4 @@
-import merge from "merge";
+import defu from "defu";
 
 const server = {
     global: {
@@ -59,5 +59,5 @@ const client = {
 };
 
 const env = import.meta.env.NODE_ENV;
-export const serverConfig = merge.recursive(server.global, server[env]);
-export const clientConfig = merge.recursive(client.global, client[env]);
+export const serverConfig = defu(server.global, server[env]);
+export const clientConfig = defu(client.global, client[env]);

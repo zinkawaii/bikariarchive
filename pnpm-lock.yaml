@@ -114,6 +114,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
       dot-prop:
         specifier: ^9.0.0
         version: 9.0.0
