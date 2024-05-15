@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import jArtmap from "~/dist/json/Article.json";
 import { Article } from "~/utils/Article";
 import type { GetArticleResponse } from "~/server/types/api/article";
 
@@ -10,7 +9,7 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     const art = Article.for(novel, index);
 
     //验证密码
-    if (art.encrypted && password !== jArtmap[novel][index].password) {
+    if (art.encrypted && password !== Article.map[novel][index].password) {
         return 1;
     }
 

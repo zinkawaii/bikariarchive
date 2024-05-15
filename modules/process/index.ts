@@ -1,4 +1,4 @@
-import { defineNuxtModule } from "nuxt/kit";
+import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 import { article, entry } from "@bikari/process";
 
 export default defineNuxtModule({
@@ -6,6 +6,14 @@ export default defineNuxtModule({
         name: "@bikari/process"
     },
     async setup(options, nuxt) {
+        const { resolve } = createResolver(import.meta.url);
+
+        addPlugin({
+            src: resolve("runtime/client")
+        });
+
+        addServerPlugin(resolve("runtime/server"));
+
         await article.build();
         await entry.build();
 

@@ -1,5 +1,4 @@
 import type { JArticle, JArtmap, JChapter } from "@bikari/process";
-import jArticle from "~/dist/json/Article.json";
 
 export class Article implements JChapter {
     novel = "";        //小说名
@@ -88,6 +87,7 @@ export class Article implements JChapter {
     static FARAWAY = "很久以前";
 
     static meta: JArticle<Article>;
+    static map: JArtmap;
 
     //根据参数获取章节单例
     static for(novel: string, index: string) {
@@ -106,12 +106,14 @@ export class Article implements JChapter {
     }
 }
 
-//将元数据引用注入原型
-Article.meta = jArticle as any;
+export function enrichJArticle(original: any) {
+    //将元数据引用注入原型
+    Article.meta = original;
 
-//类化章节项
-for (const [novel, jNovel] of Object.entries(Article.meta)) {
-    jNovel.chapters = jNovel.chapters.map((item) => {
-        return Article.for(novel, item.index);
-    });
+    //类化章节项
+    for (const [novel, jNovel] of Object.entries(Article.meta)) {
+        jNovel.chapters = jNovel.chapters.map((item) => {
+            return Article.for(novel, item.index);
+        });
+    }
 }
