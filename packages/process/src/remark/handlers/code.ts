@@ -1,4 +1,3 @@
-import { encode } from "html-entities";
 import type { Handler } from "mdast-util-to-hast";
 import type { Element } from "hast";
 
@@ -8,7 +7,7 @@ export default <Handler> function(state, node) {
         tagName: "mb-code",
         properties: {
             lang: node.lang,
-            raw: encode(node.value)
+            raw: node.value
         },
         children: []
     };
