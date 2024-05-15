@@ -26,3 +26,4 @@ logs
 temp
 backup
 bikari.tgz
+scripts/*.local.js
