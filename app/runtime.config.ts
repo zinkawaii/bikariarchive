@@ -59,5 +59,5 @@ const client = {
 };
 
 const env = import.meta.env.NODE_ENV;
-export const serverConfig = defu(server.global, server[env]);
-export const clientConfig = defu(client.global, client[env]);
+export const serverConfig = defu(server[env], server.global);
+export const clientConfig = defu(client[env], client.global);
