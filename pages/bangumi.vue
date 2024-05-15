@@ -20,7 +20,7 @@
         <div class="bangumi-list">
             <bangumi-item v-for="data in displayBangumis" :key="data.id" v-bind="data"/>
         </div>
-        <mb-pagination :total="jBangumi.length" :sizes scroll-target="body" shortkey v-model="page"/>
+        <mb-pagination :total="jBangumi.length" :sizes scroll-target="body" v-model="page"/>
     </coco-widget>
 </template>
 
