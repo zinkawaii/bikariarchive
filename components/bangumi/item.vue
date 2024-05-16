@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-    defineProps<{
-        id: number;
-        title: Record<string, string>;
-        cover: string;
-        date: string;
-    }>();
+    import type { BangumiData } from "~/server/types/api/bangumi";
+
+    defineProps<BangumiData>();
 </script>
 
 <template>
