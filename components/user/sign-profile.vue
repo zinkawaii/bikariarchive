@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     const route = useRoute();
+    const router = useRouter();
     const toastStore = useToastStore();
     const userStore = useUserStore();
 
@@ -20,7 +21,7 @@
 
             userStore.reset();
             if (route.meta.identity > 0) {
-                navigateTo({ name: "home" });
+                router.push({ name: "home" });
             }
         }
         catch {

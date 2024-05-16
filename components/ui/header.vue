@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     const route = useRoute();
+    const router = useRouter();
     const word = ref("");
 
     const navList = [
@@ -80,7 +81,7 @@
     });
 
     function search() {
-        navigateTo(toSearch(word.value));
+        router.push(toSearch(word.value));
         word.value = "";
     }
 </script>
