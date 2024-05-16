@@ -177,66 +177,68 @@
 </script>
 
 <template>
-    <div class="p-small">
-        <div class="namae-option">
-            <span>介绍</span>
-            <p class="p-small">本页面用于生成日文名，数据集与随机算法均来自 <plain-link to="https://namaemaker.net" target="_blank">namaemaker.net</plain-link></p>
-        </div>
-        <div class="namae-option">
-            <span>数量</span>
-            <div class="namae-radio">
-                <mb-radio
-                    v-for="item in counter.list"
-                    :value="item"
-                    v-model="counter.current"
-                >{{ item }}</mb-radio>
+    <coco-widget>
+        <div class="p-small">
+            <div class="namae-option">
+                <span>介绍</span>
+                <p class="p-small">本页面用于生成日文名，数据集与随机算法均来自 <plain-link to="https://namaemaker.net" target="_blank">namaemaker.net</plain-link></p>
+            </div>
+            <div class="namae-option">
+                <span>数量</span>
+                <div class="namae-radio">
+                    <mb-radio
+                        v-for="item in counter.list"
+                        :value="item"
+                        v-model="counter.current"
+                    >{{ item }}</mb-radio>
+                </div>
+            </div>
+            <div class="namae-option">
+                <span>性别</span>
+                <div class="namae-radio">
+                    <mb-radio
+                        v-for="item in gender.list"
+                        :value="item.value"
+                        v-model="gender.current"
+                    >{{ item.title }}</mb-radio>
+                </div>
+            </div>
+            <div class="namae-option">
+                <span>指定</span>
+                <div class="namae-specific">
+                    <input type="text" placeholder="姓" v-model="specific.last.kanji"/>
+                    <input type="text" placeholder="姓（读音）" v-model="specific.last.kana"/>
+                    <input type="text" placeholder="名" v-model="specific.first.kanji"/>
+                    <input type="text" placeholder="名（读音）" v-model="specific.first.kana"/>
+                </div>
+            </div>
+            <div class="namae-operator">
+                <mb-button :disabled="isJnmLoading" @click="generate">
+                    <template v-if="isJnmLoading || !isJnmLoaded">
+                        <icon v-if="isJnmLoading" v-gsap.rotate name="mingcute:loading-fill"/>
+                        <icon v-else name="fa6-solid:download"/>
+                        <span>加载</span>
+                    </template>
+                    <template v-else>
+                        <icon name="iconamoon:star-bold"/>
+                        <span>生成</span>
+                    </template>
+                </mb-button>
+                <mb-button :disabled="isResultEmpty" @click="clear">
+                    <icon name="fa6-solid:trash-can"/>
+                    <span>清除结果</span>
+                </mb-button>
             </div>
         </div>
-        <div class="namae-option">
-            <span>性别</span>
-            <div class="namae-radio">
-                <mb-radio
-                    v-for="item in gender.list"
-                    :value="item.value"
-                    v-model="gender.current"
-                >{{ item.title }}</mb-radio>
-            </div>
-        </div>
-        <div class="namae-option">
-            <span>指定</span>
-            <div class="namae-specific">
-                <input type="text" placeholder="姓" v-model="specific.last.kanji"/>
-                <input type="text" placeholder="姓（读音）" v-model="specific.last.kana"/>
-                <input type="text" placeholder="名" v-model="specific.first.kanji"/>
-                <input type="text" placeholder="名（读音）" v-model="specific.first.kana"/>
-            </div>
-        </div>
-        <div class="namae-operator">
-            <mb-button :disabled="isJnmLoading" @click="generate">
-                <template v-if="isJnmLoading || !isJnmLoaded">
-                    <icon v-if="isJnmLoading" v-gsap.rotate name="mingcute:loading-fill"/>
-                    <icon v-else name="fa6-solid:download"/>
-                    <span>加载</span>
+        <div v-if="!isResultEmpty" class="div-table namae-result">
+            <dl v-for="chunk in chunkedResults" class="namae-col">
+                <template v-for="item in chunk">
+                    <dt>{{ item.kanji }}</dt>
+                    <dd>{{ item.kana }}</dd>
                 </template>
-                <template v-else>
-                    <icon name="iconamoon:star-bold"/>
-                    <span>生成</span>
-                </template>
-            </mb-button>
-            <mb-button :disabled="isResultEmpty" @click="clear">
-                <icon name="fa6-solid:trash-can"/>
-                <span>清除结果</span>
-            </mb-button>
+            </dl>
         </div>
-    </div>
-    <div v-if="!isResultEmpty" class="div-table namae-result">
-        <dl v-for="chunk in chunkedResults" class="namae-col">
-            <template v-for="item in chunk">
-                <dt>{{ item.kanji }}</dt>
-                <dd>{{ item.kana }}</dd>
-            </template>
-        </dl>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>

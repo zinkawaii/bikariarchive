@@ -94,27 +94,19 @@ export default <RouterConfig> {
             }
         },
         {
-            name: "tools",
-            path: "/tools",
-            redirect: { name: "unknown" },
-            component: () => import("~/pages/tools/index.vue"),
-            children: [
-                {
-                    name: "excalc",
-                    path: "excalc",
-                    component: () => import("~/pages/tools/excalc.vue")
-                },
-                {
-                    name: "lyricaxis",
-                    path: "lyricaxis",
-                    component: () => import("~/pages/tools/lyricaxis.vue")
-                },
-                {
-                    name: "namaemaker",
-                    path: "namaemaker",
-                    component: () => import("~/pages/tools/namaemaker.vue")
-                }
-            ]
+            name: "excalc",
+            path: "/tools/excalc",
+            component: () => import("~/pages/tools/excalc.vue")
+        },
+        {
+            name: "lyricaxis",
+            path: "/tools/lyricaxis",
+            component: () => import("~/pages/tools/lyricaxis.vue")
+        },
+        {
+            name: "namaemaker",
+            path: "/tools/namaemaker",
+            component: () => import("~/pages/tools/namaemaker.vue")
         },
         {
             name: "user",

@@ -162,86 +162,88 @@
 </script>
 
 <template>
-    <div class="excalc-top">
-        <div class="excalc-power">
-            <div class="excalc-param">
+    <coco-widget>
+        <div class="excalc-top">
+            <div class="excalc-power">
+                <div class="excalc-param">
+                    <div class="excalc-label">
+                        <span>参数</span>
+                        <select class="excalc-param-selector" v-model="params.current.value" @change="params.change">
+                            <option v-for="(data, index) in params.data.value" :value="index">{{ data.name }}</option>
+                        </select>
+                    </div>
+                    <div class="excalc-param-handler">
+                        <mb-button :disabled="params.current.value === void 0" @click="params.save()">保存</mb-button>
+                        <mb-button @click="params.add()">新建</mb-button>
+                        <mb-button :disabled="params.current.value === void 0" @click="params.remove()">删除</mb-button>
+                    </div>
+                </div>
                 <div class="excalc-label">
-                    <span>参数</span>
-                    <select class="excalc-param-selector" v-model="params.current.value" @change="params.change">
-                        <option v-for="(data, index) in params.data.value" :value="index">{{ data.name }}</option>
-                    </select>
+                    <span>标题</span>
+                    <mb-input type="text" v-model="state.name"/>
                 </div>
-                <div class="excalc-param-handler">
-                    <mb-button :disabled="params.current.value === void 0" @click="params.save()">保存</mb-button>
-                    <mb-button @click="params.add()">新建</mb-button>
-                    <mb-button :disabled="params.current.value === void 0" @click="params.remove()">删除</mb-button>
+                <div class="excalc-label">
+                    <span>后排</span>
+                    <mb-input v-for="(item, index) in state.power.main" type="number" v-model="state.power.main[index]"/>
+                </div>
+                <div class="excalc-label">
+                    <span>前排</span>
+                    <mb-input v-for="(item, index) in state.power.pioneer" type="number" v-model="state.power.pioneer[index]"/>
                 </div>
             </div>
-            <div class="excalc-label">
-                <span>标题</span>
-                <mb-input type="text" v-model="state.name"/>
-            </div>
-            <div class="excalc-label">
-                <span>后排</span>
-                <mb-input v-for="(item, index) in state.power.main" type="number" v-model="state.power.main[index]"/>
-            </div>
-            <div class="excalc-label">
-                <span>前排</span>
-                <mb-input v-for="(item, index) in state.power.pioneer" type="number" v-model="state.power.pioneer[index]"/>
+            <div class="excalc-main">
+                <label>
+                    <span>血量</span>
+                    <mb-input type="number" v-model="state.health"/>
+                </label>
+                <label>
+                    <span>次数</span>
+                    <mb-input type="number" v-model="state.times"/>
+                </label>
+                <mb-button full @click="roll">Roll</mb-button>
+                <label>
+                    <span>斩杀率</span>
+                    <mb-input type="number" readonly v-model="kill_rate"/>
+                </label>
+                <div class="excalc-division"></div>
+                <label>
+                    <span>时间</span>
+                    <mb-input type="number" v-model="state.time"/>
+                </label>
+                <label>
+                    <span>分数</span>
+                    <mb-input type="number" readonly v-model="score"/>
+                </label>
             </div>
         </div>
-        <div class="excalc-main">
-            <label>
-                <span>血量</span>
-                <mb-input type="number" v-model="state.health"/>
-            </label>
-            <label>
-                <span>次数</span>
-                <mb-input type="number" v-model="state.times"/>
-            </label>
-            <mb-button full @click="roll">Roll</mb-button>
-            <label>
-                <span>斩杀率</span>
-                <mb-input type="number" readonly v-model="kill_rate"/>
-            </label>
-            <div class="excalc-division"></div>
-            <label>
-                <span>时间</span>
-                <mb-input type="number" v-model="state.time"/>
-            </label>
-            <label>
-                <span>分数</span>
-                <mb-input type="number" readonly v-model="score"/>
-            </label>
+        <div class="excalc-bottom">
+            <div class="excalc-tools">
+                <mb-button @click="addBuki">添加武器</mb-button>
+            </div>
+            <coco-table class="excalc-table">
+                <tbody>
+                    <tr>
+                        <th>武器名称</th>
+                        <th>伤害</th>
+                        <th>Hit</th>
+                        <th>命中率</th>
+                        <th>暴击率</th>
+                        <th>暴击伤害</th>
+                        <th>其他</th>
+                    </tr>
+                    <tr v-for="item, index in state.buki">
+                        <td><mb-input type="text" v-model="item.name"/></td>
+                        <td><mb-input type="number" v-model="item.damage"/></td>
+                        <td><mb-input type="number" v-model="item.hit"/></td>
+                        <td><mb-input type="number" :accuracy="2" v-model="item.accuracy_rate"/></td>
+                        <td><mb-input type="number" :accuracy="2" v-model="item.crit_rate"/></td>
+                        <td><mb-input type="number" :accuracy="2" v-model="item.crit_damage"/></td>
+                        <td><mb-button class="excalc-delete" :disabled="state.buki.length <= 1" @click="removeBuki(index)">删除</mb-button></td>
+                    </tr>
+                </tbody>
+            </coco-table>
         </div>
-    </div>
-    <div class="excalc-bottom">
-        <div class="excalc-tools">
-            <mb-button @click="addBuki">添加武器</mb-button>
-        </div>
-        <coco-table class="excalc-table">
-            <tbody>
-                <tr>
-                    <th>武器名称</th>
-                    <th>伤害</th>
-                    <th>Hit</th>
-                    <th>命中率</th>
-                    <th>暴击率</th>
-                    <th>暴击伤害</th>
-                    <th>其他</th>
-                </tr>
-                <tr v-for="item, index in state.buki">
-                    <td><mb-input type="text" v-model="item.name"/></td>
-                    <td><mb-input type="number" v-model="item.damage"/></td>
-                    <td><mb-input type="number" v-model="item.hit"/></td>
-                    <td><mb-input type="number" :accuracy="2" v-model="item.accuracy_rate"/></td>
-                    <td><mb-input type="number" :accuracy="2" v-model="item.crit_rate"/></td>
-                    <td><mb-input type="number" :accuracy="2" v-model="item.crit_damage"/></td>
-                    <td><mb-button class="excalc-delete" :disabled="state.buki.length <= 1" @click="removeBuki(index)">删除</mb-button></td>
-                </tr>
-            </tbody>
-        </coco-table>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>

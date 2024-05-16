@@ -214,50 +214,52 @@
 </script>
 
 <template>
-    <div class="text-small">
-        <div class="lyric-operator">
-            <mb-button @click="upload">上传</mb-button>
-            <mb-button :disabled="invalid" @click="togglePlaying()">{{ !invalid && isPlaying ? "暂停" : "播放" }}</mb-button>
-            <mb-button :disabled="invalid" @click="exporter">导出</mb-button>
-            <mb-button :disabled="invalid" @click="toggleAxising()">{{ isAxising ? "结束打轴" : "开始打轴" }}</mb-button>
+    <coco-widget>
+        <div class="text-small">
+            <div class="lyric-operator">
+                <mb-button @click="upload">上传</mb-button>
+                <mb-button :disabled="invalid" @click="togglePlaying()">{{ !invalid && isPlaying ? "暂停" : "播放" }}</mb-button>
+                <mb-button :disabled="invalid" @click="exporter">导出</mb-button>
+                <mb-button :disabled="invalid" @click="toggleAxising()">{{ isAxising ? "结束打轴" : "开始打轴" }}</mb-button>
+            </div>
+            <div class="lyric-control">
+                <span class="lyric-time">{{ formatTime(currentTime) }}</span>
+                <mb-progress
+                    class="lyric-progress"
+                    :title="filename || `- 请上传歌曲 -`"
+                    v-model="progress"
+                    @progress="onControlProgress"
+                    @change="onControlChange"
+                    @dragstart="toggleDragging(true)"
+                    @dragend="toggleDragging(false)"
+                />
+                <span class="lyric-time">{{ formatTime(duration) }}</span>
+            </div>
         </div>
-        <div class="lyric-control">
-            <span class="lyric-time">{{ formatTime(currentTime) }}</span>
-            <mb-progress
-                class="lyric-progress"
-                :title="filename || `- 请上传歌曲 -`"
-                v-model="progress"
-                @progress="onControlProgress"
-                @change="onControlChange"
-                @dragstart="toggleDragging(true)"
-                @dragend="toggleDragging(false)"
-            />
-            <span class="lyric-time">{{ formatTime(duration) }}</span>
+        <div class="lyric-main">
+            <textarea class="lyric-textarea lyric-editor" placeholder="在这里输入歌词……" v-model="raw"></textarea>
+            <div v-show="isAxising" class="lyric-textarea lyric-compile">
+                <article>
+                    <p
+                        v-for="item, i in lyrics"
+                        :key="i"
+                        class="lyric-item"
+                        :class="{
+                            light: currentLyric === i,
+                            sign: item.sign
+                        }"
+                        @click="currentLyric = i"
+                    ><time>{{ item.timed }}</time>
+                        <span>{{ item.content }}</span>
+                    </p>
+                </article>
+                <ul class="lyric-handler">
+                    <li><mb-button @click="undo">回退</mb-button></li>
+                    <li><mb-button @click="sign">标记</mb-button></li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="lyric-main">
-        <textarea class="lyric-textarea lyric-editor" placeholder="在这里输入歌词……" v-model="raw"></textarea>
-        <div v-show="isAxising" class="lyric-textarea lyric-compile">
-            <article>
-                <p
-                    v-for="item, i in lyrics"
-                    :key="i"
-                    class="lyric-item"
-                    :class="{
-                        light: currentLyric === i,
-                        sign: item.sign
-                    }"
-                    @click="currentLyric = i"
-                   ><time>{{ item.timed }}</time>
-                    <span>{{ item.content }}</span>
-                </p>
-            </article>
-            <ul class="lyric-handler">
-                <li><mb-button @click="undo">回退</mb-button></li>
-                <li><mb-button @click="sign">标记</mb-button></li>
-            </ul>
-        </div>
-    </div>
+    </coco-widget>
 </template>
 
 <style lang="scss" scoped>
