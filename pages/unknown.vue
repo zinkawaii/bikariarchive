@@ -5,7 +5,7 @@
 
     const route = useRoute();
     const router = useRouter();
-    const time = ref(4);
+    const time = ref(3);
 
     //隐藏评论区
     onMounted(() => {
@@ -15,8 +15,9 @@
     Zin.interval(() => {
         time.value--;
     }, {
+        immediate: false,
         duration: 1000,
-        times: 4
+        times: time.value
     })
     .then(() => {
         router.replace({ name: "home" });

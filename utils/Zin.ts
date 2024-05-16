@@ -85,6 +85,7 @@ const Zin = new class Z {
 
     //按照一定时间和次数循环执行函数
     interval(func: (time: number) => void, {
+        immediate = true,
         duration = 1000,
         times = -1
     } = {}) {
@@ -92,7 +93,7 @@ const Zin = new class Z {
             try {
                 let t = 0;
                 const { pause } = useIntervalFn(recursion, duration, {
-                    immediateCallback: true
+                    immediateCallback: immediate
                 });
 
                 function recursion() {
