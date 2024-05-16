@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { Zexp } from "~/utils/Zexp";
 import type { GetLoginBody, GetLogonResponse } from "~/server/types/api/user/logon";
 
 export default defineJEventHandler<GetLogonResponse>(async (event) => {
@@ -79,8 +80,8 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
 //服务端验证
 function validate(nickname: string, email: string, password: string) {
     return (/^[\w\u4E00-\u9FA5]{0,18}$/).test(nickname) &&
-           (/^[\w-]+@[\w-]+(.[\w-]+)+$/).test(email) &&
-           (/^[\w]{6,18}$/).test(password);
+           (Zexp.email).test(email) &&
+           (/^\w{6,18}$/).test(password);
 }
 
 //UID生成

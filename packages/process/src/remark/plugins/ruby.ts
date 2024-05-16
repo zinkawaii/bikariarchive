@@ -3,7 +3,7 @@ import { findAndReplace } from "mdast-util-find-and-replace";
 import { u } from "unist-builder";
 
 export default function() {
-    const RE_RUBY = /\|([^\n]*?)\(([^\n]*?)\)\|/g;
+    const RE_RUBY = /\|([^|(]*)\(([^|)]*)\)\|/g;
 
     return (tree: Root) => {
         findAndReplace(tree, [

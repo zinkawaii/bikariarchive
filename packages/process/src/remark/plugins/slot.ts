@@ -5,7 +5,7 @@ import { u } from "unist-builder";
 export default function() {
     return (tree: Root) => {
         visit(tree, "paragraph", ({ children }, index, parent) => {
-            const startRule = /^<<\s+([^\n]*)\n/;
+            const startRule = /^<<\s+(\S*)\n/;
             const endRule = /<<(?:\n|$)/;
             const start = children.at(0);
             const end = children.at(-1);

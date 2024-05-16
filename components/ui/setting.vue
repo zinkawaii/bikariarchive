@@ -38,7 +38,7 @@
     //键值 → 显示值
     function keyToStr(key: string) {
         let str = shortMap[key] || key;
-        if (str.match(/^[a-z]{1}$/)) {
+        if (str.match(/^[a-z]$/)) {
             str = str.toUpperCase();
         }
         return str;

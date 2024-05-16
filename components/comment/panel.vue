@@ -31,12 +31,12 @@
         },
         email: {
             target: email,
-            reg: /^[\w-]+@[\w-]+(.[\w-]+)+$/,
+            reg: Zexp.email,
             message: "邮箱格式不正确"
         },
         address: {
             target: address,
-            reg: /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w -.\\/?%&=]*)?$/,
+            reg: Zexp.url,
             message: "网址格式不正确"
         }
     });

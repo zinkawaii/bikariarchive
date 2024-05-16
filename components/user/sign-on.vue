@@ -32,7 +32,7 @@
         email: {
             target: email,
             required: true,
-            reg: /^[\w-]+@[\w-]+(.[\w-]+)+$/,
+            reg: Zexp.email,
             message: "邮箱格式不正确"
         },
         verify: {
@@ -44,7 +44,7 @@
         password: {
             target: password,
             required: true,
-            reg: /^[\w]*$/,
+            reg: /^\w*$/,
             message: "密码仅由大小写字母、数字以及下划线组成",
             validate(value) {
                 const count = getByteLength(value);
