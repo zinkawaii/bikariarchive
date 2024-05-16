@@ -15,7 +15,7 @@
         "known-ability": EntryKnownAbility
     };
 
-    const { data } = await useFetch("/api/entry", {
+    const { pending, data } = useLazyFetch("/api/entry", {
         query: {
             title
         },
@@ -26,11 +26,12 @@
 <template>
     <coco-widget v-if="isExist">
         <header class="entry-header">
-            <h1 class="entry-title">{{ data.title }}</h1>
+            <h1 class="entry-title">{{ title }}</h1>
         </header>
-        <article class="entry-article">
-            <section class="entry-section entry-main">
-                <div class="left">
+        <mb-skeleton v-if="pending"/>
+        <article v-else class="entry-article">
+            <section class="entry-section">
+                <div class="entry-main">
                     <div class="entry-text" v-html="data.summary"></div>
                     <div v-if="data.info?.length > 0" class="div-table entry-brief">
                         <dl v-for="i in data.info.length">
@@ -103,21 +104,25 @@
 
 <style lang="scss" scoped>
     .entry-header {
-        margin-bottom: 8px;
+        margin-bottom: 16px;
         padding-bottom: 8px;
         border-bottom: 1px solid var(--color-border);
     }
 
-    .entry-main {
-        display: flex;
-        gap: 16px;
+    .entry-section {
+        overflow: auto;
 
-        > .left {
+        &:first-child {
             display: flex;
-            flex: 1;
-            flex-direction: column;
-            justify-content: space-between;
+            gap: 16px;
+            margin-top: -8px;
         }
+    }
+
+    .entry-main {
+        display: grid;
+        flex: 1;
+        align-content: space-between;
     }
 
     .entry-brief {
@@ -155,10 +160,6 @@
         }
     }
 
-    .entry-section {
-        overflow: auto;
-    }
-
     .talent-header, .relation-header {
         display: flex;
         align-items: baseline;
@@ -174,7 +175,7 @@
     }
 
     @container main (width < 768px) {
-        .entry-main {
+        .entry-section:first-child {
             flex-direction: column;
         }
 
