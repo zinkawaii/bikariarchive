@@ -8,7 +8,9 @@
     const time = ref(4);
 
     //隐藏评论区
-    route.meta.comment = false;
+    onMounted(() => {
+        route.meta.comment = false;
+    });
 
     Zin.interval(() => {
         time.value--;
