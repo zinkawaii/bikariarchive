@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Zexp } from "~/utils/Zexp";
+import { Zexp } from "~/utils";
 import type { GetLoginBody, GetLogonResponse } from "~/server/types/api/user/logon";
 
 export default defineJEventHandler<GetLogonResponse>(async (event) => {

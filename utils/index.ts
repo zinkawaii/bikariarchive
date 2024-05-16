@@ -1,3 +1,18 @@
+//可复用正则表
+export const Zexp = {
+    email: /^[-\w]+@(?:[-\w]+\.)+[-\w]+$/,
+    url: /^https?:\/\/(?:[-\w]+\.)+[-\w]+(?::\d+)?(?:\/.*)?$/
+};
+
+//通用代码高亮配置
+export const highlightOptions = {
+    transformers: [{
+        root(hast) {
+            hast.children = hast.children[0]?.children[0].children ?? [];
+        }
+    }]
+};
+
 //获取字符串实际长度
 export function getByteLength(str: string) {
     return str?.replace(/\u0391-\uFFE5/g, "__")?.length || 0;
