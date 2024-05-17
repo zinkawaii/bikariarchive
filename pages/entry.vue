@@ -21,6 +21,11 @@
         },
         immediate: isExist
     });
+
+    //显示评论区
+    onMounted(() => {
+        route.meta.comment = isExist;
+    });
 </script>
 
 <template>
