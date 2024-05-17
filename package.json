@@ -18,7 +18,7 @@
     "task:process:dev": "cross-env NODE_ENV=\"development\" node --watch scripts/process.js",
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
-  "packageManager": "pnpm@9.1.0",
+  "packageManager": "pnpm@9.1.1",
   "dependencies": {
     "crypto-es": "^2.1.0",
     "dayjs": "^1.11.11",
@@ -81,7 +81,7 @@
     "rehype-stringify": "^10.0.0",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
-    "remark-mdc": "^3.2.0",
+    "remark-mdc": "^3.2.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.0",
     "sass": "^1.77.1",
@@ -92,6 +92,7 @@
     "unified": "^11.0.4",
     "unist-builder": "^4.0.0",
     "unist-util-visit": "^5.0.0",
+    "uqr": "^0.1.2",
     "yaml": "^2.4.2"
   }
 }
