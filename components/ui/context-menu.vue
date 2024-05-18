@@ -185,7 +185,7 @@
     .menu-item {
         padding-inline: 8px;
 
-        > svg {
+        > .icon {
             width: 16px;
             margin-right: 8px;
         }

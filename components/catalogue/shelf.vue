@@ -9,7 +9,7 @@
             <li v-for="({ title, cover }, key, i) in Article.meta">
                 <a
                     class="shelf-novel"
-                    :class="{ checked: novel === key }"
+                    :class="{ [`is-checked`]: novel === key }"
                     @click="catalogueStore.selectNovel(key as string, i)"
                     ><div class="shelf-cover">
                         <nuxt-img v-if="cover" :src="cover" alt="[cover]"/>
@@ -48,7 +48,7 @@
         transition: all 0.4s;
         filter: drop-shadow(8px 8px 2px rgb(0 0 0 / 16%));
 
-        :not(.checked) > & {
+        :not(.is-checked) > & {
             opacity: 0.66;
             scale: 0.9;
         }
@@ -68,7 +68,7 @@
     .shelf-title {
         line-height: 42px;
 
-        .checked > & {
+        .is-checked > & {
             color: var(--color-theme-text);
         }
     }

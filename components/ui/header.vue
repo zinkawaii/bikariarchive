@@ -270,14 +270,6 @@
         width: $nav-large;
         margin: auto;
 
-        > svg {
-            transition: translate 0.2s;
-        }
-
-        &:hover > svg {
-            translate: 0 -4px;
-        }
-
         @media (width >= #{$max}) {
             color: white;
             filter: drop-shadow(var(--text-shadow));
@@ -285,6 +277,14 @@
 
         @media (width < #{$max}) {
             width: $nav-small;
+        }
+
+        > .icon {
+            transition: translate 0.2s;
+        }
+
+        &:hover > .icon {
+            translate: 0 -4px;
         }
     }
 
@@ -304,7 +304,7 @@
             color: white;
         }
 
-        > svg {
+        > .icon {
             margin: auto;
         }
     }

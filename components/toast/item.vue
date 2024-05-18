@@ -45,14 +45,10 @@
     .toast-content {
         display: flex;
         align-items: center;
-        gap: 4px;
-        padding-inline: 14px;
+        gap: 8px;
+        padding-inline: 14px 18px;
         font-size: 14px;
         line-height: 32px;
-
-        > span {
-            padding-inline: 4px;
-        }
     }
 
     .toast-progress {

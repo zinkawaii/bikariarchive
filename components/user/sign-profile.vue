@@ -32,27 +32,23 @@
 
 <template>
     <div class="sign-profile">
-        <div>
-            <span class="sign-nickname">{{ userStore.nickname }}</span>
-            <div class="sign-tool">
-                <mb-button @click="logout">退出登录</mb-button>
-            </div>
+        <span class="sign-nickname">{{ userStore.nickname }}</span>
+        <div class="sign-operator">
+            <mb-button @click="logout">退出登录</mb-button>
         </div>
-        <nuxt-link :to="toSpace"><nuxt-img class="sign-avatar" src="/garden/icon/default.png" alt="[avatar]"/></nuxt-link>
+        <nuxt-link class="sign-avatar" :to="toSpace"><nuxt-img src="/garden/icon/default.png" alt="[avatar]"/></nuxt-link>
     </div>
 </template>
 
 <style lang="scss" scoped>
     .sign-profile {
-        display: flex;
-        gap: 1em;
+        display: grid;
+        grid-template:
+            "A C"
+            "B C" / 1fr auto;
+        place-items: center flex-end;
+        column-gap: 1em;
         margin-top: 1em;
-
-        > div {
-            display: grid;
-            flex: 1;
-            place-items: center flex-end;
-        }
     }
 
     .sign-nickname {
@@ -61,6 +57,8 @@
     }
 
     .sign-avatar {
+        grid-area: C;
+        overflow: hidden;
         width: 72px;
         aspect-ratio: 1;
         border-radius: 100%;

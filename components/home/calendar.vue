@@ -163,15 +163,24 @@
             <div class="calendar-header">
                 <span class="calendar-month">{{ state.month + 1 }}° {{ monthMap[state.month][0] }}</span>
                 <span class="text-primary">「{{ monthMap[state.month][1] }}」</span>
-                <a :class="{ [`is-hidden`]: isFirstMonth }" @click="toLastMonth"><icon name="fa6-solid:chevron-left"/></a>
-                <a :class="{ [`is-hidden`]: isLastMonth }" @click="toNextMonth"><icon name="fa6-solid:chevron-right"/></a>
+                <a
+                    class="calendar-switch"
+                    :class="{ [`is-hidden`]: isFirstMonth }"
+                    @click="toLastMonth"
+                ><icon name="fa6-solid:chevron-left"/></a>
+                <a
+                    class="calendar-switch"
+                    :class="{ [`is-hidden`]: isLastMonth }"
+                    @click="toNextMonth"
+                ><icon name="fa6-solid:chevron-right"/></a>
             </div>
             <ul class="calendar-week">
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
             </ul>
-            <div class="calendar-date">
+            <div class="calendar-days">
                 <a
                     v-for="date in state.dates"
+                    class="calendar-day"
                     :class="{
                         sub: date.month !== state.month,
                         special: date.event,
@@ -185,26 +194,26 @@
         </div>
         <div class="calendar-detail">
             <template v-if="currentDate">
-                <time class="calendar-detail-date">
+                <time class="calendar-date">
                     <span class="month">{{ currentDate.month + 1 || "" }}</span>月<span class="day">{{ currentDate.solar }}</span>日
                 </time>
                 <div class="calendar-section">
-                    <div class="title">事件</div>
+                    <div class="calendar-title">事件</div>
                     <div v-if="currentDate.event?.mono" class="calendar-event">
                         <icon name="fa6-solid:quote-left"/>
                         <span>{{ currentDate.event.mono }}</span>
                         <icon name="fa6-solid:quote-right"/>
                     </div>
-                    <span v-else class="none">No Special.</span>
+                    <span v-else class="calendar-none">No Special.</span>
                 </div>
                 <div class="calendar-section">
-                    <div class="title">关键人物</div>
+                    <div class="calendar-title">关键人物</div>
                     <div v-if="currentDate.event?.heroine" class="calendar-heroine">
                         <div class="heroine-wrapper">
                             <character-tag v-for="heroine in currentDate.event.heroine" :name="heroine"/>
                         </div>
                     </div>
-                    <span v-else class="none">No Character.</span>
+                    <span v-else class="calendar-none">No Character.</span>
                 </div>
                 <span class="calendar-hitokoto">{{ currentDate.event?.hitokoto }}</span>
             </template>
@@ -244,16 +253,16 @@
         border-radius: 12px;
         background-color: var(--color-theme);
         line-height: 28px;
+    }
 
-        > a {
-            padding-inline: 8px;
-            color: var(--color-theme-text);
-            transition: all 0.15s;
+    .calendar-switch {
+        padding-inline: 8px;
+        color: var(--color-theme-text);
+        transition: all 0.15s;
 
-            &.is-hidden {
-                opacity: 0;
-                pointer-events: none;
-            }
+        &.is-hidden {
+            opacity: 0;
+            pointer-events: none;
         }
     }
 
@@ -262,7 +271,7 @@
         font-weight: bold;
     }
 
-    .calendar-week, .calendar-date {
+    .calendar-week, .calendar-days {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         gap: 2px;
@@ -275,38 +284,36 @@
         border-bottom: 1px dashed var(--color-theme-dark);
     }
 
-    .calendar-date {
-        > a {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            width: 46px;
-            padding: 4px;
+    .calendar-day {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 46px;
+        padding: 4px;
 
-            &:hover {
-                box-shadow: 0 0 0 1px var(--color-theme-dark) inset;
-            }
+        &:hover {
+            box-shadow: 0 0 0 1px var(--color-theme-dark) inset;
+        }
 
-            &.sub {
-                opacity: 0.75;
-                color: var(--color-text-info);
-            }
+        &.sub {
+            opacity: 0.75;
+            color: var(--color-text-info);
+        }
 
-            &.special {
-                font-weight: bold;
-                color: var(--color-theme-text);
-            }
+        &.special {
+            font-weight: bold;
+            color: var(--color-theme-text);
+        }
 
-            &.selected {
-                background: var(--color-theme-dark);
-                font-weight: bold;
-                color: white;
-            }
+        &.selected {
+            background: var(--color-theme-dark);
+            font-weight: bold;
+            color: white;
+        }
 
-            .lunar {
-                font-size: 12px;
-                font-weight: normal;
-            }
+        > .lunar {
+            font-size: 12px;
+            font-weight: normal;
         }
     }
 
@@ -319,7 +326,7 @@
         text-align: center;
     }
 
-    .calendar-detail-date {
+    .calendar-date {
         font-family: var(--font-smooth);
         font-size: 32px;
         letter-spacing: 2px;
@@ -328,28 +335,28 @@
 
     .calendar-section {
         margin-top: 12px;
+    }
 
-        .title {
-            font-size: 12px;
-            line-height: 16px;
-            color: var(--color-text-info);
+    .calendar-title {
+        font-size: 12px;
+        line-height: 16px;
+        color: var(--color-text-info);
 
-            &::before, &::after {
-                content: "——";
-                padding-inline: 6px;
-            }
+        &::before, &::after {
+            content: "——";
+            padding-inline: 6px;
         }
+    }
 
-        .none {
-            line-height: 32px;
-            color: var(--color-text-info);
-        }
+    .calendar-none {
+        line-height: 32px;
+        color: var(--color-text-info);
     }
 
     .calendar-event {
         line-height: 32px;
 
-        > svg {
+        > .icon {
             padding-inline: 3px;
             font-size: 16px;
             color: var(--color-theme-dark);

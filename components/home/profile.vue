@@ -44,13 +44,16 @@
                 </tr>
             </tbody>
         </table>
-        <ul class="profile-link">
-            <li v-for="{ title, to, icon } in links">
-                <nuxt-link :to :title target="_blank">
-                    <icon :name="icon"/>
-                </nuxt-link>
-            </li>
-        </ul>
+        <nav class="profile-links">
+            <nuxt-link
+                v-for="{ title, to, icon } in links"
+                class="profile-link"
+                :to
+                :title
+                target="_blank"
+                ><icon :name="icon"/>
+            </nuxt-link>
+        </nav>
     </div>
 </template>
 
@@ -90,22 +93,22 @@
         }
     }
 
-    .profile-link {
+    .profile-links {
         display: flex;
         justify-content: flex-end;
         gap: 8px;
         padding-inline: 8px;
+    }
 
-        a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            border: 1px solid var(--color-border-lighter);
-            border-radius: 4px;
-            font-size: 16px;
-            color: var(--color-theme-dark);
-        }
+    .profile-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border: 1px solid var(--color-border-lighter);
+        border-radius: 4px;
+        font-size: 16px;
+        color: var(--color-theme-dark);
     }
 </style>

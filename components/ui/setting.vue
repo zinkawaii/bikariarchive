@@ -91,7 +91,7 @@
     .setting-form {
         margin-top: 16px;
 
-        + h2 {
+        + .coco-title {
             margin-top: 32px;
         }
     }

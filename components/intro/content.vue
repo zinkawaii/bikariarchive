@@ -11,8 +11,8 @@
 
 <template>
     <div class="intro-content">
-        <ul class="intro-tag">
-            <li v-for="tag in Article.meta[novel].tag">{{ tag }}</li>
+        <ul class="intro-tags">
+            <li v-for="tag in Article.meta[novel].tag" class="intro-tag">{{ tag }}</li>
         </ul>
         <div class="intro-synopsis">
             <p v-for="line in synopsis" class="p-small">{{ line }}</p>
@@ -29,7 +29,7 @@
         font-size: 14px;
     }
 
-    .intro-tag {
+    .intro-tags {
         display: flex;
         gap: 12px;
         overflow: auto;
@@ -37,14 +37,14 @@
         &::-webkit-scrollbar {
             display: none;
         }
+    }
 
-        > li {
-            padding-inline: 12px;
-            border: 1px solid var(--color-border-lighter);
-            border-radius: 12px;
-            line-height: 24px;
-            word-break: keep-all;
-        }
+    .intro-tag {
+        padding-inline: 12px;
+        border: 1px solid var(--color-border-lighter);
+        border-radius: 12px;
+        line-height: 24px;
+        word-break: keep-all;
     }
 
     .intro-synopsis {

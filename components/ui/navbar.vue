@@ -31,7 +31,7 @@
             <li v-for="{ title, name, icon } in links" class="nav-item">
                 <nuxt-link class="nav-link" :to="{ name }">
                     <icon :name="icon"/>
-                    <span>{{ title }}</span>
+                    <span class="nav-title">{{ title }}</span>
                 </nuxt-link>
             </li>
         </ul>
@@ -50,7 +50,7 @@
         &:hover {
             width: 116px;
 
-            .nav-link > span {
+            .nav-title {
                 opacity: 1;
             }
         }
@@ -91,14 +91,14 @@
             color: white;
         }
 
-        > svg {
+        > .icon {
             width: 48px;
             font-size: 21px;
         }
+    }
 
-        > span {
-            opacity: 0;
-            transition: all 0.4s;
-        }
+    .nav-title {
+        opacity: 0;
+        transition: all 0.4s;
     }
 </style>

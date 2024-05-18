@@ -11,6 +11,7 @@
     <ul class="catalogue-volume">
         <li v-for="(title, i) in volumes">
             <a
+                class="cavol-item"
                 :class="{ checked: curOrder.volume === i }"
                 @click="catalogueStore.selectVolume(i)"
             >{{ title }}</a>
@@ -22,21 +23,21 @@
     .catalogue-volume {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+    }
 
-        a {
-            display: flex;
-            justify-content: center;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            line-height: 32px;
+    .cavol-item {
+        display: flex;
+        justify-content: center;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        line-height: 32px;
 
-            &:hover {
-                border-color: var(--color-theme-dark);
-            }
+        &:hover {
+            border-color: var(--color-theme-dark);
+        }
 
-            &.checked {
-                color: var(--color-theme-text);
-            }
+        &.checked {
+            color: var(--color-theme-text);
         }
     }
 </style>

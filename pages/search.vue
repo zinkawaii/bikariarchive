@@ -118,7 +118,7 @@
     <coco-widget v-if="searchWord.length">
         <div class="search-statistics">
             <h2>"{{ searchWord }}"的检索结果</h2>
-            <span>共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次</span>
+            <span class="text-gray">共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次</span>
         </div>
         <div class="search-results">
             <mb-skeleton v-if="pending"/>
@@ -186,11 +186,7 @@
     .search-statistics {
         display: grid;
         gap: 4px;
-
-        > span {
-            font-size: 15px;
-            color: var(--color-text-info);
-        }
+        font-size: 15px;
 
         @media (width < 1024px) {
             margin: 8px;

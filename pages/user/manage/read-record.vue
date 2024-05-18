@@ -99,7 +99,7 @@
         <div class="manage-flex">
             <div v-for="item, index in que.list">
                 <form class="manage-form" :name="item.title">
-                    <span class="title">{{ item.title }}</span>
+                    <span class="manage-title">{{ item.title }}</span>
                     <input class="manage-input" type="number" v-model="item.count"/>
                     <span>条</span>
                 </form>
@@ -165,11 +165,11 @@
         border-radius: 8px;
         background-color: var(--color-background);
         font-size: 14px;
+    }
 
-        .title {
-            padding-right: 1em;
-            border-right: 1px solid var(--color-border-light);
-        }
+    .manage-title {
+        padding-right: 1em;
+        border-right: 1px solid var(--color-border-light);
     }
 
     .manage-input {
@@ -205,7 +205,7 @@
     .manage-operators {
         text-wrap: nowrap;
 
-        > button {
+        > .mb-button {
             width: 24px;
             aspect-ratio: 1;
             padding: 0;

@@ -85,11 +85,6 @@
         font-size: 14px;
         line-height: 20px;
 
-        > pre {
-            padding: 8px;
-            font-family: var(--font-code);
-        }
-
         &.is-expand {
             max-height: none;
 
@@ -97,6 +92,11 @@
                 padding-bottom: 24px;
             }
         }
+    }
+
+    .code-line, .code-content {
+        padding: 8px;
+        font-family: var(--font-code);
     }
 
     .code-line {
@@ -123,7 +123,7 @@
         text-align: center;
         cursor: pointer;
 
-        > svg {
+        > .icon {
             animation: expand-flash 2s infinite;
         }
     }

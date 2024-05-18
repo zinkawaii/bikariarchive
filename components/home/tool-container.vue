@@ -18,12 +18,12 @@
 </script>
 
 <template>
-    <div class="home-tool-container">
+    <nav class="home-tool-container">
         <nuxt-link v-for="link in links" class="home-tool" :to="link.href">
             <span class="tool-title">{{ link.title || "卖萌中……" }}</span>
             <icon class="tool-arrow" name="fa6-solid:arrow-right"/>
         </nuxt-link>
-    </div>
+    </nav>
 </template>
 
 <style lang="scss" scoped>
@@ -48,7 +48,7 @@
         color: white;
 
         &:hover {
-            span {
+            > .tool-title {
                 top: 8px;
                 left: 8px;
                 translate: 0;
@@ -58,7 +58,7 @@
                 }
             }
 
-            svg {
+            > .tool-arrow {
                 opacity: 0.8;
             }
         }
@@ -71,7 +71,6 @@
     }
 
     .tool-title {
-        display: block;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -80,7 +79,6 @@
 
         &::before {
             content: "";
-            display: block;
             position: absolute;
             top: 8px;
             left: -8px;

@@ -274,7 +274,7 @@
         font-weight: bold;
         color: var(--color-theme-text);
 
-        > svg {
+        > .icon {
             width: 1em;
             font-size: 42px;
         }
