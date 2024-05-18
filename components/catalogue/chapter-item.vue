@@ -23,10 +23,10 @@
             <li v-if="chapter.draft" tag="draft">草稿</li>
             <li v-if="isLastRead" tag="last-read">最近阅读</li>
         </ul>
-        <span class="text-gray">
-            <template v-if="infoType === 0">{{ chapter.wordCount }} 字</template>
-            <template v-else-if="infoType === 1">{{ chapter.publishDate }}</template>
-        </span>
+        <span class="text-gray">{{
+            infoType === 0 ? `${chapter.wordCount}字` :
+            infoType === 1 ? chapter.publishDate : ""
+        }}</span>
     </nuxt-link>
 </template>
 
