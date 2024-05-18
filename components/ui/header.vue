@@ -3,7 +3,7 @@
     const router = useRouter();
     const word = ref("");
 
-    const navList = [
+    const navs = [
         {
             title: "主页",
             icon: "fa6-solid:house",
@@ -88,26 +88,31 @@
 
 <template>
     <header class="z-header">
-        <div class="header-logo-wrapper">
-            <nuxt-link class="header-logo" :to="breadcrumb">
+        <div class="header-logo">
+            <nuxt-link class="logo-wrapper" :to="breadcrumb">
                 <span class="logo-aside">Bikari</span>
                 <span class="logo-center">A</span>
                 <span class="logo-aside">rchive</span>
             </nuxt-link>
         </div>
         <nav class="header-nav">
-            <mb-popper v-for="{ title, icon, to, children } in navList">
-                <nuxt-link class="nav-link" :to>
-                    <icon :name="icon" :width="null"/>
-                    <span>{{ title }}</span>
-                </nuxt-link>
-                <template v-if="children?.length" #floating>
-                    <nuxt-link v-for="child in children" class="nav-pop" :to="child.to">
-                        <icon :name="child.icon"/>
-                        <span>{{ child.title }}</span>
+            <a class="nav-expand">
+                <icon name="tabler:menu-deep"/>
+            </a>
+            <div class="nav-list">
+                <mb-popper v-for="{ title, icon, to, children } in navs">
+                    <nuxt-link class="nav-link" :to>
+                        <icon :name="icon" :width="null"/>
+                        <span>{{ title }}</span>
                     </nuxt-link>
-                </template>
-            </mb-popper>
+                    <template v-if="children?.length" #floating>
+                        <nuxt-link v-for="child in children" class="nav-pop" :to="child.to">
+                            <icon :name="child.icon"/>
+                            <span>{{ child.title }}</span>
+                        </nuxt-link>
+                    </template>
+                </mb-popper>
+            </div>
         </nav>
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
@@ -142,25 +147,23 @@
     }
 
     $title: 297px;
-    $item-max: 60px;
-    $item-min: 48px;
+    $nav-large: 60px;
+    $nav-small: 52px;
     $count: 6;
-    $nav-max: $item-max * $count;
-    $nav-min: $item-min * $count;
     $padding: 16px * 2;
-    $max: $title + $nav-max + $padding;
-    $min: $title + $nav-min + $padding;
+    $nav-full: $nav-large * $count;
+    $max: $title + $nav-full + $padding;
 
-    .header-logo-wrapper {
+    .header-logo {
         display: flex;
         padding-inline: 16px;
 
-        @media (width >= #{$min}) {
+        @media (width >= #{$max}) {
             max-width: 456px;
         }
     }
 
-    .header-logo {
+    .logo-wrapper {
         display: flex;
         margin: auto;
         font-family: var(--font-smooth);
@@ -215,11 +218,48 @@
     }
 
     .header-nav {
-        display: flex;
         margin-block: auto;
+    }
 
-        @media (width < #{$min}) {
+    .nav-expand {
+        $fs: 28px;
+        $p: 6px;
+
+        display: flex;
+        margin-inline: -($fs + $p) (-$p);
+        padding: $p;
+        font-size: $fs;
+        color: white;
+        transition: all 0.25s;
+        filter: drop-shadow(var(--text-shadow));
+
+        @media (width >= #{$max}) {
             display: none;
+        }
+    }
+
+    .nav-list {
+        display: flex;
+        justify-content: center;
+
+        @media (width < #{$max}) {
+            gap: 4px;
+            position: absolute;
+            inset: calc(100% - 12px) 0 0 auto;
+            height: 56px;
+            padding: 2px 12px 0;
+            border-bottom: 2px solid var(--color-theme-dark);
+            border-radius: var(--circle-radius);
+            box-shadow: var(--box-shadow-darker);
+            background-color: var(--color-background);
+            transform-origin: top right;
+            transition: all 0.25s;
+
+            :not(:hover) > & {
+                opacity: 0;
+                scale: 0.66;
+                pointer-events: none;
+            }
         }
     }
 
@@ -227,10 +267,8 @@
         display: grid;
         justify-items: center;
         gap: 4px;
-        width: $item-max;
+        width: $nav-large;
         margin: auto;
-        color: white;
-        filter: drop-shadow(var(--text-shadow));
 
         > svg {
             transition: translate 0.2s;
@@ -240,12 +278,13 @@
             translate: 0 -4px;
         }
 
-        @media (width < #{$max}) {
-            width: $item-min;
+        @media (width >= #{$max}) {
+            color: white;
+            filter: drop-shadow(var(--text-shadow));
+        }
 
-            span {
-                display: none;
-            }
+        @media (width < #{$max}) {
+            width: $nav-small;
         }
     }
 
