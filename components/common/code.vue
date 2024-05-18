@@ -10,7 +10,8 @@
     });
 
     const toastStore = useToastStore();
-    const isExpand = ref(false);
+    const [isCollapse, toggleCollapse] = useToggle(false);
+    const [isExpand, toggleExpand] = useToggle(false);
     const $code = ref();
 
     //代码
@@ -46,16 +47,21 @@
 <template>
     <figure class="mb-code">
         <div class="code-header">
-            <span class="text-uppercase">{{ lang }}</span>
+            <span class="text-uppercase code-lang">{{ lang }}</span>
             <a @click="copy"><icon name="fa6-solid:paste"/></a>
+            <a @click="toggleCollapse()">
+                <icon :name="`fa6-solid:chevron-${isCollapse ? `left` : `down`}`"/>
+            </a>
         </div>
-        <div class="code-area" :class="{ [`is-expand`]: isExpand }">
-            <pre class="code-line">{{ lineStr }}</pre>
-            <pre ref="$code" class="shiki code-content" v-html="code || props.raw"></pre>
-        </div>
-        <div v-if="lines >= 10" class="code-expand" @click="isExpand = !isExpand">
-            <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
-        </div>
+        <template v-if="!isCollapse">
+            <div class="code-area" :class="{ [`is-expand`]: isExpand }">
+                <pre class="code-line">{{ lineStr }}</pre>
+                <pre ref="$code" class="shiki code-content" v-html="code || props.raw"></pre>
+            </div>
+            <div v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
+                <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
+            </div>
+        </template>
     </figure>
 </template>
 
@@ -63,25 +69,33 @@
     .mb-code {
         position: relative;
         overflow: hidden;
+        padding: 4px;
         border: 1px solid var(--color-border-lighter);
-        border-radius: 8px;
+        border-radius: 16px;
         background-color: var(--color-background);
     }
 
     .code-header {
         display: flex;
+        align-items: center;
         justify-content: space-between;
+        gap: 8px;
+        height: 28px;
         padding-inline: 12px;
+        border-radius: 12px;
         background: var(--color-theme);
         font-family: var(--font-smooth);
         font-size: 1rem;
-        line-height: 28px;
         color: var(--color-theme-text);
+    }
+
+    .code-lang {
+        flex: 1;
     }
 
     .code-area {
         display: flex;
-        max-height: 194px;
+        max-height: 190px;
         font-size: 14px;
         line-height: 20px;
 
@@ -95,6 +109,7 @@
     }
 
     .code-line, .code-content {
+        margin-bottom: -4px;
         padding: 8px;
         font-family: var(--font-code);
     }
