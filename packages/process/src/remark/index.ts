@@ -3,11 +3,12 @@ import { unified } from "unified";
 import $ from "node-html-parser";
 import parse from "remark-parse";
 import frontmatter from "remark-frontmatter";
-import externalLinks, { type Options as ExternalOptions } from "rehype-external-links";
 import gfm from "remark-gfm";
 import mdc from "remark-mdc";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import raw from "rehype-raw";
+import slug from "rehype-slug";
+import externalLinks, { type Options as ExternalOptions } from "rehype-external-links";
 import stringify from "rehype-stringify";
 import attributes from "./plugins/attributes";
 import ruby from "./plugins/ruby";
@@ -39,6 +40,7 @@ export async function parseArticle<T>(text: string) {
         .use(ruby)
         .use(rehype, rehypeOptions)
         .use(raw)
+        .use(slug)
         .use(externalLinks, externalOptions)
         .use(stringify);
 
