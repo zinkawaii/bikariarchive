@@ -53,21 +53,18 @@
                 <icon :name="`fa6-solid:chevron-${isCollapse ? `left` : `down`}`"/>
             </a>
         </div>
-        <template v-if="!isCollapse">
-            <div class="code-area" :class="{ [`is-expand`]: isExpand }">
-                <pre class="code-line">{{ lineStr }}</pre>
-                <pre ref="$code" class="shiki code-content" v-html="code || props.raw"></pre>
-            </div>
+        <div v-show="!isCollapse" class="code-area" :class="{ [`is-expand`]: isExpand }">
+            <pre class="code-line">{{ lineStr }}</pre>
+            <pre ref="$code" class="shiki code-content" v-html="code || props.raw"></pre>
             <div v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
                 <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
             </div>
-        </template>
+        </div>
     </figure>
 </template>
 
 <style lang="scss" scoped>
     .mb-code {
-        position: relative;
         overflow: hidden;
         padding: 4px;
         border: 1px solid var(--color-border-lighter);
@@ -95,6 +92,7 @@
 
     .code-area {
         display: flex;
+        position: relative;
         max-height: 190px;
         font-size: 14px;
         line-height: 20px;
@@ -131,8 +129,7 @@
 
     .code-expand {
         position: absolute;
-        bottom: 0;
-        width: 100%;
+        inset: auto -4px -4px;
         background: linear-gradient(to bottom, transparent, var(--color-background));
         line-height: 28px;
         text-align: center;
