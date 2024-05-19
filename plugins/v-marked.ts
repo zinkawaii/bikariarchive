@@ -22,6 +22,9 @@ const zmark = new Marked({
         token.text = shiki.highlight(token.text, { lang: token.lang, ...highlightOptions });
     },
     renderer: {
+        link(href, title, text) {
+            return `<a class="plain-link" href=${href} rel="noopener noreferrer nofollow" target="_blank">${text}</a>`;
+        },
         code(code, infostring) {
             return `<pre class="shiki">\`\`\`${infostring}\n${code}\n\`\`\`</pre>`;
         }
