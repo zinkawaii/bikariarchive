@@ -25,9 +25,9 @@
 
 <template>
     <div class="content-table home-profile">
-        <a class="profile-avatar">
+        <nuxt-link class="profile-avatar" :to="{ name: `tweet` }">
             <nuxt-img :src="$config.public.avatar" alt="[avatar]"/>
-        </a>
+        </nuxt-link>
         <table class="profile-table">
             <tbody>
                 <tr>

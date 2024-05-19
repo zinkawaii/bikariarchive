@@ -78,6 +78,14 @@ export default <RouterConfig> {
             component: () => import("~/pages/search.vue")
         },
         {
+            name: "tweet",
+            path: "/tweet",
+            component: () => import("~/pages/tweet.vue"),
+            meta: {
+                comment: true
+            }
+        },
+        {
             name: "update",
             path: "/update",
             component: () => import("~/pages/update.vue")
