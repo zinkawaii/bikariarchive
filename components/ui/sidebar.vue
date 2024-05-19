@@ -46,7 +46,7 @@
             </p>
         </aside-widget>
         <div class="aside-sticky">
-            <aside-catalog v-if="route.name === `reader`"/>
+            <aside-unified v-if="route.name === `reader`"/>
             <aside-widget class="text-small" title="最近更新">
                 <template #icon>
                     <icon name="fa6-solid:clock-rotate-left"/>

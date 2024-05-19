@@ -15,7 +15,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .aside-widget {
         margin-top: 16px;
         padding: 16px;

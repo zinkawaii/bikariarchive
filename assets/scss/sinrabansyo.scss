@@ -305,6 +305,10 @@ textarea {
 }
 
 .novel-text {
+    h2, h3 {
+        scroll-margin-top: 80px;
+    }
+
     h2 {
         position: relative;
         margin-block: 24px 12px;

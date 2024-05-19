@@ -23,6 +23,7 @@
     "crypto-es": "^2.1.0",
     "dayjs": "^1.11.11",
     "dompurify": "^3.1.3",
+    "hookable": "^5.5.3",
     "lunisolar": "^2.5.0",
     "marked": "^12.0.2",
     "uqr": "^0.1.2",
