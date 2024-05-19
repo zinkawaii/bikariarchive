@@ -1,6 +1,9 @@
+export type SignerCurrentView = "login" | "logon" | "profile";
+
 export const useSignerStore = defineStore("signer", {
     state: () => ({
-        isOpened: false
+        isOpened: false,
+        currentView: ""
     }),
     actions: {
         open() {
@@ -11,6 +14,9 @@ export const useSignerStore = defineStore("signer", {
         },
         toggle(state?: boolean) {
             this.isOpened = state ?? !this.isOpened;
+        },
+        switchView(view: SignerCurrentView) {
+            this.currentView = view;
         }
     }
 });

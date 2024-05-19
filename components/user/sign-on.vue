@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-    const emit = defineEmits(["success"]);
-
+    const signerStore = useSignerStore();
     const toastStore = useToastStore();
 
     const nickname = ref("");
@@ -136,7 +135,7 @@
                     tips.value.verify = "* 验证码不正确";
                     break;
                 default:
-                    emit("success");
+                    signerStore.switchView("login");
             }
         }
         catch {

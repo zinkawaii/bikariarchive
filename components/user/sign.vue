@@ -3,9 +3,6 @@
     const signerStore = useSignerStore();
     const userStore = useUserStore();
 
-    //当前视图
-    const currentView = ref();
-
     //添加遮罩层
     useMask({
         isOpened: () => signerStore.isOpened,
@@ -14,7 +11,7 @@
 
     //根据登录状态切换视图
     watchImmediate(() => userStore.isLogin, (value) => {
-        currentView.value = value ? "profile" : "login";
+        signerStore.currentView = value ? "profile" : "login";
     });
 
     //路径变更时收起
@@ -29,21 +26,21 @@
             <div class="sign-innerworld"></div>
             <div class="sign-wrapper">
                 <transition name="fade" mode="out-in">
-                    <div v-if="currentView === `login`">
+                    <div v-if="signerStore.currentView === `login`">
                         <div class="sign-header">
                             <h2 class="sign-title">登录</h2>
-                            <a class="sign-have" @click="currentView = `logon`">没有账号？立即注册<icon name="fa6-solid:chevron-right"/></a>
+                            <a class="sign-have" @click="signerStore.switchView(`logon`)">没有账号？立即注册<icon name="fa6-solid:chevron-right"/></a>
                         </div>
                         <user-sign-in />
                     </div>
-                    <div v-else-if="currentView === `logon`">
+                    <div v-else-if="signerStore.currentView === `logon`">
                         <div class="sign-header">
                             <h2 class="sign-title">注册</h2>
-                            <a class="sign-have" @click="currentView = `login`">已有账号，前往登录<icon name="fa6-solid:chevron-right"/></a>
+                            <a class="sign-have" @click="signerStore.switchView(`login`)">已有账号，前往登录<icon name="fa6-solid:chevron-right"/></a>
                         </div>
-                        <user-sign-on @success="currentView = `login`"/>
+                        <user-sign-on />
                     </div>
-                    <div v-else-if="currentView === `profile`">
+                    <div v-else-if="signerStore.currentView === `profile`">
                         <div class="sign-header">
                             <h2 class="sign-title">资料卡</h2>
                             <span class="sign-have">{{ userStore.sign }}</span>
