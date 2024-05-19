@@ -14,7 +14,10 @@
 
     //相对时间
     const elapsed = computed(() => {
-        return dayjs(props.data.time).fromNow();
+        const date = dayjs(props.data.time);
+        return Date.now() - date.valueOf() >= 86400000
+            ? date.format("YYYY-MM-DD hh:mm")
+            : date.fromNow();
     });
 
     //被回复者
@@ -123,11 +126,11 @@
     .comment-reply {
         border-bottom: 1px solid var(--color-border-lighter);
 
-        & .comment-item:last-child & {
+        & > .comment-item:last-child > & {
             border: 0;
         }
 
-        &:not(:has(> *)) {
+        &:empty {
             margin-top: 14px;
         }
     }
