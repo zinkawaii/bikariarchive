@@ -4,14 +4,22 @@
     const { hooks } = useHookStore();
 
     let $link: HTMLAnchorElement = null;
-    let headers: OutlineHeaderItem[] = [];
+    let flatHeaders: OutlineHeaderItem[] = [];
     const nestedHeaders = shallowRef<OutlineHeaderItem[]>([]);
+
+    //列表模板重用
+    const [DefineOutlineList, OutlineList] = createReusableTemplate<{
+        headers: OutlineHeaderItem[];
+        root?: boolean;
+    }>({
+        inheritAttrs: false
+    });
 
     //文章渲染完成时更新标题列表
     hooks.hook("page:reader:rendered", () => {
         const $headings = document.querySelectorAll<HTMLHeadingElement>(".novel-text :where(h2, h3)");
 
-        headers = [...$headings]
+        flatHeaders = [...$headings]
         .map((el) => ({
             element: el,
             title: el.textContent,
@@ -22,11 +30,11 @@
         .filter((el) => el.level <= 3);
 
         nestedHeaders.value = [];
-        outer: for (let i = 0; i < headers.length; i++) {
-            const cur = headers[i];
+        outer: for (let i = 0; i < flatHeaders.length; i++) {
+            const cur = flatHeaders[i];
             if (i > 0) {
                 for (let j = i - 1; j >= 0; j--) {
-                    const prev = headers[j];
+                    const prev = flatHeaders[j];
                     if (prev.level < cur.level) {
                         prev.children.push(cur);
                         continue outer;
@@ -42,7 +50,7 @@
         const { scrollY, innerHeight } = window;
         const { offsetHeight } = document.body;
 
-        const topedHeaders = headers.map(({ element, link }) => ({
+        const topedHeaders = flatHeaders.map(({ element, link }) => ({
             link,
             top: getPosition(element).top
         }));
@@ -76,10 +84,28 @@
 </script>
 
 <template>
+    <define-outline-list v-slot="{ headers, root }">
+        <ul class="outline-list" :class="{ [`aside-limited`]: root }">
+            <li v-for="{ title, link, children } in headers" class="outline-item">
+                <a class="text-truncate aside-anchor" :href="link">{{ title }}</a>
+                <outline-list v-if="children.length" :headers="children"/>
+            </li>
+        </ul>
+    </define-outline-list>
     <aside-widget class="aside-unified" title="目录">
         <template #icon>
             <icon name="fa6-solid:book-open"/>
         </template>
-        <aside-outline-list :headers="nestedHeaders" root/>
+        <outline-list v-bind="{ headers: nestedHeaders, root: true }"/>
     </aside-widget>
 </template>
+
+<style lang="scss" scoped>
+    .outline-item {
+        display: grid;
+
+        > .outline-list {
+            margin-left: 1em;
+        }
+    }
+</style>
