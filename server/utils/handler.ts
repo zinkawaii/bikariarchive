@@ -15,7 +15,7 @@ const createHandler = <T extends BaseResponse>(
     }
     catch (err) {
         console.error(err);
-        event.node.res.writeHead(err.statusCode ?? 500).end();
+        sendError(event, err);
     }
 };
 

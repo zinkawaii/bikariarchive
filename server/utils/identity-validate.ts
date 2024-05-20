@@ -4,8 +4,8 @@ export function identityValidate(event: H3Event, identity: number) {
     const { session } = event.context;
 
     if ((session.identity || 0) < identity) {
-        throw {
-            statusCode: 403
-        };
+        throw createError({
+            status: 403
+        });
     }
 }
