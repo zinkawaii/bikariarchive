@@ -5,6 +5,7 @@
 
     const props = defineProps<{
         data: WithParent<CommentData>;
+        root?: boolean;
     }>();
 
     const commentStore = useCommentStore();
@@ -49,15 +50,19 @@
             <div class="comment-header">
                 <nuxt-link class="comment-nickname" :to="data.address" target="_blank">{{ data.nickname }}</nuxt-link>
                 <template v-if="data.parent?.parent">
-                    <span class="text-gray">回复</span>
+                    <icon class="text-gray" name="vaadin:chat"/>
                     <a class="comment-nickname">{{ recipient }}</a>
                 </template>
             </div>
             <div v-marked="data.content" class="novel-text comment-text"></div>
-            <div class="comment-operator">
-                <span>{{ elapsed }}</span>
-                <a @click="replyComment">回复</a>
-                <a v-if="userStore.identity >= 9" @click="removeComment">删除</a>
+            <div class="comment-info">
+                <time>{{ elapsed }}</time>
+                <a class="comment-action" @click="replyComment">
+                    <icon name="fa6-regular:comment"/>回复
+                </a>
+                <a v-if="userStore.identity >= 9" class="comment-action" @click="removeComment">
+                    <icon name="fa6-solid:trash-can"/>删除
+                </a>
             </div>
         </div>
         <div class="comment-reply">
@@ -91,13 +96,14 @@
     }
 
     .comment-main {
-        &:hover .comment-operator > a {
+        &:hover .comment-action {
             opacity: 1;
         }
     }
 
     .comment-header {
         display: flex;
+        align-items: center;
         gap: 7px;
         line-height: 21px;
     }
@@ -111,15 +117,22 @@
         margin-block: 0.5em;
     }
 
-    .comment-operator {
+    .comment-info {
         display: flex;
         gap: 16px;
         font-size: 14px;
         color: var(--color-text-info);
+    }
 
-        > a {
-            opacity: 0;
-            transition: all 0.25s;
+    .comment-action {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        opacity: 0;
+        transition: all 0.25s;
+
+        &:hover {
+            color: var(--color-theme-text);
         }
     }
 
