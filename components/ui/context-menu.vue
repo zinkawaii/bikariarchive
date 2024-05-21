@@ -121,7 +121,7 @@
 <template>
     <transition-scale :duration="0.25">
         <div v-show="state" ref="$menu" class="content-widget z-context-menu">
-            <menu class="menu-tool-bar">
+            <menu class="menu-tools">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
                     <icon :name="icon"/>
                 </li>
@@ -150,9 +150,8 @@
         font-size: 14px;
     }
 
-    .menu-tool-bar {
+    .menu-tools {
         display: flex;
-        justify-content: space-between;
         gap: 4px;
     }
 
@@ -183,11 +182,13 @@
     }
 
     .menu-item {
+        display: grid;
+        grid-template-columns: 16px 1fr;
+        gap: 6px;
         padding-inline: 8px;
 
         > .icon {
-            width: 16px;
-            margin-right: 8px;
+            margin: auto;
         }
     }
 </style>

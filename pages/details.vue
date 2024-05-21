@@ -46,6 +46,11 @@
         align-items: flex-start;
         gap: var(--cw-medium);
         margin-top: var(--cw-medium);
+
+        @container main (width < 768px) {
+            flex-direction: column;
+            align-items: stretch;
+        }
     }
 
     .detail-header {
@@ -80,13 +85,6 @@
             &::before {
                 content: " • ";
             }
-        }
-    }
-
-    @container main (width < 768px) {
-        .detail-block {
-            flex-direction: column;
-            align-items: stretch;
         }
     }
 </style>

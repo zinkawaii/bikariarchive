@@ -57,7 +57,7 @@
             <setting-form title="切换章节" type="input">
                 <input
                     v-for="(value, name) in shortcuts"
-                    class="input-line"
+                    class="setting-input"
                     :value
                     @keypress.stop="onShortcutKeypress(name)"
                     @keyup.stop="onShortcutKeyup(name, $event)"
@@ -96,7 +96,7 @@
         }
     }
 
-    .input-line {
+    .setting-input {
         flex: 1;
         text-align: center;
     }

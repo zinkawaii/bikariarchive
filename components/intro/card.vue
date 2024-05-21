@@ -34,9 +34,9 @@
         <h2 class="content-h2">{{ Article.meta[novel].title }}</h2>
         <intro-content :novel/>
         <div class="intro-record">
-            <span>&gt;</span>
-            <plain-link :to="record.link">{{ record.title }}</plain-link>
-            <span>&lt;</span>
+            <icon name="fa-solid:chevron-right"/>
+            <plain-link class="intro-link" :to="record.link">{{ record.title }}</plain-link>
+            <icon name="fa-solid:chevron-left"/>
         </div>
     </div>
 </template>
@@ -69,19 +69,21 @@
     }
 
     .intro-record {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin-top: auto;
         padding-top: 8px;
         border-top: 1px solid var(--color-border-lighter);
-        text-align: center;
         color: var(--color-text-info);
+    }
 
-        > a {
-            margin-inline: 20px;
-            transition: all 0.2s;
+    .intro-link {
+        margin-inline: 16px;
+        transition: all 0.25s;
 
-            &:hover {
-                margin-inline: 8px;
-            }
+        &:hover {
+            margin-inline: 4px;
         }
     }
 </style>

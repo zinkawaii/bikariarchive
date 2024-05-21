@@ -60,6 +60,7 @@
 <style lang="scss" scoped>
     .z-sidebar {
         width: 256px;
+        margin-top: -16px;
 
         @media (width >= 1024px) {
             &.is-collapse {
@@ -68,11 +69,7 @@
         }
 
         @media (width < 1024px) {
-            margin: auto;
-        }
-
-        > :first-child {
-            margin-top: 0;
+            margin-inline: auto;
         }
     }
 

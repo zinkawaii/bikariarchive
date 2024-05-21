@@ -306,7 +306,7 @@
         border-bottom: 3px solid rgb(0 0 0 / 25%);
         line-height: 1;
 
-        > span:first-child {
+        > :first-child {
             font-size: 28px;
             font-weight: bold;
             letter-spacing: 1px;
@@ -314,7 +314,7 @@
             color: var(--azur-text-white);
         }
 
-        > span:last-child {
+        > :last-child {
             font-size: 9px;
             letter-spacing: 3px;
             color: var(--azur-text-gray);
@@ -430,7 +430,7 @@
             background-color: var(--azur-blue-2);
         }
 
-        > span:last-child {
+        > :last-child {
             font-size: 8px;
             letter-spacing: 1px;
         }
@@ -514,7 +514,7 @@
         display: flex;
         gap: 0.25em;
 
-        > span:first-child {
+        > :first-child {
             color: var(--azur-text-gray);
         }
     }
@@ -522,7 +522,7 @@
     .azur-level {
         font-size: 32cqh;
 
-        > span:first-child {
+        > :first-child {
             letter-spacing: -5cqh;
         }
     }
@@ -596,11 +596,11 @@
         width: 120cqh;
         margin-block: 6cqh;
 
-        > span:first-child {
+        > :first-child {
             font-size: 18cqh;
         }
 
-        > span:last-child {
+        > :last-child {
             font-size: 42cqh;
             text-align: right;
         }

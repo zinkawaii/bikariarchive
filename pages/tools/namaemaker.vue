@@ -180,11 +180,11 @@
     <coco-widget>
         <div class="p-small">
             <div class="namae-option">
-                <span>介绍</span>
+                <span class="text-gray">介绍</span>
                 <p class="p-small">本页面用于生成日文名，数据集与随机算法均来自 <plain-link to="https://namaemaker.net" target="_blank">namaemaker.net</plain-link></p>
             </div>
             <div class="namae-option">
-                <span>数量</span>
+                <span class="text-gray">数量</span>
                 <div class="namae-radio">
                     <mb-radio
                         v-for="item in counter.list"
@@ -194,7 +194,7 @@
                 </div>
             </div>
             <div class="namae-option">
-                <span>性别</span>
+                <span class="text-gray">性别</span>
                 <div class="namae-radio">
                     <mb-radio
                         v-for="item in gender.list"
@@ -204,7 +204,7 @@
                 </div>
             </div>
             <div class="namae-option">
-                <span>指定</span>
+                <span class="text-gray">指定</span>
                 <div class="namae-specific">
                     <input type="text" placeholder="姓" v-model="specific.last.kanji"/>
                     <input type="text" placeholder="姓（读音）" v-model="specific.last.kana"/>
@@ -231,7 +231,7 @@
             </div>
         </div>
         <div v-if="!isResultEmpty" class="div-table namae-result">
-            <dl v-for="chunk in chunkedResults" class="namae-col">
+            <dl v-for="chunk in chunkedResults">
                 <template v-for="item in chunk">
                     <dt>{{ item.kanji }}</dt>
                     <dd>{{ item.kana }}</dd>
@@ -243,28 +243,15 @@
 
 <style lang="scss" scoped>
     .namae-option {
-        display: flex;
+        display: grid;
+        grid-template-columns: auto 1fr;
         gap: 1.6em;
-
-        & + & {
-            margin-top: 0.6em;
-        }
-
-        > span {
-            color: var(--color-text-info);
-
-            + * {
-                flex: 1;
-            }
-        }
+        margin-bottom: 0.6em;
     }
 
     .namae-radio {
-        display: flex;
-
-        > label {
-            min-width: 4.5em;
-        }
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 4.5em);
     }
 
     .namae-specific {
@@ -272,7 +259,7 @@
         grid-template: repeat(2, 1fr) / repeat(2, minmax(auto, 128px));
         gap: 0.5em 1em;
 
-        input {
+        > input {
             padding-bottom: 2px;
             border-bottom: 1px solid var(--color-border-light);
             background: transparent;
@@ -285,10 +272,8 @@
 
     .namae-result {
         margin-top: 16px;
-    }
 
-    @container main (width < 768px) {
-        .namae-result {
+        @container main (width < 768px) {
             flex-direction: column;
         }
     }

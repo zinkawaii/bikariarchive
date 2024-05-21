@@ -96,7 +96,7 @@
 
 <template>
     <coco-widget>
-        <div class="manage-flex">
+        <div class="manage-grid">
             <div v-for="item, index in que.list">
                 <form class="manage-form" :name="item.title">
                     <span class="manage-title">{{ item.title }}</span>
@@ -145,13 +145,10 @@
 </template>
 
 <style lang="scss" scoped>
-    .manage-flex {
-        display: flex;
+    .manage-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
-
-        > div {
-            flex: 1;
-        }
     }
 
     .manage-form {

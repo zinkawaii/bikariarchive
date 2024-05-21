@@ -102,7 +102,7 @@
 <template>
     <coco-widget>
         <header class="novel-header">
-            <nuxt-link class="novel-wrap-top" :class="toPrevClass" :to="toPrevRoute">
+            <nuxt-link class="novel-adjacent-top" :class="toPrevClass" :to="toPrevRoute">
                 <icon name="fa6-solid:chevron-left"/>
                 <span>{{ toPrev }}</span>
             </nuxt-link>
@@ -127,7 +127,7 @@
                     </li>
                 </ul>
             </div>
-            <nuxt-link class="novel-wrap-top" :class="toNextClass" :to="toNextRoute">
+            <nuxt-link class="novel-adjacent-top" :class="toNextClass" :to="toNextRoute">
                 <span>{{ toNext }}</span>
                 <icon name="fa6-solid:chevron-right"/>
             </nuxt-link>
@@ -163,9 +163,9 @@
             </div>
         </footer>
     </coco-widget>
-    <div class="novel-wrap-bottom">
-        <nuxt-link :class="toPrevClass" :to="toPrevRoute">{{ toPrev }}</nuxt-link>
-        <nuxt-link :class="toNextClass" :to="toNextRoute">{{ toNext }}</nuxt-link>
+    <div class="novel-navigation">
+        <nuxt-link class="novel-adjacent-bottom" :class="toPrevClass" :to="toPrevRoute">{{ toPrev }}</nuxt-link>
+        <nuxt-link class="novel-adjacent-bottom" :class="toNextClass" :to="toNextRoute">{{ toNext }}</nuxt-link>
     </div>
 </template>
 
@@ -269,7 +269,7 @@
         gap: 6px;
     }
 
-    .novel-wrap-top {
+    .novel-adjacent-top {
         display: flex;
         align-items: center;
         font-weight: bold;
@@ -279,35 +279,32 @@
             width: 1em;
             font-size: 42px;
         }
+
+        @container main (width < 768px) {
+            font-size: 0;
+        }
     }
 
-    .novel-wrap-bottom {
-        display: flex;
+    .novel-navigation {
+        display: grid;
+        grid-template-columns: 0.4fr 0.4fr;
         justify-content: space-between;
+    }
 
-        > a {
-            width: 40%;
-            padding-block: 16px;
-            border-radius: 16px;
-            box-shadow: var(--box-shadow);
-            background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
-            font-weight: bold;
-            text-align: center;
-            text-shadow: var(--text-shadow);
-            color: white;
-            cursor: pointer;
-        }
+    .novel-adjacent-bottom {
+        padding-block: 16px;
+        border-radius: 16px;
+        box-shadow: var(--box-shadow);
+        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
+        font-weight: bold;
+        text-align: center;
+        text-shadow: var(--text-shadow);
+        color: white;
     }
 
     @container main (width >= 768px) {
         .mb-skeleton, .novel-text {
             padding-inline: var(--cw-large);
-        }
-    }
-
-    @container main (width < 768px) {
-        .novel-wrap-top > span {
-            display: none;
         }
     }
 </style>

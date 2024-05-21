@@ -57,14 +57,14 @@
 
 <style lang="scss" scoped>
     .space-header {
-        --s: -32px;
+        --mb: -32px;
 
         display: grid;
         grid-template:
             "A B"
             "A C" 1fr / auto 1fr;
         gap: 3px 24px;
-        margin-bottom: var(--s);
+        margin-bottom: var(--mb);
         padding: 16px 32px;
         border-radius: 0 0 16px 16px;
         box-shadow: var(--box-shadow);
@@ -72,7 +72,11 @@
         background-image: url("/garden/background/space_header.webp");
         background-position: 0 37.5%;
         background-size: cover;
-        translate: 0 var(--s);
+        translate: 0 var(--mb);
+
+        @media (width < 1024px) {
+            --mb: -16px;
+        }
     }
 
     .space-avatar {
@@ -114,12 +118,6 @@
             box-shadow: 0 2px 4px inset rgb(35 54 86 / 30%);
             background-color: var(--color-background);
             color: var(--color-text-primary);
-        }
-    }
-
-    @media (width < 1024px) {
-        .space-header {
-            --s: -16px;
         }
     }
 </style>

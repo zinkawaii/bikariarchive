@@ -104,7 +104,7 @@
             </section>
         </article>
     </coco-widget>
-    <Unknown v-else/>
+    <component v-else :is="Unknown"/>
 </template>
 
 <style lang="scss" scoped>
