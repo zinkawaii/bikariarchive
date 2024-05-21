@@ -12,7 +12,7 @@
         {
             title: "目录",
             icon: "fa6-solid:book-open",
-            to: { name: "catalogue" }
+            to: { name: "shelf" }
         },
         {
             title: "情报",

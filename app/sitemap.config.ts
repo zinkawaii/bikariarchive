@@ -7,12 +7,12 @@ export default <ModuleOptions> {
     urls: () => [
         "/about",
         "/borrowing",
-        "/catalogue",
         "/compact",
         "/details",
         "/friend",
         "/home",
         "/search",
+        "/shelf",
         "/update",
         "/tools/excalc",
         "/tools/lyricaxis",

@@ -24,11 +24,6 @@ export default <RouterConfig> {
             component: () => import("~/pages/borrowing.vue")
         },
         {
-            name: "catalogue",
-            path: "/catalogue",
-            component: () => import("~/pages/catalogue.vue")
-        },
-        {
             name: "chanrina",
             path: "/chanrina",
             component: () => import("~/pages/chanrina.vue"),
@@ -36,6 +31,11 @@ export default <RouterConfig> {
                 identity: 6,
                 middleware: ["auth"]
             }
+        },
+        {
+            name: "compact",
+            path: "/compact",
+            component: () => import("~/pages/compact.vue")
         },
         {
             name: "details",
@@ -57,18 +57,13 @@ export default <RouterConfig> {
             component: () => import("~/pages/home.vue")
         },
         {
-            name: "compact",
-            path: "/compact",
-            component: () => import("~/pages/compact.vue")
-        },
-        {
             name: "reader",
             path: "/book/:novel/:index",
             component: () => import("~/pages/reader.vue"),
             meta: {
                 comment: true,
                 breadcrumb: {
-                    name: "catalogue"
+                    name: "shelf"
                 }
             }
         },
@@ -76,6 +71,11 @@ export default <RouterConfig> {
             name: "search",
             path: "/search",
             component: () => import("~/pages/search.vue")
+        },
+        {
+            name: "shelf",
+            path: "/shelf",
+            component: () => import("~/pages/shelf.vue")
         },
         {
             name: "tweet",

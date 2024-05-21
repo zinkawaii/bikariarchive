@@ -5,9 +5,9 @@
         chapter: Article;
     }>();
 
-    const catalogueStore = useCatalogueStore();
+    const shelfStore = useShelfStore();
     const readRecordStore = useReadRecordStore();
-    const { novel, infoType } = storeToRefs(catalogueStore);
+    const { novel, infoType } = storeToRefs(shelfStore);
 
     //最近阅读
     const isLastRead = computed(() => {
@@ -16,22 +16,22 @@
 </script>
 
 <template>
-    <nuxt-link class="cacha-item" :to="chapter.route">
+    <nuxt-link class="shech-item" :to="chapter.route">
         <span class="font-italic text-gray">{{ chapter.orderInVol + 1 }}.</span>
-        <span class="text-truncate cacha-title">{{ chapter.title }}</span>
-        <ul class="cacha-tags">
+        <span class="text-truncate shech-title">{{ chapter.title }}</span>
+        <ul class="shech-tags">
             <li v-if="chapter.draft" tag="draft">草稿</li>
             <li v-if="isLastRead" tag="last-read">最近阅读</li>
         </ul>
         <span class="text-gray">{{
-            infoType === 0 ? `${chapter.wordCount}字` :
+            infoType === 0 ? `${chapter.wordCount} 字` :
             infoType === 1 ? chapter.publishDate : ""
         }}</span>
     </nuxt-link>
 </template>
 
 <style lang="scss" scoped>
-    .cacha-item {
+    .shech-item {
         display: grid;
         grid-template-columns: auto auto 1fr auto;
         gap: 8px;
@@ -44,11 +44,11 @@
         }
     }
 
-    .cacha-title {
+    .shech-title {
         font-size: 1rem;
     }
 
-    .cacha-tags {
+    .shech-tags {
         display: flex;
         align-items: center;
         gap: 0.5em;

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-    const catalogueStore = useCatalogueStore();
-    const { curOrder, jNovel } = storeToRefs(catalogueStore);
+    const shelfStore = useShelfStore();
+    const { curOrder, jNovel } = storeToRefs(shelfStore);
 
     const volumes = computed(() => {
         return jNovel.value.volumes.map((item) => item.title);
@@ -8,24 +8,24 @@
 </script>
 
 <template>
-    <ul class="catalogue-volume">
+    <ul class="shelf-volume">
         <li v-for="(title, i) in volumes">
             <a
-                class="cavol-item"
+                class="shevo-link"
                 :class="{ checked: curOrder.volume === i }"
-                @click="catalogueStore.selectVolume(i)"
+                @click="shelfStore.selectVolume(i)"
             >{{ title }}</a>
         </li>
     </ul>
 </template>
 
 <style lang="scss" scoped>
-    .catalogue-volume {
+    .shelf-volume {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
     }
 
-    .cavol-item {
+    .shevo-link {
         display: flex;
         justify-content: center;
         border: 1px solid transparent;

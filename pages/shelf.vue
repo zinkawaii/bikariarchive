@@ -3,37 +3,41 @@
         title: "目录"
     });
 
-    const catalogueStore = useCatalogueStore();
-    const { novel, jNovel, jChapters } = storeToRefs(catalogueStore);
+    const shelfStore = useShelfStore();
+    const { novel, jNovel, jChapters } = storeToRefs(shelfStore);
 </script>
 
 <template>
     <coco-widget title="目录">
-        <catalogue-shelf />
-        <div class="catalogue-section">
-            <fieldset class="catalogue-fieldset">
+        <shelf-novel />
+        <div class="shelf-section">
+            <fieldset class="shelf-fieldset">
                 <legend class="content-h2">{{ jNovel.title }}</legend>
                 <intro-content :novel/>
             </fieldset>
-            <fieldset v-show="jNovel.volumes.length" class="catalogue-fieldset">
+            <fieldset v-show="jNovel.volumes.length" class="shelf-fieldset">
                 <legend class="content-h2">卷册列表</legend>
-                <catalogue-volume />
+                <shelf-volume />
             </fieldset>
         </div>
-        <fieldset v-show="jChapters.length" class="catalogue-fieldset">
+        <fieldset v-show="jChapters.length" class="shelf-fieldset">
             <legend class="content-h2">章节列表</legend>
-            <catalogue-chapter />
+            <shelf-chapter />
         </fieldset>
     </coco-widget>
 </template>
 
 <style lang="scss" scoped>
-    .catalogue-section {
+    .shelf-section {
         display: flex;
         column-gap: 32px;
+
+        @container main (width < 768px) {
+            flex-direction: column;
+        }
     }
 
-    .catalogue-fieldset {
+    .shelf-fieldset {
         flex: 1;
         margin-top: 16px;
         padding-top: 8px;
@@ -42,12 +46,6 @@
         > legend {
             margin: auto;
             padding-inline: 8px;
-        }
-    }
-
-    @container main (width < 768px) {
-        .catalogue-section {
-            flex-direction: column;
         }
     }
 </style>

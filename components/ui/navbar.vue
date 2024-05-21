@@ -9,7 +9,7 @@
         },
         {
             title: "目录",
-            name: "catalogue",
+            name: "shelf",
             icon: "fa6-solid:book-open"
         },
         {

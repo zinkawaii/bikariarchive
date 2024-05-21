@@ -1,7 +1,7 @@
 import type { JNovel, JVolume } from "@bikari/process";
 import { Article } from "~/utils/Article";
 
-export const useCatalogueStore = defineStore("catalogue", {
+export const useShelfStore = defineStore("shelf", {
     state: () => ({
         novel: "bikari",
         curOrder: {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-    const catalogueStore = useCatalogueStore();
-    const { infoType, jChapters } = storeToRefs(catalogueStore);
+    const shelfStore = useShelfStore();
+    const { infoType, jChapters } = storeToRefs(shelfStore);
 
     //总字数
     const totalCount = computed(() => {
@@ -26,36 +26,36 @@
 </script>
 
 <template>
-    <div class="catalogue-control">
-        <div class="catalogue-property">
+    <div class="shelf-control">
+        <div class="shelf-property">
             <span>总字数</span>
             <span>{{ totalCount }}</span>
         </div>
-        <div class="catalogue-property">
+        <div class="shelf-property">
             <span>最近更新</span>
             <span>{{ lastUpdated }}</span>
         </div>
-        <div class="catalogue-property">
+        <div class="shelf-property">
             <span>状态</span>
             <span>{{ updateState }}</span>
         </div>
-        <div class="catalogue-property">
+        <div class="shelf-property">
             <span>显示</span>
-            <form class="catalogue-display">
+            <form class="shelf-display">
                 <label><input type="radio" :value="0" v-model="infoType"/>字数</label>
                 <label><input type="radio" :value="1" v-model="infoType"/>发布日期</label>
             </form>
         </div>
     </div>
-    <ul class="catalogue-chapter">
+    <ul class="shelf-chapter">
         <li v-for="chapter in jChapters">
-            <catalogue-chapter-item :chapter/>
+            <shelf-chapter-item :chapter/>
         </li>
     </ul>
 </template>
 
 <style lang="scss" scoped>
-    .catalogue-control {
+    .shelf-control {
         display: flex;
         flex-wrap: wrap;
         column-gap: 1.5em;
@@ -65,7 +65,7 @@
         color: var(--color-text-info);
     }
 
-    .catalogue-property {
+    .shelf-property {
         display: flex;
         gap: 0.75em;
 
@@ -79,7 +79,7 @@
         }
     }
 
-    .catalogue-display {
+    .shelf-display {
         display: flex;
         gap: 0.75em;
 
@@ -92,7 +92,7 @@
         }
     }
 
-    .catalogue-chapter {
+    .shelf-chapter {
         @container main (width >= 596px) {
             columns: 2;
             column-gap: 2em;

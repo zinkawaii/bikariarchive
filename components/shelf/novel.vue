@@ -1,21 +1,21 @@
 <script lang="ts" setup>
-    const catalogueStore = useCatalogueStore();
-    const { novel, curOrder } = storeToRefs(catalogueStore);
+    const shelfStore = useShelfStore();
+    const { novel, curOrder } = storeToRefs(shelfStore);
 </script>
 
 <template>
-    <div class="catalogue-shelf">
-        <ul class="shelf-wrapper" :style="{ translate: `${curOrder.novel * -144}px` }">
+    <div class="shelf-novel">
+        <ul class="sheno-list" :style="{ translate: `${curOrder.novel * -144}px` }">
             <li v-for="({ title, cover }, key, i) in Article.meta">
                 <a
-                    class="shelf-novel"
+                    class="sheno-link"
                     :class="{ [`is-checked`]: novel === key }"
-                    @click="catalogueStore.selectNovel(key as string, i)"
-                    ><div class="shelf-cover">
+                    @click="shelfStore.selectNovel(key as string, i)"
+                    ><div class="sheno-cover">
                         <nuxt-img v-if="cover" :src="cover" alt="[cover]"/>
-                        <div v-else class="shelf-placeholder">Cover.</div>
+                        <div v-else class="sheno-placeholder">Cover.</div>
                     </div>
-                    <span class="shelf-title">{{ title.split("-")[0] }}</span>
+                    <span class="sheno-title">{{ title.split("-")[0] }}</span>
                 </a>
             </li>
         </ul>
@@ -23,25 +23,25 @@
 </template>
 
 <style lang="scss" scoped>
-    .catalogue-shelf {
+    .shelf-novel {
         padding-left: calc(50% - 72px);
         mask-image: linear-gradient(to right, transparent, white 32px, white calc(100% - 32px), transparent);
     }
 
-    .shelf-wrapper {
+    .sheno-list {
         display: flex;
         width: fit-content;
         transition: all 0.4s;
     }
 
-    .shelf-novel {
+    .sheno-link {
         display: grid;
         justify-items: center;
         margin-inline: 8px;
         color: var(--color-text-info);
     }
 
-    .shelf-cover {
+    .sheno-cover {
         width: 128px;
         aspect-ratio: 1 / 1.414;
         transform-origin: bottom;
@@ -54,7 +54,7 @@
         }
     }
 
-    .shelf-placeholder {
+    .sheno-placeholder {
         display: grid;
         place-items: center;
         height: 100%;
@@ -65,7 +65,7 @@
         user-select: none;
     }
 
-    .shelf-title {
+    .sheno-title {
         line-height: 42px;
 
         .is-checked > & {
