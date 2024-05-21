@@ -6,9 +6,9 @@ import { Article, enrichJArticle } from "~/utils/Article";
 export default defineNitroPlugin(async () => {
     const baseDir = r("/dist/json");
     const list = [
-        baseDir + "/Article.json",
-        baseDir + "/Artmap.json"
-    ];
+        "Article",
+        "Artmap"
+    ].map((name) => baseDir + `/${name}.json`);
 
     for (const path of list) {
         await update(path);

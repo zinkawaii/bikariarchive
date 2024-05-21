@@ -3,8 +3,8 @@ import dayjs from "dayjs";
 import fs from "fs-extra";
 import $ from "node-html-parser";
 import { isDev } from "@bikari/shared";
-import type { ArticleFrontMatter } from "../types";
 import { parseArticle } from "../remark";
+import type { ArticleFrontMatter } from "../types";
 import Processor from "./processor";
 
 const re = /^(.*?)\.(\d+)$/;
@@ -25,7 +25,7 @@ export default new Processor({
     },
     async parse(filename) {
         //处理文件
-        const file = fs.readFileSync(filename);
+        const file = await fs.readFile(filename);
         const { attributes, content } = await parseArticle<ArticleFrontMatter>(file.toString());
 
         //生产环境下忽略草稿文件
@@ -33,7 +33,7 @@ export default new Processor({
 
         //写入文件
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".txt");
-        fs.outputFileSync(outPath, content);
+        await fs.outputFile(outPath, content);
 
         const match = path.basename(path.resolve(filename, "..")).match(re);
         const novel = match[1];
@@ -79,7 +79,7 @@ export default new Processor({
             ...attributes
         };
     },
-    beforeGenerate(filelist) {
+    beforeBuild(filelist) {
         for (const key in this.jMeta) {
             //编号与文件名的映射表
             this.jMap[key] = {};
@@ -89,7 +89,7 @@ export default new Processor({
         }
 
         //按字母顺序解析章节
-        return filelist.sort((a, b) => a.localeCompare(b));
+        filelist.sort((a, b) => a.localeCompare(b));
     },
     beforeOutputMeta() {
         const jNeta = structuredClone(this.jMeta);

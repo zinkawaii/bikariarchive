@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 import chokidar from "chokidar";
 import fs from "fs-extra";
-import { globSync } from "glob";
+import { glob } from "glob";
 import { timer } from "@bikari/shared";
 
 interface ProcessorOptions<T> {
@@ -19,7 +19,7 @@ interface ProcessorOptions<T> {
         out: string;
     };
     parse: (this: T, filename: string) => Promise<void>;
-    beforeGenerate: (this: T, filelist: string[]) => string[] | void;
+    beforeBuild: (this: T, filelist: string[]) => void;
     beforeOutputMeta?: (this: T) => any;
 }
 
@@ -51,41 +51,40 @@ export default class Processor {
     }
 
     build() {
-        return timer(this.options.sign, this.generate.bind(this))();
+        const parse = timer(this.options.sign, async (filelist: string[]) => {
+            //生成处理文件列表
+            this.options.beforeBuild.call(this, filelist);
+
+            //顺序处理源文件
+            await Promise.all(
+                filelist.map((filename) => this.options.parse.call(this, filename))
+            );
+
+            //输出元数据文件
+            await this.outputMeta();
+        });
+
+        return glob(this.sources, {
+            windowsPathsNoEscape: true
+        }).then(parse);
     }
 
     watch() {
         const parse = timer(this.options.sign, async (filename: string) => {
             await this.options.parse.call(this, filename);
-            this.outputMeta();
+            await this.outputMeta();
         });
 
         chokidar.watch(this.sources)
         .on("change", parse);
     }
 
-    outputMeta() {
+    async outputMeta() {
         const jMeta = this.options.beforeOutputMeta?.call(this) || this.jMeta;
 
-        fs.outputFileSync(this.metaOutDir, JSON.stringify(jMeta));
-        fs.outputFileSync(this.mapOutDir, JSON.stringify(this.jMap));
-    }
-
-    private async generate() {
-        //获取文件列表
-        let filelist = globSync(this.sources, {
-            windowsPathsNoEscape: true
-        });
-
-        //运行元数据生成函数，返回可能经过处理的文件列表
-        filelist = this.options.beforeGenerate.call(this, filelist) || filelist;
-
-        //顺序处理源文件
-        await Promise.all(
-            filelist.map((filename) => this.options.parse.call(this, filename))
-        );
-
-        //输出元数据文件
-        this.outputMeta();
+        await Promise.all([
+            fs.outputJson(this.metaOutDir, jMeta),
+            fs.outputJson(this.mapOutDir, this.jMap)
+        ]);
     }
 }

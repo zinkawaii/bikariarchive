@@ -25,14 +25,14 @@ export default new Processor({
     },
     async parse(filename: string) {
         //处理文件
-        const file = fs.readFileSync(filename);
+        const file = await fs.readFile(filename);
         const attributes = await parseEntry(file.toString());
 
         //写入文件
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".json");
-        fs.outputFileSync(outPath, JSON.stringify(attributes));
+        await fs.outputJson(outPath, attributes);
     },
-    beforeGenerate(filelist) {
+    beforeBuild(filelist) {
         this.jMeta.all = [];
 
         for (const filename of filelist) {
