@@ -1,5 +1,9 @@
-//获取绝对路径
-export { r } from "@bikari/shared";
+import { resolve } from "node:path";
+
+//从根目录合并路径
+export function r(path: string) {
+    return resolve("." + path);
+}
 
 //获取查询参数
 export function getQueryValues(event: any) {
