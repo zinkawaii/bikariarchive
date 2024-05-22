@@ -87,7 +87,7 @@ export default class Processor {
 
     async parse(filename: string) {
         const stats = await fs.stat(filename);
-        const hash = resolveHash(stats.mtimeMs.toString());
+        const hash = resolveHash(stats.size.toString());
 
         //当命中缓存时
         let cache = this.jCache[filename];
