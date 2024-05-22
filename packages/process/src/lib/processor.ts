@@ -115,7 +115,8 @@ export default class Processor {
 }
 
 //从代码文件本身生成盐
-const file = fs.readFileSync(__filename);
+const path = resolve(__dirname, "index.js");
+const file = fs.readFileSync(path);
 const salt = CryptoES.MD5(file.toString());
 
 //合成大哈希
