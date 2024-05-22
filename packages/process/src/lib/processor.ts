@@ -107,11 +107,10 @@ export default class Processor {
     async outputMeta() {
         const jMeta = this.options.beforeOutputMeta?.call(this) || this.jMeta;
 
-        await Promise.all([
-            fs.outputJson(this.cacheDir, this.jCache),
-            fs.outputJson(this.metaOutDir, jMeta),
-            fs.outputJson(this.mapOutDir, this.jMap)
-        ]);
+        //同步写入防止在监听时获取空字符串
+        fs.outputJsonSync(this.cacheDir, this.jCache);
+        fs.outputJsonSync(this.metaOutDir, jMeta);
+        fs.outputJsonSync(this.mapOutDir, this.jMap);
     }
 }
 
