@@ -5,8 +5,10 @@ export default defineConfig({
         "./src/index.ts"
     ],
     format: [
+        "cjs",
         "esm"
     ],
     clean: true,
-    dts: true
+    dts: true,
+    shims: true
 });

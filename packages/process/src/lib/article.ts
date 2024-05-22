@@ -7,7 +7,7 @@ import { parseArticle } from "../remark";
 import type { ArticleFrontMatter } from "../types";
 import Processor from "./processor";
 
-const re = /^(.*?)\.(\d+)$/;
+const PATH_REGEX = /^(.*?)\.(\d+)$/;
 
 export default new Processor({
     sign: "Article",
@@ -23,7 +23,7 @@ export default new Processor({
     map: {
         out: "dist/json/Artmap.json"
     },
-    async parse(filename) {
+    async parse(filename, cache) {
         //处理文件
         const file = await fs.readFile(filename);
         const { attributes, content } = await parseArticle<ArticleFrontMatter>(file.toString());
@@ -35,7 +35,7 @@ export default new Processor({
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".txt");
         await fs.outputFile(outPath, content);
 
-        const match = path.basename(path.resolve(filename, "..")).match(re);
+        const match = path.basename(path.resolve(filename, "..")).match(PATH_REGEX);
         const novel = match[1];
         const volume = Number(match[2]);
         const name = path.basename(filename, ".md");
@@ -70,7 +70,7 @@ export default new Processor({
         };
 
         //写入数据
-        this.jMeta[novel].chapters[name] = {
+        const data = {
             index,
             volume,
             encrypted,
@@ -78,6 +78,15 @@ export default new Processor({
             wordCount,
             ...attributes
         };
+        this.jMeta[novel].chapters[name] = data;
+
+        //写入缓存
+        cache.novel = novel;
+        cache.data = data;
+    },
+    onCacheHit(cache) {
+        const { novel, data } = cache;
+        this.jMeta[novel].chapters[data.name] = data;
     },
     beforeBuild(filelist) {
         for (const key in this.jMeta) {
