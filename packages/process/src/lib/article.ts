@@ -64,10 +64,6 @@ export default new Processor({
                 delete attributes.abbrlink;
                 break;
         }
-        this.jMap[novel][index] = {
-            name,
-            password
-        };
 
         //写入数据
         const data = {
@@ -79,14 +75,25 @@ export default new Processor({
             ...attributes
         };
         this.jMeta[novel].chapters[name] = data;
+        this.jMap[novel][index] = {
+            name,
+            password
+        };
 
         //写入缓存
         cache.novel = novel;
+        cache.name = name;
         cache.data = data;
     },
     onCacheHit(cache) {
-        const { novel, data } = cache;
-        this.jMeta[novel].chapters[data.name] = data;
+        const { novel, name, data } = cache;
+        const { index, password } = data;
+
+        this.jMeta[novel].chapters[name] = data;
+        this.jMap[novel][index] = {
+            name,
+            password
+        };
     },
     beforeBuild(filelist) {
         for (const key in this.jMeta) {
