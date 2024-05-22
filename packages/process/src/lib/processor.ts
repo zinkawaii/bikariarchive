@@ -77,7 +77,7 @@ export default class Processor {
 
     watch() {
         const parse = timer(this.options.sign, async (filename: string) => {
-            await this.parse(filename);
+            await this.parse(filename) &&
             await this.outputMeta();
         });
 
@@ -93,7 +93,7 @@ export default class Processor {
         let cache = this.jCache[filename];
         if (cache?.hash === hash) {
             await this.options.onCacheHit?.call(this, cache);
-            return;
+            return false;
         }
 
         //重置缓存
@@ -101,6 +101,7 @@ export default class Processor {
 
         //开始解析
         await this.options.parse.call(this, filename, cache);
+        return true;
     }
 
     async outputMeta() {
