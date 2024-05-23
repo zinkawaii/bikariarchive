@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     defineProps<{
-        item: string[];
+        items: string[];
     }>();
 
     const selectedIndex = ref(0);
@@ -10,19 +10,17 @@
     <div class="mb-tab">
         <ul class="tab-list">
             <li
-                v-for="(name, i) in item"
+                v-for="(name, i) in items"
                 class="tab-item"
                 :class="{ active: selectedIndex === i }"
                 @click="selectedIndex = i"
             >{{ name }}</li>
         </ul>
-        <div class="tab-content">
-            <template v-for="(name, i) in item">
-                <div v-show="selectedIndex === i">
-                    <slot :name></slot>
-                </div>
-            </template>
-        </div>
+        <ul class="tab-content">
+            <li v-for="(name, i) in items" v-show="selectedIndex === i">
+                <slot :name></slot>
+            </li>
+        </ul>
     </div>
 </template>
 

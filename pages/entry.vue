@@ -50,7 +50,7 @@
                 <mb-tab
                     v-if="data.illustration?.length > 0"
                     class="entry-illustration"
-                    :item="data.illustration.map(item => item.title)"
+                    :items="data.illustration.map(item => item.title)"
                     ><template v-for="item in data.illustration" #[item.title]>
                         <mb-gallery :illustrator="item.illustrator">
                             <mb-image :src="item.src" alt="[illustration]"/>
