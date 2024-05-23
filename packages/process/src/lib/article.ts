@@ -74,7 +74,7 @@ export default new Processor({
             wordCount,
             ...attributes
         };
-        this.jMeta[novel].chapters[name] = data;
+        this.jMeta[novel].chapters[cache.order] = data;
         this.jMap[novel][index] = {
             name,
             password
@@ -86,10 +86,10 @@ export default new Processor({
         cache.data = data;
     },
     onCacheHit(cache) {
-        const { novel, name, data } = cache;
+        const { order, novel, name, data } = cache;
         const { index, password } = data;
 
-        this.jMeta[novel].chapters[name] = data;
+        this.jMeta[novel].chapters[order] = data;
         this.jMap[novel][index] = {
             name,
             password
@@ -101,7 +101,7 @@ export default new Processor({
             this.jMap[key] = {};
 
             //章节对象集合
-            this.jMeta[key].chapters = {};
+            this.jMeta[key].chapters = [];
         }
 
         //按字母顺序解析章节

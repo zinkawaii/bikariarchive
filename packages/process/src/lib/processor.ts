@@ -63,7 +63,7 @@ export default class Processor {
 
             //顺序处理源文件
             await Promise.all(
-                filelist.map((filename) => this.parse(filename))
+                filelist.map(this.parse.bind(this))
             );
 
             //输出元数据文件
@@ -85,7 +85,7 @@ export default class Processor {
         .on("change", parse);
     }
 
-    async parse(filename: string) {
+    async parse(filename: string, order?: number) {
         const stats = await fs.stat(filename);
         const hash = resolveHash(stats.size.toString());
 
@@ -97,7 +97,7 @@ export default class Processor {
         }
 
         //重置缓存
-        cache = this.jCache[filename] = { hash };
+        cache = this.jCache[filename] = { hash, order };
 
         //开始解析
         await this.options.parse.call(this, filename, cache);
