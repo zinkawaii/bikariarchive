@@ -37,12 +37,12 @@
     const currentLyric = ref(0);
 
     //音频对象
-    const $audio = import.meta.browser ? new Audio() : null;
+    const $audio = ref();
 
     //音频可以播放
     useEventListener($audio, "canplay", () => {
         invalid.value = false;
-        duration.value = $audio.duration;
+        duration.value = $audio.value.duration;
     });
 
     //音频错误
@@ -58,7 +58,7 @@
     //音频播放时
     useEventListener($audio, "timeupdate", () => {
         if (isDragging.value) return;
-        currentTime.value = $audio.currentTime;
+        currentTime.value = $audio.value.currentTime;
         progress.value = currentTime.value / duration.value;
     });
 
@@ -83,20 +83,37 @@
             isAxising.value = false;
 
             //链接
-            URL.revokeObjectURL($audio.src);
-            $audio.src = URL.createObjectURL(file);
+            URL.revokeObjectURL($audio.value.src);
+            $audio.value.src = URL.createObjectURL(file);
         });
     }
 
     //播放 & 暂停
     watch(isPlaying, (val) => {
         if (val) {
-            $audio.play();
+            $audio.value.play();
         }
         else {
-            $audio.pause();
+            $audio.value.pause();
         }
     });
+
+    //当前时长显示值
+    const formatedCurrent = computed(() => {
+        return formatTime(currentTime.value);
+    });
+
+    //总时长显示值
+    const formatedDuration = computed(() => {
+        return formatTime(duration.value);
+    });
+
+    //时间格式化
+    function formatTime(time) {
+        const m = time / 60;
+        const s = time % 60;
+        return `${String(Math.floor(m)).padStart(2, "0")}:${String(Math.floor(s)).padStart(2, "0")}`;
+    }
 
     //进度正在改变时
     function onControlProgress(rate) {
@@ -108,7 +125,7 @@
     //进度改变时
     function onControlChange(rate) {
         if (!invalid.value) {
-            $audio.currentTime = duration.value * rate;
+            $audio.value.currentTime = duration.value * rate;
         }
         else {
             //音频无效，进度归零
@@ -163,7 +180,7 @@
         } = lyrics.value;
 
         //回到两句前的时间点
-        $audio.currentTime = target?.time || 0;
+        $audio.value.currentTime = target?.time || 0;
 
         if (last) {
             last.sign = false;
@@ -204,17 +221,11 @@
             return item.timed + item.content;
         }).join("\n");
     }
-
-    //时间格式化
-    function formatTime(time) {
-        const m = time / 60;
-        const s = time % 60;
-        return `${String(Math.floor(m)).padStart(2, "0")}:${String(Math.floor(s)).padStart(2, "0")}`;
-    }
 </script>
 
 <template>
     <coco-widget>
+        <audio ref="$audio"></audio>
         <div class="text-small">
             <div class="lyric-operator">
                 <mb-button @click="upload">上传</mb-button>
@@ -223,7 +234,7 @@
                 <mb-button :disabled="invalid" @click="toggleAxising()">{{ isAxising ? "结束打轴" : "开始打轴" }}</mb-button>
             </div>
             <div class="lyric-control">
-                <span class="lyric-time">{{ formatTime(currentTime) }}</span>
+                <time>{{ formatedCurrent }}</time>
                 <mb-progress
                     class="lyric-progress"
                     :title="filename || `- 请上传歌曲 -`"
@@ -233,7 +244,7 @@
                     @dragstart="toggleDragging(true)"
                     @dragend="toggleDragging(false)"
                 />
-                <span class="lyric-time">{{ formatTime(duration) }}</span>
+                <time>{{ formatedDuration }}</time>
             </div>
         </div>
         <div class="lyric-main">
@@ -270,28 +281,18 @@
     }
 
     .lyric-control {
-        display: flex;
+        display: grid;
+        grid-template-columns: 54px 1fr 54px;
         align-items: center;
+        height: 32px;
         margin-top: 16px;
-    }
-
-    .lyric-time {
-        width: 54px;
         text-align: center;
         color: var(--color-text-info);
-    }
-
-    .lyric-progress {
-        flex: 1;
-        height: 32px;
-        box-shadow: 0 6px 12px -8px var(--color-text-info);
-        z-index: 1;
     }
 
     .lyric-main {
         position: relative;
         height: 512px;
-        transform: scale(1, 1);
     }
 
     .lyric-textarea {
@@ -300,18 +301,16 @@
         border-radius: 8px;
         background-color: var(--color-background);
         font-size: 14px;
+        line-height: 24px;
     }
 
     .lyric-editor {
         width: 100%;
         height: 100%;
-        line-height: 24px;
-        resize: none;
     }
 
     .lyric-compile {
         position: absolute;
-        overflow: auto;
         inset: 0;
     }
 
@@ -319,7 +318,6 @@
         margin-inline: -8px;
         padding-inline: 8px;
         border-radius: 8px;
-        line-height: 24px;
         user-select: none;
 
         &.sign {
@@ -336,10 +334,9 @@
     }
 
     .lyric-handler {
-        display: flex;
-        flex-direction: column;
+        display: grid;
         gap: 8px;
-        position: fixed;
+        position: absolute;
         right: 16px;
         bottom: 8px;
     }
