@@ -96,6 +96,9 @@ export default class Processor {
             return false;
         }
 
+        //继承序号
+        order ??= cache?.order;
+
         //重置缓存
         cache = this.jCache[filename] = { hash, order };
 

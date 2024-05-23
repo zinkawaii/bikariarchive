@@ -81,12 +81,12 @@ export default new Processor({
         };
 
         //写入缓存
-        cache.novel = novel;
         cache.name = name;
+        cache.novel = novel;
         cache.data = data;
     },
     onCacheHit(cache) {
-        const { order, novel, name, data } = cache;
+        const { order, name, novel, data } = cache;
         const { index, password } = data;
 
         this.jMeta[novel].chapters[order] = data;
