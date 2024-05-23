@@ -47,31 +47,57 @@
 
 <template>
     <div ref="$self" class="mb-progress">
-        <span class="progress-bar" :style="{ transform: `scaleX(${displayRate})` }"></span>
-        <span class="text-truncate progress-title">{{ title }}</span>
+        <div class="progress-track">
+            <div class="progress-rate" :style="{ scale: `${displayRate} 1` }"></div>
+        </div>
+        <span class="progress-thumb" :style="{ marginLeft: `${displayRate * 100}%` }"></span>
     </div>
 </template>
 
 <style lang="scss" scoped>
     .mb-progress {
-        display: inline-flex;
+        display: inline-grid;
+        align-items: center;
         position: relative;
-        overflow: hidden;
+        height: 20px;
+        margin-inline: 8px;
         cursor: pointer;
+        user-select: none;
     }
 
-    .progress-bar {
-        display: block;
+    .progress-track {
+        display: grid;
         position: absolute;
-        inset: 0;
+        overflow: hidden;
+        inset: 4px 0;
+        border-radius: var(--circle-radius);
+    }
+
+    .progress-rate {
         background-color: var(--color-theme);
-        transform: scaleX(0);
         transform-origin: left;
     }
 
-    .progress-title {
-        opacity: 0.5;
-        margin: auto;
-        user-select: none;
+    .progress-thumb {
+        position: absolute;
+        opacity: 0;
+        width: 20px;
+        aspect-ratio: 1;
+        border: 2px solid var(--color-theme-dark);
+        border-radius: 100%;
+        box-shadow: var(--box-shadow);
+        outline: 0 solid color-mix(in srgb, var(--color-theme-dark), transparent 66%);
+        background-color: var(--color-background);
+        transition-property: opacity, outline;
+        transition-duration: 0.2s;
+        translate: -50%;
+
+        :where(:active, :hover) > & {
+            opacity: 1;
+        }
+
+        :active > & {
+            outline-width: 10px;
+        }
     }
 </style>
