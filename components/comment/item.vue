@@ -68,14 +68,17 @@
             <div class="comment-info">
                 <time>{{ elapsed }}</time>
                 <a class="comment-action" @click="replyComment">
-                    <icon name="fa6-regular:comment"/>回复
+                    <icon name="fa6-regular:comment"/>
+                    <span>回复</span>
                 </a>
                 <template v-if="userStore.identity >= 9">
                     <a class="comment-action" @click="modifyComment">
-                        <icon name="fa6-solid:pen-to-square"/>修改
+                        <icon name="fa6-solid:pen-to-square"/>
+                        <span>修改</span>
                     </a>
                     <a class="comment-action" @click="removeComment">
-                        <icon name="fa6-solid:trash-can"/>删除
+                        <icon name="fa6-solid:trash-can"/>
+                        <span>删除</span>
                     </a>
                 </template>
             </div>
@@ -134,7 +137,8 @@
 
     .comment-info {
         display: flex;
-        gap: 16px;
+        flex-wrap: wrap;
+        gap: 8px 16px;
         font-size: 14px;
         color: var(--color-text-info);
     }
@@ -148,6 +152,12 @@
 
         &:hover {
             color: var(--color-theme-text);
+        }
+
+        @container main (width < 596px) {
+            > span {
+                display: none;
+            }
         }
     }
 
