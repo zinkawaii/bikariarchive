@@ -34,15 +34,13 @@ const zmark = new Marked({
 });
 
 export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.directive("marked", {
-        async beforeMount(el, binding) {
-            el.innerHTML = `<p class="sanitized">好像说了什么，但是被清除了</p>`;
+    nuxtApp.vueApp.directive("marked", async (el, binding) => {
+        el.innerHTML = `<p class="sanitized">好像说了什么，但是被清除了</p>`;
 
-            const sanitized = DOMPurify.sanitize(binding.value, purifyOptions) as string;
-            const html = await zmark.parse(sanitized);
-            if (html.length) {
-                el.innerHTML = html;
-            }
+        const sanitized = DOMPurify.sanitize(binding.value, purifyOptions) as string;
+        const html = await zmark.parse(sanitized);
+        if (html.length) {
+            el.innerHTML = html;
         }
     });
 });
