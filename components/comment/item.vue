@@ -28,9 +28,19 @@
 
     //回复评论
     function replyComment() {
-        commentPanelStore.open({
-            replyId: props.data.id,
-            replyName: props.data.nickname
+        commentPanelStore.reply({
+            id: props.data.id,
+            nickname: props.data.nickname
+        });
+    }
+
+    //修改评论
+    function modifyComment() {
+        commentPanelStore.modify({
+            id: props.data.id,
+            content: props.data.content,
+            nickname: props.data.nickname,
+            address: props.data.address
         });
     }
 
@@ -60,9 +70,14 @@
                 <a class="comment-action" @click="replyComment">
                     <icon name="fa6-regular:comment"/>回复
                 </a>
-                <a v-if="userStore.identity >= 9" class="comment-action" @click="removeComment">
-                    <icon name="fa6-solid:trash-can"/>删除
-                </a>
+                <template v-if="userStore.identity >= 9">
+                    <a class="comment-action" @click="modifyComment">
+                        <icon name="fa6-solid:pen-to-square"/>修改
+                    </a>
+                    <a class="comment-action" @click="removeComment">
+                        <icon name="fa6-solid:trash-can"/>删除
+                    </a>
+                </template>
             </div>
         </div>
         <div class="comment-reply">

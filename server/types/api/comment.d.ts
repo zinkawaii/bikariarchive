@@ -26,3 +26,10 @@ export interface PostCommentBody {
     email: string;
     address: string;
 }
+
+export interface PutCommentBody {
+    id: string;
+    content: string;
+    nickname: string;
+    address: string;
+}

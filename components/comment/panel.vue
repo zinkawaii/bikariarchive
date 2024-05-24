@@ -2,15 +2,70 @@
     const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
 
-    const { nickname, email, address } = storeToRefs(commentPanelStore);
-    const maxLength = 512;
-    const comment = ref("");
-    const sending = ref(false);
-
     //添加遮罩层
     useMask({
         isOpened: () => commentPanelStore.isOpened,
         onClick: () => commentPanelStore.close()
+    });
+
+    const { mode, replyOptions, modifyOptions } = storeToRefs(commentPanelStore);
+    const [isSending, toggleSending] = useToggle(false);
+    const maxLength = 512;
+
+    const isReplyMode = computed(() => {
+        return mode.value === "reply";
+    });
+
+    const isModifyMode = computed(() => {
+        return mode.value === "modify";
+    });
+
+    const content = computed({
+        get() {
+            return isModifyMode.value
+                ? modifyOptions.value.content
+                : commentPanelStore.content;
+        },
+        set(val) {
+            isModifyMode.value
+                ? modifyOptions.value.content = val
+                : commentPanelStore.content = val;
+        }
+    });
+
+    const nickname = computed({
+        get() {
+            return isModifyMode.value
+                ? modifyOptions.value.nickname
+                : commentPanelStore.nickname;
+        },
+        set(val) {
+            isModifyMode.value
+                ? modifyOptions.value.nickname = val
+                : commentPanelStore.nickname = val;
+        }
+    });
+
+    const email = computed({
+        get() {
+            return !isModifyMode.value ? commentPanelStore.email : "";
+        },
+        set(val) {
+            !isModifyMode.value && (commentPanelStore.email = val);
+        }
+    });
+
+    const address = computed({
+        get() {
+            return isModifyMode.value
+                ? modifyOptions.value.address
+                : commentPanelStore.address;
+        },
+        set(val) {
+            isModifyMode.value
+                ? modifyOptions.value.address = val
+                : commentPanelStore.address = val;
+        }
     });
 
     const checker = new Checker({
@@ -44,29 +99,40 @@
 
     //标题
     const title = computed(() => {
-        const { replyName } = commentPanelStore;
-        return replyName ? `回复 @${replyName}` : "评论";
+        return isReplyMode.value
+            ? `回复 @${replyOptions.value.nickname}`
+            : "评论";
     });
 
     //发表评论
     async function sendComment() {
         if (!checker.exec()) return;
 
-        sending.value = true;
+        toggleSending(true);
         try {
-            await commentStore.send({
-                path: commentPanelStore.path,
-                parent: commentPanelStore.replyId,
-                content: comment.value,
-                nickname: nickname.value,
-                email: email.value,
-                address: address.value
-            });
-            comment.value = "";
+            if (isModifyMode.value) {
+                await commentStore.modify({
+                    id: modifyOptions.value.id,
+                    content: content.value,
+                    nickname: nickname.value,
+                    address: address.value
+                });
+            }
+            else {
+                await commentStore.post({
+                    path: commentPanelStore.path,
+                    parent: isReplyMode.value ? replyOptions.value.id : void 0,
+                    content: content.value,
+                    nickname: nickname.value,
+                    email: email.value,
+                    address: address.value
+                });
+            }
+            content.value = "";
             commentPanelStore.close();
         }
         finally {
-            sending.value = false;
+            toggleSending(false);
         }
     }
 </script>
@@ -89,16 +155,16 @@
                 <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
             </div>
             <div class="panel-form">
-                <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="comment"></textarea>
+                <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="content"></textarea>
                 <p class="panel-tip">支持部分 Markdown 语法</p>
-                <div class="panel-count">{{ comment.length }} / {{ maxLength }}</div>
+                <div class="panel-count">{{ content.length }} / {{ maxLength }}</div>
             </div>
             <mb-button
                 full round
-                :disabled="!comment.length || sending"
+                :disabled="!content.length || isSending"
                 @click="sendComment"
                 ><icon name="fa6-solid:paper-plane"/>
-                <span>{{ sending ? "发送中……" : "发表评论" }}</span>
+                <span>{{ isSending ? "发送中……" : "发表评论" }}</span>
             </mb-button>
         </div>
     </transition-scale>

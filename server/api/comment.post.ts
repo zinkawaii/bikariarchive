@@ -28,6 +28,7 @@ export default defineJEventHandler(async (event) => {
         parent,
         content: body.content,
         time,
+        updated: time,
         nickname: body.nickname,
         email: body.email,
         address: body.address,

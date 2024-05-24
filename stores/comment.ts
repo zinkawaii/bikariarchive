@@ -1,4 +1,4 @@
-import type { CommentData, DeleteCommentBody, PostCommentBody } from "~/server/types/api/comment";
+import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~/server/types/api/comment";
 import type { WithParent } from "~/types";
 
 export const useCommentStore = defineStore("comment", () => {
@@ -25,7 +25,7 @@ export const useCommentStore = defineStore("comment", () => {
     }
 
     //发送评论
-    async function send(body: PostCommentBody) {
+    async function post(body: PostCommentBody) {
         try {
             await $fetch("/api/comment", {
                 method: "post",
@@ -35,6 +35,21 @@ export const useCommentStore = defineStore("comment", () => {
         }
         catch (err) {
             toastStore.error("comment-error", "评论发送失败");
+            throw err;
+        }
+    }
+
+    //修改评论
+    async function modify(body: PutCommentBody) {
+        try {
+            await $fetch("/api/comment", {
+                method: "put",
+                body
+            });
+            update(1);
+        }
+        catch (err) {
+            toastStore.error("comment-put-error", "评论修改失败");
             throw err;
         }
     }
@@ -59,7 +74,8 @@ export const useCommentStore = defineStore("comment", () => {
         mainCount,
         totalCount,
         update,
-        send,
+        post,
+        modify,
         remove
     };
 });

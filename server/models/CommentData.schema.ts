@@ -26,6 +26,10 @@ export const CommentDataModel = defineMongooseModel<CommentDataSchema>({
             type: Date,
             required: true
         },
+        updated: {
+            type: Date,
+            required: true
+        },
         nickname: {
             type: String,
             required: true

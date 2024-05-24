@@ -6,6 +6,7 @@ export interface CommentDataSchema {
     children: ObjectId[];
     content: string;
     time: Date;
+    updated: Date;
     nickname: string;
     email: string;
     address: string;

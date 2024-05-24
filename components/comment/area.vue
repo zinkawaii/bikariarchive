@@ -24,7 +24,7 @@
     <coco-widget ref="$self" class="comment-area">
         <div class="comment-title">
             <h2>评论<span class="comment-count">{{ totalCount }}</span></h2>
-            <mb-button @click="commentPanelStore.open()">
+            <mb-button @click="commentPanelStore.post()">
                 <icon name="fa6-solid:comment-dots"/>
                 <span>发表评论</span>
             </mb-button>
