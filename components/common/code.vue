@@ -1,6 +1,5 @@
 <script lang="ts" setup>
     import type { BundledLanguage } from "shiki";
-    import CryptoES from "crypto-es";
 
     const props = withDefaults(defineProps<{
         lang?: BundledLanguage;
@@ -15,17 +14,15 @@
     const $code = ref();
 
     //代码
-    const { data: code } = await useLazyAsyncData(
-        CryptoES.MD5(props.raw).toString(),
-        async () => {
-            const shiki = await getShikiHighlighter();
-            await loadShikiLanguages(shiki, props.lang);
-            return shiki.highlight(props.raw, {
-                lang: props.lang,
-                ...highlightOptions
-            });
-        }
-    );
+    const code = ref(props.raw);
+    onMounted(async () => {
+        const shiki = await getShikiHighlighter();
+        await loadShikiLanguages(shiki, props.lang);
+        code.value = shiki.highlight(props.raw, {
+            lang: props.lang,
+            ...highlightOptions
+        });
+    });
 
     //行数
     const lines = computed(() => {
@@ -55,7 +52,7 @@
         </div>
         <div v-show="!isCollapse" class="code-area" :class="{ [`is-expand`]: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
-            <pre ref="$code" class="shiki code-content" v-html="code || props.raw"></pre>
+            <pre ref="$code" class="shiki code-content" v-html="code"></pre>
             <div v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
                 <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
             </div>
