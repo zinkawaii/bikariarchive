@@ -2,26 +2,36 @@ import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } 
 import type { WithParent } from "~/types";
 
 export const useCommentStore = defineStore("comment", () => {
-    const data = ref<WithParent<CommentData>[]>();
+    const comments = ref<WithParent<CommentData>[]>();
     const mainCount = ref(0);
     const totalCount = ref(0);
+    const [isEmpty, toggleEmpty] = useToggle(false);
 
     const route = useRoute();
     const toastStore = useToastStore();
 
+    //清空评论
+    function clear() {
+        comments.value = [];
+        mainCount.value = 0;
+        totalCount.value = 0;
+        toggleEmpty(true);
+    }
+
     //更新评论
     async function update(page: number) {
-        const { error, mainCount: main, totalCount: total, data: res } = await $fetch("/api/comment", {
+        const res = await $fetch("/api/comment", {
             query: {
                 path: route.path,
                 page: page
             }
         });
-        if (error !== 0) return;
+        if (res.error !== 0) return;
 
-        mainCount.value = main;
-        totalCount.value = total;
-        data.value = processComments(res);
+        comments.value = processComments(res.data);
+        mainCount.value = res.mainCount;
+        totalCount.value = res.totalCount;
+        toggleEmpty(false);
     }
 
     //发送评论
@@ -70,9 +80,11 @@ export const useCommentStore = defineStore("comment", () => {
     }
 
     return {
-        data,
+        comments,
         mainCount,
         totalCount,
+        isEmpty,
+        clear,
         update,
         post,
         modify,
