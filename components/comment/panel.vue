@@ -104,6 +104,11 @@
             : "评论";
     });
 
+    //内容长度
+    const contentLength = computed(() => {
+        return content.value.trim().length;
+    });
+
     //发表评论
     async function sendComment() {
         if (!checker.exec()) return;
@@ -157,11 +162,11 @@
             <div class="panel-form">
                 <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="content"></textarea>
                 <p class="panel-tip">支持部分 Markdown 语法</p>
-                <div class="panel-count">{{ content.length }} / {{ maxLength }}</div>
+                <div class="panel-count">{{ contentLength }} / {{ maxLength }}</div>
             </div>
             <mb-button
                 full round
-                :disabled="!content.length || isSending"
+                :disabled="!contentLength || isSending"
                 @click="sendComment"
                 ><icon name="fa6-solid:paper-plane"/>
                 <span>{{ isSending ? "发送中……" : "发表评论" }}</span>
