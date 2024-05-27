@@ -45,8 +45,10 @@
     <figure class="mb-code">
         <div class="code-header">
             <span class="text-uppercase code-lang">{{ lang }}</span>
-            <a @click="copy"><icon name="fa6-solid:paste"/></a>
-            <a @click="toggleCollapse()">
+            <a class="code-action" @click="copy">
+                <icon name="fa6-solid:paste"/>
+            </a>
+            <a class="code-action" @click="toggleCollapse()">
                 <icon :name="`fa6-solid:chevron-${isCollapse ? `left` : `down`}`"/>
             </a>
         </div>
@@ -84,6 +86,12 @@
 
     .code-lang {
         flex: 1;
+    }
+
+    .code-action {
+        display: grid;
+        place-items: center;
+        width: 1rem;
     }
 
     .code-area {

@@ -16,7 +16,7 @@
                     <th>萌点</th>
                     <th>番剧</th>
                     <th width="96px">上映时间</th>
-                    <th width="32px"><icon name="fa6-solid:link" :width="null"/></th>
+                    <th width="32px"><icon name="fa6-solid:link"/></th>
                 </tr>
                 <tr v-for="{ name, special, link, bangumi, date } in jChanrina.characters">
                     <td>{{ name.zh }}</td>

@@ -156,8 +156,10 @@
     }
 
     .menu-tool, .menu-item {
+        display: grid;
+        align-items: center;
+        height: 28px;
         border-radius: 8px;
-        line-height: 28px;
         transition: all 0.25s;
         cursor: pointer;
         user-select: none;
@@ -169,8 +171,8 @@
     }
 
     .menu-tool {
-        width: 28px;
-        text-align: center;
+        justify-items: center;
+        aspect-ratio: 1;
     }
 
     .menu-list {
@@ -182,7 +184,6 @@
     }
 
     .menu-item {
-        display: grid;
         grid-template-columns: 16px 1fr;
         gap: 6px;
         padding-inline: 8px;

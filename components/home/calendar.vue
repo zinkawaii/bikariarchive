@@ -357,16 +357,15 @@
         line-height: 32px;
 
         > .iconify {
-            padding-inline: 3px;
-            font-size: 16px;
+            font-size: 12px;
             color: var(--color-theme-dark);
 
             &:nth-of-type(1) {
-                translate: 0 -3px;
+                translate: -2px -1px;
             }
 
-            &:nth-of-type(2) {
-                translate: 0 2px;
+            &:nth-of-type(3) {
+                translate: 2px 3px;
             }
         }
     }

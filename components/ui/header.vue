@@ -102,7 +102,7 @@
             <div class="nav-list">
                 <mb-popper v-for="{ title, icon, to, children } in navs">
                     <nuxt-link class="nav-link" :to>
-                        <icon :name="icon" :width="null"/>
+                        <icon :name="icon"/>
                         <span>{{ title }}</span>
                     </nuxt-link>
                     <template v-if="children?.length" #floating>
