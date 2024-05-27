@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+    import type { NovelType } from "@bikari/process";
+
     const props = defineProps<{
-        type: string;
+        type: NovelType;
         limit: number;
         sortBy?: string;
     }>();
@@ -10,22 +12,12 @@
         return props.sortBy === "updated";
     });
 
-    const jRecent = computed(() => {
-        return Object.values(Article.meta)
-            .filter(({ type }) => type === props.type)
-            .flatMap(({ chapters }) => chapters)
-            .sort((a, b) => {
-                const x = sortByUpdated.value && a.updated || a.date;
-                const y = sortByUpdated.value && b.updated || b.date;
-                return y.localeCompare(x);
-            })
-            .slice(0, props.limit);
-    });
+    const { jLimited } = useArticleList(props);
 </script>
 
 <template>
     <ul class="recent-article">
-        <li v-for="{ title, date, updated, volume, novel, route } in jRecent" class="recent-item">
+        <li v-for="{ title, date, updated, volume, novel, route } in jLimited" class="recent-item">
             <plain-link class="text-truncate recent-title" :to="route">{{ title }}</plain-link>
             <div class="recent-info">
                 <span class="text-truncate">{{ Article.meta[novel].volumes[volume].title }}</span>

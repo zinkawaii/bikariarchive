@@ -1,3 +1,5 @@
+export type NovelType = "novel" | "blog";
+
 export interface JArticle<T> {
     [novel: string]: JNovel<T>;
 }
@@ -5,7 +7,7 @@ export interface JArticle<T> {
 export interface JNovel<T> {
     author: string;
     title: string;
-    type: "novel" | "blog";
+    type: NovelType;
     tag: string[];
     synopsis: string;
     cover: string;
@@ -28,10 +30,12 @@ export interface JChapter extends Omit<ArticleFrontMatter, "abbrlink" | "passwor
 
 export interface ArticleFrontMatter {
     title: string;
+    excerpt?: string;
     abbrlink?: string;
     date?: string;
     refactored?: string;
     updated?: string;
+    cover?: string;
     draft?: boolean;
     ending?: boolean;
     password?: string;

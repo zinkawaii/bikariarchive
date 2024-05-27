@@ -7,9 +7,11 @@ export class Article implements JChapter {
     orderInVol = -1;   //章序号（卷内）
     index = "";        //章文件名
     title = "";        //章节名
+    excerpt = "";      //摘要
     date = "";         //日期
     updated = "";      //更新日期
     refactored = "";   //重构日期
+    cover = "";        //封面链接
     draft = false;     //草稿
     encrypted = false; //加密
     ending = false;    //终章

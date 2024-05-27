@@ -20,6 +20,7 @@
         <home-calendar />
         <home-blank />
     </div>
+    <home-article-list />
     <home-tool-container />
 </template>
 
