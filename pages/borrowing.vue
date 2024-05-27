@@ -33,6 +33,6 @@
         margin-top: 2px;
         font-size: 14px;
         line-height: 24px;
-        color: gray;
+        color: var(--color-text-info);
     }
 </style>

@@ -102,7 +102,7 @@
     .comment-avatar {
         grid-area: A;
         width: 42px;
-        height: 42px;
+        aspect-ratio: 1;
         border-radius: 100%;
         box-shadow: var(--box-shadow);
 

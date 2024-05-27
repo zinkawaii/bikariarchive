@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
         signerStore.open();
         return false;
     }
-    else if (userStore.identity < (to.meta.identity as number)) {
+    else if (userStore.identity < to.meta.identity) {
         toastStore.error("identity-error", "无访问权限 (Limit Code: 143)");
         return false;
     }

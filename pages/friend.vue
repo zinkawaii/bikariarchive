@@ -72,7 +72,7 @@
 
     .friend-icon {
         width: 72px;
-        height: 72px;
+        aspect-ratio: 1;
         margin: auto;
         border-radius: 8px;
     }

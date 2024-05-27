@@ -27,7 +27,7 @@
 
     .tag-avatar {
         width: 2em;
-        height: 2em;
+        aspect-ratio: 1;
         margin: 2px;
         border-radius: 100%;
     }

@@ -21,7 +21,7 @@
 
     .radio-entity {
         width: 1em;
-        height: 1em;
+        aspect-ratio: 1;
         padding: calc(0.5em - 1px);
         border: 1px solid var(--color-border);
         border-radius: 100%;

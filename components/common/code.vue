@@ -72,7 +72,6 @@
     .code-header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 8px;
         height: 28px;
         padding-inline: 12px;

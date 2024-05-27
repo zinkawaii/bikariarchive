@@ -105,7 +105,7 @@
         align-items: center;
         justify-content: center;
         width: 24px;
-        height: 24px;
+        aspect-ratio: 1;
         border: 1px solid var(--color-border-lighter);
         border-radius: 4px;
         font-size: 16px;
