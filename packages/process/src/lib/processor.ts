@@ -3,7 +3,7 @@ import chokidar from "chokidar";
 import CryptoES from "crypto-es";
 import fs from "fs-extra";
 import { glob } from "glob";
-import { timer } from "@bikari/shared";
+import { isDev, timer } from "@bikari/shared";
 
 interface ProcessorOptions<T> {
     sign: string;
@@ -89,9 +89,9 @@ export default class Processor {
         const stats = await fs.stat(filename);
         const hash = resolveHash(stats.size.toString());
 
-        //当命中缓存时
+        //当在开发环境下命中缓存时
         let cache = this.jCache[filename];
-        if (cache?.hash === hash) {
+        if (isDev && cache?.hash === hash) {
             await this.options.onCacheHit?.call(this, cache);
             return false;
         }
