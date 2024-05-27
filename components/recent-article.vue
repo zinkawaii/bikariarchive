@@ -2,7 +2,7 @@
     import type { NovelType } from "@bikari/process";
 
     const props = defineProps<{
-        type: NovelType;
+        type?: NovelType;
         limit: number;
         sortBy?: string;
     }>();

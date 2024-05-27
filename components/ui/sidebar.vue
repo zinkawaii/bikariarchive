@@ -51,7 +51,7 @@
                 <template #icon>
                     <icon name="fa6-solid:clock-rotate-left"/>
                 </template>
-                <recent-article type="blog" :limit="5" sort-by="updated"/>
+                <recent-article :limit="5" sort-by="updated"/>
             </aside-widget>
         </div>
     </aside>

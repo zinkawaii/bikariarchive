@@ -1,29 +1,34 @@
 import type { NovelType } from "@bikari/process";
 
 export interface UseArticleListOptions {
-    type: MaybeRefOrGetter<NovelType>;
+    type?: MaybeRefOrGetter<NovelType>;
     limit: MaybeRefOrGetter<number>;
     sortBy?: MaybeRefOrGetter<string>;
 }
 
 export default function(options: UseArticleListOptions) {
+    //筛选类型
+    const type = computed(() => {
+        return toValue(options.type);
+    });
+
     //单页总数
     const limit = computed(() => {
         return toValue(options.limit);
     });
 
-    //当前页数
-    const page = ref(1);
-
-    //是否按更新日期排序
+    //排序字段
     const sortBy = computed(() => {
         return [toValue(options.sortBy), "date"];
     });
 
+    //当前页数
+    const page = ref(1);
+
     //总列表
     const jFull = computed(() => {
         return Object.values(Article.meta)
-        .filter(({ type }) => type === toValue(options.type))
+        .filter((item) => !type.value || item.type === type.value)
         .flatMap(({ chapters }) => chapters)
         .sort((a, b) => {
             const [x, y] = sortBy.value.reduce(([x, y], prop) => {
