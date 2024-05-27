@@ -17,7 +17,7 @@
     const elapsed = computed(() => {
         const date = dayjs(props.data.time);
         return Date.now() - date.valueOf() >= 86400000
-            ? date.format("YYYY-MM-DD hh:mm")
+            ? date.format("YYYY-MM-DD HH:mm")
             : date.fromNow();
     });
 
