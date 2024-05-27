@@ -42,12 +42,28 @@
 
 <style lang="scss" scoped>
     .home-article-item {
+        --origin: left;
+
         display: flex;
         flex-direction: var(--direction);
         border-block: none;
+        perspective: 1024px;
+        perspective-origin: var(--origin);
+        transition: all 0.25s;
 
         &:nth-of-type(2n) {
             --direction: row-reverse;
+            --origin: right;
+            --margin: -6% 8px;
+            --rotate: -18deg;
+        }
+
+        &:hover {
+            background-color: var(--color-background);
+        }
+
+        @container main (width < 596px) {
+            flex-direction: column;
         }
     }
 
@@ -60,6 +76,19 @@
         height: 160px;
         margin: 8px;
         border-radius: 8px;
+        transform-origin: var(--origin);
+        transition: all 0.25s;
+
+        @container main (width >= 596px) {
+            :hover > & {
+                margin-inline: var(--margin, 8px -6%);
+                rotate: y var(--rotate, 18deg);
+            }
+        }
+
+        @container main (width < 596px) {
+            flex: none;
+        }
 
         &::before {
             content: "Cover.";
@@ -83,8 +112,13 @@
         flex: 1;
         align-content: center;
         gap: 4px;
+        position: relative;
         padding: 16px;
         text-align: center;
+
+        @container main (width < 596px) {
+            padding-top: 0;
+        }
     }
 
     .home-article-title {
@@ -113,22 +147,8 @@
         margin: auto 8px;
         border-radius: var(--circle-radius);
         background-color: var(--color-theme-dark);
-    }
 
-    @container main (width < 596px) {
-        .home-article-item {
-            flex-direction: column;
-        }
-
-        .home-article-background {
-            flex: none;
-        }
-
-        .home-article-wrapper {
-            padding-top: 0;
-        }
-
-        .home-article-thumb {
+        @container main (width < 596px) {
             display: none;
         }
     }
