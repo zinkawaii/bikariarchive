@@ -568,7 +568,7 @@
         width: fit-content;
         padding-top: 6cqh;
 
-        > .icon {
+        > .iconify {
             font-size: 152cqh;
             filter: drop-shadow(0 0 24cqh var(--azur-darkblue-3));
         }

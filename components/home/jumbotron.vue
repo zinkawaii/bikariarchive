@@ -179,7 +179,7 @@
             opacity: 0.5;
         }
 
-        > .icon {
+        > .iconify {
             margin: auto;
         }
     }

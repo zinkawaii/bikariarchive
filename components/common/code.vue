@@ -131,7 +131,7 @@
         text-align: center;
         cursor: pointer;
 
-        > .icon {
+        > .iconify {
             animation: expand-flash 2s infinite;
         }
     }

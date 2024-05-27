@@ -187,7 +187,7 @@
         gap: 6px;
         padding-inline: 8px;
 
-        > .icon {
+        > .iconify {
             margin: auto;
         }
     }

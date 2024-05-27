@@ -279,11 +279,11 @@
             width: $nav-small;
         }
 
-        > .icon {
+        > .iconify {
             transition: translate 0.2s;
         }
 
-        &:hover > .icon {
+        &:hover > .iconify {
             translate: 0 -4px;
         }
     }
@@ -304,7 +304,7 @@
             color: white;
         }
 
-        > .icon {
+        > .iconify {
             margin: auto;
         }
     }

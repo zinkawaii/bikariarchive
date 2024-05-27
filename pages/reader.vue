@@ -275,7 +275,7 @@
         font-weight: bold;
         color: var(--color-theme-text);
 
-        > .icon {
+        > .iconify {
             width: 1em;
             font-size: 42px;
         }

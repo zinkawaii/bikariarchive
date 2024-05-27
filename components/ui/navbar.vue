@@ -91,7 +91,7 @@
             color: white;
         }
 
-        > .icon {
+        > .iconify {
             width: 48px;
             font-size: 21px;
         }

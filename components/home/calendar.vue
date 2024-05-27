@@ -356,7 +356,7 @@
     .calendar-event {
         line-height: 32px;
 
-        > .icon {
+        > .iconify {
             padding-inline: 3px;
             font-size: 16px;
             color: var(--color-theme-dark);
