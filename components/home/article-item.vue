@@ -33,7 +33,7 @@
             </ul>
             <p class="p-small">
                 <template v-if="art.excerpt">{{ art.excerpt }}</template>
-                <span class="text-gray">这篇文章还没有简介。</span>
+                <span v-else class="text-gray">这篇文章还没有简介。</span>
             </p>
         </div>
         <span class="home-article-thumb"></span>
