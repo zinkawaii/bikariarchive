@@ -1,21 +1,6 @@
 {
   "list": [
     {
-      "title": "网站图标",
-      "items": [
-        {
-          "src": {
-            "name": "心咲",
-            "link": "https://twitter.com/_kodomama/status/1486897569003458560"
-          },
-          "creator": {
-            "name": "はねこと",
-            "link": "https://www.pixiv.net/users/2106422"
-          }
-        }
-      ]
-    },
-    {
       "title": "背景",
       "items": [
         {
@@ -61,21 +46,6 @@
           "creator": {
             "name": "胡麻乃りお",
             "link": "https://www.pixiv.net/users/431880"
-          }
-        }
-      ]
-    },
-    {
-      "title": "头像",
-      "items": [
-        {
-          "src": {
-            "name": "椎名紬",
-            "link": "https://liar-liar-anime.com/character/shiina-tsumugi"
-          },
-          "creator": {
-            "name": "konomi★きのこのみ",
-            "link": "https://www.pixiv.net/users/171980"
           }
         }
       ]
