@@ -43,7 +43,7 @@ const client = {
     global: {
         title: "微光档案",
         author: "山吹色御守",
-        avatar: "/garden/avatar/tsumugi.webp",
+        avatar: "/garden/avatar/maestrale.webp",
         description: "虚幻的幸福",
         jumbotron: {
             title: "微光茶馆",

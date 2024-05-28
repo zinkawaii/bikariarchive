@@ -82,7 +82,7 @@
         width: 96px;
         aspect-ratio: 1;
         border-radius: 24px;
-        box-shadow: var(--box-shadow);
+        filter: drop-shadow(0 0 2px rgb(0 0 0 / 16%));
     }
 
     .aside-author {
