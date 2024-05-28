@@ -29,7 +29,9 @@ export default new Processor({
         const { attributes, content } = await parseArticle<ArticleFrontMatter>(file.toString());
 
         //生产环境下忽略草稿文件
-        if (attributes.draft && !isDev) return;
+        if (attributes.draft && !isDev) {
+            return null;
+        }
 
         //写入文件
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".txt");
@@ -81,9 +83,11 @@ export default new Processor({
         };
 
         //写入缓存
-        cache.name = name;
-        cache.novel = novel;
-        cache.data = data;
+        return {
+            name,
+            novel,
+            data
+        };
     },
     onCacheHit(cache) {
         const { order, name, novel, data } = cache;

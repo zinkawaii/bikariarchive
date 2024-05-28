@@ -19,7 +19,7 @@ interface ProcessorOptions<T> {
     map: {
         out: string;
     };
-    parse: (this: T, filename: string, cache: any) => Promise<void>;
+    parse: (this: T, filename: string, cache: any) => Promise<any>;
     onCacheHit?: (this: T, cache: any) => void;
     beforeBuild: (this: T, filelist: string[]) => void;
     beforeOutputMeta?: (this: T) => any;
@@ -89,8 +89,9 @@ export default class Processor {
         const stats = await fs.stat(filename);
         const hash = resolveHash(stats.size.toString());
 
-        //当在开发环境下命中缓存时
         let cache = this.jCache[filename];
+
+        //当在开发环境下命中缓存时
         if (isDev && cache?.hash === hash) {
             await this.options.onCacheHit?.call(this, cache);
             return false;
@@ -100,10 +101,16 @@ export default class Processor {
         order ??= cache?.order;
 
         //重置缓存
-        cache = this.jCache[filename] = { hash, order };
+        cache = { hash, order };
 
         //开始解析
-        await this.options.parse.call(this, filename, cache);
+        const data = await this.options.parse.call(this, filename, cache);
+
+        //显式返回空值时清空缓存
+        this.jCache[filename] = data === null ? null : {
+            ...cache,
+            ...data || {}
+        };
         return true;
     }
 

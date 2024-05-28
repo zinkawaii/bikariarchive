@@ -23,7 +23,7 @@ export default new Processor({
     map: {
         out: "dist/json/Entrimap.json"
     },
-    async parse(filename: string) {
+    async parse(filename) {
         //处理文件
         const file = await fs.readFile(filename);
         const attributes = await parseEntry(file.toString());
