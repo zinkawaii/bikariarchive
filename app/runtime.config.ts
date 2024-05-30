@@ -2,6 +2,9 @@ import defu from "defu";
 
 const server = {
     global: {
+        article: {
+            key: "<!-- ??? -->"
+        },
         mail: {
             name: "微光档案",
             host: "smtp.qq.com",

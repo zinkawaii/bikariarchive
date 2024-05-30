@@ -1,8 +1,9 @@
-import dayjs from "dayjs";
+import CryptoES from "crypto-es";
 import { Article } from "~/utils/Article";
 import type { GetArticleResponse } from "~/server/types/api/article";
 
 export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
+    const config = useRuntimeConfig();
     const { novel, index, password } = getQueryValues(event);
 
     //初始化
@@ -57,21 +58,11 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
         res.readCount += rlist[ip].count;
     }
 
-    (async () => {
-        //获取时间，UID
-        const time = dayjs.tz();
-        const uid = event.context.session?.uid;
+    //生成代币
+    const token = {
+        novel,
+        index
+    };
 
-        //获取用户
-        const user = await UserDataModel.findOne({ uid });
-
-        //将阅读记录写入数据库
-        ReadRecordModel.create({
-            ip: getRequestIP(event, { xForwardedFor: true }),
-            time,
-            novel,
-            index,
-            user: user?._id
-        });
-    })();
+    res.token = CryptoES.AES.encrypt(JSON.stringify(token), config.article.key).toString();
 });

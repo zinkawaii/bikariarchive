@@ -83,12 +83,17 @@
         watch: false
     });
 
-    //简易验证
-    if (import.meta.browser) {
-        $fetch("/api/testify", {
-            method: "patch"
+    //添加阅读记录
+    onMounted(async () => {
+        await until(pending).toBe(false);
+
+        $fetch("/api/article", {
+            method: "patch",
+            body: {
+                token: post.value.token
+            }
         });
-    }
+    });
 
     //防抖化请求
     const debouncedExecute = Zin.debounce(async () => {
