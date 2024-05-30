@@ -83,6 +83,13 @@
         watch: false
     });
 
+    //简易验证
+    if (import.meta.browser) {
+        $fetch("/api/testify", {
+            method: "patch"
+        });
+    }
+
     //防抖化请求
     const debouncedExecute = Zin.debounce(async () => {
         await execute();
