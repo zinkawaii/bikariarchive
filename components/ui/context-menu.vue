@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     const router = useRouter();
+    const contextMenuStore = useContextMenuStore();
     const settingStore = useSettingStore();
     const toastStore = useToastStore();
     const textSelection = useTextSelection();
@@ -7,82 +8,92 @@
     const toolItems = [
         {
             icon: "fa6-solid:chevron-left",
-            action: createAction(() => {
+            action: () => {
                 router.back();
-            })
+            }
         },
         {
             icon: "fa6-solid:chevron-right",
-            action: createAction(() => {
+            action: () => {
                 router.forward();
-            })
+            }
         },
         {
             icon: "fa6-solid:arrow-up",
-            action: createAction(() => {
+            action: () => {
                 window.scrollTo({
                     top: 0
                 });
-            })
+            }
         },
         {
             icon: "fa6-solid:rotate-right",
-            action: createAction(() => {
+            action: () => {
                 location.reload();
-            })
+            }
         }
     ];
 
-    const textItems = [
-        {
-            title: "复制",
-            icon: "fa6-solid:paste",
-            action: createAction(() => {
-                navigator.clipboard.writeText(textSelection.text.value);
-                toastStore.success("copy", "文本已复制");
-            })
-        },
-        {
-            title: "站内词条",
-            icon: "fa6-solid:sitemap",
-            action: createAction(() => {
-                router.push(toEntry(textSelection.text.value));
-            })
-        },
-        {
-            title: "全文检索",
-            icon: "fa-solid:search",
-            action: createAction(() => {
-                router.push(toSearch(textSelection.text.value));
-            })
-        }
-    ];
+    contextMenuStore.base({
+        when: () => textSelection.text.value,
+        items: [
+            {
+                title: "复制",
+                icon: "fa6-solid:paste",
+                action: () => {
+                    navigator.clipboard.writeText(textSelection.text.value);
+                    toastStore.success("copy", "文本已复制");
+                }
+            },
+            {
+                title: "站内词条",
+                icon: "fa6-solid:sitemap",
+                action: () => {
+                    router.push(toEntry(textSelection.text.value));
+                }
+            },
+            {
+                title: "全文检索",
+                icon: "fa-solid:search",
+                action: () => {
+                    router.push(toSearch(textSelection.text.value));
+                }
+            }
+        ]
+    });
 
-    const menuItems = ref([
-        {
-            title: "返回主页",
-            icon: "fa6-solid:house",
-            action: createAction(() => {
-                router.push({ name: "home" });
-            })
-        },
-        {
-            title: "昼夜切换",
-            icon: computed(() => (settingStore.isDarkMode ? "fa6-solid:sun" : "fa6-solid:moon")),
-            action: createAction(() => {
-                const value = settingStore.isDarkMode ? 1 : 2;
-                settingStore.set("dark-mode", value);
-            })
-        }
-    ]);
+    contextMenuStore.base({
+        items: [
+            {
+                title: "返回主页",
+                icon: "fa6-solid:house",
+                action: () => {
+                    router.push({ name: "home" });
+                }
+            },
+            {
+                title: "昼夜切换",
+                icon: computed(() => (settingStore.isDarkMode ? "fa6-solid:sun" : "fa6-solid:moon")),
+                action: () => {
+                    const value = settingStore.isDarkMode ? 1 : 2;
+                    settingStore.set("dark-mode", value);
+                }
+            }
+        ]
+    });
 
-    //显示状态
-    const state = ref(false);
     const $menu = ref();
+
+    //捕获阶段清除附加菜单
+    useEventListener("contextmenu", () => {
+        contextMenuStore.clear();
+    }, {
+        capture: true
+    });
 
     useEventListener("contextmenu", (event) => {
         //显示菜单
-        state.value = true;
+        contextMenuStore.open();
 
         //阻止原生菜单
         event.preventDefault();
@@ -104,40 +115,21 @@
 
     //鼠标按下时
     useEventListener("mousedown", (event) => {
-        if (state.value && !(event.target as HTMLElement).closest(".z-context-menu")) {
-            state.value = false;
+        if (contextMenuStore.isOpened && !(event.target as HTMLElement).closest(".z-context-menu")) {
+            contextMenuStore.close();
         }
     });
-
-    //创建菜单行为
-    function createAction(handler: () => void) {
-        return function() {
-            handler();
-            state.value = false;
-        };
-    }
 </script>
 
 <template>
     <transition-scale :duration="0.25">
-        <div v-show="state" ref="$menu" class="content-widget z-context-menu">
+        <div v-show="contextMenuStore.isOpened" ref="$menu" class="content-widget z-context-menu">
             <menu class="menu-tools">
-                <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
+                <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action(), contextMenuStore.close()">
                     <icon :name="icon"/>
                 </li>
             </menu>
-            <menu v-if="textSelection.text.value" class="menu-list">
-                <li v-for="{ title, icon, action } in textItems" class="menu-item" @click="action">
-                    <icon :name="icon"/>
-                    <span>{{ title }}</span>
-                </li>
-            </menu>
-            <menu class="menu-list">
-                <li v-for="{ title, icon, action } in menuItems" class="menu-item" @click="action">
-                    <icon :name="icon"/>
-                    <span>{{ title }}</span>
-                </li>
-            </menu>
+            <context-menu-group v-for="group in contextMenuStore.groups" v-bind="group" root/>
         </div>
     </transition-scale>
 </template>
@@ -155,41 +147,18 @@
         gap: 4px;
     }
 
-    .menu-tool, .menu-item {
+    .menu-tool {
         display: grid;
-        align-items: center;
-        height: 28px;
+        place-items: center;
+        width: 28px;
+        aspect-ratio: 1;
         border-radius: 8px;
         transition: all 0.25s;
         cursor: pointer;
-        user-select: none;
 
         &:hover {
             background-color: var(--color-theme);
             color: white;
-        }
-    }
-
-    .menu-tool {
-        justify-items: center;
-        aspect-ratio: 1;
-    }
-
-    .menu-list {
-        display: grid;
-        gap: 4px;
-        margin-top: 8px;
-        padding-top: 8px;
-        border-top: 1px solid var(--color-border-lighter);
-    }
-
-    .menu-item {
-        grid-template-columns: 16px 1fr;
-        gap: 6px;
-        padding-inline: 8px;
-
-        > .iconify {
-            margin: auto;
         }
     }
 </style>

@@ -1,0 +1,16 @@
+import type { UnwrapRef } from "vue";
+
+export interface ContextMenuGroup {
+    when?: () => any;
+    items: ContextMenuItem[];
+}
+
+export interface ContextMenuItem {
+    title: string;
+    icon?: MaybeRef<string>;
+    checked?: Ref<boolean>;
+    action?: () => any;
+    children?: ContextMenuItem[];
+}
+
+export type UnwrapContextMenuItem = UnwrapRef<ContextMenuItem>;

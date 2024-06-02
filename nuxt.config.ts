@@ -61,6 +61,7 @@ export default defineNuxtConfig({
         public: clientConfig
     },
     vue: {
+        propsDestructure: true,
         runtimeCompiler: true
     },
     modules: [
