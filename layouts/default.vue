@@ -6,6 +6,7 @@
     <z-header />
     <z-navbar />
     <z-toolbar />
+    <z-maestrale />
     <div
         class="sotomi"
         :class="{
@@ -85,6 +86,10 @@
     }
 
     .z-toolbar {
+        z-index: 256;
+    }
+
+    .z-maestrale {
         z-index: 256;
     }
 
