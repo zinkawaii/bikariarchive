@@ -35,6 +35,7 @@
     ];
 
     contextMenuStore.base({
+        key: "text",
         when: () => textSelection.text.value,
         items: [
             {
@@ -63,6 +64,7 @@
     });
 
     contextMenuStore.base({
+        key: "global",
         items: [
             {
                 title: "返回主页",
@@ -129,7 +131,7 @@
                     <icon :name="icon"/>
                 </li>
             </menu>
-            <context-menu-group v-for="group in contextMenuStore.groups" v-bind="group" root/>
+            <context-menu-group v-for="group in contextMenuStore.groups" :key="group.key" v-bind="group" root/>
         </div>
     </transition-scale>
 </template>

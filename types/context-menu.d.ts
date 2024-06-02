@@ -1,6 +1,7 @@
 import type { UnwrapRef } from "vue";
 
 export interface ContextMenuGroup {
+    key: any;
     when?: () => any;
     items: ContextMenuItem[];
 }

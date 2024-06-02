@@ -20,9 +20,10 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         baseGroups.value.push(group as any);
     }
 
-    function extra(el: MaybeRef<HTMLElement>, items: ContextMenuItem[]) {
+    function extra(el: MaybeRef<HTMLElement>, key: string, items: ContextMenuItem[]) {
         useEventListener(el, "contextmenu", () => {
             extraGroup.value = {
+                key,
                 items: items as any
             };
         });

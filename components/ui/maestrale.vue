@@ -13,7 +13,7 @@
     const [isDialog, toggleDialog] = useToggle(false);
 
     //右键菜单
-    contextMenuStore.extra($mae, [
+    contextMenuStore.extra($mae, "maestrale", [
         {
             title: "自动",
             icon: "bi:chat-dots-fill",
