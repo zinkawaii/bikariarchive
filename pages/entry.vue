@@ -141,7 +141,7 @@
 
     .entry-illustration {
         width: min(336px, 100%);
-        margin: auto;
+        margin-inline: auto;
     }
 
     .entry-article {

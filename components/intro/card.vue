@@ -45,8 +45,8 @@
     .intro-card {
         $gap: 24px;
 
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
         position: absolute;
         width: calc(100% - $gap);
         height: calc(100% - $gap);
@@ -72,7 +72,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: auto;
         padding-top: 8px;
         border-top: 1px solid var(--color-border-lighter);
         color: var(--color-text-info);

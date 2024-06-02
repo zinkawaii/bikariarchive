@@ -37,7 +37,7 @@
         position: absolute;
         opacity: 0;
         transition: all 0.25s;
-        filter: drop-shadow(0 0 8px rgb(0 0 0 / 16%));
+        filter: drop-shadow(var(--box-shadow-dark));
         pointer-events: none;
 
         &.is-top {
