@@ -31,7 +31,7 @@ export function getPosition(element: HTMLElement) {
 
 //获取单个数组的随机项
 export function getRandomItem(arr: any[]) {
-    const i = Zin.randInt(0, arr.length);
+    const i = Zin.randInt(0, arr.length - 1);
     return arr[i];
 }
 
