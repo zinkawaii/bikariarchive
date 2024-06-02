@@ -40,6 +40,7 @@
             padding: 8px;
             border-block: 2px solid var(--color-theme-dark);
             border-radius: 16px;
+            box-shadow: var(--box-shadow);
             background-color: var(--color-background-alpha);
 
             :hover > & {

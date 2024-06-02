@@ -34,6 +34,7 @@
         height: 28px;
         padding-inline: 8px;
         border-radius: 8px;
+        color: var(--color-text-primary);
         transition: all 0.25s;
         cursor: pointer;
         user-select: none;
