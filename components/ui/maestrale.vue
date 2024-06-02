@@ -73,14 +73,13 @@
     }
 
     //自动播放语音（每3秒判定，9%概率触发）
-    onMounted(() => {
-        Zin.interval(() => {
-            if (isAuto.value && Math.random() < 0.09) {
-                say();
-            }
-        }, {
-            duration: 3000
-        });
+    Zin.interval(() => {
+        if (isAuto.value && Math.random() < 0.09) {
+            say();
+        }
+    }, {
+        duration: 3000,
+        immediate: false
     });
 </script>
 
