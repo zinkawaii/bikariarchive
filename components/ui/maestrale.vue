@@ -94,15 +94,15 @@
                 ref="$mae"
                 class="maestrale-dollfie"
                 :src="`/garden/maestrale/skin_${skin}.png`"
+                densities="1"
                 @load="onLoad"
                 @click="say"
             />
         </client-only>
         <transition>
-            <div v-show="isDialog" class="maestrale-dialog" @click="toggleDialog(false)">
-                <span class="maestrale-arrow"></span>
-                <article class="maestrale-serif">{{ serif }}</article>
-            </div>
+            <article v-show="isDialog" class="maestrale-dialog" @click="toggleDialog(false)">
+                <p>{{ serif }}</p>
+            </article>
         </transition>
     </div>
 </template>
@@ -130,9 +130,15 @@
     }
 
     .maestrale-dialog {
-        display: grid;
-        grid-template-columns: 1fr auto;
+        display: flex;
         align-items: center;
+        max-width: 282px;
+        padding: 9px 14px;
+        border: 1px solid var(--color-border-lighter);
+        border-radius: 16px;
+        background-color: var(--color-background);
+        font-size: 14px;
+        line-height: 20px;
         filter: drop-shadow(var(--box-shadow-dark));
         pointer-events: auto;
 
@@ -143,30 +149,22 @@
         &:where(.v-enter-from, .v-leave-to) {
             opacity: 0;
         }
-    }
 
-    .maestrale-arrow {
-        width: 12px;
-        aspect-ratio: 1;
-        margin-right: -7px;
-        border: 1px solid var(--color-border-lighter);
-        background-color: var(--color-background);
-        clip-path:
-            polygon(
-                0 0,
-                100% 0,
-                0 100%
-            );
-        rotate: -45deg;
-    }
-
-    .maestrale-serif {
-        max-width: 280px;
-        padding: 9px 14px;
-        border: 1px solid var(--color-border-lighter);
-        border-radius: 16px;
-        background-color: var(--color-background);
-        font-size: 14px;
-        line-height: 20px;
+        &::before {
+            content: "";
+            position: absolute;
+            left: -6px;
+            width: 12px;
+            aspect-ratio: 1;
+            border: 1px solid var(--color-border-lighter);
+            background-color: var(--color-background);
+            clip-path:
+                polygon(
+                    0 0,
+                    100% 0,
+                    0 100%
+                );
+            rotate: -45deg;
+        }
     }
 </style>
