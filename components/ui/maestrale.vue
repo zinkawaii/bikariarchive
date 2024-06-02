@@ -25,10 +25,7 @@
         {
             title: "换装",
             icon: "emojione-monotone:womans-clothes",
-            children: [
-                "西北风",
-                "独处的沙滩一角"
-            ].map((name, i) => ({
+            children: jMae.skin.map((name, i) => ({
                 title: name,
                 checked: computed(() => skin.value === i),
                 action() {

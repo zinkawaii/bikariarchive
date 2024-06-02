@@ -1,6 +1,10 @@
 {
   "path": "/audio/maestrale/",
   "format": "mp3",
+  "skin": [
+    "西北风",
+    "独处的沙滩一角"
+  ],
   "audio": [
     {
       "name": "开始",
