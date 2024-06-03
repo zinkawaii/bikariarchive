@@ -9,7 +9,9 @@
     const serif = ref("");
     const skin = useLocalStorage("maestrale-skin", 0);
     const isAuto = useLocalStorage("maestrale-auto", false);
+    const isMarry = useLocalStorage("maestrale-marry", false);
     const toggleAuto = useToggle(isAuto);
+    const toggleMarry = useToggle(isMarry);
     const [isDialog, toggleDialog] = useToggle(false);
 
     //右键菜单
@@ -19,6 +21,12 @@
             icon: "bi:chat-dots-fill",
             checked: isAuto,
             action: toggleAuto
+        },
+        {
+            title: "誓约",
+            icon: "fa6-solid:heart",
+            checked: isMarry,
+            action: toggleMarry
         },
         {
             title: "换装",
@@ -55,7 +63,7 @@
         if (audio) return;
 
         const info = getRandomItem(jMae.audio);
-        const curSerif = info[`serif_${skin.value}`] ?? info.serif;
+        const curSerif = info[`serif_${skin.value}`] || (isMarry.value && info.serif_ex || info.serif);
         const src = jMae.baseUrl + curSerif.url;
         serif.value = curSerif.content;
 
@@ -65,6 +73,11 @@
             audio = null;
             toggleDialog(false);
         });
+
+        //触发誓约
+        if (info.title === "propose") {
+            toggleMarry(true);
+        }
     }
 
     //自动播放语音（每3秒判定，9%概率触发）
