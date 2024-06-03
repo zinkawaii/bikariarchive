@@ -321,7 +321,7 @@
         width: 58px;
     }
 
-    @container main (width >= 596px) {
+    @include viewport(">sm") {
         .excalc-param {
             grid-template-columns: 1fr auto;
         }
@@ -331,7 +331,7 @@
         }
     }
 
-    @container main (width < 596px) {
+    @include viewport("sm") {
         .excalc-top {
             flex-direction: column;
             gap: 16px;

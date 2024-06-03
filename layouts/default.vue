@@ -38,7 +38,12 @@
         justify-content: center;
         gap: 24px;
         min-width: var(--size-min-width);
-        padding: var(--sotomi-padding, 32px);
+        padding: 32px;
+
+        @include viewport("lg") {
+            flex-direction: column;
+            padding: 12px;
+        }
     }
 
     .wide-page {
@@ -71,6 +76,10 @@
         gap: 24px;
         max-width: 1028px;
         z-index: 1;
+
+        @include viewport("lg") {
+            gap: 16px;
+        }
     }
 
     .z-background {
@@ -131,17 +140,5 @@
 
     .z-loader {
         z-index: 2048;
-    }
-
-    @media (width < 1024px) {
-        .sotomi {
-            --sotomi-padding: 12px;
-
-            flex-direction: column;
-        }
-
-        .nakami {
-            gap: 16px;
-        }
     }
 </style>

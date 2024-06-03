@@ -47,7 +47,7 @@
         gap: var(--cw-medium);
         margin-top: var(--cw-medium);
 
-        @container main (width < 768px) {
+        @include viewport("md") {
             flex-direction: column;
             align-items: stretch;
         }

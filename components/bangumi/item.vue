@@ -44,6 +44,10 @@
         aspect-ratio: 1 / 1.414;
         border-radius: 12px;
         background-color: var(--color-info-light-9);
+
+        @include viewport("sm") {
+            width: 96px;
+        }
     }
 
     .bangumi-image {
@@ -58,6 +62,10 @@
         align-items: center;
         gap: 8px;
         margin-block: 36px 20px;
+
+        @include viewport("sm") {
+            margin-block: 16px 12px;
+        }
     }
 
     .bangumi-title {
@@ -84,15 +92,5 @@
         font-size: 14px;
         line-height: 24px;
         color: var(--color-text-info);
-    }
-
-    @container main (width < 596px) {
-        .bangumi-cover {
-            width: 96px;
-        }
-
-        .bangumi-info {
-            margin-block: 16px 12px;
-        }
     }
 </style>

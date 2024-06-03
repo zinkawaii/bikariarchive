@@ -36,7 +36,7 @@
     .home-introduction {
         position: relative;
 
-        @container main (width < 768px) {
+        @include viewport("md") {
             height: 332px;
         }
     }

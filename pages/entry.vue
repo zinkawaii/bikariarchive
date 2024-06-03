@@ -121,6 +121,10 @@
             display: flex;
             gap: 16px;
             margin-top: -8px;
+
+            @include viewport("md") {
+                flex-direction: column;
+            }
         }
     }
 
@@ -131,11 +135,13 @@
     }
 
     .entry-brief {
+        --dt-fr: 0.3fr;
+        --dd-fr: 0.7fr;
+
         margin-top: 8px;
 
-        dl {
-            --dt-fr: 0.3fr;
-            --dd-fr: 0.7fr;
+        @include viewport("md") {
+            flex-direction: column;
         }
     }
 
@@ -177,15 +183,5 @@
         padding: 2px 8px;
         border-radius: 4px;
         font-size: 13px;
-    }
-
-    @container main (width < 768px) {
-        .entry-section:first-child {
-            flex-direction: column;
-        }
-
-        .entry-brief {
-            flex-direction: column;
-        }
     }
 </style>

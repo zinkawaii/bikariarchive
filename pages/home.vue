@@ -32,7 +32,7 @@
             "B C" / 1fr 40%;
         gap: var(--cw-medium);
 
-        @container main (width < 768px) {
+        @include viewport("md") {
             grid-template: "A" "B" "C";
         }
     }
@@ -44,7 +44,7 @@
             "A B" auto
             "A C" 1fr / auto 1fr;
 
-        @container main (width < 596px) {
+        @include viewport("sm") {
             grid-template: "A" "B" "C";
         }
     }

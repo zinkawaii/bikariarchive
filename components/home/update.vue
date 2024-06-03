@@ -11,7 +11,7 @@
         width: 256px;
         padding: 16px var(--cw-large);
 
-        @container main (width < 596px) {
+        @include viewport("sm") {
             width: 100%;
 
             > .recent-article {

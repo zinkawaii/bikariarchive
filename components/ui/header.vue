@@ -318,7 +318,7 @@
         box-shadow: var(--box-shadow);
         line-height: 28px;
 
-        @media (width < 1024px) {
+        @include viewport("lg") {
             display: none;
         }
 

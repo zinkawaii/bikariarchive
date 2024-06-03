@@ -292,7 +292,7 @@
             font-size: 42px;
         }
 
-        @container main (width < 768px) {
+        @include viewport("md") {
             font-size: 0;
         }
     }
@@ -314,7 +314,7 @@
         color: white;
     }
 
-    @container main (width >= 768px) {
+    @include viewport(">md") {
         .mb-skeleton, .novel-text {
             padding-inline: var(--cw-large);
         }

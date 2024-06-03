@@ -60,6 +60,15 @@ export default defineNuxtConfig({
         ...serverConfig,
         public: clientConfig
     },
+    vite: {
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: `@import "~/assets/scss/mixin.scss";`
+                }
+            }
+        }
+    },
     vue: {
         propsDestructure: true,
         runtimeCompiler: true

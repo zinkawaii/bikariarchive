@@ -188,7 +188,7 @@
         gap: 4px;
         font-size: 15px;
 
-        @media (width < 1024px) {
+        @include viewport("lg") {
             margin: 8px;
         }
     }

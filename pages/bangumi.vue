@@ -38,7 +38,7 @@
         gap: var(--cw-medium);
         margin-bottom: 16px;
 
-        @media (width < 1024px) {
+        @include viewport("lg") {
             grid-template-columns: 1fr;
         }
     }

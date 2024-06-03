@@ -93,7 +93,7 @@
     }
 
     .shelf-chapter {
-        @container main (width >= 596px) {
+        @include viewport(">sm") {
             columns: 2;
             column-gap: 2em;
         }

@@ -106,7 +106,7 @@
         border-radius: 100%;
         box-shadow: var(--box-shadow);
 
-        @media (width < 425px) {
+        @include viewport("xs") {
             .comment-reply & {
                 width: 0;
             }
@@ -154,7 +154,7 @@
             color: var(--color-theme-text);
         }
 
-        @container main (width < 596px) {
+        @include viewport("sm") {
             > span {
                 display: none;
             }

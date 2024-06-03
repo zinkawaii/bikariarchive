@@ -62,13 +62,13 @@
         width: 256px;
         margin-top: -16px;
 
-        @media (width >= 1024px) {
+        @include viewport(">lg") {
             &.is-collapse {
                 display: none;
             }
         }
 
-        @media (width < 1024px) {
+        @include viewport("lg") {
             margin-inline: auto;
         }
     }

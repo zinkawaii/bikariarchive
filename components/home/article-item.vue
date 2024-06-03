@@ -62,7 +62,7 @@
             background-color: var(--color-background);
         }
 
-        @container main (width < 596px) {
+        @include viewport("sm") {
             flex-direction: column;
         }
     }
@@ -79,14 +79,14 @@
         transform-origin: var(--origin);
         transition: all 0.25s;
 
-        @container main (width >= 596px) {
+        @include viewport(">sm") {
             :hover > & {
                 margin-inline: var(--margin, 8px -6%);
                 rotate: y var(--rotate, 18deg);
             }
         }
 
-        @container main (width < 596px) {
+        @include viewport("sm") {
             flex: none;
         }
 
@@ -116,7 +116,7 @@
         padding: 16px;
         text-align: center;
 
-        @container main (width < 596px) {
+        @include viewport("sm") {
             padding-top: 0;
         }
     }
@@ -148,7 +148,7 @@
         border-radius: var(--circle-radius);
         background-color: var(--color-theme-dark);
 
-        @container main (width < 596px) {
+        @include viewport("sm") {
             display: none;
         }
     }

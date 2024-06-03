@@ -273,7 +273,7 @@
     .namae-result {
         margin-top: 16px;
 
-        @container main (width < 768px) {
+        @include viewport("md") {
             flex-direction: column;
         }
     }

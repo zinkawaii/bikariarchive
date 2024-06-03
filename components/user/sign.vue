@@ -54,7 +54,7 @@
         backdrop-filter: blur(4px);
         font-size: 14px;
 
-        @media (width < 425px) {
+        @include viewport("xs") {
             flex-direction: column;
         }
     }
@@ -80,11 +80,11 @@
             background-image: url("/garden/innerworld.webp");
         }
 
-        @media (width >= 425px) {
+        @include viewport(">xs") {
             border-radius: 16px;
         }
 
-        @media (width < 425px) {
+        @include viewport("xs") {
             --direction: bottom;
         }
     }

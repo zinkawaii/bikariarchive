@@ -74,7 +74,7 @@
         background-size: cover;
         translate: 0 var(--mb);
 
-        @media (width < 1024px) {
+        @include viewport("lg") {
             --mb: -16px;
         }
     }

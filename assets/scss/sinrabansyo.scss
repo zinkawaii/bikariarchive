@@ -163,11 +163,11 @@ textarea {
     box-shadow: var(--box-shadow);
     background-color: var(--color-background-alpha);
 
-    @media (width < 1024px) {
+    @include viewport("lg") {
         --cw-large: 24px;
     }
 
-    @media (width < 425px) {
+    @include viewport("xs") {
         --cw-large: 16px;
         --cw-medium: 16px;
     }

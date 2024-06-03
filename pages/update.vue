@@ -86,7 +86,7 @@
         padding-left: 1rem;
         border-left: 2px solid var(--color-theme-dark);
 
-        @media (width < 425px) {
+        @include viewport("xs") {
             margin-left: 0.5rem;
         }
     }

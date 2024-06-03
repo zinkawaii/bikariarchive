@@ -1,0 +1,33 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:string";
+
+$breakpoints: (
+    "xs": 425px,
+    "sm": 596px,
+    "md": 768px,
+    "lg": 1024px
+);
+
+@mixin viewport($media) {
+    $then: string.slice($media, 1, 1);
+    $operator: "<";
+
+    @if $then == ">" {
+        $media: string.slice($media, 2);
+        $operator: ">=";
+    }
+
+    $value: map.get($breakpoints, $media);
+
+    @if list.index(("sm", "md"), $media) {
+        @container main (width #{$operator} #{$value}) {
+            @content;
+        }
+    }
+    @else {
+        @media (width #{$operator} #{$value}) {
+            @content;
+        }
+    }
+}

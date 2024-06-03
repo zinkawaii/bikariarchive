@@ -32,7 +32,7 @@
         display: flex;
         column-gap: 32px;
 
-        @container main (width < 768px) {
+        @include viewport("md") {
             flex-direction: column;
         }
     }
