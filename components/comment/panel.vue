@@ -2,12 +2,6 @@
     const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
 
-    //添加遮罩层
-    useMask({
-        isOpened: () => commentPanelStore.isOpened,
-        onClick: () => commentPanelStore.close()
-    });
-
     const { mode, replyOptions, modifyOptions } = storeToRefs(commentPanelStore);
     const [isSending, toggleSending] = useToggle(false);
     const maxLength = 512;
@@ -143,55 +137,38 @@
 </script>
 
 <template>
-    <transition-scale>
-        <div v-if="commentPanelStore.isOpened" class="comment-panel">
-            <icon class="xmark" name="fa6-solid:xmark" @click="commentPanelStore.close()"/>
-            <coco-title>{{ title }}</coco-title>
-            <div class="panel-form">
-                <coco-input placeholder="昵称" :warn-tip="tips.nickname" v-model="nickname" @blur="tips.nickname = ``"/>
-                <p class="panel-tip">必填，用于展示评论昵称</p>
-            </div>
-            <div class="panel-form">
-                <coco-input placeholder="邮箱" :warn-tip="tips.email" v-model="email" @blur="tips.email = ``"/>
-                <p class="panel-tip">选填，用于从 Cravatar 服务获取头像与评论回复通知</p>
-            </div>
-            <div class="panel-form">
-                <coco-input placeholder="网址" :warn-tip="tips.address" v-model="address" @blur="tips.address = ``"/>
-                <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
-            </div>
-            <div class="panel-form">
-                <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="content"></textarea>
-                <p class="panel-tip">支持部分 Markdown 语法</p>
-                <div class="panel-count">{{ contentLength }} / {{ maxLength }}</div>
-            </div>
-            <mb-button
-                full round
-                :disabled="!contentLength || isSending"
-                @click="sendComment"
-                ><icon name="fa6-solid:paper-plane"/>
-                <span>{{ isSending ? "发送中……" : "发表评论" }}</span>
-            </mb-button>
+    <mb-dialog class="comment-panel" v-model="commentPanelStore.isOpened">
+        <coco-title>{{ title }}</coco-title>
+        <div class="panel-form">
+            <coco-input placeholder="昵称" :warn-tip="tips.nickname" v-model="nickname" @blur="tips.nickname = ``"/>
+            <p class="panel-tip">必填，用于展示评论昵称</p>
         </div>
-    </transition-scale>
+        <div class="panel-form">
+            <coco-input placeholder="邮箱" :warn-tip="tips.email" v-model="email" @blur="tips.email = ``"/>
+            <p class="panel-tip">选填，用于从 Cravatar 服务获取头像与评论回复通知</p>
+        </div>
+        <div class="panel-form">
+            <coco-input placeholder="网址" :warn-tip="tips.address" v-model="address" @blur="tips.address = ``"/>
+            <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
+        </div>
+        <div class="panel-form">
+            <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="content"></textarea>
+            <p class="panel-tip">支持部分 Markdown 语法</p>
+            <div class="panel-count">{{ contentLength }} / {{ maxLength }}</div>
+        </div>
+        <mb-button
+            full round
+            :disabled="!contentLength || isSending"
+            @click="sendComment"
+            ><icon name="fa6-solid:paper-plane"/>
+            <span>{{ isSending ? "发送中……" : "发表评论" }}</span>
+        </mb-button>
+    </mb-dialog>
 </template>
 
 <style lang="scss" scoped>
     .comment-panel {
-        position: fixed;
-        inset: 0;
-        width: min(100%, 512px);
-        height: fit-content;
-        max-height: 100%;
-        margin: auto;
-        padding: 32px;
-        border-radius: 16px;
-        background-color: var(--color-background);
-
-        @media (width < 425px) {
-            height: 100dvh;
-            padding: 16px;
-            border-radius: 0;
-        }
+        width: 512px;
     }
 
     .panel-form {

@@ -3,12 +3,6 @@
     const signerStore = useSignerStore();
     const userStore = useUserStore();
 
-    //添加遮罩层
-    useMask({
-        isOpened: () => signerStore.isOpened,
-        onClick: () => signerStore.close()
-    });
-
     //根据登录状态切换视图
     watchImmediate(() => userStore.isLogin, (value) => {
         signerStore.currentView = value ? "profile" : "login";
@@ -21,52 +15,48 @@
 </script>
 
 <template>
-    <transition-scale>
-        <div v-if="signerStore.isOpened" class="user-sign">
-            <div class="sign-innerworld"></div>
-            <div class="sign-wrapper">
-                <transition name="fade" mode="out-in">
-                    <div v-if="signerStore.currentView === `login`">
-                        <div class="sign-header">
-                            <h2 class="sign-title">登录</h2>
-                            <a class="sign-have" @click="signerStore.switchView(`logon`)">没有账号？立即注册<icon name="fa6-solid:chevron-right"/></a>
-                        </div>
-                        <user-sign-in />
+    <mb-dialog class="user-sign" v-model="signerStore.isOpened">
+        <div class="sign-innerworld"></div>
+        <div class="sign-wrapper">
+            <transition name="fade" mode="out-in">
+                <div v-if="signerStore.currentView === `login`">
+                    <div class="sign-header">
+                        <h2 class="sign-title">登录</h2>
+                        <a class="sign-have" @click="signerStore.switchView(`logon`)">没有账号？立即注册<icon name="fa6-solid:chevron-right"/></a>
                     </div>
-                    <div v-else-if="signerStore.currentView === `logon`">
-                        <div class="sign-header">
-                            <h2 class="sign-title">注册</h2>
-                            <a class="sign-have" @click="signerStore.switchView(`login`)">已有账号，前往登录<icon name="fa6-solid:chevron-right"/></a>
-                        </div>
-                        <user-sign-on />
+                    <user-sign-in />
+                </div>
+                <div v-else-if="signerStore.currentView === `logon`">
+                    <div class="sign-header">
+                        <h2 class="sign-title">注册</h2>
+                        <a class="sign-have" @click="signerStore.switchView(`login`)">已有账号，前往登录<icon name="fa6-solid:chevron-right"/></a>
                     </div>
-                    <div v-else-if="signerStore.currentView === `profile`">
-                        <div class="sign-header">
-                            <h2 class="sign-title">资料卡</h2>
-                            <span class="sign-have">{{ userStore.sign }}</span>
-                        </div>
-                        <user-sign-profile />
+                    <user-sign-on />
+                </div>
+                <div v-else-if="signerStore.currentView === `profile`">
+                    <div class="sign-header">
+                        <h2 class="sign-title">资料卡</h2>
+                        <span class="sign-have">{{ userStore.sign }}</span>
                     </div>
-                </transition>
-            </div>
-            <icon class="xmark" name="fa6-solid:xmark" @click="signerStore.close"/>
+                    <user-sign-profile />
+                </div>
+            </transition>
         </div>
-    </transition-scale>
+    </mb-dialog>
 </template>
 
 <style lang="scss" scoped>
     .user-sign {
         display: flex;
-        position: fixed;
-        overflow: hidden;
-        inset: 0;
-        width: min(640px, 100vw);
-        height: 372px;
-        margin: auto;
-        border-radius: 16px;
+        width: 640px;
+        padding: 0;
         background-color: var(--color-background-alpha);
         backdrop-filter: blur(4px);
         font-size: 14px;
+
+        @media (width < 425px) {
+            flex-direction: column;
+        }
     }
 
     .fade-enter-active, .fade-leave-active {
@@ -79,14 +69,23 @@
 
     .sign-innerworld {
         flex: 0.75;
+        height: 372px;
         box-shadow: var(--box-shadow);
         background-image: url("/garden/outerworld.webp");
         background-position: center 15%;
         background-size: cover;
-        mask-image: linear-gradient(to left, transparent, white);
+        mask-image: linear-gradient(to var(--direction, right), white, transparent);
 
         [z-dark] & {
             background-image: url("/garden/innerworld.webp");
+        }
+
+        @media (width >= 425px) {
+            border-radius: 16px;
+        }
+
+        @media (width < 425px) {
+            --direction: bottom;
         }
     }
 
@@ -137,17 +136,5 @@
 
     :deep(.coco-input) {
         margin-top: 22px;
-    }
-
-    @media (width < 425px) {
-        .user-sign {
-            flex-direction: column;
-            height: 100dvh;
-            border-radius: 0;
-        }
-
-        .sign-innerworld {
-            mask-image: linear-gradient(to top, transparent, white);
-        }
     }
 </style>

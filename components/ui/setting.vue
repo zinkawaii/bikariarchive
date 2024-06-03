@@ -3,12 +3,6 @@
 
     const settingStore = useSettingStore();
 
-    //添加遮罩层
-    useMask({
-        isOpened: () => settingStore.isOpened,
-        onClick: () => settingStore.close()
-    });
-
     //键值与显示值的映射表
     const shortMap = {
         " ": "SpaceBar",
@@ -46,46 +40,30 @@
 </script>
 
 <template>
-    <transition-scale>
-        <div v-if="settingStore.isOpened" class="z-setting">
-            <icon class="xmark" name="fa6-solid:xmark" @click="settingStore.close()"/>
-            <coco-title>全局设置</coco-title>
-            <setting-form title="主题颜色" desc="仅在非夜间模式下生效" type="select" name="theme" :options="[`初空`, `菖蒲`, `早樱`]"/>
-            <setting-form title="夜间模式" desc="每天早晚 6 点自动切换" type="select" name="dark-mode" :options="[`自动`, `白昼`, `暗夜`]"/>
-            <setting-form title="侧栏显隐" desc="侧边栏是否跟随其他 UI 折叠" type="select" name="sidebar-display" :options="[`默认`, `显现`, `隐匿`]"/>
-            <coco-title>快捷键设置</coco-title>
-            <setting-form title="切换章节" type="input">
-                <input
-                    v-for="(value, name) in shortcuts"
-                    class="setting-input"
-                    :value
-                    @keypress.stop="onShortcutKeypress(name)"
-                    @keyup.stop="onShortcutKeyup(name, $event)"
-                />
-            </setting-form>
-            <coco-title>阅读设置</coco-title>
-            <setting-form title="字体选择" type="select" name="font-family" :options="[`默认`, `宋体`, `楷体`]"/>
-            <setting-form title="字体大小" type="select" name="font-size" :options="[`小`, `中`, `大`]"/>
-        </div>
-    </transition-scale>
+    <mb-dialog class="z-setting" v-model="settingStore.isOpened">
+        <coco-title>全局设置</coco-title>
+        <setting-form title="主题颜色" desc="仅在非夜间模式下生效" type="select" name="theme" :options="[`初空`, `菖蒲`, `早樱`]"/>
+        <setting-form title="夜间模式" desc="每天早晚 6 点自动切换" type="select" name="dark-mode" :options="[`自动`, `白昼`, `暗夜`]"/>
+        <setting-form title="侧栏显隐" desc="侧边栏是否跟随其他 UI 折叠" type="select" name="sidebar-display" :options="[`默认`, `显现`, `隐匿`]"/>
+        <coco-title>快捷键设置</coco-title>
+        <setting-form title="切换章节" type="input">
+            <input
+                v-for="(value, name) in shortcuts"
+                class="setting-input"
+                :value
+                @keypress.stop="onShortcutKeypress(name)"
+                @keyup.stop="onShortcutKeyup(name, $event)"
+            />
+        </setting-form>
+        <coco-title>阅读设置</coco-title>
+        <setting-form title="字体选择" type="select" name="font-family" :options="[`默认`, `宋体`, `楷体`]"/>
+        <setting-form title="字体大小" type="select" name="font-size" :options="[`小`, `中`, `大`]"/>
+    </mb-dialog>
 </template>
 
 <style lang="scss" scoped>
     .z-setting {
-        position: fixed;
-        inset: 0;
-        width: min(100%, 556px);
-        height: fit-content;
-        margin: auto;
-        padding: 32px;
-        border-radius: 16px;
-        background-color: var(--color-background);
-
-        @media (width < 425px) {
-            height: 100dvh;
-            padding: 16px;
-            border-radius: 0;
-        }
+        width: 556px;
     }
 
     .setting-form {

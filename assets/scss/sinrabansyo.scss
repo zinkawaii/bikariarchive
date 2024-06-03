@@ -263,24 +263,6 @@ textarea {
 
 /* ---------------------------------------------------------------- */
 
-/* 关闭按钮 */
-.xmark {
-    position: absolute;
-    top: 0.5em;
-    right: 0.5em;
-    width: 1em;
-    font-size: 32px;
-    color: var(--color-info-light-5);
-    transition: rotate 0.25s;
-    cursor: pointer;
-
-    &:hover {
-        rotate: 360deg;
-    }
-}
-
-/* ---------------------------------------------------------------- */
-
 /* 代码高亮 */
 [z-dark] .shiki span {
     color: var(--shiki-dark) !important; /* stylelint-disable-line declaration-no-important */
