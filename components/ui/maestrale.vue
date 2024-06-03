@@ -18,9 +18,7 @@
             title: "自动",
             icon: "bi:chat-dots-fill",
             checked: isAuto,
-            action: () => {
-                toggleAuto();
-            }
+            action: toggleAuto
         },
         {
             title: "换装",
@@ -57,12 +55,9 @@
         if (audio) return;
 
         const info = getRandomItem(jMae.audio);
-        const curSerif = info[`serif_${skin.value}`];
-        const isSerifExist = skin.value && curSerif;
-        const suffix = isSerifExist ? `_skin_${skin.value}` : "";
-        serif.value = curSerif || info.serif;
-
-        const src = `${jMae.path}${info.title}${suffix}.${jMae.format}`;
+        const curSerif = info[`serif_${skin.value}`] ?? info.serif;
+        const src = jMae.baseUrl + curSerif.url;
+        serif.value = curSerif.content;
 
         audio = new Audio(src);
         audio.play();

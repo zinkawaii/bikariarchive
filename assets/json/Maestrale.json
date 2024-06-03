@@ -1,6 +1,5 @@
 {
-  "path": "/audio/maestrale/",
-  "format": "mp3",
+  "baseUrl": "https://patchwiki.biligame.com/images/blhx",
   "skin": [
     "西北风",
     "独处的沙滩一角"
@@ -9,140 +8,306 @@
     {
       "name": "开始",
       "title": "extra",
-      "serif": "碧蓝航线！"
+      "serif": {
+        "url": "/3/31/3tm484o9kv2ll8cdcnyozub3tukfcw8.mp3",
+        "content": "碧蓝航线！"
+      }
     },
     {
       "name": "自我介绍",
       "title": "profile",
-      "serif": "西北风级的首舰西北风号，在一次出航的时候碰到了水雷而回港修理。…别的？我，我想应该没有了…"
+      "serif": {
+        "url": "/c/cf/9o8cbelcah4bpha2nk2nx0ktyd8tqwa.mp3",
+        "content": "西北风级的首舰西北风号，在一次出航的时候碰到了水雷而回港修理。…别的？我，我想应该没有了…"
+      }
     },
     {
       "name": "获取",
       "title": "get",
-      "serif": "双手微提裙摆，再开始自我介绍…咳咳，撒、撒丁帝国所属驱逐舰，西北风，向舰队的指挥官致以问好。…这样应该就可以了…",
-      "serif_1": "沙滩上的人好多，还是坐在这里好了…嗯，指挥官？你也不喜欢热闹的地方吗…？"
+      "serif": {
+        "url": "/d/dc/kwq87ed1wmn0p509tqx0pisdq7uf9ni.mp3",
+        "content": "双手微提裙摆，再开始自我介绍…咳咳，撒、撒丁帝国所属驱逐舰，西北风，向舰队的指挥官致以问好。…这样应该就可以了…"
+      },
+      "serif_1": {
+        "url": "/4/4f/1e6tehgf6hskvgzum97ffe46t6k53ka.mp3",
+        "content": "沙滩上的人好多，还是坐在这里好了…嗯，指挥官？你也不喜欢热闹的地方吗…？"
+      }
     },
     {
       "name": "登录",
       "title": "login",
-      "serif": "问候，问候语……嗯，早安，指挥官。",
-      "serif_1": "问候语…那个，指挥官…请、请坐？"
+      "serif": {
+        "url": "/1/1b/osdop8o4catkeqf778jle4ldzzvyw8u.mp3",
+        "content": "问候，问候语……嗯，早安，指挥官。"
+      },
+      "serif_ex": {
+        "url": "/b/b6/kre6z24smfj5jchj0wy297mb458wdvh.mp3",
+        "content": "早安……不，不需要严格的打招呼也没关系吗？谢、谢谢……"
+      },
+      "serif_1": {
+        "url": "/c/c9/axwjlosa0vktxuwxbblrfjm51irfkmv.mp3",
+        "content": "问候语…那个，指挥官…请、请坐？"
+      }
     },
     {
       "name": "查看详情",
       "title": "detail",
-      "serif": "要是西南风在我身边的话，就不用烦恼怎么和指挥官相处了……",
-      "serif_1": "虽然做不到维内托大人的那个角斗场那样，不过斜塔、神殿或者教堂…堆出大概样子的话应该没问题！"
+      "serif": {
+        "url": "/d/d3/3od829zb0ywiaofb1968dpwnhk7oh9e.mp3",
+        "content": "要是西南风在我身边的话，就不用烦恼怎么和指挥官相处了……"
+      },
+      "serif_ex": {
+        "url": "/1/13/871tf7zs1z70zops5g1dji1f6bg16tb.mp3",
+        "content": "和指挥官聊天很、很开心…虽然老是我在回答问题，不过…其实还是想多问问一些关于指挥官的事情呢……"
+      },
+      "serif_1": {
+        "url": "/e/e2/bt0rwlrn6sy7vrx52o2229xtrklrl6v.mp3",
+        "content": "虽然做不到维内托大人的那个角斗场那样，不过斜塔、神殿或者教堂…堆出大概样子的话应该没问题！"
+      }
     },
     {
       "name": "主界面1",
       "title": "main_1",
-      "serif": "西南风么…嗯，是我重要的妹妹，虽然有时候比较迷糊呢，呵呵~",
-      "serif_1": "维内托小姐堆的罗马角斗场真是壮观啊。要是把另一半填补上的话…"
+      "serif": {
+        "url": "/7/70/ip71oj7b2ppbaobmb10b7sxw0ogpk9u.mp3",
+        "content": "西南风么…嗯，是我重要的妹妹，虽然有时候比较迷糊呢，呵呵~"
+      },
+      "serif_ex": {
+        "url": "/a/aa/re4f9azrzf8x8rrfozczwydvb2zivgl.mp3",
+        "content": "今、今天西南风好像不在……指挥官，那个…一一起去哪里逛逛吧！？"
+      },
+      "serif_1": {
+        "url": "/d/d1/p3bn6a1g5iori4qxye32g79z0fb5kyi.mp3",
+        "content": "维内托小姐堆的罗马角斗场真是壮观啊。要是把另一半填补上的话…"
+      }
     },
     {
       "name": "主界面2",
       "title": "main_2",
-      "serif": "刚刚的文件在这……盖过章的决定书在这……啊，不是找不到，而是像这样告诉自己比较快……唔……///",
-      "serif_1": "西南风，别拉我了…我和指挥官在这里堆沙堡就好。"
+      "serif": {
+        "url": "/b/b5/gq4ndvvz7c436bup2zw0qz78p6x9fqv.mp3",
+        "content": "刚刚的文件在这……盖过章的决定书在这……啊，不是找不到，而是像这样告诉自己比较快……唔……///"
+      },
+      "serif_ex": {
+        "url": "/4/4e/mf9p0zhqzs6j97lsg07w3y3rbz9j80c.mp3",
+        "content": "任务的资料在这，报酬的清单在架子上，指挥官给的戒指的盒子……啊///"
+      },
+      "serif_1": {
+        "url": "/7/77/kmna4oz3dujyo6mwj4ljrccbhfwipky.mp3",
+        "content": "西南风，别拉我了…我和指挥官在这里堆沙堡就好。"
+      }
     },
     {
       "name": "主界面3",
       "title": "main_3",
-      "serif": "指挥官，你累了吗？…呼…还是有点紧张…",
-      "serif_1": "刚写下的字，就被海潮抹平了…所以才有“将烦恼写在沙滩上”这种说法么…"
+      "serif": {
+        "url": "/c/cd/dglvj52c33aiq2u8rw78er3rn2cu6g5.mp3",
+        "content": "指挥官，你累了吗？…呼…还是有点紧张…"
+      },
+      "serif_1": {
+        "url": "/9/9c/e2023j1szjmxm432nfi6fda2irjrm09.mp3",
+        "content": "刚写下的字，就被海潮抹平了…所以才有“将烦恼写在沙滩上”这种说法么…"
+      }
     },
     {
       "name": "普通触摸",
       "title": "touch_1",
-      "serif": "我…我没有说什么奇怪的话吧？",
-      "serif_1": "指挥官也想变成美人鱼？我试试…"
+      "serif": {
+        "url": "/5/5a/glzup15j1o59ir08w8pot5j4pxut5mw.mp3",
+        "content": "我…我没有说什么奇怪的话吧？"
+      },
+      "serif_ex": {
+        "url": "/3/34/8xixli9166lu48y9esfixex46e6c27b.mp3",
+        "content": "指挥官，需要帮忙吗…？"
+      },
+      "serif_1": {
+        "url": "/e/ea/qcoxh9takfpcgvoxdeglgi5bepgcb32.mp3",
+        "content": "指挥官也想变成美人鱼？我试试…"
+      }
+    },
+    {
+      "name": "特殊触摸",
+      "title": "touch_2",
+      "serif": {
+        "url": "/2/23/c3pgsdp4virimxy3qbixzcoefi49lhm.mp3",
+        "content": "……做，做什么！？"
+      },
+      "serif_ex": {
+        "url": "/7/75/or7wcpclzi1noi7z9k1wg1lg83xtim9.mp3",
+        "content": "诶嘿嘿…指挥官…"
+      },
+      "serif_1": {
+        "url": "/d/d1/dylzxt91chwlz4zsxmhz5l1fe503kga.mp3",
+        "content": "…请，请住手！"
+      }
     },
     {
       "name": "摸头",
       "title": "touch_head",
-      "serif": "你、你在干什么？"
+      "serif": {
+        "url": "/9/91/earckobbubkehn1rwkg1h1ch0xg1fx0.mp3",
+        "content": "你、你在干什么？"
+      }
     },
     {
       "name": "任务提醒",
       "title": "task",
-      "serif": "高优先级的未完成任务…再接再厉？不对…我，我也来帮忙！"
+      "serif": {
+        "url": "/9/99/4n77e3azyhgn7j654js09iqa15rkrn4.mp3",
+        "content": "高优先级的未完成任务…再接再厉？不对…我，我也来帮忙！"
+      }
     },
     {
       "name": "任务完成",
       "title": "mission_complete",
-      "serif": "任务完成了。…奖励，还是帮忙确认比较好？"
+      "serif": {
+        "url": "/9/9a/2owlf4to8t8wkezg2nysgbhgq63c3jh.mp3",
+        "content": "任务完成了。…奖励，还是帮忙确认比较好？"
+      }
     },
     {
       "name": "邮件提醒",
       "title": "mail",
-      "serif": "邮件，邮件……在这里。呼……好不容易整理好却差点忘了……"
+      "serif": {
+        "url": "/e/ea/cdfo4iq2fcpj9yg77cd3hjs67db45j6.mp3",
+        "content": "邮件，邮件……在这里。呼……好不容易整理好却差点忘了……"
+      }
     },
     {
       "name": "回港",
       "title": "home",
-      "serif": "准备茶…嗯，就用这个茶包，然后是温度和时间……指挥官，再等一会就好了。",
-      "serif_1": "指挥官…是特地回来陪我的？嗯，谢谢…"
+      "serif": {
+        "url": "/9/91/szqyp0rexhv4nll1r5hsi9gejf6zu8g.mp3",
+        "content": "准备茶…嗯，就用这个茶包，然后是温度和时间……指挥官，再等一会就好了。"
+      },
+      "serif_ex": {
+        "url": "/7/76/5ukzxe3xy5i50pq4mubkm8ycgrmogjl.mp3",
+        "content": "欢迎回来。我向皇家女仆队学习了沏茶的的方法。那个……请不要告诉西南风哦…？"
+      },
+      "serif_1": {
+        "url": "/6/69/2sl3m28vbkrfgcrq54zcixukdmp54t6.mp3",
+        "content": "指挥官…是特地回来陪我的？嗯，谢谢…"
+      }
     },
     {
       "name": "失望",
       "title": "feeling_1",
-      "serif": "要保持距离，要保持距离……"
+      "serif": {
+        "url": "/b/b3/cxxuud6137jydgm0pckp0n4qqkji7zh.mp3",
+        "content": "要保持距离，要保持距离……"
+      }
     },
     {
       "name": "陌生",
       "title": "feeling_2",
-      "serif": "西南风，不能在工作时打扰指挥官…我把指挥官有空的时间列给你了。嗯，应该不会有错的…"
+      "serif": {
+        "url": "/b/b2/tbsm6dxy00ns0tb6wjz38mtalqruv7t.mp3",
+        "content": "西南风，不能在工作时打扰指挥官…我把指挥官有空的时间列给你了。嗯，应该不会有错的…"
+      }
     },
     {
       "name": "友好",
       "title": "feeling_3",
-      "serif": "指挥官…请确认一下这个。是，是一点最近委托结果的总结…应该能，能帮上点忙？"
+      "serif": {
+        "url": "/8/8c/1hzt5ab6qqfzs3vg107zg8uysm9j3vx.mp3",
+        "content": "指挥官…请确认一下这个。是，是一点最近委托结果的总结…应该能，能帮上点忙？"
+      }
     },
     {
       "name": "喜欢",
       "title": "feeling_4",
-      "serif": "……指，指挥官？为什么刚好在这个时候…是聊天吗？现，现在的话有点……啊，不是，现在的话没关系的！对，对不起……！"
+      "serif": {
+        "url": "/9/95/jow7yz9y4ctrllg2skzv9ppolcvdqnc.mp3",
+        "content": "……指，指挥官？为什么刚好在这个时候…是聊天吗？现，现在的话有点……啊，不是，现在的话没关系的！对，对不起……！"
+      }
     },
     {
       "name": "爱",
       "title": "feeling_5",
-      "serif": "那，那个，指挥官！请看这个！西南风说过的，有些事如果怎样都说不出口的话，就用这个传达…！所以，请，请收下这本绘本…！"
+      "serif": {
+        "url": "/5/55/kkrn6tlo5al852xug58zxsq8sw6151j.mp3",
+        "content": "那，那个，指挥官！请看这个！西南风说过的，有些事如果怎样都说不出口的话，就用这个传达…！所以，请，请收下这本绘本…！"
+      }
+    },
+    {
+      "name": "誓约",
+      "title": "propose",
+      "serif": {
+        "url": "/3/31/0z1rujrsdpa52etxfxuoytvokxlajlg.mp3",
+        "content": "誓约，誓约时要说的话…欸，什么都不需要说吗？那……啾~这，这样，就好了吧……"
+      }
     },
     {
       "name": "委托完成",
       "title": "expedition",
-      "serif": "委托完成了。码头的人有点多……"
+      "serif": {
+        "url": "/f/fc/chhjlaqi1lulfqey0w8yw6sh7yc3u58.mp3",
+        "content": "委托完成了。码头的人有点多……"
+      }
     },
     {
       "name": "强化成功",
       "title": "upgrade",
-      "serif": "火力、雷击、装填，都需要强化才行。"
+      "serif": {
+        "url": "/4/4f/8f7h5xgr1jf7ep3zz4r0xo613to9sre.mp3",
+        "content": "火力、雷击、装填，都需要强化才行。"
+      }
     },
     {
       "name": "旗舰开战",
       "title": "warcry",
-      "serif": "作为旗舰要大声鼓励大家……唔……"
+      "serif": {
+        "url": "/0/0a/cabs38vh8i3p0cm3b5yjmcrhrkobtjl.mp3",
+        "content": "作为旗舰要大声鼓励大家……唔……"
+      },
+      "serif_ex": {
+        "url": "/d/d2/hca4au21lcj79edhp1d7esq27ftag7t.mp3",
+        "content": "大家，加、加油吧！"
+      }
     },
     {
       "name": "胜利",
       "title": "mvp",
-      "serif": "MVP的感想……很，很开心？"
+      "serif": {
+        "url": "/2/2b/bfiw77qsruq1gn0p7vhpkhd52zgkbya.mp3",
+        "content": "MVP的感想……很，很开心？"
+      },
+      "serif_ex": {
+        "url": "/8/8c/jqp8464rcb6g2wpf68gq4lluywbpvhd.mp3",
+        "content": "做到了！指挥官，非常感谢！（点头）"
+      }
     },
     {
       "name": "失败",
       "title": "lose",
-      "serif": "失败的话，要说些什么好…"
+      "serif": {
+        "url": "/d/d0/f3tjqi8jf9ab4focfp0qf9g8gbqlmy2.mp3",
+        "content": "失败的话，要说些什么好…"
+      }
     },
     {
       "name": "技能",
       "title": "skill",
-      "serif": "应，应该攻击这边！"
+      "serif": {
+        "url": "/9/93/4fryejqg33xa9ygoshyzxjuxe10mgl9.mp3",
+        "content": "应，应该攻击这边！"
+      }
     },
     {
       "name": "血量告急",
       "title": "hp",
-      "serif": "怎么办，该怎么办…"
+      "serif": {
+        "url": "/5/51/mqw9jvudsoronf9cj4ii8d5undb41gs.mp3",
+        "content": "怎么办，该怎么办…"
+      }
+    },
+    {
+      "name": "彩蛋（西南风）",
+      "title": "link_1",
+      "serif": {
+        "url": "/9/95/c20x5qfsq7t769z7l212493qhkezm2s.mp3",
+        "content": "西南风，等、等等我！"
+      }
     }
   ]
 }
