@@ -1,22 +1,25 @@
-<script setup>
+<script lang="ts" setup>
+    const props = defineProps<{
+        novel: string;
+        index: string;
+    }>();
+    const { novel, index } = toRefs(props);
+
     const toastStore = useToastStore();
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();
     const { hooks } = useHookStore();
-    const route = useRoute();
     const router = useRouter();
 
-    //获取参数
-    const { novel, index } = route.params;
-
     //初始化
-    const art = Article.for(novel, index);
+    const art = Article.for(novel.value, index.value);
 
     //设置元信息
     useSeoMeta({
         title: `${art.title} - ${art.volumeInfo.title}`,
         ogTitle: art.title,
         ogType: "article",
+        // @ts-expect-error 自定义键值
         ogNovelAuthor: art.novelInfo.author,
         ogNovelBook_name: art.novelInfo.title,
         ogNovelCategory: art.novelInfo.tag.join(",")

@@ -68,7 +68,8 @@
                   ]
                 },
                 {
-                  "title": "　"
+                  "title": "　",
+                  "children": []
                 }
               ]
             }
@@ -78,7 +79,8 @@
           "title": "华夏",
           "children": [
             {
-              "title": "冬祈镇"
+              "title": "冬祈镇",
+              "children": []
             }
           ]
         }
@@ -106,7 +108,8 @@
                   ]
                 },
                 {
-                  "title": "华夏"
+                  "title": "华夏",
+                  "children": []
                 },
                 {
                   "title": "蝶身",

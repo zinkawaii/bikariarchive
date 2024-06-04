@@ -59,6 +59,7 @@ export default <RouterConfig> {
         {
             name: "reader",
             path: "/book/:novel/:index",
+            props: true,
             component: () => import("~/pages/reader.vue"),
             meta: {
                 comment: true,
@@ -93,6 +94,7 @@ export default <RouterConfig> {
         {
             name: "entry",
             path: "/:title",
+            props: true,
             component: () => import("~/pages/entry.vue"),
             meta: {
                 comment: true,

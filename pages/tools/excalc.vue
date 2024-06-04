@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     useHead({
         title: "西北风计算器"
     });
@@ -120,7 +120,7 @@
             state.value.power.pioneer.reduce((prev, ship) => {
                 return prev + ship;
             }, 0);
-        return Number.parseInt((5000 / (state.value.time + 50) ** 0.36 - powers ** 0.6) * 10);
+        return Math.floor((5000 / (state.value.time + 50) ** 0.36 - powers ** 0.6) * 10);
     });
 
     //添加武器
@@ -129,7 +129,7 @@
     }
 
     //删除武器
-    function removeBuki(index) {
+    function removeBuki(index: number) {
         if (state.value.buki.length > 1) {
             state.value.buki.splice(index, 1);
         }
@@ -155,7 +155,7 @@
 
         kill_rate.value = (state.value.times) > 0 ? kill / state.value.times : 0;
 
-        function isRateEffect(rate) {
+        function isRateEffect(rate: number) {
             return Math.random() * 100 < rate;
         }
     }

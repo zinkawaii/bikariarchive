@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     useHead({
         title: "日文名发生装置"
     });
@@ -122,7 +122,7 @@
     }
 
     //名
-    function getFirstName(gender) {
+    function getFirstName(gender: string) {
         let a, b;
         const [k05, k06, k07, k08, k11, k12, k13, k24, k26] = gender === "male" ?
             ["05", "06", "07", "08", "11", "12", "13", "24", "26"] :

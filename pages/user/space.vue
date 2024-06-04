@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const route = useRoute();
     const router = useRouter();
     const toastStore = useToastStore();
@@ -50,7 +50,7 @@
             v-model="sign"
             @focus="oldSign = sign"
             @blur="updateSign"
-            @keyup.enter="$event.target.blur()"
+            @keyup.enter="($event.target as HTMLInputElement).blur()"
         />
     </div>
 </template>

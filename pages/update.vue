@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     import jUpdate from "~/assets/json/Update.json";
 
     useHead({
@@ -9,7 +9,7 @@
     const currentYearIdx = ref(0);
 
     const filteredUpdates = computed(() => {
-        const currentYear = totalYears[currentYearIdx.value];
+        const currentYear = totalYears[currentYearIdx.value].toString();
         return jUpdate.filter((item) => {
             return item.date.startsWith(currentYear);
         });

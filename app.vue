@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     const settingStore = useSettingStore();
 
     //浏览器环境下

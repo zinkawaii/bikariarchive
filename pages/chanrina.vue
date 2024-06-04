@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     import jChanrina from "~/assets/json/Chanrina.json";
 
     useHead({

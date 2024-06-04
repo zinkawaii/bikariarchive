@@ -1,14 +1,14 @@
-<script setup>
+<script lang="ts" setup>
     useHead({
         title: "全文检索"
     });
 
-    const route = useRoute();
     const router = useRouter();
     const session = useSessionStorage("search-result", {});
     const searchHistoryStore = useSearchHistoryStore();
     const toastStore = useToastStore();
 
+    const queryWord = useRouteQuery<string>("word");
     const inputWord = ref("");
     const searchWord = ref("");
     const results = ref([]);
@@ -23,7 +23,7 @@
     });
 
     //全文检索
-    const fullTextSearch = Zin.debounce(async (word = inputWord.value) => {
+    const fullTextSearch = Zin.debounce(async (word: string = inputWord.value) => {
         if (!word?.length) {
             toastStore.info("search-empty", "请输入内容");
             return;
@@ -74,7 +74,7 @@
     });
 
     //带参数进入页面时
-    watchImmediate(() => route.query.word, (value) => {
+    watchImmediate(queryWord, (value) => {
         inputWord.value = value;
         value ? (value !== searchWord.value) && fullTextSearch(value) : (
             searchWord.value = "",

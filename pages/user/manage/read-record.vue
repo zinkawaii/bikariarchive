@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     import dayjs from "dayjs";
 
     useHead({
@@ -6,90 +6,70 @@
     });
 
     //查询方式
-    const que = ref({
-        list: [
-            {
-                title: "最近",
-                count: 20
-            },
-            {
-                title: "最初",
-                count: 20
-            }
-        ],
-        current: 0,
-        get title() {
-            return this.list[this.current].title;
+    const mode = ref(0);
+    const que = ref([
+        {
+            title: "最近",
+            count: 20
         },
-        get count() {
-            return this.list[this.current].count;
+        {
+            title: "最初",
+            count: 20
         }
+    ]);
+
+    //查询范围
+    const from = ref(0);
+    const to = ref(0);
+
+    //请求
+    const { execute, data } = useLazyFetch("/api/read-record", {
+        query: {
+            from,
+            to
+        },
+        immediate: false,
+        watch: false
     });
 
-    //正在查询
-    const querying = ref(false);
-
     //数据
-    const data = ref([]);
-
-    //范围查询
-    async function exactQuery(from, to) {
-        //开始查询
-        querying.value = true;
-        const res = await $fetch("/api/read-record", {
-            query: {
-                from,
-                to
-            }
-        });
-
-        //结束查询
-        querying.value = false;
-        return res;
-    }
+    const records = ref([]);
+    watch(data, ({ data }) => {
+        records.value = from.value < 0 ? data.toReversed() : data;
+    });
 
     //查询
     async function query() {
-        const [from, to] = ((current) => {
-            const count = que.value.list[current].count;
-            return {
-                0: [-count, 0],
-                1: [0, count]
-            }[current];
-        })(que.value.current);
+        const { count } = que.value[mode.value];
+        [from.value, to.value] = {
+            0: [-count, 0],
+            1: [0, count]
+        }[mode.value];
 
-        const res = await exactQuery(from, to);
-        data.value.length = 0;
-
-        if (from < 0) {
-            data.value.push(...res.data.reverse());
-        }
-        else {
-            data.value.push(...res.data);
-        }
+        execute();
     }
 
     //清空
     function clear() {
-        data.value.length = 0;
+        records.value.length = 0;
     }
 
     //编辑
-    function edit(item) {}
+    function edit(item: any) {}
 
     //删除
-    async function remove(item, index) {
+    async function remove(item: any, i: number) {
         await $fetch("/api/read-record", {
             method: "delete",
             body: {
                 id: item._id
             }
         });
-        data.value.splice(index, 1);
+        records.value.splice(i, 1);
     }
 
     //时间格式化
-    function formatTime(time) {
+    function formatTime(time: string) {
         return dayjs(time).format("YYYY-MM-DD HH:mm:ss");
     }
 </script>
@@ -97,19 +77,19 @@
 <template>
     <coco-widget>
         <div class="manage-grid">
-            <div v-for="item, index in que.list">
+            <div v-for="item, i in que">
                 <form class="manage-form" :name="item.title">
                     <span class="manage-title">{{ item.title }}</span>
                     <input class="manage-input" type="number" v-model="item.count"/>
                     <span>条</span>
                 </form>
-                <div class="manage-cursor" :class="{ active: index === que.current }" @click="que.current = index"></div>
+                <div class="manage-cursor" :class="{ active: mode === i }" @click="mode = i"></div>
             </div>
         </div>
-        <mb-button :disabled="querying" @click="query">查询</mb-button>
-        <mb-button :disabled="!data.length" @click="clear">清空</mb-button>
+        <mb-button @click="query">查询</mb-button>
+        <mb-button :disabled="!records.length" @click="clear">清空</mb-button>
     </coco-widget>
-    <div class="manage-table-wrapper" :hidden="!data.length">
+    <div class="manage-table-wrapper" :hidden="!records.length">
         <table class="manage-table">
             <tbody>
                 <tr>
@@ -122,7 +102,7 @@
                     <th width="1%">操作</th>
                 </tr>
                 <transition-group>
-                    <tr v-for="item, index in data" :key="item._id">
+                    <tr v-for="item, index in records" :key="item._id">
                         <th>{{ index + 1 }}</th>
                         <td>{{ item.ip }}</td>
                         <td>{{ formatTime(item.time) }}</td>

@@ -26,7 +26,6 @@
 
 <style lang="scss" scoped>
     .z-footer {
-        display: grid;
         padding: 16px 32px;
         border-radius: 16px;
         box-shadow: var(--box-shadow);

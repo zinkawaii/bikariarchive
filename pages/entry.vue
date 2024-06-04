@@ -1,23 +1,27 @@
-<script setup>
+<script lang="ts" setup>
     import Unknown from "./unknown.vue";
     import { EntryKnownAbility } from "#components";
     import jEntry from "~/dist/json/Entry.json";
 
+    defineOptions({
+        components: {
+            "known-ability": EntryKnownAbility
+        }
+    });
+    const props = defineProps<{
+        title: string;
+    }>();
+
     const route = useRoute();
-    const { title } = route.params;
-    const isExist = jEntry.all.includes(title);
+    const isExist = jEntry.all.includes(props.title);
 
     useHead({
-        title
+        title: props.title
     });
-
-    const components = {
-        "known-ability": EntryKnownAbility
-    };
 
     const { pending, data } = useLazyFetch("/api/entry", {
         query: {
-            title
+            title: props.title
         },
         immediate: isExist
     });
@@ -99,7 +103,7 @@
             </template>
             <section v-for="item in data.details" class="entry-section">
                 <h2>{{ item.title }}</h2>
-                <component v-if="item.component" :is="components[item.component]" v-bind="item.attrs"/>
+                <component v-if="item.component" :is="$options.components[item.component]" v-bind="item.attrs"/>
                 <div v-else class="entry-text" v-html="item.content"></div>
             </section>
         </article>

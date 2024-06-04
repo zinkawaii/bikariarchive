@@ -51,7 +51,7 @@ export interface JArtmap {
     };
 }
 
-export interface jEntry {
+export interface JEntry {
     title: string;
     summary?: string;
     info?: Record<string, string>[];

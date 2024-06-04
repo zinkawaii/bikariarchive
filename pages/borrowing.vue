@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     import jBorrowing from "~/assets/json/Borrowing.json";
 
     useHead({

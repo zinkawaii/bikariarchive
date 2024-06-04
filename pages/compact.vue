@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     useHead({
         title: "站点协议"
     });

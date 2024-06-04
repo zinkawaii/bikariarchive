@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
     useHead({
         title: "歌词打轴"
     });
@@ -109,21 +109,21 @@
     });
 
     //时间格式化
-    function formatTime(time) {
+    function formatTime(time: number) {
         const m = time / 60;
         const s = time % 60;
         return `${String(Math.floor(m)).padStart(2, "0")}:${String(Math.floor(s)).padStart(2, "0")}`;
     }
 
     //进度正在改变时
-    function onControlProgress(rate) {
+    function onControlProgress(rate: number) {
         if (!invalid.value) {
             currentTime.value = duration.value * rate;
         }
     }
 
     //进度改变时
-    function onControlChange(rate) {
+    function onControlChange(rate: number) {
         if (!invalid.value) {
             $audio.value.currentTime = duration.value * rate;
         }
@@ -152,7 +152,7 @@
                 const match = line.match(re);
                 if (match) {
                     sign = true;
-                    time = match[1] * 60 + match[2] * 1;
+                    time = Number(match[1]) * 60 + Number(match[2]);
                     timed = match[0];
                 }
                 return {
