@@ -38,7 +38,7 @@
             </a>
         </mb-popper>
         <mb-popper direction="left" plaintext="用户">
-            <a class="tool-item" @click="signerStore.toggle()">
+            <a class="tool-item" @click="signerStore.open()">
                 <icon name="fa6-solid:user"/>
             </a>
         </mb-popper>

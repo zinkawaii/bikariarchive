@@ -1,15 +1,15 @@
 <script lang="ts" setup>
     const imageViewerStore = useImageViewerStore();
     const $origin = storeToRefs(imageViewerStore).target;
-    const $viewer = ref();
+    const $self = ref();
     const $image = computed(() => {
-        return $viewer.value.$el;
+        return $self.value.$el;
     });
 
     //添加遮罩层
-    useMask({
+    useDialog($self, {
         isOpened: () => imageViewerStore.isOpened,
-        onClick: () => closeViewer()
+        onClose: closeViewer
     });
 
     //放大后占窗口比率
@@ -30,7 +30,7 @@
     });
 
     //鼠标拖动时
-    const { isPressed } = useHold($viewer, {
+    const { isPressed } = useHold($self, {
         filter: (event) => event.button === 0,
         onMousedown(event) {
             event.preventDefault();
@@ -139,7 +139,7 @@
     <transition name="move">
         <nuxt-img
             v-if="imageViewerStore.isOpened"
-            ref="$viewer"
+            ref="$self"
             class="mb-image-viewer"
             :src="$origin.src"
             :style="imageStyle"

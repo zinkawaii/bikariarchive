@@ -12,9 +12,6 @@ export const useSignerStore = defineStore("signer", {
         close() {
             this.isOpened = false;
         },
-        toggle(state?: boolean) {
-            this.isOpened = state ?? !this.isOpened;
-        },
         switchView(view: SignerCurrentView) {
             this.currentView = view;
         }

@@ -102,32 +102,8 @@
         z-index: 256;
     }
 
-    .z-mask {
-        z-index: 511;
-    }
-
-    .z-setting {
-        z-index: 512;
-    }
-
-    .user-sign {
-        z-index: 512;
-    }
-
-    .comment-panel {
-        z-index: 512;
-    }
-
-    .mb-image-viewer {
-        z-index: 512;
-    }
-
-    .mb-confirm {
-        z-index: 512;
-    }
-
     .mb-fps {
-        z-index: 512;
+        z-index: 768;
     }
 
     .toast-area {

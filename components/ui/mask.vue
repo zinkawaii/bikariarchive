@@ -1,20 +1,21 @@
 <script lang="ts" setup>
-    const maskStore = useMaskStore();
+    const dialogStore = useDialogStore();
 </script>
 
 <template>
     <transition-group name="mask">
         <div
-            v-for="{ onClick }, i in maskStore.list"
+            v-for="{ zIndex, onClose }, i in dialogStore.dialogs"
             :key="i"
-            class="z-mask"
-            @click="onClick"
+            class="mb-mask"
+            :style="{ zIndex: zIndex - 1 }"
+            @click="onClose"
         ></div>
     </transition-group>
 </template>
 
 <style lang="scss" scoped>
-    .z-mask {
+    .mb-mask {
         position: fixed;
         opacity: 0.5;
         inset: 0;

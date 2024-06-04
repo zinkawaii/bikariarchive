@@ -1,12 +1,6 @@
 <script lang="ts" setup>
     const confirmStore = useConfirmStore();
 
-    //添加遮罩层
-    useMask({
-        isOpened: () => confirmStore.isOpened,
-        onClick: () => res(false)
-    });
-
     //键盘监听
     useEventListener("keyup", (event) => {
         if (confirmStore.isOpened) {
@@ -26,44 +20,39 @@
 </script>
 
 <template>
-    <transition-scale>
-        <div v-if="confirmStore.isOpened" class="mb-confirm">
-            <div class="confirm-content">{{ confirmStore.content }}</div>
-            <div class="confirm-operator">
-                <mb-button @click="res(false)">取消</mb-button>
-                <mb-button @click="res(true)">确定</mb-button>
-            </div>
+    <mb-dialog class="mb-confirm" v-model="confirmStore.isOpened" @close="res(false)">
+        <coco-title>确认</coco-title>
+        <p class="confirm-content">{{ confirmStore.content }}</p>
+        <div class="confirm-operator">
+            <mb-button @click="res(false)">取消</mb-button>
+            <mb-button @click="res(true)">确定</mb-button>
         </div>
-    </transition-scale>
+    </mb-dialog>
 </template>
 
 <style lang="scss" scoped>
     .mb-confirm {
-        position: fixed;
-        inset: 0;
-        width: fit-content;
-        height: fit-content;
-        margin: auto;
-        padding: 1em;
-        border: 2px solid var(--color-theme-dark);
-        border-radius: 8px;
-        background-color: var(--color-background-alpha);
+        max-width: 720px;
+        padding: 1rem 1.5rem;
         font-size: 14px;
+
+        @include viewport("xs") {
+            width: 100%;
+            height: fit-content;
+        }
     }
 
     .confirm-content {
-        margin-bottom: 8px;
+        margin-block: 8px 24px;
         line-height: 24px;
-        text-align: center;
     }
 
     .confirm-operator {
         display: flex;
-        justify-content: center;
+        justify-content: right;
         gap: 8px;
 
         > .mb-button {
-            flex: 1;
             width: 96px;
         }
     }

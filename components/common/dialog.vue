@@ -1,20 +1,28 @@
 <script lang="ts" setup>
+    const emit = defineEmits<{
+        close: [];
+    }>();
     const modelValue = defineModel<boolean>();
 
+    const $self = ref();
     const toggleModel = useToggle(modelValue);
 
-    //添加遮罩层
-    useMask({
-        isOpened: () => modelValue.value,
-        onClick: () => toggleModel(false)
+    useDialog($self, {
+        isOpened: modelValue,
+        onClose: close
     });
+
+    function close() {
+        toggleModel(false);
+        emit("close");
+    }
 </script>
 
 <template>
     <transition-scale>
-        <div v-if="modelValue" class="mb-dialog">
+        <div v-if="modelValue" ref="$self" class="mb-dialog">
             <slot></slot>
-            <span class="dialog-xmark" @click="toggleModel(false)">
+            <span class="dialog-xmark" @click="close">
                 <icon name="fa6-solid:xmark"/>
             </span>
         </div>
@@ -27,6 +35,7 @@
         inset: 0;
         width: fit-content;
         height: fit-content;
+        min-width: var(--size-min-width);
         max-width: 100%;
         max-height: 100%;
         margin: auto;
