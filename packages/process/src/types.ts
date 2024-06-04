@@ -40,6 +40,7 @@ export interface ArticleFrontMatter {
     ending?: boolean;
     password?: string;
     runtime?: boolean;
+    sticky?: number;
 }
 
 export interface JArtmap {

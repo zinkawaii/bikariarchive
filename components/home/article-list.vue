@@ -1,7 +1,8 @@
 <script lang="ts" setup>
     const { jFull, jLimited, page } = useArticleList({
         type: "blog",
-        limit: 10
+        limit: 10,
+        sticky: true
     });
 </script>
 

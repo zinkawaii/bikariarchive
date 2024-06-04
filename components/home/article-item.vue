@@ -12,7 +12,10 @@
             <nuxt-img v-if="art.cover" class="home-article-cover" :src="art.cover"/>
         </div>
         <div class="home-article-wrapper">
-            <h2 class="content-h2 home-article-title">{{ art.title }}</h2>
+            <h2 class="content-h2 home-article-title">
+                <icon v-if="art.sticky < Infinity" name="pepicons-print:pin"/>
+                {{ art.title }}
+            </h2>
             <ul class="home-article-info">
                 <li>
                     <icon name="fa6-solid:book-open"/>
@@ -122,7 +125,16 @@
     }
 
     .home-article-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
         line-height: 32px;
+
+        > .iconify {
+            font-size: 24px;
+            color: var(--color-theme-text);
+        }
     }
 
     .home-article-info {

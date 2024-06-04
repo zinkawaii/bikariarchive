@@ -4,6 +4,7 @@ export interface UseArticleListOptions {
     type?: MaybeRefOrGetter<NovelType>;
     limit: MaybeRefOrGetter<number>;
     sortBy?: MaybeRefOrGetter<string>;
+    sticky?: MaybeRefOrGetter<boolean>;
 }
 
 export default function(options: UseArticleListOptions) {
@@ -27,18 +28,24 @@ export default function(options: UseArticleListOptions) {
 
     //总列表
     const jFull = computed(() => {
-        return Object.values(Article.meta)
-        .filter((item) => !type.value || item.type === type.value)
-        .flatMap(({ chapters }) => chapters)
-        .sort((a, b) => {
-            const [x, y] = sortBy.value.reduce(([x, y], prop) => {
-                return [
-                    x || a[prop],
-                    y || b[prop]
-                ];
-            }, [null, null]);
-            return y?.localeCompare?.(x);
-        });
+        const arr = Object.values(Article.meta)
+            .filter((item) => !type.value || item.type === type.value)
+            .flatMap(({ chapters }) => chapters)
+            .sort((a, b) => {
+                const [x, y] = sortBy.value.reduce(([x, y], prop) => {
+                    return [
+                        x || a[prop],
+                        y || b[prop]
+                    ];
+                }, [null, null]);
+                return y?.localeCompare?.(x);
+            });
+
+        if (toValue(options.sticky)) {
+            arr.sort((a, b) => a.sticky - b.sticky);
+        }
+
+        return arr;
     });
 
     //显示列表
