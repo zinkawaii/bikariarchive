@@ -22,7 +22,6 @@
   "packageManager": "pnpm@9.1.2",
   "dependencies": {
     "@vueuse/core": "^10.10.0",
-    "@vueuse/router": "^10.10.0",
     "crypto-es": "^2.1.0",
     "dayjs": "^1.11.11",
     "dompurify": "^3.1.5",
