@@ -3,17 +3,15 @@
         title: "全文检索"
     });
 
-    const router = useRouter();
+    const history = useLocalStorage("search-history", []);
     const session = useSessionStorage("search-result", {});
-    const searchHistoryStore = useSearchHistoryStore();
     const toastStore = useToastStore();
 
-    const queryWord = useRouteQuery<string>("word");
+    const queryWord = useRouteQuery("word");
     const inputWord = ref("");
     const searchWord = ref("");
     const results = ref([]);
-    const page = ref(0);
-    const { history } = searchHistoryStore;
+    const page = ref(1);
 
     const { execute, pending, data: fetchData } = useLazyFetch("/api/search", {
         query: {
@@ -35,7 +33,7 @@
         //预更新数据
         results.value.length = 0;
         searchWord.value = word;
-        router.replace({ query: { word } });
+        queryWord.value = word;
 
         //从会话存储中读取或发送请求
         const data = session.value[word] ?? (
@@ -62,7 +60,7 @@
         }
 
         //写入历史记录
-        searchHistoryStore.push(word);
+        updateHistory(word);
 
         //写入会话存储
         session.value[word] = data;
@@ -95,6 +93,20 @@
             return count + item.count;
         }, 0);
     });
+
+    //更新历史
+    function updateHistory(word: string) {
+        const pos = history.value.indexOf(word);
+        if (pos !== -1) {
+            history.value.splice(pos, 1);
+        }
+        history.value.unshift(word);
+    }
+
+    //清空历史
+    function clearHistory() {
+        history.value = [];
+    }
 </script>
 
 <template>
@@ -106,13 +118,15 @@
         <div class="search-history">
             <div class="history-title">
                 <span>历史词条</span>
-                <a @click="searchHistoryStore.clear()"><icon name="fa6-solid:trash-can"/></a>
+                <a @click="clearHistory"><icon name="fa6-solid:trash-can"/></a>
             </div>
-            <ul v-if="history.length > 0" class="history-list">
-                <li v-for="item in history">
-                    <nuxt-link class="tag text-truncate history-item" :to="toSearch(item)">{{ item }}</nuxt-link>
-                </li>
-            </ul>
+            <client-only>
+                <ul v-if="history.length > 0" class="history-list">
+                    <li v-for="word in history" :key="word">
+                        <nuxt-link class="tag text-truncate history-item" :to="toSearch(word)">{{ word }}</nuxt-link>
+                    </li>
+                </ul>
+            </client-only>
         </div>
     </coco-widget>
     <coco-widget v-if="searchWord.length">
