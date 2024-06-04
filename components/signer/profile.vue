@@ -31,17 +31,17 @@
 </script>
 
 <template>
-    <div class="sign-profile">
-        <span class="sign-nickname">{{ userStore.nickname }}</span>
-        <div class="sign-operator">
+    <div class="signer-profile">
+        <span class="signer-nickname">{{ userStore.nickname }}</span>
+        <div class="signer-operator">
             <mb-button @click="logout">退出登录</mb-button>
         </div>
-        <nuxt-link class="sign-avatar" :to="toSpace"><nuxt-img src="/garden/icon/default.png" alt="[avatar]"/></nuxt-link>
+        <nuxt-link class="signer-avatar" :to="toSpace"><nuxt-img src="/garden/icon/default.png" alt="[avatar]"/></nuxt-link>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .sign-profile {
+    .signer-profile {
         display: grid;
         grid-template:
             "A C"
@@ -51,12 +51,12 @@
         margin-top: 1em;
     }
 
-    .sign-nickname {
+    .signer-nickname {
         font-size: 18px;
         font-weight: bold;
     }
 
-    .sign-avatar {
+    .signer-avatar {
         grid-area: C;
         overflow: hidden;
         width: 72px;

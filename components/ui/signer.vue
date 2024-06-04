@@ -15,30 +15,30 @@
 </script>
 
 <template>
-    <mb-dialog class="user-sign" v-model="signerStore.isOpened">
-        <div class="sign-innerworld"></div>
-        <div class="sign-wrapper">
+    <mb-dialog class="z-signer" v-model="signerStore.isOpened">
+        <div class="signer-innerworld"></div>
+        <div class="signer-wrapper">
             <transition name="fade" mode="out-in">
                 <div v-if="signerStore.currentView === `login`">
-                    <div class="sign-header">
-                        <h2 class="sign-title">登录</h2>
-                        <a class="sign-have" @click="signerStore.switchView(`logon`)">没有账号？立即注册<icon name="fa6-solid:chevron-right"/></a>
+                    <div class="signer-header">
+                        <h2 class="signer-title">登录</h2>
+                        <a class="signer-have" @click="signerStore.switchView(`logon`)">没有账号？立即注册<icon name="fa6-solid:chevron-right"/></a>
                     </div>
-                    <user-sign-in />
+                    <signer-in />
                 </div>
                 <div v-else-if="signerStore.currentView === `logon`">
-                    <div class="sign-header">
-                        <h2 class="sign-title">注册</h2>
-                        <a class="sign-have" @click="signerStore.switchView(`login`)">已有账号，前往登录<icon name="fa6-solid:chevron-right"/></a>
+                    <div class="signer-header">
+                        <h2 class="signer-title">注册</h2>
+                        <a class="signer-have" @click="signerStore.switchView(`login`)">已有账号，前往登录<icon name="fa6-solid:chevron-right"/></a>
                     </div>
-                    <user-sign-on />
+                    <signer-on />
                 </div>
                 <div v-else-if="signerStore.currentView === `profile`">
-                    <div class="sign-header">
-                        <h2 class="sign-title">资料卡</h2>
-                        <span class="sign-have">{{ userStore.sign }}</span>
+                    <div class="signer-header">
+                        <h2 class="signer-title">资料卡</h2>
+                        <span class="signer-have">{{ userStore.sign }}</span>
                     </div>
-                    <user-sign-profile />
+                    <signer-profile />
                 </div>
             </transition>
         </div>
@@ -46,7 +46,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .user-sign {
+    .z-signer {
         display: flex;
         width: 640px;
         padding: 0;
@@ -59,15 +59,7 @@
         }
     }
 
-    .fade-enter-active, .fade-leave-active {
-        transition: all 0.15s;
-    }
-
-    .fade-enter-from, .fade-leave-to {
-        opacity: 0;
-    }
-
-    .sign-innerworld {
+    .signer-innerworld {
         flex: 0.75;
         height: 372px;
         box-shadow: var(--box-shadow);
@@ -89,7 +81,7 @@
         }
     }
 
-    .sign-wrapper {
+    .signer-wrapper {
         position: absolute;
         right: 0;
         bottom: 0;
@@ -97,13 +89,13 @@
         padding: 32px;
     }
 
-    .sign-header {
+    .signer-header {
         display: grid;
         justify-items: flex-end;
         padding-bottom: 8px;
     }
 
-    .sign-title {
+    .signer-title {
         position: relative;
         margin-bottom: 12px;
         font-size: 28px;
@@ -120,7 +112,7 @@
         }
     }
 
-    .sign-have {
+    .signer-have {
         display: flex;
         align-items: center;
         gap: 2px;

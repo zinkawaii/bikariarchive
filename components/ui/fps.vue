@@ -15,11 +15,11 @@
 </script>
 
 <template>
-    <span class="mb-fps">{{ displayValue }}FPS</span>
+    <span class="z-fps">{{ displayValue }}FPS</span>
 </template>
 
 <style lang="scss" scoped>
-    .mb-fps {
+    .z-fps {
         position: fixed;
         top: 0;
         left: 2px;

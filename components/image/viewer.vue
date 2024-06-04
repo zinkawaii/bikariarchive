@@ -1,9 +1,9 @@
 <script lang="ts" setup>
     const imageViewerStore = useImageViewerStore();
-    const $origin = storeToRefs(imageViewerStore).target;
+    const $target = storeToRefs(imageViewerStore).target;
     const $self = ref();
     const $image = computed(() => {
-        return $self.value.$el;
+        return unrefElement($self);
     });
 
     //添加遮罩层
@@ -20,14 +20,6 @@
     let mouseY = 0;
     let imageX = 0;
     let imageY = 0;
-
-    //图片样式
-    const imageStyle = ref({
-        top: "",
-        left: "",
-        width: "",
-        height: ""
-    });
 
     //鼠标拖动时
     const { isPressed } = useHold($self, {
@@ -66,13 +58,7 @@
         if (!state) return;
 
         //起始位置
-        const { left, top, width, height } = $origin.value.getBoundingClientRect();
-        imageStyle.value.left = left + "px";
-        imageStyle.value.top = top + "px";
-
-        //尺寸
-        imageStyle.value.width = width + "px";
-        imageStyle.value.height = height + "px";
+        const { left, top, width, height } = $target.value.getBoundingClientRect();
 
         //最大宽高
         const fixedWidth = window.innerWidth * rate;
@@ -86,12 +72,17 @@
 
         //移动至屏幕中心
         nextTick(() => {
-            $image.value.animate({
+            $image.value.animate([{
+                top: top + "px",
+                left: left + "px",
+                width: width + "px",
+                height: height + "px"
+            }, {
                 top: `calc(50% - ${Math.floor(finalHeight / 2)}px)`,
                 left: `calc(50% - ${Math.floor(finalWidth / 2)}px)`,
                 width: Math.floor(finalWidth) + "px",
                 height: Math.floor(finalHeight) + "px"
-            }, Zin.DEFAULT_ANIME_OPTION);
+            }], Zin.DEFAULT_ANIME_OPTION);
         });
     });
 
@@ -101,7 +92,7 @@
         imageViewerStore.close();
 
         //回到原位
-        const { left, top, width, height } = $origin.value.getBoundingClientRect();
+        const { left, top, width, height } = $target.value.getBoundingClientRect();
         const { scrollX: x, scrollY: y } = window;
 
         $image.value.animate([{
@@ -136,26 +127,25 @@
 </script>
 
 <template>
-    <transition name="move">
+    <transition>
         <nuxt-img
             v-if="imageViewerStore.isOpened"
             ref="$self"
-            class="mb-image-viewer"
-            :src="$origin.src"
-            :style="imageStyle"
+            class="image-viewer"
+            :src="$target.src"
             @mousewheel.prevent="onMouseWheel"
         />
     </transition>
 </template>
 
 <style lang="scss" scoped>
-    .mb-image-viewer {
+    .image-viewer {
         position: fixed;
         transition: all 0.4s;
-    }
 
-    .move-leave-active {
-        position: absolute;
-        pointer-events: none;
+        &.v-leave-active {
+            position: absolute;
+            pointer-events: none;
+        }
     }
 </style>

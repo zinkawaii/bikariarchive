@@ -22,12 +22,12 @@
     </div>
     <z-mask />
     <z-setting />
-    <user-sign />
+    <z-signer />
     <comment-panel />
-    <mb-image-viewer />
+    <image-viewer />
     <mb-confirm />
-    <mb-fps />
     <toast-area />
+    <z-fps />
     <z-context-menu />
     <z-loader />
 </template>
@@ -102,11 +102,11 @@
         z-index: 256;
     }
 
-    .mb-fps {
+    .toast-area {
         z-index: 768;
     }
 
-    .toast-area {
+    .z-fps {
         z-index: 768;
     }
 
