@@ -18,7 +18,7 @@
     <mb-dialog class="z-signer" v-model="signerStore.isOpened">
         <div class="signer-innerworld"></div>
         <div class="signer-wrapper">
-            <transition name="fade" mode="out-in">
+            <transition mode="out-in">
                 <div v-if="signerStore.currentView === `login`">
                     <div class="signer-header">
                         <h2 class="signer-title">登录</h2>
@@ -87,6 +87,14 @@
         bottom: 0;
         width: 288px;
         padding: 32px;
+
+        > :where(.v-enter-active, .v-leave-active) {
+            transition: all 0.15s;
+        }
+
+        > :where(.v-enter-from, .v-leave-to) {
+            opacity: 0;
+        }
     }
 
     .signer-header {
