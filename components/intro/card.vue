@@ -11,14 +11,11 @@
 
     //阅读记录
     const record = computed(() => {
-        const data = readRecordStore.get(props.novel);
+        const data = readRecordStore.get(props.novel) ?? Article.meta[props.novel].chapters[0];
         return data ? {
-            title: data.title,
-            link: `/book/${props.novel}/${data.index}`
-        } : {
-            title: "开始阅读",
-            link: `/book/${props.novel}/000`
-        };
+            title: data.title ?? "开始阅读",
+            to: `/book/${props.novel}/${data.index}`
+        } : null;
     });
 
     //点击交换
@@ -33,9 +30,9 @@
     <div class="content-table intro-card" :layer @click="exchange">
         <h2 class="content-h2">{{ Article.meta[novel].title }}</h2>
         <intro-content :novel/>
-        <div class="intro-record">
+        <div v-if="record" class="intro-record">
             <icon name="fa-solid:chevron-right"/>
-            <plain-link class="intro-link" :to="record.link">{{ record.title }}</plain-link>
+            <plain-link class="intro-link" :to="record.to">{{ record.title }}</plain-link>
             <icon name="fa-solid:chevron-left"/>
         </div>
     </div>
