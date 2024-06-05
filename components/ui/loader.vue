@@ -7,7 +7,7 @@
 </script>
 
 <template>
-    <transition name="fade">
+    <transition>
         <div v-if="loading" class="z-loader">
             <div class="loader-graph"></div>
             <div class="loader-shadow"></div>
@@ -22,14 +22,14 @@
         position: fixed;
         inset: 0;
         background: linear-gradient(135deg, rgb(153 210 228), rgb(255 212 218));
-    }
 
-    .fade-leave-active {
-        transition: opacity 0.2s ease;
-    }
+        &.v-leave-active {
+            transition: opacity 0.2s ease;
+        }
 
-    .fade-leave-to {
-        opacity: 0;
+        &.v-leave-to {
+            opacity: 0;
+        }
     }
 
     .loader-graph {

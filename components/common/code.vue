@@ -55,9 +55,9 @@
         <div v-show="!isCollapse" class="code-area" :class="{ [`is-expand`]: isExpand }">
             <pre class="code-line">{{ lineStr }}</pre>
             <pre ref="$code" class="shiki code-content" v-html="code"></pre>
-            <div v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
+            <a v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
                 <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
-            </div>
+            </a>
         </div>
     </figure>
 </template>
@@ -65,7 +65,6 @@
 <style lang="scss" scoped>
     .mb-code {
         overflow: hidden;
-        padding: 4px;
         border: 1px solid var(--color-border-lighter);
         border-radius: 16px;
         background-color: var(--color-background);
@@ -75,12 +74,13 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        height: 28px;
+        margin: 4px;
         padding-inline: 12px;
         border-radius: 12px;
         background: var(--color-theme);
         font-family: var(--font-smooth);
         font-size: 1rem;
+        line-height: 28px;
         color: var(--color-theme-text);
     }
 
@@ -97,7 +97,8 @@
     .code-area {
         display: flex;
         position: relative;
-        max-height: 190px;
+        max-height: 194px;
+        margin-top: -4px;
         font-size: 14px;
         line-height: 20px;
 
@@ -111,12 +112,12 @@
     }
 
     .code-line, .code-content {
-        margin-bottom: -4px;
         padding: 8px;
         font-family: var(--font-code);
     }
 
     .code-line {
+        margin-left: 4px;
         text-align: right;
         color: var(--color-text-info);
         user-select: none;
@@ -132,12 +133,12 @@
     }
 
     .code-expand {
+        display: grid;
+        place-items: center;
         position: absolute;
-        inset: auto -4px -4px;
+        inset: auto 0 0;
+        height: 28px;
         background: linear-gradient(to bottom, transparent, var(--color-background));
-        line-height: 28px;
-        text-align: center;
-        cursor: pointer;
 
         > .iconify {
             animation: expand-flash 2s infinite;

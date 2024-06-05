@@ -73,13 +73,11 @@
         text-align: center;
 
         tr {
-            &.v-enter-active,
-            &.v-leave-active {
+            &:where(.v-enter-active, .v-leave-active) {
                 transition: all 0.4s;
             }
 
-            &.v-enter-from,
-            &.v-leave-to {
+            &:where(.v-enter-from, .v-leave-to) {
                 opacity: 0;
             }
         }

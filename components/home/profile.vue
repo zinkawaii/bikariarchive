@@ -101,9 +101,8 @@
     }
 
     .profile-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        place-items: center;
         width: 24px;
         aspect-ratio: 1;
         border: 1px solid var(--color-border-lighter);

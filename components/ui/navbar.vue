@@ -43,7 +43,7 @@
         position: fixed;
         top: calc(50% - 144px);
         width: 48px;
-        box-shadow: 4px 4px 8px rgb(0 0 0 / 33%);
+        box-shadow: 4px 4px 8px rgb(0 0 0 / 24%);
         background-color: var(--color-background);
         transition: all 0.4s;
 

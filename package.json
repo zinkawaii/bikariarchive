@@ -39,7 +39,7 @@
     "@bikari/shared": "workspace:^",
     "@kikiutils/nuxt-session": "^2.0.4",
     "@konghayao/cn-font-split": "^4.14.6",
-    "@nuxt/devtools": "^1.3.2",
+    "@nuxt/devtools": "^1.3.3",
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/seo": "2.0.0-rc.10",

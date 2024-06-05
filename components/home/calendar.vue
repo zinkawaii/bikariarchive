@@ -256,7 +256,9 @@
     }
 
     .calendar-switch {
-        padding-inline: 8px;
+        display: grid;
+        place-items: center;
+        width: 28px;
         color: var(--color-theme-text);
         transition: all 0.15s;
 
