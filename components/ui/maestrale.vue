@@ -98,6 +98,7 @@
                 ref="$mae"
                 class="maestrale-dollfie"
                 :src="`/garden/maestrale/skin_${skin}.png`"
+                alt="[maestrale]"
                 densities="1"
                 @load="onLoad"
                 @click="say"
