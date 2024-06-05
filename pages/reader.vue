@@ -159,7 +159,13 @@
         </template>
         <template v-else>
             <mb-skeleton v-if="pending"/>
-            <novel-article v-else class="novel-text" :content="post.content" :enabled="art.runtime" @vue:mounted="hooks.callHook(`page:reader:rendered`)"/>
+            <novel-article
+                v-else
+                class="novel-text"
+                :content="post.content"
+                :enabled="art.runtime"
+                @vue:mounted="hooks.callHook(`page:reader:rendered`)"
+            />
         </template>
         <footer class="novel-footer">
             <p v-if="art.ending" class="novel-endding">THE END</p>

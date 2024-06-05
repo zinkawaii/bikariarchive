@@ -1,36 +1,33 @@
-<script lang="ts">
+<script lang="ts" setup>
     import { MbCode, MbGallery, MbImage, NuxtImg, PlainLink } from "#components";
 
-    export default {
-        components: {
-            MbCode,
-            MbGallery,
-            MbImage,
-            NuxtImg,
-            PlainLink
-        },
-        props: {
-            content: {
-                type: String,
-                default: ""
-            },
-            enabled: {
-                type: Boolean,
-                default: true
-            },
-            tag: {
-                type: String,
-                default: "article"
+    const props = withDefaults(defineProps<{
+        content?: string;
+        enabled?: boolean;
+        tag?: string;
+    }>(), {
+        content: "",
+        enabled: true,
+        tag: "article"
+    });
+
+    const render = () => {
+        const { content, enabled, tag } = props;
+        return enabled ? h({
+            template: `<${tag}>${content}</${tag}>`,
+            components: {
+                MbCode,
+                MbGallery,
+                MbImage,
+                NuxtImg,
+                PlainLink
             }
-        },
-        render() {
-            const { content, enabled, tag } = this;
-            return enabled ? h({
-                template: `<${tag}>${content}</${tag}>`,
-                components: this.$options.components
-            }) : h(tag, {
-                innerHTML: content
-            });
-        }
+        }) : h(tag, {
+            innerHTML: content
+        });
     };
 </script>
+
+<template>
+    <render />
+</template>
