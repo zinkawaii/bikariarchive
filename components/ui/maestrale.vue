@@ -86,8 +86,8 @@
             say();
         }
     }, {
-        duration: 3000,
-        immediate: false
+        immediate: false,
+        duration: 3000
     });
 </script>
 

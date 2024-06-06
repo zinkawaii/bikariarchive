@@ -86,20 +86,20 @@
         }
 
         //发送成功
-        function successed() {
+        async function successed() {
             const max = 60;
             verifyStage.value.stage = 2;
-            verifyStage.value.delay = max + 1;
+            verifyStage.value.delay = max;
 
-            Zin.interval(() => {
+            await Zin.interval(() => {
                 verifyStage.value.delay--;
             }, {
+                immediate: false,
                 duration: 1000,
-                times: max + 1
-            })
-            .then(() => {
-                verifyStage.value.stage = 0;
+                times: max
             });
+
+            verifyStage.value.stage = 0;
         }
 
         //发送失败

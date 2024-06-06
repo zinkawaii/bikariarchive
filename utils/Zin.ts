@@ -86,15 +86,18 @@ const Zin = new class Z {
     //按照一定时间和次数循环执行函数
     interval(func: (time: number) => void, {
         immediate = true,
+        server = true,
         duration = 1000,
         times = -1
     } = {}) {
         return new Promise<void>((resolve, reject) => {
             try {
                 let t = 0;
-                const { pause } = useIntervalFn(recursion, duration, {
-                    immediateCallback: immediate
-                });
+                const { pause } = useIntervalFn(recursion, duration);
+
+                immediate && (
+                    server ? recursion() : tryOnMounted(recursion)
+                );
 
                 function recursion() {
                     if (times >= 0 && t === times) {

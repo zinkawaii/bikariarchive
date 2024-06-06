@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    const i = ref(0);
+    const serif = ref("");
     const serifs = [
         "あと少しだけでいい 満ち足りない",
         "可愛いだけではだめだってわかってる",
@@ -14,19 +14,18 @@
     ];
 
     //每7秒随机显示
-    onMounted(() => {
-        Zin.interval(() => {
-            i.value = Zin.randInt(0, serifs.length - 1);
-        }, {
-            duration: 7000
-        });
+    Zin.interval(() => {
+        serif.value = getRandomItem(serifs);
+    }, {
+        server: false,
+        duration: 7000
     });
 </script>
 
 <template>
     <div class="content-widget home-blank">
         <div class="blank-title">空白板</div>
-        <textarea class="blank-editor" :placeholder="serifs[i]"></textarea>
+        <textarea class="blank-editor" :placeholder="serif"></textarea>
     </div>
 </template>
 

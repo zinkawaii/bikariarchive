@@ -1,5 +1,5 @@
 export const useTimerStore = defineStore("timer", () => {
-    const now = ref(new Date());
+    const now = ref<Date>();
 
     Zin.interval(() => {
         now.value = new Date();
