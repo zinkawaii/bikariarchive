@@ -12,13 +12,13 @@
         delay: 0
     });
 
-    const checker = new Checker({
+    const { errors, clear, glitch, validate } = useValidate({
         nickname: {
             target: nickname,
             required: true,
-            reg: /^[\w\u4E00-\u9FA5]*$/,
+            rule: /^[\w\u4E00-\u9FA5]*$/,
             message: "昵称不可包含非法字符",
-            validate(value) {
+            exec(value) {
                 const count = getByteLength(value);
                 if (count === 0) {
                     return "昵称不能为空";
@@ -31,21 +31,21 @@
         email: {
             target: email,
             required: true,
-            reg: Zexp.email,
+            rule: Zexp.email,
             message: "邮箱格式不正确"
         },
         verify: {
             target: verify,
             required: true,
-            reg: /.+/,
+            rule: /.+/,
             message: "请输入验证码"
         },
         password: {
             target: password,
             required: true,
-            reg: /^\w*$/,
+            rule: /^\w*$/,
             message: "密码仅由大小写字母、数字以及下划线组成",
-            validate(value) {
+            exec(value) {
                 const count = getByteLength(value);
                 if (count < 6 || count > 18) {
                     return "密码位数必须在 6-18 位之间";
@@ -53,7 +53,6 @@
             }
         }
     });
-    const { tips } = checker;
 
     //验证码输入限制
     function verifyInput(event) {
@@ -63,7 +62,7 @@
 
     //发送验证码
     async function verifySend() {
-        if (!checker.exec("email")) return;
+        if (!validate("email")) return;
 
         verifyStage.value.stage = 1;
 
@@ -123,16 +122,16 @@
 
             switch (error) {
                 case 1:
-                    tips.value.email = "* 该邮箱已注册";
+                    glitch("email", "该邮箱已注册");
                     break;
                 case 2:
-                    tips.value.verify = "* 验证码不存在";
+                    glitch("verify", "验证码不存在");
                     break;
                 case 3:
-                    tips.value.verify = "* 验证码已过期";
+                    glitch("verify", "验证码已过期");
                     break;
                 case 4:
-                    tips.value.verify = "* 验证码不正确";
+                    glitch("verify", "验证码不正确");
                     break;
                 default:
                     signerStore.switchView("login");
@@ -147,10 +146,8 @@
 
     //提交
     function submit() {
-        checker.clearTips();
-        if (checker.exec()) {
-            register();
-        }
+        clear();
+        validate() && register();
     }
 </script>
 
@@ -158,24 +155,21 @@
     <coco-input
         type="text"
         placeholder="昵称"
-        :warn-tip="tips.nickname"
         v-model="nickname"
-        @blur="tips.nickname = ``"
+        v-model:error="errors.nickname"
     />
     <coco-input
         type="text"
         placeholder="电子邮箱"
-        :warn-tip="tips.email"
         v-model="email"
-        @blur="tips.email = ``"
+        v-model:error="errors.email"
     />
     <div class="sign-verify">
         <coco-input
             type="text"
             placeholder="验证码"
-            :warn-tip="tips.verify"
             v-model="verify"
-            @blur="tips.verify = ``"
+            v-model:error="errors.verify"
             @input="verifyInput"
         />
         <mb-button :disabled="verifyStage.stage > 0" @click="verifySend">{{
@@ -187,9 +181,8 @@
     <coco-input
         type="password"
         placeholder="密码"
-        :warn-tip="tips.password"
         v-model="password"
-        @blur="tips.password = ``"
+        v-model:error="errors.password"
         @keyup.enter="submit"
     />
 </template>

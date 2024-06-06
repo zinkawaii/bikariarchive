@@ -50,16 +50,14 @@
     <coco-input
         type="text"
         placeholder="昵称／UID／电子邮箱"
-        :warn="warn.nickname"
         v-model="nickname"
-        @blur="warn.nickname = false"
+        v-model:error="warn.nickname"
     />
     <coco-input
         type="password"
         placeholder="密码"
-        :warn="warn.password"
         v-model="password"
-        @blur="warn.password = false"
+        v-model:error="warn.password"
         @keyup.enter="submit"
     />
 </template>

@@ -4,17 +4,16 @@
     });
     defineProps<{
         placeholder: string;
-        warn?: boolean;
-        warnTip?: string;
     }>();
     const modelValue = defineModel<string>();
+    const error = defineModel<boolean>("error");
 </script>
 
 <template>
     <div class="coco-input">
-        <input class="input-entity" required title="" v-bind="$attrs" v-model="modelValue"/>
+        <input class="input-entity" required title="" v-bind="$attrs" v-model="modelValue" @blur="error = false"/>
         <div class="input-underline"></div>
-        <span class="input-placeholder" :class="{ warn: warn || warnTip }">{{ warnTip || placeholder }}</span>
+        <span class="input-placeholder" :class="{ [`is-error`]: error }">{{ placeholder }}</span>
     </div>
 </template>
 
@@ -70,7 +69,7 @@
         transition: all 0.25s;
         pointer-events: none;
 
-        &.warn {
+        &.is-error {
             color: var(--color-danger);
         }
     }

@@ -62,13 +62,13 @@
         }
     });
 
-    const checker = new Checker({
+    const { errors, validate } = useValidate({
         nickname: {
             target: nickname,
             required: true,
-            reg: /^[\w\u4E00-\u9FA5]*$/,
+            rule: /^[\w\u4E00-\u9FA5]*$/,
             message: "昵称不可包含非法字符",
-            validate(value) {
+            exec(value) {
                 const count = getByteLength(value);
                 if (count === 0) {
                     return "昵称不能为空";
@@ -80,16 +80,15 @@
         },
         email: {
             target: email,
-            reg: Zexp.email,
+            rule: Zexp.email,
             message: "邮箱格式不正确"
         },
         address: {
             target: address,
-            reg: Zexp.url,
+            rule: Zexp.url,
             message: "网址格式不正确"
         }
     });
-    const { tips } = checker;
 
     //标题
     const title = computed(() => {
@@ -105,7 +104,7 @@
 
     //发表评论
     async function sendComment() {
-        if (!checker.exec()) return;
+        if (!validate()) return;
 
         toggleSending(true);
         try {
@@ -140,15 +139,15 @@
     <mb-dialog class="comment-panel" v-model="commentPanelStore.isOpened">
         <coco-title>{{ title }}</coco-title>
         <div class="panel-form">
-            <coco-input placeholder="昵称" :warn-tip="tips.nickname" v-model="nickname" @blur="tips.nickname = ``"/>
+            <coco-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>
             <p class="panel-tip">必填，用于展示评论昵称</p>
         </div>
         <div class="panel-form">
-            <coco-input placeholder="邮箱" :warn-tip="tips.email" v-model="email" @blur="tips.email = ``"/>
+            <coco-input placeholder="邮箱" v-model="email" v-model:error="errors.email"/>
             <p class="panel-tip">选填，用于从 Cravatar 服务获取头像与评论回复通知</p>
         </div>
         <div class="panel-form">
-            <coco-input placeholder="网址" :warn-tip="tips.address" v-model="address" @blur="tips.address = ``"/>
+            <coco-input placeholder="网址" v-model="address" v-model:error="errors.address"/>
             <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
         </div>
         <div class="panel-form">
