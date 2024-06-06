@@ -85,7 +85,7 @@ export default defineNuxtConfig({
         "@nuxtjs/seo",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
-        "@vue-email/nuxt",
+        "@vue-email/nuxt-edge",
         "@vueuse/nuxt",
         "@zinkawaii/nuxt-gsap",
         "@zinkawaii/nuxt-shiki"

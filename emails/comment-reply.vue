@@ -1,5 +1,8 @@
-<script setup>
-    defineProps(["content", "path"]);
+<script lang="ts" setup>
+    defineProps<{
+        content: string;
+        path: string;
+    }>();
 </script>
 
 <template>

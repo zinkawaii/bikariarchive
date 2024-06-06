@@ -1,10 +1,10 @@
 import nodemailer from "nodemailer";
-import { useCompiler } from "#vue-email";
+import { useRender } from "vue-email-edge";
+import type { Component } from "vue";
 
-export async function sendMail(options: {
+export async function sendMail(component: Component, options: {
     to: string;
     title: string;
-    template: string;
     props: Record<string, any>;
 }) {
     const config = useRuntimeConfig();
@@ -18,9 +18,7 @@ export async function sendMail(options: {
     });
 
     //编译模板
-    const template = await useCompiler(`${options.template}.vue`, {
-        props: options.props
-    });
+    const template = await useRender(component, options.props);
 
     //发送邮件
     return transporter.sendMail({

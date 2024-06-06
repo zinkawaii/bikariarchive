@@ -53,7 +53,7 @@
     "@types/prompts": "^2.4.9",
     "@types/ssh2-sftp-client": "^9.0.3",
     "@types/wicg-file-system-access": "^2023.10.5",
-    "@vue-email/nuxt": "^0.8.19",
+    "@vue-email/nuxt-edge": "0.8.19-28627009.32cffe7",
     "@vueuse/nuxt": "^10.10.0",
     "@zinkawaii/eslint-config": "^0.1.1",
     "@zinkawaii/nuxt-gsap": "^0.1.2",

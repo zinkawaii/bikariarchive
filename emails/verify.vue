@@ -1,5 +1,7 @@
-<script setup>
-    defineProps(["verify"]);
+<script lang="ts" setup>
+    defineProps<{
+        verify: string;
+    }>();
 </script>
 
 <template>

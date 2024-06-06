@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import CommentReply from "~/emails/comment-reply.vue";
 import type { PostCommentBody } from "~/server/types/api/comment";
 
 export default defineJEventHandler(async (event) => {
@@ -47,10 +48,9 @@ export default defineJEventHandler(async (event) => {
 
     //对被回复评论进行邮件通知
     if (qParent?.email && qParent.email !== body.email) {
-        sendMail({
+        sendMail(CommentReply, {
             to: qParent.email,
             title: `@${body.nickname} 回复了您的评论`,
-            template: "comment-reply",
             props: {
                 content: body.content,
                 path

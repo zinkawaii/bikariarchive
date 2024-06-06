@@ -1,3 +1,5 @@
+import Verify from "~/emails/verify.vue";
+
 export default defineJEventHandler(async (event) => {
     const { email } = getQueryValues(event);
 
@@ -28,10 +30,9 @@ export default defineJEventHandler(async (event) => {
 
     //发送验证码
     try {
-        await sendMail({
+        await sendMail(Verify, {
             to: email,
             title: "注册验证码",
-            template: "verify",
             props: { verify }
         });
     }
