@@ -19,6 +19,7 @@ export const useCommentPanelStore = defineStore("comment-panel", {
         },
         reply(options: CommentReplyOptions) {
             this.open("reply");
+            this.path = location.pathname;
             this.replyOptions = options;
         },
         modify(options: CommentModifyOptions) {
