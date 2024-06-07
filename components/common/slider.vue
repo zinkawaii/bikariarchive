@@ -46,16 +46,16 @@
 </script>
 
 <template>
-    <div ref="$self" class="mb-progress">
-        <div class="progress-track">
-            <div class="progress-rate" :style="{ scale: `${displayRate} 1` }"></div>
+    <div ref="$self" class="mb-slider">
+        <div class="slider-track">
+            <div class="slider-rate" :style="{ scale: `${displayRate} 1` }"></div>
         </div>
-        <span class="progress-thumb" :style="{ marginLeft: `${displayRate * 100}%` }"></span>
+        <span class="slider-thumb" :style="{ marginLeft: `${displayRate * 100}%` }"></span>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .mb-progress {
+    .mb-slider {
         display: inline-grid;
         align-items: center;
         position: relative;
@@ -65,7 +65,7 @@
         user-select: none;
     }
 
-    .progress-track {
+    .slider-track {
         display: grid;
         position: absolute;
         overflow: hidden;
@@ -73,12 +73,12 @@
         border-radius: var(--circle-radius);
     }
 
-    .progress-rate {
+    .slider-rate {
         background-color: var(--color-theme);
         transform-origin: left;
     }
 
-    .progress-thumb {
+    .slider-thumb {
         position: absolute;
         opacity: 0;
         width: 20px;

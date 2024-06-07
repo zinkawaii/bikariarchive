@@ -235,7 +235,7 @@
             </div>
             <div class="lyric-control">
                 <time>{{ formatedCurrent }}</time>
-                <mb-progress
+                <mb-slider
                     class="lyric-progress"
                     :title="filename || `- 请上传歌曲 -`"
                     v-model="progress"
