@@ -1,6 +1,6 @@
 import type { Raw, RenderFunction, VNodeChild } from "vue";
 
-interface DialogInfo {
+interface DialogContext {
     component: VNodeChild;
     zIndex: number;
     duration: number;
@@ -10,20 +10,30 @@ interface DialogInfo {
 
 interface UseDialogOptions {
     duration?: number;
+    immediate?: boolean;
     unique?: boolean;
 }
 
 export const useDialogStore = defineStore("dialog", () => {
-    const dialogs = ref<Raw<DialogInfo>[]>([]);
+    const dialogs = ref<Raw<DialogContext>[]>([]);
 
     function use(render: RenderFunction, options: UseDialogOptions = {}) {
         const {
             duration = 400,
+            immediate = false,
             unique = false
         } = options;
 
-        let info: DialogInfo = null;
+        let ctx: DialogContext = null;
+
+        /**
+         * 弹窗是否处于显示状态
+         * 此变量用于在弹窗上下文被插入列表时单独地触发各自的 transition 动画，而不是由 transition-group 统一处理
+         */
         const opening = ref(false);
+
+        //立即打开
+        immediate && open();
 
         function open() {
             if (unique && indexOf() !== -1) return;
@@ -31,7 +41,7 @@ export const useDialogStore = defineStore("dialog", () => {
             const last = dialogs.value.at(-1);
             const zIndex = (last?.zIndex ?? 510) + 2;
 
-            info = {
+            ctx = {
                 component: render(),
                 zIndex,
                 duration,
@@ -39,14 +49,14 @@ export const useDialogStore = defineStore("dialog", () => {
                 close
             };
 
-            dialogs.value.push(info);
+            dialogs.value.push(ctx);
             nextTick(() => {
                 opening.value = true;
             });
         }
 
         async function close() {
-            info.opening.value = false;
+            ctx.opening.value = false;
             await Zin.delay(duration);
 
             const i = indexOf();
@@ -56,7 +66,7 @@ export const useDialogStore = defineStore("dialog", () => {
         }
 
         function indexOf() {
-            return dialogs.value.indexOf(info);
+            return dialogs.value.indexOf(ctx);
         }
 
         return {

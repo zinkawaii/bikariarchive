@@ -2,8 +2,8 @@
     const dialogStore = useDialogStore();
 
     const filterDialogs = computed(() => {
-        return dialogStore.dialogs.filter((info) => {
-            return info.opening;
+        return dialogStore.dialogs.filter((ctx) => {
+            return ctx.opening;
         });
     });
 </script>
