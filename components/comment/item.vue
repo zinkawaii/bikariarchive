@@ -10,7 +10,6 @@
 
     const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
-    const confirmStore = useConfirmStore();
     const userStore = useUserStore();
 
     //相对时间
@@ -46,7 +45,7 @@
 
     //删除评论
     async function removeComment() {
-        if (!await confirmStore.show("是否删除这条评论？")) return;
+        if (!await useConfirm("是否删除这条评论？")) return;
         commentStore.remove({
             id: props.data.id
         });

@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-    const imageViewerStore = useImageViewerStore();
-    const $target = storeToRefs(imageViewerStore).target;
-    const $self = ref();
-    const $image = computed(() => {
-        return unrefElement($self);
-    });
+    const props = defineProps<{
+        target: HTMLImageElement;
+        opening?: boolean;
+    }>();
+    const emit = defineEmits<{
+        close: [];
+    }>();
 
-    //添加遮罩层
-    useDialog($self, {
-        isOpened: () => imageViewerStore.isOpened,
-        onClose: closeViewer
+    const $self = ref();
+    const $image = computed<HTMLImageElement>(() => {
+        return unrefElement($self);
     });
 
     //放大后占窗口比率
@@ -34,31 +34,27 @@
             } = $image.value.getBoundingClientRect());
         },
         onMousemove(event) {
-            if (imageViewerStore.isOpened) {
-                $image.value.animate({
-                    top: imageY - mouseY + event.pageY + "px",
-                    left: imageX - mouseX + event.pageX + "px"
-                }, {
-                    duration: 0,
-                    fill: "forwards"
-                });
-            }
+            $image.value.animate({
+                top: imageY - mouseY + event.pageY + "px",
+                left: imageX - mouseX + event.pageX + "px"
+            }, {
+                duration: 0,
+                fill: "forwards"
+            });
         }
     });
 
     //按下ESC键关闭
     useEventListener("keydown", (event) => {
-        if (imageViewerStore.isOpened && event.key === "Escape") {
-            closeViewer();
+        if (event.key === "Escape") {
+            emit("close");
         }
     });
 
     //打开时
-    watch(() => imageViewerStore.isOpened, (state) => {
-        if (!state) return;
-
+    whenever(() => props.opening, () => {
         //起始位置
-        const { left, top, width, height } = $target.value.getBoundingClientRect();
+        const { left, top, width, height } = props.target.getBoundingClientRect();
 
         //最大宽高
         const fixedWidth = window.innerWidth * rate;
@@ -87,17 +83,14 @@
     });
 
     //关闭时
-    function closeViewer() {
-        if (!imageViewerStore.isOpened) return;
-        imageViewerStore.close();
-
-        //回到原位
-        const { left, top, width, height } = $target.value.getBoundingClientRect();
+    function onLeave(el: HTMLImageElement) {
+        const { left, top, width, height } = props.target.getBoundingClientRect();
         const { scrollX: x, scrollY: y } = window;
 
-        $image.value.animate([{
-            top: y + $image.value.y + "px",
-            left: x + $image.value.x + "px"
+        //回到原位
+        el.animate([{
+            top: 2 * y + el.y + "px",
+            left: 2 * x + el.x + "px"
         }, {
             top: y + top + "px",
             left: x + left + "px",
@@ -127,12 +120,12 @@
 </script>
 
 <template>
-    <transition>
+    <transition @leave="onLeave">
         <nuxt-img
-            v-if="imageViewerStore.isOpened"
+            v-if="opening"
             ref="$self"
             class="image-viewer"
-            :src="$target.src"
+            :src="target.src"
             @mousewheel.prevent="onMouseWheel"
         />
     </transition>

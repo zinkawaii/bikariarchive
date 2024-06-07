@@ -1,15 +1,21 @@
 <script lang="ts" setup>
     const dialogStore = useDialogStore();
+
+    const filterDialogs = computed(() => {
+        return dialogStore.dialogs.filter((info) => {
+            return info.opening;
+        });
+    });
 </script>
 
 <template>
     <transition-group name="mask">
         <div
-            v-for="{ zIndex, onClose }, i in dialogStore.dialogs"
-            :key="i"
+            v-for="{ zIndex, close } in filterDialogs"
+            :key="zIndex"
             class="mb-mask"
             :style="{ zIndex: zIndex - 1 }"
-            @click="onClose"
+            @click="close"
         ></div>
     </transition-group>
 </template>

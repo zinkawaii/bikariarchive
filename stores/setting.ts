@@ -1,4 +1,5 @@
 import type { WatchCallback, WatchOptions } from "vue";
+import { ZSetting } from "#components";
 import type { PickAsType } from "~/types";
 import type { Setting, SettingField } from "~/types/setting";
 
@@ -13,6 +14,13 @@ export const useSettingStore = defineStore("setting", () => {
         "font-family": 0,
         "font-size": 1,
         "ui-collapse": false
+    });
+
+    const dialogStore = useDialogStore();
+
+    //挂载弹窗实例
+    const { open, close } = dialogStore.use(() => h(ZSetting), {
+        unique: true
     });
 
     //是否为夜间模式
@@ -52,26 +60,16 @@ export const useSettingStore = defineStore("setting", () => {
         }, options);
     }
 
-    //打开设置
-    function open() {
-        isOpened.value = true;
-    }
-
-    //关闭设置
-    function close() {
-        isOpened.value = false;
-    }
-
     return {
         isOpened,
         setting,
+        open,
+        close,
         isDarkMode,
         get,
         set,
         toggle,
-        listen,
-        open,
-        close
+        listen
     };
 }, {
     persist: {

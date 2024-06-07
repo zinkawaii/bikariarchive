@@ -40,7 +40,7 @@
 </script>
 
 <template>
-    <mb-dialog class="z-setting" v-model="settingStore.isOpened">
+    <mb-dialog class="z-setting" @close="settingStore.close()">
         <coco-title>全局设置</coco-title>
         <setting-form title="主题颜色" desc="仅在非夜间模式下生效" type="select" name="theme" :options="[`初空`, `菖蒲`, `早樱`]"/>
         <setting-form title="夜间模式" desc="每天早晚 6 点自动切换" type="select" name="dark-mode" :options="[`自动`, `白昼`, `暗夜`]"/>

@@ -1,28 +1,17 @@
 <script lang="ts" setup>
-    const emit = defineEmits<{
+    defineProps<{
+        opening?: boolean;
+    }>();
+    defineEmits<{
         close: [];
     }>();
-    const modelValue = defineModel<boolean>();
-
-    const $self = ref();
-    const toggleModel = useToggle(modelValue);
-
-    useDialog($self, {
-        isOpened: modelValue,
-        onClose: close
-    });
-
-    function close() {
-        toggleModel(false);
-        emit("close");
-    }
 </script>
 
 <template>
     <transition-scale>
-        <div v-if="modelValue" ref="$self" class="mb-dialog">
+        <div v-if="opening" class="mb-dialog">
             <slot></slot>
-            <span class="dialog-xmark" @click="close">
+            <span class="dialog-xmark" @click="$emit(`close`)">
                 <icon name="fa6-solid:xmark"/>
             </span>
         </div>

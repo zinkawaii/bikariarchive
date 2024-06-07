@@ -3,8 +3,6 @@
         title: "西北风计算器"
     });
 
-    const confirmStore = useConfirmStore();
-
     //数据集合
     const state = ref();
 
@@ -29,7 +27,7 @@
 
         //保存
         async save() {
-            if (await confirmStore.show(`是否将当前所有数据保存至本地？`)) {
+            if (await useConfirm(`是否将当前所有数据保存至本地？`)) {
                 //保存至数据
                 this.data.value[this.current.value] = {
                     ...state.value
@@ -42,7 +40,7 @@
 
         //添加
         async add() {
-            if (await confirmStore.show("是否清空当前数据（若未保存）并新建一组数据？")) {
+            if (await useConfirm("是否清空当前数据（若未保存）并新建一组数据？")) {
                 //初始化
                 const obj = this.init({ name: "新参数" });
 
@@ -56,7 +54,7 @@
 
         //删除
         async remove() {
-            if (await confirmStore.show(`是否删除「${state.value.name}」并清空当前数据？`)) {
+            if (await useConfirm(`是否删除「${state.value.name}」并清空当前数据？`)) {
                 //删除
                 this.data.value.splice(this.current.value, 1);
 

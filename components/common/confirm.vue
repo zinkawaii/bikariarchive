@@ -1,31 +1,38 @@
 <script lang="ts" setup>
-    const confirmStore = useConfirmStore();
+    defineProps<{
+        message: string;
+    }>();
+    const emit = defineEmits<{
+        cancel: [];
+        confirm: [];
+    }>();
 
     //键盘监听
     useEventListener("keyup", (event) => {
-        if (confirmStore.isOpened) {
-            switch (event.key) {
-                case "Escape":
-                    return res(false);
-                case "Enter":
-                    return res(true);
-            }
+        switch (event.key) {
+            case "Escape":
+                return cancel();
+            case "Enter":
+                return confirm();
         }
     });
 
-    //返回判断结果
-    function res(state: boolean) {
-        confirmStore.hide(state);
+    function cancel() {
+        emit("cancel");
+    }
+
+    function confirm() {
+        emit("confirm");
     }
 </script>
 
 <template>
-    <mb-dialog class="mb-confirm" v-model="confirmStore.isOpened" @close="res(false)">
+    <mb-dialog class="mb-confirm" @close="cancel">
         <coco-title>确认</coco-title>
-        <p class="confirm-content">{{ confirmStore.content }}</p>
+        <p class="confirm-content">{{ message }}</p>
         <div class="confirm-operator">
-            <mb-button @click="res(false)">取消</mb-button>
-            <mb-button @click="res(true)">确定</mb-button>
+            <mb-button @click="cancel">取消</mb-button>
+            <mb-button @click="confirm">确定</mb-button>
         </div>
     </mb-dialog>
 </template>

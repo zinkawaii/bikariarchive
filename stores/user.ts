@@ -11,7 +11,7 @@ export const useUserStore = defineStore("user", () => {
     getInfo.then(({ data }) => {
         const info = data.value;
 
-        if (info.isLogin) {
+        if (info?.isLogin) {
             uid.value = info.uid;
             nickname.value = info.nickname;
             identity.value = info.identity;

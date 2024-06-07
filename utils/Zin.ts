@@ -1,6 +1,6 @@
 const Zin = new class Z {
     //默认动画配置
-    DEFAULT_ANIME_OPTION = {
+    DEFAULT_ANIME_OPTION: KeyframeAnimationOptions = {
         duration: 400,
         easing: "ease",
         fill: "forwards"

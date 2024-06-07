@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-    const imageViewerStore = useImageViewerStore();
+    import { MbImageViewer } from "#components";
+
+    const dialogStore = useDialogStore();
     const $self = ref();
 
-    function openViewer() {
-        imageViewerStore.open($self.value.$el);
-    }
+    const { open, close } = dialogStore.use(() => h(MbImageViewer, {
+        target: $self.value.$el,
+        onClose: close
+    }));
 </script>
 
 <template>
-    <nuxt-img ref="$self" class="cursor-pointer" @click="openViewer"/>
+    <nuxt-img ref="$self" class="cursor-pointer" @click="open"/>
 </template>

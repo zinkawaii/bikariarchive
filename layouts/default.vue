@@ -21,11 +21,7 @@
         <z-sidebar />
     </div>
     <z-mask />
-    <z-setting />
-    <z-signer />
-    <comment-panel />
-    <image-viewer />
-    <mb-confirm />
+    <z-dialog />
     <toast-area />
     <z-fps />
     <z-context-menu />

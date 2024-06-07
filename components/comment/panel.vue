@@ -136,7 +136,7 @@
 </script>
 
 <template>
-    <mb-dialog class="comment-panel" v-model="commentPanelStore.isOpened">
+    <mb-dialog class="comment-panel" @close="commentPanelStore.close()">
         <coco-title>{{ title }}</coco-title>
         <div class="panel-form">
             <coco-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>

@@ -15,7 +15,7 @@
 </script>
 
 <template>
-    <mb-dialog class="z-signer" v-model="signerStore.isOpened">
+    <mb-dialog class="z-signer" @close="signerStore.close()">
         <div class="signer-innerworld"></div>
         <div class="signer-wrapper">
             <transition mode="out-in">
