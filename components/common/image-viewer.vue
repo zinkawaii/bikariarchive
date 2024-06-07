@@ -44,61 +44,6 @@
         }
     });
 
-    //按下ESC键关闭
-    useEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            emit("close");
-        }
-    });
-
-    //打开时
-    whenever(() => props.opening, () => {
-        //起始位置
-        const { left, top, width, height } = props.target.getBoundingClientRect();
-
-        //最大宽高
-        const fixedWidth = window.innerWidth * rate;
-        const fixedHeight = window.innerHeight * rate;
-
-        //计算最终宽高
-        const ratio = width / height;
-        const [finalWidth, finalHeight] = (fixedWidth / fixedHeight > ratio)
-            ? [fixedHeight * ratio, fixedHeight]
-            : [fixedWidth, fixedWidth / ratio];
-
-        //移动至屏幕中心
-        nextTick(() => {
-            $image.value.animate([{
-                top: top + "px",
-                left: left + "px",
-                width: width + "px",
-                height: height + "px"
-            }, {
-                top: `calc(50% - ${Math.floor(finalHeight / 2)}px)`,
-                left: `calc(50% - ${Math.floor(finalWidth / 2)}px)`,
-                width: Math.floor(finalWidth) + "px",
-                height: Math.floor(finalHeight) + "px"
-            }], Zin.DEFAULT_ANIME_OPTION);
-        });
-    });
-
-    //关闭时
-    function onLeave(el: HTMLImageElement) {
-        const { left, top, width, height } = props.target.getBoundingClientRect();
-        const { scrollX: x, scrollY: y } = window;
-
-        //回到原位
-        el.animate([{
-            top: 2 * y + el.y + "px",
-            left: 2 * x + el.x + "px"
-        }, {
-            top: y + top + "px",
-            left: x + left + "px",
-            width: width + "px",
-            height: height + "px"
-        }], Zin.DEFAULT_ANIME_OPTION);
-    }
-
     //鼠标滚动时
     function onMouseWheel(event: WheelEvent) {
         if (isPressed.value) return;
@@ -117,10 +62,63 @@
             height: height * rate + "px"
         }, Zin.DEFAULT_ANIME_OPTION);
     }
+
+    //按下ESC键关闭
+    useEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            emit("close");
+        }
+    });
+
+    //打开时
+    function onEnter(el: HTMLImageElement) {
+        //起始位置
+        const { left, top, width, height } = props.target.getBoundingClientRect();
+
+        //最大宽高
+        const fixedWidth = window.innerWidth * rate;
+        const fixedHeight = window.innerHeight * rate;
+
+        //计算最终宽高
+        const ratio = width / height;
+        const [finalWidth, finalHeight] = (fixedWidth / fixedHeight > ratio)
+            ? [fixedHeight * ratio, fixedHeight]
+            : [fixedWidth, fixedWidth / ratio];
+
+        //移动至屏幕中心
+        el.animate([{
+            top: top + "px",
+            left: left + "px",
+            width: width + "px",
+            height: height + "px"
+        }, {
+            top: `calc(50% - ${Math.floor(finalHeight / 2)}px)`,
+            left: `calc(50% - ${Math.floor(finalWidth / 2)}px)`,
+            width: Math.floor(finalWidth) + "px",
+            height: Math.floor(finalHeight) + "px"
+        }], Zin.DEFAULT_ANIME_OPTION);
+    }
+
+    //关闭时
+    function onLeave(el: HTMLImageElement) {
+        const { left, top, width, height } = props.target.getBoundingClientRect();
+        const { scrollX: x, scrollY: y } = window;
+
+        //回到原位
+        el.animate([{
+            top: 2 * y + el.y + "px",
+            left: 2 * x + el.x + "px"
+        }, {
+            top: y + top + "px",
+            left: x + left + "px",
+            width: width + "px",
+            height: height + "px"
+        }], Zin.DEFAULT_ANIME_OPTION);
+    }
 </script>
 
 <template>
-    <transition @leave="onLeave">
+    <transition @enter="onEnter" @leave="onLeave">
         <nuxt-img
             v-if="opening"
             ref="$self"

@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    overflow-y: scroll;
+    overflow: hidden scroll;
     font-family: var(--font);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
