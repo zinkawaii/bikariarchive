@@ -32,7 +32,7 @@
 
     //滑动根元素
     const scrollElement = computed(() => {
-        return $self.value?.closest(props.scrollTarget);
+        return $self.value?.closest(props.scrollTarget) ?? document.querySelector(props.scrollTarget);
     });
 
     //切换页数时滑动到指定元素的起始位置
