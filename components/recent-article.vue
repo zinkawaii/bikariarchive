@@ -3,7 +3,7 @@
 
     const props = defineProps<{
         type?: NovelType;
-        limit: number;
+        sizes: number;
         sortBy?: string;
     }>();
 

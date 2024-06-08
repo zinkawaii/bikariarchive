@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-    const { jFull, jLimited, page } = useArticleList({
+    const { page, total, jLimited } = useArticleList({
         type: "blog",
-        limit: 10,
+        sizes: 10,
         sticky: true
     });
 </script>
@@ -9,7 +9,7 @@
 <template>
     <home-article-item v-for="art in jLimited" :art="art"/>
     <div class="content-widget home-article-pagination">
-        <mb-pagination :total="jFull.length" v-model="page"/>
+        <mb-pagination :total v-model="page"/>
     </div>
 </template>
 

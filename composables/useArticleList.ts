@@ -2,7 +2,7 @@ import type { NovelType } from "@bikari/process";
 
 export interface UseArticleListOptions {
     type?: MaybeRefOrGetter<NovelType>;
-    limit: MaybeRefOrGetter<number>;
+    sizes: MaybeRefOrGetter<number>;
     sortBy?: MaybeRefOrGetter<string>;
     sticky?: MaybeRefOrGetter<boolean>;
 }
@@ -13,18 +13,10 @@ export default function(options: UseArticleListOptions) {
         return toValue(options.type);
     });
 
-    //单页总数
-    const limit = computed(() => {
-        return toValue(options.limit);
-    });
-
     //排序字段
     const sortBy = computed(() => {
         return [toValue(options.sortBy), "date"];
     });
-
-    //当前页数
-    const page = ref(1);
 
     //总列表
     const jFull = computed(() => {
@@ -48,16 +40,14 @@ export default function(options: UseArticleListOptions) {
         return arr;
     });
 
-    //显示列表
-    const jLimited = computed(() => {
-        const start = (page.value - 1) * limit.value;
-        const end = start + limit.value;
-        return jFull.value.slice(start, end);
+    const { page, total, sizes, filteredArr: jLimited } = usePagination(jFull, {
+        sizes: options.sizes
     });
 
     return {
-        jFull,
-        jLimited,
-        page
+        page,
+        total,
+        sizes,
+        jLimited
     };
 }

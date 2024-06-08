@@ -1,7 +1,7 @@
 <template>
     <div class="content-widget home-update">
         <coco-title>历史章节</coco-title>
-        <recent-article type="novel" :limit="10"/>
+        <recent-article type="novel" :sizes="10"/>
     </div>
 </template>
 
