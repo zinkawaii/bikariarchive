@@ -11,7 +11,6 @@
     const inputWord = ref("");
     const searchWord = ref("");
     const results = ref([]);
-    const page = ref(1);
 
     const { execute, pending, data: fetchData } = useLazyFetch("/api/search", {
         query: {
@@ -19,6 +18,8 @@
         },
         watch: false
     });
+
+    const { page, filteredArr } = usePagination(results);
 
     //全文检索
     const fullTextSearch = Zin.debounce(async (word: string = inputWord.value) => {
@@ -80,13 +81,6 @@
         );
     });
 
-    //分页显示结果
-    const displayResults = computed(() => {
-        const start = (page.value - 1) * 10;
-        const end = start + 10;
-        return results.value.slice(start, end);
-    });
-
     //总出现次数
     const totalCount = computed(() => {
         return results.value.reduce((count, item) => {
@@ -136,7 +130,7 @@
         </div>
         <div class="search-results">
             <mb-skeleton v-if="pending"/>
-            <nuxt-link v-for="item in displayResults" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
+            <nuxt-link v-for="item in filteredArr" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
                 <h3 class="result-title">{{ item.title }}</h3>
                 <span class="result-volume">{{ item.volume }}</span>
                 <article class="result-part" v-html="item.parts.join(``)"></article>

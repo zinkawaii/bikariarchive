@@ -1,8 +1,8 @@
 export interface UsePaginationOptions {
-    sizes: MaybeRefOrGetter<number>;
+    sizes?: MaybeRefOrGetter<number>;
 }
 
-export default function<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginationOptions) {
+export default function<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginationOptions = {}) {
     const page = ref(1);
 
     const total = computed(() => {
@@ -10,7 +10,7 @@ export default function<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginationOpt
     });
 
     const sizes = computed(() => {
-        return toValue(options.sizes);
+        return toValue(options.sizes ?? 10);
     });
 
     const filteredArr = computed(() => {

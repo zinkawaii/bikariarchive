@@ -2,7 +2,7 @@ import type { NovelType } from "@bikari/process";
 
 export interface UseArticleListOptions {
     type?: MaybeRefOrGetter<NovelType>;
-    sizes: MaybeRefOrGetter<number>;
+    sizes?: MaybeRefOrGetter<number>;
     sortBy?: MaybeRefOrGetter<string>;
     sticky?: MaybeRefOrGetter<boolean>;
 }
