@@ -1,7 +1,6 @@
 <script lang="ts" setup>
     const { page, total, jLimited } = useArticleList({
         type: "blog",
-        sizes: 10,
         sticky: true
     });
 </script>
@@ -9,7 +8,7 @@
 <template>
     <home-article-item v-for="art in jLimited" :art="art"/>
     <div class="content-widget home-article-pagination">
-        <mb-pagination :total v-model="page"/>
+        <mb-pagination :total scroll-target=".home-article-item" v-model="page"/>
     </div>
 </template>
 
