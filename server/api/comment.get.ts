@@ -1,4 +1,6 @@
 import CryptoES from "crypto-es";
+import type { HydratedDocument } from "mongoose";
+import type { CommentDataSchema } from "~/server/types/model";
 import type { CommentData, GetCommentResponse } from "~/server/types/api/comment";
 
 //需要获取的属性
@@ -33,7 +35,7 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
     });
 
     //获取主评论
-    const data = await CommentDataModel.find({
+    const qComments = await CommentDataModel.find({
         path,
         parent: null
     }, select)
@@ -42,40 +44,31 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
     .limit(limit);
 
     //获取子评论
-    await deference(data);
-
-    res.data = dataClone([], data);
+    res.list = await deference(qComments);
 });
 
 //递归解引用
-async function deference(parent) {
-    for (const item of parent) {
-        if (item.children.length > 0) {
-            await item.populate({
-                path: "children",
-                select
-            });
-            await deference(item.children);
-        }
-    }
-}
+async function deference(parent: HydratedDocument<CommentDataSchema>[]) {
+    return await Promise.all(
+        parent.map(async (item) => {
+            const children = item.children.length ? await deference(
+                (await item.populate<{
+                    children: typeof parent;
+                }>({
+                    path: "children",
+                    select
+                })).children
+            ) : [];
 
-//递归处理数据
-function dataClone(target: CommentData[], source) {
-    for (const item of source) {
-        const i = {
-            id: item._id,
-            children: [],
-            content: item.content,
-            time: item.time,
-            nickname: item.nickname,
-            avatar: `https://cravatar.cn/avatar/${CryptoES.MD5(item.email)}?d=404`,
-            address: item.address
-        };
-        target.push(i);
-        if (item.children.length > 0) {
-            dataClone(i.children, item.children);
-        }
-    }
-    return target;
+            return <CommentData> {
+                id: item.id,
+                children,
+                content: item.content,
+                time: item.time.toString(),
+                nickname: item.nickname,
+                avatar: `https://cravatar.cn/avatar/${CryptoES.MD5(item.email)}?d=404`,
+                address: item.address
+            };
+        })
+    );
 }

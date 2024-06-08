@@ -28,7 +28,7 @@ export const useCommentStore = defineStore("comment", () => {
         });
         if (res.error !== 0) return;
 
-        comments.value = processComments(res.data);
+        comments.value = processComments(res.list);
         mainCount.value = res.mainCount;
         totalCount.value = res.totalCount;
         toggleEmpty(false);
