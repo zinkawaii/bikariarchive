@@ -3,13 +3,18 @@
         title: "番剧"
     });
 
-    const { pending, data } = useLazyFetch("/api/bangumi");
+    const { execute, pending, data } = useLazyFetch("/api/bangumi", {
+        immediate: false
+    });
 
     const { page, total, sizes, filteredArr } = usePagination(() => {
         return data.value?.list ?? [];
     }, {
         sizes: 32
     });
+
+    //仅在客户端请求
+    onMounted(execute);
 </script>
 
 <template>
