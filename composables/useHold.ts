@@ -10,6 +10,8 @@ export default function(el: MaybeRefOrGetter<HTMLElement>, options: {
 } = {}) {
     const isPressed = ref(false);
 
+    const filter = options.filter ?? ((event) => event.button === 0);
+
     const scope = effectScope();
     scope.run(() => {
         //鼠标按下时
@@ -45,7 +47,7 @@ export default function(el: MaybeRefOrGetter<HTMLElement>, options: {
     };
 
     function execWithFilter(event: MouseEvent, handler: () => void) {
-        const state = options.filter?.(event) ?? true;
+        const state = filter(event) ?? true;
         state && handler();
     }
 }

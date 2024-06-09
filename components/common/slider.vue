@@ -17,7 +17,6 @@
 
     //鼠标拖动时
     const { isPressed } = useHold($self, {
-        filter: (event) => event.button === 0,
         onMousedown(event) {
             ({
                 width: p_width,
