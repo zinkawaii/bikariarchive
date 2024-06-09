@@ -8,11 +8,19 @@
     const totalYears = [2024, 2023];
     const currentYearIdx = ref(0);
 
-    const filteredUpdates = computed(() => {
+    const updates = computed(() => {
         const currentYear = totalYears[currentYearIdx.value].toString();
         return jUpdate.filter((item) => {
             return item.date.startsWith(currentYear);
         });
+    });
+
+    const { page, total, sizes, filteredArr } = usePagination(updates, {
+        sizes: 24
+    });
+
+    watch(currentYearIdx, () => {
+        page.value = 1;
     });
 </script>
 
@@ -28,7 +36,7 @@
             >{{ year }}</a>
         </div>
         <ul class="update-list">
-            <li v-for="{ date, version, content } in filteredUpdates" class="update-item">
+            <li v-for="{ date, version, content } in filteredArr" class="update-item">
                 <div class="update-title">
                     <h2><time>{{ date }}</time></h2>
                     <code v-if="version" class="update-version">v{{ version }}</code>
@@ -41,6 +49,7 @@
                 </div>
             </li>
         </ul>
+        <mb-pagination :total :sizes scroll-target="body" v-model="page"/>
     </coco-widget>
 </template>
 
@@ -48,10 +57,9 @@
     .update-years {
         display: flex;
         align-items: flex-end;
-        gap: 8px;
+        gap: 0.5rem;
         position: relative;
-        height: 32px;
-        margin-bottom: 16px;
+        height: 2rem;
     }
 
     .update-year {
@@ -82,7 +90,7 @@
     .update-list {
         display: grid;
         gap: 1rem;
-        margin-left: 1rem;
+        margin: 1rem 0 var(--cw-medium) 1rem;
         padding-left: 1rem;
         border-left: 2px solid var(--color-theme-dark);
 
