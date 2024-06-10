@@ -29,15 +29,16 @@
 
 <template>
     <li class="mb-option" :class="{ [`is-checked`]: isEqual }" @click="update">
-        <span>{{ title }}</span>
+        <span class="text-truncate">{{ title }}</span>
     </li>
 </template>
 
 <style lang="scss" scoped>
     .mb-option {
+        height: 2em;
         padding-inline: 1em;
         border-radius: var(--circle-radius);
-        line-height: 32px;
+        line-height: 2em;
         cursor: pointer;
 
         &:hover {

@@ -1,7 +1,7 @@
-<script lang="ts" setup>
+<script lang="ts" generic="T" setup>
     import { injectionKey } from "~/types/select";
 
-    const modelValue = defineModel();
+    const modelValue = defineModel<T>();
 
     const $self = ref<HTMLElement>();
     const [isDrop, toggleDrop] = useToggle(false);
@@ -48,10 +48,10 @@
         display: grid;
         grid-template-columns: 1fr auto;
         align-items: center;
-        height: 32px;
+        height: 2rem;
         padding-inline: 1em calc(1em - 2px);
         border: 1px solid var(--color-border-light);
-        border-radius: 16px;
+        border-radius: var(--circle-radius);
         background-color: var(--color-background);
         transition: all 0.25s;
 
