@@ -1,149 +1,103 @@
 <script lang="ts" setup>
+    import type { EXCalcBuki, EXCalcData } from "~/types/excalc";
+
     useHead({
         title: "西北风计算器"
     });
 
+    //本地数据
+    const storage = useLocalStorage<EXCalcData[]>("excalc-data", []);
+
+    //空数据填充
+    whenever(() => storage.value.length === 0, () => {
+        storage.value.push(createData());
+    }, {
+        immediate: true
+    });
+
     //数据集合
-    const state = ref();
+    const currentIdx = ref(0);
+    const state = computed(() => {
+        return storage.value[currentIdx.value];
+    });
+
+    //创建数据
+    function createData(): EXCalcData {
+        return {
+            name: "空参数",
+            main: [0, 0, 0],
+            pioneer: [0, 0, 0],
+            time: 0,
+            health: 0,
+            times: 0,
+            bukis: [createBuki()]
+        };
+    }
+
+    //创建武器
+    function createBuki(): EXCalcBuki {
+        return {
+            name: "",
+            damage: 0,
+            hit: 0,
+            accuracyRate: 100,
+            critRate: 0,
+            critDamage: 150
+        };
+    }
+
+    //添加数据
+    function addData() {
+        storage.value.push(createData());
+        currentIdx.value = storage.value.length - 1;
+    }
+
+    //删除数据
+    async function removeData() {
+        if (await useConfirm(`是否删除当前数据：${state.value.name}？`)) {
+            storage.value.splice(currentIdx.value, 1);
+            currentIdx.value = Math.max(0, storage.value.length - 1);
+        }
+    }
+
+    //添加武器
+    function addBuki() {
+        state.value.bukis.push(createBuki());
+    }
+
+    //删除武器
+    function removeBuki(index: number) {
+        if (state.value.bukis.length > 1) {
+            state.value.bukis.splice(index, 1);
+        }
+    }
 
     //斩杀率
-    const kill_rate = ref(0);
+    const killRate = ref(0);
 
-    //武器模板
-    const buki_template = {
-        name: "",
-        damage: 0,
-        hit: 0,
-        accuracy_rate: 100,
-        crit_rate: 0,
-        crit_damage: 150
-    };
-
-    //存储参数
-    const key = "excalc-params";
-    const params = {
-        current: ref(),
-        data: ref(JSON.parse(process.browser && localStorage.getItem(key))?.data || []),
-
-        //保存
-        async save() {
-            if (await useConfirm(`是否将当前所有数据保存至本地？`)) {
-                //保存至数据
-                this.data.value[this.current.value] = {
-                    ...state.value
-                };
-
-                //保存至本地
-                this.save2Local();
-            }
-        },
-
-        //添加
-        async add() {
-            if (await useConfirm("是否清空当前数据（若未保存）并新建一组数据？")) {
-                //初始化
-                const obj = this.init({ name: "新参数" });
-
-                //保存至数据
-                this.data.value.push(obj);
-
-                //切换至新参数
-                this.current.value = this.data.value.length - 1;
-            }
-        },
-
-        //删除
-        async remove() {
-            if (await useConfirm(`是否删除「${state.value.name}」并清空当前数据？`)) {
-                //删除
-                this.data.value.splice(this.current.value, 1);
-
-                //切换至上一参数
-                const length = this.data.value.length;
-                if (length > 0) {
-                    this.current.value = Math.min(length - 1, this.current.value);
-                    this.change();
-                }
-                else {
-                    this.current.value = void 0;
-                    this.init();
-                }
-
-                //保存至本地
-                this.save2Local();
-            }
-        },
-
-        //初始化
-        init({ name = "" } = {}) {
-            const obj = {
-                name,
-                power: {
-                    main: [0, 0, 0],
-                    pioneer: [0, 0, 0]
-                },
-                time: 0,
-                health: 0,
-                times: 0,
-                buki: [
-                    { ...buki_template }
-                ]
-            };
-            state.value = obj;
-            return obj;
-        },
-
-        //切换时
-        change() {
-            state.value = this.data.value[this.current.value];
-        },
-
-        //保存至本地
-        save2Local() {
-            localStorage.setItem(key, JSON.stringify({
-                data: this.data.value
-            }));
-        }
-    };
-
-    //初始化
-    params.init();
-
-    //计算属性：分数
+    //分数
     const score = computed(() => {
         const powers =
-            state.value.power.main.reduce((prev, ship) => {
+            state.value.main.reduce((prev, ship) => {
                 return prev + ship;
             }, 0) +
-            state.value.power.pioneer.reduce((prev, ship) => {
+            state.value.pioneer.reduce((prev, ship) => {
                 return prev + ship;
             }, 0);
         return Math.floor((5000 / (state.value.time + 50) ** 0.36 - powers ** 0.6) * 10);
     });
 
-    //添加武器
-    function addBuki() {
-        state.value.buki.push({ ...buki_template });
-    }
-
-    //删除武器
-    function removeBuki(index: number) {
-        if (state.value.buki.length > 1) {
-            state.value.buki.splice(index, 1);
-        }
-    }
-
-    //Roll
+    //开凹
     function roll() {
         let kill = 0;
         for (let t = 0; t < state.value.times; t++) {
             let hp = 0;
-            for (const buki of state.value.buki) {
+            for (const buki of state.value.bukis) {
                 for (let i = 0; i < buki.hit; i++) {
                     //命中
-                    if (isRateEffect(buki.accuracy_rate) === false) continue;
+                    if (isRateEffect(buki.accuracyRate) === false) continue;
                     //暴击
-                    hp += buki.damage * (isRateEffect(buki.crit_rate) ? (buki.crit_damage / 100) : 1);
+                    hp += buki.damage * (isRateEffect(buki.critRate) ? (buki.critDamage / 100) : 1);
                 }
             }
             if (hp >= state.value.health) {
@@ -151,7 +105,7 @@
             }
         }
 
-        kill_rate.value = (state.value.times) > 0 ? kill / state.value.times : 0;
+        killRate.value = (state.value.times) > 0 ? kill / state.value.times : 0;
 
         function isRateEffect(rate: number) {
             return Math.random() * 100 < rate;
@@ -166,14 +120,13 @@
                 <div class="excalc-param">
                     <div class="excalc-label">
                         <span>参数</span>
-                        <select class="excalc-param-selector" v-model="params.current.value" @change="params.change">
-                            <option v-for="(data, i) in params.data.value" :value="i">{{ data.name }}</option>
-                        </select>
+                        <mb-select class="excalc-param-selector" v-model="currentIdx">
+                            <mb-option v-for="(data, i) in storage" :title="`[${i + 1}] ${data.name}`" :value="i"/>
+                        </mb-select>
                     </div>
                     <div class="excalc-param-handler">
-                        <mb-button :disabled="params.current.value === void 0" @click="params.save()">保存</mb-button>
-                        <mb-button @click="params.add()">新建</mb-button>
-                        <mb-button :disabled="params.current.value === void 0" @click="params.remove()">删除</mb-button>
+                        <mb-button @click="addData">新建</mb-button>
+                        <mb-button @click="removeData">删除</mb-button>
                     </div>
                 </div>
                 <div class="excalc-label">
@@ -182,11 +135,11 @@
                 </div>
                 <div class="excalc-label">
                     <span>后排</span>
-                    <mb-input-number v-for="(item, i) in state.power.main" v-model="state.power.main[i]"/>
+                    <mb-input-number v-for="(item, i) in state.main" v-model="state.main[i]"/>
                 </div>
                 <div class="excalc-label">
                     <span>前排</span>
-                    <mb-input-number v-for="(item, i) in state.power.pioneer" v-model="state.power.pioneer[i]"/>
+                    <mb-input-number v-for="(item, i) in state.pioneer" v-model="state.pioneer[i]"/>
                 </div>
             </div>
             <div class="excalc-main">
@@ -198,10 +151,10 @@
                     <span>次数</span>
                     <mb-input-number v-model="state.times"/>
                 </label>
-                <mb-button full @click="roll">Roll</mb-button>
+                <mb-button full round @click="roll">Roll</mb-button>
                 <label class="excalc-label">
                     <span>斩杀率</span>
-                    <mb-input-number :accuracy="7" readonly trim v-model="kill_rate"/>
+                    <mb-input-number :accuracy="7" readonly trim v-model="killRate"/>
                 </label>
                 <div class="excalc-division"></div>
                 <label class="excalc-label">
@@ -229,14 +182,14 @@
                         <th>暴击伤害</th>
                         <th>其他</th>
                     </tr>
-                    <tr v-for="(item, i) in state.buki">
+                    <tr v-for="(item, i) in state.bukis">
                         <td><mb-input v-model="item.name"/></td>
                         <td><mb-input-number v-model="item.damage"/></td>
                         <td><mb-input-number v-model="item.hit"/></td>
-                        <td><mb-input-number :accuracy="2" v-model="item.accuracy_rate"/></td>
-                        <td><mb-input-number :accuracy="2" v-model="item.crit_rate"/></td>
-                        <td><mb-input-number :accuracy="2" v-model="item.crit_damage"/></td>
-                        <td><mb-button class="excalc-delete" :disabled="state.buki.length <= 1" @click="removeBuki(i)">删除</mb-button></td>
+                        <td><mb-input-number :accuracy="2" v-model="item.accuracyRate"/></td>
+                        <td><mb-input-number :accuracy="2" v-model="item.critRate"/></td>
+                        <td><mb-input-number :accuracy="2" v-model="item.critDamage"/></td>
+                        <td><mb-button class="excalc-delete" :disabled="state.bukis.length <= 1" @click="removeBuki(i)">删除</mb-button></td>
                     </tr>
                 </tbody>
             </coco-table>
@@ -287,10 +240,6 @@
 
     .excalc-param-selector {
         flex: 1;
-        height: 2em;
-        padding: 3px;
-        border: 1px solid var(--color-border-light);
-        border-radius: 4px;
     }
 
     .excalc-param-handler {
