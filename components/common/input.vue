@@ -8,8 +8,8 @@
 <template>
     <input
         class="mb-input"
-        :value="modelValue"
         :readonly
+        v-model="modelValue"
     />
 </template>
 
