@@ -4,16 +4,17 @@
     const modelValue = defineModel();
 
     const $self = ref<HTMLElement>();
-    const title = ref("");
     const [isDrop, toggleDrop] = useToggle(false);
 
+    const titleRef = ref<MaybeRefOrGetter<string>>();
+    const title = computed(() => {
+        return toValue(titleRef.value);
+    });
+
     provide(injectionKey, {
-        equal(value) {
-            return modelValue.value === value;
-        },
-        set(value, _title) {
-            modelValue.value = value;
-            title.value = _title;
+        modelValue,
+        bind(title) {
+            titleRef.value = title;
             $self.value?.blur();
         }
     });

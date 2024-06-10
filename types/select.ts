@@ -1,6 +1,8 @@
+import type { ModelRef } from "vue";
+
 export interface SelectContext {
-    equal: (value: any) => boolean;
-    set: (value: any, title: string) => void;
+    modelValue: ModelRef<unknown, string>;
+    bind: (title: MaybeRefOrGetter<string>) => void;
 }
 
 export const injectionKey: InjectionKey<SelectContext> = Symbol();

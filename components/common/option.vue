@@ -7,20 +7,28 @@
     }>();
 
     const {
-        equal,
-        set
+        modelValue,
+        bind
     } = inject(injectionKey);
 
+    const isEqual = computed(() => {
+        return modelValue.value === props.value;
+    });
+
     //初始值更新
-    equal(props.value) && update();
+    whenever(isEqual, () => {
+        bind(() => props.title);
+    }, {
+        immediate: true
+    });
 
     function update() {
-        set(props.value, props.title);
+        modelValue.value = props.value;
     }
 </script>
 
 <template>
-    <li class="mb-option" :class="{ [`is-checked`]: equal(value) }" @click="update">
+    <li class="mb-option" :class="{ [`is-checked`]: isEqual }" @click="update">
         <span>{{ title }}</span>
     </li>
 </template>
