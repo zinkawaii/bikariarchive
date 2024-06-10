@@ -130,7 +130,7 @@
         </div>
         <div class="search-results">
             <mb-skeleton v-if="pending"/>
-            <nuxt-link v-for="item in filteredArr" :key="item.index" class="result-item" :to="`/book/bikari/${item.index}`">
+            <nuxt-link v-for="item in filteredArr" :key="item.index" class="search-result" :to="`/book/bikari/${item.index}`">
                 <h3 class="result-title">{{ item.title }}</h3>
                 <span class="result-volume">{{ item.volume }}</span>
                 <article class="result-part" v-html="item.parts.join(``)"></article>
@@ -207,7 +207,7 @@
         margin-block: 16px;
     }
 
-    .result-item {
+    .search-result {
         padding: 16px;
         border: 1px solid transparent;
         border-left-width: 16px;

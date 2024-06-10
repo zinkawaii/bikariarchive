@@ -8,7 +8,7 @@
 
 <template>
     <div class="toast-area">
-        <transition-group name="toast">
+        <transition-group>
             <toast-item
                 v-for="[key, { icon, content }] in toastList"
                 :key
@@ -28,16 +28,5 @@
         top: 80px;
         pointer-events: none;
         inset-inline: 0;
-    }
-
-    .toast-enter-active, .toast-leave-active {
-        transform-origin: top;
-        transition: all 0.4s;
-    }
-
-    .toast-enter-from, .toast-leave-to {
-        opacity: 0;
-        margin-bottom: -38px;
-        scale: 0;
     }
 </style>

@@ -7,16 +7,16 @@
 </script>
 
 <template>
-    <nuxt-link class="content-widget home-article-item" :to="art.route">
-        <div class="home-article-background">
-            <nuxt-img v-if="art.cover" class="home-article-cover" :src="art.cover"/>
+    <nuxt-link class="content-widget tabular-item" :to="art.route">
+        <div class="tabular-background">
+            <nuxt-img v-if="art.cover" class="tabular-cover" :src="art.cover"/>
         </div>
-        <div class="home-article-wrapper">
-            <h2 class="content-h2 home-article-title">
+        <div class="tabular-wrapper">
+            <h2 class="content-h2 tabular-title">
                 <icon v-if="art.sticky < Infinity" name="pepicons-print:pin"/>
                 {{ art.title }}
             </h2>
-            <ul class="home-article-info">
+            <ul class="tabular-info">
                 <li>
                     <icon name="fa6-solid:book-open"/>
                     <span>{{ art.volumeInfo.title }}</span>
@@ -39,12 +39,12 @@
                 <span v-else class="text-gray">这篇文章还没有简介。</span>
             </p>
         </div>
-        <span class="home-article-thumb"></span>
+        <span class="tabular-thumb"></span>
     </nuxt-link>
 </template>
 
 <style lang="scss" scoped>
-    .home-article-item {
+    .tabular-item {
         --origin: left;
 
         display: flex;
@@ -70,7 +70,7 @@
         }
     }
 
-    .home-article-background {
+    .tabular-background {
         display: grid;
         flex: 0.75;
         align-content: center;
@@ -106,11 +106,11 @@
         }
     }
 
-    .home-article-cover {
+    .tabular-cover {
         position: relative;
     }
 
-    .home-article-wrapper {
+    .tabular-wrapper {
         display: grid;
         flex: 1;
         align-content: center;
@@ -124,7 +124,7 @@
         }
     }
 
-    .home-article-title {
+    .tabular-title {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -137,7 +137,7 @@
         }
     }
 
-    .home-article-info {
+    .tabular-info {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -153,7 +153,7 @@
         }
     }
 
-    .home-article-thumb {
+    .tabular-thumb {
         width: 4px;
         height: 80px;
         margin: auto 8px;

@@ -102,8 +102,8 @@
                     <th width="1%">操作</th>
                 </tr>
                 <transition-group>
-                    <tr v-for="item, index in records" :key="item._id">
-                        <th>{{ index + 1 }}</th>
+                    <tr v-for="(item, i) in records" :key="item._id">
+                        <th>{{ i + 1 }}</th>
                         <td>{{ item.ip }}</td>
                         <td>{{ formatTime(item.time) }}</td>
                         <td>{{ item.novel }}</td>
@@ -113,7 +113,7 @@
                             <mb-button @click="edit(item)">
                                 <icon name="fa6-solid:pencil"/>
                             </mb-button>
-                            <mb-button @click="remove(item, index)">
+                            <mb-button @click="remove(item, i)">
                                 <icon name="fa6-solid:trash-can"/>
                             </mb-button>
                         </td>

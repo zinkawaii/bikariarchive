@@ -248,8 +248,8 @@
             </div>
         </div>
         <div class="lyric-main">
-            <textarea class="lyric-textarea lyric-editor" placeholder="在这里输入歌词……" v-model="raw"></textarea>
-            <div v-show="isAxising" class="lyric-textarea lyric-compile">
+            <textarea v-if="!isAxising" class="lyric-editor" placeholder="在这里输入歌词……" v-model="raw"></textarea>
+            <div v-else class="lyric-editor">
                 <article>
                     <p
                         v-for="item, i in lyrics"
@@ -291,27 +291,19 @@
     }
 
     .lyric-main {
+        display: grid;
         position: relative;
         height: 512px;
-    }
-
-    .lyric-textarea {
-        padding: 8px 16px;
         border: 1px solid var(--color-border-lighter);
-        border-radius: 8px;
+        border-radius: 16px;
         background-color: var(--color-background);
         font-size: 14px;
         line-height: 24px;
     }
 
     .lyric-editor {
-        width: 100%;
-        height: 100%;
-    }
-
-    .lyric-compile {
-        position: absolute;
-        inset: 0;
+        padding: 8px 16px;
+        border-radius: inherit;
     }
 
     .lyric-item {
@@ -338,6 +330,6 @@
         gap: 8px;
         position: absolute;
         right: 16px;
-        bottom: 8px;
+        bottom: 16px;
     }
 </style>

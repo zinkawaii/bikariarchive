@@ -40,6 +40,17 @@
         background-color: var(--color-background);
         cursor: pointer;
         pointer-events: auto;
+
+        &:where(.v-enter-active, .v-leave-active) {
+            transform-origin: top;
+            transition: all 0.4s;
+        }
+
+        &:where(.v-enter-from, .v-leave-to) {
+            opacity: 0;
+            margin-bottom: -38px;
+            scale: 0;
+        }
     }
 
     .toast-content {

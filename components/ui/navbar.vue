@@ -41,11 +41,13 @@
 <style lang="scss" scoped>
     .z-navbar {
         position: fixed;
-        top: calc(50% - 144px);
         width: 48px;
+        height: fit-content;
+        margin-block: auto;
         box-shadow: 4px 4px 8px rgb(0 0 0 / 24%);
         background-color: var(--color-background);
         transition: all 0.4s;
+        inset-block: 0;
 
         &:hover {
             width: 116px;
@@ -56,8 +58,7 @@
         }
 
         &.is-collapse {
-            opacity: 0;
-            transform: translateX(-48px);
+            translate: -100%;
         }
     }
 

@@ -29,7 +29,7 @@
     <div class="z-toolbar">
         <mb-popper direction="left" plaintext="开往">
             <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
-                <icon name="fa-solid:subway"/>
+                <icon name="fa6-solid:train-subway"/>
             </nuxt-link>
         </mb-popper>
         <mb-popper direction="left" plaintext="设置">

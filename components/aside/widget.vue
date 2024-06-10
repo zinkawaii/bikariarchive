@@ -27,5 +27,9 @@
         align-items: center;
         gap: 6px;
         margin-bottom: 4px;
+
+        > .iconify {
+            width: 1em;
+        }
     }
 </style>

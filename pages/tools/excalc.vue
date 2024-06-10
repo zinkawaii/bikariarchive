@@ -167,7 +167,7 @@
                     <div class="excalc-label">
                         <span>参数</span>
                         <select class="excalc-param-selector" v-model="params.current.value" @change="params.change">
-                            <option v-for="(data, index) in params.data.value" :value="index">{{ data.name }}</option>
+                            <option v-for="(data, i) in params.data.value" :value="i">{{ data.name }}</option>
                         </select>
                     </div>
                     <div class="excalc-param-handler">
@@ -182,33 +182,33 @@
                 </div>
                 <div class="excalc-label">
                     <span>后排</span>
-                    <mb-input-number v-for="(item, index) in state.power.main" v-model="state.power.main[index]"/>
+                    <mb-input-number v-for="(item, i) in state.power.main" v-model="state.power.main[i]"/>
                 </div>
                 <div class="excalc-label">
                     <span>前排</span>
-                    <mb-input-number v-for="(item, index) in state.power.pioneer" v-model="state.power.pioneer[index]"/>
+                    <mb-input-number v-for="(item, i) in state.power.pioneer" v-model="state.power.pioneer[i]"/>
                 </div>
             </div>
             <div class="excalc-main">
-                <label>
+                <label class="excalc-label">
                     <span>血量</span>
                     <mb-input-number v-model="state.health"/>
                 </label>
-                <label>
+                <label class="excalc-label">
                     <span>次数</span>
                     <mb-input-number v-model="state.times"/>
                 </label>
                 <mb-button full @click="roll">Roll</mb-button>
-                <label>
+                <label class="excalc-label">
                     <span>斩杀率</span>
                     <mb-input-number :accuracy="7" readonly trim v-model="kill_rate"/>
                 </label>
                 <div class="excalc-division"></div>
-                <label>
+                <label class="excalc-label">
                     <span>时间</span>
                     <mb-input-number v-model="state.time"/>
                 </label>
-                <label>
+                <label class="excalc-label">
                     <span>分数</span>
                     <mb-input-number readonly v-model="score"/>
                 </label>
@@ -229,14 +229,14 @@
                         <th>暴击伤害</th>
                         <th>其他</th>
                     </tr>
-                    <tr v-for="item, index in state.buki">
+                    <tr v-for="(item, i) in state.buki">
                         <td><mb-input v-model="item.name"/></td>
                         <td><mb-input-number v-model="item.damage"/></td>
                         <td><mb-input-number v-model="item.hit"/></td>
                         <td><mb-input-number :accuracy="2" v-model="item.accuracy_rate"/></td>
                         <td><mb-input-number :accuracy="2" v-model="item.crit_rate"/></td>
                         <td><mb-input-number :accuracy="2" v-model="item.crit_damage"/></td>
-                        <td><mb-button class="excalc-delete" :disabled="state.buki.length <= 1" @click="removeBuki(index)">删除</mb-button></td>
+                        <td><mb-button class="excalc-delete" :disabled="state.buki.length <= 1" @click="removeBuki(i)">删除</mb-button></td>
                     </tr>
                 </tbody>
             </coco-table>
@@ -249,6 +249,21 @@
         display: flex;
         justify-content: space-between;
         gap: 32px;
+
+        @include viewport("sm") {
+            flex-direction: column;
+            gap: 16px;
+        }
+    }
+
+    .excalc-power {
+        display: grid;
+        align-content: flex-start;
+        gap: 16px;
+
+        @include viewport(">sm") {
+            max-width: 512px;
+        }
     }
 
     .excalc-label {
@@ -256,14 +271,18 @@
         align-items: center;
         gap: 16px;
 
-        &:nth-child(n + 2) {
-            margin-top: 16px;
+        > .mb-input {
+            flex: 1;
         }
     }
 
     .excalc-param {
         display: grid;
         gap: 16px;
+
+        @include viewport(">sm") {
+            grid-template-columns: 1fr auto;
+        }
     }
 
     .excalc-param-selector {
@@ -274,19 +293,16 @@
         border-radius: 4px;
     }
 
+    .excalc-param-handler {
+        @include viewport("sm") {
+            margin-left: 48px;
+        }
+    }
+
     .excalc-main {
         display: flex;
         flex-direction: column;
         gap: 16px;
-
-        > label {
-            display: flex;
-            align-items: center;
-
-            > span {
-                margin-right: 16px;
-            }
-        }
     }
 
     .excalc-division {
@@ -299,12 +315,16 @@
         display: grid;
         gap: 16px;
         margin-top: -30px;
+
+        @include viewport("sm") {
+            margin-top: 16px;
+        }
     }
 
     .excalc-tools {
         pointer-events: none;
 
-        > button {
+        > .mb-button {
             pointer-events: auto;
         }
     }
@@ -317,30 +337,5 @@
 
     .excalc-delete {
         width: 58px;
-    }
-
-    @include viewport(">sm") {
-        .excalc-param {
-            grid-template-columns: 1fr auto;
-        }
-
-        .excalc-power {
-            max-width: 512px;
-        }
-    }
-
-    @include viewport("sm") {
-        .excalc-top {
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .excalc-param-handler {
-            margin-left: 48px;
-        }
-
-        .excalc-bottom {
-            margin-top: 16px;
-        }
     }
 </style>

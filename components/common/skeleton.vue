@@ -9,7 +9,7 @@
 </script>
 
 <template>
-    <div class="mb-skeleton" :class="{ animated }">
+    <div class="mb-skeleton" :class="{ [`is-animated`]: animated }">
         <div v-for="i in rows" :key="i" class="skeleton-item skeleton-paragraph"></div>
     </div>
 </template>
@@ -19,7 +19,7 @@
         display: grid;
         gap: 16px;
 
-        &.animated .skeleton-item {
+        &.is-animated .skeleton-item {
             background-image: linear-gradient(to right, var(--color-info-light-5) 25%, var(--color-info-light-3) 37%, var(--color-info-light-5) 63%);
             background-size: 400% 100%;
             animation: skeleton-loading 1.5s linear infinite;
