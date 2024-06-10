@@ -1,8 +1,9 @@
 export interface GetSearchResponse extends BaseResponse {
-    results?: SearchResult[];
+    list?: SearchResult[];
 }
 
 export interface SearchResult {
+    novel: string;
     index: string;
     count: number;
     parts: string[];

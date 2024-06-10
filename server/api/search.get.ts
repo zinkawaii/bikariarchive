@@ -4,7 +4,7 @@ import { Article } from "~/utils/Article";
 import type { GetSearchResponse } from "~/server/types/api/search";
 
 export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
-    let { word } = getQueryValues(event);
+    let { novel, word } = getQueryValues(event);
 
     //空关键词
     if (!word?.length) {
@@ -14,11 +14,11 @@ export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
     //限制长度
     word = word.slice(0, 64);
 
-    const jNovel = Article.meta.bikari;
-    const jChapters = jNovel.chapters;
+    const jNovels = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
+    const jChapters = jNovels.flatMap((jNovel) => jNovel?.chapters).filter(Boolean);
 
     //按章节遍历
-    res.results = [];
+    res.list = [];
     for (const art of jChapters) {
         //读取整章
         const text = await readArticle(art);
@@ -52,7 +52,8 @@ export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
             const end = Math.min(line + 2, lines.length);
             const parts = [...Array(end - start)].map((_, i) => lines[i + start].outerHTML);
 
-            res.results.push({
+            res.list.push({
+                novel: art.novel,
                 index: art.index,
                 count: position.length,
                 parts: parts

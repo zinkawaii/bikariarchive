@@ -4,67 +4,56 @@
     });
 
     const history = useLocalStorage("search-history", []);
-    const session = useSessionStorage("search-result", {});
     const toastStore = useToastStore();
 
-    const queryWord = useRouteQuery("word");
-    const inputWord = ref("");
+    const novel = useRouteQuery("novel");
+    const queryWord = useRouteQuery("word", "");
+    const inputWord = ref(queryWord.value);
     const searchWord = ref("");
-    const results = ref([]);
 
-    const { execute, pending, data: fetchData } = useLazyFetch("/api/search", {
+    const { execute, pending, data } = useLazyFetch("/api/search", {
         query: {
-            word: searchWord
+            novel,
+            word: computed(() => inputWord.value.slice(0, 64))
         },
+        immediate: false,
         watch: false
+    });
+
+    const results = computed(() => {
+        const { error, list } = data.value ?? {};
+        if (error || !list) return [];
+
+        return list.map((item) => {
+            const art = Article.for(item.novel, item.index);
+            const parts = item.parts.map((part) => {
+                return part.replaceAll(searchWord.value, `<span class="text-danger">${searchWord.value}</span>`);
+            }).join("");
+
+            return {
+                art,
+                parts,
+                count: item.count
+            };
+        });
     });
 
     const { page, filteredArr } = usePagination(results);
 
     //全文检索
-    const fullTextSearch = Zin.debounce(async (word: string = inputWord.value) => {
-        if (!word?.length) {
+    const fullTextSearch = Zin.debounce(async () => {
+        if (!inputWord.value) {
             toastStore.info("search-empty", "请输入内容");
             return;
         }
 
-        //限制长度
-        word = word.slice(0, 64);
-
-        //预更新数据
-        results.value.length = 0;
-        searchWord.value = word;
-        queryWord.value = word;
-
-        //从会话存储中读取或发送请求
-        const data = session.value[word] ?? (
-            await execute(),
-            fetchData.value
-        );
-
-        const { error, results: res } = data;
-        if (error !== 0) return;
-
-        for (const item of res) {
-            const art = Article.for("bikari", item.index);
-            const parts = item.parts.map((part) => {
-                return part.replaceAll(word, `<span class="text-danger">${word}</span>`);
-            });
-
-            results.value.push({
-                index: item.index,
-                title: art.title,
-                volume: art.volumeInfo.title,
-                count: item.count,
-                parts
-            });
-        }
+        //发送请求
+        await execute();
+        queryWord.value = inputWord.value;
+        searchWord.value = inputWord.value;
 
         //写入历史记录
-        updateHistory(word);
-
-        //写入会话存储
-        session.value[word] = data;
+        updateHistory(inputWord.value);
 
         //重置到第一页
         page.value = 1;
@@ -75,8 +64,7 @@
     //带参数进入页面时
     watchImmediate(queryWord, (value) => {
         inputWord.value = value;
-        value ? (value !== searchWord.value) && fullTextSearch(value) : (
-            searchWord.value = "",
+        value ? (searchWord.value !== value) && fullTextSearch() : (
             results.value.length = 0
         );
     });
@@ -105,9 +93,14 @@
 
 <template>
     <coco-widget title="全文检索">
-        <form class="search-form" @submit.prevent="fullTextSearch()">
-            <input class="search-input" type="search" v-model="inputWord"/>
-            <button class="search-button">全文检索</button>
+        <form class="search-form" @submit.prevent="fullTextSearch">
+            <mb-select class="search-select" v-model="novel">
+                <mb-option title="全文检索"/>
+                <mb-option-group title="书名">
+                    <mb-option v-for="{ title }, key in Article.meta" :key :title :value="key"/>
+                </mb-option-group>
+            </mb-select>
+            <coco-input type="search" placeholder="关键词" v-model="inputWord"/>
         </form>
         <div class="search-history">
             <div class="history-title">
@@ -130,12 +123,14 @@
         </div>
         <div class="search-results">
             <mb-skeleton v-if="pending"/>
-            <nuxt-link v-for="item in filteredArr" :key="item.index" class="search-result" :to="`/book/bikari/${item.index}`">
-                <h3 class="result-title">{{ item.title }}</h3>
-                <span class="result-volume">{{ item.volume }}</span>
-                <article class="result-part" v-html="item.parts.join(``)"></article>
-                <span class="result-count">本章共出现{{ item.count }}次</span>
-            </nuxt-link>
+            <template v-else>
+                <nuxt-link v-for="{ art, parts, count } in filteredArr" :key="art.index" class="search-result" :to="art.route">
+                    <h3 class="result-title">{{ art.title }}</h3>
+                    <span class="result-volume">{{ art.volumeInfo.title }}</span>
+                    <article class="result-part" v-html="parts"></article>
+                    <span class="result-count">本章共出现{{ count }}次</span>
+                </nuxt-link>
+            </template>
         </div>
         <mb-pagination :total="results.length" scroll-target=".content-widget" v-model="page"/>
     </coco-widget>
@@ -143,26 +138,18 @@
 
 <style lang="scss" scoped>
     .search-form {
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-        height: 36px;
-        border: 1px solid var(--color-border-light);
-        border-radius: 16px;
+        display: grid;
+        gap: 16px 8px;
+
+        @include viewport(">xs") {
+            grid-template-columns: auto 1fr;
+        }
     }
 
-    .search-input {
-        flex: 1;
-        padding-inline: 12px;
-    }
-
-    .search-button {
-        display: flex;
-        align-items: center;
-        padding-inline: 16px 18px;
-        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
-        text-shadow: var(--text-shadow);
-        color: white;
+    .search-select {
+        width: 180px;
+        margin-inline: auto;
+        z-index: 1;
     }
 
     .search-history {
