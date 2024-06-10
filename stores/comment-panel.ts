@@ -11,6 +11,7 @@ export const useCommentPanelStore = defineStore("comment-panel", () => {
     const replyOptions = ref<CommentReplyOptions>();
     const modifyOptions = ref<CommentModifyOptions>();
 
+    const route = useRoute();
     const dialogStore = useDialogStore();
 
     const { open, close } = dialogStore.use(() => h(CommentPanel), {
@@ -19,13 +20,13 @@ export const useCommentPanelStore = defineStore("comment-panel", () => {
 
     function post() {
         mode.value = "post";
-        path.value = location.pathname;
+        path.value = route.path;
         open();
     }
 
     function reply(options: CommentReplyOptions) {
         mode.value = "reply";
-        path.value = location.pathname;
+        path.value = route.path;
         replyOptions.value = options;
         open();
     }
