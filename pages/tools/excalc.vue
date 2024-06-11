@@ -67,9 +67,7 @@
 
     //删除武器
     function removeBuki(index: number) {
-        if (state.value.bukis.length > 1) {
-            state.value.bukis.splice(index, 1);
-        }
+        state.value.bukis.splice(index, 1);
     }
 
     //斩杀率
@@ -125,7 +123,7 @@
                         </mb-select>
                     </div>
                     <div class="excalc-param-handler">
-                        <mb-button @click="addData">新建</mb-button>
+                        <mb-button @click="addData">添加</mb-button>
                         <mb-button @click="removeData">删除</mb-button>
                     </div>
                 </div>
@@ -282,9 +280,5 @@
         td {
             padding-block: 4px;
         }
-    }
-
-    .excalc-delete {
-        width: 58px;
     }
 </style>
