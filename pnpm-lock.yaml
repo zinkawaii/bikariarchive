@@ -45,6 +45,9 @@ importers:
       '@antfu/eslint-config':
         specifier: ^2.21.0
         version: 2.21.0(@vue/compiler-sfc@3.4.27)(eslint@9.4.0)(svelte@4.2.18)(typescript@5.4.5)
+      '@bikari/excalc':
+        specifier: workspace:^
+        version: link:packages/excalc
       '@bikari/process':
         specifier: workspace:^
         version: link:packages/process
@@ -117,6 +120,9 @@ importers:
       '@zinkawaii/stylelint-config':
         specifier: ^0.1.4
         version: 0.1.4(postcss-html@1.6.0)(postcss@8.4.38)(stylelint@16.6.1(typescript@5.4.5))
+      assemblyscript:
+        specifier: ^0.27.27
+        version: 0.27.27
       chokidar:
         specifier: ^3.6.0
         version: 3.6.0
@@ -234,6 +240,8 @@ importers:
       yaml:
         specifier: ^2.4.5
         version: 2.4.5
+
+  packages/excalc: {}
 
   packages/process: {}
 
@@ -2589,6 +2597,11 @@ packages:
   asn1@0.2.6:
     resolution: {integrity: sha512-ix/FxPn0MDjeyJ7i/yoHGFt/EX6LyNbxSEhPPXODPL+KB0VPk86UYfL0lMdy+KCnv+fmvIzySwaK5COwqVbWTQ==}
 
+  assemblyscript@0.27.27:
+    resolution: {integrity: sha512-z4ijXsjjk3uespEeCWpO1K2GQySc6bn+LL5dL0tsC2VXNYKFnKDmAh3wefcKazxXHFVhYlxqNfyv96ajaQyINQ==}
+    engines: {node: '>=16', npm: '>=7'}
+    hasBin: true
+
   ast-kit@0.12.2:
     resolution: {integrity: sha512-es1zHFsnZ4Y4efz412nnrU3KvVAhgqy90a7Yt9Wpi5vQ3l4aYMOX0Qx4FD0elKr5ITEhiUGCSFcgGYf4YTuACg==}
     engines: {node: '>=16.14.0'}
@@ -2664,6 +2677,10 @@ packages:
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
+
+  binaryen@116.0.0-nightly.20240114:
+    resolution: {integrity: sha512-0GZrojJnuhoe+hiwji7QFaL3tBlJoA+KFUN7ouYSDGZLSo9CKM8swQX8n/UcbR0d1VuZKU+nhogNzv423JEu5A==}
+    hasBin: true
 
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
@@ -4637,6 +4654,9 @@ packages:
 
   long-timeout@0.1.1:
     resolution: {integrity: sha512-BFRuQUqc7x2NWxfJBCyUrN8iYUYznzL9JROmRz1gZ6KlOIgmoD+njPVbb+VNn2nGMKggMsK79iUNErillsrx7w==}
+
+  long@5.2.3:
+    resolution: {integrity: sha512-lcHwpNoggQTObv5apGNCTdJrO69eHOZMi4BNC+rTLER8iHAqGrUVeLh/irVIM7zTw2bOXA8T6uNPeujwOLg/2Q==}
 
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
@@ -10401,6 +10421,11 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
+  assemblyscript@0.27.27:
+    dependencies:
+      binaryen: 116.0.0-nightly.20240114
+      long: 5.2.3
+
   ast-kit@0.12.2:
     dependencies:
       '@babel/parser': 7.24.7
@@ -10483,6 +10508,8 @@ snapshots:
       tweetnacl: 0.14.5
 
   binary-extensions@2.3.0: {}
+
+  binaryen@116.0.0-nightly.20240114: {}
 
   bindings@1.5.0:
     dependencies:
@@ -12580,6 +12607,8 @@ snapshots:
   lodash@4.17.21: {}
 
   long-timeout@0.1.1: {}
+
+  long@5.2.3: {}
 
   longest-streak@3.1.0: {}
 

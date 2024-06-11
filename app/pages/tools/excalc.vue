@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import * as EXCalc from "@bikari/excalc";
     import type { EXCalcBuki, EXCalcData } from "~/types/excalc";
 
     useHead({
@@ -87,27 +88,7 @@
 
     //开凹
     function roll() {
-        let kill = 0;
-        for (let t = 0; t < state.value.times; t++) {
-            let hp = 0;
-            for (const buki of state.value.bukis) {
-                for (let i = 0; i < buki.hit; i++) {
-                    //命中
-                    if (isRateEffect(buki.accuracyRate) === false) continue;
-                    //暴击
-                    hp += buki.damage * (isRateEffect(buki.critRate) ? (buki.critDamage / 100) : 1);
-                }
-            }
-            if (hp >= state.value.health) {
-                kill++;
-            }
-        }
-
-        killRate.value = (state.value.times) > 0 ? kill / state.value.times : 0;
-
-        function isRateEffect(rate: number) {
-            return Math.random() * 100 < rate;
-        }
+        killRate.value = EXCalc.roll(state.value);
     }
 </script>
 
