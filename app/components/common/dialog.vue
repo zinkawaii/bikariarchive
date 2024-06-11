@@ -2,16 +2,23 @@
     defineProps<{
         opening?: boolean;
     }>();
-    defineEmits<{
+    const emit = defineEmits<{
         close: [];
     }>();
+
+    //按下 ESC 键关闭
+    useEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            emit("close");
+        }
+    });
 </script>
 
 <template>
     <transition-scale>
         <div v-if="opening" class="mb-dialog">
             <slot></slot>
-            <span class="dialog-xmark" @click="$emit(`close`)">
+            <span class="dialog-xmark" @click="emit(`close`)">
                 <icon name="fa6-solid:xmark"/>
             </span>
         </div>

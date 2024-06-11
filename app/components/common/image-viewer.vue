@@ -62,7 +62,7 @@
         }, Zin.DEFAULT_ANIME_OPTION);
     }
 
-    //按下ESC键关闭
+    //按下 ESC 键关闭
     useEventListener("keydown", (event) => {
         if (event.key === "Escape") {
             emit("close");

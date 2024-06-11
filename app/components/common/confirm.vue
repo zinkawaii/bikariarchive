@@ -7,16 +7,6 @@
         confirm: [];
     }>();
 
-    //键盘监听
-    useEventListener("keyup", (event) => {
-        switch (event.key) {
-            case "Escape":
-                return cancel();
-            case "Enter":
-                return confirm();
-        }
-    });
-
     function cancel() {
         emit("cancel");
     }
