@@ -31,7 +31,7 @@
     "pinia": "^2.1.7",
     "uqr": "^0.1.2",
     "vue": "^3.4.27",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.0",
@@ -53,7 +53,7 @@
     "@types/prompts": "^2.4.9",
     "@types/ssh2-sftp-client": "^9.0.3",
     "@types/wicg-file-system-access": "^2023.10.5",
-    "@vue-email/nuxt-edge": "^0.8.19-28628306.78c82c6",
+    "@vue-email/nuxt-edge": "0.8.19-28628306.78c82c6",
     "@vueuse/nuxt": "^10.10.0",
     "@zinkawaii/eslint-config": "^0.1.1",
     "@zinkawaii/nuxt-gsap": "^0.1.2",
@@ -74,7 +74,7 @@
     "node-html-parser": "^6.1.13",
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.13",
-    "nuxt": "^3.11.2",
+    "nuxt": "^3.12.0",
     "nuxt-icon": "1.0.0-beta.6",
     "nuxt-mongoose": "^1.0.6",
     "nuxt-simple-robots": "4.0.0-rc.17",

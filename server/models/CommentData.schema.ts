@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { defineMongooseModel } from "#nuxt/mongoose";
-import type { CommentDataSchema } from "~/server/types/model";
+import type { CommentDataSchema } from "~~/server/types/model";
 
 export const CommentDataModel = defineMongooseModel<CommentDataSchema>({
     name: "CommentData",

@@ -56,6 +56,9 @@ export default defineNuxtConfig({
     features: {
         inlineStyles: false
     },
+    future: {
+        compatibilityVersion: 4
+    },
     runtimeConfig: {
         ...serverConfig,
         public: clientConfig
@@ -108,7 +111,7 @@ export default defineNuxtConfig({
     splittedFonts: {
         fonts: [{
             name: "Teng Xiang",
-            path: "./assets/fonts/TengXQJianYuan-w3.ttf"
+            path: "~/assets/fonts/TengXQJianYuan-w3.ttf"
         }]
     },
     shiki: {

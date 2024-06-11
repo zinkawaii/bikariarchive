@@ -1,4 +1,4 @@
-import type { PostLoginBody, PostLoginResponse } from "~/server/types/api/user/login";
+import type { PostLoginBody, PostLoginResponse } from "~~/server/types/api/user/login";
 
 export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
     const { session } = event.context;

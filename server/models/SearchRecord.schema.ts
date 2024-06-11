@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { defineMongooseModel } from "#nuxt/mongoose";
-import type { SearchRecordSchema } from "~/server/types/model";
+import type { SearchRecordSchema } from "~~/server/types/model";
 
 export const SearchRecordModel = defineMongooseModel<SearchRecordSchema>({
     name: "SearchRecord",

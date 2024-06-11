@@ -1,7 +1,7 @@
 import $ from "node-html-parser";
 import dayjs from "dayjs";
 import { Article } from "~/utils/Article";
-import type { GetSearchResponse } from "~/server/types/api/search";
+import type { GetSearchResponse } from "~~/server/types/api/search";
 
 export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
     let { novel, word } = getQueryValues(event);

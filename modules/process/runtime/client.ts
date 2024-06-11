@@ -1,4 +1,4 @@
-import jArticle from "~/dist/json/Article.json";
+import jArticle from "~~/dist/json/Article.json";
 
 export default defineNuxtPlugin(() => {
     enrichJArticle(jArticle);

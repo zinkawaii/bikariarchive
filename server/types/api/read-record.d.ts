@@ -1,4 +1,4 @@
-import type { ReadRecordSchema, UserDataSchema } from "~/server/types/model";
+import type { ReadRecordSchema, UserDataSchema } from "~~/server/types/model";
 
 export interface DeleteReadRecordBody {
     id: string;

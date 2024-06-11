@@ -17,7 +17,7 @@ export default new Processor({
         pattern: "**/*.md"
     },
     meta: {
-        src: "assets/json/Article.json",
+        src: "app/assets/json/Article.json",
         out: "dist/json/Article.json"
     },
     map: {

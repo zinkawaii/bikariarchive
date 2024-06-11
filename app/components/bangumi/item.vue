@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { BangumiData } from "~/server/types/api/bangumi";
+    import type { BangumiData } from "~~/server/types/api/bangumi";
 
     defineProps<BangumiData>();
 </script>

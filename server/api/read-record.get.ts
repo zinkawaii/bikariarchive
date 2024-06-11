@@ -1,4 +1,4 @@
-import type { GetReadRecordResponse } from "~/server/types/api/read-record";
+import type { GetReadRecordResponse } from "~~/server/types/api/read-record";
 
 export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => {
     const query = getQueryValues(event);

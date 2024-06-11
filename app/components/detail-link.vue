@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import jEntry from "~/dist/json/Entry.json";
+    import jEntry from "~~/dist/json/Entry.json";
 
     const props = defineProps(["title"]);
 

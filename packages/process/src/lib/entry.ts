@@ -17,7 +17,7 @@ export default new Processor({
         pattern: `{${folders.join(",")}}/*.md`
     },
     meta: {
-        src: "assets/json/Entry.json",
+        src: "app/assets/json/Entry.json",
         out: "dist/json/Entry.json"
     },
     map: {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import dayjs from "dayjs";
-    import type { CommentData } from "~/server/types/api/comment";
+    import type { CommentData } from "~~/server/types/api/comment";
     import type { WithParent } from "~/types";
 
     const props = defineProps<{

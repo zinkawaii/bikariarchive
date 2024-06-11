@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import CommentReply from "~/emails/comment-reply.vue";
-import type { PostCommentBody } from "~/server/types/api/comment";
+import type { PostCommentBody } from "~~/server/types/api/comment";
 
 export default defineJEventHandler(async (event) => {
     const body = await readBody<PostCommentBody>(event);

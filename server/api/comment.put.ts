@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import type { PutCommentBody } from "~/server/types/api/comment";
+import type { PutCommentBody } from "~~/server/types/api/comment";
 
 export default defineJEventHandler(async (event) => {
     const body = await readBody<PutCommentBody>(event);

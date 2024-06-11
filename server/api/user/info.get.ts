@@ -1,4 +1,4 @@
-import type { GetUserInfoResponse } from "~/server/types/api/user/info";
+import type { GetUserInfoResponse } from "~~/server/types/api/user/info";
 
 export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
     const { session } = event.context;

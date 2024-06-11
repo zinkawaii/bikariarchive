@@ -1,5 +1,5 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
-import type { TempVerifySchema } from "~/server/types/model";
+import type { TempVerifySchema } from "~~/server/types/model";
 
 export const TempVerifyModel = defineMongooseModel<TempVerifySchema>({
     name: "TempVerify",

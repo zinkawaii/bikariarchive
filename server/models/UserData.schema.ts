@@ -1,5 +1,5 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
-import type { UserDataSchema } from "~/server/types/model";
+import type { UserDataSchema } from "~~/server/types/model";
 
 export const UserDataModel = defineMongooseModel<UserDataSchema>({
     name: "UserData",

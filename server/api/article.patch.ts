@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import CryptoES from "crypto-es";
-import type { PatchArticleBody } from "~/server/types/api/article";
+import type { PatchArticleBody } from "~~/server/types/api/article";
 
 export default defineJEventHandler(async (event, res) => {
     const config = useRuntimeConfig();

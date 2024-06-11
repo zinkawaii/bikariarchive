@@ -1,4 +1,4 @@
-import type { PutUserSignBody, PutUserSignResponse } from "~/server/types/api/user/sign";
+import type { PutUserSignBody, PutUserSignResponse } from "~~/server/types/api/user/sign";
 
 export default defineJEventHandler<PutUserSignResponse>(async (event) => {
     const { session } = event.context;

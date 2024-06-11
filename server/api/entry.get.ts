@@ -1,6 +1,6 @@
 import fs from "fs-extra";
-import jMap from "~/dist/json/Entrimap.json";
-import type { GetEntryResponse } from "~/server/types/api/entry";
+import jMap from "~~/dist/json/Entrimap.json";
+import type { GetEntryResponse } from "~~/server/types/api/entry";
 
 export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
     const {

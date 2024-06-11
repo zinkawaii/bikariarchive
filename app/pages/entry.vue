@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import Unknown from "./unknown.vue";
     import { EntryKnownAbility } from "#components";
-    import jEntry from "~/dist/json/Entry.json";
+    import jEntry from "~~/dist/json/Entry.json";
 
     defineOptions({
         components: {

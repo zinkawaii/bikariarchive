@@ -1,4 +1,4 @@
-import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~/server/types/api/comment";
+import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 import type { WithParent } from "~/types";
 
 export const useCommentStore = defineStore("comment", () => {

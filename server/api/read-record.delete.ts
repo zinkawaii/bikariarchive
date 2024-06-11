@@ -1,4 +1,4 @@
-import type { DeleteReadRecordBody } from "~/server/types/api/read-record";
+import type { DeleteReadRecordBody } from "~~/server/types/api/read-record";
 
 export default defineJEventHandler(async (event) => {
     const { id } = await readBody<DeleteReadRecordBody>(event);
