@@ -1,5 +1,12 @@
 [
   {
+    "date": "2024-06-11",
+    "version": "0.4.3",
+    "content": [
+      "使用 AssemblyScript 优化西北风计算器的凹分性能"
+    ]
+  },
+  {
     "date": "2024-06-10",
     "version": "0.4.2",
     "content": [
