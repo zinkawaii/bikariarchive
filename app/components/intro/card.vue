@@ -31,9 +31,9 @@
         <h2 class="content-h2">{{ Article.meta[novel].title }}</h2>
         <intro-content :novel/>
         <div v-if="record" class="intro-record">
-            <icon name="fa-solid:chevron-right"/>
+            <icon name="fa6-solid:chevron-right"/>
             <plain-link class="intro-link" :to="record.to">{{ record.title }}</plain-link>
-            <icon name="fa-solid:chevron-left"/>
+            <icon name="fa6-solid:chevron-left"/>
         </div>
     </div>
 </template>
@@ -79,7 +79,7 @@
         transition: all 0.25s;
 
         &:hover {
-            margin-inline: 4px;
+            margin-inline: 8px;
         }
     }
 </style>

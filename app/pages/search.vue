@@ -119,16 +119,16 @@
     <coco-widget v-if="searchWord.length">
         <div class="search-statistics">
             <h2>"{{ searchWord }}"的检索结果</h2>
-            <span class="text-gray">共检索到{{ results.length }}章，总出现次数为{{ totalCount }}次</span>
+            <span class="text-gray">共检索到 {{ results.length }} 章，总出现次数为 {{ totalCount }} 次</span>
         </div>
         <div class="search-results">
             <mb-skeleton v-if="pending"/>
             <template v-else>
                 <nuxt-link v-for="{ art, parts, count } in filteredArr" :key="art.index" class="search-result" :to="art.route">
                     <h3 class="result-title">{{ art.title }}</h3>
-                    <span class="result-volume">{{ art.volumeInfo.title }}</span>
+                    <span class="result-info">{{ art.volumeInfo.title }}</span>
                     <article class="result-part" v-html="parts"></article>
-                    <span class="result-count">本章共出现{{ count }}次</span>
+                    <span class="result-info result-right">本章共出现 {{ count }} 次</span>
                 </nuxt-link>
             </template>
         </div>
@@ -212,8 +212,8 @@
         line-height: 28px;
     }
 
-    .result-volume {
-        font-size: 15px;
+    .result-info {
+        font-size: 14px;
         color: var(--color-text-info);
     }
 
@@ -223,9 +223,7 @@
         line-height: 22px;
     }
 
-    .result-count {
+    .result-right {
         float: right;
-        font-size: 14px;
-        color: var(--color-text-info);
     }
 </style>

@@ -204,11 +204,6 @@ textarea {
     }
 }
 
-.p-small {
-    font-size: 14px;
-    line-height: 24px;
-}
-
 .tag {
     box-decoration-break: clone;
     background-color: var(--color-background-tag);
@@ -217,6 +212,11 @@ textarea {
     &:is(a):hover {
         color: var(--color-theme-text);
     }
+}
+
+.p-small {
+    font-size: 14px;
+    line-height: 24px;
 }
 
 .font-italic {
@@ -341,11 +341,7 @@ textarea {
         font-weight: bold;
     }
 
-    .mb-code {
-        margin-block: 16px;
-    }
-
-    .mb-gallery {
+    :where(.mb-chat, .mb-code, .mb-gallery) {
         margin-block: 16px;
     }
 
