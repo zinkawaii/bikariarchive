@@ -5,6 +5,11 @@ const server = {
         article: {
             key: "<!-- ??? -->"
         },
+        comment: {
+            "/tweet": {
+                identity: 9
+            }
+        },
         mail: {
             name: "微光档案",
             host: "smtp.qq.com",

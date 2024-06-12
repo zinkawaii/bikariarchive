@@ -5,6 +5,8 @@ import type { PostCommentBody } from "~~/server/types/api/comment";
 export default defineJEventHandler(async (event) => {
     const body = await readBody<PostCommentBody>(event);
 
+    const config = useRuntimeConfig();
+
     //获取严格路径
     const path = getStrictPath(body.path);
 
@@ -12,6 +14,9 @@ export default defineJEventHandler(async (event) => {
     if (!path) {
         return 1;
     }
+
+    //权限验证
+    identityValidate(event, config.comment[path]?.identity ?? 0);
 
     //获取时间，UID
     const time = dayjs.tz();
