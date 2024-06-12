@@ -1,11 +1,11 @@
 <script lang="ts" setup>
     const shelfStore = useShelfStore();
-    const { novel, curOrder } = storeToRefs(shelfStore);
+    const { novel, currentNovelIdx } = storeToRefs(shelfStore);
 </script>
 
 <template>
     <div class="shelf-novel">
-        <ul class="sheno-list" :style="{ translate: `${curOrder.novel * -144}px` }">
+        <ul class="sheno-list" :style="{ translate: `${currentNovelIdx * -144}px` }">
             <li v-for="({ title, cover }, key, i) in Article.meta">
                 <a
                     class="sheno-link"

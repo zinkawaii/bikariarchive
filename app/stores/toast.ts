@@ -15,35 +15,44 @@ const iconInfos: Record<ToastType, ToastIconInfo> = {
     }
 };
 
-export const useToastStore = defineStore("toast", {
-    state: () => ({
-        map: new Map<string, ToastItem>()
-    }),
-    actions: {
-        show(key: string, content: string, type: ToastType = "info") {
-            const hash = Math.random().toString(36);
-            for (const item of this.map) {
-                if (item[0].startsWith(key)) {
-                    this.remove(item[0]);
-                    break;
-                }
+export const useToastStore = defineStore("toast", () => {
+    const map = ref(new Map<string, ToastItem>());
+
+    function show(key: string, content: string, type: ToastType = "info") {
+        const hash = Math.random().toString(36);
+        for (const item of map.value) {
+            if (item[0].startsWith(key)) {
+                remove(item[0]);
+                break;
             }
-            this.map.set(key + hash, {
-                icon: iconInfos[type],
-                content
-            });
-        },
-        remove(key: string) {
-            this.map.delete(key);
-        },
-        error(key: string, content: string) {
-            this.show(key, content, "error");
-        },
-        info(key: string, content: string) {
-            this.show(key, content, "info");
-        },
-        success(key: string, content: string) {
-            this.show(key, content, "success");
         }
+        map.value.set(key + hash, {
+            icon: iconInfos[type],
+            content
+        });
     }
+
+    function remove(key: string) {
+        map.value.delete(key);
+    }
+
+    function error(key: string, content: string) {
+        show(key, content, "error");
+    }
+
+    function info(key: string, content: string) {
+        show(key, content, "info");
+    }
+
+    function success(key: string, content: string) {
+        show(key, content, "success");
+    }
+
+    return {
+        map,
+        remove,
+        error,
+        info,
+        success
+    };
 });

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     const shelfStore = useShelfStore();
-    const { curOrder, jNovel } = storeToRefs(shelfStore);
+    const { currentVolumeIdx, jNovel } = storeToRefs(shelfStore);
 
     const volumes = computed(() => {
         return jNovel.value.volumes.map((item) => item.title);
@@ -12,7 +12,7 @@
         <li v-for="(title, i) in volumes">
             <a
                 class="shevo-link"
-                :class="{ checked: curOrder.volume === i }"
+                :class="{ checked: currentVolumeIdx === i }"
                 @click="shelfStore.selectVolume(i)"
             >{{ title }}</a>
         </li>
