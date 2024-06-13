@@ -59,21 +59,11 @@ export default defineNuxtConfig({
     future: {
         compatibilityVersion: 4
     },
-    nitro: {
-        esbuild: {
-            options: {
-                target: "esnext"
-            }
-        }
-    },
     runtimeConfig: {
         ...serverConfig,
         public: clientConfig
     },
     vite: {
-        build: {
-            target: "esnext"
-        },
         css: {
             preprocessorOptions: {
                 scss: {

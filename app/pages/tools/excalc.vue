@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-    import * as EXCalc from "@bikari/excalc";
     import type { EXCalcBuki, EXCalcData } from "~/types/excalc";
 
     useHead({
@@ -87,8 +86,9 @@
     });
 
     //开凹
-    function roll() {
-        killRate.value = EXCalc.roll(state.value);
+    async function roll() {
+        const { roll } = await import("@bikari/excalc");
+        killRate.value = roll(state.value);
     }
 </script>
 
