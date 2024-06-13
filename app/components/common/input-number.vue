@@ -15,13 +15,14 @@
     const [isValid, toggleValid] = useToggle(false);
 
     //记录旧值
-    let oldValue: string,
-        oldNumberValue: number;
+    let oldValue: number,
+        oldDisplayValue: string;
 
     //响应源数据变化
     watchImmediate(modelValue, (val) => {
-        if (val !== oldNumberValue) {
-            oldValue = String(val);
+        if (val !== oldValue) {
+            oldDisplayValue = String(val);
+            oldValue = val;
             blur();
         }
     });
@@ -32,24 +33,25 @@
         if (match) {
             const d = match[2]?.slice(0, props.accuracy + 1) || "";
 
-            oldValue = match[1] + d;
-            oldNumberValue = Number(oldValue) || 0;
-            modelValue.value = oldNumberValue;
+            oldDisplayValue = match[1] + d;
+            oldValue = Number(oldDisplayValue) || 0;
+            modelValue.value = oldValue;
         }
         toggleValid(!!match);
     }
 
     //失焦时
     function blur() {
-        const match = oldValue.match(NUMBER_REGEX);
+        const match = oldDisplayValue.match(NUMBER_REGEX);
         const i = Number(match[1]) || "0";
 
         let d = match[2] || ".";
-        d = props.trim
-            ? d.replace(/0+$/, "")
-            : props.accuracy
-                ? d.padEnd(props.accuracy + 1, "0")
-                : d;
+        if (props.accuracy) {
+            d = d.padEnd(props.accuracy + 1, "0").slice(0, props.accuracy + 1);
+        }
+        if (props.trim) {
+            d = d.replace(/0+$/, "");
+        }
         d === "." && (d = "");
 
         //规整格式
