@@ -15,12 +15,15 @@
     const [isValid, toggleValid] = useToggle(false);
 
     //记录旧值
-    let oldValue = "";
+    let oldValue: string,
+        oldNumberValue: number;
 
     //响应源数据变化
     watchImmediate(modelValue, (val) => {
-        oldValue = String(val);
-        blur();
+        if (val !== oldNumberValue) {
+            oldValue = String(val);
+            blur();
+        }
     });
 
     //输入时
@@ -30,7 +33,8 @@
             const d = match[2]?.slice(0, props.accuracy + 1) || "";
 
             oldValue = match[1] + d;
-            modelValue.value = Number(oldValue) || 0;
+            oldNumberValue = Number(oldValue) || 0;
+            modelValue.value = oldNumberValue;
         }
         toggleValid(!!match);
     }
