@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-    import Unknown from "./unknown.vue";
     import { EntryKnownAbility } from "#components";
     import jEntry from "~~/dist/json/Entry.json";
 
@@ -108,7 +107,7 @@
             </section>
         </article>
     </coco-widget>
-    <component v-else :is="Unknown"/>
+    <not-found v-else/>
 </template>
 
 <style lang="scss" scoped>
