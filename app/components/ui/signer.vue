@@ -56,6 +56,8 @@
 
         @include viewport("xs") {
             flex-direction: column;
+            height: 100dvh;
+            border-radius: 0;
         }
     }
 

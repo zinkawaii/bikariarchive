@@ -38,12 +38,6 @@
         padding: 32px;
         border-radius: 16px;
         background-color: var(--color-background);
-
-        @include viewport("xs") {
-            height: 100dvh;
-            padding: 16px;
-            border-radius: 0;
-        }
     }
 
     .dialog-xmark {

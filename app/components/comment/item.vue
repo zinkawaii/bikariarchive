@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import dayjs from "dayjs";
+    import { CommentUser } from "#components";
     import type { CommentData } from "~~/server/types/api/comment";
     import type { WithParent } from "~/types";
 
@@ -10,7 +11,16 @@
 
     const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
+    const dialogStore = useDialogStore();
     const userStore = useUserStore();
+
+    //用户信息弹窗
+    const { open, close } = dialogStore.use(() => h(CommentUser, {
+        avatar: props.data.avatar,
+        nickname: props.data.nickname,
+        address: props.data.address,
+        onClose: close
+    }));
 
     //相对时间
     const elapsed = computed(() => {
@@ -54,10 +64,16 @@
 
 <template>
     <section class="comment-item">
-        <nuxt-img class="comment-avatar" :src="data.avatar" alt="[avatar]" placeholder="/garden/icon/default.png"/>
+        <nuxt-img
+            class="comment-avatar"
+            :src="data.avatar"
+            alt="[avatar]"
+            placeholder="/garden/icon/default.png"
+            @click="open"
+        />
         <div class="comment-main">
             <div class="comment-header">
-                <nuxt-link class="comment-nickname" :to="data.address" target="_blank">{{ data.nickname }}</nuxt-link>
+                <a class="comment-nickname" @click="open">{{ data.nickname }}</a>
                 <template v-if="data.parent?.parent">
                     <icon class="text-gray" name="vaadin:chat"/>
                     <a class="comment-nickname">{{ recipient }}</a>
@@ -104,6 +120,7 @@
         aspect-ratio: 1;
         border-radius: 100%;
         box-shadow: var(--box-shadow);
+        cursor: pointer;
 
         @include viewport("xs") {
             .comment-reply & {

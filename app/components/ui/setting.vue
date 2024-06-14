@@ -64,6 +64,12 @@
 <style lang="scss" scoped>
     .z-setting {
         width: 556px;
+
+        @include viewport("xs") {
+            height: 100dvh;
+            padding: 16px;
+            border-radius: 0;
+        }
     }
 
     .setting-form {

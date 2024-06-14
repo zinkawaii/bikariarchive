@@ -32,11 +32,6 @@
         max-width: 720px;
         padding: 1rem 1.5rem;
         font-size: 14px;
-
-        @include viewport("xs") {
-            width: 100%;
-            height: fit-content;
-        }
     }
 
     .confirm-content {
