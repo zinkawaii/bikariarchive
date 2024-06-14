@@ -11,11 +11,7 @@
 
 <template>
     <mb-dialog class="comment-user" @close="$emit(`close`)">
-        <nuxt-img
-            class="user-avatar"
-            :src="avatar"
-            placeholder="/garden/icon/default.png"
-        />
+        <user-avatar :src="avatar"/>
         <span class="content-h2">{{ nickname }}</span>
         <plain-link class="user-link" :to="address" target="_blank">
             <span>{{ address }}</span>
@@ -36,9 +32,6 @@
 
     .user-avatar {
         width: 72px;
-        aspect-ratio: 1;
-        border-radius: 100%;
-        box-shadow: var(--box-shadow);
     }
 
     .user-link {

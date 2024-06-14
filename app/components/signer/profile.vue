@@ -36,7 +36,7 @@
         <div class="signer-operator">
             <mb-button @click="logout">退出登录</mb-button>
         </div>
-        <nuxt-link class="signer-avatar" :to="toSpace"><nuxt-img src="/garden/icon/default.png" alt="[avatar]"/></nuxt-link>
+        <nuxt-link class="signer-avatar" :to="toSpace"><user-avatar /></nuxt-link>
     </div>
 </template>
 
@@ -58,10 +58,6 @@
 
     .signer-avatar {
         grid-area: C;
-        overflow: hidden;
         width: 72px;
-        aspect-ratio: 1;
-        border-radius: 100%;
-        box-shadow: var(--box-shadow);
     }
 </style>

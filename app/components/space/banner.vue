@@ -41,7 +41,7 @@
 
 <template>
     <div class="space-banner">
-        <nuxt-img class="banner-avatar" src="/garden/icon/default.png" alt="[avatar]"/>
+        <user-avatar class="banner-avatar"/>
         <div class="banner-title">
             <span class="banner-nickname">{{ nickname }}</span>
         </div>
@@ -98,7 +98,6 @@
         grid-area: A;
         width: 64px;
         border: 3px solid rgb(255 255 255 / 50%);
-        border-radius: 100%;
     }
 
     .banner-title {

@@ -64,13 +64,7 @@
 
 <template>
     <section class="comment-item">
-        <nuxt-img
-            class="comment-avatar"
-            :src="data.avatar"
-            alt="[avatar]"
-            placeholder="/garden/icon/default.png"
-            @click="open"
-        />
+        <user-avatar class="comment-avatar" :src="data.avatar" @click="open"/>
         <div class="comment-main">
             <div class="comment-header">
                 <a class="comment-nickname" @click="open">{{ data.nickname }}</a>
@@ -117,9 +111,6 @@
     .comment-avatar {
         grid-area: A;
         width: 42px;
-        aspect-ratio: 1;
-        border-radius: 100%;
-        box-shadow: var(--box-shadow);
         cursor: pointer;
 
         @include viewport("xs") {
