@@ -3,7 +3,10 @@ export const useUserStore = defineStore("user", () => {
     const nickname = ref("");
     const identity = ref(0);
     const sign = ref("");
-    const isLogin = ref(false);
+
+    const isLogin = computed(() => {
+        return uid.value !== -1;
+    });
 
     //获取登陆信息
     const getInfo = useFetch("/api/user/info");
@@ -11,12 +14,11 @@ export const useUserStore = defineStore("user", () => {
     getInfo.then(({ data }) => {
         const info = data.value;
 
-        if (info?.isLogin) {
+        if (!info.error) {
             uid.value = info.uid;
             nickname.value = info.nickname;
             identity.value = info.identity;
             sign.value = info.sign;
-            isLogin.value = true;
         }
     });
 
@@ -25,7 +27,6 @@ export const useUserStore = defineStore("user", () => {
         nickname.value = "";
         identity.value = 0;
         sign.value = "";
-        isLogin.value = false;
     }
 
     return {

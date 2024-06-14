@@ -18,7 +18,7 @@
             <comment-area v-if="$route.meta.comment"/>
             <z-footer />
         </main>
-        <z-sidebar />
+        <z-sidebar v-show="$route.meta.sidebar ?? true"/>
     </div>
     <z-mask />
     <z-dialog />
@@ -30,15 +30,18 @@
 
 <style lang="scss">
     .sotomi {
+        --sotomi-padding: 32px;
+
         display: flex;
         justify-content: center;
         gap: 24px;
         min-width: var(--size-min-width);
-        padding: 32px;
+        padding: var(--sotomi-padding);
 
         @include viewport("lg") {
+            --sotomi-padding: 12px;
+
             flex-direction: column;
-            padding: 12px;
         }
     }
 
@@ -53,7 +56,7 @@
     }
 
     .full-page {
-        padding: 0;
+        --sotomi-padding: 0;
 
         .nakami {
             max-width: none;

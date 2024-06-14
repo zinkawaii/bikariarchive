@@ -1,123 +1,68 @@
 <script lang="ts" setup>
+    import { injectionKey } from "~/types/space";
+
     const route = useRoute();
-    const router = useRouter();
-    const toastStore = useToastStore();
     const userStore = useUserStore();
 
-    const sign = ref(userStore.sign);
-    const oldSign = ref();
-
-    //UID校验
-    if (userStore.uid !== Number(route.params.uid)) {
-        router.replace({ name: "unknown" });
-    }
-
-    //设置标题
     useHead({
-        title: `${userStore.nickname}的个人空间`
+        title: userStore.nickname
     });
 
-    //更新签名
-    const updateSign = Zin.debounce(async () => {
-        if (sign.value === oldSign.value) return;
+    //是否是本人
+    const isMyself = computed(() => {
+        return userStore.uid === Number(route.params.uid);
+    });
 
-        try {
-            $fetch("/api/user/sign", {
-                method: "put",
-                body: {
-                    content: sign.value
-                }
-            });
-            userStore.sign = sign.value;
+    const { data } = useLazyFetch("/api/user/info", {
+        query: {
+            uid: route.params.uid
+        },
+        immediate: !isMyself.value
+    });
+
+    //用户是否存在
+    const isExist = computed(() => {
+        return isMyself.value || !data.value.error;
+    });
+
+    const uid = computed({
+        get() {
+            return isMyself.value ? userStore.uid : data.value.uid;
+        },
+        set(val) {
+            isMyself.value && (userStore.uid = val);
         }
-        catch {
-            toastStore.error("sign-update-error", "签名更新失败");
+    });
+
+    const nickname = computed({
+        get() {
+            return isMyself.value ? userStore.nickname : data.value.nickname;
+        },
+        set(val) {
+            isMyself.value && (userStore.nickname = val);
         }
-    }, {
-        title: "更新签名"
+    });
+
+    const sign = computed({
+        get() {
+            return isMyself.value ? userStore.sign : data.value.sign;
+        },
+        set(val) {
+            isMyself.value && (userStore.sign = val);
+        }
+    });
+
+    provide(injectionKey, {
+        isMyself,
+        uid,
+        nickname,
+        sign
     });
 </script>
 
 <template>
-    <div class="space-header">
-        <nuxt-img class="space-avatar" src="/garden/icon/default.png" alt="[avatar]"/>
-        <div class="space-title">
-            <span class="space-nickname">{{ userStore.nickname }}</span>
-        </div>
-        <input
-            class="space-sign"
-            placeholder="在这里输入你的个性签名……"
-            v-model="sign"
-            @focus="oldSign = sign"
-            @blur="updateSign"
-            @keyup.enter="($event.target as HTMLInputElement).blur()"
-        />
-    </div>
+    <template v-if="isExist">
+        <space-banner />
+    </template>
+    <not-found v-else/>
 </template>
-
-<style lang="scss" scoped>
-    .space-header {
-        --mb: -32px;
-
-        display: grid;
-        grid-template:
-            "A B"
-            "A C" 1fr / auto 1fr;
-        gap: 3px 24px;
-        margin-bottom: var(--mb);
-        padding: 16px 32px;
-        border-radius: 0 0 16px 16px;
-        box-shadow: var(--box-shadow);
-        background-attachment: fixed;
-        background-image: url("/garden/background/space_header.webp");
-        background-position: 0 37.5%;
-        background-size: cover;
-        translate: 0 var(--mb);
-
-        @include viewport("lg") {
-            --mb: -16px;
-        }
-    }
-
-    .space-avatar {
-        grid-area: A;
-        width: 64px;
-        border: 3px solid rgb(255 255 255 / 50%);
-        border-radius: 100%;
-    }
-
-    .space-title {
-        margin-top: 8px;
-    }
-
-    .space-nickname {
-        font-size: 18px;
-        font-weight: bold;
-        text-shadow: var(--text-shadow);
-        color: white;
-    }
-
-    .space-sign {
-        width: 100%;
-        height: 25px;
-        margin-left: -4px;
-        padding-left: 4px;
-        border: 0;
-        border-radius: 4px;
-        background-color: transparent;
-        font-size: 14px;
-        color: rgb(255 255 255 / 80%);
-        transition: all 0.4s;
-
-        &:hover {
-            box-shadow: 0 0 0 1px rgb(255 255 255 / 50%);
-            background-color: rgb(255 255 255 / 20%);
-        }
-
-        &:focus {
-            box-shadow: 0 2px 4px inset rgb(35 54 86 / 30%);
-            background-color: var(--color-background);
-            color: var(--color-text-primary);
-        }
-    }
-</style>

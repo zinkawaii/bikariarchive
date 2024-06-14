@@ -155,7 +155,10 @@ export default <RouterConfig> {
                         middleware: ["auth"]
                     }
                 }
-            ]
+            ],
+            meta: {
+                sidebar: false
+            }
         },
         {
             name: "unknown",

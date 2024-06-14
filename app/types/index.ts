@@ -9,10 +9,11 @@ export type WithParent<T> = T & {
 
 declare module "vue-router" {
     interface RouteMeta {
-        breadcrumb?: RouteLocationRaw;
+        identity?: number;
         comment?: boolean;
+        sidebar?: boolean;
         widePage?: boolean;
         fullPage?: boolean;
-        identity?: number;
+        breadcrumb?: RouteLocationRaw;
     }
 }

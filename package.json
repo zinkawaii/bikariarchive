@@ -19,9 +19,9 @@
     "task:process:dev": "cross-env NODE_ENV=\"development\" node --watch scripts/process.js",
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
-  "packageManager": "pnpm@9.1.2",
+  "packageManager": "pnpm@9.3.0",
   "dependencies": {
-    "@vueuse/core": "^10.10.1",
+    "@vueuse/core": "^10.11.0",
     "crypto-es": "^2.1.0",
     "dayjs": "^1.11.11",
     "dompurify": "^3.1.5",
@@ -55,7 +55,7 @@
     "@types/ssh2-sftp-client": "^9.0.3",
     "@types/wicg-file-system-access": "^2023.10.5",
     "@vue-email/nuxt-edge": "0.8.19-28628306.78c82c6",
-    "@vueuse/nuxt": "^10.10.1",
+    "@vueuse/nuxt": "^10.11.0",
     "@zinkawaii/eslint-config": "^0.1.1",
     "@zinkawaii/nuxt-gsap": "^0.1.2",
     "@zinkawaii/nuxt-shiki": "^0.4.0",
