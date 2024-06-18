@@ -14,18 +14,24 @@
     };
 
     const shortcuts = ref({
-        "shortcut-last": keyToStr(settingStore.get("shortcut-last")),
-        "shortcut-next": keyToStr(settingStore.get("shortcut-next"))
+        "shortcut-last": {
+            title: "上一章",
+            value: keyToStr(settingStore.get("shortcut-last"))
+        },
+        "shortcut-next": {
+            title: "下一章",
+            value: keyToStr(settingStore.get("shortcut-next"))
+        }
     });
 
     //键盘按下时
     function onShortcutKeypress(name: string) {
-        shortcuts.value[name] = "";
+        shortcuts.value[name].value = "";
     }
 
     //键盘松开时
     function onShortcutKeyup(name: SettingField, event: KeyboardEvent) {
-        shortcuts.value[name] = keyToStr(event.key);
+        shortcuts.value[name].value = keyToStr(event.key);
         settingStore.set(name, event.key);
     }
 
@@ -42,22 +48,35 @@
 <template>
     <mb-dialog class="z-setting" @close="settingStore.close()">
         <coco-title>全局设置</coco-title>
-        <setting-form title="主题颜色" desc="仅在非夜间模式下生效" type="select" name="theme" :options="[`初空`, `菖蒲`, `早樱`]"/>
-        <setting-form title="夜间模式" desc="每天早晚 6 点自动切换" type="select" name="dark-mode" :options="[`自动`, `白昼`, `暗夜`]"/>
-        <setting-form title="侧栏显隐" desc="侧边栏是否跟随其他 UI 折叠" type="select" name="sidebar-display" :options="[`默认`, `显现`, `隐匿`]"/>
+        <setting-form title="主题颜色" desc="仅在非夜间模式下生效">
+            <setting-select name="theme" :options="[`初空`, `菖蒲`, `早樱`]"/>
+        </setting-form>
+        <setting-form title="夜间模式" desc="每天早晚 6 点自动切换">
+            <setting-select name="dark-mode" :options="[`自动`, `白昼`, `暗夜`]"/>
+        </setting-form>
+        <setting-form title="侧栏显隐" desc="侧边栏是否跟随其他 UI 折叠">
+            <setting-select name="sidebar-display" :options="[`默认`, `显现`, `隐匿`]"/>
+        </setting-form>
         <coco-title>快捷键设置</coco-title>
         <setting-form title="切换章节" type="input">
-            <input
-                v-for="(value, name) in shortcuts"
-                class="setting-input"
-                :value
-                @keypress.stop="onShortcutKeypress(name)"
-                @keyup.stop="onShortcutKeyup(name, $event)"
-            />
+            <div class="setting-input">
+                <coco-input
+                    v-for="({ title, value }, name) in shortcuts"
+                    class="setting-input"
+                    :value
+                    :placeholder="title"
+                    @keypress.stop="onShortcutKeypress(name)"
+                    @keyup.stop="onShortcutKeyup(name, $event)"
+                />
+            </div>
         </setting-form>
         <coco-title>阅读设置</coco-title>
-        <setting-form title="字体选择" type="select" name="font-family" :options="[`默认`, `宋体`, `楷体`]"/>
-        <setting-form title="字体大小" type="select" name="font-size" :options="[`小`, `中`, `大`]"/>
+        <setting-form title="字体选择">
+            <setting-select name="font-family" :options="[`默认`, `宋体`, `楷体`]"/>
+        </setting-form>
+        <setting-form title="字体大小">
+            <setting-select name="font-size" :options="[`小`, `中`, `大`]"/>
+        </setting-form>
     </mb-dialog>
 </template>
 
@@ -81,7 +100,7 @@
     }
 
     .setting-input {
-        flex: 1;
-        text-align: center;
+        display: flex;
+        gap: 16px;
     }
 </style>
