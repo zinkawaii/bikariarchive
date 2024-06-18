@@ -168,6 +168,12 @@
 <style lang="scss" scoped>
     .comment-panel {
         width: 512px;
+
+        @include viewport("xs") {
+            height: 100dvh;
+            padding: 16px;
+            border-radius: 0;
+        }
     }
 
     .panel-form {
