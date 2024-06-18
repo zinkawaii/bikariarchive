@@ -20,7 +20,9 @@ export default defineNuxtConfig({
                 separator: "-"
             }
         },
-        rootId: "z-root"
+        rootAttrs: {
+            id: "z-root"
+        }
     },
     css: [
         "~/assets/scss/var.scss",
