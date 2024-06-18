@@ -20,7 +20,7 @@
         </main>
         <z-sidebar v-show="$route.meta.sidebar ?? true"/>
     </div>
-    <z-mask />
+    <z-overlay />
     <z-dialog />
     <toast-area />
     <z-fps />

@@ -9,11 +9,11 @@
 </script>
 
 <template>
-    <transition-group name="mask">
+    <transition-group>
         <div
             v-for="{ zIndex, close } in filterDialogs"
             :key="zIndex"
-            class="mb-mask"
+            class="mb-overlay"
             :style="{ zIndex: zIndex - 1 }"
             @click="close"
         ></div>
@@ -21,26 +21,27 @@
 </template>
 
 <style lang="scss" scoped>
-    .mb-mask {
+    .mb-overlay {
         position: fixed;
         opacity: 0.5;
         inset: 0;
         background-color: black;
-    }
 
-    .mask-enter-active, .mask-leave-active {
-        transition: opacity 0.4s;
-    }
+        &:where(.v-enter-active, .v-leave-active) {
+            transition: opacity 0.4s;
+            transition-timing-function: cubic-bezier(var(--bezier));
+        }
 
-    .mask-enter-active {
-        transition-timing-function: cubic-bezier(0, 0.43, 0.37, 1);
-    }
+        &.v-enter-active {
+            --bezier: 0, 0.43, 0.37, 1;
+        }
 
-    .mask-leave-active {
-        transition-timing-function: cubic-bezier(0.43, 0, 1, 0.87);
-    }
+        &.v-leave-active {
+            --bezier: 0.43, 0, 1, 0.87;
+        }
 
-    .mask-enter-from, .mask-leave-to {
-        opacity: 0;
+        &:where(.v-enter-from, .v-leave-to) {
+            opacity: 0;
+        }
     }
 </style>
