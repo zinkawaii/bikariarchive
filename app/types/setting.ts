@@ -6,6 +6,7 @@ export interface Setting {
     "shortcut-next": string;
     "font-family": number;
     "font-size": number;
+    "novel-comment": boolean;
     "ui-collapse": boolean;
 }
 

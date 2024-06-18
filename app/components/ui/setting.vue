@@ -77,6 +77,9 @@
         <setting-form title="字体大小">
             <setting-select name="font-size" :options="[`小`, `中`, `大`]"/>
         </setting-form>
+        <setting-form title="评论区">
+            <setting-switch name="novel-comment"/>
+        </setting-form>
     </mb-dialog>
 </template>
 

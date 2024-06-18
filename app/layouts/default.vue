@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+    const settingStore = useSettingStore();
+</script>
+
 <template>
     <div class="jumbotron-wrapper"></div>
     <client-only>
@@ -15,7 +19,7 @@
         }"
         ><main class="nakami">
             <slot></slot>
-            <comment-area v-if="$route.meta.comment"/>
+            <comment-area v-if="$route.meta.comment" v-show="settingStore.isCommentShow"/>
             <z-footer />
         </main>
         <z-sidebar v-show="$route.meta.sidebar ?? true"/>

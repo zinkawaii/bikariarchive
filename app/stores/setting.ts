@@ -13,9 +13,11 @@ export const useSettingStore = defineStore("setting", () => {
         "shortcut-next": "ArrowRight",
         "font-family": 0,
         "font-size": 1,
+        "novel-comment": true,
         "ui-collapse": false
     });
 
+    const route = useRoute();
     const dialogStore = useDialogStore();
 
     //挂载弹窗实例
@@ -28,6 +30,11 @@ export const useSettingStore = defineStore("setting", () => {
         1: false,
         2: true
     }[setting.value["dark-mode"]] ?? (Zin.period === Zin.PERIOD_NIGHT)));
+
+    //是否隐藏评论区
+    const isCommentShow = computed(() => {
+        return route.name !== "reader" || setting.value["novel-comment"];
+    });
 
     function get<K extends SettingField>(key: K) {
         return setting.value[key];
@@ -66,6 +73,7 @@ export const useSettingStore = defineStore("setting", () => {
         open,
         close,
         isDarkMode,
+        isCommentShow,
         get,
         set,
         toggle,
