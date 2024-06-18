@@ -76,7 +76,7 @@
     const decrypted = ref(false);
 
     //获取正文
-    const { execute, pending, data: post } = useLazyFetch("/api/article", {
+    const { execute, status, data: post } = useLazyFetch("/api/article", {
         query: {
             novel,
             index,
@@ -88,7 +88,7 @@
 
     //添加阅读记录
     onMounted(async () => {
-        await until(pending).toBe(false);
+        await until(status).toBe("success");
 
         $fetch("/api/article", {
             method: "patch",
@@ -158,7 +158,7 @@
             </form>
         </template>
         <template v-else>
-            <mb-skeleton v-if="pending"/>
+            <mb-skeleton v-if="status !== `success`"/>
             <novel-article
                 v-else
                 class="novel-text"

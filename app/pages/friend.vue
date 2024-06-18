@@ -5,7 +5,7 @@
 
     const config = useRuntimeConfig();
 
-    const { pending, data } = useLazyFetch("/api/friend");
+    const { status, data } = useLazyFetch("/api/friend");
 
     const schema = `export default {
   title: "${config.public.title}",
@@ -18,7 +18,7 @@
 <template>
     <coco-widget title="友情链接">
         <div class="novel-text text-small">
-            <mb-skeleton v-if="pending"/>
+            <mb-skeleton v-if="status !== `success`"/>
             <div v-else class="friend-list">
                 <nuxt-link v-for="item in data.list" class="friend-item" :to="item.link" target="_blank">
                     <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>

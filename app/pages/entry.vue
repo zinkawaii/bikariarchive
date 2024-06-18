@@ -18,7 +18,7 @@
         title: props.title
     });
 
-    const { pending, data } = useLazyFetch("/api/entry", {
+    const { status, data } = useLazyFetch("/api/entry", {
         query: {
             title: props.title
         },
@@ -36,7 +36,7 @@
         <header class="entry-header">
             <h1 class="entry-title">{{ title }}</h1>
         </header>
-        <mb-skeleton v-if="pending"/>
+        <mb-skeleton v-if="status !== `success`"/>
         <article v-else class="entry-article">
             <section class="entry-section">
                 <div class="entry-main">

@@ -11,7 +11,7 @@
     const inputWord = ref(queryWord.value);
     const searchWord = ref("");
 
-    const { execute, pending, data } = useLazyFetch("/api/search", {
+    const { execute, status, data } = useLazyFetch("/api/search", {
         query: {
             novel,
             word: computed(() => inputWord.value.slice(0, 64))
@@ -122,7 +122,7 @@
             <span class="text-gray">共检索到 {{ results.length }} 章，总出现次数为 {{ totalCount }} 次</span>
         </div>
         <div class="search-results">
-            <mb-skeleton v-if="pending"/>
+            <mb-skeleton v-if="status !== `success`"/>
             <template v-else>
                 <nuxt-link v-for="{ art, parts, count } in filteredArr" :key="art.index" class="search-result" :to="art.route">
                     <h3 class="result-title">{{ art.title }}</h3>

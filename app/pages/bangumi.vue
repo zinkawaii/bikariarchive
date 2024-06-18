@@ -3,7 +3,7 @@
         title: "番剧"
     });
 
-    const { execute, pending, data } = useLazyFetch("/api/bangumi", {
+    const { execute, status, data } = useLazyFetch("/api/bangumi", {
         immediate: false
     });
 
@@ -19,7 +19,7 @@
 
 <template>
     <coco-widget title="番剧">
-        <mb-skeleton v-if="pending"/>
+        <mb-skeleton v-if="status !== `success`"/>
         <template v-else>
             <div class="bangumi-list">
                 <bangumi-item v-for="bangumi in filteredArr" :key="bangumi.id" v-bind="bangumi"/>
