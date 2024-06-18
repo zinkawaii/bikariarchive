@@ -96,7 +96,8 @@
         <template #icon>
             <icon name="fa6-solid:book-open"/>
         </template>
-        <outline-list v-bind="{ headers: nestedHeaders, root: true }"/>
+        <outline-list v-if="nestedHeaders.length" v-bind="{ headers: nestedHeaders, root: true }"/>
+        <p v-else class="p-small outline-empty">这篇文章还没有目录哦~</p>
     </aside-widget>
 </template>
 
@@ -107,5 +108,10 @@
         > .outline-list {
             margin-left: 1em;
         }
+    }
+
+    .outline-empty {
+        padding: 0 0 16px 16px;
+        color: var(--color-text-info);
     }
 </style>
