@@ -8,7 +8,7 @@
 <template>
     <home-tabular-item v-for="art in jLimited" :art="art"/>
     <div class="content-widget home-pagination">
-        <mb-pagination :total scroll-target=".home-article-item" v-model="page"/>
+        <mb-pagination :total scroll-target=".tabular-item" v-model="page"/>
     </div>
 </template>
 
