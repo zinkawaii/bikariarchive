@@ -2,20 +2,14 @@
     import type { UnwrapContextMenuItem } from "~/types/context-menu";
 
     defineProps<{
-        when?: () => any;
         items: UnwrapContextMenuItem[];
         root?: boolean;
     }>();
 </script>
 
 <template>
-    <menu
-        v-if="when?.() ?? true"
-        class="menu-group"
-        :class="{
-            [`is-root`]: root
-        }"
-        ><context-menu-item v-for="data in items" :data/>
+    <menu class="menu-group" :class="{ [`is-root`]: root }">
+        <context-menu-item v-for="data in items" :data/>
     </menu>
 </template>
 

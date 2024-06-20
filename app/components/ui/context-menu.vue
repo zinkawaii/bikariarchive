@@ -36,7 +36,7 @@
 
     contextMenuStore.base({
         key: "text",
-        when: () => textSelection.text.value,
+        when: computed(() => textSelection.text.value),
         items: [
             {
                 title: "复制",
@@ -131,7 +131,9 @@
                     <icon :name="icon"/>
                 </li>
             </menu>
-            <context-menu-group v-for="group in contextMenuStore.groups" :key="group.key" v-bind="group" root/>
+            <template v-for="{ key, when, items } in contextMenuStore.groups">
+                <context-menu-group v-if="when ?? true" :key :items root/>
+            </template>
         </div>
     </transition-scale>
 </template>
