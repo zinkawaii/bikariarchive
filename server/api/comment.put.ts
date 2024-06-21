@@ -10,8 +10,6 @@ export default defineJEventHandler(async (event) => {
     //获取时间
     const time = dayjs.tz();
 
-    console.log(body);
-
     //更新评论数据
     await CommentDataModel.findOneAndUpdate({
         _id: body.id
