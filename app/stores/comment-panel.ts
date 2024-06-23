@@ -57,6 +57,7 @@ export const useCommentPanelStore = defineStore("comment-panel", () => {
             "nickname",
             "email",
             "address"
-        ]
+        ],
+        storage: persistedState.localStorage
     }
 });
