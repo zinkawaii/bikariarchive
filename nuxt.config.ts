@@ -1,3 +1,4 @@
+import vue from "@vitejs/plugin-vue";
 import { clientConfig, serverConfig } from "./app/runtime.config";
 import sitemapConfig from "./app/sitemap.config";
 import robotsConfig from "./app/robots.config";
@@ -66,6 +67,11 @@ export default defineNuxtConfig({
             options: {
                 target: "esnext"
             }
+        },
+        rollupConfig: {
+            plugins: [
+                vue()
+            ]
         }
     },
     runtimeConfig: {
@@ -93,14 +99,13 @@ export default defineNuxtConfig({
         ["nuxt-mongoose", serverConfig.mongoose],
         ["nuxt-simple-robots", robotsConfig],
         ["@nuxtjs/sitemap", sitemapConfig],
-        "nuxt-icon",
         "nuxt-site-config",
+        "@nuxt/icon",
         "@nuxt/image",
         "@nuxtjs/google-fonts",
         "@nuxtjs/seo",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
-        "@vue-email/nuxt-edge",
         "@vueuse/nuxt",
         "@zinkawaii/nuxt-gsap",
         "@zinkawaii/nuxt-shiki"

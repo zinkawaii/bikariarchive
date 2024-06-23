@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { MbCode, MbGallery, MbImage, NuxtImg, PlainLink } from "#components";
+    import { MbCode, MbGallery, MbImage, PlainLink } from "#components";
 
     const props = withDefaults(defineProps<{
         content?: string;
@@ -11,7 +11,7 @@
         tag: "article"
     });
 
-    const render = () => {
+    function render() {
         const { content, enabled, tag } = props;
         return enabled ? h({
             template: `<${tag}>${content}</${tag}>`,
@@ -19,13 +19,12 @@
                 MbCode,
                 MbGallery,
                 MbImage,
-                NuxtImg,
                 PlainLink
             }
         }) : h(tag, {
             innerHTML: content
         });
-    };
+    }
 </script>
 
 <template>

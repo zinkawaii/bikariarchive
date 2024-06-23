@@ -4,7 +4,6 @@ import type { PickAsType } from "~/types";
 import type { Setting, SettingField } from "~/types/setting";
 
 export const useSettingStore = defineStore("setting", () => {
-    const isOpened = ref(false);
     const setting = ref<Setting>({
         theme: 2,
         "dark-mode": 0,
@@ -49,9 +48,9 @@ export const useSettingStore = defineStore("setting", () => {
     }
 
     //监听
-    function listen(key: string, handler: WatchCallback, options: WatchOptions & {
-        viewTransition: boolean;
-    }) {
+    function listen<K extends SettingField, V extends Setting[K]>(key: K, handler: WatchCallback<V>, options: WatchOptions & {
+        viewTransition?: boolean;
+    } = {}) {
         watchImmediate(() => setting.value[key], (newVal, oldVal, onCleanup) => {
             const fn = handler.bind(null, newVal, oldVal, onCleanup);
 
@@ -68,7 +67,6 @@ export const useSettingStore = defineStore("setting", () => {
     }
 
     return {
-        isOpened,
         setting,
         open,
         close,

@@ -10,16 +10,16 @@
 </script>
 
 <template>
-    <div class="setting-select">
-        <span
+    <ul class="setting-select">
+        <li
             v-for="(item, i) in options"
             class="select-item"
             :class="{
                 [`is-checked`]: i === Number(settingStore.get(name))
             }"
             @click="settingStore.set(name, i)"
-        >{{ item }}</span>
-    </div>
+        >{{ item }}</li>
+    </ul>
 </template>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { useRender } from "vue-email-edge";
+import { render } from "@vue-email/render";
 import type { Component } from "vue";
 
 export async function sendMail(component: Component, options: {
@@ -18,7 +18,7 @@ export async function sendMail(component: Component, options: {
     });
 
     //编译模板
-    const template = await useRender(component, options.props);
+    const html = await render(component, options.props);
 
     //发送邮件
     return transporter.sendMail({
@@ -28,6 +28,6 @@ export async function sendMail(component: Component, options: {
         },
         subject: options.title,
         to: options.to,
-        html: template.html
+        html
     });
 }

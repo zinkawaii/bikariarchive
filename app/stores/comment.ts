@@ -47,7 +47,7 @@ export const useCommentStore = defineStore("comment", () => {
             const messate = err.statusCode === 403
                 ? "无评论权限"
                 : "评论发送失败";
-            toastStore.error("comment-error", messate);
+            toastStore.error("comment-post-error", messate);
             throw err;
         }
     }

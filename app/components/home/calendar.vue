@@ -182,9 +182,9 @@
                     v-for="date in state.dates"
                     class="calendar-day"
                     :class="{
-                        sub: date.month !== state.month,
-                        special: date.event,
-                        selected: currentDate === date
+                        [`is-sub`]: date.month !== state.month,
+                        [`is-special`]: date.event,
+                        [`is-checked`]: currentDate === date
                     }"
                     @click="currentDate = (currentDate === date) ? null : date"
                    ><span class="solar">{{ date.solar }}</span>
@@ -208,11 +208,11 @@
                 </div>
                 <div class="calendar-section">
                     <div class="calendar-title">关键人物</div>
-                    <div v-if="currentDate.event?.heroine" class="calendar-heroine">
-                        <div class="heroine-wrapper">
-                            <character-tag v-for="heroine in currentDate.event.heroine" :name="heroine"/>
-                        </div>
-                    </div>
+                    <ul v-if="currentDate.event?.heroine" class="calendar-heroine">
+                        <li class="heroine-wrapper">
+                            <character-tag v-for="heroine in currentDate.event.heroine" :key="heroine" :name="heroine"/>
+                        </li>
+                    </ul>
                     <span v-else class="calendar-none">No Character.</span>
                 </div>
                 <span class="calendar-hitokoto">{{ currentDate.event?.hitokoto }}</span>
@@ -297,17 +297,17 @@
             box-shadow: 0 0 0 1px var(--color-theme-dark) inset;
         }
 
-        &.sub {
+        &.is-sub {
             opacity: 0.75;
             color: var(--color-text-info);
         }
 
-        &.special {
+        &.is-special {
             font-weight: bold;
             color: var(--color-theme-text);
         }
 
-        &.selected {
+        &.is-checked {
             background: var(--color-theme-dark);
             font-weight: bold;
             color: white;

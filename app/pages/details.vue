@@ -81,10 +81,8 @@
     }
 
     .detail-link {
-        & + & {
-            &::before {
-                content: " • ";
-            }
+        & + &::before {
+            content: " • ";
         }
     }
 </style>

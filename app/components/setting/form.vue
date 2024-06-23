@@ -8,8 +8,8 @@
 <template>
     <div class="setting-form">
         <div>
-            <div class="form-title">{{ title }}</div>
-            <div class="form-desc">{{ desc }}</div>
+            <span class="form-title">{{ title }}</span>
+            <p class="form-desc">{{ desc }}</p>
         </div>
         <slot></slot>
     </div>
