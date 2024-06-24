@@ -1,3 +1,5 @@
+import type { CodeToHastOptions } from "shiki";
+
 //可复用正则表
 export const Zexp = {
     email: /^[-\w]+@(?:[-\w]+\.)+[-\w]+$/,
@@ -5,11 +7,12 @@ export const Zexp = {
 };
 
 //通用代码高亮配置
-export const highlightOptions = {
+export const highlightOptions: Partial<CodeToHastOptions> = {
     transformers: [{
-        root(hast) {
-            hast.children = hast.children[0]?.children[0].children ?? [];
-        }
+        root: (hast) => ({
+            type: "root",
+            children: (hast.children[0] as any).children[0].children
+        })
     }]
 };
 

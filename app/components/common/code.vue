@@ -17,11 +17,12 @@
     const code = ref(props.raw);
     onMounted(async () => {
         const shiki = await getShikiHighlighter();
-        await loadShikiLanguages(shiki, props.lang);
-        code.value = shiki.highlight(props.raw, {
-            lang: props.lang,
-            ...highlightOptions
+        const options = await resolveShikiOptions({
+            ...highlightOptions,
+            lang: props.lang
         });
+        await loadShikiLanguages(props.lang);
+        code.value = shiki.codeToHtml(props.raw, options);
     });
 
     //行数

@@ -73,7 +73,7 @@
                     <a class="comment-nickname">{{ recipient }}</a>
                 </template>
             </div>
-            <div v-marked="data.content" class="novel-text comment-text"></div>
+            <div v-remark="data.content" class="novel-text comment-text"></div>
             <div class="comment-info">
                 <time>{{ elapsed }}</time>
                 <a class="comment-action" @click="replyComment">
