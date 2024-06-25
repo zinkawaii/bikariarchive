@@ -27,12 +27,10 @@
 
     //上一章
     const toPrev = art.isFirstInVol ? "上一卷" : "上一章";
-    const toPrevClass = { invisible: art.isFirst };
     const toPrevRoute = art.prev?.route;
 
     //下一章
     const toNext = art.isLastInVol ? "下一卷" : "下一章";
-    const toNextClass = { invisible: art.isLast };
     const toNextRoute = art.next?.route;
 
     //上下章快捷键
@@ -117,7 +115,7 @@
 <template>
     <coco-widget>
         <header class="novel-header">
-            <nuxt-link class="novel-adjacent-top" :class="toPrevClass" :to="toPrevRoute">
+            <nuxt-link v-visible="!art.isFirst" class="novel-adjacent-top" :to="toPrevRoute">
                 <icon name="fa6-solid:chevron-left"/>
                 <span>{{ toPrev }}</span>
             </nuxt-link>
@@ -142,7 +140,7 @@
                     </li>
                 </ul>
             </div>
-            <nuxt-link class="novel-adjacent-top" :class="toNextClass" :to="toNextRoute">
+            <nuxt-link v-visible="!art.isLast" class="novel-adjacent-top" :to="toNextRoute">
                 <span>{{ toNext }}</span>
                 <icon name="fa6-solid:chevron-right"/>
             </nuxt-link>
@@ -185,8 +183,8 @@
         </footer>
     </coco-widget>
     <div class="novel-navigation">
-        <nuxt-link class="novel-adjacent-bottom" :class="toPrevClass" :to="toPrevRoute">{{ toPrev }}</nuxt-link>
-        <nuxt-link class="novel-adjacent-bottom" :class="toNextClass" :to="toNextRoute">{{ toNext }}</nuxt-link>
+        <nuxt-link v-visible="!art.isFirst" class="novel-adjacent-bottom" :to="toPrevRoute">{{ toPrev }}</nuxt-link>
+        <nuxt-link v-visible="!art.isLast" class="novel-adjacent-bottom" :to="toNextRoute">{{ toNext }}</nuxt-link>
     </div>
 </template>
 
