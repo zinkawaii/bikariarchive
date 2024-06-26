@@ -1,3 +1,5 @@
+import { MbConfirm } from "#components";
+
 const Zin = new class Z {
     //默认动画配置
     DEFAULT_ANIME_OPTION: KeyframeAnimationOptions = {
@@ -20,6 +22,31 @@ const Zin = new class Z {
         const now = new Date();
         const hour = now.getHours();
         return (hour >= 6 && hour < 18) ? this.PERIOD_DAY : this.PERIOD_NIGHT;
+    }
+
+    //判断对话框
+    confirm(message: string) {
+        return new Promise((resolve) => {
+            const dialogStore = useDialogStore();
+
+            const { close } = dialogStore.use(() => h(MbConfirm, {
+                message,
+                onCancel: cancel,
+                onConfirm: confirm
+            }), {
+                immediate: true
+            });
+
+            function cancel() {
+                close();
+                resolve(false);
+            }
+
+            function confirm() {
+                close();
+                resolve(true);
+            }
+        });
     }
 
     //防抖（立即执行）
