@@ -118,7 +118,7 @@
 
     .pagina-arr {
         width: 3em;
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
     }
 
     .pagina-list {

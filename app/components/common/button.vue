@@ -52,7 +52,7 @@
         }
 
         &.is-round {
-            border-radius: var(--circle-radius);
+            border-radius: var(--bounded-full);
         }
 
         & + & {

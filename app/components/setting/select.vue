@@ -28,7 +28,7 @@
         column-gap: 16px;
         padding-inline: 16px;
         border: 1px solid var(--color-border);
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
         line-height: 38px;
         word-break: keep-all;
     }

@@ -262,7 +262,7 @@
         overflow: auto;
         margin-top: 16px;
         border: 1px solid var(--color-border-lighter);
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
         background-color: var(--color-background);
         font-size: 14px;
         line-height: 2em;
@@ -279,7 +279,7 @@
 
     .copyright-avatar {
         width: 80px;
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
     }
 
     .copyright-crumb {

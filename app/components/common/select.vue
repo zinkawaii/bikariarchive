@@ -51,7 +51,7 @@
         height: 2rem;
         padding-inline: 1em calc(1em - 2px);
         border: 1px solid var(--color-border-light);
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
         background-color: var(--color-background);
         transition: all 0.25s;
 

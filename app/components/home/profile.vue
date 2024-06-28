@@ -73,7 +73,7 @@
         width: min(80%, 256px);
         aspect-ratio: 1;
         margin: -32px auto 8px;
-        border-radius: 100%;
+        border-radius: var(--bounded-circle);
         filter: drop-shadow(4px 12px 8px rgb(0 0 0 / 24%));
 
         &:hover {

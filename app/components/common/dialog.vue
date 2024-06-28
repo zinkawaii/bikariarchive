@@ -48,7 +48,7 @@
         right: 1rem;
         width: 1.5rem;
         aspect-ratio: 1;
-        border-radius: 100%;
+        border-radius: var(--bounded-circle);
         background-color: var(--color-info-light-8);
         font-size: 1rem;
         color: var(--color-text-disabled);

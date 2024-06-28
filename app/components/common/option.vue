@@ -37,7 +37,7 @@
     .mb-option {
         height: 2em;
         padding-inline: 1em;
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
         line-height: 2em;
         cursor: pointer;
 

@@ -68,7 +68,7 @@
     .detail-icon {
         width: 100px;
         aspect-ratio: 1;
-        border-radius: 100%;
+        border-radius: var(--bounded-circle);
         box-shadow: 4px 4px 12px rgb(0 0 0 / 24%);
     }
 

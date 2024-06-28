@@ -5,7 +5,7 @@
 <style lang="scss" scoped>
     .user-avatar {
         aspect-ratio: 1;
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
         box-shadow: var(--box-shadow);
     }
 </style>

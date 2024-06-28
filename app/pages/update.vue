@@ -114,7 +114,7 @@
             aspect-ratio: 1;
             margin-block: auto;
             border: 2px solid var(--color-theme-dark);
-            border-radius: var(--circle-radius);
+            border-radius: var(--bounded-full);
             background-color: var(--color-background);
             translate: -2rem;
         }

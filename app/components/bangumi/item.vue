@@ -88,7 +88,7 @@
     .bangumi-tag {
         padding-inline: 12px;
         border: 1px solid var(--color-border-light);
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
         font-size: 14px;
         line-height: 24px;
         color: var(--color-text-info);

@@ -249,7 +249,7 @@
             height: 56px;
             padding: 2px 12px 0;
             border-bottom: 2px solid var(--color-theme-dark);
-            border-radius: var(--circle-radius);
+            border-radius: var(--bounded-full);
             box-shadow: var(--box-shadow-darker);
             background-color: var(--color-background);
             transform-origin: top right;

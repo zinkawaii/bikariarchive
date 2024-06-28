@@ -33,7 +33,8 @@
     --font-consolas          : consolas, var(--font-code);
     --font-code              : "Source Code Pro", var(--font);
     --font-smooth            : "Teng Xiang", var(--font);
-    --circle-radius          : calc(1px * infinity);
+    --bounded-circle         : 100%;
+    --bounded-full           : calc(1px * infinity);
     --size-min-width         : 320px;
 }
 

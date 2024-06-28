@@ -69,7 +69,7 @@
         position: absolute;
         overflow: hidden;
         inset: 4px 0;
-        border-radius: var(--circle-radius);
+        border-radius: var(--bounded-full);
     }
 
     .slider-rate {
@@ -83,7 +83,7 @@
         width: 20px;
         aspect-ratio: 1;
         border: 2px solid var(--color-theme-dark);
-        border-radius: 100%;
+        border-radius: var(--bounded-circle);
         box-shadow: var(--box-shadow);
         outline: 0 solid color-mix(in srgb, var(--color-theme-dark), transparent 66%);
         background-color: var(--color-background);
