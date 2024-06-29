@@ -1,6 +1,9 @@
 import defu from "defu";
 
-const server = {
+type NodeEnv = "development" | "production";
+type Config = Record<"global" | NodeEnv, Record<string, any>>;
+
+const server: Config = {
     global: {
         article: {
             key: "<!-- ??? -->"
@@ -47,7 +50,7 @@ const server = {
     production: {}
 };
 
-const client = {
+const client: Config = {
     global: {
         title: "微光档案",
         author: "山吹色御守",
@@ -66,6 +69,6 @@ const client = {
     }
 };
 
-const env = import.meta.env.NODE_ENV;
+const env = import.meta.env.NODE_ENV as NodeEnv;
 export const serverConfig = defu(server[env], server.global);
 export const clientConfig = defu(client[env], client.global);
