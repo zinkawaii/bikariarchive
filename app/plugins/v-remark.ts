@@ -1,7 +1,6 @@
 import parse from "remark-parse";
 import gfm from "remark-gfm";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
-import externalLinks, { type Options as ExternalOptions } from "rehype-external-links";
 import stringify from "rehype-stringify";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
@@ -52,15 +51,22 @@ const rehypeOptions: RehypeOptions = {
             };
             state.patch(node, result);
             return state.applyData(node, result);
+        },
+        link(state, node) {
+            const result: Element = {
+                type: "element",
+                tagName: "a",
+                properties: {
+                    class: "plain-link",
+                    href: node.url,
+                    rel: "noopener noreferrer nofollow",
+                    target: "_blank"
+                },
+                children: node.children
+            };
+            state.patch(node, result);
+            return state.applyData(node, result);
         }
-    }
-};
-
-const externalOptions: ExternalOptions = {
-    rel: ["noopener", "noreferrer", "nofollow"],
-    target: "_blank",
-    properties: {
-        class: "plain-link"
     }
 };
 
@@ -70,7 +76,6 @@ async function parseComment(text: string) {
         .use(gfm)
         .use(code)
         .use(rehype, rehypeOptions)
-        .use(externalLinks, externalOptions)
         .use(stringify);
 
     const result = await processor.process(text);
