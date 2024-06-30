@@ -1,4 +1,7 @@
-export default {
+import type { ModuleOptions } from "nuxt-simple-robots";
+
+export default <ModuleOptions> {
+    credits: false,
     groups: [
         "AhrefsBot",
         "AhrefsSiteAudit",
