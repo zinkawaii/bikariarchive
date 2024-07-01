@@ -53,12 +53,14 @@
                 <icon :name="`fa6-solid:chevron-${isCollapse ? `left` : `down`}`"/>
             </a>
         </div>
-        <div v-show="!isCollapse" class="code-area" :class="{ [`is-expand`]: isExpand }">
-            <pre class="code-line">{{ lineStr }}</pre>
-            <pre ref="$code" class="shiki code-content" v-html="code"></pre>
-            <a v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
-                <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
-            </a>
+        <div class="code-area" :class="{ [`is-collapse`]: isCollapse }">
+            <div class="code-inner" :class="{ [`is-expand`]: isExpand }">
+                <pre class="code-line">{{ lineStr }}</pre>
+                <pre ref="$code" class="shiki code-content" v-html="code"></pre>
+                <a v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
+                    <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
+                </a>
+            </div>
         </div>
     </figure>
 </template>
@@ -96,10 +98,23 @@
     }
 
     .code-area {
+        display: grid;
+        grid-template-rows: 1fr;
+        margin-top: -4px;
+        transition: grid-template-rows 0.25s;
+
+        &.is-collapse {
+            grid-template-rows: 0fr;
+            margin-top: 0;
+            translate: 0 -4px;
+        }
+    }
+
+    .code-inner {
         display: flex;
         position: relative;
+        overflow: hidden;
         max-height: 194px;
-        margin-top: -4px;
         font-size: 14px;
         line-height: 20px;
 
