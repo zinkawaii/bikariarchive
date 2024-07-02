@@ -162,7 +162,7 @@
         }
 
         @include viewport("sm") {
-            > span {
+            > .iconify + span {
                 display: none;
             }
         }
