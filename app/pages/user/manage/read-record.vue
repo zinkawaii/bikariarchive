@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import dayjs from "dayjs";
+    import type { UnwrapRef } from "vue";
 
     useHead({
         title: "阅读记录"
@@ -33,7 +34,7 @@
     });
 
     //数据
-    const records = ref([]);
+    const records = ref<UnwrapRef<typeof data>["data"]>([]);
     watch(data, ({ data }) => {
         records.value = from.value < 0 ? data.toReversed() : data;
     });

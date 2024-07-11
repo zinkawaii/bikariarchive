@@ -26,6 +26,9 @@ export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => 
         .sort({ _id: sort })
         .skip(skip)
         .limit(count)
-        .populate({ path: "user", select: "uid" });
+        .populate<{
+            _id: string;
+            user: { uid: number };
+        }>({ path: "user", select: "uid" });
     }
 });
