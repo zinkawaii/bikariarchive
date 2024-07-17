@@ -97,7 +97,7 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
-        ["nuxt-simple-robots", robotsConfig],
+        ["@nuxtjs/robots", robotsConfig],
         ["@nuxtjs/sitemap", sitemapConfig],
         "nuxt-site-config",
         "@nuxt/icon",
