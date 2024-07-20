@@ -29,6 +29,7 @@ export default defineNuxtConfig({
         "~/assets/scss/var.scss",
         "~/assets/scss/sinrabansyo.scss"
     ],
+    compatibilityDate: "2024-07-19",
     components: [
         {
             path: "~/components"
@@ -69,6 +70,7 @@ export default defineNuxtConfig({
             }
         },
         rollupConfig: {
+            // @ts-expect-error 类型实例化过深，且可能无限
             plugins: [
                 vue()
             ]
