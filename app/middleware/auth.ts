@@ -12,7 +12,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
         return false;
     }
     else if (userStore.identity < to.meta.identity) {
-        toastStore.error("identity-error", "无访问权限");
+        toastStore.error("[identity]", "无访问权限");
         return false;
     }
 });

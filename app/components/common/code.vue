@@ -38,7 +38,7 @@
     //复制
     function copy() {
         navigator.clipboard.writeText($code.value.textContent);
-        toastStore.success("copy", "代码已复制");
+        toastStore.success("[copy]", "代码已复制");
     }
 </script>
 

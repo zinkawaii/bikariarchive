@@ -22,7 +22,7 @@ export default function<T extends ValidatorEntries>(entries: T) {
 
     //错误提示
     function glitch(key: keyof T, message: string) {
-        toastStore.error(`validate-error:${key as string}`, message);
+        toastStore.error(`[${key as string}]:validate`, message);
         errors.value[key] = true;
     }
 

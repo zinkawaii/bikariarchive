@@ -99,12 +99,13 @@
     //防抖化请求
     const debouncedExecute = Zin.debounce(async () => {
         await execute();
+        const key = "[article]:password";
         switch (post.value.error) {
             case 1:
-                toastStore.error("article-password-error", "密码错误");
+                toastStore.error(key, "密码错误");
                 break;
             default:
-                toastStore.success("article-password-right", "密码正确");
+                toastStore.success(key, "密码正确");
                 decrypted.value = true;
         }
     }, {

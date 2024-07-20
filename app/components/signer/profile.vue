@@ -25,7 +25,7 @@
             }
         }
         catch {
-            toastStore.error("logout-error", "退出登录失败");
+            toastStore.error("[logout]", "退出登录失败");
         }
     }
 </script>

@@ -19,14 +19,15 @@ export const useToastStore = defineStore("toast", () => {
     const map = ref(new Map<string, ToastItem>());
 
     function show(key: string, content: string, type: ToastType = "info") {
+        const fullKey = `<${type}>${key}`;
         const hash = Math.random().toString(36);
         for (const item of map.value) {
-            if (item[0].startsWith(key)) {
+            if (item[0].startsWith(fullKey)) {
                 remove(item[0]);
                 break;
             }
         }
-        map.value.set(key + hash, {
+        map.value.set(fullKey + hash, {
             icon: iconInfos[type],
             content
         });

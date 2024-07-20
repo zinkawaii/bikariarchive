@@ -103,7 +103,7 @@
 
         //发送失败
         function failed() {
-            toastStore.error("verify-send-error", "验证码发送失败");
+            toastStore.error("[verify]:send", "验证码发送失败");
         }
     }
 
@@ -138,7 +138,7 @@
             }
         }
         catch {
-            toastStore.error("logon-error", "注册失败");
+            toastStore.error("[logon]", "注册失败");
         }
     }, {
         title: "注册"

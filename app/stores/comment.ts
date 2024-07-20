@@ -47,7 +47,7 @@ export const useCommentStore = defineStore("comment", () => {
             const messate = err.statusCode === 403
                 ? "无评论权限"
                 : "评论发送失败";
-            toastStore.error("comment-post-error", messate);
+            toastStore.error("[comment]:post", messate);
             throw err;
         }
     }
@@ -62,7 +62,7 @@ export const useCommentStore = defineStore("comment", () => {
             update(1);
         }
         catch (err) {
-            toastStore.error("comment-put-error", "评论修改失败");
+            toastStore.error("[comment]:put", "评论修改失败");
             throw err;
         }
     }
@@ -77,7 +77,7 @@ export const useCommentStore = defineStore("comment", () => {
             update(1);
         }
         catch (err) {
-            toastStore.error("comment-delete-error", "评论删除失败");
+            toastStore.error("[comment]:delete", "评论删除失败");
             throw err;
         }
     }

@@ -67,7 +67,7 @@
             Jnm = await $fetch("/json/Jnm.json");
             isJnmLoading.value = false;
             isJnmLoaded.value = true;
-            toastStore.success("jnm-loaded", "数据集已加载");
+            toastStore.success("[jnm]:load", "数据集已加载");
             return;
         }
 

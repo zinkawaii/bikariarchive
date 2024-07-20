@@ -43,7 +43,7 @@
                 icon: "fa6-solid:paste",
                 action: () => {
                     navigator.clipboard.writeText(textSelection.text.value);
-                    toastStore.success("copy", "文本已复制");
+                    toastStore.success("[copy]", "文本已复制");
                 }
             },
             {
