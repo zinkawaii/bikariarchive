@@ -99,9 +99,6 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
-        ["@nuxtjs/robots", robotsConfig],
-        ["@nuxtjs/sitemap", sitemapConfig],
-        "nuxt-site-config",
         "@nuxt/icon",
         "@nuxt/image",
         "@nuxtjs/google-fonts",
@@ -112,6 +109,8 @@ export default defineNuxtConfig({
         "@zinkawaii/nuxt-gsap",
         "@zinkawaii/nuxt-shiki"
     ],
+    robots: robotsConfig,
+    sitemap: sitemapConfig,
     site: {
         name: clientConfig.title,
         url: `https://${clientConfig.domain}`,

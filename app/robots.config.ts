@@ -1,4 +1,4 @@
-import type { ModuleOptions } from "nuxt-simple-robots";
+import type { ModuleOptions } from "@nuxtjs/robots";
 
 export default <ModuleOptions> {
     credits: false,
