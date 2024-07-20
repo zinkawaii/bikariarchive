@@ -33,9 +33,11 @@ const server: Config = {
         session: {
             maxAge: 86400 * 30,
             storage: {
-                driver: "cookie",
-                options: {
-                    key: "<!-- ??? -->"
+                data: {
+                    driver: "cookie/header",
+                    options: {
+                        key: "<!-- ??? -->"
+                    }
                 }
             }
         }
