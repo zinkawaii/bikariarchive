@@ -1,27 +1,22 @@
 import SftpClient from "ssh2-sftp-client";
-import prompts from "prompts";
+import { confirm } from "@inquirer/prompts";
 import * as tar from "tar";
 import { timer } from "@bikari/shared";
 
-const options = await prompts([
-    {
-        type: "confirm",
-        name: "compress",
-        message: "是否压缩构建包？",
-        initial: false
-    },
-    {
-        type: "confirm",
-        name: "send",
-        message: "是否上传构建包？",
-        initial: false
-    }
-]);
+const isCompress = await confirm({
+    message: "是否压缩构建包？",
+    default: false
+});
+
+const isUpload = await confirm({
+    message: "是否上传构建包？",
+    default: false
+});
 
 const packname = "bikari.tgz";
 const root = "<!-- ??? -->";
 
-options.compress &&
+isCompress &&
 await timer("压缩构建包", async () => {
     await tar.create({
         gzip: true,
@@ -42,7 +37,7 @@ await timer("连接服务器", async () => {
     });
 })();
 
-options.send &&
+isUpload &&
 await timer("上传构建包", async () => {
     await sftp.put(`./${packname}`, `${root}/${packname}`);
 })();
