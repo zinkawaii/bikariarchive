@@ -120,3 +120,14 @@ export function enrichJArticle(original: any) {
         });
     }
 }
+
+export function guideToShelf(novel: string, volume: number) {
+    const router = useRouter();
+    const shelfStore = useShelfStore();
+
+    shelfStore.selectNovel(novel);
+    shelfStore.selectVolume(volume);
+    router.push({
+        name: "shelf"
+    });
+}

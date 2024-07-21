@@ -2,9 +2,12 @@ import { Article } from "~/utils/Article";
 
 export const useShelfStore = defineStore("shelf", () => {
     const novel = ref("bikari");
-    const currentNovelIdx = ref(0);
     const currentVolumeIdx = ref(0);
     const infoType = ref(1);
+
+    const currentNovelIdx = computed(() => {
+        return Object.keys(Article.meta).indexOf(novel.value);
+    });
 
     const jNovel = computed(() => {
         return Article.meta[novel.value];
@@ -20,9 +23,8 @@ export const useShelfStore = defineStore("shelf", () => {
         });
     });
 
-    function selectNovel(key: string, i: number) {
+    function selectNovel(key: string) {
         novel.value = key;
-        currentNovelIdx.value = i;
         currentVolumeIdx.value = 0;
     }
 

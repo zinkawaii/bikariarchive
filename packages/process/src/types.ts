@@ -56,10 +56,16 @@ export interface JEntry {
     title: string;
     summary?: string;
     info?: Record<string, string>[];
+    appearance?: EntryAppearance;
     illustration?: EntryIllustration[];
     talent?: EntryTalent[];
     relationship?: EntryRelationship[];
     details?: EntryDetail[];
+}
+
+export interface EntryAppearance {
+    novel: string;
+    index: string;
 }
 
 export interface EntryIllustration {

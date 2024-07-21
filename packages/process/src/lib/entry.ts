@@ -1,6 +1,7 @@
 import * as path from "node:path";
 import fs from "fs-extra";
 import { parseEntry } from "../remark";
+import type { JEntry } from "../types";
 import Processor from "./processor";
 
 const folders = [
@@ -26,7 +27,13 @@ export default new Processor({
     async parse(filename) {
         //处理文件
         const file = await fs.readFile(filename);
-        const attributes = await parseEntry(file.toString());
+        const attributes = await parseEntry<JEntry>(file.toString());
+
+        //约束类型
+        const { appearance } = attributes;
+        if (appearance) {
+            appearance.index = String(appearance.index);
+        }
 
         //写入文件
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".json");

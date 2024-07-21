@@ -54,7 +54,7 @@ export async function parseArticle<T>(text: string) {
     };
 }
 
-export async function parseEntry(text: string) {
+export async function parseEntry<T>(text: string) {
     const processor = unified()
         .use(parse)
         .use(frontmatter)
@@ -77,5 +77,5 @@ export async function parseEntry(text: string) {
         const content = slot.innerHTML;
         setProperty(data, path, content);
     }
-    return data;
+    return data as T;
 }

@@ -25,6 +25,16 @@
         immediate: isExist
     });
 
+    const appearArt = computed(() => {
+        try {
+            const { novel, index } = data.value.appearance;
+            return Article.for(novel, index);
+        }
+        catch {
+            return null;
+        }
+    });
+
     //显示评论区
     onMounted(() => {
         route.meta.comment = isExist;
@@ -41,6 +51,12 @@
             <section class="entry-section">
                 <div class="entry-main">
                     <div class="entry-text" v-html="data.summary"></div>
+                    <p v-if="appearArt" class="entry-appearance">
+                        首次登场于
+                        <plain-link @click="guideToShelf(appearArt.novel, appearArt.volume)">{{ appearArt.volumeInfo.title }}</plain-link>
+                        -
+                        <plain-link :to="appearArt.route">{{ appearArt.title }}</plain-link>
+                    </p>
                     <div v-if="data.info?.length > 0" class="div-table entry-brief">
                         <dl v-for="i in data.info.length">
                             <template v-for="value, key in data.info[i - 1]">
@@ -132,9 +148,17 @@
     }
 
     .entry-main {
-        display: grid;
+        display: flex;
         flex: 1;
-        align-content: space-between;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .entry-appearance {
+        margin-top: auto;
+        font-size: 12px;
+        text-align: right;
+        color: var(--color-text-info);
     }
 
     .entry-brief {

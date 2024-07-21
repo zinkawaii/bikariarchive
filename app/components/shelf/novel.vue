@@ -6,11 +6,11 @@
 <template>
     <div class="shelf-novel">
         <ul class="sheno-list" :style="{ translate: `${currentNovelIdx * -144}px` }">
-            <li v-for="({ title, cover }, key, i) in Article.meta">
+            <li v-for="({ title, cover }, key) in Article.meta">
                 <a
                     class="sheno-link"
                     :class="{ [`is-checked`]: novel === key }"
-                    @click="shelfStore.selectNovel(key as string, i)"
+                    @click="shelfStore.selectNovel(key as string)"
                     ><div class="sheno-cover">
                         <nuxt-img v-if="cover" :src="cover" alt="[cover]"/>
                         <div v-else class="sheno-placeholder">Cover.</div>
