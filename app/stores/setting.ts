@@ -51,19 +51,21 @@ export const useSettingStore = defineStore("setting", () => {
     function listen<K extends SettingField, V extends Setting[K]>(key: K, handler: WatchCallback<V>, options: WatchOptions & {
         viewTransition?: boolean;
     } = {}) {
-        watchImmediate(() => setting.value[key], (newVal, oldVal, onCleanup) => {
+        watch(() => setting.value[key], (newVal, oldVal, onCleanup) => {
             const fn = handler.bind(null, newVal, oldVal, onCleanup);
 
-            if (//首屏加载时不应用视图转换
+            if (/* 首屏加载时不应用视图转换 */
                 oldVal !== void 0
-                && import.meta.browser
                 && options?.viewTransition
                 && document.startViewTransition
             ) {
                 document.startViewTransition(fn);
             }
             else fn();
-        }, options);
+        }, {
+            immediate: import.meta.browser,
+            ...options
+        });
     }
 
     return {
