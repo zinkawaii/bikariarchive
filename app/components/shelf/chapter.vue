@@ -23,6 +23,10 @@
     const updateState = computed(() => {
         return jChapters.value.some((c) => c.ending) ? "已完结" : "连载中";
     });
+
+    const { page, total, sizes, filteredArr } = usePagination(jChapters, {
+        sizes: 16
+    });
 </script>
 
 <template>
@@ -48,10 +52,11 @@
         </div>
     </div>
     <ul class="shelf-chapter">
-        <li v-for="chapter in jChapters">
+        <li v-for="chapter in filteredArr" :key="chapter.index">
             <shelf-chapter-item :chapter/>
         </li>
     </ul>
+    <mb-pagination v-if="total > sizes" class="shelf-pagination" :total :sizes v-model="page"/>
 </template>
 
 <style lang="scss" scoped>
@@ -97,5 +102,9 @@
             columns: 2;
             column-gap: 2em;
         }
+    }
+
+    .shelf-pagination {
+        margin-top: 16px;
     }
 </style>
