@@ -5,6 +5,10 @@ export interface UsePaginationOptions {
 export default function<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginationOptions = {}) {
     const page = ref(1);
 
+    watch(arr, () => {
+        page.value = 1;
+    });
+
     const total = computed(() => {
         return toValue(arr).length;
     });

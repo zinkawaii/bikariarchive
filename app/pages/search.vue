@@ -38,7 +38,7 @@
         });
     });
 
-    const { page, filteredArr } = usePagination(results);
+    const { page, total, filteredArr } = usePagination(results);
 
     //全文检索
     const fullTextSearch = Zin.debounce(async () => {
@@ -54,9 +54,6 @@
 
         //写入历史记录
         updateHistory(inputWord.value);
-
-        //重置到第一页
-        page.value = 1;
     }, {
         title: "检索"
     });
@@ -132,7 +129,7 @@
                 </nuxt-link>
             </template>
         </div>
-        <mb-pagination :total="results.length" scroll-target=".content-widget" v-model="page"/>
+        <mb-pagination :total scroll-target=".content-widget" v-model="page"/>
     </coco-widget>
 </template>
 

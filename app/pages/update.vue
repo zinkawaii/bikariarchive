@@ -18,10 +18,6 @@
     const { page, total, sizes, filteredArr } = usePagination(updates, {
         sizes: 24
     });
-
-    watch(currentYearIdx, () => {
-        page.value = 1;
-    });
 </script>
 
 <template>
