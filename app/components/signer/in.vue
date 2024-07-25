@@ -26,8 +26,7 @@
                         uid: res.uid,
                         nickname: res.nickname,
                         identity: res.identity,
-                        sign: res.sign,
-                        isLogin: true
+                        sign: res.sign
                     });
                     break;
                 case 1:

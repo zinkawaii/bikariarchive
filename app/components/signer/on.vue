@@ -55,13 +55,14 @@
     });
 
     //验证码输入限制
-    function verifyInput(event) {
-        const value = event.target.value;
-        event.target.value = value.replace(/\D+/, "").slice(0, 6);
+    function onVerifyInput(event: InputEvent) {
+        const target = event.target as HTMLInputElement;
+        const value = target.value;
+        target.value = value.replace(/\D+/, "").slice(0, 6);
     }
 
     //发送验证码
-    async function verifySend() {
+    async function sendVerify() {
         if (!validate("email")) return;
 
         verifyStage.value.stage = 1;
@@ -170,9 +171,9 @@
             placeholder="验证码"
             v-model="verify"
             v-model:error="errors.verify"
-            @input="verifyInput"
+            @input="onVerifyInput"
         />
-        <mb-button :disabled="verifyStage.stage > 0" @click="verifySend">{{
+        <mb-button :disabled="verifyStage.stage > 0" @click="sendVerify">{{
             verifyStage.stage === 1 ? "发送中……" :
             verifyStage.stage === 2 ? `已发送(${verifyStage.delay})` :
             "发送验证码"

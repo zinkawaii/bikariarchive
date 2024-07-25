@@ -15,47 +15,43 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     }
 
     //读取文章
-    const file = await readArticle(art);
-    res.content = file.toString();
+    res.content = await readArticle(art);
 
     //获取阅读量
-    const qRecord = await ReadRecordModel.find({
+    const qRecords = await ReadRecordModel.find({
         novel,
         index
     }, "ip time");
 
     //处理阅读量
     const interval = 8 * 60 * 60 * 1000;
-    const rlist: {
-        [T: string]: {
-            count: number;
-            time: number;
-        };
-    } = {};
-    for (const record of qRecord) {
-        const ip = record.ip;
-        if (ip in rlist) {
-            const next = record.time.getTime();
-            const last = rlist[ip].time;
+    const records: Record<string, {
+        count: number;
+        time: number;
+    }> = {};
+    for (const { ip, time } of qRecords) {
+        if (ip in records) {
+            const next = time.getTime();
+            const last = records[ip].time;
 
             //同IP下阅读间隔大于8小时
             if (next - last >= interval) {
-                rlist[ip].count++;
-                rlist[ip].time = next;
+                records[ip].count++;
+                records[ip].time = next;
             }
         }
         else {
-            rlist[ip] = {
+            records[ip] = {
                 count: 1,
-                time: record.time.getTime()
+                time: time.getTime()
             };
         }
     }
 
     //统计阅读量
     res.readCount = 0;
-    for (const ip in rlist) {
-        res.readCount += rlist[ip].count;
+    for (const ip in records) {
+        res.readCount += records[ip].count;
     }
 
     //生成代币

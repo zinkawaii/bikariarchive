@@ -272,7 +272,7 @@
             display: none;
         }
 
-        .right {
+        > .right {
             padding: 12px 16px;
             text-wrap: nowrap;
         }
@@ -295,13 +295,13 @@
         font-weight: bold;
         color: var(--color-theme-text);
 
+        @include viewport("md") {
+            font-size: 0;
+        }
+
         > .iconify {
             width: 1em;
             font-size: 42px;
-        }
-
-        @include viewport("md") {
-            font-size: 0;
         }
     }
 
@@ -323,7 +323,7 @@
     }
 
     @include viewport(">md") {
-        .mb-skeleton, .novel-text {
+        :where(.mb-skeleton, .novel-text) {
             padding-inline: var(--cw-large);
         }
     }

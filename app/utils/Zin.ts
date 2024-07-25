@@ -56,7 +56,7 @@ const Zin = new class Z {
         title = null
     } = {}) {
         const toastStore = useToastStore();
-        let timer;
+        let timer: NodeJS.Timeout;
         return <(this: unknown, ...args: T) => void> (
             immediate
             ? function(...args) {
@@ -76,7 +76,7 @@ const Zin = new class Z {
 
         function clearAndToast() {
             clearTimeout(timer);
-            title && toastStore.info("debounce", `你的${title}速度太快了~`);
+            title && toastStore.info("[debounce]", `你的${title}速度太快了~`);
         }
     }
 
