@@ -55,12 +55,18 @@ export interface JArtmap {
 export interface JEntry {
     title: string;
     summary?: string;
-    info?: Record<string, string>[];
+    brief?: EntryBrief;
     appearance?: EntryAppearance;
     illustration?: EntryIllustration[];
     talent?: EntryTalent[];
     relationship?: EntryRelationship[];
     details?: EntryDetail[];
+}
+
+export interface EntryBrief {
+    name?: Record<"zh" | "jp" | "ka" | "en", string>;
+    sex?: string;
+    age?: number;
 }
 
 export interface EntryAppearance {

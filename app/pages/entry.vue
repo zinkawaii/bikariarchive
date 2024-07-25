@@ -57,14 +57,7 @@
                         -
                         <plain-link :to="appearArt.route">{{ appearArt.title }}</plain-link>
                     </p>
-                    <div v-if="data.info?.length > 0" class="div-table entry-brief">
-                        <dl v-for="i in data.info.length">
-                            <template v-for="value, key in data.info[i - 1]">
-                                <dt>{{ key }}</dt>
-                                <dd>{{ value }}</dd>
-                            </template>
-                        </dl>
-                    </div>
+                    <entry-brief v-if="data.brief" v-bind="data.brief"/>
                 </div>
                 <mb-tab
                     v-if="data.illustration?.length > 0"
@@ -159,17 +152,6 @@
         font-size: 12px;
         text-align: right;
         color: var(--color-text-info);
-    }
-
-    .entry-brief {
-        --dt-fr: 0.3fr;
-        --dd-fr: 0.7fr;
-
-        margin-top: 8px;
-
-        @include viewport("md") {
-            flex-direction: column;
-        }
     }
 
     .entry-illustration {
