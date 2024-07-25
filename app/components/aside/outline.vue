@@ -17,7 +17,7 @@
 
     //文章渲染完成时更新标题列表
     hooks.hook("page:reader:rendered", () => {
-        const $headings = document.querySelectorAll<HTMLHeadingElement>(".novel-text :where(h2, h3)");
+        const $headings = document.querySelectorAll<HTMLHeadingElement>(".novel-text :where(h2, h3):not(.sr-only)");
 
         flatHeaders = [...$headings]
         .map((el) => ({

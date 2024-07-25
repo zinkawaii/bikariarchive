@@ -257,6 +257,10 @@ textarea {
     cursor: pointer;
 }
 
+.sr-only {
+    display: none;
+}
+
 /* ---------------------------------------------------------------- */
 
 /* 代码高亮 */
@@ -337,6 +341,10 @@ textarea {
         font-weight: bold;
     }
 
+    sub, sup {
+        font-size: 0.8em;
+    }
+
     :where(.mb-chat, .mb-code, .mb-gallery) {
         margin-block: 16px;
     }
@@ -347,6 +355,24 @@ textarea {
 
     > :last-child {
         margin-bottom: 0;
+    }
+
+    > .footnotes {
+        margin-top: 16px;
+        font-size: 14px;
+    }
+
+    [data-footnote-ref] {
+        margin-inline: 2px;
+        color: var(--color-theme-text);
+
+        &::before {
+            content: "[";
+        }
+
+        &::after {
+            content: "]";
+        }
     }
 }
 

@@ -3,7 +3,6 @@ import { unified } from "unified";
 import $ from "node-html-parser";
 import parse from "remark-parse";
 import frontmatter from "remark-frontmatter";
-import gfm from "remark-gfm";
 import mdc from "remark-mdc";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import raw from "rehype-raw";
@@ -11,9 +10,16 @@ import slug from "rehype-slug";
 import externalLinks, { type Options as ExternalOptions } from "rehype-external-links";
 import stringify from "rehype-stringify";
 import attributes from "./plugins/attributes";
+import footnote from "./plugins/footnote";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
+import strikethrough from "./plugins/strikethrough";
 import code from "./handlers/code";
+
+export {
+    ruby,
+    strikethrough
+};
 
 const externalOptions: ExternalOptions = {
     rel: ["noopener", "noreferrer", "nofollow"],
@@ -35,9 +41,10 @@ export async function parseArticle<T>(text: string) {
         .use(parse)
         .use(frontmatter)
         .use(attributes)
-        .use(gfm)
         .use(mdc)
+        .use(footnote)
         .use(ruby)
+        .use(strikethrough)
         .use(rehype, rehypeOptions)
         .use(raw)
         .use(slug)
@@ -59,8 +66,9 @@ export async function parseEntry<T>(text: string) {
         .use(parse)
         .use(frontmatter)
         .use(attributes)
-        .use(gfm)
+        .use(footnote)
         .use(ruby)
+        .use(strikethrough)
         .use(slot)
         .use(rehype, rehypeOptions)
         .use(raw)

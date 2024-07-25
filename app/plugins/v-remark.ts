@@ -1,5 +1,5 @@
 import parse from "remark-parse";
-import gfm from "remark-gfm";
+import { ruby, strikethrough } from "@bikari/process/remark";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import stringify from "rehype-stringify";
 import { unified } from "unified";
@@ -73,7 +73,8 @@ const rehypeOptions: RehypeOptions = {
 async function parseComment(text: string) {
     const processor = unified()
         .use(parse)
-        .use(gfm)
+        .use(ruby)
+        .use(strikethrough)
         .use(code)
         .use(rehype, rehypeOptions)
         .use(stringify);

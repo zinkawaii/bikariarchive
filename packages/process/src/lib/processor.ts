@@ -125,7 +125,7 @@ export default class Processor {
 }
 
 //从代码文件本身生成盐
-const path = resolve(__dirname, "index.js");
+const path = import.meta.filename ?? __filename;
 const file = fs.readFileSync(path);
 const salt = CryptoES.MD5(file.toString());
 
