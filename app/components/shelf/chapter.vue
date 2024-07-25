@@ -25,7 +25,7 @@
     });
 
     const { page, total, sizes, filteredArr } = usePagination(jChapters, {
-        sizes: 16
+        sizes: 32
     });
 </script>
 
