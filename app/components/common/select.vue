@@ -3,7 +3,7 @@
 
     const modelValue = defineModel<T>();
 
-    const $self = ref<HTMLElement>();
+    const $self = ref();
     const [isDrop, toggleDrop] = useToggle(false);
 
     const titleRef = ref<MaybeRefOrGetter<string>>();
@@ -29,7 +29,7 @@
         @blur="toggleDrop(false)"
         ><a class="select-wrapper">
             <span>{{ title }}</span>
-            <icon class="text-gray select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa6-solid:chevron-down"/>
+            <icon class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa6-solid:chevron-down"/>
         </a>
         <ul class="select-dropdown" :class="{ [`is-drop`]: isDrop }">
             <slot></slot>
@@ -62,6 +62,7 @@
     }
 
     .select-arrow {
+        color: var(--color-text-info);
         transition: rotate 0.25s;
 
         &.is-reverse {

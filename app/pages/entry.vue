@@ -127,8 +127,6 @@
     }
 
     .entry-section {
-        overflow: auto;
-
         &:first-child {
             display: flex;
             gap: 16px;
@@ -182,13 +180,12 @@
 
     .talent-header, .relation-header {
         display: flex;
+        flex-wrap: wrap;
         align-items: baseline;
-        overflow: hidden;
-        text-wrap: nowrap;
     }
 
     .talent-tag {
-        margin-left: 6px;
+        margin: 2px 0 0 6px;
         padding: 2px 8px;
         border-radius: 4px;
         font-size: 13px;

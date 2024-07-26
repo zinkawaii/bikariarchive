@@ -152,7 +152,7 @@ const Zin = new class Z {
     throttle<T extends unknown[]>(func: (...args: T) => void, delay?: number) {
         //根据延迟时长
         if (delay && delay > 0) {
-            let timer = null;
+            let timer: NodeJS.Timeout;
             return function(this: unknown, ...args: T) {
                 if (!timer) {
                     func.apply(this, args);
