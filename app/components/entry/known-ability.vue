@@ -13,8 +13,7 @@
 <template>
     <ul v-if="filterList.length > 0" class="entry-known-ability">
         <li v-for="{ name, owner } in filterList">
-            <plain-link v-if="owner.length > 0" :to="toEntry(owner[0].name)">{{ name }}</plain-link>
-            <span v-else>{{ name }}</span>
+            <entry-link :title="[owner[0]?.name ?? name, name]"/>
         </li>
     </ul>
     <p v-else>暂无。</p>
