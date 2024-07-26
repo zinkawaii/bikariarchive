@@ -3,21 +3,21 @@
         {
             title: "阅读记录",
             sub: "Read Record",
-            name: "read-record"
+            to: { name: "read-record" }
         },
         {
             title: "用户数据",
             sub: "User Data",
-            name: "user-data"
+            to: { name: "user-data" }
         }
     ];
 </script>
 
 <template>
     <div class="manage-banner">
-        <nuxt-link v-for="view in views" class="manage-link" :to="{ name: view.name }">
-            <span class="title">{{ view.title }}</span>
-            <span class="sub">{{ view.sub }}</span>
+        <nuxt-link v-for="{ title, sub, to } in views" class="manage-link" :to>
+            <span class="title">{{ title }}</span>
+            <span class="sub">{{ sub }}</span>
         </nuxt-link>
     </div>
     <nuxt-page keepalive/>

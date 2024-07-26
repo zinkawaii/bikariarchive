@@ -4,23 +4,23 @@
     const links = [
         {
             title: "主页",
-            name: "home",
-            icon: "fa6-solid:house"
+            icon: "fa6-solid:house",
+            to: { name: "home" }
         },
         {
             title: "目录",
-            name: "shelf",
-            icon: "fa6-solid:book-open"
+            icon: "fa6-solid:book-open",
+            to: { name: "shelf" }
         },
         {
             title: "情报",
-            name: "details",
-            icon: "fa6-solid:sitemap"
+            icon: "fa6-solid:sitemap",
+            to: { name: "details" }
         },
         {
             title: "检索",
-            name: "search",
-            icon: "fa6-solid:magnifying-glass"
+            icon: "fa6-solid:magnifying-glass",
+            to: { name: "search" }
         }
     ];
 </script>
@@ -28,8 +28,8 @@
 <template>
     <nav class="z-navbar" :class="{ [`is-collapse`]: settingStore.setting[`ui-collapse`] }">
         <ul class="nav-list">
-            <li v-for="{ title, name, icon } in links" class="nav-item">
-                <nuxt-link class="nav-link" :to="{ name }">
+            <li v-for="{ title, icon, to } in links" class="nav-item">
+                <nuxt-link class="nav-link" :to>
                     <icon :name="icon"/>
                     <span class="nav-title">{{ title }}</span>
                 </nuxt-link>
