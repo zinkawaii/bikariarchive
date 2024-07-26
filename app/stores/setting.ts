@@ -1,7 +1,6 @@
 import type { WatchCallback, WatchOptions } from "vue";
 import { ZSetting } from "#components";
-import type { PickAsType } from "~/types";
-import type { Setting, SettingField } from "~/types/setting";
+import type { Setting, SettingBooleanField, SettingField } from "~/types/setting";
 
 export const useSettingStore = defineStore("setting", () => {
     const setting = ref<Setting>({
@@ -43,7 +42,7 @@ export const useSettingStore = defineStore("setting", () => {
         setting.value[key] = value;
     }
 
-    function toggle<K extends keyof PickAsType<Setting, boolean>, V extends Setting[K]>(key: K, value?: V) {
+    function toggle<K extends SettingBooleanField, V extends Setting[K]>(key: K, value?: V) {
         setting.value[key] = value ?? !setting.value[key];
     }
 

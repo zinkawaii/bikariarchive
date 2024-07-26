@@ -1,3 +1,5 @@
+import type { PickAsType } from "~/types";
+
 export interface Setting {
     theme: number;
     "dark-mode": number;
@@ -11,3 +13,4 @@ export interface Setting {
 }
 
 export type SettingField = keyof Setting;
+export type SettingBooleanField = keyof PickAsType<Setting, boolean>;
