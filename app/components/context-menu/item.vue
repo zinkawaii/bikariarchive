@@ -1,22 +1,13 @@
 <script lang="ts" setup>
     import type { UnwrapContextMenuItem } from "~/types/context-menu";
 
-    const { data } = defineProps<{
+    defineProps<{
         data: UnwrapContextMenuItem;
     }>();
-
-    const contextMenuStore = useContextMenuStore();
-
-    function onClick() {
-        if (data.action) {
-            data.action();
-            contextMenuStore.close();
-        }
-    }
 </script>
 
 <template>
-    <li class="menu-item" @click="onClick">
+    <li class="menu-item" @click="data.action">
         <icon :name="data.icon ?? (data.checked ? `fa6-solid:check` : ``)"/>
         <span>{{ data.title }}</span>
         <icon v-if="data.icon && data.checked" name="fa6-solid:check"/>

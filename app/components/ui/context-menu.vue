@@ -127,7 +127,7 @@
     <transition-scale :duration="0.25">
         <div v-show="contextMenuStore.isOpened" ref="$menu" class="content-widget z-context-menu">
             <menu class="menu-tools">
-                <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action(), contextMenuStore.close()">
+                <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
                     <icon :name="icon"/>
                 </li>
             </menu>
