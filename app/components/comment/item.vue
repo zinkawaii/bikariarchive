@@ -77,7 +77,7 @@
             <div class="comment-info">
                 <time>{{ elapsed }}</time>
                 <a class="comment-action" @click="replyComment">
-                    <icon name="fa6-regular:comment"/>
+                    <icon name="fa6-solid:comment-dots"/>
                     <span>回复</span>
                 </a>
                 <template v-if="userStore.identity >= 9">

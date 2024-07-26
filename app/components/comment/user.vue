@@ -13,9 +13,9 @@
     <mb-dialog class="comment-user" @close="$emit(`close`)">
         <user-avatar :src="avatar"/>
         <span class="content-h2">{{ nickname }}</span>
-        <plain-link class="user-link" :to="address" target="_blank">
+        <plain-link v-if="address" class="user-link" :to="address" target="_blank">
             <span>{{ address }}</span>
-            <icon name="ooui:link-external-ltr"/>
+            <icon name="fa6-solid:arrow-up-right-from-square"/>
         </plain-link>
     </mb-dialog>
 </template>

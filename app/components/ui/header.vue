@@ -56,7 +56,7 @@
                 },
                 {
                     title: "关于",
-                    icon: "fa-solid:info-circle",
+                    icon: "fa6-solid:circle-info",
                     to: { name: "about" }
                 }
             ]
@@ -67,7 +67,7 @@
             children: [
                 {
                     title: "友情链接",
-                    icon: "fa-solid:user-friends",
+                    icon: "fa6-solid:user-group",
                     to: { name: "friend" }
                 }
             ]
@@ -117,7 +117,7 @@
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
             <button title="全文检索">
-                <icon name="fa-solid:search"/>
+                <icon name="fa6-solid:magnifying-glass"/>
             </button>
         </form>
     </header>

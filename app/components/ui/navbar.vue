@@ -20,7 +20,7 @@
         {
             title: "检索",
             name: "search",
-            icon: "fa-solid:search"
+            icon: "fa6-solid:magnifying-glass"
         }
     ];
 </script>

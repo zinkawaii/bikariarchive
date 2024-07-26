@@ -55,7 +55,7 @@
             },
             {
                 title: "全文检索",
-                icon: "fa-solid:search",
+                icon: "fa6-solid:magnifying-glass",
                 action: () => {
                     router.push(toSearch(textSelection.text.value));
                 }
