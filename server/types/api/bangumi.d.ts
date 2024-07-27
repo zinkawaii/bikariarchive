@@ -1,4 +1,6 @@
 export interface GetBangumiResponse extends BaseResponse {
+    total: number;
+    sizes: number;
     list: BangumiData[];
 }
 

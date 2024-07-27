@@ -3,14 +3,13 @@
         title: "番剧"
     });
 
-    const { execute, status, data } = useLazyFetch("/api/bangumi", {
-        immediate: false
-    });
+    const page = ref(1);
 
-    const { page, total, sizes, filteredArr } = usePagination(() => {
-        return data.value?.list ?? [];
-    }, {
-        sizes: 32
+    const { execute, data } = useLazyFetch("/api/bangumi", {
+        query: {
+            page
+        },
+        immediate: false
     });
 
     //仅在客户端请求
@@ -19,12 +18,12 @@
 
 <template>
     <coco-widget title="番剧">
-        <mb-skeleton v-if="status !== `success`"/>
+        <mb-skeleton v-if="!data"/>
         <template v-else>
             <div class="bangumi-list">
-                <bangumi-item v-for="bangumi in filteredArr" :key="bangumi.id" v-bind="bangumi"/>
+                <bangumi-item v-for="bangumi in data.list" :key="bangumi.id" v-bind="bangumi"/>
             </div>
-            <mb-pagination :total :sizes scroll-target="body" v-model="page"/>
+            <mb-pagination :total="data.total" :sizes="data.sizes" scroll-target="body" v-model="page"/>
         </template>
     </coco-widget>
 </template>
