@@ -97,5 +97,10 @@
     "tar": "^7.4.3",
     "tsup": "^8.2.3",
     "yaml": "^2.5.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "mdast-util-to-hast@13.2.0": "patches/mdast-util-to-hast@13.2.0.patch"
+    }
   }
 }

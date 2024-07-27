@@ -283,10 +283,6 @@ textarea {
 }
 
 .novel-text {
-    h2, h3 {
-        scroll-margin-top: 80px;
-    }
-
     h2 {
         position: relative;
         margin-block: 24px 12px;
@@ -345,6 +341,10 @@ textarea {
         font-size: 0.8em;
     }
 
+    [id] {
+        scroll-margin-top: 80px;
+    }
+
     :where(.mb-chat, .mb-code, .mb-gallery) {
         margin-block: 16px;
     }
@@ -362,7 +362,7 @@ textarea {
         font-size: 14px;
     }
 
-    [data-footnote-ref] {
+    .footnote-ref {
         margin-inline: 2px;
         color: var(--color-theme-text);
 
@@ -372,6 +372,15 @@ textarea {
 
         &::after {
             content: "]";
+        }
+    }
+
+    .footnote-backref {
+        color: var(--color-text-info);
+        transition: color 0.25s;
+
+        &:hover {
+            color: var(--color-theme-text);
         }
     }
 }

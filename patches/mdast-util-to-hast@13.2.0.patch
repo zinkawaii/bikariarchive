@@ -1,0 +1,33 @@
+diff --git a/lib/footer.js b/lib/footer.js
+index 3ccf0958b96683f3f559265aeff73641ae328afc..2c47b012c3294700b5e350de737826cf18172951 100644
+--- a/lib/footer.js
++++ b/lib/footer.js
+@@ -182,12 +182,11 @@ export function footer(state) {
+             'fnref-' +
+             safeId +
+             (rereferenceIndex > 1 ? '-' + rereferenceIndex : ''),
+-          dataFootnoteBackref: '',
+           ariaLabel:
+             typeof footnoteBackLabel === 'string'
+               ? footnoteBackLabel
+               : footnoteBackLabel(referenceIndex, rereferenceIndex),
+-          className: ['data-footnote-backref']
++          className: ['footnote-backref']
+         },
+         children: Array.isArray(children) ? children : [children]
+       })
+diff --git a/lib/handlers/footnote-reference.js b/lib/handlers/footnote-reference.js
+index 7c65fa88a641b615c3ccc65f7d3c319bef85d0f2..2c231418d5c600f0c8ba3acda4f0535e6349e420 100644
+--- a/lib/handlers/footnote-reference.js
++++ b/lib/handlers/footnote-reference.js
+@@ -51,8 +51,8 @@ export function footnoteReference(state, node) {
+         'fnref-' +
+         safeId +
+         (reuseCounter > 1 ? '-' + reuseCounter : ''),
+-      dataFootnoteRef: true,
+-      ariaDescribedBy: ['footnote-label']
++      ariaDescribedBy: ['footnote-label'],
++      className: ['footnote-ref']
+     },
+     children: [{type: 'text', value: String(counter)}]
+   }
