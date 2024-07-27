@@ -39,7 +39,7 @@
         </div>
         <mb-skeleton v-if="isEmpty"/>
         <comment-item v-for="item in comments" :key="item.id" :data="item" root/>
-        <mb-pagination v-if="mainCount > 0" :total="mainCount" scroll-target=".z-comment" v-model="page"/>
+        <mb-pagination v-if="mainCount > 0" :total="mainCount" scroll-target=".comment-area" v-model="page"/>
     </coco-widget>
 </template>
 
