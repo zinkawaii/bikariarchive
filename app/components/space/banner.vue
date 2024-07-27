@@ -77,8 +77,8 @@
         background-size: cover;
         clip-path: inset(var(--scroll-banner) -4px -4px -4px);
         animation: scroll-banner linear both;
-        animation-timeline: view();
         animation-range: exit calc(var(--mb) - 64px) calc(100% + var(--mb) - 64px);
+        animation-timeline: view();
         translate: 0 var(--mb);
     }
 
