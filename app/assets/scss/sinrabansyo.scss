@@ -114,6 +114,11 @@ textarea {
     outline: none;
 }
 
+/* stylelint-disable-next-line selector-type-no-unknown */
+::highlight(danger) {
+    color: var(--color-danger);
+}
+
 ::placeholder {
     color: var(--color-text-info);
 }
@@ -274,7 +279,7 @@ textarea {
     line-height: 2em;
 }
 
-:where(.intro-synopsis, .novel-text, .entry-article, .result-part) p {
+:where(.intro-synopsis, .novel-text, .entry-article) p {
     text-indent: 2em;
 }
 

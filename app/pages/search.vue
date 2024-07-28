@@ -21,21 +21,8 @@
     });
 
     const results = computed(() => {
-        const { error, list } = data.value ?? {};
-        if (error || !list) return [];
-
-        return list.map((item) => {
-            const art = Article.for(item.novel, item.index);
-            const parts = item.parts.map((part) => {
-                return part.replaceAll(searchWord.value, `<span class="text-danger">${searchWord.value}</span>`);
-            }).join("");
-
-            return {
-                art,
-                parts,
-                count: item.count
-            };
-        });
+        const { list } = data.value ?? {};
+        return list ?? [];
     });
 
     const { page, total, filteredArr } = usePagination(results);
@@ -47,13 +34,14 @@
             return;
         }
 
-        //发送请求
-        await execute();
         queryWord.value = inputWord.value;
         searchWord.value = inputWord.value;
 
         //写入历史记录
         updateHistory(inputWord.value);
+
+        //发送请求
+        await execute();
     }, {
         title: "检索"
     });
@@ -61,9 +49,9 @@
     //带参数进入页面时
     watchImmediate(queryWord, (value) => {
         inputWord.value = value;
-        value ? (searchWord.value !== value) && fullTextSearch() : (
-            results.value.length = 0
-        );
+        if (value && searchWord.value !== value) {
+            fullTextSearch();
+        }
     });
 
     //总出现次数
@@ -121,12 +109,7 @@
         <div class="search-results">
             <mb-skeleton v-if="status !== `success`"/>
             <template v-else>
-                <nuxt-link v-for="{ art, parts, count } in filteredArr" :key="art.index" class="search-result" :to="art.route">
-                    <h3 class="result-title">{{ art.title }}</h3>
-                    <span class="result-info">{{ art.volumeInfo.title }}</span>
-                    <article class="result-part" v-html="parts"></article>
-                    <span class="result-info result-right">本章共出现 {{ count }} 次</span>
-                </nuxt-link>
+                <search-result v-for="result in filteredArr" :key="result.index" :word="searchWord" v-bind="result"/>
             </template>
         </div>
         <mb-pagination :total scroll-target=".content-widget" v-model="page"/>
@@ -189,38 +172,5 @@
         display: flex;
         flex-direction: column;
         margin-block: 16px;
-    }
-
-    .search-result {
-        padding: 16px;
-        border: 1px solid transparent;
-        border-left-width: 16px;
-        border-radius: 8px;
-        transition: all 0.25s;
-
-        &:hover {
-            border-color: var(--color-border-lighter);
-            border-left-color: var(--color-theme);
-            background-color: var(--color-background);
-        }
-    }
-
-    .result-title {
-        line-height: 28px;
-    }
-
-    .result-info {
-        font-size: 14px;
-        color: var(--color-text-info);
-    }
-
-    .result-part {
-        padding-block: 4px;
-        font-size: 13px;
-        line-height: 22px;
-    }
-
-    .result-right {
-        float: right;
     }
 </style>

@@ -1,5 +1,12 @@
 [
   {
+    "date": "2024-07-29",
+    "version": "0.4.12",
+    "content": [
+      "使用 CSS Custom Highlight API 优化全文检索关键字的高亮效果"
+    ]
+  },
+  {
     "date": "2024-07-27",
     "version": "0.4.11",
     "content": [
