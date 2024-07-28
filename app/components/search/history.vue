@@ -4,20 +4,19 @@
     const history = useLocalStorage("search-history", []);
     const { searchWord } = inject(injectionKey);
 
-    watch(searchWord, update);
-
     //更新历史
-    function update(word: string) {
+    watch(searchWord, (word) => {
         const pos = history.value.indexOf(word);
         if (pos !== -1) {
             history.value.splice(pos, 1);
         }
         history.value.unshift(word);
-    }
+        history.value.splice(16);
+    });
 
     //清空历史
     function clear() {
-        history.value = [];
+        history.value.length = 0;
     }
 </script>
 
@@ -28,7 +27,7 @@
             <a @click="clear"><icon name="fa6-solid:trash-can"/></a>
         </div>
         <client-only>
-            <ul v-if="history.length > 0" class="history-list">
+            <ul v-if="history.length" class="history-list">
                 <li v-for="word in history" :key="word">
                     <nuxt-link class="tag text-truncate history-item" :to="toSearch(word)">{{ word }}</nuxt-link>
                 </li>
