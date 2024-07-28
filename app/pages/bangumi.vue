@@ -5,15 +5,11 @@
 
     const page = ref(1);
 
-    const { execute, data } = useLazyFetch("/api/bangumi", {
+    const { data } = useLazyFetch("/api/bangumi", {
         query: {
             page
-        },
-        immediate: false
+        }
     });
-
-    //仅在客户端请求
-    onMounted(execute);
 </script>
 
 <template>
