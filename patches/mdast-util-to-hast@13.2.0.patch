@@ -1,9 +1,22 @@
 diff --git a/lib/footer.js b/lib/footer.js
-index 3ccf0958b96683f3f559265aeff73641ae328afc..2c47b012c3294700b5e350de737826cf18172951 100644
+index 3ccf0958b96683f3f559265aeff73641ae328afc..fe3c6ff4a9785b7b7f7cc0db1e5dc5de37f56b5d 100644
 --- a/lib/footer.js
 +++ b/lib/footer.js
-@@ -182,12 +182,11 @@ export function footer(state) {
-             'fnref-' +
+@@ -126,7 +126,7 @@ export function footer(state) {
+   const clobberPrefix =
+     typeof state.options.clobberPrefix === 'string'
+       ? state.options.clobberPrefix
+-      : 'user-content-'
++      : 'footnote-'
+   const footnoteBackContent =
+     state.options.footnoteBackContent || defaultFootnoteBackContent
+   const footnoteBackLabel =
+@@ -179,15 +179,14 @@ export function footer(state) {
+           href:
+             '#' +
+             clobberPrefix +
+-            'fnref-' +
++            'ref-' +
              safeId +
              (rereferenceIndex > 1 ? '-' + rereferenceIndex : ''),
 -          dataFootnoteBackref: '',
@@ -16,12 +29,47 @@ index 3ccf0958b96683f3f559265aeff73641ae328afc..2c47b012c3294700b5e350de737826cf
          },
          children: Array.isArray(children) ? children : [children]
        })
+@@ -212,7 +211,7 @@ export function footer(state) {
+     const listItem = {
+       type: 'element',
+       tagName: 'li',
+-      properties: {id: clobberPrefix + 'fn-' + safeId},
++      properties: {id: clobberPrefix + safeId},
+       children: state.wrap(content, true)
+     }
+ 
+@@ -228,7 +227,7 @@ export function footer(state) {
+   return {
+     type: 'element',
+     tagName: 'section',
+-    properties: {dataFootnotes: true, className: ['footnotes']},
++    properties: {className: ['footnotes']},
+     children: [
+       {
+         type: 'element',
 diff --git a/lib/handlers/footnote-reference.js b/lib/handlers/footnote-reference.js
-index 7c65fa88a641b615c3ccc65f7d3c319bef85d0f2..2c231418d5c600f0c8ba3acda4f0535e6349e420 100644
+index 7c65fa88a641b615c3ccc65f7d3c319bef85d0f2..10253dca5a45ea4f72519a3becad7a91da4e119e 100644
 --- a/lib/handlers/footnote-reference.js
 +++ b/lib/handlers/footnote-reference.js
-@@ -51,8 +51,8 @@ export function footnoteReference(state, node) {
-         'fnref-' +
+@@ -20,7 +20,7 @@ export function footnoteReference(state, node) {
+   const clobberPrefix =
+     typeof state.options.clobberPrefix === 'string'
+       ? state.options.clobberPrefix
+-      : 'user-content-'
++      : 'footnote-'
+   const id = String(node.identifier).toUpperCase()
+   const safeId = normalizeUri(id.toLowerCase())
+   const index = state.footnoteOrder.indexOf(id)
+@@ -45,14 +45,14 @@ export function footnoteReference(state, node) {
+     type: 'element',
+     tagName: 'a',
+     properties: {
+-      href: '#' + clobberPrefix + 'fn-' + safeId,
++      href: '#' + clobberPrefix + safeId,
+       id:
+         clobberPrefix +
+-        'fnref-' +
++        'ref-' +
          safeId +
          (reuseCounter > 1 ? '-' + reuseCounter : ''),
 -      dataFootnoteRef: true,

@@ -31,6 +31,7 @@ const externalOptions: ExternalOptions = {
 
 const rehypeOptions: RehypeOptions = {
     allowDangerousHtml: true,
+    footnoteLabel: "参考资料",
     handlers: {
         code
     }
