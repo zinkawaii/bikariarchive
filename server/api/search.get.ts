@@ -4,15 +4,15 @@ import { Article } from "~/utils/Article";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 
 export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
-    let { novel, word } = getQueryValues(event);
-
-    //空关键词
-    if (!word?.length) {
-        return 1;
-    }
+    let { novel, word = "" } = getQueryValues(event);
 
     //限制长度
-    word = word.slice(0, 64);
+    word = word.slice(0, 64).trim();
+
+    //空关键词
+    if (!word.length) {
+        return 1;
+    }
 
     const jNovels = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
     const jChapters = jNovels.flatMap((jNovel) => jNovel?.chapters).filter(Boolean);
