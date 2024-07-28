@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+    import { injectionKey } from "~/types/search";
     import type { SearchResult } from "~~/server/types/api/search";
 
-    const props = defineProps<{
-        word: string;
-    } & SearchResult>();
+    const props = defineProps<SearchResult>();
+
+    const { searchWord } = inject(injectionKey);
 
     const art = computed(() => {
         return Article.for(props.novel, props.index);
@@ -14,7 +15,7 @@
     });
 
     const $part = ref();
-    useHighlight($part, props.word, {
+    useHighlight($part, searchWord, {
         name: "danger"
     });
 </script>

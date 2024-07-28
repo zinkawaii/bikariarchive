@@ -1,15 +1,20 @@
 <script lang="ts" setup>
+    import { injectionKey } from "~/types/search";
+
     useHead({
         title: "全文检索"
     });
 
-    const history = useLocalStorage("search-history", []);
     const toastStore = useToastStore();
 
     const novel = useRouteQuery("novel");
     const queryWord = useRouteQuery("word", "");
     const inputWord = ref(queryWord.value);
     const searchWord = ref("");
+
+    provide(injectionKey, {
+        searchWord
+    });
 
     const { execute, status, data } = useLazyFetch("/api/search", {
         query: {
@@ -37,9 +42,6 @@
         queryWord.value = inputWord.value;
         searchWord.value = inputWord.value;
 
-        //写入历史记录
-        updateHistory(inputWord.value);
-
         //发送请求
         await execute();
     }, {
@@ -60,20 +62,6 @@
             return count + item.count;
         }, 0);
     });
-
-    //更新历史
-    function updateHistory(word: string) {
-        const pos = history.value.indexOf(word);
-        if (pos !== -1) {
-            history.value.splice(pos, 1);
-        }
-        history.value.unshift(word);
-    }
-
-    //清空历史
-    function clearHistory() {
-        history.value = [];
-    }
 </script>
 
 <template>
@@ -87,19 +75,7 @@
             </mb-select>
             <coco-input type="search" placeholder="关键词" v-model="inputWord"/>
         </form>
-        <div class="search-history">
-            <div class="history-title">
-                <span>历史词条</span>
-                <a @click="clearHistory"><icon name="fa6-solid:trash-can"/></a>
-            </div>
-            <client-only>
-                <ul v-if="history.length > 0" class="history-list">
-                    <li v-for="word in history" :key="word">
-                        <nuxt-link class="tag text-truncate history-item" :to="toSearch(word)">{{ word }}</nuxt-link>
-                    </li>
-                </ul>
-            </client-only>
-        </div>
+        <search-history />
     </coco-widget>
     <coco-widget v-if="searchWord.length">
         <div class="search-statistics">
@@ -109,7 +85,7 @@
         <div class="search-results">
             <mb-skeleton v-if="status !== `success`"/>
             <template v-else>
-                <search-result v-for="result in filteredArr" :key="result.index" :word="searchWord" v-bind="result"/>
+                <search-result v-for="result in filteredArr" :key="result.index" v-bind="result"/>
             </template>
         </div>
         <mb-pagination :total scroll-target=".content-widget" v-model="page"/>
@@ -130,32 +106,6 @@
         width: 180px;
         margin-inline: auto;
         z-index: 1;
-    }
-
-    .search-history {
-        margin-top: 16px;
-        color: var(--color-text-info);
-    }
-
-    .history-title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .history-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px 8px;
-        margin-top: 8px;
-        font-size: 14px;
-    }
-
-    .history-item {
-        display: block;
-        max-width: 112px;
-        padding: 4px 8px;
-        border-radius: 4px;
     }
 
     .search-statistics {

@@ -1,0 +1,66 @@
+<script lang="ts" setup>
+    import { injectionKey } from "~/types/search";
+
+    const history = useLocalStorage("search-history", []);
+    const { searchWord } = inject(injectionKey);
+
+    watch(searchWord, update);
+
+    //更新历史
+    function update(word: string) {
+        const pos = history.value.indexOf(word);
+        if (pos !== -1) {
+            history.value.splice(pos, 1);
+        }
+        history.value.unshift(word);
+    }
+
+    //清空历史
+    function clear() {
+        history.value = [];
+    }
+</script>
+
+<template>
+    <div class="search-history">
+        <div class="history-title">
+            <span>历史词条</span>
+            <a @click="clear"><icon name="fa6-solid:trash-can"/></a>
+        </div>
+        <client-only>
+            <ul v-if="history.length > 0" class="history-list">
+                <li v-for="word in history" :key="word">
+                    <nuxt-link class="tag text-truncate history-item" :to="toSearch(word)">{{ word }}</nuxt-link>
+                </li>
+            </ul>
+        </client-only>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+    .search-history {
+        margin-top: 16px;
+        color: var(--color-text-info);
+    }
+
+    .history-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .history-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+        font-size: 14px;
+    }
+
+    .history-item {
+        display: block;
+        max-width: 112px;
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+</style>
