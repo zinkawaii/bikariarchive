@@ -7,10 +7,7 @@
         close: [];
     }>();
 
-    const $self = ref();
-    const $image = computed<HTMLImageElement>(() => {
-        return unrefElement($self);
-    });
+    const rootEl = useCurrentElement<HTMLImageElement>();
 
     //放大后占窗口比率
     const rate = 0.9;
@@ -22,7 +19,7 @@
     let imageY = 0;
 
     //鼠标拖动时
-    const { isPressed } = useHold($self, {
+    const { isPressed } = useHold(rootEl, {
         onMousedown(event) {
             event.preventDefault();
             mouseX = event.pageX;
@@ -30,10 +27,10 @@
             ({
                 left: imageX,
                 top: imageY
-            } = $image.value.getBoundingClientRect());
+            } = rootEl.value.getBoundingClientRect());
         },
         onMousemove(event) {
-            $image.value.animate({
+            rootEl.value.animate({
                 top: imageY - mouseY + event.pageY + "px",
                 left: imageX - mouseX + event.pageX + "px"
             }, {
@@ -50,11 +47,11 @@
         //缩放比率
         const rate = event.deltaY < 0 ? 1.5 : 0.667;
 
-        const { left, top, width, height } = $image.value.getBoundingClientRect();
+        const { left, top, width, height } = rootEl.value.getBoundingClientRect();
         const finalX = left - (event.clientX - left) * ((rate - 1) / 1);
         const finalY = top - (event.clientY - top) * ((rate - 1) / 1);
 
-        $image.value.animate({
+        rootEl.value.animate({
             left: finalX + "px",
             top: finalY + "px",
             width: width * rate + "px",
@@ -120,7 +117,6 @@
     <transition @enter="onEnter" @leave="onLeave">
         <nuxt-img
             v-if="opening"
-            ref="$self"
             class="image-viewer"
             :src="target.src"
             @mousewheel.prevent="onMouseWheel"

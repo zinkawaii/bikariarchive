@@ -10,18 +10,19 @@
     }>();
     const modelValue = defineModel<number>();
 
-    let p_width = 0;
-    let p_left = 0;
-    const $self = ref();
+    const rootEl = useCurrentElement<HTMLElement>();
     const rate = ref(0);
 
+    let p_width = 0;
+    let p_left = 0;
+
     //鼠标拖动时
-    const { isPressed } = useHold($self, {
+    const { isPressed } = useHold(rootEl, {
         onMousedown(event) {
             ({
                 width: p_width,
                 left: p_left
-            } = $self.value.getBoundingClientRect());
+            } = rootEl.value.getBoundingClientRect());
             emit("dragstart");
 
             //进度预变化
@@ -45,7 +46,7 @@
 </script>
 
 <template>
-    <div ref="$self" class="mb-slider">
+    <div class="mb-slider">
         <div class="slider-track">
             <div class="slider-rate" :style="{ scale: `${displayRate} 1` }"></div>
         </div>

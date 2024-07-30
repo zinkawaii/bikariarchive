@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     const router = useRouter();
+    const rootEl = useCurrentElement<HTMLElement>();
     const contextMenuStore = useContextMenuStore();
     const settingStore = useSettingStore();
     const toastStore = useToastStore();
@@ -84,8 +85,6 @@
         ]
     });
 
-    const $self = ref();
-
     //捕获阶段清除附加菜单
     useEventListener("contextmenu", () => {
         contextMenuStore.clear();
@@ -102,16 +101,16 @@
 
         nextTick(() => {
             //获取宽高
-            const width = $self.value.offsetWidth;
-            const height = $self.value.offsetHeight;
+            const width = rootEl.value.offsetWidth;
+            const height = rootEl.value.offsetHeight;
 
             //计算位置
             let { x, y } = event;
             x -= (width + x > window.innerWidth) ? width : 0;
             y -= (height + y > window.innerHeight) ? height : 0;
 
-            $self.value.style.left = x + "px";
-            $self.value.style.top = y + "px";
+            rootEl.value.style.left = x + "px";
+            rootEl.value.style.top = y + "px";
         });
     });
 
@@ -125,7 +124,7 @@
 
 <template>
     <transition-scale :duration="0.25">
-        <div v-show="contextMenuStore.isOpened" ref="$self" class="content-widget z-context-menu">
+        <div v-show="contextMenuStore.isOpened" class="content-widget z-context-menu">
             <menu class="menu-tools">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
                     <icon :name="icon"/>

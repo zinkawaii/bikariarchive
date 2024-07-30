@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+    const route = useRoute();
+    const rootEl = useCurrentElement();
     const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
-    const route = useRoute();
 
-    const $self = ref();
     const page = ref(1);
     const { comments, totalCount, mainCount, isEmpty } = storeToRefs(commentStore);
 
@@ -14,7 +14,7 @@
         commentStore.clear();
 
         //终止未触发的观测器
-        stop?.(), { stop } = useIntersectionObserver($self, ([{ isIntersecting }]) => {
+        stop?.(), { stop } = useIntersectionObserver(rootEl, ([{ isIntersecting }]) => {
             if (isIntersecting) {
                 commentStore.update(page.value);
                 stop();
@@ -29,7 +29,7 @@
 </script>
 
 <template>
-    <coco-widget ref="$self" class="comment-area">
+    <coco-widget class="comment-area">
         <div class="comment-title">
             <h2>评论<span class="comment-count">{{ totalCount }}</span></h2>
             <mb-button @click="commentPanelStore.post()">

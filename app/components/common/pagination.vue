@@ -11,7 +11,7 @@
     const modelValue = defineModel<number>();
 
     //组件根元素
-    const $self = ref();
+    const rootEl = useCurrentElement<HTMLElement>();
 
     //总页数
     const totalPages = computed(() => {
@@ -32,7 +32,7 @@
 
     //滑动根元素
     const scrollElement = computed(() => {
-        return $self.value?.closest(props.scrollTarget) ?? document.querySelector(props.scrollTarget);
+        return rootEl.value?.closest(props.scrollTarget) ?? document.querySelector(props.scrollTarget);
     });
 
     //切换页数时滑动到指定元素的起始位置
@@ -47,7 +47,7 @@
 </script>
 
 <template>
-    <div ref="$self" class="mb-pagination">
+    <div class="mb-pagination">
         <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === 1 }" @click="modelValue--">
             <icon name="fa6-solid:chevron-left"/>
         </a>

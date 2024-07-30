@@ -22,7 +22,7 @@ export function getByteLength(str: string) {
 }
 
 //获取元素绝对位置
-export function getPosition(element: HTMLElement) {
+export function getPosition(element: Element) {
     const rect = element.getBoundingClientRect();
     const top = rect.top + window.scrollY;
     const left = rect.left + window.scrollX;

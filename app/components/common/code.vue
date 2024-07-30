@@ -11,7 +11,7 @@
     const toastStore = useToastStore();
     const [isCollapse, toggleCollapse] = useToggle(false);
     const [isExpand, toggleExpand] = useToggle(false);
-    const $code = ref();
+    const codeEl = ref<HTMLPreElement>();
 
     //代码
     const code = ref(props.raw);
@@ -37,7 +37,7 @@
 
     //复制
     function copy() {
-        navigator.clipboard.writeText($code.value.textContent);
+        navigator.clipboard.writeText(codeEl.value.textContent);
         toastStore.success("[copy]", "代码已复制");
     }
 </script>
@@ -56,7 +56,7 @@
         <div class="code-area" :class="{ [`is-collapse`]: isCollapse }">
             <div class="code-inner" :class="{ [`is-expand`]: isExpand }">
                 <pre class="code-line">{{ lineStr }}</pre>
-                <pre ref="$code" class="shiki code-content" v-html="code"></pre>
+                <pre ref="codeEl" class="shiki code-content" v-html="code"></pre>
                 <a v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
                     <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
                 </a>

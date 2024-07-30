@@ -3,7 +3,7 @@
 
     const modelValue = defineModel<T>();
 
-    const $self = ref();
+    const rootEl = useCurrentElement<HTMLElement>();
     const [isDrop, toggleDrop] = useToggle(false);
 
     const titleRef = ref<MaybeRefOrGetter<string>>();
@@ -15,14 +15,13 @@
         modelValue,
         bind(title) {
             titleRef.value = title;
-            $self.value?.blur();
+            rootEl.value?.blur();
         }
     });
 </script>
 
 <template>
     <div
-        ref="$self"
         class="mb-select"
         tabindex="-1"
         @focus="toggleDrop(true)"
