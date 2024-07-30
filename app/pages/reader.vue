@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-    const props = defineProps<{
+    const { novel, index } = defineProps<{
         novel: string;
         index: string;
     }>();
-    const { novel, index } = toRefs(props);
 
-    const toastStore = useToastStore();
+    const router = useRouter();
+    const { hooks } = useHookStore();
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();
-    const { hooks } = useHookStore();
-    const router = useRouter();
+    const toastStore = useToastStore();
 
     //初始化
-    const art = Article.for(novel.value, index.value);
+    const art = Article.for(novel, index);
 
     //设置元信息
     useSeoMeta({

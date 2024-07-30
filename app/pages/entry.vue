@@ -7,20 +7,20 @@
             "known-ability": EntryKnownAbility
         }
     });
-    const props = defineProps<{
+    const { title } = defineProps<{
         title: string;
     }>();
 
     useHead({
-        title: props.title
+        title
     });
 
     const route = useRoute();
-    const isExist = jEntry.all.includes(props.title);
+    const isExist = jEntry.all.includes(title);
 
     const { status, data } = useLazyFetch("/api/entry", {
         query: {
-            title: props.title
+            title
         },
         immediate: isExist
     });
