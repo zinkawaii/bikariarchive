@@ -6,7 +6,7 @@
     }>();
 
     //当前选中卷
-    const currentVolume = ref();
+    const currentVolume = ref<number>();
     watchEffect(() => {
         currentVolume.value = props.art.volume;
     });

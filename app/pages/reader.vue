@@ -70,7 +70,7 @@
     });
 
     //密码
-    const password = ref();
+    const password = ref("");
     const decrypted = ref(false);
 
     //获取正文

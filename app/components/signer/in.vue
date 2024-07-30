@@ -2,8 +2,8 @@
     const toastStore = useToastStore();
     const userStore = useUserStore();
 
-    const nickname = ref();
-    const password = ref();
+    const nickname = ref("");
+    const password = ref("");
 
     const warn = ref({
         nickname: false,
