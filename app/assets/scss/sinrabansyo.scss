@@ -135,6 +135,10 @@ textarea {
 
 ::-webkit-scrollbar-track {
     background-color: var(--color-background);
+
+    :not(:root) > & {
+        border-radius: 5px;
+    }
 }
 
 ::-webkit-scrollbar-thumb {

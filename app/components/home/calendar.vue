@@ -219,11 +219,9 @@
                 </p>
                 <span v-else class="calendar-none">No Special.</span>
                 <div class="calendar-title">关键人物</div>
-                <ul v-if="currentDate.event?.heroine" class="calendar-heroine">
-                    <li class="heroine-wrapper">
-                        <character-tag v-for="heroine in currentDate.event.heroine" :key="heroine" :name="heroine"/>
-                    </li>
-                </ul>
+                <div v-if="currentDate.event?.heroine" class="calendar-heroine">
+                    <character-tag v-for="heroine in currentDate.event.heroine" :key="heroine" :name="heroine"/>
+                </div>
                 <span v-else class="calendar-none">No Character.</span>
                 <p class="calendar-hitokoto">{{ currentDate.event?.hitokoto }}</p>
             </template>
@@ -381,14 +379,39 @@
 
     .calendar-heroine {
         display: flex;
+        gap: 8px;
         overflow: auto;
         margin-top: 9px;
+        padding-bottom: 2px;
+        animation-name: heroine;
+        animation-timeline: scroll(x self);
+        scroll-snap-type: x mandatory;
+
+        > .character-tag {
+            scroll-snap-align: center;
+
+            &:first-child {
+                margin-left: auto;
+            }
+
+            &:last-child {
+                margin-right: auto;
+            }
+        }
     }
 
-    .heroine-wrapper {
-        display: flex;
-        gap: 8px;
-        margin: auto;
+    @keyframes heroine {
+        0% {
+            mask-image: linear-gradient(to right, white calc(100% - 2rem), transparent);
+        }
+
+        1%, 99% {
+            mask-image: linear-gradient(to right, transparent, white 2rem, white calc(100% - 2rem), transparent);
+        }
+
+        100% {
+            mask-image: linear-gradient(to right, transparent, white 2rem);
+        }
     }
 
     .calendar-hitokoto {
