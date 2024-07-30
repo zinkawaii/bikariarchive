@@ -5,7 +5,8 @@
     const settingStore = useSettingStore();
 
     let audio: HTMLAudioElement = null;
-    const $mae = ref();
+    const maeComp = ref();
+    const maeEl = computed<HTMLImageElement>(() => unrefElement(maeComp));
     const serif = ref("");
     const skin = useLocalStorage("maestrale-skin", 0);
     const isAuto = useLocalStorage("maestrale-auto", false);
@@ -15,7 +16,7 @@
     const [isDialog, toggleDialog] = useToggle(false);
 
     //右键菜单
-    contextMenuStore.extra($mae, "maestrale", [
+    contextMenuStore.extra(maeEl, "maestrale", [
         {
             title: "自动",
             icon: "bi:chat-dots-fill",
@@ -43,7 +44,7 @@
 
     //换装时的动画
     function onLoad() {
-        $mae.value.$el.animate([
+        maeEl.value.animate([
             { rotate: "y 90deg" },
             {}
         ], Zin.DEFAULT_ANIME_OPTION);
@@ -51,7 +52,7 @@
 
     //随机播放语音
     async function say() {
-        $mae.value.$el.animate([
+        maeEl.value.animate([
             {},
             { translate: "0 -16px" },
             {}
@@ -95,7 +96,7 @@
     <div class="z-maestrale" :class="{ [`is-collapse`]: settingStore.setting[`ui-collapse`] }">
         <client-only>
             <nuxt-img
-                ref="$mae"
+                ref="maeComp"
                 class="maestrale-dollfie"
                 :src="`/garden/maestrale/skin_${skin}.png`"
                 alt="[maestrale]"

@@ -14,8 +14,8 @@
         return props.parts.join("");
     });
 
-    const $part = ref();
-    useHighlight($part, searchWord, {
+    const partEl = ref<HTMLElement>();
+    useHighlight(partEl, searchWord, {
         name: "danger"
     });
 </script>
@@ -24,7 +24,7 @@
     <nuxt-link class="search-result" :to="art.route">
         <h3 class="result-title">{{ art.title }}</h3>
         <span class="result-info">{{ art.volumeInfo.title }}</span>
-        <article ref="$part" class="novel-text result-part" v-html="part"></article>
+        <article ref="partEl" class="novel-text result-part" v-html="part"></article>
         <span class="result-info result-right">本章共出现 {{ count }} 次</span>
     </nuxt-link>
 </template>

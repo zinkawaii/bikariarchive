@@ -37,28 +37,28 @@
     const currentLyric = ref(0);
 
     //音频对象
-    const $audio = ref();
+    const audioEl = ref<HTMLAudioElement>();
 
     //音频可以播放
-    useEventListener($audio, "canplay", () => {
+    useEventListener(audioEl, "canplay", () => {
         invalid.value = false;
-        duration.value = $audio.value.duration;
+        duration.value = audioEl.value.duration;
     });
 
     //音频错误
-    useEventListener($audio, "error", () => {
+    useEventListener(audioEl, "error", () => {
         filename.value = "";
     });
 
     //音频结束播放
-    useEventListener($audio, "ended", () => {
+    useEventListener(audioEl, "ended", () => {
         togglePlaying(false);
     });
 
     //音频播放时
-    useEventListener($audio, "timeupdate", () => {
+    useEventListener(audioEl, "timeupdate", () => {
         if (isDragging.value) return;
-        currentTime.value = $audio.value.currentTime;
+        currentTime.value = audioEl.value.currentTime;
         progress.value = currentTime.value / duration.value;
     });
 
@@ -83,18 +83,18 @@
             isAxising.value = false;
 
             //链接
-            URL.revokeObjectURL($audio.value.src);
-            $audio.value.src = URL.createObjectURL(file);
+            URL.revokeObjectURL(audioEl.value.src);
+            audioEl.value.src = URL.createObjectURL(file);
         });
     }
 
     //播放 & 暂停
     watch(isPlaying, (val) => {
         if (val) {
-            $audio.value.play();
+            audioEl.value.play();
         }
         else {
-            $audio.value.pause();
+            audioEl.value.pause();
         }
     });
 
@@ -125,7 +125,7 @@
     //进度改变时
     function onControlChange(rate: number) {
         if (!invalid.value) {
-            $audio.value.currentTime = duration.value * rate;
+            audioEl.value.currentTime = duration.value * rate;
         }
         else {
             //音频无效，进度归零
@@ -180,7 +180,7 @@
         } = lyrics.value;
 
         //回到两句前的时间点
-        $audio.value.currentTime = target?.time || 0;
+        audioEl.value.currentTime = target?.time || 0;
 
         if (last) {
             last.sign = false;
@@ -225,7 +225,7 @@
 
 <template>
     <coco-widget>
-        <audio ref="$audio"></audio>
+        <audio ref="audioEl"></audio>
         <div class="text-small">
             <div class="lyric-operator">
                 <mb-button @click="upload">上传</mb-button>

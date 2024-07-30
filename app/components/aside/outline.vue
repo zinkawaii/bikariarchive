@@ -3,7 +3,7 @@
 
     const { hooks } = useHookStore();
 
-    let $link: HTMLAnchorElement = null;
+    let linkEl: HTMLAnchorElement = null;
     let flatHeaders: OutlineHeaderItem[] = [];
     const nestedHeaders = shallowRef<OutlineHeaderItem[]>([]);
 
@@ -17,9 +17,9 @@
 
     //文章渲染完成时更新标题列表
     hooks.hook("page:reader:rendered", () => {
-        const $headings = document.querySelectorAll<HTMLHeadingElement>(".novel-text :where(h2, h3):not(.sr-only)");
+        const headingEls = document.querySelectorAll<HTMLHeadingElement>(".novel-text :where(h2, h3):not(.sr-only)");
 
-        flatHeaders = [...$headings]
+        flatHeaders = [...headingEls]
         .map((el) => ({
             element: el,
             title: el.textContent,
@@ -77,9 +77,9 @@
 
     //更新激活链接
     function activateLink(hash: string) {
-        $link?.classList.remove("is-active");
-        $link = document.querySelector(`.aside-anchor[href="${decodeURIComponent(hash)}"]`);
-        $link?.classList.add("is-active");
+        linkEl?.classList.remove("is-active");
+        linkEl = document.querySelector(`.aside-anchor[href="${decodeURIComponent(hash)}"]`);
+        linkEl?.classList.add("is-active");
     }
 </script>
 
