@@ -3,6 +3,20 @@
     import lunisolar from "lunisolar";
     import jTimeline from "~/assets/json/Timeline.json";
 
+    interface CalendarDate {
+        year: number;
+        month: number;
+        solar: number;
+        lunar: string;
+        event?: TimelineEvent;
+    }
+
+    interface TimelineEvent {
+        mono: string;
+        heroine: string[];
+        hitokoto?: string;
+    }
+
     //月份别名
     const monthMap = [
         ["初空", "はつそら"],
@@ -23,23 +37,20 @@
     const startDate = dayjs("2018/11/7");
     const endDate = dayjs("2019/12/31");
 
-    //选中日期
-    const currentDate = ref();
-
-    //数据状态
-    const state = ref({
-        year: 2019,
-        month: 6,
-        dates: [],
-        event: null
-    });
+    const currentYear = ref(2019);
+    const currentMonth = ref(6);
+    const currentDates = ref<CalendarDate[]>([]);
+    const currentDate = ref<CalendarDate>();
 
     //监听年月并显示日期
-    watchEffect(() => {
-        const { year, month, dates } = state.value;
-
-        //清空日期列表
-        dates.length = 0;
+    watchImmediate([
+        currentYear,
+        currentMonth
+    ], ([
+        year,
+        month
+    ]) => {
+        const dates = [];
 
         //当月第一天
         const firstDay = dayjs(new Date(year, month));
@@ -90,52 +101,23 @@
                 }
             }
         }
+
+        //更新日期列表
+        currentDates.value = dates;
     });
-
-    //是否为起始月份
-    const isFirstMonth = computed(() => {
-        return state.value.year === startDate.year() && state.value.month === startDate.month();
-    });
-
-    //是否为结束月份
-    const isLastMonth = computed(() => {
-        return state.value.year === endDate.year() && state.value.month === endDate.month();
-    });
-
-    //上一月份
-    function toLastMonth() {
-        if (state.value.month === 0) {
-            state.value.month = 11;
-            state.value.year--;
-        }
-        else {
-            state.value.month--;
-        }
-    }
-
-    //下一月份
-    function toNextMonth() {
-        if (state.value.month === 11) {
-            state.value.month = 0;
-            state.value.year++;
-        }
-        else {
-            state.value.month++;
-        }
-    }
 
     //创建日期对象
-    function createDate(year: number, month: number, day: number) {
+    function createDate(year: number, month: number, day: number): CalendarDate {
         const base = new Date(year, month, day);
 
         const solar = dayjs(base);
         const lunar = lunisolar(base);
 
         return {
+            year: year,
+            month: month,
             solar: day,
             lunar: getSubTitle(),
-            month: month,
-            year: year,
             event: jTimeline[solar.format("YYYY-MM-DD")]
         };
 
@@ -143,7 +125,7 @@
         function getSubTitle() {
             //节气
             if (lunar.solarTerm) {
-                return lunar.solarTerm;
+                return lunar.solarTerm.name;
             }
 
             //月初
@@ -155,14 +137,46 @@
             return lunar.lunar.getDayName();
         }
     }
+
+    //是否为起始月份
+    const isFirstMonth = computed(() => {
+        return currentYear.value === startDate.year() && currentMonth.value === startDate.month();
+    });
+
+    //是否为结束月份
+    const isLastMonth = computed(() => {
+        return currentYear.value === endDate.year() && currentMonth.value === endDate.month();
+    });
+
+    //上一月份
+    function toLastMonth() {
+        if (currentMonth.value === 0) {
+            currentMonth.value = 11;
+            currentYear.value--;
+        }
+        else {
+            currentMonth.value--;
+        }
+    }
+
+    //下一月份
+    function toNextMonth() {
+        if (currentMonth.value === 11) {
+            currentMonth.value = 0;
+            currentYear.value++;
+        }
+        else {
+            currentMonth.value++;
+        }
+    }
 </script>
 
 <template>
     <div class="content-widget home-calendar">
         <div class="calendar-wrapper">
             <div class="calendar-header">
-                <span class="calendar-month">{{ state.month + 1 }}° {{ monthMap[state.month][0] }}</span>
-                <span class="text-primary">「{{ monthMap[state.month][1] }}」</span>
+                <span class="calendar-month">{{ currentMonth + 1 }}° {{ monthMap[currentMonth][0] }}</span>
+                <span class="text-primary">「{{ monthMap[currentMonth][1] }}」</span>
                 <a
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isFirstMonth }"
@@ -179,10 +193,10 @@
             </ul>
             <div class="calendar-days">
                 <a
-                    v-for="date in state.dates"
+                    v-for="date in currentDates"
                     class="calendar-day"
                     :class="{
-                        [`is-sub`]: date.month !== state.month,
+                        [`is-sub`]: currentMonth !== date.month,
                         [`is-special`]: date.event,
                         [`is-checked`]: currentDate === date
                     }"
@@ -197,25 +211,21 @@
                 <time class="calendar-date">
                     <span class="month">{{ currentDate.month + 1 || "" }}</span>月<span class="day">{{ currentDate.solar }}</span>日
                 </time>
-                <div class="calendar-section">
-                    <div class="calendar-title">事件</div>
-                    <div v-if="currentDate.event?.mono" class="calendar-event">
-                        <icon name="fa6-solid:quote-left"/>
-                        <span>{{ currentDate.event.mono }}</span>
-                        <icon name="fa6-solid:quote-right"/>
-                    </div>
-                    <span v-else class="calendar-none">No Special.</span>
-                </div>
-                <div class="calendar-section">
-                    <div class="calendar-title">关键人物</div>
-                    <ul v-if="currentDate.event?.heroine" class="calendar-heroine">
-                        <li class="heroine-wrapper">
-                            <character-tag v-for="heroine in currentDate.event.heroine" :key="heroine" :name="heroine"/>
-                        </li>
-                    </ul>
-                    <span v-else class="calendar-none">No Character.</span>
-                </div>
-                <span class="calendar-hitokoto">{{ currentDate.event?.hitokoto }}</span>
+                <div class="calendar-title">事件</div>
+                <p v-if="currentDate.event?.mono" class="calendar-event">
+                    <icon name="fa6-solid:quote-left"/>
+                    <span>{{ currentDate.event.mono }}</span>
+                    <icon name="fa6-solid:quote-right"/>
+                </p>
+                <span v-else class="calendar-none">No Special.</span>
+                <div class="calendar-title">关键人物</div>
+                <ul v-if="currentDate.event?.heroine" class="calendar-heroine">
+                    <li class="heroine-wrapper">
+                        <character-tag v-for="heroine in currentDate.event.heroine" :key="heroine" :name="heroine"/>
+                    </li>
+                </ul>
+                <span v-else class="calendar-none">No Character.</span>
+                <p class="calendar-hitokoto">{{ currentDate.event?.hitokoto }}</p>
             </template>
             <span v-else class="calendar-default">No Data</span>
         </div>
@@ -335,11 +345,8 @@
         color: var(--color-theme-text);
     }
 
-    .calendar-section {
-        margin-top: 12px;
-    }
-
     .calendar-title {
+        margin-top: 12px;
         font-size: 12px;
         line-height: 16px;
         color: var(--color-text-info);
@@ -375,7 +382,7 @@
     .calendar-heroine {
         display: flex;
         overflow: auto;
-        padding-top: 9px;
+        margin-top: 9px;
     }
 
     .heroine-wrapper {
