@@ -17,7 +17,7 @@
 
 <template>
     <coco-widget title="友情链接">
-        <div class="novel-text text-small">
+        <article class="novel-text text-small">
             <mb-skeleton v-if="status !== `success`"/>
             <div v-else class="friend-list">
                 <nuxt-link v-for="item in data.list" class="friend-item" :to="item.link" target="_blank">
@@ -40,7 +40,7 @@
             <h2>申请格式</h2>
             <p>按照以下 Schema，使用你擅长的编程或标记语言将结构化的站点信息进行导出，并放置在评论的底部。</p>
             <mb-code lang="js" :raw="schema"/>
-        </div>
+        </article>
     </coco-widget>
 </template>
 

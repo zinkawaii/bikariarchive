@@ -22,7 +22,7 @@
 <template>
     <div class="coco-input">
         <input class="input-entity" required title="" v-bind="$attrs" v-model="inputValue" @blur="error = false"/>
-        <div class="input-underline"></div>
+        <span class="input-underline"></span>
         <span class="input-placeholder" :class="{ [`is-error`]: error }">{{ placeholder }}</span>
     </div>
 </template>

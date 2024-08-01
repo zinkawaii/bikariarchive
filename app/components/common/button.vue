@@ -33,7 +33,6 @@
         text-wrap: nowrap;
         color: var(--color-theme-text);
         transition: all 0.4s;
-        cursor: pointer;
         user-select: none;
 
         &:hover {

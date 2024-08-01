@@ -6,7 +6,6 @@
 
     const props = defineProps<{
         data: WithParent<CommentData>;
-        root?: boolean;
     }>();
 
     const commentStore = useCommentStore();

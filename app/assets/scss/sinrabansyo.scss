@@ -44,7 +44,7 @@ a {
     cursor: pointer;
 }
 
-rt {
+rt, sub, sup {
     font-size: 0.75em;
     line-height: 1em;
 }
@@ -344,10 +344,6 @@ textarea {
 
     strong {
         font-weight: bold;
-    }
-
-    sub, sup {
-        font-size: 0.8em;
     }
 
     [id] {

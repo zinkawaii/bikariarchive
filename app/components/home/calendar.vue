@@ -209,16 +209,16 @@
         <div class="calendar-detail">
             <template v-if="currentDate">
                 <time class="calendar-date">
-                    <span class="month">{{ currentDate.month + 1 || "" }}</span>月<span class="day">{{ currentDate.solar }}</span>日
+                    {{ currentDate.month + 1 || "" }}月{{ currentDate.solar }}日
                 </time>
-                <div class="calendar-title">事件</div>
+                <h6 class="calendar-title">事件</h6>
                 <p v-if="currentDate.event?.mono" class="calendar-event">
                     <icon name="fa6-solid:quote-left"/>
                     <span>{{ currentDate.event.mono }}</span>
                     <icon name="fa6-solid:quote-right"/>
                 </p>
                 <span v-else class="calendar-none">No Special.</span>
-                <div class="calendar-title">关键人物</div>
+                <h6 class="calendar-title">关键人物</h6>
                 <div v-if="currentDate.event?.heroine" class="calendar-heroine">
                     <character-tag v-for="heroine in currentDate.event.heroine" :key="heroine" :name="heroine"/>
                 </div>
@@ -381,7 +381,9 @@
         display: flex;
         gap: 8px;
         overflow: auto;
-        margin-top: 9px;
+        width: fit-content;
+        max-width: 100%;
+        margin: 9px auto 0;
         padding-bottom: 2px;
         animation-name: heroine;
         animation-timeline: scroll(x self);
@@ -389,14 +391,6 @@
 
         > .character-tag {
             scroll-snap-align: center;
-
-            &:first-child {
-                margin-left: auto;
-            }
-
-            &:last-child {
-                margin-right: auto;
-            }
         }
     }
 

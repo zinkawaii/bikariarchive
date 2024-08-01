@@ -80,7 +80,7 @@
     <coco-widget v-if="searchWord.length">
         <div class="search-statistics">
             <h2>"{{ searchWord }}"的检索结果</h2>
-            <span class="text-gray">共检索到 {{ results.length }} 章，总出现次数为 {{ totalCount }} 次</span>
+            <p class="text-gray">共检索到 {{ results.length }} 章，总出现次数为 {{ totalCount }} 次</p>
         </div>
         <div class="search-results">
             <mb-skeleton v-if="status !== `success`"/>

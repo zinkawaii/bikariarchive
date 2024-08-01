@@ -1,18 +1,17 @@
 <script lang="ts" setup>
     defineProps<{
         title?: string;
-        icon?: string;
     }>();
 </script>
 
 <template>
-    <div class="content-widget aside-widget">
+    <section class="content-widget aside-widget">
         <h2 v-if="title" class="content-h2 aside-title">
             <slot name="icon"></slot>
             <span>{{ title }}</span>
         </h2>
         <slot></slot>
-    </div>
+    </section>
 </template>
 
 <style lang="scss">
