@@ -110,13 +110,15 @@ textarea {
     resize: none;
 }
 
-:focus {
-    outline: none;
+:root {
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    &::highlight(danger) {
+        color: var(--color-danger);
+    }
 }
 
-/* stylelint-disable-next-line selector-type-no-unknown */
-::highlight(danger) {
-    color: var(--color-danger);
+:focus {
+    outline: none;
 }
 
 ::placeholder {

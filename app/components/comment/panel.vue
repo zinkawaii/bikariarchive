@@ -4,7 +4,6 @@
 
     const { mode, replyOptions, modifyOptions } = storeToRefs(commentPanelStore);
     const [isSending, toggleSending] = useToggle(false);
-    const maxLength = 512;
 
     const isReplyMode = computed(() => {
         return mode.value === "reply";
@@ -97,9 +96,9 @@
             : "评论";
     });
 
-    //内容长度
-    const contentLength = computed(() => {
-        return content.value.trim().length;
+    //内容是否为空
+    const isContentEmpty = computed(() => {
+        return !content.value.trim().length;
     });
 
     //发表评论
@@ -151,13 +150,12 @@
             <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
         </div>
         <div class="panel-form">
-            <textarea class="panel-editor" placeholder="说点什么吧~" :maxlength="maxLength" v-model="content"></textarea>
+            <comment-editor v-model="content"/>
             <p class="panel-tip">支持部分 Markdown 语法</p>
-            <div class="panel-count">{{ contentLength }} / {{ maxLength }}</div>
         </div>
         <mb-button
             full round
-            :disabled="!contentLength || isSending"
+            :disabled="isContentEmpty || isSending"
             @click="sendComment"
             ><icon name="fa6-solid:paper-plane"/>
             <span>{{ isSending ? "发送中……" : "发表评论" }}</span>
@@ -195,29 +193,5 @@
         &::before {
             content: "• ";
         }
-    }
-
-    .panel-editor {
-        display: block;
-        width: 100%;
-        height: 180px;
-        padding: 6px 8px;
-        border: 1px solid var(--color-border-lighter);
-        border-radius: 4px;
-        background-color: var(--color-background);
-        line-height: 24px;
-        transition: border-color 0.4s;
-
-        &:focus {
-            border-color: var(--color-theme-dark);
-        }
-    }
-
-    .panel-count {
-        position: absolute;
-        right: 8px;
-        bottom: 30px;
-        font-size: 12px;
-        color: var(--color-text-info);
     }
 </style>
