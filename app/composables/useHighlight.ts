@@ -1,4 +1,4 @@
-import type { MaybeComputedElementRef, MaybeElement } from "@vueuse/core";
+import { type MaybeComputedElementRef, type MaybeElement, notNullish } from "@vueuse/core";
 
 export interface UseHighlightOptions {
     name: string;
@@ -7,81 +7,44 @@ export interface UseHighlightOptions {
 
 export default function(
     target: MaybeComputedElementRef | MaybeComputedElementRef[] | MaybeRefOrGetter<MaybeElement[]>,
-    word: MaybeRefOrGetter<string>,
+    word: MaybeRefOrGetter<string | RegExp>,
     options: UseHighlightOptions
 ) {
-    if (import.meta.server) {
-        return;
-    }
-
-    if (!CSS.highlights) {
-        console.warn("CSS Custom Highlight API is not supported.");
-        return;
-    }
+    const isSupported = useSupported(() => CSS.highlights);
 
     const targets = computed(() => {
         const value = toValue(target);
-        return (Array.isArray(value) ? value : [value])
-            .map(unrefElement)
-            .filter(Boolean);
+        return (Array.isArray(value) ? value : [value]).map(unrefElement).filter(notNullish);
     });
 
     const textNodes = ref<Node[]>([]);
-    function updateTextNodes() {
-        textNodes.value = [];
-
-        for (const target of targets.value) {
-            const treeWalker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
-            let currentNode: Node | null;
-            while (currentNode = treeWalker.nextNode()) {
-                textNodes.value.push(currentNode);
-            }
-        }
-    }
-
-    watchImmediate(targets, updateTextNodes);
-
-    options.watch &&
-    useMutationObserver(targets, updateTextNodes, {
-        characterData: true,
-        childList: true,
-        subtree: true
-    });
 
     const ranges = computed(() => {
-        const searchWord = toValue(word);
-        const { length } = searchWord;
+        const rule = toValue(word);
+        const { length } = rule.toString();
         if (!length) {
             return [];
         }
 
-        let fullText = "";
+        let text = "";
         const points = [0];
         for (const node of textNodes.value) {
-            fullText += node.textContent;
-            points.push(fullText.length);
+            text += node.textContent;
+            points.push(text.length);
         }
 
-        const indices = [];
-        for (let offset = 0; offset < fullText.length;) {
-            const idx = fullText.indexOf(searchWord, offset);
-            if (idx !== -1) {
-                indices.push(idx);
-                offset = idx + length;
-            }
-            else break;
-        }
+        const indices = findWordIndices(text, rule);
 
         function findNodeAndOffset(wordIdx: number): [Node, number] {
-            const nodeIdx = points.findIndex((p) => p > wordIdx) - 1;
+            const nodeIdx = Math.max(0, points.findIndex((p) => p > wordIdx) - 1);
             const node = textNodes.value[nodeIdx];
             const offset = wordIdx - points[nodeIdx];
             return [node, offset];
         }
 
-        return indices.map((idx) => {
-            const [startNode, startOffset] = findNodeAndOffset(idx);
-            const [endNode, endOffset] = findNodeAndOffset(idx + length);
+        return indices.map(([start, end]) => {
+            const [startNode, startOffset] = findNodeAndOffset(start);
+            const [endNode, endOffset] = findNodeAndOffset(end);
 
             const range = new Range();
             range.setStart(startNode, startOffset);
@@ -90,15 +53,72 @@ export default function(
         });
     });
 
-    const highlight = CSS.highlights.get(options.name) ?? new Highlight();
-    CSS.highlights.set(options.name, highlight);
+    function update() {
+        textNodes.value = [];
 
-    watch(ranges, (newVal, oldVal = []) => {
-        for (const range of oldVal) {
-            highlight.delete(range);
+        for (const target of targets.value) {
+            const treeWalker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
+            let currentNode = treeWalker.nextNode();
+            while (currentNode) {
+                textNodes.value.push(currentNode);
+                currentNode = treeWalker.nextNode();
+            }
         }
-        for (const range of newVal) {
-            highlight.add(range);
+    }
+
+    if (isSupported.value) {
+        watch(targets, update, {
+            immediate: true
+        });
+
+        if (options.watch) {
+            useMutationObserver(targets, update, {
+                characterData: true,
+                childList: true,
+                subtree: true
+            });
         }
-    });
+
+        const highlight = CSS.highlights.get(options.name) ?? new Highlight();
+        CSS.highlights.set(options.name, highlight);
+
+        watch(ranges, (newVal, oldVal = []) => {
+            for (const range of oldVal) {
+                highlight.delete(range);
+            }
+            for (const range of newVal) {
+                highlight.add(range);
+            }
+        });
+    }
+
+    return {
+        isSupported,
+        update
+    };
+}
+
+function findWordIndices(text: string, rule: string | RegExp) {
+    const indices: [number, number][] = [];
+
+    if (typeof rule === "string") {
+        for (let offset = 0; offset < text.length;) {
+            const idx = text.indexOf(rule, offset);
+            if (idx !== -1) {
+                offset = idx + rule.length;
+                indices.push([idx, offset]);
+            }
+            else {
+                break;
+            }
+        }
+    }
+    else {
+        const matches = text.matchAll(rule);
+        for (const match of matches) {
+            const { 0: res, index } = match;
+            indices.push([index, index + res.length]);
+        }
+    }
+    return indices;
 }
