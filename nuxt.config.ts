@@ -137,10 +137,5 @@ export default defineNuxtConfig({
             light: "min-light",
             dark: "one-dark-pro"
         }
-    },
-    gsap: {
-        plugins: [
-            "Flip"
-        ]
     }
 });

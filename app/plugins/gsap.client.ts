@@ -1,3 +1,5 @@
+import { Flip } from "gsap/Flip";
+
 interface GsapEffect<T = gsap.TweenVars> {
     name: string;
     effect: (targets: gsap.TweenTarget, config: T) => gsap.core.Tween;
@@ -7,6 +9,8 @@ interface GsapEffect<T = gsap.TweenVars> {
 
 export default defineNuxtPlugin(() => {
     const gsap = useGsap();
+
+    gsap.registerPlugin(Flip);
 
     const effects: GsapEffect[] = [
         {
