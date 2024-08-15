@@ -31,6 +31,7 @@
         border-radius: var(--bounded-full);
         line-height: 38px;
         word-break: keep-all;
+        user-select: none;
     }
 
     .select-item {

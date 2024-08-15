@@ -31,7 +31,12 @@
     const raw = ref("");
 
     //歌词列表
-    const lyrics = ref([]);
+    const lyrics = ref<{
+        sign: boolean;
+        time: number;
+        timed: string;
+        content: string;
+    }[]>([]);
 
     //当前歌词序号
     const currentLyric = ref(0);
@@ -184,7 +189,7 @@
 
         if (last) {
             last.sign = false;
-            last.time = "";
+            last.time = 0;
             last.timed = "";
 
             //指向不存在的序号时不再减少
@@ -237,7 +242,6 @@
                 <time>{{ formatedCurrent }}</time>
                 <mb-slider
                     class="lyric-progress"
-                    :title="filename || `- 请上传歌曲 -`"
                     v-model="progress"
                     @progress="onControlProgress"
                     @change="onControlChange"
@@ -260,7 +264,7 @@
                             sign: item.sign
                         }"
                         @click="currentLyric = i"
-                    ><time>{{ item.timed }}</time>
+                        ><time>{{ item.timed }}</time>
                         <span>{{ item.content }}</span>
                     </p>
                 </article>

@@ -21,7 +21,7 @@
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
   "dependencies": {
-    "@vueuse/core": "11.0.0-beta.2",
+    "@vueuse/core": "11.0.0-beta.3",
     "crypto-es": "^2.1.0",
     "dayjs": "^1.11.12",
     "hookable": "^5.5.3",
@@ -40,12 +40,12 @@
     "remark-mdc": "^3.2.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.0",
-    "shiki": "^1.12.1",
+    "shiki": "^1.13.0",
     "unified": "^11.0.5",
     "unist-builder": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "uqr": "^0.1.2",
-    "vue": "3.5.0-beta.1",
+    "vue": "3.5.0-beta.2",
     "vue-router": "^4.4.3"
   },
   "devDependencies": {
@@ -70,7 +70,7 @@
     "@types/wicg-file-system-access": "^2023.10.5",
     "@vitejs/plugin-vue": "^5.1.2",
     "@vue-email/render": "^0.0.9",
-    "@vueuse/nuxt": "11.0.0-beta.2",
+    "@vueuse/nuxt": "11.0.0-beta.3",
     "@zinkawaii/eslint-config": "^0.1.4",
     "@zinkawaii/nuxt-gsap": "^0.1.2",
     "@zinkawaii/nuxt-shiki": "^0.5.0",

@@ -6,7 +6,7 @@
 
     let audio: HTMLAudioElement = null;
     const maeComp = ref();
-    const maeEl = computed<HTMLImageElement>(() => unrefElement(maeComp));
+    const maeEl = useCurrentElement<HTMLImageElement>(maeComp);
     const serif = ref("");
     const skin = useLocalStorage("maestrale-skin", 0);
     const isAuto = useLocalStorage("maestrale-auto", false);

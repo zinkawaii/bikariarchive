@@ -13,22 +13,23 @@
 </script>
 
 <template>
-    <div class="setting-switch" @click="settingStore.toggle(name)">
-        <div class="switch-button" :class="{ [`is-checked`]: state }">
+    <button class="setting-switch" @click="settingStore.toggle(name)">
+        <span class="switch-button" :class="{ [`is-checked`]: state }">
             <span class="switch-thumb"></span>
-        </div>
+        </span>
         <span class="switch-title">{{ state ? "打开" : "关闭" }}</span>
-    </div>
+    </button>
 </template>
 
 <style lang="scss" scoped>
     .setting-switch {
         display: flex;
+        align-items: stretch;
         padding: 6px;
         border: 1px solid var(--color-border);
         border-radius: var(--bounded-full);
         line-height: 26px;
-        cursor: pointer;
+        user-select: none;
     }
 
     .switch-button {

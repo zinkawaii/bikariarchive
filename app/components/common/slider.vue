@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-    defineProps<{
-        title: string;
-    }>();
     const emit = defineEmits<{
         progress: [rate: number];
         change: [rate: number];
