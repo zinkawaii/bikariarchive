@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
+  htmlparser2:
+    hash: xddoar25yi7wnibcfi2wox7rum
+    path: patches/htmlparser2.patch
   mdast-util-to-hast@13.2.0:
     hash: r643e47pvnbtahlf3bmodhoetq
     path: patches/mdast-util-to-hast@13.2.0.patch
@@ -9422,7 +9425,7 @@ snapshots:
       dom-serializer: 2.0.0
       domhandler: 5.0.3
       domutils: 3.1.0
-      htmlparser2: 8.0.2
+      htmlparser2: 8.0.2(patch_hash=xddoar25yi7wnibcfi2wox7rum)
       parse5: 7.1.2
       parse5-htmlparser2-tree-adapter: 7.0.0
 
@@ -10753,12 +10756,12 @@ snapshots:
       '@selderee/plugin-htmlparser2': 0.11.0
       deepmerge: 4.3.1
       dom-serializer: 2.0.0
-      htmlparser2: 8.0.2
+      htmlparser2: 8.0.2(patch_hash=xddoar25yi7wnibcfi2wox7rum)
       selderee: 0.11.0
 
   html-void-elements@3.0.0: {}
 
-  htmlparser2@8.0.2:
+  htmlparser2@8.0.2(patch_hash=xddoar25yi7wnibcfi2wox7rum):
     dependencies:
       domelementtype: 2.3.0
       domhandler: 5.0.3
@@ -12366,7 +12369,7 @@ snapshots:
 
   postcss-html@1.7.0:
     dependencies:
-      htmlparser2: 8.0.2
+      htmlparser2: 8.0.2(patch_hash=xddoar25yi7wnibcfi2wox7rum)
       js-tokens: 9.0.0
       postcss: 8.4.41
       postcss-safe-parser: 6.0.0(postcss@8.4.41)
