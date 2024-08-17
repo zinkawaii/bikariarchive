@@ -19,6 +19,9 @@
     const characters = computed(() => {
         return props.character.split(",");
     });
+
+    const [isLoaded, toggleLoaded] = useToggle(false);
+    useEventListener(imgEl, "load", toggleLoaded);
 </script>
 
 <template>
@@ -30,7 +33,7 @@
             :alt
             @click="open"
         />
-        <figcaption v-if="character" class="image-caption">
+        <figcaption v-if="character && isLoaded" class="image-caption">
             <character-tag v-for="name in characters" :name/>
         </figcaption>
     </figure>
