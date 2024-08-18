@@ -14,7 +14,7 @@
     const editorEl = ref<HTMLTextAreaElement>();
     usePlainShiki(editorEl, {
         lang: "markdown",
-        watch: true
+        selector: (theme) => `[z-${theme}]`
     });
 
     function checkLength(event: InputEvent) {
