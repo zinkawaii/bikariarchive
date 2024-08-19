@@ -101,8 +101,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "mdast-util-to-hast": "patches/mdast-util-to-hast@13.2.0.patch",
-      "htmlparser2": "patches/htmlparser2@8.0.2.patch"
+      "mdast-util-to-hast": "patches/mdast-util-to-hast@13.2.0.patch"
     }
   }
 }
