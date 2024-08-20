@@ -15,15 +15,14 @@
         return modelValue.value === props.value;
     });
 
-    //初始值更新
-    whenever(isEqual, () => {
-        bind(() => props.title);
-    }, {
-        immediate: true
-    });
+    //初始更新
+    if (isEqual.value) {
+        update();
+    }
 
     function update() {
         modelValue.value = props.value;
+        bind(() => props.title);
     }
 </script>
 
