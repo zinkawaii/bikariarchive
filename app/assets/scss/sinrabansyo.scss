@@ -11,6 +11,9 @@
 
 html {
     scroll-behavior: smooth;
+
+    // TODO: nuxt@3.13.0
+    scroll-padding: 0;
 }
 
 body {
