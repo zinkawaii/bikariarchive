@@ -73,7 +73,7 @@
                     <mb-option v-for="{ title }, key in Article.meta" :key :title :value="key"/>
                 </mb-option-group>
             </mb-select>
-            <coco-input type="search" placeholder="关键词" v-model.trim="inputWord"/>
+            <coco-input type="search" placeholder="关键词" accesskey="/" v-model.trim="inputWord"/>
         </form>
         <search-history />
     </coco-widget>
