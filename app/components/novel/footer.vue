@@ -10,8 +10,7 @@
     <footer class="novel-footer">
         <p v-if="art.ending" class="novel-endding">THE END</p>
         <div class="novel-copyright">
-            <nuxt-img class="copyright-avatar" :src="$config.public.avatar" alt="[avatar]"/>
-            <div class="right">
+            <div class="copyright-wrapper">
                 <div class="copyright-crumb">
                     <span>{{ art.novelInfo.title }}</span>
                     <icon class="text-gray" name="fa6-solid:chevron-right"/>
@@ -48,34 +47,28 @@
     }
 
     .novel-copyright {
-        display: flex;
-        overflow: auto;
         margin-top: 16px;
+        padding: 4px;
         border: 1px solid var(--color-border-lighter);
-        border-radius: var(--bounded-full);
+        border-radius: 16px;
         background-color: var(--color-background);
         font-size: 14px;
         line-height: 2em;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        > .right {
-            padding: 12px 16px;
-            text-wrap: nowrap;
-        }
+        text-align: center;
     }
 
-    .copyright-avatar {
-        width: 80px;
-        border-radius: var(--bounded-full);
+    .copyright-wrapper {
+        padding: 1em;
+        border: 4px dashed var(--color-border-lighter);
+        border-radius: 12px;
     }
 
     .copyright-crumb {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 6px;
+        justify-content: center;
+        column-gap: 6px;
     }
 
     .novel-adjacents {

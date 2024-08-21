@@ -36,7 +36,8 @@
     }
 
     .adjacent-sign {
-        line-height: 34px;
+        margin-bottom: 2px;
+        line-height: 1.5em;
         color: var(--color-theme-text);
 
         > .iconify {
