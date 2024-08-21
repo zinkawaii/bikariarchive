@@ -22,7 +22,7 @@
             <h2>隐私政策</h2>
             <p>本站仅在以下情况收集个人信息：</p>
             <ol>
-                <li v-for="text, i in behaviors">
+                <li v-for="(text, i) in behaviors">
                     <p>用户<em>{{ text }}</em>时{{ i === behaviors.length - 1 ? "。" : "；" }}</p>
                 </li>
             </ol>

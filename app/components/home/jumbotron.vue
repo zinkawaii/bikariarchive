@@ -40,7 +40,7 @@
         <div class="jumbo-banner">
             <h1 class="jumbo-title">
                 <template v-if="isCrossing">
-                    <span v-for="char, i in titleChars" class="jumbo-char" :style="{ animationDelay: `${i * titleDelay}ms` }">{{ char }}</span>
+                    <span v-for="(char, i) in titleChars" class="jumbo-char" :style="{ animationDelay: `${i * titleDelay}ms` }">{{ char }}</span>
                 </template>
                 <template v-else>{{ title }}</template>
             </h1>

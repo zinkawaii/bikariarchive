@@ -256,7 +256,7 @@
             <div v-else class="lyric-editor">
                 <article>
                     <p
-                        v-for="item, i in lyrics"
+                        v-for="(item, i) in lyrics"
                         :key="i"
                         class="lyric-item"
                         :class="{

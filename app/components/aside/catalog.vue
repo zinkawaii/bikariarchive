@@ -26,7 +26,7 @@
     <aside-widget class="aside-unified">
         <form class="catalog-volume">
             <select class="content-h2 catalog-selector" v-model="currentVolume">
-                <option v-for="({ title }, i) in jNovel.volumes" :value="i">{{ title }}</option>
+                <option v-for="{ title }, i in jNovel.volumes" :value="i">{{ title }}</option>
             </select>
             <span class="catalog-underline"></span>
         </form>

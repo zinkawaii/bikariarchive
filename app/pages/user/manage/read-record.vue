@@ -78,7 +78,7 @@
 <template>
     <coco-widget>
         <div class="manage-grid">
-            <div v-for="item, i in que">
+            <div v-for="(item, i) in que">
                 <form class="manage-form" :name="item.title">
                     <span class="manage-title">{{ item.title }}</span>
                     <input class="manage-input" type="number" v-model="item.count"/>

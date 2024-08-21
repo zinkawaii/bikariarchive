@@ -6,7 +6,7 @@
 <template>
     <div class="shelf-novel">
         <ul class="sheno-list" :style="{ translate: `${currentNovelIdx * -144}px` }">
-            <li v-for="({ title, cover }, key) in Article.meta">
+            <li v-for="{ title, cover }, key in Article.meta">
                 <a
                     class="sheno-link"
                     :class="{ [`is-checked`]: novel === key }"

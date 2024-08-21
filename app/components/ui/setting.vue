@@ -61,7 +61,7 @@
         <setting-form title="切换章节" type="input">
             <div class="setting-input">
                 <coco-input
-                    v-for="({ title, value }, name) in shortcuts"
+                    v-for="{ title, value }, name in shortcuts"
                     class="setting-input"
                     :value
                     :placeholder="title"
