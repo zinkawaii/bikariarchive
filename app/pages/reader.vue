@@ -24,23 +24,15 @@
         ogNovelCategory: art.novelInfo.tag.join(",")
     });
 
-    //上一章
-    const toPrev = art.isFirstInVol ? "上一卷" : "上一章";
-    const toPrevRoute = art.prev?.route;
-
-    //下一章
-    const toNext = art.isLastInVol ? "下一卷" : "下一章";
-    const toNextRoute = art.next?.route;
-
     //上下章快捷键
     useEventListener("keyup", (event) => {
         if (isFocusedEditable()) return;
 
         if (!art.isFirst && event.key === settingStore.get("shortcut-last")) {
-            router.push(toPrevRoute);
+            router.push(art.prev?.route);
         }
         else if (!art.isLast && event.key === settingStore.get("shortcut-next")) {
-            router.push(toNextRoute);
+            router.push(art.next?.route);
         }
     });
 
@@ -114,211 +106,24 @@
 
 <template>
     <coco-widget>
-        <header class="novel-header">
-            <nuxt-link v-visible="!art.isFirst" class="novel-adjacent-top" :to="toPrevRoute">
-                <icon name="fa6-solid:chevron-left"/>
-                <span>{{ toPrev }}</span>
-            </nuxt-link>
-            <div>
-                <h1 class="novel-title">{{ art.title }}</h1>
-                <ul class="novel-information">
-                    <li>
-                        <icon name="fa6-solid:eye"/>
-                        <span>{{ post?.readCount ?? "?" }} 阅读</span>
-                    </li>
-                    <li>
-                        <icon name="nonicons:keyword-16"/>
-                        <span>{{ art.wordCount }} 字</span>
-                    </li>
-                    <li>
-                        <icon name="fa6-solid:pen"/>
-                        <time>{{ art.publishDate }}</time>
-                    </li>
-                    <li>
-                        <icon name="fa6-solid:clock-rotate-left"/>
-                        <time>{{ art.updateDate }}</time>
-                    </li>
-                </ul>
-            </div>
-            <nuxt-link v-visible="!art.isLast" class="novel-adjacent-top" :to="toNextRoute">
-                <span>{{ toNext }}</span>
-                <icon name="fa6-solid:chevron-right"/>
-            </nuxt-link>
-        </header>
-        <template v-if="art.encrypted && !decrypted">
-            <p class="novel-encrypted">
-                <icon name="solar:lock-password-bold"/>
-                <span>文章已加密，请输入正确的密码后查看内容</span>
-                <icon name="solar:lock-password-bold"/>
-            </p>
-            <form class="novel-decrypt" @submit.prevent="debouncedExecute">
-                <coco-input type="password" placeholder="密码" v-model="password"/>
-            </form>
-        </template>
-        <template v-else>
-            <mb-skeleton v-if="status !== `success`"/>
-            <novel-article
-                v-else
-                class="novel-text"
-                :content="post.content"
-                :enabled="art.runtime"
-                @vue:mounted="hooks.callHook(`page:reader:rendered`)"
-            />
-        </template>
-        <footer class="novel-footer">
-            <p v-if="art.ending" class="novel-endding">THE END</p>
-            <div class="novel-copyright">
-                <nuxt-img class="copyright-avatar" :src="$config.public.avatar" alt="[avatar]"/>
-                <div class="right">
-                    <div class="copyright-crumb">
-                        <span>{{ art.novelInfo.title }}</span>
-                        <icon class="text-gray" name="fa6-solid:chevron-right"/>
-                        <span>{{ art.volumeInfo.title }}</span>
-                        <icon class="text-gray" name="fa6-solid:chevron-right"/>
-                        <span>{{ art.title }}</span>
-                    </div>
-                    <p class="text-gray">本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</p>
-                </div>
-            </div>
-        </footer>
+        <novel-header :art :post/>
+        <novel-decrypt v-if="art.encrypted && !decrypted" v-model="password" @decrypt="debouncedExecute"/>
+        <mb-skeleton v-else-if="status !== `success`"/>
+        <novel-article
+            v-else
+            class="novel-text"
+            :content="post.content"
+            :enabled="art.runtime"
+            @vue:mounted="hooks.callHook(`page:reader:rendered`)"
+        />
+        <novel-footer :art/>
     </coco-widget>
-    <div class="novel-navigation">
-        <nuxt-link v-visible="!art.isFirst" class="novel-adjacent-bottom" :to="toPrevRoute">{{ toPrev }}</nuxt-link>
-        <nuxt-link v-visible="!art.isLast" class="novel-adjacent-bottom" :to="toNextRoute">{{ toNext }}</nuxt-link>
-    </div>
 </template>
 
 <style lang="scss" scoped>
-    .novel-header {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        margin-bottom: 16px;
-    }
-
-    .novel-title {
-        padding-bottom: 8px;
-        font-size: 24px;
-        line-height: 36px;
-        text-align: center;
-    }
-
-    .novel-information {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        column-gap: 18px;
-        font-size: 12px;
-        line-height: 20px;
-        color: var(--color-text-info);
-
-        > li {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-    }
-
-    .novel-encrypted {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.25em;
-        font-size: 14px;
-        line-height: 22px;
-        text-align: center;
-        color: var(--color-text-info);
-    }
-
-    .novel-decrypt {
-        max-width: 616px;
-        margin-inline: auto;
-        padding-block: 32px;
-    }
-
     .novel-text {
         font-family: v-bind("fontFamily");
         font-size: v-bind("fontSize");
-    }
-
-    .novel-endding {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5em;
-        font-size: 13px;
-        line-height: 32px;
-        color: var(--color-info-light-3);
-
-        &::before, &::after {
-            content: "";
-            width: 20%;
-            height: 1px;
-            background-color: var(--color-border-light);
-        }
-    }
-
-    .novel-copyright {
-        display: flex;
-        overflow: auto;
-        margin-top: 16px;
-        border: 1px solid var(--color-border-lighter);
-        border-radius: var(--bounded-full);
-        background-color: var(--color-background);
-        font-size: 14px;
-        line-height: 2em;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        > .right {
-            padding: 12px 16px;
-            text-wrap: nowrap;
-        }
-    }
-
-    .copyright-avatar {
-        width: 80px;
-        border-radius: var(--bounded-full);
-    }
-
-    .copyright-crumb {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    .novel-adjacent-top {
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-        color: var(--color-theme-text);
-
-        @include viewport("md") {
-            font-size: 0;
-        }
-
-        > .iconify {
-            width: 1em;
-            font-size: 42px;
-        }
-    }
-
-    .novel-navigation {
-        display: grid;
-        grid-template-columns: 0.4fr 0.4fr;
-        justify-content: space-between;
-    }
-
-    .novel-adjacent-bottom {
-        padding-block: 16px;
-        border-radius: 16px;
-        box-shadow: var(--box-shadow);
-        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
-        font-weight: bold;
-        text-align: center;
-        text-shadow: var(--text-shadow);
-        color: white;
     }
 
     @include viewport(">md") {
