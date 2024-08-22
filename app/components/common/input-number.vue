@@ -1,14 +1,13 @@
 <script lang="ts" setup>
     const props = withDefaults(defineProps<{
         accuracy?: number;
-        readonly?: boolean;
         trim?: boolean;
     }>(), {
         accuracy: 0
     });
     const modelValue = defineModel<number>();
 
-    const NUMBER_REGEX = /^(\d*)(\.\d*)?$/;
+    const NUMBER_REGEX = /^([-+]?\d*)(\.\d*)?$/;
 
     //组件根元素
     const displayValue = ref("");
@@ -43,7 +42,7 @@
     //失焦时
     function blur() {
         const match = oldDisplayValue.match(NUMBER_REGEX);
-        const i = Number(match[1]) || "0";
+        const i = Number(match[1]) || (match[1] === "-" ? "-0" : "0");
 
         let d = match[2] || ".";
         if (props.accuracy) {
@@ -61,10 +60,8 @@
 </script>
 
 <template>
-    <input
-        class="mb-input"
+    <mb-input
         :class="{ [`is-invalid`]: !isValid }"
-        :readonly
         v-model="displayValue"
         @input="input"
         @blur="blur"
