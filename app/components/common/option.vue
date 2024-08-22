@@ -15,10 +15,9 @@
         return modelValue.value === props.value;
     });
 
-    //初始更新
-    if (isEqual.value) {
-        update();
-    }
+    whenever(isEqual, update, {
+        immediate: true
+    });
 
     function update() {
         modelValue.value = props.value;
