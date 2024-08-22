@@ -21,7 +21,6 @@
         <home-blank />
     </div>
     <home-tabular />
-    <home-tool-container />
 </template>
 
 <style lang="scss" scoped>

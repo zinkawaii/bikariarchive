@@ -33,6 +33,11 @@ export default <RouterConfig> {
             }
         },
         {
+            name: "chest",
+            path: "/chest",
+            component: () => import("~/pages/chest.vue")
+        },
+        {
             name: "compact",
             path: "/compact",
             component: () => import("~/pages/compact.vue")

@@ -29,6 +29,11 @@
                     to: { name: "borrowing" }
                 },
                 {
+                    title: "工具箱",
+                    icon: "fa6-solid:screwdriver-wrench",
+                    to: { name: "chest" }
+                },
+                {
                     title: "番剧",
                     icon: "fa6-brands:bilibili",
                     to: { name: "bangumi" }
