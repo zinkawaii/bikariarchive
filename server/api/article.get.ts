@@ -15,7 +15,7 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     }
 
     //读取文章
-    res.content = await readArticle(art);
+    res.body = await readArticle(art);
 
     //获取阅读量
     const qRecords = await ReadRecordModel.find({

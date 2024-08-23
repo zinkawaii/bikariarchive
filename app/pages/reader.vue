@@ -112,8 +112,7 @@
         <novel-article
             v-else
             class="novel-text"
-            :content="post.content"
-            :enabled="art.runtime"
+            :body="post.body"
             @vue:mounted="hooks.callHook(`page:reader:rendered`)"
         />
         <novel-footer :art/>

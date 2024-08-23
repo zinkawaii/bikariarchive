@@ -92,9 +92,6 @@ export default defineNuxtConfig({
             }
         }
     },
-    vue: {
-        runtimeCompiler: true
-    },
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],

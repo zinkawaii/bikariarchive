@@ -1,7 +1,9 @@
+import type { Root } from "@bikari/process";
+
 export interface GetArticleResponse extends BaseResponse {
-    token?: string;
-    content?: string;
+    body?: Root;
     readCount?: number;
+    token?: string;
 }
 
 export interface PatchArticleBody {

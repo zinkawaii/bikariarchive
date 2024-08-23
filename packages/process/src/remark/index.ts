@@ -3,12 +3,13 @@ import { unified } from "unified";
 import $ from "node-html-parser";
 import parse from "remark-parse";
 import frontmatter from "remark-frontmatter";
-import mdc from "remark-mdc";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import raw from "rehype-raw";
 import externalLinks, { type Options as ExternalOptions } from "rehype-external-links";
 import stringify from "rehype-stringify";
+import type { Root } from "../types";
 import attributes from "./plugins/attributes";
+import compiler from "./plugins/compiler";
 import footnote from "./plugins/footnote";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
@@ -42,7 +43,6 @@ export async function parseArticle<T>(text: string) {
         .use(parse)
         .use(frontmatter)
         .use(attributes)
-        .use(mdc)
         .use(footnote)
         .use(ruby)
         .use(slug)
@@ -50,7 +50,7 @@ export async function parseArticle<T>(text: string) {
         .use(rehype, rehypeOptions)
         .use(raw)
         .use(externalLinks, externalOptions)
-        .use(stringify);
+        .use(compiler);
 
     //文本预处理
     text = text.replaceAll(/(?<=\n)<br(\s*)\/?>/g, "<p><br /></p>\n");
@@ -58,7 +58,7 @@ export async function parseArticle<T>(text: string) {
     const result = await processor.process(text);
     return {
         attributes: result.data as T,
-        content: result.value.toString()
+        body: result.result as Root
     };
 }
 

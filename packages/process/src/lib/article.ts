@@ -1,10 +1,11 @@
 import * as path from "node:path";
 import dayjs from "dayjs";
 import fs from "fs-extra";
-import $ from "node-html-parser";
+import { toString } from "mdast-util-to-string";
+import { visit } from "unist-util-visit";
 import { isDev } from "@bikari/shared";
 import { parseArticle } from "../remark";
-import type { ArticleFrontMatter } from "../types";
+import type { ArticleFrontMatter, Element } from "../types";
 import Processor from "./processor";
 
 const PATH_REGEX = /^(.*?)\.(\d+)$/;
@@ -26,7 +27,7 @@ export default new Processor({
     async parse(filename, cache) {
         //处理文件
         const file = await fs.readFile(filename);
-        const { attributes, content } = await parseArticle<ArticleFrontMatter>(file.toString());
+        const { attributes, body } = await parseArticle<ArticleFrontMatter>(file.toString());
 
         //生产环境下忽略草稿文件
         if (attributes.draft && !isDev) {
@@ -34,8 +35,8 @@ export default new Processor({
         }
 
         //写入文件
-        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".txt");
-        await fs.outputFile(outPath, content);
+        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".json");
+        await fs.outputJSON(outPath, body);
 
         const match = path.basename(path.resolve(filename, "..")).match(PATH_REGEX);
         const novel = match[1];
@@ -43,9 +44,12 @@ export default new Processor({
         const name = path.basename(filename, ".md");
 
         //解析内容
-        const doc = $.parse(content);
-        const runtime = doc.querySelectorAll("*").some((e) => e.tagName.includes("-")) || void 0;
-        const wordCount = doc.querySelectorAll("p").reduce((res, p) => res + p.textContent.length, 0);
+        let wordCount = 0;
+        visit<any, any>(body, "element", (node: Element) => {
+            if (node.tag === "p") {
+                wordCount += toString(node).length;
+            }
+        });
 
         //加密内容
         const password = String(attributes.password || "") || void 0;
@@ -72,7 +76,6 @@ export default new Processor({
             index,
             volume,
             encrypted,
-            runtime,
             wordCount,
             ...attributes
         };

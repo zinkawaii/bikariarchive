@@ -1,11 +1,11 @@
 import fs from "fs-extra";
+import type { Root } from "@bikari/process";
 import { Article } from "~/utils/Article";
 
 export async function readArticle(art: Article) {
     const { novel, volume, index } = art;
     const filename = Article.map[novel][index].name;
-    const path = r(`/dist/novel/${novel}.${volume}/${filename}.txt`);
-    const file = await fs.readFile(path);
+    const path = r(`/dist/novel/${novel}.${volume}/${filename}.json`);
 
-    return file.toString();
+    return await fs.readJSON(path) as Root;
 }

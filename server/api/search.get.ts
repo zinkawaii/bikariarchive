@@ -1,5 +1,7 @@
-import $ from "node-html-parser";
 import dayjs from "dayjs";
+import { toString } from "mdast-util-to-string";
+import { visit } from "unist-util-visit";
+import type { Element } from "@bikari/process";
 import { Article } from "~/utils/Article";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 
@@ -21,17 +23,20 @@ export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
     res.list = [];
     for (const art of jChapters) {
         //读取整章
-        const text = await readArticle(art);
-        if (!text) continue;
+        const root = await readArticle(art);
 
         //开始检索
-        const doc = $.parse(text);
-        const lines = doc.querySelectorAll("p");
+        const lines: [Element, string][] = [];
+        visit(root, "element", (node) => {
+            if (node.tag === "p") {
+                lines.push([node, toString(node)]);
+            }
+        });
 
         const position = [];
         for (let i = 0; i < lines.length; i++) {
             let pos = -1;
-            const line = lines[i].textContent;
+            const line = lines[i][1];
 
             do {
                 pos = line.indexOf(word, pos + 1);
@@ -50,13 +55,13 @@ export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
             //前后文
             const start = Math.max(line - 1, 0);
             const end = Math.min(line + 2, lines.length);
-            const parts = [...Array(end - start)].map((_, i) => lines[i + start].outerHTML);
+            const parts = [...Array(end - start)].map((_, i) => lines[i + start][0]);
 
             res.list.push({
                 novel: art.novel,
                 index: art.index,
                 count: position.length,
-                parts: parts
+                parts
             });
         }
     }

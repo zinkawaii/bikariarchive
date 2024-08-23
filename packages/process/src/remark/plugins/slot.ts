@@ -47,7 +47,6 @@ export default function() {
                 u("paragraph", children)
             ]);
             parent.children.splice(index, 1, res as any);
-            return index + 1;
         });
     };
 }

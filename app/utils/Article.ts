@@ -15,7 +15,6 @@ export class Article implements JChapter {
     draft = false;     //草稿
     encrypted = false; //加密
     ending = false;    //终章
-    runtime = false;   //运行时
     sticky = Infinity; //置顶
     wordCount = 0;     //字数
 

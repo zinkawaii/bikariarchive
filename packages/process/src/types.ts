@@ -1,3 +1,20 @@
+export interface Root {
+    type: "root";
+    children: Element[];
+}
+
+export interface Element {
+    type: "element";
+    tag: string;
+    props: Record<string, any>;
+    children: (Element | Text)[];
+}
+
+export interface Text {
+    type: "text";
+    value: string;
+}
+
 export type NovelType = "novel" | "blog";
 
 export interface JArticle<T> {
@@ -39,7 +56,6 @@ export interface ArticleFrontMatter {
     draft?: boolean;
     ending?: boolean;
     password?: string;
-    runtime?: boolean;
     sticky?: number;
 }
 
