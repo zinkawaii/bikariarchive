@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+    useHead({
+        title: "工具箱"
+    });
+
     const tools = [
         {
             title: "日文名发生装置",
