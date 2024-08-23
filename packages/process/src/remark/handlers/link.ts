@@ -1,16 +1,16 @@
-import type { Code } from "mdast";
+import type { Link } from "mdast";
 import type { Handler } from "mdast-util-to-hast";
 import type { Element } from "hast";
 
-export default <Handler> function(state, node: Code) {
+export default <Handler> function(state, node: Link) {
     const result: Element = {
         type: "element",
-        tagName: "mb-code",
+        tagName: "plain-link",
         properties: {
-            lang: node.lang,
-            raw: node.value
+            to: node.url,
+            title: node.title
         },
-        children: []
+        children: state.all(node)
     };
     state.patch(node, result);
     return state.applyData(node, result);

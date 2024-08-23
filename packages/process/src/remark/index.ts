@@ -5,7 +5,6 @@ import frontmatter from "remark-frontmatter";
 import mdc from "remark-mdc";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import raw from "rehype-raw";
-import externalLinks, { type Options as ExternalOptions } from "rehype-external-links";
 import type { Root } from "../types";
 import attributes from "./plugins/attributes";
 import compiler from "./plugins/compiler";
@@ -15,25 +14,19 @@ import slot from "./plugins/slot";
 import slug from "./plugins/slug";
 import strikethrough from "./plugins/strikethrough";
 import code from "./handlers/code";
+import link from "./handlers/link";
 
 export {
     ruby,
     strikethrough
 };
 
-const externalOptions: ExternalOptions = {
-    rel: ["noopener", "noreferrer", "nofollow"],
-    target: "_blank",
-    properties: {
-        class: "plain-link"
-    }
-};
-
 const rehypeOptions: RehypeOptions = {
     allowDangerousHtml: true,
     footnoteLabel: "参考资料",
     handlers: {
-        code
+        code,
+        link
     }
 };
 
@@ -48,7 +41,6 @@ export async function parseArticle<T>(text: string) {
         .use(strikethrough)
         .use(rehype, rehypeOptions)
         .use(raw)
-        .use(externalLinks, externalOptions)
         .use(compiler);
 
     //文本预处理
@@ -72,7 +64,6 @@ export async function parseEntry<T>(text: string) {
         .use(strikethrough)
         .use(rehype, rehypeOptions)
         .use(raw)
-        .use(externalLinks, externalOptions)
         .use(slot);
 
     //文本预处理
