@@ -1,19 +1,19 @@
 import parse from "remark-parse";
-import { ruby, strikethrough } from "@bikari/process/remark";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
-import stringify from "rehype-stringify";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
-import type { Code } from "mdast";
-import type { Element, Root } from "hast";
+import type * as hast from "hast";
+import type * as mdast from "mdast";
+import { compiler, link, ruby, strikethrough } from "@bikari/process/remark";
+import type { Root } from "@bikari/process";
 
 let shiki: Awaited<ReturnType<typeof getShikiHighlighter>>,
     options: Awaited<ReturnType<typeof resolveShikiOptions>>;
 
 //收集并加载语言
-const code = () => async (tree: Root) => {
+const code = () => async (tree: hast.Root) => {
     const languages: string[] = [];
-    visit(tree, "code", (node: Code) => {
+    visit(tree, "code", (node: mdast.Code) => {
         languages.push(node.lang);
     });
     if (languages.length) {
@@ -31,7 +31,7 @@ const rehypeOptions: RehypeOptions = {
                 ...options,
                 lang: node.lang
             }) as any;
-            const result: Element = {
+            const result: hast.Element = {
                 type: "element",
                 tagName: "pre",
                 properties: {
@@ -42,7 +42,7 @@ const rehypeOptions: RehypeOptions = {
                         type: "text",
                         value: `\`\`\`${node.lang}\n`
                     },
-                    hast,
+                    ...hast.children,
                     {
                         type: "text",
                         value: "\n```"
@@ -52,44 +52,19 @@ const rehypeOptions: RehypeOptions = {
             state.patch(node, result);
             return state.applyData(node, result);
         },
-        link(state, node) {
-            const result: Element = {
-                type: "element",
-                tagName: "a",
-                properties: {
-                    class: "plain-link",
-                    href: node.url,
-                    rel: "noopener noreferrer nofollow",
-                    target: "_blank"
-                },
-                children: node.children
-            };
-            state.patch(node, result);
-            return state.applyData(node, result);
-        }
+        link
     }
 };
 
-async function parseComment(text: string) {
+export async function parseComment(text: string) {
     const processor = unified()
         .use(parse)
         .use(ruby)
         .use(strikethrough)
         .use(code)
         .use(rehype, rehypeOptions)
-        .use(stringify);
+        .use(compiler);
 
     const result = await processor.process(text);
-    return result.value.toString();
+    return result.result as Root;
 }
-
-export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.directive("remark", async (el, binding) => {
-        el.innerHTML = `<p class="sanitized">好像说了什么，但是被清除了</p>`;
-
-        const html = await parseComment(binding.value);
-        if (html.length) {
-            el.innerHTML = html;
-        }
-    });
-});

@@ -13,6 +13,10 @@
     const dialogStore = useDialogStore();
     const userStore = useUserStore();
 
+    const body = computedAsync(() => {
+        return parseComment(props.data.content);
+    });
+
     //用户信息弹窗
     const { open, close } = dialogStore.use(() => h(CommentUser, {
         avatar: props.data.avatar,
@@ -72,7 +76,9 @@
                     <a class="comment-nickname">{{ recipient }}</a>
                 </template>
             </div>
-            <div v-remark="data.content" class="novel-text comment-text"></div>
+            <novel-article class="comment-text" :body>
+                <p class="comment-sanitized">好像说了什么，但是被清除了</p>
+            </novel-article>
             <div class="comment-info">
                 <time>{{ elapsed }}</time>
                 <a class="comment-action" @click="replyComment">
@@ -139,6 +145,10 @@
 
     .comment-text {
         margin-block: 0.5em;
+    }
+
+    .comment-sanitized {
+        color: var(--color-text-disabled);
     }
 
     .comment-info {

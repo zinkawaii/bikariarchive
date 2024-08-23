@@ -10,6 +10,9 @@
         body: () => [],
         tag: "article"
     });
+    const slots = defineSlots<{
+        default: () => any;
+    }>();
 
     const components = createComponentsMap({
         MbCode,
@@ -28,7 +31,7 @@
     function render() {
         const { body, tag } = props;
         const children = Array.isArray(body) ? body : body.children;
-        return h(tag, r(children));
+        return h(tag, children.length ? r(children) : slots.default());
 
         function r(children: Element["children"]) {
             return children.map((node) => {

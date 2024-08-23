@@ -17,6 +17,8 @@ import code from "./handlers/code";
 import link from "./handlers/link";
 
 export {
+    compiler,
+    link,
     ruby,
     strikethrough
 };

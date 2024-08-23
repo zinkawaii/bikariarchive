@@ -27,10 +27,7 @@ export function transformNodes(root: hast.Parent) {
                 children: node.children
             } as any);
         }
-        else if (
-            node.type === "text" && !node.value.trim() ||
-            node.type === "comment"
-        ) {
+        else if (node.type === "comment") {
             parent?.children.splice(index, 1);
             return index;
         }
