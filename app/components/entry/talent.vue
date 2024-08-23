@@ -28,7 +28,7 @@
                         <h3>{{ item.name }}</h3>
                     </template>
                 </hgroup>
-                <div class="novel-text" v-html="item.content"></div>
+                <novel-article :body="item.content"/>
             </template>
         </template>
         <p v-else>未知。</p>

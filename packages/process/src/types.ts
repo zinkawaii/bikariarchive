@@ -70,7 +70,7 @@ export interface JArtmap {
 
 export interface JEntry {
     title: string;
-    summary?: string;
+    summary?: Root;
     brief?: EntryBrief;
     appearance?: EntryAppearance;
     illustration?: EntryIllustration[];
@@ -103,7 +103,7 @@ export enum EntryTalentType {
 }
 
 export type EntryTalent = {
-    content: string;
+    content: Root;
 } & ({
     type: EntryTalentType.NOURYOKU;
     name: {
@@ -121,12 +121,12 @@ export type EntryTalent = {
 export interface EntryRelationship {
     name: string;
     relation: string;
-    content: string;
+    content: Root;
 }
 
 export interface EntryDetail {
     title: string;
     component?: string;
-    attrs?: Record<string, any>;
-    content?: string;
+    props?: Record<string, any>;
+    content?: Root;
 }

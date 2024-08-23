@@ -1,52 +1,26 @@
-import type { Root } from "mdast";
 import { visit } from "unist-util-visit";
-import { u } from "unist-builder";
+import type { Element, Root } from "hast";
+import { transformNodes } from "./utils";
 
 export default function() {
-    return (tree: Root) => {
-        visit(tree, "paragraph", ({ children }, index, parent) => {
-            const startRule = /^<<\s+(\S*)\n/;
-            const endRule = /<<(?:\n|$)/;
-            const start = children.at(0);
-            const end = children.at(-1);
-
-            if (start.type !== "text" || end.type !== "text") return;
-
-            let startMatch: RegExpExecArray,
-                endMatch: RegExpExecArray;
-
-            if (
-                !(startMatch = startRule.exec(start.value)) ||
-                !(endMatch = endRule.exec(end.value))
-            ) return;
-
-            if (children.length === 1) {
-                start.value = start.value.substring(
-                    startMatch[0].length,
-                    start.value.length - endMatch[0].length
-                );
+    this.compiler = (root: Root) => {
+        let slotsComp: Element | undefined;
+        visit(root, "element", (node) => {
+            if (node.tagName === "slots") {
+                slotsComp = node;
             }
-            else {
-                start.value = start.value.substring(
-                    startMatch[0].length
-                );
-                end.value = end.value.substring(
-                    0,
-                    end.value.length - endMatch[0].length
-                );
-            }
-
-            const res = u("slot", {
-                data: {
-                    hName: "slot",
-                    hProperties: {
-                        path: startMatch[1].trim()
-                    }
-                }
-            }, [
-                u("paragraph", children)
-            ]);
-            parent.children.splice(index, 1, res as any);
         });
+
+        const slots = slotsComp?.children
+            .filter((node): node is Element => node.type === "element" && node.tagName === "component-slot")
+            .map((slot) => ({
+                tag: Object.keys(slot.properties)[0].slice("v-slot:".length),
+                children: transformNodes(slot)
+            })) ?? [];
+
+        return {
+            type: "root",
+            children: slots
+        };
     };
 }

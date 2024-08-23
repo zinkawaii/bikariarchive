@@ -89,7 +89,6 @@
     "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
     "nanoid": "^5.0.7",
-    "node-html-parser": "^6.1.13",
     "nodemailer": "^6.9.14",
     "nuxt": "^3.13.0",
     "nuxt-mongoose": "^1.0.6",

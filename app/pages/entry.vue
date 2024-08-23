@@ -40,7 +40,7 @@
         <article v-else class="entry-article">
             <section class="entry-section">
                 <div class="entry-main">
-                    <div class="novel-text" v-html="data.summary"></div>
+                    <novel-article :body="data.summary"/>
                     <entry-appearance v-if="data.appearance" v-bind="data.appearance"/>
                     <entry-brief v-if="data.brief" v-bind="data.brief"/>
                 </div>
@@ -51,8 +51,8 @@
                 <entry-relationship :data="data.relationship"/>
             </template>
             <entry-section v-for="item in data.details" :title="item.title">
-                <component v-if="item.component" :is="$options.components[item.component]" v-bind="item.attrs"/>
-                <div v-else class="novel-text" v-html="item.content"></div>
+                <component v-if="item.component" :is="$options.components[item.component]" v-bind="item.props"/>
+                <novel-article v-else :body="item.content"/>
             </entry-section>
         </article>
     </coco-widget>

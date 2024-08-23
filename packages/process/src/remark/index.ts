@@ -1,12 +1,11 @@
 import { setProperty } from "dot-prop";
 import { unified } from "unified";
-import $ from "node-html-parser";
 import parse from "remark-parse";
 import frontmatter from "remark-frontmatter";
+import mdc from "remark-mdc";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import raw from "rehype-raw";
 import externalLinks, { type Options as ExternalOptions } from "rehype-external-links";
-import stringify from "rehype-stringify";
 import type { Root } from "../types";
 import attributes from "./plugins/attributes";
 import compiler from "./plugins/compiler";
@@ -67,23 +66,25 @@ export async function parseEntry<T>(text: string) {
         .use(parse)
         .use(frontmatter)
         .use(attributes)
+        .use(mdc)
         .use(footnote)
         .use(ruby)
         .use(strikethrough)
-        .use(slot)
         .use(rehype, rehypeOptions)
         .use(raw)
         .use(externalLinks, externalOptions)
-        .use(stringify);
+        .use(slot);
+
+    //文本预处理
+    text = text.replace(/(?<=\n)---/, "---\n\n::slots") + "\n\n::";
 
     const result = await processor.process(text);
     const { data } = result;
 
-    const doc = $.parse(result.value.toString());
-    const slots = doc.querySelectorAll("slot");
+    const slots = (result.result as Root).children;
     for (const slot of slots) {
-        const path = slot.getAttribute("path");
-        const content = slot.innerHTML;
+        const path = slot.tag;
+        const content = slot.children;
         setProperty(data, path, content);
     }
     return data as T;

@@ -111,7 +111,6 @@
         <mb-skeleton v-else-if="status !== `success`"/>
         <novel-article
             v-else
-            class="novel-text"
             :body="post.body"
             @vue:mounted="hooks.callHook(`page:reader:rendered`)"
         />

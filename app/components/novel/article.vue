@@ -7,6 +7,7 @@
         body: Root | Element[];
         tag?: string;
     }>(), {
+        body: () => [],
         tag: "article"
     });
 
@@ -46,5 +47,5 @@
 </script>
 
 <template>
-    <render />
+    <render class="novel-text"/>
 </template>
