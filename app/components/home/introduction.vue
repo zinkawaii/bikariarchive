@@ -1,22 +1,18 @@
 <script lang="ts" setup>
-    const intro = ref({
-        status: 0,
-        novel: Object.keys(Article.meta),
-        layer: ["outer", "inner"],
-        translate: []
-    });
+    const status = ref(0);
+    const novels = ref(Object.keys(Article.meta));
+    const layer = ref(["outer", "inner"]);
 
     //表里互换
     function exchange() {
-        intro.value.status ^= 1;
+        status.value ^= 1;
 
         //首位小说入队尾
-        const novel = intro.value.novel.shift();
-        intro.value.novel.push(novel);
+        const novel = novels.value.shift();
+        novels.value.push(novel);
 
         //交换层级
-        const { layer } = intro.value;
-        layer.reverse();
+        layer.value.reverse();
     }
 </script>
 
@@ -24,9 +20,8 @@
     <div class="home-introduction">
         <intro-card
             v-for="i in 2"
-            :style="{ translate: intro.translate[i - 1] }"
-            :layer="intro.layer[i - 1]"
-            :novel="intro.novel[intro.status ? 2 - i : i - 1]"
+            :layer="layer[i - 1]"
+            :novel="novels[status ? 2 - i : i - 1]"
             @exchange="exchange"
         />
     </div>

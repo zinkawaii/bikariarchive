@@ -13,6 +13,20 @@
     const [isExpand, toggleExpand] = useToggle(false);
     const codeEl = ref<HTMLPreElement>();
 
+    const actions = computed(() => [
+        {
+            icon: "fa6-solid:paste",
+            action() {
+                navigator.clipboard.writeText(codeEl.value.textContent);
+                toastStore.success("[copy]", "代码已复制");
+            }
+        },
+        {
+            icon: `fa6-solid:chevron-${isCollapse.value ? `left` : `down`}`,
+            action: () => toggleCollapse()
+        }
+    ]);
+
     //代码
     const code = ref(props.raw);
     onMounted(async () => {
@@ -32,25 +46,16 @@
 
     //行号
     const lineStr = computed(() => {
-        return Array.from({ length: lines.value }).map((_, i) => i + 1).join("\n");
+        return [...Array(lines.value + 1).keys()].slice(1).join("\n");
     });
-
-    //复制
-    function copy() {
-        navigator.clipboard.writeText(codeEl.value.textContent);
-        toastStore.success("[copy]", "代码已复制");
-    }
 </script>
 
 <template>
     <figure class="mb-code">
         <div class="code-header">
             <span class="text-uppercase code-lang">{{ lang }}</span>
-            <a class="code-action" @click="copy">
-                <icon name="fa6-solid:paste"/>
-            </a>
-            <a class="code-action" @click="toggleCollapse()">
-                <icon :name="`fa6-solid:chevron-${isCollapse ? `left` : `down`}`"/>
+            <a v-for="{ icon, action } in actions" class="code-action" @click="action">
+                <icon :name="icon"/>
             </a>
         </div>
         <div class="code-area" :class="{ [`is-collapse`]: isCollapse }">

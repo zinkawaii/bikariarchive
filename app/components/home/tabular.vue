@@ -6,7 +6,7 @@
 </script>
 
 <template>
-    <home-tabular-item v-for="art in jLimited" :art="art"/>
+    <home-tabular-item v-for="art in jLimited" :art/>
     <div class="content-widget home-pagination">
         <mb-pagination :total scroll-target=".tabular-item" v-model="page"/>
     </div>
