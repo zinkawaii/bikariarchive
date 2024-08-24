@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     const links = [
         {
-            title: "Github",
+            title: "GitHub",
             to: "https://github.com/KazariEX",
             icon: "fa6-brands:github"
         },
@@ -45,14 +45,14 @@
             </tbody>
         </table>
         <nav class="profile-links">
-            <nuxt-link
-                v-for="{ title, to, icon } in links"
-                class="profile-link"
-                :to
-                :title
-                target="_blank"
-                ><icon :name="icon"/>
-            </nuxt-link>
+            <mb-popper v-for="{ title, to, icon } in links" :plaintext="title">
+                <nuxt-link
+                    class="profile-link"
+                    :to
+                    target="_blank"
+                    ><icon :name="icon"/>
+                </nuxt-link>
+            </mb-popper>
         </nav>
     </div>
 </template>
