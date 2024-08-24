@@ -25,15 +25,21 @@
         :target
         :rel
         ><slot></slot>
+        <icon v-if="isExternal" class="plain-external" name="fa6-solid:arrow-up-right-from-square"/>
     </nuxt-link>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .plain-link {
         color: var(--color-link);
 
         &.is-danger {
             color: var(--color-danger);
         }
+    }
+
+    .plain-external {
+        margin-left: 4px;
+        font-size: 0.75em;
     }
 </style>
