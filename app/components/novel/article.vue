@@ -31,7 +31,7 @@
     function render() {
         const { body, tag } = props;
         const children = Array.isArray(body) ? body : body.children;
-        return h(tag, children.length ? r(children) : slots.default());
+        return h(tag, children.length ? r(children) : slots.default?.());
 
         function r(children: Element["children"]) {
             return children.map((node) => {
