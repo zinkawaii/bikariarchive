@@ -13,10 +13,7 @@
     <mb-dialog class="comment-user" @close="$emit(`close`)">
         <user-avatar :src="avatar"/>
         <span class="content-h2">{{ nickname }}</span>
-        <plain-link v-if="address" class="user-link" :to="address" target="_blank">
-            <span>{{ address }}</span>
-            <icon name="fa6-solid:arrow-up-right-from-square"/>
-        </plain-link>
+        <plain-link v-if="address" :to="address">{{ address }}</plain-link>
     </mb-dialog>
 </template>
 
@@ -32,11 +29,5 @@
 
     .user-avatar {
         width: 72px;
-    }
-
-    .user-link {
-        display: flex;
-        align-items: center;
-        gap: 4px;
     }
 </style>
