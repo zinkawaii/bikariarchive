@@ -4,7 +4,7 @@ import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type * as hast from "hast";
 import type * as mdast from "mdast";
-import { compiler, link, ruby, strikethrough } from "@bikari/process/remark";
+import { compiler, image, link, ruby, strikethrough } from "@bikari/process/remark";
 import type { Root } from "@bikari/process";
 
 let shiki: Awaited<ReturnType<typeof getShikiHighlighter>>,
@@ -52,6 +52,7 @@ const rehypeOptions: RehypeOptions = {
             state.patch(node, result);
             return state.applyData(node, result);
         },
+        image,
         link
     }
 };

@@ -14,10 +14,12 @@ import slot from "./plugins/slot";
 import slug from "./plugins/slug";
 import strikethrough from "./plugins/strikethrough";
 import code from "./handlers/code";
+import image from "./handlers/image";
 import link from "./handlers/link";
 
 export {
     compiler,
+    image,
     link,
     ruby,
     strikethrough
@@ -28,6 +30,7 @@ const rehypeOptions: RehypeOptions = {
     footnoteLabel: "参考资料",
     handlers: {
         code,
+        image,
         link
     }
 };
