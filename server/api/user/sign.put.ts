@@ -1,6 +1,6 @@
-import type { PutUserSignBody, PutUserSignResponse } from "~~/server/types/api/user/sign";
+import type { PutUserSignBody } from "~~/server/types/api/user/sign";
 
-export default defineJEventHandler<PutUserSignResponse>(async (event) => {
+export default defineJEventHandler(async (event) => {
     const { session } = event.context;
     const { content } = await readBody<PutUserSignBody>(event);
 

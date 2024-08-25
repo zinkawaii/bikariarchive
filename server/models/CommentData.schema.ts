@@ -35,8 +35,7 @@ export const CommentDataModel = defineMongooseModel<CommentDataSchema>({
             required: true
         },
         email: {
-            type: String,
-            required: true
+            type: String
         },
         address: {
             type: String

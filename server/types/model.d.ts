@@ -2,16 +2,16 @@ import type { ObjectId } from "mongoose";
 
 export interface CommentDataSchema {
     path: string;
-    parent: ObjectId;
-    children: ObjectId[];
+    parent?: ObjectId;
+    children?: ObjectId[];
     content: string;
     time: Date;
     updated: Date;
     nickname: string;
-    email: string;
-    address: string;
+    email?: string;
+    address?: string;
     ip: string;
-    user: ObjectId;
+    user?: ObjectId;
 }
 
 export interface ReadRecordSchema {
@@ -19,14 +19,14 @@ export interface ReadRecordSchema {
     time: Date;
     novel: string;
     index: string;
-    user: ObjectId;
+    user?: ObjectId;
 }
 
 export interface SearchRecordSchema {
     ip: string;
     time: Date;
     word: string;
-    user: ObjectId;
+    user?: ObjectId;
 }
 
 export interface TempVerifySchema {
