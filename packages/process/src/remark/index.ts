@@ -37,6 +37,7 @@ export async function parseArticle<T>(text: string) {
         .use(parse)
         .use(frontmatter)
         .use(attributes)
+        .use(mdc)
         .use(footnote)
         .use(ruby)
         .use(slug)
