@@ -7,6 +7,7 @@ export default <ModuleOptions> {
     urls: () => [
         "/about",
         "/borrowing",
+        "/chest",
         "/compact",
         "/details",
         "/friend",
