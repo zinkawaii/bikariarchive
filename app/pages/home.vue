@@ -1,6 +1,11 @@
 <script lang="ts" setup>
+    const config = useRuntimeConfig();
+
     useHead({
-        title: "主页"
+        title: "主页",
+        link: [
+            { rel: "canonical", href: `https://${config.public.domain}` }
+        ]
     });
 </script>
 
