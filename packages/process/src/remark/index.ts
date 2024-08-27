@@ -65,7 +65,6 @@ export async function parseEntry<T>(text: string) {
         .use(frontmatter)
         .use(attributes)
         .use(mdc)
-        .use(footnote)
         .use(ruby)
         .use(strikethrough)
         .use(rehype, rehypeOptions)
