@@ -5,7 +5,6 @@ import frontmatter from "remark-frontmatter";
 import mdc from "remark-mdc";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import raw from "rehype-raw";
-import type { Root } from "../types";
 import attributes from "./plugins/attributes";
 import compiler from "./plugins/compiler";
 import footnote from "./plugins/footnote";
@@ -16,6 +15,7 @@ import strikethrough from "./plugins/strikethrough";
 import code from "./handlers/code";
 import image from "./handlers/image";
 import link from "./handlers/link";
+import type { Root } from "./types";
 
 export {
     compiler,

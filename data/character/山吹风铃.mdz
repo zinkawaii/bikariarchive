@@ -10,7 +10,7 @@ brief:
   age: 13
 appearance:
   novel: bikari
-  index: 101
+  index: "101"
 illustration:
   - title: 立绘
     src: /garden/illustration/山吹风铃_1.jpg

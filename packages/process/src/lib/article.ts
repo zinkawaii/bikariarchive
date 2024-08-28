@@ -5,7 +5,8 @@ import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 import { isDev } from "@bikari/shared";
 import { parseArticle } from "../remark";
-import type { ArticleFrontMatter, Element } from "../types";
+import type { Element } from "../remark/types";
+import type { ArticleFrontmatter } from "./types";
 import Processor from "./processor";
 
 const PATH_REGEX = /^(.*?)\.(\d+)$/;
@@ -15,7 +16,7 @@ export default new Processor({
     source: {
         src: "data/novel",
         out: "dist/novel",
-        pattern: "**/*.md"
+        pattern: "**/*.mdz"
     },
     meta: {
         src: "app/assets/json/Article.json",
@@ -27,7 +28,7 @@ export default new Processor({
     async parse(filename, cache) {
         //处理文件
         const file = await fs.readFile(filename);
-        const { attributes, body } = await parseArticle<ArticleFrontMatter>(file.toString());
+        const { attributes, body } = await parseArticle<ArticleFrontmatter>(file.toString());
 
         //生产环境下忽略草稿文件
         if (attributes.draft && !isDev) {

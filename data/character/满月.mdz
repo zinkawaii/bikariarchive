@@ -10,7 +10,7 @@ brief:
   age: 13
 appearance:
   novel: bikari
-  index: 213
+  index: "213"
 illustration:
 talent:
   - type: 超能力

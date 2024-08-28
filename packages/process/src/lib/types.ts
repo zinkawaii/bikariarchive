@@ -1,19 +1,4 @@
-export interface Root {
-    type: "root";
-    children: Element[];
-}
-
-export interface Element {
-    type: "element";
-    tag: string;
-    props: Record<string, any>;
-    children: (Element | Text)[];
-}
-
-export interface Text {
-    type: "text";
-    value: string;
-}
+import type { Root } from "../remark/types";
 
 export type NovelType = "novel" | "blog";
 
@@ -27,25 +12,25 @@ export interface JNovel<T> {
     type: NovelType;
     tag: string[];
     synopsis: string;
-    cover: string;
+    cover?: string;
     volumes: JVolume[];
     chapters: T[];
 }
 
 export interface JVolume {
     title: string;
-    cover: string;
-    ending: boolean;
+    cover?: string;
+    ending?: boolean;
 }
 
-export interface JChapter extends Omit<ArticleFrontMatter, "abbrlink" | "password"> {
+export interface JChapter extends Omit<ArticleFrontmatter, "abbrlink" | "password"> {
     index: string;
     volume: number;
     encrypted?: boolean;
     wordCount: number;
 }
 
-export interface ArticleFrontMatter {
+export interface ArticleFrontmatter {
     title: string;
     excerpt?: string;
     abbrlink?: string;
@@ -96,16 +81,12 @@ export interface EntryIllustration {
     illustrator: string;
 }
 
-export enum EntryTalentType {
-    NOURYOKU = "超能力",
-    TAISHITSU = "体质",
-    GANBOU = "愿望"
-}
+export type EntryTalentType = "超能力" | "体质" | "愿望";
 
 export type EntryTalent = {
-    content: Root;
+    content?: Root;
 } & ({
-    type: EntryTalentType.NOURYOKU;
+    type: "超能力";
     name: {
         zh: string;
         jp: string;
@@ -114,14 +95,14 @@ export type EntryTalent = {
     star: number;
     class: string[];
 } | {
-    type: Exclude<EntryTalentType, EntryTalentType.NOURYOKU>;
+    type: Exclude<EntryTalentType, "超能力">;
     name: string;
 });
 
 export interface EntryRelationship {
     name: string;
     relation: string;
-    content: Root;
+    content?: Root;
 }
 
 export interface EntryDetail {

@@ -10,7 +10,7 @@ brief:
   age: 15
 appearance:
   novel: bikari
-  index: 111
+  index: "111"
 illustration:
   - title: 人物卡
     src: /garden/illustration/若叶舞_2.jpg

@@ -10,7 +10,7 @@ brief:
   age: 15
 appearance:
   novel: bikari
-  index: 108
+  index: "108"
 illustration:
   - title: 立绘
     src: /garden/illustration/浅井爱纱_1.jpg

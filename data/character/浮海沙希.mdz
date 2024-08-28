@@ -10,7 +10,7 @@ brief:
   age: 15
 appearance:
   novel: bikari
-  index: 300
+  index: "300"
 illustration:
 talent:
 relationship:
