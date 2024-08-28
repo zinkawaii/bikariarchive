@@ -2,10 +2,18 @@
     import type { OutlineHeaderItem } from "~/types/outline";
 
     const { hooks } = useHookStore();
+    const { width } = useWindowSize();
 
-    let linkEl: HTMLAnchorElement = null;
-    let flatHeaders: OutlineHeaderItem[] = [];
+    const activeLink = ref<string>();
+    const flatHeaders = shallowRef<OutlineHeaderItem[]>([]);
     const nestedHeaders = shallowRef<OutlineHeaderItem[]>([]);
+
+    const headerOffsets = computedWithControl(() => [flatHeaders.value, width.value], () => {
+        return flatHeaders.value?.map(({ element, link }) => ({
+            link,
+            top: getPosition(element).top
+        })) ?? [];
+    });
 
     //列表模板重用
     const [DefineOutlineList, OutlineList] = createReusableTemplate<{
@@ -19,7 +27,7 @@
     hooks.hook("page:reader:rendered", () => {
         const headingEls = document.querySelectorAll<HTMLHeadingElement>(".novel-text :where(h2, h3):not(.sr-only)");
 
-        flatHeaders = [...headingEls]
+        flatHeaders.value = [...headingEls]
         .map((el) => ({
             element: el,
             title: el.textContent,
@@ -30,11 +38,11 @@
         .filter((el) => el.level <= 3);
 
         nestedHeaders.value = [];
-        outer: for (let i = 0; i < flatHeaders.length; i++) {
-            const cur = flatHeaders[i];
+        outer: for (let i = 0; i < flatHeaders.value.length; i++) {
+            const cur = flatHeaders.value[i];
             if (i > 0) {
                 for (let j = i - 1; j >= 0; j--) {
-                    const prev = flatHeaders[j];
+                    const prev = flatHeaders.value[j];
                     if (prev.level < cur.level) {
                         prev.children.push(cur);
                         continue outer;
@@ -50,44 +58,36 @@
         const { scrollY, innerHeight } = window;
         const { offsetHeight } = document.body;
 
-        const topedHeaders = flatHeaders.map(({ element, link }) => ({
-            link,
-            top: getPosition(element).top
-        }));
-
-        if (!topedHeaders.length || scrollY < 1) {
-            activateLink(null);
+        if (!headerOffsets.value.length || scrollY < 1) {
+            activeLink.value = null;
             return;
         }
 
         if (Math.abs(scrollY + innerHeight - offsetHeight) < 1) {
-            activateLink(topedHeaders.at(-1).link);
+            activeLink.value = headerOffsets.value.at(-1).link;
             return;
         }
 
-        let activeLink = null;
-        for (const { link, top } of topedHeaders) {
+        for (const { link, top } of headerOffsets.value) {
             if (top > scrollY + 80) {
                 break;
             }
-            activeLink = link;
+            activeLink.value = link;
         }
-        activateLink(activeLink);
     }));
-
-    //更新激活链接
-    function activateLink(hash: string) {
-        linkEl?.classList.remove("is-active");
-        linkEl = document.querySelector(`.aside-anchor[href="${decodeURIComponent(hash)}"]`);
-        linkEl?.classList.add("is-active");
-    }
 </script>
 
 <template>
     <define-outline-list v-slot="{ headers, root }">
         <ul class="outline-list" :class="{ [`aside-limited`]: root }">
             <li v-for="{ title, link, children } in headers" class="outline-item">
-                <a class="text-truncate aside-anchor" :href="link">{{ title }}</a>
+                <a
+                    class="text-truncate aside-anchor"
+                    :class="{
+                        [`is-active`]: link === activeLink
+                    }"
+                    :href="link"
+                >{{ title }}</a>
                 <outline-list v-if="children.length" :headers="children"/>
             </li>
         </ul>
