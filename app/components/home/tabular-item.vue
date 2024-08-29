@@ -73,7 +73,6 @@
     .tabular-background {
         display: grid;
         flex: 0.75;
-        align-content: center;
         position: relative;
         overflow: hidden;
         height: 160px;
@@ -107,7 +106,9 @@
     }
 
     .tabular-cover {
-        position: relative;
+        position: absolute;
+        height: 100%;
+        object-fit: cover;
     }
 
     .tabular-wrapper {
