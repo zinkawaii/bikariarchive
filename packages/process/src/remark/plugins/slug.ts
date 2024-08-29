@@ -5,7 +5,7 @@ import { toString } from "mdast-util-to-string";
 
 export default function() {
     const slugger = new GithubSlugger();
-    const numerics = "ABCDEFGHIJ";
+    const numerics = "OABCDEFGHI";
 
     return (tree: Root) => {
         slugger.reset();
