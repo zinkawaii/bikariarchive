@@ -12,6 +12,9 @@ appearance:
   novel: bikari
   index: "204"
 illustration:
+  - title: 立绘
+    src: /garden/illustration/浅井花环_1.webp
+    illustrator: 狸猫森
 talent:
 relationship:
   - name: 浅井爱纱
