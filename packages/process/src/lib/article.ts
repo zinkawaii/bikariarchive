@@ -36,13 +36,13 @@ export default new Processor({
         }
 
         //写入文件
-        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".json");
+        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".mdz", ".json");
         await fs.outputJSON(outPath, body);
 
         const match = path.basename(path.resolve(filename, "..")).match(PATH_REGEX);
         const novel = match[1];
         const volume = Number(match[2]);
-        const name = path.basename(filename, ".md");
+        const name = path.basename(filename, ".mdz");
 
         //解析内容
         let wordCount = 0;

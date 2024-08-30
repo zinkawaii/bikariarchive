@@ -30,14 +30,14 @@ export default new Processor({
         const attributes = await parseEntry<JEntry>(file.toString());
 
         //写入文件
-        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".md", ".json");
+        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".mdz", ".json");
         await fs.outputJson(outPath, attributes);
     },
     beforeBuild(filelist) {
         this.jMeta.all = [];
 
         for (const filename of filelist) {
-            const name = path.basename(filename, ".md");
+            const name = path.basename(filename, ".mdz");
             this.jMeta.all.push(name);
 
             for (const folder of folders) {
