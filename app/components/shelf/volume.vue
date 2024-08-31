@@ -9,12 +9,15 @@
 
 <template>
     <ul class="shelf-volume">
-        <li v-for="(title, i) in volumes">
-            <a
-                class="shevo-link"
-                :class="{ checked: currentVolumeIdx === i }"
-                @click="shelfStore.selectVolume(i)"
-            >{{ title }}</a>
+        <li
+            v-for="(title, i) in volumes"
+            class="shevo-item"
+            :class="{
+                checked: currentVolumeIdx === i
+            }"
+            @click="shelfStore.selectVolume(i)"
+            ><span class="font-italic text-gray text-small">#{{ i + 1 }}</span>
+            <span>{{ title }}</span>
         </li>
     </ul>
 </template>
@@ -23,18 +26,16 @@
     .shelf-volume {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+        gap: 4px 8px;
     }
 
-    .shevo-link {
+    .shevo-item {
         display: flex;
-        justify-content: center;
-        border: 1px solid transparent;
-        border-radius: 4px;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px dashed var(--color-border-light);
         line-height: 32px;
-
-        &:hover {
-            border-color: var(--color-theme-dark);
-        }
+        cursor: pointer;
 
         &.checked {
             color: var(--color-theme-text);

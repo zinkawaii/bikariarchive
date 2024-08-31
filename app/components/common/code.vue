@@ -46,7 +46,7 @@
 
     //行号
     const lineStr = computed(() => {
-        return [...Array(lines.value + 1).keys()].slice(1).join("\n");
+        return [...new Array(lines.value + 1).keys()].slice(1).join("\n");
     });
 </script>
 

@@ -11,17 +11,19 @@ let shiki: Awaited<ReturnType<typeof getShikiHighlighter>>,
     options: Awaited<ReturnType<typeof resolveShikiOptions>>;
 
 //收集并加载语言
-const code = () => async (tree: hast.Root) => {
-    const languages: string[] = [];
-    visit(tree, "code", (node: mdast.Code) => {
-        languages.push(node.lang);
-    });
-    if (languages.length) {
-        shiki ??= await getShikiHighlighter();
-        options ??= await resolveShikiOptions(highlightOptions);
-        await loadShikiLanguages(...languages);
-    }
-};
+function code() {
+    return async (tree: hast.Root) => {
+        const languages: string[] = [];
+        visit(tree, "code", (node: mdast.Code) => {
+            languages.push(node.lang);
+        });
+        if (languages.length) {
+            shiki ??= await getShikiHighlighter();
+            options ??= await resolveShikiOptions(highlightOptions);
+            await loadShikiLanguages(...languages);
+        }
+    };
+}
 
 //代码高亮与格式转换
 const rehypeOptions: RehypeOptions = {
@@ -30,7 +32,7 @@ const rehypeOptions: RehypeOptions = {
             const hast = shiki.codeToHast(node.value, {
                 ...options,
                 lang: node.lang
-            }) as any;
+            });
             const result: hast.Element = {
                 type: "element",
                 tagName: "pre",
@@ -42,7 +44,7 @@ const rehypeOptions: RehypeOptions = {
                         type: "text",
                         value: `\`\`\`${node.lang}\n`
                     },
-                    ...hast.children,
+                    ...hast.children as hast.ElementContent[],
                     {
                         type: "text",
                         value: "\n```"

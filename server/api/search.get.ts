@@ -55,7 +55,7 @@ export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
             //前后文
             const start = Math.max(line - 1, 0);
             const end = Math.min(line + 2, lines.length);
-            const parts = [...Array(end - start)].map((_, i) => lines[i + start][0]);
+            const parts = [...new Array(end - start)].map((_, i) => lines[i + start][0]);
 
             res.list.push({
                 novel: art.novel,

@@ -21,7 +21,11 @@
 <style lang="scss" scoped>
     .gallery-illustration {
         display: grid;
-        grid-gap: 16px;
+        grid-gap: 8px;
+
+        :deep(> .mb-image) {
+            margin-block: 0;
+        }
     }
 
     .gallery-illustrator {

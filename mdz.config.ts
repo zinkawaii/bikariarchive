@@ -19,8 +19,7 @@ export default {
             import: [
                 "@bikari/process",
                 "ArticleFrontmatter"
-            ],
-            skipTemplate: true
+            ]
         }
     ]
 };

@@ -351,7 +351,7 @@ textarea {
         scroll-margin-top: 80px;
     }
 
-    :where(.mb-chat, .mb-code, .mb-gallery) {
+    :where(.mb-code, .mb-gallery, .mb-image) {
         margin-block: 16px;
     }
 
@@ -392,10 +392,6 @@ textarea {
 }
 
 .comment-text {
-    blockquote {
-        margin-inline: 0;
-    }
-
     ol {
         padding-left: 2em;
     }
@@ -408,9 +404,9 @@ textarea {
         text-indent: 0;
     }
 
-    pre {
+    .shiki {
         margin-top: 7px;
-        padding-top: 4px;
+        padding-top: 3px;
         font-family: var(--font-code);
         font-size: 14px;
         line-height: 20px;

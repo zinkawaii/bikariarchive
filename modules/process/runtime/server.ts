@@ -18,19 +18,19 @@ export default defineNitroPlugin(async () => {
         chokidar.watch(list)
         .on("change", update);
     }
+});
 
-    async function update(path: string) {
-        const name = basename(path, ".json");
-        const data = await fs.readJson(path);
-        switch (name) {
-            case "Article": {
-                enrichJArticle(data);
-                break;
-            }
-            case "Artmap": {
-                Article.map = data;
-                break;
-            }
+async function update(path: string) {
+    const name = basename(path, ".json");
+    const data = await fs.readJson(path);
+    switch (name) {
+        case "Article": {
+            enrichJArticle(data);
+            break;
+        }
+        case "Artmap": {
+            Article.map = data;
+            break;
         }
     }
-});
+}
