@@ -10,7 +10,7 @@
         return Article.for(props.novel, props.index);
     });
 
-    const partComp = ref();
+    const partComp = useTemplateRef("part");
     useHighlight(partComp, searchWord, {
         name: "danger"
     });
@@ -20,7 +20,7 @@
     <nuxt-link class="search-result" :to="art.route">
         <h3 class="result-title">{{ art.title }}</h3>
         <span class="result-info">{{ art.volumeInfo.title }}</span>
-        <novel-article ref="partComp" class="result-part" :body="parts"/>
+        <novel-article ref="part" class="result-part" :body="parts"/>
         <span class="result-info result-right">本章共出现 {{ count }} 次</span>
     </nuxt-link>
 </template>

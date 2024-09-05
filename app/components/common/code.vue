@@ -11,7 +11,7 @@
     const toastStore = useToastStore();
     const [isCollapse, toggleCollapse] = useToggle(false);
     const [isExpand, toggleExpand] = useToggle(false);
-    const codeEl = ref<HTMLPreElement>();
+    const codeEl = useTemplateRef("code");
 
     const actions = computed(() => [
         {
@@ -61,7 +61,7 @@
         <div class="code-area" :class="{ [`is-collapse`]: isCollapse }">
             <div class="code-inner" :class="{ [`is-expand`]: isExpand }">
                 <pre class="code-line">{{ lineStr }}</pre>
-                <pre ref="codeEl" class="shiki code-content" v-html="code"></pre>
+                <pre ref="code" class="shiki code-content" v-html="code"></pre>
                 <a v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
                     <icon :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
                 </a>

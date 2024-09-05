@@ -5,8 +5,10 @@
     const settingStore = useSettingStore();
 
     let audio: HTMLAudioElement = null;
-    const maeComp = ref();
-    const maeEl = useCurrentElement<HTMLImageElement>(maeComp);
+
+    const maeComp = useTemplateRef("mae");
+    const maeEl = useCurrentElement(maeComp);
+
     const serif = ref("");
     const skin = useLocalStorage("maestrale-skin", 0);
     const isAuto = useLocalStorage("maestrale-auto", false);
@@ -96,7 +98,7 @@
     <div class="z-maestrale" :class="{ [`is-collapse`]: settingStore.setting[`ui-collapse`] }">
         <client-only>
             <nuxt-img
-                ref="maeComp"
+                ref="mae"
                 class="maestrale-dollfie"
                 :src="`/garden/maestrale/skin_${skin}.png`"
                 alt="[maestrale]"

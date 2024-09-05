@@ -7,8 +7,8 @@
         alt?: string;
     }>();
 
-    const imgComp = ref();
-    const imgEl = useCurrentElement<HTMLImageElement>(imgComp);
+    const imgComp = useTemplateRef("img");
+    const imgEl = useCurrentElement(imgComp);
     const dialogStore = useDialogStore();
 
     const { open, close } = dialogStore.use(() => h(MbImageViewer, {
@@ -27,7 +27,7 @@
 <template>
     <figure class="mb-image">
         <nuxt-img
-            ref="imgComp"
+            ref="img"
             class="cursor-pointer"
             :src
             :alt

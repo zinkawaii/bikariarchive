@@ -7,7 +7,7 @@
     }>();
     const modelValue = defineModel<number>();
 
-    const rootEl = useCurrentElement<HTMLElement>();
+    const rootEl = useTemplateRef("root");
     const rate = ref(0);
 
     let p_width = 0;
@@ -43,7 +43,7 @@
 </script>
 
 <template>
-    <div class="mb-slider">
+    <div ref="root" class="mb-slider">
         <div class="slider-track">
             <div class="slider-rate" :style="{ scale: `${displayRate} 1` }"></div>
         </div>

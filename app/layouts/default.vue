@@ -4,9 +4,7 @@
 
 <template>
     <div class="jumbotron-wrapper"></div>
-    <client-only>
-        <z-background />
-    </client-only>
+    <z-background />
     <z-header />
     <z-navbar />
     <z-toolbar />

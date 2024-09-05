@@ -7,7 +7,8 @@
         close: [];
     }>();
 
-    const rootEl = useCurrentElement<HTMLImageElement>();
+    const rootComp = useTemplateRef("root");
+    const rootEl = useCurrentElement(rootComp);
 
     //放大后占窗口比率
     const rate = 0.9;
@@ -117,6 +118,7 @@
     <transition @enter="onEnter" @leave="onLeave">
         <nuxt-img
             v-if="opening"
+            ref="root"
             class="image-viewer"
             :src="target.src"
             @mousewheel.prevent="onMouseWheel"

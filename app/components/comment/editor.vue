@@ -11,7 +11,7 @@
         return modelValue.value.replaceAll(/\s/g, "").length;
     });
 
-    const editorEl = ref<HTMLTextAreaElement>();
+    const editorEl = useTemplateRef("editor");
     usePlainShiki(editorEl, {
         lang: "markdown",
         selector: (theme) => `[z-${theme}]`
@@ -31,7 +31,7 @@
 
 <template>
     <div
-        ref="editorEl"
+        ref="editor"
         class="panel-editor"
         contenteditable="plaintext-only"
         @beforeinput="checkLength"

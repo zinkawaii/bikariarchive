@@ -11,7 +11,7 @@
     const modelValue = defineModel<number>();
 
     //组件根元素
-    const rootEl = useCurrentElement<HTMLElement>();
+    const rootEl = useTemplateRef("root");
 
     //总页数
     const totalPages = computed(() => {
@@ -47,7 +47,7 @@
 </script>
 
 <template>
-    <div class="mb-pagination">
+    <div ref="root" class="mb-pagination">
         <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === 1 }" @click="modelValue--">
             <icon name="fa6-solid:chevron-left"/>
         </a>

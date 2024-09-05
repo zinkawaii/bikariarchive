@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-    const router = useRouter();
-    const rootEl = useCurrentElement<HTMLElement>();
     const contextMenuStore = useContextMenuStore();
     const settingStore = useSettingStore();
     const toastStore = useToastStore();
+    const router = useRouter();
+    const rootEl = useTemplateRef("root");
     const textSelection = useTextSelection();
 
     const toolItems = [
@@ -124,7 +124,7 @@
 
 <template>
     <transition-scale :duration="0.25">
-        <div v-show="contextMenuStore.isOpened" class="content-widget z-context-menu">
+        <div v-show="contextMenuStore.isOpened" ref="root" class="content-widget z-context-menu">
             <menu class="menu-tools">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
                     <icon :name="icon"/>

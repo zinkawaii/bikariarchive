@@ -3,7 +3,7 @@
 
     const modelValue = defineModel<T>();
 
-    const rootEl = useCurrentElement<HTMLElement>();
+    const rootEl = useTemplateRef("root");
     const [isDrop, toggleDrop] = useToggle(false);
 
     const titleRef = ref<MaybeRefOrGetter<string>>();
@@ -22,6 +22,7 @@
 
 <template>
     <div
+        ref="root"
         class="mb-select"
         tabindex="-1"
         @focus="toggleDrop(true)"

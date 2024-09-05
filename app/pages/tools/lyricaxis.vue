@@ -42,7 +42,7 @@
     const currentLyric = ref(0);
 
     //音频对象
-    const audioEl = ref<HTMLAudioElement>();
+    const audioEl = useTemplateRef("audio");
 
     //音频可以播放
     useEventListener(audioEl, "canplay", () => {
@@ -230,7 +230,7 @@
 
 <template>
     <coco-widget>
-        <audio ref="audioEl"></audio>
+        <audio ref="audio"></audio>
         <div class="text-small">
             <div class="lyric-operator">
                 <mb-button @click="upload">上传</mb-button>
