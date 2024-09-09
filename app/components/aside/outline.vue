@@ -2,13 +2,13 @@
     import type { OutlineHeaderItem } from "~/types/outline";
 
     const { hooks } = useHookStore();
-    const { width } = useWindowSize();
+    const { height } = useElementSize(document?.body);
 
     const activeLink = ref<string>();
     const flatHeaders = shallowRef<OutlineHeaderItem[]>([]);
     const nestedHeaders = shallowRef<OutlineHeaderItem[]>([]);
 
-    const headerOffsets = computedWithControl(() => [flatHeaders.value, width.value], () => {
+    const headerOffsets = computedWithControl(() => [flatHeaders.value, height.value], () => {
         return flatHeaders.value?.map(({ element, link }) => ({
             link,
             top: getPosition(element).top
@@ -56,14 +56,13 @@
     //页面滚动时
     useEventListener("scroll", Zin.throttle(() => {
         const { scrollY, innerHeight } = window;
-        const { offsetHeight } = document.body;
 
         if (!headerOffsets.value.length || scrollY < 1) {
             activeLink.value = null;
             return;
         }
 
-        if (Math.abs(scrollY + innerHeight - offsetHeight) < 1) {
+        if (Math.abs(scrollY + innerHeight - height.value) < 1) {
             activeLink.value = headerOffsets.value.at(-1).link;
             return;
         }
