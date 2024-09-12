@@ -14,13 +14,13 @@ export function timer(sign, func) {
         performance.mark(start);
 
         //运行函数
-        await func.call(this, ...args);
+        const output = await func.call(this, ...args) ?? true;
 
         //结束标记
         performance.mark(end);
 
         //计算时长
         const measure = performance.measure(full, start, end);
-        consola.success(`${sign} -- ${measure.duration.toFixed(0)}ms`);
+        output && consola.success(`${sign} -- ${measure.duration.toFixed(0)}ms`);
     };
 }
