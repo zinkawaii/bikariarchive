@@ -97,23 +97,20 @@ export class Article implements JChapter {
     static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>) {
         if (typeof novel !== "string" || typeof index !== "string") {
             return computed(() => {
-                try {
-                    return Article.for(toValue(novel), toValue(index));
-                }
-                catch {
-                    return null;
-                }
+                const novelVal = toValue(novel) ?? "";
+                const indexVal = toValue(index) ?? "";
+                return Article.for(novelVal, indexVal);
             });
         }
 
         const jNovel = this.meta[novel];
         if (!jNovel) {
-            throw new Error("[novel] is invalid.");
+            return null;
         }
 
         const order = jNovel.chapters.findIndex((c) => c.index === index);
         if (order === -1) {
-            throw new Error("[index] is invalid.");
+            return null;
         }
 
         const jChapter = jNovel.chapters[order];

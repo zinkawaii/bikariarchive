@@ -12,6 +12,9 @@
 
     //初始化
     const art = Article.for(novel, index);
+    if (!art) {
+        throw new Error(`Article(${novel}, ${index}) is invalid.`);
+    }
 
     //设置元信息
     useSeoMeta({
