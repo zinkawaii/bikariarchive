@@ -3,9 +3,7 @@
 
     const props = defineProps<EntryAppearance>();
 
-    const art = computed(() => {
-        return Article.for(props.novel, props.index);
-    });
+    const art = Article.for(() => props.novel, () => props.index);
 </script>
 
 <template>

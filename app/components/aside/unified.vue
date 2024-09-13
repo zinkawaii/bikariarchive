@@ -5,14 +5,11 @@
     }>();
 
     //当前章节
-    const art = computed(() => {
-        const { novel, index } = params.value;
-        return Article.for(novel, index);
-    });
+    const art = Article.for(() => params.value.novel, () => params.value.index);
 </script>
 
 <template>
-    <aside-catalog v-if="art.novelInfo.type === `novel`" :art/>
+    <aside-catalog v-if="art?.novelInfo.type === `novel`" :art/>
     <aside-outline v-else/>
 </template>
 

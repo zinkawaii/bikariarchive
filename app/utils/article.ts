@@ -92,7 +92,20 @@ export class Article implements JChapter {
     static map: JArtmap;
 
     //根据参数获取章节单例
-    static for(novel: string, index: string) {
+    static for(novel: string, index: string): Article;
+    static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>): ComputedRef<Article>;
+    static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>) {
+        if (typeof novel !== "string" || typeof index !== "string") {
+            return computed(() => {
+                try {
+                    return Article.for(toValue(novel), toValue(index));
+                }
+                catch {
+                    return null;
+                }
+            });
+        }
+
         const jNovel = this.meta[novel];
         if (!jNovel) {
             throw new Error("[novel] is invalid.");

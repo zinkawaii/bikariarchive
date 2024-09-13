@@ -6,9 +6,7 @@
 
     const { searchWord } = inject(injectionKey);
 
-    const art = computed(() => {
-        return Article.for(props.novel, props.index);
-    });
+    const art = Article.for(() => props.novel, () => props.index);
 
     const partComp = useTemplateRef("part");
     useHighlight(partComp, searchWord, {
