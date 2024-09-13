@@ -43,11 +43,6 @@ export default <RouterConfig> {
             component: () => import("~/pages/compact.vue")
         },
         {
-            name: "details",
-            path: "/details",
-            component: () => import("~/pages/details.vue")
-        },
-        {
             name: "friend",
             path: "/friend",
             component: () => import("~/pages/friend.vue"),
@@ -60,6 +55,11 @@ export default <RouterConfig> {
             path: "/home",
             alias: "/",
             component: () => import("~/pages/home.vue")
+        },
+        {
+            name: "intel",
+            path: "/intel",
+            component: () => import("~/pages/intel.vue")
         },
         {
             name: "reader",
@@ -104,7 +104,7 @@ export default <RouterConfig> {
             meta: {
                 comment: true,
                 breadcrumb: {
-                    name: "details"
+                    name: "intel"
                 }
             }
         },

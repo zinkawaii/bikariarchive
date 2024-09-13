@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-    import jEntry from "~~/dist/json/Entry.json";
-
     const props = defineProps<{
         title: string | string[];
     }>();
@@ -15,7 +13,7 @@
     const displayName = isArray ? props.title[1] : props.title;
 
     //是否存在
-    const isExist = jEntry.all.includes(name);
+    const isExist = Entry.meta.all.includes(name);
 </script>
 
 <template>

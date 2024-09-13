@@ -1,6 +1,5 @@
 <script lang="ts" setup>
     import { EntryKnownAbility } from "#components";
-    import jEntry from "~~/dist/json/Entry.json";
 
     defineOptions({
         components: {
@@ -16,7 +15,7 @@
     });
 
     const route = useRoute();
-    const isExist = jEntry.all.includes(title);
+    const isExist = Entry.meta.all.includes(title);
 
     const { status, data } = useLazyFetch("/api/entry", {
         query: {

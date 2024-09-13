@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-    import jEntry from "~~/dist/json/Entry.json";
-
     useHead({
         title: "情报"
     });
@@ -8,7 +6,7 @@
 
 <template>
     <coco-widget title="情报">
-        <div v-for="block in jEntry.blocks" class="detail-block">
+        <div v-for="block in Entry.meta.blocks" class="detail-block">
             <div class="detail-header">
                 <nuxt-img class="detail-icon" :src="block.icon" alt="[icon]"/>
                 <span>{{ block.title }}</span>

@@ -12,6 +12,6 @@ export default defineConfig({
     clean: true,
     dts: true,
     define: {
-        __HASH__: `${new Date().getTime()}`
+        __TIME__: `${new Date().getTime()}`
     }
 });

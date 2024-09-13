@@ -1,4 +1,4 @@
-import { Article } from "~/utils/Article";
+import { Article } from "~/utils/article";
 
 export const useShelfStore = defineStore("shelf", () => {
     const novel = ref("bikari");

@@ -58,7 +58,7 @@ export default class Processor {
         this.sources = resolve(this.sourceSrcDir, options.source.pattern);
     }
 
-    build() {
+    async build() {
         const parse = timer(this.options.sign, async () => {
             this.options.beforeBuild.call(this);
 
@@ -72,10 +72,10 @@ export default class Processor {
             await this.outputMeta();
         });
 
-        parse();
+        await parse();
     }
 
-    watch() {
+    async watch() {
         const parse = timer(this.options.sign, async (event: string, filename: string) => {
             if (event === "change" && !await this.parse(filename)) {
                 return false;
@@ -89,8 +89,9 @@ export default class Processor {
             await this.outputMeta();
         });
 
-        chokidar.watch(this.sources)
-        .on("all", parse);
+        const filelist = await this.resolveFilelist();
+        const watcher = chokidar.watch(filelist, {});
+        watcher.on("all", parse);
     }
 
     async parse(filename: string, order?: number, insert?: boolean) {
@@ -161,7 +162,7 @@ export default class Processor {
     }
 
     async outputMeta() {
-        const jMeta = this.options.beforeOutputMeta?.call(this) || this.jMeta;
+        const jMeta = this.options.beforeOutputMeta.call(this);
 
         //同步写入防止在监听时获取空字符串
         fs.outputJsonSync(this.cacheDir, this.jCache);
@@ -171,8 +172,8 @@ export default class Processor {
 }
 
 //从构建时间戳生成盐
-declare const __HASH__: string;
-const salt = CryptoES.MD5(__HASH__);
+declare const __TIME__: string;
+const salt = CryptoES.MD5(__TIME__);
 
 //合成大哈希
 function resolveHash(text: string) {

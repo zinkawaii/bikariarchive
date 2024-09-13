@@ -1,5 +1,5 @@
 import CryptoES from "crypto-es";
-import { Article } from "~/utils/Article";
+import { Article } from "~/utils/article";
 import type { GetArticleResponse } from "~~/server/types/api/article";
 
 export default defineJEventHandler<GetArticleResponse>(async (event, res) => {

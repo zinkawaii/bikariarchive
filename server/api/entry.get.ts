@@ -1,6 +1,6 @@
 import fs from "fs-extra";
-import jMap from "~~/dist/json/Entrimap.json";
 import type { GetEntryResponse } from "~~/server/types/api/entry";
+import { Entry } from "~/utils/entry";
 
 export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
     const {
@@ -8,11 +8,11 @@ export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
     } = getQueryValues(event);
 
     //词条不存在
-    if (!(title in jMap)) {
+    if (!(title in Entry.map)) {
         return 1;
     }
 
-    const category = jMap[title];
+    const category = Entry.map[title];
     const path = r(`/dist/${category}/${title}.json`);
     const data = await fs.readJson(path);
 

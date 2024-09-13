@@ -1,6 +1,6 @@
 import type { ModuleOptions } from "@nuxtjs/sitemap";
 import jArticle from "../dist/json/Article.json";
-import jEntry from "../dist/json/Entry.json";
+import jIntel from "../dist/json/Intel.json";
 
 export default <ModuleOptions> {
     excludeAppSources: true,
@@ -9,9 +9,9 @@ export default <ModuleOptions> {
         "/borrowing",
         "/chest",
         "/compact",
-        "/details",
         "/friend",
         "/home",
+        "/intel",
         "/search",
         "/shelf",
         "/update",
@@ -23,6 +23,6 @@ export default <ModuleOptions> {
                 return `/book/${novel}/${item.index}`;
             });
         }),
-        ...Object.values(jEntry.all)
+        ...Object.values(jIntel.all)
     ].flat()
 };

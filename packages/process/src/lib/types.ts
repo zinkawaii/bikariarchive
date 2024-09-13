@@ -53,6 +53,36 @@ export interface JArtmap {
     };
 }
 
+export interface JIntel {
+    blocks: IntelBlock[];
+    all: string[];
+}
+
+export interface IntelBlock {
+    title: string;
+    icon: string;
+    children: IntelBranch[];
+}
+
+export interface IntelBranch {
+    title: string;
+    children: IntelLeaf[];
+}
+
+export interface IntelLeaf {
+    title: string;
+    children: IntelItem[];
+}
+
+export interface IntelItem {
+    title: string;
+    children: (string | [string, string])[];
+}
+
+export interface JIntmap {
+    [entry: string]: string;
+}
+
 export interface JEntry {
     title: string;
     summary?: Root;

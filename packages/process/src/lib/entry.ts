@@ -18,11 +18,11 @@ export default new Processor({
         pattern: `{${folders.join(",")}}/*.mdz`
     },
     meta: {
-        src: "app/assets/json/Entry.json",
-        out: "dist/json/Entry.json"
+        src: "app/assets/json/Intel.json",
+        out: "dist/json/Intel.json"
     },
     map: {
-        out: "dist/json/Entrimap.json"
+        out: "dist/json/Intmap.json"
     },
     async parse(filename) {
         //处理文件

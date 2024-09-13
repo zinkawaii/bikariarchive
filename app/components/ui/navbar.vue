@@ -15,7 +15,7 @@
         {
             title: "情报",
             icon: "fa6-solid:sitemap",
-            to: { name: "details" }
+            to: { name: "intel" }
         },
         {
             title: "检索",

@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import type { Root } from "@bikari/process";
-import { Article } from "~/utils/Article";
+import { Article } from "~/utils/article";
 
 export async function readArticle(art: Article) {
     const { novel, volume, index } = art;

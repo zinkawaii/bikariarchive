@@ -1,6 +1,6 @@
 import type { H3Event } from "h3";
 import { Feed } from "feed";
-import { Article } from "~/utils/Article";
+import { Article } from "~/utils/article";
 
 export default defineEventHandler(async (event: H3Event) => {
     setHeaders(event, {

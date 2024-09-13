@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 import type { Element } from "@bikari/process";
-import { Article } from "~/utils/Article";
+import { Article } from "~/utils/article";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 
 export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
