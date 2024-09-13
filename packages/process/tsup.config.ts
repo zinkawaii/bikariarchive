@@ -10,5 +10,8 @@ export default defineConfig({
         "esm"
     ],
     clean: true,
-    dts: true
+    dts: true,
+    define: {
+        __HASH__: `${new Date().getTime()}`
+    }
 });

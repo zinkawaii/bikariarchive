@@ -32,20 +32,38 @@ export default new Processor({
         //写入文件
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".mdz", ".json");
         await fs.outputJson(outPath, attributes);
+
+        //写入数据
+        const name = path.basename(filename, ".mdz");
+        const folder = folders.find((folder) => filename.includes(folder));
+        this.jMeta.all.add(name);
+        this.jMap[name] = folder;
+
+        //写入缓存
+        return {
+            name,
+            folder
+        };
     },
-    beforeBuild(filelist) {
-        this.jMeta.all = [];
+    unlink(cache) {
+        const { name } = cache;
 
-        for (const filename of filelist) {
-            const name = path.basename(filename, ".mdz");
-            this.jMeta.all.push(name);
+        this.jMeta.all.delete(name);
+        delete this.jMap[name];
+    },
+    onCacheHit(cache) {
+        const { name, folder } = cache;
 
-            for (const folder of folders) {
-                if (filename.includes(folder)) {
-                    this.jMap[name] = folder;
-                    break;
-                }
-            }
-        }
-    }
+        this.jMeta.all.add(name);
+        this.jMap[name] = folder;
+    },
+    beforeBuild() {
+        this.jMeta.all = new Set();
+    },
+    beforeOutputMeta() {
+        const jMeta = structuredClone(this.jMeta);
+        jMeta.all = [...jMeta.all];
+
+        return jMeta;
+    },
 });

@@ -19,16 +19,18 @@ interface ProcessorOptions<T> {
     map: {
         out: string;
     };
-    parse: (this: T, filename: string, cache: any) => Promise<any>;
-    onCacheHit?: (this: T, cache: any) => void;
-    beforeBuild: (this: T, filelist: string[]) => void;
-    beforeOutputMeta?: (this: T) => any;
+    parse: (this: T, filename: string, cache: any, insert: boolean) => Promise<any>;
+    unlink: (this: T, cache: any) => void;
+    onCacheHit: (this: T, cache: any) => void;
+    resolveFilelist?: (this: T, filelist: string[]) => string[];
+    beforeBuild: (this: T) => void;
+    beforeOutputMeta: (this: T) => any;
 }
 
 export default class Processor {
-    jCache: any;
+    jCache: Record<string, any>;
     jMeta: any;
-    jMap: any;
+    jMap: Record<string, any>;
 
     cacheDir: string;
     metaSrcDir: string;
@@ -57,35 +59,41 @@ export default class Processor {
     }
 
     build() {
-        const parse = timer(this.options.sign, async (filelist: string[]) => {
-            //生成处理文件列表
-            this.options.beforeBuild.call(this, filelist);
+        const parse = timer(this.options.sign, async () => {
+            this.options.beforeBuild.call(this);
 
             //顺序处理源文件
+            const filelist = await this.resolveFilelist();
             await Promise.all(
-                filelist.map(this.parse.bind(this))
+                filelist.map((filename, order) => this.parse(filename, order))
             );
 
             //输出元数据文件
             await this.outputMeta();
         });
 
-        return glob(this.sources, {
-            windowsPathsNoEscape: true
-        }).then(parse);
+        parse();
     }
 
     watch() {
-        const parse = timer(this.options.sign, async (filename: string) => {
-            await this.parse(filename) &&
+        const parse = timer(this.options.sign, async (event: string, filename: string) => {
+            if (event === "change" && !await this.parse(filename)) {
+                return false;
+            }
+            else if (event === "add" && !await this.add(filename)) {
+                return false;
+            }
+            else if (event === "unlink" && !await this.unlink(filename)) {
+                return false;
+            }
             await this.outputMeta();
         });
 
         chokidar.watch(this.sources)
-        .on("change", parse);
+        .on("all", parse);
     }
 
-    async parse(filename: string, order?: number) {
+    async parse(filename: string, order?: number, insert?: boolean) {
         const stats = await fs.stat(filename);
         const hash = resolveHash(stats.size.toString());
 
@@ -104,7 +112,7 @@ export default class Processor {
         cache = { hash, order };
 
         //开始解析
-        const data = await this.options.parse.call(this, filename, cache);
+        const data = await this.options.parse.call(this, filename, cache, insert);
 
         //显式返回空值时清空缓存
         this.jCache[filename] = data === null ? null : {
@@ -112,6 +120,44 @@ export default class Processor {
             ...data || {}
         };
         return true;
+    }
+
+    async add(filename: string) {
+        const cache = this.jCache[filename];
+
+        //缓存存在时无需更新
+        if (cache) {
+            return false;
+        }
+
+        const filelist = await this.resolveFilelist();
+        const order = filelist.indexOf(filename);
+
+        //开始解析
+        return await this.parse(filename, order, true);
+    }
+
+    async unlink(filename: string) {
+        const cache = this.jCache[filename];
+
+        //缓存不存在时无需更新
+        if (!cache) {
+            return false;
+        }
+
+        //执行自定义清理逻辑
+        this.options.unlink?.call(this, cache);
+
+        //清空缓存
+        this.jCache[filename] = null;
+        return true;
+    }
+
+    async resolveFilelist() {
+        const filelist = await glob(this.sources, {
+            windowsPathsNoEscape: true
+        });
+        return this.options.resolveFilelist?.call(this, filelist) as string[] ?? filelist;
     }
 
     async outputMeta() {
@@ -124,10 +170,9 @@ export default class Processor {
     }
 }
 
-//从代码文件本身生成盐
-const path = import.meta.filename ?? __filename;
-const file = fs.readFileSync(path);
-const salt = CryptoES.MD5(file.toString());
+//从构建时间戳生成盐
+declare const __HASH__: string;
+const salt = CryptoES.MD5(__HASH__);
 
 //合成大哈希
 function resolveHash(text: string) {

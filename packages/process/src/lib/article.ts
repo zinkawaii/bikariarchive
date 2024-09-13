@@ -25,7 +25,7 @@ export default new Processor({
     map: {
         out: "dist/json/Artmap.json"
     },
-    async parse(filename, cache) {
+    async parse(filename, cache, insert) {
         //处理文件
         const file = await fs.readFile(filename);
         const { attributes, body } = await parseArticle<ArticleFrontmatter>(file.toString());
@@ -39,6 +39,7 @@ export default new Processor({
         const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".mdz", ".json");
         await fs.outputJSON(outPath, body);
 
+        //解析文件名
         const match = path.basename(path.resolve(filename, "..")).match(PATH_REGEX);
         const novel = match[1];
         const volume = Number(match[2]);
@@ -80,7 +81,7 @@ export default new Processor({
             wordCount,
             ...attributes
         };
-        this.jMeta[novel].chapters[cache.order] = data;
+        this.jMeta[novel].chapters.splice(cache.order, insert ? 0 : 1, data);
         this.jMap[novel][index] = {
             name,
             password
@@ -93,6 +94,12 @@ export default new Processor({
             data
         };
     },
+    unlink(cache) {
+        const { order, novel, data } = cache;
+
+        this.jMeta[novel].chapters.splice(order, 1);
+        delete this.jMap[novel][data.index];
+    },
     onCacheHit(cache) {
         const { order, name, novel, data } = cache;
         const { index, password } = data;
@@ -103,25 +110,25 @@ export default new Processor({
             password
         };
     },
-    beforeBuild(filelist) {
-        for (const key in this.jMeta) {
+    resolveFilelist(filelist) {
+        return filelist.toSorted((a, b) => a.localeCompare(b));
+    },
+    beforeBuild() {
+        for (const novel in this.jMeta) {
             //编号与文件名的映射表
-            this.jMap[key] = {};
+            this.jMap[novel] = {};
 
             //章节对象集合
-            this.jMeta[key].chapters = [];
+            this.jMeta[novel].chapters = [];
         }
-
-        //按字母顺序解析章节
-        filelist.sort((a, b) => a.localeCompare(b));
     },
     beforeOutputMeta() {
-        const jNeta = structuredClone(this.jMeta);
-        for (const key in jNeta) {
-            jNeta[key].chapters = Object.values(jNeta[key].chapters);
+        const jMeta = structuredClone(this.jMeta);
+        for (const key in jMeta) {
+            jMeta[key].chapters = Object.values(jMeta[key].chapters);
         }
 
-        return jNeta;
+        return jMeta;
     }
 });
 
