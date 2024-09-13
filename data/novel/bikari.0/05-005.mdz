@@ -1,0 +1,9 @@
+---
+title: 立绘 其三
+date: 2024-09-13
+draft: true
+---
+
+::mb-gallery{illustrator="狸猫森"}
+  :mb-image{src="/garden/illustration/浅井花环_1.webp" character="浅井花环"}
+::
