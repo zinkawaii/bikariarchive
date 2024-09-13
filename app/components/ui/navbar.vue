@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <nav class="z-navbar" :class="{ [`is-collapse`]: settingStore.setting[`ui-collapse`] }">
+    <nav class="z-navbar" :class="{ [`is-collapse`]: settingStore.get(`ui-collapse`) }">
         <ul class="nav-list">
             <li v-for="{ title, icon, to } in links" class="nav-item">
                 <nuxt-link class="nav-link" :to>

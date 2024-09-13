@@ -26,7 +26,7 @@
     .shelf-volume {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
-        gap: 4px 8px;
+        gap: 4px 16px;
     }
 
     .shevo-item {

@@ -9,7 +9,7 @@
     const storage = useLocalStorage<EXCalcData[]>("excalc-data", []);
 
     //空数据填充
-    whenever(() => storage.value.length === 0, () => {
+    whenever(() => !storage.value.length, () => {
         storage.value.push(createData());
     }, {
         immediate: true

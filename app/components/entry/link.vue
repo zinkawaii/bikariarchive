@@ -17,7 +17,7 @@
 </script>
 
 <template>
-    <span class="detail-link">
+    <span class="entry-link">
         <plain-link :danger="!isExist" :to="toEntry(name)">{{ displayName }}</plain-link>
     </span>
 </template>

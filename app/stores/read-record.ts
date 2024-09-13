@@ -18,6 +18,6 @@ export const useReadRecordStore = defineStore("read-record", () => {
     };
 }, {
     persist: {
-        paths: ["record"]
+        pick: ["record"]
     }
 });

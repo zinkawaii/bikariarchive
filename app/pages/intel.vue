@@ -6,12 +6,12 @@
 
 <template>
     <coco-widget title="情报">
-        <div v-for="block in Entry.meta.blocks" class="detail-block">
-            <div class="detail-header">
-                <nuxt-img class="detail-icon" :src="block.icon" alt="[icon]"/>
+        <div v-for="block in Entry.meta.blocks" class="intel-block">
+            <div class="intel-header">
+                <nuxt-img class="intel-icon" :src="block.icon" alt="[icon]"/>
                 <span>{{ block.title }}</span>
             </div>
-            <coco-table class="detail-table">
+            <coco-table class="intel-table">
                 <colgroup>
                     <col width="15%"/>
                     <col width="20%"/>
@@ -39,7 +39,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .detail-block {
+    .intel-block {
         display: flex;
         align-items: flex-start;
         gap: var(--cw-medium);
@@ -51,7 +51,7 @@
         }
     }
 
-    .detail-header {
+    .intel-header {
         display: grid;
         justify-items: center;
         gap: 8px;
@@ -63,14 +63,14 @@
         font-family: var(--font-smooth);
     }
 
-    .detail-icon {
+    .intel-icon {
         width: 100px;
         aspect-ratio: 1;
         border-radius: var(--bounded-circle);
         box-shadow: 4px 4px 12px rgb(0 0 0 / 24%);
     }
 
-    .detail-table {
+    .intel-table {
         flex: 1;
 
         th {
@@ -78,7 +78,7 @@
         }
     }
 
-    .detail-link {
+    .entry-link {
         & + &::before {
             content: " • ";
         }

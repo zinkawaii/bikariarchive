@@ -80,6 +80,6 @@ export const useSettingStore = defineStore("setting", () => {
     };
 }, {
     persist: {
-        paths: ["setting"]
+        pick: ["setting"]
     }
 });

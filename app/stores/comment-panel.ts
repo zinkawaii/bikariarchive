@@ -53,7 +53,7 @@ export const useCommentPanelStore = defineStore("comment-panel", () => {
     };
 }, {
     persist: {
-        paths: [
+        pick: [
             "nickname",
             "email",
             "address"

@@ -95,7 +95,7 @@
 </script>
 
 <template>
-    <div class="z-maestrale" :class="{ [`is-collapse`]: settingStore.setting[`ui-collapse`] }">
+    <div class="z-maestrale" :class="{ [`is-collapse`]: settingStore.get(`ui-collapse`) }">
         <client-only>
             <nuxt-img
                 ref="mae"

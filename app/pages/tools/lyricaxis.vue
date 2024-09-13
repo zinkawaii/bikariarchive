@@ -32,10 +32,10 @@
 
     //歌词列表
     const lyrics = ref<{
-        sign: boolean;
         time: number;
-        timed: string;
+        timing: string;
         content: string;
+        signed: boolean;
     }[]>([]);
 
     //当前歌词序号
@@ -68,29 +68,28 @@
     });
 
     //上传
-    function upload() {
-        showOpenFilePicker({
+    async function upload() {
+        const handle = await showOpenFilePicker({
             types: [{
                 accept: {
                     "audio/*": [".mp3"]
                 }
             }]
-        })
-        .then((handle) => handle[0].getFile())
-        .then((file) => {
-            //状态初始化
-            filename.value = file.name;
-            invalid.value = true;
-            currentTime.value = 0;
-            duration.value = 0;
-            progress.value = 0;
-            isPlaying.value = false;
-            isAxising.value = false;
-
-            //链接
-            URL.revokeObjectURL(audioEl.value.src);
-            audioEl.value.src = URL.createObjectURL(file);
         });
+        const file = await handle[0].getFile();
+
+        //状态初始化
+        filename.value = file.name;
+        invalid.value = true;
+        currentTime.value = 0;
+        duration.value = 0;
+        progress.value = 0;
+        isPlaying.value = false;
+        isAxising.value = false;
+
+        //链接
+        URL.revokeObjectURL(audioEl.value.src);
+        audioEl.value.src = URL.createObjectURL(file);
     }
 
     //播放 & 暂停
@@ -150,21 +149,21 @@
     watch(isAxising, (val) => {
         if (val) {
             lyrics.value = raw.value.split("\n").map((line) => {
-                let sign = false;
                 let time = 0;
-                let timed = "";
+                let timing = "";
+                let signed = false;
                 const re = /\[(\d{2}):(\d{2}\.\d{3})\]/;
                 const match = line.match(re);
                 if (match) {
-                    sign = true;
                     time = Number(match[1]) * 60 + Number(match[2]);
-                    timed = match[0];
+                    timing = match[0];
+                    signed = true;
                 }
                 return {
-                    sign,
                     time,
-                    timed,
-                    content: line.replace(re, "") || "　"
+                    timing,
+                    content: line.replace(re, "") || "　",
+                    signed
                 };
             });
         }
@@ -188,9 +187,9 @@
         audioEl.value.currentTime = target?.time || 0;
 
         if (last) {
-            last.sign = false;
             last.time = 0;
-            last.timed = "";
+            last.timing = "";
+            last.signed = false;
 
             //指向不存在的序号时不再减少
             currentLyric.value--;
@@ -207,13 +206,13 @@
             const s = time % 60;
 
             //格式化时间点
-            current.sign = true;
             current.time = time;
-            current.timed = `[${
+            current.timing = `[${
                 String(Math.floor(m)).padStart(2, "0")
             }:${
                 s.toFixed(3).padStart(6, "0")
             }]`;
+            current.signed = true;
 
             //指向不存在的序号时不再增加
             currentLyric.value++;
@@ -223,7 +222,7 @@
     //获取打轴结果
     function getCompileText() {
         return lyrics.value.map((item) => {
-            return item.timed + item.content;
+            return item.timing + item.content;
         }).join("\n");
     }
 </script>
@@ -260,11 +259,11 @@
                         :key="i"
                         class="lyric-item"
                         :class="{
-                            light: currentLyric === i,
-                            sign: item.sign
+                            [`is-signed`]: item.signed,
+                            [`is-checked`]: currentLyric === i
                         }"
                         @click="currentLyric = i"
-                        ><time>{{ item.timed }}</time>
+                        ><time>{{ item.timing }}</time>
                         <span>{{ item.content }}</span>
                     </p>
                 </article>
@@ -316,11 +315,11 @@
         border-radius: 8px;
         user-select: none;
 
-        &.sign {
+        &.is-signed {
             color: var(--color-text-info);
         }
 
-        &.light {
+        &.is-checked {
             color: var(--color-theme-text);
         }
 

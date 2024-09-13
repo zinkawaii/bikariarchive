@@ -108,9 +108,7 @@ function findWordIndices(text: string, rule: string | RegExp) {
                 offset = idx + rule.length;
                 indices.push([idx, offset]);
             }
-            else {
-                break;
-            }
+            else break;
         }
     }
     else {
