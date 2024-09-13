@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-    const params = useRouteParams<{
-        novel: string;
-        index: string;
-    }>();
+    const novel = useRouteParams<string>("novel");
+    const index = useRouteParams<string>("index");
 
     //当前章节
-    const art = Article.for(() => params.value.novel, () => params.value.index);
+    const art = Article.for(novel, index);
 </script>
 
 <template>
