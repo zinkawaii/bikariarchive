@@ -33,7 +33,7 @@ export default new Processor({
 
         //写入数据
         const name = basename(filename, ".mdz");
-        const folder = this.sourceFolders.find((dir) => filename.startsWith(dir));
+        const folder = basename(this.sourceFolders.find((dir) => filename.startsWith(dir)));
 
         //写入缓存
         return {
