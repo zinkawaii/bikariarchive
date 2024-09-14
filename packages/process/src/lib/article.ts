@@ -1,4 +1,4 @@
-import * as path from "node:path";
+import { basename, resolve } from "node:path";
 import dayjs from "dayjs";
 import fs from "fs-extra";
 import { toString } from "mdast-util-to-string";
@@ -14,9 +14,12 @@ const PATH_REGEX = /^(.*?)\.(\d+)$/;
 export default new Processor({
     sign: "Article",
     source: {
-        src: "data/novel",
-        out: "dist/novel",
-        pattern: "**/*.mdz"
+        base: "data",
+        dist: "dist",
+        folders: [
+            "novel"
+        ],
+        ext: ".mdz"
     },
     meta: {
         src: "app/assets/json/Article.json",
@@ -25,7 +28,7 @@ export default new Processor({
     map: {
         out: "dist/json/Artmap.json"
     },
-    async parse(filename, cache, insert) {
+    async parse(filename) {
         //处理文件
         const file = await fs.readFile(filename);
         const { attributes, body } = await parseArticle<ArticleFrontmatter>(file.toString());
@@ -36,14 +39,13 @@ export default new Processor({
         }
 
         //写入文件
-        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".mdz", ".json");
-        await fs.outputJSON(outPath, body);
+        await this.outputJson(filename, body);
 
         //解析文件名
-        const match = path.basename(path.resolve(filename, "..")).match(PATH_REGEX);
+        const match = basename(resolve(filename, "..")).match(PATH_REGEX);
         const novel = match[1];
         const volume = Number(match[2]);
-        const name = path.basename(filename, ".mdz");
+        const name = basename(filename, ".mdz");
 
         //解析内容
         let wordCount = 0;
@@ -62,12 +64,16 @@ export default new Processor({
         formatDate(attributes, ["date", "updated", "refactored"]);
 
         //生成映射
+        let order = `[${volume}]`;
         let index = "";
         switch (this.jMeta[novel].type) {
             case "novel":
-                index = name.match(/(.*?)-(.*)/)[2];
+                const match = name.match(/^(.*?)-(.*)$/);
+                order += match[1];
+                index = match[2];
                 break;
             case "blog":
+                order += name;
                 index = attributes.abbrlink;
                 delete attributes.abbrlink;
                 break;
@@ -81,24 +87,21 @@ export default new Processor({
             wordCount,
             ...attributes
         };
-        this.jMeta[novel].chapters.splice(cache.order, insert ? 0 : 1, data);
-        this.jMap[novel][index] = {
-            name,
-            password
-        };
 
         //写入缓存
         return {
             name,
+            order,
             novel,
             data
         };
     },
     unlink(cache) {
         const { order, novel, data } = cache;
+        const { index } = data;
 
-        this.jMeta[novel].chapters.splice(order, 1);
-        delete this.jMap[novel][data.index];
+        delete this.jMeta[novel].chapters[order];
+        delete this.jMap[novel][index];
     },
     onCacheHit(cache) {
         const { order, name, novel, data } = cache;
@@ -110,30 +113,28 @@ export default new Processor({
             password
         };
     },
-    resolveFilelist(filelist) {
-        return filelist.toSorted((a, b) => a.localeCompare(b));
-    },
     beforeBuild() {
         for (const novel in this.jMeta) {
             //编号与文件名的映射表
             this.jMap[novel] = {};
 
             //章节对象集合
-            this.jMeta[novel].chapters = [];
+            this.jMeta[novel].chapters = {};
         }
     },
     beforeOutputMeta() {
         const jMeta = structuredClone(this.jMeta);
         for (const key in jMeta) {
-            jMeta[key].chapters = Object.values(jMeta[key].chapters);
+            jMeta[key].chapters = Object.entries(jMeta[key].chapters)
+                .toSorted(([a], [b]) => a.localeCompare(b))
+                .map(([_, c]) => c);
         }
-
         return jMeta;
     }
 });
 
 //日期格式化
-function formatDate(obj, keys) {
+function formatDate(obj: object, keys: string[]) {
     for (const key of keys) {
         if (Reflect.has(obj, key)) {
             obj[key] = dayjs(obj[key]).format("YYYY-MM-DD");

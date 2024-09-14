@@ -8,9 +8,10 @@ import { isDev, timer } from "@bikari/shared";
 interface ProcessorOptions<T> {
     sign: string;
     source: {
-        src: string;
-        out: string;
-        pattern: string;
+        base: string;
+        dist: string;
+        folders: string[];
+        ext: string;
     };
     meta: {
         src: string;
@@ -19,10 +20,9 @@ interface ProcessorOptions<T> {
     map: {
         out: string;
     };
-    parse: (this: T, filename: string, cache: any, insert: boolean) => Promise<any>;
+    parse: (this: T, filename: string) => Promise<any>;
     unlink: (this: T, cache: any) => void;
     onCacheHit: (this: T, cache: any) => void;
-    resolveFilelist?: (this: T, filelist: string[]) => string[];
     beforeBuild: (this: T) => void;
     beforeOutputMeta: (this: T) => any;
 }
@@ -37,9 +37,10 @@ export default class Processor {
     metaOutDir: string;
     mapOutDir: string;
 
-    sourceSrcDir: string;
-    sourceOutDir: string;
-    sources: string;
+    sourceBase: string;
+    sourceDist: string;
+    sourceFolders: string[];
+    sourceGlob: string[];
 
     constructor(
         public options: ProcessorOptions<Processor>
@@ -53,9 +54,10 @@ export default class Processor {
         this.jMeta = fs.readJsonSync(this.metaSrcDir);
         this.jMap = {};
 
-        this.sourceSrcDir = resolve(options.source.src);
-        this.sourceOutDir = resolve(options.source.out);
-        this.sources = resolve(this.sourceSrcDir, options.source.pattern);
+        this.sourceBase = resolve(options.source.base)
+        this.sourceDist = resolve(options.source.dist);
+        this.sourceFolders = options.source.folders.map((f) => resolve(this.sourceBase, f));
+        this.sourceGlob = this.sourceFolders.map((p) => resolve(p, `**/*${options.source.ext}`));
     }
 
     async build() {
@@ -63,9 +65,13 @@ export default class Processor {
             this.options.beforeBuild.call(this);
 
             //顺序处理源文件
-            const filelist = await this.resolveFilelist();
+            const filelist = await glob(this.sourceGlob, {
+                windowsPathsNoEscape: true
+            });
+            filelist.sort((a, b) => a.localeCompare(b));
+
             await Promise.all(
-                filelist.map((filename, order) => this.parse(filename, order))
+                filelist.map((filename) => this.parse(filename))
             );
 
             //输出元数据文件
@@ -77,6 +83,9 @@ export default class Processor {
 
     async watch() {
         const parse = timer(this.options.sign, async (event: string, filename: string) => {
+            if (!filename.endsWith(this.options.source.ext)) {
+                return false;
+            }
             if (event === "change" && !await this.parse(filename)) {
                 return false;
             }
@@ -89,13 +98,14 @@ export default class Processor {
             await this.outputMeta();
         });
 
-        const filelist = await this.resolveFilelist();
-        const watcher = chokidar.watch(filelist, {});
+        const watcher = chokidar.watch(this.sourceFolders, {
+            ignoreInitial: true
+        });
         watcher.on("all", parse);
     }
 
-    async parse(filename: string, order?: number, insert?: boolean) {
-        const stats = await fs.stat(filename);
+    async parse(filename: string) {
+        const stats = fs.statSync(filename);
         const hash = resolveHash(stats.size.toString());
 
         let cache = this.jCache[filename];
@@ -106,20 +116,26 @@ export default class Processor {
             return false;
         }
 
-        //继承序号
-        order ??= cache?.order;
-
         //重置缓存
-        cache = { hash, order };
+        cache = { hash };
 
         //开始解析
-        const data = await this.options.parse.call(this, filename, cache, insert);
+        const data = await this.options.parse.call(this, filename);
 
-        //显式返回空值时清空缓存
-        this.jCache[filename] = data === null ? null : {
-            ...cache,
-            ...data || {}
-        };
+        if (data !== null) {
+            cache = {
+                ...cache,
+                ...data
+            };
+            //执行一次命中缓存的逻辑
+            await this.options.onCacheHit?.call(this, cache);
+        }
+        else {
+            //显式返回空值时清空缓存
+            cache = null;
+        }
+
+        this.jCache[filename] = cache;
         return true;
     }
 
@@ -131,11 +147,8 @@ export default class Processor {
             return false;
         }
 
-        const filelist = await this.resolveFilelist();
-        const order = filelist.indexOf(filename);
-
         //开始解析
-        return await this.parse(filename, order, true);
+        return await this.parse(filename);
     }
 
     async unlink(filename: string) {
@@ -154,13 +167,6 @@ export default class Processor {
         return true;
     }
 
-    async resolveFilelist() {
-        const filelist = await glob(this.sources, {
-            windowsPathsNoEscape: true
-        });
-        return this.options.resolveFilelist?.call(this, filelist) as string[] ?? filelist;
-    }
-
     async outputMeta() {
         const jMeta = this.options.beforeOutputMeta.call(this);
 
@@ -168,6 +174,11 @@ export default class Processor {
         fs.outputJsonSync(this.cacheDir, this.jCache);
         fs.outputJsonSync(this.metaOutDir, jMeta);
         fs.outputJsonSync(this.mapOutDir, this.jMap);
+    }
+
+    async outputJson(filename: string, data: unknown) {
+        const path = filename.replace(this.sourceBase, this.sourceDist).replace(this.options.source.ext, ".json");
+        await fs.outputJson(path, data);
     }
 }
 

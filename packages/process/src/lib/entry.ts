@@ -1,21 +1,20 @@
-import * as path from "node:path";
+import { basename } from "node:path";
 import fs from "fs-extra";
 import { parseEntry } from "../remark";
 import type { JEntry } from "./types";
 import Processor from "./processor";
 
-const folders = [
-    "area",
-    "character",
-    "concept"
-];
-
 export default new Processor({
     sign: "Entry",
     source: {
-        src: "data",
-        out: "dist",
-        pattern: `{${folders.join(",")}}/*.mdz`
+        base: "data",
+        dist: "dist",
+        folders: [
+            "area",
+            "character",
+            "concept"
+        ],
+        ext: ".mdz"
     },
     meta: {
         src: "app/assets/json/Intel.json",
@@ -30,14 +29,11 @@ export default new Processor({
         const attributes = await parseEntry<JEntry>(file.toString());
 
         //写入文件
-        const outPath = filename.replace(this.sourceSrcDir, this.sourceOutDir).replace(".mdz", ".json");
-        await fs.outputJson(outPath, attributes);
+        await this.outputJson(filename, attributes);
 
         //写入数据
-        const name = path.basename(filename, ".mdz");
-        const folder = folders.find((folder) => filename.includes(folder));
-        this.jMeta.all.add(name);
-        this.jMap[name] = folder;
+        const name = basename(filename, ".mdz");
+        const folder = this.sourceFolders.find((dir) => filename.startsWith(dir));
 
         //写入缓存
         return {
@@ -48,21 +44,21 @@ export default new Processor({
     unlink(cache) {
         const { name } = cache;
 
-        this.jMeta.all.delete(name);
+        delete this.jMeta.all[name];
         delete this.jMap[name];
     },
     onCacheHit(cache) {
         const { name, folder } = cache;
 
-        this.jMeta.all.add(name);
+        this.jMeta.all[name] = true;
         this.jMap[name] = folder;
     },
     beforeBuild() {
-        this.jMeta.all = new Set();
+        this.jMeta.all = {};
     },
     beforeOutputMeta() {
         const jMeta = structuredClone(this.jMeta);
-        jMeta.all = [...jMeta.all];
+        jMeta.all = Object.keys(jMeta.all);
 
         return jMeta;
     },
