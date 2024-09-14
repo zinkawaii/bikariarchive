@@ -23,6 +23,7 @@ interface ProcessorOptions<T> {
     parse: (this: T, filename: string) => Promise<any>;
     unlink: (this: T, cache: any) => void;
     onCacheHit: (this: T, cache: any) => void;
+    onMetaUpdate: (this: T, newVal: any, oldVal: any) => any;
     beforeBuild: (this: T) => void;
     beforeOutputMeta: (this: T) => any;
 }
@@ -82,7 +83,10 @@ export default class Processor {
     }
 
     async watch() {
-        const parse = timer(this.options.sign, async (event: string, filename: string) => {
+        chokidar.watch(this.sourceFolders, {
+            ignoreInitial: true
+        })
+        .on("all", timer(this.options.sign, async (event: string, filename: string) => {
             if (!filename.endsWith(this.options.source.ext)) {
                 return false;
             }
@@ -96,12 +100,16 @@ export default class Processor {
                 return false;
             }
             await this.outputMeta();
-        });
+        }));
 
-        const watcher = chokidar.watch(this.sourceFolders, {
+        chokidar.watch(this.metaSrcDir, {
             ignoreInitial: true
-        });
-        watcher.on("all", parse);
+        })
+        .on("change", timer(this.options.sign, async () => {
+            const newVal = await fs.readJson(this.metaSrcDir);
+            this.jMeta = this.options.onMetaUpdate.call(this, newVal, this.jMeta);
+            await this.outputMeta();
+        }));
     }
 
     async parse(filename: string) {
@@ -112,7 +120,7 @@ export default class Processor {
 
         //当在开发环境下命中缓存时
         if (isDev && cache?.hash === hash) {
-            await this.options.onCacheHit?.call(this, cache);
+            await this.options.onCacheHit.call(this, cache);
             return false;
         }
 
@@ -128,7 +136,7 @@ export default class Processor {
                 ...data
             };
             //执行一次命中缓存的逻辑
-            await this.options.onCacheHit?.call(this, cache);
+            await this.options.onCacheHit.call(this, cache);
         }
         else {
             //显式返回空值时清空缓存
@@ -160,7 +168,7 @@ export default class Processor {
         }
 
         //执行自定义清理逻辑
-        this.options.unlink?.call(this, cache);
+        this.options.unlink.call(this, cache);
 
         //清空缓存
         this.jCache[filename] = null;

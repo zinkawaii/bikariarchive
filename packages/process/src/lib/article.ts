@@ -113,6 +113,12 @@ export default new Processor({
             password
         };
     },
+    onMetaUpdate(newVal, oldVal) {
+        for (const novel in oldVal) {
+            newVal[novel].chapters = oldVal[novel].chapters;
+        }
+        return newVal;
+    },
     beforeBuild() {
         for (const novel in this.jMeta) {
             //编号与文件名的映射表
@@ -124,8 +130,8 @@ export default new Processor({
     },
     beforeOutputMeta() {
         const jMeta = structuredClone(this.jMeta);
-        for (const key in jMeta) {
-            jMeta[key].chapters = Object.entries(jMeta[key].chapters)
+        for (const novel in jMeta) {
+            jMeta[novel].chapters = Object.entries(jMeta[novel].chapters)
                 .toSorted(([a], [b]) => a.localeCompare(b))
                 .map(([_, c]) => c);
         }

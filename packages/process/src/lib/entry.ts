@@ -53,6 +53,10 @@ export default new Processor({
         this.jMeta.all[name] = true;
         this.jMap[name] = folder;
     },
+    onMetaUpdate(newVal, oldVal) {
+        newVal.all = oldVal.all;
+        return newVal;
+    },
     beforeBuild() {
         this.jMeta.all = {};
     },
