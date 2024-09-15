@@ -25,15 +25,19 @@
       }
     ]
   },
-  "yukipara": {
+  "utakata": {
     "author": "山吹色御守",
-    "title": "雪女乐园",
+    "title": "虚幻的幸福",
     "type": "novel",
     "tag": [
-      "后宫", "幻想", "战斗", "超能力"
+      "纯爱"
     ],
-    "synopsis": "这篇小说还没有正文哦~",
-    "volumes": []
+    "synopsis": "有的人只拥吻影子，于是只拥有幸福的幻影——\n但对我来说，那样就足够了。",
+    "volumes": [
+      {
+        "title": "伊始卷"
+      }
+    ]
   },
   "daily": {
     "author": "山吹色御守",
