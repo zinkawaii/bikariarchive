@@ -9,6 +9,8 @@
 
     const readRecordStore = useReadRecordStore();
 
+    const code = computed(() => `- ${capitalize(props.novel)} -`);
+
     //阅读记录
     const record = computed(() => {
         const data = readRecordStore.get(props.novel) ?? Article.meta[props.novel].chapters[0];
@@ -27,8 +29,11 @@
 </script>
 
 <template>
-    <div class="content-table intro-card" :layer @click="exchange">
-        <h2 class="content-h2">{{ Article.meta[novel].title }}</h2>
+    <div class="content-table intro-card" :class="`is-${layer}`" @click="exchange">
+        <h2 class="content-h2 intro-header">
+            {{ Article.meta[novel].title }}
+            <span class="text-truncate text-gray">{{ code }}</span>
+        </h2>
         <intro-content :novel/>
         <div v-if="record" class="intro-record">
             <icon name="fa6-solid:chevron-right"/>
@@ -50,19 +55,23 @@
         transition-property: filter, translate;
         transition-duration: 0.25s;
 
-        &[layer="outer"] {
+        &.is-outer {
             z-index: 1;
         }
 
-        &[layer="inner"] {
+        &.is-inner {
             translate: $gap $gap;
             cursor: pointer;
             filter: brightness(75%) opacity(50%);
         }
     }
 
-    .intro-content {
-        margin-top: 8px;
+    .intro-header {
+        display: flex;
+        gap: 0.5em;
+        overflow: hidden;
+        margin-bottom: 8px;
+        text-wrap: nowrap;
     }
 
     .intro-record {

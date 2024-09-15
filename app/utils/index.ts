@@ -16,6 +16,11 @@ export const highlightOptions: Partial<CodeToHastOptions> = {
     }]
 };
 
+//首字母大写
+export function capitalize(str: string) {
+    return str[0].toUpperCase() + str.slice(1);
+}
+
 //获取字符串实际长度
 export function getByteLength(str: string) {
     return str?.replace(/\u0391-\uFFE5/g, "__")?.length || 0;
@@ -55,11 +60,6 @@ export function isFocusedEditable() {
         ["input", "textarea"].includes(tagName) ||
         focusedElement.hasAttribute("contenteditable")
     );
-}
-
-//以换行符切分字符串
-export function splitByNewline(text: string) {
-    return text?.split("\n");
 }
 
 //路由：词条

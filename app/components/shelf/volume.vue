@@ -13,7 +13,7 @@
             v-for="(title, i) in volumes"
             class="shevo-item"
             :class="{
-                checked: currentVolumeIdx === i
+                [`is-checked`]: currentVolumeIdx === i
             }"
             @click="shelfStore.selectVolume(i)"
             ><span class="font-italic text-gray text-small">#{{ i + 1 }}</span>
@@ -37,7 +37,7 @@
         line-height: 32px;
         cursor: pointer;
 
-        &.checked {
+        &.is-checked {
             color: var(--color-theme-text);
         }
     }
