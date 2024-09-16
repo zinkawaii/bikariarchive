@@ -1,5 +1,8 @@
 ---
 title: 能力评级
+details:
+  - title: 已知能力
+    component: starred-ability
 ---
 
 #summary
