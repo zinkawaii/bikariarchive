@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import { toString } from "mdast-util-to-string";
+
     const { novel, index } = defineProps<{
         novel: string;
         index: string;
@@ -15,17 +17,6 @@
     if (!art) {
         throw new Error(`Article(${novel}, ${index}) is invalid.`);
     }
-
-    //设置元信息
-    useSeoMeta({
-        title: `${art.title} - ${art.volumeInfo.title}`,
-        ogTitle: art.title,
-        ogType: "article",
-        // @ts-expect-error 自定义键值
-        ogNovelAuthor: art.novelInfo.author,
-        ogNovelBook_name: art.novelInfo.title,
-        ogNovelCategory: art.novelInfo.tag.join(",")
-    });
 
     //上下章快捷键
     useEventListener("keyup", (event) => {
@@ -76,6 +67,24 @@
         },
         immediate: !art.encrypted,
         watch: false
+    });
+
+    //设置元信息
+    useSeoMeta({
+        title: `${art.title} - ${art.volumeInfo.title}`,
+        ogTitle: art.title,
+        ogType: "article",
+        // @ts-expect-error 自定义键值
+        ogArticleAuthor: art.novelInfo.author,
+        ogArticleSection: art.novelInfo.type,
+        ogArticleTag: art.novelInfo.tag.join(","),
+        ogArticlePublished_time: art.publishDate,
+        ogArticleModified_time: art.updateDate,
+        description: () => post.value?.body.children
+            .filter((node) => node.tag === "p")
+            .map((p) => toString(p))
+            .join("")
+            .slice(0, 128),
     });
 
     //添加阅读记录
