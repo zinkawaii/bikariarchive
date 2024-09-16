@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-    import { EntryKnownAbility } from "#components";
+    import { EntryKnownAbility, EntryStarredAbility } from "#components";
 
     defineOptions({
         components: {
-            "known-ability": EntryKnownAbility
+            "known-ability": EntryKnownAbility,
+            "starred-ability": EntryStarredAbility
         }
     });
     const { title } = defineProps<{

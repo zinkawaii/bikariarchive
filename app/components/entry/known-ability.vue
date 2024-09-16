@@ -2,17 +2,24 @@
     import jAbility from "~/assets/json/Ability.json";
 
     const props = defineProps<{
-        classification: string;
+        classification?: string;
+        star?: number;
     }>();
 
-    const filterList = jAbility.items.filter((item) => {
-        return item.class.includes(props.classification);
+    const filterred = jAbility.items.filter((item) => {
+        const { classification, star } = props;
+        if (classification) {
+            return item.class.includes(classification);
+        }
+        else if (star) {
+            return item.owner[0]?.star === star;
+        }
     });
 </script>
 
 <template>
-    <ul v-if="filterList.length > 0" class="entry-known-ability">
-        <li v-for="{ name, owner } in filterList">
+    <ul v-if="filterred.length" class="entry-known-ability">
+        <li v-for="{ name, owner } in filterred">
             <entry-link :title="[owner[0]?.name ?? name, name]"/>
         </li>
     </ul>
