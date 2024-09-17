@@ -13,52 +13,14 @@
         return mode.value === "modify";
     });
 
-    const content = computed({
-        get() {
-            return isModifyMode.value
-                ? modifyOptions.value.content
-                : commentPanelStore.content;
+    const { content, nickname, email, address } = useSourceRefs(() => isModifyMode.value ? modifyOptions.value : commentPanelStore, {
+        content: {},
+        nickname: {},
+        email: {
+            default: "",
+            readonly: isModifyMode
         },
-        set(val) {
-            isModifyMode.value
-                ? modifyOptions.value.content = val
-                : commentPanelStore.content = val;
-        }
-    });
-
-    const nickname = computed({
-        get() {
-            return isModifyMode.value
-                ? modifyOptions.value.nickname
-                : commentPanelStore.nickname;
-        },
-        set(val) {
-            isModifyMode.value
-                ? modifyOptions.value.nickname = val
-                : commentPanelStore.nickname = val;
-        }
-    });
-
-    const email = computed({
-        get() {
-            return !isModifyMode.value ? commentPanelStore.email : "";
-        },
-        set(val) {
-            !isModifyMode.value && (commentPanelStore.email = val);
-        }
-    });
-
-    const address = computed({
-        get() {
-            return isModifyMode.value
-                ? modifyOptions.value.address
-                : commentPanelStore.address;
-        },
-        set(val) {
-            isModifyMode.value
-                ? modifyOptions.value.address = val
-                : commentPanelStore.address = val;
-        }
+        address: {}
     });
 
     const { errors, validate } = useValidate({

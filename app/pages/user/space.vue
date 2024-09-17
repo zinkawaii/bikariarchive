@@ -13,11 +13,15 @@
         return userStore.uid === Number(route.params.uid);
     });
 
+    //不是本人
+    const isNotMyself = computed(() => !isMyself.value);
+
+    //获取用户信息
     const { data } = useLazyFetch("/api/user/info", {
         query: {
             uid: route.params.uid
         },
-        immediate: !isMyself.value
+        immediate: isNotMyself.value
     });
 
     //用户是否存在
@@ -25,30 +29,15 @@
         return isMyself.value || !data.value.error;
     });
 
-    const uid = computed({
-        get() {
-            return isMyself.value ? userStore.uid : data.value.uid;
+    const { uid, nickname, sign } = useSourceRefs(() => isMyself.value ? userStore : data.value, {
+        uid: {
+            readonly: isNotMyself
         },
-        set(val) {
-            isMyself.value && (userStore.uid = val);
-        }
-    });
-
-    const nickname = computed({
-        get() {
-            return isMyself.value ? userStore.nickname : data.value.nickname;
+        nickname: {
+            readonly: isNotMyself
         },
-        set(val) {
-            isMyself.value && (userStore.nickname = val);
-        }
-    });
-
-    const sign = computed({
-        get() {
-            return isMyself.value ? userStore.sign : data.value.sign;
-        },
-        set(val) {
-            isMyself.value && (userStore.sign = val);
+        sign: {
+            readonly: isNotMyself
         }
     });
 
