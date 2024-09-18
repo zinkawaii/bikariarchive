@@ -1,0 +1,13 @@
+diff --git a/dist/compiler-sfc.cjs.js b/dist/compiler-sfc.cjs.js
+index 17d0ddd25c0b8460877e58634469e399024f404d..639dbb04c7e858acd94010c84508a309ad8719b4 100644
+--- a/dist/compiler-sfc.cjs.js
++++ b/dist/compiler-sfc.cjs.js
+@@ -19767,7 +19767,7 @@ function transformDestructuredProps(ctx, vueImportAliases) {
+   if (ctx.options.propsDestructure === false) {
+     return;
+   }
+-  const rootScope = {};
++  const rootScope = Object.create(null);
+   const scopeStack = [rootScope];
+   let currentScope = rootScope;
+   const excludedIds = /* @__PURE__ */ new WeakSet();

@@ -9,7 +9,10 @@
 
     const readRecordStore = useReadRecordStore();
 
-    const code = computed(() => `- ${capitalize(props.novel)} -`);
+    //小说代号
+    const code = computed(() => {
+        return `- ${capitalize(props.novel)} -`;
+    });
 
     //阅读记录
     const record = computed(() => {

@@ -22,10 +22,10 @@ export default defineEventHandler(async (event: H3Event) => {
 
     Object.values(Article.meta)
     .flatMap(({ chapters }) => chapters)
-    .filter((c) => c.date)
+    .filter((c) => c.updateDate !== Article.FARAWAY)
     .sort((a, b) => {
-        const x = a.updated || a.date;
-        const y = b.updated || b.date;
+        const x = a.updateDate
+        const y = b.updateDate;
         return y.localeCompare(x);
     })
     .slice(0, 10)
@@ -33,8 +33,8 @@ export default defineEventHandler(async (event: H3Event) => {
         feed.addItem({
             title: c.title,
             link: `https://${config.public.domain}/book/${c.novel}/${c.index}`,
-            date: new Date(c.updated || c.date),
-            published: new Date(c.date)
+            date: new Date(c.updateDate),
+            published: new Date(c.publishDate)
         });
     });
 

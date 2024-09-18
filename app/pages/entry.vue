@@ -65,9 +65,11 @@
         border-bottom: 1px solid var(--color-border);
     }
 
-    .entry-section {
+    :where(.mb-skeleton, .entry-section) {
         margin-top: 16px;
+    }
 
+    .entry-section {
         &:first-child {
             display: flex;
             gap: 16px;

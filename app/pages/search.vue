@@ -103,7 +103,7 @@
     }
 
     .search-select {
-        width: 180px;
+        width: 160px;
         margin-inline: auto;
         z-index: 1;
     }

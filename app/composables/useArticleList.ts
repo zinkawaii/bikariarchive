@@ -9,14 +9,15 @@ export interface UseArticleListOptions {
 
 export default function(options: UseArticleListOptions) {
     //筛选类型
-    const type = computed(() => {
-        return toValue(options.type);
-    });
+    const type = toRef(options.type);
 
     //排序字段
     const sortBy = computed(() => {
         return [toValue(options.sortBy), "date"];
     });
+
+    //是否显示置顶
+    const sticky = toRef(options.sticky);
 
     //总列表
     const jFull = computed(() => {
@@ -33,7 +34,7 @@ export default function(options: UseArticleListOptions) {
                 return y?.localeCompare?.(x);
             });
 
-        if (toValue(options.sticky)) {
+        if (sticky.value) {
             arr.sort((a, b) => a.sticky - b.sticky);
         }
 

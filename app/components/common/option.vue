@@ -1,9 +1,9 @@
-<script lang="ts" setup>
+<script lang="ts" generic="T" setup>
     import { injectionKey } from "~/types/select";
 
     const props = defineProps<{
         title: string;
-        value?: any;
+        value?: T;
     }>();
 
     const {

@@ -48,19 +48,19 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
 });
 
 //递归解引用
-async function deference(parent: HydratedDocument<CommentDataSchema>[]) {
+async function deference<T extends HydratedDocument<CommentDataSchema>>(parent: T[]): Promise<CommentData[]> {
     return await Promise.all(
         parent.map(async (item) => {
             const children = item.children.length ? await deference(
                 (await item.populate<{
-                    children: typeof parent;
+                    children: T[];
                 }>({
                     path: "children",
                     select
                 })).children
             ) : [];
 
-            return <CommentData> {
+            return {
                 id: item.id,
                 children,
                 content: item.content,

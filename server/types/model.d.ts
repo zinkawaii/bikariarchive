@@ -3,7 +3,7 @@ import type { ObjectId } from "mongoose";
 export interface CommentDataSchema {
     path: string;
     parent?: ObjectId;
-    children?: ObjectId[];
+    children: ObjectId[];
     content: string;
     time: Date;
     updated: Date;

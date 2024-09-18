@@ -13,7 +13,7 @@ export function identityValidate(event: H3Event, identity: number) {
 export function myselfValidate(event: H3Event, uid: number) {
     const { session } = event.context;
 
-    if (session.uid !== uid && session.identity < 9) {
+    if (session.uid !== uid && (session.identity || 0) < 9) {
         throw createError({
             status: 403
         });

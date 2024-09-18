@@ -56,7 +56,7 @@
 
     //结果是否为空
     const isResultEmpty = computed(() => {
-        return results.value.length === 0;
+        return !results.value.length;
     });
 
     //生成

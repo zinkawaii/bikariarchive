@@ -5,7 +5,7 @@
 
     const page = ref(1);
 
-    const { data } = useLazyFetch("/api/bangumi", {
+    const { data, status } = useLazyFetch("/api/bangumi", {
         query: {
             page
         }
@@ -14,7 +14,7 @@
 
 <template>
     <coco-widget title="番剧">
-        <mb-skeleton v-if="!data"/>
+        <mb-skeleton v-if="status !== `success`"/>
         <template v-else>
             <div class="bangumi-list">
                 <bangumi-item v-for="bangumi in data.list" :key="bangumi.id" v-bind="bangumi"/>
