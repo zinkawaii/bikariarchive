@@ -48,13 +48,15 @@
         padding: 6px 8px;
         border: 1px solid var(--color-border-lighter);
         border-radius: 4px;
+        outline: 2px solid transparent;
+        outline-offset: -1px;
         background-color: var(--color-background);
         line-height: 24px;
         word-break: break-all;
-        transition: border-color 0.4s;
+        transition: outline 0.25s;
 
         &:focus {
-            border-color: var(--color-theme-dark);
+            outline-color: var(--color-theme-dark);
         }
     }
 

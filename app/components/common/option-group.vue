@@ -13,7 +13,7 @@
 
 <style lang="scss" scoped>
     .group-title {
-        padding: 6px 14px;
+        padding: 6px 12px;
         font-size: 12px;
         color: var(--color-text-info);
     }

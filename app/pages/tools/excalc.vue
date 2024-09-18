@@ -132,7 +132,7 @@
                     <span>次数</span>
                     <mb-input-number v-model="state.times"/>
                 </label>
-                <mb-button full round @click="roll">Roll</mb-button>
+                <mb-button full @click="roll">Roll</mb-button>
                 <label class="excalc-label">
                     <span>斩杀率</span>
                     <mb-input-number :accuracy="7" readonly trim v-model="killRate"/>

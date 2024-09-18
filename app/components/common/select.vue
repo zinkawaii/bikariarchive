@@ -49,14 +49,16 @@
         grid-template-columns: 1fr auto;
         align-items: center;
         height: 2rem;
-        padding-inline: 1em calc(1em - 2px);
+        padding-inline: 12px;
         border: 1px solid var(--color-border-light);
-        border-radius: var(--bounded-full);
+        border-radius: 6px;
+        outline: 2px solid transparent;
+        outline-offset: -1px;
         background-color: var(--color-background);
         transition: all 0.25s;
 
         :focus > & {
-            border-color: var(--color-theme-dark);
+            outline-color: var(--color-theme-dark);
             color: var(--color-text-info);
         }
     }
@@ -77,7 +79,7 @@
         margin-top: 8px;
         padding: 8px;
         border: 1px solid var(--color-border-light);
-        border-radius: 16px;
+        border-radius: 6px;
         box-shadow: var(--box-shadow-dark);
         background-color: var(--color-background);
         transform-origin: top;

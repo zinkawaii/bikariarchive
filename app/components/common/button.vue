@@ -26,13 +26,13 @@
         gap: 0.4em;
         padding-inline: 0.75em;
         border: 1px solid var(--color-theme-dark);
-        border-radius: 4px;
+        border-radius: 6px;
         background-color: transparent;
         line-height: calc(2em - 2px);
         vertical-align: middle;
         text-wrap: nowrap;
         color: var(--color-theme-text);
-        transition: all 0.4s;
+        transition: all 0.25s;
         user-select: none;
 
         &:hover {

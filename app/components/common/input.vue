@@ -18,16 +18,18 @@
         width: 100%;
         height: 2rem;
         border: 1px solid var(--color-border-light);
-        border-radius: var(--bounded-full);
+        border-radius: 6px;
+        outline: 2px solid transparent;
+        outline-offset: -1px;
         text-align: center;
-        transition: border 0.25s;
+        transition: outline 0.25s;
 
         &:focus {
-            border-color: var(--color-theme-dark);
+            outline-color: var(--color-theme-dark);
         }
 
         &.is-invalid {
-            border-color: var(--color-danger);
+            outline-color: var(--color-danger);
         }
     }
 </style>

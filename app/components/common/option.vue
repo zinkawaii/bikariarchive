@@ -34,8 +34,8 @@
 <style lang="scss" scoped>
     .mb-option {
         height: 2em;
-        padding-inline: 1em;
-        border-radius: var(--bounded-full);
+        padding-inline: 12px;
+        border-radius: 8px;
         line-height: 2em;
         cursor: pointer;
 
