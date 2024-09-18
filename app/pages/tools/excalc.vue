@@ -75,13 +75,15 @@
 
     //分数
     const score = computed(() => {
-        const powers =
+        const powers = Math.max(
             state.value.main.reduce((prev, ship) => {
                 return prev + ship;
             }, 0) +
             state.value.pioneer.reduce((prev, ship) => {
                 return prev + ship;
-            }, 0);
+            }, 0),
+            0
+        );
         return Math.floor((5000 / (state.value.time + 50) ** 0.36 - powers ** 0.6) * 10);
     });
 
