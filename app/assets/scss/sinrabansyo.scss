@@ -274,8 +274,14 @@ textarea {
 /* ---------------------------------------------------------------- */
 
 /* 代码高亮 */
-[z-dark] .shiki span {
-    color: var(--shiki-dark) !important; /* stylelint-disable-line declaration-no-important */
+.shiki span {
+    background-color: var(--shiki-light-bg);
+    color: var(--shiki-light);
+
+    [z-dark] & {
+        background-color: var(--shiki-dark-bg);
+        color: var(--shiki-dark);
+    }
 }
 
 /* ---------------------------------------------------------------- */

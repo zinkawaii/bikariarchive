@@ -8,6 +8,7 @@ export const Zexp = {
 
 //通用代码高亮配置
 export const highlightOptions: Partial<CodeToHastOptions> = {
+    defaultColor: false,
     transformers: [{
         root: (hast) => ({
             type: "root",
