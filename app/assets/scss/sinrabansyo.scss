@@ -410,7 +410,7 @@ textarea {
         font-family: var(--font-code);
         font-size: 14px;
         line-height: 20px;
-        white-space: pre-wrap;
+        white-space: break-spaces;
         word-break: break-all;
     }
 }
