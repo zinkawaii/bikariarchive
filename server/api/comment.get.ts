@@ -66,7 +66,7 @@ async function deference<T extends HydratedDocument<CommentDataSchema>>(parent: 
                 content: item.content,
                 time: item.time.toString(),
                 nickname: item.nickname,
-                avatar: `https://cravatar.cn/avatar/${CryptoES.MD5(item.email)}?d=404`,
+                avatar: `https://weavatar.com/avatar/${CryptoES.SHA256(item.email?.toLocaleLowerCase())}?d=404`,
                 address: item.address
             };
         })
