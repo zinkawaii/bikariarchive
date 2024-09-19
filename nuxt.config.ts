@@ -131,7 +131,7 @@ export default defineNuxtConfig({
     shiki: {
         dynamic: true,
         defaultTheme: {
-            light: "min-light",
+            light: "catppuccin-latte",
             dark: "one-dark-pro"
         }
     }
