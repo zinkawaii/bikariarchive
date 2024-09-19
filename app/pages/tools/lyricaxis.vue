@@ -288,7 +288,7 @@
         grid-template-columns: 54px 1fr 54px;
         align-items: center;
         height: 32px;
-        margin-top: 16px;
+        margin-block: 12px 4px;
         text-align: center;
         color: var(--color-text-info);
     }
@@ -298,7 +298,7 @@
         position: relative;
         height: 512px;
         border: 1px solid var(--color-border-lighter);
-        border-radius: 16px;
+        border-radius: 6px;
         background-color: var(--color-background);
         font-size: 14px;
         line-height: 24px;

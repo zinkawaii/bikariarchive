@@ -1,16 +1,19 @@
 <script lang="ts" setup>
     import type { UnwrapContextMenuItem } from "~/types/context-menu";
 
-    defineProps<{
+    const props = defineProps<{
         data: UnwrapContextMenuItem;
     }>();
+
+    const name = toRef(props.data.icon);
+    const checked = toRef(props.data.checked);
 </script>
 
 <template>
     <li class="menu-item" @click="data.action">
-        <icon :name="data.icon ?? (data.checked ? `fa6-solid:check` : ``)"/>
+        <icon :name="name ?? (checked ? `fa6-solid:check` : ``)"/>
         <span>{{ data.title }}</span>
-        <icon v-if="data.icon && data.checked" name="fa6-solid:check"/>
+        <icon v-if="name && checked" name="fa6-solid:check"/>
         <context-menu-group v-if="data.children" :items="data.children"/>
     </li>
 </template>

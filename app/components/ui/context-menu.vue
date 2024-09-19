@@ -37,7 +37,7 @@
 
     contextMenuStore.base({
         key: "text",
-        when: computed(() => textSelection.text.value),
+        when: () => textSelection.text.value,
         items: [
             {
                 title: "复制",
@@ -76,7 +76,7 @@
             },
             {
                 title: "昼夜切换",
-                icon: computed(() => (settingStore.isDarkMode ? "fa6-solid:sun" : "fa6-solid:moon")),
+                icon: () => (settingStore.isDarkMode ? "fa6-solid:sun" : "fa6-solid:moon"),
                 action: () => {
                     const value = settingStore.isDarkMode ? 1 : 2;
                     settingStore.set("dark-mode", value);
@@ -131,7 +131,7 @@
                 </li>
             </menu>
             <template v-for="{ key, when, items } in contextMenuStore.groups">
-                <context-menu-group v-if="when ?? true" :key :items root/>
+                <context-menu-group v-if="toValue(when) ?? true" :key :items root/>
             </template>
         </div>
     </transition-scale>

@@ -8,8 +8,8 @@ export interface ContextMenuGroup {
 
 export interface ContextMenuItem {
     title: string;
-    icon?: MaybeRef<string>;
-    checked?: Ref<boolean>;
+    icon?: MaybeRefOrGetter<string>;
+    checked?: MaybeRefOrGetter<boolean>;
     action?: () => any;
     children?: ContextMenuItem[];
 }

@@ -105,7 +105,7 @@
         </div>
         <div class="panel-form">
             <coco-input placeholder="邮箱" v-model="email" v-model:error="errors.email"/>
-            <p class="panel-tip">选填，用于从 Cravatar 服务获取头像与评论回复通知</p>
+            <p class="panel-tip">选填，用于从 WeAvatar 服务获取头像与评论回复通知</p>
         </div>
         <div class="panel-form">
             <coco-input placeholder="网址" v-model="address" v-model:error="errors.address"/>

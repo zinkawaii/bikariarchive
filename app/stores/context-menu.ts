@@ -26,7 +26,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         useEventListener(el, "contextmenu", () => {
             extraGroup.value = {
                 key,
-                items: items as any
+                items
             };
         });
     }

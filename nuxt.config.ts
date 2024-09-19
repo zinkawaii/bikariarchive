@@ -1,7 +1,7 @@
 import vue from "@vitejs/plugin-vue";
-import { clientConfig, serverConfig } from "./app/runtime.config";
-import sitemapConfig from "./app/sitemap.config";
 import robotsConfig from "./app/robots.config";
+import sitemapConfig from "./app/sitemap.config";
+import { clientConfig, serverConfig } from "./app/runtime.config";
 
 export default defineNuxtConfig({
     app: {

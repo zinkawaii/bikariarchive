@@ -47,7 +47,7 @@
         height: 180px;
         padding: 6px 8px;
         border: 1px solid var(--color-border-lighter);
-        border-radius: 4px;
+        border-radius: 6px;
         outline: 2px solid transparent;
         outline-offset: -1px;
         background-color: var(--color-background);

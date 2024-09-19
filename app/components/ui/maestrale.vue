@@ -36,7 +36,7 @@
             icon: "emojione-monotone:womans-clothes",
             children: jMae.skin.map((name, i) => ({
                 title: name,
-                checked: computed(() => skin.value === i),
+                checked: () => skin.value === i,
                 action() {
                     skin.value = i;
                 }

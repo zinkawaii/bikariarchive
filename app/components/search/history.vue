@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { injectionKey } from "~/types/search";
 
+    const toastStore = useToastStore();
     const history = useLocalStorage("search-history", []);
     const { searchWord } = inject(injectionKey);
 
@@ -15,8 +16,11 @@
     });
 
     //清空历史
-    function clear() {
-        history.value.length = 0;
+    async function clear() {
+        if (await Zin.confirm("是否清空历史词条？")) {
+            history.value.length = 0;
+            toastStore.success("[search]:clear", "历史记录已清空");
+        }
     }
 </script>
 
