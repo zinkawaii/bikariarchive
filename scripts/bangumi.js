@@ -1,5 +1,5 @@
-import fs from "fs-extra";
 import defu from "defu";
+import fs from "fs-extra";
 
 //读取文件
 const path = "../app/assets/json/Bangumi.json";

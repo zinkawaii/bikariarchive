@@ -1,6 +1,6 @@
 import fs from "fs-extra";
-import type { GetEntryResponse } from "~~/server/types/api/entry";
 import { Entry } from "~/utils/entry";
+import type { GetEntryResponse } from "~~/server/types/api/entry";
 
 export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
     const {

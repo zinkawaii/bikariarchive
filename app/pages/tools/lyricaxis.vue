@@ -263,7 +263,8 @@
                             [`is-checked`]: currentLyric === i
                         }"
                         @click="currentLyric = i"
-                        ><time>{{ item.timing }}</time>
+                    >
+                        <time>{{ item.timing }}</time>
                         <span>{{ item.content }}</span>
                     </p>
                 </article>

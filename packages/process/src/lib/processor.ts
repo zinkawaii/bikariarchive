@@ -1,9 +1,9 @@
 import { resolve } from "node:path";
+import { isDev, timer } from "@bikari/shared";
 import chokidar from "chokidar";
 import CryptoES from "crypto-es";
 import fs from "fs-extra";
 import { glob } from "glob";
-import { isDev, timer } from "@bikari/shared";
 
 interface ProcessorOptions<T> {
     sign: string;
@@ -55,7 +55,7 @@ export default class Processor {
         this.jMeta = fs.readJsonSync(this.metaSrcDir);
         this.jMap = {};
 
-        this.sourceBase = resolve(options.source.base)
+        this.sourceBase = resolve(options.source.base);
         this.sourceDist = resolve(options.source.dist);
         this.sourceFolders = options.source.folders.map((f) => resolve(this.sourceBase, f));
         this.sourceGlob = this.sourceFolders.map((p) => resolve(p, `**/*${options.source.ext}`));

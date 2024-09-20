@@ -1,5 +1,5 @@
-import { type Options, gfmStrikethrough } from "micromark-extension-gfm-strikethrough";
 import { gfmStrikethroughFromMarkdown } from "mdast-util-gfm-strikethrough";
+import { gfmStrikethrough, type Options } from "micromark-extension-gfm-strikethrough";
 import type { Root } from "mdast";
 import type { Processor } from "unified";
 import { pushExtensions } from "./utils";

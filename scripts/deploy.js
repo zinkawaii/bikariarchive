@@ -1,7 +1,7 @@
-import SftpClient from "ssh2-sftp-client";
-import { confirm } from "@inquirer/prompts";
-import * as tar from "tar";
 import { timer } from "@bikari/shared";
+import { confirm } from "@inquirer/prompts";
+import SftpClient from "ssh2-sftp-client";
+import * as tar from "tar";
 
 const isCompress = await confirm({
     message: "是否压缩构建包？",

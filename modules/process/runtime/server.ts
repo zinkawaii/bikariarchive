@@ -2,7 +2,7 @@ import { basename } from "node:path";
 import chokidar from "chokidar";
 import fs from "fs-extra";
 import { Article, enrichJArticle } from "~/utils/article";
-import { Entry, enrichJIntel } from "~/utils/entry";
+import { enrichJIntel, Entry } from "~/utils/entry";
 
 export default defineNitroPlugin(async () => {
     const baseDir = r("/dist/json");

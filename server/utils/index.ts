@@ -10,7 +10,7 @@ export function r(path: string) {
 export function getQueryValues(event: H3Event) {
     const query = getQuery(event);
     const obj: {
-        [T: string]: string
+        [T: string]: string;
     } = {};
 
     for (const key in query) {

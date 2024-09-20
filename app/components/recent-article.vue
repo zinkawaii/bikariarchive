@@ -17,11 +17,11 @@
 
 <template>
     <ul class="recent-article">
-        <li v-for="{ title, date, updated, volume, novel, route } in jLimited" class="recent-item">
+        <li v-for="{ title, volume, novel, route, publishDate, updateDate } in jLimited" class="recent-item">
             <plain-link class="text-truncate recent-title" :to="route">{{ title }}</plain-link>
             <div class="recent-info">
                 <span class="text-truncate">{{ Article.meta[novel].volumes[volume].title }}</span>
-                <time>{{ sortByUpdated && updated || date }}</time>
+                <time>{{ sortByUpdated ? updateDate : publishDate }}</time>
             </div>
         </li>
     </ul>

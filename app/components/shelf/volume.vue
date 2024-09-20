@@ -16,7 +16,8 @@
                 [`is-checked`]: currentVolumeIdx === i
             }"
             @click="shelfStore.selectVolume(i)"
-            ><span class="font-italic text-gray text-small">#{{ i + 1 }}</span>
+        >
+            <span class="font-italic text-gray text-small">#{{ i + 1 }}</span>
             <span>{{ title }}</span>
         </li>
     </ul>

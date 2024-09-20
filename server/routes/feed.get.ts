@@ -1,5 +1,5 @@
-import type { H3Event } from "h3";
 import { Feed } from "feed";
+import type { H3Event } from "h3";
 import { Article } from "~/utils/article";
 
 export default defineEventHandler(async (event: H3Event) => {
@@ -24,7 +24,7 @@ export default defineEventHandler(async (event: H3Event) => {
     .flatMap(({ chapters }) => chapters)
     .filter((c) => c.updateDate !== Article.FARAWAY)
     .sort((a, b) => {
-        const x = a.updateDate
+        const x = a.updateDate;
         const y = b.updateDate;
         return y.localeCompare(x);
     })

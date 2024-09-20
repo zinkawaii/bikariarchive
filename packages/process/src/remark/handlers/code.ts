@@ -1,6 +1,6 @@
+import type { Element } from "hast";
 import type { Code } from "mdast";
 import type { Handler } from "mdast-util-to-hast";
-import type { Element } from "hast";
 
 export default <Handler> function(state, node: Code) {
     const result: Element = {

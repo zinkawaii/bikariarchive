@@ -8,11 +8,8 @@
 </script>
 
 <template>
-    <nuxt-link
-        class="novel-adjacent"
-        :class="`is-${type}`"
-        :to="art?.route"
-        ><h3 class="adjacent-sign">
+    <nuxt-link class="novel-adjacent" :class="`is-${type}`" :to="art?.route">
+        <h3 class="adjacent-sign">
             <icon name="solar:rewind-forward-bold-duotone"/>
             <span>{{ art?.title }}</span>
         </h3>

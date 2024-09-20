@@ -15,7 +15,8 @@
             [`wide-page`]: $route.meta.widePage,
             [`full-page`]: $route.meta.fullPage
         }"
-        ><main class="nakami">
+    >
+        <main class="nakami">
             <slot></slot>
             <comment-area v-if="$route.meta.comment" v-show="settingStore.isCommentShow"/>
             <z-footer />

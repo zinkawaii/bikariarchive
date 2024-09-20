@@ -1,10 +1,13 @@
 import { setProperty } from "dot-prop";
-import { unified } from "unified";
-import parse from "remark-parse";
+import raw from "rehype-raw";
 import frontmatter from "remark-frontmatter";
 import mdc from "remark-mdc";
+import parse from "remark-parse";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
-import raw from "rehype-raw";
+import { unified } from "unified";
+import code from "./handlers/code";
+import image from "./handlers/image";
+import link from "./handlers/link";
 import attributes from "./plugins/attributes";
 import compiler from "./plugins/compiler";
 import footnote from "./plugins/footnote";
@@ -12,9 +15,6 @@ import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
 import strikethrough from "./plugins/strikethrough";
-import code from "./handlers/code";
-import image from "./handlers/image";
-import link from "./handlers/link";
 import type { Root } from "./types";
 
 export {

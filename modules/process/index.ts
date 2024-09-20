@@ -1,5 +1,5 @@
-import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 import { article, entry } from "@bikari/process";
+import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 
 export default defineNuxtModule({
     meta: {

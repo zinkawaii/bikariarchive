@@ -27,7 +27,8 @@
         tabindex="-1"
         @focus="toggleDrop(true)"
         @blur="toggleDrop(false)"
-        ><a class="select-wrapper">
+    >
+        <a class="select-wrapper">
             <span>{{ title }}</span>
             <icon class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa6-solid:chevron-down"/>
         </a>

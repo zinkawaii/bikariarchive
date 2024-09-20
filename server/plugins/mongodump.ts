@@ -1,6 +1,6 @@
 import { exec } from "node:child_process";
-import { CronJob } from "cron";
 import consola from "consola";
+import { CronJob } from "cron";
 import dayjs from "dayjs";
 
 export default defineNitroPlugin(() => {

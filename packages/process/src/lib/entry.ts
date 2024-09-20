@@ -1,8 +1,8 @@
 import { basename } from "node:path";
 import fs from "fs-extra";
 import { parseEntry } from "../remark";
-import type { JEntry } from "./types";
 import Processor from "./processor";
+import type { JEntry } from "./types";
 
 export default new Processor({
     sign: "Entry",
@@ -65,5 +65,5 @@ export default new Processor({
         jMeta.all = Object.keys(jMeta.all);
 
         return jMeta;
-    },
+    }
 });

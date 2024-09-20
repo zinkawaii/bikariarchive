@@ -16,7 +16,8 @@
             :class="[`is-${direction}`, {
                 [`is-plain`]: plaintext
             }]"
-            ><div class="popper-inner">
+        >
+            <div class="popper-inner">
                 <template v-if="plaintext">{{ plaintext }}</template>
                 <slot v-else name="floating"></slot>
             </div>

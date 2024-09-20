@@ -14,6 +14,7 @@
         else if (star) {
             return item.owner[0]?.star === star;
         }
+        return true;
     });
 </script>
 

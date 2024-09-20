@@ -11,7 +11,8 @@
                     class="sheno-link"
                     :class="{ [`is-checked`]: novel === key }"
                     @click="shelfStore.selectNovel(key as string)"
-                    ><div class="sheno-cover">
+                >
+                    <div class="sheno-cover">
                         <nuxt-img v-if="cover" :src="cover" alt="[cover]"/>
                         <div v-else class="sheno-placeholder">Cover.</div>
                     </div>

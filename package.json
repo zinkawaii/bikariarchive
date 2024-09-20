@@ -70,7 +70,7 @@
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue-email/render": "^0.0.9",
     "@vueuse/nuxt": "^11.1.0",
-    "@zinkawaii/eslint-config": "^0.1.6",
+    "@zinkawaii/eslint-config": "^0.1.7",
     "@zinkawaii/nuxt-gsap": "^0.1.3",
     "@zinkawaii/nuxt-shiki": "^0.6.0",
     "@zinkawaii/stylelint-config": "^0.1.5",

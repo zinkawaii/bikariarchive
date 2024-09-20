@@ -1,5 +1,5 @@
-import nodemailer from "nodemailer";
 import { render } from "@vue-email/render";
+import nodemailer from "nodemailer";
 import type { Component } from "vue";
 
 export async function sendMail(component: Component, options: {

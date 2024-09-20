@@ -4,7 +4,7 @@
     import { MbCode, MbGallery, MbImage, PlainLink } from "#components";
 
     const props = withDefaults(defineProps<{
-        body: Root | Element[];
+        body?: Root | Element[];
         tag?: string;
     }>(), {
         body: () => [],

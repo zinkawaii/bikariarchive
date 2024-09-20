@@ -14,8 +14,7 @@
             [`is-full`]: full,
             [`is-round`]: round
         }"
-        ><slot></slot>
-    </button>
+    ><slot></slot></button>
 </template>
 
 <style lang="scss">

@@ -13,7 +13,7 @@
         return mode.value === "modify";
     });
 
-    const { content, nickname, email, address } = useSourceRefs(() => isModifyMode.value ? modifyOptions.value : commentPanelStore, {
+    const { content, nickname, email, address } = useSourceRefs(() => (isModifyMode.value ? modifyOptions.value : commentPanelStore), {
         content: {},
         nickname: {},
         email: {
@@ -119,7 +119,8 @@
             full round
             :disabled="isContentEmpty || isSending"
             @click="sendComment"
-            ><icon name="fa6-solid:paper-plane"/>
+        >
+            <icon name="fa6-solid:paper-plane"/>
             <span>{{ isSending ? "发送中……" : "发表评论" }}</span>
         </mb-button>
     </mb-dialog>

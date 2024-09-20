@@ -1,13 +1,13 @@
 import { basename, resolve } from "node:path";
+import { isDev } from "@bikari/shared";
 import dayjs from "dayjs";
 import fs from "fs-extra";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
-import { isDev } from "@bikari/shared";
 import { parseArticle } from "../remark";
+import Processor from "./processor";
 import type { Element } from "../remark/types";
 import type { ArticleFrontmatter } from "./types";
-import Processor from "./processor";
 
 const PATH_REGEX = /^(.*?)\.(\d+)$/;
 
@@ -67,16 +67,18 @@ export default new Processor({
         let order = `[${volume}]`;
         let index = "";
         switch (this.jMeta[novel].type) {
-            case "novel":
-                const match = name.match(/^(.*?)-(.*)$/);
+            case "novel": {
+                const match = name.match(/^([^-]*)-(.*)$/);
                 order += match[1];
                 index = match[2];
                 break;
-            case "blog":
+            }
+            case "blog": {
                 order += name;
                 index = attributes.abbrlink;
                 delete attributes.abbrlink;
                 break;
+            }
         }
 
         //写入数据

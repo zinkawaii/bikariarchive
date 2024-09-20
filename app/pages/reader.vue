@@ -84,7 +84,7 @@
             .filter((node) => node.tag === "p")
             .map((p) => toString(p))
             .join("")
-            .slice(0, 128),
+            .slice(0, 128)
     });
 
     //添加阅读记录

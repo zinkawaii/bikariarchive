@@ -1,5 +1,5 @@
+import { createPlainShiki, type MountPlainShikiOptions } from "plain-shiki";
 import type { CodeToTokensWithThemesOptions } from "shiki";
-import { type MountPlainShikiOptions, createPlainShiki } from "plain-shiki";
 
 export default function(
     target: MaybeRefOrGetter<HTMLElement>,

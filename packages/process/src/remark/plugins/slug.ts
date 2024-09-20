@@ -1,7 +1,7 @@
-import type { Root } from "mdast";
 import GithubSlugger from "github-slugger";
-import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
+import { visit } from "unist-util-visit";
+import type { Root } from "mdast";
 
 export default function() {
     const slugger = new GithubSlugger();

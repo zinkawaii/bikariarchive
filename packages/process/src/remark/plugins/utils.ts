@@ -1,9 +1,9 @@
 import { visit } from "unist-util-visit";
 import type * as hast from "hast";
 import type * as mdast from "mdast";
-import type { Processor } from "unified";
-import type { Extension as MicromarkExtension } from "micromark-util-types";
 import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
+import type { Extension as MicromarkExtension } from "micromark-util-types";
+import type { Processor } from "unified";
 
 interface PushExtensionsOptions {
     micromark: MicromarkExtension[];

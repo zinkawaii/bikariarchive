@@ -1,11 +1,11 @@
 <script lang="ts" setup>
+    const modelValue = defineModel<number>();
     const emit = defineEmits<{
         progress: [rate: number];
         change: [rate: number];
         dragstart: [];
         dragend: [];
     }>();
-    const modelValue = defineModel<number>();
 
     const rootEl = useTemplateRef("root");
     const rate = ref(0);

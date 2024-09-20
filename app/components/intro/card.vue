@@ -3,7 +3,7 @@
         layer: string;
         novel: string;
     }>();
-    const emits = defineEmits<{
+    const emit = defineEmits<{
         exchange: [];
     }>();
 
@@ -26,7 +26,7 @@
     //点击交换
     function exchange() {
         if (props.layer === "inner") {
-            emits("exchange");
+            emit("exchange");
         }
     }
 </script>

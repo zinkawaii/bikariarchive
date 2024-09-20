@@ -201,7 +201,8 @@
                         [`is-checked`]: currentDate === date
                     }"
                     @click="currentDate = (currentDate === date) ? null : date"
-                    ><span class="solar">{{ date.solar }}</span>
+                >
+                    <span class="solar">{{ date.solar }}</span>
                     <span class="lunar">{{ date.lunar }}</span>
                 </a>
             </div>

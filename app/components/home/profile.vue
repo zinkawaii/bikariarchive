@@ -46,11 +46,8 @@
         </table>
         <nav class="profile-links">
             <mb-popper v-for="{ title, to, icon } in links" :plaintext="title">
-                <nuxt-link
-                    class="profile-link"
-                    :to
-                    target="_blank"
-                    ><icon :name="icon"/>
+                <nuxt-link class="profile-link" :to target="_blank">
+                    <icon :name="icon"/>
                 </nuxt-link>
             </mb-popper>
         </nav>

@@ -1,11 +1,11 @@
+import { compiler, image, link, ruby, strikethrough } from "@bikari/process/remark";
 import parse from "remark-parse";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
+import type { Root } from "@bikari/process";
 import type * as hast from "hast";
 import type * as mdast from "mdast";
-import { compiler, image, link, ruby, strikethrough } from "@bikari/process/remark";
-import type { Root } from "@bikari/process";
 
 let shiki: Awaited<ReturnType<typeof getShikiHighlighter>>,
     options: Awaited<ReturnType<typeof resolveShikiOptions>>;

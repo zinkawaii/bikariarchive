@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import dayjs from "dayjs";
     import { CommentUser } from "#components";
-    import type { CommentData } from "~~/server/types/api/comment";
     import type { WithParent } from "~/types";
+    import type { CommentData } from "~~/server/types/api/comment";
 
     const props = defineProps<{
         data: WithParent<CommentData>;

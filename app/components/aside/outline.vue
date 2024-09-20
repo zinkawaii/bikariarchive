@@ -28,14 +28,14 @@
         const headingEls = document.querySelectorAll<HTMLHeadingElement>(".novel-text :where(h2, h3):not(.sr-only)");
 
         flatHeaders.value = [...headingEls]
-        .map((el) => ({
-            element: el,
-            title: el.textContent,
-            link: "#" + el.id,
-            level: Number(el.tagName[1]),
-            children: []
-        }))
-        .filter((el) => el.level <= 3);
+            .map((el) => ({
+                element: el,
+                title: el.textContent,
+                link: "#" + el.id,
+                level: Number(el.tagName[1]),
+                children: []
+            }))
+            .filter((el) => el.level <= 3);
 
         nestedHeaders.value = [];
         outer: for (let i = 0; i < flatHeaders.value.length; i++) {

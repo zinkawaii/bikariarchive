@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+    const modelValue = defineModel<string>();
     const emit = defineEmits<{
         decrypt: [];
     }>();
-    const modelValue = defineModel<string>();
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 import CryptoES from "crypto-es";
 import type { HydratedDocument } from "mongoose";
-import type { CommentDataSchema } from "~~/server/types/model";
 import type { CommentData, GetCommentResponse } from "~~/server/types/api/comment";
+import type { CommentDataSchema } from "~~/server/types/model";
 
 //需要获取的属性
 const select = "_id content children time nickname email address";

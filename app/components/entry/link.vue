@@ -1,23 +1,21 @@
 <script lang="ts" setup>
     const props = defineProps<{
-        title: string | string[];
+        title: string | [name: string, displayName: string];
     }>();
 
-    //有无别名
-    const isArray = Array.isArray(props.title);
-
-    //词条名称
-    const name = isArray ? props.title[0] : props.title;
-
-    //显示名称
-    const displayName = isArray ? props.title[1] : props.title;
+    //词条与显示名称
+    const titles = computed(() => {
+        return Array.isArray(props.title) ? props.title : [props.title, props.title];
+    });
 
     //是否存在
-    const isExist = Entry.meta.all.includes(name);
+    const isExist = computed(() => {
+        return Entry.meta.all.includes(titles.value[0]);
+    });
 </script>
 
 <template>
     <span class="entry-link">
-        <plain-link :danger="!isExist" :to="toEntry(name)">{{ displayName }}</plain-link>
+        <plain-link :danger="!isExist" :to="toEntry(titles[0])">{{ titles[1] }}</plain-link>
     </span>
 </template>

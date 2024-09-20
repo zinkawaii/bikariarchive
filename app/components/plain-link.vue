@@ -24,7 +24,8 @@
         :class="{ [`is-danger`]: danger }"
         :target
         :rel
-        ><slot></slot>
+    >
+        <slot></slot>
         <icon v-if="isExternal" class="plain-external" name="fa6-solid:arrow-up-right-from-square"/>
     </nuxt-link>
 </template>
