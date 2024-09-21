@@ -11,7 +11,7 @@
         if (classification) {
             return item.class.includes(classification);
         }
-        else if (star) {
+        else if (star !== void 0) {
             return item.owner[0]?.star === star;
         }
         return true;
