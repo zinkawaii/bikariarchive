@@ -35,7 +35,7 @@
                     return "昵称不能为空";
                 }
                 else if (count > 24) {
-                    return "昵称长度不能超过24个字符";
+                    return "昵称长度不能超过 24 个字符";
                 }
             }
         },
@@ -58,9 +58,10 @@
             : "评论";
     });
 
-    //内容是否为空
-    const isContentEmpty = computed(() => {
-        return !content.value.trim().length;
+    //内容是否超长
+    const isContentOverlength = computed(() => {
+        const { length } = content.value.trim();
+        return length === 0 || length > 512;
     });
 
     //发表评论
@@ -117,7 +118,7 @@
         </div>
         <mb-button
             full round
-            :disabled="isContentEmpty || isSending"
+            :disabled="isContentOverlength || isSending"
             @click="sendComment"
         >
             <icon name="fa6-solid:paper-plane"/>

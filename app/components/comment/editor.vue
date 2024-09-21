@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    const props = withDefaults(defineProps<{
+    withDefaults(defineProps<{
         maxlength?: number;
     }>(), {
         maxlength: 512
@@ -17,12 +17,6 @@
         selector: (theme) => `[z-${theme}]`
     });
 
-    function checkLength(event: InputEvent) {
-        if (length.value + event.data?.length > props.maxlength) {
-            event.preventDefault();
-        }
-    }
-
     function updateModelValue(event: InputEvent) {
         const target = event.target as HTMLElement;
         modelValue.value = target.textContent;
@@ -33,8 +27,10 @@
     <div
         ref="editor"
         class="panel-editor"
+        :class="{
+            ['is-invalid']: length > maxlength
+        }"
         contenteditable="plaintext-only"
-        @beforeinput="checkLength"
         @input="updateModelValue"
         v-text="initialValue"
     ></div>
@@ -57,6 +53,10 @@
 
         &:focus {
             outline-color: var(--color-theme-dark);
+        }
+
+        &.is-invalid {
+            outline-color: var(--color-danger);
         }
     }
 
