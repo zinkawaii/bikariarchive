@@ -5,7 +5,7 @@ import type { Element } from "@bikari/process";
 import { Article } from "~/utils/article";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 
-export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
+export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res) => {
     let { novel, word = "" } = getQueryValues(event);
 
     //限制长度
@@ -72,4 +72,4 @@ export default defineJEventHandler<GetSearchResponse>(async (event, res) => {
         time: dayjs.tz(),
         word
     }).save();
-});
+}, 1500);

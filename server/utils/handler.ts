@@ -27,3 +27,22 @@ export const defineJCachedEventHandler = <T extends BaseResponse>(
     handler: Handler<T>,
     options?: CachedEventHandlerOptions
 ) => defineCachedEventHandler(createHandler<T>(handler), options);
+
+export const defineJThrottledEventHandler = <T extends BaseResponse>(
+    handler: Handler<T>,
+    delay: number
+) => {
+    let timer: NodeJS.Timeout;
+    function throttledHandler(...args: Parameters<typeof handler>): T {
+        if (!timer) {
+            timer = setTimeout(() => {
+                timer = null;
+            }, delay);
+            return handler.apply(this, args);
+        }
+        throw createError({
+            statusCode: 429
+        });
+    }
+    return defineEventHandler(createHandler<T>(throttledHandler));
+};

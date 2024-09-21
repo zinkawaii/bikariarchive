@@ -16,7 +16,7 @@
         searchWord
     });
 
-    const { execute, status, data } = useLazyFetch("/api/search", {
+    const { execute, status, data, error } = useLazyFetch("/api/search", {
         query: {
             novel,
             word: computed(() => inputWord.value.slice(0, 64))
@@ -54,6 +54,15 @@
         if (value && searchWord.value !== value) {
             fullTextSearch();
         }
+    });
+
+    //错误处理
+    whenever(error, (err) => {
+        if (err.statusCode === 429) {
+            toastStore.info("[search]:throttle", "接口节流中");
+        }
+    }, {
+        immediate: true
     });
 
     //总出现次数
