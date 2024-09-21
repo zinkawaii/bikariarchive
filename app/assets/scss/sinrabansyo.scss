@@ -299,6 +299,8 @@ textarea {
 }
 
 .novel-text {
+    overflow-wrap: anywhere;
+
     h2 {
         position: relative;
         margin-block: 24px 12px;
