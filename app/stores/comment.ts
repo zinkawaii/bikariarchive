@@ -1,3 +1,4 @@
+import type { H3Error } from "h3";
 import type { WithParent } from "~/types";
 import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 
@@ -26,7 +27,7 @@ export const useCommentStore = defineStore("comment", () => {
                 page: page
             }
         });
-        if (res.error !== 0) return;
+        if (res.error) return;
 
         comments.value = processComments(res.list);
         mainCount.value = res.mainCount;
@@ -35,51 +36,43 @@ export const useCommentStore = defineStore("comment", () => {
     }
 
     //发送评论
-    async function post(body: PostCommentBody) {
-        try {
-            await $fetch("/api/comment", {
-                method: "post",
-                body
-            });
-            update(1);
-        }
-        catch (err) {
-            const messate = err.statusCode === 403
-                ? "无评论权限"
-                : "评论发送失败";
-            toastStore.error("[comment]:post", messate);
-            throw err;
-        }
-    }
+    const post = createRequest<PostCommentBody>("post", (err) => {
+        return err.statusCode === 403
+            ? "无评论权限"
+            : "评论发送失败";
+    });
 
     //修改评论
-    async function modify(body: PutCommentBody) {
-        try {
-            await $fetch("/api/comment", {
-                method: "put",
-                body
-            });
-            update(1);
-        }
-        catch (err) {
-            toastStore.error("[comment]:put", "评论修改失败");
-            throw err;
-        }
-    }
+    const modify = createRequest<PutCommentBody>("put", (err) => {
+        return err.statusCode === 403
+            ? "无修改权限"
+            : "评论修改失败";
+    });
 
     //删除评论
-    async function remove(body: DeleteCommentBody) {
-        try {
-            await $fetch("/api/comment", {
-                method: "delete",
-                body
-            });
-            update(1);
-        }
-        catch (err) {
-            toastStore.error("[comment]:delete", "评论删除失败");
-            throw err;
-        }
+    const remove = createRequest<DeleteCommentBody>("delete", (err) => {
+        return err.statusCode === 403
+            ? "无删除权限"
+            : "评论删除失败";
+    });
+
+    function createRequest<T>(method: "post" | "put" | "delete", message: (err: H3Error) => string) {
+        return async (body: T) => {
+            try {
+                const res = await $fetch("/api/comment", {
+                    method,
+                    body
+                });
+                if (res.error) {
+                    throw createError({ status: res.error });
+                }
+                update(1);
+            }
+            catch (err) {
+                toastStore.error(`[comment]:${method}`, message(err));
+                throw err;
+            }
+        };
     }
 
     return {

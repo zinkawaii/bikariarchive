@@ -3,9 +3,8 @@ import CommentReply from "~/emails/comment-reply.vue";
 import type { PostCommentBody } from "~~/server/types/api/comment";
 
 export default defineJEventHandler(async (event) => {
-    const body = await readBody<PostCommentBody>(event);
-
     const config = useRuntimeConfig();
+    const body = await readBody<PostCommentBody>(event);
 
     //获取严格路径
     const path = getStrictPath(body.path);
@@ -18,12 +17,17 @@ export default defineJEventHandler(async (event) => {
     //权限验证
     identityValidate(event, config.comment[path]?.identity ?? 0);
 
+    //内容过长
+    if (body.content?.length > 512) {
+        return 2;
+    }
+
     //获取时间，UID
     const time = dayjs.tz();
     const uid = event.context.session?.uid;
 
     //规制参数类型
-    const parent = body.parent || void (0);
+    const parent = body.parent || void 0;
 
     //获取用户
     const qUser = await UserDataModel.findOne({ uid });
