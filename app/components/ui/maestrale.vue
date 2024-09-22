@@ -19,7 +19,7 @@
 
     //右键菜单
     contextMenuStore.extra(maeEl, {
-        key: "maestrale",
+        title: "maestrale",
         shield: ["image"],
         items: [
             {

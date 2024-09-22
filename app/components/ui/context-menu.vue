@@ -1,10 +1,18 @@
 <script lang="ts" setup>
     const contextMenuStore = useContextMenuStore();
     const settingStore = useSettingStore();
-    const toastStore = useToastStore();
+    const config = useRuntimeConfig();
     const router = useRouter();
     const rootEl = useTemplateRef("root");
     const textSelection = useTextSelection();
+
+    const targetEl = shallowRef<HTMLElement>();
+    const targetAnchorLink = computed(() => {
+        return targetEl.value?.closest("a")?.href ?? "";
+    });
+    const targetImageLink = computed(() => {
+        return targetEl.value?.closest("img")?.src ?? "";
+    });
 
     const toolItems = [
         {
@@ -36,15 +44,53 @@
     ];
 
     contextMenuStore.base({
-        key: "text",
+        title: "anchor",
+        when: targetAnchorLink,
+        items: [
+            {
+                title: "复制链接",
+                icon: "fa6-solid:link",
+                action: () => {
+                    copyText(targetAnchorLink.value, "链接已复制");
+                }
+            }
+        ]
+    });
+
+    contextMenuStore.base({
+        title: "image",
+        when: targetImageLink,
+        items: [
+            {
+                title: "复制图像",
+                icon: "fa6-solid:image",
+                disabled: () => {
+                    const url = new URL(targetImageLink.value);
+                    return url.hostname !== config.public.domain;
+                },
+                action: () => {
+                    copyImage(targetImageLink.value, "图像已复制");
+                }
+            },
+            {
+                title: "复制链接",
+                icon: "fa6-solid:link",
+                action: () => {
+                    copyText(targetImageLink.value, "链接已复制");
+                }
+            }
+        ]
+    });
+
+    contextMenuStore.base({
+        title: "text",
         when: () => textSelection.text.value,
         items: [
             {
                 title: "复制",
                 icon: "fa6-solid:paste",
                 action: () => {
-                    navigator.clipboard.writeText(textSelection.text.value);
-                    toastStore.success("[copy]", "文本已复制");
+                    copyText(textSelection.text.value, "文本已复制");
                 }
             },
             {
@@ -65,7 +111,7 @@
     });
 
     contextMenuStore.base({
-        key: "global",
+        title: "main",
         items: [
             {
                 title: "返回主页",
@@ -96,6 +142,9 @@
         if (event.ctrlKey) {
             return;
         }
+
+        //获取点击元素
+        targetEl.value = event.target as HTMLElement;
 
         //显示菜单
         contextMenuStore.open();
@@ -134,8 +183,8 @@
                     <icon :name="icon"/>
                 </li>
             </menu>
-            <template v-for="{ key, when, items } in contextMenuStore.groups">
-                <context-menu-group v-if="toValue(when) ?? true" :key :items root/>
+            <template v-for="{ title, when, items } in contextMenuStore.groups">
+                <context-menu-group v-if="toValue(when) ?? true" :key="title" :title :items root/>
             </template>
         </div>
     </transition-scale>

@@ -19,12 +19,12 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     }
 
     function base(group: ContextMenuGroup) {
-        patchActions(group.items);
+        patchItems(group.items);
         baseGroups.value.push(group as any);
     }
 
     function extra(el: MaybeRef<HTMLElement>, group: ContextMenuGroup) {
-        patchActions(group.items);
+        patchItems(group.items);
         useEventListener(el, "contextmenu", () => {
             extraGroup.value = group;
         });
@@ -49,11 +49,11 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     };
 
     //触发事件时关闭菜单
-    function patchActions(items: ContextMenuItem[]) {
+    function patchItems(items: ContextMenuItem[]) {
         for (const item of items) {
             const { action, children = [] } = item;
             item.action &&= () => (action(), close());
-            patchActions(children);
+            patchItems(children);
         }
     }
 });

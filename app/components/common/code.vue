@@ -8,7 +8,6 @@
         lang: "js"
     });
 
-    const toastStore = useToastStore();
     const [isCollapse, toggleCollapse] = useToggle(false);
     const [isExpand, toggleExpand] = useToggle(false);
     const codeEl = useTemplateRef("pre");
@@ -17,8 +16,7 @@
         {
             icon: "fa6-solid:paste",
             action() {
-                navigator.clipboard.writeText(codeEl.value.textContent);
-                toastStore.success("[copy]", "代码已复制");
+                copyText(codeEl.value.textContent, "代码已复制");
             }
         },
         {

@@ -5,12 +5,13 @@
         data: UnwrapContextMenuItem;
     }>();
 
-    const name = toRef(props.data.icon);
-    const checked = toRef(props.data.checked);
+    const name = computed(() => toValue(props.data.icon));
+    const checked = computed(() => toValue(props.data.checked));
+    const disabled = computed(() => toValue(props.data.disabled));
 </script>
 
 <template>
-    <li class="menu-item" @click="data.action">
+    <li class="menu-item" :class="{ [`is-disabled`]: disabled }" @click="data.action">
         <icon :name="name ?? (checked ? `fa6-solid:check` : ``)"/>
         <span>{{ data.title }}</span>
         <icon v-if="name && checked" name="fa6-solid:check"/>
@@ -36,6 +37,11 @@
         &:hover {
             background-color: var(--color-theme);
             color: white;
+        }
+
+        &.is-disabled {
+            color: var(--color-text-disabled);
+            pointer-events: none;
         }
 
         > .iconify {
