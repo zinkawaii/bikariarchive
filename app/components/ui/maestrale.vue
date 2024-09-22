@@ -18,31 +18,35 @@
     const [isDialog, toggleDialog] = useToggle(false);
 
     //右键菜单
-    contextMenuStore.extra(maeEl, "maestrale", [
-        {
-            title: "自动",
-            icon: "bi:chat-dots-fill",
-            checked: isAuto,
-            action: toggleAuto
-        },
-        {
-            title: "誓约",
-            icon: "fa6-solid:heart",
-            checked: isMarry,
-            action: toggleMarry
-        },
-        {
-            title: "换装",
-            icon: "emojione-monotone:womans-clothes",
-            children: jMae.skin.map((name, i) => ({
-                title: name,
-                checked: () => skin.value === i,
-                action() {
-                    skin.value = i;
-                }
-            }))
-        }
-    ]);
+    contextMenuStore.extra(maeEl, {
+        key: "maestrale",
+        shield: ["image"],
+        items: [
+            {
+                title: "自动",
+                icon: "bi:chat-dots-fill",
+                checked: isAuto,
+                action: toggleAuto
+            },
+            {
+                title: "誓约",
+                icon: "fa6-solid:heart",
+                checked: isMarry,
+                action: toggleMarry
+            },
+            {
+                title: "换装",
+                icon: "emojione-monotone:womans-clothes",
+                children: jMae.skin.map((name, i) => ({
+                    title: name,
+                    checked: () => skin.value === i,
+                    action() {
+                        skin.value = i;
+                    }
+                }))
+            }
+        ]
+    });
 
     //换装时的动画
     function onLoad() {

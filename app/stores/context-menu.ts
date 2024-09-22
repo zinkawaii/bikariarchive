@@ -8,7 +8,9 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     const groups = computed(() => {
         return [
             extraGroup.value,
-            ...baseGroups.value
+            ...baseGroups.value.filter((group) => {
+                return !extraGroup.value?.shield?.includes(group.title);
+            })
         ].filter(Boolean);
     });
 
@@ -21,13 +23,10 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         baseGroups.value.push(group as any);
     }
 
-    function extra(el: MaybeRef<HTMLElement>, key: string, items: ContextMenuItem[]) {
-        patchActions(items);
+    function extra(el: MaybeRef<HTMLElement>, group: ContextMenuGroup) {
+        patchActions(group.items);
         useEventListener(el, "contextmenu", () => {
-            extraGroup.value = {
-                key,
-                items
-            };
+            extraGroup.value = group;
         });
     }
 
