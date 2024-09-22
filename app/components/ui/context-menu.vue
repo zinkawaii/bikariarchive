@@ -93,6 +93,10 @@
     });
 
     useEventListener("contextmenu", (event) => {
+        if (event.ctrlKey) {
+            return;
+        }
+
         //显示菜单
         contextMenuStore.open();
 
