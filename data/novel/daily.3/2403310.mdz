@@ -2,7 +2,7 @@
 title: 阅读页样式用例
 abbrlink: 93ec4a4
 date: 2024-03-31
-updated: 2024-08-25
+updated: 2024-09-23
 ---
 
 ## 二级标题
@@ -41,7 +41,7 @@ import consola from "consola";
 /* 一些注释 */
 consola.info(`
   这是代码块，采用了运行时高亮的方案。\n
-  它是导致文章启用模板运行时渲染的最频繁因素。\n
+  目前支持完全动态地加载语言包。\n
   代码高亮库为 Shiki。
 `);
 
