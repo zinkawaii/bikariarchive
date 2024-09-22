@@ -45,18 +45,18 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "uqr": "^0.1.2",
-    "vue": "^3.5.6",
+    "vue": "^3.5.8",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.6.2",
+    "@antfu/eslint-config": "^3.7.1",
     "@bikari/excalc": "workspace:^",
     "@bikari/process": "workspace:^",
     "@bikari/shared": "workspace:^",
     "@iconify-json/fa6-solid": "^1.2.0",
     "@inquirer/prompts": "^6.0.1",
     "@kikiutils/nuxt-session": "^3.1.2",
-    "@nuxt/devtools": "^1.4.2",
+    "@nuxt/devtools": "^1.5.0",
     "@nuxt/icon": "^1.5.1",
     "@nuxt/image": "^1.8.0",
     "@nuxtjs/google-fonts": "^3.2.0",
@@ -75,14 +75,14 @@
     "@zinkawaii/nuxt-shiki": "^0.6.0",
     "@zinkawaii/stylelint-config": "^0.1.5",
     "assemblyscript": "^0.27.29",
-    "chokidar": "^4.0.0",
+    "chokidar": "^4.0.1",
     "cn-font-split": "^5.2.2",
     "consola": "^3.2.3",
     "cron": "^3.1.7",
     "cross-env": "^7.0.3",
     "defu": "^6.1.4",
     "dot-prop": "^9.0.0",
-    "eslint": "^9.10.0",
+    "eslint": "^9.11.0",
     "feed": "^4.2.2",
     "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
@@ -90,7 +90,7 @@
     "nodemailer": "^6.9.15",
     "nuxt": "^3.13.2",
     "nuxt-mongoose": "^1.0.6",
-    "sass": "^1.79.1",
+    "sass": "^1.79.3",
     "ssh2-sftp-client": "^11.0.0",
     "stylelint": "^16.9.0",
     "tar": "^7.4.3",
@@ -99,7 +99,6 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "@vue/compiler-sfc": "patches/@vue__compiler-sfc.patch",
       "mdast-util-to-hast": "patches/mdast-util-to-hast.patch"
     }
   }

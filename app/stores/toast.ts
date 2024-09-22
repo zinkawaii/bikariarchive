@@ -18,7 +18,7 @@ const iconInfos: Record<ToastType, ToastIconInfo> = {
 export const useToastStore = defineStore("toast", () => {
     const map = ref(new Map<string, ToastItem>());
 
-    function show(key: string, content: string, type: ToastType = "info") {
+    function show(key: string, message: string, type: ToastType = "info") {
         const fullKey = `<${type}>${key}`;
         const hash = Math.random().toString(36);
         for (const item of map.value) {
@@ -29,7 +29,7 @@ export const useToastStore = defineStore("toast", () => {
         }
         map.value.set(fullKey + hash, {
             icon: iconInfos[type],
-            content
+            message
         });
     }
 
@@ -37,16 +37,16 @@ export const useToastStore = defineStore("toast", () => {
         map.value.delete(key);
     }
 
-    function error(key: string, content: string) {
-        show(key, content, "error");
+    function error(key: string, message: string) {
+        show(key, message, "error");
     }
 
-    function info(key: string, content: string) {
-        show(key, content, "info");
+    function info(key: string, message: string) {
+        show(key, message, "info");
     }
 
-    function success(key: string, content: string) {
-        show(key, content, "success");
+    function success(key: string, message: string) {
+        show(key, message, "success");
     }
 
     return {

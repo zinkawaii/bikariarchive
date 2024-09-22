@@ -7,5 +7,5 @@ export interface ToastIconInfo {
 
 export interface ToastItem {
     icon: ToastIconInfo;
-    content: string;
+    message: string;
 }

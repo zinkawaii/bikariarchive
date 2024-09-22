@@ -19,7 +19,7 @@
     async function clear() {
         if (await Zin.confirm("是否清空历史词条？")) {
             history.value.length = 0;
-            toastStore.success("[search]:clear", "历史记录已清空");
+            toastStore.success("[search]:clear", "历史词条已清空");
         }
     }
 </script>

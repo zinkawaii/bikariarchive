@@ -10,11 +10,11 @@
     <div class="toast-area">
         <transition-group>
             <toast-item
-                v-for="[key, { icon, content }] in toastList"
+                v-for="[key, { icon, message }] in toastList"
                 :key
                 :name="key"
                 :icon-info="icon"
-                :content
+                :message
             />
         </transition-group>
     </div>

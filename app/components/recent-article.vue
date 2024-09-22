@@ -28,11 +28,16 @@
 </template>
 
 <style lang="scss" scoped>
+    .recent-article {
+        display: grid;
+        row-gap: 4px;
+    }
+
     .recent-item {
         display: grid;
-        margin-bottom: 4px;
         padding-bottom: 4px;
         border-bottom: 1px dashed var(--color-border-light);
+        font-size: 14px;
     }
 
     .recent-title {

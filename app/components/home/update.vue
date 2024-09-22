@@ -9,13 +9,12 @@
     .home-update {
         grid-area: A;
         width: 256px;
-        padding: 16px var(--cw-large);
+        padding: 16px var(--cw-large) var(--cw-medium);
 
         @include viewport("sm") {
             width: 100%;
 
             > .recent-article {
-                display: grid;
                 grid-template-columns: 1fr 1fr;
                 column-gap: 16px;
             }

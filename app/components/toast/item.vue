@@ -4,7 +4,7 @@
     const props = defineProps<{
         name: string;
         iconInfo: ToastIconInfo;
-        content: string;
+        message: string;
     }>();
 
     const toastStore = useToastStore();
@@ -23,7 +23,7 @@
     <div class="toast-item" @click="remove">
         <div class="toast-content">
             <icon v-if="iconInfo" :name="iconInfo.name" size="20" :style="{ color: iconInfo.color }"/>
-            <span>{{ content }}</span>
+            <span>{{ message }}</span>
         </div>
         <div class="toast-progress"></div>
     </div>
