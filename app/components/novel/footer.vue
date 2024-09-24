@@ -13,9 +13,9 @@
             <div class="copyright-wrapper">
                 <div class="copyright-crumb">
                     <span>{{ art.novelInfo.title }}</span>
-                    <icon class="text-gray" name="fa6-solid:chevron-right"/>
+                    <iconify class="text-gray" name="fa6-solid:chevron-right"/>
                     <span>{{ art.volumeInfo.title }}</span>
-                    <icon class="text-gray" name="fa6-solid:chevron-right"/>
+                    <iconify class="text-gray" name="fa6-solid:chevron-right"/>
                     <span>{{ art.title }}</span>
                 </div>
                 <p class="text-gray">本网站的所有文章除特别声明外，转载均需经过作者本人同意；文章内容仅供个人交流用，禁作商业用途。</p>

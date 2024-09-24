@@ -181,12 +181,12 @@
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isFirstMonth }"
                     @click="toLastMonth"
-                ><icon name="fa6-solid:chevron-left"/></a>
+                ><iconify name="fa6-solid:chevron-left"/></a>
                 <a
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isLastMonth }"
                     @click="toNextMonth"
-                ><icon name="fa6-solid:chevron-right"/></a>
+                ><iconify name="fa6-solid:chevron-right"/></a>
             </div>
             <ul class="calendar-week">
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
@@ -214,9 +214,9 @@
                 </time>
                 <h6 class="calendar-title">事件</h6>
                 <p v-if="currentDate.event?.mono" class="calendar-event">
-                    <icon name="fa6-solid:quote-left"/>
+                    <iconify name="fa6-solid:quote-left"/>
                     <span>{{ currentDate.event.mono }}</span>
-                    <icon name="fa6-solid:quote-right"/>
+                    <iconify name="fa6-solid:quote-right"/>
                 </p>
                 <span v-else class="calendar-none">No Special.</span>
                 <h6 class="calendar-title">关键人物</h6>

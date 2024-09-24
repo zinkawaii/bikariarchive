@@ -26,7 +26,7 @@
         :rel
     >
         <slot></slot>
-        <icon v-if="isExternal" class="plain-external" name="fa6-solid:arrow-up-right-from-square"/>
+        <iconify v-if="isExternal" class="plain-external" name="fa6-solid:arrow-up-right-from-square"/>
     </nuxt-link>
 </template>
 

@@ -128,6 +128,9 @@ export default defineNuxtConfig({
             path: "~/assets/fonts/TengXQJianYuan-w3.ttf"
         }]
     },
+    icon: {
+        componentName: "iconify"
+    },
     shiki: {
         dynamic: true,
         defaultTheme: {

@@ -52,7 +52,7 @@
             </h2>
         </div>
         <a class="jumbo-hide" @click="toBottom">
-            <icon name="fa6-solid:chevron-down"/>
+            <iconify name="fa6-solid:chevron-down"/>
         </a>
     </div>
 </template>

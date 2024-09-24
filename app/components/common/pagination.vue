@@ -49,7 +49,7 @@
 <template>
     <div ref="root" class="mb-pagination">
         <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === 1 }" @click="modelValue--">
-            <icon name="fa6-solid:chevron-left"/>
+            <iconify name="fa6-solid:chevron-left"/>
         </a>
         <div class="pagina-list">
             <a
@@ -81,7 +81,7 @@
             >{{ totalPages }}</a>
         </div>
         <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === totalPages }" @click="modelValue++">
-            <icon name="fa6-solid:chevron-right"/>
+            <iconify name="fa6-solid:chevron-right"/>
         </a>
     </div>
 </template>

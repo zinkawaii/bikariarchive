@@ -19,7 +19,7 @@
         <div v-if="opening" class="mb-dialog">
             <slot></slot>
             <span class="dialog-xmark" @click="emit(`close`)">
-                <icon name="fa6-solid:xmark"/>
+                <iconify name="fa6-solid:xmark"/>
             </span>
         </div>
     </transition-scale>

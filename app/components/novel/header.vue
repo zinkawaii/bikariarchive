@@ -13,28 +13,28 @@
         <h1 class="novel-title">{{ art.title }}</h1>
         <ul class="novel-information">
             <li>
-                <icon name="fa6-solid:eye"/>
+                <iconify name="fa6-solid:eye"/>
                 <span>{{ post?.readCount ?? "?" }} 阅读</span>
             </li>
             <li>
-                <icon name="nonicons:keyword-16"/>
+                <iconify name="nonicons:keyword-16"/>
                 <span>{{ art.wordCount }} 字</span>
             </li>
             <li>
-                <icon name="fa6-solid:pen"/>
+                <iconify name="fa6-solid:pen"/>
                 <time>{{ art.publishDate }}</time>
             </li>
             <li>
-                <icon name="fa6-solid:clock-rotate-left"/>
+                <iconify name="fa6-solid:clock-rotate-left"/>
                 <time>{{ art.updateDate }}</time>
             </li>
         </ul>
         <nuxt-link v-visible="!art.isFirst" class="novel-adjacent-top" :to="art.prev?.route">
-            <icon name="fa6-solid:chevron-left"/>
+            <iconify name="fa6-solid:chevron-left"/>
             <span>{{ art.isFirstInVol ? "上一卷" : "上一章" }}</span>
         </nuxt-link>
         <nuxt-link v-visible="!art.isLast" class="novel-adjacent-top" :to="art.next?.route">
-            <icon name="fa6-solid:chevron-right"/>
+            <iconify name="fa6-solid:chevron-right"/>
             <span>{{ art.isLastInVol ? "下一卷" : "下一章" }}</span>
         </nuxt-link>
     </header>

@@ -68,7 +68,7 @@
                 <div class="azur-center">
                     <div class="azur-float" reset>
                         <div class="azur-appella">
-                            <icon name="emojione-monotone:bed"/>
+                            <iconify name="emojione-monotone:bed"/>
                             <ruby>蹲家<rt>HIKIKOMORI</rt></ruby>
                         </div>
                         <div class="azur-rank">

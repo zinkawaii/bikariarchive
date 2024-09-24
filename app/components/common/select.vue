@@ -30,7 +30,7 @@
     >
         <a class="select-wrapper">
             <span>{{ title }}</span>
-            <icon class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa6-solid:chevron-down"/>
+            <iconify class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa6-solid:chevron-down"/>
         </a>
         <ul class="select-dropdown" :class="{ [`is-drop`]: isDrop }">
             <slot></slot>

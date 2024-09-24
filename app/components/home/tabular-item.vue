@@ -13,24 +13,24 @@
         </div>
         <div class="tabular-wrapper">
             <h2 class="content-h2 tabular-title">
-                <icon v-if="art.sticky < Infinity" name="pepicons-print:pin"/>
+                <iconify v-if="art.sticky < Infinity" name="pepicons-print:pin"/>
                 {{ art.title }}
             </h2>
             <ul class="tabular-info">
                 <li>
-                    <icon name="fa6-solid:book-open"/>
+                    <iconify name="fa6-solid:book-open"/>
                     <span>{{ art.volumeInfo.title }}</span>
                 </li>
                 <li>
-                    <icon name="nonicons:keyword-16"/>
+                    <iconify name="nonicons:keyword-16"/>
                     <span>{{ art.wordCount }} 字</span>
                 </li>
                 <li>
-                    <icon name="fa6-solid:pen"/>
+                    <iconify name="fa6-solid:pen"/>
                     <time>{{ art.publishDate }}</time>
                 </li>
                 <li>
-                    <icon name="fa6-solid:clock-rotate-left"/>
+                    <iconify name="fa6-solid:clock-rotate-left"/>
                     <time>{{ art.updateDate }}</time>
                 </li>
             </ul>

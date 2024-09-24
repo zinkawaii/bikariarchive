@@ -93,7 +93,7 @@
     </define-outline-list>
     <aside-widget class="aside-unified" title="目录">
         <template #icon>
-            <icon name="fa6-solid:book-open"/>
+            <iconify name="fa6-solid:book-open"/>
         </template>
         <outline-list v-if="nestedHeaders.length" v-bind="{ headers: nestedHeaders, root: true }"/>
         <p v-else class="p-small outline-empty">这篇文章还没有目录哦~</p>

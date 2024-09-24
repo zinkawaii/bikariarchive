@@ -102,17 +102,17 @@
         </div>
         <nav class="header-nav">
             <a class="nav-expand">
-                <icon name="tabler:menu-deep"/>
+                <iconify name="tabler:menu-deep"/>
             </a>
             <div class="nav-list">
                 <mb-popper v-for="{ title, icon, to, children } in navs">
                     <nuxt-link class="nav-link" :to>
-                        <icon :name="icon"/>
+                        <iconify :name="icon"/>
                         <span>{{ title }}</span>
                     </nuxt-link>
                     <template v-if="children?.length" #floating>
                         <nuxt-link v-for="child in children" class="nav-pop" :to="child.to">
-                            <icon :name="child.icon"/>
+                            <iconify :name="child.icon"/>
                             <span>{{ child.title }}</span>
                         </nuxt-link>
                     </template>
@@ -122,7 +122,7 @@
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
             <button title="全文检索">
-                <icon name="fa6-solid:magnifying-glass"/>
+                <iconify name="fa6-solid:magnifying-glass"/>
             </button>
         </form>
     </header>

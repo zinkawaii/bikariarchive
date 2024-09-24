@@ -38,7 +38,7 @@
         </aside-widget>
         <aside-widget title="公告">
             <template #icon>
-                <icon name="fa6-solid:bullhorn"/>
+                <iconify name="fa6-solid:bullhorn"/>
             </template>
             <p class="p-small">
                 欢迎来到<span class="text-primary">{{ $config.public.title }}</span>！(｡･ ω&lt;)ゞ♡<br />
@@ -49,7 +49,7 @@
             <aside-unified v-if="route.name === `reader`"/>
             <aside-widget title="最近更新">
                 <template #icon>
-                    <icon name="fa6-solid:clock-rotate-left"/>
+                    <iconify name="fa6-solid:clock-rotate-left"/>
                 </template>
                 <recent-article :sizes="5" sort-by="updated"/>
             </aside-widget>

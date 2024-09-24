@@ -215,17 +215,17 @@
             <div class="namae-operator">
                 <mb-button :disabled="isJnmLoading" @click="generate">
                     <template v-if="isJnmLoading || !isJnmLoaded">
-                        <icon v-if="isJnmLoading" v-gsap.rotate name="mingcute:loading-fill"/>
-                        <icon v-else name="fa6-solid:download"/>
+                        <iconify v-if="isJnmLoading" v-gsap.rotate name="mingcute:loading-fill"/>
+                        <iconify v-else name="fa6-solid:download"/>
                         <span>加载</span>
                     </template>
                     <template v-else>
-                        <icon name="iconamoon:star-bold"/>
+                        <iconify name="iconamoon:star-bold"/>
                         <span>生成</span>
                     </template>
                 </mb-button>
                 <mb-button :disabled="isResultEmpty" @click="clear">
-                    <icon name="fa6-solid:trash-can"/>
+                    <iconify name="fa6-solid:trash-can"/>
                     <span>清除结果</span>
                 </mb-button>
             </div>

@@ -7,9 +7,9 @@
 
 <template>
     <p class="novel-encrypted">
-        <icon name="solar:lock-password-bold"/>
+        <iconify name="solar:lock-password-bold"/>
         <span>文章已加密，请输入正确的密码后查看内容</span>
-        <icon name="solar:lock-password-bold"/>
+        <iconify name="solar:lock-password-bold"/>
     </p>
     <form class="novel-decrypt" @submit.prevent="emit(`decrypt`)">
         <coco-input type="password" placeholder="密码" v-model="modelValue"/>

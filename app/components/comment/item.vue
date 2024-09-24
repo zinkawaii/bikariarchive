@@ -72,7 +72,7 @@
             <div class="comment-header">
                 <a class="comment-nickname" @click="open">{{ data.nickname }}</a>
                 <template v-if="data.parent?.parent">
-                    <icon class="text-gray" name="vaadin:chat"/>
+                    <iconify class="text-gray" name="vaadin:chat"/>
                     <a class="comment-nickname">{{ recipient }}</a>
                 </template>
             </div>
@@ -82,16 +82,16 @@
             <div class="comment-info">
                 <time>{{ elapsed }}</time>
                 <a class="comment-action" @click="replyComment">
-                    <icon name="fa6-solid:comment-dots"/>
+                    <iconify name="fa6-solid:comment-dots"/>
                     <span>回复</span>
                 </a>
                 <template v-if="userStore.identity >= 9">
                     <a class="comment-action" @click="modifyComment">
-                        <icon name="fa6-solid:pen-to-square"/>
+                        <iconify name="fa6-solid:pen-to-square"/>
                         <span>修改</span>
                     </a>
                     <a class="comment-action" @click="removeComment">
-                        <icon name="fa6-solid:trash-can"/>
+                        <iconify name="fa6-solid:trash-can"/>
                         <span>删除</span>
                     </a>
                 </template>

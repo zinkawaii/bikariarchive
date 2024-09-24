@@ -22,7 +22,7 @@
 <template>
     <div class="toast-item" @click="remove">
         <div class="toast-content">
-            <icon v-if="iconInfo" :name="iconInfo.name" size="20" :style="{ color: iconInfo.color }"/>
+            <iconify v-if="iconInfo" :name="iconInfo.name" size="20" :style="{ color: iconInfo.color }"/>
             <span>{{ message }}</span>
         </div>
         <div class="toast-progress"></div>

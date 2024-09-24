@@ -10,7 +10,7 @@
 <template>
     <nuxt-link class="novel-adjacent" :class="`is-${type}`" :to="art?.route">
         <h3 class="adjacent-sign">
-            <icon name="solar:rewind-forward-bold-duotone"/>
+            <iconify name="solar:rewind-forward-bold-duotone"/>
             <span>{{ art?.title }}</span>
         </h3>
         <p class="text-small text-gray">{{ art?.volumeInfo.title }}</p>

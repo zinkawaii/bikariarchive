@@ -12,9 +12,9 @@
 
 <template>
     <li class="menu-item" :class="{ [`is-disabled`]: disabled }" @click="data.action">
-        <icon :name="name ?? (checked ? `fa6-solid:check` : ``)"/>
+        <iconify :name="name ?? (checked ? `fa6-solid:check` : ``)"/>
         <span>{{ data.title }}</span>
-        <icon v-if="name && checked" name="fa6-solid:check"/>
+        <iconify v-if="name && checked" name="fa6-solid:check"/>
         <context-menu-group v-if="data.children" :items="data.children"/>
     </li>
 </template>

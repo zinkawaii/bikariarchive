@@ -30,7 +30,7 @@
         <ul class="nav-list">
             <li v-for="{ title, icon, to } in links" class="nav-item">
                 <nuxt-link class="nav-link" :to>
-                    <icon :name="icon"/>
+                    <iconify :name="icon"/>
                     <span class="nav-title">{{ title }}</span>
                 </nuxt-link>
             </li>

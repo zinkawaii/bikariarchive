@@ -112,10 +112,10 @@
                         <td>{{ item.user?.uid || "--" }}</td>
                         <td class="manage-operators">
                             <mb-button @click="edit(item)">
-                                <icon name="fa6-solid:pencil"/>
+                                <iconify name="fa6-solid:pencil"/>
                             </mb-button>
                             <mb-button @click="remove(item, i)">
-                                <icon name="fa6-solid:trash-can"/>
+                                <iconify name="fa6-solid:trash-can"/>
                             </mb-button>
                         </td>
                     </tr>

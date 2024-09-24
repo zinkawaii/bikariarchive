@@ -180,7 +180,7 @@
         <div v-show="contextMenuStore.isOpened" ref="root" class="content-widget z-context-menu">
             <menu class="menu-tools">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
-                    <icon :name="icon"/>
+                    <iconify :name="icon"/>
                 </li>
             </menu>
             <template v-for="{ title, when, items } in contextMenuStore.groups">
