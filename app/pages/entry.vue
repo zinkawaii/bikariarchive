@@ -38,7 +38,7 @@
 </script>
 
 <template>
-    <coco-widget v-if="isExist">
+    <meow-widget v-if="isExist">
         <header class="entry-header">
             <h1 class="entry-title">{{ title }}</h1>
         </header>
@@ -61,7 +61,7 @@
                 <novel-article v-else tag="div" :body="item.content"/>
             </entry-section>
         </article>
-    </coco-widget>
+    </meow-widget>
     <not-found v-else/>
 </template>
 

@@ -7,20 +7,20 @@
 </script>
 
 <template>
-    <div class="coco-table-wrapper">
-        <table class="coco-table" :style="{ minWidth: `${minWidth}px` }">
+    <div class="meow-table-wrapper">
+        <table class="meow-table" :style="{ minWidth: `${minWidth}px` }">
             <slot></slot>
         </table>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .coco-table-wrapper {
+    .meow-table-wrapper {
         overflow: auto;
         border: 1px solid var(--color-border);
     }
 
-    .coco-table {
+    .meow-table {
         border-spacing: 2px;
     }
 </style>

@@ -165,8 +165,8 @@ textarea {
 
 /* 通用内容部件 */
 .content-widget {
-    --cw-large: 32px;
-    --cw-medium: 24px;
+    --meow-large: 32px;
+    --meow-medium: 24px;
 
     border: 2px solid var(--color-theme-dark);
     border-radius: 16px;
@@ -174,12 +174,12 @@ textarea {
     background-color: var(--color-background-alpha);
 
     @include viewport("lg") {
-        --cw-large: 24px;
+        --meow-large: 24px;
     }
 
     @include viewport("xs") {
-        --cw-large: 16px;
-        --cw-medium: 16px;
+        --meow-large: 16px;
+        --meow-medium: 16px;
     }
 }
 

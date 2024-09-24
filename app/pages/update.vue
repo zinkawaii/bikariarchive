@@ -21,7 +21,7 @@
 </script>
 
 <template>
-    <coco-widget title="更新日志">
+    <meow-widget title="更新日志">
         <div class="update-years">
             <div class="update-thumb" :style="{ translate: `${currentYearIdx * 88}px` }"></div>
             <a
@@ -46,7 +46,7 @@
             </li>
         </ul>
         <mb-pagination :total :sizes scroll-target="body" v-model="page"/>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>
@@ -86,7 +86,7 @@
     .update-list {
         display: grid;
         gap: 1rem;
-        margin: 1rem 0 var(--cw-medium) 1rem;
+        margin: 1rem 0 var(--meow-medium) 1rem;
         padding-left: 1rem;
         border-left: 2px solid var(--color-theme-dark);
 

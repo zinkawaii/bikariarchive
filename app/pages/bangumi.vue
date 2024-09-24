@@ -13,7 +13,7 @@
 </script>
 
 <template>
-    <coco-widget title="番剧">
+    <meow-widget title="番剧">
         <mb-skeleton v-if="status !== `success`"/>
         <template v-else>
             <div class="bangumi-list">
@@ -21,14 +21,14 @@
             </div>
             <mb-pagination :total="data.total" :sizes="data.sizes" scroll-target="body" v-model="page"/>
         </template>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>
     .bangumi-list {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: var(--cw-medium);
+        gap: var(--meow-medium);
         margin-bottom: 16px;
 
         @include viewport("lg") {

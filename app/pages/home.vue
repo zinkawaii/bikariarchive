@@ -15,11 +15,11 @@
             <home-jumbotron />
         </teleport>
     </client-only>
-    <coco-widget class="home-brief">
+    <meow-widget class="home-brief">
         <home-welcome />
         <home-introduction />
         <home-profile />
-    </coco-widget>
+    </meow-widget>
     <div class="home-complex">
         <home-update />
         <home-calendar />
@@ -34,7 +34,7 @@
         grid-template:
             "A A"
             "B C" / 1fr 40%;
-        gap: var(--cw-medium);
+        gap: var(--meow-medium);
 
         @include viewport("md") {
             grid-template: "A" "B" "C";

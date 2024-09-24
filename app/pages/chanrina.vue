@@ -7,8 +7,8 @@
 </script>
 
 <template>
-    <coco-widget title="神殿">
-        <coco-table class="text-small text-center" :min-width="720">
+    <meow-widget title="神殿">
+        <meow-table class="text-small text-center" :min-width="720">
             <tbody>
                 <tr>
                     <th>姓名</th>
@@ -27,6 +27,6 @@
                     <td><nuxt-link v-if="link" :to="link" target="_blank"><iconify name="fa6-solid:arrow-up-right-from-square"/></nuxt-link></td>
                 </tr>
             </tbody>
-        </coco-table>
-    </coco-widget>
+        </meow-table>
+    </meow-widget>
 </template>

@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <coco-widget title="工具箱">
+    <meow-widget title="工具箱">
         <div class="chest-list">
             <nuxt-link v-for="{ title, description, icon, to } in tools" class="chest-item" :to>
                 <div class="chest-icon">
@@ -39,7 +39,7 @@
                 <p class="p-small text-truncate text-gray">{{ description }}</p>
             </nuxt-link>
         </div>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>

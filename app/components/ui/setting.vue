@@ -47,7 +47,7 @@
 
 <template>
     <mb-dialog class="z-setting" @close="settingStore.close()">
-        <coco-title>全局设置</coco-title>
+        <meow-title>全局设置</meow-title>
         <setting-form title="主题颜色" desc="仅在非夜间模式下生效">
             <setting-select name="theme" :options="[`初空`, `菖蒲`, `早樱`]"/>
         </setting-form>
@@ -57,10 +57,10 @@
         <setting-form title="侧栏显隐" desc="侧边栏是否跟随其他 UI 折叠">
             <setting-select name="sidebar-display" :options="[`默认`, `显现`, `隐匿`]"/>
         </setting-form>
-        <coco-title>快捷键设置</coco-title>
+        <meow-title>快捷键设置</meow-title>
         <setting-form title="切换章节" type="input">
             <div class="setting-input">
-                <coco-input
+                <meow-input
                     v-for="{ title, value }, name in shortcuts"
                     class="setting-input"
                     :value
@@ -70,7 +70,7 @@
                 />
             </div>
         </setting-form>
-        <coco-title>阅读设置</coco-title>
+        <meow-title>阅读设置</meow-title>
         <setting-form title="字体选择">
             <setting-select name="font-family" :options="[`默认`, `宋体`, `楷体`]"/>
         </setting-form>
@@ -97,7 +97,7 @@
     .setting-form {
         margin-top: 16px;
 
-        + .coco-title {
+        + .meow-title {
             margin-top: 32px;
         }
     }

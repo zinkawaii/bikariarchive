@@ -117,7 +117,7 @@
 </script>
 
 <template>
-    <coco-widget>
+    <meow-widget>
         <novel-header :art :post/>
         <novel-decrypt v-if="art.encrypted && !decrypted" v-model="password" @decrypt="debouncedExecute"/>
         <mb-skeleton v-else-if="status !== `success`"/>
@@ -127,7 +127,7 @@
             @vue:mounted="hooks.callHook(`page:reader:rendered`)"
         />
         <novel-footer :art/>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>
@@ -138,7 +138,7 @@
 
     @include viewport(">md") {
         :where(.mb-skeleton, .novel-text) {
-            padding-inline: var(--cw-large);
+            padding-inline: var(--meow-large);
         }
     }
 </style>

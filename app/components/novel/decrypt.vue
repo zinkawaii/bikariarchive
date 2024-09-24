@@ -12,7 +12,7 @@
         <iconify name="solar:lock-password-bold"/>
     </p>
     <form class="novel-decrypt" @submit.prevent="emit(`decrypt`)">
-        <coco-input type="password" placeholder="密码" v-model="modelValue"/>
+        <meow-input type="password" placeholder="密码" v-model="modelValue"/>
     </form>
 </template>
 

@@ -19,7 +19,7 @@
 </script>
 
 <template>
-    <coco-widget>
+    <meow-widget>
         <p class="text-center">你访问了一个不存在的页面！将在 {{ time }} 秒后<plain-link :to="{ name: `home` }">返回主页</plain-link>。</p>
-    </coco-widget>
+    </meow-widget>
 </template>

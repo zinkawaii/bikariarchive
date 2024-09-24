@@ -76,7 +76,7 @@
 </script>
 
 <template>
-    <coco-widget>
+    <meow-widget>
         <div class="manage-grid">
             <div v-for="(item, i) in que">
                 <form class="manage-form" :name="item.title">
@@ -89,7 +89,7 @@
         </div>
         <mb-button @click="query">查询</mb-button>
         <mb-button :disabled="!records.length" @click="clear">清空</mb-button>
-    </coco-widget>
+    </meow-widget>
     <div class="manage-table-wrapper" :hidden="!records.length">
         <table class="manage-table">
             <tbody>

@@ -8,7 +8,7 @@
     const { comments, totalCount, mainCount, isEmpty } = storeToRefs(commentStore);
 
     //相对视口懒加载
-    let stop = null;
+    let stop: () => void;
     watchImmediate(() => route.path, () => {
         //清空上一页的评论
         commentStore.clear();
@@ -29,7 +29,7 @@
 </script>
 
 <template>
-    <coco-widget ref="root" class="comment-area">
+    <meow-widget ref="root" class="comment-area">
         <div class="comment-title">
             <h2>评论<span class="comment-count">{{ totalCount }}</span></h2>
             <mb-button @click="commentPanelStore.post()">
@@ -40,7 +40,7 @@
         <mb-skeleton v-if="isEmpty"/>
         <comment-item v-for="item in comments" :key="item.id" :data="item"/>
         <mb-pagination v-if="mainCount > 0" :total="mainCount" scroll-target=".comment-area" v-model="page"/>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>

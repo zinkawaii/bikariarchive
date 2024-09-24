@@ -46,13 +46,13 @@
 </script>
 
 <template>
-    <coco-input
+    <meow-input
         type="text"
         placeholder="昵称／UID／电子邮箱"
         v-model="nickname"
         v-model:error="warn.nickname"
     />
-    <coco-input
+    <meow-input
         type="password"
         placeholder="密码"
         v-model="password"

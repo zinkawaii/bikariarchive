@@ -1,9 +1,9 @@
 <template>
-    <h2 class="content-h2 coco-title"><slot></slot></h2>
+    <h2 class="content-h2 meow-title"><slot></slot></h2>
 </template>
 
 <style lang="scss" scoped>
-    .coco-title {
+    .meow-title {
         width: fit-content;
         margin-bottom: 4px;
 

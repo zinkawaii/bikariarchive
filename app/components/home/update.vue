@@ -1,6 +1,6 @@
 <template>
     <div class="content-widget home-update">
-        <coco-title>历史章节</coco-title>
+        <meow-title>历史章节</meow-title>
         <recent-article type="novel" :sizes="10"/>
     </div>
 </template>
@@ -9,7 +9,7 @@
     .home-update {
         grid-area: A;
         width: 256px;
-        padding: 16px var(--cw-large) var(--cw-medium);
+        padding: 16px var(--meow-large) var(--meow-medium);
 
         @include viewport("sm") {
             width: 100%;

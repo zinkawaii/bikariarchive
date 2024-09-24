@@ -74,7 +74,7 @@
 </script>
 
 <template>
-    <coco-widget title="全文检索">
+    <meow-widget title="全文检索">
         <form class="search-form" @submit.prevent="fullTextSearch">
             <mb-select class="search-select" v-model="novel">
                 <mb-option title="全文检索"/>
@@ -82,11 +82,11 @@
                     <mb-option v-for="{ title }, key in Article.meta" :key :title :value="key"/>
                 </mb-option-group>
             </mb-select>
-            <coco-input type="search" placeholder="关键词" accesskey="/" v-model.trim="inputWord"/>
+            <meow-input type="search" placeholder="关键词" accesskey="/" v-model.trim="inputWord"/>
         </form>
         <search-history />
-    </coco-widget>
-    <coco-widget v-if="searchWord.length">
+    </meow-widget>
+    <meow-widget v-if="searchWord.length">
         <div class="search-statistics">
             <h2>"{{ searchWord }}"的检索结果</h2>
             <p class="text-gray">共检索到 {{ results.length }} 章，总出现次数为 {{ totalCount }} 次</p>
@@ -98,7 +98,7 @@
             </template>
         </div>
         <mb-pagination :total scroll-target=".content-widget" v-model="page"/>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>

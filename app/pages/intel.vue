@@ -5,13 +5,13 @@
 </script>
 
 <template>
-    <coco-widget title="情报">
+    <meow-widget title="情报">
         <div v-for="block in Entry.meta.blocks" class="intel-block">
             <div class="intel-header">
                 <nuxt-img class="intel-icon" :src="block.icon" alt="[icon]"/>
                 <span>{{ block.title }}</span>
             </div>
-            <coco-table class="intel-table">
+            <meow-table class="intel-table">
                 <colgroup>
                     <col width="15%"/>
                     <col width="20%"/>
@@ -33,17 +33,17 @@
                         </template>
                     </template>
                 </tbody>
-            </coco-table>
+            </meow-table>
         </div>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>
     .intel-block {
         display: flex;
         align-items: flex-start;
-        gap: var(--cw-medium);
-        margin-top: var(--cw-medium);
+        gap: var(--meow-medium);
+        margin-top: var(--meow-medium);
 
         @include viewport("md") {
             flex-direction: column;

@@ -140,7 +140,7 @@
         }
     }
 
-    :deep(.coco-input) {
+    :deep(.meow-input) {
         margin-top: 22px;
     }
 </style>

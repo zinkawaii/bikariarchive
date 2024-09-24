@@ -18,7 +18,7 @@
 
 <template>
     <mb-dialog class="mb-confirm" @close="cancel">
-        <coco-title>确认</coco-title>
+        <meow-title>确认</meow-title>
         <p class="confirm-content">{{ message }}</p>
         <div class="confirm-operator">
             <mb-button @click="cancel">取消</mb-button>

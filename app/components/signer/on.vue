@@ -153,20 +153,20 @@
 </script>
 
 <template>
-    <coco-input
+    <meow-input
         type="text"
         placeholder="昵称"
         v-model="nickname"
         v-model:error="errors.nickname"
     />
-    <coco-input
+    <meow-input
         type="text"
         placeholder="电子邮箱"
         v-model="email"
         v-model:error="errors.email"
     />
     <div class="sign-verify">
-        <coco-input
+        <meow-input
             type="text"
             placeholder="验证码"
             v-model="verify"
@@ -179,7 +179,7 @@
             "发送验证码"
         }}</mb-button>
     </div>
-    <coco-input
+    <meow-input
         type="password"
         placeholder="密码"
         v-model="password"

@@ -8,7 +8,7 @@
 </script>
 
 <template>
-    <coco-widget title="目录">
+    <meow-widget title="目录">
         <shelf-novel />
         <div class="shelf-section">
             <fieldset class="shelf-fieldset">
@@ -24,7 +24,7 @@
             <legend class="content-h2">章节列表</legend>
             <shelf-chapter />
         </fieldset>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>

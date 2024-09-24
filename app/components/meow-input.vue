@@ -20,7 +20,7 @@
 </script>
 
 <template>
-    <div class="coco-input">
+    <div class="meow-input">
         <input class="input-entity" required title="" v-bind="$attrs" v-model="inputValue" @blur="error = false"/>
         <span class="input-underline"></span>
         <span class="input-placeholder" :class="{ [`is-error`]: error }">{{ placeholder }}</span>
@@ -28,7 +28,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .coco-input {
+    .meow-input {
         display: grid;
         position: relative;
         line-height: 20px;

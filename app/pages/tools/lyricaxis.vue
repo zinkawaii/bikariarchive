@@ -228,7 +228,7 @@
 </script>
 
 <template>
-    <coco-widget>
+    <meow-widget>
         <audio ref="audio"></audio>
         <div class="text-small">
             <div class="lyric-operator">
@@ -274,7 +274,7 @@
                 </ul>
             </div>
         </div>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>

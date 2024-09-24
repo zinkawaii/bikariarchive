@@ -7,8 +7,8 @@
 </script>
 
 <template>
-    <coco-widget title="借物表">
-        <coco-table class="borrowing-table">
+    <meow-widget title="借物表">
+        <meow-table class="borrowing-table">
             <tbody>
                 <tr>
                     <th width="25%">元素</th>
@@ -23,9 +23,9 @@
                     </tr>
                 </template>
             </tbody>
-        </coco-table>
+        </meow-table>
         <p class="borrowing-tip">* 除本借物表所标注的素材外，其余所有（底部或含有画师标签的）图片均为《微光茶馆》及其衍生作品的原创稿件。</p>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>

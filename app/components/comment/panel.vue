@@ -99,17 +99,17 @@
 
 <template>
     <mb-dialog class="comment-panel" @close="commentPanelStore.close()">
-        <coco-title>{{ title }}</coco-title>
+        <meow-title>{{ title }}</meow-title>
         <div class="panel-form">
-            <coco-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>
+            <meow-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>
             <p class="panel-tip">必填，用于展示评论昵称</p>
         </div>
         <div class="panel-form">
-            <coco-input placeholder="邮箱" v-model="email" v-model:error="errors.email"/>
+            <meow-input placeholder="邮箱" v-model="email" v-model:error="errors.email"/>
             <p class="panel-tip">选填，用于从 WeAvatar 服务获取头像与评论回复通知</p>
         </div>
         <div class="panel-form">
-            <coco-input placeholder="网址" v-model="address" v-model:error="errors.address"/>
+            <meow-input placeholder="网址" v-model="address" v-model:error="errors.address"/>
             <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
         </div>
         <div class="panel-form">

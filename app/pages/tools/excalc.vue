@@ -95,7 +95,7 @@
 </script>
 
 <template>
-    <coco-widget>
+    <meow-widget>
         <div class="excalc-top">
             <div class="excalc-power">
                 <div class="excalc-param">
@@ -152,7 +152,7 @@
             <div class="excalc-tools">
                 <mb-button @click="addBuki">添加武器</mb-button>
             </div>
-            <coco-table class="excalc-table">
+            <meow-table class="excalc-table">
                 <tbody>
                     <tr>
                         <th>武器名称</th>
@@ -173,9 +173,9 @@
                         <td><mb-button class="excalc-delete" :disabled="state.bukis.length <= 1" @click="removeBuki(i)">删除</mb-button></td>
                     </tr>
                 </tbody>
-            </coco-table>
+            </meow-table>
         </div>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>
