@@ -1,3 +1,4 @@
+import { reactive, type Reactive } from "vue";
 import type { JArticle, JArtmap, JChapter } from "@bikari/process";
 
 export class Article implements JChapter {
@@ -18,22 +19,22 @@ export class Article implements JChapter {
     sticky = Infinity; //置顶
     wordCount = 0;     //字数
 
-    private constructor(novel: string, order: number) {
-        const jNovel = Article.meta[novel];
+    private constructor(novel: string, order: number, raw: JChapter) {
+        this.assign(novel, order, raw);
+    }
 
-        //转置类型
-        const jChapters = jNovel.chapters as JChapter[];
-
+    assign(novel: string, order: number, raw: JChapter) {
         //合并属性
-        const c = jChapters[order];
-        Object.assign(this, c);
+        Object.assign(this, raw);
         this.novel = novel;
         this.order = order;
 
         //计算卷内序号
-        this.orderInVol = jChapters
-            .filter((n) => n.volume === c.volume)
-            .findIndex((n) => n.index === c.index);
+        this.orderInVol = Article.meta[novel].chapters
+            .filter((n) => n.volume === raw.volume)
+            .findIndex((n) => n.index === raw.index);
+
+        return this;
     }
 
     get publishDate() {
@@ -88,11 +89,11 @@ export class Article implements JChapter {
 
     static FARAWAY = "很久以前";
 
-    static meta: JArticle<Article>;
+    static meta = reactive({} as JArticle<Article>);
     static map: JArtmap;
 
     //根据参数获取章节单例
-    static for(novel: string, index: string): Article;
+    static for(novel: string, index: string): Reactive<Article>;
     static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>): ComputedRef<Article>;
     static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>) {
         if (typeof novel !== "string" || typeof index !== "string") {
@@ -113,19 +114,43 @@ export class Article implements JChapter {
             return null;
         }
 
-        const jChapter = jNovel.chapters[order];
-        return (jChapter instanceof Article) ? jChapter : new Article(novel, order);
+        const raw = jNovel.chapters[order];
+        return raw instanceof Article ? raw : reactive(
+            new Article(novel, order, raw)
+        );
     }
 }
 
-export function enrichJArticle(original: any) {
-    //将元数据引用注入原型
-    Article.meta = original;
+//将元数据引用注入原型
+export function enrichJArticle(original: JArticle<JChapter>) {
+    for (const novel in original) {
+        const { chapters } = original[novel];
+        const { chapters: articles } = Article.meta[novel] ?? original[novel];
 
-    //类化章节项
-    for (const [novel, jNovel] of Object.entries(Article.meta)) {
-        jNovel.chapters = jNovel.chapters.map((item) => {
-            return Article.for(novel, item.index);
+        //全量覆盖
+        Reflect.set(Article.meta, novel, original[novel]);
+
+        //名称与序号的映射
+        const hashs = new Map(
+            chapters.map(({ index }, i) => [index, i])
+        );
+
+        //按名称对齐章节位置
+        const results: Article[] = [...new Array(chapters.length)];
+        for (const art of articles) {
+            const i = hashs.get(art.index);
+
+            //不存在时相当于删除章节
+            if (i !== void 0) {
+                results[i] = art instanceof Article
+                    ? art.assign(novel, art.order, chapters[i])
+                    : Article.for(novel, chapters[i].index);
+            }
+        }
+
+        //挂载章节列表
+        Article.meta[novel].chapters = results.map((art, i) => {
+            return art ?? Article.for(novel, chapters[i].index);
         });
     }
 }

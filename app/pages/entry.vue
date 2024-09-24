@@ -16,18 +16,24 @@
     });
 
     const route = useRoute();
-    const isExist = Entry.meta.all.includes(title);
+
+    const isExist = computed(() => {
+        return Entry.meta.all.includes(title);
+    });
 
     const { status, data } = useLazyFetch("/api/entry", {
         query: {
             title
         },
-        immediate: isExist
+        immediate: isExist.value,
+        watch: [Entry.meta]
     });
 
     //显示评论区
-    onMounted(() => {
-        route.meta.comment = isExist;
+    watch(isExist, (val) => {
+        route.meta.comment = val;
+    }, {
+        immediate: import.meta.browser
     });
 </script>
 

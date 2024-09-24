@@ -66,7 +66,7 @@
             password
         },
         immediate: !art.encrypted,
-        watch: false
+        watch: [art]
     });
 
     //设置元信息

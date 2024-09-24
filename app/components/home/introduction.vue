@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     const status = ref(0);
-    const novels = ref(Object.keys(Article.meta));
     const layer = ref(["outer", "inner"]);
+    const novels = computed(() => Object.keys(Article.meta));
 
     //表里互换
     function exchange() {

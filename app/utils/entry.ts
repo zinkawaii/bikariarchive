@@ -1,11 +1,12 @@
+import { reactive } from "vue";
 import type { JIntel, JIntmap } from "@bikari/process";
 
 export class Entry {
-    static meta: JIntel;
+    static meta = reactive({} as JIntel);
     static map: JIntmap;
 }
 
-export function enrichJIntel(original: any) {
-    //将元数据引用注入原型
-    Entry.meta = original;
+//将元数据引用注入原型
+export function enrichJIntel(original: JIntel) {
+    Object.assign(Entry.meta, original);
 }
