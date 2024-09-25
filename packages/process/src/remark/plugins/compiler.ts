@@ -1,8 +1,15 @@
-import type { Root } from "hast";
-import { transformNodes } from "./utils";
+import type { Processor } from "unified";
+import { transformRoot } from "./utils";
+import type { Root } from "../types";
 
-export default function() {
-    this.compiler = (root: Root) => {
-        return transformNodes(root);
+declare module "unified" {
+    interface CompileResultMap {
+        root: Root;
+    }
+}
+
+export default function(this: Processor) {
+    this.compiler = (root) => {
+        return transformRoot(root);
     };
 }

@@ -1,7 +1,7 @@
 import { codes } from "micromark-util-symbol";
-import type { Root, Ruby } from "mdast";
+import type { Ruby } from "mdast";
 import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
-import type { Construct, Extension as MicromarkExtension } from "micromark-util-types";
+import type { Code, Construct, Extension as MicromarkExtension } from "micromark-util-types";
 import type { Processor } from "unified";
 import { pushExtensions } from "./utils";
 
@@ -29,7 +29,7 @@ declare module "mdast" {
     }
 }
 
-export default function(this: Processor<Root>) {
+export default function(this: Processor) {
     pushExtensions(this, {
         micromark: [ruby()],
         fromMarkdown: [rubyFromMarkdown()]
@@ -41,7 +41,7 @@ function ruby(): MicromarkExtension {
         tokenize(effects, ok, nok) {
             return start;
 
-            function start(code: number) {
+            function start(code: Code) {
                 effects.enter("ruby");
                 effects.enter("rubyFenceStart");
                 effects.consume(code);
@@ -51,7 +51,7 @@ function ruby(): MicromarkExtension {
                 return content;
             }
 
-            function content(code: number) {
+            function content(code: Code) {
                 if (code === codes.eof) {
                     return nok(code);
                 }
@@ -71,7 +71,7 @@ function ruby(): MicromarkExtension {
                 return content;
             }
 
-            function marker(code: number) {
+            function marker(code: Code) {
                 if (code === codes.eof) {
                     return nok(code);
                 }
@@ -90,7 +90,7 @@ function ruby(): MicromarkExtension {
                 return marker;
             }
 
-            function end(code: number) {
+            function end(code: Code) {
                 if (code !== codes.verticalBar) {
                     return nok(code);
                 }
@@ -133,13 +133,13 @@ function rubyFromMarkdown(): FromMarkdownExtension {
         exit: {
             ruby(token) {
                 const element = this.stack.at(-1) as Ruby;
-                element.data.hChildren.push(
-                    { type: "text", value: element.content },
+                element.data?.hChildren?.push(
+                    { type: "text", value: element.content ?? "" },
                     {
                         type: "element",
                         tagName: "rt",
                         properties: {},
-                        children: [{ type: "text", value: element.marker }]
+                        children: [{ type: "text", value: element.marker ?? "" }]
                     }
                 );
                 this.exit(token);

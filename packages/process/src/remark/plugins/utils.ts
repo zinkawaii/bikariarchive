@@ -1,46 +1,45 @@
-import { visit } from "unist-util-visit";
 import type * as hast from "hast";
-import type * as mdast from "mdast";
 import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
 import type { Extension as MicromarkExtension } from "micromark-util-types";
 import type { Processor } from "unified";
+import type { Element, Root } from "../types";
 
 interface PushExtensionsOptions {
     micromark: MicromarkExtension[];
     fromMarkdown: FromMarkdownExtension[];
 }
 
-export function pushExtensions(processor: Processor<mdast.Root>, options: PushExtensionsOptions) {
+export function pushExtensions(processor: Processor, options: PushExtensionsOptions) {
     const data = processor.data();
 
     (data.micromarkExtensions ??= []).push(...options.micromark);
     (data.fromMarkdownExtensions ??= []).push(...options.fromMarkdown);
 }
 
-export function transformNodes(root: hast.Parent) {
-    visit(root, (node: hast.ElementContent, index, parent) => {
+export function transformRoot(root: hast.Node) {
+    return {
+        type: "root",
+        children: transformNodes(root as hast.Element)
+    } as Root;
+}
+
+export function transformNodes(root: hast.Element) {
+    const children: Element["children"] = [];
+    for (const node of root.children) {
         if (node.type === "element") {
-            parent?.children.splice(index, 1, {
+            children.push({
                 type: node.type,
                 tag: node.tagName,
                 props: node.properties,
-                children: node.children
-            } as any);
+                children: transformNodes(node)
+            });
         }
-        else if (node.type === "comment") {
-            parent?.children.splice(index, 1);
-            return index;
-        }
-        else {
-            parent?.children.splice(index, 1, {
-                type: node.type,
+        else if (node.type === "raw" || node.type === "text") {
+            children.push({
+                type: "text",
                 value: node.value
             });
         }
-    });
-
-    return {
-        type: "root",
-        children: root.children
-    };
+    }
+    return children;
 }
