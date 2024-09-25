@@ -6,13 +6,19 @@
     const rootEl = useTemplateRef("root");
     const textSelection = useTextSelection();
 
-    const targetEl = shallowRef<HTMLElement>();
+    const composedPath = shallowRef<EventTarget[]>([]);
+
     const targetAnchorLink = computed(() => {
-        return targetEl.value?.closest("a")?.href ?? "";
+        return getClosestEl("a")?.href ?? "";
     });
     const targetImageLink = computed(() => {
-        return targetEl.value?.closest("img")?.src ?? "";
+        return getClosestEl("img")?.src ?? "";
     });
+
+    function getClosestEl<T extends keyof HTMLElementTagNameMap>(tag: T) {
+        const tagName = tag.toUpperCase();
+        return composedPath.value.find((el: Element): el is HTMLElementTagNameMap[T] => el.tagName === tagName);
+    }
 
     const toolItems = [
         {
@@ -143,8 +149,8 @@
             return;
         }
 
-        //获取点击元素
-        targetEl.value = event.target as HTMLElement;
+        //获取传播路径
+        composedPath.value = event.composedPath();
 
         //显示菜单
         contextMenuStore.open();
@@ -169,7 +175,7 @@
 
     //鼠标按下时
     useEventListener("mousedown", (event) => {
-        if (contextMenuStore.isOpened && !(event.target as HTMLElement).closest(".z-context-menu")) {
+        if (contextMenuStore.isOpened && !event.composedPath().includes(rootEl.value)) {
             contextMenuStore.close();
         }
     });
