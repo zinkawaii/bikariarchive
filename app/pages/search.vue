@@ -83,6 +83,7 @@
                 </mb-option-group>
             </mb-select>
             <meow-input type="search" placeholder="关键词" accesskey="/" v-model.trim="inputWord"/>
+            <meow-button icon="twemoji:magnifying-glass-tilted-right">全文检索</meow-button>
         </form>
         <search-history />
     </meow-widget>
@@ -104,14 +105,18 @@
 <style lang="scss" scoped>
     .search-form {
         display: grid;
+        grid-template: "A B C" / auto 1fr auto;
         gap: 16px 8px;
 
-        @include viewport(">xs") {
-            grid-template-columns: auto 1fr;
+        @include viewport("sm") {
+            grid-template:
+                "A A"
+                "B C" / 1fr auto;
         }
     }
 
     .search-select {
+        grid-area: A;
         width: 160px;
         margin-inline: auto;
         z-index: 1;
