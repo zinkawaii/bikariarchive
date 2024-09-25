@@ -38,9 +38,6 @@ export default new Processor({
             return null;
         }
 
-        //写入文件
-        await this.outputJson(filename, body);
-
         //解析文件名
         const match = basename(resolve(filename, "..")).match(PATH_REGEX);
         const novel = match[1];
@@ -49,7 +46,7 @@ export default new Processor({
 
         //解析内容
         let wordCount = 0;
-        visit<any, any>(body, "element", (node: Element) => {
+        visit(body, "element", (node: Element) => {
             if (node.tag === "p") {
                 wordCount += toString(node).length;
             }
@@ -74,12 +71,18 @@ export default new Processor({
                 break;
             }
             case "blog": {
+                if (!attributes.abbrlink) {
+                    return null;
+                }
                 order += name;
                 index = attributes.abbrlink;
                 delete attributes.abbrlink;
                 break;
             }
         }
+
+        //写入文件
+        await this.outputJson(filename, body);
 
         //写入数据
         const data = {
@@ -142,7 +145,7 @@ export default new Processor({
 });
 
 //日期格式化
-function formatDate(obj: object, keys: string[]) {
+function formatDate(obj: Record<string, any>, keys: string[]) {
     for (const key of keys) {
         if (Reflect.has(obj, key)) {
             obj[key] = dayjs(obj[key]).format("YYYY-MM-DD");

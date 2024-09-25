@@ -137,13 +137,12 @@ export default class Processor {
             };
             //执行一次命中缓存的逻辑
             await this.options.onCacheHit.call(this, cache);
+            this.jCache[filename] = cache;
         }
         else {
-            //显式返回空值时清空缓存
-            cache = null;
+            //显式返回空值时清理数据
+            this.unlink(filename);
         }
-
-        this.jCache[filename] = cache;
         return true;
     }
 
