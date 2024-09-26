@@ -33,7 +33,7 @@ export const defineJThrottledEventHandler = <T extends BaseResponse>(
     delay: number
 ) => {
     let timer: NodeJS.Timeout;
-    function throttledHandler(...args: Parameters<typeof handler>): T {
+    function throttledHandler(this: unknown, ...args: Parameters<typeof handler>) {
         if (!timer) {
             timer = setTimeout(() => {
                 timer = null;

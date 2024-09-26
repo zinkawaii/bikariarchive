@@ -53,7 +53,7 @@ const Zin = new class Z {
     debounce<T extends unknown[]>(func: (...args: T) => void, {
         delay = 1500,
         immediate = true,
-        title = null
+        title = ""
     } = {}) {
         const toastStore = useToastStore();
         let timer: NodeJS.Timeout;

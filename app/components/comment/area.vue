@@ -46,7 +46,6 @@
 <style lang="scss" scoped>
     .comment-title {
         display: flex;
-        align-items: center;
         justify-content: space-between;
     }
 

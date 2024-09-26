@@ -19,7 +19,7 @@ function code() {
         });
         if (languages.length) {
             shiki ??= await getShikiHighlighter();
-            options ??= await resolveShikiOptions(highlightOptions);
+            options ??= await resolveShikiOptions();
             await loadShikiLanguages(...languages);
         }
     };

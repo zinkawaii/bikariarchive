@@ -1,4 +1,4 @@
-import type { H3Error } from "h3";
+import { H3Error } from "h3";
 import type { WithParent } from "~/types";
 import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 
@@ -56,7 +56,7 @@ export const useCommentStore = defineStore("comment", () => {
             : "评论删除失败";
     });
 
-    function createRequest<T>(method: "post" | "put" | "delete", message: (err: H3Error) => string) {
+    function createRequest<T>(method: "post" | "put" | "delete", getter: (err: H3Error) => string) {
         return async (body: T) => {
             try {
                 const res = await $fetch("/api/comment", {
@@ -69,7 +69,8 @@ export const useCommentStore = defineStore("comment", () => {
                 update(1);
             }
             catch (err) {
-                toastStore.error(`[comment]:${method}`, message(err));
+                const message = err instanceof H3Error ? getter(err) : String(err);
+                toastStore.error(`[comment]:${method}`, message);
                 throw err;
             }
         };

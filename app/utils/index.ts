@@ -1,20 +1,7 @@
-import type { CodeToHastOptions } from "shiki";
-
 //可复用正则表
 export const Zexp = {
     email: /^[-\w]+@(?:[-\w]+\.)+[-\w]+$/,
     url: /^https?:\/\/(?:[-\w]+\.)+[-\w]+(?::\d+)?(?:\/.*)?$/
-};
-
-//通用代码高亮配置
-export const highlightOptions: Partial<CodeToHastOptions> = {
-    defaultColor: false,
-    transformers: [{
-        root: (hast) => ({
-            type: "root",
-            children: (hast.children[0] as any).children[0].children
-        })
-    }]
 };
 
 //首字母大写

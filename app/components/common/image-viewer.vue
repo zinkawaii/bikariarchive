@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import type { BaseTransitionProps } from "vue";
+
     const props = defineProps<{
         target: HTMLImageElement;
         opening?: boolean;
@@ -68,7 +70,7 @@
     });
 
     //打开时
-    function onEnter(el: HTMLImageElement) {
+    const onEnter: BaseTransitionProps<HTMLImageElement>["onEnter"] = (el) => {
         //起始位置
         const { left, top, width, height } = props.target.getBoundingClientRect();
 
@@ -94,10 +96,10 @@
             width: Math.floor(finalWidth) + "px",
             height: Math.floor(finalHeight) + "px"
         }], Zin.DEFAULT_ANIME_OPTION);
-    }
+    };
 
     //关闭时
-    function onLeave(el: HTMLImageElement) {
+    const onLeave: BaseTransitionProps<HTMLImageElement>["onLeave"] = (el) => {
         const { left, top, width, height } = props.target.getBoundingClientRect();
         const { scrollX: x, scrollY: y } = window;
 
@@ -111,7 +113,7 @@
             width: width + "px",
             height: height + "px"
         }], Zin.DEFAULT_ANIME_OPTION);
-    }
+    };
 </script>
 
 <template>

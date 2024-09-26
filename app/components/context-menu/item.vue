@@ -5,16 +5,16 @@
         data: UnwrapContextMenuItem;
     }>();
 
-    const name = computed(() => toValue(props.data.icon));
+    const icon = computed(() => toValue(props.data.icon));
     const checked = computed(() => toValue(props.data.checked));
     const disabled = computed(() => toValue(props.data.disabled));
 </script>
 
 <template>
     <li class="menu-item" :class="{ [`is-disabled`]: disabled }" @click="data.action">
-        <iconify :name="name ?? (checked ? `fa6-solid:check` : ``)"/>
+        <iconify :name="icon ?? (checked ? `fa6-solid:check` : ``)"/>
         <span>{{ data.title }}</span>
-        <iconify v-if="name && checked" name="fa6-solid:check"/>
+        <iconify v-if="icon && checked" name="fa6-solid:check"/>
         <context-menu-group v-if="data.children" :items="data.children"/>
     </li>
 </template>

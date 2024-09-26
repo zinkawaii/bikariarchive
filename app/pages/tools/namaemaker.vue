@@ -5,7 +5,7 @@
 
     const toastStore = useToastStore();
 
-    let Jnm = null;
+    let Jnm: Record<string, string[]> = null;
     const isJnmLoaded = ref(false);
     const isJnmLoading = ref(false);
 
@@ -123,10 +123,11 @@
 
     //名
     function getFirstName(gender: string) {
-        let a, b;
-        const [k05, k06, k07, k08, k11, k12, k13, k24, k26] = gender === "male" ?
-            ["05", "06", "07", "08", "11", "12", "13", "24", "26"] :
-            ["14", "15", "16", "17", "20", "21", "22", "25", "27"];
+        let a = "";
+        let b = "";
+        const [k05, k06, k07, k08, k11, k12, k13, k24, k26] = gender === "male"
+            ? ["05", "06", "07", "08", "11", "12", "13", "24", "26"]
+            : ["14", "15", "16", "17", "20", "21", "22", "25", "27"];
 
         const r = Zin.randInt(0, 1000);
         if (r < 100) {
@@ -177,7 +178,7 @@
 </script>
 
 <template>
-    <coco-widget>
+    <meow-widget>
         <div class="p-small">
             <div class="namae-option">
                 <span class="text-gray">介绍</span>
@@ -238,7 +239,7 @@
                 </template>
             </dl>
         </div>
-    </coco-widget>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>

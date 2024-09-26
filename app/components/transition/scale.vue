@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import type { BaseTransitionProps } from "vue";
+
     const props = withDefaults(defineProps<{
         scale?: number;
         duration?: number;
@@ -21,23 +23,23 @@
         scale: 1
     }));
 
-    async function onEnter(el, done) {
+    const onEnter: BaseTransitionProps["onEnter"] = async (el, done) => {
         await gsap.fromTo(el, fromState.value, {
             ...toState.value,
             duration: props.duration,
             ease: `${props.ease}.out`
         });
         done();
-    }
+    };
 
-    async function onLeave(el, done) {
+    const onLeave: BaseTransitionProps["onLeave"] = async (el, done) => {
         await gsap.fromTo(el, toState.value, {
             ...fromState.value,
             duration: props.duration,
             ease: `${props.ease}.in`
         });
         done();
-    }
+    };
 </script>
 
 <template>

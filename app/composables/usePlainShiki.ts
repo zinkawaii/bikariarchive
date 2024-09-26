@@ -1,17 +1,15 @@
-import { createPlainShiki, type MountPlainShikiOptions } from "plain-shiki";
-import type { CodeToTokensWithThemesOptions } from "shiki";
+import { createPlainShiki, type CreatePlainShikiReturns, type MountPlainShikiOptions } from "plain-shiki";
 
 export default function(
     target: MaybeRefOrGetter<HTMLElement>,
     options: MountPlainShikiOptions
 ) {
-    let ctx: ReturnType<ReturnType<typeof createPlainShiki>["mount"]> | undefined;
+    let ctx: ReturnType<CreatePlainShikiReturns["mount"]>;
 
     onMounted(async () => {
-        const lang = options.lang;
         const shiki = await getShikiHighlighter();
-        const shikiOptions = await resolveShikiOptions({ lang }) as CodeToTokensWithThemesOptions;
-        await loadShikiLanguages(lang);
+        const shikiOptions = await resolveShikiOptions();
+        await loadShikiLanguages(options.lang);
 
         const { mount } = createPlainShiki(shiki);
 
@@ -19,9 +17,9 @@ export default function(
             ctx?.dispose();
             if (el) {
                 ctx = mount(el, {
-                    themes: shikiOptions.themes as any,
-                    watch: false,
-                    ...options
+                    ...shikiOptions,
+                    ...options,
+                    watch: false
                 });
             }
         });

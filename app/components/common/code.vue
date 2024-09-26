@@ -12,7 +12,7 @@
     const [isExpand, toggleExpand] = useToggle(false);
     const codeEl = useTemplateRef("pre");
 
-    const actions = computed(() => [
+    const actions = [
         {
             icon: "fa6-solid:paste",
             action() {
@@ -20,19 +20,16 @@
             }
         },
         {
-            icon: `fa6-solid:chevron-${isCollapse.value ? `left` : `down`}`,
+            icon: () => `fa6-solid:chevron-${isCollapse.value ? `left` : `down`}`,
             action: () => toggleCollapse()
         }
-    ]);
+    ];
 
     //代码
     const code = ref(props.raw);
     onMounted(async () => {
         const shiki = await getShikiHighlighter();
-        const options = await resolveShikiOptions({
-            ...highlightOptions,
-            lang: props.lang
-        });
+        const options = await resolveShikiOptions({ lang: props.lang });
         await loadShikiLanguages(props.lang);
         code.value = shiki.codeToHtml(props.raw, options);
     });

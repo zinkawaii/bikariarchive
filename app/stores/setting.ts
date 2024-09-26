@@ -38,16 +38,16 @@ export const useSettingStore = defineStore("setting", () => {
         return setting.value[key];
     }
 
-    function set<K extends SettingField, V extends Setting[K]>(key: K, value: V) {
+    function set<K extends SettingField>(key: K, value: Setting[K]) {
         setting.value[key] = value;
     }
 
-    function toggle<K extends SettingBooleanField, V extends Setting[K]>(key: K, value?: V) {
+    function toggle<K extends SettingBooleanField>(key: K, value?: Setting[K]) {
         setting.value[key] = value ?? !setting.value[key];
     }
 
     //监听
-    function listen<K extends SettingField, V extends Setting[K]>(key: K, handler: WatchCallback<V>, options: WatchOptions & {
+    function listen<K extends SettingField>(key: K, handler: WatchCallback<Setting[K]>, options: WatchOptions & {
         viewTransition?: boolean;
     } = {}) {
         watch(() => setting.value[key], (newVal, oldVal, onCleanup) => {
