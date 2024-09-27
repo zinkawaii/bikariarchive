@@ -105,8 +105,8 @@
 
         //回到原位
         el.animate([{
-            top: 2 * y + el.y + "px",
-            left: 2 * x + el.x + "px"
+            top: 2 * y + el.y / window.devicePixelRatio + "px",
+            left: 2 * x + el.x / window.devicePixelRatio + "px"
         }, {
             top: y + top + "px",
             left: x + left + "px",
