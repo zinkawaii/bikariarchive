@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import type { UseIntersectionObserverReturn } from "@vueuse/core";
+
     const route = useRoute();
     const rootComp = useTemplateRef("root");
     const commentStore = useCommentStore();
@@ -8,16 +10,19 @@
     const { comments, totalCount, mainCount, isEmpty } = storeToRefs(commentStore);
 
     //相对视口懒加载
-    let stop: () => void;
+    let observer: UseIntersectionObserverReturn;
     watchImmediate(() => route.path, () => {
         //清空上一页的评论
         commentStore.clear();
 
         //终止未触发的观测器
-        stop?.(), { stop } = useIntersectionObserver(rootComp, ([{ isIntersecting }]) => {
+        observer?.stop();
+
+        //更新观测器
+        observer = useIntersectionObserver(rootComp, ([{ isIntersecting }]) => {
             if (isIntersecting) {
                 commentStore.update(page.value);
-                stop();
+                observer.stop();
             }
         });
     });

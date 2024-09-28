@@ -57,6 +57,9 @@
         <setting-form title="侧栏显隐" desc="侧边栏是否跟随其他 UI 折叠">
             <setting-select name="sidebar-display" :options="[`默认`, `显现`, `隐匿`]"/>
         </setting-form>
+        <setting-form title="交互模块" desc="是否开启评论区等交互功能">
+            <setting-switch name="interaction"/>
+        </setting-form>
         <meow-title>快捷键设置</meow-title>
         <setting-form title="切换章节" type="input">
             <div class="setting-input">
@@ -76,9 +79,6 @@
         </setting-form>
         <setting-form title="字体大小">
             <setting-select name="font-size" :options="[`小`, `中`, `大`]"/>
-        </setting-form>
-        <setting-form title="评论区">
-            <setting-switch name="novel-comment"/>
         </setting-form>
     </mb-dialog>
 </template>

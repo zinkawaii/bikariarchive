@@ -18,7 +18,7 @@
     >
         <main class="nakami">
             <slot></slot>
-            <comment-area v-if="$route.meta.comment" v-show="settingStore.isCommentShow"/>
+            <comment-area v-if="$route.meta.comment" v-show="settingStore.get(`interaction`)"/>
             <z-footer />
         </main>
         <z-sidebar v-show="$route.meta.sidebar ?? true"/>
