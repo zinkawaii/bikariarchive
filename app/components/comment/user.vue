@@ -19,12 +19,16 @@
 
 <style lang="scss" scoped>
     .comment-user {
-        display: grid;
-        justify-items: center;
-        gap: 8px;
-        padding: 24px;
+        --dialog-padding: 24px;
+
         font-size: 14px;
         text-align: center;
+
+        :deep(> .dialog-wrapper) {
+            display: grid;
+            justify-items: center;
+            gap: 8px;
+        }
     }
 
     .user-avatar {

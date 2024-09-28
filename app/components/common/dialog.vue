@@ -17,7 +17,9 @@
 <template>
     <transition-scale>
         <div v-if="opening" class="mb-dialog">
-            <slot></slot>
+            <div class="dialog-wrapper">
+                <slot></slot>
+            </div>
             <span class="dialog-xmark" @click="emit(`close`)">
                 <iconify name="fa6-solid:xmark"/>
             </span>
@@ -27,7 +29,10 @@
 
 <style lang="scss" scoped>
     .mb-dialog {
+        display: grid;
+        grid-template-rows: 1fr;
         position: fixed;
+        overflow: hidden;
         inset: 0;
         width: fit-content;
         height: fit-content;
@@ -35,9 +40,17 @@
         max-width: 100%;
         max-height: 100%;
         margin: auto;
-        padding: 32px;
         border-radius: 16px;
         background-color: var(--color-background);
+    }
+
+    .dialog-wrapper {
+        overflow: auto;
+        padding: var(--dialog-padding, 32px);
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     .dialog-xmark {

@@ -29,8 +29,9 @@
 
 <style lang="scss" scoped>
     .mb-confirm {
+        --dialog-padding: 1rem 1.5rem;
+
         max-width: 720px;
-        padding: 1rem 1.5rem;
         font-size: 14px;
     }
 

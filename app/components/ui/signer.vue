@@ -51,9 +51,9 @@
 
 <style lang="scss" scoped>
     .z-signer {
-        display: flex;
+        --dialog-padding: 0;
+
         width: 640px;
-        padding: 0;
         background-color: var(--color-background-alpha);
         backdrop-filter: blur(4px);
         font-size: 14px;
@@ -66,8 +66,6 @@
     }
 
     .signer-innerworld {
-        flex: 0.75;
-        height: 372px;
         box-shadow: var(--box-shadow);
         background-image: url("/garden/outerworld.webp");
         background-position: center 15%;
@@ -79,11 +77,14 @@
         }
 
         @include viewport(">xs") {
-            border-radius: 16px;
+            width: 75%;
+            height: 372px;
         }
 
         @include viewport("xs") {
             --direction: bottom;
+
+            height: 75%;
         }
     }
 
