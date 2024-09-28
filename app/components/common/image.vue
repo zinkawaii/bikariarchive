@@ -7,12 +7,37 @@
         alt?: string;
     }>();
 
+    const dialogStore = useDialogStore();
+    const gsap = useGsap();
+
     const imgComp = useTemplateRef("img");
     const imgEl = useCurrentElement(imgComp);
-    const dialogStore = useDialogStore();
 
-    const { open } = dialogStore.use(() => h(MbImageViewer, {
-        target: imgEl.value
+    const captionEl = useTemplateRef("caption");
+    const tagEls = computed(() => {
+        return [...captionEl.value?.children ?? []].toReversed();
+    });
+
+    const { open, close } = dialogStore.use(() => h(MbImageViewer, {
+        target: imgEl.value,
+        async onClose() {
+            await close();
+            if (!tagEls.value.length) {
+                return;
+            }
+
+            const tl = gsap.timeline({
+                defaults: {
+                    duration: 0.4,
+                    ease: "back.out"
+                }
+            });
+
+            for (const el of tagEls.value) {
+                tl.fromTo(el, { y: 42 }, { y: 0 }, "<0.05");
+            }
+            tl.play();
+        }
     }));
 
     const characters = computed(() => {
@@ -32,7 +57,7 @@
             :alt
             @click="open"
         />
-        <figcaption v-if="character && isLoaded" class="image-caption">
+        <figcaption v-if="character && isLoaded" ref="caption" class="image-caption">
             <character-tag v-for="name in characters" :name/>
         </figcaption>
     </figure>
@@ -49,6 +74,8 @@
         flex-wrap: wrap-reverse;
         gap: 0.5em;
         position: absolute;
-        inset: auto 0.5em 0.5em;
+        overflow: hidden;
+        inset: auto 0 0;
+        padding: 0.5em;
     }
 </style>
