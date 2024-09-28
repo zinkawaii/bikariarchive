@@ -1,7 +1,7 @@
-import type { Raw, RenderFunction, VNodeChild } from "vue";
+import type { Raw } from "vue";
 
 interface DialogContext {
-    component: VNodeChild;
+    component: VNode;
     zIndex: number;
     duration: number;
     opening: Ref<boolean>;
@@ -17,7 +17,7 @@ interface UseDialogOptions {
 export const useDialogStore = defineStore("dialog", () => {
     const dialogs = ref<Raw<DialogContext>[]>([]);
 
-    function use(render: RenderFunction, options: UseDialogOptions = {}) {
+    function use(render: () => VNode, options: UseDialogOptions = {}) {
         const {
             duration = 400,
             immediate = false,
@@ -38,15 +38,16 @@ export const useDialogStore = defineStore("dialog", () => {
         function open() {
             if (unique && indexOf() !== -1) return;
 
+            const component = render();
             const last = dialogs.value.at(-1);
             const zIndex = (last?.zIndex ?? 510) + 2;
 
             ctx = {
-                component: render(),
+                component,
                 zIndex,
                 duration,
                 opening,
-                close
+                close: (component.props ??= {}).onClose ??= close
             };
 
             dialogs.value.push(ctx);

@@ -18,11 +18,10 @@
     });
 
     //用户信息弹窗
-    const { open, close } = dialogStore.use(() => h(CommentUser, {
+    const { open } = dialogStore.use(() => h(CommentUser, {
         avatar: props.data.avatar,
         nickname: props.data.nickname,
-        address: props.data.address,
-        onClose: close
+        address: props.data.address
     }));
 
     //相对时间

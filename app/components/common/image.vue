@@ -11,9 +11,8 @@
     const imgEl = useCurrentElement(imgComp);
     const dialogStore = useDialogStore();
 
-    const { open, close } = dialogStore.use(() => h(MbImageViewer, {
-        target: imgEl.value,
-        onClose: close
+    const { open } = dialogStore.use(() => h(MbImageViewer, {
+        target: imgEl.value
     }));
 
     const characters = computed(() => {
