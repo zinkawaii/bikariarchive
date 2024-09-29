@@ -1,8 +1,10 @@
 <script lang="ts" setup>
     const signerStore = useSignerStore();
     const userStore = useUserStore();
-    const image = useImage();
     const route = useRoute();
+
+    const outerworld = useBackgroundImage("/garden/outerworld.webp");
+    const innerworld = useBackgroundImage("/garden/innerworld.webp");
 
     //根据登录状态切换视图
     watchImmediate(() => userStore.isLogin, (value) => {
@@ -60,7 +62,6 @@
         font-size: 14px;
 
         @include viewport("xs") {
-            flex-direction: column;
             height: 100dvh;
             border-radius: 0;
         }
@@ -68,13 +69,13 @@
 
     .signer-innerworld {
         box-shadow: var(--box-shadow);
-        background-image: url("/garden/outerworld.webp");
+        background-image: v-bind(outerworld);
         background-position: center 15%;
         background-size: cover;
         mask-image: linear-gradient(to var(--direction, right), white, transparent);
 
         [z-dark] & {
-            background-image: url("/garden/innerworld.webp");
+            background-image: v-bind(innerworld);
         }
 
         @include viewport(">xs") {

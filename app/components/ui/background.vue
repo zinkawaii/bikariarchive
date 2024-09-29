@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-    const image = `url(/garden/background/bg_${
+    const lightUrl = useBackgroundImage(`/garden/background/bg_${
         Zin.period === Zin.PERIOD_DAY ? "day" : "night"
-    }.webp)`;
+    }.webp`);
+    const darkUrl = useBackgroundImage("/garden/background/bg_dark.webp");
 </script>
 
 <template>
@@ -13,13 +14,13 @@
         position: fixed;
         inset: 0;
         height: 100lvh;
-        background-image: v-bind("image");
+        background-image: v-bind("lightUrl");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
 
         [z-dark] & {
-            background-image: url("/garden/background/bg_dark.webp");
+            background-image: v-bind("darkUrl");
         }
     }
 </style>

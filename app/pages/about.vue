@@ -5,6 +5,8 @@
         title: "关于"
     });
 
+    const coverUrl = useBackgroundImage("/garden/maestrale/cover.webp");
+
     const today = dayjs();
     const year = today.year();
 
@@ -132,7 +134,7 @@
     .azur-cover {
         position: fixed;
         inset: 0;
-        background-image: url("/garden/maestrale/cover.webp");
+        background-image: v-bind("coverUrl");
         background-position: center;
         background-size: cover;
         scale: -1 1;

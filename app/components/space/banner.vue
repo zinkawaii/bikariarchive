@@ -1,26 +1,28 @@
 <script lang="ts" setup>
     import { injectionKey } from "~/types/space";
 
-    const toastStore = useToastStore();
-
     const {
         isMyself,
         nickname,
         sign: userSign
     } = inject(injectionKey);
 
-    const sign = ref(userSign.value);
+    const toastStore = useToastStore();
+    const headerUrl = useBackgroundImage("/garden/background/space_header.webp");
 
+    const sign = ref(userSign.value);
     let oldSign = "";
 
     //记录旧值
-    function onFocus() {
+    function recordSign() {
         oldSign = sign.value;
     }
 
     //更新签名
     const updateSign = Zin.debounce(async () => {
-        if (sign.value === oldSign) return;
+        if (sign.value === oldSign) {
+            return;
+        }
 
         try {
             $fetch("/api/user/sign", {
@@ -50,7 +52,7 @@
             class="text-truncate banner-sign"
             placeholder="在这里输入你的个性签名……"
             v-model="sign"
-            @focus="onFocus"
+            @focus="recordSign"
             @blur="updateSign"
             @keyup.enter="($event.target as HTMLInputElement).blur()"
         />
@@ -72,7 +74,7 @@
         border-radius: 0 0 16px 16px;
         box-shadow: var(--box-shadow);
         background-attachment: fixed;
-        background-image: url("/garden/background/space_header.webp");
+        background-image: v-bind("headerUrl");
         background-position: 0 37.5%;
         background-size: cover;
         clip-path: inset(var(--scroll-banner) -4px -4px -4px);
