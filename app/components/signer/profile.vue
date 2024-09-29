@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-    const route = useRoute();
-    const router = useRouter();
     const toastStore = useToastStore();
     const userStore = useUserStore();
+    const route = useRoute();
+    const router = useRouter();
 
     //空间链接
     const toSpace = computed(() => ({

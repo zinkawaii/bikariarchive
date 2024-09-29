@@ -1,10 +1,10 @@
 <script lang="ts" setup>
     import type { UseIntersectionObserverReturn } from "@vueuse/core";
 
-    const route = useRoute();
-    const rootComp = useTemplateRef("root");
     const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
+    const route = useRoute();
+    const rootComp = useTemplateRef("root");
 
     const page = ref(1);
     const { comments, totalCount, mainCount, isEmpty } = storeToRefs(commentStore);

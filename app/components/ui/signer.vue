@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-    const route = useRoute();
     const signerStore = useSignerStore();
     const userStore = useUserStore();
+    const image = useImage();
+    const route = useRoute();
 
     //根据登录状态切换视图
     watchImmediate(() => userStore.isLogin, (value) => {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-    const gsap = useGsap();
     const signerStore = useSignerStore();
     const settingStore = useSettingStore();
+    const gsap = useGsap();
 
     const collapse = computed(() => settingStore.get("ui-collapse"));
 

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import { injectionKey } from "~/types/space";
 
-    const route = useRoute();
     const userStore = useUserStore();
+    const route = useRoute();
 
     useHead({
         title: userStore.nickname

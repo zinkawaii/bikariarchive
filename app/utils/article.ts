@@ -156,8 +156,8 @@ export function enrichJArticle(original: JArticle<JChapter>) {
 }
 
 export function guideToShelf(novel: string, volume: number) {
-    const router = useRouter();
     const shelfStore = useShelfStore();
+    const router = useRouter();
 
     shelfStore.selectNovel(novel);
     shelfStore.selectVolume(volume);

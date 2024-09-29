@@ -6,11 +6,11 @@
         index: string;
     }>();
 
-    const router = useRouter();
     const { hooks } = useHookStore();
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();
     const toastStore = useToastStore();
+    const router = useRouter();
 
     //初始化
     const art = Article.for(novel, index);

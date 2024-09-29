@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import Flip from "gsap/Flip";
 
-    const route = useRoute();
     const settingStore = useSettingStore();
+    const route = useRoute();
 
     const isCollapse = ref(false);
 

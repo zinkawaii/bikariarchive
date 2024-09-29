@@ -15,7 +15,6 @@ export const useSettingStore = defineStore("setting", () => {
         "ui-collapse": false
     });
 
-    const route = useRoute();
     const dialogStore = useDialogStore();
 
     //挂载弹窗实例
