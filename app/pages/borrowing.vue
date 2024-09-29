@@ -15,7 +15,7 @@
                     <th width="50%">出处</th>
                     <th>创作者</th>
                 </tr>
-                <template v-for="element in jBorrowing.list">
+                <template v-for="element in jBorrowing">
                     <tr v-for="(item, i) in element.items">
                         <th v-if="i === 0" :rowspan="element.items.length">{{ element.title }}</th>
                         <td><plain-link :to="item.src.link" target="_blank">{{ item.src.name }}</plain-link></td>

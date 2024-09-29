@@ -1,28 +1,26 @@
-{
-  "list": [
-    {
-      "title": "蜡羽集",
-      "link": "https://layuji.com",
-      "icon": "https://layuji.com/images/meidoavatar.jpg",
-      "description": "幻猫的随笔博客"
-    },
-    {
-      "title": "Kloudy Shape",
-      "link": "https://shape.kloudy.cn",
-      "icon": "https://api.kloudy.cn/img/icon.webp",
-      "description": "Stay Hungry, Stay Foolish"
-    },
-    {
-      "title": "纸鹿摸鱼处",
-      "link": "https://blog.zhilu.cyou",
-      "icon": "https://weavatar.com/avatar/c909847cf0c0af3eef65a90375949c31f2328f195bb6f7145134b965d42c81cf?s=512",
-      "description": "纸鹿至麓不知路，支炉制露不止漉"
-    },
-    {
-      "title": "FloatSheep's Blog",
-      "link": "https://blog.hesiy.cn",
-      "icon": "https://weavatar.com/avatar/96126db0a3cb0d116f93ddff00273c5eca958fa8a54a8292dbcbda00165c598c?s=512",
-      "description": "On the other side of obstacles"
-    }
-  ]
-}
+[
+  {
+    "title": "蜡羽集",
+    "link": "https://layuji.com",
+    "icon": "https://layuji.com/images/meidoavatar.jpg",
+    "description": "幻猫的随笔博客"
+  },
+  {
+    "title": "Kloudy Shape",
+    "link": "https://shape.kloudy.cn",
+    "icon": "https://api.kloudy.cn/img/icon.webp",
+    "description": "Stay Hungry, Stay Foolish"
+  },
+  {
+    "title": "纸鹿摸鱼处",
+    "link": "https://blog.zhilu.cyou",
+    "icon": "https://weavatar.com/avatar/c909847cf0c0af3eef65a90375949c31f2328f195bb6f7145134b965d42c81cf?s=512",
+    "description": "纸鹿至麓不知路，支炉制露不止漉"
+  },
+  {
+    "title": "FloatSheep's Blog",
+    "link": "https://blog.hesiy.cn",
+    "icon": "https://weavatar.com/avatar/96126db0a3cb0d116f93ddff00273c5eca958fa8a54a8292dbcbda00165c598c?s=512",
+    "description": "On the other side of obstacles"
+  }
+]
