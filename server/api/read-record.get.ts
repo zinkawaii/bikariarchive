@@ -1,13 +1,16 @@
+import { z } from "zod";
 import type { GetReadRecordResponse } from "~~/server/types/api/read-record";
 
+const schema = z.object({
+    from: z.string().transform(Number),
+    to: z.string().transform(Number)
+});
+
 export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => {
-    const query = getQueryValues(event);
+    let { from, to } = schema.parse(getQuery(event));
 
     //权限验证
     identityValidate(event, 9);
-
-    let from = Number.parseInt(query.from);
-    let to = Number.parseInt(query.to);
 
     //<from>始终小于<to>
     if (from > to) [from, to] = [to, from];

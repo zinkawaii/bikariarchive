@@ -1,15 +1,18 @@
+import { z } from "zod";
 import type { BangumiData, GetBangumiResponse } from "~~/server/types/api/bangumi";
 
+const schema = z.object({
+    page: z.string().transform(Number)
+});
+
 export default defineJEventHandler<GetBangumiResponse>(async (event, res) => {
-    const query = getQueryValues(event);
+    const { page } = schema.parse(getQuery(event));
 
-    const page = Number(query.page);
-    const sizes = 32;
-
-    if (!page) {
+    if (page <= 0) {
         return 1;
     }
 
+    const sizes = 32;
     const {
         total,
         data

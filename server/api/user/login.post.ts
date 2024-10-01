@@ -1,18 +1,23 @@
+import { z } from "zod";
 import type { PostLoginBody, PostLoginResponse } from "~~/server/types/api/user/login";
+
+const schema = z.object({
+    account: z.string(),
+    password: z.string()
+});
 
 export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
     const { session } = event.context;
-    const {
-        account: acc,
-        password: pwd
-    } = await readBody<PostLoginBody>(event);
+    const { account, password } = schema.parse(
+        await readBody<PostLoginBody>(event)
+    );
 
     //查询UID、昵称或邮箱
     const qUser = await UserDataModel.findOne({
         $or: [
-            { uid: Number(acc) || -1 },
-            { nickname: acc },
-            { email: acc }
+            { uid: Number(account) || -1 },
+            { nickname: account },
+            { email: account }
         ]
     }, "uid nickname identity sign hash salt");
 
@@ -21,20 +26,10 @@ export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
         return 1;
     }
 
-    const {
-        uid,
-        nickname,
-        identity,
-        sign,
-        hash,
-        salt
-    } = qUser;
-
-    //哈希验证
-    const p_hash = InnerCode.encrypt(pwd, salt);
+    const { uid, nickname, identity, sign, hash, salt } = qUser;
 
     //密码错误
-    if (p_hash !== hash) {
+    if (hash !== InnerCode.encrypt(password, salt)) {
         return 2;
     }
 

@@ -1,10 +1,17 @@
 import CryptoES from "crypto-es";
+import { z } from "zod";
 import { Article } from "~/utils/article";
 import type { GetArticleResponse } from "~~/server/types/api/article";
 
+const schema = z.object({
+    novel: z.string(),
+    index: z.string(),
+    password: z.string()
+});
+
 export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     const config = useRuntimeConfig();
-    const { novel, index, password } = getQueryValues(event);
+    const { novel, index, password } = schema.parse(getQuery(event));
 
     //初始化
     const art = Article.for(novel, index);

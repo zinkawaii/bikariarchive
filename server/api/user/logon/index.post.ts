@@ -1,20 +1,20 @@
 import dayjs from "dayjs";
+import { z } from "zod";
 import { Zexp } from "~/utils";
 import type { GetLoginBody, GetLogonResponse } from "~~/server/types/api/user/logon";
 
+const schema = z.object({
+    nickname: z.string().regex(Zexp.nickname),
+    email: z.string().regex(Zexp.email),
+    verify: z.string().length(6),
+    password: z.string().regex(Zexp.password)
+});
+
 export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const { session } = event.context;
-    const {
-        nickname,
-        email,
-        verify,
-        password
-    } = await readBody<GetLoginBody>(event);
-
-    //表单验证失败
-    if (!validate(nickname, email, password)) {
-        return 100;
-    }
+    const { nickname, email, verify, password } = schema.parse(
+        await readBody<GetLoginBody>(event)
+    );
 
     //查询用户信息中是否存在该邮箱所注册的账号
     const qUser = await UserDataModel.findOne({ email });
@@ -80,13 +80,6 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
     session.uid = uid;
     session.identity = identity;
 });
-
-//服务端验证
-function validate(nickname: string, email: string, password: string) {
-    return (/^[\w\u4E00-\u9FA5]{0,18}$/).test(nickname) &&
-           (Zexp.email).test(email) &&
-           (/^\w{6,18}$/).test(password);
-}
 
 //UID生成
 function createUid() {

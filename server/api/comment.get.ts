@@ -1,19 +1,22 @@
 import CryptoES from "crypto-es";
+import { z } from "zod";
 import type { HydratedDocument } from "mongoose";
 import type { CommentData, GetCommentResponse } from "~~/server/types/api/comment";
 import type { CommentDataSchema } from "~~/server/types/model";
+
+const schema = z.object({
+    path: z.string(),
+    page: z.string().transform(Number)
+});
 
 //需要获取的属性
 const select = "_id content children time nickname email address";
 
 export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
-    let {
-        path,
-        page
-    } = getQueryValues(event);
+    const body = schema.parse(getQuery(event));
 
     //获取严格路径
-    path = getStrictPath(path);
+    const path = getStrictPath(body.path);
 
     //路径格式错误
     if (!path) {
@@ -40,7 +43,7 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
         parent: null
     }, select)
     .sort({ time: "desc" })
-    .skip((Number(page) - 1) * limit)
+    .skip((body.page - 1) * limit)
     .limit(limit);
 
     //获取子评论

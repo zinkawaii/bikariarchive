@@ -1,3 +1,4 @@
+import { ZodError } from "zod";
 import type { H3Event } from "h3";
 import type { CachedEventHandlerOptions } from "nitropack";
 
@@ -14,8 +15,16 @@ const createHandler = <T extends BaseResponse>(
         return res;
     }
     catch (err) {
-        console.error(err);
-        sendError(event, err);
+        if (err instanceof ZodError) {
+            sendError(event, createError({
+                status: 400,
+                data: import.meta.dev ? err.issues : void 0
+            }));
+        }
+        else {
+            console.error(err);
+            sendError(event, err);
+        }
     }
 };
 

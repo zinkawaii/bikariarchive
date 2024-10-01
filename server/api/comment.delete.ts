@@ -1,7 +1,14 @@
+import { z } from "zod";
 import type { DeleteCommentBody } from "~~/server/types/api/comment";
 
+const schema = z.object({
+    id: z.string()
+});
+
 export default defineJEventHandler(async (event) => {
-    const { id } = await readBody<DeleteCommentBody>(event);
+    const { id } = schema.parse(
+        await readBody<DeleteCommentBody>(event)
+    );
 
     //权限验证
     identityValidate(event, 9);

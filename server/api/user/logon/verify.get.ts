@@ -1,7 +1,13 @@
+import { z } from "zod";
 import Verify from "~/emails/verify.vue";
+import { Zexp } from "~/utils";
+
+const schema = z.object({
+    email: z.string().regex(Zexp.email)
+});
 
 export default defineJEventHandler(async (event) => {
-    const { email } = getQueryValues(event);
+    const { email } = schema.parse(getQuery(event));
 
     //预生成验证码
     const time = Date.now();

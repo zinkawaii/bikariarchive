@@ -1,20 +1,18 @@
 import dayjs from "dayjs";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
+import { z } from "zod";
 import type { Element } from "@bikari/process";
 import { Article } from "~/utils/article";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 
+const schema = z.object({
+    novel: z.string().optional(),
+    word: z.string().min(1).max(64)
+});
+
 export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res) => {
-    let { novel, word = "" } = getQueryValues(event);
-
-    //限制长度
-    word = word.slice(0, 64).trim();
-
-    //空关键词
-    if (!word.length) {
-        return 1;
-    }
+    const { novel, word } = schema.parse(getQuery(event));
 
     const jNovels = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
     const jChapters = jNovels.flatMap((jNovel) => jNovel?.chapters).filter(Boolean);

@@ -20,16 +20,16 @@ export interface CommentData {
 
 export interface PostCommentBody {
     path: string;
-    parent: string;
+    parent?: string;
     content: string;
     nickname: string;
-    email: string;
-    address: string;
+    email?: string;
+    address?: string;
 }
 
 export interface PutCommentBody {
     id: string;
     content: string;
     nickname: string;
-    address: string;
+    address?: string;
 }

@@ -1,11 +1,13 @@
+import { z } from "zod";
 import type { GetUserInfoResponse } from "~~/server/types/api/user/info";
+
+const schema = z.object({
+    uid: z.string().optional().transform((val) => Number(val) || void 0)
+});
 
 export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
     const { session } = event.context;
-
-    const query = getQueryValues(event);
-    const queryUid = Number(query.uid);
-    const uid = queryUid || session.uid;
+    const { uid = session.uid } = schema.parse(getQuery(event));
 
     const qUser = await UserDataModel.findOne({
         uid
@@ -22,7 +24,7 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
 
     try {
         //只有本人才能获取的信息
-        myselfValidate(event, queryUid);
+        myselfValidate(event, uid);
         res.identity = qUser.identity;
     }
     catch {}

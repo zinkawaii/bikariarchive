@@ -1,10 +1,17 @@
 import CryptoES from "crypto-es";
 import dayjs from "dayjs";
+import { z } from "zod";
 import type { PatchArticleBody } from "~~/server/types/api/article";
+
+const schema = z.object({
+    token: z.string()
+});
 
 export default defineJEventHandler(async (event, res) => {
     const config = useRuntimeConfig();
-    const { token } = await readBody<PatchArticleBody>(event);
+    const { token } = schema.parse(
+        await readBody<PatchArticleBody>(event)
+    );
 
     const ip = getRequestIP(event, { xForwardedFor: true });
     const time = dayjs.tz().toDate();

@@ -1,10 +1,23 @@
 import dayjs from "dayjs";
+import { z } from "zod";
 import CommentReply from "~/emails/comment-reply.vue";
+import { Zexp } from "~/utils";
 import type { PostCommentBody } from "~~/server/types/api/comment";
+
+const schema = z.object({
+    path: z.string(),
+    parent: z.string().optional().transform((val) => val || void 0),
+    content: z.string().max(512),
+    nickname: z.string().regex(Zexp.nickname),
+    email: z.string().regex(Zexp.email).optional(),
+    address: z.string().regex(Zexp.url).optional()
+});
 
 export default defineJEventHandler(async (event) => {
     const config = useRuntimeConfig();
-    const body = await readBody<PostCommentBody>(event);
+    const body = schema.parse(
+        await readBody<PostCommentBody>(event)
+    );
 
     //获取严格路径
     const path = getStrictPath(body.path);
@@ -17,17 +30,9 @@ export default defineJEventHandler(async (event) => {
     //权限验证
     identityValidate(event, config.comment[path]?.identity ?? 0);
 
-    //内容过长
-    if (body.content?.length > 512) {
-        return 2;
-    }
-
     //获取时间，UID
     const time = dayjs.tz();
     const uid = event.context.session?.uid;
-
-    //规制参数类型
-    const parent = body.parent || void 0;
 
     //获取用户
     const qUser = await UserDataModel.findOne({ uid });
@@ -35,7 +40,7 @@ export default defineJEventHandler(async (event) => {
     //将评论数据写入数据库
     const qComment = await CommentDataModel.create({
         path,
-        parent,
+        parent: body.parent,
         content: body.content,
         time,
         updated: time,
@@ -48,7 +53,7 @@ export default defineJEventHandler(async (event) => {
 
     //更新所回复评论的数据（如果有）
     const qParent = await CommentDataModel.findOneAndUpdate({
-        _id: parent
+        _id: body.parent
     }, {
         $push: {
             children: qComment._id

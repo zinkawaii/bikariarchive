@@ -1,8 +1,15 @@
+import { z } from "zod";
 import type { PutUserSignBody } from "~~/server/types/api/user/sign";
+
+const schema = z.object({
+    content: z.string()
+});
 
 export default defineJEventHandler(async (event) => {
     const { session } = event.context;
-    const { content } = await readBody<PutUserSignBody>(event);
+    const { content } = schema.parse(
+        await readBody<PutUserSignBody>(event)
+    );
 
     //权限验证
     identityValidate(event, 1);
