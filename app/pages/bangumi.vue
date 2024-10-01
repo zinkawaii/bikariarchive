@@ -3,9 +3,11 @@
         title: "番剧"
     });
 
-    const page = ref(1);
+    const page = useRouteQuery("page", 1, {
+        transform: Number
+    });
 
-    const { data, status } = useLazyFetch("/api/bangumi", {
+    const { status, data } = useLazyFetch("/api/bangumi", {
         query: {
             page
         }
