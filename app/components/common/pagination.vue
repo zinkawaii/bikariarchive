@@ -18,16 +18,22 @@
         return Math.max(1, Math.ceil(props.total / props.sizes));
     });
 
-    //中间页选项
-    const middleCount = computed(() => {
-        const page = modelValue.value;
+    //显示页码
+    const pages = computed(() => {
+        const current = modelValue.value;
         const total = totalPages.value;
+        const expand = 1;
+
+        const start = Math.max(1, Math.min(total - 2 * expand, current - expand));
+        const end = Math.min(total, start + 2 * expand);
 
         return [
-            (page > 2) && page - 1,
-            (page > 1 && page < total) && page,
-            (page < total - 1) && page + 1
-        ].filter((i) => i);
+            start > 1 && 1,
+            start > 2 && (start === 3 ? 2 : -Infinity),
+            ...[...new Array(end - start + 1)].map((_, i) => i + start),
+            end < total - 1 && (end === total - 2 ? total - 1 : Infinity),
+            end < total && total
+        ].filter(Boolean);
     });
 
     //滑动根元素
@@ -52,33 +58,19 @@
             <iconify name="fa6-solid:chevron-left"/>
         </a>
         <div class="pagina-list">
-            <a
-                class="pagina-item"
-                :class="{ active: modelValue === 1 }"
-                @click="modelValue = 1"
-            >1</a>
-            <a
-                v-show="modelValue > 3"
-                class="pagina-item"
-                @click="modelValue -= 2"
-            >...</a>
-            <a
-                v-for="i in middleCount"
-                class="pagina-item"
-                :class="{ active: modelValue === i }"
-                @click="modelValue = i"
-            >{{ i }}</a>
-            <a
-                v-show="modelValue < totalPages - 2"
-                class="pagina-item"
-                @click="modelValue += 2"
-            >...</a>
-            <a
-                v-if="totalPages > 1"
-                class="pagina-item"
-                :class="{ active: modelValue === totalPages }"
-                @click="modelValue = totalPages"
-            >{{ totalPages }}</a>
+            <template v-for="i in pages">
+                <a
+                    v-if="Number.isFinite(i)"
+                    class="pagina-item"
+                    :class="{ active: modelValue === i }"
+                    @click="modelValue = i"
+                >{{ i }}</a>
+                <a
+                    v-else
+                    class="pagina-item"
+                    @click="modelValue += i > 0 ? 2 : -2"
+                >...</a>
+            </template>
         </div>
         <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === totalPages }" @click="modelValue++">
             <iconify name="fa6-solid:chevron-right"/>
