@@ -1,35 +1,45 @@
 <script lang="ts" setup>
+    defineOptions({
+        inheritAttrs: false
+    });
     defineProps<{
-        readonly?: boolean;
+        invalid?: boolean;
     }>();
     const modelValue = defineModel<string>();
 </script>
 
 <template>
-    <input
-        class="mb-input"
-        :readonly
-        v-model="modelValue"
-    />
+    <div class="mb-input" :class="{ [`is-invalid`]: invalid }">
+        <input
+            class="input-entity"
+            v-bind="$attrs"
+            v-model="modelValue"
+        />
+    </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .mb-input {
-        width: 100%;
+        display: flex;
         height: 2rem;
         border: 1px solid var(--color-border-light);
         border-radius: 6px;
         outline: 2px solid transparent;
         outline-offset: -1px;
-        text-align: center;
+        background-color: var(--color-background);
         transition: outline 0.25s;
 
-        &:focus {
+        &:focus-within {
             outline-color: var(--color-theme-dark);
         }
 
         &.is-invalid {
             outline-color: var(--color-danger);
         }
+    }
+
+    .input-entity {
+        width: 100%;
+        text-align: center;
     }
 </style>

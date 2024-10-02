@@ -3,11 +3,15 @@
         accuracy?: number;
         min?: number;
         max?: number;
+        step?: number;
+        controls?: boolean;
+        readonly?: boolean;
         trim?: boolean;
     }>(), {
         accuracy: 0,
         min: -Infinity,
-        max: Infinity
+        max: Infinity,
+        step: 1
     });
     const modelValue = defineModel<number>();
 
@@ -77,10 +81,68 @@
 </script>
 
 <template>
-    <mb-input
-        :class="{ [`is-invalid`]: !isValid }"
-        v-model="displayValue"
-        @input="input"
-        @blur="blur"
-    />
+    <div class="mb-input-number">
+        <button
+            v-if="controls"
+            class="input-arrow"
+            :class="{ [`is-disabled`]: readonly || modelValue - step < min }"
+            @click="modelValue -= step"
+        >
+            <iconify name="fa6-solid:chevron-left"/>
+        </button>
+        <mb-input
+            :invalid="!isValid"
+            :readonly
+            v-model="displayValue"
+            @input="input"
+            @blur="blur"
+        />
+        <button
+            v-if="controls"
+            class="input-arrow"
+            :class="{ [`is-disabled`]: readonly || modelValue + step > max }"
+            @click="modelValue += step"
+        >
+            <iconify name="fa6-solid:chevron-right"/>
+        </button>
+    </div>
 </template>
+
+<style lang="scss" scoped>
+    .mb-input-number {
+        position: relative;
+    }
+
+    .input-arrow {
+        display: grid;
+        place-items: center;
+        position: absolute;
+        top: 1px;
+        height: calc(100% - 2px);
+        aspect-ratio: 1;
+        border: 1px solid transparent;
+        background-color: var(--color-background);
+        transition: color 0.25s;
+
+        &:hover {
+            color: var(--color-theme-text);
+        }
+
+        &:first-child {
+            left: 1px;
+            border-right-color: var(--color-border-light);
+            border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child {
+            right: 1px;
+            border-left-color: var(--color-border-light);
+            border-radius: 0 6px 6px 0;
+        }
+
+        &.is-disabled {
+            color: var(--color-text-disabled);
+            pointer-events: none;
+        }
+    }
+</style>
