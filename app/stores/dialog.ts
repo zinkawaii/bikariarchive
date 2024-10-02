@@ -24,7 +24,7 @@ export const useDialogStore = defineStore("dialog", () => {
             unique = false
         } = options;
 
-        let ctx: DialogContext = null;
+        let ctx: DialogContext;
 
         /**
          * 弹窗是否处于显示状态

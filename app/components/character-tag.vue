@@ -26,7 +26,7 @@
     }
 
     .tag-avatar {
-        width: 2em;
+        width: 28px;
         aspect-ratio: 1;
         margin: 2px;
         border-radius: var(--bounded-circle);

@@ -121,7 +121,8 @@
         height: calc(100% - 2px);
         aspect-ratio: 1;
         border: 1px solid transparent;
-        background-color: var(--color-background);
+        background-color: var(--color-info-light-9);
+        color: var(--color-text-secondary);
         transition: color 0.25s;
 
         &:hover {

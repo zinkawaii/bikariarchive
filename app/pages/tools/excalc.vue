@@ -116,21 +116,21 @@
                 </div>
                 <div class="excalc-label">
                     <span>后排</span>
-                    <mb-input-number v-for="(item, i) in state.main" v-model="state.main[i]"/>
+                    <mb-input-number v-for="(item, i) in state.main" :min="0" v-model="state.main[i]"/>
                 </div>
                 <div class="excalc-label">
                     <span>前排</span>
-                    <mb-input-number v-for="(item, i) in state.pioneer" v-model="state.pioneer[i]"/>
+                    <mb-input-number v-for="(item, i) in state.pioneer" :min="0" v-model="state.pioneer[i]"/>
                 </div>
             </div>
             <div class="excalc-main">
                 <label class="excalc-label">
                     <span>血量</span>
-                    <mb-input-number v-model="state.health"/>
+                    <mb-input-number :min="0" v-model="state.health"/>
                 </label>
                 <label class="excalc-label">
                     <span>次数</span>
-                    <mb-input-number v-model="state.times"/>
+                    <mb-input-number :min="0" v-model="state.times"/>
                 </label>
                 <mb-button full @click="roll">Roll</mb-button>
                 <label class="excalc-label">
@@ -140,11 +140,11 @@
                 <div class="excalc-division"></div>
                 <label class="excalc-label">
                     <span>时间</span>
-                    <mb-input-number v-model="state.time"/>
+                    <mb-input-number :min="0" v-model="state.time"/>
                 </label>
                 <label class="excalc-label">
                     <span>分数</span>
-                    <mb-input-number readonly v-model="score"/>
+                    <mb-input-number :min="0" readonly v-model="score"/>
                 </label>
             </div>
         </div>
@@ -165,11 +165,11 @@
                     </tr>
                     <tr v-for="(item, i) in state.bukis">
                         <td><mb-input v-model="item.name"/></td>
-                        <td><mb-input-number v-model="item.damage"/></td>
-                        <td><mb-input-number v-model="item.hit"/></td>
-                        <td><mb-input-number :accuracy="2" v-model="item.accuracyRate"/></td>
-                        <td><mb-input-number :accuracy="2" v-model="item.critRate"/></td>
-                        <td><mb-input-number :accuracy="2" v-model="item.critDamage"/></td>
+                        <td><mb-input-number :min="0" v-model="item.damage"/></td>
+                        <td><mb-input-number :min="0" v-model="item.hit"/></td>
+                        <td><mb-input-number :accuracy="2" :min="0" v-model="item.accuracyRate"/></td>
+                        <td><mb-input-number :accuracy="2" :min="0" v-model="item.critRate"/></td>
+                        <td><mb-input-number :accuracy="2" :min="0" v-model="item.critDamage"/></td>
                         <td><mb-button class="excalc-delete" :disabled="state.bukis.length <= 1" @click="removeBuki(i)">删除</mb-button></td>
                     </tr>
                 </tbody>
@@ -205,7 +205,7 @@
         align-items: center;
         gap: 16px;
 
-        > .mb-input {
+        > :nth-child(n + 2) {
             flex: 1;
         }
     }

@@ -5,9 +5,10 @@
 
     const toastStore = useToastStore();
 
-    let Jnm: Record<string, string[]> = null;
-    const isJnmLoaded = ref(false);
-    const isJnmLoading = ref(false);
+    let Jnm: Record<string, string[]>;
+    const { execute, status, data } = useLazyFetch<typeof Jnm>("/json/Jnm.json", {
+        immediate: false
+    });
 
     //数量
     const counter = ref({
@@ -62,11 +63,9 @@
     //生成
     async function generate() {
         //从静态资源服务器读取数据，防止打包文件过大
-        if (!isJnmLoaded.value) {
-            isJnmLoading.value = true;
-            Jnm = await $fetch("/json/Jnm.json");
-            isJnmLoading.value = false;
-            isJnmLoaded.value = true;
+        if (status.value === "idle") {
+            await execute();
+            Jnm = data.value;
             toastStore.success("[jnm]:load", "数据集已加载");
             return;
         }
@@ -214,9 +213,9 @@
                 </div>
             </div>
             <div class="namae-operator">
-                <mb-button :disabled="isJnmLoading" @click="generate">
-                    <template v-if="isJnmLoading || !isJnmLoaded">
-                        <iconify v-if="isJnmLoading" v-gsap.rotate name="mingcute:loading-fill"/>
+                <mb-button :disabled="status === `pending`" @click="generate">
+                    <template v-if="status !== `success`">
+                        <iconify v-if="status === `pending`" v-gsap.rotate name="mingcute:loading-fill"/>
                         <iconify v-else name="fa6-solid:download"/>
                         <span>加载</span>
                     </template>

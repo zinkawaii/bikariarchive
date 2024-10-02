@@ -1,4 +1,3 @@
-import { H3Error } from "h3";
 import type { WithParent } from "~/types";
 import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 
@@ -36,27 +35,27 @@ export const useCommentStore = defineStore("comment", () => {
     }
 
     //发送评论
-    const post = createRequest<PostCommentBody>("post", (err) => {
-        return err.statusCode === 403
+    const post = createRequest<PostCommentBody>("post", (statusCode) => {
+        return statusCode === 403
             ? "无评论权限"
             : "评论发送失败";
     });
 
     //修改评论
-    const modify = createRequest<PutCommentBody>("put", (err) => {
-        return err.statusCode === 403
+    const modify = createRequest<PutCommentBody>("put", (statusCode) => {
+        return statusCode === 403
             ? "无修改权限"
             : "评论修改失败";
     });
 
     //删除评论
-    const remove = createRequest<DeleteCommentBody>("delete", (err) => {
-        return err.statusCode === 403
+    const remove = createRequest<DeleteCommentBody>("delete", (statusCode) => {
+        return statusCode === 403
             ? "无删除权限"
             : "评论删除失败";
     });
 
-    function createRequest<T>(method: "post" | "put" | "delete", getter: (err: H3Error) => string) {
+    function createRequest<T>(method: "post" | "put" | "delete", getter: (statusCode: number) => string) {
         return async (body: T) => {
             try {
                 const res = await $fetch("/api/comment", {
@@ -69,7 +68,7 @@ export const useCommentStore = defineStore("comment", () => {
                 update(1);
             }
             catch (err) {
-                const message = err instanceof H3Error ? getter(err) : String(err);
+                const message = err.statusCode ? getter(err.statusCode) : String(err);
                 toastStore.error(`[comment]:${method}`, message);
                 throw err;
             }
