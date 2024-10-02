@@ -41,7 +41,7 @@
         return rootEl.value?.closest(props.scrollTarget) ?? document.querySelector(props.scrollTarget);
     });
 
-    //切换页数时滑动到指定元素的起始位置
+    //切换页码时滑动到指定元素的起始位置
     watch(modelValue, () => {
         if (scrollElement.value) {
             const pos = getPosition(scrollElement.value);
@@ -50,6 +50,16 @@
             });
         }
     });
+
+    //点击页码时
+    async function selectPage(val: number) {
+        modelValue.value = modelValue.value === val ? await Zin.numeric({
+            title: "跳转到页码",
+            initialValue: val,
+            min: 1,
+            max: totalPages.value
+        }) : val;
+    }
 </script>
 
 <template>
@@ -63,7 +73,7 @@
                     v-if="Number.isFinite(i)"
                     class="pagina-item"
                     :class="{ active: modelValue === i }"
-                    @click="modelValue = i"
+                    @click="selectPage(i)"
                 >{{ i }}</a>
                 <a
                     v-else
