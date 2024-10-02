@@ -1,4 +1,12 @@
 <script lang="ts" setup>
+    const props = withDefaults(defineProps<{
+        min?: number;
+        max?: number;
+        step?: number;
+    }>(), {
+        min: 0,
+        max: 1
+    });
     const modelValue = defineModel<number>();
     const emit = defineEmits<{
         progress: [rate: number];
@@ -10,52 +18,59 @@
     const rootEl = useTemplateRef("root");
     const rate = ref(0);
 
-    let p_width = 0;
-    let p_left = 0;
+    watchEffect(() => {
+        rate.value = (modelValue.value - props.min) / (props.max - props.min);
+    });
+
+    let current = modelValue.value;
+    let width = 0;
+    let left = 0;
 
     //鼠标拖动时
-    const { isPressed } = useHold(rootEl, {
+    useHold(rootEl, {
         onMousedown(event) {
-            ({
-                width: p_width,
-                left: p_left
-            } = rootEl.value.getBoundingClientRect());
+            ({ width, left } = rootEl.value.getBoundingClientRect());
             emit("dragstart");
 
             //进度预变化
             this.onMousemove(event);
         },
         onMousemove(event) {
-            rate.value = Math.max(0, Math.min(1, (event.clientX - p_left) / p_width));
-            emit("progress", rate.value);
+            const { min, max, step } = props;
+
+            rate.value = Math.max(0, Math.min(1, (event.clientX - left) / width));
+            current = rate.value * (max - min) + min;
+
+            if (step) {
+                current = Math.round(current / step) * step;
+                rate.value = (current - min) / (max - min);
+            }
+            modelValue.value = current;
+            emit("progress", current);
         },
         onMouseup() {
-            modelValue.value = rate.value;
+            modelValue.value = current;
             emit("dragend");
-            emit("change", rate.value);
+            emit("change", current);
         }
-    });
-
-    //显示的进度
-    const displayRate = computed(() => {
-        return Math.max(0, Math.min(1, isPressed.value ? rate.value : modelValue.value));
     });
 </script>
 
 <template>
     <div ref="root" class="mb-slider">
         <div class="slider-track">
-            <div class="slider-rate" :style="{ scale: `${displayRate} 1` }"></div>
+            <div class="slider-rate" :style="{ scale: `${rate} 1` }"></div>
         </div>
-        <span class="slider-thumb" :style="{ marginLeft: `${displayRate * 100}%` }"></span>
+        <span class="slider-thumb" :style="{ marginLeft: `${rate * 100}%` }"></span>
     </div>
 </template>
 
 <style lang="scss" scoped>
     .mb-slider {
-        display: inline-grid;
+        display: grid;
         align-items: center;
         position: relative;
+        width: calc(100% - 16px);
         height: 20px;
         margin-inline: 8px;
         cursor: pointer;
@@ -68,6 +83,7 @@
         overflow: hidden;
         inset: 4px 0;
         border-radius: var(--bounded-full);
+        background-color: color-mix(in srgb, var(--color-info-light-5), transparent 50%);
     }
 
     .slider-rate {
