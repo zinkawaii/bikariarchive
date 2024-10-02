@@ -155,7 +155,6 @@
         width: 0;
         height: 100%;
         border: 0;
-        background-color: transparent;
         text-align: center;
     }
 

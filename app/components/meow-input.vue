@@ -36,7 +36,6 @@
 
     .input-entity {
         padding: 4px;
-        background-color: transparent;
 
         &:where(:focus) {
             ~ .input-underline::before {

@@ -46,7 +46,6 @@
 
     .blank-editor {
         padding: 4px;
-        background-color: transparent;
         font-size: 14px;
         line-height: 24px;
     }

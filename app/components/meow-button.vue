@@ -23,7 +23,6 @@ onMounted(() => {
         align-items: flex-end;
         position: relative;
         padding-left: 16px;
-        background-color: transparent;
     }
 
     .button-icon {

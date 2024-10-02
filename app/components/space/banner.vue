@@ -117,7 +117,6 @@
         margin: auto 0 auto -6px;
         padding-left: 6px;
         border-radius: 4px;
-        background-color: transparent;
         font-size: 14px;
         line-height: 26px;
         color: rgb(255 255 255 / 80%);

@@ -321,6 +321,7 @@
         margin: auto 16px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
+        background-color: var(--color-background);
         line-height: 28px;
 
         @include viewport("lg") {

@@ -97,9 +97,13 @@ button, label, select {
     cursor: pointer;
 }
 
-button, input, textarea, select, option {
-    background-color: var(--color-background);
+button, input, textarea, select {
+    background-color: transparent;
     color: inherit;
+}
+
+option {
+    background-color: var(--color-background);
 }
 
 input {

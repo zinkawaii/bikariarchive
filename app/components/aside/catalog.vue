@@ -47,7 +47,6 @@
     .catalog-selector {
         padding-block: 8px;
         border-bottom: 1px solid var(--color-border);
-        background-color: transparent;
 
         &:focus + .catalog-underline {
             scale: 1;

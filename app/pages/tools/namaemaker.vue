@@ -263,7 +263,6 @@
         > input {
             padding-bottom: 2px;
             border-bottom: 1px solid var(--color-border-light);
-            background: transparent;
         }
     }
 
