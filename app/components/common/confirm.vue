@@ -3,16 +3,15 @@
         message: string;
     }>();
     const emit = defineEmits<{
-        cancel: [];
-        confirm: [];
+        close: [value: boolean];
     }>();
 
     function cancel() {
-        emit("cancel");
+        emit("close", false);
     }
 
     function confirm() {
-        emit("confirm");
+        emit("close", true);
     }
 </script>
 

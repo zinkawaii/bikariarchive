@@ -26,26 +26,18 @@ const Zin = new class Z {
 
     //判断对话框
     confirm(message: string) {
-        return new Promise((resolve) => {
+        return new Promise<boolean>((resolve) => {
             const dialogStore = useDialogStore();
 
             const { close } = dialogStore.use(() => h(MbConfirm, {
                 message,
-                onCancel: cancel,
-                onConfirm: confirm
+                onClose(val = false) {
+                    close();
+                    resolve(val);
+                }
             }), {
                 immediate: true
             });
-
-            function cancel() {
-                close();
-                resolve(false);
-            }
-
-            function confirm() {
-                close();
-                resolve(true);
-            }
         });
     }
 
