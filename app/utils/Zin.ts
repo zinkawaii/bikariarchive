@@ -1,4 +1,5 @@
-import { MbConfirm } from "#components";
+import { MbConfirm, MbNumeric } from "#components";
+import type { MbNumericProps } from "~/components/common/numeric.vue";
 
 const Zin = new class Z {
     //默认动画配置
@@ -132,6 +133,23 @@ const Zin = new class Z {
             catch (err) {
                 reject(err);
             }
+        });
+    }
+
+    //数字选择框
+    numeric(options: MbNumericProps) {
+        return new Promise<number>((resolve) => {
+            const dialogStore = useDialogStore();
+
+            const { close } = dialogStore.use(() => h(MbNumeric, {
+                ...options,
+                onClose(val = options.initialValue) {
+                    close();
+                    resolve(val);
+                }
+            }), {
+                immediate: true
+            });
         });
     }
 
