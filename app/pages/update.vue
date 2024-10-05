@@ -32,14 +32,15 @@
             >{{ year }}</a>
         </div>
         <ul class="update-list">
-            <li v-for="{ date, version, content } in filteredArr" class="update-item">
+            <li v-for="{ date, version, items } in filteredArr" class="update-item">
                 <div class="update-title">
                     <h2><time>{{ date }}</time></h2>
                     <code v-if="version" class="update-version">v{{ version }}</code>
                 </div>
                 <div class="update-content">
-                    <p v-for="(text, i) in content" class="p-small">
-                        <span>{{ i + 1 }}. </span>
+                    <p v-for="{ type, scope, text } in items" class="p-small">
+                        <span class="update-type">{{ type }}</span>
+                        <span v-if="scope" class="update-scope">{{ scope }}</span>
                         <span v-html="text"></span>
                     </p>
                 </div>
@@ -131,6 +132,32 @@
 
         [z-dark] & {
             --shadow: 18%;
+        }
+    }
+
+    .update-type {
+        margin-right: 4px;
+        font-family: var(--font-consolas);
+        color: var(--color-theme-text);
+
+        &::before {
+            content: "(";
+            color: var(--color-text-info);
+        }
+
+        &::after {
+            content: ")";
+            color: var(--color-text-info);
+        }
+    }
+
+    .update-scope {
+        margin-right: 4px;
+        font-family: var(--font-consolas);
+        color: var(--color-text-info);
+
+        &::after {
+            content: ":";
         }
     }
 </style>
