@@ -162,7 +162,7 @@
                 return {
                     time,
                     timing,
-                    content: line.replace(re, "") || "　",
+                    content: " " + line.replace(re, "").trim(),
                     signed
                 };
             });

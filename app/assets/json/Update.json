@@ -12,6 +12,11 @@
         "type": "chore",
         "scope": "z-footer",
         "text": "移除走秒显示"
+      },
+      {
+        "type": "fix",
+        "scope": "lyricaxis",
+        "text": "在时间戳与歌词之间插入空格"
       }
     ]
   },
