@@ -306,6 +306,7 @@
     }
 
     .lyric-editor {
+        overflow: auto;
         padding: 8px 16px;
         border-radius: inherit;
     }

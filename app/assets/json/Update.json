@@ -1,5 +1,16 @@
 [
   {
+    "date": "2024-10-07",
+    "version": "0.5.12",
+    "items": [
+      {
+        "type": "fix",
+        "scope": "lyricaxis",
+        "text": "修复打轴模式下文本溢出的问题"
+      }
+    ]
+  },
+  {
     "date": "2024-10-05",
     "version": "0.5.11",
     "items": [
