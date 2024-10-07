@@ -44,12 +44,9 @@ export function getRandomItems<T extends any[][]>(...arrs: T) {
 
 //判断焦点是否位于可编辑元素内
 export function isFocusedEditable() {
-    const focusedElement = document.activeElement;
-    const tagName = focusedElement.tagName.toLowerCase();
-    return (
-        ["input", "textarea"].includes(tagName) ||
-        focusedElement.hasAttribute("contenteditable")
-    );
+    const el = document.activeElement as HTMLElement;
+    const tag = el.tagName.toLowerCase();
+    return ["input", "textarea"].includes(tag) || el.isContentEditable;
 }
 
 //路由：词条
