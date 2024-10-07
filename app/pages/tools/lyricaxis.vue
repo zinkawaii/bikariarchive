@@ -152,17 +152,17 @@
                 let time = 0;
                 let timing = "";
                 let signed = false;
-                const re = /\[(\d{2}):(\d{2}\.\d{3})\]/;
+                const re = /\[(\d{2}):(\d{2}\.\d{2})\]/;
                 const match = line.match(re);
                 if (match) {
                     time = Number(match[1]) * 60 + Number(match[2]);
-                    timing = match[0];
+                    timing = match[0] + " ";
                     signed = true;
                 }
                 return {
                     time,
                     timing,
-                    content: " " + line.replace(re, "").trim(),
+                    content: line.replace(re, "").trim(),
                     signed
                 };
             });
@@ -210,8 +210,8 @@
             current.timing = `[${
                 String(Math.floor(m)).padStart(2, "0")
             }:${
-                s.toFixed(3).padStart(6, "0")
-            }]`;
+                s.toFixed(2).padStart(5, "0")
+            }] `;
             current.signed = true;
 
             //指向不存在的序号时不再增加
@@ -312,6 +312,7 @@
     }
 
     .lyric-item {
+        height: 24px;
         margin-inline: -8px;
         padding-inline: 8px;
         border-radius: 8px;

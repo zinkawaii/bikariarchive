@@ -4,6 +4,11 @@
     "version": "0.5.12",
     "items": [
       {
+        "type": "chore",
+        "scope": "lyricaxis",
+        "text": "时间戳显示两位小数"
+      },
+      {
         "type": "fix",
         "scope": "lyricaxis",
         "text": "修复打轴模式下文本溢出的问题"
