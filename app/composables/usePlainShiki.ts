@@ -18,17 +18,9 @@ export default function(
             if (el) {
                 ctx = mount(el, {
                     ...shikiOptions,
-                    ...options,
-                    watch: false
+                    ...options
                 });
             }
         });
-
-        useEventListener(target, "input", Zin.debounce(() => {
-            ctx?.update();
-        }, {
-            immediate: false,
-            delay: 150
-        }));
     });
 }
