@@ -19,7 +19,9 @@
     const rate = ref(0);
 
     watchEffect(() => {
-        rate.value = (modelValue.value - props.min) / (props.max - props.min);
+        rate.value = props.max > props.min
+            ? (modelValue.value - props.min) / (props.max - props.min)
+            : props.min > 0 ? 1 : 0;
     });
 
     let current = modelValue.value;
