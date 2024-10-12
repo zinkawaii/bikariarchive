@@ -16,7 +16,7 @@
                         <nuxt-img v-if="cover" :src="cover" alt="[cover]"/>
                         <div v-else class="sheno-placeholder">Cover.</div>
                     </div>
-                    <span class="sheno-title">{{ title.split("-")[0] }}</span>
+                    <span class="sheno-title">{{ title }}</span>
                 </a>
             </li>
         </ul>

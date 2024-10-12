@@ -5,7 +5,7 @@
     const titleDelay = 80;
     const summaryDelay = 20;
     const { title, summary } = config.public.jumbotron;
-    const titleChars = title.split("");
+    const titleChars = [...title];
     const summaryChars = ref([]);
     const isCrossing = ref(true);
     const isJumping = ref(false);
