@@ -95,9 +95,9 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
+        "@nuxt/fonts",
         "@nuxt/icon",
         "@nuxt/image",
-        "@nuxtjs/google-fonts",
         "@nuxtjs/seo",
         "@pinia/nuxt",
         "@pinia-plugin-persistedstate/nuxt",
@@ -114,13 +114,12 @@ export default defineNuxtConfig({
         defaultLocale: "zh-CN",
         indexable: true
     },
-    googleFonts: {
-        display: "swap",
-        families: {
-            "Source Code Pro": {
-                regular: 400
-            }
-        }
+    fonts: {
+        provider: "google",
+        families: [{
+            name: "Source Code Pro",
+            global: true
+        }]
     },
     splittedFonts: {
         fonts: [{
