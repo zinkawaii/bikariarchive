@@ -6,15 +6,9 @@ import sitemapConfig from "./app/sitemap.config";
 export default defineNuxtConfig({
     app: {
         head: {
-            charset: "utf-8",
-            viewport: "width=device-width, initial-scale=1",
             link: [
                 { rel: "icon", href: "/garden/favicon.ico" },
                 { rel: "alternate", type: "application/atom+xml", title: clientConfig.title, href: "/feed" }
-            ],
-            meta: [
-                { "http-equiv": "Cache-Control", content: "no-siteapp" },
-                { "http-equiv": "X-UA-Compatible", content: "IE=edge, chrome=1" }
             ],
             titleTemplate: "%s %separator %siteName",
             templateParams: {
