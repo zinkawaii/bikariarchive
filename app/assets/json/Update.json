@@ -1,5 +1,16 @@
 [
   {
+    "date": "2024-10-16",
+    "version": "0.5.14",
+    "items": [
+      {
+        "type": "feat",
+        "scope": "user",
+        "text": "添加修改密码功能"
+      }
+    ]
+  },
+  {
     "date": "2024-10-13",
     "version": "0.5.13",
     "items": [

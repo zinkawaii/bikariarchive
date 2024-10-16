@@ -52,6 +52,7 @@
 <template>
     <template v-if="isExist">
         <space-banner />
+        <space-password />
     </template>
     <not-found v-else/>
 </template>

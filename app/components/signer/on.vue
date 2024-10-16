@@ -43,14 +43,7 @@
         password: {
             target: password,
             required: true,
-            rule: /^\w*$/,
-            message: "密码仅由大小写字母、数字以及下划线组成",
-            exec(value) {
-                const count = getByteLength(value);
-                if (count < 6 || count > 18) {
-                    return "密码位数必须在 6-18 位之间";
-                }
-            }
+            ...passwordValidates
         }
     });
 

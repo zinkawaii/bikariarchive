@@ -5,40 +5,60 @@
     const nickname = ref("");
     const password = ref("");
 
-    const warn = ref({
-        nickname: false,
-        password: false
+    const { errors, glitch, validate } = useValidate({
+        nickname: {
+            target: nickname,
+            required: true,
+            ...nicknameValidates
+        },
+        password: {
+            target: password,
+            required: true,
+            ...passwordValidates
+        }
+    });
+
+    const { status, execute, data: res } = useLazyFetch("/api/user/login", {
+        method: "post",
+        body: {
+            account: nickname,
+            password
+        },
+        watch: false,
+        immediate: false
     });
 
     const submit = Zin.debounce(async () => {
-        try {
-            const res = await $fetch("/api/user/login", {
-                method: "post",
-                body: {
-                    account: nickname.value,
-                    password: password.value
-                }
-            });
-
-            switch (res.error) {
-                case 0:
-                    userStore.$patch({
-                        uid: res.uid,
-                        nickname: res.nickname,
-                        identity: res.identity,
-                        sign: res.sign
-                    });
-                    break;
-                case 1:
-                    warn.value.nickname = true;
-                    break;
-                case 2:
-                    warn.value.password = true;
-                    break;
-            }
+        if (!validate()) {
+            return;
         }
-        catch {
-            toastStore.error("[login]", "登录失败");
+
+        const key = "[login]";
+        await execute();
+
+        if (status.value !== "success") {
+            toastStore.error(key, "登录失败");
+            return;
+        }
+
+        const { error, uid, nickname, identity, sign } = res.value;
+        switch (error) {
+            case 1: {
+                glitch("nickname", "账号不存在");
+                return;
+            }
+            case 2: {
+                glitch("password", "密码错误");
+                return;
+            }
+            default: {
+                userStore.$patch({
+                    uid,
+                    nickname,
+                    identity,
+                    sign
+                });
+            }
         }
     }, {
         title: "登录"
@@ -50,13 +70,13 @@
         type="text"
         placeholder="昵称／UID／电子邮箱"
         v-model="nickname"
-        v-model:error="warn.nickname"
+        v-model:error="errors.nickname"
     />
     <meow-input
         type="password"
         placeholder="密码"
         v-model="password"
-        v-model:error="warn.password"
+        v-model:error="errors.password"
         @keyup.enter="submit"
     />
 </template>
