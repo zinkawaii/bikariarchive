@@ -65,61 +65,6 @@
     ]
   },
   {
-    "title": "主页工具栏",
-    "items": [
-      {
-        "src": {
-          "name": "mermaid",
-          "link": "https://www.pixiv.net/artworks/100412706"
-        },
-        "creator": {
-          "name": "にもし",
-          "link": "https://www.pixiv.net/users/145944"
-        }
-      },
-      {
-        "src": {
-          "name": "白黒少女とピクニック",
-          "link": "https://www.pixiv.net/artworks/97289387"
-        },
-        "creator": {
-          "name": "にもし",
-          "link": "https://www.pixiv.net/users/145944"
-        }
-      },
-      {
-        "src": {
-          "name": "雨上がりの天使",
-          "link": "https://www.pixiv.net/artworks/89326460"
-        },
-        "creator": {
-          "name": "にもし",
-          "link": "https://www.pixiv.net/users/145944"
-        }
-      },
-      {
-        "src": {
-          "name": "𝑹𝒆𝒍𝒂𝒙 𝒕𝒊𝒎𝒆",
-          "link": "https://www.pixiv.net/artworks/92731337"
-        },
-        "creator": {
-          "name": "にもし",
-          "link": "https://www.pixiv.net/users/145944"
-        }
-      },
-      {
-        "src": {
-          "name": "春を告げる",
-          "link": "https://www.pixiv.net/artworks/94945362"
-        },
-        "creator": {
-          "name": "にもし",
-          "link": "https://www.pixiv.net/users/145944"
-        }
-      }
-    ]
-  },
-  {
     "title": "关于页背景",
     "items": [
       {
