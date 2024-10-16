@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-    const { page, total, jLimited } = useArticleList({
+    const { page, total, jPaginated } = useArticleList({
         type: "blog",
         sticky: true
     });
 </script>
 
 <template>
-    <home-tabular-item v-for="art in jLimited" :art/>
+    <home-tabular-item v-for="art in jPaginated" :art/>
     <div class="content-widget home-pagination">
         <mb-pagination :total scroll-target=".tabular-item" v-model="page"/>
     </div>

@@ -15,7 +15,7 @@
         });
     });
 
-    const { page, total, sizes, filteredArr } = usePagination(updates, {
+    const { page, total, sizes, paginatedArr } = usePagination(updates, {
         sizes: 24
     });
 </script>
@@ -32,7 +32,7 @@
             >{{ year }}</a>
         </div>
         <ul class="update-list">
-            <li v-for="{ date, version, items } in filteredArr" class="update-item">
+            <li v-for="{ date, version, items } in paginatedArr" class="update-item">
                 <div class="update-title">
                     <h2><time>{{ date }}</time></h2>
                     <code v-if="version" class="update-version">v{{ version }}</code>

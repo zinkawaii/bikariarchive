@@ -12,12 +12,12 @@
         return props.sortBy === "updated";
     });
 
-    const { jLimited } = useArticleList(props);
+    const { jPaginated } = useArticleList(props);
 </script>
 
 <template>
     <ul class="recent-article">
-        <li v-for="{ title, volume, novel, route, publishDate, updateDate } in jLimited" class="recent-item">
+        <li v-for="{ title, volume, novel, route, publishDate, updateDate } in jPaginated" class="recent-item">
             <plain-link class="text-truncate recent-title" :to="route">{{ title }}</plain-link>
             <div class="recent-info">
                 <span class="text-truncate">{{ Article.meta[novel].volumes[volume].title }}</span>

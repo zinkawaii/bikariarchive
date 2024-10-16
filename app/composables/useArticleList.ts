@@ -41,7 +41,7 @@ export default function(options: UseArticleListOptions) {
         return arr;
     });
 
-    const { page, total, sizes, filteredArr: jLimited } = usePagination(jFull, {
+    const { page, total, sizes, paginatedArr: jPaginated } = usePagination(jFull, {
         sizes: options.sizes
     });
 
@@ -49,6 +49,6 @@ export default function(options: UseArticleListOptions) {
         page,
         total,
         sizes,
-        jLimited
+        jPaginated
     };
 }

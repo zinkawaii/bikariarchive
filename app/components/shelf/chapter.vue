@@ -24,7 +24,7 @@
         return jChapters.value.some((c) => c.ending) ? "已完结" : "连载中";
     });
 
-    const { page, total, sizes, filteredArr } = usePagination(jChapters, {
+    const { page, total, sizes, paginatedArr } = usePagination(jChapters, {
         sizes: 32
     });
 </script>
@@ -52,7 +52,7 @@
         </div>
     </div>
     <ul class="shelf-chapter">
-        <li v-for="chapter in filteredArr" :key="chapter.index">
+        <li v-for="chapter in paginatedArr" :key="chapter.index">
             <shelf-chapter-item :chapter/>
         </li>
     </ul>

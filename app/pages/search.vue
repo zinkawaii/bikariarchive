@@ -30,7 +30,7 @@
         return list ?? [];
     });
 
-    const { page, total, filteredArr } = usePagination(results);
+    const { page, total, paginatedArr } = usePagination(results);
 
     //全文检索
     const fullTextSearch = Zin.debounce(async () => {
@@ -95,7 +95,7 @@
         <div class="search-results">
             <mb-skeleton v-if="status !== `success`"/>
             <template v-else>
-                <search-result v-for="result in filteredArr" :key="result.index" v-bind="result"/>
+                <search-result v-for="result in paginatedArr" :key="result.index" v-bind="result"/>
             </template>
         </div>
         <mb-pagination :total scroll-target=".content-widget" v-model="page"/>
