@@ -52,7 +52,22 @@
 <template>
     <template v-if="isExist">
         <space-banner />
-        <space-password />
+        <div class="space-complex">
+            <home-blank />
+            <space-password />
+        </div>
     </template>
     <not-found v-else/>
 </template>
+
+<style lang="scss" scoped>
+    .space-complex {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+
+        @include viewport("sm") {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

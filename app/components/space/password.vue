@@ -102,8 +102,8 @@
 <style lang="scss" scoped>
     .space-password {
         width: 240px;
+        margin-inline: auto;
         padding: 16px var(--meow-medium);
-        border-block: none;
         font-size: 14px;
 
         > .meow-input {
