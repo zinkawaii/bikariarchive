@@ -32,7 +32,7 @@
                     <time>{{ art.updateDate }}</time>
                 </li>
             </ul>
-            <p class="p-small">
+            <p class="p-small text-secondary">
                 <template v-if="art.excerpt">{{ art.excerpt }}</template>
                 <span v-else class="text-gray">这篇文章还没有简介。</span>
             </p>
