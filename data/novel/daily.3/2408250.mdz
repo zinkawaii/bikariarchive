@@ -42,7 +42,7 @@ interface Entry {
   details: {
     title: string;
     content: string;
-  }[]
+  }[];
 }
 ```
 

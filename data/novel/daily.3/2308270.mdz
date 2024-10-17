@@ -12,43 +12,43 @@ const cache = {};
 
 //监听本地存储的修改
 (() => {
-    const channel = new BroadcastChannel("storage");
+  const channel = new BroadcastChannel("storage");
 
-    //跨页监听
-    channel.addEventListener("message", (e) => {
-        dispatch(e.data);
-    });
+  //跨页监听
+  channel.addEventListener("message", (e) => {
+    dispatch(e.data);
+  });
 
-    const original = localStorage.setItem;
-    localStorage.setItem = function(key, value) {
-        //本页
-        dispatch({ key, value });
+  const original = localStorage.setItem;
+  localStorage.setItem = function(key, value) {
+    //本页
+    dispatch({ key, value });
 
-        //跨页
-        channel.postMessage({ key, value });
+    //跨页
+    channel.postMessage({ key, value });
 
-        //执行原生行为
-        original.call(this, key, value);
-    };
+    //执行原生行为
+    original.call(this, key, value);
+  };
 
-    function dispatch({ key, value }) {
-        //缓存
-        cache[key] = String(value);
+  function dispatch({ key, value }) {
+    //缓存
+    cache[key] = String(value);
 
-        //触发全局事件
-        const event = new Event(`storage:${key}`);
-        event.key = key;
-        event.value = value;
-        window.dispatchEvent(event);
-    }
+    //触发全局事件
+    const event = new Event(`storage:${key}`);
+    event.key = key;
+    event.value = value;
+    window.dispatchEvent(event);
+  }
 })();
 
 //缓存本地存储的读取
 (() => {
-    const original = localStorage.getItem;
-    localStorage.getItem = function(key) {
-        return cache[key] ??= original.call(this, key);
-    };
+  const original = localStorage.getItem;
+  localStorage.getItem = function(key) {
+    return cache[key] ??= original.call(this, key);
+  };
 })();
 ```
 
@@ -65,7 +65,7 @@ const cache = {};
 ```js
 const channel = new BroadcastChannel("storage");
 channel.addEventListener("message", (e) => {
-    dispatch(e.data);
+  dispatch(e.data);
 });
 ```
 
@@ -93,9 +93,9 @@ window.dispatchEvent(event);
 ```js
 const original = localStorage.setItem;
 localStorage.setItem = function(key, value) {
-    dispatch({ key, value });
-    channel.postMessage({ key, value });
-    original.call(this, key, value);
+  dispatch({ key, value });
+  channel.postMessage({ key, value });
+  original.call(this, key, value);
 };
 ```
 
@@ -104,7 +104,7 @@ localStorage.setItem = function(key, value) {
 ```js
 const original = localStorage.getItem;
 localStorage.getItem = function(key) {
-    return cache[key] ??= original.call(this, key);
+  return cache[key] ??= original.call(this, key);
 };
 ```
 
@@ -123,11 +123,11 @@ window.addEventListener("storage:font-family", setFontFamily);
 
 ```js
 window.addEventListener("keydown", (event) => {
-    if (!isFirst && event.key === localStorage.getItem("shortcut-last")) {
-        /* 前往上一章节 */
-    }
-    if (!isLast && event.key === localStorage.getItem("shortcut-next")) {
-        /* 前往下一章节 */
-    }
+  if (!isFirst && event.key === localStorage.getItem("shortcut-last")) {
+    /* 前往上一章节 */
+  }
+  if (!isLast && event.key === localStorage.getItem("shortcut-next")) {
+    /* 前往下一章节 */
+  }
 });
 ```
