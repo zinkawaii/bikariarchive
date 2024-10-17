@@ -11,6 +11,7 @@ declare module "vue-router" {
     interface RouteMeta {
         identity?: number;
         comment?: boolean;
+        jumbotron?: boolean;
         sidebar?: boolean;
         widePage?: boolean;
         fullPage?: boolean;

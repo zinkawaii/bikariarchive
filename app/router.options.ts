@@ -54,7 +54,10 @@ export default <RouterConfig> {
             name: "home",
             path: "/home",
             alias: "/",
-            component: () => import("~/pages/home.vue")
+            component: () => import("~/pages/home.vue"),
+            meta: {
+                jumbotron: true
+            }
         },
         {
             name: "intel",

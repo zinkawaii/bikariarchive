@@ -10,11 +10,6 @@
 </script>
 
 <template>
-    <client-only>
-        <teleport to=".jumbotron-wrapper">
-            <home-jumbotron />
-        </teleport>
-    </client-only>
     <meow-widget class="home-brief">
         <home-welcome />
         <home-introduction />

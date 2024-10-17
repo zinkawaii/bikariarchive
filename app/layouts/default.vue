@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="jumbotron-wrapper"></div>
+    <z-jumbotron v-if="$route.meta.jumbotron"/>
     <z-background />
     <z-header />
     <z-navbar />

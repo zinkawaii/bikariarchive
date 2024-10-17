@@ -7,13 +7,10 @@
     const { title, summary } = config.public.jumbotron;
     const titleChars = [...title];
     const summaryChars = ref([]);
-    const isCrossing = ref(true);
-    const isJumping = ref(false);
+    const [isMotion, toggleMotion] = useToggle(true);
 
     //标题动效
-    Zin.delay(duration + titleDelay)
-    .then(async () => {
-        isJumping.value = true;
+    Zin.delay(duration + titleDelay).then(async () => {
         await Zin.interval((i) => {
             const char = summary[i];
             summaryChars.value.push(char);
@@ -22,8 +19,7 @@
             times: summary.length
         });
         await Zin.delay(duration);
-        isCrossing.value = false;
-        isJumping.value = false;
+        toggleMotion(false);
     });
 
     //点击箭头
@@ -39,13 +35,13 @@
         <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp" alt="[jumbotron]"/>
         <div class="jumbo-banner">
             <h1 class="jumbo-title">
-                <template v-if="isCrossing">
+                <template v-if="isMotion">
                     <span v-for="(char, i) in titleChars" class="jumbo-char" :style="{ animationDelay: `${i * titleDelay}ms` }">{{ char }}</span>
                 </template>
                 <template v-else>{{ title }}</template>
             </h1>
             <h2 class="jumbo-phrase">
-                <template v-if="isCrossing || isJumping">
+                <template v-if="isMotion">
                     <span v-for="char in summaryChars" class="jumbo-char">{{ char }}</span>
                 </template>
                 <template v-else>{{ summary }}</template>
