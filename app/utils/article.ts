@@ -1,23 +1,23 @@
 import { reactive, type Reactive } from "vue";
-import type { JArticle, JArtmap, JChapter } from "@bikari/process";
+import type { ArticleCover, JArticle, JArtmap, JChapter } from "@bikari/process";
 
 export class Article implements JChapter {
-    novel = "";        //小说名
-    volume = -1;       //卷序号
-    order = -1;        //章序号
-    orderInVol = -1;   //章序号（卷内）
-    index = "";        //章文件名
-    title = "";        //章节名
-    excerpt = "";      //摘要
-    date = "";         //日期
-    updated = "";      //更新日期
-    refactored = "";   //重构日期
-    cover = "";        //封面链接
-    draft = false;     //草稿
-    encrypted = false; //加密
-    ending = false;    //终章
-    sticky = Infinity; //置顶
-    wordCount = 0;     //字数
+    novel = "";           //小说名
+    volume = -1;          //卷序号
+    order = -1;           //章序号
+    orderInVol = -1;      //章序号（卷内）
+    index = "";           //章文件名
+    title = "";           //章节名
+    excerpt?: string;     //摘要
+    cover?: ArticleCover; //封面
+    date?: string;        //日期
+    updated?: string;     //更新日期
+    refactored?: string;  //重构日期
+    draft = false;        //草稿
+    encrypted = false;    //加密
+    ending = false;       //终章
+    sticky = Infinity;    //置顶
+    wordCount = 0;        //字数
 
     private constructor(novel: string, order: number, raw: JChapter) {
         this.assign(novel, order, raw);
@@ -38,11 +38,11 @@ export class Article implements JChapter {
     }
 
     get publishDate() {
-        return this.date || this.refactored || Article.FARAWAY;
+        return this.date ?? this.refactored ?? Article.FARAWAY;
     }
 
     get updateDate() {
-        return this.updated || this.publishDate;
+        return this.updated ?? this.publishDate;
     }
 
     get route() {

@@ -37,11 +37,17 @@ export interface ArticleFrontmatter {
     date?: string;
     refactored?: string;
     updated?: string;
-    cover?: string;
+    cover?: ArticleCover;
     draft?: boolean;
     ending?: boolean;
     password?: string;
     sticky?: number;
+}
+
+export interface ArticleCover {
+    src: string;
+    reference?: string;
+    align?: "top" | "center" | "bottom";
 }
 
 export interface JArtmap {

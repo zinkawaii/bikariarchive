@@ -8,9 +8,7 @@
 
 <template>
     <nuxt-link class="content-widget tabular-item" :to="art.route">
-        <div class="tabular-background">
-            <nuxt-img v-if="art.cover" class="tabular-cover" :src="art.cover"/>
-        </div>
+        <novel-cover class="tabular-cover" :src="art.cover?.src" :align="art.cover?.align"/>
         <div class="tabular-wrapper">
             <h2 class="content-h2 tabular-title">
                 <iconify v-if="art.sticky < Infinity" name="pepicons-print:pin"/>
@@ -45,24 +43,18 @@
 
 <style lang="scss" scoped>
     .tabular-item {
-        --origin: left;
-
         display: flex;
         flex-direction: var(--direction);
         border-block: none;
-        perspective: 1024px;
-        perspective-origin: var(--origin);
         transition: all 0.25s;
 
         &:nth-of-type(2n) {
             --direction: row-reverse;
-            --origin: right;
-            --margin: -6% 8px;
-            --rotate: -18deg;
         }
 
         &:hover {
             background-color: var(--color-background);
+            translate: 0 -4px;
         }
 
         @include viewport("sm") {
@@ -70,45 +62,16 @@
         }
     }
 
-    .tabular-background {
-        display: grid;
+    .tabular-cover {
         flex: 0.75;
-        position: relative;
-        overflow: hidden;
         height: 160px;
         margin: 8px;
         border-radius: 8px;
-        transform-origin: var(--origin);
         transition: all 0.25s;
-
-        @include viewport(">sm") {
-            :hover > & {
-                margin-inline: var(--margin, 8px -6%);
-                rotate: y var(--rotate, 18deg);
-            }
-        }
 
         @include viewport("sm") {
             flex: none;
         }
-
-        &::before {
-            content: "Cover.";
-            display: grid;
-            place-items: center;
-            position: absolute;
-            opacity: 0.33;
-            inset: 0;
-            background-color: var(--color-info-light-5);
-            font-size: 48px;
-            font-weight: bold;
-        }
-    }
-
-    .tabular-cover {
-        position: absolute;
-        height: 100%;
-        object-fit: cover;
     }
 
     .tabular-wrapper {
@@ -116,7 +79,6 @@
         flex: 1;
         align-content: center;
         gap: 4px;
-        position: relative;
         padding: 16px;
         text-align: center;
 

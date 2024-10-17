@@ -27,11 +27,11 @@ export default function(options: UseArticleListOptions) {
             .sort((a, b) => {
                 const [x, y] = sortBy.value.reduce(([x, y], prop) => {
                     return [
-                        x || a[prop],
-                        y || b[prop]
+                        x ?? a[prop],
+                        y ?? b[prop]
                     ];
                 }, [null, null]);
-                return y?.localeCompare?.(x);
+                return x && y ? y.localeCompare(x) : x ? -1 : 1;
             });
 
         if (sticky.value) {

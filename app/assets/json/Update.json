@@ -1,5 +1,16 @@
 [
   {
+    "date": "2024-10-17",
+    "version": "0.5.15",
+    "items": [
+      {
+        "type": "feat",
+        "scope": "reader",
+        "text": "封面显示与图源跳转"
+      }
+    ]
+  },
+  {
     "date": "2024-10-16",
     "version": "0.5.14",
     "items": [
