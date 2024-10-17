@@ -124,7 +124,7 @@
         <novel-article
             v-else
             :body="post.body"
-            @vue:mounted="hooks.callHook(`page:reader:rendered`)"
+            @vue:mounted="hooks.callHook(`reader:rendered`)"
         />
         <novel-footer :art/>
     </meow-widget>

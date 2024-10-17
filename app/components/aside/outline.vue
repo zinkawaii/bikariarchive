@@ -24,7 +24,7 @@
     });
 
     //文章渲染完成时更新标题列表
-    hooks.hook("page:reader:rendered", () => {
+    hooks.hook("reader:rendered", () => {
         const headingEls = document.querySelectorAll<HTMLHeadingElement>(".novel-text :where(h2, h3):not(.sr-only)");
 
         flatHeaders.value = [...headingEls]
