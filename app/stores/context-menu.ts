@@ -6,10 +6,11 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     const extraGroup = ref<ContextMenuGroup>(null);
 
     const groups = computed(() => {
+        const isExtra = extraGroup.value ? (toValue(extraGroup.value.when) ?? true) : false;
         return [
-            extraGroup.value,
+            isExtra && extraGroup.value,
             ...baseGroups.value.filter((group) => {
-                return !extraGroup.value?.shield?.includes(group.title);
+                return (toValue(group.when) ?? true) && (isExtra ? !extraGroup.value.shield?.includes(group.title) : true);
             })
         ].filter(Boolean);
     });
