@@ -8,7 +8,7 @@
 
 <template>
     <nuxt-link class="content-widget tabular-item" :to="art.route">
-        <novel-cover class="tabular-cover" :src="art.cover?.src" :align="art.cover?.align"/>
+        <novel-cover class="tabular-cover" v-bind="art.cover"/>
         <div class="tabular-wrapper">
             <h2 class="content-h2 tabular-title">
                 <iconify v-if="art.sticky < Infinity" name="pepicons-print:pin"/>

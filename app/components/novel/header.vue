@@ -2,34 +2,14 @@
     import type { Article } from "~/utils/article";
     import type { GetArticleResponse } from "~~/server/types/api/article";
 
-    const props = defineProps<{
+    defineProps<{
         art: Article;
         post?: GetArticleResponse;
     }>();
-
-    const contextMenuStore = useContextMenuStore();
-
-    const coverComp = useTemplateRef("cover");
-    const coverEl = useCurrentElement(coverComp);
-
-    contextMenuStore.extra(coverEl, {
-        title: "cover",
-        shield: ["image"],
-        when: () => !!props.art.cover.reference,
-        items: [
-            {
-                title: "前往图源",
-                icon: "fa6-solid:arrow-up-right-from-square",
-                action() {
-                    window.open(props.art.cover.reference, "_blank");
-                }
-            }
-        ]
-    });
 </script>
 
 <template>
-    <novel-cover v-if="art.cover" ref="cover" :src="art.cover.src" :align="art.cover.align"/>
+    <novel-cover v-if="art.cover" v-bind="art.cover"/>
     <header class="novel-header">
         <h1 class="novel-title">{{ art.title }}</h1>
         <ul class="novel-information">
