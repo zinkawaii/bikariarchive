@@ -10,8 +10,14 @@
 </script>
 
 <template>
-    <figure class="novel-cover">
-        <nuxt-img v-if="src" class="novel-image" :class="`is-${align}`" :src loading="lazy"/>
+        <nuxt-img
+            v-if="src"
+            class="novel-image"
+            :class="`is-${align}`"
+            :src
+            alt="[cover]"
+            loading="lazy"
+        />
     </figure>
 </template>
 

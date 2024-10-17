@@ -7,7 +7,7 @@
 <template>
     <nuxt-link class="bangumi-item" :to="`https://bangumi.tv/subject/${id}`" target="_blank">
         <div class="bangumi-cover">
-            <nuxt-img v-if="cover" class="bangumi-image" :src="cover" loading="lazy"/>
+            <nuxt-img v-if="cover" class="bangumi-image" :src="cover" alt="[cover]" loading="lazy"/>
         </div>
         <div class="bangumi-info">
             <span class="text-truncate bangumi-title">{{ title.jp }}</span>
