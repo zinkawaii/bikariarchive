@@ -103,12 +103,13 @@
         height: 2em;
         margin-inline: 4px;
         border: 1px solid var(--color-border-lighter);
+        outline: 2px solid transparent;
+        outline-offset: -1px;
         background-color: var(--color-background);
-        transition: border-color 0.25s;
+        transition: all 0.25s;
 
         &:not(.active):hover {
-            border-width: 2px;
-            border-color: var(--color-theme-dark);
+            outline-color: var(--color-theme-dark);
             color: var(--color-theme-text);
         }
 
@@ -128,7 +129,8 @@
     }
 
     .pagina-item {
-        width: 2em;
+        min-width: 2em;
+        padding-inline: 0.5em;
         border-radius: 8px;
 
         &.active {

@@ -45,9 +45,6 @@ export default defineNuxtConfig({
         host: clientConfig.domain,
         port: 443
     },
-    devtools: {
-        enabled: false
-    },
     experimental: {
         viewTransition: true
     },
@@ -81,6 +78,7 @@ export default defineNuxtConfig({
         css: {
             preprocessorOptions: {
                 scss: {
+                    api: "modern-compiler",
                     additionalData: `@import "~/assets/scss/mixin.scss";`
                 }
             }

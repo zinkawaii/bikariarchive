@@ -50,7 +50,7 @@
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.7.3",
+    "@antfu/eslint-config": "^3.8.0",
     "@bikari/excalc": "workspace:^",
     "@bikari/process": "workspace:^",
     "@bikari/shared": "workspace:^",
@@ -91,13 +91,13 @@
     "nodemailer": "^6.9.15",
     "nuxt": "^3.13.2",
     "nuxt-mongoose": "^1.0.6",
-    "sass": "^1.79.5",
+    "sass": "^1.80.2",
     "ssh2-sftp-client": "^11.0.0",
     "stylelint": "^16.10.0",
     "tar": "^7.4.3",
     "tsup": "^8.3.0",
     "vue-tsc": "^2.1.6",
-    "yaml": "^2.5.1",
+    "yaml": "^2.6.0",
     "zod": "^3.23.8"
   },
   "pnpm": {

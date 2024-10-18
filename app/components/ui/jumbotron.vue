@@ -31,7 +31,7 @@
 </script>
 
 <template>
-    <div class="home-jumbotron">
+    <div class="z-jumbotron">
         <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp" alt="[jumbotron]"/>
         <div class="jumbo-banner">
             <h1 class="jumbo-title">
@@ -56,7 +56,7 @@
 <style lang="scss" scoped>
     $h: 72vh;
 
-    .home-jumbotron {
+    .z-jumbotron {
         height: $h * 2;
         margin-bottom: -$h;
         clip-path: inset(0 0 50% 0);

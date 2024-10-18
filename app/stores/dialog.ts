@@ -57,7 +57,7 @@ export const useDialogStore = defineStore("dialog", () => {
         }
 
         async function close() {
-            ctx.opening.value = false;
+            opening.value = false;
             await Zin.delay(duration);
 
             const i = indexOf();

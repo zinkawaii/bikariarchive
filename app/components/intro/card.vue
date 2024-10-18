@@ -48,13 +48,11 @@
 
 <style lang="scss" scoped>
     .intro-card {
-        $gap: 24px;
-
         display: grid;
         grid-template-rows: auto 1fr auto;
         position: absolute;
-        width: calc(100% - $gap);
-        height: calc(100% - $gap);
+        width: calc(100% - var(--meow-medium));
+        height: calc(100% - var(--meow-medium));
         transition-property: filter, translate;
         transition-duration: 0.25s;
 
@@ -63,7 +61,7 @@
         }
 
         &.is-inner {
-            translate: $gap $gap;
+            translate: var(--meow-medium) var(--meow-medium);
             cursor: pointer;
             filter: brightness(75%) opacity(50%);
         }

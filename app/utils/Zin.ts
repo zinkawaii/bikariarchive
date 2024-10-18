@@ -49,20 +49,20 @@ const Zin = new class Z {
         title = ""
     } = {}) {
         const toastStore = useToastStore();
-        let timer: NodeJS.Timeout;
+        let timer: NodeJS.Timeout | undefined;
         return <(this: unknown, ...args: T) => void> (
             immediate
             ? function(...args) {
                 timer ? clearAndToast() : func.apply(this, args);
                 timer = setTimeout(() => {
-                    timer = null;
+                    timer = void 0;
                 }, delay);
             }
             : function(...args) {
                 timer && clearAndToast();
                 timer = setTimeout(() => {
                     func.apply(this, args);
-                    timer = null;
+                    timer = void 0;
                 }, delay);
             }
         );
@@ -162,12 +162,12 @@ const Zin = new class Z {
     throttle<T extends unknown[]>(func: (...args: T) => void, delay?: number) {
         //根据延迟时长
         if (delay && delay > 0) {
-            let timer: NodeJS.Timeout;
+            let timer: NodeJS.Timeout | undefined;
             return function(this: unknown, ...args: T) {
                 if (!timer) {
                     func.apply(this, args);
                     timer = setTimeout(() => {
-                        timer = null;
+                        timer = void 0;
                     }, delay);
                 }
             };
