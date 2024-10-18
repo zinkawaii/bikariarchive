@@ -27,7 +27,7 @@ const docHeight = useElementSize(document.body).height;
 
 // 滑块高度
 const thumbHeight = computed(() => {
-    return winHeight.value ** 2 / docHeight.value;
+  return winHeight.value ** 2 / docHeight.value;
 });
 ```
 
@@ -39,24 +39,24 @@ const thumbHeight = computed(() => {
 
 ```js
 const thumbTop = computed(() => {
-    return `calc(100% - ${thumbHeight.value}px)`;
+  return `calc(100% - ${thumbHeight.value}px)`;
 });
 ```
 
 ```css
 .scroll-thumb {
-    animation: scroll-animation linear;
-    animation-timeline: scroll();
+  animation: scroll-animation linear;
+  animation-timeline: scroll();
 }
 
 @keyframe scroll-animation {
-    from {
-      top: 0;
-    }
+  from {
+    top: 0;
+  }
 
-    to {
-      top: v-bind("thumbTop");
-    }
+  to {
+    top: v-bind("thumbTop");
+  }
 }
 ```
 
@@ -79,27 +79,27 @@ let startY = 0;
 
 // 窗口与滑块的移动比例
 const distanceRatio = computed(() => {
-    return docHeight.value / winHeight.value;
+  return docHeight.value / winHeight.value;
 });
 
 // 在模板中绑定在滑块元素上，记得添加 prevent 修饰符
 function onMousedown(event) {
-    isPressed = true;
-    startY = event.y;
+  isPressed = true;
+  startY = event.y;
 }
 
 // 务必使用节流函数
 useEventListener("mousemove", useThrottleFn((event) => {
-    if (isPressed) {
-        window.scrollBy({
-            top: (event.y - startY) * distanceRatio.value
-        });
-        startY = event.y;
-    }
+  if (isPressed) {
+    window.scrollBy({
+      top: (event.y - startY) * distanceRatio.value
+    });
+    startY = event.y;
+  }
 }, 16.6));
 
 useEventListener("mouseup", () => {
-    isPressed = false;
+  isPressed = false;
 });
 ```
 
