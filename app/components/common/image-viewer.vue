@@ -48,11 +48,14 @@
         if (isPressed.value) return;
 
         //缩放比率
-        const rate = event.deltaY < 0 ? 1.5 : 0.667;
+        let rate = 1 + Math.abs(event.deltaY) / 200;
+        if (event.deltaY > 0) {
+            rate = 1 / rate;
+        }
 
         const { left, top, width, height } = rootEl.value.getBoundingClientRect();
-        const finalX = left - (event.clientX - left) * ((rate - 1) / 1);
-        const finalY = top - (event.clientY - top) * ((rate - 1) / 1);
+        const finalX = left - (event.clientX - left) * (rate - 1);
+        const finalY = top - (event.clientY - top) * (rate - 1);
 
         rootEl.value.animate({
             left: finalX + "px",
