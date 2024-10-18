@@ -2,36 +2,33 @@ import { z } from "zod";
 import type { GetReadRecordResponse } from "~~/server/types/api/read-record";
 
 const schema = z.object({
-    from: z.string().transform(Number),
-    to: z.string().transform(Number)
+    page: z.string().transform(Number)
 });
 
 export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => {
-    let { from, to } = schema.parse(getQuery(event));
+    const { page } = schema.parse(getQuery(event));
+
+    if (page < 1) {
+        return 1;
+    }
 
     //权限验证
     identityValidate(event, 9);
 
-    //<from>始终小于<to>
-    if (from > to) [from, to] = [to, from];
+    const sizes = 20;
 
-    //符号不一致
-    if (to && (from ^ to) <= 0) {
-        return 1;
-    }
+    const total = await ReadRecordModel.countDocuments();
 
-    const sort = from < 0 ? -1 : 1;
-    const count = to - from;
-    const skip = from >= 0 ? from : Math.abs(to);
+    const qRecords = await ReadRecordModel.find()
+    .sort({ _id: -1 })
+    .skip((page - 1) * sizes)
+    .limit(sizes)
+    .populate<{
+        _id: string;
+        user: { uid: number };
+    }>({ path: "user", select: "uid" });
 
-    if (count > 0) {
-        res.data = await ReadRecordModel.find()
-        .sort({ _id: sort })
-        .skip(skip)
-        .limit(count)
-        .populate<{
-            _id: string;
-            user: { uid: number };
-        }>({ path: "user", select: "uid" });
-    }
+    res.total = total;
+    res.sizes = sizes;
+    res.list = qRecords;
 });

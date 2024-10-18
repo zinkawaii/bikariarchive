@@ -5,7 +5,9 @@ export interface DeleteReadRecordBody {
 }
 
 export interface GetReadRecordResponse extends BaseResponse {
-    data?: (Omit<ReadRecordSchema, "user"> & {
+    total: number;
+    sizes: number;
+    list: (Omit<ReadRecordSchema, "user"> & {
         _id: string;
         user?: Pick<UserDataSchema, "uid">;
     })[];
