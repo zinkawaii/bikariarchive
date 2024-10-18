@@ -79,7 +79,7 @@ export default defineNuxtConfig({
             preprocessorOptions: {
                 scss: {
                     api: "modern-compiler",
-                    additionalData: `@import "~/assets/scss/mixin.scss";`
+                    additionalData: `@use "~/assets/scss/mixin.scss" as *;`
                 }
             }
         }
