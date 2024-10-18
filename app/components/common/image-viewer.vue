@@ -101,12 +101,13 @@
     //关闭时
     const onLeave: BaseTransitionProps<HTMLImageElement>["onLeave"] = (el) => {
         const { left, top, width, height } = props.target.getBoundingClientRect();
+        const { left: elLeft, top: elTop } = el.getBoundingClientRect();
         const { scrollX: x, scrollY: y } = window;
 
         //回到原位
         el.animate([{
-            top: 2 * y + el.y / window.devicePixelRatio + "px",
-            left: 2 * x + el.x / window.devicePixelRatio + "px"
+            top: 2 * y + elTop + "px",
+            left: 2 * x + elLeft + "px"
         }, {
             top: y + top + "px",
             left: x + left + "px",
