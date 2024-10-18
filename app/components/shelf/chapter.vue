@@ -13,9 +13,9 @@
     const lastUpdated = computed(() => {
         return (jChapters.value.length > 0) ?
             jChapters.value.reduce((prev, curr) => {
-                const a = prev.updated || prev.date;
-                const b = curr.updated || curr.date;
-                return a.localeCompare(b) > 0 ? prev : curr;
+                const a = prev.updated ?? prev.date;
+                const b = curr.updated ?? curr.date;
+                return a?.localeCompare(b) > 0 ? prev : curr;
             }).updateDate : Article.FARAWAY;
     });
 
