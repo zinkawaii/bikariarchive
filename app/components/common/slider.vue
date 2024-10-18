@@ -30,14 +30,14 @@
 
     //鼠标拖动时
     useHold(rootEl, {
-        onMousedown(event) {
+        onPointerdown(event) {
             ({ width, left } = rootEl.value.getBoundingClientRect());
             emit("dragstart");
 
             //进度预变化
-            this.onMousemove(event);
+            this.onPointermove(event);
         },
-        onMousemove(event) {
+        onPointermove(event) {
             const { min, max, step } = props;
 
             rate.value = Math.max(0, Math.min(1, (event.clientX - left) / width));
@@ -50,7 +50,7 @@
             modelValue.value = current;
             emit("progress", current);
         },
-        onMouseup() {
+        onPointerup() {
             modelValue.value = current;
             emit("dragend");
             emit("change", current);

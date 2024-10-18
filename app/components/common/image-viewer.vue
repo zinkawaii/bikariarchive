@@ -22,9 +22,8 @@
     let imageY = 0;
 
     //鼠标拖动时
-    const { isPressed } = useHold(rootEl, {
-        onMousedown(event) {
-            event.preventDefault();
+    const { isHolding } = useHold(rootEl, {
+        onPointerdown(event) {
             mouseX = event.pageX;
             mouseY = event.pageY;
             ({
@@ -32,7 +31,7 @@
                 top: imageY
             } = rootEl.value.getBoundingClientRect());
         },
-        onMousemove(event) {
+        onPointermove(event) {
             rootEl.value.animate({
                 top: imageY - mouseY + event.pageY + "px",
                 left: imageX - mouseX + event.pageX + "px"
@@ -44,8 +43,8 @@
     });
 
     //鼠标滚动时
-    function onMouseWheel(event: WheelEvent) {
-        if (isPressed.value) return;
+    function onWheel(event: WheelEvent) {
+        if (isHolding.value) return;
 
         //缩放比率
         let rate = 1 + Math.abs(event.deltaY) / 200;
@@ -127,7 +126,8 @@
             ref="root"
             class="image-viewer"
             :src="target.src"
-            @mousewheel.prevent="onMouseWheel"
+            :draggable="false"
+            @wheel.prevent="onWheel"
         />
     </transition>
 </template>
@@ -136,6 +136,7 @@
     .image-viewer {
         position: fixed;
         transition: all 0.4s;
+        touch-action: none;
 
         &.v-leave-active {
             position: absolute;

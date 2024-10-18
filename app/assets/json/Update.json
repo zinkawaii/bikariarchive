@@ -6,7 +6,7 @@
       {
         "type": "feat",
         "scope": "mb-image-viewer",
-        "text": "支持精细缩放"
+        "text": "支持精细缩放与触摸事件"
       },
       {
         "type": "fix",
