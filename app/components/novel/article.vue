@@ -5,20 +5,29 @@
 
     const props = withDefaults(defineProps<{
         body?: Root | Element[];
+        components?: Record<string, Component>;
         tag?: string;
     }>(), {
         body: () => [],
+        components: () => ({}),
         tag: "article"
     });
     const slots = defineSlots<{
         default: () => any;
     }>();
 
-    const components = createComponentsMap({
+    const globalComponents = {
         MbCode,
         MbGallery,
         MbImage,
         PlainLink
+    };
+
+    const resolvedComponents = computed(() => {
+        return createComponentsMap({
+            ...globalComponents,
+            ...props.components
+        });
     });
 
     function createComponentsMap(comps: Record<string, Component>) {
@@ -36,8 +45,8 @@
         function r(children: Element["children"]) {
             return children.map((node) => {
                 if (node.type === "element") {
-                    const comp = components[node.tag] || node.tag;
-                    return h(comp, node.props, node.tag in components ? {
+                    const comp = resolvedComponents.value[node.tag] || node.tag;
+                    return h(comp, node.props, node.tag in resolvedComponents.value ? {
                         default: () => r(node.children)
                     } : r(node.children));
                 }

@@ -1,12 +1,13 @@
 ---
 title: 其他系
-details:
-  - title: 已知能力
-    component: known-ability
-    props:
-      classification: 其他
 ---
 
 #summary
 
 其他系，所有未被明确分类的能力都暂时归为此系别。
+
+#details[0]
+
+## 已知能力
+
+:known-ability{classification="其他"}

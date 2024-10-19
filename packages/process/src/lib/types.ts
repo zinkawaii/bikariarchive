@@ -1,4 +1,4 @@
-import type { Root } from "../remark/types";
+import type { Element } from "../remark/types";
 
 export type NovelType = "novel" | "blog";
 
@@ -91,13 +91,13 @@ export interface JIntmap {
 
 export interface JEntry {
     title: string;
-    summary?: Root;
+    summary?: Element[];
     brief?: EntryBrief;
     appearance?: EntryAppearance;
     illustration?: EntryIllustration[];
     talent?: EntryTalent[];
     relationship?: EntryRelationship[];
-    details?: EntryDetail[];
+    details?: Element[][];
 }
 
 export interface EntryBrief {
@@ -120,7 +120,7 @@ export interface EntryIllustration {
 export type EntryTalentType = "超能力" | "体质" | "愿望";
 
 export type EntryTalent = {
-    content?: Root;
+    content?: Element[];
 } & ({
     type: "超能力";
     name: {
@@ -138,12 +138,12 @@ export type EntryTalent = {
 export interface EntryRelationship {
     name: string;
     relation: string;
-    content?: Root;
+    content?: Element[];
 }
 
 export interface EntryDetail {
     title: string;
     component?: string;
     props?: Record<string, any>;
-    content?: Root;
+    content?: Element[];
 }

@@ -1,12 +1,4 @@
 <script lang="ts" setup>
-    import { EntryKnownAbility, EntryStarredAbility } from "#components";
-
-    defineOptions({
-        components: {
-            "known-ability": EntryKnownAbility,
-            "starred-ability": EntryStarredAbility
-        }
-    });
     const { title } = defineProps<{
         title: string;
     }>();
@@ -56,10 +48,7 @@
                 <entry-talent :data="data.talent"/>
                 <entry-relationship :data="data.relationship"/>
             </template>
-            <entry-section v-for="item in data.details" :title="item.title">
-                <component v-if="item.component" :is="$options.components[item.component]" v-bind="item.props"/>
-                <novel-article v-else tag="div" :body="item.content"/>
-            </entry-section>
+            <entry-detail v-for="detail in data.details" :detail/>
         </article>
     </meow-widget>
     <not-found v-else/>
