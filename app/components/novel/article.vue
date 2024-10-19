@@ -38,6 +38,14 @@
         return comps;
     }
 
+    function transformProps(props: Record<string, any>) {
+        if ("className" in props) {
+            props.class = props.className;
+            delete props.className;
+        }
+        return props;
+    }
+
     function render() {
         const { body, tag } = props;
         const children = Array.isArray(body) ? body : body.children;
@@ -47,7 +55,7 @@
             return children.map((node) => {
                 if (node.type === "element") {
                     const comp = resolvedComponents.value[node.tag] || node.tag;
-                    return h(comp, node.props, node.tag in resolvedComponents.value ? {
+                    return h(comp, transformProps(node.props), node.tag in resolvedComponents.value ? {
                         default: () => r(node.children)
                     } : r(node.children));
                 }

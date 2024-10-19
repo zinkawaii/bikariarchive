@@ -3,12 +3,12 @@ import type { Parent, Root, Text } from "mdast";
 
 declare module "mdast" {
     interface RootContentMap {
-        iconify: Iconify;
+        iconify: Emoji;
     }
 }
 
-interface Iconify extends Parent {
-    type: "iconify";
+interface Emoji extends Parent {
+    type: "emoji";
 }
 
 const ICONIFY_REGEX = / ?i-[\w-]+:[\w-]+ ?/g;
@@ -24,7 +24,7 @@ export default function() {
 
             let offset = 0;
             let hasIconify = false;
-            const nodes: (Text | Iconify)[] = [];
+            const nodes: (Text | Emoji)[] = [];
 
             for (const [i, name] of [...indices, [node.value.length, ""] as const]) {
                 const text = node.value.slice(offset, i);
@@ -37,10 +37,11 @@ export default function() {
                 if (name) {
                     hasIconify = true;
                     nodes.push({
-                        type: "iconify",
+                        type: "emoji",
                         data: {
                             hName: "iconify",
                             hProperties: {
+                                class: "emoji",
                                 name: name.trim()
                             }
                         },

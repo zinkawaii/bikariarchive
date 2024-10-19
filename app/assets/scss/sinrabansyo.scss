@@ -363,10 +363,6 @@ textarea {
         font-weight: bold;
     }
 
-    [id] {
-        scroll-margin-top: 80px;
-    }
-
     :where(.mb-code, .mb-gallery, .mb-image) {
         margin-block: 16px;
     }
@@ -377,6 +373,17 @@ textarea {
 
     > :last-child {
         margin-bottom: 0;
+    }
+
+    [id] {
+        scroll-margin-top: 80px;
+    }
+
+    .emoji {
+        width: 1.25em;
+        height: 1.25em;
+        margin-inline: 2px;
+        vertical-align: -0.25em;
     }
 
     > .footnotes {
@@ -404,13 +411,6 @@ textarea {
         &:hover {
             color: var(--color-theme-text);
         }
-    }
-
-    .iconify {
-        width: 1.25em;
-        height: 1.25em;
-        margin-inline: 2px;
-        vertical-align: -0.25em;
     }
 }
 
