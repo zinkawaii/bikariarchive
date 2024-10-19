@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { Element, Text } from "@bikari/process";
+    import type { Element, Text } from "@bikari/article";
     import { EntryKnownAbility, EntryStarredAbility } from "#components";
 
     defineOptions({

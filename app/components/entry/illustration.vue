@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { EntryIllustration } from "@bikari/process";
+    import type { EntryIllustration } from "@bikari/article";
 
     const props = defineProps<{
         data: EntryIllustration[];

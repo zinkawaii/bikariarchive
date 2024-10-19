@@ -51,8 +51,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.8.0",
+    "@bikari/article": "workspace:^",
     "@bikari/excalc": "workspace:^",
-    "@bikari/process": "workspace:^",
     "@bikari/shared": "workspace:^",
     "@iconify-json/fa6-solid": "^1.2.1",
     "@inquirer/prompts": "^7.0.0",

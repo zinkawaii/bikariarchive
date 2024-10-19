@@ -1,4 +1,4 @@
-import type { Element } from "@bikari/process";
+import type { Element } from "@bikari/article";
 
 export interface GetSearchResponse extends BaseResponse {
     list?: SearchResult[];

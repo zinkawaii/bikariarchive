@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { EntryBrief } from "@bikari/process";
+    import type { EntryBrief } from "@bikari/article";
 
     const props = defineProps<EntryBrief>();
 

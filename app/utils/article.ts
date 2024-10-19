@@ -1,5 +1,5 @@
 import { reactive, type Reactive } from "vue";
-import type { ArticleCover, Element, JArticle, JArtmap, JChapter } from "@bikari/process";
+import type { ArticleCover, Element, JArticle, JArtmap, JChapter } from "@bikari/article";
 
 export class Article implements JChapter {
     novel = "";           //小说名

@@ -1,4 +1,4 @@
-import { article, entry } from "@bikari/process";
+import { article, entry } from "@bikari/article";
 import { isDev } from "@bikari/shared";
 
 article.build();

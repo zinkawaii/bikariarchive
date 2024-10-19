@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { NovelType } from "@bikari/process";
+    import type { NovelType } from "@bikari/article";
 
     const props = defineProps<{
         type?: NovelType;

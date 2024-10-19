@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { EntryTalent } from "@bikari/process";
+    import type { EntryTalent } from "@bikari/article";
 
     defineProps<{
         data?: EntryTalent[];

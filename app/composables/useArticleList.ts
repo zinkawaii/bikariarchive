@@ -1,4 +1,4 @@
-import type { NovelType } from "@bikari/process";
+import type { NovelType } from "@bikari/article";
 
 export interface UseArticleListOptions {
     type?: MaybeRefOrGetter<NovelType>;

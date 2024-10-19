@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { EntryRelationship } from "@bikari/process";
+    import type { EntryRelationship } from "@bikari/article";
 
     defineProps<{
         data?: EntryRelationship[];

@@ -8,7 +8,7 @@ export default {
                 "./concept"
             ],
             import: [
-                "@bikari/process",
+                "@bikari/article",
                 "JEntry"
             ]
         },
@@ -17,7 +17,7 @@ export default {
                 "./novel"
             ],
             import: [
-                "@bikari/process",
+                "@bikari/article",
                 "ArticleFrontmatter"
             ]
         }

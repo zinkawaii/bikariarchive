@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { hyphenate } from "@vueuse/core";
-    import type { Element, Root } from "@bikari/process";
+    import type { Element, Root } from "@bikari/article";
     import { Iconify, MbCode, MbGallery, MbImage, PlainLink } from "#components";
 
     const props = withDefaults(defineProps<{

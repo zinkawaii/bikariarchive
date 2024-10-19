@@ -1,5 +1,5 @@
 import fs from "fs-extra";
-import type { Root } from "@bikari/process";
+import type { Root } from "@bikari/article";
 import { Article } from "~/utils/article";
 
 export async function readArticle(art: Article) {

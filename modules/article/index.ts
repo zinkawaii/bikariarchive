@@ -1,9 +1,9 @@
-import { article, entry } from "@bikari/process";
+import { article, entry } from "@bikari/article";
 import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 
 export default defineNuxtModule({
     meta: {
-        name: "@bikari/process"
+        name: "@bikari/article"
     },
     async setup(options, nuxt) {
         const { resolve } = createResolver(import.meta.url);

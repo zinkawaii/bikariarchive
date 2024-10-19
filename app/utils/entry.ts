@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import type { JIntel, JIntmap } from "@bikari/process";
+import type { JIntel, JIntmap } from "@bikari/article";
 
 export class Entry {
     static meta = reactive({} as JIntel);

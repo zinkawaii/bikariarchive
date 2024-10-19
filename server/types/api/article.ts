@@ -1,4 +1,4 @@
-import type { Root } from "@bikari/process";
+import type { Root } from "@bikari/article";
 
 export interface GetArticleResponse extends BaseResponse {
     body?: Root;

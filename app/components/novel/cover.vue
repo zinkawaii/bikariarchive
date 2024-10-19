@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { ArticleCover } from "@bikari/process";
+    import type { ArticleCover } from "@bikari/article";
 
     const props = withDefaults(defineProps<Partial<ArticleCover>>(), {
         align: "center"
