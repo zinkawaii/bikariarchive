@@ -54,7 +54,7 @@
 </template>
 
 <style lang="scss" scoped>
-    $h: 72vh;
+    $h: 72dvh;
 
     .z-jumbotron {
         height: $h * 2;
@@ -73,7 +73,7 @@
         display: grid;
         align-content: center;
         position: absolute;
-        inset: 0 0 (100vh - $h);
+        inset: 0 0 (100dvh - $h);
         text-align: center;
         text-shadow: 0 0 12px rgb(0 0 0 / 66%);
         color: white;
@@ -165,7 +165,7 @@
         display: flex;
         position: absolute;
         opacity: 0;
-        inset: ($h - 14vh) 0 (100vh - $h);
+        inset: ($h - 14dvh) 0 (100dvh - $h);
         background: linear-gradient(transparent, black);
         font-size: 64px;
         color: white;

@@ -17,6 +17,11 @@
         "type": "fix",
         "scope": "mb-image-viewer",
         "text": "修复在移动端关闭时初始偏移获取错误的问题"
+      },
+      {
+        "type": "fix",
+        "scope": "z-jumbotron",
+        "text": "修复在移动端未滚动到位时标题提前消失的问题"
       }
     ]
   },
@@ -713,8 +718,8 @@
     "items": [
       {
         "type": "feat",
-        "scope": "home",
-        "text": "新的巨幕标题动效"
+        "scope": "z-jumbotron",
+        "text": "新的标题动效"
       }
     ]
   },
@@ -791,8 +796,8 @@
       },
       {
         "type": "fix",
-        "scope": "home",
-        "text": "修复巨幕滚动视差的向下兼容性"
+        "scope": "z-jumbotron",
+        "text": "修复滚动视差的向下兼容性"
       }
     ]
   },
@@ -802,8 +807,8 @@
     "items": [
       {
         "type": "pref",
-        "scope": "home",
-        "text": "以更优雅的方式重新实现了巨幕的滚动视差"
+        "scope": "z-jumbotron",
+        "text": "以更优雅的方式重新实现滚动视差"
       }
     ]
   },
@@ -981,8 +986,8 @@
       },
       {
         "type": "feat",
-        "scope": "home",
-        "text": "取消巨幕的鼠标跟随，在标题上应用滚动视差"
+        "scope": "z-jumbotron",
+        "text": "取消鼠标跟随效果，在标题上应用滚动视差"
       },
       {
         "type": "feat",
@@ -1318,7 +1323,7 @@
     "items": [
       {
         "type": "feat",
-        "scope": "home",
+        "scope": "z-jumbotron",
         "text": "复现巨幕"
       },
       {

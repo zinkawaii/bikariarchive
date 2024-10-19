@@ -16,7 +16,7 @@
         display: flex;
         flex-direction: column;
         overflow: auto;
-        max-height: calc(100vh - 96px);
+        max-height: calc(100dvh - 96px);
         padding: 0;
 
         > .aside-title {
