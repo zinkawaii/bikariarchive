@@ -6,7 +6,7 @@
       {
         "type": "feat",
         "scope": "article",
-        "text": "支持 Iconify 图标"
+        "text": "支持 Iconify 简写语法"
       },
       {
         "type": "feat",
