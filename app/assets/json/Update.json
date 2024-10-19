@@ -1,8 +1,13 @@
 [
   {
-    "date": "2024-10-18",
-    "version": "0.5.16",
+    "date": "2024-10-19",
+    "version": "0.5.17",
     "items": [
+      {
+        "type": "feat",
+        "scope": "article",
+        "text": "支持 Iconify 图标"
+      },
       {
         "type": "feat",
         "scope": "mb-image-viewer",
@@ -12,7 +17,13 @@
         "type": "fix",
         "scope": "mb-image-viewer",
         "text": "修复在移动端关闭时初始偏移获取错误的问题"
-      },
+      }
+    ]
+  },
+  {
+    "date": "2024-10-18",
+    "version": "0.5.16",
+    "items": [
       {
         "type": "fix",
         "scope": "shelf",

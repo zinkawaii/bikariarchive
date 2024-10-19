@@ -405,6 +405,13 @@ textarea {
             color: var(--color-theme-text);
         }
     }
+
+    .iconify {
+        width: 1.25em;
+        height: 1.25em;
+        margin-inline: 1.5px;
+        vertical-align: -0.25em;
+    }
 }
 
 .comment-text {

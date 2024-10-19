@@ -11,6 +11,7 @@ import link from "./handlers/link";
 import attributes from "./plugins/attributes";
 import compiler from "./plugins/compiler";
 import footnote from "./plugins/footnote";
+import iconify from "./plugins/iconify";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
@@ -19,6 +20,7 @@ import type { Root } from "./types";
 
 export {
     compiler,
+    iconify,
     image,
     link,
     ruby,
@@ -42,6 +44,7 @@ export async function parseArticle<T>(text: string) {
         .use(attributes)
         .use(mdc)
         .use(footnote)
+        .use(iconify)
         .use(ruby)
         .use(slug)
         .use(strikethrough)
@@ -65,6 +68,7 @@ export async function parseEntry<T>(text: string) {
         .use(frontmatter)
         .use(attributes)
         .use(mdc)
+        .use(iconify)
         .use(ruby)
         .use(strikethrough)
         .use(rehype, rehypeOptions)

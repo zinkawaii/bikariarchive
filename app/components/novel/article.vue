@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { hyphenate } from "@vueuse/core";
     import type { Element, Root } from "@bikari/process";
-    import { MbCode, MbGallery, MbImage, PlainLink } from "#components";
+    import { Iconify, MbCode, MbGallery, MbImage, PlainLink } from "#components";
 
     const props = withDefaults(defineProps<{
         body?: Root | Element[];
@@ -17,6 +17,7 @@
     }>();
 
     const globalComponents = {
+        Iconify,
         MbCode,
         MbGallery,
         MbImage,

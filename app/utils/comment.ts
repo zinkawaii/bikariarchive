@@ -1,4 +1,4 @@
-import { compiler, image, link, ruby, strikethrough } from "@bikari/process/remark";
+import { compiler, iconify, image, link, ruby, strikethrough } from "@bikari/process/remark";
 import parse from "remark-parse";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import { unified } from "unified";
@@ -62,6 +62,7 @@ const rehypeOptions: RehypeOptions = {
 export async function parseComment(text: string) {
     const processor = unified()
         .use(parse)
+        .use(iconify)
         .use(ruby)
         .use(strikethrough)
         .use(code)
