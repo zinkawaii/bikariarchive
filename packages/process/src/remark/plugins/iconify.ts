@@ -11,7 +11,7 @@ interface Iconify extends Parent {
     type: "iconify";
 }
 
-const ICONIFY_REGEX = / ?i-[\w-]+:[\w-]+ ?/g;
+const ICONIFY_REGEX = /(?:^| )i-[\w-]+:[\w-]+ ?/g;
 
 export default function() {
     return (tree: Root) => {
