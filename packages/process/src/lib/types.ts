@@ -32,7 +32,7 @@ export interface JChapter extends Omit<ArticleFrontmatter, "abbrlink" | "passwor
 
 export interface ArticleFrontmatter {
     title: string;
-    excerpt?: string;
+    excerpt?: Element[];
     abbrlink?: string;
     date?: string;
     refactored?: string;

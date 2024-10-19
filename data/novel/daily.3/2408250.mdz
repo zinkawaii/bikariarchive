@@ -1,6 +1,5 @@
 ---
 title: 编译器魔法雏形
-excerpt: 是〇〇，我加了〇〇。
 abbrlink: 7b3e03b
 cover:
   src: https://cdn.bikari.top/image/7b3e03b.webp
@@ -8,6 +7,10 @@ cover:
 date: 2024-08-25
 updated: 2024-10-17
 ---
+
+::excerpt
+  是~~魔法~~，我加了~~魔法~~。
+::
 
 早在编写词条页模板的时期，我就时常困惑于这样一件事：如何在结构化的数据（JSON）中优雅地嵌入文本数据，而不至于在不能换行的字符串内手动编写 HTML，或是传入未经处理的 Markdown，将渲染压力转移到客户端？
 

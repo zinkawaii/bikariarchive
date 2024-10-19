@@ -1,10 +1,13 @@
 ---
 title: 阅读页样式用例
-excerpt: 这是简介。
 abbrlink: 93ec4a4
 date: 2024-03-31
 updated: 2024-10-19
 ---
+
+::excerpt
+  这是简介。
+::
 
 ## 二级标题
 

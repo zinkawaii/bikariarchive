@@ -1,5 +1,5 @@
 import { reactive, type Reactive } from "vue";
-import type { ArticleCover, JArticle, JArtmap, JChapter } from "@bikari/process";
+import type { ArticleCover, Element, JArticle, JArtmap, JChapter } from "@bikari/process";
 
 export class Article implements JChapter {
     novel = "";           //小说名
@@ -8,7 +8,7 @@ export class Article implements JChapter {
     orderInVol = -1;      //章序号（卷内）
     index = "";           //章文件名
     title = "";           //章节名
-    excerpt?: string;     //摘要
+    excerpt?: Element[];  //摘要
     cover?: ArticleCover; //封面
     date?: string;        //日期
     updated?: string;     //更新日期

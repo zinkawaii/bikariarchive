@@ -32,10 +32,8 @@
                     <time>{{ art.updateDate }}</time>
                 </li>
             </ul>
-            <p class="p-small text-secondary">
-                <template v-if="art.excerpt">{{ art.excerpt }}</template>
-                <span v-else class="text-gray">这篇文章还没有简介。</span>
-            </p>
+            <novel-article v-if="art.excerpt" class="p-small text-secondary" tag="p" :body="art.excerpt"/>
+            <p v-else class="p-small text-gray">这篇文章还没有简介。</p>
         </div>
         <span class="tabular-thumb"></span>
     </nuxt-link>

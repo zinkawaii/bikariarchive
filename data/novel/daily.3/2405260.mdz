@@ -1,12 +1,15 @@
 ---
 title: 个人向 CSS 编码风格汇总
-excerpt: 在这里记录我的 CSS 编码风格。
 abbrlink: 44dc7f8
 cover:
   src: https://cdn.bikari.top/image/44dc7f8.webp
 date: 2024-05-26
 updated: 2024-10-17
 ---
+
+::excerpt
+  在这里记录我的 CSS 编码风格。
+::
 
 在这里记录我的 CSS 编码风格，不一定是最佳实践，也欢迎读者针对特定场景提供更优的写法。
 

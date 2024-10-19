@@ -56,9 +56,22 @@ export async function parseArticle<T>(text: string) {
     text = text.replaceAll(/(?<=\n)<br(\s*)\/?>/g, "<p><br /></p>\n");
 
     const result = await processor.process(text);
+    const body = result.result as Root;
+    const { data } = result;
+
+    //简介转换
+    const firstChild = body.children[0];
+    if (firstChild?.tag === "excerpt") {
+        const node = firstChild.children[0];
+        if (node?.type === "element" && node?.tag === "p") {
+            data.excerpt = node.children;
+            body.children.splice(0, 1);
+        }
+    }
+
     return {
-        attributes: result.data as T,
-        body: result.result as Root
+        attributes: data as T,
+        body
     };
 }
 
