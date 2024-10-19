@@ -25,6 +25,7 @@
 
 <style lang="scss" scoped>
     .shelf-novel {
+        overflow: hidden;
         padding-left: calc(50% - 72px);
         mask-image: linear-gradient(to right, transparent, white 32px, white calc(100% - 32px), transparent);
     }

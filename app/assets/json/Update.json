@@ -22,6 +22,11 @@
         "type": "fix",
         "scope": "z-jumbotron",
         "text": "修复在移动端未滚动到位时标题提前消失的问题"
+      },
+      {
+        "type": "fix",
+        "scope": "shelf",
+        "text": "修复窄屏下书籍列表导致宽度溢出的问题"
       }
     ]
   },
