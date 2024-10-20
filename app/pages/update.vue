@@ -4,10 +4,13 @@
     });
 
     const totalYears = [2024, 2023];
-    const currentYearIdx = ref(0);
 
-    const currentYear = computed(() => {
-        return totalYears[currentYearIdx.value];
+    const currentYear = useRouteQuery("year", 2024, {
+        transform: Number
+    });
+
+    const currentYearIdx = computed(() => {
+        return totalYears.indexOf(currentYear.value);
     });
 
     const { status, data } = useLazyFetch("/api/update", {
@@ -24,12 +27,12 @@
 <template>
     <meow-widget title="更新日志">
         <div class="update-years">
-            <div class="update-thumb" :style="{ translate: `${currentYearIdx * 88}px` }"></div>
+            <div v-if="currentYearIdx !== -1" class="update-thumb" :style="{ translate: `${currentYearIdx * 88}px` }"></div>
             <a
-                v-for="year, i in totalYears"
+                v-for="year in totalYears"
                 class="update-year"
                 :class="{ [`is-checked`]: totalYears[currentYearIdx] === year }"
-                @click="currentYearIdx = i"
+                @click="currentYear = year"
             >{{ year }}</a>
         </div>
         <mb-skeleton v-if="status === `pending`" class="update-skeleton"/>

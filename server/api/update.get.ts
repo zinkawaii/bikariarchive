@@ -9,11 +9,8 @@ const schema = z.object({
 export default defineJEventHandler<GetUpdateResponse>(async (event, res) => {
     const { year } = schema.parse(getQuery(event));
 
-    //超出年份
-    if (![2023, 2024].includes(year)) {
-        return 1;
-    }
-
     //读取数据
-    res.list = await fs.readJSON(r(`/dist/update/${year}.json`));
+    res.list = [2023, 2024].includes(year)
+        ? await fs.readJSON(r(`/dist/update/${year}.json`))
+        : [];
 });
