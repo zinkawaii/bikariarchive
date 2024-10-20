@@ -1,5 +1,16 @@
 [
   {
+    "date": "2024-10-20",
+    "version": "0.5.18",
+    "items": [
+      {
+        "type": "feat",
+        "scope": "mb-image-viewer",
+        "text": "支持图片位置裁剪过渡"
+      }
+    ]
+  },
+  {
     "date": "2024-10-19",
     "version": "0.5.17",
     "items": [
