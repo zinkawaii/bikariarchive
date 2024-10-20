@@ -19,7 +19,7 @@
         }
     });
 
-    const { page, total, sizes, paginatedArr } = usePagination(() => data.value.list, {
+    const { page, total, sizes, paginatedArr } = usePagination(() => data.value?.list ?? [], {
         sizes: 24
     });
 </script>
