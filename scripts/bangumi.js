@@ -2,7 +2,7 @@ import defu from "defu";
 import fs from "fs-extra";
 
 //读取文件
-const path = "../app/assets/json/Bangumi.json";
+const path = "../data/json/Bangumi.json";
 const file = await fs.readJson(path);
 
 //ID列表

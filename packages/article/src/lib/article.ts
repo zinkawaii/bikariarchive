@@ -22,7 +22,7 @@ export default new Processor({
         ext: ".mdz"
     },
     meta: {
-        src: "app/assets/json/Article.json",
+        src: "data/json/Article.json",
         out: "dist/json/Article.json"
     },
     map: {

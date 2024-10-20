@@ -16,7 +16,7 @@ export default defineJEventHandler<GetBangumiResponse>(async (event, res) => {
     const {
         total,
         data
-    } = await readJsonPaginated<BangumiData>("/app/assets/json/Bangumi.json", {
+    } = await readJsonPaginated<BangumiData>("/data/json/Bangumi.json", {
         page,
         sizes
     });

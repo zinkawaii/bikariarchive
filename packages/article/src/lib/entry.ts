@@ -17,7 +17,7 @@ export default new Processor({
         ext: ".mdz"
     },
     meta: {
-        src: "app/assets/json/Intel.json",
+        src: "data/json/Intel.json",
         out: "dist/json/Intel.json"
     },
     map: {
