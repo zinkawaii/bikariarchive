@@ -14,11 +14,11 @@
     "git:stash": "git add -A && git stash",
     "git:stash/pop": "git stash pop && git reset",
     "task:abbrlink": "cd scripts && node --watch abbrlink.js",
+    "task:article": "node scripts/article.js",
+    "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.js",
     "task:bangumi": "cd scripts && node --watch bangumi.js",
     "task:build": "pnpm run git:stash && pnpm run fix:sharp && pnpm run build && pnpm run git:stash/pop",
     "task:deploy": "cd scripts && node deploy.js",
-    "task:process": "node scripts/process.js",
-    "task:process/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/process.js",
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
   "dependencies": {
