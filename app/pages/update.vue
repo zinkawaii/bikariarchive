@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-    import jUpdate from "~/assets/json/Update.json";
-
     useHead({
         title: "更新日志"
     });
@@ -8,14 +6,17 @@
     const totalYears = [2024, 2023];
     const currentYearIdx = ref(0);
 
-    const updates = computed(() => {
-        const currentYear = totalYears[currentYearIdx.value].toString();
-        return jUpdate.filter((item) => {
-            return item.date.startsWith(currentYear);
-        });
+    const currentYear = computed(() => {
+        return totalYears[currentYearIdx.value];
     });
 
-    const { page, total, sizes, paginatedArr } = usePagination(updates, {
+    const { status, data } = useLazyFetch("/api/update", {
+        query: {
+            year: currentYear
+        }
+    });
+
+    const { page, total, sizes, paginatedArr } = usePagination(() => data.value.list, {
         sizes: 24
     });
 </script>
@@ -31,17 +32,18 @@
                 @click="currentYearIdx = i"
             >{{ year }}</a>
         </div>
-        <ul class="update-list">
+        <mb-skeleton v-if="status === `pending`" class="update-skeleton"/>
+        <ul v-else class="update-list">
             <li v-for="{ date, version, items } in paginatedArr" class="update-item">
                 <div class="update-title">
                     <h2><time>{{ date }}</time></h2>
                     <code v-if="version" class="update-version">v{{ version }}</code>
                 </div>
                 <div class="update-content">
-                    <p v-for="{ type, scope, text } in items" class="p-small">
+                    <p v-for="{ type, scope, content } in items" class="p-small">
                         <span class="update-type">{{ type }}</span>
                         <span v-if="scope" class="update-scope">{{ scope }}</span>
-                        <span v-html="text"></span>
+                        <novel-article tag="span" :body="content"/>
                     </p>
                 </div>
             </li>
@@ -82,6 +84,10 @@
         border-radius: 16px 32px 64px 24px / 16px 16px 24px 32px;
         background-image: linear-gradient(to right, var(--color-theme-dark), transparent);
         transition: all 0.25s;
+    }
+
+    .update-skeleton {
+        margin-block: var(--meow-medium);
     }
 
     .update-list {

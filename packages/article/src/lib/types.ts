@@ -1,4 +1,4 @@
-import type { Element } from "../remark/types";
+import type { Child } from "../remark/types";
 
 export type NovelType = "novel" | "blog";
 
@@ -32,7 +32,7 @@ export interface JChapter extends Omit<ArticleFrontmatter, "abbrlink" | "passwor
 
 export interface ArticleFrontmatter {
     title: string;
-    excerpt?: Element[];
+    excerpt?: Child[];
     abbrlink?: string;
     date?: string;
     refactored?: string;
@@ -91,13 +91,13 @@ export interface JIntmap {
 
 export interface JEntry {
     title: string;
-    summary?: Element[];
+    summary?: Child[];
     brief?: EntryBrief;
     appearance?: EntryAppearance;
     illustration?: EntryIllustration[];
     talent?: EntryTalent[];
     relationship?: EntryRelationship[];
-    details?: Element[][];
+    details?: Child[][];
 }
 
 export interface EntryBrief {
@@ -120,7 +120,7 @@ export interface EntryIllustration {
 export type EntryTalentType = "超能力" | "体质" | "愿望";
 
 export type EntryTalent = {
-    content?: Element[];
+    content?: Child[];
 } & ({
     type: "超能力";
     name: {
@@ -138,12 +138,24 @@ export type EntryTalent = {
 export interface EntryRelationship {
     name: string;
     relation: string;
-    content?: Element[];
+    content?: Child[];
 }
 
 export interface EntryDetail {
     title: string;
     component?: string;
     props?: Record<string, any>;
-    content?: Element[];
+    content?: Child[];
+}
+
+export interface JUpdate {
+    date: string;
+    version: string;
+    items: UpdateRecord[];
+}
+
+export interface UpdateRecord {
+    type: string;
+    scope?: string;
+    content: Child[];
 }

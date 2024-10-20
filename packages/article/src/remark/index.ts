@@ -16,7 +16,7 @@ import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
 import strikethrough from "./plugins/strikethrough";
-import type { Root } from "./types";
+import type { Element, Root } from "./types";
 
 export {
     compiler,
@@ -61,7 +61,7 @@ export async function parseArticle<T>(text: string) {
 
     //简介转换
     const firstChild = body.children[0];
-    if (firstChild?.tag === "excerpt") {
+    if (firstChild?.type === "element" && firstChild?.tag === "excerpt") {
         const node = firstChild.children[0];
         if (node?.type === "element" && node?.tag === "p") {
             data.excerpt = node.children;
@@ -94,11 +94,25 @@ export async function parseEntry<T>(text: string) {
     const result = await processor.process(text);
     const { data } = result;
 
-    const slots = (result.result as Root).children;
+    const slots = (result.result as Root).children as Element[];
     for (const slot of slots) {
         const path = slot.tag;
         const content = slot.children;
         setProperty(data, path, content);
     }
     return data as T;
+}
+
+export async function parseUpdate(text: string) {
+    const processor = unified()
+        .use(parse)
+        .use(emoji)
+        .use(ruby)
+        .use(strikethrough)
+        .use(rehype, rehypeOptions)
+        .use(raw)
+        .use(compiler);
+
+    const result = await processor.process(text);
+    return result.result as Root;
 }

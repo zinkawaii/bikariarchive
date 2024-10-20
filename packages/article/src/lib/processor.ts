@@ -13,19 +13,19 @@ interface ProcessorOptions<T> {
         folders: string[];
         ext: string;
     };
-    meta: {
-        src: string;
+    meta?: {
+        src?: string;
         out: string;
     };
-    map: {
+    map?: {
         out: string;
     };
     parse: (this: T, filename: string) => Promise<any>;
-    unlink: (this: T, cache: any) => void;
-    onCacheHit: (this: T, cache: any) => void;
-    onMetaUpdate: (this: T, newVal: any, oldVal: any) => any;
-    beforeBuild: (this: T) => void;
-    beforeOutputMeta: (this: T) => any;
+    unlink?: (this: T, cache: any) => void;
+    onCacheHit?: (this: T, cache: any) => void;
+    onMetaUpdate?: (this: T, newVal: any, oldVal: any) => any;
+    beforeBuild?: (this: T) => void;
+    beforeOutputMeta?: (this: T) => any;
 }
 
 export default class Processor {
@@ -34,9 +34,9 @@ export default class Processor {
     jMap: Record<string, any>;
 
     cacheDir: string;
-    metaSrcDir: string;
-    metaOutDir: string;
-    mapOutDir: string;
+    metaSrcDir?: string;
+    metaOutDir?: string;
+    mapOutDir?: string;
 
     sourceBase: string;
     sourceDist: string;
@@ -47,13 +47,23 @@ export default class Processor {
         public options: ProcessorOptions<Processor>
     ) {
         this.cacheDir = resolve("dist/cache", `${this.options.sign}.json`);
-        this.metaSrcDir = resolve(options.meta.src);
-        this.metaOutDir = resolve(options.meta.out);
-        this.mapOutDir = resolve(options.map.out);
-
         this.jCache = fs.existsSync(this.cacheDir) && fs.readJSONSync(this.cacheDir) || {};
-        this.jMeta = fs.readJsonSync(this.metaSrcDir);
-        this.jMap = {};
+
+        if (options.meta) {
+            if (options.meta.src) {
+                this.metaSrcDir = resolve(options.meta.src);
+                this.jMeta = fs.readJSONSync(this.metaSrcDir);
+            }
+            else {
+                this.jMeta = {};
+            }
+            this.metaOutDir = resolve(options.meta.out);
+        }
+
+        if (options.map) {
+            this.mapOutDir = resolve(options.map.out);
+            this.jMap = {};
+        }
 
         this.sourceBase = resolve(options.source.base);
         this.sourceDist = resolve(options.source.dist);
@@ -63,7 +73,7 @@ export default class Processor {
 
     async build() {
         const parse = timer(this.options.sign, async () => {
-            this.options.beforeBuild.call(this);
+            this.options.beforeBuild?.call(this);
 
             //顺序处理源文件
             const filelist = await glob(this.sourceGlob, {
@@ -76,7 +86,7 @@ export default class Processor {
             );
 
             //输出元数据文件
-            await this.outputMeta();
+            this.outputMeta();
         });
 
         await parse();
@@ -99,17 +109,19 @@ export default class Processor {
             else if (event === "unlink" && !await this.unlink(filename)) {
                 return false;
             }
-            await this.outputMeta();
+            this.outputMeta();
         }));
 
-        chokidar.watch(this.metaSrcDir, {
-            ignoreInitial: true
-        })
-        .on("change", timer(this.options.sign, async () => {
-            const newVal = await fs.readJson(this.metaSrcDir);
-            this.jMeta = this.options.onMetaUpdate.call(this, newVal, this.jMeta);
-            await this.outputMeta();
-        }));
+        if (this.metaSrcDir) {
+            chokidar.watch(this.metaSrcDir, {
+                ignoreInitial: true
+            })
+            .on("change", timer(this.options.sign, async () => {
+                const newVal = await fs.readJson(this.metaSrcDir);
+                this.jMeta = this.options.onMetaUpdate?.call(this, newVal, this.jMeta);
+                this.outputMeta();
+            }));
+        }
     }
 
     async parse(filename: string) {
@@ -120,7 +132,7 @@ export default class Processor {
 
         //当在开发环境下命中缓存时
         if (isDev && cache?.hash === hash) {
-            await this.options.onCacheHit.call(this, cache);
+            await this.options.onCacheHit?.call(this, cache);
             return false;
         }
 
@@ -133,10 +145,10 @@ export default class Processor {
         if (data !== null) {
             cache = {
                 ...cache,
-                ...data
+                ...data ?? {}
             };
             //执行一次命中缓存的逻辑
-            await this.options.onCacheHit.call(this, cache);
+            await this.options.onCacheHit?.call(this, cache);
             this.jCache[filename] = cache;
         }
         else {
@@ -167,20 +179,26 @@ export default class Processor {
         }
 
         //执行自定义清理逻辑
-        this.options.unlink.call(this, cache);
+        this.options.unlink?.call(this, cache);
 
         //清空缓存
         this.jCache[filename] = null;
         return true;
     }
 
-    async outputMeta() {
-        const jMeta = this.options.beforeOutputMeta.call(this);
+    outputMeta() {
+        const jMeta = this.options.beforeOutputMeta?.call(this) ?? this.jMeta;
 
         //同步写入防止在监听时获取空字符串
         fs.outputJsonSync(this.cacheDir, this.jCache);
-        fs.outputJsonSync(this.metaOutDir, jMeta);
-        fs.outputJsonSync(this.mapOutDir, this.jMap);
+
+        if (this.options.meta) {
+            fs.outputJsonSync(this.metaOutDir, jMeta);
+        }
+
+        if (this.options.map) {
+            fs.outputJsonSync(this.mapOutDir, this.jMap);
+        }
     }
 
     async outputJson(filename: string, data: unknown) {

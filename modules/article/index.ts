@@ -1,4 +1,4 @@
-import { article, entry } from "@bikari/article";
+import { article, entry, update } from "@bikari/article";
 import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 
 export default defineNuxtModule({
@@ -16,10 +16,12 @@ export default defineNuxtModule({
 
         await article.build();
         await entry.build();
+        await update.build();
 
         if (nuxt.options.dev) {
             article.watch();
             entry.watch();
+            update.watch();
         }
     }
 });

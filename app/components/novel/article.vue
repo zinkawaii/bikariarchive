@@ -1,10 +1,10 @@
 <script lang="ts" setup>
     import { hyphenate } from "@vueuse/core";
-    import type { Element, Root } from "@bikari/article";
+    import type { Child, Root } from "@bikari/article";
     import { Iconify, MbCode, MbGallery, MbImage, PlainLink } from "#components";
 
     const props = withDefaults(defineProps<{
-        body?: Root | Element[];
+        body?: Root | Child[];
         components?: Record<string, Component>;
         tag?: string;
     }>(), {
@@ -51,7 +51,7 @@
         const children = Array.isArray(body) ? body : body.children;
         return h(tag, children.length ? r(children) : slots.default?.());
 
-        function r(children: Element["children"]) {
+        function r(children: Child[]) {
             return children.map((node) => {
                 if (node.type === "element") {
                     const comp = resolvedComponents.value[node.tag] || node.tag;
