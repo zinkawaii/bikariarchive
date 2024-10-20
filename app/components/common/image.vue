@@ -1,11 +1,16 @@
 <script lang="ts" setup>
     import { MbImageViewer } from "#components";
 
-    const props = defineProps<{
-        src: string;
+    const props = withDefaults(defineProps<{
+        src: HTMLImageElement["src"];
+        alt?: HTMLImageElement["alt"];
+        loading?: HTMLImageElement["loading"];
+        align?: string;
         character?: string;
-        alt?: string;
-    }>();
+        viewable?: boolean;
+    }>(), {
+        viewable: true
+    });
 
     const dialogStore = useDialogStore();
     const gsap = useGsap();
@@ -52,10 +57,16 @@
     <figure class="mb-image">
         <nuxt-img
             ref="img"
-            class="cursor-pointer"
+            class="image-entity"
+            :style="{ objectPosition: align }"
+            :class="{
+                [`is-absolute`]: align,
+                [`cursor-pointer`]: viewable
+            }"
             :src
             :alt
-            @click="open"
+            :loading
+            @click="viewable && open()"
         />
         <figcaption v-if="character && isLoaded" ref="caption" class="image-caption">
             <character-tag v-for="name in characters" :name/>
@@ -66,6 +77,15 @@
 <style lang="scss" scoped>
     .mb-image {
         position: relative;
+    }
+
+    .image-entity {
+        height: 100%;
+        object-fit: cover;
+
+        &.is-absolute {
+            position: absolute;
+        }
     }
 
     .image-caption {

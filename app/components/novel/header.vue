@@ -9,7 +9,7 @@
 </script>
 
 <template>
-    <novel-cover v-if="art.cover" v-bind="art.cover"/>
+    <novel-cover v-if="art.cover" v-bind="art.cover" viewable/>
     <header class="novel-header">
         <h1 class="novel-title">{{ art.title }}</h1>
         <ul class="novel-information">

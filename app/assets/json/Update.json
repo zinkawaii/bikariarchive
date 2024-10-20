@@ -7,6 +7,11 @@
         "type": "feat",
         "scope": "mb-image-viewer",
         "text": "支持图片位置裁剪过渡"
+      },
+      {
+        "type": "improve",
+        "scope": "reader",
+        "text": "可查看的封面"
       }
     ]
   },

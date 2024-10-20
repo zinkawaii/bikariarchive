@@ -47,7 +47,7 @@ export interface ArticleFrontmatter {
 export interface ArticleCover {
     src: string;
     reference?: string;
-    align?: "top" | "center" | "bottom";
+    align?: string;
 }
 
 export interface JArtmap {

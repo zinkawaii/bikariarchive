@@ -1,7 +1,9 @@
 <script lang="ts" setup>
     import type { ArticleCover } from "@bikari/article";
 
-    const props = withDefaults(defineProps<Partial<ArticleCover>>(), {
+    const props = withDefaults(defineProps<Partial<ArticleCover> & {
+        viewable?: boolean;
+    }>(), {
         align: "center"
     });
 
@@ -25,16 +27,16 @@
 </script>
 
 <template>
-    <figure ref="root" class="novel-cover">
-        <nuxt-img
+    <div ref="root" class="novel-cover">
+        <mb-image
             v-if="src"
-            class="novel-image"
-            :class="`is-${align}`"
             :src
+            :align
+            :viewable
             alt="[cover]"
             loading="lazy"
         />
-    </figure>
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -53,20 +55,6 @@
             background-color: var(--color-info-light-5);
             font-size: 48px;
             font-weight: bold;
-        }
-    }
-
-    .novel-image {
-        position: absolute;
-        height: 100%;
-        object-fit: cover;
-
-        &.is-top {
-            object-position: top;
-        }
-
-        &.is-bottom {
-            object-position: bottom;
         }
     }
 </style>
