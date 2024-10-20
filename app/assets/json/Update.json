@@ -12,6 +12,11 @@
         "type": "improve",
         "scope": "reader",
         "text": "可查看的封面"
+      },
+      {
+        "type": "fix",
+        "scope": "z-jumbotron",
+        "text": "修复在移动端未滚动到位时标题提前消失的问题"
       }
     ]
   },
@@ -33,11 +38,6 @@
         "type": "fix",
         "scope": "mb-image-viewer",
         "text": "修复在移动端关闭时初始偏移获取错误的问题"
-      },
-      {
-        "type": "fix",
-        "scope": "z-jumbotron",
-        "text": "修复在移动端未滚动到位时标题提前消失的问题"
       },
       {
         "type": "fix",
