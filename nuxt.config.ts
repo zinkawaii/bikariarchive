@@ -55,11 +55,6 @@ export default defineNuxtConfig({
         compatibilityVersion: 4
     },
     nitro: {
-        esbuild: {
-            options: {
-                target: "esnext"
-            }
-        },
         rollupConfig: {
             // @ts-expect-error 类型实例化过深，且可能无限
             plugins: [

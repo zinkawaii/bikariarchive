@@ -73,29 +73,18 @@
 
     //打开时
     const onEnter: BaseTransitionProps<HTMLImageElement>["onEnter"] = (el) => {
-        //起始位置
-        const { left, top, width, height } = props.target.getBoundingClientRect();
-
-        //剪切尺寸
-        const { naturalRatio, clipTop, clipRight, clipBottom, clipLeft } = getClipRect(width, height);
-
         //最大宽高
         const fixedWidth = window.innerWidth * rate;
         const fixedHeight = window.innerHeight * rate;
 
         //最终宽高
+        const naturalRatio = props.target.naturalWidth / props.target.naturalHeight;
         const [finalWidth, finalHeight] = (fixedWidth / fixedHeight > naturalRatio)
             ? [fixedHeight * naturalRatio, fixedHeight]
             : [fixedWidth, fixedWidth / naturalRatio];
 
         //移动至屏幕中心
-        el.animate([{
-            top: (top - clipTop) + "px",
-            left: (left - clipLeft) + "px",
-            width: (width + clipLeft + clipRight) + "px",
-            height: (height + clipTop + clipBottom) + "px",
-            clipPath: `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px)`
-        }, {
+        el.animate([getOriginalKeyframe(), {
             top: `calc(50% - ${Math.floor(finalHeight / 2)}px)`,
             left: `calc(50% - ${Math.floor(finalWidth / 2)}px)`,
             width: Math.floor(finalWidth) + "px",
@@ -106,28 +95,20 @@
 
     //关闭时
     const onLeave: BaseTransitionProps<HTMLImageElement>["onLeave"] = (el) => {
-        const { left, top, width, height } = props.target.getBoundingClientRect();
         const { left: elLeft, top: elTop } = el.getBoundingClientRect();
         const { scrollX: x, scrollY: y } = window;
-
-        //剪切尺寸
-        const { clipTop, clipRight, clipBottom, clipLeft } = getClipRect(width, height);
 
         //回到原位
         el.animate([{
             top: 2 * y + elTop + "px",
             left: 2 * x + elLeft + "px",
             clipPath: "inset(0)"
-        }, {
-            top: (y + top - clipTop) + "px",
-            left: (x + left - clipLeft) + "px",
-            width: (width + clipLeft + clipRight) + "px",
-            height: (height + clipTop + clipBottom) + "px",
-            clipPath: `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px)`
-        }], Zin.DEFAULT_ANIME_OPTION);
+        }, getOriginalKeyframe(x, y)], Zin.DEFAULT_ANIME_OPTION);
     };
 
-    function getClipRect(width: number, height: number) {
+    //获取原始位置动画帧
+    function getOriginalKeyframe(x = 0, y = 0) {
+        const { left, top, width, height } = props.target.getBoundingClientRect();
         const { naturalWidth, naturalHeight } = props.target;
         const { objectPosition } = getComputedStyle(props.target);
         const [horizontal, vertical] = objectPosition.split(" ").map((pos) => Number(pos.slice(0, -1)) / 100);
@@ -152,11 +133,11 @@
         }
 
         return {
-            naturalRatio,
-            clipTop,
-            clipRight,
-            clipBottom,
-            clipLeft
+            top: (y + top - clipTop) + "px",
+            left: (x + left - clipLeft) + "px",
+            width: (width + clipLeft + clipRight) + "px",
+            height: (height + clipTop + clipBottom) + "px",
+            clipPath: `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px)`
         };
     }
 </script>
