@@ -10,11 +10,11 @@ feat(article): 最近章节可根据更新时间排序
 
 ## 2023-12-27 [v0.1.15]
 
-feat(article): 为 blog 类文章生成永久链接
+feat(article): 为 Blog 类文章生成永久链接
 
 ## 2023-12-26 [v0.1.14]
 
-feat: 引入 FontAwesome SVG
+feat: 引入 [FontAwesome SVG](https://fontawesome.com)
 
 ## 2023-12-20 [v0.1.13]
 
@@ -78,6 +78,6 @@ pref: 优化了一些组件的内存管理
 
 ## 2023-11-13 [v0.1.0]
 
-refactor: 使用 Nuxt 重构整个网站，初步复现所有基本功能
+refactor: 使用 [Nuxt](https://nuxt.com) 重构整个网站，初步复现所有基本功能
 
 feat(reader): 部分文章采用运行时模板编译
