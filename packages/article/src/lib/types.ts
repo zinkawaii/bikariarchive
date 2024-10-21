@@ -97,7 +97,7 @@ export interface JEntry {
     illustration?: EntryIllustration[];
     talent?: EntryTalent[];
     relationship?: EntryRelationship[];
-    details?: Child[][];
+    details?: EntryDetail[];
 }
 
 export interface EntryBrief {
@@ -143,18 +143,16 @@ export interface EntryRelationship {
 
 export interface EntryDetail {
     title: string;
-    component?: string;
-    props?: Record<string, any>;
-    content?: Child[];
+    content: Child[];
 }
 
 export interface JUpdate {
     date: string;
     version: string;
-    items: UpdateRecord[];
+    items: UpdateItem[];
 }
 
-export interface UpdateRecord {
+export interface UpdateItem {
     type: string;
     scope?: string;
     content: Child[];

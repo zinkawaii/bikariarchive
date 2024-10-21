@@ -2,7 +2,8 @@ import { basename } from "node:path";
 import fs from "fs-extra";
 import { parseEntry } from "../remark";
 import Processor from "./processor";
-import type { JEntry } from "./types";
+import type { Child } from "../remark/types";
+import type { EntryDetail, JEntry } from "./types";
 
 export default new Processor({
     sign: "Entry",
@@ -27,6 +28,34 @@ export default new Processor({
         //处理文件
         const file = await fs.readFile(filename);
         const attributes = await parseEntry<JEntry>(file.toString());
+
+        const details: EntryDetail[] = [];
+        let detail: EntryDetail;
+
+        for (let i = 0; i < attributes.details.length; i++) {
+            const node = (attributes.details as unknown as Child[])[i];
+
+            if (node.type === "element" && node.tag === "h2") {
+                if (node.children.length !== 1) {
+                    continue;
+                }
+
+                const firstNode = node.children[0];
+                if (firstNode.type !== "text") {
+                    continue;
+                }
+
+                detail = {
+                    title: firstNode.value,
+                    content: []
+                };
+                details.push(detail);
+            }
+            else {
+                detail?.content.push(node);
+            }
+        }
+        attributes.details = details;
 
         //写入文件
         await this.outputJson(filename, attributes);

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { Element, Text } from "@bikari/article";
+    import type { EntryDetail } from "@bikari/article";
     import { EntryKnownAbility, EntryStarredAbility } from "#components";
 
     defineOptions({
@@ -8,21 +8,11 @@
             "starred-ability": EntryStarredAbility
         }
     });
-    const props = defineProps<{
-        detail: Element[];
-    }>();
-
-    const title = computed(() => {
-        return props.detail[0]?.tag === "h2" ? (props.detail[0]?.children[0] as Text).value : "";
-    });
-
-    const body = computed(() => {
-        return props.detail.slice(props.detail[0]?.tag === "h2" ? 1 : 0);
-    });
+    defineProps<EntryDetail>();
 </script>
 
 <template>
     <entry-section :title>
-        <novel-article tag="div" :body :components="$options.components"/>
+        <novel-article tag="div" :body="content" :components="$options.components"/>
     </entry-section>
 </template>

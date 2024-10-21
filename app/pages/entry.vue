@@ -48,7 +48,7 @@
                 <entry-talent :data="data.talent"/>
                 <entry-relationship :data="data.relationship"/>
             </template>
-            <entry-detail v-for="detail in data.details" :detail/>
+            <entry-detail v-for="detail in data.details" v-bind="detail"/>
         </article>
     </meow-widget>
     <not-found v-else/>
