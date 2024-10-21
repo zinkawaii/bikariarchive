@@ -11,10 +11,7 @@ export interface UseHoldOptions {
 
 export default function(el: MaybeRefOrGetter<HTMLElement>, options: UseHoldOptions) {
     const {
-        filter = () => true,
-        onPointerdown,
-        onPointermove,
-        onPointerup
+        filter = () => true
     } = options;
 
     const isHolding = ref(false);
@@ -24,7 +21,7 @@ export default function(el: MaybeRefOrGetter<HTMLElement>, options: UseHoldOptio
         if (!filter(event)) {
             return;
         }
-        onPointerdown?.(event);
+        options.onPointerdown?.(event);
         isHolding.value = true;
     });
 
@@ -33,7 +30,7 @@ export default function(el: MaybeRefOrGetter<HTMLElement>, options: UseHoldOptio
         if (!isHolding.value || !filter(event)) {
             return;
         }
-        onPointermove?.(event);
+        options.onPointermove?.(event);
         isHolding.value = true;
     }));
 
@@ -42,7 +39,7 @@ export default function(el: MaybeRefOrGetter<HTMLElement>, options: UseHoldOptio
         if (!isHolding.value) {
             return;
         }
-        onPointerup?.(event);
+        options.onPointerup?.(event);
         isHolding.value = false;
     });
 

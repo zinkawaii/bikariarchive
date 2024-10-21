@@ -1,8 +1,12 @@
+## 2024-10-21 [v0.5.19]
+
+feat(update): 动态请求数据与 Hast 化
+
+fix(mb-slider): 修复无法拖动滑块的问题
+
 ## 2024-10-20 [v0.5.18]
 
 feat(mb-image-viewer): 支持图片位置裁剪过渡
-
-feat(update): 动态请求数据与 Hast 化
 
 improve(reader): 可查看的封面
 
@@ -188,7 +192,7 @@ feat(comment): 点击头像和昵称时显示用户信息弹窗
 
 ## 2024-06-11 [v0.4.3]
 
-pref(excalc): 使用 AssemblyScript 优化凹分性能
+pref(excalc): 使用 [AssemblyScript](https://www.assemblyscript.org) 优化凹分性能
 
 ## 2024-06-10 [v0.4.2]
 
