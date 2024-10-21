@@ -220,7 +220,7 @@
                 </p>
                 <span v-else class="calendar-none">No Special.</span>
                 <h6 class="calendar-title">关键人物</h6>
-                <div v-if="currentDate.event?.heroine" class="calendar-heroine">
+                <div v-if="currentDate.event?.heroine" class="edge-fades-x calendar-heroine">
                     <character-tag v-for="heroine in currentDate.event.heroine" :key="heroine" :name="heroine"/>
                 </div>
                 <span v-else class="calendar-none">No Character.</span>
@@ -381,31 +381,13 @@
     .calendar-heroine {
         display: flex;
         gap: 8px;
-        overflow: auto;
-        width: fit-content;
         max-width: 100%;
         margin: 9px auto 0;
         padding-bottom: 2px;
-        animation-name: heroine;
-        animation-timeline: scroll(x self);
         scroll-snap-type: x mandatory;
 
         > .character-tag {
             scroll-snap-align: center;
-        }
-    }
-
-    @keyframes heroine {
-        0% {
-            mask-image: linear-gradient(to right, white calc(100% - 2rem), transparent);
-        }
-
-        1%, 99% {
-            mask-image: linear-gradient(to right, transparent, white 2rem, white calc(100% - 2rem), transparent);
-        }
-
-        100% {
-            mask-image: linear-gradient(to right, transparent, white 2rem);
         }
     }
 

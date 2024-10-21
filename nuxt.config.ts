@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     },
     css: [
         "~/assets/scss/var.scss",
-        "~/assets/scss/sinrabansyo.scss"
+        "~/assets/scss/sinrabansyo.scss",
+        "~/assets/scss/animation.scss"
     ],
     compatibilityDate: "2024-07-19",
     components: [
