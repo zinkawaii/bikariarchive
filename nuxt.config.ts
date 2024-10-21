@@ -5,16 +5,6 @@ import sitemapConfig from "./app/sitemap.config";
 
 export default defineNuxtConfig({
     app: {
-        head: {
-            link: [
-                { rel: "icon", href: "/garden/favicon.ico" },
-                { rel: "alternate", type: "application/atom+xml", title: clientConfig.title, href: "/feed" }
-            ],
-            titleTemplate: "%s %separator %siteName",
-            templateParams: {
-                separator: "-"
-            }
-        },
         rootAttrs: {
             id: "z-root"
         }

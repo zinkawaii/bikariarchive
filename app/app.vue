@@ -1,5 +1,17 @@
 <script lang="ts" setup>
+    const config = useRuntimeConfig();
     const settingStore = useSettingStore();
+
+    useHead({
+        link: [
+            { rel: "icon", href: "/garden/favicon.ico" },
+            { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" }
+        ],
+        titleTemplate: "%s %separator %siteName",
+        templateParams: {
+            separator: "-"
+        }
+    });
 
     //夜间模式
     settingStore.listen("dark-mode", () => {
