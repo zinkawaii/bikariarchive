@@ -1,4 +1,5 @@
 import { Feed } from "feed";
+import { toString } from "mdast-util-to-string";
 import type { H3Event } from "h3";
 import { Article } from "~/utils/article";
 
@@ -32,6 +33,7 @@ export default defineEventHandler(async (event: H3Event) => {
     .forEach((c) => {
         feed.addItem({
             title: c.title,
+            description: toString(c.excerpt),
             link: `https://${config.public.domain}/book/${c.novel}/${c.index}`,
             date: new Date(c.updateDate),
             published: new Date(c.publishDate)
