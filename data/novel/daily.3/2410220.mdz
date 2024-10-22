@@ -4,6 +4,10 @@ abbrlink: a4e3e63
 date: 2024-10-22
 ---
 
+::excerpt
+  再也不用担心孩子的全局状态管理了。
+::
+
 ## 快速实现
 
 首先创建一个用来管理弹窗列表的 Store：
@@ -16,7 +20,7 @@ export interface ModelContext {
   component: VNode;
   zIndex: number;
   duration: number;
-  opening: Ref<boolean>;
+  isOpening: Ref<boolean>;
   close: () => any;
 }
 
@@ -78,18 +82,18 @@ function open() {
     component,
     zIndex,
     duration,
-    opening,
+    isOpening,
     close: (component.props ??= {}).onClose ??= close
   };
 
   dialog.value.push(ctx);
   nextTick(() => {
-    opening.value = true;
+    isOpening.value = true;
   });
 }
 
 async function close() {
-  opening.value = false;
+  isOpening.value = false;
   await promiseTimeout(duration);
 
   const i = indexOf();
