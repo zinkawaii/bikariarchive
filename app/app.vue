@@ -10,7 +10,7 @@
             { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" }
         ],
         meta: [
-            { name: "apple-mobile-web-app-capable", content: "yes" },
+            { name: "mobile-web-app-capable", content: "yes" },
             { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
             { name: "apple-mobile-web-app-title", content: config.public.title }
         ],
