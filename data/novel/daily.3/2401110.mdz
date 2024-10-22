@@ -49,7 +49,7 @@ const thumbTop = computed(() => {
   animation-timeline: scroll();
 }
 
-@keyframe scroll-animation {
+@keyframes scroll-animation {
   from {
     top: 0;
   }
