@@ -3,6 +3,9 @@
     const config = useRuntimeConfig();
     const image = useImage();
 
+    const dark = ref<boolean>();
+    const theme = ref<string>();
+
     useHead({
         link: [
             { rel: "icon", href: "/garden/favicon.ico" },
@@ -14,27 +17,26 @@
             { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
             { name: "apple-mobile-web-app-title", content: config.public.title }
         ],
-        titleTemplate: "%s %separator %siteName",
+        titleTemplate: "%s %separator %site.name",
         templateParams: {
             separator: "-"
+        },
+        htmlAttrs: {
+            theme,
+            "z-dark": dark
         }
     });
 
-    //夜间模式
-    settingStore.listen("dark-mode", () => {
-        document.documentElement.toggleAttribute("z-dark", settingStore.isDarkMode);
+    //主题颜色
+    settingStore.listen("theme", () => {
+        theme.value = settingStore.themeName;
     }, {
         viewTransition: true
     });
 
-    //主题颜色
-    settingStore.listen("theme", (value) => {
-        const theme = {
-            /* 初空 */ 0: "hatsusora",
-            /* 抹茶 */ 1: "ayame"
-        }[value] ||
-            /* 早樱 */ "sakura";
-        document.documentElement.setAttribute("theme", theme);
+    //夜间模式
+    settingStore.listen("dark-mode", () => {
+        dark.value = settingStore.isDarkMode;
     }, {
         viewTransition: true
     });

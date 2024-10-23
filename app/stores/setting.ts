@@ -22,6 +22,15 @@ export const useSettingStore = defineStore("setting", () => {
         unique: true
     });
 
+    //主题名称
+    const themeName = computed(() => {
+        return {
+            /* 初空 */ 0: "hatsusora",
+            /* 抹茶 */ 1: "ayame"
+        }[setting.value.theme] ||
+            /* 早樱 */ "sakura";
+    });
+
     //是否为夜间模式
     const isDarkMode = computed(() => ({
         1: false,
@@ -65,6 +74,7 @@ export const useSettingStore = defineStore("setting", () => {
         setting,
         open,
         close,
+        themeName,
         isDarkMode,
         get,
         set,

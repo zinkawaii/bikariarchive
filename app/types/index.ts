@@ -18,3 +18,10 @@ declare module "vue-router" {
         breadcrumb?: RouteLocationRaw;
     }
 }
+
+declare module "zhead" {
+    interface HtmlAttributes {
+        theme?: string;
+        "z-dark"?: boolean;
+    }
+}
