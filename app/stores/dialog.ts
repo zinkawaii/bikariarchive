@@ -4,7 +4,7 @@ interface DialogContext {
     component: VNode;
     zIndex: number;
     duration: number;
-    opening: Ref<boolean>;
+    isOpening: Ref<boolean>;
     close: () => any;
 }
 
@@ -30,7 +30,7 @@ export const useDialogStore = defineStore("dialog", () => {
          * 弹窗是否处于显示状态
          * 此变量用于在弹窗上下文被插入列表时单独地触发各自的 transition 动画，而不是由 transition-group 统一处理
          */
-        const opening = ref(false);
+        const isOpening = ref(false);
 
         //立即打开
         immediate && open();
@@ -46,18 +46,18 @@ export const useDialogStore = defineStore("dialog", () => {
                 component,
                 zIndex,
                 duration,
-                opening,
+                isOpening,
                 close: (component.props ??= {}).onClose ??= close
             };
 
             dialogs.value.push(ctx);
             nextTick(() => {
-                opening.value = true;
+                isOpening.value = true;
             });
         }
 
         async function close() {
-            opening.value = false;
+            isOpening.value = false;
             await Zin.delay(duration);
 
             const i = indexOf();

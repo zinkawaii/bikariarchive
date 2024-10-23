@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     defineProps<{
-        opening?: boolean;
+        isOpening?: boolean;
     }>();
     const emit = defineEmits<{
         close: [];
@@ -16,7 +16,7 @@
 
 <template>
     <transition-scale>
-        <div v-if="opening" class="mb-dialog">
+        <div v-if="isOpening" class="mb-dialog">
             <div class="dialog-wrapper">
                 <slot></slot>
             </div>

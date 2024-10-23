@@ -1,7 +1,7 @@
 import type { ContextMenuGroup, ContextMenuItem } from "~/types/context-menu";
 
 export const useContextMenuStore = defineStore("context-menu", () => {
-    const isOpened = ref(false);
+    const isOpening = ref(false);
     const baseGroups = ref<ContextMenuGroup[]>([]);
     const extraGroup = ref<ContextMenuGroup>(null);
 
@@ -32,15 +32,15 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     }
 
     function open() {
-        isOpened.value = true;
+        isOpening.value = true;
     }
 
     function close() {
-        isOpened.value = false;
+        isOpening.value = false;
     }
 
     return {
-        isOpened,
+        isOpening,
         groups,
         clear,
         base,

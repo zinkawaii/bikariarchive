@@ -3,7 +3,7 @@
 
     const props = defineProps<{
         target: HTMLImageElement;
-        opening?: boolean;
+        isOpening?: boolean;
     }>();
     const emit = defineEmits<{
         close: [];
@@ -145,7 +145,7 @@
 <template>
     <transition @enter="onEnter" @leave="onLeave">
         <nuxt-img
-            v-if="opening"
+            v-if="isOpening"
             ref="root"
             class="image-viewer"
             :src="target.src"

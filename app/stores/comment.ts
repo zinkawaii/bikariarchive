@@ -5,7 +5,7 @@ export const useCommentStore = defineStore("comment", () => {
     const comments = ref<WithParent<CommentData>[]>();
     const mainCount = ref(0);
     const totalCount = ref(0);
-    const [isEmpty, toggleEmpty] = useToggle(false);
+    const isEmpty = ref(false);
 
     const route = useRoute();
     const toastStore = useToastStore();
@@ -15,7 +15,7 @@ export const useCommentStore = defineStore("comment", () => {
         comments.value = [];
         mainCount.value = 0;
         totalCount.value = 0;
-        toggleEmpty(true);
+        isEmpty.value = true;
     }
 
     //更新评论
@@ -31,7 +31,7 @@ export const useCommentStore = defineStore("comment", () => {
         comments.value = processComments(res.list);
         mainCount.value = res.mainCount;
         totalCount.value = res.totalCount;
-        toggleEmpty(false);
+        isEmpty.value = false;
     }
 
     //发送评论

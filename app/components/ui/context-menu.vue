@@ -175,7 +175,7 @@
 
     //鼠标按下时
     useEventListener("mousedown", (event) => {
-        if (contextMenuStore.isOpened && !event.composedPath().includes(rootEl.value)) {
+        if (contextMenuStore.isOpening && !event.composedPath().includes(rootEl.value)) {
             contextMenuStore.close();
         }
     });
@@ -183,7 +183,7 @@
 
 <template>
     <transition-scale :duration="0.25">
-        <div v-show="contextMenuStore.isOpened" ref="root" class="content-widget z-context-menu">
+        <div v-show="contextMenuStore.isOpening" ref="root" class="content-widget z-context-menu">
             <menu class="menu-tools">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
                     <iconify :name="icon"/>
