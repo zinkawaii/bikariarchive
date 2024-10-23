@@ -44,7 +44,17 @@ export default new Processor({
         const volume = Number(match[2]);
         const name = basename(filename, ".mdz");
 
-        //解析内容
+        //简介转换
+        const firstChild = body.children[0];
+        if (firstChild?.type === "element" && firstChild?.tag === "excerpt") {
+            const node = firstChild.children[0];
+            if (node?.type === "element" && node?.tag === "p") {
+                attributes.excerpt = node.children;
+                body.children.splice(0, 1);
+            }
+        }
+
+        //字数统计
         let wordCount = 0;
         visit(body, "element", (node: Element) => {
             if (node.tag === "p") {
@@ -52,7 +62,7 @@ export default new Processor({
             }
         });
 
-        //加密内容
+        //内容加密
         const password = String(attributes.password || "") || void 0;
         const encrypted = Boolean(password) || void 0;
         delete attributes.password;
