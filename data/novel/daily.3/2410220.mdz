@@ -1,6 +1,8 @@
 ---
-title: 速通命令式 Model
+title: 速通命令式 Modal
 abbrlink: a4e3e63
+cover:
+  src: https://cdn.bikari.top/image/a4e3e63.webp
 date: 2024-10-22
 ---
 
@@ -16,7 +18,7 @@ date: 2024-10-22
 import { defineStore } from "pinia";
 import { type Raw, ref, type VNode } from "vue";
 
-export interface ModelContext {
+export interface ModalContext {
   component: VNode;
   zIndex: number;
   duration: number;
@@ -24,11 +26,11 @@ export interface ModelContext {
   close: () => any;
 }
 
-export const useModelStore = defineStore("model", () => {
-  const models = ref<Raw<ModelContext>[]>([]);
+export const useModalStore = defineStore("modal", () => {
+  const modals = ref<Raw<ModalContext>[]>([]);
 
   return {
-    models
+    modals
   };
 });
 ```
@@ -36,20 +38,20 @@ export const useModelStore = defineStore("model", () => {
 之后，向该 Store 中添加一个可组合项：
 
 ```ts
-export interface UseModelOptions {
+export interface UseModalOptions {
   duration?: number;
   immediate?: boolean;
   unique?: boolean;
 }
 
-function use(render: () => VNode, options: UseModelOptions = {}) {
+function use(render: () => VNode, options: UseModalOptions = {}) {
   const {
     duration = 400,
     immediate = false,
     unique = false
   } = options;
 
-  let ctx: ModelContext;
+  let ctx: ModalContext;
 }
 ```
 
@@ -98,12 +100,12 @@ async function close() {
 
   const i = indexOf();
   if (i !== -1) {
-    models.value.splice(i, 1);
+    modals.value.splice(i, 1);
   }
 }
 
 function indexOf() {
-  return models.value.indexOf(ctx);
+  return modals.value.indexOf(ctx);
 }
 ```
 
@@ -118,14 +120,14 @@ function indexOf() {
 ```vue
 <script lang="ts" setup>
   import { storeToRefs } from "pinia";
-  import { useModelStore } from "~/stores/model";
+  import { useModalStore } from "~/stores/modal";
 
-  const modelStore = useModelStore();
-  const { models } = storeToRefs(modelStore);
+  const modalStore = useModalStore();
+  const { modals } = storeToRefs(modalStore);
 </script>
 
 <template>
-  <template v-for="{ component, zIndex, isOpening } in models" :key="zIndex">
+  <template v-for="{ component, zIndex, isOpening } in modals" :key="zIndex">
     <component :is="component" :isOpening :style="{ zIndex }"/>
   </template>
 </template>
@@ -143,12 +145,12 @@ function indexOf() {
 import { defineStore } from "pinia";
 import { h } from "vue";
 import Setting from "~/components/setting.vue";
-import { useModelStore } from "~/stores/model";
+import { useModalStore } from "~/stores/modal";
 
 export const useSettingStore = defineStore("setting", () => {
-  const modelStore = useModelStore();
+  const modalStore = useModalStore();
 
-  const { open, close } = modelStore.use(() => h(Setting), {
+  const { open, close } = modalStore.use(() => h(Setting), {
     unique: true
   });
 
@@ -161,19 +163,18 @@ export const useSettingStore = defineStore("setting", () => {
 
 ### 临时弹窗
 
-创建一个 Util，在调用时立即召唤弹窗，之后就是具体的业务逻辑了：
+创建一个 Util，在调用时立即召唤弹窗，剩下的就是具体的业务逻辑了：
 
 ```ts
-import { defineStore } from "pinia";
 import { h } from "vue";
 import Confirm from "~/components/confirm.vue";
-import { useModelStore } from "~/stores/model";
+import { useModalStore } from "~/stores/modal";
 
 export function confirm(message: string) {
   return new Promise((resolve) => {
-    const modelStore = useModelStore();
+    const modalStore = useModalStore();
 
-    const { close } = modelStore.use(() => h(Confirm, {
+    const { close } = modalStore.use(() => h(Confirm, {
       message,
       onClose(val) {
         resolve(val);

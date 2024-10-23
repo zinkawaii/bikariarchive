@@ -2,7 +2,7 @@
 title: 基于滚动驱动动画的滚动条
 abbrlink: 057e1b0
 date: 2024-01-11
-updated: 2024-01-21
+updated: 2024-10-23
 ---
 
 目前 [scroll-driven animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations) 的浏览器兼容性不是很好，故编写一个 demo 暂存在这个页面。利用 JS 实现的滚动条要比原生消耗更多性能，在反复调试了一下午后还是选择再观望一阵子。
@@ -72,7 +72,7 @@ const thumbTop = computed(() => {
 import { useEventListener, useThrottleFn } from "vueuse/core";
 
 // 鼠标是否按下
-let isPressed = false;
+let isPressing = false;
 
 // 执行滚动前的窗口纵坐标
 let startY = 0;
@@ -84,13 +84,13 @@ const distanceRatio = computed(() => {
 
 // 在模板中绑定在滑块元素上，记得添加 prevent 修饰符
 function onMousedown(event) {
-  isPressed = true;
+  isPressing = true;
   startY = event.y;
 }
 
 // 务必使用节流函数
 useEventListener("mousemove", useThrottleFn((event) => {
-  if (isPressed) {
+  if (isPressing) {
     window.scrollBy({
       top: (event.y - startY) * distanceRatio.value
     });
@@ -99,7 +99,7 @@ useEventListener("mousemove", useThrottleFn((event) => {
 }, 16.6));
 
 useEventListener("mouseup", () => {
-  isPressed = false;
+  isPressing = false;
 });
 ```
 
