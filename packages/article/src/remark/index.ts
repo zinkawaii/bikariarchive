@@ -12,6 +12,7 @@ import attributes from "./plugins/attributes";
 import compiler from "./plugins/compiler";
 import emoji from "./plugins/emoji";
 import footnote from "./plugins/footnote";
+import interpolation from "./plugins/interpolation";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
@@ -45,6 +46,7 @@ export async function parseArticle<T>(text: string) {
         .use(mdc)
         .use(emoji)
         .use(footnote)
+        .use(interpolation)
         .use(ruby)
         .use(slug)
         .use(strikethrough)
@@ -69,6 +71,7 @@ export async function parseEntry<T>(text: string) {
         .use(attributes)
         .use(mdc)
         .use(emoji)
+        .use(interpolation)
         .use(ruby)
         .use(strikethrough)
         .use(rehype, rehypeOptions)
