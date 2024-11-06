@@ -81,7 +81,7 @@
         ogArticlePublished_time: art.publishDate,
         ogArticleModified_time: art.updateDate,
         description: () => post.value?.body.children
-            .filter((node) => node.tag === "p")
+            .filter((node) => node.type === "element" && node.tag === "p")
             .map((p) => toString(p))
             .join("")
             .slice(0, 128)

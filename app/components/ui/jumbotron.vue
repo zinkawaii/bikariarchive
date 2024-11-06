@@ -6,7 +6,7 @@
     const summaryDelay = 20;
     const { title, summary } = config.public.jumbotron;
     const titleChars = [...title];
-    const summaryChars = ref([]);
+    const summaryChars = ref<string[]>([]);
     const [isMotion, toggleMotion] = useToggle(true);
 
     //标题动效

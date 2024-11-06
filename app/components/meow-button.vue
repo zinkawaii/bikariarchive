@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-defineProps<{
-    icon: string;
-}>();
+    defineProps<{
+        icon: string;
+    }>();
 
-const code = ref("#???");
+    const code = ref("#???");
 
-onMounted(() => {
-    code.value = "#" + Zin.randInt(0, 255).toString().padStart(3, "0");
-});
+    onMounted(() => {
+        code.value = "#" + Zin.randInt(0, 255).toString().padStart(3, "0");
+    });
 </script>
 
 <template>

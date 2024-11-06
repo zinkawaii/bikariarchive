@@ -18,7 +18,7 @@
         }
     });
 
-    const { status, execute, data: res } = useLazyFetch("/api/user/login", {
+    const { status, execute, data } = useLazyFetch("/api/user/login", {
         method: "post",
         body: {
             account: nickname,
@@ -41,7 +41,7 @@
             return;
         }
 
-        const { error, uid, nickname, identity, sign } = res.value;
+        const { error, uid, nickname, identity, sign } = data.value;
         switch (error) {
             case 1: {
                 glitch("nickname", "账号不存在");

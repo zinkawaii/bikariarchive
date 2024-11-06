@@ -27,7 +27,7 @@
         }
     });
 
-    const { status, execute, data: res } = useLazyFetch("/api/user/password", {
+    const { status, execute, data } = useLazyFetch("/api/user/password", {
         method: "put",
         body: {
             old: oldVal,
@@ -50,7 +50,7 @@
             return;
         }
 
-        switch (res.value.error) {
+        switch (data.value.error) {
             case 1: {
                 toastStore.error(key, "找不到用户");
                 break;

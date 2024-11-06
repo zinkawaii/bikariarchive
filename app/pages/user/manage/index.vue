@@ -67,10 +67,10 @@
     }
 
     .manage-table {
-        min-width: 616px;
         background-color: var(--color-background-alpha);
         font-size: 14px;
         text-align: center;
+        text-wrap: nowrap;
 
         tr {
             &:where(.v-enter-active, .v-leave-active) {
