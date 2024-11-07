@@ -6,16 +6,6 @@ export const Zexp = {
     url: /^https?:\/\/(?:[-\w]+\.)+[-\w]+(?::\d+)?(?:\/.*)?$/
 };
 
-//首字母大写
-export function capitalize(str: string) {
-    return str[0].toUpperCase() + str.slice(1);
-}
-
-//获取字符串实际长度
-export function getByteLength(str: string) {
-    return str?.replace(/\u0391-\uFFE5/g, "__")?.length || 0;
-}
-
 //获取元素绝对位置
 export function getPosition(element: Element) {
     const rect = element.getBoundingClientRect();
