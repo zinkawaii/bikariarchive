@@ -125,6 +125,7 @@
         --azur-text-white: rgb(255 255 255);
         --azur-full-height: calc(100dvh - 64px);
 
+        contain: strict;
         container-type: size;
         overflow: hidden;
         height: var(--azur-full-height);
@@ -467,6 +468,7 @@
     }
 
     .azur-block-wrapper {
+        position: relative;
         container-type: size;
         text-wrap: nowrap;
 
@@ -534,6 +536,7 @@
     }
 
     .azur-center {
+        position: relative;
         container-type: size;
         flex: 1;
         margin-left: -32px;
