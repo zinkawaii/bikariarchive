@@ -1,8 +1,14 @@
 <script lang="ts" setup>
-    const lightUrl = useBackgroundImage(`/garden/background/bg_${
-        Zin.period === Zin.PERIOD_DAY ? "day" : "night"
-    }.webp`);
+    const settingStore = useSettingStore();
+
+    const lightUrl = ref("");
     const darkUrl = useBackgroundImage("/garden/background/bg_dark.webp");
+
+    settingStore.listen("theme", () => {
+        lightUrl.value = useBackgroundImage(`/garden/background/bg_${settingStore.themeName}.webp`);
+    }, {
+        viewTransition: true
+    });
 </script>
 
 <template>
