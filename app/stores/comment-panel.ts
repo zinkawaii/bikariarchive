@@ -58,6 +58,6 @@ export const useCommentPanelStore = defineStore("comment-panel", () => {
             "email",
             "address"
         ],
-        storage: persistedState.localStorage
+        storage: piniaPluginPersistedstate.localStorage()
     }
 });

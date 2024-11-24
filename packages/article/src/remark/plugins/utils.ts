@@ -2,7 +2,7 @@ import type * as hast from "hast";
 import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
 import type { Extension as MicromarkExtension } from "micromark-util-types";
 import type { Processor } from "unified";
-import type { Element, Root } from "../types";
+import type { Child, Root } from "../types";
 
 interface PushExtensionsOptions {
     micromark: MicromarkExtension[];
@@ -24,7 +24,7 @@ export function transformRoot(root: hast.Node) {
 }
 
 export function transformNodes(root: hast.Element) {
-    const children: Element["children"] = [];
+    const children: Child[] = [];
     for (const node of root.children) {
         if (node.type === "element") {
             children.push({

@@ -32,9 +32,8 @@ export default defineNuxtModule<FontSplitOptions>({
 
             if (!await pathExists(dirName)) {
                 fontSplit({
-                    FontPath: fontPath,
-                    destFold: dirName,
-                    chunkSize: 70 * 1024,
+                    input: fontPath,
+                    outDir: dirName,
                     previewImage: null,
                     testHTML: false,
                     reporter: false,

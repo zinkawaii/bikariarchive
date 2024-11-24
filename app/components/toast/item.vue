@@ -20,13 +20,13 @@
 </script>
 
 <template>
-    <div class="toast-item" @click="remove">
-        <div class="toast-content">
-            <iconify v-if="iconInfo" :name="iconInfo.name" size="20" :style="{ color: iconInfo.color }"/>
+    <li class="toast-item" @click="remove">
+        <p class="toast-content">
+            <iconify :name="iconInfo.name" size="20" :style="{ color: iconInfo.color }"/>
             <span>{{ message }}</span>
-        </div>
+        </p>
         <div class="toast-progress"></div>
-    </div>
+    </li>
 </template>
 
 <style lang="scss" scoped>

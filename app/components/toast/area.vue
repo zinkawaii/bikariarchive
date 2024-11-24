@@ -8,7 +8,7 @@
 
 <template>
     <div class="toast-area">
-        <transition-group>
+        <transition-group tag="ul">
             <toast-item
                 v-for="[key, { icon, message }] in toastList"
                 :key

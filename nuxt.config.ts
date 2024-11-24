@@ -73,12 +73,12 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
+        "pinia-plugin-persistedstate/nuxt",
         "@nuxt/fonts",
         "@nuxt/icon",
         "@nuxt/image",
         "@nuxtjs/seo",
         "@pinia/nuxt",
-        "@pinia-plugin-persistedstate/nuxt",
         "@vueuse/nuxt",
         "@zinkawaii/nuxt-gsap",
         "@zinkawaii/nuxt-shiki"
