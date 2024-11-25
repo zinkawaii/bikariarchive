@@ -4,7 +4,7 @@ import type { Setting, SettingBooleanField, SettingField } from "~/types/setting
 
 export const useSettingStore = defineStore("setting", () => {
     const setting = ref<Setting>({
-        theme: 2,
+        theme: 0,
         "dark-mode": 0,
         "sidebar-display": 0,
         interaction: true,
@@ -26,9 +26,9 @@ export const useSettingStore = defineStore("setting", () => {
     const themeName = computed(() => {
         return {
             /* 初空 */ 0: "hatsusora",
-            /* 抹茶 */ 1: "ayame"
-        }[setting.value.theme] ||
-            /* 早樱 */ "sakura";
+            /* 抹茶 */ 1: "ayame",
+            /* 早樱 */ 2: "sakura"
+        }[setting.value.theme];
     });
 
     //是否为夜间模式
