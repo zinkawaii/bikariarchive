@@ -43,7 +43,7 @@
         width: 128px;
         aspect-ratio: 1 / 1.414;
         border-radius: 12px;
-        background-color: var(--color-info-light-9);
+        background-color: var(--color-gray-900);
 
         @include viewport("sm") {
             width: 96px;

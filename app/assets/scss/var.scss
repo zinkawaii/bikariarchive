@@ -1,25 +1,28 @@
 :root {
-    --color-text-primary     : rgb(33 30 31); /* 文本色 - 主要 */
-    --color-text-regular     : rgb(66 60 62); /* 文本色 - 常规 */
-    --color-text-secondary   : rgb(99 90 93); /* 文本色 - 次要 */
-    --color-text-info        : rgb(148 148 148); /* 文本色 - 灰色 */
-    --color-text-disabled    : rgb(168 168 168); /* 文本色 - 禁用 */
+    --color-text-primary     : rgb(30 31 33); /* 文本色 - 主要 */
+    --color-text-regular     : rgb(60 62 66); /* 文本色 - 常规 */
+    --color-text-secondary   : rgb(90 93 99); /* 文本色 - 次要 */
+    --color-text-info        : var(--color-gray-100); /* 文本色 - 灰色 */
+    --color-text-disabled    : var(--color-gray-300); /* 文本色 - 禁用 */
     --color-link             : rgb(63 81 181); /* 超链接色 */
     --color-danger           : rgb(245 64 64); /* 危险色 */
     --color-success          : rgb(103 194 58); /* 安全色 */
     --color-warning          : rgb(230 162 60); /* 警告色 */
-    --color-info             : rgb(148 148 148);
-    --color-info-light-3     : rgb(170 170 170);
-    --color-info-light-5     : rgb(192 192 192);
-    --color-info-light-7     : rgb(214 214 214);
-    --color-info-light-8     : rgb(225 225 225);
-    --color-info-light-9     : rgb(236 236 236);
-    --color-info-dark-2      : rgb(112 112 112);
-    --color-border           : rgb(184 184 184);
-    --color-border-light     : rgb(200 200 200);
-    --color-border-lighter   : rgb(216 216 216);
-    --color-border-dark      : rgb(144 144 144);
-    --color-border-darker    : rgb(120 120 120);
+    --color-gray-50          : rgb(108 115 129);
+    --color-gray-100         : rgb(142 148 160);
+    --color-gray-200         : rgb(153 159 171);
+    --color-gray-300         : rgb(165 170 181);
+    --color-gray-400         : rgb(176 181 192);
+    --color-gray-500         : rgb(187 192 202);
+    --color-gray-600         : rgb(198 203 213);
+    --color-gray-700         : rgb(210 214 223);
+    --color-gray-800         : rgb(221 225 234);
+    --color-gray-900         : rgb(232 236 244);
+    --color-border           : var(--color-gray-400);
+    --color-border-light     : var(--color-gray-600);
+    --color-border-lighter   : var(--color-gray-700);
+    --color-border-dark      : var(--color-gray-100);
+    --color-border-darker    : var(--color-gray-50);
     --color-background       : rgb(248 248 248); /* 背景色 */
     --color-background-alpha : rgb(248 248 248 / 88%); /* 背景色 - 透明 */
     --color-selection-bg     : rgb(119 184 233 / 66%); /* 选区背景色 */
@@ -60,19 +63,16 @@
     --color-text-primary     : rgb(255 255 255 / 88%); /* 文本色 */
     --color-text-regular     : rgb(237 241 243 / 88%); /* 文本色 - 常规 */
     --color-text-secondary   : rgb(204 210 213 / 88%); /* 文本色 - 次要 */
-    --color-text-disabled    : rgb(130 130 130); /* 文本色 - 禁用 */
     --color-link             : rgb(88 160 255); /* 超链接色 */
-    --color-info-light-3     : rgb(124 124 124);
-    --color-info-light-5     : rgb(100 100 100);
-    --color-info-light-7     : rgb(76 76 76);
-    --color-info-light-8     : rgb(64 64 64);
-    --color-info-light-9     : rgb(52 52 52);
-    --color-info-dark-2      : rgb(184 184 184);
-    --color-border           : rgb(112 112 112);
-    --color-border-light     : rgb(96 96 96);
-    --color-border-lighter   : rgb(80 80 80);
-    --color-border-dark      : rgb(152 152 152);
-    --color-border-darker    : rgb(176 176 176);
+    --color-gray-50          : rgb(179 184 198);
+    --color-gray-200         : rgb(130 136 148);
+    --color-gray-300         : rgb(118 124 135);
+    --color-gray-400         : rgb(105 112 123);
+    --color-gray-500         : rgb(93 100 110);
+    --color-gray-600         : rgb(81 88 98);
+    --color-gray-700         : rgb(69 76 85);
+    --color-gray-800         : rgb(56 64 73);
+    --color-gray-900         : rgb(44 52 60);
     --color-background       : rgb(42 42 42); /* 背景色 */
     --color-background-alpha : rgb(42 42 42 / 84%); /* 背景色 - 透明 */
     --color-theme            : hwb(196deg 15% 25%);

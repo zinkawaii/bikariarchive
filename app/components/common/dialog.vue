@@ -62,9 +62,9 @@
         width: 1.5rem;
         aspect-ratio: 1;
         border-radius: var(--bounded-circle);
-        background-color: var(--color-info-light-8);
+        background-color: var(--color-gray-800);
         font-size: 1rem;
-        color: var(--color-text-disabled);
+        color: var(--color-gray-300);
         transition: all 0.4s;
         cursor: pointer;
 

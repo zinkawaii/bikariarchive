@@ -9,10 +9,18 @@
     const readRecordStore = useReadRecordStore();
     const { novel, infoType } = storeToRefs(shelfStore);
 
-    //最近阅读
-    const isLastRead = computed(() => {
-        return props.chapter.index === readRecordStore.get(novel.value)?.index;
-    });
+    const tags = [
+        {
+            name: "草稿",
+            color: "rgb(216 108 234)",
+            when: () => props.chapter.draft
+        },
+        {
+            name: "最近阅读",
+            color: "var(--color-warning)",
+            when: () => props.chapter.index === readRecordStore.get(novel.value)?.index
+        }
+    ];
 </script>
 
 <template>
@@ -20,8 +28,13 @@
         <span class="font-italic text-gray">{{ chapter.orderInVol + 1 }}.</span>
         <span class="text-truncate shech-title">{{ chapter.title }}</span>
         <ul class="shech-tags">
-            <li v-if="chapter.draft" tag="draft">草稿</li>
-            <li v-if="isLastRead" tag="last-read">最近阅读</li>
+            <template v-for="{ name, color, when } in tags">
+                <li
+                    v-if="toValue(when)"
+                    class="shech-tag"
+                    :style="`--color: ${color}`"
+                >{{ name }}</li>
+            </template>
         </ul>
         <span class="text-gray">{{
             infoType === 0 ? `${chapter.wordCount} 字` :
@@ -54,21 +67,13 @@
         gap: 0.5em;
         line-height: 1.5em;
         text-wrap: nowrap;
+    }
 
-        > li {
-            padding-inline: 7px;
-            border: 1px solid var(--color);
-            border-radius: 4px;
-            font-size: 13px;
-            color: var(--color);
-
-            &[tag="draft"] {
-                --color: rgb(232 84 232);
-            }
-
-            &[tag="last-read"] {
-                --color: var(--color-warning);
-            }
-        }
+    .shech-tag {
+        padding-inline: 7px;
+        border: 1px solid var(--color);
+        border-radius: 4px;
+        font-size: 13px;
+        color: var(--color);
     }
 </style>

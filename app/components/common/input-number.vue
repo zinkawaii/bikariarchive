@@ -121,7 +121,7 @@
         height: calc(100% - 2px);
         aspect-ratio: 1;
         border: 1px solid transparent;
-        background-color: var(--color-info-light-9);
+        background-color: var(--color-gray-900);
         color: var(--color-text-secondary);
         transition: color 0.25s;
 

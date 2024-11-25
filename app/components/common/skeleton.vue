@@ -20,7 +20,7 @@
         gap: 16px;
 
         &.is-animated .skeleton-item {
-            background-image: linear-gradient(to right, var(--color-info-light-5) 25%, var(--color-info-light-3) 37%, var(--color-info-light-5) 63%);
+            background-image: linear-gradient(to right, var(--color-gray-500) 25%, var(--color-gray-300) 37%, var(--color-gray-500) 63%);
             background-size: 400% 100%;
             animation: skeleton-loading 1.5s linear infinite;
         }
@@ -30,7 +30,7 @@
         opacity: 0.5;
         height: 16px;
         border-radius: 4px;
-        background-color: var(--color-info-light-5);
+        background-color: var(--color-gray-500);
 
         &:first-child {
             width: 33%;

@@ -327,7 +327,7 @@
         }
 
         &:hover {
-            background-color: var(--color-info-light-8);
+            background-color: var(--color-gray-800);
         }
     }
 

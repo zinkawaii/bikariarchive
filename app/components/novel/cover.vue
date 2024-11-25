@@ -52,7 +52,7 @@
             position: absolute;
             opacity: 0.33;
             inset: 0;
-            background-color: var(--color-info-light-5);
+            background-color: var(--color-gray-500);
             font-size: 48px;
             font-weight: bold;
         }

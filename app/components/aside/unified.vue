@@ -46,7 +46,7 @@
         color: var(--color-text);
 
         &:hover {
-            background-color: var(--color-info-light-5);
+            background-color: var(--color-gray-500);
             color: white;
         }
 

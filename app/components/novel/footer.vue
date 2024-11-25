@@ -36,7 +36,7 @@
         gap: 0.5em;
         font-size: 13px;
         line-height: 32px;
-        color: var(--color-info-light-3);
+        color: var(--color-gray-300);
 
         &::before, &::after {
             content: "";

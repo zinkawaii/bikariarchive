@@ -63,7 +63,7 @@ code {
     border: 1px solid var(--color-border);
     border-radius: 4px;
     box-decoration-break: clone;
-    background-color: color-mix(in srgb, var(--color-info-light-7), transparent 66%);
+    background-color: color-mix(in srgb, var(--color-gray-700), transparent 66%);
     font-family: var(--font-consolas);
     color: var(--color-theme-text);
 }
@@ -220,7 +220,7 @@ textarea {
 
 .tag {
     box-decoration-break: clone;
-    background-color: var(--color-info-light-7);
+    background-color: var(--color-gray-700);
     color: var(--color-text-secondary);
 
     &:is(a):hover {

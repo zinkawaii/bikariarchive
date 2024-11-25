@@ -85,7 +85,7 @@
         overflow: hidden;
         inset: 4px 0;
         border-radius: var(--bounded-full);
-        background-color: color-mix(in srgb, var(--color-info-light-5), transparent 50%);
+        background-color: color-mix(in srgb, var(--color-gray-500), transparent 50%);
     }
 
     .slider-rate {

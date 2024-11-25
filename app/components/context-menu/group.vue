@@ -49,7 +49,7 @@
         padding-inline: 0.5em;
         font-family: var(--font-code);
         font-size: 12px;
-        color: var(--color-info);
+        color: var(--color-gray-100);
         user-select: none;
     }
 

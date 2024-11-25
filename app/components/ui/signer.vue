@@ -136,7 +136,7 @@
         font-size: 12px;
         line-height: 1.5em;
         text-align: right;
-        color: var(--color-info-dark-2);
+        color: var(--color-gray-50);
 
         &:hover {
             color: var(--color-theme-text);

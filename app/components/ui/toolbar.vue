@@ -79,7 +79,7 @@
         pointer-events: auto;
 
         &:hover {
-            background-color: var(--color-info);
+            background-color: var(--color-gray-100);
         }
     }
 

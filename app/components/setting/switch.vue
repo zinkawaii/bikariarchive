@@ -49,7 +49,7 @@
     .switch-thumb {
         aspect-ratio: 1;
         border-radius: var(--bounded-full);
-        background-color: var(--color-info-light-5);
+        background-color: var(--color-gray-500);
         transition: all 0.25s;
 
         .is-checked > & {

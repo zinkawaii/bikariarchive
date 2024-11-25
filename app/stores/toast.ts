@@ -7,7 +7,7 @@ const iconInfos: Record<ToastType, ToastIconInfo> = {
     },
     info: {
         name: "ooui:info-filled",
-        color: "var(--color-info-light-3)"
+        color: "var(--color-gray-300)"
     },
     success: {
         name: "ooui:success",
