@@ -49,25 +49,40 @@ export const useSettingStore = defineStore("setting", () => {
         setting.value[key] = value ?? !setting.value[key];
     }
 
-    //监听
-    function listen<K extends SettingField>(key: K, handler: WatchCallback<Setting[K]>, options: WatchOptions & {
-        viewTransition?: boolean;
-    } = {}) {
-        watch(() => setting.value[key], (newVal, oldVal, onCleanup) => {
-            const fn = handler.bind(null, newVal, oldVal, onCleanup);
+    //事件映射
+    const mapping = new Map<string, {
+        trigger: () => any;
+        handlers: Set<WatchCallback>;
+    }>();
 
-            if (/* 首屏加载时不应用视图转换 */
-                oldVal !== void 0
-                && options?.viewTransition
-                && document.startViewTransition
-            ) {
-                document.startViewTransition(fn);
-            }
-            else fn();
-        }, {
-            immediate: import.meta.browser,
-            ...options
-        });
+    //监听
+    function listen<K extends SettingField>(key: K, handler: WatchCallback<Setting[K]>) {
+        const handlers = mapping.get(key)?.handlers ?? new Set();
+        handlers.add(handler);
+
+        if (!mapping.has(key)) {
+            const { trigger } = watchTriggerable(() => setting.value[key], (newVal, oldVal, onCleanup) => {
+                if (oldVal !== void 0) {
+                    document.startViewTransition?.(fn) ?? fn();
+                }
+                else fn();
+
+                function fn() {
+                    for (const handler of handlers) {
+                        handler(newVal, oldVal, onCleanup);
+                    }
+                }
+            });
+
+            mapping.set(key, {
+                trigger,
+                handlers
+            });
+        }
+
+        if (import.meta.browser) {
+            mapping.get(key).trigger();
+        }
     }
 
     return {

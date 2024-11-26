@@ -30,15 +30,11 @@
     //主题颜色
     settingStore.listen("theme", () => {
         theme.value = settingStore.themeName;
-    }, {
-        viewTransition: true
     });
 
     //夜间模式
     settingStore.listen("dark-mode", () => {
         dark.value = settingStore.isDarkMode;
-    }, {
-        viewTransition: true
     });
 
     onMounted(() => {

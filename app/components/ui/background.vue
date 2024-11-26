@@ -6,8 +6,6 @@
 
     settingStore.listen("theme", () => {
         lightUrl.value = useBackgroundImage(`/garden/background/bg_${settingStore.themeName}.webp`);
-    }, {
-        viewTransition: true
     });
 </script>
 
