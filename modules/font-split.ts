@@ -1,7 +1,7 @@
-import { resolve } from "node:path";
 import { fontSplit } from "cn-font-split";
 import { pathExists } from "fs-extra";
 import { defineNuxtModule, resolvePath } from "nuxt/kit";
+import { resolve } from "pathe";
 
 interface FontSplitOptions {
     fonts?: FontInfo[];

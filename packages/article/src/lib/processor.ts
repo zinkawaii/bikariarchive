@@ -1,9 +1,9 @@
-import { resolve } from "node:path";
 import { isDev, timer } from "@bikari/shared";
 import chokidar from "chokidar";
 import CryptoES from "crypto-es";
 import fs from "fs-extra";
 import { glob } from "glob";
+import { resolve } from "pathe";
 
 interface ProcessorOptions<T> {
     sign: string;

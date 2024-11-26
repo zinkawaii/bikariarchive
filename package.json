@@ -48,7 +48,7 @@
     "unist-util-visit": "^5.0.0",
     "uqr": "^0.1.2",
     "vue": "^3.5.13",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.9.2",
@@ -62,7 +62,7 @@
     "@nuxt/fonts": "^0.10.2",
     "@nuxt/icon": "^1.8.2",
     "@nuxt/image": "^1.8.1",
-    "@nuxtjs/seo": "2.0.0-rc.23",
+    "@nuxtjs/seo": "^2.0.2",
     "@pinia/nuxt": "^0.7.0",
     "@types/fs-extra": "^11.0.4",
     "@types/nodemailer": "^6.4.17",
@@ -91,6 +91,7 @@
     "nodemailer": "^6.9.16",
     "nuxt": "^3.14.1592",
     "nuxt-mongoose": "^1.0.6",
+    "pathe": "^1.1.2",
     "sass": "^1.81.0",
     "ssh2-sftp-client": "^11.0.0",
     "stylelint": "^16.10.0",

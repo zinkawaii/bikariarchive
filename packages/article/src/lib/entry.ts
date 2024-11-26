@@ -1,5 +1,5 @@
-import { basename } from "node:path";
 import fs from "fs-extra";
+import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import Processor from "./processor";
 import type { Child } from "../remark/types";

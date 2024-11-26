@@ -1,6 +1,6 @@
-import { basename } from "node:path";
 import chokidar from "chokidar";
 import fs from "fs-extra";
+import { basename } from "pathe";
 import { Article, enrichJArticle } from "~/utils/article";
 import { enrichJIntel, Entry } from "~/utils/entry";
 

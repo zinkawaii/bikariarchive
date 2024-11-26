@@ -1,4 +1,4 @@
-import { resolve } from "node:path";
+import { resolve } from "pathe";
 
 //从根目录合并路径
 export function r(path: string) {

@@ -1,8 +1,8 @@
-import { basename, resolve } from "node:path";
 import { isDev } from "@bikari/shared";
 import dayjs from "dayjs";
 import fs from "fs-extra";
 import { toString } from "mdast-util-to-string";
+import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle } from "../remark";
 import Processor from "./processor";
