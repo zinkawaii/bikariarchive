@@ -64,27 +64,27 @@
 
 <template>
     <div ref="root" class="mb-pagination">
-        <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === 1 }" @click="modelValue--">
+        <button class="pagina-arr" :class="{ [`is-disabled`]: modelValue === 1 }" @click="modelValue--">
             <iconify name="fa6-solid:chevron-left"/>
-        </a>
+        </button>
         <div class="pagina-list">
             <template v-for="i in pages">
-                <a
+                <button
                     v-if="Number.isFinite(i)"
                     class="pagina-item"
                     :class="{ active: modelValue === i }"
                     @click="selectPage(i)"
-                >{{ i }}</a>
-                <a
+                >{{ i }}</button>
+                <button
                     v-else
                     class="pagina-item"
                     @click="modelValue += i > 0 ? 2 : -2"
-                >...</a>
+                >...</button>
             </template>
         </div>
-        <a class="pagina-arr" :class="{ [`is-disabled`]: modelValue === totalPages }" @click="modelValue++">
+        <button class="pagina-arr" :class="{ [`is-disabled`]: modelValue === totalPages }" @click="modelValue++">
             <iconify name="fa6-solid:chevron-right"/>
-        </a>
+        </button>
     </div>
 </template>
 

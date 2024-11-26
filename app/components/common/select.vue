@@ -28,10 +28,8 @@
         @focus="toggleDrop(true)"
         @blur="toggleDrop(false)"
     >
-        <a class="select-wrapper">
-            <span>{{ title }}</span>
-            <iconify class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa6-solid:chevron-down"/>
-        </a>
+        <span class="select-title">{{ title }}</span>
+        <iconify class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa6-solid:chevron-down"/>
         <ul class="select-dropdown" :class="{ [`is-drop`]: isDrop }">
             <slot></slot>
         </ul>
@@ -41,14 +39,9 @@
 <style lang="scss" scoped>
     .mb-select {
         display: grid;
-        position: relative;
-        font-size: 14px;
-    }
-
-    .select-wrapper {
-        display: grid;
         grid-template-columns: 1fr auto;
         align-items: center;
+        position: relative;
         height: 2rem;
         padding-inline: 12px;
         border: 1px solid var(--color-border-light);
@@ -56,10 +49,19 @@
         outline: 2px solid transparent;
         outline-offset: -1px;
         background-color: var(--color-background);
+        font-size: 14px;
+        transition: all 0.25s;
+        cursor: pointer;
+
+        &:focus {
+            outline-color: var(--color-theme-dark);
+        }
+    }
+
+    .select-title {
         transition: all 0.25s;
 
         :focus > & {
-            outline-color: var(--color-theme-dark);
             color: var(--color-text-info);
         }
     }

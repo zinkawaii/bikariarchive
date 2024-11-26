@@ -17,13 +17,6 @@
         return parseComment(props.data.content);
     });
 
-    //用户信息弹窗
-    const { open } = dialogStore.use(() => h(CommentUser, {
-        avatar: props.data.avatar,
-        nickname: props.data.nickname,
-        address: props.data.address
-    }));
-
     //相对时间
     const elapsed = computed(() => {
         const date = dayjs(props.data.time);
@@ -32,10 +25,16 @@
             : date.fromNow();
     });
 
-    //被回复者
-    const recipient = computed(() => {
-        return props.data.parent?.nickname;
-    });
+    //查看用户信息
+    function openUserInfo(data: CommentData) {
+        dialogStore.use(() => h(CommentUser, {
+            avatar: data.avatar,
+            nickname: data.nickname,
+            address: data.address
+        }), {
+            immediate: true
+        });
+    }
 
     //回复评论
     function replyComment() {
@@ -66,13 +65,13 @@
 
 <template>
     <section class="comment-item">
-        <user-avatar class="comment-avatar" :src="data.avatar" @click="open"/>
+        <user-avatar class="comment-avatar" :src="data.avatar" @click="openUserInfo(data)"/>
         <div class="comment-main">
             <div class="comment-header">
-                <a class="comment-nickname" @click="open">{{ data.nickname }}</a>
+                <button class="comment-nickname" @click="openUserInfo(data)">{{ data.nickname }}</button>
                 <template v-if="data.parent?.parent">
                     <iconify class="text-gray" name="vaadin:chat"/>
-                    <a class="comment-nickname">{{ recipient }}</a>
+                    <button class="comment-nickname" @click="openUserInfo(data.parent)">{{ data.parent.nickname }}</button>
                 </template>
             </div>
             <novel-article class="comment-text" :body>
@@ -80,19 +79,19 @@
             </novel-article>
             <div class="comment-info">
                 <time>{{ elapsed }}</time>
-                <a class="comment-action" @click="replyComment">
+                <button class="comment-action" @click="replyComment">
                     <iconify name="fa6-solid:comment-dots"/>
                     <span>回复</span>
-                </a>
+                </button>
                 <template v-if="userStore.identity >= 9">
-                    <a class="comment-action" @click="modifyComment">
+                    <button class="comment-action" @click="modifyComment">
                         <iconify name="fa6-solid:pen-to-square"/>
                         <span>修改</span>
-                    </a>
-                    <a class="comment-action" @click="removeComment">
+                    </button>
+                    <button class="comment-action" @click="removeComment">
                         <iconify name="fa6-solid:trash-can"/>
                         <span>删除</span>
-                    </a>
+                    </button>
                 </template>
             </div>
         </div>

@@ -28,12 +28,12 @@
     <meow-widget title="更新日志">
         <div class="update-years">
             <div v-if="currentYearIdx !== -1" class="update-thumb" :style="{ translate: `${currentYearIdx * 88}px` }"></div>
-            <a
+            <button
                 v-for="year in totalYears"
                 class="update-year"
                 :class="{ [`is-checked`]: totalYears[currentYearIdx] === year }"
                 @click="currentYear = year"
-            >{{ year }}</a>
+            >{{ year }}</button>
         </div>
         <mb-skeleton v-if="status === `pending`" class="update-skeleton"/>
         <ul v-else class="update-list">

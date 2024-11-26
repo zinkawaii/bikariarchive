@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import { NuxtLink } from "#components";
+
     const route = useRoute();
     const router = useRouter();
     const word = ref("");
@@ -101,15 +103,15 @@
             </nuxt-link>
         </div>
         <nav class="header-nav">
-            <a class="nav-expand">
+            <button class="nav-expand">
                 <iconify name="tabler:menu-deep"/>
-            </a>
+            </button>
             <div class="nav-list">
                 <mb-popper v-for="{ title, icon, to, children } in navs">
-                    <nuxt-link class="nav-link" :to>
+                    <component :is="to ? NuxtLink : `button`" class="nav-link" :to>
                         <iconify :name="icon"/>
                         <span>{{ title }}</span>
-                    </nuxt-link>
+                    </component>
                     <template v-if="children?.length" #floating>
                         <nuxt-link v-for="child in children" class="nav-pop" :to="child.to">
                             <iconify :name="child.icon"/>

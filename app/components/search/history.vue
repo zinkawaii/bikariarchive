@@ -28,7 +28,9 @@
     <div class="search-history">
         <div class="history-title">
             <span>历史词条</span>
-            <a @click="clear"><iconify name="fa6-solid:trash-can"/></a>
+            <button @click="clear">
+                <iconify name="fa6-solid:trash-can"/>
+            </button>
         </div>
         <client-only>
             <ul v-if="history.length" class="history-list">

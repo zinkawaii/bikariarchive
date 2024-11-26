@@ -177,22 +177,22 @@
             <div class="calendar-header">
                 <span class="calendar-month">{{ currentMonth + 1 }}° {{ monthMap[currentMonth][0] }}</span>
                 <span class="text-primary">「{{ monthMap[currentMonth][1] }}」</span>
-                <a
+                <button
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isFirstMonth }"
                     @click="toLastMonth"
-                ><iconify name="fa6-solid:chevron-left"/></a>
-                <a
+                ><iconify name="fa6-solid:chevron-left"/></button>
+                <button
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isLastMonth }"
                     @click="toNextMonth"
-                ><iconify name="fa6-solid:chevron-right"/></a>
+                ><iconify name="fa6-solid:chevron-right"/></button>
             </div>
             <ul class="calendar-week">
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
             </ul>
             <div class="calendar-days">
-                <a
+                <button
                     v-for="date in currentDates"
                     class="calendar-day"
                     :class="{
@@ -204,7 +204,7 @@
                 >
                     <span class="solar">{{ date.solar }}</span>
                     <span class="lunar">{{ date.lunar }}</span>
-                </a>
+                </button>
             </div>
         </div>
         <div class="calendar-detail">
@@ -296,8 +296,7 @@
     }
 
     .calendar-day {
-        display: flex;
-        flex-direction: column;
+        display: grid;
         position: relative;
         width: 46px;
         padding: 4px;

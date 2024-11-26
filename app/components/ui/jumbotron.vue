@@ -47,9 +47,9 @@
                 <template v-else>{{ summary }}</template>
             </h2>
         </div>
-        <a class="jumbo-hide" @click="toBottom">
+        <button class="jumbo-hide" @click="toBottom">
             <iconify name="fa6-solid:chevron-down"/>
-        </a>
+        </button>
     </div>
 </template>
 

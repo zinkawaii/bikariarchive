@@ -33,14 +33,14 @@
             </nuxt-link>
         </mb-popper>
         <mb-popper direction="left" plaintext="设置">
-            <a class="tool-item" @click="settingStore.open()">
+            <button class="tool-item" @click="settingStore.open()">
                 <iconify name="fa6-solid:gear"/>
-            </a>
+            </button>
         </mb-popper>
         <mb-popper direction="left" plaintext="用户">
-            <a class="tool-item" @click="signerStore.open()">
+            <button class="tool-item" @click="signerStore.open()">
                 <iconify name="fa6-solid:user"/>
-            </a>
+            </button>
         </mb-popper>
         <mb-popper direction="left" plaintext="回到顶部">
             <a class="tool-item" href="#">
@@ -48,10 +48,10 @@
                 <iconify class="tool-arrow-top" name="fa6-solid:arrow-up"/>
             </a>
         </mb-popper>
-        <mb-popper direction="left" plaintext="收起">
-            <a class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
+        <mb-popper direction="left" :plaintext="collapse ? `展开` : `收起`">
+            <button class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
                 <iconify :name="`fa6-solid:chevron-${collapse ? `left` : `right`}`"/>
-            </a>
+            </button>
         </mb-popper>
     </div>
 </template>
