@@ -298,7 +298,7 @@ textarea {
     line-height: 2em;
 }
 
-:where(.intro-synopsis, .novel-text, .entry-article) p {
+:where(.novel-text, .entry-article) p {
     text-indent: 2em;
 }
 

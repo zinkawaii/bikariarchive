@@ -24,7 +24,7 @@ export default new Processor({
     map: {
         out: "dist/json/Intmap.json"
     },
-    async parse(filename) {
+    async parse(kind, filename) {
         //处理文件
         const file = await fs.readFile(filename);
         const attributes = await parseEntry<JEntry>(file.toString());
@@ -45,13 +45,13 @@ export default new Processor({
             folder
         };
     },
-    unlink(cache) {
+    unlink(kind, cache) {
         const { name } = cache;
 
         delete this.jMeta.all[name];
         delete this.jMap[name];
     },
-    onCacheHit(cache) {
+    onCacheHit(kind, cache) {
         const { name, folder } = cache;
 
         this.jMeta.all[name] = true;

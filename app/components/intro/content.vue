@@ -2,21 +2,14 @@
     const props = defineProps<{
         novel: string;
     }>();
-
-    //简介
-    const synopsis = computed(() => {
-        return Article.meta[props.novel].synopsis.split("\n");
-    });
 </script>
 
 <template>
     <div class="intro-content">
-        <ul class="intro-tags">
+        <ul class="edge-fades-x intro-tags">
             <li v-for="tag in Article.meta[novel].tag" class="intro-tag">{{ tag }}</li>
         </ul>
-        <div class="intro-synopsis">
-            <p v-for="line in synopsis" class="p-small">{{ line }}</p>
-        </div>
+        <novel-article class="intro-synopsis" :body="Article.meta[props.novel].synopsis"/>
     </div>
 </template>
 
@@ -49,5 +42,9 @@
 
     .intro-synopsis {
         overflow: auto;
+
+        :deep(p) {
+            line-height: 24px;
+        }
     }
 </style>

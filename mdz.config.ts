@@ -2,10 +2,10 @@ export default {
     baseDir: "./data",
     mappings: [
         {
-            dirs: [
-                "./area",
-                "./character",
-                "./concept"
+            patterns: [
+                "./area/*",
+                "./character/*",
+                "./concept/*"
             ],
             import: [
                 "@bikari/article",
@@ -13,8 +13,17 @@ export default {
             ]
         },
         {
-            dirs: [
-                "./novel"
+            patterns: [
+                "./novel/*"
+            ],
+            import: [
+                "@bikari/article",
+                "NovelFrontmatter"
+            ]
+        },
+        {
+            patterns: [
+                "./novel/*/*"
             ],
             import: [
                 "@bikari/article",

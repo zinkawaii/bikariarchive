@@ -16,7 +16,7 @@ export default new Processor({
         ],
         ext: ".mdz"
     },
-    async parse(filename) {
+    async parse(kind, filename) {
         //处理文件
         const file = await fs.readFile(filename);
         const body = await parseUpdate(file.toString());

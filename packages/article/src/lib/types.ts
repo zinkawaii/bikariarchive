@@ -6,12 +6,14 @@ export interface JArticle<T> {
     [novel: string]: JNovel<T>;
 }
 
+export type NovelFrontmatter = Omit<JNovel<JChapter>, "chapters">;
+
 export interface JNovel<T> {
     author: string;
     title: string;
     type: NovelType;
     tag: string[];
-    synopsis: string;
+    synopsis: Child[];
     cover?: string;
     volumes: JVolume[];
     chapters: T[];

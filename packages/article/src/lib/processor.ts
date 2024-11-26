@@ -5,7 +5,7 @@ import fs from "fs-extra";
 import { glob } from "glob";
 import { resolve } from "pathe";
 
-interface ProcessorOptions<T> {
+interface ProcessorOptions<T, K> {
     sign: string;
     source: {
         base: string;
@@ -20,15 +20,16 @@ interface ProcessorOptions<T> {
     map?: {
         out: string;
     };
-    parse: (this: T, filename: string) => Promise<any>;
-    unlink?: (this: T, cache: any) => void;
-    onCacheHit?: (this: T, cache: any) => void;
+    resolveSourceKind?: (filename: string) => K;
+    parse: (this: T, kind: K, filename: string) => Promise<any>;
+    unlink?: (this: T, kind: K, cache: any) => void;
+    onCacheHit?: (this: T, kind: K, cache: any) => void;
     onMetaUpdate?: (this: T, newVal: any, oldVal: any) => any;
     beforeBuild?: (this: T) => void;
     beforeOutputMeta?: (this: T) => any;
 }
 
-export default class Processor {
+export default class Processor<K = number> {
     jCache: Record<string, any>;
     jMeta: any;
     jMap: Record<string, any>;
@@ -44,7 +45,7 @@ export default class Processor {
     sourceGlob: string[];
 
     constructor(
-        public options: ProcessorOptions<Processor>
+        private options: ProcessorOptions<Processor, K>
     ) {
         this.cacheDir = resolve("dist/cache", `${this.options.sign}.json`);
         this.jCache = fs.existsSync(this.cacheDir) && fs.readJSONSync(this.cacheDir) || {};
@@ -76,14 +77,27 @@ export default class Processor {
             this.options.beforeBuild?.call(this);
 
             //顺序处理源文件
-            const filelist = await glob(this.sourceGlob, {
+            const paths = await glob(this.sourceGlob, {
                 windowsPathsNoEscape: true
             });
-            filelist.sort((a, b) => a.localeCompare(b));
+            paths.sort((a, b) => a.localeCompare(b));
 
-            await Promise.all(
-                filelist.map((filename) => this.parse(filename))
-            );
+            //对源文件进行分类
+            const sources = new Map<K, string[]>();
+            for (const path of paths) {
+                const filename = path.replaceAll("\\", "/");
+                const kind = this.options.resolveSourceKind?.(filename);
+                if (!sources.has(kind)) {
+                    sources.set(kind, []);
+                }
+                sources.get(kind).push(filename);
+            }
+
+            for (const [kind, names] of sources) {
+                await Promise.all(
+                    names.map((name) => this.parse(kind, name))
+                );
+            }
 
             //输出元数据文件
             this.outputMeta();
@@ -96,17 +110,20 @@ export default class Processor {
         chokidar.watch(this.sourceFolders, {
             ignoreInitial: true
         })
-        .on("all", timer(this.options.sign, async (event: string, filename: string) => {
+        .on("all", timer(this.options.sign, async (event: string, path: string) => {
+            const filename = path.replaceAll("\\", "/");
+            const kind = this.options.resolveSourceKind?.(filename);
+
             if (!filename.endsWith(this.options.source.ext)) {
                 return false;
             }
-            if (event === "change" && !await this.parse(filename)) {
+            if (event === "change" && !await this.parse(kind, filename)) {
                 return false;
             }
-            else if (event === "add" && !await this.add(filename)) {
+            else if (event === "add" && !await this.add(kind, filename)) {
                 return false;
             }
-            else if (event === "unlink" && !await this.unlink(filename)) {
+            else if (event === "unlink" && !await this.unlink(kind, filename)) {
                 return false;
             }
             this.outputMeta();
@@ -124,7 +141,7 @@ export default class Processor {
         }
     }
 
-    async parse(filename: string) {
+    async parse(kind: K, filename: string) {
         const stats = fs.statSync(filename);
         const hash = resolveHash(stats.size.toString());
 
@@ -132,7 +149,7 @@ export default class Processor {
 
         //当在开发环境下命中缓存时
         if (isDev && cache?.hash === hash) {
-            await this.options.onCacheHit?.call(this, cache);
+            await this.options.onCacheHit?.call(this, kind, cache);
             return false;
         }
 
@@ -140,7 +157,7 @@ export default class Processor {
         cache = { hash };
 
         //开始解析
-        const data = await this.options.parse.call(this, filename);
+        const data = await this.options.parse.call(this, kind, filename);
 
         if (data !== null) {
             cache = {
@@ -148,17 +165,17 @@ export default class Processor {
                 ...data ?? {}
             };
             //执行一次命中缓存的逻辑
-            await this.options.onCacheHit?.call(this, cache);
+            await this.options.onCacheHit?.call(this, kind, cache);
             this.jCache[filename] = cache;
         }
         else {
             //显式返回空值时清理数据
-            this.unlink(filename);
+            this.unlink(kind, filename);
         }
         return true;
     }
 
-    async add(filename: string) {
+    async add(kind: K, filename: string) {
         const cache = this.jCache[filename];
 
         //缓存存在时无需更新
@@ -167,10 +184,10 @@ export default class Processor {
         }
 
         //开始解析
-        return await this.parse(filename);
+        return await this.parse(kind, filename);
     }
 
-    async unlink(filename: string) {
+    async unlink(kind: K, filename: string) {
         const cache = this.jCache[filename];
 
         //缓存不存在时无需更新
@@ -179,7 +196,7 @@ export default class Processor {
         }
 
         //执行自定义清理逻辑
-        this.options.unlink?.call(this, cache);
+        this.options.unlink?.call(this, kind, cache);
 
         //清空缓存
         this.jCache[filename] = null;
