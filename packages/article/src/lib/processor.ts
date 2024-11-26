@@ -142,7 +142,7 @@ export default class Processor<K = number> {
 
     async parse(kind: K, path: string) {
         const stats = fs.statSync(path);
-        const hash = resolveHash(stats.size.toString());
+        const hash = CryptoES.MD5(stats.size.toString()).toString();
 
         let cache = this.jCache[path];
 
@@ -221,14 +221,4 @@ export default class Processor<K = number> {
         const outPath = path.replace(this.sourceBase, this.sourceDist).replace(this.options.source.ext, ".json");
         await fs.outputJson(outPath, data);
     }
-}
-
-//从构建时间戳生成盐
-declare const __TIME__: string;
-const salt = CryptoES.MD5(__TIME__);
-
-//合成大哈希
-function resolveHash(text: string) {
-    const hash = CryptoES.MD5(text + salt).toString();
-    return hash;
 }

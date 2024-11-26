@@ -52,9 +52,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.9.2",
-    "@bikari/article": "workspace:^",
-    "@bikari/excalc": "workspace:^",
-    "@bikari/shared": "workspace:^",
     "@iconify-json/fa6-solid": "^1.2.2",
     "@inquirer/prompts": "^7.1.0",
     "@kikiutils/nuxt-session": "^3.1.3",

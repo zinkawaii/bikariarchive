@@ -1,4 +1,5 @@
 import vue from "@vitejs/plugin-vue";
+import { resolve } from "pathe";
 import robotsConfig from "./app/robots.config";
 import { clientConfig, serverConfig } from "./app/runtime.config";
 import sitemapConfig from "./app/sitemap.config";
@@ -8,6 +9,11 @@ export default defineNuxtConfig({
         rootAttrs: {
             id: "z-root"
         }
+    },
+    alias: {
+        "@bikari/article": resolve(__dirname, "./packages/article/src"),
+        "@bikari/excalc": resolve(__dirname, "./packages/excalc"),
+        "@bikari/shared": resolve(__dirname, "./packages/shared/src")
     },
     css: [
         "~/assets/scss/var.scss",
