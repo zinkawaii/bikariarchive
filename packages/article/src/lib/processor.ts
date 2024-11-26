@@ -2,8 +2,8 @@ import { isDev, timer } from "@bikari/shared";
 import chokidar from "chokidar";
 import CryptoES from "crypto-es";
 import fs from "fs-extra";
-import { glob } from "glob";
 import { resolve } from "pathe";
+import { glob } from "tinyglobby";
 
 interface ProcessorOptions<T, K> {
     sign: string;
@@ -20,8 +20,8 @@ interface ProcessorOptions<T, K> {
     map?: {
         out: string;
     };
-    resolveSourceKind?: (filename: string) => K;
-    parse: (this: T, kind: K, filename: string) => Promise<any>;
+    resolveSourceKind?: (path: string) => K;
+    parse: (this: T, kind: K, path: string) => Promise<any>;
     unlink?: (this: T, kind: K, cache: any) => void;
     onCacheHit?: (this: T, kind: K, cache: any) => void;
     onMetaUpdate?: (this: T, newVal: any, oldVal: any) => any;
@@ -78,19 +78,18 @@ export default class Processor<K = number> {
 
             //顺序处理源文件
             const paths = await glob(this.sourceGlob, {
-                windowsPathsNoEscape: true
+                absolute: true
             });
             paths.sort((a, b) => a.localeCompare(b));
 
             //对源文件进行分类
             const sources = new Map<K, string[]>();
             for (const path of paths) {
-                const filename = path.replaceAll("\\", "/");
-                const kind = this.options.resolveSourceKind?.(filename);
+                const kind = this.options.resolveSourceKind?.(path);
                 if (!sources.has(kind)) {
                     sources.set(kind, []);
                 }
-                sources.get(kind).push(filename);
+                sources.get(kind).push(path);
             }
 
             for (const [kind, names] of sources) {
@@ -110,20 +109,20 @@ export default class Processor<K = number> {
         chokidar.watch(this.sourceFolders, {
             ignoreInitial: true
         })
-        .on("all", timer(this.options.sign, async (event: string, path: string) => {
-            const filename = path.replaceAll("\\", "/");
-            const kind = this.options.resolveSourceKind?.(filename);
+        .on("all", timer(this.options.sign, async (event: string, filename: string) => {
+            const path = filename.replaceAll("\\", "/");
+            const kind = this.options.resolveSourceKind?.(path);
 
-            if (!filename.endsWith(this.options.source.ext)) {
+            if (!path.endsWith(this.options.source.ext)) {
                 return false;
             }
-            if (event === "change" && !await this.parse(kind, filename)) {
+            if (event === "change" && !await this.parse(kind, path)) {
                 return false;
             }
-            else if (event === "add" && !await this.add(kind, filename)) {
+            else if (event === "add" && !await this.add(kind, path)) {
                 return false;
             }
-            else if (event === "unlink" && !await this.unlink(kind, filename)) {
+            else if (event === "unlink" && !await this.unlink(kind, path)) {
                 return false;
             }
             this.outputMeta();
@@ -141,11 +140,11 @@ export default class Processor<K = number> {
         }
     }
 
-    async parse(kind: K, filename: string) {
-        const stats = fs.statSync(filename);
+    async parse(kind: K, path: string) {
+        const stats = fs.statSync(path);
         const hash = resolveHash(stats.size.toString());
 
-        let cache = this.jCache[filename];
+        let cache = this.jCache[path];
 
         //当在开发环境下命中缓存时
         if (isDev && cache?.hash === hash) {
@@ -157,7 +156,7 @@ export default class Processor<K = number> {
         cache = { hash };
 
         //开始解析
-        const data = await this.options.parse.call(this, kind, filename);
+        const data = await this.options.parse.call(this, kind, path);
 
         if (data !== null) {
             cache = {
@@ -166,17 +165,17 @@ export default class Processor<K = number> {
             };
             //执行一次命中缓存的逻辑
             await this.options.onCacheHit?.call(this, kind, cache);
-            this.jCache[filename] = cache;
+            this.jCache[path] = cache;
         }
         else {
             //显式返回空值时清理数据
-            this.unlink(kind, filename);
+            this.unlink(kind, path);
         }
         return true;
     }
 
-    async add(kind: K, filename: string) {
-        const cache = this.jCache[filename];
+    async add(kind: K, path: string) {
+        const cache = this.jCache[path];
 
         //缓存存在时无需更新
         if (cache) {
@@ -184,11 +183,11 @@ export default class Processor<K = number> {
         }
 
         //开始解析
-        return await this.parse(kind, filename);
+        return await this.parse(kind, path);
     }
 
-    async unlink(kind: K, filename: string) {
-        const cache = this.jCache[filename];
+    async unlink(kind: K, path: string) {
+        const cache = this.jCache[path];
 
         //缓存不存在时无需更新
         if (!cache) {
@@ -199,7 +198,7 @@ export default class Processor<K = number> {
         this.options.unlink?.call(this, kind, cache);
 
         //清空缓存
-        this.jCache[filename] = null;
+        this.jCache[path] = null;
         return true;
     }
 
@@ -218,9 +217,9 @@ export default class Processor<K = number> {
         }
     }
 
-    async outputJson(filename: string, data: unknown) {
-        const path = filename.replace(this.sourceBase, this.sourceDist).replace(this.options.source.ext, ".json");
-        await fs.outputJson(path, data);
+    async outputJson(path: string, data: unknown) {
+        const outPath = path.replace(this.sourceBase, this.sourceDist).replace(this.options.source.ext, ".json");
+        await fs.outputJson(outPath, data);
     }
 }
 

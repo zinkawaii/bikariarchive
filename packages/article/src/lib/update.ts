@@ -16,9 +16,9 @@ export default new Processor({
         ],
         ext: ".mdz"
     },
-    async parse(kind, filename) {
+    async parse(kind, path) {
         //处理文件
-        const file = await fs.readFile(filename);
+        const file = await fs.readFile(path);
         const body = await parseUpdate(file.toString());
 
         const updates: JUpdate[] = [];
@@ -74,6 +74,6 @@ export default new Processor({
         }
 
         //写入文件
-        await this.outputJson(filename, updates);
+        await this.outputJson(path, updates);
     }
 });

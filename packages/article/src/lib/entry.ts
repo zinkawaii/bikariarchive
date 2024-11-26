@@ -24,20 +24,20 @@ export default new Processor({
     map: {
         out: "dist/json/Intmap.json"
     },
-    async parse(kind, filename) {
+    async parse(kind, path) {
         //处理文件
-        const file = await fs.readFile(filename);
+        const file = await fs.readFile(path);
         const attributes = await parseEntry<JEntry>(file.toString());
 
         //转换数据
         transformDetails(attributes);
 
         //写入文件
-        await this.outputJson(filename, attributes);
+        await this.outputJson(path, attributes);
 
         //写入数据
-        const name = basename(filename, ".mdz");
-        const folder = basename(this.sourceFolders.find((dir) => filename.startsWith(dir)));
+        const name = basename(path, ".mdz");
+        const folder = basename(this.sourceFolders.find((dir) => path.startsWith(dir)));
 
         //写入缓存
         return {

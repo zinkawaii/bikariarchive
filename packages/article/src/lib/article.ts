@@ -32,15 +32,15 @@ export default new Processor({
     map: {
         out: "dist/json/Artmap.json"
     },
-    resolveSourceKind(filename) {
-        return filename.split("/").at(-2) === "novel" ? SourceKind.Meta : SourceKind.Article;
+    resolveSourceKind(path) {
+        return path.split("/").at(-2) === "novel" ? SourceKind.Meta : SourceKind.Article;
     },
-    parse(kind, filename) {
+    parse(kind, path) {
         switch (kind) {
             case SourceKind.Meta:
-                return processMeta(filename);
+                return processMeta(path);
             case SourceKind.Article:
-                return processArticle(this, filename);
+                return processArticle(this, path);
         }
     },
     unlink(kind, cache) {
@@ -100,11 +100,11 @@ export default new Processor({
     }
 });
 
-async function processMeta(filename: string) {
+async function processMeta(path: string) {
     //处理文件
-    const file = await fs.readFile(filename);
+    const file = await fs.readFile(path);
     const attributes = await parseEntry<NovelFrontmatter>(file.toString());
-    const novel = basename(filename, ".mdz").split("-")[1];
+    const novel = basename(path, ".mdz").split("-")[1];
 
     //写入缓存
     return {
@@ -113,9 +113,9 @@ async function processMeta(filename: string) {
     };
 }
 
-async function processArticle(processor: Processor, filename: string) {
+async function processArticle(processor: Processor, path: string) {
     //处理文件
-    const file = await fs.readFile(filename);
+    const file = await fs.readFile(path);
     const { attributes, body } = await parseArticle<ArticleFrontmatter>(file.toString());
 
     //生产环境下忽略草稿文件
@@ -124,10 +124,10 @@ async function processArticle(processor: Processor, filename: string) {
     }
 
     //解析文件名
-    const match = basename(resolve(filename, "..")).match(PATH_REGEX);
+    const match = basename(resolve(path, "..")).match(PATH_REGEX);
     const novel = match[1];
     const volume = Number(match[2]);
-    const name = basename(filename, ".mdz");
+    const name = basename(path, ".mdz");
 
     //简介转换
     const firstChild = body.children[0];
@@ -177,7 +177,7 @@ async function processArticle(processor: Processor, filename: string) {
     }
 
     //写入文件
-    await processor.outputJson(filename, body);
+    await processor.outputJson(path, body);
 
     //写入数据
     const data = {
