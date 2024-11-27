@@ -1,15 +1,15 @@
 {
   "name": "@bikari/excalc",
   "type": "module",
-  "scripts": {
-    "build": "asc src/index.ts --target release"
+  "exports": {
+    ".": {
+      "types": "./dist/excalc.d.ts",
+      "import": "./dist/excalc.js"
+    }
   },
   "main": "./dist/excalc.js",
   "types": "./dist/excalc.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/excalc.js",
-      "types": "./dist/excalc.d.ts"
-    }
+  "scripts": {
+    "build": "asc src/index.ts --target release"
   }
 }

@@ -1,8 +1,6 @@
 {
   "name": "@bikari/article",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -15,6 +13,8 @@
       "require": "./dist/remark/index.cjs"
     }
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup-node",
     "watch": "tsup-node --watch"

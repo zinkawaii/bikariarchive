@@ -2,14 +2,16 @@ import antfu from "@antfu/eslint-config";
 import zin from "@zinkawaii/eslint-config";
 
 export default antfu({
-    jsonc: false,
-    markdown: false,
-    yaml: false,
-    stylistic: {
-        quotes: "double",
-        semi: true,
-        indent: 4
+    ignores: [
+        "data/json/Bangumi.json",
+        "public/json/Jnm.json"
+    ],
+    jsonc: {
+        overrides: {
+            "jsonc/indent": ["warn", 2]
+        }
     },
+    markdown: false,
     rules: {
         ...zin.standard,
         ...zin.recommended,

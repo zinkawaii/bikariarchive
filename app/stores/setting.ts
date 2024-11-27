@@ -1,4 +1,4 @@
-import type { WatchCallback, WatchOptions } from "vue";
+import type { WatchCallback } from "vue";
 import { ZSetting } from "#components";
 import type { Setting, SettingBooleanField, SettingField } from "~/types/setting";
 

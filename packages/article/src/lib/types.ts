@@ -9,8 +9,8 @@ export interface JArticle<T> {
 export type NovelFrontmatter = Omit<JNovel<JChapter>, "chapters">;
 
 export interface JNovel<T> {
-    author: string;
     title: string;
+    author: string;
     type: NovelType;
     tag: string[];
     synopsis: Child[];

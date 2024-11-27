@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "dist",
     "target": "ESNext",
+    "baseUrl": "./",
     "module": "ESNext",
-    "moduleResolution": "Bundler"
+    "moduleResolution": "Bundler",
+    "outDir": "dist"
   }
 }

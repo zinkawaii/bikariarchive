@@ -1,9 +1,9 @@
 {
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "strict": false,
     "types": [
       "@types/wicg-file-system-access"
-    ]
+    ],
+    "strict": false
   }
 }

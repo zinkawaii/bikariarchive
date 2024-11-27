@@ -100,6 +100,6 @@
 
     .nav-title {
         opacity: 0;
-        transition: all 0.4s;
+        transition: opacity 0.4s;
     }
 </style>
