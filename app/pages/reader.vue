@@ -74,6 +74,7 @@
         title: `${art.title} - ${art.volumeInfo.title}`,
         ogTitle: art.title,
         ogType: "article",
+        ogImage: art.cover?.src,
         // @ts-expect-error 自定义键值
         ogArticleAuthor: art.novelInfo.author,
         ogArticleSection: art.novelInfo.type,
