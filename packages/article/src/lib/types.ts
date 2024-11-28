@@ -2,13 +2,13 @@ import type { Child } from "../remark/types";
 
 export type NovelType = "novel" | "blog";
 
-export interface JArticle<T> {
+export interface JArticle<T = JChapter> {
     [novel: string]: JNovel<T>;
 }
 
-export type NovelFrontmatter = Omit<JNovel<JChapter>, "chapters">;
+export type NovelFrontmatter = Omit<JNovel, "chapters">;
 
-export interface JNovel<T> {
+export interface JNovel<T = JChapter> {
     title: string;
     author: string;
     type: NovelType;

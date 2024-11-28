@@ -65,11 +65,12 @@ export default new Processor({
     onCacheHit(kind, cache) {
         switch (kind) {
             case SourceKind.Meta: {
-                const { novel, data } = cache;
+                const { novel, order, data } = cache;
 
                 if (!(novel in this.jMeta)) {
                     this.jMap[novel] = {};
                     this.jMeta[novel] = {
+                        order,
                         chapters: []
                     };
                 }
@@ -90,8 +91,12 @@ export default new Processor({
         }
     },
     beforeOutputMeta() {
-        const jMeta = structuredClone(this.jMeta);
+        const jMeta = sortKeyValues<any>(
+            structuredClone(this.jMeta),
+            ({ order: a }, { order: b }) => a.localeCompare(b)
+        );
         for (const novel in jMeta) {
+            delete jMeta[novel].order;
             jMeta[novel].chapters = Object.entries(jMeta[novel].chapters)
                 .toSorted(([a], [b]) => a.localeCompare(b))
                 .map(([_, c]) => c);
@@ -104,11 +109,12 @@ async function processMeta(path: string) {
     //处理文件
     const file = await fs.readFile(path);
     const attributes = await parseEntry<NovelFrontmatter>(file.toString());
-    const novel = basename(path, ".mdz").split("-")[1];
+    const [order, novel] = basename(path, ".mdz").split("-");
 
     //写入缓存
     return {
         novel,
+        order,
         data: attributes
     };
 }
@@ -195,6 +201,14 @@ async function processArticle(processor: Processor, path: string) {
         novel,
         data
     };
+}
+
+//键值对排序
+function sortKeyValues<T>(obj: Record<string, T>, compareFn: (a: T, b: T) => number) {
+    return Object.fromEntries(
+        Object.entries(obj)
+            .toSorted(([, a], [, b]) => compareFn(a, b))
+    );
 }
 
 //日期格式化

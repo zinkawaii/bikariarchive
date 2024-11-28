@@ -122,7 +122,7 @@ export class Article implements JChapter {
 }
 
 //将元数据引用注入原型
-export function enrichJArticle(original: JArticle<JChapter>) {
+export function enrichJArticle(original: JArticle) {
     for (const novel in original) {
         const { chapters } = original[novel];
         const { chapters: articles } = Article.meta[novel] ?? original[novel];
