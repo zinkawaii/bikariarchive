@@ -4,6 +4,8 @@ improve(mb-dialog): 宽屏时与屏幕边缘留出一定间隙
 
 fix(article): 修复书籍顺序可能发生错位的问题
 
+fix(setting): 在组件卸载时移除监听的事件代理
+
 ## 2024-11-26 [v0.5.22]
 
 feat(article): 书籍简介 Hast 化

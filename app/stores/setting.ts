@@ -60,6 +60,10 @@ export const useSettingStore = defineStore("setting", () => {
         const handlers = mapping.get(key)?.handlers ?? new Set();
         handlers.add(handler);
 
+        onUnmounted(() => {
+            handlers.delete(handler);
+        });
+
         if (!mapping.has(key)) {
             const { trigger } = watchTriggerable(() => setting.value[key], (newVal, oldVal, onCleanup) => {
                 if (oldVal !== void 0) {
