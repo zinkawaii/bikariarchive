@@ -143,7 +143,7 @@
         padding: 4px;
         font-size: 12px;
         line-height: 18px;
-        color: var(--color-text-info);
+        color: var(--color-info);
 
         &::before {
             content: "• ";

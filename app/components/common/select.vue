@@ -62,12 +62,12 @@
         transition: all 0.25s;
 
         :focus > & {
-            color: var(--color-text-info);
+            color: var(--color-info);
         }
     }
 
     .select-arrow {
-        color: var(--color-text-info);
+        color: var(--color-info);
         transition: rotate 0.25s;
 
         &.is-reverse {

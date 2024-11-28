@@ -56,7 +56,7 @@
 
     .comment-count {
         margin-left: 0.5em;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .mb-skeleton, .mb-pagination {

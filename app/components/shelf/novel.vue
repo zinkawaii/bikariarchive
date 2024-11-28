@@ -41,7 +41,7 @@
         display: grid;
         justify-items: center;
         margin-inline: 8px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .sheno-cover {

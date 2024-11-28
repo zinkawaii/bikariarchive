@@ -96,6 +96,6 @@
         font-size: 14px;
         line-height: 21px;
         text-overflow: ellipsis;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 </style>

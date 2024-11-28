@@ -60,7 +60,7 @@
         }
 
         &:not(.active) {
-            color: var(--color-text-info);
+            color: var(--color-info);
             cursor: pointer;
 
             & + & {

@@ -25,7 +25,7 @@
         font-size: 14px;
         line-height: 22px;
         text-align: center;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .novel-decrypt {

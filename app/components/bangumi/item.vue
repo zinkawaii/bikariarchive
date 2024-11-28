@@ -77,7 +77,7 @@
     .bangumi-trans {
         font-size: 17px;
         font-weight: bold;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .bangumi-tags {
@@ -91,6 +91,6 @@
         border-radius: var(--bounded-full);
         font-size: 14px;
         line-height: 24px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 </style>

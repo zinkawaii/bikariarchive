@@ -93,7 +93,7 @@
         display: flex;
         justify-content: center;
         font-size: 14px;
-        color: var(--color-text-info);
+        color: var(--color-info);
         user-select: none;
     }
 

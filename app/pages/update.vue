@@ -151,19 +151,19 @@
 
         &::before {
             content: "(";
-            color: var(--color-text-info);
+            color: var(--color-info);
         }
 
         &::after {
             content: ")";
-            color: var(--color-text-info);
+            color: var(--color-info);
         }
     }
 
     .update-scope {
         margin-right: 4px;
         font-family: var(--font-consolas);
-        color: var(--color-text-info);
+        color: var(--color-info);
 
         &::after {
             content: ":";

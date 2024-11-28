@@ -126,7 +126,7 @@ textarea {
 }
 
 ::placeholder {
-    color: var(--color-text-info);
+    color: var(--color-info);
 }
 
 ::selection {
@@ -247,7 +247,7 @@ textarea {
 }
 
 .text-gray {
-    color: var(--color-text-info);
+    color: var(--color-info);
 }
 
 .text-primary {
@@ -406,7 +406,7 @@ textarea {
     }
 
     .footnote-backref {
-        color: var(--color-text-info);
+        color: var(--color-info);
         transition: color 0.25s;
 
         &:hover {

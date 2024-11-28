@@ -81,7 +81,7 @@
         justify-content: center;
         padding-top: 8px;
         border-top: 1px solid var(--color-border-lighter);
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .intro-link {

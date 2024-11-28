@@ -291,7 +291,7 @@
         height: 32px;
         margin-block: 12px 4px;
         text-align: center;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .lyric-main {
@@ -319,7 +319,7 @@
         user-select: none;
 
         &.is-signed {
-            color: var(--color-text-info);
+            color: var(--color-info);
         }
 
         &.is-checked {

@@ -44,7 +44,7 @@
 
     .result-info {
         font-size: 14px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .result-part {

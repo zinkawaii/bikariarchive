@@ -111,6 +111,6 @@
 
     .outline-empty {
         padding: 0 0 16px 16px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 </style>

@@ -45,7 +45,7 @@
 <style lang="scss" scoped>
     .search-history {
         margin-top: 16px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .history-title {

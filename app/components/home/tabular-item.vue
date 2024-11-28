@@ -105,7 +105,7 @@
         column-gap: 18px;
         font-size: 12px;
         line-height: 20px;
-        color: var(--color-text-info);
+        color: var(--color-info);
 
         > li {
             display: flex;

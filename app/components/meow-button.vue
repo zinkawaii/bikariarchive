@@ -30,7 +30,7 @@
         opacity: 0.4;
         left: 0;
         font-size: 36px;
-        color: var(--color-text-info);
+        color: var(--color-info);
         transform-origin: left bottom;
         transition: scale 0.25s;
 
@@ -53,7 +53,7 @@
             right: 0;
             font-family: var(--font-code);
             font-size: 12px;
-            color: var(--color-gray-100);
+            color: var(--color-info);
         }
     }
 </style>

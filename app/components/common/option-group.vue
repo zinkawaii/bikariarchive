@@ -15,6 +15,6 @@
     .group-title {
         padding: 6px 12px;
         font-size: 12px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 </style>

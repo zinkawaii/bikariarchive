@@ -75,7 +75,7 @@
         border: 3px dashed var(--color-border);
         border-radius: 8px;
         font-size: 24px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .chest-title {

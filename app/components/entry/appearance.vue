@@ -21,6 +21,6 @@
         font-size: 12px;
         line-height: 21px;
         text-align: right;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 </style>

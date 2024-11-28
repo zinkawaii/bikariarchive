@@ -307,7 +307,7 @@
 
         &.is-sub {
             opacity: 0.75;
-            color: var(--color-text-info);
+            color: var(--color-info);
         }
 
         &.is-special {
@@ -347,7 +347,7 @@
         margin-top: 12px;
         font-size: 12px;
         line-height: 16px;
-        color: var(--color-text-info);
+        color: var(--color-info);
 
         &::before, &::after {
             content: "——";
@@ -357,7 +357,7 @@
 
     .calendar-none {
         line-height: 32px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .calendar-event {
@@ -411,6 +411,6 @@
         margin: auto;
         font-size: 48px;
         font-weight: bold;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 </style>

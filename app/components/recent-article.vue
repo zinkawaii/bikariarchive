@@ -51,6 +51,6 @@
         grid-template-columns: 1fr auto;
         gap: 8px;
         font-size: 12px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 </style>

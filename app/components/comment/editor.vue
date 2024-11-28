@@ -65,6 +65,6 @@
         right: 8px;
         bottom: 30px;
         font-size: 12px;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 </style>

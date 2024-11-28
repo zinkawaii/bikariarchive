@@ -74,7 +74,7 @@
         position: absolute;
         top: 4px;
         left: 4px;
-        color: var(--color-text-info);
+        color: var(--color-info);
         transition: all 0.25s;
         pointer-events: none;
 

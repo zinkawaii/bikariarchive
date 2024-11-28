@@ -67,7 +67,7 @@
         margin-bottom: 8px;
         font-size: 14px;
         line-height: 2em;
-        color: var(--color-text-info);
+        color: var(--color-info);
     }
 
     .shelf-property {
