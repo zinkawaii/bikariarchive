@@ -1,3 +1,4 @@
+import type { ImageOptions } from "@nuxt/image";
 import { MbConfirm, MbNumeric } from "#components";
 import type { MbNumericProps } from "~/components/common/numeric.vue";
 
@@ -23,6 +24,12 @@ const Zin = new class Z {
         const now = new Date();
         const hour = now.getHours();
         return (hour >= 6 && hour < 18) ? this.PERIOD_DAY : this.PERIOD_NIGHT;
+    }
+
+    //背景图链接
+    background(source: string, options: ImageOptions = {}) {
+        const image = useImage();
+        return `url(${image(source, options.modifiers, options)})`;
     }
 
     //判断对话框

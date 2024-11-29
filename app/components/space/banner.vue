@@ -8,7 +8,7 @@
     } = inject(injectionKey);
 
     const toastStore = useToastStore();
-    const headerUrl = useBackgroundImage("/garden/background/space_header.webp");
+    const headerUrl = Zin.background("/garden/background/space_header.webp");
 
     const sign = ref(userSign.value);
     let oldSign = "";

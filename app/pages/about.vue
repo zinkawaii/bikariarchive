@@ -5,7 +5,7 @@
         title: "关于"
     });
 
-    const coverUrl = useBackgroundImage("/garden/maestrale/cover.webp");
+    const coverUrl = Zin.background("/garden/maestrale/cover.webp");
 
     const today = dayjs();
     const year = today.year();
@@ -468,8 +468,8 @@
     }
 
     .azur-block-wrapper {
-        position: relative;
         container-type: size;
+        position: relative;
         text-wrap: nowrap;
 
         &::before {
@@ -536,9 +536,9 @@
     }
 
     .azur-center {
-        position: relative;
         container-type: size;
         flex: 1;
+        position: relative;
         margin-left: -32px;
         animation-delay: 0.1s;
 

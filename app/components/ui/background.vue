@@ -2,10 +2,10 @@
     const settingStore = useSettingStore();
 
     const lightUrl = ref("");
-    const darkUrl = useBackgroundImage("/garden/background/bg_dark.webp");
+    const darkUrl = Zin.background("/garden/background/bg_dark.webp");
 
     settingStore.listen("theme", () => {
-        lightUrl.value = useBackgroundImage(`/garden/background/bg_${settingStore.themeName}.webp`);
+        lightUrl.value = Zin.background(`/garden/background/bg_${settingStore.themeName}.webp`);
     });
 </script>
 
