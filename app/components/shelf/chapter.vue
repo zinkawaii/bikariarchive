@@ -45,10 +45,13 @@
         </div>
         <div class="shelf-property">
             <span>显示</span>
-            <form class="shelf-display">
-                <label><input type="radio" :value="0" v-model="infoType"/>字数</label>
-                <label><input type="radio" :value="1" v-model="infoType"/>发布日期</label>
-            </form>
+            <button
+                v-for="(label, i) in [`字数`, `发布日期`]"
+                :class="{
+                    [`text-primary`]: infoType === i
+                }"
+                @click="infoType = i"
+            >{{ label }}</button>
         </div>
     </div>
     <ul class="shelf-chapter">
@@ -81,19 +84,6 @@
         > :first-child {
             font-weight: bold;
             color: var(--color-theme-text);
-        }
-    }
-
-    .shelf-display {
-        display: flex;
-        gap: 0.75em;
-
-        > :has(> :checked) {
-            color: var(--color-theme-dark);
-        }
-
-        input {
-            display: none;
         }
     }
 
