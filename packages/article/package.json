@@ -4,19 +4,18 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./remark": {
       "types": "./dist/remark/index.d.ts",
-      "import": "./dist/remark/index.js",
+      "import": "./dist/remark/index.mjs",
       "require": "./dist/remark/index.cjs"
     }
   },
-  "main": "./dist/index.js",
+  "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup-node",
-    "watch": "tsup-node --watch"
+    "stub": "unbuild --stub"
   }
 }
