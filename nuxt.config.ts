@@ -1,8 +1,12 @@
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "pathe";
+import { ProxyAgent, setGlobalDispatcher } from "undici";
 import robotsConfig from "./app/robots.config";
 import { clientConfig, serverConfig } from "./app/runtime.config";
 import sitemapConfig from "./app/sitemap.config";
+
+const dispatcher = new ProxyAgent({ uri: new URL(process.env.HTTPS_PROXY).toString() });
+setGlobalDispatcher(dispatcher);
 
 export default defineNuxtConfig({
     app: {
