@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <template v-for="{ component, zIndex, isOpening } in dialogs" :key="zIndex">
-        <component :is="component" :is-opening :style="{ zIndex }"/>
+    <template v-for="{ vnode, zIndex, isOpening } in dialogs" :key="zIndex">
+        <component :is="vnode" :is-opening :style="{ zIndex }"/>
     </template>
 </template>

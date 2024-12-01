@@ -1,5 +1,5 @@
 import type { WatchCallback } from "vue";
-import { ZSetting } from "#components";
+import { LazyZSetting } from "#components";
 import type { Setting, SettingBooleanField, SettingField } from "~/types/setting";
 
 export const useSettingStore = defineStore("setting", () => {
@@ -18,7 +18,7 @@ export const useSettingStore = defineStore("setting", () => {
     const dialogStore = useDialogStore();
 
     //挂载弹窗实例
-    const { open, close } = dialogStore.use(() => h(ZSetting), {
+    const { open, close } = dialogStore.use(() => h(LazyZSetting), {
         unique: true
     });
 

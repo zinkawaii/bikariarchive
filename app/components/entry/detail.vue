@@ -1,11 +1,11 @@
 <script lang="ts" setup>
     import type { EntryDetail } from "@bikari/article";
-    import { EntryKnownAbility, EntryStarredAbility } from "#components";
+    import { LazyEntryKnownAbility, LazyEntryStarredAbility } from "#components";
 
     defineOptions({
         components: {
-            "known-ability": EntryKnownAbility,
-            "starred-ability": EntryStarredAbility
+            "known-ability": LazyEntryKnownAbility,
+            "starred-ability": LazyEntryStarredAbility
         }
     });
     defineProps<EntryDetail>();

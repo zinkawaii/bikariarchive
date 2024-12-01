@@ -1,4 +1,4 @@
-import { CommentPanel } from "#components";
+import { LazyCommentPanel } from "#components";
 import type { CommentMode, CommentModifyOptions, CommentReplyOptions } from "~/types/comment";
 
 export const useCommentPanelStore = defineStore("comment-panel", () => {
@@ -14,7 +14,7 @@ export const useCommentPanelStore = defineStore("comment-panel", () => {
     const route = useRoute();
     const dialogStore = useDialogStore();
 
-    const { open, close } = dialogStore.use(() => h(CommentPanel), {
+    const { open, close } = dialogStore.use(() => h(LazyCommentPanel), {
         unique: true
     });
 

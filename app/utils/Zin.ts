@@ -1,5 +1,5 @@
 import type { ImageOptions } from "@nuxt/image";
-import { MbConfirm, MbNumeric } from "#components";
+import { LazyMbConfirm, LazyMbNumeric } from "#components";
 import type { MbNumericProps } from "~/components/common/numeric.vue";
 
 const Zin = new class Z {
@@ -37,7 +37,7 @@ const Zin = new class Z {
         return new Promise<boolean>((resolve) => {
             const dialogStore = useDialogStore();
 
-            const { close } = dialogStore.use(() => h(MbConfirm, {
+            const { close } = dialogStore.use(() => h(LazyMbConfirm, {
                 message,
                 onClose(val = false) {
                     close();
@@ -148,7 +148,7 @@ const Zin = new class Z {
         return new Promise<number>((resolve) => {
             const dialogStore = useDialogStore();
 
-            const { close } = dialogStore.use(() => h(MbNumeric, {
+            const { close } = dialogStore.use(() => h(LazyMbNumeric, {
                 ...options,
                 onClose(val = options.initialValue) {
                     close();

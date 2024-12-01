@@ -1,4 +1,4 @@
-import { ZSigner } from "#components";
+import { LazyZSigner } from "#components";
 
 export type SignerCurrentView = "login" | "logon" | "profile";
 
@@ -8,7 +8,7 @@ export const useSignerStore = defineStore("signer", () => {
     const dialogStore = useDialogStore();
 
     //挂载弹窗实例
-    const { open, close } = dialogStore.use(() => h(ZSigner), {
+    const { open, close } = dialogStore.use(() => h(LazyZSigner), {
         unique: true
     });
 

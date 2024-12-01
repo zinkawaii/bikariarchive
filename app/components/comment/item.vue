@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import dayjs from "dayjs";
-    import { CommentUser } from "#components";
+    import { LazyCommentUser } from "#components";
     import type { WithParent } from "~/types";
     import type { CommentData } from "~~/server/types/api/comment";
 
@@ -27,7 +27,7 @@
 
     //查看用户信息
     function openUserInfo(data: CommentData) {
-        dialogStore.use(() => h(CommentUser, {
+        dialogStore.use(() => h(LazyCommentUser, {
             avatar: data.avatar,
             nickname: data.nickname,
             address: data.address

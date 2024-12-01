@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { MbImageViewer } from "#components";
+    import { LazyMbImageViewer } from "#components";
 
     const props = withDefaults(defineProps<{
         src: HTMLImageElement["src"];
@@ -23,7 +23,7 @@
         return [...captionEl.value?.children ?? []].toReversed();
     });
 
-    const { open, close } = dialogStore.use(() => h(MbImageViewer, {
+    const { open, close } = dialogStore.use(() => h(LazyMbImageViewer, {
         target: imgEl.value,
         async onClose() {
             await close();

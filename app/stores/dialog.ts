@@ -1,7 +1,7 @@
 import type { Raw } from "vue";
 
 interface DialogContext {
-    component: VNode;
+    vnode: VNode;
     zIndex: number;
     duration: number;
     isOpening: Ref<boolean>;
@@ -38,22 +38,22 @@ export const useDialogStore = defineStore("dialog", () => {
         function open() {
             if (unique && indexOf() !== -1) return;
 
-            const component = render();
+            const vnode = render();
             const last = dialogs.value.at(-1);
             const zIndex = (last?.zIndex ?? 510) + 2;
 
             ctx = {
-                component,
+                vnode,
                 zIndex,
                 duration,
                 isOpening,
-                close: (component.props ??= {}).onClose ??= close
+                close: (vnode.props ??= {}).onClose ??= close
             };
 
             dialogs.value.push(ctx);
-            nextTick(() => {
+            vnode.props.onVnodeMounted = () => {
                 isOpening.value = true;
-            });
+            };
         }
 
         async function close() {
