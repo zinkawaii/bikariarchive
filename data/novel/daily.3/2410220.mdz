@@ -4,6 +4,7 @@ abbrlink: a4e3e63
 cover:
   src: https://cdn.bikari.top/image/a4e3e63.webp
 date: 2024-10-22
+updated: 2024-12-01
 ---
 
 ::excerpt
@@ -19,7 +20,7 @@ import { defineStore } from "pinia";
 import { type Raw, ref, type VNode } from "vue";
 
 export interface ModalContext {
-  component: VNode;
+  vnode: VNode;
   zIndex: number;
   duration: number;
   isOpening: Ref<boolean>;
@@ -76,22 +77,22 @@ const isOpening = ref(false);
 function open() {
   if (unique && indexOf() !== -1) return;
 
-  const component = render();
+  const vnode = render();
   const last = dialog.value.at(-1);
   const zIndex = (last?.zIndex ?? 510) + 2;
 
   ctx = {
-    component,
+    vnode,
     zIndex,
     duration,
     isOpening,
-    close: (component.props ??= {}).onClose ??= close
+    close: (vnode.props ??= {}).onClose ??= close
   };
 
   dialog.value.push(ctx);
-  nextTick(() => {
+  vnode.props.onVnodeMounted = () => {
     isOpening.value = true;
-  });
+  };
 }
 
 async function close() {
@@ -109,7 +110,7 @@ function indexOf() {
 }
 ```
 
-我们首先看 `isOpening` 变量，它为弹窗提供了利用 `Transition` 组件实现过渡动画的能力：首先在 `open` 方法的末尾通过 `nextTick` 开启，然后在 `close` 方法的开头关闭，等待一段时间后才将弹窗上下文从 Store 中移除。
+我们先看 `isOpening` 变量，它为弹窗提供了利用 `Transition` 组件实现过渡动画的能力：首先在 `open` 方法的末尾通过 `onVNodeMounted` 事件开启，然后在 `close` 方法的开头关闭，等待一段时间后才将弹窗上下文从 Store 中移除。
 
 之后是 `zIndex` 的计算，它有助于使弹窗按照打开的顺序正确叠加。之所以间隔 2 个单位，是因为中间还需要一层遮罩。
 
@@ -127,8 +128,8 @@ function indexOf() {
 </script>
 
 <template>
-  <template v-for="{ component, zIndex, isOpening } in modals" :key="zIndex">
-    <component :is="component" :isOpening :style="{ zIndex }"/>
+  <template v-for="{ vnode, zIndex, isOpening } in modals" :key="zIndex">
+    <component :is="vnode" :isOpening :style="{ zIndex }"/>
   </template>
 </template>
 ```
