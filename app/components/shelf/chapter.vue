@@ -11,12 +11,14 @@
 
     //最近更新
     const lastUpdated = computed(() => {
-        return (jChapters.value.length > 0) ?
-            jChapters.value.reduce((prev, curr) => {
-                const a = prev.updated ?? prev.date;
-                const b = curr.updated ?? curr.date;
-                return a?.localeCompare(b) > 0 ? prev : curr;
-            }).updateDate : Article.FARAWAY;
+        return jChapters.value.length
+            ? jChapters.value.reduce((prev, curr) => (
+                curr.updateDate !== Article.FARAWAY &&
+                curr.updateDate.localeCompare(prev.updateDate) > 0
+                    ? curr
+                    : prev
+            )).updateDate
+            : Article.FARAWAY;
     });
 
     //状态
