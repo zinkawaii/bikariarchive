@@ -5,150 +5,124 @@ import fs from "fs-extra";
 import { resolve } from "pathe";
 import { glob } from "tinyglobby";
 
-interface ProcessorOptions<T, K> {
+interface ProcessorContext {
     sign: string;
-    source: {
-        base: string;
-        dist: string;
-        folders: string[];
-        ext: string;
-    };
-    meta?: {
-        src?: string;
-        out: string;
-    };
-    map?: {
-        out: string;
-    };
-    resolveSourceKind?: (path: string) => K;
-    parse: (this: T, kind: K, path: string) => Promise<any>;
-    unlink?: (this: T, kind: K, cache: any) => void;
-    onCacheHit?: (this: T, kind: K, cache: any) => void;
-    onMetaUpdate?: (this: T, newVal: any, oldVal: any) => any;
-    beforeBuild?: (this: T) => void;
-    beforeOutputMeta?: (this: T) => any;
+    loadInfos: LoadInfo[];
+    sourceInfos: SourceInfo[];
 }
 
-export default class Processor<K = number> {
-    jCache: Record<string, any>;
-    jMeta: any;
-    jMap: Record<string, any>;
+export type LoadInfo = UseLoadOptions & {
+    name: string;
+    value: any;
+    output: () => void;
+};
 
-    cacheDir: string;
-    metaSrcDir?: string;
-    metaOutDir?: string;
-    mapOutDir?: string;
+export type SourceInfo = UseSourceOptions & {
+    kind: number;
+    glob: string[];
+    filter: (path: string) => boolean;
+    output: (path: string, data: any) => Promise<void>;
+};
 
-    sourceBase: string;
-    sourceDist: string;
-    sourceFolders: string[];
-    sourceGlob: string[];
+export interface BaseCache {
+    hash: string;
+}
 
-    constructor(
-        private options: ProcessorOptions<Processor, K>
-    ) {
-        this.cacheDir = resolve("dist/cache", `${this.options.sign}.json`);
-        this.jCache = fs.existsSync(this.cacheDir) && fs.readJSONSync(this.cacheDir) || {};
+let currentContext: ProcessorContext | null = null;
 
-        if (options.meta) {
-            if (options.meta.src) {
-                this.metaSrcDir = resolve(options.meta.src);
-                this.jMeta = fs.readJSONSync(this.metaSrcDir);
-            }
-            else {
-                this.jMeta = {};
-            }
-            this.metaOutDir = resolve(options.meta.out);
-        }
+export function createProcessor(sign: string, setup: (ctx: ProcessorContext) => void) {
+    const ctx: ProcessorContext = {
+        sign,
+        loadInfos: [],
+        sourceInfos: []
+    };
 
-        if (options.map) {
-            this.mapOutDir = resolve(options.map.out);
-            this.jMap = {};
-        }
+    currentContext = ctx;
+    setup(ctx);
+    currentContext = null;
 
-        this.sourceBase = resolve(options.source.base);
-        this.sourceDist = resolve(options.source.dist);
-        this.sourceFolders = options.source.folders.map((f) => resolve(this.sourceBase, f));
-        this.sourceGlob = this.sourceFolders.map((p) => resolve(p, `**/*${options.source.ext}`));
-    }
+    ctx.sourceInfos.sort((a, b) => {
+        return a.kind - b.kind;
+    });
 
-    async build() {
-        const parse = timer(this.options.sign, async () => {
-            this.options.beforeBuild?.call(this);
+    const cachePath = resolve("dist/cache", `${sign}.json`);
+    const caches: Record<string, BaseCache> = fs.existsSync(cachePath) && fs.readJsonSync(cachePath) || {};
 
-            //顺序处理源文件
-            const paths = await glob(this.sourceGlob, {
-                absolute: true
-            });
-            paths.sort((a, b) => a.localeCompare(b));
+    async function build() {
+        const exec = timer(sign, async () => {
+            for (const info of ctx.sourceInfos) {
+                const paths = await glob(info.glob, {
+                    deep: info.deep ? Infinity : 2,
+                    absolute: true
+                });
 
-            //对源文件进行分类
-            const sources = new Map<K, string[]>();
-            for (const path of paths) {
-                const kind = this.options.resolveSourceKind?.(path);
-                if (!sources.has(kind)) {
-                    sources.set(kind, []);
-                }
-                sources.get(kind).push(path);
-            }
-
-            for (const [kind, names] of sources) {
                 await Promise.all(
-                    names.map((name) => this.parse(kind, name))
-                );
+                    paths
+                        .map((path) => path.replaceAll("\\", "/"))
+                        .filter(info.filter)
+                        .sort((a, b) => a.localeCompare(b))
+                        .map((path) => parse(path, info))
+                    );
             }
-
-            //输出元数据文件
-            this.outputMeta();
+            outputLoads();
         });
 
-        await parse();
+        await exec();
     }
 
-    async watch() {
-        chokidar.watch(this.sourceFolders, {
-            ignoreInitial: true
-        })
-        .on("all", timer(this.options.sign, async (event: string, filename: string) => {
-            const path = filename.replaceAll("\\", "/");
-            const kind = this.options.resolveSourceKind?.(path);
-
-            if (!path.endsWith(this.options.source.ext)) {
-                return false;
-            }
-            if (event === "change" && !await this.parse(kind, path)) {
-                return false;
-            }
-            else if (event === "add" && !await this.add(kind, path)) {
-                return false;
-            }
-            else if (event === "unlink" && !await this.unlink(kind, path)) {
-                return false;
-            }
-            this.outputMeta();
-        }));
-
-        if (this.metaSrcDir) {
-            chokidar.watch(this.metaSrcDir, {
+    async function watch() {
+        for (const info of ctx.sourceInfos) {
+            chokidar.watch(info.folders, {
+                depth: info.deep ? Infinity : 0,
                 ignoreInitial: true
             })
-            .on("change", timer(this.options.sign, async () => {
-                const newVal = await fs.readJson(this.metaSrcDir);
-                this.jMeta = this.options.onMetaUpdate?.call(this, newVal, this.jMeta);
-                this.outputMeta();
+            .on("all", timer(sign, async (event: string, filename: string) => {
+                const path = filename.replaceAll("\\", "/");
+
+                if (!path.endsWith(info.ext)) {
+                    return false;
+                }
+                else if (!info.filter(path)) {
+                    return false;
+                }
+                else if (event === "change" && !await parse(path, info)) {
+                    return false;
+                }
+                else if (event === "add" && !await add(path, info)) {
+                    return false;
+                }
+                else if (event === "unlink" && !unlink(path, info)) {
+                    return false;
+                }
+                outputLoads();
+            }));
+        }
+
+        for (const info of ctx.loadInfos) {
+            if (!info.src) {
+                continue;
+            }
+
+            chokidar.watch(info.src, {
+                ignoreInitial: true
+            })
+            .on("change", timer(ctx.sign, async () => {
+                const newVal = await fs.readJson(info.src);
+                info.value = info.onUpdate(newVal, info.value);
+                info.output();
             }));
         }
     }
 
-    async parse(kind: K, path: string) {
+    async function parse(path: string, info: SourceInfo) {
         const stats = fs.statSync(path);
         const hash = CryptoES.MD5(stats.size.toString()).toString();
 
-        let cache = this.jCache[path];
+        let cache = caches[path];
 
         //当在开发环境下命中缓存时
         if (isDev && cache?.hash === hash) {
-            await this.options.onCacheHit?.call(this, kind, cache);
+            info.onCacheHit?.(cache);
             return false;
         }
 
@@ -156,7 +130,7 @@ export default class Processor<K = number> {
         cache = { hash };
 
         //开始解析
-        const data = await this.options.parse.call(this, kind, path);
+        const data = await info.parse(path, info);
 
         if (data !== null) {
             cache = {
@@ -164,18 +138,18 @@ export default class Processor<K = number> {
                 ...data ?? {}
             };
             //执行一次命中缓存的逻辑
-            await this.options.onCacheHit?.call(this, kind, cache);
-            this.jCache[path] = cache;
+            info.onCacheHit?.(cache);
+            caches[path] = cache;
         }
         else {
             //显式返回空值时清理数据
-            this.unlink(kind, path);
+            unlink(path, info);
         }
         return true;
     }
 
-    async add(kind: K, path: string) {
-        const cache = this.jCache[path];
+    async function add(path: string, info: SourceInfo) {
+        const cache = caches[path];
 
         //缓存存在时无需更新
         if (cache) {
@@ -183,11 +157,11 @@ export default class Processor<K = number> {
         }
 
         //开始解析
-        return await this.parse(kind, path);
+        return await parse(path, info);
     }
 
-    async unlink(kind: K, path: string) {
-        const cache = this.jCache[path];
+    function unlink(path: string, info: SourceInfo) {
+        const cache = caches[path];
 
         //缓存不存在时无需更新
         if (!cache) {
@@ -195,30 +169,95 @@ export default class Processor<K = number> {
         }
 
         //执行自定义清理逻辑
-        this.options.unlink?.call(this, kind, cache);
+        info.unlink?.(cache);
 
         //清空缓存
-        this.jCache[path] = null;
+        caches[path] = null;
         return true;
     }
 
-    outputMeta() {
-        const jMeta = this.options.beforeOutputMeta?.call(this) ?? this.jMeta;
+    function outputLoads() {
+        fs.outputJsonSync(cachePath, caches);
 
-        //同步写入防止在监听时获取空字符串
-        fs.outputJsonSync(this.cacheDir, this.jCache);
-
-        if (this.options.meta) {
-            fs.outputJsonSync(this.metaOutDir, jMeta);
-        }
-
-        if (this.options.map) {
-            fs.outputJsonSync(this.mapOutDir, this.jMap);
+        for (const info of ctx.loadInfos) {
+            info.output();
         }
     }
 
-    async outputJson(path: string, data: unknown) {
-        const outPath = path.replace(this.sourceBase, this.sourceDist).replace(this.options.source.ext, ".json");
-        await fs.outputJson(outPath, data);
-    }
+    return {
+        build,
+        watch
+    };
+}
+
+interface UseLoadOptions {
+    src?: string;
+    out: string;
+    onUpdate?: (newVal: any, oldVal: any) => void;
+    beforeOutput?: (val: any) => any;
+}
+
+export function useLoad(name: string, options: UseLoadOptions) {
+    const ctx = currentContext;
+
+    const src = options.src ? resolve(options.src) : void 0;
+    const out = resolve(options.out);
+
+    const info: LoadInfo = {
+        ...options,
+        name,
+        value: src ? fs.readJsonSync(src) : {},
+        src,
+        out,
+        output() {
+            const data = info.beforeOutput?.(info.value) ?? info.value;
+            fs.outputJsonSync(info.out, data);
+        }
+    };
+    ctx.loadInfos.push(info);
+
+    return info;
+}
+
+interface UseSourceOptions<T = any> {
+    base: string;
+    dist?: string;
+    folders: string[];
+    ext: string;
+    deep?: boolean;
+    skip?: number;
+    parse: (path: string, info: SourceInfo) => Promise<T | null | void>;
+    unlink?: (cache: T) => void;
+    onCacheHit?: (cache: T) => void;
+}
+
+export function useSource<C extends object>(kind: number, options: UseSourceOptions<C>) {
+    const ctx = currentContext;
+
+    const base = resolve(options.base);
+    const dist = options.dist ? resolve(options.dist) : void 0;
+    const folders = options.folders.map((folder) => resolve(base, folder));
+    const glob = folders.map((path) => resolve(path, `**/*${options.ext}`));
+
+    const info: SourceInfo = {
+        ...options,
+        kind,
+        base,
+        dist,
+        folders,
+        glob,
+        deep: options.deep ?? true,
+        skip: options.skip ?? 0,
+        filter(path) {
+            const depth = path.split("/").length - folders[0].split("/").length;
+            return info.skip < depth;
+        },
+        async output(path, data) {
+            const outPath = path.replace(base, dist).replace(info.ext, ".json");
+            await fs.outputJson(outPath, data);
+        }
+    };
+    ctx.sourceInfos.push(info);
+
+    return info;
 }

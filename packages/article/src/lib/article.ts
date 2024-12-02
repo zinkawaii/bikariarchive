@@ -5,7 +5,7 @@ import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle, parseEntry } from "../remark";
-import Processor from "./processor";
+import { type BaseCache, createProcessor, type LoadInfo, type SourceInfo, useLoad, useSource } from "./processor";
 import type { Element } from "../remark/types";
 import type { ArticleFrontmatter, NovelFrontmatter } from "./types";
 
@@ -16,93 +16,87 @@ enum SourceKind {
 
 const PATH_REGEX = /^(.*?)\.(\d+)$/;
 
-export default new Processor({
-    sign: "Article",
-    source: {
+export default createProcessor("Article", () => {
+    const metaInfo = useLoad("meta", {
+        out: "dist/json/Article.json",
+        beforeOutput(val) {
+            const newVal = sortKeyValues<any>(
+                structuredClone(val),
+                ({ order: a }, { order: b }) => a.localeCompare(b)
+            );
+            for (const novel in newVal) {
+                delete newVal[novel].order;
+                newVal[novel].chapters = Object.entries(newVal[novel].chapters)
+                    .toSorted(([a], [b]) => a.localeCompare(b))
+                    .map(([_, c]) => c);
+            }
+            return newVal;
+        }
+    });
+
+    const mapInfo = useLoad("map", {
+        out: "dist/json/Artmap.json"
+    });
+
+    useSource(SourceKind.Meta, {
+        base: "data",
+        folders: [
+            "novel"
+        ],
+        ext: ".mdz",
+        deep: false,
+        parse(path) {
+            return processMeta(path);
+        },
+        unlink(cache) {
+            const { novel } = cache;
+
+            delete mapInfo.value[novel];
+            delete metaInfo.value[novel];
+        },
+        onCacheHit(cache) {
+            const { novel, order, data } = cache;
+
+            if (!(novel in metaInfo.value)) {
+                mapInfo.value[novel] = {};
+                metaInfo.value[novel] = {
+                    order,
+                    chapters: []
+                };
+            }
+            Object.assign(metaInfo.value[novel], data);
+        }
+    });
+
+    useSource(SourceKind.Article, {
         base: "data",
         dist: "dist",
         folders: [
             "novel"
         ],
-        ext: ".mdz"
-    },
-    meta: {
-        out: "dist/json/Article.json"
-    },
-    map: {
-        out: "dist/json/Artmap.json"
-    },
-    resolveSourceKind(path) {
-        return path.split("/").at(-2) === "novel" ? SourceKind.Meta : SourceKind.Article;
-    },
-    parse(kind, path) {
-        switch (kind) {
-            case SourceKind.Meta:
-                return processMeta(path);
-            case SourceKind.Article:
-                return processArticle(this, path);
-        }
-    },
-    unlink(kind, cache) {
-        switch (kind) {
-            case SourceKind.Meta: {
-                const { novel } = cache;
+        ext: ".mdz",
+        skip: 1,
+        parse(path, info) {
+            return processArticle(path, info, metaInfo);
+        },
+        unlink(cache) {
+            const { order, novel, data } = cache;
+            const { index } = data;
 
-                delete this.jMap[novel];
-                delete this.jMeta[novel];
-                break;
-            }
-            case SourceKind.Article: {
-                const { order, novel, data } = cache;
-                const { index } = data;
+            delete mapInfo.value[novel][index];
+            delete metaInfo.value[novel].chapters[order];
+        },
+        onCacheHit(cache) {
+            const { order, name, novel, data } = cache;
+            const { index, password } = data;
 
-                delete this.jMap[novel][index];
-                delete this.jMeta[novel].chapters[order];
-                break;
-            }
+            metaInfo.value[novel].chapters[order] = data;
+            mapInfo.value[novel][index] = {
+                name,
+                password
+            };
         }
-    },
-    onCacheHit(kind, cache) {
-        switch (kind) {
-            case SourceKind.Meta: {
-                const { novel, order, data } = cache;
-
-                if (!(novel in this.jMeta)) {
-                    this.jMap[novel] = {};
-                    this.jMeta[novel] = {
-                        order,
-                        chapters: []
-                    };
-                }
-                Object.assign(this.jMeta[novel], data);
-                break;
-            }
-            case SourceKind.Article: {
-                const { order, name, novel, data } = cache;
-                const { index, password } = data;
-
-                this.jMeta[novel].chapters[order] = data;
-                this.jMap[novel][index] = {
-                    name,
-                    password
-                };
-                break;
-            }
-        }
-    },
-    beforeOutputMeta() {
-        const jMeta = sortKeyValues<any>(
-            structuredClone(this.jMeta),
-            ({ order: a }, { order: b }) => a.localeCompare(b)
-        );
-        for (const novel in jMeta) {
-            delete jMeta[novel].order;
-            jMeta[novel].chapters = Object.entries(jMeta[novel].chapters)
-                .toSorted(([a], [b]) => a.localeCompare(b))
-                .map(([_, c]) => c);
-        }
-        return jMeta;
-    }
+    });
 });
 
 async function processMeta(path: string) {
@@ -119,7 +113,7 @@ async function processMeta(path: string) {
     };
 }
 
-async function processArticle(processor: Processor, path: string) {
+async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo) {
     //处理文件
     const file = await fs.readFile(path);
     const { attributes, body } = await parseArticle<ArticleFrontmatter>(file.toString());
@@ -164,7 +158,7 @@ async function processArticle(processor: Processor, path: string) {
     //生成映射
     let order = `[${volume}]`;
     let index = "";
-    switch (processor.jMeta[novel].type) {
+    switch (metaInfo.value[novel].type) {
         case "novel": {
             const match = name.match(/^([^-]*)-(.*)$/);
             order += match[1];
@@ -183,7 +177,7 @@ async function processArticle(processor: Processor, path: string) {
     }
 
     //写入文件
-    await processor.outputJson(path, body);
+    await info.output(path, body);
 
     //写入数据
     const data = {
