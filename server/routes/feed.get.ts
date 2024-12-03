@@ -14,14 +14,15 @@ export default defineEventHandler(async (event: H3Event) => {
     const feed = new Feed({
         id: "BikariArchive",
         title: "BikariArchive",
-        copyright: "",
+        copyright: "© 2022-2024 KazariEX",
+        favicon: `https://${config.public.domain}/garden/favicon.ico`,
         link: `https://${config.public.domain}`,
         author: {
             name: "KazariEX"
         }
     });
 
-    Object.values(Article.meta)
+    const arts = Object.values(Article.meta)
     .flatMap(({ chapters }) => chapters)
     .filter((c) => c.updateDate !== Article.FARAWAY)
     .sort((a, b) => {
@@ -29,16 +30,24 @@ export default defineEventHandler(async (event: H3Event) => {
         const y = b.updateDate;
         return y.localeCompare(x);
     })
-    .slice(0, 10)
-    .forEach((c) => {
+    .slice(0, 10);
+
+    for (const art of arts) {
+        const description = toString(art.excerpt);
+        const link = `https://${config.public.domain}/book/${art.novel}/${art.index}`;
+        const content = `${
+            art.cover ? `<img src="${art.cover.src}">` : ""
+        }<p>${description}</p><a href="${link}">查看原文</a>`;
+
         feed.addItem({
-            title: c.title,
-            description: toString(c.excerpt),
-            link: `https://${config.public.domain}/book/${c.novel}/${c.index}`,
-            date: new Date(c.updateDate),
-            published: new Date(c.publishDate)
+            title: art.title,
+            description,
+            link,
+            date: new Date(art.updateDate),
+            published: new Date(art.publishDate),
+            content
         });
-    });
+    }
 
     return feed.atom1();
 });
