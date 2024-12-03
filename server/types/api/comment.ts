@@ -15,7 +15,7 @@ export interface CommentData {
     time: string;
     nickname: string;
     avatar: string;
-    address: string;
+    address?: string;
 }
 
 export interface PostCommentBody {

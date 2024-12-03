@@ -24,7 +24,7 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
 
     try {
         //只有本人才能获取的信息
-        myselfValidate(event, uid);
+        myselfValidate(event, uid!);
         res.identity = qUser.identity;
     }
     catch {}

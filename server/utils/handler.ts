@@ -15,16 +15,27 @@ const createHandler = <T extends BaseResponse>(
         return res;
     }
     catch (err) {
+        let status: number;
+        let data: unknown;
+
         if (err instanceof ZodError) {
-            sendError(event, createError({
-                status: 400,
-                data: import.meta.dev ? err.issues : void 0
-            }));
+            status = 400;
+            data = err.issues;
+        }
+        else if (isError(err)) {
+            status = err.statusCode;
+            data = err.data;
         }
         else {
-            console.error(err);
-            sendError(event, err);
+            status = 500;
+            data = err;
         }
+
+        console.error(err);
+        sendError(event, createError({
+            status,
+            data: import.meta.dev ? data : void 0
+        }));
     }
 };
 
@@ -41,11 +52,11 @@ export const defineJThrottledEventHandler = <T extends BaseResponse>(
     handler: Handler<T>,
     delay: number
 ) => {
-    let timer: NodeJS.Timeout;
+    let timer: NodeJS.Timeout | undefined;
     function throttledHandler(this: unknown, ...args: Parameters<typeof handler>) {
         if (!timer) {
             timer = setTimeout(() => {
-                timer = null;
+                timer = void 0;
             }, delay);
             return handler.apply(this, args);
         }

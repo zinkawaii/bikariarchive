@@ -7,7 +7,7 @@ export default defineNitroPlugin(() => {
     const config = useRuntimeConfig();
     const { options } = config.mongoose;
 
-    const job = CronJob.from({
+    CronJob.from({
         cronTime: "0 33 23 * * 7",
         timeZone: "UTC+8",
         onTick() {

@@ -63,13 +63,16 @@ async function deference<T extends HydratedDocument<CommentDataSchema>>(parent: 
                 })).children
             ) : [];
 
+            const hash = item.email ? CryptoES.SHA256(item.email.toLocaleLowerCase()) : "";
+            const avatar = `https://weavatar.com/avatar/${hash}?d=404`;
+
             return {
                 id: item.id,
                 children,
                 content: item.content,
                 time: item.time.toString(),
                 nickname: item.nickname,
-                avatar: `https://weavatar.com/avatar/${CryptoES.SHA256(item.email?.toLocaleLowerCase())}?d=404`,
+                avatar,
                 address: item.address
             };
         })
