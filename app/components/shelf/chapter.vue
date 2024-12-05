@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     const shelfStore = useShelfStore();
-    const { infoType, jChapters } = storeToRefs(shelfStore);
+    const { jChapters } = storeToRefs(shelfStore);
 
     const properties = [
         {
@@ -41,20 +41,10 @@
             <span class="shelf-label">{{ label }}</span>
             <span>{{ value }}</span>
         </div>
-        <div class="shelf-property">
-            <span class="shelf-label">显示</span>
-            <button
-                v-for="(label, i) in [`字数`, `发布日期`]"
-                :class="{
-                    [`text-primary`]: infoType === i
-                }"
-                @click="infoType = i"
-            >{{ label }}</button>
-        </div>
     </div>
     <ul class="shelf-chapter">
-        <li v-for="chapter in paginatedArr" :key="chapter.index">
-            <shelf-chapter-item :chapter/>
+        <li v-for="art in paginatedArr" :key="art.index">
+            <shelf-chapter-item :art/>
         </li>
     </ul>
     <mb-pagination v-if="total > sizes" class="shelf-pagination" :total :sizes v-model="page"/>
@@ -65,7 +55,7 @@
         display: flex;
         flex-wrap: wrap;
         column-gap: 1.5em;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
         font-size: 14px;
         line-height: 2em;
         color: var(--color-info);
@@ -74,10 +64,6 @@
     .shelf-property {
         display: flex;
         gap: 0.75em;
-
-        &:last-child {
-            margin-left: auto;
-        }
     }
 
     .shelf-label {

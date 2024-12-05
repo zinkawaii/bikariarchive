@@ -3,7 +3,6 @@ import { Article } from "~/utils/article";
 export const useShelfStore = defineStore("shelf", () => {
     const novel = ref("bikari");
     const currentVolumeIdx = ref(0);
-    const infoType = ref(1);
 
     const currentNovelIdx = computed(() => {
         return Object.keys(Article.meta).indexOf(novel.value);
@@ -36,7 +35,6 @@ export const useShelfStore = defineStore("shelf", () => {
         novel,
         currentNovelIdx,
         currentVolumeIdx,
-        infoType,
         jNovel,
         jVolume,
         jChapters,

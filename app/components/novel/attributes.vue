@@ -1,0 +1,91 @@
+<script lang="ts" setup>
+    import type { GetArticleResponse } from "~~/server/types/api/article";
+
+    type Attr = "volume" | "read-count" | "word-count" | "publish-date" | "update-date";
+
+    const props = withDefaults(defineProps<{
+        art: Article;
+        post?: GetArticleResponse;
+        attrs: Attr[];
+        wrap?: boolean;
+    }>(), {
+        wrap: true
+    });
+
+    const infos: {
+        attr: Attr;
+        icon: string;
+        content: ComputedRef<unknown>;
+    }[] = [
+        {
+            attr: "volume",
+            icon: "fa6-solid:book-open",
+            content: computed(() => props.art.volumeInfo.title)
+        },
+        {
+            attr: "read-count",
+            icon: "fa6-solid:eye",
+            content: computed(() => `${props.post?.readCount ?? "?"} 阅读`)
+        },
+        {
+            attr: "word-count",
+            icon: "nonicons:keyword-16",
+            content: computed(() => `${props.art.wordCount} 字`)
+        },
+        {
+            attr: "publish-date",
+            icon: "fa6-solid:pen",
+            content: computed(() => props.art.publishDate)
+        },
+        {
+            attr: "update-date",
+            icon: "fa6-solid:clock-rotate-left",
+            content: computed(() => props.art.updateDate)
+        }
+    ];
+
+    const filterred = computed(() => {
+        return infos.filter(({ attr }) => props.attrs.includes(attr));
+    });
+</script>
+
+<template>
+    <ul
+        class="novel-attributes"
+        :class="{
+            [`is-wrap`]: wrap,
+            [`edge-fades-x`]: !wrap
+        }"
+    >
+        <li v-for="{ icon, content } in filterred" class="novel-attr">
+            <iconify :name="icon"/>
+            <span>{{ content }}</span>
+        </li>
+    </ul>
+</template>
+
+<style lang="scss" scoped>
+    .novel-attributes {
+        display: flex;
+        column-gap: 18px;
+        font-size: 12px;
+        line-height: 20px;
+        text-wrap: nowrap;
+        color: var(--color-info);
+
+        &.is-wrap {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .novel-attr {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+</style>

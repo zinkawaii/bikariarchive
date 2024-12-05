@@ -14,24 +14,10 @@
                 <iconify v-if="art.sticky < Infinity" name="pepicons-print:pin"/>
                 {{ art.title }}
             </h2>
-            <ul class="tabular-info">
-                <li>
-                    <iconify name="fa6-solid:book-open"/>
-                    <span>{{ art.volumeInfo.title }}</span>
-                </li>
-                <li>
-                    <iconify name="nonicons:keyword-16"/>
-                    <span>{{ art.wordCount }} 字</span>
-                </li>
-                <li>
-                    <iconify name="fa6-solid:pen"/>
-                    <time>{{ art.publishDate }}</time>
-                </li>
-                <li>
-                    <iconify name="fa6-solid:clock-rotate-left"/>
-                    <time>{{ art.updateDate }}</time>
-                </li>
-            </ul>
+            <novel-attributes
+                :art
+                :attrs="[`volume`, `word-count`, `publish-date`, `update-date`]"
+            />
             <novel-article v-if="art.excerpt" class="p-small text-secondary" tag="p" :body="art.excerpt"/>
             <p v-else class="p-small text-gray">这篇文章还没有简介。</p>
         </div>
@@ -65,7 +51,6 @@
         height: 160px;
         margin: 8px;
         border-radius: 8px;
-        transition: all 0.25s;
 
         @include viewport("sm") {
             flex: none;
@@ -95,22 +80,6 @@
         > .iconify {
             font-size: 24px;
             color: var(--color-theme-text);
-        }
-    }
-
-    .tabular-info {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        column-gap: 18px;
-        font-size: 12px;
-        line-height: 20px;
-        color: var(--color-info);
-
-        > li {
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
     }
 

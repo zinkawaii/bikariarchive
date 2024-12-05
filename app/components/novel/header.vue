@@ -12,24 +12,11 @@
     <novel-cover v-if="art.cover" v-bind="art.cover" viewable/>
     <header class="novel-header">
         <h1 class="novel-title">{{ art.title }}</h1>
-        <ul class="novel-information">
-            <li>
-                <iconify name="fa6-solid:eye"/>
-                <span>{{ post?.readCount ?? "?" }} 阅读</span>
-            </li>
-            <li>
-                <iconify name="nonicons:keyword-16"/>
-                <span>{{ art.wordCount }} 字</span>
-            </li>
-            <li>
-                <iconify name="fa6-solid:pen"/>
-                <time>{{ art.publishDate }}</time>
-            </li>
-            <li>
-                <iconify name="fa6-solid:clock-rotate-left"/>
-                <time>{{ art.updateDate }}</time>
-            </li>
-        </ul>
+        <novel-attributes
+            :art
+            :post
+            :attrs="[`read-count`, `word-count`, `publish-date`, `update-date`]"
+        />
         <nuxt-link v-visible="!art.isFirst" class="novel-adjacent-top" :to="art.prev?.route">
             <iconify name="fa6-solid:chevron-left"/>
             <span>{{ art.isFirstInVol ? "上一卷" : "上一章" }}</span>
@@ -63,22 +50,6 @@
         font-size: 24px;
         line-height: 36px;
         text-align: center;
-    }
-
-    .novel-information {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        column-gap: 18px;
-        font-size: 12px;
-        line-height: 20px;
-        color: var(--color-info);
-
-        > li {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
     }
 
     .novel-adjacent-top {

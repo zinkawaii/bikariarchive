@@ -2,31 +2,30 @@
     import type { Article } from "~/utils/article";
 
     const props = defineProps<{
-        chapter: Article;
+        art: Article;
     }>();
 
     const shelfStore = useShelfStore();
     const readRecordStore = useReadRecordStore();
-    const { novel, infoType } = storeToRefs(shelfStore);
+    const { novel } = storeToRefs(shelfStore);
 
     const tags = [
         {
             name: "草稿",
             color: "rgb(216 108 234)",
-            when: () => props.chapter.draft
+            when: () => props.art.draft
         },
         {
             name: "最近阅读",
             color: "var(--color-warning)",
-            when: () => props.chapter.index === readRecordStore.get(novel.value)?.index
+            when: () => props.art.index === readRecordStore.get(novel.value)?.index
         }
     ];
 </script>
 
 <template>
-    <nuxt-link class="shech-item" :to="chapter.route">
-        <span class="font-italic text-gray">{{ chapter.orderInVol + 1 }}.</span>
-        <span class="text-truncate shech-title">{{ chapter.title }}</span>
+    <nuxt-link class="shech-item" :to="art.route">
+        <span class="text-truncate shech-title">{{ art.title }}</span>
         <ul class="shech-tags">
             <template v-for="{ name, color, when } in tags">
                 <li
@@ -36,21 +35,27 @@
                 >{{ name }}</li>
             </template>
         </ul>
-        <span class="text-gray">{{
-            infoType === 0 ? `${chapter.wordCount} 字` :
-            infoType === 1 ? chapter.publishDate : ""
-        }}</span>
+        <novel-attributes
+            :art
+            :attrs="[`word-count`, `publish-date`, `update-date`]"
+            :wrap="false"
+        />
+        <span class="shech-order">{{ art.orderInVol + 1 }}</span>
     </nuxt-link>
 </template>
 
 <style lang="scss" scoped>
     .shech-item {
         display: grid;
-        grid-template-columns: auto auto 1fr auto;
-        gap: 8px;
+        grid-template:
+            "A B D" 26px
+            "C C D" 24px / auto 1fr auto;
+        align-items: center;
+        column-gap: 8px;
+        padding-top: 8px;
         border-bottom: 1px dashed var(--color-border-light);
         font-size: 14px;
-        line-height: 36px;
+        break-inside: avoid;
 
         &:hover {
             color: var(--color-theme-text);
@@ -75,5 +80,18 @@
         border-radius: 4px;
         font-size: 13px;
         color: var(--color);
+    }
+
+    .novel-attributes {
+        grid-area: C;
+    }
+
+    .shech-order {
+        grid-area: D;
+        opacity: 0.5;
+        font-size: 28px;
+        font-style: italic;
+        font-weight: bold;
+        color: var(--color-info);
     }
 </style>
