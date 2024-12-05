@@ -28,7 +28,7 @@ export default defineJEventHandler(async (event) => {
     }
 
     //权限验证
-    identityValidate(event, config.comment[path]?.identity ?? 0);
+    identityValidate(event, Reflect.get(config.comment, path)?.identity ?? 0);
 
     //获取时间，UID
     const time = dayjs.tz();

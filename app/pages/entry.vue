@@ -32,7 +32,7 @@
 <template>
     <meow-widget v-if="isExist">
         <header class="entry-header">
-            <h1 class="entry-title">{{ title }}</h1>
+            <h1 class="entry-title">{{ data?.title ?? title }}</h1>
         </header>
         <mb-skeleton v-if="status !== `success`"/>
         <article v-else class="entry-article">

@@ -24,7 +24,7 @@ export type SourceInfo = UseSourceOptions & {
     output: (path: string, data: any) => Promise<void>;
 };
 
-export interface BaseCache {
+interface BaseCache {
     hash: string;
 }
 

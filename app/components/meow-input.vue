@@ -39,7 +39,7 @@
 
         &:where(:focus) {
             ~ .input-underline::before {
-                width: 100%;
+                scale: 1;
             }
 
             ~ .input-placeholder {
@@ -63,10 +63,11 @@
         &::before {
             content: "";
             display: block;
-            width: 0;
             height: 1px;
             background-color: var(--color-theme-dark);
-            transition: all 0.4s;
+            transform-origin: left;
+            transition: scale 0.4s;
+            scale: 0 1;
         }
     }
 

@@ -47,12 +47,12 @@
 
 <template>
     <figure class="mb-code">
-        <div class="code-header">
+        <figcaption class="code-header">
             <span class="text-uppercase code-lang">{{ lang }}</span>
             <button v-for="{ icon, action } in actions" class="code-action" @click="action">
                 <iconify :name="toValue(icon)"/>
             </button>
-        </div>
+        </figcaption>
         <div class="code-area" :class="{ [`is-collapse`]: isCollapse }">
             <div class="code-inner" :class="{ [`is-expand`]: isExpand }">
                 <pre class="code-line">{{ lineStr }}</pre>
@@ -135,7 +135,7 @@
     .code-line {
         margin-left: 4px;
         text-align: right;
-        color: var(--color-text-info);
+        color: var(--color-info);
         user-select: none;
     }
 

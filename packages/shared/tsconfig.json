@@ -3,7 +3,6 @@
     "target": "ESNext",
     "baseUrl": "./",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "outDir": "dist"
+    "moduleResolution": "Bundler"
   }
 }

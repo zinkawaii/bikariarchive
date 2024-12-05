@@ -94,16 +94,18 @@
     };
 
     //关闭时
-    const onLeave: BaseTransitionProps<HTMLImageElement>["onLeave"] = (el) => {
+    const onLeave: BaseTransitionProps<HTMLImageElement>["onLeave"] = (el, done) => {
         const { left: elLeft, top: elTop } = el.getBoundingClientRect();
         const { scrollX: x, scrollY: y } = window;
 
         //回到原位
-        el.animate([{
+        const animation = el.animate([{
             top: 2 * y + elTop + "px",
             left: 2 * x + elLeft + "px",
             clipPath: "inset(0)"
         }, getOriginalKeyframe(x, y)], Zin.DEFAULT_ANIME_OPTION);
+
+        animation.addEventListener("finish", done);
     };
 
     //获取原始位置动画帧
@@ -158,7 +160,6 @@
 <style lang="scss" scoped>
     .image-viewer {
         position: fixed;
-        transition: all 0.4s;
         touch-action: none;
 
         &.v-leave-active {

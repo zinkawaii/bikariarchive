@@ -6,11 +6,6 @@ export default antfu({
         "data/json/Bangumi.json",
         "public/json/Jnm.json"
     ],
-    jsonc: {
-        overrides: {
-            "jsonc/indent": ["warn", 2]
-        }
-    },
     markdown: false,
     rules: {
         ...zin.standard,

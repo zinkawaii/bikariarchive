@@ -2,29 +2,33 @@
     const shelfStore = useShelfStore();
     const { infoType, jChapters } = storeToRefs(shelfStore);
 
-    //总字数
-    const totalCount = computed(() => {
-        return jChapters.value.reduce((res, c) => {
-            return res + c.wordCount;
-        }, 0);
-    });
-
-    //最近更新
-    const lastUpdated = computed(() => {
-        return jChapters.value.length
-            ? jChapters.value.reduce((prev, curr) => (
-                curr.updateDate !== Article.FARAWAY &&
-                curr.updateDate.localeCompare(prev.updateDate) > 0
-                    ? curr
-                    : prev
-            )).updateDate
-            : Article.FARAWAY;
-    });
-
-    //状态
-    const updateState = computed(() => {
-        return jChapters.value.some((c) => c.ending) ? "已完结" : "连载中";
-    });
+    const properties = [
+        {
+            label: "总字数",
+            value: computed(() => {
+                return jChapters.value.reduce((res, c) => res + c.wordCount, 0);
+            })
+        },
+        {
+            label: "最近更新",
+            value: computed(() => {
+                return jChapters.value.length
+                    ? jChapters.value.reduce((prev, curr) => (
+                        curr.updateDate !== Article.FARAWAY &&
+                        curr.updateDate.localeCompare(prev.updateDate) > 0
+                            ? curr
+                            : prev
+                    )).updateDate
+                    : Article.FARAWAY;
+            })
+        },
+        {
+            label: "状态",
+            value: computed(() => {
+                return jChapters.value.some((c) => c.ending) ? "已完结" : "连载中";
+            })
+        }
+    ];
 
     const { page, total, sizes, paginatedArr } = usePagination(jChapters, {
         sizes: 32
@@ -33,20 +37,12 @@
 
 <template>
     <div class="shelf-control">
-        <div class="shelf-property">
-            <span>总字数</span>
-            <span>{{ totalCount }}</span>
+        <div v-for="{ label, value: { value } } in properties" class="shelf-property">
+            <span class="shelf-label">{{ label }}</span>
+            <span>{{ value }}</span>
         </div>
         <div class="shelf-property">
-            <span>最近更新</span>
-            <span>{{ lastUpdated }}</span>
-        </div>
-        <div class="shelf-property">
-            <span>状态</span>
-            <span>{{ updateState }}</span>
-        </div>
-        <div class="shelf-property">
-            <span>显示</span>
+            <span class="shelf-label">显示</span>
             <button
                 v-for="(label, i) in [`字数`, `发布日期`]"
                 :class="{
@@ -82,11 +78,11 @@
         &:last-child {
             margin-left: auto;
         }
+    }
 
-        > :first-child {
-            font-weight: bold;
-            color: var(--color-theme-text);
-        }
+    .shelf-label {
+        font-weight: bold;
+        color: var(--color-theme-text);
     }
 
     .shelf-chapter {

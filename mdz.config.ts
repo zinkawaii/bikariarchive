@@ -1,4 +1,6 @@
-export default {
+import { defineConfig } from "@mdzjs/config";
+
+export default defineConfig({
     baseDir: "./data",
     mappings: [
         {
@@ -31,4 +33,4 @@ export default {
             ]
         }
     ]
-};
+});

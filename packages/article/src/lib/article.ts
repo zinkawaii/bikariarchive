@@ -5,7 +5,7 @@ import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle, parseEntry } from "../remark";
-import { type BaseCache, createProcessor, type LoadInfo, type SourceInfo, useLoad, useSource } from "./processor";
+import { createProcessor, type LoadInfo, type SourceInfo, useLoad, useSource } from "./processor";
 import type { Element } from "../remark/types";
 import type { ArticleFrontmatter, NovelFrontmatter } from "./types";
 

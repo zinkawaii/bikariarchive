@@ -1,5 +1,5 @@
-import { getProperty } from "dot-prop";
 import { codes } from "micromark-util-symbol";
+import { getProperty } from "propathy";
 import { visit } from "unist-util-visit";
 import type { Root, Var } from "mdast";
 import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
@@ -36,7 +36,7 @@ export default function(this: Processor) {
 
     return (tree: Root, file: VFile) => {
         visit(tree, "var", (node, index, parent) => {
-            const value = getProperty(file.data, node.expression) ?? "";
+            const value = getProperty(file.data, node.expression, "") as string;
 
             const prev = parent.children[index - 1];
             const next = parent.children[index + 1];

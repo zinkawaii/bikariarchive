@@ -1,4 +1,4 @@
-import { setProperty } from "dot-prop";
+import { setProperty } from "propathy";
 import raw from "rehype-raw";
 import frontmatter from "remark-frontmatter";
 import mdc from "remark-mdc";
