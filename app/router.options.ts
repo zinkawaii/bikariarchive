@@ -24,15 +24,6 @@ export default <RouterConfig> {
             component: () => import("~/pages/borrowing.vue")
         },
         {
-            name: "chanrina",
-            path: "/chanrina",
-            component: () => import("~/pages/chanrina.vue"),
-            meta: {
-                identity: 6,
-                middleware: ["auth"]
-            }
-        },
-        {
             name: "chest",
             path: "/chest",
             component: () => import("~/pages/chest.vue")
