@@ -2,7 +2,7 @@
 title: 速通命令式 Modal
 abbrlink: a4e3e63
 cover:
-  src: https://cdn.bikari.top/image/a4e3e63.webp
+  src: https://cdn.bikari.top/image/cover/a4e3e63.webp
 date: 2024-10-22
 updated: 2024-12-01
 ---
@@ -70,7 +70,6 @@ function use(render: () => VNode, options: UseModalOptions = {}) {
 
 ```ts
 import { promiseTimeout } from "@vueuse/core";
-import { nextTick } from "vue";
 
 const isOpening = ref(false);
 
