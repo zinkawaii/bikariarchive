@@ -1,4 +1,5 @@
 import type { ObjectId } from "mongoose";
+import type { CommentMode } from "~~/server/types/api/comment";
 
 export interface CommentDataSchema {
     path: string;
@@ -7,10 +8,11 @@ export interface CommentDataSchema {
     content: string;
     time: Date;
     updated: Date;
-    nickname: string;
+    ip: string;
+    mode: CommentMode;
+    nickname?: string;
     email?: string;
     address?: string;
-    ip: string;
     user?: ObjectId;
 }
 

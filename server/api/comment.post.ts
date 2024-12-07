@@ -3,12 +3,14 @@ import { z } from "zod";
 import CommentReply from "~/emails/comment-reply.vue";
 import { Zexp } from "~/utils";
 import type { PostCommentBody } from "~~/server/types/api/comment";
+import type { UserDataSchema } from "../types/model";
 
 const schema = z.object({
     path: z.string(),
     parent: z.string().optional().transform((val) => val || void 0),
     content: z.string().max(512),
-    nickname: z.string().regex(Zexp.nickname),
+    mode: z.enum(["guest", "user"]),
+    nickname: z.string().regex(Zexp.nickname).optional(),
     email: z.string().regex(Zexp.email).optional(),
     address: z.string().regex(Zexp.url).optional()
 });
@@ -34,8 +36,32 @@ export default defineJEventHandler(async (event) => {
     const time = dayjs.tz();
     const uid = event.context.session?.uid;
 
-    //获取用户
-    const qUser = await UserDataModel.findOne({ uid });
+    let extra = {};
+    if (body.mode === "guest") {
+        //无游客昵称
+        if (!body.nickname) {
+            return 2;
+        }
+
+        extra = {
+            nickname: body.nickname,
+            email: body.email,
+            address: body.address
+        };
+    }
+    else {
+        //获取用户
+        const qUser = await UserDataModel.findOne({ uid });
+
+        //用户不存在
+        if (!qUser) {
+            return 3;
+        }
+
+        extra = {
+            user: qUser.id
+        };
+    }
 
     //将评论数据写入数据库
     const qComment = await CommentDataModel.create({
@@ -44,11 +70,9 @@ export default defineJEventHandler(async (event) => {
         content: body.content,
         time,
         updated: time,
-        nickname: body.nickname,
-        email: body.email,
-        address: body.address,
         ip: getRequestIP(event, { xForwardedFor: true }),
-        user: qUser?._id
+        mode: body.mode,
+        ...extra
     });
 
     //更新所回复评论的数据（如果有）
@@ -58,12 +82,24 @@ export default defineJEventHandler(async (event) => {
         $push: {
             children: qComment._id
         }
+    }).populate<{
+        user?: UserDataSchema;
+    }>({
+        path: "user",
+        select: "email"
     });
 
+    if (!qParent) {
+        return;
+    }
+
+    //获取回复邮箱
+    const email = qParent.mode === "guest" ? qParent.email : qParent.user?.email;
+
     //对被回复评论进行邮件通知
-    if (qParent?.email && qParent.email !== body.email) {
+    if (email && email !== body.email) {
         sendMail(CommentReply, {
-            to: qParent.email,
+            to: email,
             title: `@${body.nickname} 回复了您的评论`,
             props: {
                 content: body.content,

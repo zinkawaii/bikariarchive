@@ -49,7 +49,9 @@
         commentPanelStore.modify({
             id: props.data.id,
             content: props.data.content,
+            mode: props.data.mode,
             nickname: props.data.nickname,
+            email: props.data.email,
             address: props.data.address
         });
     }

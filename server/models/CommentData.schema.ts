@@ -30,19 +30,23 @@ export const CommentDataModel = defineMongooseModel<CommentDataSchema>({
             type: Date,
             required: true
         },
-        nickname: {
+        ip: {
             type: String,
             required: true
+        },
+        mode: {
+            type: String,
+            enum: ["guest", "user"],
+            required: true
+        },
+        nickname: {
+            type: String
         },
         email: {
             type: String
         },
         address: {
             type: String
-        },
-        ip: {
-            type: String,
-            required: true
         },
         user: {
             type: Types.ObjectId,

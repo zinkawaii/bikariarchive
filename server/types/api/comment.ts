@@ -1,3 +1,5 @@
+export type CommentMode = "guest" | "user";
+
 export interface DeleteCommentBody {
     id: string;
 }
@@ -13,8 +15,10 @@ export interface CommentData {
     children: CommentData[];
     content: string;
     time: string;
+    mode: CommentMode;
     nickname: string;
     avatar: string;
+    email?: string;
     address?: string;
 }
 
@@ -22,7 +26,8 @@ export interface PostCommentBody {
     path: string;
     parent?: string;
     content: string;
-    nickname: string;
+    mode: CommentMode;
+    nickname?: string;
     email?: string;
     address?: string;
 }
@@ -30,6 +35,7 @@ export interface PostCommentBody {
 export interface PutCommentBody {
     id: string;
     content: string;
-    nickname: string;
+    nickname?: string;
+    email?: string;
     address?: string;
 }

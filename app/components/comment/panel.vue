@@ -2,24 +2,22 @@
     const commentStore = useCommentStore();
     const commentPanelStore = useCommentPanelStore();
 
-    const { mode, replyOptions, modifyOptions } = storeToRefs(commentPanelStore);
+    const { kind, replyOptions, modifyOptions } = storeToRefs(commentPanelStore);
     const [isSending, toggleSending] = useToggle(false);
 
-    const isReplyMode = computed(() => {
-        return mode.value === "reply";
+    const isReplyKind = computed(() => {
+        return kind.value === "reply";
     });
 
-    const isModifyMode = computed(() => {
-        return mode.value === "modify";
+    const isModifyKind = computed(() => {
+        return kind.value === "modify";
     });
 
-    const { content, nickname, email, address } = useSourceRefs(() => (isModifyMode.value ? modifyOptions.value : commentPanelStore), {
+    const { content, mode, nickname, email, address } = useSourceRefs(() => (isModifyKind.value ? modifyOptions.value : commentPanelStore), {
         content: {},
+        mode: {},
         nickname: {},
-        email: {
-            default: "",
-            readonly: isModifyMode
-        },
+        email: {},
         address: {}
     });
 
@@ -43,7 +41,7 @@
 
     //标题
     const title = computed(() => {
-        return isReplyMode.value
+        return isReplyKind.value
             ? `回复 @${replyOptions.value.nickname}`
             : "评论";
     });
@@ -60,19 +58,21 @@
 
         toggleSending(true);
         try {
-            if (isModifyMode.value) {
+            if (isModifyKind.value) {
                 await commentStore.modify({
                     id: modifyOptions.value.id,
                     content: content.value,
                     nickname: nickname.value,
+                    email: email.value,
                     address: address.value
                 });
             }
             else {
                 await commentStore.post({
                     path: commentPanelStore.path,
-                    parent: isReplyMode.value ? replyOptions.value.id : void 0,
+                    parent: isReplyKind.value ? replyOptions.value.id : void 0,
                     content: content.value,
+                    mode: mode.value,
                     nickname: nickname.value,
                     email: email.value,
                     address: address.value
@@ -90,18 +90,20 @@
 <template>
     <mb-dialog class="comment-panel" @close="commentPanelStore.close()">
         <meow-title>{{ title }}</meow-title>
-        <div class="panel-form">
-            <meow-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>
-            <p class="panel-tip">必填，用于展示评论昵称</p>
-        </div>
-        <div class="panel-form">
-            <meow-input placeholder="邮箱" v-model="email" v-model:error="errors.email"/>
-            <p class="panel-tip">选填，用于从 WeAvatar 服务获取头像与评论回复通知</p>
-        </div>
-        <div class="panel-form">
-            <meow-input placeholder="网址" v-model="address" v-model:error="errors.address"/>
-            <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
-        </div>
+        <template v-if="mode === `guest`">
+            <div class="panel-form">
+                <meow-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>
+                <p class="panel-tip">必填，用于展示评论昵称</p>
+            </div>
+            <div class="panel-form">
+                <meow-input placeholder="邮箱" v-model="email" v-model:error="errors.email"/>
+                <p class="panel-tip">选填，用于从 WeAvatar 服务获取头像与评论回复通知</p>
+            </div>
+            <div class="panel-form">
+                <meow-input placeholder="网址" v-model="address" v-model:error="errors.address"/>
+                <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
+            </div>
+        </template>
         <div class="panel-form">
             <comment-editor v-model="content"/>
             <p class="panel-tip">支持部分 Markdown 语法</p>

@@ -1,13 +1,6 @@
-export type CommentMode = "post" | "reply" | "modify";
+import type { CommentData } from "~~/server/types/api/comment";
 
-export interface CommentReplyOptions {
-    id: string;
-    nickname: string;
-}
+export type CommentKind = "post" | "reply" | "modify";
 
-export interface CommentModifyOptions {
-    id: string;
-    content: string;
-    nickname: string;
-    address: string;
-}
+export type CommentReplyOptions = Pick<CommentData, "id" | "nickname">;
+export type CommentModifyOptions = Pick<CommentData, "id" | "content" | "mode" | "nickname" | "email" | "address">;

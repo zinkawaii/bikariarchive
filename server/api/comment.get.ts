@@ -2,7 +2,7 @@ import CryptoES from "crypto-es";
 import { z } from "zod";
 import type { HydratedDocument } from "mongoose";
 import type { CommentData, GetCommentResponse } from "~~/server/types/api/comment";
-import type { CommentDataSchema } from "~~/server/types/model";
+import type { CommentDataSchema, UserDataSchema } from "~~/server/types/model";
 
 const schema = z.object({
     path: z.string(),
@@ -10,9 +10,10 @@ const schema = z.object({
 });
 
 //需要获取的属性
-const select = "_id content children time nickname email address";
+const select = "_id children content time mode nickname email address user";
 
 export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
+    const { session } = event.context;
     const body = schema.parse(getQuery(event));
 
     //获取严格路径
@@ -47,23 +48,37 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
     .limit(limit);
 
     //获取子评论
-    res.list = await deference(qComments);
+    res.list = await deference(qComments, session.identity ?? 0);
 });
 
 //递归解引用
-async function deference<T extends HydratedDocument<CommentDataSchema>>(parent: T[]): Promise<CommentData[]> {
+async function deference<
+    T extends HydratedDocument<CommentDataSchema>
+>(parent: T[], identity: number): Promise<CommentData[]> {
     return await Promise.all(
         parent.map(async (item) => {
+            let { mode, nickname = "", email } = item;
+
+            if (mode === "user") {
+                const { user } = await item.populate<{
+                    user: UserDataSchema;
+                }>({
+                    path: "user",
+                    select: "nickname email"
+                });
+
+                nickname = user.nickname;
+                email = user.email;
+            }
+
             const children = item.children.length ? await deference(
                 (await item.populate<{
                     children: T[];
-                }>({
-                    path: "children",
-                    select
-                })).children
+                }>("children", select)).children,
+                identity
             ) : [];
 
-            const hash = item.email ? CryptoES.SHA256(item.email.toLocaleLowerCase()) : "";
+            const hash = email ? CryptoES.SHA256(email.toLocaleLowerCase()) : "";
             const avatar = `https://weavatar.com/avatar/${hash}?d=404`;
 
             return {
@@ -71,8 +86,10 @@ async function deference<T extends HydratedDocument<CommentDataSchema>>(parent: 
                 children,
                 content: item.content,
                 time: item.time.toString(),
-                nickname: item.nickname,
+                mode,
+                nickname,
                 avatar,
+                email: identity >= 9 ? email : void 0,
                 address: item.address
             };
         })
