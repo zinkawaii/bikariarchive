@@ -30,7 +30,8 @@
         dialogStore.use(() => h(LazyCommentUser, {
             avatar: data.avatar,
             nickname: data.nickname,
-            address: data.address
+            address: data.address,
+            character: data.character
         }), {
             immediate: true
         });

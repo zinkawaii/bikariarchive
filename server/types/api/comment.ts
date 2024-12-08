@@ -20,6 +20,7 @@ export interface CommentData {
     avatar: string;
     email?: string;
     address?: string;
+    character: string;
 }
 
 export interface PostCommentBody {

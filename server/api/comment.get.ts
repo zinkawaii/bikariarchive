@@ -58,17 +58,19 @@ async function deference<
     return await Promise.all(
         parent.map(async (item) => {
             let { mode, nickname = "", email } = item;
+            let character = "游客";
 
             if (mode === "user") {
                 const { user } = await item.populate<{
                     user: UserDataSchema;
                 }>({
                     path: "user",
-                    select: "nickname email"
+                    select: "nickname email identity"
                 });
 
                 nickname = user.nickname;
                 email = user.email;
+                character = user.identity >= 9 ? "站长" : "用户";
             }
 
             const children = item.children.length ? await deference(
@@ -87,7 +89,8 @@ async function deference<
                 nickname,
                 avatar: generateAvatarUrl(email),
                 email: identity >= 9 ? email : void 0,
-                address: item.address
+                address: item.address,
+                character
             };
         })
     );
