@@ -48,25 +48,30 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
     .limit(limit);
 
     //获取子评论
-    res.list = await deference(qComments, session.identity ?? 0);
+    res.list = await deference(qComments, {}, session.identity ?? 0);
 });
 
 //递归解引用
 async function deference<
     T extends HydratedDocument<CommentDataSchema>
->(parent: T[], identity: number): Promise<CommentData[]> {
+>(
+    parent: T[],
+    users: Record<string, Pick<UserDataSchema, "nickname" | "email" | "address" | "identity">>,
+    identity: number
+): Promise<CommentData[]> {
     return await Promise.all(
         parent.map(async (item) => {
             let { mode, nickname = "", email, address } = item;
             let character = "游客";
 
             if (mode === "user") {
-                const { user } = await item.populate<{
+                const key = String(item.user);
+                const user = users[key] ??= (await item.populate<{
                     user: UserDataSchema;
                 }>({
                     path: "user",
                     select: "nickname email address identity"
-                });
+                })).user;
 
                 nickname = user.nickname;
                 email = user.email;
@@ -78,6 +83,7 @@ async function deference<
                 (await item.populate<{
                     children: T[];
                 }>("children", select)).children,
+                users,
                 identity
             ) : [];
 
