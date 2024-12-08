@@ -4,6 +4,7 @@ export interface SpaceContext {
     isMyself: ComputedRef<boolean>;
     uid: Ref<number>;
     nickname: Ref<string>;
+    avatar: Ref<string>;
     sign: Ref<string>;
 }
 

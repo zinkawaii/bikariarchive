@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { generateAvatarUrl } from "~~/server/utils";
 import type { GetUserInfoResponse } from "~~/server/types/api/user/info";
 
 const schema = z.object({
@@ -11,7 +12,7 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
 
     const qUser = await UserDataModel.findOne({
         uid
-    }, "nickname identity sign");
+    }, "nickname email identity sign");
 
     //用户不存在
     if (!qUser) {
@@ -20,6 +21,7 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
 
     res.uid = uid;
     res.nickname = qUser.nickname;
+    res.avatar = generateAvatarUrl(qUser.email);
     res.sign = qUser.sign;
 
     try {

@@ -1,6 +1,6 @@
-import CryptoES from "crypto-es";
 import { z } from "zod";
 import type { HydratedDocument } from "mongoose";
+import { generateAvatarUrl } from "~~/server/utils";
 import type { CommentData, GetCommentResponse } from "~~/server/types/api/comment";
 import type { CommentDataSchema, UserDataSchema } from "~~/server/types/model";
 
@@ -78,9 +78,6 @@ async function deference<
                 identity
             ) : [];
 
-            const hash = email ? CryptoES.SHA256(email.toLocaleLowerCase()) : "";
-            const avatar = `https://weavatar.com/avatar/${hash}?d=404`;
-
             return {
                 id: item.id,
                 children,
@@ -88,7 +85,7 @@ async function deference<
                 time: item.time.toString(),
                 mode,
                 nickname,
-                avatar,
+                avatar: generateAvatarUrl(email),
                 email: identity >= 9 ? email : void 0,
                 address: item.address
             };

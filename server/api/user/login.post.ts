@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { generateAvatarUrl } from "~~/server/utils";
 import type { PostLoginBody, PostLoginResponse } from "~~/server/types/api/user/login";
 
 const schema = z.object({
@@ -19,14 +20,14 @@ export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
             { nickname: account },
             { email: account }
         ]
-    }, "uid nickname identity sign hash salt");
+    }, "uid nickname email identity sign hash salt");
 
     //账号不存在
     if (!qUser) {
         return 1;
     }
 
-    const { uid, nickname, identity, sign, hash, salt } = qUser;
+    const { uid, nickname, email, identity, sign, hash, salt } = qUser;
 
     //密码错误
     if (hash !== InnerCode.encrypt(password, salt)) {
@@ -35,6 +36,7 @@ export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
 
     res.uid = uid;
     res.nickname = nickname;
+    res.avatar = generateAvatarUrl(email);
     res.identity = identity;
     res.sign = sign;
 

@@ -36,7 +36,9 @@
         <div class="signer-operator">
             <mb-button @click="logout">退出登录</mb-button>
         </div>
-        <nuxt-link class="signer-avatar" :to="toSpace"><user-avatar /></nuxt-link>
+        <nuxt-link class="signer-avatar" :to="toSpace">
+            <user-avatar :src="userStore.avatar"/>
+        </nuxt-link>
     </div>
 </template>
 

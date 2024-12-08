@@ -29,7 +29,7 @@
         return isMyself.value || !data.value.error;
     });
 
-    const { uid, nickname, sign } = useSourceRefs(() => (isMyself.value ? userStore : data.value), {
+    const { uid, nickname, sign, avatar } = useSourceRefs(() => (isMyself.value ? userStore : data.value), {
         uid: {
             readonly: isNotMyself
         },
@@ -38,6 +38,9 @@
         },
         sign: {
             readonly: isNotMyself
+        },
+        avatar: {
+            readonly: isNotMyself
         }
     });
 
@@ -45,7 +48,8 @@
         isMyself,
         uid,
         nickname,
-        sign
+        sign,
+        avatar
     });
 </script>
 

@@ -1,6 +1,7 @@
 export const useUserStore = defineStore("user", () => {
     const uid = ref(-1);
     const nickname = ref("");
+    const avatar = ref("");
     const identity = ref(0);
     const sign = ref("");
 
@@ -17,6 +18,7 @@ export const useUserStore = defineStore("user", () => {
         if (!info.error) {
             uid.value = info.uid;
             nickname.value = info.nickname;
+            avatar.value = info.avatar;
             identity.value = info.identity;
             sign.value = info.sign;
         }
@@ -25,6 +27,7 @@ export const useUserStore = defineStore("user", () => {
     function reset() {
         uid.value = -1;
         nickname.value = "";
+        avatar.value = "";
         identity.value = 0;
         sign.value = "";
     }
@@ -32,6 +35,7 @@ export const useUserStore = defineStore("user", () => {
     return {
         uid,
         nickname,
+        avatar,
         identity,
         sign,
         isLogin,

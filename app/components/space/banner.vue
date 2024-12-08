@@ -4,7 +4,8 @@
     const {
         isMyself,
         nickname,
-        sign: userSign
+        sign: userSign,
+        avatar
     } = inject(injectionKey);
 
     const toastStore = useToastStore();
@@ -43,7 +44,7 @@
 
 <template>
     <div class="space-banner">
-        <user-avatar class="banner-avatar"/>
+        <user-avatar class="banner-avatar" :src="avatar"/>
         <div class="banner-title">
             <span class="banner-nickname">{{ nickname }}</span>
         </div>

@@ -1,7 +1,5 @@
-export interface GetUserInfoResponse extends BaseResponse {
-    uid?: number;
-    nickname?: string;
-    identity?: number;
-    sign?: string;
+import type { PostLoginResponse } from "~~/server/types/api/user/login";
+
+export interface GetUserInfoResponse extends PostLoginResponse {
     isLogin?: boolean;
 }
