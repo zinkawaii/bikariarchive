@@ -51,9 +51,6 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
     //性别
     const sex = 0;
 
-    //个性签名
-    const sign = "";
-
     //权限
     const identity = 1;
 
@@ -69,7 +66,6 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
         nickname,
         email,
         sex,
-        sign,
         identity,
         createTime,
         hash,

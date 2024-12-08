@@ -57,7 +57,7 @@ async function deference<
 >(parent: T[], identity: number): Promise<CommentData[]> {
     return await Promise.all(
         parent.map(async (item) => {
-            let { mode, nickname = "", email } = item;
+            let { mode, nickname = "", email, address } = item;
             let character = "游客";
 
             if (mode === "user") {
@@ -65,11 +65,12 @@ async function deference<
                     user: UserDataSchema;
                 }>({
                     path: "user",
-                    select: "nickname email identity"
+                    select: "nickname email address identity"
                 });
 
                 nickname = user.nickname;
                 email = user.email;
+                address = user.address;
                 character = user.identity >= 9 ? "站长" : "用户";
             }
 
@@ -89,7 +90,7 @@ async function deference<
                 nickname,
                 avatar: generateAvatarUrl(email),
                 email: identity >= 9 ? email : void 0,
-                address: item.address,
+                address,
                 character
             };
         })

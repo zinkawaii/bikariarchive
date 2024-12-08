@@ -41,8 +41,9 @@ export interface UserDataSchema {
     uid: number;
     nickname: string;
     email: string;
+    address?: string;
     sex: number;
-    sign: string;
+    sign?: string;
     identity: number;
     createTime: Date;
     hash: string;
