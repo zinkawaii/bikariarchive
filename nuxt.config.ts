@@ -83,7 +83,6 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
-        "pinia-plugin-persistedstate/nuxt",
         "@nuxt/fonts",
         "@nuxt/icon",
         "@nuxt/image",
@@ -91,7 +90,8 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@vueuse/nuxt",
         "@zinkawaii/nuxt-gsap",
-        "@zinkawaii/nuxt-shiki"
+        "@zinkawaii/nuxt-shiki",
+        "pinia-plugin-persistedstate/nuxt"
     ],
     robots: robotsConfig,
     sitemap: sitemapConfig,

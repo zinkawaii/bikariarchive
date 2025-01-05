@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-    import { hyphenate } from "@vueuse/core";
     import type { Child, Root } from "@bikari/article";
     import { Iconify, MbCode, MbGallery, MbImage, PlainLink } from "#components";
 

@@ -35,15 +35,15 @@ export default defineNuxtModule<FontSplitOptions>({
                     input: fontPath,
                     outDir: dirName,
                     previewImage: null,
-                    testHTML: false,
+                    multiThreads: true,
+                    testHtml: false,
                     reporter: false,
-                    threads: {},
                     targetType: "ttf",
                     renameOutputFont: `[hash:8][ext]`,
-                    cssFileName: cssName,
                     css: {
+                        fileName: cssName,
                         fontFamily: font.name,
-                        localFamily: false
+                        localFamily: []
                     }
                 });
             }

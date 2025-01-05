@@ -103,12 +103,12 @@
     });
 
     //当前时长显示值
-    const formatedCurrent = computed(() => {
+    const displayCurrentTime = computed(() => {
         return formatTime(currentTime.value);
     });
 
     //总时长显示值
-    const formatedDuration = computed(() => {
+    const displayDuration = computed(() => {
         return formatTime(duration.value);
     });
 
@@ -201,22 +201,23 @@
         const time = currentTime.value;
         const current = lyrics.value[currentLyric.value];
 
-        if (current) {
-            const m = time / 60;
-            const s = time % 60;
-
-            //格式化时间点
-            current.time = time;
-            current.timing = `[${
-                String(Math.floor(m)).padStart(2, "0")
-            }:${
-                s.toFixed(2).padStart(5, "0")
-            }] `;
-            current.signed = true;
-
-            //指向不存在的序号时不再增加
-            currentLyric.value++;
+        //指向不存在的序号时不再增加
+        if (!current) {
+            return;
         }
+        currentLyric.value++;
+
+        const m = time / 60;
+        const s = time % 60;
+
+        //格式化时间点
+        current.time = time;
+        current.timing = `[${
+            String(Math.floor(m)).padStart(2, "0")
+        }:${
+            s.toFixed(2).padStart(5, "0")
+        }] `;
+        current.signed = true;
     }
 
     //获取打轴结果
@@ -238,7 +239,7 @@
                 <mb-button :disabled="invalid" @click="toggleAxising()">{{ isAxising ? "结束打轴" : "开始打轴" }}</mb-button>
             </div>
             <div class="lyric-control">
-                <time>{{ formatedCurrent }}</time>
+                <time>{{ displayCurrentTime }}</time>
                 <mb-slider
                     class="lyric-progress"
                     v-model="progress"
@@ -247,7 +248,7 @@
                     @dragstart="toggleDragging(true)"
                     @dragend="toggleDragging(false)"
                 />
-                <time>{{ formatedDuration }}</time>
+                <time>{{ displayDuration }}</time>
             </div>
         </div>
         <div class="lyric-main">
