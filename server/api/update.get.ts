@@ -10,7 +10,7 @@ export default defineJEventHandler<GetUpdateResponse>(async (event, res) => {
     const { year } = schema.parse(getQuery(event));
 
     //读取数据
-    res.list = [2023, 2024].includes(year)
+    res.list = [2023, 2024, 2025].includes(year)
         ? await fs.readJSON(r(`/dist/update/${year}.json`))
         : [];
 });

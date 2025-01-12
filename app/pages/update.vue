@@ -3,9 +3,9 @@
         title: "更新日志"
     });
 
-    const totalYears = [2024, 2023];
+    const totalYears = [2025, 2024, 2023];
 
-    const currentYear = useRouteQuery("year", 2024, {
+    const currentYear = useRouteQuery("year", 2025, {
         transform: Number
     });
 
