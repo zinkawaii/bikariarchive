@@ -4,7 +4,7 @@ import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import { createProcessor, useLoad, useSource } from "./processor";
 import type { Child } from "../remark/types";
-import type { EntryDetail, EntryTalent, IntelBlock, IntelBranch, IntelItem, IntelLeaf, JEntry, JIntel } from "./types";
+import type { EntryDetail, EntryTalent, IntelNode, JEntry, JIntel } from "./types";
 
 interface AbilityInfo {
     name: string;
@@ -29,7 +29,7 @@ export default createProcessor("Entry", () => {
 
             const newVal = structuredClone(val) as JIntel;
             for (const block of newVal.blocks) {
-                trim(block);
+                transform(block);
             }
 
             return {
@@ -38,19 +38,23 @@ export default createProcessor("Entry", () => {
                 drafts
             };
 
-            //在生产环境下修剪草稿词条
-            function trim(tree: IntelBlock | IntelBranch | IntelLeaf | IntelItem) {
+            //在生产环境下隐藏未知标题，修剪草稿词条
+            function transform(tree: IntelNode) {
+                if (tree.unknown && !(isDev && tree.title)) {
+                    tree.title = "? ? ?";
+                }
+
                 for (let i = 0; i < tree.children.length; i++) {
-                    let item = tree.children[i];
+                    let item = tree.children[i] as IntelNode | string | string[];
                     if (typeof item === "object" && !Array.isArray(item)) {
-                        trim(item);
+                        transform(item);
                         if (!item.children.length) {
                             tree.children.splice(i--, 1);
                         }
                         continue;
                     }
                     if (Array.isArray(item)) {
-                        item = item[0] as string;
+                        item = item[0];
                     }
                     if (!(item in val.all)) {
                         tree.children.splice(i--, 1);
@@ -73,7 +77,7 @@ export default createProcessor("Entry", () => {
         },
         beforeOutput(val) {
             const items = [];
-            for (const [name, abilities] of Object.entries(val) as [string, AbilityInfo[]][]) {
+            for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {
                 if (!(name in metaInfo.value.all)) {
                     continue;
                 }
