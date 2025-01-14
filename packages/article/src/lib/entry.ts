@@ -4,7 +4,13 @@ import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import { createProcessor, useLoad, useSource } from "./processor";
 import type { Child } from "../remark/types";
-import type { EntryDetail, IntelBlock, IntelBranch, IntelItem, IntelLeaf, JEntry, JIntel } from "./types";
+import type { EntryDetail, EntryTalent, IntelBlock, IntelBranch, IntelItem, IntelLeaf, JEntry, JIntel } from "./types";
+
+interface AbilityInfo {
+    name: string;
+    star: number;
+    class: string[];
+}
 
 export default createProcessor("Entry", () => {
     const metaInfo = useLoad("meta", {
@@ -46,7 +52,7 @@ export default createProcessor("Entry", () => {
                     if (Array.isArray(item)) {
                         item = item[0] as string;
                     }
-                    if (!all.includes(item) && !drafts.includes(item)) {
+                    if (!(item in val.all)) {
                         tree.children.splice(i--, 1);
                     }
                 }
@@ -57,6 +63,37 @@ export default createProcessor("Entry", () => {
 
     const mapInfo = useLoad("map", {
         out: "dist/json/Intmap.json"
+    });
+
+    const abilityInfo = useLoad("ability", {
+        out: "dist/json/Ability.json",
+        onUpdate(newVal, oldVal) {
+            newVal.items = oldVal.items;
+            return newVal;
+        },
+        beforeOutput(val) {
+            const items = [];
+            for (const [name, abilities] of Object.entries(val) as [string, AbilityInfo[]][]) {
+                if (!(name in metaInfo.value.all)) {
+                    continue;
+                }
+                for (const ability of abilities) {
+                    let item = items.find(({ name }) => name === ability.name);
+                    if (!item) {
+                        items.push(item = {
+                            name: ability.name,
+                            class: ability.class,
+                            owners: []
+                        });
+                    }
+                    item.owners.push({
+                        name,
+                        star: ability.star
+                    });
+                }
+            }
+            return items;
+        }
     });
 
     useSource(0, {
@@ -88,11 +125,15 @@ export default createProcessor("Entry", () => {
             const name = basename(path, ".mdz");
             const folder = basename(info.folders.find((dir) => path.startsWith(dir)));
 
+            //提取超能力信息
+            const abilities = collectAbilities(attributes.talents ?? []);
+
             //写入缓存
             return {
                 name,
                 folder,
-                draft: attributes.draft
+                draft: attributes.draft,
+                abilities
             };
         },
         unlink(cache) {
@@ -100,12 +141,14 @@ export default createProcessor("Entry", () => {
 
             delete metaInfo.value.all[name];
             delete mapInfo.value[name];
+            delete abilityInfo.value[name];
         },
         onCacheHit(cache) {
-            const { name, folder, draft } = cache;
+            const { name, folder, draft, abilities } = cache;
 
             metaInfo.value.all[name] = draft;
             mapInfo.value[name] = folder;
+            abilityInfo.value[name] = abilities;
         }
     });
 });
@@ -143,4 +186,20 @@ function transformDetails(attributes: JEntry) {
         }
     }
     attributes.details = details;
+}
+
+function collectAbilities(talents: EntryTalent[]) {
+    const abilities: AbilityInfo[] = [];
+    for (const talent of talents) {
+        if (talent.type !== "超能力") {
+            continue;
+        }
+
+        abilities.push({
+            name: talent.name.zh,
+            star: talent.star,
+            class: talent.class
+        });
+    }
+    return abilities;
 }
