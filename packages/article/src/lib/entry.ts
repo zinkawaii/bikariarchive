@@ -1,9 +1,10 @@
+import { isDev } from "@bikari/shared";
 import fs from "fs-extra";
 import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import { createProcessor, useLoad, useSource } from "./processor";
 import type { Child } from "../remark/types";
-import type { EntryDetail, JEntry } from "./types";
+import type { EntryDetail, IntelBlock, IntelBranch, IntelItem, IntelLeaf, JEntry, JIntel } from "./types";
 
 export default createProcessor("Entry", () => {
     const metaInfo = useLoad("meta", {
@@ -14,9 +15,42 @@ export default createProcessor("Entry", () => {
             return newVal;
         },
         beforeOutput(val) {
-            const newVal = structuredClone(val);
-            newVal.all = Object.keys(newVal.all);
-            return newVal;
+            const all = [];
+            const drafts = [];
+            for (const [name, draft] of Object.entries(val.all)) {
+                (draft ? drafts : all).push(name);
+            }
+
+            const newVal = structuredClone(val) as JIntel;
+            for (const block of newVal.blocks) {
+                trim(block);
+            }
+
+            return {
+                ...newVal,
+                all,
+                drafts
+            };
+
+            //在生产环境下修剪草稿词条
+            function trim(tree: IntelBlock | IntelBranch | IntelLeaf | IntelItem) {
+                for (let i = 0; i < tree.children.length; i++) {
+                    let item = tree.children[i];
+                    if (typeof item === "object" && !Array.isArray(item)) {
+                        trim(item);
+                        if (!item.children.length) {
+                            tree.children.splice(i--, 1);
+                        }
+                        continue;
+                    }
+                    if (Array.isArray(item)) {
+                        item = item[0] as string;
+                    }
+                    if (!all.includes(item) && !drafts.includes(item)) {
+                        tree.children.splice(i--, 1);
+                    }
+                }
+            }
         }
     });
     metaInfo.value.all = {};
@@ -39,6 +73,11 @@ export default createProcessor("Entry", () => {
             const file = await fs.readFile(path);
             const attributes = await parseEntry<JEntry>(file.toString());
 
+            //生产环境下忽略草稿文件
+            if (attributes.draft && !isDev) {
+                return null;
+            }
+
             //转换数据
             transformDetails(attributes);
 
@@ -52,7 +91,8 @@ export default createProcessor("Entry", () => {
             //写入缓存
             return {
                 name,
-                folder
+                folder,
+                draft: attributes.draft
             };
         },
         unlink(cache) {
@@ -62,9 +102,9 @@ export default createProcessor("Entry", () => {
             delete mapInfo.value[name];
         },
         onCacheHit(cache) {
-            const { name, folder } = cache;
+            const { name, folder, draft } = cache;
 
-            metaInfo.value.all[name] = true;
+            metaInfo.value.all[name] = draft;
             mapInfo.value[name] = folder;
         }
     });

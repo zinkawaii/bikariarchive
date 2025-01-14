@@ -64,6 +64,7 @@ export interface JArtmap {
 export interface JIntel {
     blocks: IntelBlock[];
     all: string[];
+    drafts: string[];
 }
 
 export interface IntelBlock {
@@ -74,7 +75,7 @@ export interface IntelBlock {
 
 export interface IntelBranch {
     title: string;
-    children: IntelLeaf[];
+    children: (IntelLeaf | IntelItem)[];
 }
 
 export interface IntelLeaf {
@@ -93,6 +94,7 @@ export interface JIntmap {
 
 export interface JEntry {
     title: string;
+    draft?: boolean;
     summary?: Child[];
     brief?: EntryBrief;
     appearance?: EntryAppearance;

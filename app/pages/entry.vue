@@ -10,7 +10,7 @@
     const route = useRoute();
 
     const isExist = computed(() => {
-        return Entry.meta.all.includes(title);
+        return Entry.meta.all.includes(title) || Entry.meta.drafts.includes(title);
     });
 
     const { status, data } = useLazyFetch("/api/entry", {

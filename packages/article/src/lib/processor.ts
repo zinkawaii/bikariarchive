@@ -193,7 +193,7 @@ export function createProcessor(sign: string, setup: (ctx: ProcessorContext) => 
 interface UseLoadOptions {
     src?: string;
     out: string;
-    onUpdate?: (newVal: any, oldVal: any) => void;
+    onUpdate?: (newVal: any, oldVal: any) => any;
     beforeOutput?: (val: any) => any;
 }
 
