@@ -11,7 +11,7 @@
         ],
         [
             { key: "日文名", val: props.name?.jp },
-            { key: "平假名", val: props.name?.ka },
+            { key: "振假名", val: props.name?.ka },
             { key: "年龄", val: props.age }
         ]
     ]);
