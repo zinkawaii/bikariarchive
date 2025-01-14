@@ -8,9 +8,10 @@ brief:
     en: Fukai Takuma
   sex: 男
   age: 39
-illustration:
-talent:
-relationship:
+appearance:
+illustrations:
+talents:
+relationships:
   - name: 浮海沙希
     relation: 女儿
 ---

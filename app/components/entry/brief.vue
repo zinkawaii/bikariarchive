@@ -21,7 +21,7 @@
     <div class="div-table entry-brief">
         <dl v-for="arr in fields">
             <template v-for="{ key, val } in arr">
-                <template v-if="val">
+                <template v-if="val !== void 0">
                     <dt>{{ key }}</dt>
                     <dd>{{ val }}</dd>
                 </template>

@@ -6,9 +6,9 @@ brief:
 appearance:
   novel: utakata
   index: "000"
-illustration:
-talent:
-relationship:
+illustrations:
+talents:
+relationships:
   - name: 秋叶翎
     relation: 学长
 ---

@@ -22,7 +22,10 @@
                             class="tag talent-tag"
                             :to="toEntry(`能力评级`)"
                         >Star {{ item.star }}</nuxt-link>
-                        <span class="tag talent-tag">{{ item.name.en }}</span>
+                        <span
+                            v-if="item.name.en"
+                            class="tag talent-tag"
+                        >{{ item.name.en }}</span>
                     </template>
                     <template v-else>
                         <h3>{{ item.name }}</h3>

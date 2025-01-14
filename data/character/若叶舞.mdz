@@ -11,12 +11,12 @@ brief:
 appearance:
   novel: bikari
   index: "111"
-illustration:
+illustrations:
   - title: 人物卡
     src: /garden/illustration/若叶舞_2.jpg
     illustrator: 狸猫森
-talent:
-relationship:
+talents:
+relationships:
   - name: 若叶遥
     relation: 姐姐
 ---

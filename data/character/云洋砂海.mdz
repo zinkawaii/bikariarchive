@@ -11,9 +11,9 @@ brief:
 appearance:
   novel: bikari
   index: "100"
-illustration:
-talent:
-relationship:
+illustrations:
+talents:
+relationships:
   - name: 森谷雪绘
     relation: 老师
 ---

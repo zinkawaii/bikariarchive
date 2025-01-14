@@ -6,7 +6,7 @@
 
 <template>
     <section class="entry-section">
-        <h2 v-if="title">{{ title }}</h2>
+        <h2 v-if="title" :id="title">{{ title }}</h2>
         <slot></slot>
     </section>
 </template>

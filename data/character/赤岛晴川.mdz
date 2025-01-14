@@ -11,8 +11,8 @@ brief:
 appearance:
   novel: bikari
   index: "106"
-illustration:
-talent:
+illustrations:
+talents:
   - type: 超能力
     name:
       zh: 炽热火羽
@@ -21,9 +21,9 @@ talent:
     star: 3
     class:
       - 元素
-relationship:
+relationships:
 ---
 
-#talent[0].content
+#talents[0].content
 
 操纵火，能够在背后生成十余米长的火翼。

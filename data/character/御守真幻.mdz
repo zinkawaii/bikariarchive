@@ -11,8 +11,8 @@ brief:
 appearance:
   novel: bikari
   index: "101"
-illustration:
-talent:
+illustrations:
+talents:
   - type: 超能力
     name:
       zh: 时空掌控
@@ -21,11 +21,11 @@ talent:
     star: 5
     class:
       - 空间
-relationship:
+relationships:
   - name: 山吹风铃
     relation: 后辈
 ---
 
-#talent[0].content
+#talents[0].content
 
 未知。

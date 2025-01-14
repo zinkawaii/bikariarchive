@@ -98,16 +98,16 @@ export interface JEntry {
     summary?: Child[];
     brief?: EntryBrief;
     appearance?: EntryAppearance;
-    illustration?: EntryIllustration[];
-    talent?: EntryTalent[];
-    relationship?: EntryRelationship[];
+    illustrations?: EntryIllustration[];
+    talents?: EntryTalent[];
+    relationships?: EntryRelationship[];
     details?: EntryDetail[];
 }
 
 export interface EntryBrief {
     name?: Record<"zh" | "jp" | "ka" | "en", string>;
     sex?: string;
-    age?: number;
+    age?: number | null;
 }
 
 export interface EntryAppearance {
@@ -129,8 +129,8 @@ export type EntryTalent = {
     type: "超能力";
     name: {
         zh: string;
-        jp: string;
-        en: string;
+        jp?: string;
+        en?: string;
     };
     star: number;
     class: string[];

@@ -6,8 +6,8 @@ brief:
 appearance:
   novel: utakata
   index: "000"
-illustration:
-talent:
+illustrations:
+talents:
   - type: 超能力
     name:
       zh: 状态锁存
@@ -16,13 +16,13 @@ talent:
     star: 2
     class:
       - 原石
-relationship:
+relationships:
   - name: 秋园静
     relation: 妹妹
   - name: 陈子莹
     relation: 学妹
 ---
 
-#talent[0].content
+#talents[0].content
 
 未知。

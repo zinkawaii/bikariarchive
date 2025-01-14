@@ -42,11 +42,11 @@
                     <entry-appearance v-if="data.appearance" v-bind="data.appearance"/>
                     <entry-brief v-if="data.brief" v-bind="data.brief"/>
                 </div>
-                <entry-illustration v-if="data.illustration" :data="data.illustration"/>
+                <entry-illustration v-if="data.illustrations" :data="data.illustrations"/>
             </section>
             <template v-if="data.category === `character`">
-                <entry-talent :data="data.talent"/>
-                <entry-relationship :data="data.relationship"/>
+                <entry-talent :data="data.talents"/>
+                <entry-relationship :data="data.relationships"/>
             </template>
             <entry-detail v-for="detail in data.details" v-bind="detail"/>
         </article>

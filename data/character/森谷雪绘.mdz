@@ -11,9 +11,9 @@ brief:
 appearance:
   novel: bikari
   index: "119"
-illustration:
-talent:
-relationship:
+illustrations:
+talents:
+relationships:
   - name: 云洋砂海
     relation: 学生
 ---

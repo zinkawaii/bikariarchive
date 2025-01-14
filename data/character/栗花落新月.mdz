@@ -11,8 +11,8 @@ brief:
 appearance:
   novel: bikari
   index: 2k2
-illustration:
-talent:
+illustrations:
+talents:
   - type: 超能力
     name:
       zh: 月下夕颜
@@ -21,7 +21,7 @@ talent:
     star: 3
     class:
       - 自然
-relationship:
+relationships:
   - name: 三日月
     relation: “影子”
   - name: 弦月
@@ -32,6 +32,6 @@ relationship:
     relation: 妹妹
 ---
 
-#talent[0].content
+#talents[0].content
 
 通过照射到月光，与他物互换内在。外表与内在会根据月相的更替而改变。

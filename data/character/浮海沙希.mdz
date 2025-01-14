@@ -11,9 +11,9 @@ brief:
 appearance:
   novel: bikari
   index: "300"
-illustration:
-talent:
-relationship:
+illustrations:
+talents:
+relationships:
   - name: 浮海拓马
     relation: 父亲
 ---
