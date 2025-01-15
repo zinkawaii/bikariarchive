@@ -1,4 +1,5 @@
 import { isDev } from "@bikari/shared";
+import defu from "defu";
 import fs from "fs-extra";
 import { basename } from "pathe";
 import { parseEntry } from "../remark";
@@ -112,11 +113,18 @@ export default createProcessor("Entry", () => {
         async parse(path, info) {
             //处理文件
             const file = await fs.readFile(path);
-            const attributes = await parseEntry<JEntry>(file.toString());
+            let { attributes, drafts } = await parseEntry<JEntry>(file.toString());
 
             //生产环境下忽略草稿文件
             if (attributes.draft && !isDev) {
                 return null;
+            }
+
+            //合并草稿数据
+            if (isDev) {
+                for (const draft of drafts) {
+                    attributes = defu(draft, attributes);
+                }
             }
 
             //转换数据

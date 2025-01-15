@@ -3,10 +3,27 @@ import YAML from "yaml";
 import type { Root } from "mdast";
 import type { VFile } from "vfile";
 
-export default function() {
+interface Options {
+    placeholder?: boolean;
+}
+
+export default function(options: Options = {}) {
     return (tree: Root, file: VFile) => {
-        visit(tree, "yaml", (node) => {
-            file.data = YAML.parse(node.value);
+        const frontmatters = [];
+        visit(tree, "yaml", (node, index, parent) => {
+            const data = YAML.parse(node.value);
+            frontmatters.push(data);
+
+            if (options.placeholder) {
+                parent.children.splice(index, 1, {
+                    type: "text",
+                    value: `id(frontmatter):${frontmatters.length - 1}`
+                });
+            }
         });
+
+        file.data = {
+            frontmatters
+        };
     };
 }

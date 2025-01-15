@@ -1,4 +1,3 @@
-import { setProperty } from "propathy";
 import raw from "rehype-raw";
 import frontmatter from "remark-frontmatter";
 import mdc from "remark-mdc";
@@ -17,7 +16,7 @@ import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
 import strikethrough from "./plugins/strikethrough";
-import type { Element, Root } from "./types";
+import type { Root } from "./types";
 
 export {
     compiler,
@@ -59,7 +58,7 @@ export async function parseArticle<T>(text: string) {
 
     const result = await processor.process(text);
     return {
-        attributes: result.data as T,
+        attributes: result.data.frontmatters[0] as T,
         body: result.result as Root
     };
 }
@@ -67,8 +66,14 @@ export async function parseArticle<T>(text: string) {
 export async function parseEntry<T>(text: string) {
     const processor = unified()
         .use(parse)
-        .use(frontmatter)
-        .use(attributes)
+        .use(frontmatter, {
+            type: "yaml",
+            fence: "---",
+            anywhere: true
+        })
+        .use(attributes, {
+            placeholder: true
+        })
         .use(mdc)
         .use(emoji)
         .use(interpolation)
@@ -79,18 +84,15 @@ export async function parseEntry<T>(text: string) {
         .use(slot);
 
     //文本预处理
-    text = text.replace(/(?<=\n)---/, "---\n\n::slots") + "\n\n::";
+    text = [...generateSlottedText(text)].join("");
 
     const result = await processor.process(text);
-    const { data } = result;
+    const [data, ...drafts] = result.data.frontmatters as T[];
 
-    const slots = (result.result as Root).children as Element[];
-    for (const slot of slots) {
-        const path = slot.tag;
-        const content = slot.children;
-        setProperty(data, path, content);
-    }
-    return data as T;
+    return {
+        attributes: data,
+        drafts
+    };
 }
 
 export async function parseUpdate(text: string) {
@@ -105,4 +107,25 @@ export async function parseUpdate(text: string) {
 
     const result = await processor.process(text);
     return result.result as Root;
+}
+
+function* generateSlottedText(text: string) {
+    let i = 0;
+    let lastIndex = 0;
+    for (const match of text.matchAll(/(?<=\n)---(?=\n|$)/g)) {
+        const { index } = match;
+        if (i % 2 === 0) {
+            yield text.slice(lastIndex, index + 3);
+            yield "\n\n::slots";
+            lastIndex = index + 3;
+        }
+        else {
+            yield text.slice(lastIndex, index);
+            yield "::\n\n";
+            lastIndex = index;
+        }
+        i++;
+    }
+    yield text.slice(lastIndex);
+    yield "\n::";
 }

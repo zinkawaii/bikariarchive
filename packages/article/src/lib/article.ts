@@ -102,7 +102,7 @@ export default createProcessor("Article", () => {
 async function processMeta(path: string) {
     //处理文件
     const file = await fs.readFile(path);
-    const attributes = await parseEntry<NovelFrontmatter>(file.toString());
+    const { attributes } = await parseEntry<NovelFrontmatter>(file.toString());
     const [order, novel] = basename(path, ".mdz").split("-");
 
     //写入缓存
