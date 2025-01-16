@@ -1,26 +1,42 @@
 import { createPlainShiki, type CreatePlainShikiReturns, type MountPlainShikiOptions } from "plain-shiki";
+import type { BundledLanguage, BundledTheme } from "shiki";
+
+export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, "lang" | "themes"> & {
+    lang: MaybeRefOrGetter<BundledLanguage>;
+    themes: MaybeRefOrGetter<Record<string, BundledTheme>>;
+};
 
 export default function(
-    target: MaybeRefOrGetter<HTMLElement>,
+    el: MaybeRefOrGetter<HTMLElement>,
     options: MountPlainShikiOptions
 ) {
+    const target = toRef(el);
+    const lang = toRef(options.lang);
+    const themes = toRef(options.themes);
+
+    let plain: CreatePlainShikiReturns;
     let ctx: ReturnType<CreatePlainShikiReturns["mount"]>;
+
+    const { trigger } = watchTriggerable([target, lang, themes], async () => {
+        await loadShikiLanguages(lang.value);
+        const shikiOptions = await resolveShikiOptions();
+        ctx?.dispose();
+
+        if (target.value) {
+            ctx = plain?.mount(target.value, {
+                ...shikiOptions,
+                ...options
+            });
+        }
+    });
 
     onMounted(async () => {
         const shiki = await getShikiHighlighter();
-        const shikiOptions = await resolveShikiOptions();
-        await loadShikiLanguages(options.lang);
+        plain = createPlainShiki(shiki);
+        trigger();
+    });
 
-        const { mount } = createPlainShiki(shiki);
-
-        watchImmediate(() => toValue(target), (el) => {
-            ctx?.dispose();
-            if (el) {
-                ctx = mount(el, {
-                    ...shikiOptions,
-                    ...options
-                });
-            }
-        });
+    onUnmounted(() => {
+        ctx?.dispose();
     });
 }
