@@ -87,8 +87,10 @@
             line-height: 26px;
 
             &::before {
-                content: "·";
-                font-weight: bold;
+                content: "•";
+                display: inline-block;
+                width: 1em;
+                text-align: center;
             }
         }
     }

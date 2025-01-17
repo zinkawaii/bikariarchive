@@ -37,7 +37,7 @@
 
 <template>
     <div class="shelf-control">
-        <div v-for="{ label, value: { value } } in properties" class="shelf-property">
+        <div v-for="{ label, value } in properties" class="shelf-property">
             <span class="shelf-label">{{ label }}</span>
             <span>{{ value }}</span>
         </div>

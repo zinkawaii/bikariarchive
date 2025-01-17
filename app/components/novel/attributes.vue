@@ -15,32 +15,32 @@
     const infos: {
         attr: Attr;
         icon: string;
-        content: ComputedRef<unknown>;
+        content: MaybeRefOrGetter<unknown>;
     }[] = [
         {
             attr: "volume",
             icon: "fa6-solid:book-open",
-            content: computed(() => props.art.volumeInfo.title)
+            content: () => props.art.volumeInfo.title
         },
         {
             attr: "read-count",
             icon: "fa6-solid:eye",
-            content: computed(() => `${props.post?.readCount ?? "?"} 阅读`)
+            content: () => `${props.post?.readCount ?? "?"} 阅读`
         },
         {
             attr: "word-count",
             icon: "nonicons:keyword-16",
-            content: computed(() => `${props.art.wordCount} 字`)
+            content: () => `${props.art.wordCount} 字`
         },
         {
             attr: "publish-date",
             icon: "fa6-solid:pen",
-            content: computed(() => props.art.publishDate)
+            content: () => props.art.publishDate
         },
         {
             attr: "update-date",
             icon: "fa6-solid:clock-rotate-left",
-            content: computed(() => props.art.updateDate)
+            content: () => props.art.updateDate
         }
     ];
 
@@ -59,7 +59,7 @@
     >
         <li v-for="{ icon, content } in filterred" class="novel-attr">
             <iconify :name="icon"/>
-            <span>{{ content }}</span>
+            <span>{{ toValue(content) }}</span>
         </li>
     </ul>
 </template>
