@@ -8,6 +8,15 @@ appearance:
   index: "000"
 illustrations:
 talents:
+relationships:
+  - name: 秋园静
+    relation: 妹妹
+  - name: 陈子莹
+    relation: 学妹
+---
+
+---
+talents:
   - type: 超能力
     name:
       zh: 状态锁存
@@ -16,13 +25,8 @@ talents:
     star: 2
     class:
       - 原石
-relationships:
-  - name: 秋园静
-    relation: 妹妹
-  - name: 陈子莹
-    relation: 学妹
 ---
 
 #talents[0].content
 
-未知。
+强制锁定物体或行为的运动或静止状态。
