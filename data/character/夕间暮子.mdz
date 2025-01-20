@@ -1,0 +1,26 @@
+---
+title: 夕间暮子
+draft: true
+brief:
+  name:
+    zh: 夕间暮子
+    jp: 夕間暮子
+    ka: ゆうま　くれこ
+    en: Yuuma Kureko
+  sex: 女
+  age: null
+appearance:
+illustrations:
+talents:
+  - type: 超能力
+    name:
+      zh: 光子夕立
+    star: 2
+    class:
+      - 自然
+relationships:
+---
+
+#talents[0].content
+
+能够在阳光照射处形成热流，并扭曲热流中的火焰燃烧法则。

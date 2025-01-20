@@ -1,0 +1,27 @@
+---
+title: 抚斩月影
+draft: true
+brief:
+  name:
+    zh: 抚斩月影
+    jp: 撫斬月影
+    ka: なでぎり　つきかげ
+    en: Nadegiri Tsukikage
+  sex: 男
+  age: null
+appearance:
+illustrations:
+talents:
+  - type: 超能力
+    name:
+      zh: 暗夜行者
+      en: Umbra Fades
+    star: 3
+    class:
+      - 光学
+relationships:
+---
+
+#talents[0].content
+
+自身的透明度会随着所处位置的光线明暗而发生变化。

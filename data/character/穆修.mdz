@@ -1,0 +1,22 @@
+---
+title: 穆修
+draft: true
+brief:
+  sex: 男
+  age: null
+appearance:
+illustrations:
+talents:
+  - type: 超能力
+    name:
+      zh: 量子缔合
+      en: Quantum Association
+    star: 4
+    class:
+      - 量子
+relationships:
+---
+
+#talents[0].content
+
+自由控制任何化学反应的进行，或对量子进行强制性的合成和分解。

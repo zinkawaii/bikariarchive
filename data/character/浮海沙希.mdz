@@ -17,3 +17,19 @@ relationships:
   - name: 浮海拓马
     relation: 父亲
 ---
+
+---
+talents:
+  - type: 超能力
+    name:
+      zh: 偶像崇拜
+      jp: 偶像崇拝
+      en: Idolatry
+    star: 4
+    class:
+      - 原石
+---
+
+#talents[0].content
+
+能够自由地使用粉丝的能力。在模仿自己的偶像时，能够使用该偶像的能力。

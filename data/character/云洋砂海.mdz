@@ -17,3 +17,9 @@ relationships:
   - name: 森谷雪绘
     relation: 老师
 ---
+
+---
+relationships:
+  - name: 云洋砂奈美
+    relation: 妹妹
+---

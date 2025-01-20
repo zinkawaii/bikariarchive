@@ -15,3 +15,17 @@ illustrations:
 talents:
 relationships:
 ---
+
+---
+talents:
+  - type: 超能力
+    name:
+      zh: 静止之刻
+    star: 3
+    class:
+      - 空间
+---
+
+#talents[0].content
+
+通过跃迁到超高速世界来模拟时间静止。

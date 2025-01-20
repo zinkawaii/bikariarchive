@@ -28,6 +28,9 @@ talents:
     star: 5
     class:
       - 空间
+relationships:
+  - name: 御守真理
+    relation: 妹妹
 ---
 
 #talents[0].content

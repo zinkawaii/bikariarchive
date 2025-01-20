@@ -1,0 +1,27 @@
+---
+title: 柚木薄枝
+draft: true
+brief:
+  name:
+    zh: 柚木薄枝
+    jp: 柚木薄枝
+    ka: ゆずき　はくえ
+    en: Yuzuki Hakue
+  sex: 女
+  age: null
+appearance:
+illustrations:
+talents:
+  - type: 超能力
+    name:
+      zh: 光点覆灭
+      en: Eclipse
+    star: 1
+    class:
+      - 光学
+relationships:
+---
+
+#talents[0].content
+
+能够强制熄灭点光源。

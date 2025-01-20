@@ -1,0 +1,30 @@
+---
+title: 游园望
+draft: true
+brief:
+  name:
+    zh: 游园望
+    jp: 游園望
+    ka: ゆうえん　のぞむ
+    en: Yuuen Nozomu
+  sex: 男
+  age: null
+appearance:
+  novel: bikari
+  index: 1k3
+illustrations:
+talents:
+  - type: 超能力
+    name:
+      zh: 回廊波动
+      jp: 回廊波動
+      en: Corridor Wave
+    star: 3
+    class:
+      - 念力
+relationships:
+---
+
+#talents[0].content
+
+能够通过使对方的梦镜回廊波动，使对方的能力发生崩坏。
