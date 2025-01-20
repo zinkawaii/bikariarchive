@@ -1,9 +1,9 @@
 import { isDev } from "@bikari/shared";
 import defu from "defu";
 import fs from "fs-extra";
+import { createProcessor, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
 import { parseEntry } from "../remark";
-import { createProcessor, useLoad, useSource } from "./processor";
 import type { Child } from "../remark/types";
 import type { EntryDetail, EntryTalent, IntelNode, JEntry, JIntel } from "./types";
 
@@ -18,7 +18,7 @@ export default createProcessor("Entry", () => {
         src: "data/json/Intel.json",
         out: "dist/json/Intel.json",
         onUpdate(newVal, oldVal) {
-            newVal.all = oldVal.all;
+            newVal.all = oldVal?.all ?? {};
             return newVal;
         },
         beforeOutput(val) {
@@ -64,7 +64,6 @@ export default createProcessor("Entry", () => {
             }
         }
     });
-    metaInfo.value.all = {};
 
     const mapInfo = useLoad("map", {
         out: "dist/json/Intmap.json"
@@ -72,10 +71,6 @@ export default createProcessor("Entry", () => {
 
     const abilityInfo = useLoad("ability", {
         out: "dist/json/Ability.json",
-        onUpdate(newVal, oldVal) {
-            newVal.items = oldVal.items;
-            return newVal;
-        },
         beforeOutput(val) {
             const items = [];
             for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {

@@ -1,6 +1,6 @@
 import fs from "fs-extra";
+import { createProcessor, useSource } from "kerria";
 import { parseUpdate } from "../remark";
-import { createProcessor, useSource } from "./processor";
 import type { JUpdate } from "./types";
 
 const TITLE_REGEX = /^(.+) \[v(.+)\]$/;
