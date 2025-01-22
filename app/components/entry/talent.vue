@@ -34,7 +34,6 @@
                 <novel-article tag="div" :body="item.content"/>
             </template>
         </template>
-        <p v-else>未知。</p>
     </entry-section>
 </template>
 

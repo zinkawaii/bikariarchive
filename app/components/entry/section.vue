@@ -7,6 +7,8 @@
 <template>
     <section class="entry-section">
         <h2 v-if="title" :id="title">{{ title }}</h2>
-        <slot></slot>
+        <slot>
+            <p>未知。</p>
+        </slot>
     </section>
 </template>
