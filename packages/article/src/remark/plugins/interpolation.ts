@@ -36,7 +36,7 @@ export default function(this: Processor) {
 
     return (tree: Root, file: VFile) => {
         visit(tree, "var", (node, index, parent) => {
-            const value = getProperty(file.data, node.expression, "") as string;
+            const value = getProperty(file.data.frontmatters[0], node.expression, "") as string;
 
             const prev = parent.children[index - 1];
             const next = parent.children[index + 1];

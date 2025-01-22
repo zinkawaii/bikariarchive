@@ -21,7 +21,7 @@ it("emoji", async () => {
         .use(raw)
         .use(compiler);
 
-    const body = await getBody(processor, `
+    const { body } = await process(processor, `
 i-twemoji:face-with-monocle
     `);
     const children = tryGetChildren(body.children[0], "p");
@@ -45,7 +45,7 @@ it("ruby", async () => {
         .use(raw)
         .use(compiler);
 
-    const body = await getBody(processor, `
+    const { body } = await process(processor, `
 |山吹风铃(やまぶき かざり)|
     `);
     const children = tryGetChildren(body.children[0], "p");
@@ -71,22 +71,26 @@ it("ruby", async () => {
 it("slot", async () => {
     const processor = unified()
         .use(parse)
+        .use(frontmatter)
+        .use(attributes, { placeholder: true })
         .use(mdc)
         .use(rehype)
         .use(raw)
         .use(slot);
 
-    const body = await getBody(processor, `
+    const { data } = await process(processor, `
 ::slots
 #foo
 #bar
 ::
     `);
 
-    expect(body.children).toEqual([
-        { tag: "foo", children: [] },
-        { tag: "bar", children: [] }
-    ]);
+    expect(data).toEqual({
+        frontmatters: [{
+            foo: [],
+            bar: []
+        }]
+    });
 });
 
 it("interpolation", async () => {
@@ -99,7 +103,7 @@ it("interpolation", async () => {
         .use(raw)
         .use(compiler);
 
-    const body = await getBody(processor, `---
+    const { body } = await process(processor, `---
 foo:
   bar:
     - baz: ...
@@ -114,9 +118,12 @@ foo:
     }]);
 });
 
-async function getBody(processor: Processor<any, any, any, any, any>, text: string) {
+async function process(processor: Processor<any, any, any, any, Root>, text: string) {
     const result = await processor.process(text);
-    return result.result as Root;
+    return {
+        body: result.result,
+        data: result.data
+    };
 }
 
 function tryGetChildren(node: Child, tag: string) {
