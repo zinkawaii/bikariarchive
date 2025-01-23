@@ -6,17 +6,18 @@ import { transformNodes } from "./utils";
 
 export default function(this: Processor) {
     this.compiler = (root, file) => {
-        let frontmatter: Record<string, any>;
+        const { frontmatters } = file.data;
+        let frontmatter: (typeof frontmatters)[number];
 
-        visit(root as hast.Root, (node) => {
-            if (node.type === "text") {
-                const match = node.value.match(/id\(frontmatter\):(\d+)\n/);
-                if (match) {
-                    const index = match[1];
-                    frontmatter = file.data.frontmatters[index];
-                }
+        visit(root as hast.Root, (node, index, parent) => {
+            if (node.type !== "element") {
+                return;
             }
-            else if (node.type === "element" && node.tagName === "slots" && frontmatter) {
+            if (node.tagName === "frontmatter") {
+                frontmatter = frontmatters[node.properties.order as number];
+                parent.children.splice(index, 1);
+            }
+            else if (node.tagName === "slots" && frontmatter) {
                 const slots = node.children
                     .filter((node): node is hast.Element => node.type === "element" && node.tagName === "component-slot")
                     .map((slot) => ({
