@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import dayjs from "dayjs";
+    import { differenceInDays, getYear, isBefore, isLeapYear } from "date-fns";
 
     useHead({
         title: "关于"
@@ -7,16 +7,16 @@
 
     const coverUrl = Zin.background("/garden/maestrale/cover.webp");
 
-    const today = dayjs();
-    const year = today.year();
+    const today = new Date();
+    const year = getYear(today);
 
     const birth = "09-29";
-    const isBefore = today.isBefore(`${year}-${birth}`);
-    const birthday = dayjs(`${year - (isBefore ? 1 : 0)}-${birth}`);
+    const before = isBefore(today, `${year}-${birth}`);
+    const birthday = new Date(`${year - (before ? 1 : 0)}-${birth}`);
 
-    const level = year - 2003 + (isBefore ? 0 : 1);
-    const total = today.isLeapYear() && isBefore ? 366 : 365;
-    const exp = today.diff(birthday, "day");
+    const level = year - 2003 + (before ? 0 : 1);
+    const total = isLeapYear(today) && before ? 366 : 365;
+    const exp = differenceInDays(today, birthday);
 </script>
 
 <template>

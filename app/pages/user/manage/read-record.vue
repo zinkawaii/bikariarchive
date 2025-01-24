@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import dayjs from "dayjs";
+    import { format } from "date-fns";
 
     useHead({
         title: "阅读记录"
@@ -42,7 +42,7 @@
     }
 
     function formatTime(time: string) {
-        return dayjs(time).format("YYYY-MM-DD HH:mm:ss");
+        return format(time, "yyyy-MM-dd HH:mm:ss");
     }
 </script>
 

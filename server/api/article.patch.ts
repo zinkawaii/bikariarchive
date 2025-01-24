@@ -1,5 +1,4 @@
 import CryptoES from "crypto-es";
-import dayjs from "dayjs";
 import { z } from "zod";
 import type { PatchArticleBody } from "~~/server/types/api/article";
 
@@ -14,7 +13,7 @@ export default defineJEventHandler(async (event, res) => {
     );
 
     const ip = getRequestIP(event, { xForwardedFor: true });
-    const time = dayjs.tz().toDate();
+    const time = new Date();
     const uid = event.context.session?.uid;
 
     //获取用户

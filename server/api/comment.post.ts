@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { z } from "zod";
 import CommentReply from "~/emails/comment-reply.vue";
 import { Zexp } from "~/utils";
@@ -33,7 +32,7 @@ export default defineJEventHandler(async (event) => {
     identityValidate(event, Reflect.get(config.comment, path)?.identity ?? 0);
 
     //获取时间，UID
-    const time = dayjs.tz();
+    const time = new Date();
     const uid = event.context.session?.uid;
 
     let extra = {};

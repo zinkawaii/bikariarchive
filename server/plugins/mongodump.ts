@@ -1,7 +1,7 @@
 import { exec } from "node:child_process";
 import consola from "consola";
 import { CronJob } from "cron";
-import dayjs from "dayjs";
+import { format } from "date-fns";
 
 export default defineNitroPlugin(() => {
     const config = useRuntimeConfig();
@@ -12,10 +12,10 @@ export default defineNitroPlugin(() => {
         timeZone: "UTC+8",
         onTick() {
             //获取当前日期
-            const date = dayjs.tz();
+            const date = new Date();
 
             //备份路径
-            const path = r(`/server/backup/${date.format("YYMMDD")}.archive`);
+            const path = r(`/server/backup/${format(date, "yyMMdd")}.archive`);
 
             //运行命令
             exec(`mongodump -u=${options.user} -p=${options.pass} -d=${options.dbName} --archive="${path}" --authenticationDatabase admin`, (err) => {

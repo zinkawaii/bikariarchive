@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { z } from "zod";
 import { Zexp } from "~/utils";
 import type { PutCommentBody } from "~~/server/types/api/comment";
@@ -20,7 +19,7 @@ export default defineJEventHandler(async (event) => {
     identityValidate(event, 9);
 
     //获取时间
-    const time = dayjs.tz();
+    const time = new Date();
 
     //获取评论
     const qComment = await CommentDataModel.findOne({

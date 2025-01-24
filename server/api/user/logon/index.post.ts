@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { z } from "zod";
 import { Zexp } from "~/utils";
 import type { GetLoginBody, GetLogonResponse } from "~~/server/types/api/user/logon";
@@ -55,7 +54,7 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const identity = 1;
 
     //创建时间
-    const createTime = dayjs.tz();
+    const createTime = new Date();
 
     //哈希和盐值
     const { hash, salt } = InnerCode.create(password);

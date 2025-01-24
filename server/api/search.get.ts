@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 import { z } from "zod";
@@ -67,7 +66,7 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
     //将检索记录写入数据库
     new SearchRecordModel({
         ip: getRequestIP(event, { xForwardedFor: true }),
-        time: dayjs.tz(),
+        time: new Date(),
         word
     }).save();
 }, 1500);

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import dayjs from "dayjs";
+    import { format, getDay, getDaysInMonth, getMonth, getYear } from "date-fns";
     import lunisolar from "lunisolar";
     import jTimeline from "~/assets/json/Timeline.json";
 
@@ -34,8 +34,8 @@
     ];
 
     //日期范围
-    const startDate = dayjs("2018/11/7");
-    const endDate = dayjs("2019/12/31");
+    const startDate = new Date("2018-11-07");
+    const endDate = new Date("2019-12-31");
 
     const currentYear = ref(2019);
     const currentMonth = ref(6);
@@ -53,23 +53,23 @@
         const dates = [];
 
         //当月第一天
-        const firstDay = dayjs(new Date(year, month));
+        const firstDay = new Date(year, month);
 
         //添加当月日期
-        const count = firstDay.daysInMonth();
+        const count = getDaysInMonth(firstDay);
         for (let i = 0; i < count; i++) {
             dates.push(createDate(year, month, i + 1));
         }
 
         //添加上月日期
-        const weekday = (firstDay.day() + 6) % 7;
+        const weekday = (getDay(firstDay) + 6) % 7;
         if (weekday > 0) {
             const [y, m] = month === 0
                 ? [year - 1, 0]
                 : [year, month - 1];
 
-            const firstDay = dayjs(new Date(y, m));
-            const count = firstDay.daysInMonth();
+            const firstDay = new Date(y, m);
+            const count = getDaysInMonth(firstDay);
             for (let i = weekday; i > 0; i--) {
                 const d = count - weekday + i;
                 dates.unshift(createDate(y, m, d));
@@ -108,17 +108,15 @@
 
     //创建日期对象
     function createDate(year: number, month: number, day: number): CalendarDate {
-        const base = new Date(year, month, day);
-
-        const solar = dayjs(base);
-        const lunar = lunisolar(base);
+        const solar = new Date(year, month, day);
+        const lunar = lunisolar(solar);
 
         return {
             year: year,
             month: month,
             solar: day,
             lunar: getSubTitle(),
-            event: jTimeline[solar.format("YYYY-MM-DD")]
+            event: jTimeline[format(solar, "yyyy-MM-dd")]
         };
 
         //副标题
@@ -140,12 +138,12 @@
 
     //是否为起始月份
     const isFirstMonth = computed(() => {
-        return currentYear.value === startDate.year() && currentMonth.value === startDate.month();
+        return currentYear.value === getYear(startDate) && currentMonth.value === getMonth(startDate);
     });
 
     //是否为结束月份
     const isLastMonth = computed(() => {
-        return currentYear.value === endDate.year() && currentMonth.value === endDate.month();
+        return currentYear.value === getYear(endDate) && currentMonth.value === getMonth(endDate);
     });
 
     //上一月份

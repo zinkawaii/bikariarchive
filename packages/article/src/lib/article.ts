@@ -1,5 +1,5 @@
 import { isDev } from "@bikari/shared";
-import dayjs from "dayjs";
+import { format } from "date-fns";
 import fs from "fs-extra";
 import { createProcessor, type LoadInfo, type SourceInfo, useLoad, useSource } from "kerria";
 import { toString } from "mdast-util-to-string";
@@ -208,8 +208,8 @@ function sortKeyValues<T>(obj: Record<string, T>, compareFn: (a: T, b: T) => num
 //日期格式化
 function formatDate(obj: Record<string, any>, keys: string[]) {
     for (const key of keys) {
-        if (Reflect.has(obj, key)) {
-            obj[key] = dayjs(obj[key]).format("YYYY-MM-DD");
+        if (key in obj) {
+            obj[key] = format(obj[key], "yyyy-MM-dd");
         }
     }
 }

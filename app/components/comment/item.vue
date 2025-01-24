@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import dayjs from "dayjs";
+    import { format, formatDistanceToNow } from "date-fns";
     import { LazyCommentUser } from "#components";
     import type { WithParent } from "~/types";
     import type { CommentData } from "~~/server/types/api/comment";
@@ -19,10 +19,13 @@
 
     //相对时间
     const elapsed = computed(() => {
-        const date = dayjs(props.data.time);
+        const date = new Date(props.data.time);
         return Date.now() - date.valueOf() >= 86400000
-            ? date.format("YYYY-MM-DD HH:mm")
-            : date.fromNow();
+            ? format(date, "yyyy-MM-dd HH:mm")
+            : formatDistanceToNow(date, {
+                addSuffix: true,
+                includeSeconds: true
+            });
     });
 
     //查看用户信息
