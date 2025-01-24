@@ -1,15 +1,15 @@
-interface PointerFn {
-    (event: PointerEvent): void;
+interface PointerFn<R = unknown> {
+    (event: PointerEvent): R | void;
 }
 
-export interface UseHoldOptions {
+export interface UsePointerOptions {
     filter?: (event: PointerEvent) => boolean;
     onPointerdown?: PointerFn;
     onPointermove?: PointerFn;
-    onPointerup?: PointerFn;
+    onPointerup?: PointerFn<boolean>;
 }
 
-export default function(el: MaybeRefOrGetter<HTMLElement>, options: UseHoldOptions) {
+export default function(el: MaybeRefOrGetter<HTMLElement>, options: UsePointerOptions) {
     const {
         filter = () => true
     } = options;
@@ -26,21 +26,21 @@ export default function(el: MaybeRefOrGetter<HTMLElement>, options: UseHoldOptio
     });
 
     //鼠标移动时
-    useEventListener("pointermove", Zin.throttle((event) => {
+    useEventListener("pointermove", (event) => {
         if (!isHolding.value || !filter(event)) {
             return;
         }
         options.onPointermove?.(event);
-        isHolding.value = true;
-    }));
+    });
 
     //鼠标松开时
     useEventListener("pointerup", (event) => {
         if (!isHolding.value) {
             return;
         }
-        options.onPointerup?.(event);
-        isHolding.value = false;
+        if (options.onPointerup?.(event) !== false) {
+            isHolding.value = false;
+        }
     });
 
     return {

@@ -49,7 +49,7 @@
         }
     ];
 
-    contextMenuStore.base({
+    contextMenuStore.basic({
         title: "anchor",
         when: targetAnchorLink,
         items: [
@@ -63,7 +63,7 @@
         ]
     });
 
-    contextMenuStore.base({
+    contextMenuStore.basic({
         title: "image",
         when: targetImageLink,
         items: [
@@ -88,7 +88,7 @@
         ]
     });
 
-    contextMenuStore.base({
+    contextMenuStore.basic({
         title: "text",
         when: () => textSelection.text.value,
         items: [
@@ -116,7 +116,7 @@
         ]
     });
 
-    contextMenuStore.base({
+    contextMenuStore.basic({
         title: "main",
         items: [
             {

@@ -16,7 +16,7 @@
     const gsap = useGsap();
 
     const imgComp = useTemplateRef("img");
-    const imgEl = useCurrentElement(imgComp);
+    const imgEl = computed(() => imgComp.value?.$refs.imgEl);
 
     const captionEl = useTemplateRef("caption");
     const tagEls = computed(() => {

@@ -7,7 +7,7 @@
     let audio: HTMLAudioElement = null;
 
     const maeComp = useTemplateRef("mae");
-    const maeEl = useCurrentElement(maeComp);
+    const maeEl = computed(() => maeComp.value?.$refs.imgEl);
 
     const serif = ref("");
     const skin = useLocalStorage("maestrale-skin", 0);

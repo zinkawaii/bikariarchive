@@ -29,7 +29,7 @@
     let left = 0;
 
     //鼠标拖动时
-    useHold(rootEl, {
+    usePointer(rootEl, {
         onPointerdown(event) {
             ({ width, left } = rootEl.value.getBoundingClientRect());
             emit("dragstart");

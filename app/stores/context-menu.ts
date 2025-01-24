@@ -19,7 +19,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         extraGroup.value = null;
     }
 
-    function base(group: ContextMenuGroup) {
+    function basic(group: ContextMenuGroup) {
         patchItems(group.items);
         baseGroups.value.push(group as any);
     }
@@ -43,7 +43,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         isOpening,
         groups,
         clear,
-        base,
+        basic: basic,
         extra,
         open,
         close

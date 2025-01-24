@@ -10,35 +10,111 @@
     }>();
 
     const rootComp = useTemplateRef("root");
-    const rootEl = useCurrentElement(rootComp);
+    const rootEl = computed(() => rootComp.value?.$refs.imgEl);
 
     //放大后占窗口比率
     const rate = 0.9;
 
-    //起始位置
-    let mouseX = 0;
-    let mouseY = 0;
-    let imageX = 0;
-    let imageY = 0;
+    interface Pointer {
+        startX: number;
+        startY: number;
+        currentX: number;
+        currentY: number;
+    }
+
+    //起始位置和尺寸
+    let startRect: DOMRect;
+
+    //起始中心位置
+    let startCenter: typeof center.value;
+
+    //起始两指距离
+    let startDistance: typeof distance.value;
+
+    //指针数据
+    const pointers = ref<Record<number, Pointer>>({});
+
+    //双指数据
+    const fingers = computed(() => {
+        return Object.values(pointers.value).slice(0, 2);
+    });
+
+    //当前中心位置
+    const center = computed(() => getCenter("current"));
+
+    //当前两指距离
+    const distance = computed(() => getDistance("current"));
+
+    //获取中心位置
+    function getCenter(mode: "start" | "current") {
+        return {
+            x: fingers.value.reduce((sum, finger) => sum + finger[mode + "X"], 0) / fingers.value.length,
+            y: fingers.value.reduce((sum, finger) => sum + finger[mode + "Y"], 0) / fingers.value.length
+        };
+    }
+
+    //获取两指距离
+    function getDistance(mode: "start" | "current") {
+        const [finger1, finger2] = fingers.value;
+        return finger2 ? Math.hypot(
+            finger1[mode + "X"] - finger2[mode + "X"],
+            finger1[mode + "Y"] - finger2[mode + "Y"]
+        ) : 0;
+    }
+
+    //初始化
+    function initialize() {
+        for (const pointer of Object.values(pointers.value)) {
+            pointer.startX = pointer.currentX;
+            pointer.startY = pointer.currentY;
+        }
+
+        startRect = rootEl.value.getBoundingClientRect();
+        startCenter = getCenter("start");
+        startDistance = getDistance("start");
+    }
 
     //鼠标拖动时
-    const { isHolding } = useHold(rootEl, {
+    const { isHolding } = usePointer(rootEl, {
         onPointerdown(event) {
-            mouseX = event.pageX;
-            mouseY = event.pageY;
-            ({
-                left: imageX,
-                top: imageY
-            } = rootEl.value.getBoundingClientRect());
+            pointers.value[event.pointerId] = {
+                startX: event.screenX,
+                startY: event.screenY,
+                currentX: event.screenX,
+                currentY: event.screenY
+            };
+            initialize();
         },
         onPointermove(event) {
+            const pointer = pointers.value[event.pointerId];
+            if (!pointer) {
+                return;
+            }
+            pointer.currentX = event.screenX;
+            pointer.currentY = event.screenY;
+
+            const rate = distance.value / startDistance || 1;
+            const left = startRect.left + center.value.x - startCenter.x;
+            const top = startRect.top + center.value.y - startCenter.y;
+            const finalLeft = left - (center.value.x - left) * (rate - 1);
+            const finalTop = top - (center.value.y - top) * (rate - 1);
+
             rootEl.value.animate({
-                top: imageY - mouseY + event.pageY + "px",
-                left: imageX - mouseX + event.pageX + "px"
+                left: finalLeft + "px",
+                top: finalTop + "px",
+                width: startRect.width * rate + "px",
+                height: startRect.height * rate + "px"
             }, {
                 duration: 0,
                 fill: "forwards"
             });
+        },
+        onPointerup(event) {
+            delete pointers.value[event.pointerId];
+            if (Object.keys(pointers.value).length) {
+                initialize();
+                return false;
+            }
         }
     });
 
@@ -53,12 +129,12 @@
         }
 
         const { left, top, width, height } = rootEl.value.getBoundingClientRect();
-        const finalX = left - (event.clientX - left) * (rate - 1);
-        const finalY = top - (event.clientY - top) * (rate - 1);
+        const finalLeft = left - (event.clientX - left) * (rate - 1);
+        const finalTop = top - (event.clientY - top) * (rate - 1);
 
         rootEl.value.animate({
-            left: finalX + "px",
-            top: finalY + "px",
+            left: finalLeft + "px",
+            top: finalTop + "px",
             width: width * rate + "px",
             height: height * rate + "px"
         }, Zin.DEFAULT_ANIME_OPTION);
