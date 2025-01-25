@@ -61,6 +61,7 @@ export default <RouterConfig> {
             props: true,
             component: () => import("~/pages/reader.vue"),
             meta: {
+                catalog: true,
                 comment: true,
                 breadcrumb: {
                     name: "shelf"
@@ -96,6 +97,7 @@ export default <RouterConfig> {
             props: true,
             component: () => import("~/pages/entry.vue"),
             meta: {
+                catalog: true,
                 comment: true,
                 breadcrumb: {
                     name: "intel"

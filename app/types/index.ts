@@ -10,6 +10,7 @@ export type WithParent<T> = T & {
 declare module "vue-router" {
     interface RouteMeta {
         identity?: number;
+        catalog?: boolean;
         comment?: boolean;
         jumbotron?: boolean;
         sidebar?: boolean;

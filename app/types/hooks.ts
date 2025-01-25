@@ -1,3 +1,3 @@
 export interface BikariHooks {
-    "reader:rendered": () => void;
+    "article:rendered": (selector: string) => void;
 }
