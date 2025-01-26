@@ -2,6 +2,8 @@
 
 feat(entry): 添加目录
 
+feat(sidebar): 新的目录样式
+
 ## 2025-01-24 [v0.5.31]
 
 feat(mb-image-viewer): 支持双指移动与缩放

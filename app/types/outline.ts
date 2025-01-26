@@ -3,5 +3,6 @@ export interface OutlineHeaderItem {
     title: string;
     link: string;
     level: number;
+    order: string;
     children: OutlineHeaderItem[];
 }

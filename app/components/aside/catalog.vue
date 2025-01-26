@@ -74,4 +74,18 @@
             margin-top: 4px;
         }
     }
+
+    .aside-anchor {
+        padding-left: 12px;
+
+        &:hover {
+            background-color: var(--color-gray-500);
+            color: white;
+        }
+
+        &.router-link-active {
+            background-color: var(--color-theme);
+            color: white;
+        }
+    }
 </style>

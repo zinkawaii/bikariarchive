@@ -40,19 +40,10 @@
     }
 
     .aside-anchor {
-        padding: 6px 0 6px 12px;
+        padding-block: 6px;
         border-radius: 8px;
         font-size: 14px;
+        line-height: 18px;
         color: var(--color-text);
-
-        &:hover {
-            background-color: var(--color-gray-500);
-            color: white;
-        }
-
-        &.router-link-active, &.is-active {
-            background-color: var(--color-theme);
-            color: white;
-        }
     }
 </style>
