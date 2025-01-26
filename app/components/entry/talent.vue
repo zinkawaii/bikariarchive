@@ -12,7 +12,7 @@
             <template v-for="item in data">
                 <hgroup>
                     <template v-if="item.type === `超能力`">
-                        <h3>{{ item.name.zh }}</h3>
+                        <h3 :id="item.name.zh">{{ item.name.zh }}</h3>
                         <nuxt-link
                             v-for="cls in item.class"
                             class="tag talent-tag"
@@ -28,7 +28,7 @@
                         >{{ item.name.en }}</span>
                     </template>
                     <template v-else>
-                        <h3>{{ item.name }}</h3>
+                        <h3 :id="item.name">{{ item.name }}</h3>
                     </template>
                 </hgroup>
                 <novel-article tag="div" :body="item.content"/>

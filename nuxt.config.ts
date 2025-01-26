@@ -78,6 +78,11 @@ export default defineNuxtConfig({
                     additionalData: `@use "~/assets/scss/mixin.scss" as *;`
                 }
             }
+        },
+        ssr: {
+            noExternal: [
+                "yaml"
+            ]
         }
     },
     modules: [
