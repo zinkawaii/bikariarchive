@@ -47,7 +47,7 @@ client.exec(`
     git pull --rebase;
     sudo rm -rf {.output,dist};
     sudo tar -xzvf ${packname};
-    sudo pnpm i;
+    sudo pnpm i --ignore-scripts;
     pnpm run deploy;
 `, (err, channel) => {
     if (err) {
