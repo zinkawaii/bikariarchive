@@ -188,6 +188,11 @@
             }
         }
 
+        &::before, &::after {
+            margin-inline: 2px;
+            translate: 0 -4px;
+        }
+
         &::before {
             content: "ʚ";
             transform-origin: right;
@@ -196,7 +201,6 @@
         &::after {
             content: "ɞ";
             transform-origin: left;
-            rotate: 0 30deg;
         }
     }
 

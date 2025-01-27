@@ -116,8 +116,8 @@ export default defineNuxtConfig({
     },
     splittedFonts: {
         fonts: [{
-            name: "Teng Xiang",
-            path: "~/assets/fonts/TengXQJianYuan-w3.ttf"
+            name: "ChillRoundF",
+            path: "~/assets/fonts/ChillRoundFRegular.ttf"
         }]
     },
     icon: {

@@ -107,7 +107,7 @@
     }
 
     .jumbo-phrase {
-        margin-block: 32px 8px;
+        margin-top: 32px;
 
         > .jumbo-char {
             animation-name: jumbo-char-jump;
