@@ -26,4 +26,5 @@ logs
 temp
 backup
 bikari.tgz
+public/json/Jnm.json
 scripts/*.local.js

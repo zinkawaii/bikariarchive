@@ -19,6 +19,7 @@
     "task:bangumi": "cd scripts && node --watch bangumi.js",
     "task:build": "pnpm run git:stash && pnpm run fix:sharp && pnpm run build && pnpm run git:stash/pop",
     "task:deploy": "cd scripts && node deploy.js",
+    "task:jnm": "cd scripts && node jnm.js",
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
   "dependencies": {
