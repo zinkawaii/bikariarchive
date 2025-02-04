@@ -1,4 +1,4 @@
-import { type MaybeComputedElementRef, type MaybeElement, notNullish } from "@vueuse/core";
+import { type MaybeComputedElementRef, type MaybeElement, notNullish, toArray } from "@vueuse/core";
 
 export interface UseHighlightOptions {
     name: string;
@@ -14,10 +14,21 @@ export default function(
 
     const targets = computed(() => {
         const value = toValue(target);
-        return (Array.isArray(value) ? value : [value]).map(unrefElement).filter(notNullish);
+        return toArray(value).map(unrefElement).filter(notNullish);
     });
 
-    const textNodes = ref<Node[]>([]);
+    const textNodes = computedWithControl(targets, () => {
+        const res = [];
+        for (const target of targets.value) {
+            const treeWalker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
+            let currentNode = treeWalker.nextNode();
+            while (currentNode) {
+                res.push(currentNode);
+                currentNode = treeWalker.nextNode();
+            }
+        }
+        return res;
+    });
 
     const ranges = computed(() => {
         const rule = toValue(word);
@@ -53,26 +64,9 @@ export default function(
         });
     });
 
-    function update() {
-        textNodes.value = [];
-
-        for (const target of targets.value) {
-            const treeWalker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
-            let currentNode = treeWalker.nextNode();
-            while (currentNode) {
-                textNodes.value.push(currentNode);
-                currentNode = treeWalker.nextNode();
-            }
-        }
-    }
-
     if (isSupported.value) {
-        watch(targets, update, {
-            immediate: true
-        });
-
         if (options.watch) {
-            useMutationObserver(targets, update, {
+            useMutationObserver(targets, textNodes.trigger, {
                 characterData: true,
                 childList: true,
                 subtree: true
@@ -94,7 +88,7 @@ export default function(
 
     return {
         isSupported,
-        update
+        update: textNodes.trigger
     };
 }
 

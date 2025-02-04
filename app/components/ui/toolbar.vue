@@ -115,7 +115,7 @@
         &::after {
             content: "%";
             padding-left: 1px;
-            font-size: 11px;
+            font-size: 12px;
         }
 
         :hover > & {

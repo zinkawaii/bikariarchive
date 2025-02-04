@@ -43,7 +43,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         isOpening,
         groups,
         clear,
-        basic: basic,
+        basic,
         extra,
         open,
         close

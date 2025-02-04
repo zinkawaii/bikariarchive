@@ -61,12 +61,12 @@
 
 <style lang="scss" scoped>
     .entry-header {
-        padding-bottom: 8px;
+        padding-bottom: 12px;
         border-bottom: 1px solid var(--color-border);
     }
 
     :where(.mb-skeleton, .entry-section) {
-        margin-top: 16px;
+        margin-top: 24px;
     }
 
     .entry-section {
@@ -82,7 +82,7 @@
 
         :deep(> h2) {
             margin-bottom: 8px;
-            padding-bottom: 8px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--color-border);
         }
 
@@ -101,6 +101,7 @@
     }
 
     .entry-main {
+        container: entry-main / inline-size;
         display: flex;
         flex: 1;
         flex-direction: column;

@@ -1,6 +1,5 @@
 import { LazyZSigner } from "#components";
-
-export type SignerCurrentView = "login" | "logon" | "profile";
+import type { SignerCurrentView } from "~/types/signer";
 
 export const useSignerStore = defineStore("signer", () => {
     const currentView = ref<SignerCurrentView>("login");

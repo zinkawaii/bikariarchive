@@ -89,7 +89,7 @@
     }
 
     .jumbo-title, .jumbo-phrase {
-        height: 1em;
+        height: 1.25em;
     }
 
     .jumbo-title {
@@ -107,7 +107,8 @@
     }
 
     .jumbo-phrase {
-        margin-top: 32px;
+        margin-top: 0.25em;
+        line-height: 1.25em;
 
         > .jumbo-char {
             animation-name: jumbo-char-jump;

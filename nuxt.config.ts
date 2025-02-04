@@ -46,6 +46,9 @@ export default defineNuxtConfig({
         host: clientConfig.domain,
         port: 443
     },
+    devtools: {
+        enabled: true
+    },
     experimental: {
         viewTransition: true
     },
@@ -79,10 +82,8 @@ export default defineNuxtConfig({
                 }
             }
         },
-        ssr: {
-            noExternal: [
-                "yaml"
-            ]
+        server: {
+            allowedHosts: true
         }
     },
     modules: [

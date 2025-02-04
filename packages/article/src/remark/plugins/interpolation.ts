@@ -6,7 +6,7 @@ import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdow
 import type { Code, Construct, Extension as MicromarkExtension } from "micromark-util-types";
 import type { Processor } from "unified";
 import type { VFile } from "vfile";
-import { pushExtensions } from "./utils";
+import { appendExtensions } from "./utils";
 
 declare module "micromark-util-types" {
     interface TokenTypeMap {
@@ -29,9 +29,9 @@ declare module "mdast" {
 }
 
 export default function(this: Processor) {
-    pushExtensions(this, {
-        micromark: [interpolation()],
-        fromMarkdown: [interpolationFromMarkdown()]
+    appendExtensions(this, {
+        micromark: interpolation(),
+        fromMarkdown: interpolationFromMarkdown()
     });
 
     return (tree: Root, file: VFile) => {

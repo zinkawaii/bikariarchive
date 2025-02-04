@@ -35,7 +35,7 @@ const rehypeOptions: RehypeOptions = {
             });
             const result: hast.Element = {
                 type: "element",
-                tagName: "pre",
+                tagName: "figure",
                 properties: {
                     class: "shiki"
                 },
@@ -44,7 +44,14 @@ const rehypeOptions: RehypeOptions = {
                         type: "text",
                         value: `\`\`\`${node.lang}\n`
                     },
-                    ...hast.children as hast.ElementContent[],
+                    {
+                        type: "element",
+                        tagName: "pre",
+                        properties: {
+                            class: "edge-fades-x"
+                        },
+                        children: hast.children as hast.ElementContent[]
+                    },
                     {
                         type: "text",
                         value: "\n```"

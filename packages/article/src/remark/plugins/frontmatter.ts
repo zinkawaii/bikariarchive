@@ -3,8 +3,9 @@ import { frontmatter, type Matter } from "micromark-extension-frontmatter";
 import { visit } from "unist-util-visit";
 import YAML from "yaml";
 import type { Node, Root } from "mdast";
+import type { Processor } from "unified";
 import type { VFile } from "vfile";
-import { pushExtensions } from "./utils";
+import { appendExtensions } from "./utils";
 
 declare module "vfile" {
     interface DataMap {
@@ -26,10 +27,10 @@ interface Options {
     fallthrough?: boolean;
 }
 
-export default function(options?: Options & Matter) {
-    pushExtensions(this, {
-        micromark: [frontmatter(options)],
-        fromMarkdown: [frontmatterFromMarkdown(options)]
+export default function(this: Processor, options?: Options & Matter) {
+    appendExtensions(this, {
+        micromark: frontmatter(options),
+        fromMarkdown: frontmatterFromMarkdown(options)
     });
 
     return (tree: Root, file: VFile) => {

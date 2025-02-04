@@ -1,12 +1,19 @@
 <script lang="ts" setup>
-    import type { OutlineHeaderItem } from "~/types/outline";
+    interface HeaderInfo {
+        element: HTMLHeadingElement;
+        title: string;
+        link: string;
+        level: number;
+        order: string;
+        children: HeaderInfo[];
+    }
 
     const { hooks } = useHookStore();
     const { height } = useElementSize(document?.body);
 
     const activeIdx = ref(0);
-    const flatHeaders = shallowRef<OutlineHeaderItem[]>([]);
-    const nestedHeaders = shallowRef<OutlineHeaderItem[]>([]);
+    const flatHeaders = shallowRef<HeaderInfo[]>([]);
+    const nestedHeaders = shallowRef<HeaderInfo[]>([]);
 
     const headerOffsets = computedWithControl(() => [flatHeaders.value, height.value], () => {
         return flatHeaders.value?.map(({ element, link }) => ({
@@ -17,7 +24,7 @@
 
     //列表模板重用
     const [DefineOutlineList, OutlineList] = createReusableTemplate<{
-        headers: OutlineHeaderItem[];
+        headers: HeaderInfo[];
     }>({
         inheritAttrs: false
     });
@@ -131,12 +138,10 @@
     }
 
     .outline-thumb {
-        width: 100%;
         height: 30px;
-        border-radius: 2px;
+        border-radius: var(--bounded-full);
         background-color: var(--color-theme-dark);
         transition: translate 0.12s;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .outline-item {

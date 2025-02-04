@@ -3,7 +3,7 @@ import type { Ruby } from "mdast";
 import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
 import type { Code, Construct, Extension as MicromarkExtension } from "micromark-util-types";
 import type { Processor } from "unified";
-import { pushExtensions } from "./utils";
+import { appendExtensions } from "./utils";
 
 declare module "micromark-util-types" {
     interface TokenTypeMap {
@@ -30,9 +30,9 @@ declare module "mdast" {
 }
 
 export default function(this: Processor) {
-    pushExtensions(this, {
-        micromark: [ruby()],
-        fromMarkdown: [rubyFromMarkdown()]
+    appendExtensions(this, {
+        micromark: ruby(),
+        fromMarkdown: rubyFromMarkdown()
     });
 }
 

@@ -31,7 +31,5 @@
     .entry-known-ability {
         padding-left: 2em;
         font-size: 14px;
-        line-height: 26px;
-        list-style-type: disc;
     }
 </style>

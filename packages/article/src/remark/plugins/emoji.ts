@@ -1,5 +1,6 @@
 import { visit } from "unist-util-visit";
 import type { Parent, Root, Text } from "mdast";
+import type { Processor } from "unified";
 
 declare module "mdast" {
     interface RootContentMap {
@@ -13,7 +14,7 @@ interface Emoji extends Parent {
 
 const ICONIFY_REGEX = / ?i-[\w-]+:[\w-]+ ?/g;
 
-export default function() {
+export default function(this: Processor) {
     return (tree: Root) => {
         visit(tree, "text", (node, index, parent) => {
             const indices: [number, string][] = [];

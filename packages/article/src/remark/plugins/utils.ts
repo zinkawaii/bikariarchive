@@ -5,15 +5,15 @@ import type { Processor } from "unified";
 import type { Child, Root } from "../types";
 
 interface PushExtensionsOptions {
-    micromark: MicromarkExtension[];
-    fromMarkdown: FromMarkdownExtension[];
+    micromark: MicromarkExtension;
+    fromMarkdown: FromMarkdownExtension;
 }
 
-export function pushExtensions(processor: Processor, options: PushExtensionsOptions) {
+export function appendExtensions(processor: Processor, options: PushExtensionsOptions) {
     const data = processor.data();
 
-    (data.micromarkExtensions ??= []).push(...options.micromark);
-    (data.fromMarkdownExtensions ??= []).push(...options.fromMarkdown);
+    (data.micromarkExtensions ??= []).push(options.micromark);
+    (data.fromMarkdownExtensions ??= []).push(options.fromMarkdown);
 }
 
 export function transformRoot(root: hast.Node) {

@@ -20,7 +20,7 @@
         </td>
     </define-intel-cell>
     <meow-widget title="情报">
-        <div v-for="block in Entry.meta.blocks" class="intel-block">
+        <section v-for="block in Entry.meta.blocks" class="intel-block">
             <div class="intel-header">
                 <nuxt-img class="intel-icon" :src="block.icon" alt="[icon]"/>
                 <span>{{ block.title }}</span>
@@ -54,7 +54,7 @@
                     </template>
                 </tbody>
             </meow-table>
-        </div>
+        </section>
     </meow-widget>
 </template>
 
@@ -93,8 +93,8 @@
     .intel-table {
         flex: 1;
 
-        th {
-            text-wrap: nowrap;
+        td {
+            font-size: 14px;
         }
     }
 

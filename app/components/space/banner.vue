@@ -120,6 +120,7 @@
         border-radius: 4px;
         font-size: 14px;
         line-height: 26px;
+        text-shadow: var(--text-shadow);
         color: rgb(255 255 255 / 80%);
         transition: all 0.4s;
 
@@ -131,6 +132,7 @@
         &:focus {
             box-shadow: 0 2px 4px inset rgb(35 54 86 / 30%);
             background-color: var(--color-background);
+            text-shadow: none;
             color: var(--color-text-primary);
         }
     }

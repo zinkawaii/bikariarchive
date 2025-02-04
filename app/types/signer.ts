@@ -1,0 +1,1 @@
+export type SignerCurrentView = "login" | "logon" | "profile";

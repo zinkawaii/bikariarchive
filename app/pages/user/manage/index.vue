@@ -68,7 +68,6 @@
 
     .manage-table {
         background-color: var(--color-background-alpha);
-        font-size: 14px;
         text-align: center;
         text-wrap: nowrap;
 

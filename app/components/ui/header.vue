@@ -148,12 +148,11 @@
         font-size: 14px;
     }
 
-    $title: 297px;
-    $nav-large: 60px;
-    $nav-small: 52px;
+    $title: 298px;
+    $nav: 60px;
     $count: 6;
     $padding: 16px * 2;
-    $nav-full: $nav-large * $count;
+    $nav-full: $nav * $count;
     $max: $title + $nav-full + $padding;
 
     .header-logo {
@@ -190,7 +189,7 @@
 
         &::before, &::after {
             margin-inline: 2px;
-            translate: 0 -4px;
+            translate: 0 -3px;
         }
 
         &::before {
@@ -273,16 +272,12 @@
         display: grid;
         justify-items: center;
         gap: 4px;
-        width: $nav-large;
+        width: $nav;
         margin: auto;
 
         @media (width >= #{$max}) {
             color: white;
             filter: drop-shadow(var(--text-shadow));
-        }
-
-        @media (width < #{$max}) {
-            width: $nav-small;
         }
 
         > .iconify {

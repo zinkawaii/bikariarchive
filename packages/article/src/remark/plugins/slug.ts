@@ -2,8 +2,9 @@ import GithubSlugger from "github-slugger";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 import type { Root } from "mdast";
+import type { Processor } from "unified";
 
-export default function() {
+export default function(this: Processor) {
     const slugger = new GithubSlugger();
     const numerics = "OABCDEFGHI";
 

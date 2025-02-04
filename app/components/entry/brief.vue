@@ -37,7 +37,7 @@
 
         margin-top: 8px;
 
-        @include viewport("md") {
+        @container entry-main (width < 512px) {
             flex-direction: column;
         }
     }
