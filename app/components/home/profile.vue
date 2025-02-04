@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+    const contextMenuStore = useContextMenuStore();
+    const router = useRouter();
+
     const links = [
         {
             title: "GitHub",
@@ -21,13 +24,28 @@
             icon: "fa6-solid:rss"
         }
     ];
+
+    const avatarEl = useTemplateRef("avatar");
+    contextMenuStore.extra(avatarEl, {
+        title: "profile",
+        shield: ["image"],
+        items: [
+            {
+                title: "说说",
+                icon: "bi:chat-dots-fill",
+                action() {
+                    router.push({ name: "tweet" });
+                }
+            }
+        ]
+    });
 </script>
 
 <template>
     <div class="content-table home-profile">
-        <nuxt-link class="profile-avatar" :to="{ name: `tweet` }">
+        <div ref="avatar" class="profile-avatar">
             <nuxt-img :src="$config.public.avatar" alt="[avatar]"/>
-        </nuxt-link>
+        </div>
         <table class="profile-table">
             <tbody>
                 <tr>
