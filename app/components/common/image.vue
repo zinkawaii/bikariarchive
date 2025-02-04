@@ -27,21 +27,9 @@
         target: imgEl.value,
         async onClose() {
             await close();
-            if (!tagEls.value.length) {
-                return;
+            if (tagEls.value.length) {
+                displayCharacters();
             }
-
-            const tl = gsap.timeline({
-                defaults: {
-                    duration: 0.4,
-                    ease: "back.out"
-                }
-            });
-
-            for (const el of tagEls.value) {
-                tl.fromTo(el, { y: 42 }, { y: 0 }, "<0.05");
-            }
-            tl.play();
         }
     }));
 
@@ -50,7 +38,28 @@
     });
 
     const [isLoaded, toggleLoaded] = useToggle(false);
-    useEventListener(imgEl, "load", toggleLoaded);
+    onMounted(() => {
+        if (imgEl.value.complete) {
+            toggleLoaded();
+        }
+        else {
+            imgEl.value.addEventListener("load", () => toggleLoaded());
+        }
+    });
+
+    function displayCharacters() {
+        const tl = gsap.timeline({
+            defaults: {
+                duration: 0.4,
+                ease: "back.out"
+            }
+        });
+
+        for (const el of tagEls.value) {
+            tl.fromTo(el, { y: 42 }, { y: 0 }, "<0.05");
+        }
+        tl.play();
+    }
 </script>
 
 <template>
@@ -68,9 +77,11 @@
             :loading
             @click="viewable && open()"
         />
-        <figcaption v-if="character && isLoaded" ref="caption" class="image-caption">
-            <character-tag v-for="name in characters" :name/>
-        </figcaption>
+        <transition @enter="displayCharacters">
+            <figcaption v-if="character && isLoaded" ref="caption" class="image-caption">
+                <character-tag v-for="name in characters" :name/>
+            </figcaption>
+        </transition>
     </figure>
 </template>
 
