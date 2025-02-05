@@ -65,8 +65,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0(@pinia/nuxt@0.9.0(magicast@0.3.5)(pinia@2.3.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))(rollup@4.34.2))(magicast@0.3.5)(pinia@2.3.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3)))(rollup@4.34.2)
       plain-shiki:
-        specifier: ^0.0.12
-        version: 0.0.12(shiki@2.3.0)
+        specifier: ^0.1.1
+        version: 0.1.1(shiki@2.3.1)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
@@ -80,8 +80,8 @@ importers:
         specifier: ^11.1.1
         version: 11.1.1
       shiki:
-        specifier: ^2.3.0
-        version: 2.3.0
+        specifier: ^2.3.1
+        version: 2.3.1
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -153,8 +153,8 @@ importers:
         specifier: ^12.5.0
         version: 12.5.0(magicast@0.3.5)(nuxt@3.15.4(@parcel/watcher@2.5.1)(@types/node@22.13.1)(db0@0.2.3)(eslint@9.19.0(jiti@2.4.2))(ioredis@5.4.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.34.2)(sass@1.83.4)(stylelint@16.14.1(typescript@5.7.3))(terser@5.37.0)(typescript@5.7.3)(vite@6.0.11(@types/node@22.13.1)(jiti@2.4.2)(sass@1.83.4)(terser@5.37.0)(yaml@2.7.0))(vue-tsc@2.2.0(typescript@5.7.3))(yaml@2.7.0))(rollup@4.34.2)(typescript@5.7.3)
       '@zinkawaii/eslint-config':
-        specifier: ^0.1.10
-        version: 0.1.10
+        specifier: ^0.2.0
+        version: 0.2.0
       '@zinkawaii/nuxt-gsap':
         specifier: ^0.1.3
         version: 0.1.3(magicast@0.3.5)(rollup@4.34.2)
@@ -162,8 +162,8 @@ importers:
         specifier: ^0.7.1
         version: 0.7.1(magicast@0.3.5)(rollup@4.34.2)
       '@zinkawaii/stylelint-config':
-        specifier: ^0.2.2
-        version: 0.2.2(postcss-html@1.8.0)(postcss@8.5.1)(stylelint@16.14.1(typescript@5.7.3))
+        specifier: ^0.3.0
+        version: 0.3.0(postcss-html@1.8.0)(postcss@8.5.1)(stylelint@16.14.1(typescript@5.7.3))
       assemblyscript:
         specifier: ^0.27.32
         version: 0.27.32
@@ -195,11 +195,8 @@ importers:
         specifier: ^11.3.0
         version: 11.3.0
       kerria:
-        specifier: ^0.1.0
-        version: 0.1.0
-      nanoid:
-        specifier: ^5.0.9
-        version: 5.0.9
+        specifier: ^0.2.0
+        version: 0.2.0
       nodemailer:
         specifier: ^6.10.0
         version: 6.10.0
@@ -213,8 +210,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       propathy:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.0
+        version: 0.2.0
       sass:
         specifier: ^1.83.4
         version: 1.83.4
@@ -227,9 +224,6 @@ importers:
       tar:
         specifier: ^7.4.3
         version: 7.4.3
-      tinyglobby:
-        specifier: ^0.2.10
-        version: 0.2.10
       unbuild:
         specifier: ^3.3.1
         version: 3.3.1(sass@1.83.4)(typescript@5.7.3)(vue-tsc@2.2.0(typescript@5.7.3))(vue@3.5.13(typescript@5.7.3))
@@ -1481,38 +1475,38 @@ packages:
   '@shikijs/core@1.29.2':
     resolution: {integrity: sha512-vju0lY9r27jJfOY4Z7+Rt/nIOjzJpZ3y+nYpqtUZInVoXQ/TJZcfGnNOGnKjFdVZb8qexiCuSlZRKcGfhhTTZQ==}
 
-  '@shikijs/core@2.3.0':
-    resolution: {integrity: sha512-N1r7sIXYm31Zju3CmH6bH6tgIftF0NlHxx0HiZ85X2BLWczgFLo61PJCoF7nFZUu8DeS0g8xhZsiL8zi+tV8YQ==}
+  '@shikijs/core@2.3.1':
+    resolution: {integrity: sha512-u9WTI0CgQUicTJjkHoJbZosxLP2AlBPr8RV3cuh4SQDsXYqMomjnAoo4lZSqVq8a8kpMwyv/LqoSrg69dH0ZeA==}
 
   '@shikijs/engine-javascript@1.29.2':
     resolution: {integrity: sha512-iNEZv4IrLYPv64Q6k7EPpOCE/nuvGiKl7zxdq0WFuRPF5PAE9PRo2JGq/d8crLusM59BRemJ4eOqrFrC4wiQ+A==}
 
-  '@shikijs/engine-javascript@2.3.0':
-    resolution: {integrity: sha512-/ITg36HXHXP486+6zaQgP7Y38LIV9V2Pir4aIk7zQ5XcM1CU8dOlUL9BuyA/E6BKg1XaAgN+rFg3qsaspt+x2A==}
+  '@shikijs/engine-javascript@2.3.1':
+    resolution: {integrity: sha512-sZLM4utrD1D28ENLtVS1+b7TIf1OIr3Gt0gLejMIG69lmFQI8mY0eGBdvbuvvM3Ys2M0kNYJF6BaWct27PggHw==}
 
   '@shikijs/engine-oniguruma@1.29.2':
     resolution: {integrity: sha512-7iiOx3SG8+g1MnlzZVDYiaeHe7Ez2Kf2HrJzdmGwkRisT7r4rak0e655AcM/tF9JG/kg5fMNYlLLKglbN7gBqA==}
 
-  '@shikijs/engine-oniguruma@2.3.0':
-    resolution: {integrity: sha512-8nBH/QwDrJLxbIFg7ifrfyEtrW0m9FCfanxU9SJFUEbA+rFNbyDGdoXZ4IxkC6ykT1+Utx2vW6EYVAUk3Q9gcg==}
+  '@shikijs/engine-oniguruma@2.3.1':
+    resolution: {integrity: sha512-UKJEMht1gkF2ROigCgb3FE2ssmbR8CJEwUneImJ2QoZqayH/96Vp88p2N+RmyqJEHo1rsOivlJKeU9shhKpfSA==}
 
   '@shikijs/langs@1.29.2':
     resolution: {integrity: sha512-FIBA7N3LZ+223U7cJDUYd5shmciFQlYkFXlkKVaHsCPgfVLiO+e12FmQE6Tf9vuyEsFe3dIl8qGWKXgEHL9wmQ==}
 
-  '@shikijs/langs@2.3.0':
-    resolution: {integrity: sha512-gaNaqbUhncigokGehwhzGe5AY+IRJKDnp+1Zp3gjxhhv6RxMYtbn9zDu3cl9ngNZGEdtEtvruz6LasdY3n0MCA==}
+  '@shikijs/langs@2.3.1':
+    resolution: {integrity: sha512-3csAX8RGm2EQCbpCb1Eq+r4DSpkku6gxb4jiHnOxlV4D36VYZsmunUiDo/4NZvpFA0CW33v/JoYmFJ3yQ2TvSw==}
 
   '@shikijs/themes@1.29.2':
     resolution: {integrity: sha512-i9TNZlsq4uoyqSbluIcZkmPL9Bfi3djVxRnofUHwvx/h6SRW3cwgBC5SML7vsDcWyukY0eCzVN980rqP6qNl9g==}
 
-  '@shikijs/themes@2.3.0':
-    resolution: {integrity: sha512-2M3XKry66lB975B7v+kSesGyIJrhxsLdk/RyhB+hbkXmD2Myyuspyox0/2JTqWnM1Y9132NjeVsBl1ZI507ZXw==}
+  '@shikijs/themes@2.3.1':
+    resolution: {integrity: sha512-QtkIM4Vz166+m4KED7/U5iVpgAdhfsHqMbBbjIzdTyTM1GIk2XQLcaB9b/LQY0y83Zl4lg7A7Hg+FT8+vAGL5A==}
 
   '@shikijs/types@1.29.2':
     resolution: {integrity: sha512-VJjK0eIijTZf0QSTODEXCqinjBn0joAHQ+aPSBzrv4O2d/QSbsMw+ZeSRx03kV34Hy7NzUvV/7NqfYGRLrASmw==}
 
-  '@shikijs/types@2.3.0':
-    resolution: {integrity: sha512-rC8ZkfIE6m17RBGwRPoXqj/an4JPUnAB1JGHELPVrzygyB0Gqa9Lc7h4xYb8c3GWywAgrjryLAJSN3kpe1fqhw==}
+  '@shikijs/types@2.3.1':
+    resolution: {integrity: sha512-1BQV6R4zF4pDPpPTbML8mPFX6RsNYtROfhgPT2YX+KW4B99a2UNtwuvmNj03BRy/sDz9GeAx9gAmnv8NroS/2w==}
 
   '@shikijs/vscode-textmate@10.0.1':
     resolution: {integrity: sha512-fTIQwLF+Qhuws31iw7Ncl1R3HUDtGwIipiJ9iU+UsDUwMhegFcQKQHd51nZjb7CArq0MvON8rbgCGQYWHUKAdg==}
@@ -1536,8 +1530,8 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
-  '@stylistic/stylelint-plugin@3.1.1':
-    resolution: {integrity: sha512-XagAHHIa528EvyGybv8EEYGK5zrVW74cHpsjhtovVATbhDRuJYfE+X4HCaAieW9lCkwbX6L+X0I4CiUG3w/hFw==}
+  '@stylistic/stylelint-plugin@3.1.2':
+    resolution: {integrity: sha512-tylFJGMQo62alGazK74MNxFjMagYOHmBZiePZFOJK2n13JZta0uVkB3Bh5qodUmOLtRH+uxH297EibK14UKm8g==}
     engines: {node: ^18.12 || >=20.9}
     peerDependencies:
       stylelint: ^16.8.0
@@ -2097,8 +2091,8 @@ packages:
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
 
-  '@zinkawaii/eslint-config@0.1.10':
-    resolution: {integrity: sha512-5DCGM5cwbB4sV2FpR3vRne49eU6HByEDoAKpIcs1VRUQ9qx5wM3XPFWt/c+7E1GPSKiJLrnQ0dIJX/Zk8uqe9w==}
+  '@zinkawaii/eslint-config@0.2.0':
+    resolution: {integrity: sha512-ZDYMHf2cAaHky31Ha+m9ydO0baNUXrVd27ug/1VLX83OSrhBtqdpbdqKHxecrg6715bM3hnS4hqJ5oOPtUq1CA==}
 
   '@zinkawaii/nuxt-gsap@0.1.3':
     resolution: {integrity: sha512-CIMP1b3kyevZkJLPaFER5Iau6F4CQwJhpaCmoztyhVIa9Kx4HTdC/keWZtRU5Z8+1ZyG7zvnRUxfmmG33UN/Gw==}
@@ -2106,8 +2100,8 @@ packages:
   '@zinkawaii/nuxt-shiki@0.7.1':
     resolution: {integrity: sha512-6p7cDKKVzLb4+pvqz3JXVlxxkihKZ0zOX/OfaJEG5kWgVzTw6nRv+019U4k6L7BOAlraZWdOIEGWbl4BM4X//Q==}
 
-  '@zinkawaii/stylelint-config@0.2.2':
-    resolution: {integrity: sha512-VoxyEmiDH+UnFfFjJcIdgaCDgvftUjrvBvEGEm6nLmoTsPQoptQ9uwgRLB1AbBUaCk27q9sJ0qO7joKIBftchg==}
+  '@zinkawaii/stylelint-config@0.3.0':
+    resolution: {integrity: sha512-NHOza7w3OW6jEHm88SEaZLCM6FwyYc7aQMvuV45CReSP59fFRTco+dsGMbgzOf5cjBkx3NkDxPEdJmgwflJE6A==}
 
   abbrev@2.0.0:
     resolution: {integrity: sha512-6/mh1E2u2YgEsCHdY0Yx5oW+61gZU+1vXaoiHHrpKeuRNNgFvS+/jrwHiQhB5apAf5oB7UB7E19ol2R2LKH8hQ==}
@@ -3881,8 +3875,8 @@ packages:
     resolution: {integrity: sha512-C3iHfuGUXK2u8/ipq9LfjFfXFxAZMQJJq7vLS45r3D9Y2xQ/m4S8zaR4zMLFWh9AsNPXmcFfUDhTEO8UIC/V6Q==}
     engines: {node: '>=12.0.0'}
 
-  kerria@0.1.0:
-    resolution: {integrity: sha512-/jRCaDcUtoP00CzUmH+FryxqtYI6VaDY6UQxYb4P531B9DzOkle4az/mi1N3cL+5zbhorcM5cWcfWRpNvmGy/w==}
+  kerria@0.2.0:
+    resolution: {integrity: sha512-i6UP/OEMZGtakJl0fMaLnhUg2hxcNpcNR5EpYCx1q3JBE46ZVTHgZs4Xfy4Ap2EHfrIqMRFNzJAI6/zTDsNAzg==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -4765,10 +4759,10 @@ packages:
   pkg-types@1.3.1:
     resolution: {integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==}
 
-  plain-shiki@0.0.12:
-    resolution: {integrity: sha512-jaR0Rhm0wWOn1unMrt0yOTYI83y+ntabQ///GxYyRSYFRsNJZRrT7dpWbtX/QRFL44cznutwCT5EiEXj1KwXVQ==}
+  plain-shiki@0.1.1:
+    resolution: {integrity: sha512-eHM+HdYYZsl0jUG7rlvImPOgda7Q/P4OPOaj/DcC60yAlhmtIBwn3rqvQfLlF2bNmyuO9W1RrkMmK2AO5Dc38w==}
     peerDependencies:
-      shiki: ^1.22.0
+      shiki: '>=1.22.0'
 
   playwright-core@1.50.1:
     resolution: {integrity: sha512-ra9fsNWayuYumt+NiM069M6OkcRb1FZSK8bgi66AtpFoWkg2+y0bJSNmkFrWhMbEBbVKC/EruAHH3g0zmtwGmQ==}
@@ -5027,8 +5021,8 @@ packages:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
     engines: {node: '>= 6'}
 
-  propathy@0.1.0:
-    resolution: {integrity: sha512-VoQWNshBFma36GNbdPjh2/CxyoxFWqB7KbDxpF1gj3T9KqI9/BuY+ia9gxVWTXg62iUn/6SloNABVhZVbHnVXA==}
+  propathy@0.2.0:
+    resolution: {integrity: sha512-PvLIp90v/atwLJGJDM8gdhHs02oZ15FRamRhDZ1XN3Iun9In8gCsDL2V8qp1QQJPai2mtn02gu0i23iRFXJSPw==}
 
   property-information@6.5.0:
     resolution: {integrity: sha512-PgTgs/BlvHxOu8QuEN7wi5A0OmXaBcHpmCSTehcs6Uuu9IkDIEo13Hy7n898RHfrQ49vKCoGeWZSaAK01nwVig==}
@@ -5323,8 +5317,8 @@ packages:
   shiki@1.29.2:
     resolution: {integrity: sha512-njXuliz/cP+67jU2hukkxCNuH1yUi4QfdZZY+sMr5PPrIyXSu5iTb/qYC4BiWWB0vZ+7TbdvYUCeL23zpwCfbg==}
 
-  shiki@2.3.0:
-    resolution: {integrity: sha512-wMmrvyxj4i8ft9r2dA+aIi5+G6PL0Dz19h5fr5xG7Jvo8uLIOWxaveSRl3LNcj58h+jUnhdkCh7tQIVULGNXJw==}
+  shiki@2.3.1:
+    resolution: {integrity: sha512-bD1XuVAyZBVxHiPlO/m2nM2F5g8G5MwSZHNYx+ArpcOW52+fCN6peGP5gG61O0gZpzUVbImeR3ar8cF+Z5WM8g==}
 
   sift@17.1.3:
     resolution: {integrity: sha512-Rtlj66/b0ICeFzYTuNvX/EF1igRbbnGSvEyT79McoZa/DeGhMyC5pWKOEsZKnpkqtSeovd5FL/bjHWC3CIIvCQ==}
@@ -7985,11 +7979,11 @@ snapshots:
       '@types/hast': 3.0.4
       hast-util-to-html: 9.0.4
 
-  '@shikijs/core@2.3.0':
+  '@shikijs/core@2.3.1':
     dependencies:
-      '@shikijs/engine-javascript': 2.3.0
-      '@shikijs/engine-oniguruma': 2.3.0
-      '@shikijs/types': 2.3.0
+      '@shikijs/engine-javascript': 2.3.1
+      '@shikijs/engine-oniguruma': 2.3.1
+      '@shikijs/types': 2.3.1
       '@shikijs/vscode-textmate': 10.0.1
       '@types/hast': 3.0.4
       hast-util-to-html: 9.0.4
@@ -8000,9 +7994,9 @@ snapshots:
       '@shikijs/vscode-textmate': 10.0.1
       oniguruma-to-es: 2.3.0
 
-  '@shikijs/engine-javascript@2.3.0':
+  '@shikijs/engine-javascript@2.3.1':
     dependencies:
-      '@shikijs/types': 2.3.0
+      '@shikijs/types': 2.3.1
       '@shikijs/vscode-textmate': 10.0.1
       oniguruma-to-es: 3.1.0
 
@@ -8011,33 +8005,33 @@ snapshots:
       '@shikijs/types': 1.29.2
       '@shikijs/vscode-textmate': 10.0.1
 
-  '@shikijs/engine-oniguruma@2.3.0':
+  '@shikijs/engine-oniguruma@2.3.1':
     dependencies:
-      '@shikijs/types': 2.3.0
+      '@shikijs/types': 2.3.1
       '@shikijs/vscode-textmate': 10.0.1
 
   '@shikijs/langs@1.29.2':
     dependencies:
       '@shikijs/types': 1.29.2
 
-  '@shikijs/langs@2.3.0':
+  '@shikijs/langs@2.3.1':
     dependencies:
-      '@shikijs/types': 2.3.0
+      '@shikijs/types': 2.3.1
 
   '@shikijs/themes@1.29.2':
     dependencies:
       '@shikijs/types': 1.29.2
 
-  '@shikijs/themes@2.3.0':
+  '@shikijs/themes@2.3.1':
     dependencies:
-      '@shikijs/types': 2.3.0
+      '@shikijs/types': 2.3.1
 
   '@shikijs/types@1.29.2':
     dependencies:
       '@shikijs/vscode-textmate': 10.0.1
       '@types/hast': 3.0.4
 
-  '@shikijs/types@2.3.0':
+  '@shikijs/types@2.3.1':
     dependencies:
       '@shikijs/vscode-textmate': 10.0.1
       '@types/hast': 3.0.4
@@ -8065,7 +8059,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@stylistic/stylelint-plugin@3.1.1(stylelint@16.14.1(typescript@5.7.3))':
+  '@stylistic/stylelint-plugin@3.1.2(stylelint@16.14.1(typescript@5.7.3))':
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.4(@csstools/css-tokenizer@3.0.3)
       '@csstools/css-tokenizer': 3.0.3
@@ -8921,7 +8915,7 @@ snapshots:
 
   '@xtuc/long@4.2.2': {}
 
-  '@zinkawaii/eslint-config@0.1.10': {}
+  '@zinkawaii/eslint-config@0.2.0': {}
 
   '@zinkawaii/nuxt-gsap@0.1.3(magicast@0.3.5)(rollup@4.34.2)':
     dependencies:
@@ -8945,9 +8939,9 @@ snapshots:
       - rollup
       - supports-color
 
-  '@zinkawaii/stylelint-config@0.2.2(postcss-html@1.8.0)(postcss@8.5.1)(stylelint@16.14.1(typescript@5.7.3))':
+  '@zinkawaii/stylelint-config@0.3.0(postcss-html@1.8.0)(postcss@8.5.1)(stylelint@16.14.1(typescript@5.7.3))':
     dependencies:
-      '@stylistic/stylelint-plugin': 3.1.1(stylelint@16.14.1(typescript@5.7.3))
+      '@stylistic/stylelint-plugin': 3.1.2(stylelint@16.14.1(typescript@5.7.3))
       stylelint-config-html: 1.1.0(postcss-html@1.8.0)(stylelint@16.14.1(typescript@5.7.3))
       stylelint-config-standard-scss: 14.0.0(postcss@8.5.1)(stylelint@16.14.1(typescript@5.7.3))
       stylelint-order: 6.0.4(stylelint@16.14.1(typescript@5.7.3))
@@ -10882,7 +10876,7 @@ snapshots:
 
   kareem@2.6.3: {}
 
-  kerria@0.1.0:
+  kerria@0.2.0:
     dependencies:
       chokidar: 4.0.3
       consola: 3.4.0
@@ -12291,9 +12285,9 @@ snapshots:
       mlly: 1.7.4
       pathe: 2.0.2
 
-  plain-shiki@0.0.12(shiki@2.3.0):
+  plain-shiki@0.1.1(shiki@2.3.1):
     dependencies:
-      shiki: 2.3.0
+      shiki: 2.3.1
 
   playwright-core@1.50.1: {}
 
@@ -12536,7 +12530,7 @@ snapshots:
       kleur: 3.0.3
       sisteransi: 1.0.5
 
-  propathy@0.1.0: {}
+  propathy@0.2.0: {}
 
   property-information@6.5.0: {}
 
@@ -12944,14 +12938,14 @@ snapshots:
       '@shikijs/vscode-textmate': 10.0.1
       '@types/hast': 3.0.4
 
-  shiki@2.3.0:
+  shiki@2.3.1:
     dependencies:
-      '@shikijs/core': 2.3.0
-      '@shikijs/engine-javascript': 2.3.0
-      '@shikijs/engine-oniguruma': 2.3.0
-      '@shikijs/langs': 2.3.0
-      '@shikijs/themes': 2.3.0
-      '@shikijs/types': 2.3.0
+      '@shikijs/core': 2.3.1
+      '@shikijs/engine-javascript': 2.3.1
+      '@shikijs/engine-oniguruma': 2.3.1
+      '@shikijs/langs': 2.3.1
+      '@shikijs/themes': 2.3.1
+      '@shikijs/types': 2.3.1
       '@shikijs/vscode-textmate': 10.0.1
       '@types/hast': 3.0.4
 
