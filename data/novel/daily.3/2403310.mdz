@@ -2,7 +2,7 @@
 title: 阅读页样式用例
 abbrlink: 93ec4a4
 date: 2024-03-31
-updated: 2024-10-24
+updated: 2025-02-07
 ---
 
 ::excerpt
@@ -36,6 +36,8 @@ updated: 2024-10-24
 2. 缩进为三个中文字符；
 
 3. 它是普通列表的通常表示法。
+
+:mb-image{src="https://cdn.bikari.top/image/pixiv/103842593.jpg!style:webp" reference="https://www.pixiv.net/artworks/103842593" max-width="616" caption="这是图片，可点击放大，可通过右键前往图源"}
 
 > 这是引用块，字体大小固定为 `14px`，没有首行缩进，所以通常不分段。
 
