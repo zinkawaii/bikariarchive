@@ -17,11 +17,11 @@
             :post
             :attrs="[`read-count`, `word-count`, `publish-date`, `update-date`]"
         />
-        <nuxt-link v-visible="!art.isFirst" class="novel-adjacent-top" :to="art.prev?.route">
+        <nuxt-link v-visible="art.prev" class="novel-adjacent-top" :to="art.prev?.route">
             <iconify name="fa6-solid:chevron-left"/>
             <span>{{ art.isFirstInVol ? "上一卷" : "上一章" }}</span>
         </nuxt-link>
-        <nuxt-link v-visible="!art.isLast" class="novel-adjacent-top" :to="art.next?.route">
+        <nuxt-link v-visible="art.next" class="novel-adjacent-top" :to="art.next?.route">
             <iconify name="fa6-solid:chevron-right"/>
             <span>{{ art.isLastInVol ? "下一卷" : "下一章" }}</span>
         </nuxt-link>

@@ -64,19 +64,31 @@ export class Article implements JChapter {
     }
 
     get prev() {
-        return this.novelInfo.chapters[this.order - 1];
+        const prev = this.novelInfo.chapters[this.order - 1];
+        if (this.novelInfo.type === "novel" || this.volume === prev?.volume) {
+            return prev;
+        }
+        return void 0;
     }
 
     get next() {
-        return this.novelInfo.chapters[this.order + 1];
+        const next = this.novelInfo.chapters[this.order + 1];
+        if (this.novelInfo.type === "novel" || this.volume === next?.volume) {
+            return next;
+        }
+        return void 0;
     }
 
     get isFirst() {
-        return this.order === 0;
+        return this.novelInfo.type === "novel"
+            ? this.order === 0
+            : this.isFirstInVol;
     }
 
     get isLast() {
-        return this.order === this.novelInfo.chapters.length - 1;
+        return this.novelInfo.type === "novel"
+            ? this.order === this.novelInfo.chapters.length - 1
+            : this.isLastInVol;
     }
 
     get isFirstInVol() {
