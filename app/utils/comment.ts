@@ -4,8 +4,8 @@ import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { Root } from "@bikari/article";
-import type * as hast from "hast";
-import type * as mdast from "mdast";
+import type hast from "hast";
+import type mdast from "mdast";
 
 let shiki: Awaited<ReturnType<typeof getShikiHighlighter>>,
     options: Awaited<ReturnType<typeof resolveShikiOptions>>;

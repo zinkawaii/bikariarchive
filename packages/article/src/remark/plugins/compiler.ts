@@ -1,3 +1,4 @@
+import type hast from "hast";
 import type { Processor } from "unified";
 import { transformRoot } from "./utils";
 import type { Root } from "../types";
@@ -9,7 +10,7 @@ declare module "unified" {
 }
 
 export default function(this: Processor) {
-    this.compiler = (root) => {
+    this.compiler = (root: hast.Root) => {
         return transformRoot(root);
     };
 }
