@@ -1,37 +1,20 @@
 <script lang="ts" setup>
     import type { ArticleCover } from "@bikari/article";
 
-    const props = withDefaults(defineProps<Partial<ArticleCover> & {
+    withDefaults(defineProps<Partial<ArticleCover> & {
         viewable?: boolean;
     }>(), {
         align: "center"
     });
-
-    const contextMenuStore = useContextMenuStore();
-    const rootEl = useTemplateRef("root");
-
-    contextMenuStore.extra(rootEl, {
-        title: "cover",
-        shield: ["image"],
-        when: () => !!props.reference,
-        items: [
-            {
-                title: "前往图源",
-                icon: "fa6-solid:arrow-up-right-from-square",
-                action() {
-                    window.open(props.reference, "_blank");
-                }
-            }
-        ]
-    });
 </script>
 
 <template>
-    <div ref="root" class="novel-cover">
+    <div class="novel-cover">
         <mb-image
             v-if="src"
             :src
             :align
+            :reference
             :viewable
             alt="[cover]"
             loading="lazy"

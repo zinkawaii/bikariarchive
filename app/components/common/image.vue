@@ -1,28 +1,66 @@
 <script lang="ts" setup>
+    import type { ImgHTMLAttributes } from "vue";
     import { LazyMbImageViewer } from "#components";
 
     const props = withDefaults(defineProps<{
-        src: HTMLImageElement["src"];
-        alt?: HTMLImageElement["alt"];
-        loading?: HTMLImageElement["loading"];
+        src: ImgHTMLAttributes["src"];
+        alt?: ImgHTMLAttributes["alt"];
+        loading?: ImgHTMLAttributes["loading"];
+        maxWidth?: ImgHTMLAttributes["width"];
+        maxHeight?: ImgHTMLAttributes["height"];
         align?: string;
+        caption?: string;
         character?: string;
+        reference?: string;
         viewable?: boolean;
     }>(), {
         viewable: true
     });
 
+    const contextMenuStore = useContextMenuStore();
     const dialogStore = useDialogStore();
     const gsap = useGsap();
 
     const imgComp = useTemplateRef("img");
     const imgEl = computed(() => imgComp.value?.$refs.imgEl);
 
-    const captionEl = useTemplateRef("caption");
+    const charEl = useTemplateRef("char");
     const tagEls = computed(() => {
-        return [...captionEl.value?.children ?? []].toReversed();
+        return [...charEl.value?.children ?? []].toReversed();
     });
 
+    //角色列表
+    const characters = computed(() => {
+        return props.character.split(",");
+    });
+
+    //附加样式
+    const style = computed(() => {
+        return {
+            maxWidth: props.maxWidth ? `${props.maxWidth}px` : void 0,
+            maxHeight: props.maxHeight ? `${props.maxHeight}px` : void 0,
+            objectPosition: props.align
+        };
+    });
+
+    //右键菜单
+    contextMenuStore.extra(imgEl, {
+        title: "image",
+        shield: ["image"],
+        when: () => !!props.reference,
+        items: [
+            {
+                title: "前往图源",
+                icon: "fa6-solid:arrow-up-right-from-square",
+                action() {
+                    window.open(props.reference, "_blank");
+                }
+
+            }
+        ]
+    });
+
+    //查看器
     const { open, close } = dialogStore.use(() => h(LazyMbImageViewer, {
         target: imgEl.value,
         async onClose() {
@@ -33,10 +71,7 @@
         }
     }));
 
-    const characters = computed(() => {
-        return props.character.split(",");
-    });
-
+    //加载完成时
     const [isLoaded, toggleLoaded] = useToggle(false);
     onMounted(() => {
         if (imgEl.value.complete) {
@@ -47,6 +82,7 @@
         }
     });
 
+    //触发回弹动画
     function displayCharacters() {
         const tl = gsap.timeline({
             defaults: {
@@ -67,31 +103,34 @@
         <nuxt-img
             ref="img"
             class="image-entity"
-            :style="{ objectPosition: align }"
             :class="{
                 [`is-absolute`]: align,
                 [`cursor-pointer`]: viewable
             }"
+            :style
             :src
             :alt
             :loading
             @click="viewable && open()"
         />
         <transition @enter="displayCharacters">
-            <figcaption v-if="character && isLoaded" ref="caption" class="image-caption">
+            <div v-if="character && isLoaded" ref="char" class="image-characters">
                 <character-tag v-for="name in characters" :name/>
-            </figcaption>
+            </div>
         </transition>
+        <figcaption v-if="caption" class="image-caption">{{ caption }}</figcaption>
     </figure>
 </template>
 
 <style lang="scss" scoped>
     .mb-image {
+        display: grid;
         position: relative;
     }
 
     .image-entity {
         height: 100%;
+        margin: auto;
         object-fit: cover;
 
         &.is-absolute {
@@ -99,7 +138,7 @@
         }
     }
 
-    .image-caption {
+    .image-characters {
         display: flex;
         justify-content: flex-end;
         flex-wrap: wrap-reverse;
@@ -108,5 +147,13 @@
         overflow: hidden;
         inset: auto 0 0;
         padding: 0.5em;
+    }
+
+    .image-caption {
+        margin-top: 0.5rem;
+        font-size: 13px;
+        line-height: 2em;
+        text-align: center;
+        color: var(--color-text-secondary);
     }
 </style>
