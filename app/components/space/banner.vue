@@ -50,14 +50,14 @@
         </div>
         <input
             v-if="isMyself"
-            class="text-truncate banner-sign"
+            class="banner-sign text-truncate"
             placeholder="在这里输入你的个性签名……"
             v-model="sign"
             @focus="recordSign"
             @blur="updateSign"
             @keyup.enter="($event.target as HTMLInputElement).blur()"
         />
-        <span v-else class="text-truncate banner-sign">{{ sign }}</span>
+        <span v-else class="banner-sign text-truncate">{{ sign }}</span>
     </div>
 </template>
 

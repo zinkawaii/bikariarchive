@@ -6,7 +6,7 @@
 
 <template>
     <div class="intro-content">
-        <ul class="edge-fades-x intro-tags">
+        <ul class="intro-tags edge-fades-x">
             <li v-for="tag in Article.meta[novel].tag" class="intro-tag">{{ tag }}</li>
         </ul>
         <novel-article class="intro-synopsis" :body="Article.meta[props.novel].synopsis"/>

@@ -1,5 +1,5 @@
 <template>
-    <div class="content-widget home-update">
+    <div class="home-update content-widget">
         <meow-title>历史章节</meow-title>
         <recent-article type="novel" :sizes="10"/>
     </div>

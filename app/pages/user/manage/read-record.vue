@@ -78,7 +78,7 @@
             </tbody>
         </table>
     </div>
-    <div class="content-widget manage-pagination">
+    <div class="manage-pagination content-widget">
         <mb-pagination :total="data.total" :sizes="data.sizes" v-model="page"/>
     </div>
 </template>

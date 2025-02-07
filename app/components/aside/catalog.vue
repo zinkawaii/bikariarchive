@@ -25,14 +25,14 @@
 <template>
     <aside-widget class="aside-unified">
         <form class="catalog-volume">
-            <select class="content-h2 catalog-selector" v-model="currentVolume">
+            <select class="catalog-selector content-h2" v-model="currentVolume">
                 <option v-for="{ title }, i in jNovel.volumes" :value="i">{{ title }}</option>
             </select>
             <span class="catalog-underline"></span>
         </form>
         <ul class="aside-limited">
             <li v-for="c in jChapters" class="catalog-item">
-                <nuxt-link class="text-truncate aside-anchor" :to="c.route">{{ c.title }}</nuxt-link>
+                <nuxt-link class="aside-anchor text-truncate" :to="c.route">{{ c.title }}</nuxt-link>
             </li>
         </ul>
     </aside-widget>

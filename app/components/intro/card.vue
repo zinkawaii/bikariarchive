@@ -32,8 +32,8 @@
 </script>
 
 <template>
-    <div class="content-table intro-card" :class="`is-${layer}`" @click="exchange">
-        <h2 class="content-h2 intro-header">
+    <div class="intro-card content-table" :class="`is-${layer}`" @click="exchange">
+        <h2 class="intro-header content-h2">
             {{ Article.meta[novel].title }}
             <span class="text-truncate text-gray">{{ code }}</span>
         </h2>

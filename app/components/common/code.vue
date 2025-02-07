@@ -48,7 +48,7 @@
 <template>
     <figure class="mb-code">
         <figcaption class="code-header">
-            <span class="text-uppercase code-lang">{{ lang }}</span>
+            <span class="code-lang text-uppercase">{{ lang }}</span>
             <button v-for="{ icon, action } in actions" class="code-action" @click="action">
                 <iconify :name="toValue(icon)"/>
             </button>
@@ -56,7 +56,7 @@
         <div class="code-area" :class="{ [`is-collapse`]: isCollapse }">
             <div class="code-inner" :class="{ [`is-expand`]: isExpand }">
                 <pre class="code-line">{{ lineStr }}</pre>
-                <pre ref="pre" class="shiki code-content" v-html="code"></pre>
+                <pre ref="pre" class="code-content shiki" v-html="code"></pre>
                 <button v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
                     <iconify :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
                 </button>

@@ -18,7 +18,7 @@
 <template>
     <ul class="recent-article">
         <li v-for="{ title, volume, novel, route, publishDate, updateDate } in jPaginated" class="recent-item">
-            <plain-link class="text-truncate recent-title" :to="route">{{ title }}</plain-link>
+            <plain-link class="recent-title text-truncate" :to="route">{{ title }}</plain-link>
             <div class="recent-info">
                 <span class="text-truncate">{{ Article.meta[novel].volumes[volume].title }}</span>
                 <time>{{ sortByUpdated ? updateDate : publishDate }}</time>

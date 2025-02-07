@@ -33,7 +33,7 @@
     <aside class="z-sidebar" :class="{ [`is-collapse`]: isCollapse }">
         <aside-widget class="aside-profile">
             <nuxt-img class="aside-avatar" :src="$config.public.avatar" alt="[avatar]"/>
-            <span class="content-h2 aside-author">{{ $config.public.author }}</span>
+            <span class="aside-author content-h2">{{ $config.public.author }}</span>
             <p class="p-small">うたかたなしあわせ</p>
         </aside-widget>
         <aside-widget title="公告">

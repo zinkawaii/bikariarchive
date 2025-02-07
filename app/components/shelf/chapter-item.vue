@@ -25,7 +25,7 @@
 
 <template>
     <nuxt-link class="shech-item" :to="art.route">
-        <span class="text-truncate shech-title">{{ art.title }}</span>
+        <span class="shech-title text-truncate">{{ art.title }}</span>
         <ul class="shech-tags">
             <template v-for="{ name, color, when } in tags">
                 <li

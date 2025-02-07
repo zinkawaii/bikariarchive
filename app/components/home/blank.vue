@@ -23,7 +23,7 @@
 </script>
 
 <template>
-    <div class="content-widget home-blank">
+    <div class="home-blank content-widget">
         <div class="blank-title">空白板</div>
         <textarea class="blank-editor" :placeholder="serif"></textarea>
     </div>

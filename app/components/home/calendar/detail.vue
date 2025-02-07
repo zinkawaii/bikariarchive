@@ -20,7 +20,7 @@
             </p>
             <span v-else class="calendar-none">No Special.</span>
             <h6 class="calendar-title">关键人物</h6>
-            <div v-if="date.event?.heroine" class="edge-fades-x calendar-heroine">
+            <div v-if="date.event?.heroine" class="calendar-heroine edge-fades-x">
                 <character-tag v-for="heroine in date.event.heroine" :key="heroine" :name="heroine"/>
             </div>
             <span v-else class="calendar-none">No Character.</span>

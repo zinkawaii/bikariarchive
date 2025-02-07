@@ -7,7 +7,7 @@
 
 <template>
     <home-tabular-item v-for="art in jPaginated" :art/>
-    <div class="content-widget home-pagination">
+    <div class="home-pagination content-widget">
         <mb-pagination :total scroll-target=".tabular-item" v-model="page"/>
     </div>
 </template>

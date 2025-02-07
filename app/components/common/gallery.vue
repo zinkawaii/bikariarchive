@@ -9,7 +9,7 @@
         <div class="gallery-illustration">
             <slot></slot>
         </div>
-        <div class="div-table gallery-illustrator">
+        <div class="gallery-illustrator div-table">
             <dl>
                 <dt>画师</dt>
                 <dd>{{ illustrator }}</dd>

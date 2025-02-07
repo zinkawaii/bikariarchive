@@ -42,7 +42,7 @@
 </script>
 
 <template>
-    <div class="content-table home-profile">
+    <div class="home-profile content-table">
         <div ref="avatar" class="profile-avatar">
             <nuxt-img :src="$config.public.avatar" alt="[avatar]"/>
         </div>

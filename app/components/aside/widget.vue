@@ -5,8 +5,8 @@
 </script>
 
 <template>
-    <section class="content-widget aside-widget">
-        <h2 v-if="title" class="content-h2 aside-title">
+    <section class="aside-widget content-widget">
+        <h2 v-if="title" class="aside-title content-h2">
             <slot name="icon"></slot>
             <span>{{ title }}</span>
         </h2>

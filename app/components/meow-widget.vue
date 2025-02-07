@@ -5,7 +5,7 @@
 </script>
 
 <template>
-    <div class="content-widget meow-widget">
+    <div class="meow-widget content-widget">
         <header v-if="title" class="meow-header">
             <h1 class="meow-title">{{ title }}</h1>
         </header>

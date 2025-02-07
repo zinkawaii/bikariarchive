@@ -18,7 +18,7 @@
 </script>
 
 <template>
-    <div class="div-table entry-brief">
+    <div class="entry-brief div-table">
         <dl v-for="arr in fields">
             <template v-for="{ key, val } in arr">
                 <template v-if="val !== void 0">

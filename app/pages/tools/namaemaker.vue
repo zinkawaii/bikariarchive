@@ -230,7 +230,7 @@
                 </mb-button>
             </div>
         </div>
-        <div v-if="!isResultEmpty" class="div-table namae-result">
+        <div v-if="!isResultEmpty" class="namae-result div-table">
             <dl v-for="chunk in chunkedResults">
                 <template v-for="item in chunk">
                     <dt>{{ item.kanji }}</dt>

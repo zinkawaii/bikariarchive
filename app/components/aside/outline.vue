@@ -99,7 +99,7 @@
         <ul class="outline-list">
             <li v-for="{ title, link, order, children } in headers" class="outline-item">
                 <a
-                    class="text-truncate aside-anchor"
+                    class="aside-anchor text-truncate"
                     :class="{
                         [`is-active`]: link === activeLink
                     }"
@@ -122,7 +122,7 @@
             </div>
             <outline-list v-bind="{ headers: nestedHeaders }"/>
         </div>
-        <p v-else class="p-small outline-empty">这篇文章还没有目录哦~</p>
+        <p v-else class="outline-empty p-small">这篇文章还没有目录哦~</p>
     </aside-widget>
 </template>
 

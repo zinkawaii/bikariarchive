@@ -35,7 +35,7 @@
         <client-only>
             <ul v-if="history.length" class="history-list">
                 <li v-for="word in history" :key="word">
-                    <nuxt-link class="tag text-truncate history-item" :to="toSearch(word)">{{ word }}</nuxt-link>
+                    <nuxt-link class="history-item tag text-truncate" :to="toSearch(word)">{{ word }}</nuxt-link>
                 </li>
             </ul>
         </client-only>

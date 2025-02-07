@@ -5,5 +5,8 @@
       "@types/wicg-file-system-access"
     ],
     "strict": false
+  },
+  "vueCompilerOptions": {
+    "experimentalResolveStyleCssClasses": "always"
   }
 }

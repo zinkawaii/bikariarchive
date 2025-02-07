@@ -72,7 +72,7 @@
 </script>
 
 <template>
-    <div class="content-widget space-password">
+    <div class="space-password content-widget">
         <meow-title>修改密码</meow-title>
         <meow-input
             type="password"

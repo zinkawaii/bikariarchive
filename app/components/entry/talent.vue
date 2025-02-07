@@ -15,16 +15,16 @@
                         <h3 :id="item.name.zh">{{ item.name.zh }}</h3>
                         <nuxt-link
                             v-for="cls in item.class"
-                            class="tag talent-tag"
+                            class="talent-tag tag"
                             :to="toEntry(`${cls}系`)"
                         >{{ cls }}</nuxt-link>
                         <nuxt-link
-                            class="tag talent-tag"
+                            class="talent-tag tag"
                             :to="toEntry(`能力评级`)"
                         >Star {{ item.star }}</nuxt-link>
                         <span
                             v-if="item.name.en"
-                            class="tag talent-tag"
+                            class="talent-tag tag"
                         >{{ item.name.en }}</span>
                     </template>
                     <template v-else>
