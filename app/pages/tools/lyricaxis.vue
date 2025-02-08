@@ -47,7 +47,7 @@
     //音频可以播放
     useEventListener(audioEl, "canplay", () => {
         invalid.value = false;
-        duration.value = audioEl.value.duration;
+        duration.value = audioEl.value!.duration;
     });
 
     //音频错误
@@ -62,8 +62,10 @@
 
     //音频播放时
     useEventListener(audioEl, "timeupdate", () => {
-        if (isDragging.value) return;
-        currentTime.value = audioEl.value.currentTime;
+        if (isDragging.value) {
+            return;
+        }
+        currentTime.value = audioEl.value!.currentTime;
         progress.value = currentTime.value / duration.value;
     });
 
@@ -88,17 +90,17 @@
         isAxising.value = false;
 
         //链接
-        URL.revokeObjectURL(audioEl.value.src);
-        audioEl.value.src = URL.createObjectURL(file);
+        URL.revokeObjectURL(audioEl.value!.src);
+        audioEl.value!.src = URL.createObjectURL(file);
     }
 
     //播放 & 暂停
     watch(isPlaying, (val) => {
         if (val) {
-            audioEl.value.play();
+            audioEl.value!.play();
         }
         else {
-            audioEl.value.pause();
+            audioEl.value!.pause();
         }
     });
 
@@ -129,7 +131,7 @@
     //进度改变时
     function onControlChange(rate: number) {
         if (!invalid.value) {
-            audioEl.value.currentTime = duration.value * rate;
+            audioEl.value!.currentTime = duration.value * rate;
         }
         else {
             //音频无效，进度归零
@@ -184,7 +186,7 @@
         } = lyrics.value;
 
         //回到两句前的时间点
-        audioEl.value.currentTime = target?.time || 0;
+        audioEl.value!.currentTime = target?.time || 0;
 
         if (last) {
             last.time = 0;
@@ -241,7 +243,6 @@
             <div class="lyric-control">
                 <time>{{ displayCurrentTime }}</time>
                 <mb-slider
-                    class="lyric-progress"
                     v-model="progress"
                     @progress="onControlProgress"
                     @change="onControlChange"

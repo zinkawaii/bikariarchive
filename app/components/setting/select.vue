@@ -2,7 +2,7 @@
     import type { SettingField } from "~/types/setting";
 
     defineProps<{
-        name?: SettingField;
+        name: SettingField;
         options: string[];
     }>();
 

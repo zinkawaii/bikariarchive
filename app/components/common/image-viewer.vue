@@ -48,8 +48,8 @@
     //获取中心位置
     function getCenter(mode: "start" | "current") {
         return {
-            x: fingers.value.reduce((sum, finger) => sum + finger[mode + "X"], 0) / fingers.value.length,
-            y: fingers.value.reduce((sum, finger) => sum + finger[mode + "Y"], 0) / fingers.value.length
+            x: fingers.value.reduce((sum, finger) => sum + finger[`${mode}X`], 0) / fingers.value.length,
+            y: fingers.value.reduce((sum, finger) => sum + finger[`${mode}Y`], 0) / fingers.value.length
         };
     }
 
@@ -57,8 +57,8 @@
     function getDistance(mode: "start" | "current") {
         const [finger1, finger2] = fingers.value;
         return finger2 ? Math.hypot(
-            finger1[mode + "X"] - finger2[mode + "X"],
-            finger1[mode + "Y"] - finger2[mode + "Y"]
+            finger1[`${mode}X`] - finger2[`${mode}X`],
+            finger1[`${mode}Y`] - finger2[`${mode}Y`]
         ) : 0;
     }
 
@@ -69,7 +69,7 @@
             pointer.startY = pointer.currentY;
         }
 
-        startRect = rootEl.value.getBoundingClientRect();
+        startRect = rootEl.value!.getBoundingClientRect();
         startCenter = getCenter("start");
         startDistance = getDistance("start");
     }
@@ -99,7 +99,7 @@
             const finalLeft = left - (center.value.x - left) * (rate - 1);
             const finalTop = top - (center.value.y - top) * (rate - 1);
 
-            rootEl.value.animate({
+            rootEl.value!.animate({
                 left: finalLeft + "px",
                 top: finalTop + "px",
                 width: startRect.width * rate + "px",
@@ -120,7 +120,9 @@
 
     //鼠标滚动时
     function onWheel(event: WheelEvent) {
-        if (isHolding.value) return;
+        if (isHolding.value) {
+            return;
+        }
 
         //缩放比率
         let rate = 1 + Math.abs(event.deltaY) / 200;
@@ -128,11 +130,11 @@
             rate = 1 / rate;
         }
 
-        const { left, top, width, height } = rootEl.value.getBoundingClientRect();
+        const { left, top, width, height } = rootEl.value!.getBoundingClientRect();
         const finalLeft = left - (event.clientX - left) * (rate - 1);
         const finalTop = top - (event.clientY - top) * (rate - 1);
 
-        rootEl.value.animate({
+        rootEl.value!.animate({
             left: finalLeft + "px",
             top: finalTop + "px",
             width: width * rate + "px",

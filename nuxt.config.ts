@@ -5,8 +5,11 @@ import robotsConfig from "./app/robots.config";
 import { clientConfig, serverConfig } from "./app/runtime.config";
 import sitemapConfig from "./app/sitemap.config";
 
-const dispatcher = new ProxyAgent({ uri: new URL(process.env.HTTPS_PROXY).toString() });
-setGlobalDispatcher(dispatcher);
+try {
+    const dispatcher = new ProxyAgent({ uri: new URL(process.env.HTTPS_PROXY!).toString() });
+    setGlobalDispatcher(dispatcher);
+}
+catch {}
 
 export default defineNuxtConfig({
     app: {
@@ -15,9 +18,9 @@ export default defineNuxtConfig({
         }
     },
     alias: {
-        "@bikari/article": resolve(__dirname, "./packages/article/src"),
-        "@bikari/excalc": resolve(__dirname, "./packages/excalc"),
-        "@bikari/shared": resolve(__dirname, "./packages/shared/src")
+        "@bikari/article": resolve(import.meta.dirname, "./packages/article/src"),
+        "@bikari/excalc": resolve(import.meta.dirname, "./packages/excalc"),
+        "@bikari/shared": resolve(import.meta.dirname, "./packages/shared/src")
     },
     css: [
         "~/assets/scss/var.scss",
@@ -89,6 +92,7 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
+        "@nuxt/eslint",
         "@nuxt/fonts",
         "@nuxt/icon",
         "@nuxt/image",

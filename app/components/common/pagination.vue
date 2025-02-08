@@ -8,7 +8,9 @@
         sizes: 10,
         scrollOffset: 64
     });
-    const modelValue = defineModel<number>();
+    const modelValue = defineModel<number>({
+        required: true
+    });
 
     //组件根元素
     const rootEl = useTemplateRef("root");
@@ -27,18 +29,28 @@
         const start = Math.max(1, Math.min(total - 2 * expand, current - expand));
         const end = Math.min(total, start + 2 * expand);
 
-        return [
-            start > 1 && 1,
-            start > 2 && (start === 3 ? 2 : -Infinity),
-            ...[...new Array(end - start + 1)].map((_, i) => i + start),
-            end < total - 1 && (end === total - 2 ? total - 1 : Infinity),
-            end < total && total
-        ].filter(Boolean);
+        const res = [...new Array(end - start + 1)].map((_, i) => i + start);
+        if (start > 2) {
+            res.unshift(start === 3 ? 2 : -Infinity);
+        }
+        if (start > 1) {
+            res.unshift(1);
+        }
+        if (end < total - 1) {
+            res.push(end === total - 2 ? total - 1 : Infinity);
+        }
+        if (end < total) {
+            res.push(total);
+        }
+        return res;
     });
 
     //滑动根元素
     const scrollElement = computed(() => {
-        return rootEl.value?.closest(props.scrollTarget) ?? document.querySelector(props.scrollTarget);
+        if (props.scrollTarget) {
+            return rootEl.value?.closest(props.scrollTarget) ?? document.querySelector(props.scrollTarget);
+        }
+        return null;
     });
 
     //切换页码时滑动到指定元素的起始位置

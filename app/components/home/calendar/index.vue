@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { format, getDay, getDaysInMonth, getMonth, getYear } from "date-fns";
     import lunisolar from "lunisolar";
-    import jTimeline from "~/assets/json/Timeline.json";
+    import jTimeline, { type TimelineEvent } from "~/assets/json/Timeline.json";
 
     export interface CalendarDate {
         year: number;
@@ -9,12 +9,6 @@
         solar: number;
         lunar: string;
         event?: TimelineEvent;
-    }
-
-    interface TimelineEvent {
-        mono: string;
-        heroine: string[];
-        hitokoto?: string;
     }
 
     //月份别名
@@ -198,7 +192,7 @@
                         [`is-special`]: date.event,
                         [`is-checked`]: currentDate === date
                     }"
-                    @click="currentDate = (currentDate === date) ? null : date"
+                    @click="currentDate = (currentDate === date) ? void 0 : date"
                 >
                     <span class="solar">{{ date.solar }}</span>
                     <span class="lunar">{{ date.lunar }}</span>

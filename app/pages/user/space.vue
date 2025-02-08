@@ -26,10 +26,10 @@
 
     //用户是否存在
     const isExist = computed(() => {
-        return isMyself.value || !data.value.error;
+        return isMyself.value || !data.value?.error;
     });
 
-    const { uid, nickname, sign, avatar } = useSourceRefs(() => (isMyself.value ? userStore : data.value), {
+    const { uid, nickname, sign, avatar } = useSourceRefs(() => (isMyself.value ? userStore : data.value!), {
         uid: {
             readonly: isNotMyself
         },

@@ -24,7 +24,7 @@ export default defineNuxtModule<FontSplitOptions>({
         fonts: []
     },
     async setup(options, nuxt) {
-        for (const font of options.fonts) {
+        for (const font of options.fonts!) {
             const fontPath = await resolvePath(font.path);
             const fontName = font.name.replaceAll(/\s+/g, "_");
             const dirName = `node_modules/.cache/${cacheName}/${fontName}`;

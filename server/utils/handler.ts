@@ -37,6 +37,9 @@ const createHandler = <T extends BaseResponse>(
             data: import.meta.dev ? data : void 0
         }));
     }
+
+    //防止类型推断返回空值
+    return {} as T;
 };
 
 export const defineJEventHandler = <T extends BaseResponse>(

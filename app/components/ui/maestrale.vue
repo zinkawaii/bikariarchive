@@ -4,10 +4,10 @@
     const contextMenuStore = useContextMenuStore();
     const settingStore = useSettingStore();
 
-    let audio: HTMLAudioElement = null;
+    let audio: HTMLAudioElement | undefined;
 
     const maeComp = useTemplateRef("mae");
-    const maeEl = computed(() => maeComp.value?.$refs.imgEl);
+    const maeEl = computed(() => maeComp.value?.$refs.imgEl ?? null);
 
     const serif = ref("");
     const skin = useLocalStorage("maestrale-skin", 0);
@@ -37,7 +37,7 @@
             {
                 title: "换装",
                 icon: "emojione-monotone:womans-clothes",
-                children: jMae.skin.map((name, i) => ({
+                children: jMae.skins.map((name, i) => ({
                     title: name,
                     checked: () => skin.value === i,
                     action() {
@@ -50,7 +50,7 @@
 
     //换装时的动画
     function onLoad() {
-        maeEl.value.animate([
+        maeEl.value!.animate([
             { rotate: "y 90deg" },
             {}
         ], Zin.DEFAULT_ANIME_OPTION);
@@ -58,7 +58,7 @@
 
     //随机播放语音
     async function say() {
-        maeEl.value.animate([
+        maeEl.value!.animate([
             {},
             { translate: "0 -16px" },
             {}
@@ -67,17 +67,19 @@
         });
 
         toggleDialog(true);
-        if (audio) return;
+        if (audio) {
+            return;
+        }
 
-        const info = getRandomItem(jMae.audio);
-        const curSerif = info[`serif_${skin.value}`] || (isMarry.value && info.serif_ex || info.serif);
+        const info = getRandomItem(jMae.audios);
+        const curSerif = info[`serif_${skin.value}`] ?? (isMarry.value && info.serif_ex || info.serif);
         const src = jMae.baseUrl + curSerif.url;
         serif.value = curSerif.content;
 
         audio = new Audio(src);
         audio.play();
         audio.addEventListener("ended", () => {
-            audio = null;
+            audio = void 0;
             toggleDialog(false);
         });
 

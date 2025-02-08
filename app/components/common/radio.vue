@@ -1,8 +1,10 @@
-<script lang="ts" setup>
+<script lang="ts" generic="T" setup>
     defineProps<{
-        value: any;
+        value: T;
     }>();
-    const modelValue = defineModel<any>();
+    const modelValue = defineModel<T>({
+        required: true
+    });
 </script>
 
 <template>

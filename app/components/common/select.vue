@@ -1,7 +1,9 @@
 <script lang="ts" generic="T" setup>
     import { injectionKey } from "~/types/select";
 
-    const modelValue = defineModel<T>();
+    const modelValue = defineModel<T>({
+        required: true
+    });
 
     const rootEl = useTemplateRef("root");
     const [isDrop, toggleDrop] = useToggle(false);

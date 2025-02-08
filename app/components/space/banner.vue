@@ -6,7 +6,7 @@
         nickname,
         sign: userSign,
         avatar
-    } = inject(injectionKey);
+    } = inject(injectionKey)!;
 
     const toastStore = useToastStore();
     const headerUrl = Zin.background("/garden/background/space_header.webp");

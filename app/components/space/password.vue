@@ -50,7 +50,7 @@
             return;
         }
 
-        switch (data.value.error) {
+        switch (data.value!.error) {
             case 1: {
                 toastStore.error(key, "找不到用户");
                 break;

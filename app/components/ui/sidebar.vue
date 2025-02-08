@@ -25,7 +25,7 @@
             0: collapse,
             1: false,
             2: true
-        }[display];
+        }[display]!;
     });
 </script>
 

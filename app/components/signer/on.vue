@@ -56,7 +56,9 @@
 
     //发送验证码
     async function sendVerify() {
-        if (!validate("email")) return;
+        if (!validate("email")) {
+            return;
+        }
 
         verifyStage.value.stage = 1;
 

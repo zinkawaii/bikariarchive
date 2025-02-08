@@ -2,7 +2,7 @@
     const props = defineProps<{
         avatar: string;
         nickname: string;
-        address: string;
+        address?: string;
         character: string;
     }>();
     defineEmits<{
@@ -10,9 +10,7 @@
     }>();
 
     const displayAddress = computed(() => {
-        return props.address
-            .replace(/^https?:\/\//, "")
-            .replace(/\/$/, "");
+        return props.address?.replace(/^https?:\/\//, "").replace(/\/$/, "");
     });
 </script>
 

@@ -10,10 +10,11 @@
     const { execute, data } = useLazyFetch("/api/read-record", {
         query: {
             page
-        }
+        },
+        default: () => null!
     });
 
-    const records = ref<(typeof data.value)["list"]>();
+    const records = ref<(typeof data.value)["list"]>([]);
     watchImmediate(data, (val) => {
         records.value = val?.list ?? [];
     });

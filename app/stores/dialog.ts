@@ -36,7 +36,9 @@ export const useDialogStore = defineStore("dialog", () => {
         immediate && open();
 
         function open() {
-            if (unique && indexOf() !== -1) return;
+            if (unique && indexOf() !== -1) {
+                return;
+            }
 
             const vnode = render();
             const last = dialogs.value.at(-1);

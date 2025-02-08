@@ -41,7 +41,7 @@
             return;
         }
 
-        const { error, uid, nickname, avatar, identity, sign } = data.value;
+        const { error, uid, nickname, avatar, identity, sign } = data.value!;
         switch (error) {
             case 1: {
                 glitch("nickname", "账号不存在");

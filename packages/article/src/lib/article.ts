@@ -6,7 +6,6 @@ import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle, parseEntry } from "../remark";
-import type { Element } from "../remark/types";
 import type { ArticleFrontmatter, NovelFrontmatter } from "./types";
 
 enum SourceKind {
@@ -141,7 +140,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
 
     //字数统计
     let wordCount = 0;
-    visit(body, "element", (node: Element) => {
+    visit(body, "element", (node) => {
         if (node.tag === "p") {
             wordCount += toString(node).length;
         }

@@ -15,6 +15,10 @@
     const flatHeaders = shallowRef<HeaderInfo[]>([]);
     const nestedHeaders = shallowRef<HeaderInfo[]>([]);
 
+    const activeLink = computed(() => {
+        return flatHeaders.value[activeIdx.value]?.link;
+    });
+
     const headerOffsets = computedWithControl(() => [flatHeaders.value, height.value], () => {
         return flatHeaders.value?.map(({ element, link }) => ({
             link,
@@ -41,7 +45,7 @@
         flatHeaders.value = [...headingEls]
             .map((el) => ({
                 element: el,
-                title: el.textContent,
+                title: el.textContent!,
                 link: "#" + el.id,
                 level: Number(el.tagName[1]),
                 order: "",
@@ -52,24 +56,18 @@
         nestedHeaders.value = [];
         outer: for (let i = 0; i < flatHeaders.value.length; i++) {
             const cur = flatHeaders.value[i];
-            if (i > 0) {
-                for (let j = i - 1; j >= 0; j--) {
-                    const prev = flatHeaders.value[j];
-                    if (prev.level < cur.level) {
-                        cur.order = `${prev.order}.${prev.children.length + 1}`;
-                        prev.children.push(cur);
-                        continue outer;
-                    }
+            for (let j = i - 1; j >= 0; j--) {
+                const prev = flatHeaders.value[j];
+                if (prev.level < cur.level) {
+                    cur.order = `${prev.order}.${prev.children.length + 1}`;
+                    prev.children.push(cur);
+                    continue outer;
                 }
             }
             cur.order = `${nestedHeaders.value.length + 1}`;
             nestedHeaders.value.push(cur);
         }
     }
-
-    const activeLink = computed(() => {
-        return flatHeaders.value[activeIdx.value]?.link;
-    });
 
     //页面滚动时
     useEventListener("scroll", Zin.throttle(() => {

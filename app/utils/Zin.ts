@@ -152,7 +152,7 @@ const Zin = new class Z {
                 ...options,
                 onClose(val = options.initialValue) {
                     close();
-                    resolve(val);
+                    resolve(val ?? 0);
                 }
             }), {
                 immediate: true

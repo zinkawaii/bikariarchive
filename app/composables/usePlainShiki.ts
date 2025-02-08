@@ -7,7 +7,7 @@ export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, "lang" | "themes
 };
 
 export default function(
-    el: MaybeRefOrGetter<HTMLElement>,
+    el: MaybeRefOrGetter<HTMLElement | null | undefined>,
     options: MountPlainShikiOptions
 ) {
     const target = toRef(el);

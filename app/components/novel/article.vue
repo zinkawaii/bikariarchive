@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import type { Child, Root } from "@bikari/article";
+    import type { VNodeArrayChildren } from "vue";
     import { Iconify, MbCode, MbGallery, MbImage, PlainLink } from "#components";
 
     const props = withDefaults(defineProps<{
@@ -50,7 +51,7 @@
         const children = Array.isArray(body) ? body : body.children;
         return h(tag, children.length ? r(children) : slots.default?.());
 
-        function r(children: Child[]) {
+        function r(children: Child[]): VNodeArrayChildren {
             return children.map((node) => {
                 if (node.type === "element") {
                     const comp = resolvedComponents.value[node.tag] || node.tag;

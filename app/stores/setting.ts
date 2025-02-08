@@ -85,7 +85,7 @@ export const useSettingStore = defineStore("setting", () => {
         }
 
         if (import.meta.browser) {
-            mapping.get(key).trigger();
+            mapping.get(key)!.trigger();
         }
     }
 

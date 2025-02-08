@@ -13,7 +13,9 @@
         max: Infinity,
         step: 1
     });
-    const modelValue = defineModel<number>();
+    const modelValue = defineModel<number>({
+        required: true
+    });
 
     const NUMBER_REGEX = /^([-+]?\d*)(\.\d*)?$/;
 
@@ -62,7 +64,7 @@
 
     //失焦时
     function blur() {
-        const match = oldDisplayValue.match(NUMBER_REGEX);
+        const match = oldDisplayValue.match(NUMBER_REGEX)!;
         const i = Number(match[1]) || "0";
 
         let d = match[2] || ".";

@@ -25,7 +25,8 @@ export const UserDataModel = defineMongooseModel<UserDataSchema>({
             required: true
         },
         sign: {
-            type: String
+            type: String,
+            required: true
         },
         identity: {
             type: Number,

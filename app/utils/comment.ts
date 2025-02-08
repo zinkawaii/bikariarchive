@@ -15,7 +15,9 @@ function code() {
     return async (tree: hast.Root) => {
         const languages: string[] = [];
         visit(tree, "code", (node: mdast.Code) => {
-            languages.push(node.lang);
+            if (node.lang) {
+                languages.push(node.lang);
+            }
         });
         if (languages.length) {
             shiki ??= await getShikiHighlighter();

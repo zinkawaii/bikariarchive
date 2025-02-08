@@ -9,7 +9,7 @@
     const modelValue = defineModel<string>();
     const error = defineModel<boolean>("error");
 
-    const inputValue = computed<string>({
+    const inputValue = computed({
         get() {
             return modelValue.value ?? props.value;
         },

@@ -9,7 +9,10 @@ export interface UsePointerOptions {
     onPointerup?: PointerFn<boolean>;
 }
 
-export default function(el: MaybeRefOrGetter<HTMLElement>, options: UsePointerOptions) {
+export default function(
+    el: MaybeRefOrGetter<HTMLElement | null | undefined>,
+    options: UsePointerOptions
+) {
     const {
         filter = () => true
     } = options;

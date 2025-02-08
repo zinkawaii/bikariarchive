@@ -13,7 +13,7 @@ export const useUserStore = defineStore("user", () => {
     const getInfo = useFetch("/api/user/info");
 
     getInfo.then(({ data }) => {
-        const info = data.value;
+        const info = data.value!;
 
         if (!info.error) {
             uid.value = info.uid;

@@ -160,22 +160,22 @@
 
         nextTick(() => {
             //获取宽高
-            const width = rootEl.value.offsetWidth;
-            const height = rootEl.value.offsetHeight;
+            const width = rootEl.value!.offsetWidth;
+            const height = rootEl.value!.offsetHeight;
 
             //计算位置
             let { x, y } = event;
             x -= (width + x > window.innerWidth) ? width : 0;
             y -= (height + y > window.innerHeight) ? height : 0;
 
-            rootEl.value.style.left = x + "px";
-            rootEl.value.style.top = y + "px";
+            rootEl.value!.style.left = x + "px";
+            rootEl.value!.style.top = y + "px";
         });
     });
 
     //鼠标按下时
     useEventListener("mousedown", (event) => {
-        if (contextMenuStore.isOpening && !event.composedPath().includes(rootEl.value)) {
+        if (contextMenuStore.isOpening && !event.composedPath().includes(rootEl.value!)) {
             contextMenuStore.close();
         }
     });

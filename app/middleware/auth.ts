@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
         signerStore.open();
         return false;
     }
-    else if (userStore.identity < to.meta.identity) {
+    else if (userStore.identity < (to.meta.identity ?? 0)) {
         toastStore.error("[identity]", "无访问权限");
         return false;
     }

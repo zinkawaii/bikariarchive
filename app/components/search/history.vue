@@ -2,8 +2,8 @@
     import { injectionKey } from "~/types/search";
 
     const toastStore = useToastStore();
-    const history = useLocalStorage("search-history", []);
-    const { searchWord } = inject(injectionKey);
+    const history = useLocalStorage<string[]>("search-history", []);
+    const { searchWord } = inject(injectionKey)!;
 
     //更新历史
     watch(searchWord, (word) => {

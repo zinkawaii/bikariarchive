@@ -6,7 +6,7 @@ export interface GetLoginBody {
 }
 
 export interface GetLogonResponse extends BaseResponse {
-    uid?: number;
-    nickname?: string;
-    identity?: number;
+    uid: number;
+    nickname: string;
+    identity: number;
 }

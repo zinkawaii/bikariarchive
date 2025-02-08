@@ -26,8 +26,7 @@
     });
 
     const results = computed(() => {
-        const { list } = data.value ?? {};
-        return list ?? [];
+        return (data.value ?? {}).list ?? [];
     });
 
     const { page, total, paginatedArr } = usePagination(results);

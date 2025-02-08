@@ -17,8 +17,12 @@
         content: {},
         mode: {},
         nickname: {},
-        email: {},
-        address: {}
+        email: {
+            default: ""
+        },
+        address: {
+            default: ""
+        }
     });
 
     const { errors, validate } = useValidate({
@@ -54,7 +58,9 @@
 
     //发表评论
     async function sendComment() {
-        if (!validate()) return;
+        if (!validate()) {
+            return;
+        }
 
         toggleSending(true);
         try {

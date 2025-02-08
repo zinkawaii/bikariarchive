@@ -7,10 +7,10 @@ export default defineNuxtPlugin(() => {
 
     if (import.meta.hot) {
         import.meta.hot.accept("../../../dist/json/Article.json", (mod) => {
-            enrichJArticle(mod.default);
+            enrichJArticle(mod?.default);
         });
         import.meta.hot.accept("../../../dist/json/Intel.json", (mod) => {
-            enrichJIntel(mod.default);
+            enrichJIntel(mod?.default);
         });
     }
 });

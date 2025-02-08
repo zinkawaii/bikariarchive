@@ -1,10 +1,12 @@
 <script lang="ts" setup>
     import type { SettingField } from "~/types/setting";
 
+    type ShortCutKey = SettingField & "shortcut-last" | "shortcut-next";
+
     const settingStore = useSettingStore();
 
     //键值与显示值的映射表
-    const shortMap = {
+    const shortMap: Record<string, string> = {
         " ": "SpaceBar",
         ArrowLeft: "←",
         ArrowUp: "↑",
@@ -25,19 +27,19 @@
     });
 
     //键盘按下时
-    function onShortcutKeypress(name: string) {
+    function onShortcutKeypress(name: ShortCutKey) {
         shortcuts.value[name].value = "";
     }
 
     //键盘松开时
-    function onShortcutKeyup(name: SettingField, event: KeyboardEvent) {
+    function onShortcutKeyup(name: ShortCutKey, event: KeyboardEvent) {
         shortcuts.value[name].value = keyToStr(event.key);
         settingStore.set(name, event.key);
     }
 
     //键值 → 显示值
     function keyToStr(key: string) {
-        let str = shortMap[key] || key;
+        let str = shortMap[key] ?? key;
         if (str.match(/^[a-z]$/)) {
             str = str.toUpperCase();
         }

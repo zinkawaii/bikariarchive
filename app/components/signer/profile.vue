@@ -20,7 +20,7 @@
             });
 
             userStore.reset();
-            if (route.meta.identity > 0) {
+            if (route.meta.identity) {
                 router.push({ name: "home" });
             }
         }

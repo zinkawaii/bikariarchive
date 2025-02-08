@@ -4,7 +4,9 @@
     }>(), {
         maxlength: 512
     });
-    const modelValue = defineModel<string>();
+    const modelValue = defineModel<string>({
+        required: true
+    });
 
     const initialValue = modelValue.value;
     const length = computed(() => {
@@ -19,7 +21,7 @@
 
     function updateModelValue(event: InputEvent) {
         const target = event.target as HTMLElement;
-        modelValue.value = target.textContent;
+        modelValue.value = target.textContent!;
     }
 </script>
 

@@ -1,10 +1,12 @@
 <script lang="ts" setup>
+    import type { SetupContext } from "vue";
+
     defineProps<{
         danger?: boolean;
         hideExternal?: boolean;
     }>();
 
-    const attrs = useAttrs();
+    const attrs = useAttrs() as SetupContext["attrs"];
 
     const isExternal = computed(() => {
         return typeof attrs.to === "string" && /^(?:https?:)?\/\//.test(attrs.to);

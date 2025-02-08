@@ -5,7 +5,8 @@
         lang?: BundledLanguage;
         raw?: string;
     }>(), {
-        lang: "js"
+        lang: "js",
+        raw: ""
     });
 
     const [isCollapse, toggleCollapse] = useToggle(false);
@@ -16,7 +17,7 @@
         {
             icon: "fa6-solid:paste",
             action() {
-                copyText(codeEl.value.textContent, "代码已复制");
+                copyText(codeEl.value!.textContent!, "代码已复制");
             }
         },
         {

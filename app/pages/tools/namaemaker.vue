@@ -44,7 +44,10 @@
     });
 
     //结果
-    const results = ref([]);
+    const results = ref<{
+        kanji: string;
+        kana: string;
+    }[]>([]);
 
     //分列结果
     const chunkedResults = computed(() => {
@@ -65,7 +68,7 @@
         //从静态资源服务器读取数据，防止打包文件过大
         if (status.value === "idle") {
             await execute();
-            Jnm = data.value;
+            Jnm = data.value!;
             toastStore.success("[jnm]:load", "数据集已加载");
             return;
         }

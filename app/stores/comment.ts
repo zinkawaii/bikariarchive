@@ -1,3 +1,4 @@
+import { isObject } from "@vueuse/core";
 import type { WithParent } from "~/types";
 import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 
@@ -26,7 +27,9 @@ export const useCommentStore = defineStore("comment", () => {
                 page: page
             }
         });
-        if (res.error) return;
+        if (res.error) {
+            return;
+        }
 
         comments.value = processComments(res.list);
         mainCount.value = res.mainCount;
@@ -55,7 +58,7 @@ export const useCommentStore = defineStore("comment", () => {
             : "评论删除失败";
     });
 
-    function createRequest<T>(method: "post" | "put" | "delete", getter: (statusCode: number) => string) {
+    function createRequest<T extends Record<string, any>>(method: "post" | "put" | "delete", getter: (statusCode: number) => string) {
         return async (body: T) => {
             try {
                 const res = await $fetch("/api/comment", {
@@ -68,7 +71,8 @@ export const useCommentStore = defineStore("comment", () => {
                 update(1);
             }
             catch (err) {
-                const message = err.statusCode ? getter(err.statusCode) : String(err);
+                const statusCode = isObject(err) ? Reflect.get(err, "statusCode") : void 0;
+                const message = typeof statusCode === "number" ? getter(statusCode) : String(err);
                 toastStore.error(`[comment]:${method}`, message);
                 throw err;
             }

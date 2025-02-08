@@ -3,7 +3,7 @@ interface ValidateEntry {
     required?: boolean;
     rule?: RegExp;
     message?: string;
-    exec?: (value: string) => string;
+    exec?: (value: string) => string | void;
 }
 
 export default function<T extends Record<string, ValidateEntry>>(entries: T) {
@@ -38,7 +38,7 @@ export default function<T extends Record<string, ValidateEntry>>(entries: T) {
         if (required || target.value) {
             const msg = rule && !rule.test(target.value) ? message : exec?.(target.value);
 
-            if (msg?.length > 0) {
+            if (msg?.length) {
                 glitch(key, msg);
                 return false;
             }

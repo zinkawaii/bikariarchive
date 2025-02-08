@@ -4,7 +4,7 @@
 
     const props = defineProps<SearchResult>();
 
-    const { searchWord } = inject(injectionKey);
+    const { searchWord } = inject(injectionKey)!;
 
     const art = Article.for(() => props.novel, () => props.index);
 

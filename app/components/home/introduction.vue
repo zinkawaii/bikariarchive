@@ -8,7 +8,7 @@
         status.value ^= 1;
 
         //首位小说入队尾
-        const novel = novels.value.shift();
+        const novel = novels.value.shift()!;
         novels.value.push(novel);
 
         //交换层级

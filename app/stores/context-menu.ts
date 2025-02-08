@@ -3,20 +3,20 @@ import type { ContextMenuGroup, ContextMenuItem } from "~/types/context-menu";
 export const useContextMenuStore = defineStore("context-menu", () => {
     const isOpening = ref(false);
     const baseGroups = ref<ContextMenuGroup[]>([]);
-    const extraGroup = ref<ContextMenuGroup>(null);
+    const extraGroup = ref<ContextMenuGroup>();
 
     const groups = computed(() => {
         const isExtra = extraGroup.value ? (toValue(extraGroup.value.when) ?? true) : false;
         return [
             isExtra && extraGroup.value,
             ...baseGroups.value.filter((group) => {
-                return (toValue(group.when) ?? true) && (isExtra ? !extraGroup.value.shield?.includes(group.title) : true);
+                return (toValue(group.when) ?? true) && (extraGroup.value?.shield?.includes(group.title) ?? true);
             })
         ].filter(Boolean);
     });
 
     function clear() {
-        extraGroup.value = null;
+        extraGroup.value = void 0;
     }
 
     function basic(group: ContextMenuGroup) {
@@ -24,7 +24,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         baseGroups.value.push(group as any);
     }
 
-    function extra(el: MaybeRef<HTMLElement>, group: ContextMenuGroup) {
+    function extra(el: MaybeRefOrGetter<HTMLElement | null | undefined>, group: ContextMenuGroup) {
         patchItems(group.items);
         useEventListener(el, "contextmenu", () => {
             extraGroup.value = group;
@@ -53,7 +53,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     function patchItems(items: ContextMenuItem[]) {
         for (const item of items) {
             const { action, children = [] } = item;
-            item.action &&= () => (action(), close());
+            item.action &&= () => (action!(), close());
             patchItems(children);
         }
     }

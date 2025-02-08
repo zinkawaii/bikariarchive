@@ -20,10 +20,15 @@ export function copyImage(link: string, message: string) {
         canvas.width = naturalWidth;
         canvas.height = naturalHeight;
 
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d")!;
         ctx.drawImage(imgEl, 0, 0, naturalWidth, naturalHeight);
 
         canvas.toBlob((blob) => {
+            if (!blob) {
+                toastStore.error("[copy]:image", "图像复制失败");
+                return;
+            }
+
             const data = [new ClipboardItem({
                 [blob.type]: blob
             })];

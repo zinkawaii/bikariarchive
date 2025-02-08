@@ -5,7 +5,9 @@
 
     const config = useRuntimeConfig();
 
-    const { status, data } = useLazyFetch("/api/friend");
+    const { status, data } = useLazyFetch("/api/friend", {
+        default: () => null!
+    });
 
     const schema = `export default {
   title: "${config.public.title}",

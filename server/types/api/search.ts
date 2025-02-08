@@ -1,7 +1,7 @@
 import type { Element } from "@bikari/article";
 
 export interface GetSearchResponse extends BaseResponse {
-    list?: SearchResult[];
+    list: SearchResult[];
 }
 
 export interface SearchResult {

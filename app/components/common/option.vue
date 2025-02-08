@@ -9,7 +9,7 @@
     const {
         modelValue,
         bind
-    } = inject(injectionKey);
+    } = inject(injectionKey)!;
 
     const isEqual = computed(() => {
         return modelValue.value === props.value;

@@ -5,9 +5,9 @@ export interface DeleteCommentBody {
 }
 
 export interface GetCommentResponse extends BaseResponse {
-    totalCount?: number;
-    mainCount?: number;
-    list?: CommentData[];
+    totalCount: number;
+    mainCount: number;
+    list: CommentData[];
 }
 
 export interface CommentData {

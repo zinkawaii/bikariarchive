@@ -62,10 +62,11 @@
 
     //删除评论
     async function removeComment() {
-        if (!await Zin.confirm("是否删除这条评论？")) return;
-        commentStore.remove({
-            id: props.data.id
-        });
+        if (await Zin.confirm("是否删除这条评论？")) {
+            commentStore.remove({
+                id: props.data.id
+            });
+        }
     }
 </script>
 

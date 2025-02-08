@@ -43,7 +43,7 @@ export interface UserDataSchema {
     email: string;
     address?: string;
     sex: number;
-    sign?: string;
+    sign: string;
     identity: number;
     createTime: Date;
     hash: string;

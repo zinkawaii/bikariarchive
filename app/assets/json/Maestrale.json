@@ -1,10 +1,10 @@
 {
   "baseUrl": "https://patchwiki.biligame.com/images/blhx",
-  "skin": [
+  "skins": [
     "西北风",
     "独处的沙滩一角"
   ],
-  "audio": [
+  "audios": [
     {
       "name": "开始",
       "title": "extra",

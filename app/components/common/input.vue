@@ -5,7 +5,9 @@
     defineProps<{
         invalid?: boolean;
     }>();
-    const modelValue = defineModel<string>();
+    const modelValue = defineModel<string>({
+        required: true
+    });
 </script>
 
 <template>

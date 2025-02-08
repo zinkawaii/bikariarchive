@@ -63,7 +63,7 @@ export class Article implements JChapter {
         return this.novelInfo.volumes[this.volume];
     }
 
-    get prev() {
+    get prev(): Article | undefined {
         const prev = this.novelInfo.chapters[this.order - 1];
         if (this.novelInfo.type === "novel" || this.volume === prev?.volume) {
             return prev;
@@ -71,7 +71,7 @@ export class Article implements JChapter {
         return void 0;
     }
 
-    get next() {
+    get next(): Article | undefined {
         const next = this.novelInfo.chapters[this.order + 1];
         if (this.novelInfo.type === "novel" || this.volume === next?.volume) {
             return next;

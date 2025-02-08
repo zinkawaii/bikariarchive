@@ -20,13 +20,15 @@
 
     //上下章快捷键
     useEventListener("keyup", (event) => {
-        if (isFocusedEditable()) return;
+        if (isFocusedEditable()) {
+            return;
+        }
 
         if (!art.isFirst && event.key === settingStore.get("shortcut-last")) {
-            router.push(art.prev?.route);
+            router.push(art.prev!.route);
         }
         else if (!art.isLast && event.key === settingStore.get("shortcut-next")) {
-            router.push(art.next?.route);
+            router.push(art.next!.route);
         }
     });
 
@@ -66,7 +68,8 @@
             password
         },
         immediate: !art.encrypted,
-        watch: [art]
+        watch: [art],
+        default: () => null!
     });
 
     //设置元信息

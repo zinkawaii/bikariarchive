@@ -4,7 +4,8 @@
     "types": [
       "@types/wicg-file-system-access"
     ],
-    "strict": false
+    "strictFunctionTypes": false,
+    "noUncheckedIndexedAccess": false
   },
   "vueCompilerOptions": {
     "experimentalResolveStyleCssClasses": "always"

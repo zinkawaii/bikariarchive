@@ -19,7 +19,8 @@
             title
         },
         immediate: isExist.value,
-        watch: [Entry.meta]
+        watch: [Entry.meta],
+        default: () => null!
     });
 
     //显示评论区

@@ -4,9 +4,9 @@ export interface PostLoginBody {
 }
 
 export interface PostLoginResponse extends BaseResponse {
-    uid?: number;
-    nickname?: string;
-    avatar?: string;
-    identity?: number;
-    sign?: string;
+    uid: number;
+    nickname: string;
+    avatar: string;
+    identity: number;
+    sign: string;
 }

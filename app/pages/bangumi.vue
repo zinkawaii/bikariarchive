@@ -10,7 +10,8 @@
     const { status, data } = useLazyFetch("/api/bangumi", {
         query: {
             page
-        }
+        },
+        default: () => null!
     });
 </script>
 

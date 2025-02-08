@@ -22,7 +22,7 @@
     const gsap = useGsap();
 
     const imgComp = useTemplateRef("img");
-    const imgEl = computed(() => imgComp.value?.$refs.imgEl);
+    const imgEl = computed(() => imgComp.value?.$refs.imgEl ?? null);
 
     const charEl = useTemplateRef("char");
     const tagEls = computed(() => {
@@ -31,7 +31,7 @@
 
     //角色列表
     const characters = computed(() => {
-        return props.character.split(",");
+        return props.character?.split(",");
     });
 
     //附加样式
@@ -62,7 +62,7 @@
 
     //查看器
     const { open, close } = dialogStore.use(() => h(LazyMbImageViewer, {
-        target: imgEl.value,
+        target: imgEl.value!,
         async onClose() {
             await close();
             if (tagEls.value.length) {
@@ -74,11 +74,11 @@
     //加载完成时
     const [isLoaded, toggleLoaded] = useToggle(false);
     onMounted(() => {
-        if (imgEl.value.complete) {
+        if (imgEl.value!.complete) {
             toggleLoaded();
         }
         else {
-            imgEl.value.addEventListener("load", () => toggleLoaded());
+            imgEl.value!.addEventListener("load", () => toggleLoaded());
         }
     });
 

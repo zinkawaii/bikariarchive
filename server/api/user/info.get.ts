@@ -19,7 +19,7 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
         return 1;
     }
 
-    res.uid = uid;
+    res.uid = uid!;
     res.nickname = qUser.nickname;
     res.avatar = generateAvatarUrl(qUser.email);
     res.sign = qUser.sign;

@@ -7,7 +7,9 @@
         min: 0,
         max: 1
     });
-    const modelValue = defineModel<number>();
+    const modelValue = defineModel<number>({
+        required: true
+    });
     const emit = defineEmits<{
         progress: [rate: number];
         change: [rate: number];
@@ -31,11 +33,11 @@
     //鼠标拖动时
     usePointer(rootEl, {
         onPointerdown(event) {
-            ({ width, left } = rootEl.value.getBoundingClientRect());
+            ({ width, left } = rootEl.value!.getBoundingClientRect());
             emit("dragstart");
 
             //进度预变化
-            this.onPointermove(event);
+            this.onPointermove!(event);
         },
         onPointermove(event) {
             const { min, max, step } = props;

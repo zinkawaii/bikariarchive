@@ -1,3 +1,4 @@
+import { notNullish } from "@vueuse/core";
 import type { NovelType } from "@bikari/article";
 
 export interface UseArticleListOptions {
@@ -13,7 +14,7 @@ export default function(options: UseArticleListOptions) {
 
     //排序字段
     const sortBy = computed(() => {
-        return [toValue(options.sortBy), "date"];
+        return [toValue(options.sortBy), "date"].filter(notNullish);
     });
 
     //是否显示置顶
@@ -27,8 +28,8 @@ export default function(options: UseArticleListOptions) {
             .sort((a, b) => {
                 const [x, y] = sortBy.value.reduce(([x, y], prop) => {
                     return [
-                        x ?? a[prop],
-                        y ?? b[prop]
+                        x ?? Reflect.get(a, prop),
+                        y ?? Reflect.get(b, prop)
                     ];
                 }, [null, null]);
                 return x && y ? y.localeCompare(x) : x ? -1 : 1;

@@ -2,14 +2,14 @@ import { LazyCommentPanel } from "#components";
 import type { CommentKind, CommentModifyOptions, CommentReplyOptions } from "~/types/comment";
 
 export const useCommentPanelStore = defineStore("comment-panel", () => {
-    const kind = ref<CommentKind>();
+    const kind = ref<CommentKind>(null!);
     const content = ref("");
     const nickname = ref("");
     const email = ref("");
     const address = ref("");
     const path = ref("");
-    const replyOptions = ref<CommentReplyOptions>();
-    const modifyOptions = ref<CommentModifyOptions>();
+    const replyOptions = ref<CommentReplyOptions>(null!);
+    const modifyOptions = ref<CommentModifyOptions>(null!);
 
     const route = useRoute();
     const dialogStore = useDialogStore();
