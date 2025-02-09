@@ -1,3 +1,4 @@
+import { notNullish } from "@vueuse/core";
 import type { ContextMenuGroup, ContextMenuItem } from "~/types/context-menu";
 
 export const useContextMenuStore = defineStore("context-menu", () => {
@@ -5,14 +6,18 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     const baseGroups = ref<ContextMenuGroup[]>([]);
     const extraGroup = ref<ContextMenuGroup>();
 
+    const displayExtra = computed(() => {
+        return extraGroup.value && (toValue(extraGroup.value.when) ?? true) ? extraGroup.value : void 0;
+    });
+
+    const displayBasics = computed(() => {
+        return baseGroups.value.filter((group) => {
+            return (toValue(group.when) ?? true) && (!displayExtra.value?.shield?.includes(group.title));
+        });
+    });
+
     const groups = computed(() => {
-        const isExtra = extraGroup.value ? (toValue(extraGroup.value.when) ?? true) : false;
-        return [
-            isExtra && extraGroup.value,
-            ...baseGroups.value.filter((group) => {
-                return (toValue(group.when) ?? true) && (extraGroup.value?.shield?.includes(group.title) ?? true);
-            })
-        ].filter(Boolean);
+        return [displayExtra.value, ...displayBasics.value].filter(notNullish);
     });
 
     function clear() {
