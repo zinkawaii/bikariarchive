@@ -164,7 +164,7 @@
 </script>
 
 <template>
-    <div class="home-calendar content-widget">
+    <div class="home-calendar content-widget no-scrollbar">
         <div class="calendar-wrapper">
             <div class="calendar-header">
                 <span class="calendar-month">{{ currentMonth + 1 }}° {{ monthMap[currentMonth][0] }}</span>
@@ -210,10 +210,6 @@
         overflow: auto;
         font-size: 14px;
         scroll-snap-type: x mandatory;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
     }
 
     .calendar-wrapper, .calendar-detail {

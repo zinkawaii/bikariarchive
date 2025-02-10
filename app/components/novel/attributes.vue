@@ -54,7 +54,7 @@
         class="novel-attributes"
         :class="{
             [`is-wrap`]: wrap,
-            [`edge-fades-x`]: !wrap
+            [`edge-fades-x no-scrollbar`]: !wrap
         }"
     >
         <li v-for="{ icon, content } in filterred" class="novel-attr">
@@ -76,10 +76,6 @@
         &.is-wrap {
             flex-wrap: wrap;
             justify-content: center;
-        }
-
-        &::-webkit-scrollbar {
-            display: none;
         }
     }
 

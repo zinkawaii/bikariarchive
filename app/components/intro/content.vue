@@ -6,7 +6,7 @@
 
 <template>
     <div class="intro-content">
-        <ul class="intro-tags edge-fades-x">
+        <ul class="intro-tags edge-fades-x no-scrollbar">
             <li v-for="tag in Article.meta[novel].tag" class="intro-tag">{{ tag }}</li>
         </ul>
         <novel-article class="intro-synopsis" :body="Article.meta[props.novel].synopsis"/>
@@ -26,10 +26,6 @@
         display: flex;
         gap: 12px;
         overflow: auto;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
     }
 
     .intro-tag {

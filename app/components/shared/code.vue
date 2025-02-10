@@ -57,7 +57,7 @@
         <div class="code-area" :class="{ [`is-collapse`]: isCollapse }">
             <div class="code-inner" :class="{ [`is-expand`]: isExpand }">
                 <pre class="code-line">{{ lineStr }}</pre>
-                <pre ref="pre" class="code-content shiki" v-html="code"></pre>
+                <pre ref="pre" class="code-content shiki no-scrollbar" v-html="code"></pre>
                 <button v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
                     <iconify :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
                 </button>
@@ -143,10 +143,6 @@
     .code-content {
         overflow: auto hidden;
         border-left: 1px solid var(--color-border-lighter);
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
     }
 
     .code-expand {

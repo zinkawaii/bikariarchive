@@ -17,7 +17,7 @@
 <template>
     <transition-scale>
         <div v-if="isOpening" class="mb-dialog">
-            <div class="dialog-wrapper">
+            <div class="dialog-wrapper no-scrollbar">
                 <slot></slot>
             </div>
             <span class="dialog-xmark" @click="emit(`close`)">
@@ -53,10 +53,6 @@
     .dialog-wrapper {
         overflow: auto;
         padding: var(--dialog-padding, 32px);
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
     }
 
     .dialog-xmark {
