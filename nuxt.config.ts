@@ -37,7 +37,7 @@ export default defineNuxtConfig({
             prefix: "z"
         },
         {
-            path: "~/components/common",
+            path: "~/components/shared",
             prefix: "mb"
         }
     ],
@@ -92,7 +92,6 @@ export default defineNuxtConfig({
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
         ["nuxt-mongoose", serverConfig.mongoose],
-        "@nuxt/eslint",
         "@nuxt/fonts",
         "@nuxt/icon",
         "@nuxt/image",
