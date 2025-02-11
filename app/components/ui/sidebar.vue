@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import Flip from "gsap/Flip";
+    import { animate } from "motion-v";
 
     const settingStore = useSettingStore();
     const route = useRoute();
@@ -12,11 +12,17 @@
         const display = settingStore.get("sidebar-display");
 
         if (import.meta.browser) {
-            const nakamiState = Flip.getState(".nakami");
+            const nakami = document.querySelector(".nakami")!;
+            const start = getPosition(nakami);
+
             nextTick(() => {
-                Flip.from(nakamiState, {
+                const end = getPosition(nakami);
+                animate(nakami, {
+                    x: [start.left - end.left, 0],
+                    y: [start.top - end.top, 0]
+                }, {
                     duration: 0.4,
-                    ease: "back.out"
+                    ease: "backOut"
                 });
             });
         }

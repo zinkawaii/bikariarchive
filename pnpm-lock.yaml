@@ -58,6 +58,9 @@ importers:
       micromark-util-symbol:
         specifier: ^2.0.1
         version: 2.0.1
+      motion-v:
+        specifier: 0.10.0-beta.1
+        version: 0.10.0-beta.1(vue@3.5.13(typescript@5.7.3))
       pinia:
         specifier: ^3.0.0
         version: 3.0.0(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
@@ -155,9 +158,6 @@ importers:
       '@zinkawaii/eslint-config':
         specifier: ^0.2.0
         version: 0.2.0
-      '@zinkawaii/nuxt-gsap':
-        specifier: ^0.1.3
-        version: 0.1.3(magicast@0.3.5)
       '@zinkawaii/nuxt-shiki':
         specifier: ^0.8.0
         version: 0.8.0(magicast@0.3.5)
@@ -2101,9 +2101,6 @@ packages:
   '@zinkawaii/eslint-config@0.2.0':
     resolution: {integrity: sha512-ZDYMHf2cAaHky31Ha+m9ydO0baNUXrVd27ug/1VLX83OSrhBtqdpbdqKHxecrg6715bM3hnS4hqJ5oOPtUq1CA==}
 
-  '@zinkawaii/nuxt-gsap@0.1.3':
-    resolution: {integrity: sha512-CIMP1b3kyevZkJLPaFER5Iau6F4CQwJhpaCmoztyhVIa9Kx4HTdC/keWZtRU5Z8+1ZyG7zvnRUxfmmG33UN/Gw==}
-
   '@zinkawaii/nuxt-shiki@0.8.0':
     resolution: {integrity: sha512-zdO2nY/7mRPbU2tFHhlFdi7/x5/Brdcp/UsKCnbJ9ikChZErc8/O3oslcephtKbMVnmHfv3d6mkmpy2hG11BPg==}
 
@@ -2484,7 +2481,7 @@ packages:
     resolution: {integrity: sha512-tskPPKEs8D2KPafUypv2gxwJP8h/OaJmC82QQGGDQcHvXX43xF2VDACcJVmZ0EuSxkpO9Kc4MlrA3q0+FG58AQ==}
 
   clean-regexp@1.0.0:
-    resolution: {integrity: sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw==}
+    resolution: {integrity: sha1-jffHquUf02h06PjQW5GAvBGj/tc=}
     engines: {node: '>=4'}
 
   cli-width@4.1.0:
@@ -3357,6 +3354,20 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
+  framer-motion@12.4.0:
+    resolution: {integrity: sha512-QX92ThRniev3YTkjXOV/7m9fXBRQ5xDDRWDinuU//Xkjh+q9ppg3Nb0b95xgJYd2AE0rgJ7eoihY+Z+jjSv22w==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -3499,12 +3510,6 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  gsap-trial@3.12.7:
-    resolution: {integrity: sha512-VR6064JQ4RM2pUll+qBB7mgNtTkKGBSPRSNRIibYU66ZA9fEFkUIWhAb37/h1oGVu1HxPYLqsxFUOaL7PQVJ1w==}
-
-  gsap@3.12.7:
-    resolution: {integrity: sha512-V4GsyVamhmKefvcAKaoy0h6si0xX7ogwBoBSs2CTJwt7luW0oZzC0LhdkyuKV8PJAXr7Yaj8pMjCKD4GJ+eEMg==}
-
   gzip-size@6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
     engines: {node: '>=10'}
@@ -3557,6 +3562,9 @@ packages:
   hex-rgb@4.3.0:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
+
+  hey-listen@1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
 
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
@@ -3691,7 +3699,7 @@ packages:
     resolution: {integrity: sha512-hmbYhX/9MUMF5uh7tOXyK/n0ZvWpad5caBA17GsC6vyuCqaWliRG5K1qS9inmUhEMaOBIW7/whAnSwveW/LtZw==}
 
   is-arrayish@0.2.1:
-    resolution: {integrity: sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0=}
+    resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
 
   is-arrayish@0.3.2:
     resolution: {integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==}
@@ -4346,6 +4354,17 @@ packages:
     resolution: {integrity: sha512-nLhk3Qrv6q/HpD2k1O7kbBqsq+/kmKpdv5KJ+LLhQlII3e1p/SSLoLP6jMuSiU6+iLK7zFw4T1niAk3mA3QVug==}
     engines: {node: '>=16.20.1'}
 
+  motion-dom@12.0.0:
+    resolution: {integrity: sha512-CvYd15OeIR6kHgMdonCc1ihsaUG4MYh/wrkz8gZ3hBX/uamyZCXN9S9qJoYF03GqfTt7thTV/dxnHYX4+55vDg==}
+
+  motion-utils@12.0.0:
+    resolution: {integrity: sha512-MNFiBKbbqnmvOjkPyOKgHUp3Q6oiokLkI1bEwm5QA28cxMZrv0CbbBGDNmhF6DIXsi1pCQBSs0dX8xjeER1tmA==}
+
+  motion-v@0.10.0-beta.1:
+    resolution: {integrity: sha512-OlwE3817XY06uje+WYQQkBKcFzQQpmUWnV6WrrMGVJmYTsLP8/nepJ3ClyhfoHi3CbZ1L7KOoBGm+DQfcAycvQ==}
+    peerDependencies:
+      vue: '>=3.0.0'
+
   mpath@0.9.0:
     resolution: {integrity: sha512-ikJRQTk8hw5DEoFVxHG1Gn9T/xcjtdnOKIU1JTmGjZZlg9LST2mBLmcX3/ICIbgJydT2GOc15RnNy5mHmzfSew==}
     engines: {node: '>=4.0.0'}
@@ -4391,7 +4410,7 @@ packages:
     resolution: {integrity: sha512-GEbrYkbfF7MoNaoh2iGG84Mnf/WZfB0GdGEsM8wz7Expx/LlWf5U8t9nvJKXSp3qr5IsEbK04cBGhol/KwOsWA==}
 
   natural-compare@1.4.0:
-    resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+    resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
 
   natural-orderby@5.0.0:
     resolution: {integrity: sha512-kKHJhxwpR/Okycz4HhQKKlhWe4ASEfPgkSWNmKFHd7+ezuQlxkA5cM3+XkBPvm1gmHen3w53qsYAv+8GwRrBlg==}
@@ -8967,15 +8986,6 @@ snapshots:
 
   '@zinkawaii/eslint-config@0.2.0': {}
 
-  '@zinkawaii/nuxt-gsap@0.1.3(magicast@0.3.5)':
-    dependencies:
-      '@nuxt/kit': 3.15.4(magicast@0.3.5)
-      gsap: 3.12.7
-      gsap-trial: 3.12.7
-    transitivePeerDependencies:
-      - magicast
-      - supports-color
-
   '@zinkawaii/nuxt-shiki@0.8.0(magicast@0.3.5)':
     dependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)
@@ -10357,6 +10367,12 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
+  framer-motion@12.4.0:
+    dependencies:
+      motion-dom: 12.0.0
+      motion-utils: 12.0.0
+      tslib: 2.8.1
+
   fresh@0.5.2: {}
 
   fs-constants@1.0.0:
@@ -10505,10 +10521,6 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  gsap-trial@3.12.7: {}
-
-  gsap@3.12.7: {}
-
   gzip-size@6.0.0:
     dependencies:
       duplexer: 0.1.2
@@ -10610,6 +10622,8 @@ snapshots:
   he@1.2.0: {}
 
   hex-rgb@4.3.0: {}
+
+  hey-listen@1.0.8: {}
 
   hookable@5.5.3: {}
 
@@ -11577,6 +11591,24 @@ snapshots:
       - snappy
       - socks
       - supports-color
+
+  motion-dom@12.0.0:
+    dependencies:
+      motion-utils: 12.0.0
+
+  motion-utils@12.0.0: {}
+
+  motion-v@0.10.0-beta.1(vue@3.5.13(typescript@5.7.3)):
+    dependencies:
+      '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.7.3))
+      framer-motion: 12.4.0
+      hey-listen: 1.0.8
+      vue: 3.5.13(typescript@5.7.3)
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - '@vue/composition-api'
+      - react
+      - react-dom
 
   mpath@0.9.0: {}
 

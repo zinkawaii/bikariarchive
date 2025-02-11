@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+    import { animate } from "motion-v";
+
     const signerStore = useSignerStore();
     const settingStore = useSettingStore();
-    const gsap = useGsap();
 
     const collapse = computed(() => settingStore.get("ui-collapse"));
 
@@ -9,18 +10,18 @@
         const items = [...document.querySelectorAll(".z-toolbar > .mb-popper")].slice(0, -1);
 
         watchEffect(() => {
-            const tl = gsap.timeline({
-                defaults: {
-                    duration: 0.4,
-                    ease: `back.${collapse.value ? `in` : `out`}`
-                }
-            });
-
             const sortedItems = collapse.value ? items : items.toReversed();
-            for (const item of sortedItems) {
-                tl.to(item, { x: collapse.value ? 60 : 0 }, "<0.05");
+            for (let i = 0; i < sortedItems.length; i++) {
+                const el = sortedItems[i];
+                const animation = animate(el, {
+                    x: collapse.value ? 60 : 0
+                }, {
+                    delay: i * 0.05,
+                    duration: 0.4,
+                    ease: `back${collapse.value ? `In` : `Out`}`
+                });
+                animation.play();
             }
-            tl.play();
         });
     });
 </script>

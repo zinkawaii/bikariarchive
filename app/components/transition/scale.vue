@@ -1,42 +1,35 @@
 <script lang="ts" setup>
+    import { animate, type Easing } from "motion-v";
     import type { BaseTransitionProps } from "vue";
 
     const props = withDefaults(defineProps<{
         scale?: number;
         duration?: number;
-        ease?: string;
+        ease?: [Easing, Easing];
     }>(), {
         scale: 0.66,
         duration: 0.4,
-        ease: "back"
+        ease: () => ["backOut", "backIn"]
     });
 
-    const gsap = useGsap();
-
-    const fromState = computed(() => ({
-        opacity: 0,
-        scale: props.scale
-    }));
-
-    const toState = computed(() => ({
-        opacity: 1,
-        scale: 1
-    }));
-
     const onEnter: BaseTransitionProps["onEnter"] = async (el, done) => {
-        await gsap.fromTo(el, fromState.value, {
-            ...toState.value,
+        await animate(el, {
+            opacity: [0, 1],
+            scale: [props.scale, 1]
+        }, {
             duration: props.duration,
-            ease: `${props.ease}.out`
+            ease: props.ease[0]
         });
         done();
     };
 
     const onLeave: BaseTransitionProps["onLeave"] = async (el, done) => {
-        await gsap.fromTo(el, toState.value, {
-            ...fromState.value,
+        await animate(el, {
+            opacity: [1, 0],
+            scale: [1, props.scale]
+        }, {
             duration: props.duration,
-            ease: `${props.ease}.in`
+            ease: props.ease[1]
         });
         done();
     };

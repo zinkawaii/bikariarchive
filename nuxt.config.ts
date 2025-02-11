@@ -98,8 +98,8 @@ export default defineNuxtConfig({
         "@nuxtjs/seo",
         "@pinia/nuxt",
         "@vueuse/nuxt",
-        "@zinkawaii/nuxt-gsap",
         "@zinkawaii/nuxt-shiki",
+        "motion-v/nuxt",
         "pinia-plugin-persistedstate/nuxt"
     ],
     robots: robotsConfig,

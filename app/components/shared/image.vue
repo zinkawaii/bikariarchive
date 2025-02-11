@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import { animate } from "motion-v";
     import type { ImgHTMLAttributes } from "vue";
     import { LazyMbImageViewer } from "#components";
 
@@ -19,7 +20,6 @@
 
     const contextMenuStore = useContextMenuStore();
     const dialogStore = useDialogStore();
-    const gsap = useGsap();
 
     const imgComp = useTemplateRef("img");
     const imgEl = computed(() => imgComp.value?.$refs.imgEl ?? null);
@@ -84,17 +84,17 @@
 
     //触发回弹动画
     function displayCharacters() {
-        const tl = gsap.timeline({
-            defaults: {
+        for (let i = 0; i < tagEls.value.length; i++) {
+            const el = tagEls.value[i];
+            const animation = animate(el, {
+                y: [42, 0]
+            }, {
+                delay: i * 0.05,
                 duration: 0.4,
-                ease: "back.out"
-            }
-        });
-
-        for (const el of tagEls.value) {
-            tl.fromTo(el, { y: 42 }, { y: 0 }, "<0.05");
+                ease: "backOut"
+            });
+            animation.play();
         }
-        tl.play();
     }
 </script>
 
