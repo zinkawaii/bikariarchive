@@ -47,7 +47,7 @@
                     <div class="azur-block-wrapper">
                         <div class="azur-block-content">
                             <div class="azur-resume-part">
-                                <span class="azur-author" reset>{{ $config.public.author }}</span>
+                                <span reset>{{ $config.public.author }}</span>
                                 <div class="azur-uid" reset>
                                     <span>UID:</span>
                                     <span>37810541</span>
@@ -510,10 +510,6 @@
         }
     }
 
-    .azur-author {
-        letter-spacing: 1px;
-    }
-
     .azur-uid, .azur-level {
         display: flex;
         gap: 0.25em;
@@ -527,7 +523,7 @@
         font-size: 32cqh;
 
         > :first-child {
-            letter-spacing: -5cqh;
+            letter-spacing: -2cqh;
         }
     }
 

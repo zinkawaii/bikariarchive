@@ -1,5 +1,3 @@
-import type { UnwrapRef } from "vue";
-
 export interface ContextMenuGroup {
     title: string;
     when?: MaybeRefOrGetter<any>;
@@ -15,5 +13,3 @@ export interface ContextMenuItem {
     action?: () => any;
     children?: ContextMenuItem[];
 }
-
-export type UnwrapContextMenuItem = UnwrapRef<ContextMenuItem>;

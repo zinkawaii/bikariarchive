@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-    import type { UnwrapContextMenuItem } from "~/types/context-menu";
+    import type { ContextMenuItem } from "~/types/context-menu";
 
     defineProps<{
         title?: string;
-        items: UnwrapContextMenuItem[];
+        items: ContextMenuItem[];
         root?: boolean;
     }>();
 </script>
@@ -28,7 +28,8 @@
             top: -18px;
             left: 100%;
             padding: 8px;
-            border-block: 2px solid var(--color-theme-dark);
+            border: 2px solid var(--color-theme-dark);
+            border-left: none;
             border-radius: 16px;
             box-shadow: var(--box-shadow);
             background-color: var(--color-background-alpha);

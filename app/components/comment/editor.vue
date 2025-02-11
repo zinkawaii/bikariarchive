@@ -29,9 +29,7 @@
     <div
         ref="editor"
         class="panel-editor"
-        :class="{
-            ['is-invalid']: length > maxlength
-        }"
+        :class="{ [`is-invalid`]: length > maxlength }"
         contenteditable="plaintext-only"
         @input="updateModelValue"
         v-text="initialValue"

@@ -2,7 +2,7 @@
     import type { SettingField } from "~/types/setting";
 
     defineProps<{
-        name: SettingField;
+        name: SettingField<number>;
         options: string[];
     }>();
 
@@ -14,9 +14,7 @@
         <li
             v-for="(item, i) in options"
             class="select-item"
-            :class="{
-                [`is-checked`]: i === Number(settingStore.get(name))
-            }"
+            :class="{ [`is-checked`]: i === settingStore.get(name) }"
             @click="settingStore.set(name, i)"
         >{{ item }}</li>
     </ul>

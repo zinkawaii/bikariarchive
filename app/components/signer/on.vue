@@ -16,17 +16,7 @@
         nickname: {
             target: nickname,
             required: true,
-            rule: /^[\w\u4E00-\u9FA5]*$/,
-            message: "昵称不可包含非法字符",
-            exec(value) {
-                const count = getByteLength(value);
-                if (count === 0) {
-                    return "昵称不能为空";
-                }
-                else if (count > 24) {
-                    return "昵称长度不能超过 24 个字符";
-                }
-            }
+            ...nicknameValidates
         },
         email: {
             target: email,

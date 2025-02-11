@@ -15,14 +15,14 @@
         close: [value: number];
     }>();
 
-    const model = ref(props.initialValue);
+    const currentValue = ref(props.initialValue);
 
     function cancel() {
         emit("close", props.initialValue);
     }
 
     function confirm() {
-        emit("close", model.value);
+        emit("close", currentValue.value);
     }
 </script>
 
@@ -30,26 +30,38 @@
     <mb-dialog class="mb-numeric" @close="cancel">
         <meow-title>{{ title }}</meow-title>
         <div class="numeric-editor">
-            <mb-button :disabled="model <= min" @click="model = min">最小</mb-button>
+            <mb-button
+                :disabled="currentValue <= min"
+                @click="currentValue = min"
+            >最小</mb-button>
             <mb-input-number
                 :accuracy="0"
                 :min
                 :max
                 controls
-                v-model="model"
+                v-model="currentValue"
                 @keyup.enter="confirm"
             />
-            <mb-button :disabled="model >= max" @click="model = max">最大</mb-button>
+            <mb-button
+                :disabled="currentValue >= max"
+                @click="currentValue = max"
+            >最大</mb-button>
         </div>
         <div class="numeric-selector">
-            <span class="numeric-limit" :class="{ [`is-equal`]: model === min }">{{ min }}</span>
+            <span
+                class="numeric-limit"
+                :class="{ [`is-equal`]: currentValue === min }"
+            >{{ min }}</span>
             <mb-slider
                 :min
                 :max
                 :step="1"
-                v-model="model"
+                v-model="currentValue"
             />
-            <span class="numeric-limit" :class="{ [`is-equal`]: model === max }">{{ max }}</span>
+            <span
+                class="numeric-limit"
+                :class="{ [`is-equal`]: currentValue === max }"
+            >{{ max }}</span>
         </div>
         <div class="numeric-operator">
             <mb-button @click="cancel">取消</mb-button>

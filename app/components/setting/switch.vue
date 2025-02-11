@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-    import type { SettingBooleanField } from "~/types/setting";
+    import type { SettingField } from "~/types/setting";
 
     const props = defineProps<{
-        name: SettingBooleanField;
+        name: SettingField<boolean>;
     }>();
 
     const settingStore = useSettingStore();

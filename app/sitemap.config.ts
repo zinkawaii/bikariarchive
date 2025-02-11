@@ -23,6 +23,6 @@ export default <ModuleOptions> {
                 return `/book/${novel}/${item.index}`;
             });
         }),
-        ...Object.values(jIntel.all)
+        ...jIntel.all
     ].flat()
 };

@@ -3,8 +3,7 @@ import zin from "@zinkawaii/eslint-config";
 
 export default antfu({
     ignores: [
-        "data/json/Bangumi.json",
-        "public/json/Jnm.json"
+        "data/json/Bangumi.json"
     ],
     markdown: false,
     rules: {

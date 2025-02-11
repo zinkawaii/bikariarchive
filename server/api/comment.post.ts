@@ -2,7 +2,7 @@ import { z } from "zod";
 import CommentReply from "~/emails/comment-reply.vue";
 import { Zexp } from "~/utils";
 import type { PostCommentBody } from "~~/server/types/api/comment";
-import type { UserDataSchema } from "../types/model";
+import type { UserDataSchema } from "~~/server/types/model";
 
 const schema = z.object({
     path: z.string(),

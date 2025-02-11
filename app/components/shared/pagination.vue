@@ -65,7 +65,7 @@
 
     //点击页码时
     async function selectPage(val: number) {
-        modelValue.value = modelValue.value === val ? await Zin.numeric({
+        modelValue.value = modelValue.value === val ? await requireNumeric({
             title: "跳转到页码",
             initialValue: val,
             min: 1,

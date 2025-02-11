@@ -10,37 +10,34 @@
         immediate: false
     });
 
+    const countList = [1, 10, 100, 500];
+    const genderList = [
+        {
+            title: "男",
+            value: "male"
+        },
+        {
+            title: "女",
+            value: "female"
+        }
+    ];
+
     //数量
-    const counter = ref({
-        list: [1, 10, 100, 500],
-        current: 1
-    });
+    const count = ref(1);
 
     //性别
-    const gender = ref({
-        list: [
-            {
-                title: "男",
-                value: "male"
-            },
-            {
-                title: "女",
-                value: "female"
-            }
-        ],
-        current: "female"
+    const gender = ref("female");
+
+    //指定（姓）
+    const specLast = ref({
+        kanji: "",
+        kana: ""
     });
 
-    //指定
-    const specific = ref({
-        last: {
-            kanji: "",
-            kana: ""
-        },
-        first: {
-            kanji: "",
-            kana: ""
-        }
+    //指定（名）
+    const specFirst = ref({
+        kanji: "",
+        kana: ""
     });
 
     //结果
@@ -77,27 +74,24 @@
         clear();
 
         //指定汉字与假名
-        const pre_last_kanji = specific.value.last.kanji || specific.value.last.kana;
-        const pre_last_kana = specific.value.last.kana || specific.value.last.kanji;
-        const pre_first_kanji = specific.value.first.kanji || specific.value.first.kana;
-        const pre_first_kana = specific.value.first.kana || specific.value.first.kanji;
+        const specLastKanji = specLast.value.kanji || specLast.value.kana;
+        const specLastKana = specLast.value.kana || specLast.value.kanji;
+        const specFirstKanji = specFirst.value.kanji || specFirst.value.kana;
+        const specFirstKana = specFirst.value.kana || specFirst.value.kanji;
 
-        const count = counter.value.current;
-        const sex = gender.value.current;
-
-        for (let i = 0; i < count; i++) {
-            const {
-                last = pre_last_kanji,
-                last_kana = pre_last_kana
-            } = pre_last_kana ? {} : getLastName();
-            const {
-                first = pre_first_kanji,
-                first_kana = pre_first_kana
-            } = pre_first_kana ? {} : getFirstName(sex);
+        for (let i = 0; i < count.value; i++) {
+            const [
+                lastKanji = specLastKanji,
+                lastKana = specLastKana
+            ] = specLastKana ? [] : getLastName();
+            const [
+                firstKanji = specFirstKanji,
+                firstKana = specFirstKana
+            ] = specFirstKana ? [] : getFirstName(gender.value);
 
             results.value.push({
-                kanji: last + " " + first,
-                kana: last_kana + "　" + first_kana
+                kanji: lastKanji + " " + firstKanji,
+                kana: lastKana + "　" + firstKana
             });
         }
     }
@@ -117,10 +111,7 @@
             getRandomItems(Jnm["04"], Jnm["04_kana"]) :
             getRandomItems(Jnm["23"], Jnm["23_kana"]);
 
-        return {
-            last: kanji,
-            last_kana: kana
-        };
+        return [kanji, kana] as const;
     }
 
     //名
@@ -172,10 +163,7 @@
             [a, b] = getRandomItems(Jnm[k24], Jnm[`${k24}_kana`]);
         }
 
-        return {
-            first: a,
-            first_kana: b
-        };
+        return [a, b] as const;
     }
 </script>
 
@@ -190,9 +178,9 @@
                 <span class="text-gray">数量</span>
                 <div class="namae-radio">
                     <mb-radio
-                        v-for="item in counter.list"
+                        v-for="item in countList"
                         :value="item"
-                        v-model="counter.current"
+                        v-model="count"
                     >{{ item }}</mb-radio>
                 </div>
             </div>
@@ -200,19 +188,19 @@
                 <span class="text-gray">性别</span>
                 <div class="namae-radio">
                     <mb-radio
-                        v-for="item in gender.list"
-                        :value="item.value"
-                        v-model="gender.current"
-                    >{{ item.title }}</mb-radio>
+                        v-for="{ title, value } in genderList"
+                        :value
+                        v-model="gender"
+                    >{{ title }}</mb-radio>
                 </div>
             </div>
             <div class="namae-option">
                 <span class="text-gray">指定</span>
                 <div class="namae-specific">
-                    <input type="text" placeholder="姓" v-model="specific.last.kanji"/>
-                    <input type="text" placeholder="姓（读音）" v-model="specific.last.kana"/>
-                    <input type="text" placeholder="名" v-model="specific.first.kanji"/>
-                    <input type="text" placeholder="名（读音）" v-model="specific.first.kana"/>
+                    <input type="text" placeholder="姓" v-model="specLast.kanji"/>
+                    <input type="text" placeholder="姓（读音）" v-model="specLast.kana"/>
+                    <input type="text" placeholder="名" v-model="specFirst.kanji"/>
+                    <input type="text" placeholder="名（读音）" v-model="specFirst.kana"/>
                 </div>
             </div>
             <div class="namae-operator">
@@ -235,9 +223,9 @@
         </div>
         <div v-if="!isResultEmpty" class="namae-result div-table">
             <dl v-for="chunk in chunkedResults">
-                <template v-for="item in chunk">
-                    <dt>{{ item.kanji }}</dt>
-                    <dd>{{ item.kana }}</dd>
+                <template v-for="{ kanji, kana } in chunk">
+                    <dt>{{ kanji }}</dt>
+                    <dd>{{ kana }}</dd>
                 </template>
             </dl>
         </div>

@@ -54,7 +54,7 @@
 
     //删除数据
     async function removeData() {
-        if (await Zin.confirm(`是否删除当前数据：${state.value.name}？`)) {
+        if (await requireConfirm(`是否删除当前数据：${state.value.name}？`)) {
             storage.value.splice(currentIdx.value, 1);
             currentIdx.value = Math.max(0, storage.value.length - 1);
         }

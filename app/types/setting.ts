@@ -12,5 +12,4 @@ export interface Setting {
     "ui-collapse": boolean;
 }
 
-export type SettingField = keyof Setting;
-export type SettingBooleanField = keyof PickAsType<Setting, boolean>;
+export type SettingField<T = any> = keyof PickAsType<Setting, T>;

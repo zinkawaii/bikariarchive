@@ -98,9 +98,7 @@
             <li v-for="{ title, link, order, children } in headers" class="outline-item">
                 <a
                     class="aside-anchor text-truncate"
-                    :class="{
-                        [`is-active`]: link === activeLink
-                    }"
+                    :class="{ [`is-active`]: link === activeLink }"
                     :href="link"
                 >
                     <span class="outline-order">{{ order }}</span>

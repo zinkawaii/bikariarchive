@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-    import type { UnwrapContextMenuItem } from "~/types/context-menu";
+    import type { ContextMenuItem } from "~/types/context-menu";
 
     const props = defineProps<{
-        data: UnwrapContextMenuItem;
+        data: ContextMenuItem;
     }>();
 
     const icon = computed(() => toValue(props.data.icon));

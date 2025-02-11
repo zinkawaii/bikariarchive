@@ -87,15 +87,13 @@
         width: 100px;
         aspect-ratio: 1;
         border-radius: var(--bounded-circle);
-        box-shadow: 4px 4px 12px rgb(0 0 0 / 24%);
+        box-shadow: var(--box-shadow);
     }
 
     .intel-table {
-        flex: 1;
+        --font-size-td: 14px;
 
-        td {
-            font-size: 14px;
-        }
+        flex: 1;
     }
 
     .entry-link {

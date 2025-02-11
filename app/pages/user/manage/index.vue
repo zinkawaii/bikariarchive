@@ -62,11 +62,12 @@
 
 <style lang="scss">
     .manage-table-wrapper {
-        overflow: auto;
         box-shadow: var(--box-shadow);
     }
 
     .manage-table {
+        --font-size-td: 14px;
+
         background-color: var(--color-background-alpha);
         text-align: center;
         text-wrap: nowrap;

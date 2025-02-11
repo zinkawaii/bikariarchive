@@ -30,9 +30,10 @@
 
     .gallery-illustrator {
         --dt-fr: 0.6fr;
+        --font-size-th: 1rem;
+        --font-size-td: 1rem;
 
         margin-top: 8px;
-        font-size: 1rem;
         text-align: center;
     }
 </style>

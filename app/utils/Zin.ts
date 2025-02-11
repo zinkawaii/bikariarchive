@@ -1,6 +1,4 @@
 import type { ImageOptions } from "@nuxt/image";
-import { LazyMbConfirm, LazyMbNumeric } from "#components";
-import type { MbNumericProps } from "~/components/common/numeric.vue";
 
 const Zin = new class Z {
     //默认动画配置
@@ -30,23 +28,6 @@ const Zin = new class Z {
     background(source: string, options: ImageOptions = {}) {
         const image = useImage();
         return `url(${image(source, options.modifiers, options)})`;
-    }
-
-    //判断对话框
-    confirm(message: string) {
-        return new Promise<boolean>((resolve) => {
-            const dialogStore = useDialogStore();
-
-            const { close } = dialogStore.use(() => h(LazyMbConfirm, {
-                message,
-                onClose(val = false) {
-                    close();
-                    resolve(val);
-                }
-            }), {
-                immediate: true
-            });
-        });
     }
 
     //防抖（立即执行）
@@ -140,23 +121,6 @@ const Zin = new class Z {
             catch (err) {
                 reject(err);
             }
-        });
-    }
-
-    //数字选择框
-    numeric(options: MbNumericProps) {
-        return new Promise<number>((resolve) => {
-            const dialogStore = useDialogStore();
-
-            const { close } = dialogStore.use(() => h(LazyMbNumeric, {
-                ...options,
-                onClose(val = options.initialValue) {
-                    close();
-                    resolve(val ?? 0);
-                }
-            }), {
-                immediate: true
-            });
         });
     }
 

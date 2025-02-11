@@ -12,7 +12,7 @@
             <li
                 v-for="(name, i) in items"
                 class="tab-item"
-                :class="{ active: selectedIndex === i }"
+                :class="{ [`is-active`]: selectedIndex === i }"
                 @click="selectedIndex = i"
             >{{ name }}</li>
         </ul>
@@ -48,7 +48,7 @@
             border-right: 1px solid transparent;
         }
 
-        &.active {
+        &.is-active {
             height: 32px;
             margin: 0 0 -1px;
             padding: 3px 12px 6px;
@@ -59,7 +59,7 @@
             z-index: 1;
         }
 
-        &:not(.active) {
+        &:not(.is-active) {
             color: var(--color-info);
             cursor: pointer;
 

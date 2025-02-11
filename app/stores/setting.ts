@@ -1,6 +1,6 @@
 import type { WatchCallback } from "vue";
 import { LazyZSetting } from "#components";
-import type { Setting, SettingBooleanField, SettingField } from "~/types/setting";
+import type { Setting, SettingField } from "~/types/setting";
 
 export const useSettingStore = defineStore("setting", () => {
     const setting = ref<Setting>({
@@ -45,7 +45,7 @@ export const useSettingStore = defineStore("setting", () => {
         setting.value[key] = value;
     }
 
-    function toggle<K extends SettingBooleanField>(key: K, value?: Setting[K]) {
+    function toggle<K extends SettingField<boolean>>(key: K, value?: Setting[K]) {
         setting.value[key] = value ?? !setting.value[key];
     }
 
