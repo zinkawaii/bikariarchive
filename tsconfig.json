@@ -8,6 +8,14 @@
     "noUncheckedIndexedAccess": false
   },
   "vueCompilerOptions": {
+    "checkUnknownComponents": true,
+    "checkUnknownDirectives": true,
+    "inferComponentDollarEl": true,
+    "inferComponentDollarRefs": true,
+    "inferTemplateDollarAttrs": true,
+    "inferTemplateDollarEl": true,
+    "inferTemplateDollarRefs": true,
+    "inferTemplateDollarSlots": true,
     "experimentalResolveStyleCssClasses": "always"
   }
 }

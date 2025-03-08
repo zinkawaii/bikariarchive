@@ -207,7 +207,7 @@
                 <mb-button :disabled="status === `pending`" @click="generate">
                     <template v-if="status !== `success`">
                         <motion
-                            v-if="status !== `pending`"
+                            v-if="status === `pending`"
                             as-child
                             :animate="{ rotate: 360 }"
                             :transition="{ duration: 1.5, ease: `linear`, repeat: Infinity }"

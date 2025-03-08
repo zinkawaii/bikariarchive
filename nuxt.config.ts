@@ -111,6 +111,9 @@ export default defineNuxtConfig({
         defaultLocale: "zh-CN",
         indexable: true
     },
+    ogImage: {
+        enabled: false
+    },
     fonts: {
         provider: "google",
         families: [{

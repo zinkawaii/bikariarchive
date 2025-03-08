@@ -105,7 +105,7 @@ function processComments<T extends CommentData>(comments: T[]) {
 
         //将嵌套子评论拍平
         for (const child of item.children) {
-            if (child.children.length > 0) {
+            if (child.children.length) {
                 item.children.push(...child.children);
                 child.children.length = 0;
             }

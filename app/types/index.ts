@@ -20,8 +20,8 @@ declare module "vue-router" {
     }
 }
 
-declare module "zhead" {
-    interface HtmlAttributes {
+declare module "@unhead/vue" {
+    interface HtmlAttr {
         theme?: string;
         "z-dark"?: boolean;
     }
