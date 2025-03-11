@@ -69,8 +69,8 @@
                     id: modifyOptions.value.id,
                     content: content.value,
                     nickname: nickname.value,
-                    email: email.value,
-                    address: address.value
+                    email: email.value || void 0,
+                    address: address.value || void 0
                 });
             }
             else {
@@ -80,8 +80,8 @@
                     content: content.value,
                     mode: mode.value,
                     nickname: nickname.value,
-                    email: email.value,
-                    address: address.value
+                    email: email.value || void 0,
+                    address: address.value || void 0
                 });
             }
             content.value = "";

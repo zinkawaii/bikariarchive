@@ -1,3 +1,7 @@
+## 2025-03-11 [v0.5.36]
+
+fix(comment): 修复不填邮箱或网址时评论失败的问题
+
 ## 2025-02-12 [v0.5.35]
 
 refactor: 切换动画库至 [Motion Vue](https://motion.unovue.com)

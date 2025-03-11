@@ -28,7 +28,7 @@ export interface PostCommentBody {
     parent?: string;
     content: string;
     mode: CommentMode;
-    nickname?: string;
+    nickname: string;
     email?: string;
     address?: string;
 }

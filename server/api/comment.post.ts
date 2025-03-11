@@ -9,7 +9,7 @@ const schema = z.object({
     parent: z.string().optional().transform((val) => val || void 0),
     content: z.string().max(512),
     mode: z.enum(["guest", "user"]),
-    nickname: z.string().regex(Zexp.nickname).optional(),
+    nickname: z.string().regex(Zexp.nickname),
     email: z.string().regex(Zexp.email).optional(),
     address: z.string().regex(Zexp.url).optional()
 });
