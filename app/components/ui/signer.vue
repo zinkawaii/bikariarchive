@@ -114,14 +114,14 @@
 
     .signer-title {
         position: relative;
-        margin-bottom: 12px;
+        margin-bottom: 16px;
         font-size: 28px;
 
         &::after {
             content: "";
             position: absolute;
             right: 0;
-            bottom: -6px;
+            bottom: -8px;
             width: calc(100% + 6px);
             height: 3px;
             border-radius: 3px;
