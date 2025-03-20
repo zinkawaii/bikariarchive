@@ -155,7 +155,7 @@ export function enrichJArticle(original: JArticle) {
             //不存在时相当于删除章节
             if (i !== void 0) {
                 results[i] = art instanceof Article
-                    ? art.assign(novel, art.order, chapters[i])
+                    ? art.assign(novel, i, chapters[i])
                     : Article.for(novel, chapters[i].index);
             }
         }
