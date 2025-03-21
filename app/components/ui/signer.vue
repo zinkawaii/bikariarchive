@@ -3,8 +3,8 @@
     const userStore = useUserStore();
     const route = useRoute();
 
-    const outerworld = Zin.background("/garden/outerworld.webp");
-    const innerworld = Zin.background("/garden/innerworld.webp");
+    const outerworld = Zin.image("/garden/outerworld.webp", { wrap: true });
+    const innerworld = Zin.image("/garden/innerworld.webp", { wrap: true });
 
     //根据登录状态切换视图
     watchImmediate(() => userStore.isLogin, (value) => {

@@ -1,6 +1,8 @@
 <script lang="ts" setup>
     const config = useRuntimeConfig();
 
+    const jumbotronUrl = Zin.image("/garden/jumbotron.webp");
+
     const duration = 400;
     const titleDelay = 80;
     const summaryDelay = 20;
@@ -32,7 +34,7 @@
 
 <template>
     <div class="z-jumbotron">
-        <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp" alt="[jumbotron]"/>
+        <nuxt-img class="jumbo-image" :src="jumbotronUrl" alt="[jumbotron]"/>
         <div class="jumbo-banner">
             <h1 class="jumbo-title">
                 <template v-if="isMotion">

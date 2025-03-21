@@ -60,7 +60,8 @@ const client = {
         jumbotron: {
             title: "微光茶馆",
             summary: "微かの力を尽くして、光の届いた彼方へ"
-        }
+        },
+        cdnUrl: "https://cdn.bikari.top"
     },
     development: {
         domain: "zinkawaii"

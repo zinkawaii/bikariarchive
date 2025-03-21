@@ -9,7 +9,7 @@
     } = inject(injectionKey)!;
 
     const toastStore = useToastStore();
-    const headerUrl = Zin.background("/garden/background/space_header.webp");
+    const headerUrl = Zin.image("/garden/background/alice.webp", { wrap: true });
 
     const sign = ref(userSign.value);
     let oldSign = "";

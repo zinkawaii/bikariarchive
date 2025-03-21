@@ -5,7 +5,7 @@
         title: "关于"
     });
 
-    const coverUrl = Zin.background("/garden/maestrale/cover.webp");
+    const coverUrl = Zin.image("/garden/background/maestrale.webp", { wrap: true });
 
     const today = new Date();
     const year = getYear(today);

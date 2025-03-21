@@ -1,6 +1,4 @@
-import type { ImageOptions } from "@nuxt/image";
-
-const Zin = new class Z {
+export const Zin = new class Z {
     //默认动画配置
     DEFAULT_ANIME_OPTION: KeyframeAnimationOptions = {
         duration: 400,
@@ -24,10 +22,13 @@ const Zin = new class Z {
         return (hour >= 6 && hour < 18) ? this.PERIOD_DAY : this.PERIOD_NIGHT;
     }
 
-    //背景图链接
-    background(source: string, options: ImageOptions = {}) {
-        const image = useImage();
-        return `url(${image(source, options.modifiers, options)})`;
+    //图床链接
+    image(src: string, options: {
+        wrap?: boolean;
+    } = {}) {
+        const config = useRuntimeConfig();
+        const url = config.public.cdnUrl + src;
+        return options.wrap ? `url(${url})` : url;
     }
 
     //防抖（立即执行）
@@ -158,5 +159,3 @@ const Zin = new class Z {
         }
     }
 }();
-
-export default Zin;
