@@ -19,17 +19,25 @@
 </script>
 
 <template>
-    <ul v-if="filterred.length" class="entry-known-ability">
-        <li v-for="{ name, owners } in filterred">
-            <entry-link :title="[owners[0]?.name ?? name, name]"/>
-        </li>
-    </ul>
+    <p v-if="filterred.length" class="entry-known-ability">
+        <entry-link
+            v-for="{ name, owners } in filterred"
+            :title="[owners[0]?.name ?? name, name]"
+        />
+    </p>
     <p v-else>暂无。</p>
 </template>
 
 <style lang="scss" scoped>
     .entry-known-ability {
-        padding-left: 2em;
+        padding-left: 4px;
         font-size: 14px;
+        text-indent: 0;
+    }
+
+    .entry-link {
+        & + &::before {
+            content: " • ";
+        }
     }
 </style>
