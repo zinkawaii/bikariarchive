@@ -21,6 +21,7 @@ talents:
   - type: 超能力
     name:
       zh: 静止之刻
+      en: Silent World
     star: 3
     class:
       - 空间
