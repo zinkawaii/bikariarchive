@@ -52,9 +52,6 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true
     },
-    experimental: {
-        viewTransition: true
-    },
     features: {
         inlineStyles: false
     },
