@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <z-jumbotron v-if="$route.meta.jumbotron"/>
+    <z-jumbotron />
     <z-background />
     <z-header />
     <z-navbar />
@@ -39,6 +39,7 @@
         justify-content: center;
         gap: 24px;
         min-width: var(--size-min-width);
+        min-height: calc(100svh - 64px);
         padding: var(--sotomi-padding);
 
         @include viewport("lg") {
