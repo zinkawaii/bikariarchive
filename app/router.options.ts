@@ -11,6 +11,19 @@ export default <RouterConfig> {
             }
         },
         {
+            name: "article",
+            path: "/book/:novel/:index",
+            props: true,
+            component: () => import("~/pages/article.vue"),
+            meta: {
+                catalog: true,
+                comment: true,
+                breadcrumb: {
+                    name: "shelf"
+                }
+            }
+        },
+        {
             name: "bangumi",
             path: "/bangumi",
             component: () => import("~/pages/bangumi.vue"),
@@ -54,19 +67,6 @@ export default <RouterConfig> {
             name: "intel",
             path: "/intel",
             component: () => import("~/pages/intel.vue")
-        },
-        {
-            name: "reader",
-            path: "/book/:novel/:index",
-            props: true,
-            component: () => import("~/pages/reader.vue"),
-            meta: {
-                catalog: true,
-                comment: true,
-                breadcrumb: {
-                    name: "shelf"
-                }
-            }
         },
         {
             name: "search",

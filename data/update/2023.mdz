@@ -30,7 +30,7 @@ feat(context-menu): 添加右键菜单
 
 ## 2023-12-14 [v0.1.10]
 
-feat(reader): 在小说每卷的终章末尾显示 THE END
+feat(article): 在小说每卷的终章末尾显示 THE END
 
 ## 2023-12-12 [v0.1.9]
 
@@ -68,7 +68,7 @@ feat(mb-confirm): 复现模态判断框
 
 ## 2023-11-15 [v0.1.2]
 
-feat(reader): 复现上下章快捷键
+feat(article): 复现上下章快捷键
 
 ## 2023-11-14 [v0.1.1]
 
@@ -80,4 +80,4 @@ pref: 优化了一些组件的内存管理
 
 refactor: 使用 [Nuxt](https://nuxt.com) 重构整个网站，初步复现所有基本功能
 
-feat(reader): 部分文章采用运行时模板编译
+feat(article): 部分文章采用运行时模板编译

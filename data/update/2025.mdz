@@ -16,7 +16,7 @@ refactor: 切换动画库至 [Motion Vue](https://motion.unovue.com)
 
 feat(mb-image): 支持指定最大尺寸、说明文字和图源链接
 
-improve(reader): 仅在 Novel 类型下显示上下卷链接
+improve(article): 仅在 Novel 类型下显示上下卷链接
 
 ## 2025-02-05 [v0.5.33]
 

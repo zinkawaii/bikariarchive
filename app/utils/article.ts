@@ -47,7 +47,7 @@ export class Article implements JChapter {
 
     get route() {
         return {
-            name: "reader",
+            name: "article",
             params: {
                 novel: this.novel,
                 index: this.index
