@@ -11,5 +11,8 @@
   "types": "./dist/excalc.d.ts",
   "scripts": {
     "build": "asc src/index.ts --target release"
+  },
+  "devDependencies": {
+    "assemblyscript": "catalog:"
   }
 }

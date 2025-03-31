@@ -11,5 +11,11 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "stub": "unbuild --stub"
+  },
+  "dependencies": {
+    "consola": "catalog:"
+  },
+  "devDependencies": {
+    "unbuild": "catalog:"
   }
 }

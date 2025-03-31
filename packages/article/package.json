@@ -16,5 +16,33 @@
   "scripts": {
     "stub": "unbuild --stub",
     "test": "vitest"
+  },
+  "dependencies": {
+    "date-fns": "catalog:",
+    "defu": "catalog:",
+    "fs-extra": "catalog:",
+    "github-slugger": "catalog:",
+    "kerria": "catalog:",
+    "mdast-util-frontmatter": "catalog:",
+    "mdast-util-gfm-footnote": "catalog:",
+    "mdast-util-gfm-strikethrough": "catalog:",
+    "mdast-util-to-string": "catalog:",
+    "micromark-extension-frontmatter": "catalog:",
+    "micromark-extension-gfm-footnote": "catalog:",
+    "micromark-extension-gfm-strikethrough": "catalog:",
+    "micromark-util-symbol": "catalog:",
+    "pathe": "catalog:",
+    "propathy": "catalog:",
+    "rehype-raw": "catalog:",
+    "remark-mdc": "catalog:",
+    "remark-parse": "catalog:",
+    "remark-rehype": "catalog:",
+    "unified": "catalog:",
+    "unist-util-visit": "catalog:",
+    "yaml": "catalog:"
+  },
+  "devDependencies": {
+    "unbuild": "catalog:",
+    "vitest": "catalog:"
   }
 }

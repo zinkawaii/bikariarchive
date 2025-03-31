@@ -6,6 +6,7 @@ export default antfu({
         "data/json/Bangumi.json"
     ],
     markdown: false,
+    pnpm: true,
     rules: {
         ...zin.standard,
         ...zin.recommended,
