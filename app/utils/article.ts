@@ -166,14 +166,3 @@ export function enrichJArticle(original: JArticle) {
         });
     }
 }
-
-export function guideToShelf(novel: string, volume: number) {
-    const shelfStore = useShelfStore();
-    const router = useRouter();
-
-    shelfStore.selectNovel(novel);
-    shelfStore.selectVolume(volume);
-    router.push({
-        name: "shelf"
-    });
-}

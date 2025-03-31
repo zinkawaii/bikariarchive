@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     const settingStore = useSettingStore();
+    const shelfStore = useShelfStore();
 
     const links = [
         {
@@ -10,7 +11,7 @@
         {
             title: "目录",
             icon: "fa6-solid:book-open",
-            to: { name: "shelf" }
+            to: computed(() => shelfStore.route)
         },
         {
             title: "情报",
@@ -29,6 +30,7 @@
     <nav class="z-navbar" :class="{ [`is-collapse`]: settingStore.get(`ui-collapse`) }">
         <ul class="nav-list">
             <li v-for="{ title, icon, to } in links" class="nav-item">
+                <!-- @vue-expect-error -->
                 <nuxt-link class="nav-link" :to>
                     <iconify :name="icon"/>
                     <span class="nav-title">{{ title }}</span>

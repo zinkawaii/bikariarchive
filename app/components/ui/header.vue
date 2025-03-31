@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { NuxtLink } from "#components";
 
+    const shelfStore = useShelfStore();
     const route = useRoute();
     const router = useRouter();
     const word = ref("");
@@ -14,7 +15,7 @@
         {
             title: "目录",
             icon: "fa6-solid:book-open",
-            to: { name: "shelf" }
+            to: computed(() => shelfStore.route)
         },
         {
             title: "情报",

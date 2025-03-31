@@ -2,6 +2,7 @@
     import { renderSVG } from "uqr";
 
     const config = useRuntimeConfig();
+    const shelfStore = useShelfStore();
 
     const qrcode = ref("");
     onMounted(() => {
@@ -19,7 +20,7 @@
         <p class="p-small">
             <span class="welcome-title content-h2">欢迎来到{{ $config.public.title }}！</span>
             <i class="welcome-qrcode" v-html="qrcode"></i><br />
-            这里是我的个人网站，主要用于发布小说正文，所有文章均可在<plain-link :to="{ name: `shelf` }">目录页</plain-link>索引并浏览。<plain-link :to="{ name: `intel` }">情报页</plain-link>整理并展示了目前部分可以公开的设定。<plain-link :to="{ name: `search` }">检索页</plain-link>可在全文范围内对特定关键词进行检索。
+            这里是我的个人网站，主要用于发布小说正文，所有文章均可在<plain-link :to="shelfStore.route">目录页</plain-link>索引并浏览。<plain-link :to="{ name: `intel` }">情报页</plain-link>整理并展示了目前部分可以公开的设定。<plain-link :to="{ name: `search` }">检索页</plain-link>可在全文范围内对特定关键词进行检索。
         </p>
     </div>
 </template>

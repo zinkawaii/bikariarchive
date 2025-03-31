@@ -1,7 +1,29 @@
 import { Article } from "~/utils/article";
 
 export const useShelfStore = defineStore("shelf", () => {
-    const novel = ref("bikari");
+    const route = useRoute();
+    const router = useRouter();
+
+    let novelRaw: string;
+    const novel = computed({
+        get() {
+            if (route.name === "shelf") {
+                novelRaw = route.params.novel as string;
+            }
+            return novelRaw ?? "bikari";
+        },
+        set(val) {
+            novelRaw = val;
+            if (route.name === "shelf") {
+                router.replace({
+                    params: {
+                        novel: val
+                    }
+                });
+            }
+        }
+    });
+
     const currentVolumeIdx = ref(0);
 
     const currentNovelIdx = computed(() => {
@@ -22,6 +44,21 @@ export const useShelfStore = defineStore("shelf", () => {
         });
     });
 
+    const currentRoute = computed(() => {
+        return {
+            name: "shelf",
+            params: {
+                novel: novel.value
+            }
+        };
+    });
+
+    function goto(novel: string, volume: number) {
+        selectNovel(novel);
+        selectVolume(volume);
+        router.push(currentRoute.value);
+    }
+
     function selectNovel(key: string) {
         novel.value = key;
         currentVolumeIdx.value = 0;
@@ -38,6 +75,8 @@ export const useShelfStore = defineStore("shelf", () => {
         jNovel,
         jVolume,
         jChapters,
+        route: currentRoute,
+        goto,
         selectNovel,
         selectVolume
     };

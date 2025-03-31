@@ -3,13 +3,15 @@
 
     const props = defineProps<EntryAppearance>();
 
+    const shelfStore = useShelfStore();
+
     const art = Article.for(() => props.novel, () => props.index);
 </script>
 
 <template>
     <p class="entry-appearance">
         首次登场于
-        <plain-link @click="guideToShelf(art.novel, art.volume)">{{ art.volumeInfo.title }}</plain-link>
+        <plain-link @click="shelfStore.goto(art.novel, art.volume)">{{ art.volumeInfo.title }}</plain-link>
         -
         <plain-link :to="art.route">{{ art.title }}</plain-link>
     </p>

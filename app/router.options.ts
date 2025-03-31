@@ -11,15 +11,29 @@ export default <RouterConfig> {
             }
         },
         {
+            path: "/book",
+            component: () => import("~/pages/book/index.vue"),
+            children: [
+                {
+                    name: "shelf",
+                    path: ":novel",
+                    component: () => import("~/pages/book/shelf.vue")
+                }
+            ]
+        },
+        {
             name: "article",
             path: "/book/:novel/:index",
             props: true,
-            component: () => import("~/pages/article.vue"),
+            component: () => import("~/pages/book/article.vue"),
             meta: {
                 catalog: true,
                 comment: true,
                 breadcrumb: {
-                    name: "shelf"
+                    name: "shelf",
+                    params: {
+                        novel: "bikari"
+                    }
                 }
             }
         },
@@ -72,11 +86,6 @@ export default <RouterConfig> {
             name: "search",
             path: "/search",
             component: () => import("~/pages/search.vue")
-        },
-        {
-            name: "shelf",
-            path: "/shelf",
-            component: () => import("~/pages/shelf.vue")
         },
         {
             name: "tweet",
