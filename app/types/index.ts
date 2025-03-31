@@ -16,7 +16,6 @@ declare module "vue-router" {
         sidebar?: boolean;
         widePage?: boolean;
         fullPage?: boolean;
-        breadcrumb?: RouteLocationRaw;
     }
 }
 

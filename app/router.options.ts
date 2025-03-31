@@ -28,13 +28,7 @@ export default <RouterConfig> {
             component: () => import("~/pages/book/article.vue"),
             meta: {
                 catalog: true,
-                comment: true,
-                breadcrumb: {
-                    name: "shelf",
-                    params: {
-                        novel: "bikari"
-                    }
-                }
+                comment: true
             }
         },
         {
@@ -107,10 +101,7 @@ export default <RouterConfig> {
             component: () => import("~/pages/entry.vue"),
             meta: {
                 catalog: true,
-                comment: true,
-                breadcrumb: {
-                    name: "intel"
-                }
+                comment: true
             }
         },
         {

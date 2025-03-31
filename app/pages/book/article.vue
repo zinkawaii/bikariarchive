@@ -18,6 +18,14 @@
         throw new Error(`Article(${novel}, ${index}) is invalid.`);
     }
 
+    //面包屑
+    useBreadcrumb({
+        name: "shelf",
+        params: {
+            novel
+        }
+    });
+
     //上下章快捷键
     useEventListener("keyup", (event) => {
         if (isFocusedEditable()) {

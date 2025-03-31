@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import { NuxtLink } from "#components";
 
+    const breadcrumbStore = useBreadcrumbStore();
     const shelfStore = useShelfStore();
-    const route = useRoute();
     const router = useRouter();
     const word = ref("");
 
@@ -77,12 +77,6 @@
         }
     ];
 
-    const breadcrumb = computed(() => {
-        return route.meta.breadcrumb ?? {
-            name: "home"
-        };
-    });
-
     function search() {
         router.push(toSearch(word.value));
         word.value = "";
@@ -92,7 +86,7 @@
 <template>
     <header class="z-header">
         <div class="header-logo">
-            <nuxt-link class="logo-wrapper" :to="breadcrumb">
+            <nuxt-link class="logo-wrapper" :to="breadcrumbStore.route">
                 <span class="logo-aside">Bikari</span>
                 <span class="logo-center">A</span>
                 <span class="logo-aside">rchive</span>

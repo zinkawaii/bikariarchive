@@ -7,6 +7,10 @@
         title
     });
 
+    useBreadcrumb({
+        name: "intel"
+    });
+
     const { hooks } = useHookStore();
     const route = useRoute();
 
