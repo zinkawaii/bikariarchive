@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-    useHead({
-        title: "目录"
-    });
-
     const shelfStore = useShelfStore();
     const { novel, jNovel, jChapters } = storeToRefs(shelfStore);
+
+    useHead({
+        title: () => Article.meta[novel.value].title
+    });
 </script>
 
 <template>
