@@ -12,6 +12,7 @@ export default <RouterConfig> {
         },
         {
             path: "/book",
+            redirect: { name: "unknown" },
             component: () => import("~/pages/book/index.vue"),
             children: [
                 {
