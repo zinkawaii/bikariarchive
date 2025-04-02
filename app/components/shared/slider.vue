@@ -42,7 +42,7 @@
         onPointermove(event) {
             const { min, max, step } = props;
 
-            rate.value = Math.max(0, Math.min(1, (event.clientX - left) / width));
+            rate.value = clamp(0, (event.clientX - left) / width, 1);
             current = rate.value * (max - min) + min;
 
             if (step) {

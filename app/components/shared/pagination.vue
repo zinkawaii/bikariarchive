@@ -26,7 +26,7 @@
         const total = totalPages.value;
         const expand = 1;
 
-        const start = Math.max(1, Math.min(total - 2 * expand, current - expand));
+        const start = clamp(1, current - expand, total - 2 * expand);
         const end = Math.min(total, start + 2 * expand);
 
         const res = [...new Array(end - start + 1)].map((_, i) => i + start);

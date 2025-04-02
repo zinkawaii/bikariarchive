@@ -6,6 +6,16 @@ export const Zexp = {
     url: /^https?:\/\/(?:[-\w]+\.)+[-\w]+(?::\d+)?(?:\/.*)?$/
 };
 
+//取中间值
+export function clamp(min: number, x: number, max: number) {
+    return Math.max(min, Math.min(x, max));
+}
+
+//获取数符
+export function signof(x: number) {
+    return x > 0 ? 1 : x < 0 ? -1 : 0;
+}
+
 //获取元素绝对位置
 export function getPosition(element: Element) {
     const rect = element.getBoundingClientRect();
