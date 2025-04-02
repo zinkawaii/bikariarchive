@@ -57,10 +57,17 @@
         });
     }
 
+    const throttledSelectNovel = Zin.throttle((delta: number) => {
+        shelfStore.selectNovel(delta);
+    }, 250);
+
     function onWheel(event: WheelEvent) {
         const delta = event.shiftKey ? event.deltaY : event.deltaX;
-        if (delta) {
-            shelfStore.selectNovel(delta);
+        if (Math.abs(delta) > 0) {
+            event.preventDefault();
+        }
+        if (Math.abs(delta) >= 4) {
+            throttledSelectNovel(delta);
         }
     }
 </script>
