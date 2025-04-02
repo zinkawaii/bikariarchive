@@ -24,10 +24,14 @@ export const useShelfStore = defineStore("shelf", () => {
         }
     });
 
+    const novels = computed(() => {
+        return Object.keys(Article.meta);
+    });
+
     const currentVolumeIdx = ref(0);
 
     const currentNovelIdx = computed(() => {
-        return Object.keys(Article.meta).indexOf(novel.value);
+        return novels.value.indexOf(novel.value);
     });
 
     const jNovel = computed(() => {
@@ -59,7 +63,14 @@ export const useShelfStore = defineStore("shelf", () => {
         router.push(currentRoute.value);
     }
 
-    function selectNovel(key: string) {
+    function selectNovel(key: string): void;
+    function selectNovel(delta: number): void;
+    function selectNovel(key: string | number) {
+        if (typeof key === "number") {
+            const raw = currentNovelIdx.value + signof(key);
+            const idx = clamp(0, raw, novels.value.length - 1);
+            key = novels.value[idx];
+        }
         novel.value = key;
         currentVolumeIdx.value = 0;
     }
@@ -70,6 +81,7 @@ export const useShelfStore = defineStore("shelf", () => {
 
     return {
         novel,
+        novels,
         currentNovelIdx,
         currentVolumeIdx,
         jNovel,
