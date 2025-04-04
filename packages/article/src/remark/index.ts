@@ -1,4 +1,5 @@
 import raw from "rehype-raw";
+import math from "remark-math";
 import mdc from "remark-mdc";
 import parse from "remark-parse";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
@@ -6,6 +7,7 @@ import { unified } from "unified";
 import code from "./handlers/code";
 import image from "./handlers/image";
 import link from "./handlers/link";
+import maths from "./handlers/math";
 import compiler from "./plugins/compiler";
 import emoji from "./plugins/emoji";
 import footnote from "./plugins/footnote";
@@ -22,6 +24,7 @@ export {
     emoji,
     image,
     link,
+    maths,
     ruby,
     strikethrough
 };
@@ -32,7 +35,8 @@ const rehypeOptions: RehypeOptions = {
     handlers: {
         code,
         image,
-        link
+        link,
+        ...maths
     }
 };
 
@@ -44,6 +48,7 @@ export async function parseArticle<T>(text: string) {
         .use(emoji)
         .use(footnote)
         .use(interpolation)
+        .use(math)
         .use(ruby)
         .use(slug)
         .use(strikethrough)
@@ -73,6 +78,7 @@ export async function parseEntry<T>(text: string) {
         .use(mdc)
         .use(emoji)
         .use(interpolation)
+        .use(math)
         .use(ruby)
         .use(strikethrough)
         .use(rehype, rehypeOptions)

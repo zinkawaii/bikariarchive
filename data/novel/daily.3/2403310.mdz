@@ -2,7 +2,7 @@
 title: 阅读页样式用例
 abbrlink: 93ec4a4
 date: 2024-03-31
-updated: 2025-02-07
+updated: 2025-04-05
 ---
 
 ::excerpt
@@ -53,5 +53,11 @@ consola.info(`
 
 consola.success("这是展开才能看到的内容。");
 ```
+
+$$
+\text{This is a katex formula.}
+\\[0.5em]
+\frac{1}{\pi} = \frac{2\sqrt2}{9801} \sum_{k = 0}^{\infty} \frac{(4k)!(1103 + 26390k)}{(k!)^4 396^{4k}}
+$$
 
 [^1]: 这是脚注。

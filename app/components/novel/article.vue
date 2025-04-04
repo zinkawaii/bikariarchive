@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import type { Child, Root } from "@bikari/article";
     import type { VNodeArrayChildren } from "vue";
-    import { Iconify, MbCode, MbGallery, MbImage, PlainLink } from "#components";
+    import { Iconify, MbCode, MbGallery, MbImage, MbMath, PlainLink } from "#components";
 
     const props = withDefaults(defineProps<{
         body?: Root | Child[];
@@ -21,6 +21,7 @@
         MbCode,
         MbGallery,
         MbImage,
+        MbMath,
         PlainLink
     };
 

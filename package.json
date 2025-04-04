@@ -28,6 +28,7 @@
     "crypto-es": "catalog:",
     "date-fns": "catalog:",
     "hookable": "catalog:",
+    "katex": "^0.16.21",
     "lunisolar": "catalog:",
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",

@@ -1,4 +1,5 @@
-import { compiler, emoji, image, link, ruby, strikethrough } from "@bikari/article/remark";
+import { compiler, emoji, image, link, maths, ruby, strikethrough } from "@bikari/article/remark";
+import math from "remark-math";
 import parse from "remark-parse";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import { unified } from "unified";
@@ -64,7 +65,8 @@ const rehypeOptions: RehypeOptions = {
             return state.applyData(node, result);
         },
         image,
-        link
+        link,
+        ...maths
     }
 };
 
@@ -72,6 +74,7 @@ export async function parseComment(text: string) {
     const processor = unified()
         .use(parse)
         .use(emoji)
+        .use(math)
         .use(ruby)
         .use(strikethrough)
         .use(code)
