@@ -206,14 +206,11 @@
             <div class="namae-operator">
                 <mb-button :disabled="status === `pending`" @click="generate">
                     <template v-if="status !== `success`">
-                        <motion
+                        <iconify
                             v-if="status === `pending`"
-                            as-child
-                            :animate="{ rotate: 360 }"
-                            :transition="{ duration: 1.5, ease: `linear`, repeat: Infinity }"
-                        >
-                            <iconify name="mingcute:loading-fill"/>
-                        </motion>
+                            v-anime="{ rotate: 360, duration: 1500, ease: `linear`, loop: true }"
+                            name="mingcute:loading-fill"
+                        />
                         <iconify v-else name="fa6-solid:download"/>
                         <span>加载</span>
                     </template>

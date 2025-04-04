@@ -96,7 +96,6 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@vueuse/nuxt",
         "@zinkawaii/nuxt-shiki",
-        "motion-v/nuxt",
         "pinia-plugin-persistedstate/nuxt"
     ],
     robots: robotsConfig,

@@ -182,7 +182,7 @@
 </script>
 
 <template>
-    <transition-scale :duration="0.25">
+    <transition-scale :duration="250">
         <div v-show="contextMenuStore.isOpening" ref="root" class="z-context-menu content-widget">
             <menu class="menu-tools">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">

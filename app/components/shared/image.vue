@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { animate } from "motion-v";
+    import { animate } from "animejs";
     import type { ImgHTMLAttributes } from "vue";
     import { LazyMbImageViewer } from "#components";
 
@@ -87,14 +87,12 @@
     function displayCharacters() {
         for (let i = 0; i < tagEls.value.length; i++) {
             const el = tagEls.value[i];
-            const animation = animate(el, {
-                y: [42, 0]
-            }, {
-                delay: i * 0.05,
-                duration: 0.4,
-                ease: "backOut"
+            animate(el, {
+                y: [42, 0],
+                delay: i * 50,
+                duration: 400,
+                ease: "outBack"
             });
-            animation.play();
         }
     }
 </script>

@@ -24,11 +24,11 @@
   "dependencies": {
     "@vueuse/core": "catalog:",
     "@vueuse/router": "catalog:",
+    "animejs": "catalog:",
     "crypto-es": "catalog:",
     "date-fns": "catalog:",
     "hookable": "catalog:",
     "lunisolar": "catalog:",
-    "motion-v": "catalog:",
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
     "plain-shiki": "catalog:",

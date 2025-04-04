@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { animate } from "motion-v";
+    import { animate } from "animejs";
 
     const signerStore = useSignerStore();
     const settingStore = useSettingStore();
@@ -13,14 +13,12 @@
             const sortedItems = collapse.value ? items : items.toReversed();
             for (let i = 0; i < sortedItems.length; i++) {
                 const el = sortedItems[i];
-                const animation = animate(el, {
-                    x: collapse.value ? 60 : 0
-                }, {
-                    delay: i * 0.05,
-                    duration: 0.4,
-                    ease: `back${collapse.value ? `In` : `Out`}`
+                animate(el, {
+                    x: collapse.value ? 60 : 0,
+                    delay: i * 50,
+                    duration: 400,
+                    ease: `${collapse.value ? `in` : `out`}Back`
                 });
-                animation.play();
             }
         });
     });

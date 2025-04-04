@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { animate } from "motion-v";
+    import { animate } from "animejs";
 
     const settingStore = useSettingStore();
     const route = useRoute();
@@ -19,10 +19,9 @@
                 const end = getPosition(nakami);
                 animate(nakami, {
                     x: [start.left - end.left, 0],
-                    y: [start.top - end.top, 0]
-                }, {
-                    duration: 0.4,
-                    ease: "backOut"
+                    y: [start.top - end.top, 0],
+                    duration: 400,
+                    ease: "outBack"
                 });
             });
         }
