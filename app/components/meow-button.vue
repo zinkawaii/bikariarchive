@@ -6,7 +6,7 @@
     const code = ref("#???");
 
     onMounted(() => {
-        code.value = "#" + Zin.randInt(0, 255).toString().padStart(3, "0");
+        code.value = "#" + randomInt(0, 256).toString().padStart(3, "0");
     });
 </script>
 

@@ -20,7 +20,7 @@ export const useToastStore = defineStore("toast", () => {
 
     function show(key: string, message: string, type: ToastType = "info") {
         const fullKey = `<${type}>${key}`;
-        const hash = Math.random().toString(36).slice(2);
+        const hash = randomHash(8);
         for (const item of map.value) {
             if (item[0].startsWith(fullKey)) {
                 remove(item[0]);

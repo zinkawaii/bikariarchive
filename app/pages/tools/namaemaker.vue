@@ -103,13 +103,13 @@
 
     //姓
     function getLastName() {
-        const r = Math.floor(100 * Math.random());
+        const r = randomInt(0, 100);
         const [kanji, kana] = r < 10 ?
-            getRandomItems(Jnm["01"], Jnm["01_kana"]) : r < 55 ?
-            getRandomItems(Jnm["02"], Jnm["02_kana"]) : r < 65 ?
-            getRandomItems(Jnm["03"], Jnm["03_kana"]) : r < 70 ?
-            getRandomItems(Jnm["04"], Jnm["04_kana"]) :
-            getRandomItems(Jnm["23"], Jnm["23_kana"]);
+            randomItems(Jnm["01"], Jnm["01_kana"]) : r < 55 ?
+            randomItems(Jnm["02"], Jnm["02_kana"]) : r < 65 ?
+            randomItems(Jnm["03"], Jnm["03_kana"]) : r < 70 ?
+            randomItems(Jnm["04"], Jnm["04_kana"]) :
+            randomItems(Jnm["23"], Jnm["23_kana"]);
 
         return [kanji, kana] as const;
     }
@@ -122,45 +122,45 @@
             ? ["05", "06", "07", "08", "11", "12", "13", "24", "26"]
             : ["14", "15", "16", "17", "20", "21", "22", "25", "27"];
 
-        const r = Zin.randInt(0, 1000);
+        const r = randomInt(0, 1000);
         if (r < 100) {
-            [a, b] = getRandomItems(Jnm[k05], Jnm[`${k05}_kana`]);
+            [a, b] = randomItems(Jnm[k05], Jnm[`${k05}_kana`]);
         }
         else if (r < 540) {
-            if (Zin.randInt(0, 100) < 70) {
-                [a, b] = getRandomItems(Jnm[k06], Jnm[`${k06}_kana`]);
+            if (randomInt(0, 100) < 70) {
+                [a, b] = randomItems(Jnm[k06], Jnm[`${k06}_kana`]);
             }
             else {
                 do {
-                    const [m1, m2] = getRandomItems(Jnm[k11], Jnm[`${k11}_kana`]);
-                    const [n1, n2] = getRandomItems(Jnm[k12], Jnm[`${k12}_kana`]);
+                    const [m1, m2] = randomItems(Jnm[k11], Jnm[`${k11}_kana`]);
+                    const [n1, n2] = randomItems(Jnm[k12], Jnm[`${k12}_kana`]);
                     a = m1 + n1;
                     b = m2 + n2;
                 } while (!Jnm[`${k13}_kana`].includes(b));
             }
         }
         else if (r < 649) {
-            if (Zin.randInt(0, 100) < 70) {
-                [a, b] = getRandomItems(Jnm[k07], Jnm[`${k07}_kana`]);
+            if (randomInt(0, 100) < 70) {
+                [a, b] = randomItems(Jnm[k07], Jnm[`${k07}_kana`]);
             }
             else {
                 do {
-                    const [i1, i2] = getRandomItems(Jnm[k11], Jnm[`${k11}_kana`]);
-                    const [m1, m2] = getRandomItems(Jnm[k26], Jnm[`${k26}_kana`]);
-                    const [n1, n2] = getRandomItems(Jnm[k12], Jnm[`${k12}_kana`]);
+                    const [i1, i2] = randomItems(Jnm[k11], Jnm[`${k11}_kana`]);
+                    const [m1, m2] = randomItems(Jnm[k26], Jnm[`${k26}_kana`]);
+                    const [n1, n2] = randomItems(Jnm[k12], Jnm[`${k12}_kana`]);
                     a = i1 + m1 + n1;
                     b = i2 + m2 + n2;
                 } while (!Jnm[`${k13}_kana`].includes(b));
             }
         }
         else if (r < 650) {
-            [a, b] = getRandomItems(Jnm[k08], Jnm[`${k08}_kana`]);
+            [a, b] = randomItems(Jnm[k08], Jnm[`${k08}_kana`]);
         }
         else if (r < 700) {
-            a = b = getRandomItem(Jnm[`${k13}_kana`]);
+            a = b = randomItem(Jnm[`${k13}_kana`]);
         }
         else {
-            [a, b] = getRandomItems(Jnm[k24], Jnm[`${k24}_kana`]);
+            [a, b] = randomItems(Jnm[k24], Jnm[`${k24}_kana`]);
         }
 
         return [a, b] as const;

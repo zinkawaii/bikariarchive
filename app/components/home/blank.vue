@@ -15,7 +15,7 @@
 
     //每7秒随机显示
     Zin.interval(() => {
-        serif.value = getRandomItem(serifs);
+        serif.value = randomItem(serifs);
     }, {
         server: false,
         duration: 7000

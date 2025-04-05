@@ -71,7 +71,7 @@
             return;
         }
 
-        const info = getRandomItem(jMae.audios);
+        const info = randomItem(jMae.audios);
         const curSerif = info[`serif_${skin.value}`] ?? (isMarry.value && info.serif_ex || info.serif);
         const src = jMae.baseUrl + curSerif.url;
         serif.value = curSerif.content;

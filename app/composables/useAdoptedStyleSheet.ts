@@ -2,7 +2,7 @@ export default function(cssText: TemplateStringsArray, ...cssVars: MaybeRefOrGet
     let styleSheet: CSSStyleSheet;
 
     const entries = cssVars.map((source) => [
-        Math.random().toString(16).slice(-8),
+        randomHash(8),
         source
     ]);
 

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Zexp } from "~/utils";
+import { randomInt } from "~/utils/random";
 import type { GetLoginBody, GetLogonResponse } from "~~/server/types/api/user/logon";
 
 const schema = z.object({
@@ -82,6 +83,6 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
 
 //UID生成
 function createUid() {
-    const uid = Math.floor(Math.random() * (100000 - 10000) + 10000);
+    const uid = randomInt(10000, 100000);
     return uid;
 }

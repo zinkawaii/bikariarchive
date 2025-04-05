@@ -125,11 +125,6 @@ export const Zin = new class Z {
         });
     }
 
-    //生成随机整数
-    randInt(from: number, to: number) {
-        return Math.floor(Math.random() * (to - from + 1) + from);
-    }
-
     //节流
     throttle<T extends unknown[]>(func: (...args: T) => void, delay?: number) {
         //根据延迟时长

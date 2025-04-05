@@ -27,21 +27,6 @@ export function getPosition(element: Element) {
     };
 }
 
-//获取单个数组的随机项
-export function getRandomItem<T>(arr: T[]) {
-    const i = Zin.randInt(0, arr.length - 1);
-    return arr[i];
-}
-
-//获取多个数组的同下标随机项
-export function getRandomItems<T extends any[][]>(...arrs: T) {
-    const length = arrs.reduce((res, arr) => Math.min(res, arr.length), Number.POSITIVE_INFINITY);
-    const i = Zin.randInt(0, length);
-    return arrs.map((arr) => arr[i]) as {
-        [K in keyof T]: T[K][number]
-    };
-}
-
 //判断焦点是否位于可编辑元素内
 export function isFocusedEditable() {
     const el = document.activeElement as HTMLElement;

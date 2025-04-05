@@ -1,6 +1,7 @@
 import { z } from "zod";
 import Verify from "~/emails/verify.vue";
 import { Zexp } from "~/utils";
+import { randomInt } from "~/utils/random";
 
 const schema = z.object({
     email: z.string().regex(Zexp.email)
@@ -11,7 +12,7 @@ export default defineJEventHandler(async (event) => {
 
     //预生成验证码
     const time = Date.now();
-    let verify = String(Math.floor(Math.random() * 1000000)).padStart(6, "0");
+    let verify = randomInt(0, 1000000).toString().padStart(6, "0");
 
     //查询数据库中是否已存在该邮箱未处理的验证码
     const qVerify = await TempVerifyModel.findOne({ email });
