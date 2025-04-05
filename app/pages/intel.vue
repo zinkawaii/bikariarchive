@@ -20,11 +20,11 @@
         </td>
     </define-intel-cell>
     <meow-widget title="情报">
-        <section v-for="block in Entry.meta.blocks" class="intel-block">
-            <div class="intel-header">
-                <nuxt-img class="intel-icon" :src="block.icon" alt="[icon]"/>
-                <span>{{ block.title }}</span>
-            </div>
+        <section v-for="block in Entry.meta.blocks" class="intel-section">
+            <h2 :id="block.title" class="intel-header">
+                <span class="intel-abbr">{{ block.abbr.toUpperCase() }}</span>
+                <span class="intel-title">{{ block.title }}</span>
+            </h2>
             <meow-table class="intel-table">
                 <colgroup>
                     <col width="15%"/>
@@ -59,41 +59,41 @@
 </template>
 
 <style lang="scss" scoped>
-    .intel-block {
-        display: flex;
-        align-items: flex-start;
-        gap: var(--meow-medium);
-        margin-top: var(--meow-medium);
-
-        @include viewport("md") {
-            flex-direction: column;
-            align-items: stretch;
+    .intel-section {
+        &:hover .intel-abbr {
+            color: var(--color-info);
         }
     }
 
     .intel-header {
+        --edge-fades-to: right;
+
         display: grid;
+        justify-content: center;
         justify-items: center;
-        gap: 8px;
-        margin-inline: auto;
-        padding: 16px 24px 12px;
-        border: 1px solid var(--color-border-lighter);
-        border-left: 32px solid var(--color-theme);
-        background-color: var(--color-background);
-        font-family: var(--font-smooth);
+        position: relative;
+        overflow-x: clip;
+        margin-block: 24px 16px;
+        animation-name: edge-fades;
+        animation-timeline: view();
     }
 
-    .intel-icon {
-        width: 100px;
-        aspect-ratio: 1;
-        border-radius: var(--bounded-circle);
-        box-shadow: var(--box-shadow);
+    .intel-abbr {
+        opacity: 0.5;
+        margin-block: -8px -32px;
+        mask: linear-gradient(black 33%, transparent);
+        font-size: 64px;
+        color: transparent;
+        transition: color 0.25s;
+        -webkit-text-stroke: 1px var(--color-info);
+    }
+
+    .intel-title {
+        isolation: isolate;
     }
 
     .intel-table {
         --font-size-td: 14px;
-
-        flex: 1;
     }
 
     .entry-link {

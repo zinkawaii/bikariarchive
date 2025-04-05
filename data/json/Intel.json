@@ -2,7 +2,7 @@
   "blocks": [
     {
       "title": "角色一览",
-      "icon": "/garden/icon/浅井爱纱.png",
+      "abbr": "character",
       "children": [
         {
           "title": "东瀛",
@@ -155,7 +155,7 @@
     },
     {
       "title": "世界观设定",
-      "icon": "/garden/icon/世界观设定.png",
+      "abbr": "concept",
       "children": [
         {
           "title": "地区",

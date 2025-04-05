@@ -74,7 +74,7 @@ export interface IntelNode<T = unknown> {
 }
 
 export interface IntelBlock extends IntelNode<IntelBranch> {
-    icon: string;
+    abbr: string;
 }
 
 export interface IntelBranch extends IntelNode<IntelLeaf | IntelItem> {}

@@ -1,3 +1,7 @@
+## 2025-04-06 [v0.5.42]
+
+feat(intel): 新的情报样式
+
 ## 2025-04-05 [v0.5.41]
 
 feat(article): 支持 [Katex](https://katex.org) 数学公式
