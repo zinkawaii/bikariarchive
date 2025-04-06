@@ -96,8 +96,8 @@
             <button class="nav-expand">
                 <iconify name="tabler:menu-deep"/>
             </button>
-            <div class="nav-list">
-                <mb-popper v-for="{ title, icon, to, children } in navs">
+            <ul class="nav-list">
+                <mb-popper v-for="{ title, icon, to, children } in navs" as="li">
                     <component :is="to ? NuxtLink : `button`" class="nav-link" :to>
                         <iconify :name="icon"/>
                         <span>{{ title }}</span>
@@ -109,7 +109,7 @@
                         </nuxt-link>
                     </template>
                 </mb-popper>
-            </div>
+            </ul>
         </nav>
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>

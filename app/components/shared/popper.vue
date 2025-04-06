@@ -1,3 +1,5 @@
+<!-- @fallthroughAttributes true -->
+
 <script lang="ts" setup>
     withDefaults(defineProps<{
         direction?: "top" | "right" | "bottom" | "left";
@@ -8,7 +10,7 @@
 </script>
 
 <template>
-    <div class="mb-popper">
+    <mb-primitive class="mb-popper">
         <slot></slot>
         <div
             v-if="$slots.floating || plaintext"
@@ -22,7 +24,7 @@
                 <slot v-else name="floating"></slot>
             </div>
         </div>
-    </div>
+    </mb-primitive>
 </template>
 
 <style lang="scss" scoped>
