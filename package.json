@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.7.0",
+  "packageManager": "pnpm@10.7.1",
   "scripts": {
     "deploy": "pm2 restart .output/server/index.mjs",
     "dev": "nuxi dev --no-qr",
@@ -28,7 +28,7 @@
     "crypto-es": "catalog:",
     "date-fns": "catalog:",
     "hookable": "catalog:",
-    "katex": "^0.16.21",
+    "katex": "catalog:",
     "lunisolar": "catalog:",
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",

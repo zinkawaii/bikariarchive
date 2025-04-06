@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import { renderSVG } from "uqr";
 
-    const config = useRuntimeConfig();
     const shelfStore = useShelfStore();
+    const config = useRuntimeConfig();
 
     const qrcode = ref("");
     onMounted(() => {

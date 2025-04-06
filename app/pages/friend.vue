@@ -12,7 +12,7 @@
     const schema = `export default {
   title: "${config.public.title}",
   link: "https://${config.public.domain}",
-  icon: "https://cravatar.cn/avatar/ECB2EA87C4532F007838D86D02798F89",
+  icon: "https://wsrv.nl/?url=github.com/KazariEX.png",
   description: "${config.public.description}"
 };`;
 </script>

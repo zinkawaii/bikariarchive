@@ -1,5 +1,5 @@
 .edge-fades-x {
-    --direction: right;
+    --edge-fades-to: right;
 
     overflow-x: auto;
     animation-name: edge-fades;
@@ -7,7 +7,7 @@
 }
 
 .edge-fades-y {
-    --direction: bottom;
+    --edge-fades-to: bottom;
 
     overflow-y: auto;
     animation-name: edge-fades;
@@ -16,14 +16,14 @@
 
 @keyframes edge-fades {
     0% {
-        mask-image: linear-gradient(to var(--direction), white calc(100% - 2rem), transparent);
+        mask-image: linear-gradient(to var(--edge-fades-to), white calc(100% - 2rem), transparent);
     }
 
     1%, 99% {
-        mask-image: linear-gradient(to var(--direction), transparent, white 2rem, white calc(100% - 2rem), transparent);
+        mask-image: linear-gradient(to var(--edge-fades-to), transparent, white 2rem, white calc(100% - 2rem), transparent);
     }
 
     100% {
-        mask-image: linear-gradient(to var(--direction), transparent, white 2rem);
+        mask-image: linear-gradient(to var(--edge-fades-to), transparent, white 2rem);
     }
 }

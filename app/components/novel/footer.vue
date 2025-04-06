@@ -9,7 +9,7 @@
 <template>
     <footer class="novel-footer">
         <p v-if="art.ending" class="novel-endding">THE END</p>
-        <div class="novel-copyright">
+        <div class="novel-copyright p-small">
             <div class="copyright-wrapper">
                 <div class="copyright-crumb">
                     <span>{{ art.novelInfo.title }}</span>
@@ -52,8 +52,6 @@
         border: 1px solid var(--color-border-lighter);
         border-radius: 16px;
         background-color: var(--color-background);
-        font-size: 14px;
-        line-height: 2em;
         text-align: center;
     }
 
@@ -69,6 +67,7 @@
         align-items: center;
         justify-content: center;
         column-gap: 6px;
+        margin-bottom: 4px;
     }
 
     .novel-adjacents {

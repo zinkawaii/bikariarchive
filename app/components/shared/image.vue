@@ -18,7 +18,6 @@
         viewable: true
     });
 
-    const config = useRuntimeConfig();
     const contextMenuStore = useContextMenuStore();
     const dialogStore = useDialogStore();
 

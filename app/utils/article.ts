@@ -92,11 +92,11 @@ export class Article implements JChapter {
     }
 
     get isFirstInVol() {
-        return (this.prev?.volume ?? Number.NEGATIVE_INFINITY) < this.volume;
+        return (this.prev?.volume ?? -Infinity) < this.volume;
     }
 
     get isLastInVol() {
-        return (this.next?.volume ?? Number.POSITIVE_INFINITY) > this.volume;
+        return (this.next?.volume ?? Infinity) > this.volume;
     }
 
     static FARAWAY = "很久以前";

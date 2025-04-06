@@ -25,7 +25,6 @@
     .intro-tags {
         display: flex;
         gap: 12px;
-        overflow: auto;
     }
 
     .intro-tag {

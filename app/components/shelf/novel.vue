@@ -100,7 +100,6 @@
 
     .sheno-list {
         display: flex;
-        width: 0;
 
         &.is-holding {
             pointer-events: none;

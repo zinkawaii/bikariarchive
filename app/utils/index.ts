@@ -8,12 +8,8 @@ export const Zexp = {
 
 //取中间值
 export function clamp(min: number, x: number, max: number) {
-    return Math.max(min, Math.min(x, max));
-}
-
-//获取数符
-export function signof(x: number) {
-    return x > 0 ? 1 : x < 0 ? -1 : 0;
+    const mid = x > min ? x : min;
+    return mid < max ? mid : max;
 }
 
 //获取元素绝对位置

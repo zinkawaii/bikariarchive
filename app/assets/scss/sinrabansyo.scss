@@ -46,11 +46,6 @@ a {
     cursor: pointer;
 }
 
-rt, sub, sup {
-    font-size: 0.75em;
-    line-height: 1em;
-}
-
 blockquote {
     margin-block: 16px;
     padding: 12px 16px;
@@ -74,6 +69,11 @@ img {
     width: 100%;
     height: auto;
     vertical-align: middle;
+}
+
+rt, sub, sup {
+    font-size: 0.75em;
+    line-height: 1em;
 }
 
 table {

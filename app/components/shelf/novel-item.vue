@@ -15,25 +15,21 @@
         return isCurrentNovel.value && shelfStore.jVolume.cover || props.cover;
     });
 
-    function clickCover(event: MouseEvent) {
-        if (isCurrentNovel.value) {
-            return;
+    function onClick() {
+        if (!isCurrentNovel.value) {
+            shelfStore.selectNovel(props.novel as string);
         }
-
-        shelfStore.selectNovel(props.novel as string);
-        event.stopPropagation();
     }
 </script>
 
 <template>
-    <li>
+    <li class="sheno-item">
         <button
-            class="sheno-link"
-            :class="{ [`is-checked`]: novel === shelfStore.novel }"
-            @click.capture="clickCover"
+            :class="{ [`is-checked`]: isCurrentNovel }"
+            @click="onClick"
         >
             <div class="sheno-cover">
-                <mb-image v-if="cover" :src="cover" alt="[cover]" align="center"/>
+                <mb-image v-if="cover" :src="cover" alt="[cover]" align="center" :viewable="isCurrentNovel"/>
                 <div v-else class="sheno-placeholder">Cover.</div>
             </div>
             <span class="sheno-title">{{ title }}</span>
@@ -42,8 +38,9 @@
 </template>
 
 <style lang="scss" scoped>
-    .sheno-link {
+    .sheno-item {
         margin-inline: 8px;
+        text-align: center;
         color: var(--color-info);
     }
 
@@ -59,21 +56,15 @@
             opacity: 0.66;
             scale: 0.9;
         }
-
-        :deep(.image-entity) {
-            right: 0;
-        }
     }
 
     .sheno-placeholder {
         display: grid;
-        place-items: center;
-        height: 100%;
+        align-items: center;
         border: 4px dashed var(--color-border);
         border-radius: 8px;
         font-size: 32px;
         font-weight: bold;
-        user-select: none;
     }
 
     .sheno-title {

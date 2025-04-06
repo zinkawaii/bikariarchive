@@ -63,11 +63,9 @@ export const useShelfStore = defineStore("shelf", () => {
         router.push(currentRoute.value);
     }
 
-    function selectNovel(key: string): void;
-    function selectNovel(delta: number): void;
     function selectNovel(key: string | number) {
         if (typeof key === "number") {
-            const raw = currentNovelIdx.value + signof(key);
+            const raw = currentNovelIdx.value + Math.sign(key);
             const idx = clamp(0, raw, novels.value.length - 1);
             key = novels.value[idx];
         }

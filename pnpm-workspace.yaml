@@ -4,11 +4,11 @@ packages:
 catalog:
   "@antfu/eslint-config": ^4.11.0
   "@iconify-json/fa6-solid": ^1.2.3
-  "@inquirer/prompts": ^7.4.0
+  "@inquirer/prompts": ^7.4.1
   "@kikiutils/nuxt-session": ^3.1.6
   "@mdzjs/config": ^0.0.1
   "@nuxt/devtools": 2.1.0
-  "@nuxt/fonts": ^0.11.0
+  "@nuxt/fonts": ^0.11.1
   "@nuxt/icon": ^1.11.0
   "@nuxt/image": ^1.10.0
   "@nuxtjs/seo": ^2.2.0
@@ -16,13 +16,13 @@ catalog:
   "@types/fs-extra": ^11.0.4
   "@types/nodemailer": ^6.4.17
   "@types/ssh2-sftp-client": ^9.0.4
-  "@types/wicg-file-system-access": ^2023.10.5
+  "@types/wicg-file-system-access": ^2023.10.6
   "@vitejs/plugin-vue": ^5.2.3
   "@vue-email/render": ^0.0.9
   "@vueuse/core": ^13.0.0
   "@vueuse/nuxt": ^13.0.0
   "@vueuse/router": ^13.0.0
-  "@zinkawaii/eslint-config": ^0.2.1
+  "@zinkawaii/eslint-config": ^0.2.2
   "@zinkawaii/nuxt-shiki": ^0.9.0
   "@zinkawaii/stylelint-config": ^0.3.0
   animejs: ^4.0.0
@@ -35,11 +35,12 @@ catalog:
   crypto-es: ^2.1.0
   date-fns: ^4.1.0
   defu: ^6.1.4
-  eslint: ^9.23.0
+  eslint: ^9.24.0
   feed: ^4.2.2
   fs-extra: ^11.3.0
   github-slugger: ^2.0.0
   hookable: ^5.5.3
+  katex: ^0.16.21
   kerria: ^0.2.1
   lunisolar: ^2.5.2
   mdast-util-frontmatter: ^2.0.1
@@ -62,14 +63,14 @@ catalog:
   remark-math: ^6.0.0
   remark-mdc: ^3.5.3
   remark-parse: ^11.0.0
-  remark-rehype: ^11.1.1
-  sass: ^1.86.0
+  remark-rehype: ^11.1.2
+  sass: ^1.86.3
   shiki: ^3.2.1
   ssh2-sftp-client: ^12.0.0
-  stylelint: ^16.17.0
+  stylelint: ^16.18.0
   tar: ^7.4.3
   unbuild: ^3.5.0
-  undici: ^7.6.0
+  undici: ^7.7.0
   unified: ^11.0.5
   unist-util-visit: ^5.0.0
   uqr: ^0.1.2

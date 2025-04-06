@@ -21,7 +21,7 @@ export default function(options: UseArticleListOptions) {
     const sticky = toRef(options.sticky);
 
     //总列表
-    const jFull = computed(() => {
+    const totals = computed(() => {
         const arr = Object.values(Article.meta)
             .filter((item) => !type.value || item.type === type.value)
             .flatMap(({ chapters }) => chapters)
@@ -42,7 +42,7 @@ export default function(options: UseArticleListOptions) {
         return arr;
     });
 
-    const { page, total, sizes, paginatedArr: jPaginated } = usePagination(jFull, {
+    const { page, total, sizes, paginatedArr: articles } = usePagination(totals, {
         sizes: options.sizes
     });
 
@@ -50,6 +50,6 @@ export default function(options: UseArticleListOptions) {
         page,
         total,
         sizes,
-        jPaginated
+        articles
     };
 }

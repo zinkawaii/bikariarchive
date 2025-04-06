@@ -47,8 +47,9 @@
     }
 
     .novel-title {
+        padding-block: 2px;
         font-size: 24px;
-        line-height: 36px;
+        line-height: 32px;
         text-align: center;
     }
 
