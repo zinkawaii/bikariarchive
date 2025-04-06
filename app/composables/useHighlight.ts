@@ -47,7 +47,7 @@ export default function(
         const indices = findWordIndices(text, rule);
 
         function findNodeAndOffset(wordIdx: number) {
-            const nodeIdx = Math.max(0, points.findIndex((p) => p > wordIdx) - 1);
+            const nodeIdx = Math.max(0, points.findLastIndex((p) => p < wordIdx));
             const node = textNodes.value[nodeIdx];
             const offset = wordIdx - points[nodeIdx];
             return [node, offset] as const;

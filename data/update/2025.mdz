@@ -2,6 +2,8 @@
 
 feat(intel): 新的情报样式
 
+fix(search): 修复搜索结果位于片段末尾时高亮失效的问题
+
 ## 2025-04-05 [v0.5.41]
 
 feat(article): 支持 [Katex](https://katex.org) 数学公式
