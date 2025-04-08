@@ -14,6 +14,22 @@
         ]
     });
 
+    const contextMenuStore = useContextMenuStore();
+    const rootEl = useTemplateRef("root");
+
+    contextMenuStore.extra(rootEl, {
+        title: "math",
+        items: [
+            {
+                title: "复制公式",
+                icon: "fa6-solid:paste",
+                action() {
+                    copyText(props.raw, "公式已复制");
+                }
+            }
+        ]
+    });
+
     const code = computed(() => {
         return renderToString(props.raw, {
             displayMode: props.type === "block",
@@ -29,20 +45,21 @@
     });
 
     function render() {
-        if (props.type === "inline") {
-            return h("span", {
-                class: "katex",
-                innerHTML: code.value.slice("<span class=\"katex\">".length, -"</span>".length)
+        if (props.type === "block") {
+            return h("pre", {
+                class: "mb-math",
+                innerHTML: code.value
             });
         }
         else {
-            return h("pre", {
-                innerHTML: code.value
+            return h("span", {
+                class: "katex",
+                innerHTML: code.value.slice("<span class=\"katex\">".length, -"</span>".length)
             });
         }
     }
 </script>
 
 <template>
-    <render class="mb-math"/>
+    <render ref="root"/>
 </template>
