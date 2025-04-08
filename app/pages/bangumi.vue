@@ -34,7 +34,7 @@
         gap: var(--meow-medium);
         margin-bottom: 16px;
 
-        @include viewport("lg") {
+        @include viewport("md") {
             grid-template-columns: 1fr;
         }
     }

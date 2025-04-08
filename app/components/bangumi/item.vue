@@ -10,11 +10,14 @@
             <nuxt-img v-if="cover" class="bangumi-image" :src="cover" alt="[cover]" loading="lazy"/>
         </div>
         <div class="bangumi-info">
-            <span class="bangumi-title text-truncate">{{ title.jp }}</span>
+            <h3 class="bangumi-title text-truncate">{{ title.jp }}</h3>
             <span class="bangumi-trans text-truncate">{{ title.zh }}</span>
-            <div class="bangumi-tags">
-                <time class="bangumi-tag">{{ date }}</time>
-            </div>
+            <ul class="bangumi-tags">
+                <li class="bangumi-tag">
+                    <iconify name="fa6-solid:circle-play"/>
+                    <time>{{ date }}</time>
+                </li>
+            </ul>
         </div>
     </nuxt-link>
 </template>
@@ -22,11 +25,7 @@
 <style lang="scss" scoped>
     .bangumi-item {
         display: flex;
-        gap: 16px;
-        padding: 8px;
-        border: 1px solid var(--color-border-lighter);
-        border-radius: 16px;
-        background-color: var(--color-background);
+        gap: 12px;
         transition: border-color 0.25s;
 
         &:hover {
@@ -40,14 +39,10 @@
 
     .bangumi-cover {
         overflow: hidden;
-        width: 128px;
+        width: 64px;
         aspect-ratio: 1 / 1.414;
-        border-radius: 12px;
+        border-radius: 4px;
         background-color: var(--color-gray-900);
-
-        @include viewport("sm") {
-            width: 96px;
-        }
     }
 
     .bangumi-image {
@@ -58,39 +53,28 @@
     .bangumi-info {
         display: grid;
         flex: 1;
-        grid-template-rows: auto auto 1fr;
-        align-items: center;
-        gap: 8px;
-        margin-block: 36px 20px;
-
-        @include viewport("sm") {
-            margin-block: 16px 12px;
-        }
+        gap: 9px;
+        margin-block: auto;
     }
 
     .bangumi-title {
-        font-size: 21px;
-        font-weight: bold;
         transition: all 0.25s;
     }
 
     .bangumi-trans {
-        font-size: 17px;
-        font-weight: bold;
+        font-size: 14px;
         color: var(--color-info);
     }
 
     .bangumi-tags {
         display: flex;
-        gap: 8px;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: var(--color-info);
     }
 
     .bangumi-tag {
-        padding-inline: 12px;
-        border: 1px solid var(--color-border-light);
-        border-radius: var(--bounded-full);
-        font-size: 14px;
-        line-height: 24px;
-        color: var(--color-info);
+        display: contents;
     }
 </style>
