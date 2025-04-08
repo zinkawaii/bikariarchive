@@ -1,23 +1,36 @@
 import { reactive, type Reactive } from "vue";
-import type { ArticleCover, Element, JArticle, JArtmap, JChapter } from "@bikari/article";
+import type { ArticleCover, Child, JArticle, JArtmap, JChapter } from "@bikari/article";
+import type { PickOptional } from "~/types";
+
+const defaults: PickOptional<JChapter> = {
+    excerpt: void 0,
+    cover: void 0,
+    date: void 0,
+    updated: void 0,
+    refactored: void 0,
+    draft: false,
+    encrypted: false,
+    ending: false,
+    sticky: Infinity
+};
 
 export class Article implements JChapter {
-    novel = "";           //小说名
-    volume = -1;          //卷序号
-    order = -1;           //章序号
-    orderInVol = -1;      //章序号（卷内）
-    index = "";           //章文件名
-    title = "";           //章节名
-    excerpt?: Element[];  //摘要
+    novel!: string;       //小说名
+    volume!: number;      //卷序号
+    order!: number;       //章序号
+    orderInVol!: number;  //章序号（卷内）
+    index!: string;       //章文件名
+    title!: string;       //章节名
+    excerpt?: Child[];    //摘要
     cover?: ArticleCover; //封面
     date?: string;        //日期
     updated?: string;     //更新日期
     refactored?: string;  //重构日期
-    draft = false;        //草稿
-    encrypted = false;    //加密
-    ending = false;       //终章
-    sticky = Infinity;    //置顶
-    wordCount = 0;        //字数
+    draft!: boolean;      //草稿
+    encrypted!: boolean;  //加密
+    ending!: boolean;     //终章
+    sticky!: number;      //置顶
+    wordCount!: number;   //字数
 
     private constructor(novel: string, order: number, raw: JChapter) {
         this.assign(novel, order, raw);
@@ -25,7 +38,7 @@ export class Article implements JChapter {
 
     assign(novel: string, order: number, raw: JChapter) {
         //合并属性
-        Object.assign(this, raw);
+        Object.assign(this, defaults, raw);
         this.novel = novel;
         this.order = order;
 
@@ -140,7 +153,7 @@ export function enrichJArticle(original: JArticle) {
         const { chapters: articles } = Article.meta[novel] ?? original[novel];
 
         //全量覆盖
-        Reflect.set(Article.meta, novel, original[novel]);
+        Object.assign(Article.meta[novel] ??= {} as any, original[novel]);
 
         //名称与序号的映射
         const hashs = new Map(
