@@ -81,7 +81,7 @@
                     <button class="comment-nickname" @click="openUserInfo(data.parent)">{{ data.parent.nickname }}</button>
                 </template>
             </div>
-            <novel-article class="comment-text" :body>
+            <novel-article :body variant="comment">
                 <p class="comment-sanitized">好像说了什么，但是被清除了</p>
             </novel-article>
             <div class="comment-info">
@@ -131,6 +131,9 @@
     }
 
     .comment-main {
+        display: grid;
+        gap: 0.5em;
+
         &:hover .comment-action {
             opacity: 1;
         }
@@ -146,10 +149,6 @@
     .comment-nickname {
         font-family: var(--font-smooth);
         color: var(--color-theme-text);
-    }
-
-    .comment-text {
-        margin-block: 0.5em;
     }
 
     .comment-sanitized {

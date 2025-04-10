@@ -9,8 +9,11 @@ tag:
   - 意识流
 volumes:
   - title: 日常相关
+    variant: story
   - title: 梦境相关
+    variant: story
   - title: 萌文化相关
+    variant: story
   - title: 前端技术相关
 ---
 

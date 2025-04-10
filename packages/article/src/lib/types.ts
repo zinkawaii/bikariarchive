@@ -22,6 +22,7 @@ export interface JNovel<T = JChapter> {
 export interface JVolume {
     title: string;
     cover?: string;
+    variant?: ArticleVariant;
     ending?: boolean;
 }
 
@@ -40,6 +41,7 @@ export interface ArticleFrontmatter {
     refactored?: string;
     updated?: string;
     cover?: ArticleCover;
+    variant?: ArticleVariant;
     draft?: boolean;
     ending?: boolean;
     password?: string;
@@ -51,6 +53,8 @@ export interface ArticleCover {
     reference?: string;
     align?: string;
 }
+
+export type ArticleVariant = "general" | "story" | "comment";
 
 export interface JArtmap {
     [novel: string]: {

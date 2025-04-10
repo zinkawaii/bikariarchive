@@ -134,6 +134,7 @@
         <novel-article
             v-else
             :body="post.body"
+            :variant="art.variant"
             @vue:mounted="hooks.callHook(`article:rendered`, `.novel-text`)"
         />
         <novel-footer :art/>

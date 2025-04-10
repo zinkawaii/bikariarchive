@@ -21,10 +21,9 @@
     </define-intel-cell>
     <meow-widget title="情报">
         <section v-for="block in Entry.meta.blocks" class="intel-section">
-            <h2 :id="block.title" class="intel-header">
-                <span class="intel-abbr">{{ block.abbr.toUpperCase() }}</span>
-                <span class="intel-title">{{ block.title }}</span>
-            </h2>
+            <story-heading :modifier="block.abbr.toUpperCase()">
+                {{ block.title }}
+            </story-heading>
             <meow-table class="intel-table">
                 <colgroup>
                     <col width="15%"/>
@@ -60,36 +59,9 @@
 
 <style lang="scss" scoped>
     .intel-section {
-        &:hover .intel-abbr {
+        &:hover > .story-heading::before {
             color: var(--color-info);
         }
-    }
-
-    .intel-header {
-        --edge-fades-to: right;
-
-        display: grid;
-        justify-content: center;
-        justify-items: center;
-        position: relative;
-        overflow-x: clip;
-        margin-block: 24px 16px;
-        animation-name: edge-fades;
-        animation-timeline: view();
-    }
-
-    .intel-abbr {
-        opacity: 0.5;
-        margin-block: -8px -32px;
-        mask: linear-gradient(black 33%, transparent);
-        font-size: 64px;
-        color: transparent;
-        transition: color 0.25s;
-        -webkit-text-stroke: 1px var(--color-info);
-    }
-
-    .intel-title {
-        isolation: isolate;
     }
 
     .intel-table {

@@ -1,13 +1,14 @@
 import { reactive, type Reactive } from "vue";
-import type { ArticleCover, Child, JArticle, JArtmap, JChapter } from "@bikari/article";
+import type { ArticleCover, ArticleVariant, Child, JArticle, JArtmap, JChapter } from "@bikari/article";
 import type { PickOptional } from "~/types";
 
 const defaults: PickOptional<JChapter> = {
     excerpt: void 0,
-    cover: void 0,
     date: void 0,
     updated: void 0,
     refactored: void 0,
+    cover: void 0,
+    variant: void 0,
     draft: false,
     encrypted: false,
     ending: false,
@@ -15,22 +16,23 @@ const defaults: PickOptional<JChapter> = {
 };
 
 export class Article implements JChapter {
-    novel!: string;       //小说名
-    volume!: number;      //卷序号
-    order!: number;       //章序号
-    orderInVol!: number;  //章序号（卷内）
-    index!: string;       //章文件名
-    title!: string;       //章节名
-    excerpt?: Child[];    //摘要
-    cover?: ArticleCover; //封面
-    date?: string;        //日期
-    updated?: string;     //更新日期
-    refactored?: string;  //重构日期
-    draft!: boolean;      //草稿
-    encrypted!: boolean;  //加密
-    ending!: boolean;     //终章
-    sticky!: number;      //置顶
-    wordCount!: number;   //字数
+    novel!: string;           //小说名
+    volume!: number;          //卷序号
+    order!: number;           //章序号
+    orderInVol!: number;      //章序号（卷内）
+    index!: string;           //章文件名
+    title!: string;           //章节名
+    excerpt?: Child[];        //摘要
+    date?: string;            //日期
+    updated?: string;         //更新日期
+    refactored?: string;      //重构日期
+    cover?: ArticleCover;     //封面
+    variant?: ArticleVariant; //变体
+    draft!: boolean;          //草稿
+    encrypted!: boolean;      //加密
+    ending!: boolean;         //终章
+    sticky!: number;          //置顶
+    wordCount!: number;       //字数
 
     private constructor(novel: string, order: number, raw: JChapter) {
         this.assign(novel, order, raw);
@@ -46,6 +48,9 @@ export class Article implements JChapter {
         this.orderInVol = Article.meta[novel].chapters
             .filter((n) => n.volume === raw.volume)
             .findIndex((n) => n.index === raw.index);
+
+        //后备变体值
+        this.variant ??= this.volumeInfo.variant;
 
         return this;
     }
