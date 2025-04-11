@@ -1,12 +1,12 @@
-import { z } from "zod";
+import { type } from "arktype";
 import type { HydratedDocument } from "mongoose";
 import { generateAvatarUrl } from "~~/server/utils";
 import type { CommentData, GetCommentResponse } from "~~/server/types/api/comment";
 import type { CommentDataSchema, UserDataSchema } from "~~/server/types/model";
 
-const schema = z.object({
-    path: z.string(),
-    page: z.string().transform(Number)
+const schema = type({
+    path: "string",
+    page: "string.numeric.parse"
 });
 
 //需要获取的属性
@@ -14,7 +14,7 @@ const select = "_id children content time mode nickname email address user";
 
 export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
     const { session } = event.context;
-    const body = schema.parse(getQuery(event));
+    const body = schema.assert(getQuery(event));
 
     //获取严格路径
     const path = getStrictPath(body.path);

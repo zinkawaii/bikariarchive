@@ -1,4 +1,4 @@
-import { ZodError } from "zod";
+import { TraversalError } from "arktype";
 import type { H3Event } from "h3";
 import type { CachedEventHandlerOptions } from "nitropack";
 
@@ -18,9 +18,9 @@ const createHandler = <T extends BaseResponse>(
         let status: number;
         let data: unknown;
 
-        if (err instanceof ZodError) {
+        if (err instanceof TraversalError) {
             status = 400;
-            data = err.issues;
+            data = err.message;
         }
         else if (isError(err)) {
             status = err.statusCode;

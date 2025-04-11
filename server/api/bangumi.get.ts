@@ -1,12 +1,12 @@
-import { z } from "zod";
+import { type } from "arktype";
 import type { BangumiData, GetBangumiResponse } from "~~/server/types/api/bangumi";
 
-const schema = z.object({
-    page: z.string().transform(Number)
+const schema = type({
+    page: "string.numeric.parse"
 });
 
 export default defineJEventHandler<GetBangumiResponse>(async (event, res) => {
-    const { page } = schema.parse(getQuery(event));
+    const { page } = schema.assert(getQuery(event));
 
     if (page <= 0) {
         return 1;

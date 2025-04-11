@@ -1,14 +1,14 @@
-import { z } from "zod";
+import { type } from "arktype";
 import { generateAvatarUrl } from "~~/server/utils";
 import type { GetUserInfoResponse } from "~~/server/types/api/user/info";
 
-const schema = z.object({
-    uid: z.string().optional().transform((val) => Number(val) || void 0)
+const schema = type({
+    uid: "string.numeric.parse?"
 });
 
 export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
     const { session } = event.context;
-    const { uid = session.uid } = schema.parse(getQuery(event));
+    const { uid = session.uid } = schema.assert(getQuery(event));
 
     const qUser = await UserDataModel.findOne({
         uid

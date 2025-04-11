@@ -1,15 +1,15 @@
-import { z } from "zod";
+import { type } from "arktype";
 import { Zexp } from "~/utils";
 import type { PutPasswordBody } from "~~/server/types/api/user/password";
 
-const schema = z.object({
-    old: z.string().regex(Zexp.password),
-    new: z.string().regex(Zexp.password)
+const schema = type({
+    old: type(Zexp.password),
+    new: type(Zexp.password)
 });
 
 export default defineJEventHandler(async (event) => {
     const { session } = event.context;
-    const { old: oldPassword, new: newPassword } = schema.parse(
+    const { old: oldPassword, new: newPassword } = schema.assert(
         await readBody<PutPasswordBody>(event)
     );
 

@@ -1,15 +1,15 @@
-import { z } from "zod";
+import { type } from "arktype";
 import { generateAvatarUrl } from "~~/server/utils";
 import type { PostLoginBody, PostLoginResponse } from "~~/server/types/api/user/login";
 
-const schema = z.object({
-    account: z.string(),
-    password: z.string()
+const schema = type({
+    account: "string",
+    password: "string"
 });
 
 export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
     const { session } = event.context;
-    const { account, password } = schema.parse(
+    const { account, password } = schema.assert(
         await readBody<PostLoginBody>(event)
     );
 

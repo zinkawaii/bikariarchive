@@ -27,6 +27,7 @@
     "animejs": "catalog:",
     "crypto-es": "catalog:",
     "date-fns": "catalog:",
+    "github-slugger": "catalog:",
     "hookable": "catalog:",
     "katex": "catalog:",
     "lunisolar": "catalog:",
@@ -60,6 +61,7 @@
     "@zinkawaii/eslint-config": "catalog:",
     "@zinkawaii/nuxt-shiki": "catalog:",
     "@zinkawaii/stylelint-config": "catalog:",
+    "arktype": "catalog:",
     "chokidar": "catalog:",
     "cn-font-split": "catalog:",
     "consola": "catalog:",
@@ -78,7 +80,6 @@
     "stylelint": "catalog:",
     "tar": "catalog:",
     "undici": "catalog:",
-    "vue-tsc": "catalog:",
-    "zod": "catalog:"
+    "vue-tsc": "catalog:"
   }
 }

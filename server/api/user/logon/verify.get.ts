@@ -1,14 +1,14 @@
-import { z } from "zod";
+import { type } from "arktype";
 import Verify from "~/emails/verify.vue";
 import { Zexp } from "~/utils";
 import { randomInt } from "~/utils/random";
 
-const schema = z.object({
-    email: z.string().regex(Zexp.email)
+const schema = type({
+    email: type(Zexp.email)
 });
 
 export default defineJEventHandler(async (event) => {
-    const { email } = schema.parse(getQuery(event));
+    const { email } = schema.assert(getQuery(event));
 
     //预生成验证码
     const time = Date.now();

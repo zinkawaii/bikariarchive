@@ -78,6 +78,9 @@ catalogs:
     animejs:
       specifier: ^4.0.0
       version: 4.0.0
+    arktype:
+      specifier: ^2.1.19
+      version: 2.1.19
     assemblyscript:
       specifier: ^0.27.35
       version: 0.27.35
@@ -237,9 +240,6 @@ catalogs:
     yaml:
       specifier: ^2.7.1
       version: 2.7.1
-    zod:
-      specifier: ^3.24.2
-      version: 3.24.2
 
 patchedDependencies:
   mdast-util-to-hast:
@@ -265,6 +265,9 @@ importers:
       date-fns:
         specifier: 'catalog:'
         version: 4.1.0
+      github-slugger:
+        specifier: 'catalog:'
+        version: 2.0.0
       hookable:
         specifier: 'catalog:'
         version: 5.5.3
@@ -359,6 +362,9 @@ importers:
       '@zinkawaii/stylelint-config':
         specifier: 'catalog:'
         version: 0.3.0(postcss-html@1.8.0)(postcss@8.5.3)(stylelint@16.18.0(typescript@5.7.3))
+      arktype:
+        specifier: 'catalog:'
+        version: 2.1.19
       chokidar:
         specifier: 'catalog:'
         version: 4.0.3
@@ -416,9 +422,6 @@ importers:
       vue-tsc:
         specifier: 'catalog:'
         version: 2.2.8(typescript@5.7.3)
-      zod:
-        specifier: 'catalog:'
-        version: 3.24.2
 
   packages/article:
     dependencies:
@@ -578,6 +581,12 @@ packages:
 
   '@antfu/utils@8.1.0':
     resolution: {integrity: sha512-XPR7Jfwp0FFl/dFYPX8ZjpmU4/1mIXTjnZ1ba48BLMyKOV62/tiRjdsFcPs2hsYcSud4tzk7w3a3LjX8Fu3huA==}
+
+  '@ark/schema@0.45.9':
+    resolution: {integrity: sha512-rG0v/JI0sibn/0wERAHTYVLCtEqoMP2IIlxnb+S5DrEjCI5wpubbZSWMDW50tZ8tV6FANu6zzHDeeKbp6lsZdg==}
+
+  '@ark/util@0.45.9':
+    resolution: {integrity: sha512-0WYNAb8aRGp7dNt6xIvIrRzL7V1XL3u3PK2vcklhtTrdaP235DjC9qJhzidrxtWr68mA5ySSjUrgrXk622bKkw==}
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -2910,6 +2919,9 @@ packages:
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+
+  arktype@2.1.19:
+    resolution: {integrity: sha512-notORSuTSpfLV7rq0kYC4mTgIVlVR0xQuvtFxOaE9aKiXyON/kgoIBwZZcKeSSb4BebNcfJoGlxJicAUl/HMdw==}
 
   array-union@2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
@@ -7172,9 +7184,6 @@ packages:
     resolution: {integrity: sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA==}
     engines: {node: '>= 14'}
 
-  zod@3.24.2:
-    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
-
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -7240,6 +7249,12 @@ snapshots:
   '@antfu/utils@0.7.10': {}
 
   '@antfu/utils@8.1.0': {}
+
+  '@ark/schema@0.45.9':
+    dependencies:
+      '@ark/util': 0.45.9
+
+  '@ark/util@0.45.9': {}
 
   '@babel/code-frame@7.26.2':
     dependencies:
@@ -10169,6 +10184,11 @@ snapshots:
   are-docs-informative@0.0.2: {}
 
   argparse@2.0.1: {}
+
+  arktype@2.1.19:
+    dependencies:
+      '@ark/schema': 0.45.9
+      '@ark/util': 0.45.9
 
   array-union@2.1.0: {}
 
@@ -15457,7 +15477,5 @@ snapshots:
       archiver-utils: 5.0.2
       compress-commons: 6.0.2
       readable-stream: 4.7.0
-
-  zod@3.24.2: {}
 
   zwitch@2.0.4: {}

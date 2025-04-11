@@ -1,17 +1,17 @@
-import { z } from "zod";
+import { type } from "arktype";
 import { Zexp } from "~/utils";
 import type { PutCommentBody } from "~~/server/types/api/comment";
 
-const schema = z.object({
-    id: z.string(),
-    content: z.string().max(512),
-    nickname: z.string().regex(Zexp.nickname).optional(),
-    email: z.string().regex(Zexp.email).optional(),
-    address: z.string().regex(Zexp.url).optional()
+const schema = type({
+    id: "string",
+    content: "string <= 512",
+    nickname: type(Zexp.nickname).optional(),
+    email: type(Zexp.email).optional(),
+    address: type(Zexp.url).optional()
 });
 
 export default defineJEventHandler(async (event) => {
-    const body = schema.parse(
+    const body = schema.assert(
         await readBody<PutCommentBody>(event)
     );
 

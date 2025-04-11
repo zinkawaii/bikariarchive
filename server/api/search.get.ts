@@ -1,17 +1,17 @@
+import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
-import { z } from "zod";
 import type { Element } from "@bikari/article";
 import { Article } from "~/utils/article";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 
-const schema = z.object({
-    novel: z.string().optional(),
-    word: z.string().min(1).max(64)
+const schema = type({
+    novel: "string?",
+    word: "0 < string <= 64"
 });
 
 export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res) => {
-    const { novel, word } = schema.parse(getQuery(event));
+    const { novel, word } = schema.assert(getQuery(event));
 
     const jNovels = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
     const jChapters = jNovels.flatMap((jNovel) => jNovel?.chapters).filter(Boolean);

@@ -1,12 +1,12 @@
-import { z } from "zod";
+import { type } from "arktype";
 import type { DeleteCommentBody } from "~~/server/types/api/comment";
 
-const schema = z.object({
-    id: z.string()
+const schema = type({
+    id: "string"
 });
 
 export default defineJEventHandler(async (event) => {
-    const { id } = schema.parse(
+    const { id } = schema.assert(
         await readBody<DeleteCommentBody>(event)
     );
 

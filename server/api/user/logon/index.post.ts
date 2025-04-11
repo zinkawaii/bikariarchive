@@ -1,18 +1,18 @@
-import { z } from "zod";
+import { type } from "arktype";
 import { Zexp } from "~/utils";
 import { randomInt } from "~/utils/random";
 import type { GetLoginBody, GetLogonResponse } from "~~/server/types/api/user/logon";
 
-const schema = z.object({
-    nickname: z.string().regex(Zexp.nickname),
-    email: z.string().regex(Zexp.email),
-    verify: z.string().length(6),
-    password: z.string().regex(Zexp.password)
+const schema = type({
+    nickname: type(Zexp.nickname),
+    email: type(Zexp.email),
+    verify: "string == 6",
+    password: type(Zexp.password)
 });
 
 export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const { session } = event.context;
-    const { nickname, email, verify, password } = schema.parse(
+    const { nickname, email, verify, password } = schema.assert(
         await readBody<GetLoginBody>(event)
     );
 

@@ -1,13 +1,13 @@
-import { z } from "zod";
+import { type } from "arktype";
 import type { PutUserSignBody } from "~~/server/types/api/user/sign";
 
-const schema = z.object({
-    content: z.string()
+const schema = type({
+    content: "string"
 });
 
 export default defineJEventHandler(async (event) => {
     const { session } = event.context;
-    const { content } = schema.parse(
+    const { content } = schema.assert(
         await readBody<PutUserSignBody>(event)
     );
 

@@ -1,12 +1,12 @@
-import { z } from "zod";
+import { type } from "arktype";
 import type { GetReadRecordResponse } from "~~/server/types/api/read-record";
 
-const schema = z.object({
-    page: z.string().transform(Number)
+const schema = type({
+    page: "string.numeric.parse"
 });
 
 export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => {
-    const { page } = schema.parse(getQuery(event));
+    const { page } = schema.assert(getQuery(event));
 
     if (page < 1) {
         return 1;

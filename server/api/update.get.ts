@@ -1,13 +1,13 @@
+import { type } from "arktype";
 import fs from "fs-extra";
-import { z } from "zod";
 import type { GetUpdateResponse } from "~~/server/types/api/update";
 
-const schema = z.object({
-    year: z.string().transform(Number)
+const schema = type({
+    year: "string.numeric.parse"
 });
 
 export default defineJEventHandler<GetUpdateResponse>(async (event, res) => {
-    const { year } = schema.parse(getQuery(event));
+    const { year } = schema.assert(getQuery(event));
 
     //读取数据
     res.list = [2023, 2024, 2025].includes(year)

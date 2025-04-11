@@ -1,14 +1,14 @@
+import { type } from "arktype";
 import fs from "fs-extra";
-import { z } from "zod";
 import { Entry } from "~/utils/entry";
 import type { GetEntryResponse } from "~~/server/types/api/entry";
 
-const schema = z.object({
-    title: z.string()
+const schema = type({
+    title: "string"
 });
 
 export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
-    const { title } = schema.parse(getQuery(event));
+    const { title } = schema.assert(getQuery(event));
 
     const category = Entry.map[title];
 

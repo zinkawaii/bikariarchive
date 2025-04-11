@@ -1,14 +1,14 @@
+import { type } from "arktype";
 import CryptoES from "crypto-es";
-import { z } from "zod";
 import type { PatchArticleBody } from "~~/server/types/api/article";
 
-const schema = z.object({
-    token: z.string()
+const schema = type({
+    token: "string"
 });
 
 export default defineJEventHandler(async (event, res) => {
     const config = useRuntimeConfig();
-    const { token } = schema.parse(
+    const { token } = schema.assert(
         await readBody<PatchArticleBody>(event)
     );
 

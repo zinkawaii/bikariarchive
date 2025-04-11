@@ -1,22 +1,22 @@
-import { z } from "zod";
+import { type } from "arktype";
 import CommentReply from "~/emails/comment-reply.vue";
 import { Zexp } from "~/utils";
 import type { PostCommentBody } from "~~/server/types/api/comment";
 import type { UserDataSchema } from "~~/server/types/model";
 
-const schema = z.object({
-    path: z.string(),
-    parent: z.string().optional().transform((val) => val || void 0),
-    content: z.string().max(512),
-    mode: z.enum(["guest", "user"]),
-    nickname: z.string().regex(Zexp.nickname),
-    email: z.string().regex(Zexp.email).optional(),
-    address: z.string().regex(Zexp.url).optional()
+const schema = type({
+    path: "string",
+    parent: "string?",
+    content: "string <= 512",
+    mode: `"guest" | "user"`,
+    nickname: type(Zexp.nickname),
+    email: type(Zexp.email).optional(),
+    address: type(Zexp.url).optional()
 });
 
 export default defineJEventHandler(async (event) => {
     const config = useRuntimeConfig();
-    const body = schema.parse(
+    const body = schema.assert(
         await readBody<PostCommentBody>(event)
     );
 
