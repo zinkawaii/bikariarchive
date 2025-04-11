@@ -101,9 +101,11 @@
                 <div class="excalc-param">
                     <div class="excalc-label">
                         <span>参数</span>
-                        <mb-select class="excalc-param-selector" v-model="currentIdx">
-                            <mb-option v-for="(data, i) in storage" :title="`[${i + 1}] ${data.name}`" :value="i"/>
-                        </mb-select>
+                        <mb-select
+                            class="excalc-param-selector"
+                            :options="storage.map((data, i) => ({ label: `[${i + 1}] ${data.name}`, value: i }))"
+                            v-model="currentIdx"
+                        />
                     </div>
                     <div class="excalc-param-handler">
                         <mb-button @click="addData">添加</mb-button>

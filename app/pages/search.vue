@@ -16,6 +16,22 @@
         searchWord
     });
 
+    const options = computed(() => {
+        return [
+            {
+                label: "全文检索"
+            },
+            {
+                label: "书名",
+                group: true
+            },
+            ...Object.entries(Article.meta).map(([key, { title }]) => ({
+                label: title,
+                value: key
+            }))
+        ];
+    });
+
     const { execute, status, data, error } = useLazyFetch("/api/search", {
         query: {
             novel,
@@ -75,12 +91,7 @@
 <template>
     <meow-widget title="全文检索">
         <form class="search-form" @submit.prevent="fullTextSearch">
-            <mb-select class="search-select" v-model="novel">
-                <mb-option title="全文检索"/>
-                <mb-option-group title="书名">
-                    <mb-option v-for="{ title }, key in Article.meta" :key :title :value="key"/>
-                </mb-option-group>
-            </mb-select>
+            <mb-select class="search-select" :options v-model="novel"/>
             <meow-input type="search" placeholder="关键词" accesskey="/" v-model.trim="inputWord"/>
             <meow-button icon="twemoji:magnifying-glass-tilted-right">全文检索</meow-button>
         </form>
