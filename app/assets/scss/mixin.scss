@@ -31,3 +31,9 @@ $breakpoints: (
         }
     }
 }
+
+@mixin dark() {
+    [z-dark] & {
+        @content;
+    }
+}

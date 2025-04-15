@@ -303,7 +303,7 @@ textarea {
     background-color: var(--shiki-light-bg);
     color: var(--shiki-light);
 
-    [z-dark] & {
+    @include dark {
         background-color: var(--shiki-dark-bg);
         color: var(--shiki-dark);
     }

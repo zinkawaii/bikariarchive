@@ -23,7 +23,7 @@
         background-repeat: no-repeat;
         background-size: cover;
 
-        [z-dark] & {
+        @include dark {
             background-image: v-bind("darkUrl");
         }
     }

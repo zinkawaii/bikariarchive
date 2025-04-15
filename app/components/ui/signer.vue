@@ -74,7 +74,7 @@
         background-size: cover;
         mask-image: linear-gradient(to var(--direction, right), white, transparent);
 
-        [z-dark] & {
+        @include dark {
             background-image: v-bind(innerworld);
         }
 
