@@ -27,7 +27,7 @@
     ];
 
     //代码
-    const code = ref(props.raw);
+    const code = ref(escapeHtml(props.raw));
     onMounted(async () => {
         const shiki = await getShikiHighlighter();
         const options = await resolveShikiOptions({ lang: props.lang });

@@ -1,3 +1,13 @@
+//转义实体字符
+export function escapeHtml(html: string) {
+    return html
+        .replaceAll(/&/g, "&amp;")
+        .replaceAll(/</g, "&lt;")
+        .replaceAll(/>/g, "&gt;")
+        .replaceAll(/"/g, "&quot;")
+        .replaceAll(/'/g, "&#039;");
+}
+
 //首字母大写
 export function capitalize<T extends string>(str: T) {
     return (
