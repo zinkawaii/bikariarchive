@@ -31,7 +31,7 @@ export const useModalStore = defineStore("modal", () => {
   const modals = ref<Raw<ModalContext>[]>([]);
 
   return {
-    modals
+    modals,
   };
 });
 ```
@@ -49,7 +49,7 @@ function use(render: () => VNode, options: UseModalOptions = {}) {
   const {
     duration = 400,
     immediate = false,
-    unique = false
+    unique = false,
   } = options;
 
   let ctx: ModalContext;
@@ -85,7 +85,7 @@ function open() {
     zIndex,
     duration,
     isOpening,
-    close: (vnode.props ??= {}).onClose ??= close
+    close: (vnode.props ??= {}).onClose ??= close,
   };
 
   dialog.value.push(ctx);
@@ -151,12 +151,12 @@ export const useSettingStore = defineStore("setting", () => {
   const modalStore = useModalStore();
 
   const { open, close } = modalStore.use(() => h(Setting), {
-    unique: true
+    unique: true,
   });
 
   return {
     open,
-    close
+    close,
   };
 });
 ```
@@ -179,9 +179,9 @@ export function confirm(message: string) {
       onClose(val) {
         resolve(val);
         close();
-      }
+      },
     }), {
-      immediate: true
+      immediate: true,
     });
   });
 }

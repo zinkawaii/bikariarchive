@@ -92,7 +92,7 @@ function onMousedown(event) {
 useEventListener("mousemove", useThrottleFn((event) => {
   if (isPressing) {
     window.scrollBy({
-      top: (event.y - startY) * distanceRatio.value
+      top: (event.y - startY) * distanceRatio.value,
     });
     startY = event.y;
   }
