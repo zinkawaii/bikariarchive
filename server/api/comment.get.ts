@@ -1,5 +1,6 @@
 import { type } from "arktype";
 import type { HydratedDocument } from "mongoose";
+import { CommentDataModel } from "~~/server/models/CommentData";
 import { generateAvatarUrl } from "~~/server/utils";
 import type { CommentData, GetCommentResponse } from "~~/server/types/api/comment";
 import type { CommentDataSchema, UserDataSchema } from "~~/server/types/model";

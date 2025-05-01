@@ -1,5 +1,7 @@
 import { type } from "arktype";
 import CryptoES from "crypto-es";
+import { ReadRecordModel } from "~~/server/models/ReadRecord";
+import { UserDataModel } from "~~/server/models/UserData";
 import type { PatchArticleBody } from "~~/server/types/api/article";
 
 const schema = type({

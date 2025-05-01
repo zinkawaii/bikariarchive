@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { UserDataModel } from "~~/server/models/UserData";
 import { generateAvatarUrl } from "~~/server/utils";
 import type { PostLoginBody, PostLoginResponse } from "~~/server/types/api/user/login";
 

@@ -31,9 +31,9 @@ catalogs:
     feed: ^4.2.2
     fs-extra: ^11.3.0
     hookable: ^5.5.3
+    mongoose: ^8.14.1
     nodemailer: ^6.10.1
     nuxt: ^3.17.1
-    nuxt-mongoose: ^1.0.6
     pathe: ^2.0.3
     propathy: ^0.2.0
     sass: ^1.87.0

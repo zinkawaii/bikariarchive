@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { CommentDataModel } from "~~/server/models/CommentData";
 import type { DeleteCommentBody } from "~~/server/types/api/comment";
 
 const schema = type({

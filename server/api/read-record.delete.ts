@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { ReadRecordModel } from "~~/server/models/ReadRecord";
 import type { DeleteReadRecordBody } from "~~/server/types/api/read-record";
 
 const schema = type({

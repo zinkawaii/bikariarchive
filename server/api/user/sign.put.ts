@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { UserDataModel } from "~~/server/models/UserData";
 import type { PutUserSignBody } from "~~/server/types/api/user/sign";
 
 const schema = type({

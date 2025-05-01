@@ -1,6 +1,8 @@
 import { type } from "arktype";
 import { Zexp } from "~/utils";
 import { randomInt } from "~/utils/random";
+import { TempVerifyModel } from "~~/server/models/TempVerify";
+import { UserDataModel } from "~~/server/models/UserData";
 import type { GetLoginBody, GetLogonResponse } from "~~/server/types/api/user/logon";
 
 const schema = type({
