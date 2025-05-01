@@ -10,7 +10,7 @@
     }>();
 
     const modelValue = defineModel<T>({
-        required: true
+        required: true,
     });
 
     const rootEl = useTemplateRef("root");
@@ -20,7 +20,7 @@
         return Object.fromEntries(
             props.options
                 .filter((item) => !item.group)
-                .map((item) => [item.value, item])
+                .map((item) => [item.value, item]),
         );
     });
 
@@ -51,7 +51,7 @@
                     v-else
                     class="select-option"
                     :class="{
-                        [`is-checked`]: modelValue === value
+                        [`is-checked`]: modelValue === value,
                     }"
                     @click="selectItem(value as T)"
                 >

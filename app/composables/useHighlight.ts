@@ -8,7 +8,7 @@ export interface UseHighlightOptions {
 export default function(
     target: MaybeComputedElementRef | MaybeComputedElementRef[] | MaybeRefOrGetter<MaybeElement[]>,
     word: MaybeRefOrGetter<string | RegExp>,
-    options: UseHighlightOptions
+    options: UseHighlightOptions,
 ) {
     const isSupported = useSupported(() => CSS.highlights);
 
@@ -69,7 +69,7 @@ export default function(
             useMutationObserver(targets, textNodes.trigger, {
                 characterData: true,
                 childList: true,
-                subtree: true
+                subtree: true,
             });
         }
 
@@ -88,7 +88,7 @@ export default function(
 
     return {
         isSupported,
-        update: textNodes.trigger
+        update: textNodes.trigger,
     };
 }
 

@@ -10,21 +10,21 @@
         link: [
             { rel: "icon", href: "/garden/favicon.ico" },
             { rel: "apple-touch-icon", href: image(config.public.avatar, { width: 180 }) },
-            { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" }
+            { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" },
         ],
         meta: [
             { name: "mobile-web-app-capable", content: "yes" },
             { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
-            { name: "apple-mobile-web-app-title", content: config.public.title }
+            { name: "apple-mobile-web-app-title", content: config.public.title },
         ],
         titleTemplate: "%s %separator %site.name",
         templateParams: {
-            separator: "-"
+            separator: "-",
         },
         htmlAttrs: {
             theme,
-            "z-dark": dark
-        }
+            "z-dark": dark,
+        },
     });
 
     //主题颜色

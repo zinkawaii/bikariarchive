@@ -17,11 +17,11 @@ export const useShelfStore = defineStore("shelf", () => {
             if (route.name === "shelf") {
                 router.replace({
                     params: {
-                        novel: val
-                    }
+                        novel: val,
+                    },
                 });
             }
-        }
+        },
     });
 
     const novels = computed(() => {
@@ -52,8 +52,8 @@ export const useShelfStore = defineStore("shelf", () => {
         return {
             name: "shelf",
             params: {
-                novel: novel.value
-            }
+                novel: novel.value,
+            },
         };
     });
 
@@ -88,6 +88,6 @@ export const useShelfStore = defineStore("shelf", () => {
         route: currentRoute,
         goto,
         selectNovel,
-        selectVolume
+        selectVolume,
     };
 });

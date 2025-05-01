@@ -6,7 +6,7 @@ import type { CommentDataSchema, UserDataSchema } from "~~/server/types/model";
 
 const schema = type({
     path: "string",
-    page: "string.numeric.parse"
+    page: "string.numeric.parse",
 });
 
 //需要获取的属性
@@ -29,19 +29,19 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
 
     //总评论数
     res.totalCount = await CommentDataModel.countDocuments({
-        path
+        path,
     });
 
     //主评论数
     res.mainCount = await CommentDataModel.countDocuments({
         path,
-        parent: null
+        parent: null,
     });
 
     //获取主评论
     const qComments = await CommentDataModel.find({
         path,
-        parent: null
+        parent: null,
     }, select)
     .sort({ time: "desc" })
     .skip((body.page - 1) * limit)
@@ -53,11 +53,11 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
 
 //递归解引用
 async function deference<
-    T extends HydratedDocument<CommentDataSchema>
+    T extends HydratedDocument<CommentDataSchema>,
 >(
     parent: T[],
     users: Record<string, Pick<UserDataSchema, "nickname" | "email" | "address" | "identity">>,
-    identity: number
+    identity: number,
 ): Promise<CommentData[]> {
     return await Promise.all(
         parent.map(async (item) => {
@@ -70,7 +70,7 @@ async function deference<
                     user: UserDataSchema;
                 }>({
                     path: "user",
-                    select: "nickname email address identity"
+                    select: "nickname email address identity",
                 })).user;
 
                 nickname = user.nickname;
@@ -84,7 +84,7 @@ async function deference<
                     children: T[];
                 }>("children", select)).children,
                 users,
-                identity
+                identity,
             ) : [];
 
             return {
@@ -97,8 +97,8 @@ async function deference<
                 avatar: generateAvatarUrl(email),
                 email: identity >= 9 ? email : void 0,
                 address,
-                character
+                character,
             };
-        })
+        }),
     );
 }

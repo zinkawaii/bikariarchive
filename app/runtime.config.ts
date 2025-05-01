@@ -5,12 +5,12 @@ type NodeEnv = "development" | "production";
 const server = {
     global: {
         article: {
-            key: "<!-- ??? -->"
+            key: "<!-- ??? -->",
         },
         comment: {
             "/tweet": {
-                identity: 9
-            }
+                identity: 9,
+            },
         },
         mail: {
             name: "微光档案",
@@ -18,16 +18,16 @@ const server = {
             port: 465,
             auth: {
                 user: "<!-- ??? -->",
-                pass: "<!-- ??? -->"
-            }
+                pass: "<!-- ??? -->",
+            },
         },
         mongoose: {
             uri: "<!-- ??? -->",
             options: {
                 dbName: "<!-- ??? -->",
                 user: "<!-- ??? -->",
-                pass: "<!-- ??? -->"
-            }
+                pass: "<!-- ??? -->",
+            },
         },
         session: {
             maxAge: 86400 * 30,
@@ -35,20 +35,20 @@ const server = {
                 data: {
                     driver: "cookie/header",
                     options: {
-                        key: "<!-- ??? -->"
-                    }
-                }
-            }
-        }
+                        key: "<!-- ??? -->",
+                    },
+                },
+            },
+        },
     },
     development: {
         mongoose: {
             options: {
-                dbName: "<!-- ??? -->"
-            }
-        }
+                dbName: "<!-- ??? -->",
+            },
+        },
     },
-    production: {}
+    production: {},
 };
 
 const client = {
@@ -59,16 +59,16 @@ const client = {
         description: "虚幻的幸福",
         jumbotron: {
             title: "微光茶馆",
-            summary: "微かの力を尽くして、光の届いた彼方へ"
+            summary: "微かの力を尽くして、光の届いた彼方へ",
         },
-        cdnUrl: "https://cdn.bikari.top"
+        cdnUrl: "https://cdn.bikari.top",
     },
     development: {
-        domain: "zinkawaii"
+        domain: "zinkawaii",
     },
     production: {
-        domain: "bikari.top"
-    }
+        domain: "bikari.top",
+    },
 };
 
 const env = import.meta.env.NODE_ENV as NodeEnv;

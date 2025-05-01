@@ -9,32 +9,32 @@
 
     const verifyStage = ref({
         stage: 0,
-        delay: 0
+        delay: 0,
     });
 
     const { errors, clear, glitch, validate } = useValidate({
         nickname: {
             target: nickname,
             required: true,
-            ...nicknameValidates
+            ...nicknameValidates,
         },
         email: {
             target: email,
             required: true,
             rule: Zexp.email,
-            message: "邮箱格式不正确"
+            message: "邮箱格式不正确",
         },
         verify: {
             target: verify,
             required: true,
             rule: /.+/,
-            message: "请输入验证码"
+            message: "请输入验证码",
         },
         password: {
             target: password,
             required: true,
-            ...passwordValidates
-        }
+            ...passwordValidates,
+        },
     });
 
     //验证码输入限制
@@ -55,8 +55,8 @@
         try {
             const { error } = await $fetch("/api/user/logon/verify", {
                 query: {
-                    email: email.value
-                }
+                    email: email.value,
+                },
             });
 
             switch (error) {
@@ -81,7 +81,7 @@
             }, {
                 immediate: false,
                 duration: 1000,
-                times: max
+                times: max,
             });
 
             verifyStage.value.stage = 0;
@@ -102,8 +102,8 @@
                     nickname: nickname.value,
                     email: email.value,
                     verify: verify.value,
-                    password: password.value
-                }
+                    password: password.value,
+                },
             });
 
             switch (error) {
@@ -127,7 +127,7 @@
             toastStore.error("[logon]", "注册失败");
         }
     }, {
-        title: "注册"
+        title: "注册",
     });
 
     //提交

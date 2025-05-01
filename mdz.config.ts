@@ -7,30 +7,30 @@ export default defineConfig({
             patterns: [
                 "./area/*",
                 "./character/*",
-                "./concept/*"
+                "./concept/*",
             ],
             import: [
                 "@bikari/article",
-                "JEntry"
-            ]
+                "JEntry",
+            ],
         },
         {
             patterns: [
-                "./novel/*"
+                "./novel/*",
             ],
             import: [
                 "@bikari/article",
-                "NovelFrontmatter"
-            ]
+                "NovelFrontmatter",
+            ],
         },
         {
             patterns: [
-                "./novel/*/*"
+                "./novel/*/*",
             ],
             import: [
                 "@bikari/article",
-                "ArticleFrontmatter"
-            ]
-        }
-    ]
+                "ArticleFrontmatter",
+            ],
+        },
+    ],
 });

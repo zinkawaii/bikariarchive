@@ -2,7 +2,7 @@ import { type } from "arktype";
 import type { GetReadRecordResponse } from "~~/server/types/api/read-record";
 
 const schema = type({
-    page: "string.numeric.parse"
+    page: "string.numeric.parse",
 });
 
 export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => {

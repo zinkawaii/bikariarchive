@@ -6,7 +6,7 @@ import { Article } from "~/utils/article";
 export default defineEventHandler(async (event: H3Event) => {
     setHeaders(event, {
         "content-type": "application/xml",
-        "cache-control": 60 * 15
+        "cache-control": 60 * 15,
     });
 
     const config = useRuntimeConfig();
@@ -18,8 +18,8 @@ export default defineEventHandler(async (event: H3Event) => {
         favicon: `https://${config.public.domain}/garden/favicon.ico`,
         link: `https://${config.public.domain}`,
         author: {
-            name: "KazariEX"
-        }
+            name: "KazariEX",
+        },
     });
 
     const arts = Object.values(Article.meta)
@@ -45,7 +45,7 @@ export default defineEventHandler(async (event: H3Event) => {
             link,
             date: new Date(art.updateDate),
             published: new Date(art.publishDate),
-            content
+            content,
         });
     }
 

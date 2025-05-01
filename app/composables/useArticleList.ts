@@ -29,7 +29,7 @@ export default function(options: UseArticleListOptions) {
                 const [x, y] = sortBy.value.reduce(([x, y], prop) => {
                     return [
                         x ?? Reflect.get(a, prop),
-                        y ?? Reflect.get(b, prop)
+                        y ?? Reflect.get(b, prop),
                     ];
                 }, [null, null]);
                 return x && y ? y.localeCompare(x) : x ? -1 : 1;
@@ -43,13 +43,13 @@ export default function(options: UseArticleListOptions) {
     });
 
     const { page, total, sizes, paginatedArr: articles } = usePagination(totals, {
-        sizes: options.sizes
+        sizes: options.sizes,
     });
 
     return {
         page,
         total,
         sizes,
-        articles
+        articles,
     };
 }

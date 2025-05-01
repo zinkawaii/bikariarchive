@@ -11,13 +11,13 @@ const schema = type({
     mode: `"guest" | "user"`,
     nickname: type(Zexp.nickname),
     email: type(Zexp.email).optional(),
-    address: type(Zexp.url).optional()
+    address: type(Zexp.url).optional(),
 });
 
 export default defineJEventHandler(async (event) => {
     const config = useRuntimeConfig();
     const body = schema.assert(
-        await readBody<PostCommentBody>(event)
+        await readBody<PostCommentBody>(event),
     );
 
     //获取严格路径
@@ -45,7 +45,7 @@ export default defineJEventHandler(async (event) => {
         extra = {
             nickname: body.nickname,
             email: body.email,
-            address: body.address
+            address: body.address,
         };
     }
     else {
@@ -58,7 +58,7 @@ export default defineJEventHandler(async (event) => {
         }
 
         extra = {
-            user: qUser.id
+            user: qUser.id,
         };
     }
 
@@ -71,21 +71,21 @@ export default defineJEventHandler(async (event) => {
         updated: time,
         ip: getRequestIP(event, { xForwardedFor: true }),
         mode: body.mode,
-        ...extra
+        ...extra,
     });
 
     //更新所回复评论的数据（如果有）
     const qParent = await CommentDataModel.findOneAndUpdate({
-        _id: body.parent
+        _id: body.parent,
     }, {
         $push: {
-            children: qComment._id
-        }
+            children: qComment._id,
+        },
     }).populate<{
         user?: UserDataSchema;
     }>({
         path: "user",
-        select: "email"
+        select: "email",
     });
 
     if (!qParent) {
@@ -102,8 +102,8 @@ export default defineJEventHandler(async (event) => {
             title: `@${body.nickname} 回复了您的评论`,
             props: {
                 content: body.content,
-                path
-            }
+                path,
+            },
         });
     }
 });

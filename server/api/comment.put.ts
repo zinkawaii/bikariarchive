@@ -7,12 +7,12 @@ const schema = type({
     content: "string <= 512",
     nickname: type(Zexp.nickname).optional(),
     email: type(Zexp.email).optional(),
-    address: type(Zexp.url).optional()
+    address: type(Zexp.url).optional(),
 });
 
 export default defineJEventHandler(async (event) => {
     const body = schema.assert(
-        await readBody<PutCommentBody>(event)
+        await readBody<PutCommentBody>(event),
     );
 
     //权限验证
@@ -23,7 +23,7 @@ export default defineJEventHandler(async (event) => {
 
     //获取评论
     const qComment = await CommentDataModel.findOne({
-        _id: body.id
+        _id: body.id,
     });
 
     //评论不存在
@@ -36,7 +36,7 @@ export default defineJEventHandler(async (event) => {
         extra = {
             nickname: body.nickname,
             email: body.email,
-            address: body.address
+            address: body.address,
         };
     }
 
@@ -44,6 +44,6 @@ export default defineJEventHandler(async (event) => {
     await qComment.updateOne({
         content: body.content,
         updated: time,
-        ...extra
+        ...extra,
     });
 });

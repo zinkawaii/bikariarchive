@@ -30,7 +30,7 @@ interface Options {
 export default function(this: Processor, options?: Options & Matter) {
     appendExtensions(this, {
         micromark: frontmatter(options),
-        fromMarkdown: frontmatterFromMarkdown(options)
+        fromMarkdown: frontmatterFromMarkdown(options),
     });
 
     return (tree: Root, file: VFile) => {
@@ -39,7 +39,7 @@ export default function(this: Processor, options?: Options & Matter) {
         if (tree.children[0]?.type !== "yaml") {
             tree.children.unshift({
                 type: "yaml",
-                value: ""
+                value: "",
             });
         }
 
@@ -53,15 +53,15 @@ export default function(this: Processor, options?: Options & Matter) {
                     data: {
                         hName: "frontmatter",
                         hProperties: {
-                            order: frontmatters.length - 1
-                        }
-                    }
+                            order: frontmatters.length - 1,
+                        },
+                    },
                 });
             }
         });
 
         file.data = {
-            frontmatters
+            frontmatters,
         };
     };
 }

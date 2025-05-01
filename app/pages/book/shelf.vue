@@ -3,7 +3,7 @@
     const { novel, jNovel, jChapters } = storeToRefs(shelfStore);
 
     useHead({
-        title: () => Article.meta[novel.value].title
+        title: () => Article.meta[novel.value].title,
     });
 </script>
 

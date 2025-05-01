@@ -9,23 +9,23 @@
         nickname: {
             target: nickname,
             required: true,
-            ...nicknameValidates
+            ...nicknameValidates,
         },
         password: {
             target: password,
             required: true,
-            ...passwordValidates
-        }
+            ...passwordValidates,
+        },
     });
 
     const { status, execute, data } = useLazyFetch("/api/user/login", {
         method: "post",
         body: {
             account: nickname,
-            password
+            password,
         },
         watch: false,
-        immediate: false
+        immediate: false,
     });
 
     const submit = Zin.debounce(async () => {
@@ -57,12 +57,12 @@
                     nickname,
                     avatar,
                     identity,
-                    sign
+                    sign,
                 });
             }
         }
     }, {
-        title: "登录"
+        title: "登录",
     });
 </script>
 

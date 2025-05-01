@@ -24,7 +24,7 @@
             ? format(date, "yyyy-MM-dd HH:mm")
             : formatDistanceToNow(date, {
                 addSuffix: true,
-                includeSeconds: true
+                includeSeconds: true,
             });
     });
 
@@ -34,9 +34,9 @@
             avatar: data.avatar,
             nickname: data.nickname,
             address: data.address,
-            character: data.character
+            character: data.character,
         }), {
-            immediate: true
+            immediate: true,
         });
     }
 
@@ -44,7 +44,7 @@
     function replyComment() {
         commentPanelStore.reply({
             id: props.data.id,
-            nickname: props.data.nickname
+            nickname: props.data.nickname,
         });
     }
 
@@ -56,7 +56,7 @@
             mode: props.data.mode,
             nickname: props.data.nickname,
             email: props.data.email,
-            address: props.data.address
+            address: props.data.address,
         });
     }
 
@@ -64,7 +64,7 @@
     async function removeComment() {
         if (await requireConfirm("是否删除这条评论？")) {
             commentStore.remove({
-                id: props.data.id
+                id: props.data.id,
             });
         }
     }

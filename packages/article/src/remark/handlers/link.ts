@@ -8,9 +8,9 @@ export default <Handler> function(state, node: Link) {
         tagName: "plain-link",
         properties: {
             to: node.url,
-            title: node.title
+            title: node.title,
         },
-        children: state.all(node)
+        children: state.all(node),
     };
     state.patch(node, result);
     return state.applyData(node, result);

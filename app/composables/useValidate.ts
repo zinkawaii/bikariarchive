@@ -10,7 +10,7 @@ export default function<T extends Record<string, ValidateEntry>>(entries: T) {
     const toastStore = useToastStore();
 
     const errors: Ref<Record<keyof T, boolean>> = ref(Object.fromEntries(
-        Object.keys(entries).map((key) => [key, false])
+        Object.keys(entries).map((key) => [key, false]),
     ) as any);
 
     //清除错误
@@ -50,7 +50,7 @@ export default function<T extends Record<string, ValidateEntry>>(entries: T) {
         errors,
         clear,
         glitch,
-        validate
+        validate,
     };
 }
 
@@ -65,7 +65,7 @@ export const nicknameValidates: Partial<ValidateEntry> = {
         else if (count > 24) {
             return "昵称长度不能超过 24 个字符";
         }
-    }
+    },
 };
 
 export const passwordValidates: Partial<ValidateEntry> = {
@@ -76,5 +76,5 @@ export const passwordValidates: Partial<ValidateEntry> = {
         if (count < 6 || count > 18) {
             return "密码位数必须在 6-18 位之间";
         }
-    }
+    },
 };

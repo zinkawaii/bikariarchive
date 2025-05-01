@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     useHead({
-        title: "歌词打轴"
+        title: "歌词打轴",
     });
 
     //文件名
@@ -74,9 +74,9 @@
         const handle = await showOpenFilePicker({
             types: [{
                 accept: {
-                    "audio/*": [".mp3"]
-                }
-            }]
+                    "audio/*": [".mp3"],
+                },
+            }],
         });
         const file = await handle[0].getFile();
 
@@ -143,7 +143,7 @@
     function exporter() {
         const output = getCompileText();
         Zin.download(output, {
-            filename: `${filename.value}.lrc`
+            filename: `${filename.value}.lrc`,
         });
     }
 
@@ -165,7 +165,7 @@
                     time,
                     timing,
                     content: line.replace(re, "").trim(),
-                    signed
+                    signed,
                 };
             });
         }
@@ -182,7 +182,7 @@
     function undo() {
         const {
             [currentLyric.value - 1]: last,
-            [currentLyric.value - 2]: target
+            [currentLyric.value - 2]: target,
         } = lyrics.value;
 
         //回到两句前的时间点
@@ -262,7 +262,7 @@
                         class="lyric-item"
                         :class="{
                             [`is-signed`]: item.signed,
-                            [`is-checked`]: currentLyric === i
+                            [`is-checked`]: currentLyric === i,
                         }"
                         @click="currentLyric = i"
                     >

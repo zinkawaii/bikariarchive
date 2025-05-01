@@ -2,7 +2,7 @@ import { type } from "arktype";
 import type { BangumiData, GetBangumiResponse } from "~~/server/types/api/bangumi";
 
 const schema = type({
-    page: "string.numeric.parse"
+    page: "string.numeric.parse",
 });
 
 export default defineJEventHandler<GetBangumiResponse>(async (event, res) => {
@@ -15,10 +15,10 @@ export default defineJEventHandler<GetBangumiResponse>(async (event, res) => {
     const sizes = 32;
     const {
         total,
-        data
+        data,
     } = await readJsonPaginated<BangumiData>("/data/json/Bangumi.json", {
         page,
-        sizes
+        sizes,
     });
 
     if (!data.length) {

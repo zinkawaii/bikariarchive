@@ -3,13 +3,13 @@ import CryptoES from "crypto-es";
 import type { PatchArticleBody } from "~~/server/types/api/article";
 
 const schema = type({
-    token: "string"
+    token: "string",
 });
 
 export default defineJEventHandler(async (event, res) => {
     const config = useRuntimeConfig();
     const { token } = schema.assert(
-        await readBody<PatchArticleBody>(event)
+        await readBody<PatchArticleBody>(event),
     );
 
     const ip = getRequestIP(event, { xForwardedFor: true });
@@ -21,7 +21,7 @@ export default defineJEventHandler(async (event, res) => {
 
     try {
         const { novel, index } = JSON.parse(
-            CryptoES.AES.decrypt(token, config.article.key).toString(CryptoES.enc.Utf8)
+            CryptoES.AES.decrypt(token, config.article.key).toString(CryptoES.enc.Utf8),
         );
 
         //添加阅读记录
@@ -30,7 +30,7 @@ export default defineJEventHandler(async (event, res) => {
             time,
             novel,
             index,
-            user
+            user,
         });
     }
     catch {

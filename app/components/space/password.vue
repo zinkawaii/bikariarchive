@@ -9,12 +9,12 @@
         oldVal: {
             target: oldVal,
             required: true,
-            ...passwordValidates
+            ...passwordValidates,
         },
         newVal: {
             target: newVal,
             required: true,
-            ...passwordValidates
+            ...passwordValidates,
         },
         confirmVal: {
             target: confirmVal,
@@ -23,18 +23,18 @@
                 if (value !== newVal.value) {
                     return "两次密码不一致";
                 }
-            }
-        }
+            },
+        },
     });
 
     const { status, execute, data } = useLazyFetch("/api/user/password", {
         method: "put",
         body: {
             old: oldVal,
-            new: newVal
+            new: newVal,
         },
         watch: false,
-        immediate: false
+        immediate: false,
     });
 
     const updatePassword = Zin.debounce(async () => {
@@ -67,7 +67,7 @@
             }
         }
     }, {
-        title: "修改密码"
+        title: "修改密码",
     });
 </script>
 

@@ -1,25 +1,25 @@
 <script lang="ts" setup>
     useHead({
-        title: "日文名发生装置"
+        title: "日文名发生装置",
     });
 
     const toastStore = useToastStore();
 
     let Jnm: Record<string, string[]>;
     const { execute, status, data } = useLazyFetch<typeof Jnm>("/json/Jnm.json", {
-        immediate: false
+        immediate: false,
     });
 
     const countList = [1, 10, 100, 500];
     const genderList = [
         {
             title: "男",
-            value: "male"
+            value: "male",
         },
         {
             title: "女",
-            value: "female"
-        }
+            value: "female",
+        },
     ];
 
     //数量
@@ -31,13 +31,13 @@
     //指定（姓）
     const specLast = ref({
         kanji: "",
-        kana: ""
+        kana: "",
     });
 
     //指定（名）
     const specFirst = ref({
         kanji: "",
-        kana: ""
+        kana: "",
     });
 
     //结果
@@ -51,7 +51,7 @@
         const median = Math.ceil(results.value.length / 2);
         return [
             results.value.slice(0, median),
-            results.value.slice(median)
+            results.value.slice(median),
         ];
     });
 
@@ -82,16 +82,16 @@
         for (let i = 0; i < count.value; i++) {
             const [
                 lastKanji = specLastKanji,
-                lastKana = specLastKana
+                lastKana = specLastKana,
             ] = specLastKana ? [] : getLastName();
             const [
                 firstKanji = specFirstKanji,
-                firstKana = specFirstKana
+                firstKana = specFirstKana,
             ] = specFirstKana ? [] : getFirstName(gender.value);
 
             results.value.push({
                 kanji: lastKanji + " " + firstKanji,
-                kana: lastKana + "　" + firstKana
+                kana: lastKana + "　" + firstKana,
             });
         }
     }

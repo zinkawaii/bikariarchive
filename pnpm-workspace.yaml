@@ -1,85 +1,96 @@
 packages:
   - packages/**
 
-catalog:
-  "@antfu/eslint-config": ^4.11.0
-  "@iconify-json/fa6-solid": ^1.2.3
-  "@inquirer/prompts": ^7.4.1
-  "@kikiutils/nuxt-session": ^3.1.6
-  "@mdzjs/config": ^0.0.1
-  "@nuxt/devtools": 2.1.0
-  "@nuxt/fonts": ^0.11.1
-  "@nuxt/icon": ^1.11.0
-  "@nuxt/image": ^1.10.0
-  "@nuxtjs/seo": ^2.2.0
-  "@pinia/nuxt": ^0.10.1
-  "@types/fs-extra": ^11.0.4
-  "@types/nodemailer": ^6.4.17
-  "@types/ssh2-sftp-client": ^9.0.4
-  "@types/wicg-file-system-access": ^2023.10.6
-  "@vitejs/plugin-vue": ^5.2.3
-  "@vue-email/render": ^0.0.9
-  "@vueuse/core": ^13.0.0
-  "@vueuse/nuxt": ^13.0.0
-  "@vueuse/router": ^13.0.0
-  "@zinkawaii/eslint-config": ^0.2.2
-  "@zinkawaii/nuxt-shiki": ^0.9.0
-  "@zinkawaii/stylelint-config": ^0.3.0
-  animejs: ^4.0.0
-  arktype: ^2.1.19
-  assemblyscript: ^0.27.35
-  chokidar: ^4.0.3
-  cn-font-split: ^7.2.7
-  consola: ^3.4.2
-  croner: ^9.0.0
-  cross-env: ^7.0.3
-  crypto-es: ^2.1.0
-  date-fns: ^4.1.0
-  defu: ^6.1.4
-  eslint: ^9.24.0
-  feed: ^4.2.2
-  fs-extra: ^11.3.0
-  github-slugger: ^2.0.0
-  hookable: ^5.5.3
-  katex: ^0.16.21
-  kerria: ^0.2.1
-  lunisolar: ^2.5.2
-  mdast-util-frontmatter: ^2.0.1
-  mdast-util-gfm-footnote: ^2.1.0
-  mdast-util-gfm-strikethrough: ^2.0.0
-  mdast-util-to-string: ^4.0.0
-  micromark-extension-frontmatter: ^2.0.0
-  micromark-extension-gfm-footnote: ^2.1.0
-  micromark-extension-gfm-strikethrough: ^2.1.0
-  micromark-util-symbol: ^2.0.1
-  nodemailer: ^6.10.0
-  nuxt: ~3.15.4
-  nuxt-mongoose: ^1.0.6
-  pathe: ^2.0.3
-  pinia: ^3.0.1
-  pinia-plugin-persistedstate: ^4.2.0
-  plain-shiki: ^0.2.0
-  propathy: ^0.2.0
-  rehype-raw: ^7.0.0
-  remark-math: ^6.0.0
-  remark-mdc: ^3.5.3
-  remark-parse: ^11.0.0
-  remark-rehype: ^11.1.2
-  sass: ^1.86.3
-  shiki: ^3.2.1
-  ssh2-sftp-client: ^12.0.0
-  stylelint: ^16.18.0
-  tar: ^7.4.3
-  unbuild: ^3.5.0
-  undici: ^7.7.0
-  unified: ^11.0.5
-  unist-util-visit: ^5.0.0
-  uqr: ^0.1.2
-  vitest: ^3.1.1
-  vue: ^3.5.13
-  vue-router: ^4.5.0
-  vue-tsc: ^2.2.8
-  yaml: ^2.7.1
+patchedDependencies:
+  mdast-util-to-hast: patches/mdast-util-to-hast.patch
+
+catalogs:
+  backend:
+    "@iconify-json/fa6-solid": ^1.2.3
+    "@inquirer/prompts": ^7.5.0
+    "@kikiutils/nuxt-session": ^4.0.1
+    "@nuxt/devtools": 2.1.0
+    "@nuxt/fonts": ^0.11.2
+    "@nuxt/icon": ^1.12.0
+    "@nuxt/image": ^1.10.0
+    "@nuxtjs/seo": ^3.0.3
+    "@pinia/nuxt": ^0.11.0
+    "@vitejs/plugin-vue": ^5.2.3
+    "@vue-email/render": ^0.0.9
+    "@vueuse/nuxt": ^13.1.0
+    "@zinkawaii/nuxt-shiki": ^0.9.0
+    "@zinkawaii/tsconfig": ^0.0.2
+    arktype: ^2.1.20
+    chokidar: ^4.0.3
+    cn-font-split: ^7.2.8
+    consola: ^3.4.2
+    croner: ^9.0.0
+    cross-env: ^7.0.3
+    crypto-es: ^2.1.0
+    defu: ^6.1.4
+    feed: ^4.2.2
+    fs-extra: ^11.3.0
+    hookable: ^5.5.3
+    nodemailer: ^6.10.1
+    nuxt: ^3.17.1
+    nuxt-mongoose: ^1.0.6
+    pathe: ^2.0.3
+    propathy: ^0.2.0
+    sass: ^1.87.0
+    ssh2-sftp-client: ^12.0.0
+    tar: ^7.4.3
+    undici: ^7.8.0
+    yaml: ^2.7.1
+  build:
+    assemblyscript: ^0.27.36
+    unbuild: ^3.5.0
+    vue-tsc: ^2.2.10
+  frontend:
+    "@vueuse/core": ^13.1.0
+    "@vueuse/router": ^13.1.0
+    animejs: ^4.0.2
+    date-fns: ^4.1.0
+    github-slugger: ^2.0.0
+    katex: ^0.16.22
+    lunisolar: ^2.5.2
+    pinia: ^3.0.2
+    pinia-plugin-persistedstate: ^4.2.0
+    plain-shiki: ^0.2.0
+    shiki: ^3.3.0
+    uqr: ^0.1.2
+    vue: ^3.5.13
+    vue-router: ^4.5.1
+  lint:
+    "@antfu/eslint-config": ^4.12.0
+    "@zinkawaii/eslint-config": ^0.3.0
+    "@zinkawaii/stylelint-config": ^0.3.1
+    eslint: ^9.25.1
+    stylelint: ^16.19.1
+  markdown:
+    "@mdzjs/config": ^0.0.1
+    kerria: ^0.2.3
+    mdast-util-frontmatter: ^2.0.1
+    mdast-util-gfm-footnote: ^2.1.0
+    mdast-util-gfm-strikethrough: ^2.0.0
+    mdast-util-to-string: ^4.0.0
+    micromark-extension-frontmatter: ^2.0.0
+    micromark-extension-gfm-footnote: ^2.1.0
+    micromark-extension-gfm-strikethrough: ^2.1.0
+    micromark-util-symbol: ^2.0.1
+    rehype-raw: ^7.0.0
+    remark-math: ^6.0.0
+    remark-mdc: ^3.6.0
+    remark-parse: ^11.0.0
+    remark-rehype: ^11.1.2
+    unified: ^11.0.5
+    unist-util-visit: ^5.0.0
+  test:
+    vitest: ^3.1.2
+  types:
+    "@types/fs-extra": ^11.0.4
+    "@types/nodemailer": ^6.4.17
+    "@types/ssh2-sftp-client": ^9.0.4
+    "@types/wicg-file-system-access": ^2023.10.6
 
 onlyBuiltDependencies:
   - "@parcel/watcher"
@@ -90,7 +101,5 @@ onlyBuiltDependencies:
   - protobufjs
   - sharp
   - ssh2
+  - unrs-resolver
   - vue-demi
-
-patchedDependencies:
-  mdast-util-to-hast: patches/mdast-util-to-hast.patch

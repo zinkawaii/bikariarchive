@@ -7,8 +7,8 @@ export default <RouterConfig> {
             path: "/about",
             component: () => import("~/pages/about.vue"),
             meta: {
-                fullPage: true
-            }
+                fullPage: true,
+            },
         },
         {
             path: "/book",
@@ -18,9 +18,9 @@ export default <RouterConfig> {
                 {
                     name: "shelf",
                     path: ":novel",
-                    component: () => import("~/pages/book/shelf.vue")
-                }
-            ]
+                    component: () => import("~/pages/book/shelf.vue"),
+                },
+            ],
         },
         {
             name: "article",
@@ -29,39 +29,39 @@ export default <RouterConfig> {
             component: () => import("~/pages/book/article.vue"),
             meta: {
                 catalog: true,
-                comment: true
-            }
+                comment: true,
+            },
         },
         {
             name: "bangumi",
             path: "/bangumi",
             component: () => import("~/pages/bangumi.vue"),
             meta: {
-                widePage: true
-            }
+                widePage: true,
+            },
         },
         {
             name: "borrowing",
             path: "/borrowing",
-            component: () => import("~/pages/borrowing.vue")
+            component: () => import("~/pages/borrowing.vue"),
         },
         {
             name: "chest",
             path: "/chest",
-            component: () => import("~/pages/chest.vue")
+            component: () => import("~/pages/chest.vue"),
         },
         {
             name: "compact",
             path: "/compact",
-            component: () => import("~/pages/compact.vue")
+            component: () => import("~/pages/compact.vue"),
         },
         {
             name: "friend",
             path: "/friend",
             component: () => import("~/pages/friend.vue"),
             meta: {
-                comment: true
-            }
+                comment: true,
+            },
         },
         {
             name: "home",
@@ -69,31 +69,31 @@ export default <RouterConfig> {
             alias: "/",
             component: () => import("~/pages/home.vue"),
             meta: {
-                jumbotron: true
-            }
+                jumbotron: true,
+            },
         },
         {
             name: "intel",
             path: "/intel",
-            component: () => import("~/pages/intel.vue")
+            component: () => import("~/pages/intel.vue"),
         },
         {
             name: "search",
             path: "/search",
-            component: () => import("~/pages/search.vue")
+            component: () => import("~/pages/search.vue"),
         },
         {
             name: "tweet",
             path: "/tweet",
             component: () => import("~/pages/tweet.vue"),
             meta: {
-                comment: true
-            }
+                comment: true,
+            },
         },
         {
             name: "update",
             path: "/update",
-            component: () => import("~/pages/update.vue")
+            component: () => import("~/pages/update.vue"),
         },
         {
             name: "entry",
@@ -102,23 +102,23 @@ export default <RouterConfig> {
             component: () => import("~/pages/entry.vue"),
             meta: {
                 catalog: true,
-                comment: true
-            }
+                comment: true,
+            },
         },
         {
             name: "excalc",
             path: "/tools/excalc",
-            component: () => import("~/pages/tools/excalc.vue")
+            component: () => import("~/pages/tools/excalc.vue"),
         },
         {
             name: "lyricaxis",
             path: "/tools/lyricaxis",
-            component: () => import("~/pages/tools/lyricaxis.vue")
+            component: () => import("~/pages/tools/lyricaxis.vue"),
         },
         {
             name: "namaemaker",
             path: "/tools/namaemaker",
-            component: () => import("~/pages/tools/namaemaker.vue")
+            component: () => import("~/pages/tools/namaemaker.vue"),
         },
         {
             name: "user",
@@ -132,8 +132,8 @@ export default <RouterConfig> {
                     component: () => import("~/pages/user/space.vue"),
                     meta: {
                         identity: 1,
-                        middleware: ["auth"]
-                    }
+                        middleware: ["auth"],
+                    },
                 },
                 {
                     name: "manage",
@@ -144,28 +144,28 @@ export default <RouterConfig> {
                         {
                             name: "read-record",
                             path: "read-record",
-                            component: () => import("~/pages/user/manage/read-record.vue")
+                            component: () => import("~/pages/user/manage/read-record.vue"),
                         },
                         {
                             name: "user-data",
                             path: "user-data",
-                            component: () => import("~/pages/user/manage/user-data.vue")
-                        }
+                            component: () => import("~/pages/user/manage/user-data.vue"),
+                        },
                     ],
                     meta: {
                         identity: 9,
-                        middleware: ["auth"]
-                    }
-                }
+                        middleware: ["auth"],
+                    },
+                },
             ],
             meta: {
-                sidebar: false
-            }
+                sidebar: false,
+            },
         },
         {
             name: "unknown",
             path: "/:pathMatch(.*)*",
-            component: () => import("~/pages/unknown.vue")
-        }
-    ]
+            component: () => import("~/pages/unknown.vue"),
+        },
+    ],
 };

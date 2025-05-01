@@ -30,7 +30,7 @@ export function copyImage(link: string, message: string) {
             }
 
             const data = [new ClipboardItem({
-                [blob.type]: blob
+                [blob.type]: blob,
             })];
 
             navigator.clipboard.write(data);

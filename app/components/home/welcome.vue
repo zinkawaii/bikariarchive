@@ -10,7 +10,7 @@
             border: 0,
             ecc: "M",
             whiteColor: "transparent",
-            blackColor: "var(--color-theme-dark)"
+            blackColor: "var(--color-theme-dark)",
         });
     });
 </script>

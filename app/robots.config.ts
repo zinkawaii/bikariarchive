@@ -25,9 +25,9 @@ export default <ModuleOptions> {
         "serpstatbot",
         "spbot",
         "Uptimebot",
-        "ZoominfoBot"
+        "ZoominfoBot",
     ].map((ua) => ({
         userAgent: ua,
-        disallow: "/"
-    }))
+        disallow: "/",
+    })),
 };

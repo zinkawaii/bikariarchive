@@ -2,7 +2,7 @@
     import { differenceInDays, getYear, isBefore, isLeapYear } from "date-fns";
 
     useHead({
-        title: "关于"
+        title: "关于",
     });
 
     const coverUrl = Zin.image("/garden/background/maestrale.webp", { wrap: true });
@@ -125,7 +125,7 @@
         --azur-text-white: rgb(255 255 255);
         --azur-full-height: calc(100dvh - 64px);
 
-        contain: strict;
+        contain: paint;
         container-type: size;
         overflow: hidden;
         height: var(--azur-full-height);

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     const modelValue = defineModel<string>({
-        required: true
+        required: true,
     });
     const emit = defineEmits<{
         decrypt: [];

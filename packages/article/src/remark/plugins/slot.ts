@@ -22,7 +22,7 @@ export default function(this: Processor) {
                     .filter((node): node is hast.Element => node.type === "element" && node.tagName === "component-slot")
                     .map((slot) => ({
                         tag: Object.keys(slot.properties)[0].slice("v-slot:".length),
-                        children: transformNodes(slot.children)
+                        children: transformNodes(slot.children),
                     })) ?? [];
 
                 for (const slot of slots) {

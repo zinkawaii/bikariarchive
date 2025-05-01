@@ -4,13 +4,13 @@ import type { PostLoginBody, PostLoginResponse } from "~~/server/types/api/user/
 
 const schema = type({
     account: "string",
-    password: "string"
+    password: "string",
 });
 
 export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
     const { session } = event.context;
     const { account, password } = schema.assert(
-        await readBody<PostLoginBody>(event)
+        await readBody<PostLoginBody>(event),
     );
 
     //查询UID、昵称或邮箱
@@ -18,8 +18,8 @@ export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
         $or: [
             { uid: Number(account) || -1 },
             { nickname: account },
-            { email: account }
-        ]
+            { email: account },
+        ],
     }, "uid nickname email identity sign hash salt");
 
     //账号不存在

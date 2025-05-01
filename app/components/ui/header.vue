@@ -10,17 +10,17 @@
         {
             title: "主页",
             icon: "fa6-solid:house",
-            to: { name: "home" }
+            to: { name: "home" },
         },
         {
             title: "目录",
             icon: "fa6-solid:book-open",
-            to: computed(() => shelfStore.route)
+            to: computed(() => shelfStore.route),
         },
         {
             title: "情报",
             icon: "fa6-solid:sitemap",
-            to: { name: "intel" }
+            to: { name: "intel" },
         },
         {
             title: "档案",
@@ -29,19 +29,19 @@
                 {
                     title: "借物表",
                     icon: "fa6-solid:person-praying",
-                    to: { name: "borrowing" }
+                    to: { name: "borrowing" },
                 },
                 {
                     title: "工具箱",
                     icon: "fa6-solid:screwdriver-wrench",
-                    to: { name: "chest" }
+                    to: { name: "chest" },
                 },
                 {
                     title: "番剧",
                     icon: "fa6-brands:bilibili",
-                    to: { name: "bangumi" }
-                }
-            ]
+                    to: { name: "bangumi" },
+                },
+            ],
         },
         {
             title: "营业",
@@ -50,19 +50,19 @@
                 {
                     title: "更新日志",
                     icon: "fa6-solid:clock-rotate-left",
-                    to: { name: "update" }
+                    to: { name: "update" },
                 },
                 {
                     title: "站点协议",
                     icon: "teenyicons:contract-solid",
-                    to: { name: "compact" }
+                    to: { name: "compact" },
                 },
                 {
                     title: "关于",
                     icon: "fa6-solid:circle-info",
-                    to: { name: "about" }
-                }
-            ]
+                    to: { name: "about" },
+                },
+            ],
         },
         {
             title: "链接",
@@ -71,10 +71,10 @@
                 {
                     title: "友情链接",
                     icon: "fa6-solid:user-group",
-                    to: { name: "friend" }
-                }
-            ]
-        }
+                    to: { name: "friend" },
+                },
+            ],
+        },
     ];
 
     function search() {

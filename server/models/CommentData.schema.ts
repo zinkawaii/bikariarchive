@@ -8,52 +8,52 @@ export const CommentDataModel = defineMongooseModel<CommentDataSchema>({
         path: {
             type: String,
             required: true,
-            index: true
+            index: true,
         },
         parent: {
             type: Types.ObjectId,
-            ref: "CommentData"
+            ref: "CommentData",
         },
         children: {
             type: [Types.ObjectId],
-            ref: "CommentData"
+            ref: "CommentData",
         },
         content: {
             type: String,
-            required: true
+            required: true,
         },
         time: {
             type: Date,
-            required: true
+            required: true,
         },
         updated: {
             type: Date,
-            required: true
+            required: true,
         },
         ip: {
             type: String,
-            required: true
+            required: true,
         },
         mode: {
             type: String,
             enum: ["guest", "user"],
-            required: true
+            required: true,
         },
         nickname: {
-            type: String
+            type: String,
         },
         email: {
-            type: String
+            type: String,
         },
         address: {
-            type: String
+            type: String,
         },
         user: {
             type: Types.ObjectId,
-            ref: "UserData"
-        }
+            ref: "UserData",
+        },
     },
     options: {
-        collection: "comment_data"
-    }
+        collection: "comment_data",
+    },
 });

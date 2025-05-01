@@ -9,7 +9,7 @@ export const InnerCode = {
         const hash = MD5(MD5(str) + salt).toString();
         return {
             hash,
-            salt
+            salt,
         };
     },
 
@@ -17,5 +17,5 @@ export const InnerCode = {
     encrypt(str: string, salt: string) {
         const hash = MD5(MD5(str) + salt).toString();
         return hash;
-    }
+    },
 };

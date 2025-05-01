@@ -2,7 +2,7 @@
     import { injectionKey } from "~/types/search";
 
     useHead({
-        title: "全文检索"
+        title: "全文检索",
     });
 
     const toastStore = useToastStore();
@@ -13,32 +13,32 @@
     const searchWord = ref("");
 
     provide(injectionKey, {
-        searchWord
+        searchWord,
     });
 
     const options = computed(() => {
         return [
             {
-                label: "全文检索"
+                label: "全文检索",
             },
             {
                 label: "书名",
-                group: true
+                group: true,
             },
             ...Object.entries(Article.meta).map(([key, { title }]) => ({
                 label: title,
-                value: key
-            }))
+                value: key,
+            })),
         ];
     });
 
     const { execute, status, data, error } = useLazyFetch("/api/search", {
         query: {
             novel,
-            word: computed(() => inputWord.value.slice(0, 64))
+            word: computed(() => inputWord.value.slice(0, 64)),
         },
         immediate: false,
-        watch: false
+        watch: false,
     });
 
     const results = computed(() => {
@@ -60,7 +60,7 @@
         //发送请求
         await execute();
     }, {
-        title: "检索"
+        title: "检索",
     });
 
     //带参数进入页面时
@@ -77,7 +77,7 @@
             toastStore.info("[search]:throttle", "接口节流中");
         }
     }, {
-        immediate: true
+        immediate: true,
     });
 
     //总出现次数

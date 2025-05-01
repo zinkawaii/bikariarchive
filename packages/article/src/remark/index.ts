@@ -26,7 +26,7 @@ export {
     link,
     maths,
     ruby,
-    strikethrough
+    strikethrough,
 };
 
 const rehypeOptions: RehypeOptions = {
@@ -36,8 +36,8 @@ const rehypeOptions: RehypeOptions = {
         code,
         image,
         link,
-        ...maths
-    }
+        ...maths,
+    },
 };
 
 export async function parseArticle<T>(text: string) {
@@ -62,7 +62,7 @@ export async function parseArticle<T>(text: string) {
     const result = await processor.process(text);
     return {
         attributes: result.data.frontmatters[0] as T,
-        body: result.result as Root
+        body: result.result as Root,
     };
 }
 
@@ -73,7 +73,7 @@ export async function parseEntry<T>(text: string) {
             type: "yaml",
             fence: "---",
             anywhere: true,
-            fallthrough: true
+            fallthrough: true,
         })
         .use(mdc)
         .use(emoji)
@@ -93,7 +93,7 @@ export async function parseEntry<T>(text: string) {
 
     return {
         attributes: data,
-        drafts
+        drafts,
     };
 }
 

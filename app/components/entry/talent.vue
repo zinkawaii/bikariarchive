@@ -31,7 +31,7 @@
                         <h3 :id="item.name">{{ item.name }}</h3>
                     </template>
                 </hgroup>
-                <novel-article tag="div" :body="item.content"/>
+                <novel-article as="div" :body="item.content"/>
             </template>
         </template>
     </entry-section>

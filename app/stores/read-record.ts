@@ -14,10 +14,10 @@ export const useReadRecordStore = defineStore("read-record", () => {
     return {
         record,
         get,
-        set
+        set,
     };
 }, {
     persist: {
-        pick: ["record"]
-    }
+        pick: ["record"],
+    },
 });

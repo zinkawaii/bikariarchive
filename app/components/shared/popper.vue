@@ -5,7 +5,7 @@
         direction?: "top" | "right" | "bottom" | "left";
         plaintext?: string;
     }>(), {
-        direction: "bottom"
+        direction: "bottom",
     });
 </script>
 
@@ -16,7 +16,7 @@
             v-if="$slots.floating || plaintext"
             class="popper-outer"
             :class="[`is-${direction}`, {
-                [`is-plain`]: plaintext
+                [`is-plain`]: plaintext,
             }]"
         >
             <div class="popper-inner">

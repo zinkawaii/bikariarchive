@@ -12,18 +12,18 @@
         ArrowUp: "↑",
         ArrowRight: "→",
         ArrowDown: "↓",
-        Control: "Ctrl"
+        Control: "Ctrl",
     };
 
     const shortcuts = ref({
         "shortcut-last": {
             title: "上一章",
-            value: keyToStr(settingStore.get("shortcut-last"))
+            value: keyToStr(settingStore.get("shortcut-last")),
         },
         "shortcut-next": {
             title: "下一章",
-            value: keyToStr(settingStore.get("shortcut-next"))
-        }
+            value: keyToStr(settingStore.get("shortcut-next")),
+        },
     });
 
     //键盘按下时

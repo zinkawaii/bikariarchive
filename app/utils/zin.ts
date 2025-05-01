@@ -3,7 +3,7 @@ export const Zin = new class Z {
     DEFAULT_ANIME_OPTION: KeyframeAnimationOptions = {
         duration: 400,
         easing: "ease",
-        fill: "forwards"
+        fill: "forwards",
     };
 
     //视口宽度常量
@@ -35,7 +35,7 @@ export const Zin = new class Z {
     debounce<T extends unknown[]>(func: (...args: T) => void, {
         delay = 1500,
         immediate = true,
-        title = ""
+        title = "",
     } = {}) {
         const toastStore = useToastStore();
         let timer: NodeJS.Timeout | undefined;
@@ -72,7 +72,7 @@ export const Zin = new class Z {
     //从字符串或对象下载文本文件
     download(data: any, {
         type = "",
-        filename = ""
+        filename = "",
     } = {}) {
         let mime = "text/plain";
         switch (type) {
@@ -97,7 +97,7 @@ export const Zin = new class Z {
         immediate = true,
         server = true,
         duration = 1000,
-        times = -1
+        times = -1,
     } = {}) {
         return new Promise<void>((resolve, reject) => {
             try {

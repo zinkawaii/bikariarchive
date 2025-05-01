@@ -6,10 +6,10 @@
         scrollOffset?: number;
     }>(), {
         sizes: 10,
-        scrollOffset: 64
+        scrollOffset: 64,
     });
     const modelValue = defineModel<number>({
-        required: true
+        required: true,
     });
 
     //组件根元素
@@ -58,7 +58,7 @@
         if (scrollElement.value) {
             const pos = getPosition(scrollElement.value);
             window.scrollTo({
-                top: pos.top - props.scrollOffset
+                top: pos.top - props.scrollOffset,
             });
         }
     });
@@ -69,7 +69,7 @@
             title: "跳转到页码",
             initialValue: val,
             min: 1,
-            max: totalPages.value
+            max: totalPages.value,
         }) : val;
     }
 </script>
@@ -95,7 +95,7 @@
             </template>
         </div>
         <button class="pagina-arr" :class="{ [`is-disabled`]: modelValue === totalPages }" @click="modelValue++">
-            <iconify name="fa6-solid:chevron-right"/>
+            <iconify name="fa6-solid:chevron-right" />
         </button>
     </div>
 </template>

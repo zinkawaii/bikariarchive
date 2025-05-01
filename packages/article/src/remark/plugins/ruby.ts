@@ -32,7 +32,7 @@ declare module "mdast" {
 export default function(this: Processor) {
     appendExtensions(this, {
         micromark: ruby(),
-        fromMarkdown: rubyFromMarkdown()
+        fromMarkdown: rubyFromMarkdown(),
     });
 }
 
@@ -100,13 +100,13 @@ function ruby(): MicromarkExtension {
                 effects.exit("ruby");
                 return ok(code);
             }
-        }
+        },
     };
 
     return {
         text: {
-            [codes.verticalBar]: [start]
-        }
+            [codes.verticalBar]: [start],
+        },
     };
 }
 
@@ -119,8 +119,8 @@ function rubyFromMarkdown(): FromMarkdownExtension {
                     children: [],
                     data: {
                         hName: "ruby",
-                        hChildren: []
-                    }
+                        hChildren: [],
+                    },
                 }, token);
             },
             rubyContent() {
@@ -128,7 +128,7 @@ function rubyFromMarkdown(): FromMarkdownExtension {
             },
             rubyMarker() {
                 this.stack.push({ type: "fragment", children: [] });
-            }
+            },
         },
         exit: {
             ruby(token) {
@@ -139,8 +139,8 @@ function rubyFromMarkdown(): FromMarkdownExtension {
                         type: "element",
                         tagName: "rt",
                         properties: {},
-                        children: [{ type: "text", value: element.marker ?? "" }]
-                    }
+                        children: [{ type: "text", value: element.marker ?? "" }],
+                    },
                 );
                 this.exit(token);
             },
@@ -153,7 +153,7 @@ function rubyFromMarkdown(): FromMarkdownExtension {
                 const data = this.resume();
                 const element = this.stack.at(-1) as Ruby;
                 element.marker = data;
-            }
-        }
+            },
+        },
     };
 }

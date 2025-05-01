@@ -3,7 +3,7 @@
         value: T;
     }>();
     const modelValue = defineModel<T>({
-        required: true
+        required: true,
     });
 </script>
 

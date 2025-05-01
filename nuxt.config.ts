@@ -14,77 +14,77 @@ catch {}
 export default defineNuxtConfig({
     app: {
         rootAttrs: {
-            id: "z-root"
-        }
+            id: "z-root",
+        },
     },
     alias: {
         "@bikari/article": resolve(import.meta.dirname, "./packages/article/src"),
         "@bikari/excalc": resolve(import.meta.dirname, "./packages/excalc"),
-        "@bikari/shared": resolve(import.meta.dirname, "./packages/shared/src")
+        "@bikari/shared": resolve(import.meta.dirname, "./packages/shared/src"),
     },
     css: [
         "~/assets/scss/var.scss",
         "~/assets/scss/sinrabansyo.scss",
-        "~/assets/scss/animation.scss"
+        "~/assets/scss/animation.scss",
     ],
     compatibilityDate: "2024-07-19",
     components: [
         {
-            path: "~/components"
+            path: "~/components",
         },
         {
             path: "~/components/ui",
-            prefix: "z"
+            prefix: "z",
         },
         {
             path: "~/components/shared",
-            prefix: "mb"
-        }
+            prefix: "mb",
+        },
     ],
     devServer: {
         https: {
             key: "<!-- ??? -->",
-            cert: "<!-- ??? -->"
+            cert: "<!-- ??? -->",
         },
         host: clientConfig.domain,
-        port: 443
+        port: 443,
     },
     devtools: {
-        enabled: true
+        enabled: true,
     },
     features: {
-        inlineStyles: false
+        inlineStyles: false,
     },
     future: {
-        compatibilityVersion: 4
+        compatibilityVersion: 4,
     },
     nitro: {
         rollupConfig: {
             // @ts-expect-error 类型实例化过深，且可能无限
             plugins: [
-                vue()
-            ]
-        }
+                vue(),
+            ],
+        },
     },
     runtimeConfig: {
         ...serverConfig,
-        public: clientConfig
+        public: clientConfig,
     },
     vite: {
         build: {
-            target: "esnext"
+            target: "esnext",
         },
         css: {
             preprocessorOptions: {
                 scss: {
                     api: "modern-compiler",
-                    additionalData: `@use "~/assets/scss/mixin.scss" as *;`
-                }
-            }
+                    additionalData: `@use "~/assets/scss/mixin.scss" as *;`,
+                },
+            },
         },
         server: {
-            allowedHosts: true
-        }
+            allowedHosts: true,
+        },
     },
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
@@ -96,7 +96,7 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@vueuse/nuxt",
         "@zinkawaii/nuxt-shiki",
-        "pinia-plugin-persistedstate/nuxt"
+        "pinia-plugin-persistedstate/nuxt",
     ],
     robots: robotsConfig,
     sitemap: sitemapConfig,
@@ -105,32 +105,32 @@ export default defineNuxtConfig({
         url: `https://${clientConfig.domain}`,
         description: clientConfig.description,
         defaultLocale: "zh-CN",
-        indexable: true
+        indexable: true,
     },
     ogImage: {
-        enabled: false
+        enabled: false,
     },
     fonts: {
         provider: "google",
         families: [{
             name: "Source Code Pro",
-            global: true
-        }]
+            global: true,
+        }],
     },
     splittedFonts: {
         fonts: [{
             name: "ChillRoundF",
-            path: "~/assets/fonts/ChillRoundFRegular.ttf"
-        }]
+            path: "~/assets/fonts/ChillRoundFRegular.ttf",
+        }],
     },
     icon: {
-        componentName: "iconify"
+        componentName: "iconify",
     },
     shiki: {
         dynamic: true,
         defaultTheme: {
             light: "catppuccin-latte",
-            dark: "one-dark-pro"
-        }
-    }
+            dark: "one-dark-pro",
+        },
+    },
 });

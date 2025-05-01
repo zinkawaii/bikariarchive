@@ -4,7 +4,7 @@
         animated?: boolean;
     }>(), {
         rows: 5,
-        animated: true
+        animated: true,
     });
 </script>
 

@@ -13,7 +13,7 @@
         class="sotomi"
         :class="{
             [`wide-page`]: $route.meta.widePage,
-            [`full-page`]: $route.meta.fullPage
+            [`full-page`]: $route.meta.fullPage,
         }"
     >
         <main class="nakami">

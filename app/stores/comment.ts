@@ -24,8 +24,8 @@ export const useCommentStore = defineStore("comment", () => {
         const res = await $fetch("/api/comment", {
             query: {
                 path: route.path,
-                page: page
-            }
+                page: page,
+            },
         });
         if (res.error) {
             return;
@@ -63,7 +63,7 @@ export const useCommentStore = defineStore("comment", () => {
             try {
                 const res = await $fetch("/api/comment", {
                     method,
-                    body
+                    body,
                 });
                 if (res.error) {
                     throw createError({ status: res.error });
@@ -88,7 +88,7 @@ export const useCommentStore = defineStore("comment", () => {
         update,
         post,
         modify,
-        remove
+        remove,
     };
 });
 

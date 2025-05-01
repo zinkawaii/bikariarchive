@@ -13,9 +13,10 @@
     "stub": "unbuild --stub"
   },
   "dependencies": {
-    "consola": "catalog:"
+    "consola": "catalog:backend"
   },
   "devDependencies": {
-    "unbuild": "catalog:"
+    "@zinkawaii/tsconfig": "catalog:backend",
+    "unbuild": "catalog:build"
   }
 }

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     const { page, total, articles } = useArticleList({
         type: "blog",
-        sticky: true
+        sticky: true,
     });
 </script>
 

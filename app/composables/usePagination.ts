@@ -27,6 +27,6 @@ export default function<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginationOpt
         page,
         total,
         sizes,
-        paginatedArr
+        paginatedArr,
     };
 }

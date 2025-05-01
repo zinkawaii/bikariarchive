@@ -8,7 +8,7 @@ export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, "lang" | "themes
 
 export default function(
     el: MaybeRefOrGetter<HTMLElement | null | undefined>,
-    options: MountPlainShikiOptions
+    options: MountPlainShikiOptions,
 ) {
     const target = toRef(el);
     const lang = toRef(options.lang);
@@ -25,7 +25,7 @@ export default function(
         if (target.value) {
             ctx = plain?.mount(target.value, {
                 ...shikiOptions,
-                ...options
+                ...options,
             });
         }
     });

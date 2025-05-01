@@ -6,7 +6,7 @@ import type { GetArticleResponse } from "~~/server/types/api/article";
 const schema = type({
     novel: "string",
     index: "string",
-    password: "string"
+    password: "string",
 });
 
 export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
@@ -30,7 +30,7 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     //获取阅读量
     const qRecords = await ReadRecordModel.find({
         novel,
-        index
+        index,
     }, "ip time");
 
     //处理阅读量
@@ -53,7 +53,7 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
         else {
             records[ip] = {
                 count: 1,
-                time: time.getTime()
+                time: time.getTime(),
             };
         }
     }
@@ -67,7 +67,7 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     //生成代币
     const token = {
         novel,
-        index
+        index,
     };
 
     res.token = CryptoES.AES.encrypt(JSON.stringify(token), config.article.key).toString();

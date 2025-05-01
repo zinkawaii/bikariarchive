@@ -2,14 +2,8 @@
   "name": "@bikari/article",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
-    },
-    "./remark": {
-      "types": "./dist/remark/index.d.ts",
-      "import": "./dist/remark/index.mjs"
-    }
+    ".": "./dist/index.mjs",
+    "./remark": "./dist/remark/index.mjs"
   },
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -18,32 +12,33 @@
     "test": "vitest"
   },
   "dependencies": {
-    "date-fns": "catalog:",
-    "defu": "catalog:",
-    "fs-extra": "catalog:",
-    "github-slugger": "catalog:",
-    "kerria": "catalog:",
-    "mdast-util-frontmatter": "catalog:",
-    "mdast-util-gfm-footnote": "catalog:",
-    "mdast-util-gfm-strikethrough": "catalog:",
-    "mdast-util-to-string": "catalog:",
-    "micromark-extension-frontmatter": "catalog:",
-    "micromark-extension-gfm-footnote": "catalog:",
-    "micromark-extension-gfm-strikethrough": "catalog:",
-    "micromark-util-symbol": "catalog:",
-    "pathe": "catalog:",
-    "propathy": "catalog:",
-    "rehype-raw": "catalog:",
-    "remark-math": "catalog:",
-    "remark-mdc": "catalog:",
-    "remark-parse": "catalog:",
-    "remark-rehype": "catalog:",
-    "unified": "catalog:",
-    "unist-util-visit": "catalog:",
-    "yaml": "catalog:"
+    "date-fns": "catalog:frontend",
+    "defu": "catalog:backend",
+    "fs-extra": "catalog:backend",
+    "github-slugger": "catalog:frontend",
+    "kerria": "catalog:markdown",
+    "mdast-util-frontmatter": "catalog:markdown",
+    "mdast-util-gfm-footnote": "catalog:markdown",
+    "mdast-util-gfm-strikethrough": "catalog:markdown",
+    "mdast-util-to-string": "catalog:markdown",
+    "micromark-extension-frontmatter": "catalog:markdown",
+    "micromark-extension-gfm-footnote": "catalog:markdown",
+    "micromark-extension-gfm-strikethrough": "catalog:markdown",
+    "micromark-util-symbol": "catalog:markdown",
+    "pathe": "catalog:backend",
+    "propathy": "catalog:backend",
+    "rehype-raw": "catalog:markdown",
+    "remark-math": "catalog:markdown",
+    "remark-mdc": "catalog:markdown",
+    "remark-parse": "catalog:markdown",
+    "remark-rehype": "catalog:markdown",
+    "unified": "catalog:markdown",
+    "unist-util-visit": "catalog:markdown",
+    "yaml": "catalog:backend"
   },
   "devDependencies": {
-    "unbuild": "catalog:",
-    "vitest": "catalog:"
+    "@zinkawaii/tsconfig": "catalog:backend",
+    "unbuild": "catalog:build",
+    "vitest": "catalog:test"
   }
 }

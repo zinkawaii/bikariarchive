@@ -51,7 +51,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         basic,
         extra,
         open,
-        close
+        close,
     };
 
     //触发事件时关闭菜单

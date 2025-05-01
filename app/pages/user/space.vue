@@ -5,7 +5,7 @@
     const route = useRoute();
 
     useHead({
-        title: userStore.nickname
+        title: userStore.nickname,
     });
 
     //是否是本人
@@ -19,9 +19,9 @@
     //获取用户信息
     const { data } = useLazyFetch("/api/user/info", {
         query: {
-            uid: route.params.uid
+            uid: route.params.uid,
         },
-        immediate: isNotMyself.value
+        immediate: isNotMyself.value,
     });
 
     //用户是否存在
@@ -31,17 +31,17 @@
 
     const { uid, nickname, sign, avatar } = useSourceRefs(() => (isMyself.value ? userStore : data.value!), {
         uid: {
-            readonly: isNotMyself
+            readonly: isNotMyself,
         },
         nickname: {
-            readonly: isNotMyself
+            readonly: isNotMyself,
         },
         sign: {
-            readonly: isNotMyself
+            readonly: isNotMyself,
         },
         avatar: {
-            readonly: isNotMyself
-        }
+            readonly: isNotMyself,
+        },
     });
 
     provide(injectionKey, {
@@ -49,7 +49,7 @@
         uid,
         nickname,
         sign,
-        avatar
+        avatar,
     });
 </script>
 

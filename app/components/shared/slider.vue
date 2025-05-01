@@ -5,10 +5,10 @@
         step?: number;
     }>(), {
         min: 0,
-        max: 1
+        max: 1,
     });
     const modelValue = defineModel<number>({
-        required: true
+        required: true,
     });
     const emit = defineEmits<{
         progress: [rate: number];
@@ -56,7 +56,7 @@
             modelValue.value = current;
             emit("dragend");
             emit("change", current);
-        }
+        },
     });
 </script>
 

@@ -3,16 +3,16 @@ import type { ToastIconInfo, ToastItem, ToastType } from "~/types/toast";
 const iconInfos: Record<ToastType, ToastIconInfo> = {
     error: {
         name: "ooui:clear",
-        color: "var(--color-danger)"
+        color: "var(--color-danger)",
     },
     info: {
         name: "ooui:info-filled",
-        color: "var(--color-gray-300)"
+        color: "var(--color-gray-300)",
     },
     success: {
         name: "ooui:success",
-        color: "var(--color-success)"
-    }
+        color: "var(--color-success)",
+    },
 };
 
 export const useToastStore = defineStore("toast", () => {
@@ -29,7 +29,7 @@ export const useToastStore = defineStore("toast", () => {
         }
         map.value.set(`${fullKey}(${hash})`, {
             icon: iconInfos[type],
-            message
+            message,
         });
     }
 
@@ -54,6 +54,6 @@ export const useToastStore = defineStore("toast", () => {
         remove,
         error,
         info,
-        success
+        success,
     };
 });

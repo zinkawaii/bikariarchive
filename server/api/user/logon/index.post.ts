@@ -7,13 +7,13 @@ const schema = type({
     nickname: type(Zexp.nickname),
     email: type(Zexp.email),
     verify: "string == 6",
-    password: type(Zexp.password)
+    password: type(Zexp.password),
 });
 
 export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const { session } = event.context;
     const { nickname, email, verify, password } = schema.assert(
-        await readBody<GetLoginBody>(event)
+        await readBody<GetLoginBody>(event),
     );
 
     //查询用户信息中是否存在该邮箱所注册的账号
@@ -73,7 +73,7 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
         identity,
         createTime,
         hash,
-        salt
+        salt,
     });
 
     //写入会话

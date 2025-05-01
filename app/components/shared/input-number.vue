@@ -11,10 +11,10 @@
         accuracy: 0,
         min: -Infinity,
         max: Infinity,
-        step: 1
+        step: 1,
     });
     const modelValue = defineModel<number>({
-        required: true
+        required: true,
     });
 
     const NUMBER_REGEX = /^([-+]?\d*)(\.\d*)?$/;

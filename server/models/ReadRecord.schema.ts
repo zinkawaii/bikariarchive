@@ -7,27 +7,27 @@ export const ReadRecordModel = defineMongooseModel<ReadRecordSchema>({
     schema: {
         ip: {
             type: String,
-            required: true
+            required: true,
         },
         time: {
             type: Date,
-            required: true
+            required: true,
         },
         novel: {
             type: String,
-            required: true
+            required: true,
         },
         index: {
             type: String,
             required: true,
-            index: true
+            index: true,
         },
         user: {
             type: Types.ObjectId,
-            ref: "UserData"
-        }
+            ref: "UserData",
+        },
     },
     options: {
-        collection: "read_record"
-    }
+        collection: "read_record",
+    },
 });

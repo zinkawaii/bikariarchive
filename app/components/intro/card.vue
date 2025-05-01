@@ -19,7 +19,7 @@
         const data = readRecordStore.get(props.novel) ?? Article.meta[props.novel].chapters[0];
         return data ? {
             title: data.title ?? "开始阅读",
-            to: `/book/${props.novel}/${data.index}`
+            to: `/book/${props.novel}/${data.index}`,
         } : null;
     });
 

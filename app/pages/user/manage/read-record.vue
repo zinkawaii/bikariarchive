@@ -2,16 +2,16 @@
     import { format } from "date-fns";
 
     useHead({
-        title: "阅读记录"
+        title: "阅读记录",
     });
 
     const page = ref(1);
 
     const { execute, data } = useLazyFetch("/api/read-record", {
         query: {
-            page
+            page,
         },
-        default: () => null!
+        default: () => null!,
     });
 
     const records = ref<(typeof data.value)["list"]>([]);
@@ -23,8 +23,8 @@
         await $fetch("/api/read-record", {
             method: "delete",
             body: {
-                id: item._id
-            }
+                id: item._id,
+            },
         });
 
         records.value.splice(i, 1);

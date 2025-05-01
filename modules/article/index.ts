@@ -3,13 +3,13 @@ import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nu
 
 export default defineNuxtModule({
     meta: {
-        name: "@bikari/article"
+        name: "@bikari/article",
     },
     async setup(options, nuxt) {
         const { resolve } = createResolver(import.meta.url);
 
         addPlugin({
-            src: resolve("runtime/client")
+            src: resolve("runtime/client"),
         });
 
         addServerPlugin(resolve("runtime/server"));
@@ -23,5 +23,5 @@ export default defineNuxtModule({
             entry.watch();
             update.watch();
         }
-    }
+    },
 });

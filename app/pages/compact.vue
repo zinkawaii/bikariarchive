@@ -1,12 +1,12 @@
 <script lang="ts" setup>
     useHead({
-        title: "站点协议"
+        title: "站点协议",
     });
 
     const behaviors = [
         "访问阅读页",
         "发表评论",
-        "进行与账号相关的操作"
+        "进行与账号相关的操作",
     ];
 </script>
 

@@ -21,7 +21,7 @@ export const useDialogStore = defineStore("dialog", () => {
         const {
             duration = 400,
             immediate = false,
-            unique = false
+            unique = false,
         } = options;
 
         let ctx: DialogContext;
@@ -49,7 +49,7 @@ export const useDialogStore = defineStore("dialog", () => {
                 zIndex,
                 duration,
                 isOpening,
-                close: (vnode.props ??= {}).onClose ??= close
+                close: (vnode.props ??= {}).onClose ??= close,
             };
 
             dialogs.value.push(ctx);
@@ -74,12 +74,12 @@ export const useDialogStore = defineStore("dialog", () => {
 
         return {
             open,
-            close
+            close,
         };
     }
 
     return {
         dialogs,
-        use
+        use,
     };
 });

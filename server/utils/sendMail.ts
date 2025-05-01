@@ -14,7 +14,7 @@ export async function sendMail(component: Component, options: {
         host: config.mail.host,
         port: config.mail.port,
         auth: config.mail.auth,
-        secure: true
+        secure: true,
     });
 
     //编译模板
@@ -24,10 +24,10 @@ export async function sendMail(component: Component, options: {
     return transporter.sendMail({
         from: {
             name: config.mail.name,
-            address: config.mail.auth.user
+            address: config.mail.auth.user,
         },
         subject: options.title,
         to: options.to,
-        html
+        html,
     });
 }

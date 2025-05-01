@@ -3,7 +3,7 @@ export default function(cssText: TemplateStringsArray, ...cssVars: MaybeRefOrGet
 
     const entries = cssVars.map((source) => [
         randomHash(8),
-        source
+        source,
     ]);
 
     tryOnMounted(() => {
@@ -27,7 +27,7 @@ export default function(cssText: TemplateStringsArray, ...cssVars: MaybeRefOrGet
     });
 
     watch(getVals, update, {
-        flush: "sync"
+        flush: "sync",
     });
 
     function getVals() {

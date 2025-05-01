@@ -5,13 +5,13 @@
         type: "inline" | "block";
         raw?: string;
     }>(), {
-        raw: ""
+        raw: "",
     });
 
     useHead({
         link: [
-            { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" }
-        ]
+            { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" },
+        ],
     });
 
     const contextMenuStore = useContextMenuStore();
@@ -25,9 +25,9 @@
                 icon: "fa6-solid:paste",
                 action() {
                     copyText(props.raw, "公式已复制");
-                }
-            }
-        ]
+                },
+            },
+        ],
     });
 
     const code = computed(() => {
@@ -40,7 +40,7 @@
                     return "ignore";
                 }
                 return "warn";
-            }
+            },
         });
     });
 
@@ -48,13 +48,13 @@
         if (props.type === "block") {
             return h("pre", {
                 class: "mb-math",
-                innerHTML: code.value
+                innerHTML: code.value,
             });
         }
         else {
             return h("span", {
                 class: "katex",
-                innerHTML: code.value.slice("<span class=\"katex\">".length, -"</span>".length)
+                innerHTML: code.value.slice("<span class=\"katex\">".length, -"</span>".length),
             });
         }
     }

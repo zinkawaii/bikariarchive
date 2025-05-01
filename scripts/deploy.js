@@ -5,12 +5,12 @@ import * as tar from "tar";
 
 const isCompress = await confirm({
     message: "是否压缩构建包？",
-    default: false
+    default: false,
 });
 
 const isUpload = await confirm({
     message: "是否上传构建包？",
-    default: false
+    default: false,
 });
 
 const packname = "bikari.tgz";
@@ -21,7 +21,7 @@ await timer("压缩构建包", async () => {
     await tar.create({
         gzip: true,
         file: packname,
-        cwd: "../"
+        cwd: "../",
     }, [".output", "dist"]);
 })();
 
@@ -33,7 +33,7 @@ await timer("连接服务器", async () => {
         host: "<!-- ??? -->",
         port: 1177,
         username: "<!-- ??? -->",
-        password: "<!-- ??? -->"
+        password: "<!-- ??? -->",
     });
 })();
 

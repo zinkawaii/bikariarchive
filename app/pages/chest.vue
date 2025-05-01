@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     useHead({
-        title: "工具箱"
+        title: "工具箱",
     });
 
     const tools = [
@@ -8,20 +8,20 @@
             title: "日文名发生装置",
             description: "治好了孩子的起名困难症",
             icon: "material-symbols:language-japanese-kana",
-            to: { name: "namaemaker" }
+            to: { name: "namaemaker" },
         },
         {
             title: "歌词打轴",
             description: "为你的歌词快速打轴",
             icon: "mdi:timeline-clock",
-            to: { name: "lyricaxis" }
+            to: { name: "lyricaxis" },
         },
         {
             title: "西北风计算器",
             description: "骗人凹分用",
             icon: "streamline:calculator-2-solid",
-            to: { name: "excalc" }
-        }
+            to: { name: "excalc" },
+        },
     ];
 </script>
 

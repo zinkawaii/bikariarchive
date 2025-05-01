@@ -10,7 +10,7 @@ import type { ArticleFrontmatter, NovelFrontmatter } from "./types";
 
 enum SourceKind {
     Meta,
-    Article
+    Article,
 }
 
 const PATH_REGEX = /^(.*?)\.(\d+)$/;
@@ -21,7 +21,7 @@ export default createProcessor("Article", () => {
         beforeOutput(val) {
             const newVal = sortKeyValues<any>(
                 structuredClone(val),
-                ({ order: a }, { order: b }) => a.localeCompare(b)
+                ({ order: a }, { order: b }) => a.localeCompare(b),
             );
             for (const novel in newVal) {
                 delete newVal[novel].order;
@@ -30,17 +30,17 @@ export default createProcessor("Article", () => {
                     .map(([_, c]) => c);
             }
             return newVal;
-        }
+        },
     });
 
     const mapInfo = useLoad("map", {
-        out: "dist/json/Artmap.json"
+        out: "dist/json/Artmap.json",
     });
 
     useSource(SourceKind.Meta, {
         base: "data",
         folders: [
-            "novel"
+            "novel",
         ],
         ext: ".mdz",
         deep: false,
@@ -60,18 +60,18 @@ export default createProcessor("Article", () => {
                 mapInfo.value[novel] = {};
                 metaInfo.value[novel] = {
                     order,
-                    chapters: []
+                    chapters: [],
                 };
             }
             Object.assign(metaInfo.value[novel], data);
-        }
+        },
     });
 
     useSource(SourceKind.Article, {
         base: "data",
         dist: "dist",
         folders: [
-            "novel"
+            "novel",
         ],
         ext: ".mdz",
         skip: 1,
@@ -92,9 +92,9 @@ export default createProcessor("Article", () => {
             metaInfo.value[novel].chapters[order] = data;
             mapInfo.value[novel][index] = {
                 name,
-                password
+                password,
             };
-        }
+        },
     });
 });
 
@@ -108,7 +108,7 @@ async function processMeta(path: string) {
     return {
         novel,
         order,
-        data: attributes
+        data: attributes,
     };
 }
 
@@ -184,7 +184,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
         volume,
         encrypted,
         wordCount,
-        ...attributes
+        ...attributes,
     };
 
     //写入缓存
@@ -192,7 +192,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
         name,
         order,
         novel,
-        data
+        data,
     };
 }
 
@@ -200,7 +200,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
 function sortKeyValues<T>(obj: Record<string, T>, compareFn: (a: T, b: T) => number) {
     return Object.fromEntries(
         Object.entries(obj)
-            .toSorted(([, a], [, b]) => compareFn(a, b))
+            .toSorted(([, a], [, b]) => compareFn(a, b)),
     );
 }
 

@@ -8,9 +8,9 @@ export default <Handler> function(state, node: Code) {
         tagName: "mb-code",
         properties: {
             lang: node.lang,
-            raw: node.value
+            raw: node.value,
         },
-        children: []
+        children: [],
     };
     state.patch(node, result);
     return state.applyData(node, result);

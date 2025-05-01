@@ -4,7 +4,7 @@ import { Entry } from "~/utils/entry";
 import type { GetEntryResponse } from "~~/server/types/api/entry";
 
 const schema = type({
-    title: "string"
+    title: "string",
 });
 
 export default defineJEventHandler<GetEntryResponse>(async (event, res) => {

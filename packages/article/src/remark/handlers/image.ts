@@ -9,9 +9,9 @@ export default <Handler> function(state, node: Image) {
         properties: {
             src: node.url,
             alt: node.alt,
-            title: node.title
+            title: node.title,
         },
-        children: []
+        children: [],
     };
     state.patch(node, result);
     return state.applyData(node, result);

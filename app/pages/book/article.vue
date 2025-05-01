@@ -22,8 +22,8 @@
     useBreadcrumb({
         name: "shelf",
         params: {
-            novel
-        }
+            novel,
+        },
     });
 
     //上下章快捷键
@@ -45,7 +45,7 @@
         return {
             0: "inherit",
             1: "宋体",
-            2: "楷体"
+            2: "楷体",
         }[settingStore.get("font-family")];
     });
 
@@ -54,14 +54,14 @@
         return {
             0: 14,
             1: 16,
-            2: 18
+            2: 18,
         }[settingStore.get("font-size")] + "px";
     });
 
     //写入阅读记录
     readRecordStore.set(art.novel, {
         index: art.index,
-        title: art.title
+        title: art.title,
     });
 
     //密码
@@ -73,11 +73,11 @@
         query: {
             novel,
             index,
-            password
+            password,
         },
         immediate: !art.encrypted,
         watch: [art],
-        default: () => null!
+        default: () => null!,
     });
 
     //设置元信息
@@ -96,7 +96,7 @@
             .filter((node) => node.type === "element" && node.tag === "p")
             .map((p) => toString(p))
             .join("")
-            .slice(0, 128)
+            .slice(0, 128),
     });
 
     //添加阅读记录
@@ -106,8 +106,8 @@
         $fetch("/api/article", {
             method: "patch",
             body: {
-                token: post.value.token
-            }
+                token: post.value.token,
+            },
         });
     });
 
@@ -122,7 +122,7 @@
                 decrypted.value = true;
         }
     }, {
-        title: "请求"
+        title: "请求",
     });
 </script>
 

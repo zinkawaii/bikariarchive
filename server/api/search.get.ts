@@ -7,7 +7,7 @@ import type { GetSearchResponse } from "~~/server/types/api/search";
 
 const schema = type({
     novel: "string?",
-    word: "0 < string <= 64"
+    word: "0 < string <= 64",
 });
 
 export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res) => {
@@ -40,7 +40,7 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
                 if (pos !== -1) {
                     position.push({
                         line: i,
-                        pos: pos
+                        pos: pos,
                     });
                 }
             } while (pos !== -1);
@@ -58,7 +58,7 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
                 novel: art.novel,
                 index: art.index,
                 count: position.length,
-                parts
+                parts,
             });
         }
     }
@@ -67,6 +67,6 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
     new SearchRecordModel({
         ip: getRequestIP(event, { xForwardedFor: true }),
         time: new Date(),
-        word
+        word,
     }).save();
 }, 1500);

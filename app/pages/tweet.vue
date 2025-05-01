@@ -1,5 +1,5 @@
 <script lang="ts" setup>
     useHead({
-        title: "说说"
+        title: "说说",
     });
 </script>

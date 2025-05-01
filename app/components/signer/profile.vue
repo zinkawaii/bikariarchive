@@ -8,15 +8,15 @@
     const toSpace = computed(() => ({
         name: "space",
         params: {
-            uid: userStore.uid ?? -1
-        }
+            uid: userStore.uid ?? -1,
+        },
     }));
 
     //退出登录
     async function logout() {
         try {
             await $fetch("/api/user/logout", {
-                method: "post"
+                method: "post",
             });
 
             userStore.reset();

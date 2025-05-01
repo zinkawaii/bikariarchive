@@ -12,14 +12,14 @@ export const useSettingStore = defineStore("setting", () => {
         "shortcut-next": "ArrowRight",
         "font-family": 0,
         "font-size": 1,
-        "ui-collapse": false
+        "ui-collapse": false,
     });
 
     const dialogStore = useDialogStore();
 
     //挂载弹窗实例
     const { open, close } = dialogStore.use(() => h(LazyZSetting), {
-        unique: true
+        unique: true,
     });
 
     //主题名称
@@ -27,14 +27,14 @@ export const useSettingStore = defineStore("setting", () => {
         return {
             /* 初空 */ 0: "hatsusora",
             /* 抹茶 */ 1: "ayame",
-            /* 早樱 */ 2: "sakura"
+            /* 早樱 */ 2: "sakura",
         }[setting.value.theme];
     });
 
     //是否为夜间模式
     const isDarkMode = computed(() => ({
         1: false,
-        2: true
+        2: true,
     }[setting.value["dark-mode"]] ?? (Zin.period === Zin.PERIOD_NIGHT)));
 
     function get<K extends SettingField>(key: K) {
@@ -80,7 +80,7 @@ export const useSettingStore = defineStore("setting", () => {
 
             mapping.set(key, {
                 trigger,
-                handlers
+                handlers,
             });
         }
 
@@ -98,10 +98,10 @@ export const useSettingStore = defineStore("setting", () => {
         get,
         set,
         toggle,
-        listen
+        listen,
     };
 }, {
     persist: {
-        pick: ["setting"]
-    }
+        pick: ["setting"],
+    },
 });

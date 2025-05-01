@@ -7,22 +7,22 @@ export const SearchRecordModel = defineMongooseModel<SearchRecordSchema>({
     schema: {
         ip: {
             type: String,
-            required: true
+            required: true,
         },
         time: {
             type: Date,
-            required: true
+            required: true,
         },
         word: {
             type: String,
-            required: true
+            required: true,
         },
         user: {
             type: Types.ObjectId,
-            ref: "UserData"
-        }
+            ref: "UserData",
+        },
     },
     options: {
-        collection: "search_record"
-    }
+        collection: "search_record",
+    },
 });

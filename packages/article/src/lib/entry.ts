@@ -36,7 +36,7 @@ export default createProcessor("Entry", () => {
             return {
                 ...newVal,
                 all,
-                drafts
+                drafts,
             };
 
             //在生产环境下隐藏未知标题，修剪草稿词条
@@ -62,11 +62,11 @@ export default createProcessor("Entry", () => {
                     }
                 }
             }
-        }
+        },
     });
 
     const mapInfo = useLoad("map", {
-        out: "dist/json/Intmap.json"
+        out: "dist/json/Intmap.json",
     });
 
     const abilityInfo = useLoad("ability", {
@@ -83,17 +83,17 @@ export default createProcessor("Entry", () => {
                         items.push(item = {
                             name: ability.name,
                             class: ability.class,
-                            owners: []
+                            owners: [],
                         });
                     }
                     item.owners.push({
                         name,
-                        star: ability.star
+                        star: ability.star,
                     });
                 }
             }
             return items;
-        }
+        },
     });
 
     useSource(0, {
@@ -102,7 +102,7 @@ export default createProcessor("Entry", () => {
         folders: [
             "area",
             "character",
-            "concept"
+            "concept",
         ],
         ext: ".mdz",
         async parse(path, info) {
@@ -140,7 +140,7 @@ export default createProcessor("Entry", () => {
                 name,
                 folder,
                 draft: attributes.draft,
-                abilities
+                abilities,
             };
         },
         unlink(cache) {
@@ -156,7 +156,7 @@ export default createProcessor("Entry", () => {
             metaInfo.value.all[name] = draft;
             mapInfo.value[name] = folder;
             abilityInfo.value[name] = abilities;
-        }
+        },
     });
 });
 
@@ -184,7 +184,7 @@ function transformDetails(attributes: JEntry) {
 
             detail = {
                 title: firstNode.value,
-                content: []
+                content: [],
             };
             details.push(detail);
         }
@@ -205,7 +205,7 @@ function collectAbilities(talents: EntryTalent[]) {
         abilities.push({
             name: talent.name.zh,
             star: talent.star,
-            class: talent.class
+            class: talent.class,
         });
     }
     return abilities;

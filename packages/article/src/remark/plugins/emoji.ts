@@ -32,7 +32,7 @@ export default function(this: Processor) {
                 if (text) {
                     nodes.push({
                         type: "text",
-                        value: text
+                        value: text,
                     });
                 }
                 if (name) {
@@ -43,10 +43,10 @@ export default function(this: Processor) {
                             hName: "iconify",
                             hProperties: {
                                 class: "emoji",
-                                name: name.trim()
-                            }
+                                name: name.trim(),
+                            },
                         },
-                        children: []
+                        children: [],
                     });
                 }
                 offset = i + name.length;

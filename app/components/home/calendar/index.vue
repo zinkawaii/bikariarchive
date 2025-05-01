@@ -24,7 +24,7 @@
         ["竹醉", "ちくすい"],
         ["时雨", "しぐれ"],
         ["神乐", "かぐら"],
-        ["胧月", "おぼろづき"]
+        ["胧月", "おぼろづき"],
     ];
 
     //日期范围
@@ -39,10 +39,10 @@
     //监听年月并显示日期
     watchImmediate([
         currentYear,
-        currentMonth
+        currentMonth,
     ], ([
         year,
-        month
+        month,
     ]) => {
         const dates = [];
 
@@ -110,7 +110,7 @@
             month,
             solar: day,
             lunar: getSubTitle(),
-            event: jTimeline[format(solar, "yyyy-MM-dd")]
+            event: jTimeline[format(solar, "yyyy-MM-dd")],
         };
 
         //副标题
@@ -190,7 +190,7 @@
                     :class="{
                         [`is-sub`]: currentMonth !== date.month,
                         [`is-special`]: date.event,
-                        [`is-checked`]: currentDate === date
+                        [`is-checked`]: currentDate === date,
                     }"
                     @click="currentDate = (currentDate === date) ? void 0 : date"
                 >

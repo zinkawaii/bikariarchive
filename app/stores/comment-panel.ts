@@ -20,7 +20,7 @@ export const useCommentPanelStore = defineStore("comment-panel", () => {
     });
 
     const { open, close } = dialogStore.use(() => h(LazyCommentPanel), {
-        unique: true
+        unique: true,
     });
 
     function post() {
@@ -55,15 +55,15 @@ export const useCommentPanelStore = defineStore("comment-panel", () => {
         close,
         post,
         reply,
-        modify
+        modify,
     };
 }, {
     persist: {
         pick: [
             "nickname",
             "email",
-            "address"
+            "address",
         ],
-        storage: piniaPluginPersistedstate.localStorage()
-    }
+        storage: piniaPluginPersistedstate.localStorage(),
+    },
 });

@@ -40,6 +40,6 @@ export const useUserStore = defineStore("user", () => {
         sign,
         isLogin,
         getInfo,
-        reset
+        reset,
     };
 });

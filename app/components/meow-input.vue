@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     defineOptions({
-        inheritAttrs: false
+        inheritAttrs: false,
     });
     const props = defineProps<{
         value?: string;
@@ -15,7 +15,7 @@
         },
         set(val) {
             (props.value === void 0) && (modelValue.value = val);
-        }
+        },
     });
 </script>
 

@@ -5,10 +5,10 @@ import { appendExtensions } from "./utils";
 
 export default function(this: Processor) {
     const options: Options = {
-        singleTilde: false
+        singleTilde: false,
     };
     appendExtensions(this, {
         micromark: gfmStrikethrough(options),
-        fromMarkdown: gfmStrikethroughFromMarkdown()
+        fromMarkdown: gfmStrikethroughFromMarkdown(),
     });
 }

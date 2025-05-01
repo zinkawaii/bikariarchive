@@ -8,7 +8,7 @@ export interface ReadJsonPaginatedOptions {
 export async function readJsonPaginated<T>(path: string, options: ReadJsonPaginatedOptions) {
     const {
         page,
-        sizes
+        sizes,
     } = options;
 
     const jData: T[] = await fs.readJson(r(path));
@@ -20,6 +20,6 @@ export async function readJsonPaginated<T>(path: string, options: ReadJsonPagina
 
     return {
         total,
-        data
+        data,
     };
 }

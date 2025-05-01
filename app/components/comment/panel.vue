@@ -18,29 +18,29 @@
         mode: {},
         nickname: {},
         email: {
-            default: ""
+            default: "",
         },
         address: {
-            default: ""
-        }
+            default: "",
+        },
     });
 
     const { errors, validate } = useValidate({
         nickname: {
             target: nickname,
             required: true,
-            ...nicknameValidates
+            ...nicknameValidates,
         },
         email: {
             target: email,
             rule: Zexp.email,
-            message: "邮箱格式不正确"
+            message: "邮箱格式不正确",
         },
         address: {
             target: address,
             rule: Zexp.url,
-            message: "网址格式不正确"
-        }
+            message: "网址格式不正确",
+        },
     });
 
     //标题
@@ -70,7 +70,7 @@
                     content: content.value,
                     nickname: nickname.value,
                     email: email.value || void 0,
-                    address: address.value || void 0
+                    address: address.value || void 0,
                 });
             }
             else {
@@ -81,7 +81,7 @@
                     mode: mode.value,
                     nickname: nickname.value,
                     email: email.value || void 0,
-                    address: address.value || void 0
+                    address: address.value || void 0,
                 });
             }
             content.value = "";

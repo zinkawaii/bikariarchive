@@ -5,7 +5,7 @@
         isMyself,
         nickname,
         sign: userSign,
-        avatar
+        avatar,
     } = inject(injectionKey)!;
 
     const toastStore = useToastStore();
@@ -29,8 +29,8 @@
             $fetch("/api/user/sign", {
                 method: "put",
                 body: {
-                    content: sign.value
-                }
+                    content: sign.value,
+                },
             });
             userSign.value = sign.value;
         }
@@ -38,7 +38,7 @@
             toastStore.error("[sign]:update", "签名更新失败");
         }
     }, {
-        title: "更新签名"
+        title: "更新签名",
     });
 </script>
 

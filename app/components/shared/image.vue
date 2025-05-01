@@ -15,7 +15,7 @@
         reference?: string;
         viewable?: boolean;
     }>(), {
-        viewable: true
+        viewable: true,
     });
 
     const contextMenuStore = useContextMenuStore();
@@ -39,7 +39,7 @@
         return {
             maxWidth: props.maxWidth ? `${props.maxWidth}px` : void 0,
             maxHeight: props.maxHeight ? `${props.maxHeight}px` : void 0,
-            objectPosition: props.align
+            objectPosition: props.align,
         };
     });
 
@@ -54,10 +54,10 @@
                 icon: "fa6-solid:arrow-up-right-from-square",
                 action() {
                     window.open(props.reference, "_blank");
-                }
+                },
 
-            }
-        ]
+            },
+        ],
     });
 
     //查看器
@@ -68,7 +68,7 @@
             if (tagEls.value.length) {
                 displayCharacters();
             }
-        }
+        },
     }));
 
     //加载完成时
@@ -90,7 +90,7 @@
                 y: [42, 0],
                 delay: i * 50,
                 duration: 400,
-                ease: "outBack"
+                ease: "outBack",
             });
         }
     }
@@ -103,7 +103,7 @@
             class="image-entity"
             :class="{
                 [`is-absolute`]: align,
-                [`cursor-pointer`]: viewable
+                [`cursor-pointer`]: viewable,
             }"
             :style
             :src
@@ -138,8 +138,8 @@
 
     .image-characters {
         display: flex;
-        justify-content: flex-end;
         flex-wrap: wrap-reverse;
+        justify-content: flex-end;
         gap: 0.5em;
         position: absolute;
         overflow: hidden;

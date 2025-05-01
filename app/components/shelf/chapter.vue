@@ -7,7 +7,7 @@
             label: "总字数",
             value: computed(() => {
                 return jChapters.value.reduce((res, c) => res + c.wordCount, 0);
-            })
+            }),
         },
         {
             label: "最近更新",
@@ -20,18 +20,18 @@
                             : prev
                     )).updateDate
                     : Article.FARAWAY;
-            })
+            }),
         },
         {
             label: "状态",
             value: computed(() => {
                 return jChapters.value.some((c) => c.ending) ? "已完结" : "连载中";
-            })
-        }
+            }),
+        },
     ];
 
     const { page, total, sizes, paginatedArr } = usePagination(jChapters, {
-        sizes: 32
+        sizes: 32,
     });
 </script>
 

@@ -22,7 +22,7 @@
     const headerOffsets = computedWithControl(() => [flatHeaders.value, height.value], () => {
         return flatHeaders.value?.map(({ element, link }) => ({
             link,
-            top: getPosition(element).top
+            top: getPosition(element).top,
         })) ?? [];
     });
 
@@ -30,7 +30,7 @@
     const [DefineOutlineList, OutlineList] = createReusableTemplate<{
         headers: HeaderInfo[];
     }>({
-        inheritAttrs: false
+        inheritAttrs: false,
     });
 
     //文章渲染完成时更新标题列表
@@ -49,7 +49,7 @@
                 link: "#" + el.id,
                 level: Number(el.tagName[1]),
                 order: "",
-                children: []
+                children: [],
             }))
             .filter((el) => el.link.length > 1 && el.level <= 3);
 

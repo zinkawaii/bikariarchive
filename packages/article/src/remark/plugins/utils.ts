@@ -19,7 +19,7 @@ export function appendExtensions(processor: Processor, options: PushExtensionsOp
 export function transformRoot(root: hast.Root) {
     return {
         type: "root",
-        children: transformNodes(root.children).filter((node) => node.type !== "text")
+        children: transformNodes(root.children).filter((node) => node.type !== "text"),
     } as Root;
 }
 
@@ -31,13 +31,13 @@ export function transformNodes(nodes: hast.RootContent[]) {
                 type: node.type,
                 tag: node.tagName,
                 props: node.properties,
-                children: transformNodes(node.children)
+                children: transformNodes(node.children),
             });
         }
         else if (node.type === "raw" || node.type === "text") {
             children.push({
                 type: "text",
-                value: node.value
+                value: node.value,
             });
         }
     }

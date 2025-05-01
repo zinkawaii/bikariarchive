@@ -3,7 +3,7 @@ import { generateAvatarUrl } from "~~/server/utils";
 import type { GetUserInfoResponse } from "~~/server/types/api/user/info";
 
 const schema = type({
-    uid: "string.numeric.parse?"
+    uid: "string.numeric.parse?",
 });
 
 export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
@@ -11,7 +11,7 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
     const { uid = session.uid } = schema.assert(getQuery(event));
 
     const qUser = await UserDataModel.findOne({
-        uid
+        uid,
     }, "nickname email identity sign");
 
     //用户不存在

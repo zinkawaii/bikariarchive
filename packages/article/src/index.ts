@@ -7,5 +7,5 @@ export * from "./remark/types";
 export {
     article,
     entry,
-    update
+    update,
 };

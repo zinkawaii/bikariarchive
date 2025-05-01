@@ -42,7 +42,7 @@
                     move(index);
                 });
             }
-        }
+        },
     });
 
     watch(currentNovelIdx, move);
@@ -53,7 +53,7 @@
             transition: [0.25, 0.1, 0.25, 1],
             abort() {
                 return isHolding.value;
-            }
+            },
         });
     }
 

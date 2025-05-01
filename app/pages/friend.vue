@@ -1,12 +1,12 @@
 <script lang="ts" setup>
     useHead({
-        title: "友情链接"
+        title: "友情链接",
     });
 
     const config = useRuntimeConfig();
 
     const { status, data } = useLazyFetch("/api/friend", {
-        default: () => null!
+        default: () => null!,
     });
 
     const schema = `export default {
@@ -93,11 +93,11 @@
 
     .friend-desc {
         display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
         font-size: 14px;
+        -webkit-line-clamp: 2;
         line-height: 21px;
         text-overflow: ellipsis;
         color: var(--color-info);
+        -webkit-box-orient: vertical;
     }
 </style>

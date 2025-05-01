@@ -3,15 +3,14 @@ import zin from "@zinkawaii/eslint-config";
 
 export default antfu({
     ignores: [
-        "data/json/Bangumi.json"
+        "data/json/Bangumi.json",
     ],
-    markdown: false,
     pnpm: true,
     rules: {
         ...zin.standard,
         ...zin.recommended,
         ...zin.stylistic,
         ...zin.vue,
-        ...zin.patch
-    }
+        ...zin.patch,
+    },
 });

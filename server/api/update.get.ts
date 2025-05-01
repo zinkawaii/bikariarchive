@@ -3,7 +3,7 @@ import fs from "fs-extra";
 import type { GetUpdateResponse } from "~~/server/types/api/update";
 
 const schema = type({
-    year: "string.numeric.parse"
+    year: "string.numeric.parse",
 });
 
 export default defineJEventHandler<GetUpdateResponse>(async (event, res) => {

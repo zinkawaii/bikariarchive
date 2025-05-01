@@ -12,7 +12,7 @@
         :class="{
             [`is-disabled`]: disabled,
             [`is-full`]: full,
-            [`is-round`]: round
+            [`is-round`]: round,
         }"
     ><slot></slot></button>
 </template>

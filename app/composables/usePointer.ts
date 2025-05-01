@@ -11,10 +11,10 @@ export interface UsePointerOptions {
 
 export default function(
     el: MaybeRefOrGetter<HTMLElement | null | undefined>,
-    options: UsePointerOptions
+    options: UsePointerOptions,
 ) {
     const {
-        filter = () => true
+        filter = () => true,
     } = options;
 
     const isHolding = ref(false);
@@ -47,6 +47,6 @@ export default function(
     });
 
     return {
-        isHolding
+        isHolding,
     };
 }

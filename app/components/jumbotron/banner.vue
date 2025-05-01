@@ -16,7 +16,7 @@
             summaryChars.value.push(char);
         }, {
             duration: summaryDelay,
-            times: summary.length
+            times: summary.length,
         });
         await Zin.delay(duration);
         toggleMotion(false);

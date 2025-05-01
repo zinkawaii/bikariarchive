@@ -1,17 +1,17 @@
 <script lang="ts" setup>
     useHead({
-        title: "番剧"
+        title: "番剧",
     });
 
     const page = useRouteQuery("page", 1, {
-        transform: Number
+        transform: Number,
     });
 
     const { status, data } = useLazyFetch("/api/bangumi", {
         query: {
-            page
+            page,
         },
-        default: () => null!
+        default: () => null!,
     });
 </script>
 

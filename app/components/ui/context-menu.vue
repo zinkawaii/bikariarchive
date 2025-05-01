@@ -25,28 +25,28 @@
             icon: "fa6-solid:chevron-left",
             action: () => {
                 router.back();
-            }
+            },
         },
         {
             icon: "fa6-solid:chevron-right",
             action: () => {
                 router.forward();
-            }
+            },
         },
         {
             icon: "fa6-solid:arrow-up",
             action: () => {
                 window.scrollTo({
-                    top: 0
+                    top: 0,
                 });
-            }
+            },
         },
         {
             icon: "fa6-solid:rotate-right",
             action: () => {
                 location.reload();
-            }
-        }
+            },
+        },
     ];
 
     contextMenuStore.basic({
@@ -58,9 +58,9 @@
                 icon: "fa6-solid:link",
                 action: () => {
                     copyText(targetAnchorLink.value, "链接已复制");
-                }
-            }
-        ]
+                },
+            },
+        ],
     });
 
     contextMenuStore.basic({
@@ -76,16 +76,16 @@
                 },
                 action: () => {
                     copyImage(targetImageLink.value, "图像已复制");
-                }
+                },
             },
             {
                 title: "复制链接",
                 icon: "fa6-solid:link",
                 action: () => {
                     copyText(targetImageLink.value, "链接已复制");
-                }
-            }
-        ]
+                },
+            },
+        ],
     });
 
     contextMenuStore.basic({
@@ -97,23 +97,23 @@
                 icon: "fa6-solid:paste",
                 action: () => {
                     copyText(textSelection.text.value, "文本已复制");
-                }
+                },
             },
             {
                 title: "站内词条",
                 icon: "fa6-solid:sitemap",
                 action: () => {
                     router.push(toEntry(textSelection.text.value));
-                }
+                },
             },
             {
                 title: "全文检索",
                 icon: "fa6-solid:magnifying-glass",
                 action: () => {
                     router.push(toSearch(textSelection.text.value));
-                }
-            }
-        ]
+                },
+            },
+        ],
     });
 
     contextMenuStore.basic({
@@ -124,7 +124,7 @@
                 icon: "fa6-solid:house",
                 action: () => {
                     router.push({ name: "home" });
-                }
+                },
             },
             {
                 title: "昼夜切换",
@@ -132,16 +132,16 @@
                 action: () => {
                     const value = settingStore.isDarkMode ? 1 : 2;
                     settingStore.set("dark-mode", value);
-                }
-            }
-        ]
+                },
+            },
+        ],
     });
 
     //捕获阶段清除附加菜单
     useEventListener("contextmenu", () => {
         contextMenuStore.clear();
     }, {
-        capture: true
+        capture: true,
     });
 
     useEventListener("contextmenu", (event) => {

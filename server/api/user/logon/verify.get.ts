@@ -4,7 +4,7 @@ import { Zexp } from "~/utils";
 import { randomInt } from "~/utils/random";
 
 const schema = type({
-    email: type(Zexp.email)
+    email: type(Zexp.email),
 });
 
 export default defineJEventHandler(async (event) => {
@@ -36,7 +36,7 @@ export default defineJEventHandler(async (event) => {
         await sendMail(Verify, {
             to: email,
             title: "注册验证码",
-            props: { verify }
+            props: { verify },
         });
     }
     catch {

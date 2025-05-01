@@ -5,7 +5,7 @@ export const useBreadcrumbStore = defineStore("breadcrumb", () => {
 
     const route = computed(() => {
         return [...list.value].at(-1) ?? {
-            name: "home"
+            name: "home",
         };
     });
 
@@ -19,7 +19,7 @@ export const useBreadcrumbStore = defineStore("breadcrumb", () => {
 
     return {
         route,
-        use
+        use,
     };
 });
 

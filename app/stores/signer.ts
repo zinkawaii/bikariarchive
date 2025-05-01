@@ -8,7 +8,7 @@ export const useSignerStore = defineStore("signer", () => {
 
     //挂载弹窗实例
     const { open, close } = dialogStore.use(() => h(LazyZSigner), {
-        unique: true
+        unique: true,
     });
 
     //切换当前视图
@@ -20,6 +20,6 @@ export const useSignerStore = defineStore("signer", () => {
         currentView,
         open,
         close,
-        switchView
+        switchView,
     };
 });

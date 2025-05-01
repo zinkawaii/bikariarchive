@@ -11,9 +11,9 @@ export function requireConfirm(message: string) {
             onClose(val = false) {
                 close();
                 resolve(val);
-            }
+            },
         }), {
-            immediate: true
+            immediate: true,
         });
     });
 }
@@ -28,9 +28,9 @@ export function requireNumeric(options: MbNumericProps) {
             onClose(val = options.initialValue) {
                 close();
                 resolve(val ?? 0);
-            }
+            },
         }), {
-            immediate: true
+            immediate: true,
         });
     });
 }

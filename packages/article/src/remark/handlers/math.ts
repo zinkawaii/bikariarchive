@@ -7,9 +7,9 @@ const math: Handler = (state, node) => {
         tagName: "mb-math",
         properties: {
             type: "block",
-            raw: node.value
+            raw: node.value,
         },
-        children: []
+        children: [],
     };
     state.patch(node, result);
     return result;
@@ -21,9 +21,9 @@ const inlineMath: Handler = (state, node) => {
         tagName: "mb-math",
         properties: {
             type: "inline",
-            raw: node.value
+            raw: node.value,
         },
-        children: []
+        children: [],
     };
     state.patch(node, result);
     return result;
@@ -31,5 +31,5 @@ const inlineMath: Handler = (state, node) => {
 
 export default {
     math,
-    inlineMath
+    inlineMath,
 };

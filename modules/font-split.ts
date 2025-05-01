@@ -18,10 +18,10 @@ const cacheName = name.replaceAll("/", "+");
 export default defineNuxtModule<FontSplitOptions>({
     meta: {
         name,
-        configKey: "splittedFonts"
+        configKey: "splittedFonts",
     },
     defaults: {
-        fonts: []
+        fonts: [],
     },
     async setup(options, nuxt) {
         for (const font of options.fonts!) {
@@ -41,12 +41,12 @@ export default defineNuxtModule<FontSplitOptions>({
                     css: {
                         fileName: cssName,
                         fontFamily: font.name,
-                        localFamily: []
-                    }
+                        localFamily: [],
+                    },
                 });
             }
 
             nuxt.options.css.push(resolve(dirName, cssName));
         }
-    }
+    },
 });

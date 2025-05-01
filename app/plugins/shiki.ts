@@ -5,9 +5,9 @@ export default defineNuxtPlugin((nuxtApp) => {
             transformers: [{
                 root: (hast) => ({
                     type: "root",
-                    children: (hast.children[0] as any).children[0].children
-                })
-            }]
+                    children: (hast.children[0] as any).children[0].children,
+                }),
+            }],
         });
     });
 });

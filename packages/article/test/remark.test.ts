@@ -30,9 +30,9 @@ it("emoji", async () => {
         tag: "iconify",
         props: {
             className: ["emoji"],
-            name: "i-twemoji:face-with-monocle"
+            name: "i-twemoji:face-with-monocle",
         },
-        children: []
+        children: [],
     }]);
 });
 
@@ -60,10 +60,10 @@ it("ruby", async () => {
                 tag: "rt",
                 props: {},
                 children: [
-                    { type: "text", value: "やまぶき かざり" }
-                ]
-            }
-        ]
+                    { type: "text", value: "やまぶき かざり" },
+                ],
+            },
+        ],
     }]);
 });
 
@@ -73,7 +73,7 @@ it("slot", async () => {
         .use(frontmatter, {
             type: "yaml",
             fence: "---",
-            fallthrough: true
+            fallthrough: true,
         })
         .use(mdc)
         .use(rehype)
@@ -90,8 +90,8 @@ it("slot", async () => {
     expect(data).toEqual({
         frontmatters: [{
             foo: [],
-            bar: []
-        }]
+            bar: [],
+        }],
     });
 });
 
@@ -116,7 +116,7 @@ it("interpolation", async () => {
 
     expect(children).toEqual([{
         type: "text",
-        value: "[...] ... [...]"
+        value: "[...] ... [...]",
     }]);
 });
 
@@ -125,7 +125,7 @@ async function process(processor: Processor<any, any, any, any, Root>, text: str
     const result = await processor.process(text);
     return {
         body: result.result,
-        data: result.data
+        data: result.data,
     };
 }
 

@@ -9,7 +9,7 @@
     const props = withDefaults(defineProps<MbNumericProps>(), {
         title: "选择",
         initialValue: 0,
-        min: 0
+        min: 0,
     });
     const emit = defineEmits<{
         close: [value: number];

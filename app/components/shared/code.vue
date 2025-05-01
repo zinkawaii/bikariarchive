@@ -6,7 +6,7 @@
         raw?: string;
     }>(), {
         lang: "js",
-        raw: ""
+        raw: "",
     });
 
     const [isCollapse, toggleCollapse] = useToggle(false);
@@ -18,12 +18,12 @@
             icon: "fa6-solid:paste",
             action() {
                 copyText(codeEl.value!.textContent!, "代码已复制");
-            }
+            },
         },
         {
             icon: () => `fa6-solid:chevron-${isCollapse.value ? `left` : `down`}`,
-            action: () => toggleCollapse()
-        }
+            action: () => toggleCollapse(),
+        },
     ];
 
     //代码
@@ -58,7 +58,7 @@
             class="code-area"
             :class="{
                 [`is-collapse`]: isCollapse,
-                [`is-expand`]: isExpand
+                [`is-expand`]: isExpand,
             }"
         >
             <pre class="code-line">{{ lineStr }}</pre>

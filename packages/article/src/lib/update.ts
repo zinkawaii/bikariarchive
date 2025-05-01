@@ -11,7 +11,7 @@ export default createProcessor("Update", () => {
         base: "data",
         dist: "dist",
         folders: [
-            "update"
+            "update",
         ],
         ext: ".mdz",
         async parse(path, info) {
@@ -46,7 +46,7 @@ export default createProcessor("Update", () => {
                     update = {
                         date: match[1],
                         version: match[2],
-                        items: []
+                        items: [],
                     };
                     updates.push(update);
                 }
@@ -66,13 +66,13 @@ export default createProcessor("Update", () => {
                     update?.items.push({
                         type: match[1],
                         scope: match[2],
-                        content: node.children
+                        content: node.children,
                     });
                 }
             }
 
             //写入文件
             await info.output(path, updates);
-        }
+        },
     });
 });

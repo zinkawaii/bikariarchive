@@ -21,7 +21,7 @@
         if (percent.value) {
             window.scrollTo({
                 top: 0,
-                behavior: "instant"
+                behavior: "instant",
             });
         }
     }
@@ -29,7 +29,7 @@
     //点击箭头
     function toBottom() {
         window.scrollTo({
-            top: window.innerHeight * 0.72
+            top: window.innerHeight * 0.72,
         });
     }
 </script>

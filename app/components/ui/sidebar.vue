@@ -21,7 +21,7 @@
                     x: [start.left - end.left, 0],
                     y: [start.top - end.top, 0],
                     duration: 400,
-                    ease: "outBack"
+                    ease: "outBack",
                 });
             });
         }
@@ -29,7 +29,7 @@
         isCollapse.value = {
             0: collapse,
             1: false,
-            2: true
+            2: true,
         }[display]!;
     });
 </script>

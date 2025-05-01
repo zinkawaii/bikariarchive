@@ -10,7 +10,7 @@
 
     const partComp = useTemplateRef("part");
     useHighlight(partComp, searchWord, {
-        name: "danger"
+        name: "danger",
     });
 </script>
 

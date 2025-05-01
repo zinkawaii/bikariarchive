@@ -1,3 +1,5 @@
+<!-- @fallthroughAttributes true -->
+
 <script lang="ts" setup>
     import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
     import type { VNodeArrayChildren } from "vue";
@@ -6,13 +8,11 @@
     const props = withDefaults(defineProps<{
         body?: Root | Child[];
         components?: Record<string, Component>;
-        tag?: string;
         variant?: ArticleVariant;
     }>(), {
         body: () => [],
         components: () => ({}),
-        tag: "article",
-        variant: "general"
+        variant: "general",
     });
     const slots = defineSlots<{
         default: () => any;
@@ -25,13 +25,13 @@
         MbImage,
         MbMath,
         PlainLink,
-        StoryHeading
+        StoryHeading,
     };
 
     const resolvedComponents = computed(() => {
         return createComponentsMap({
             ...globalComponents,
-            ...props.components
+            ...props.components,
         });
     });
 
@@ -62,7 +62,7 @@
                     const [left, right] = last.value.split(" | ");
                     props = {
                         ...props,
-                        modifier: right
+                        modifier: right,
                     };
                     delete props.id;
                     children = children.slice(0, -1);
@@ -75,21 +75,21 @@
             tag,
             comp: resolvedComponents.value[tag] || tag,
             props: transformProps(props),
-            children
+            children,
         };
     }
 
     function render() {
-        const { body, tag, variant } = props;
+        const { body, variant } = props;
         const children = Array.isArray(body) ? body : body.children;
-        return h(tag, children.length ? r(children) : slots.default?.());
+        return children.length ? r(children) : slots.default?.();
 
         function r(children: Child[]): VNodeArrayChildren {
             return children.map((node) => {
                 if (node.type === "element") {
                     const { tag, comp, props, children } = transformVariant(node, variant);
                     return h(comp, props, tag in resolvedComponents.value ? {
-                        default: () => r(children)
+                        default: () => r(children),
                     } : r(children));
                 }
                 else {
@@ -101,7 +101,9 @@
 </script>
 
 <template>
-    <render class="novel-text" :class="`is-${variant}`"/>
+    <mb-primitive class="novel-text" :class="`is-${variant}`" as="article">
+        <render />
+    </mb-primitive>
 </template>
 
 <style lang="scss">

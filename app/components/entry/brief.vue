@@ -7,13 +7,13 @@
         [
             { key: "中文名", val: props.name?.zh },
             { key: "外文名", val: props.name?.en },
-            { key: "性别", val: props.sex }
+            { key: "性别", val: props.sex },
         ],
         [
             { key: "日文名", val: props.name?.jp },
             { key: "振假名", val: props.name?.ka },
-            { key: "年龄", val: props.age }
-        ]
+            { key: "年龄", val: props.age },
+        ],
     ]);
 </script>
 

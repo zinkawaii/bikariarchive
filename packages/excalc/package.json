@@ -2,10 +2,7 @@
   "name": "@bikari/excalc",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/excalc.d.ts",
-      "import": "./dist/excalc.js"
-    }
+    ".": "./dist/excalc.js"
   },
   "main": "./dist/excalc.js",
   "types": "./dist/excalc.d.ts",
@@ -13,6 +10,6 @@
     "build": "asc src/index.ts --target release"
   },
   "devDependencies": {
-    "assemblyscript": "catalog:"
+    "assemblyscript": "catalog:build"
   }
 }

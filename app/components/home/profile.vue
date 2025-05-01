@@ -6,23 +6,23 @@
         {
             title: "GitHub",
             to: "https://github.com/KazariEX",
-            icon: "fa6-brands:github"
+            icon: "fa6-brands:github",
         },
         {
             title: "Twitter",
             to: "https://twitter.com/KazariEX_0929",
-            icon: "fa6-brands:twitter"
+            icon: "fa6-brands:twitter",
         },
         {
             title: "BiliBili",
             to: "https://space.bilibili.com/37810541",
-            icon: "fa6-brands:bilibili"
+            icon: "fa6-brands:bilibili",
         },
         {
             title: "RSS",
             to: "/feed",
-            icon: "fa6-solid:rss"
-        }
+            icon: "fa6-solid:rss",
+        },
     ];
 
     const avatarEl = useTemplateRef("avatar");
@@ -35,9 +35,9 @@
                 icon: "bi:chat-dots-fill",
                 action() {
                     router.push({ name: "tweet" });
-                }
-            }
-        ]
+                },
+            },
+        ],
     });
 </script>
 
@@ -84,7 +84,6 @@
     }
 
     .profile-avatar {
-        display: block;
         width: min(80%, 256px);
         aspect-ratio: 1;
         margin: -32px auto 8px;

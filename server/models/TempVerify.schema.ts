@@ -6,18 +6,18 @@ export const TempVerifyModel = defineMongooseModel<TempVerifySchema>({
     schema: {
         email: {
             type: String,
-            required: true
+            required: true,
         },
         time: {
             type: Date,
-            required: true
+            required: true,
         },
         verify: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
     options: {
-        collection: "temp_verify"
-    }
+        collection: "temp_verify",
+    },
 });

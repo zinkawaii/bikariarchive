@@ -3,7 +3,7 @@ export const Zexp = {
     email: /^[-\w]+@(?:[-\w]+\.)+[-\w]+$/,
     nickname: /^[\w\u4E00-\u9FA5]{0,18}$/,
     password: /^\w{6,18}$/,
-    url: /^https?:\/\/(?:[-\w]+\.)+[-\w]+(?::\d+)?(?:\/.*)?$/
+    url: /^https?:\/\/(?:[-\w]+\.)+[-\w]+(?::\d+)?(?:\/.*)?$/,
 };
 
 //取中间值
@@ -19,7 +19,7 @@ export function getPosition(element: Element) {
     const left = rect.left + window.scrollX;
     return {
         top,
-        left
+        left,
     };
 }
 
@@ -34,7 +34,7 @@ export function isFocusedEditable() {
 export function toEntry(title: string) {
     return {
         name: "entry",
-        params: { title }
+        params: { title },
     };
 }
 
@@ -42,6 +42,6 @@ export function toEntry(title: string) {
 export function toSearch(word: string) {
     return {
         name: "search",
-        query: { word }
+        query: { word },
     };
 }

@@ -19,8 +19,8 @@ export default <ModuleOptions> {
         "/tools/namaemaker",
         ...Object.entries(jArticle).map(([novel, { chapters }]) => [
             `/book/${novel}`,
-            ...chapters.map((item) => `/book/${novel}/${item.index}`)
+            ...chapters.map((item) => `/book/${novel}/${item.index}`),
         ]),
-        ...jIntel.all
-    ].flat()
+        ...jIntel.all,
+    ].flat(),
 };

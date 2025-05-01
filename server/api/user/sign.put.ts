@@ -2,22 +2,22 @@ import { type } from "arktype";
 import type { PutUserSignBody } from "~~/server/types/api/user/sign";
 
 const schema = type({
-    content: "string"
+    content: "string",
 });
 
 export default defineJEventHandler(async (event) => {
     const { session } = event.context;
     const { content } = schema.assert(
-        await readBody<PutUserSignBody>(event)
+        await readBody<PutUserSignBody>(event),
     );
 
     //权限验证
     identityValidate(event, 1);
 
     const qUser = await UserDataModel.updateOne({
-        uid: session.uid
+        uid: session.uid,
     }, {
-        sign: content
+        sign: content,
     });
 
     //找不到用户

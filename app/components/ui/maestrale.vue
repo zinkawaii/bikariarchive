@@ -26,13 +26,13 @@
                 title: "自动",
                 icon: "bi:chat-dots-fill",
                 checked: isAuto,
-                action: toggleAuto
+                action: toggleAuto,
             },
             {
                 title: "誓约",
                 icon: "fa6-solid:heart",
                 checked: isMarry,
-                action: toggleMarry
+                action: toggleMarry,
             },
             {
                 title: "换装",
@@ -42,17 +42,17 @@
                     checked: () => skin.value === i,
                     action() {
                         skin.value = i;
-                    }
-                }))
-            }
-        ]
+                    },
+                })),
+            },
+        ],
     });
 
     //换装时的动画
     function onLoad() {
         maeEl.value!.animate([
             { rotate: "y 90deg" },
-            {}
+            {},
         ], Zin.DEFAULT_ANIME_OPTION);
     }
 
@@ -61,9 +61,9 @@
         maeEl.value!.animate([
             {},
             { translate: "0 -16px" },
-            {}
+            {},
         ], {
-            duration: 150
+            duration: 150,
         });
 
         toggleDialog(true);
@@ -96,7 +96,7 @@
         }
     }, {
         immediate: false,
-        duration: 3000
+        duration: 3000,
     });
 </script>
 

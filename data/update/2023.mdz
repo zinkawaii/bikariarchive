@@ -60,7 +60,7 @@ feat(fps): 复现左上角帧率显示
 
 feat(mb-image-viewer): 复现图片查看器
 
-feat(mb-gallary): 添加画廊组件
+feat(mb-gallery): 添加画廊组件
 
 ## 2023-11-17 [v0.1.3]
 

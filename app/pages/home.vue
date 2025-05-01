@@ -4,8 +4,8 @@
     useHead({
         title: "主页",
         link: [
-            { rel: "canonical", href: `https://${config.public.domain}` }
-        ]
+            { rel: "canonical", href: `https://${config.public.domain}` },
+        ],
     });
 </script>
 

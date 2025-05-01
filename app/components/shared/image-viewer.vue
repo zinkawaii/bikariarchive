@@ -49,7 +49,7 @@
     function getCenter(mode: "start" | "current") {
         return {
             x: fingers.value.reduce((sum, finger) => sum + finger[`${mode}X`], 0) / fingers.value.length,
-            y: fingers.value.reduce((sum, finger) => sum + finger[`${mode}Y`], 0) / fingers.value.length
+            y: fingers.value.reduce((sum, finger) => sum + finger[`${mode}Y`], 0) / fingers.value.length,
         };
     }
 
@@ -58,7 +58,7 @@
         const [finger1, finger2] = fingers.value;
         return finger2 ? Math.hypot(
             finger1[`${mode}X`] - finger2[`${mode}X`],
-            finger1[`${mode}Y`] - finger2[`${mode}Y`]
+            finger1[`${mode}Y`] - finger2[`${mode}Y`],
         ) : 0;
     }
 
@@ -81,7 +81,7 @@
                 startX: event.screenX,
                 startY: event.screenY,
                 currentX: event.screenX,
-                currentY: event.screenY
+                currentY: event.screenY,
             };
             initialize();
         },
@@ -103,10 +103,10 @@
                 left: finalLeft + "px",
                 top: finalTop + "px",
                 width: startRect.width * rate + "px",
-                height: startRect.height * rate + "px"
+                height: startRect.height * rate + "px",
             }, {
                 duration: 0,
-                fill: "forwards"
+                fill: "forwards",
             });
         },
         onPointerup(event) {
@@ -115,7 +115,7 @@
                 initialize();
                 return false;
             }
-        }
+        },
     });
 
     //鼠标滚动时
@@ -138,7 +138,7 @@
             left: finalLeft + "px",
             top: finalTop + "px",
             width: width * rate + "px",
-            height: height * rate + "px"
+            height: height * rate + "px",
         }, Zin.DEFAULT_ANIME_OPTION);
     }
 
@@ -167,7 +167,7 @@
             left: `calc(50% - ${Math.floor(finalWidth / 2)}px)`,
             width: Math.floor(finalWidth) + "px",
             height: Math.floor(finalHeight) + "px",
-            clipPath: "inset(0)"
+            clipPath: "inset(0)",
         }], Zin.DEFAULT_ANIME_OPTION);
     };
 
@@ -180,7 +180,7 @@
         const animation = el.animate([{
             top: 2 * y + elTop + "px",
             left: 2 * x + elLeft + "px",
-            clipPath: "inset(0)"
+            clipPath: "inset(0)",
         }, getOriginalKeyframe(x, y)], Zin.DEFAULT_ANIME_OPTION);
 
         animation.addEventListener("finish", done);
@@ -217,7 +217,7 @@
             left: (x + left - clipLeft) + "px",
             width: (width + clipLeft + clipRight) + "px",
             height: (height + clipTop + clipBottom) + "px",
-            clipPath: `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px)`
+            clipPath: `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px)`,
         };
     }
 </script>

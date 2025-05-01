@@ -8,7 +8,7 @@ export default defineNitroPlugin(() => {
     const { options } = config.mongoose;
 
     const job = new Cron("0 33 23 * * 7", {
-        timezone: "Asia/Shanghai"
+        timezone: "Asia/Shanghai",
     }, () => {
         //获取当前日期
         const date = new Date();

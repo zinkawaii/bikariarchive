@@ -2,7 +2,7 @@
     import type { EXCalcBuki, EXCalcData } from "~/types/excalc";
 
     useHead({
-        title: "西北风计算器"
+        title: "西北风计算器",
     });
 
     //本地数据
@@ -12,7 +12,7 @@
     whenever(() => !storage.value.length, () => {
         storage.value.push(createData());
     }, {
-        immediate: true
+        immediate: true,
     });
 
     //数据集合
@@ -30,7 +30,7 @@
             time: 0,
             health: 0,
             times: 0,
-            bukis: [createBuki()]
+            bukis: [createBuki()],
         };
     }
 
@@ -42,7 +42,7 @@
             hit: 0,
             accuracyRate: 100,
             critRate: 0,
-            critDamage: 150
+            critDamage: 150,
         };
     }
 
@@ -82,7 +82,7 @@
             state.value.pioneer.reduce((prev, ship) => {
                 return prev + ship;
             }, 0),
-            0
+            0,
         );
         return Math.floor((5000 / (state.value.time + 50) ** 0.36 - powers ** 0.6) * 10);
     });

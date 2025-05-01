@@ -3,6 +3,6 @@ import { zhCN } from "date-fns/locale";
 
 export default defineNuxtPlugin(() => {
     setDefaultOptions({
-        locale: zhCN
+        locale: zhCN,
     });
 });

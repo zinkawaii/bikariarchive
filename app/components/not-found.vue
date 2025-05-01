@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     useHead({
-        title: "404"
+        title: "404",
     });
 
     const router = useRouter();
@@ -11,7 +11,7 @@
     }, {
         immediate: false,
         duration: 1000,
-        times: time.value
+        times: time.value,
     })
     .then(() => {
         router.replace({ name: "home" });

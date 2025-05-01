@@ -1,12 +1,12 @@
 <script lang="ts" setup>
     defineOptions({
-        inheritAttrs: false
+        inheritAttrs: false,
     });
     defineProps<{
         invalid?: boolean;
     }>();
     const modelValue = defineModel<string>({
-        required: true
+        required: true,
     });
 </script>
 

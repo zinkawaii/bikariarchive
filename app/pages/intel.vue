@@ -2,7 +2,7 @@
     import type { IntelItem, IntelLeaf } from "@bikari/article";
 
     useHead({
-        title: "情报"
+        title: "情报",
     });
 
     const [DefineIntelCell, IntelCell] = createReusableTemplate<IntelItem>();

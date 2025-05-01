@@ -9,7 +9,7 @@
         attrs: Attr[];
         wrap?: boolean;
     }>(), {
-        wrap: true
+        wrap: true,
     });
 
     const infos: {
@@ -20,28 +20,28 @@
         {
             attr: "volume",
             icon: "fa6-solid:book-open",
-            content: () => props.art.volumeInfo.title
+            content: () => props.art.volumeInfo.title,
         },
         {
             attr: "read-count",
             icon: "fa6-solid:eye",
-            content: () => `${props.post?.readCount ?? "?"} 阅读`
+            content: () => `${props.post?.readCount ?? "?"} 阅读`,
         },
         {
             attr: "word-count",
             icon: "nonicons:keyword-16",
-            content: () => `${props.art.wordCount} 字`
+            content: () => `${props.art.wordCount} 字`,
         },
         {
             attr: "publish-date",
             icon: "fa6-solid:pen",
-            content: () => props.art.publishDate
+            content: () => props.art.publishDate,
         },
         {
             attr: "update-date",
             icon: "fa6-solid:clock-rotate-left",
-            content: () => props.art.updateDate
-        }
+            content: () => props.art.updateDate,
+        },
     ];
 
     const filterred = computed(() => {
@@ -54,7 +54,7 @@
         class="novel-attributes"
         :class="{
             [`is-wrap`]: wrap,
-            [`edge-fades-x no-scrollbar`]: !wrap
+            [`edge-fades-x no-scrollbar`]: !wrap,
         }"
     >
         <li v-for="{ icon, content } in filterred" class="novel-attr">

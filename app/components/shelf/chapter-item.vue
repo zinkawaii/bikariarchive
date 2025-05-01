@@ -13,13 +13,13 @@
         {
             name: "草稿",
             color: "rgb(216 108 234)",
-            when: () => props.art.draft
+            when: () => props.art.draft,
         },
         {
             name: "最近阅读",
             color: "var(--color-warning)",
-            when: () => props.art.index === readRecordStore.get(novel.value)?.index
-        }
+            when: () => props.art.index === readRecordStore.get(novel.value)?.index,
+        },
     ];
 </script>
 

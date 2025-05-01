@@ -22,9 +22,8 @@
 
         display: grid;
         justify-content: center;
-        position: relative;
         overflow-x: clip;
-        margin-block: 24px 16px;
+        margin-block: 16px 8px;
         text-align: center;
         animation-name: edge-fades;
         animation-timeline: view();
@@ -32,7 +31,6 @@
         &::before {
             content: attr(modifier);
             opacity: 0.5;
-            margin-block: -8px -32px;
             mask: linear-gradient(black 33%, transparent);
             font-size: 64px;
             text-wrap: nowrap;
@@ -43,6 +41,7 @@
     }
 
     .heading-title {
+        margin-top: -32px;
         isolation: isolate;
     }
 </style>

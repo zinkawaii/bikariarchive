@@ -4,11 +4,11 @@
     }>();
 
     useHead({
-        title
+        title,
     });
 
     useBreadcrumb({
-        name: "intel"
+        name: "intel",
     });
 
     const { hooks } = useHookStore();
@@ -20,18 +20,18 @@
 
     const { status, data } = useLazyFetch("/api/entry", {
         query: {
-            title
+            title,
         },
         immediate: isExist.value,
         watch: [Entry.meta],
-        default: () => null!
+        default: () => null!,
     });
 
     //显示评论区
     watch(isExist, (val) => {
         route.meta.comment = val;
     }, {
-        immediate: import.meta.browser
+        immediate: import.meta.browser,
     });
 </script>
 
@@ -48,7 +48,7 @@
         >
             <section class="entry-section">
                 <div class="entry-main">
-                    <novel-article tag="div" :body="data.summary"/>
+                    <novel-article as="div" :body="data.summary"/>
                     <entry-appearance v-if="data.appearance" v-bind="data.appearance"/>
                     <entry-brief v-if="data.brief" v-bind="data.brief"/>
                 </div>

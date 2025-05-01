@@ -42,21 +42,21 @@
 }
 
 [theme="hatsusora"] {
-    --color-theme            : hwb(216deg 72% 0%);
-    --color-theme-dark       : hwb(216deg 50% 8%);
-    --color-theme-text       : hwb(216deg 36% 16%);
+    --color-theme            : oklch(88% 0.0672 258deg);
+    --color-theme-dark       : oklch(77% 0.1054 258deg);
+    --color-theme-text       : oklch(66% 0.1225 258deg);
 }
 
 [theme="ayame"] {
-    --color-theme            : hwb(256deg 80% 0%);
-    --color-theme-dark       : hwb(256deg 60% 8%);
-    --color-theme-text       : hwb(256deg 48% 16%);
+    --color-theme            : oklch(88% 0.0711 297deg);
+    --color-theme-dark       : oklch(77% 0.1184 297deg);
+    --color-theme-text       : oklch(66% 0.1359 297deg);
 }
 
 [theme="sakura"] {
-    --color-theme            : hwb(0deg 80% 0%);
-    --color-theme-dark       : hwb(0deg 60% 8%);
-    --color-theme-text       : hwb(0deg 48% 16%);
+    --color-theme            : oklch(88% 0.0582 18deg);
+    --color-theme-dark       : oklch(77% 0.0989 18deg);
+    --color-theme-text       : oklch(66% 0.1149 18deg);
 }
 
 [z-dark] {
@@ -75,7 +75,7 @@
     --color-gray-900         : rgb(44 52 60);
     --color-background       : rgb(42 42 42); /* 背景色 */
     --color-background-alpha : rgb(42 42 42 / 84%); /* 背景色 - 透明 */
-    --color-theme            : hwb(196deg 15% 25%);
-    --color-theme-dark       : hwb(196deg 34% 14%);
-    --color-theme-text       : hwb(196deg 40% 9%);
+    --color-theme            : oklch(63% 0.1128 234deg);
+    --color-theme-dark       : oklch(74% 0.1037 234deg);
+    --color-theme-text       : oklch(78% 0.1026 234deg);
 }

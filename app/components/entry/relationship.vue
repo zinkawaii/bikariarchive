@@ -14,7 +14,7 @@
                     <h3><character-tag :name="item.name"/></h3>
                     <span>：{{ item.relation }}</span>
                 </hgroup>
-                <novel-article tag="div" :body="item.content"/>
+                <novel-article as="div" :body="item.content"/>
             </template>
         </template>
     </entry-section>

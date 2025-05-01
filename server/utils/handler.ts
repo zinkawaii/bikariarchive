@@ -7,7 +7,7 @@ interface Handler<T> {
 }
 
 const createHandler = <T extends BaseResponse>(
-    handler: Handler<T>
+    handler: Handler<T>,
 ) => async (event: H3Event) => {
     try {
         const res = { error: 0 } as T;
@@ -34,7 +34,7 @@ const createHandler = <T extends BaseResponse>(
         console.error(err);
         sendError(event, createError({
             status,
-            data: import.meta.dev ? data : void 0
+            data: import.meta.dev ? data : void 0,
         }));
     }
 
@@ -43,17 +43,17 @@ const createHandler = <T extends BaseResponse>(
 };
 
 export const defineJEventHandler = <T extends BaseResponse>(
-    handler: Handler<T>
+    handler: Handler<T>,
 ) => defineEventHandler(createHandler<T>(handler));
 
 export const defineJCachedEventHandler = <T extends BaseResponse>(
     handler: Handler<T>,
-    options?: CachedEventHandlerOptions
+    options?: CachedEventHandlerOptions,
 ) => defineCachedEventHandler(createHandler<T>(handler), options);
 
 export const defineJThrottledEventHandler = <T extends BaseResponse>(
     handler: Handler<T>,
-    delay: number
+    delay: number,
 ) => {
     let timer: NodeJS.Timeout | undefined;
     function throttledHandler(this: unknown, ...args: Parameters<typeof handler>) {
@@ -64,7 +64,7 @@ export const defineJThrottledEventHandler = <T extends BaseResponse>(
             return handler.apply(this, args);
         }
         throw createError({
-            statusCode: 429
+            statusCode: 429,
         });
     }
     return defineEventHandler(createHandler<T>(throttledHandler));

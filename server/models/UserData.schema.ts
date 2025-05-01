@@ -7,45 +7,45 @@ export const UserDataModel = defineMongooseModel<UserDataSchema>({
         uid: {
             type: Number,
             required: true,
-            unique: true
+            unique: true,
         },
         nickname: {
             type: String,
-            required: true
+            required: true,
         },
         email: {
             type: String,
-            required: true
+            required: true,
         },
         address: {
-            type: String
+            type: String,
         },
         sex: {
             type: Number,
-            required: true
+            required: true,
         },
         sign: {
             type: String,
-            required: true
+            required: true,
         },
         identity: {
             type: Number,
-            required: true
+            required: true,
         },
         createTime: {
             type: Date,
-            required: true
+            required: true,
         },
         hash: {
             type: String,
-            required: true
+            required: true,
         },
         salt: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
     options: {
-        collection: "user_data"
-    }
+        collection: "user_data",
+    },
 });

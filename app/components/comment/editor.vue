@@ -2,10 +2,10 @@
     withDefaults(defineProps<{
         maxlength?: number;
     }>(), {
-        maxlength: 512
+        maxlength: 512,
     });
     const modelValue = defineModel<string>({
-        required: true
+        required: true,
     });
 
     const initialValue = modelValue.value;
@@ -16,7 +16,7 @@
     const editorEl = useTemplateRef("editor");
     usePlainShiki(editorEl, {
         lang: "markdown",
-        selector: (theme) => `[z-${theme}]`
+        selector: (theme) => `[z-${theme}]`,
     });
 
     function updateModelValue(event: InputEvent) {

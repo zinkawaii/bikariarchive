@@ -32,10 +32,10 @@ for (const item of list) {
         id: json.id,
         title: {
             jp: json.name,
-            zh: json.name_cn || json.name
+            zh: json.name_cn || json.name,
         },
         cover: json.images.common,
-        date: json.date
+        date: json.date,
     });
 
     file.push(data);
@@ -49,5 +49,5 @@ file.sort((a, b) => {
 
 //写入文件
 fs.writeJson(path, file, {
-    spaces: 2
+    spaces: 2,
 });

@@ -5,14 +5,14 @@
     defineOptions({
         components: {
             "known-ability": LazyEntryKnownAbility,
-            "starred-ability": LazyEntryStarredAbility
-        }
+            "starred-ability": LazyEntryStarredAbility,
+        },
     });
     defineProps<EntryDetail>();
 </script>
 
 <template>
     <entry-section :title>
-        <novel-article tag="div" :body="content" :components="$options.components"/>
+        <novel-article as="div" :body="content" :components="$options.components"/>
     </entry-section>
 </template>

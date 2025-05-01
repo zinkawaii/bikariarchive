@@ -4,7 +4,7 @@
     }
 
     withDefaults(defineProps<MbPrimitiveProps>(), {
-        as: "div"
+        as: "div",
     });
 </script>
 

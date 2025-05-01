@@ -12,7 +12,7 @@ const defaults: PickOptional<JChapter> = {
     draft: false,
     encrypted: false,
     ending: false,
-    sticky: Infinity
+    sticky: Infinity,
 };
 
 export class Article implements JChapter {
@@ -68,8 +68,8 @@ export class Article implements JChapter {
             name: "article",
             params: {
                 novel: this.novel,
-                index: this.index
-            }
+                index: this.index,
+            },
         };
     }
 
@@ -146,7 +146,7 @@ export class Article implements JChapter {
 
         const raw = jNovel.chapters[order];
         return raw instanceof Article ? raw : reactive(
-            new Article(novel, order, raw)
+            new Article(novel, order, raw),
         );
     }
 }
@@ -162,7 +162,7 @@ export function enrichJArticle(original: JArticle) {
 
         //名称与序号的映射
         const hashs = new Map(
-            chapters.map(({ index }, i) => [index, i])
+            chapters.map(({ index }, i) => [index, i]),
         );
 
         //按名称对齐章节位置

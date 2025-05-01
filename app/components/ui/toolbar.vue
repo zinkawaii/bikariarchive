@@ -17,7 +17,7 @@
                     x: collapse.value ? 60 : 0,
                     delay: i * 50,
                     duration: 400,
-                    ease: `${collapse.value ? `in` : `out`}Back`
+                    ease: `${collapse.value ? `in` : `out`}Back`,
                 });
             }
         });

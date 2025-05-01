@@ -2,7 +2,7 @@
     import jBorrowing from "~/assets/json/Borrowing.json";
 
     useHead({
-        title: "借物表"
+        title: "借物表",
     });
 </script>
 

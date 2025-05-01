@@ -72,9 +72,9 @@
 
     .novel-adjacents {
         display: flex;
+        flex-wrap: wrap;
         gap: 16px;
         margin-top: 16px;
-        flex-wrap: wrap;
 
         &:empty {
             display: none;

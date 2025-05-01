@@ -31,7 +31,7 @@ declare module "mdast" {
 export default function(this: Processor) {
     appendExtensions(this, {
         micromark: interpolation(),
-        fromMarkdown: interpolationFromMarkdown()
+        fromMarkdown: interpolationFromMarkdown(),
     });
 
     return (tree: Root, file: VFile) => {
@@ -57,7 +57,7 @@ export default function(this: Processor) {
             else {
                 parent.children.splice(index, 1, {
                     type: "text",
-                    value
+                    value,
                 });
             }
         });
@@ -126,13 +126,13 @@ function interpolation(): MicromarkExtension {
                     return ok(code);
                 }
             }
-        }
+        },
     };
 
     return {
         text: {
-            [codes.leftCurlyBrace]: [start]
-        }
+            [codes.leftCurlyBrace]: [start],
+        },
     };
 }
 
@@ -142,12 +142,12 @@ function interpolationFromMarkdown(): FromMarkdownExtension {
             var(token) {
                 this.enter({
                     type: "var",
-                    children: []
+                    children: [],
                 }, token);
             },
             varExpression() {
                 this.stack.push({ type: "fragment", children: [] });
-            }
+            },
         },
         exit: {
             var(token) {
@@ -157,7 +157,7 @@ function interpolationFromMarkdown(): FromMarkdownExtension {
                 const data = this.resume();
                 const element = this.stack.at(-1) as Var;
                 element.expression = data.trim();
-            }
-        }
+            },
+        },
     };
 }

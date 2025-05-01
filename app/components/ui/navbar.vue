@@ -6,23 +6,23 @@
         {
             title: "主页",
             icon: "fa6-solid:house",
-            to: { name: "home" }
+            to: { name: "home" },
         },
         {
             title: "目录",
             icon: "fa6-solid:book-open",
-            to: computed(() => shelfStore.route)
+            to: computed(() => shelfStore.route),
         },
         {
             title: "情报",
             icon: "fa6-solid:sitemap",
-            to: { name: "intel" }
+            to: { name: "intel" },
         },
         {
             title: "检索",
             icon: "fa6-solid:magnifying-glass",
-            to: { name: "search" }
-        }
+            to: { name: "search" },
+        },
     ];
 </script>
 

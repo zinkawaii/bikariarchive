@@ -2,7 +2,7 @@ import type { WritableComputedRef } from "vue";
 
 export type UseSourceRefsReturns<
     T extends object,
-    F extends Record<string, UseSourceRefsFieldOptions>
+    F extends Record<string, UseSourceRefsFieldOptions>,
 > = {
     [P in keyof F]: WritableComputedRef<
         P extends keyof T
@@ -22,10 +22,10 @@ export interface UseSourceRefsFieldOptions {
 
 export default function<
     T extends object,
-    F extends Record<string, UseSourceRefsFieldOptions>
+    F extends Record<string, UseSourceRefsFieldOptions>,
 >(
     source: MaybeRefOrGetter<T>,
-    fields: F
+    fields: F,
 ) {
     const src = toRef(source);
 
@@ -40,7 +40,7 @@ export default function<
             },
             set(val) {
                 !toValue(options.readonly) && (src.value[field] = val);
-            }
+            },
         });
     }
 

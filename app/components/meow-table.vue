@@ -2,7 +2,7 @@
     withDefaults(defineProps<{
         minWidth?: number;
     }>(), {
-        minWidth: 616
+        minWidth: 616,
     });
 </script>
 

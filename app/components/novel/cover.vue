@@ -4,7 +4,7 @@
     withDefaults(defineProps<Partial<ArticleCover> & {
         viewable?: boolean;
     }>(), {
-        align: "center"
+        align: "center",
     });
 </script>
 

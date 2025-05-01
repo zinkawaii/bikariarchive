@@ -9,7 +9,7 @@
     }>(), {
         scale: 0.66,
         duration: 400,
-        ease: () => ["outBack", "inBack"]
+        ease: () => ["outBack", "inBack"],
     });
 
     const onEnter: BaseTransitionProps["onEnter"] = (el, done) => {
@@ -17,7 +17,7 @@
             opacity: [0, 1],
             scale: [props.scale, 1],
             duration: props.duration,
-            ease: props.ease[0]
+            ease: props.ease[0],
         }).then(done);
     };
 
@@ -26,7 +26,7 @@
             opacity: [1, 0],
             scale: [1, props.scale],
             duration: props.duration,
-            ease: props.ease[1]
+            ease: props.ease[1],
         }).then(done);
     };
 </script>

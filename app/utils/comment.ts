@@ -34,40 +34,40 @@ const rehypeOptions: RehypeOptions = {
         code(state, node) {
             const hast = shiki.codeToHast(node.value, {
                 ...options,
-                lang: node.lang
+                lang: node.lang,
             });
             const result: hast.Element = {
                 type: "element",
                 tagName: "figure",
                 properties: {
-                    class: "shiki"
+                    class: "shiki",
                 },
                 children: [
                     {
                         type: "text",
-                        value: `\`\`\`${node.lang}\n`
+                        value: `\`\`\`${node.lang}\n`,
                     },
                     {
                         type: "element",
                         tagName: "pre",
                         properties: {
-                            class: "edge-fades-x"
+                            class: "edge-fades-x",
                         },
-                        children: hast.children as hast.ElementContent[]
+                        children: hast.children as hast.ElementContent[],
                     },
                     {
                         type: "text",
-                        value: "\n```"
-                    }
-                ]
+                        value: "\n```",
+                    },
+                ],
             };
             state.patch(node, result);
             return state.applyData(node, result);
         },
         image,
         link,
-        ...maths
-    }
+        ...maths,
+    },
 };
 
 export async function parseComment(text: string) {

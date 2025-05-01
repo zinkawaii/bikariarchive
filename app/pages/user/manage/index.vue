@@ -3,13 +3,13 @@
         {
             title: "阅读记录",
             sub: "Read Record",
-            to: { name: "read-record" }
+            to: { name: "read-record" },
         },
         {
             title: "用户数据",
             sub: "User Data",
-            to: { name: "user-data" }
-        }
+            to: { name: "user-data" },
+        },
     ];
 </script>
 
