@@ -86,8 +86,8 @@ export default createProcessor("Article", () => {
             delete metaInfo.value[novel].chapters[order];
         },
         onCacheHit(cache) {
-            const { order, name, novel, data } = cache;
-            const { index, password } = data;
+            const { order, name, novel, password, data } = cache;
+            const { index } = data;
 
             metaInfo.value[novel].chapters[order] = data;
             mapInfo.value[novel][index] = {
@@ -194,6 +194,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
         name,
         order,
         novel,
+        password,
         data,
     };
 }
