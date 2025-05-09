@@ -4,8 +4,9 @@ abbrlink: 49e0b1b
 cover:
   src: https://cdn.bikari.top/image/cover/49e0b1b.webp
   align: left bottom
-date: 2024-06-01
-updated: 2024-10-17
+date:
+  created: 2024-06-01
+  updated: 2024-10-17
 sticky: 1
 ---
 

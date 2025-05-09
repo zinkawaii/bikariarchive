@@ -4,8 +4,10 @@ abbrlink: 7b3e03b
 cover:
   src: https://cdn.bikari.top/image/cover/7b3e03b.webp
   reference: https://x.com/0youmu/status/1482264790190161922
-date: 2024-08-25
-updated: 2024-10-17
+date:
+  created: 2024-08-25
+  published: 2024-08-26
+  updated: 2024-10-17
 ---
 
 ::excerpt
@@ -26,7 +28,8 @@ updated: 2024-10-17
 ---
 title: 编译器魔法雏形
 abbrlink: 7b3e03b
-date: 2024-08-25
+date:
+  published: 2024-08-25
 ---
 ```
 

@@ -14,7 +14,7 @@ export default function(options: UseArticleListOptions) {
 
     //排序字段
     const sortBy = computed(() => {
-        return [toValue(options.sortBy), "date"].filter(notNullish);
+        return [toValue(options.sortBy), "published", "created"].filter(notNullish);
     });
 
     //是否显示置顶
@@ -26,12 +26,8 @@ export default function(options: UseArticleListOptions) {
             .filter((item) => !type.value || item.type === type.value)
             .flatMap(({ chapters }) => chapters)
             .sort((a, b) => {
-                const [x, y] = sortBy.value.reduce(([x, y], prop) => {
-                    return [
-                        x ?? Reflect.get(a, prop),
-                        y ?? Reflect.get(b, prop),
-                    ];
-                }, [null, null]);
+                const x = sortBy.value.reduce((x, prop) => x ?? Reflect.get(a.date, prop), void 0);
+                const y = sortBy.value.reduce((y, prop) => y ?? Reflect.get(b.date, prop), void 0);
                 return x && y ? y.localeCompare(x) : x ? -1 : 1;
             });
 

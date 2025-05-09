@@ -1,8 +1,10 @@
 ---
 title: 基于滚动驱动动画的滚动条
 abbrlink: 057e1b0
-date: 2024-01-11
-updated: 2024-10-23
+date:
+  created: 2024-01-11
+  published: 2024-01-12
+  updated: 2024-10-23
 ---
 
 目前 [scroll-driven animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations) 的浏览器兼容性不是很好，故编写一个 demo 暂存在这个页面。利用 JS 实现的滚动条要比原生消耗更多性能，在反复调试了一下午后还是选择再观望一阵子。

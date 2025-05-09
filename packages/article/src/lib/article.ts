@@ -152,7 +152,9 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
     delete attributes.password;
 
     //日期格式化
-    formatDate(attributes, ["date", "updated", "refactored"]);
+    for (const [key, value] of Object.entries(attributes.date ?? {})) {
+        attributes.date[key] = format(value, "yyyy-MM-dd");
+    }
 
     //生成映射
     let order = `[${volume}]`;
@@ -202,13 +204,4 @@ function sortKeyValues<T>(obj: Record<string, T>, compareFn: (a: T, b: T) => num
         Object.entries(obj)
             .toSorted(([, a], [, b]) => compareFn(a, b)),
     );
-}
-
-//日期格式化
-function formatDate(obj: Record<string, any>, keys: string[]) {
-    for (const key of keys) {
-        if (key in obj) {
-            obj[key] = format(obj[key], "yyyy-MM-dd");
-        }
-    }
 }

@@ -37,9 +37,12 @@ export interface ArticleFrontmatter {
     title: string;
     excerpt?: Child[];
     abbrlink?: string;
-    date?: string;
-    refactored?: string;
-    updated?: string;
+    date?: {
+        created?: string;
+        published?: string;
+        refactored?: string;
+        updated?: string;
+    };
     cover?: ArticleCover;
     variant?: ArticleVariant;
     draft?: boolean;

@@ -4,9 +4,7 @@ import type { PickOptional } from "~/types";
 
 const defaults: PickOptional<JChapter> = {
     excerpt: void 0,
-    date: void 0,
-    updated: void 0,
-    refactored: void 0,
+    date: {},
     cover: void 0,
     variant: void 0,
     draft: false,
@@ -23,9 +21,6 @@ export class Article implements JChapter {
     index!: string;           //章文件名
     title!: string;           //章节名
     excerpt?: Child[];        //摘要
-    date?: string;            //日期
-    updated?: string;         //更新日期
-    refactored?: string;      //重构日期
     cover?: ArticleCover;     //封面
     variant?: ArticleVariant; //变体
     draft!: boolean;          //草稿
@@ -33,6 +28,13 @@ export class Article implements JChapter {
     ending!: boolean;         //终章
     sticky!: number;          //置顶
     wordCount!: number;       //字数
+
+    date!: {
+        created?: string;     //创建日期
+        published?: string;   //发布日期
+        refactored?: string;  //重构日期
+        updated?: string;     //更新日期
+    };
 
     private constructor(novel: string, order: number, raw: JChapter) {
         this.assign(novel, order, raw);
@@ -55,12 +57,16 @@ export class Article implements JChapter {
         return this;
     }
 
+    get createDate() {
+        return this.date?.created ?? this.date?.refactored ?? Article.FARAWAY;
+    }
+
     get publishDate() {
-        return this.date ?? this.refactored ?? Article.FARAWAY;
+        return this.date?.published ?? this.createDate;
     }
 
     get updateDate() {
-        return this.updated ?? this.publishDate;
+        return this.date?.updated ?? this.publishDate;
     }
 
     get route() {
