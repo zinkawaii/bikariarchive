@@ -1,5 +1,5 @@
 import { timer } from "@bikari/shared";
-import { confirm } from "@inquirer/prompts";
+import { confirm } from "@clack/prompts";
 import SftpClient from "ssh2-sftp-client";
 import * as tar from "tar";
 

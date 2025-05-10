@@ -6,8 +6,8 @@ patchedDependencies:
 
 catalogs:
   backend:
+    "@clack/prompts": ^0.10.1
     "@iconify-json/fa6-solid": ^1.2.3
-    "@inquirer/prompts": ^7.5.0
     "@kikiutils/nuxt-session": ^4.0.1
     "@nuxt/devtools": 2.1.0
     "@nuxt/fonts": ^0.11.2

@@ -22,6 +22,7 @@
     "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
   },
   "dependencies": {
+    "@clack/prompts": "catalog:backend",
     "@vueuse/core": "catalog:frontend",
     "@vueuse/router": "catalog:frontend",
     "animejs": "catalog:frontend",
@@ -42,7 +43,6 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",
     "@iconify-json/fa6-solid": "catalog:backend",
-    "@inquirer/prompts": "catalog:backend",
     "@kikiutils/nuxt-session": "catalog:backend",
     "@mdzjs/config": "catalog:markdown",
     "@nuxt/devtools": "catalog:backend",
