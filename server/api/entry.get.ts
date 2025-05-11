@@ -17,7 +17,7 @@ export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
         return 1;
     }
 
-    const path = r(`/dist/${category}/${title}.json`);
+    const path = r(`/data/dist/${category}/${title}.json`);
     const data = await fs.readJson(path);
 
     res.category = category;

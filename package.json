@@ -3,7 +3,6 @@
   "private": true,
   "packageManager": "pnpm@10.10.0",
   "scripts": {
-    "deploy": "pm2 restart .output/server/index.mjs",
     "dev": "nuxi dev --no-qr",
     "build": "pnpm --filter @bikari/excalc run build && nuxi build",
     "prepare": "nuxi prepare",
@@ -15,13 +14,9 @@
     "task:article": "node scripts/article.js",
     "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.js",
     "task:bangumi": "cd scripts && node --watch bangumi.js",
-    "task:build": "pnpm run git:stash && pnpm run fix:sharp && pnpm run build && pnpm run git:stash/pop",
-    "task:deploy": "cd scripts && node deploy.js",
-    "task:jnm": "cd scripts && node jnm.js",
-    "fix:sharp": "npm rebuild --arch=x64 --platform=linux sharp"
+    "task:jnm": "cd scripts && node jnm.js"
   },
   "dependencies": {
-    "@clack/prompts": "catalog:backend",
     "@vueuse/core": "catalog:frontend",
     "@vueuse/router": "catalog:frontend",
     "animejs": "catalog:frontend",
@@ -52,7 +47,6 @@
     "@pinia/nuxt": "catalog:backend",
     "@types/fs-extra": "catalog:types",
     "@types/nodemailer": "catalog:types",
-    "@types/ssh2-sftp-client": "catalog:types",
     "@types/wicg-file-system-access": "catalog:types",
     "@vitejs/plugin-vue": "catalog:backend",
     "@vue-email/render": "catalog:backend",
@@ -64,7 +58,6 @@
     "chokidar": "catalog:backend",
     "cn-font-split": "catalog:backend",
     "consola": "catalog:backend",
-    "croner": "catalog:backend",
     "cross-env": "catalog:backend",
     "defu": "catalog:backend",
     "eslint": "catalog:lint",
@@ -75,9 +68,7 @@
     "nuxt": "catalog:backend",
     "pathe": "catalog:backend",
     "sass": "catalog:backend",
-    "ssh2-sftp-client": "catalog:backend",
     "stylelint": "catalog:lint",
-    "tar": "catalog:backend",
     "undici": "catalog:backend",
     "vue-tsc": "catalog:build"
   }

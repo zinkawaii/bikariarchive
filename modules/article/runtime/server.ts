@@ -5,7 +5,7 @@ import { Article, enrichJArticle } from "~/utils/article";
 import { enrichJIntel, Entry } from "~/utils/entry";
 
 export default defineNitroPlugin(async () => {
-    const baseDir = r("/dist/json");
+    const baseDir = r("/data/dist/json");
     const list = [
         "Article",
         "Artmap",

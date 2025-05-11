@@ -17,7 +17,7 @@ const PATH_REGEX = /^(.*?)\.(\d+)$/;
 
 export default createProcessor("Article", () => {
     const metaInfo = useLoad("meta", {
-        out: "dist/json/Article.json",
+        out: "data/dist/json/Article.json",
         beforeOutput(val) {
             const newVal = sortKeyValues<any>(
                 structuredClone(val),
@@ -34,7 +34,7 @@ export default createProcessor("Article", () => {
     });
 
     const mapInfo = useLoad("map", {
-        out: "dist/json/Artmap.json",
+        out: "data/dist/json/Artmap.json",
     });
 
     useSource(SourceKind.Meta, {
@@ -69,7 +69,7 @@ export default createProcessor("Article", () => {
 
     useSource(SourceKind.Article, {
         base: "data",
-        dist: "dist",
+        dist: "data/dist",
         folders: [
             "novel",
         ],

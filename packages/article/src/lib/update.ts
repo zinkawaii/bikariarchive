@@ -9,7 +9,7 @@ const PREFIX_REGEX = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 export default createProcessor("Update", () => {
     useSource(0, {
         base: "data",
-        dist: "dist",
+        dist: "data/dist",
         folders: [
             "update",
         ],

@@ -11,6 +11,6 @@ export default defineJEventHandler<GetUpdateResponse>(async (event, res) => {
 
     //读取数据
     res.list = [2023, 2024, 2025].includes(year)
-        ? await fs.readJSON(r(`/dist/update/${year}.json`))
+        ? await fs.readJSON(r(`/data/dist/update/${year}.json`))
         : [];
 });

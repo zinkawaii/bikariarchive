@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import jAbility from "~~/dist/json/Ability.json";
+    import jAbility from "~~/data/dist/json/Ability.json";
 
     const props = defineProps<{
         classification?: string;

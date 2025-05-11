@@ -1,4 +1,5 @@
 import { article, entry, update } from "@bikari/article";
+import fs from "fs-extra";
 import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 
 export default defineNuxtModule({
@@ -23,5 +24,12 @@ export default defineNuxtModule({
             entry.watch();
             update.watch();
         }
+
+        nuxt.hook("nitro:build:public-assets", () => {
+            fs.copySync(
+                resolve("../../data"),
+                resolve("../../.netlify/functions-internal/server/data"),
+            );
+        });
     },
 });

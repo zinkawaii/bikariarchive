@@ -131,6 +131,9 @@ export default defineNuxtConfig({
     icon: {
         componentName: "iconify",
     },
+    image: {
+        provider: "none",
+    },
     shiki: {
         dynamic: true,
         defaultTheme: {

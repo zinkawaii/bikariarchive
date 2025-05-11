@@ -16,7 +16,7 @@ interface AbilityInfo {
 export default createProcessor("Entry", () => {
     const metaInfo = useLoad("meta", {
         src: "data/json/Intel.json",
-        out: "dist/json/Intel.json",
+        out: "data/dist/json/Intel.json",
         onUpdate(newVal, oldVal) {
             newVal.all = oldVal?.all ?? {};
             return newVal;
@@ -66,11 +66,11 @@ export default createProcessor("Entry", () => {
     });
 
     const mapInfo = useLoad("map", {
-        out: "dist/json/Intmap.json",
+        out: "data/dist/json/Intmap.json",
     });
 
     const abilityInfo = useLoad("ability", {
-        out: "dist/json/Ability.json",
+        out: "data/dist/json/Ability.json",
         beforeOutput(val) {
             const items = [];
             for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {
@@ -98,7 +98,7 @@ export default createProcessor("Entry", () => {
 
     useSource(0, {
         base: "data",
-        dist: "dist",
+        dist: "data/dist",
         folders: [
             "area",
             "character",
