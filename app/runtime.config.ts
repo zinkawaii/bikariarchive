@@ -48,7 +48,15 @@ const server = {
             },
         },
     },
-    production: {},
+    production: {
+        mongoose: {
+            uri: "<!-- ??? -->",
+            options: {
+                dbName: "<!-- ??? -->",
+                user: "<!-- ??? -->",
+            },
+        },
+    },
 };
 
 const client = {
