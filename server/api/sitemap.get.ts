@@ -1,10 +1,9 @@
-import type { ModuleOptions } from "@nuxtjs/sitemap";
-import jArticle from "../dist/json/Article.json";
-import jIntel from "../dist/json/Intel.json";
+import { defineSitemapEventHandler } from "#imports";
+import { Article } from "~/utils/article";
+import { Entry } from "~/utils/entry";
 
-export default <ModuleOptions> {
-    excludeAppSources: true,
-    urls: () => [
+export default defineSitemapEventHandler(() => {
+    return [
         "/about",
         "/borrowing",
         "/chest",
@@ -17,10 +16,10 @@ export default <ModuleOptions> {
         "/tools/excalc",
         "/tools/lyricaxis",
         "/tools/namaemaker",
-        ...Object.entries(jArticle).map(([novel, { chapters }]) => [
+        ...Object.entries(Article.meta).map(([novel, { chapters }]) => [
             `/book/${novel}`,
             ...chapters.map((item) => `/book/${novel}/${item.index}`),
         ]),
-        ...jIntel.all,
-    ].flat(),
-};
+        ...Entry.meta.all,
+    ].flat();
+});

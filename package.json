@@ -5,8 +5,8 @@
   "scripts": {
     "deploy": "pm2 restart .output/server/index.mjs",
     "dev": "nuxi dev --no-qr",
-    "build": "nuxi build",
-    "prepare": "pnpm --filter @bikari/* run build && pnpm run task:article && nuxi prepare",
+    "build": "pnpm --filter @bikari/excalc run build && nuxi build",
+    "prepare": "nuxi prepare",
     "preview": "nuxi preview",
     "tscheck": "vue-tsc",
     "stylelint": "stylelint **/*.{vue,scss}",

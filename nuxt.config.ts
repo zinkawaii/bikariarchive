@@ -3,7 +3,6 @@ import { resolve } from "pathe";
 import { ProxyAgent, setGlobalDispatcher } from "undici";
 import robotsConfig from "./app/robots.config";
 import { clientConfig, serverConfig } from "./app/runtime.config";
-import sitemapConfig from "./app/sitemap.config";
 
 try {
     const dispatcher = new ProxyAgent({ uri: new URL(process.env.HTTPS_PROXY!).toString() });
@@ -100,7 +99,12 @@ export default defineNuxtConfig({
         "./modules/font-split",
     ],
     robots: robotsConfig,
-    sitemap: sitemapConfig,
+    sitemap: {
+        excludeAppSources: true,
+        sources: [
+            "/api/sitemap.get",
+        ],
+    },
     site: {
         name: clientConfig.title,
         url: `https://${clientConfig.domain}`,
