@@ -24,7 +24,6 @@
         },
         immediate: isExist.value,
         watch: [Entry.meta],
-        default: () => null!,
     });
 
     //显示评论区
@@ -42,7 +41,7 @@
         </header>
         <mb-skeleton v-if="status !== `success`"/>
         <article
-            v-else
+            v-else-if="data"
             class="entry-article"
             @vue:mounted="hooks.callHook(`article:rendered`, `.entry-article`)"
         >

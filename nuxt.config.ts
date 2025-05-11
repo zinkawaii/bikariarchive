@@ -96,6 +96,8 @@ export default defineNuxtConfig({
         "@vueuse/nuxt",
         "@zinkawaii/nuxt-shiki",
         "pinia-plugin-persistedstate/nuxt",
+        "./modules/article",
+        "./modules/font-split",
     ],
     robots: robotsConfig,
     sitemap: sitemapConfig,

@@ -5,9 +5,7 @@
 
     const config = useRuntimeConfig();
 
-    const { status, data } = useLazyFetch("/api/friend", {
-        default: () => null!,
-    });
+    const { status, data } = useLazyFetch("/api/friend");
 
     const schema = `export default {
   title: "${config.public.title}",
@@ -21,7 +19,7 @@
     <meow-widget title="友情链接">
         <novel-article class="text-small">
             <mb-skeleton v-if="status !== `success`"/>
-            <div v-else class="friend-list">
+            <div v-else-if="data" class="friend-list">
                 <nuxt-link v-for="item in data.list" class="friend-item" :to="item.link" target="_blank">
                     <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
                     <div class="friend-info">

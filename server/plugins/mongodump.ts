@@ -7,7 +7,7 @@ export default defineNitroPlugin(() => {
     const config = useRuntimeConfig();
     const { options } = config.mongoose;
 
-    new Cron("0 33 23 * * 7", {
+    const task = new Cron("0 33 23 * * 7", {
         timezone: "Asia/Shanghai",
     }, () => {
         //获取当前日期

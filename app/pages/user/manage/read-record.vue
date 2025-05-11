@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import { format } from "date-fns";
+    import type { FetchResult } from "#app";
 
     useHead({
         title: "阅读记录",
@@ -11,10 +12,9 @@
         query: {
             page,
         },
-        default: () => null!,
     });
 
-    const records = ref<(typeof data.value)["list"]>([]);
+    const records = ref<FetchResult<"/api/read-record", "get">["list"]>([]);
     watchImmediate(data, (val) => {
         records.value = val?.list ?? [];
     });
@@ -32,7 +32,7 @@
             return;
         }
 
-        const { total, sizes } = data.value;
+        const { total, sizes } = data.value!;
         const totalPages = Math.max(1, Math.ceil(total / sizes));
         if (page.value === totalPages && page.value > 1) {
             page.value -= 1;
@@ -80,7 +80,7 @@
         </table>
     </div>
     <div class="manage-pagination content-widget">
-        <mb-pagination :total="data.total" :sizes="data.sizes" v-model="page"/>
+        <mb-pagination :total="data?.total ?? 0" :sizes="data?.sizes" v-model="page"/>
     </div>
 </template>
 

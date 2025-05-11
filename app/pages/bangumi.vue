@@ -11,14 +11,13 @@
         query: {
             page,
         },
-        default: () => null!,
     });
 </script>
 
 <template>
     <meow-widget title="番剧">
         <mb-skeleton v-if="status !== `success`"/>
-        <template v-else>
+        <template v-else-if="data">
             <div class="bangumi-list">
                 <bangumi-item v-for="bangumi in data.list" :key="bangumi.id" v-bind="bangumi"/>
             </div>

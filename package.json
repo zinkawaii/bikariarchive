@@ -9,7 +9,6 @@
     "prepare": "nuxi prepare",
     "preview": "nuxi preview",
     "tscheck": "vue-tsc",
-    "eslint": "eslint .",
     "stylelint": "stylelint **/*.{vue,scss}",
     "git:stash": "git add -A && git stash",
     "git:stash/pop": "git stash pop && git reset",

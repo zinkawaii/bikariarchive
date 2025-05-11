@@ -24,7 +24,7 @@ export const UserDataModel = model("UserData", new Schema<UserDataSchema>({
     },
     sign: {
         type: String,
-        required: true,
+        default: "",
     },
     identity: {
         type: Number,

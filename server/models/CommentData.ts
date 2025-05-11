@@ -1,4 +1,4 @@
-import { Schema, Types, model } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 import type { CommentDataSchema } from "~~/server/types/model";
 
 export const CommentDataModel = model("CommentData", new Schema<CommentDataSchema>({

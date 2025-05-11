@@ -77,7 +77,6 @@
         },
         immediate: !art.encrypted,
         watch: [art],
-        default: () => null!,
     });
 
     //设置元信息
@@ -106,7 +105,7 @@
         $fetch("/api/article", {
             method: "patch",
             body: {
-                token: post.value.token,
+                token: post.value?.token,
             },
         });
     });
@@ -114,7 +113,7 @@
     //防抖化请求
     const debouncedExecute = Zin.debounce(async () => {
         await execute();
-        switch (post.value.error) {
+        switch (post.value?.error) {
             case 1:
                 toastStore.error("[article]:password", "密码错误");
                 break;
@@ -132,7 +131,7 @@
         <novel-decrypt v-if="art.encrypted && !decrypted" v-model="password" @decrypt="debouncedExecute"/>
         <mb-skeleton v-else-if="status !== `success`"/>
         <novel-article
-            v-else
+            v-else-if="post"
             :body="post.body"
             :variant="art.variant"
             @vue:mounted="hooks.callHook(`article:rendered`, `.novel-text`)"
