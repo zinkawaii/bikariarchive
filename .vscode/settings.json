@@ -5,14 +5,16 @@
       "color": "#FA565D",
       "fileExtensions": [
         "mdz"
-      ]
+      ],
+      "name": "mdz"
     },
     {
       "base": "typescript",
       "color": "#FA565D",
       "fileNames": [
         "mdz.config.ts"
-      ]
+      ],
+      "name": "mdz.config.ts"
     }
   ],
   "material-icon-theme.folders.associations": {
