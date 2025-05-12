@@ -1,0 +1,21 @@
+{
+  "material-icon-theme.files.customClones": [
+    {
+      "base": "markdown",
+      "color": "#FA565D",
+      "fileExtensions": [
+        "mdz"
+      ]
+    },
+    {
+      "base": "typescript",
+      "color": "#FA565D",
+      "fileNames": [
+        "mdz.config.ts"
+      ]
+    }
+  ],
+  "material-icon-theme.folders.associations": {
+    "novel": "content"
+  }
+}
