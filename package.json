@@ -14,7 +14,8 @@
     "task:article": "node scripts/article.js",
     "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.js",
     "task:bangumi": "cd scripts && node --watch bangumi.js",
-    "task:jnm": "cd scripts && node jnm.js"
+    "task:jnm": "cd scripts && node jnm.js",
+    "task:svgo": "svgo public/image/favicon.svg"
   },
   "dependencies": {
     "@vueuse/core": "catalog:frontend",
@@ -69,6 +70,7 @@
     "pathe": "catalog:backend",
     "sass": "catalog:backend",
     "stylelint": "catalog:lint",
+    "svgo": "catalog:backend",
     "undici": "catalog:backend",
     "vue-tsc": "catalog:build"
   }

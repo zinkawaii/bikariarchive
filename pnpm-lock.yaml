@@ -93,6 +93,9 @@ catalogs:
     sass:
       specifier: ^1.87.0
       version: 1.87.0
+    svgo:
+      specifier: ^3.3.2
+      version: 3.3.2
     undici:
       specifier: ^7.9.0
       version: 7.9.0
@@ -395,6 +398,9 @@ importers:
       stylelint:
         specifier: catalog:lint
         version: 16.19.1(typescript@5.8.3)
+      svgo:
+        specifier: catalog:backend
+        version: 3.3.2
       undici:
         specifier: catalog:backend
         version: 7.9.0

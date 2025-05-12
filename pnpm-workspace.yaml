@@ -37,6 +37,7 @@ catalogs:
     pathe: ^2.0.3
     propathy: ^0.2.0
     sass: ^1.87.0
+    svgo: ^3.3.2
     undici: ^7.9.0
     yaml: ^2.7.1
   build:
