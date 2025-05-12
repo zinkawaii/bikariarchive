@@ -10,11 +10,12 @@ export default defineEventHandler(async (event: H3Event) => {
     });
 
     const config = useRuntimeConfig();
+    const currentDate = new Date();
 
     const feed = new Feed({
         id: "BikariArchive",
         title: "BikariArchive",
-        copyright: "© 2022-2024 KazariEX",
+        copyright: `© 2022-${currentDate.getFullYear()} KazariEX`,
         favicon: `https://${config.public.domain}/garden/favicon.ico`,
         link: `https://${config.public.domain}`,
         author: {
