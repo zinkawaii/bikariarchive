@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import { writeFile } from "node:fs/promises";
 import { resolve } from "pathe";
 
 const url = "https://namaemaker.net/wp-content/cache/autoptimize/autoptimize_single_4e118ae6b0f62cbfd6a1c0b41283e2c2.php";
@@ -14,4 +14,4 @@ for (const match of text.matchAll(reg)) {
 }
 
 const outputPath = resolve(import.meta.dirname, "../public/json/Jnm.json");
-await fs.outputJson(outputPath, Jnm);
+await writeFile(outputPath, JSON.stringify(Jnm, null, 2));

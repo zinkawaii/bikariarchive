@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import { readFile } from "node:fs/promises";
 import { createProcessor, useSource } from "kerria";
 import { parseUpdate } from "../remark";
 import type { JUpdate } from "./types";
@@ -16,8 +16,8 @@ export default createProcessor("Update", () => {
         ext: ".mdz",
         async parse(path, info) {
             //处理文件
-            const file = await fs.readFile(path);
-            const body = await parseUpdate(file.toString());
+            const file = await readFile(path, "utf-8");
+            const body = await parseUpdate(file);
 
             const updates: JUpdate[] = [];
             let update: JUpdate;

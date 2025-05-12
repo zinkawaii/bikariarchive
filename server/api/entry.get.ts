@@ -1,5 +1,5 @@
+import { readFile } from "node:fs/promises";
 import { type } from "arktype";
-import fs from "fs-extra";
 import { Entry } from "~/utils/entry";
 import type { GetEntryResponse } from "~~/server/types/api/entry";
 
@@ -18,7 +18,8 @@ export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
     }
 
     const path = r(`/data/dist/${category}/${title}.json`);
-    const data = await fs.readJson(path);
+    const file = await readFile(path, "utf-8");
+    const data = JSON.parse(file);
 
     res.category = category;
     Object.assign(res, data);

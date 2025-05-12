@@ -1,5 +1,5 @@
+import { existsSync } from "node:fs";
 import { fontSplit } from "cn-font-split";
-import fs from "fs-extra";
 import { defineNuxtModule, resolvePath } from "nuxt/kit";
 import { resolve } from "pathe";
 
@@ -30,7 +30,7 @@ export default defineNuxtModule<FontSplitOptions>({
             const dirName = `node_modules/.cache/${cacheName}/${fontName}`;
             const cssName = "index.css";
 
-            if (!await fs.pathExists(dirName)) {
+            if (!existsSync(dirName)) {
                 fontSplit({
                     input: fontPath,
                     outDir: dirName,

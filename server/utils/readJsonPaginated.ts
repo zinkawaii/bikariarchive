@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import { readFile } from "node:fs/promises";
 
 export interface ReadJsonPaginatedOptions {
     page: number;
@@ -11,15 +11,15 @@ export async function readJsonPaginated<T>(path: string, options: ReadJsonPagina
         sizes,
     } = options;
 
-    const jData: T[] = await fs.readJson(r(path));
+    const file = await readFile(r(path), "utf-8");
+    const data: T[] = JSON.parse(file);
 
-    const { length: total } = jData;
+    const { length: total } = data;
     const start = (page - 1) * sizes;
     const end = start + sizes;
-    const data = jData.slice(start, end);
 
     return {
         total,
-        data,
+        data: data.slice(start, end),
     };
 }

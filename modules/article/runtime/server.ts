@@ -1,5 +1,5 @@
+import { readFile } from "node:fs/promises";
 import chokidar from "chokidar";
-import fs from "fs-extra";
 import { basename } from "pathe";
 import { Article, enrichJArticle } from "~/utils/article";
 import { enrichJIntel, Entry } from "~/utils/entry";
@@ -25,7 +25,8 @@ export default defineNitroPlugin(async () => {
 
 async function update(path: string) {
     const name = basename(path, ".json");
-    const data = await fs.readJson(path);
+    const file = await readFile(path, "utf-8");
+    const data = JSON.parse(file);
     switch (name) {
         case "Article": {
             enrichJArticle(data);

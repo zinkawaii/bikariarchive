@@ -28,15 +28,14 @@ catalogs:
     cross-env: ^7.0.3
     crypto-es: ^2.1.0
     defu: ^6.1.4
-    feed: ^5.0.0
-    fs-extra: ^11.3.0
+    feed: ^5.0.1
     hookable: ^5.5.3
     mongoose: ^8.14.2
     nodemailer: ^7.0.3
-    nuxt: ^3.17.2
+    nuxt: ^3.17.3
     pathe: ^2.0.3
     propathy: ^0.2.0
-    sass: ^1.87.0
+    sass: ^1.88.0
     svgo: ^3.3.2
     undici: ^7.9.0
     yaml: ^2.7.1
@@ -53,7 +52,7 @@ catalogs:
     katex: ^0.16.22
     lunisolar: ^2.5.2
     pinia: ^3.0.2
-    pinia-plugin-persistedstate: ^4.2.0
+    pinia-plugin-persistedstate: ^4.3.0
     plain-shiki: ^0.2.0
     shiki: ^3.4.0
     uqr: ^0.1.2
@@ -86,7 +85,6 @@ catalogs:
   test:
     vitest: ^3.1.3
   types:
-    "@types/fs-extra": ^11.0.4
     "@types/nodemailer": ^6.4.17
     "@types/wicg-file-system-access": ^2023.10.6
 

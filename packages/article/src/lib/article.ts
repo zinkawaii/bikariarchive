@@ -1,6 +1,6 @@
+import { readFile } from "node:fs/promises";
 import { isDev } from "@bikari/shared";
 import { format } from "date-fns";
-import fs from "fs-extra";
 import { createProcessor, type LoadInfo, type SourceInfo, useLoad, useSource } from "kerria";
 import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
@@ -100,8 +100,8 @@ export default createProcessor("Article", () => {
 
 async function processMeta(path: string) {
     //处理文件
-    const file = await fs.readFile(path);
-    const { attributes } = await parseEntry<NovelFrontmatter>(file.toString());
+    const file = await readFile(path, "utf-8");
+    const { attributes } = await parseEntry<NovelFrontmatter>(file);
     const [order, novel] = basename(path, ".mdz").split("-");
 
     //写入缓存
@@ -114,8 +114,8 @@ async function processMeta(path: string) {
 
 async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo) {
     //处理文件
-    const file = await fs.readFile(path);
-    const { attributes, body } = await parseArticle<ArticleFrontmatter>(file.toString());
+    const file = await readFile(path, "utf-8");
+    const { attributes, body } = await parseArticle<ArticleFrontmatter>(file);
 
     //生产环境下忽略草稿文件
     if (attributes.draft && !isDev) {

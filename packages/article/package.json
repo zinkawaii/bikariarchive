@@ -14,7 +14,6 @@
   "dependencies": {
     "date-fns": "catalog:frontend",
     "defu": "catalog:backend",
-    "fs-extra": "catalog:backend",
     "github-slugger": "catalog:frontend",
     "kerria": "catalog:markdown",
     "mdast-util-frontmatter": "catalog:markdown",

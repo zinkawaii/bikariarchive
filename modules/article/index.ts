@@ -1,5 +1,5 @@
+import { cp } from "node:fs/promises";
 import { article, entry, update } from "@bikari/article";
-import fs from "fs-extra";
 import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 
 export default defineNuxtModule({
@@ -25,11 +25,10 @@ export default defineNuxtModule({
             update.watch();
         }
 
-        nuxt.hook("nitro:build:public-assets", () => {
-            fs.copySync(
-                resolve("../../data"),
-                resolve("../../.netlify/functions-internal/server/data"),
-            );
+        nuxt.hook("nitro:build:public-assets", async () => {
+            const source = resolve("../../data");
+            const target = resolve("../../.netlify/functions-internal/server/data");
+            await cp(source, target);
         });
     },
 });

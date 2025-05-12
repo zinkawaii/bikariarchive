@@ -1,6 +1,6 @@
+import { readFile } from "node:fs/promises";
 import { isDev } from "@bikari/shared";
 import defu from "defu";
-import fs from "fs-extra";
 import { createProcessor, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
 import { parseEntry } from "../remark";
@@ -107,8 +107,8 @@ export default createProcessor("Entry", () => {
         ext: ".mdz",
         async parse(path, info) {
             //处理文件
-            const file = await fs.readFile(path);
-            let { attributes, drafts } = await parseEntry<JEntry>(file.toString());
+            const file = await readFile(path, "utf-8");
+            let { attributes, drafts } = await parseEntry<JEntry>(file);
 
             //生产环境下忽略草稿文件
             if (attributes.draft && !isDev) {
