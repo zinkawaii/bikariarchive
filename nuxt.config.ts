@@ -102,7 +102,7 @@ export default defineNuxtConfig({
     sitemap: {
         excludeAppSources: true,
         sources: [
-            "/api/sitemap.get",
+            "/api/sitemap",
         ],
     },
     site: {
