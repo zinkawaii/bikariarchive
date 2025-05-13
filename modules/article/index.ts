@@ -28,7 +28,9 @@ export default defineNuxtModule({
         nuxt.hook("nitro:build:public-assets", async () => {
             const source = resolve("../../data");
             const target = resolve("../../.netlify/functions-internal/server/data");
-            await cp(source, target);
+            await cp(source, target, {
+                recursive: true,
+            });
         });
     },
 });
