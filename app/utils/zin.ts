@@ -11,17 +11,6 @@ export const Zin = new class Z {
     WINDOW_SIZE_MID = 768;
     WINDOW_SIZE_MIN = 425;
 
-    //时间段常量
-    PERIOD_DAY = Symbol();
-    PERIOD_NIGHT = Symbol();
-
-    //获取时间段
-    get period() {
-        const now = new Date();
-        const hour = now.getHours();
-        return (hour >= 6 && hour < 18) ? this.PERIOD_DAY : this.PERIOD_NIGHT;
-    }
-
     //图床链接
     image(src: string, options: {
         wrap?: boolean;

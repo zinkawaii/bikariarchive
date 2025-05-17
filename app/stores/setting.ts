@@ -16,6 +16,7 @@ export const useSettingStore = defineStore("setting", () => {
     });
 
     const dialogStore = useDialogStore();
+    const isPreferredDark = usePreferredDark();
 
     //挂载弹窗实例
     const { open, close } = dialogStore.use(() => h(LazyZSetting), {
@@ -35,7 +36,7 @@ export const useSettingStore = defineStore("setting", () => {
     const isDarkMode = computed(() => ({
         1: false,
         2: true,
-    }[setting.value["dark-mode"]] ?? (Zin.period === Zin.PERIOD_NIGHT)));
+    }[setting.value["dark-mode"]] ?? isPreferredDark.value));
 
     function get<K extends SettingField>(key: K) {
         return setting.value[key];
