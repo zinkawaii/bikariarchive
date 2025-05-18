@@ -11,10 +11,14 @@ export default defineNitroPlugin(async (nitroApp) => {
 
     nitroApp.hooks.hook("close", () => {
         mongoose.disconnect();
+        consola.info("Disconnected from MongoDB");
     });
 
     try {
-        await mongoose.connect(config.mongoose.uri, config.mongoose.options);
+        await mongoose.connect(config.mongoose.uri, {
+            ...config.mongoose.options,
+            bufferCommands: false,
+        });
         consola.success("Connected to MongoDB");
     }
     catch (err) {
