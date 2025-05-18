@@ -10,8 +10,8 @@
     const schema = `export default {
   title: "${config.public.title}",
   link: "https://${config.public.domain}",
-  icon: "https://wsrv.nl/?url=github.com/KazariEX.png",
-  description: "${config.public.description}"
+  icon: "https://${config.public.domain}/garden/favicon.svg",
+  description: "${config.public.description}",
 };`;
 </script>
 
