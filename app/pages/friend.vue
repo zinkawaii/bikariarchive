@@ -1,11 +1,11 @@
 <script lang="ts" setup>
+    import jFriend from "~/assets/json/Friend.json";
+
     useHead({
         title: "友情链接",
     });
 
     const config = useRuntimeConfig();
-
-    const { status, data } = useLazyFetch("/api/friend");
 
     const schema = `export default {
   title: "${config.public.title}",
@@ -18,9 +18,8 @@
 <template>
     <meow-widget title="友情链接">
         <novel-article class="text-small">
-            <mb-skeleton v-if="status !== `success`"/>
-            <div v-else-if="data" class="friend-list">
-                <nuxt-link v-for="item in data.list" class="friend-item" :to="item.link" target="_blank">
+            <div class="friend-list">
+                <nuxt-link v-for="item in jFriend" class="friend-item" :to="item.link" target="_blank">
                     <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
                     <div class="friend-info">
                         <div class="friend-title content-h2 text-truncate">{{ item.title }}</div>
