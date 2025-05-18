@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import type { SettingField } from "~/types/setting";
 
-    type ShortCutKey = SettingField & "shortcut-last" | "shortcut-next";
+    type ShortCutKey = Extract<SettingField, `shortcut-${string}`>;
 
     const settingStore = useSettingStore();
 

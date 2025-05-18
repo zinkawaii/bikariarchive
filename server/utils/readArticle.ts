@@ -5,7 +5,7 @@ import { Article } from "~/utils/article";
 export async function readArticle(art: Article) {
     const { novel, volume, index } = art;
     const filename = Article.map[novel][index].name;
-    const path = r(`/data/dist/novel/${novel}.${volume}/${filename}.json`);
+    const path = r(`/.data/novel/${novel}.${volume}/${filename}.json`);
     const file = await readFile(path, "utf-8");
     return JSON.parse(file) as Root;
 }

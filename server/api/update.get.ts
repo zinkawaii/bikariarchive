@@ -11,7 +11,7 @@ export default defineJEventHandler<GetUpdateResponse>(async (event, res) => {
 
     //读取数据
     if ([2023, 2024, 2025].includes(year)) {
-        const path = r(`/data/dist/update/${year}.json`);
+        const path = r(`/.data/update/${year}.json`);
         const file = await readFile(path, "utf-8");
         res.list = JSON.parse(file);
     }
