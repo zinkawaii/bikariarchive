@@ -15,10 +15,7 @@ export default defineNitroPlugin(async (nitroApp) => {
     });
 
     try {
-        await mongoose.connect(config.mongoose.uri, {
-            ...config.mongoose.options,
-            bufferCommands: false,
-        });
+        await mongoose.connect(config.mongoose.uri, config.mongoose.options);
         consola.success("Connected to MongoDB");
     }
     catch (err) {
