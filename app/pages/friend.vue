@@ -10,7 +10,7 @@
     const schema = `export default {
   title: "${config.public.title}",
   link: "https://${config.public.domain}",
-  icon: "https://${config.public.domain}/garden/favicon.svg",
+  icon: "https://${config.public.domain}${config.public.favicon}",
   description: "${config.public.description}",
 };`;
 </script>

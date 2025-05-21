@@ -1,5 +1,3 @@
-<!-- @fallthroughAttributes true -->
-
 <script lang="ts" setup>
     import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
     import type { VNodeArrayChildren } from "vue";

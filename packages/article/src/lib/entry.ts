@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { isDev } from "@bikari/shared";
 import defu from "defu";
-import { createProcessor, useLoad, useSource } from "kerria";
+import { createKerria, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import type { Child } from "../remark/types";
@@ -13,7 +13,7 @@ interface AbilityInfo {
     class: string[];
 }
 
-export default createProcessor("Entry", () => {
+export default createKerria("Entry", () => {
     const metaInfo = useLoad("meta", {
         src: "data/json/Intel.json",
         out: ".data/json/Intel.json",

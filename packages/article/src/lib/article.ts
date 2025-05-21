@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { isDev } from "@bikari/shared";
 import { format } from "date-fns";
-import { createProcessor, type LoadInfo, type SourceInfo, useLoad, useSource } from "kerria";
+import { createKerria, type LoadInfo, type SourceInfo, useLoad, useSource } from "kerria";
 import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
@@ -15,7 +15,7 @@ enum SourceKind {
 
 const PATH_REGEX = /^(.*?)\.(\d+)$/;
 
-export default createProcessor("Article", () => {
+export default createKerria("Article", () => {
     const metaInfo = useLoad("meta", {
         out: ".data/json/Article.json",
         beforeOutput(val) {

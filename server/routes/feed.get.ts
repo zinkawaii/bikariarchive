@@ -1,5 +1,5 @@
-import { Feed } from "feed";
 import { toString } from "mdast-util-to-string";
+import { createFeed, generateAtom1 } from "zfeed";
 import type { H3Event } from "h3";
 import { Article } from "~/utils/article";
 
@@ -12,17 +12,6 @@ export default defineEventHandler(async (event: H3Event) => {
     const config = useRuntimeConfig();
     const currentDate = new Date();
 
-    const feed = new Feed({
-        id: "BikariArchive",
-        title: "BikariArchive",
-        copyright: `© 2022-${currentDate.getFullYear()} KazariEX`,
-        favicon: `https://${config.public.domain}/garden/favicon.ico`,
-        link: `https://${config.public.domain}`,
-        author: {
-            name: "KazariEX",
-        },
-    });
-
     const arts = Object.values(Article.meta)
     .flatMap(({ chapters }) => chapters)
     .filter((c) => c.updateDate !== Article.FARAWAY)
@@ -33,22 +22,38 @@ export default defineEventHandler(async (event: H3Event) => {
     })
     .slice(0, 10);
 
-    for (const art of arts) {
-        const description = toString(art.excerpt);
-        const link = `https://${config.public.domain}/book/${art.novel}/${art.index}`;
-        const content = `${
-            art.cover ? `<img src="${art.cover.src}">` : ""
-        }<p>${description}</p><a href="${link}">查看原文</a>`;
+    const feed = createFeed({
+        id: "BikariArchive",
+        title: config.public.title,
+        description: config.public.description,
+        link: `https://${config.public.domain}`,
+        feed: `https://${config.public.domain}/feed`,
+        language: "zh-CN",
+        generator: "https://github.com/KazariEX/zfeed",
+        image: `https://${config.public.domain}${config.public.avatar}`,
+        favicon: `https://${config.public.domain}${config.public.favicon}`,
+        copyright: `© 2022-${currentDate.getFullYear()} KazariEX`,
+        updatedAt: new Date(arts[0].updateDate),
+        author: {
+            name: "KazariEX",
+        },
+        items: arts.map((art) => {
+            const description = toString(art.excerpt);
+            const link = `https://${config.public.domain}/book/${art.novel}/${art.index}`;
+            const content = `${
+                art.cover ? `<img src="${art.cover.src}">` : ""
+            }<p>${description}</p><a href="${link}">查看原文</a>`;
 
-        feed.addItem({
-            title: art.title,
-            description,
-            link,
-            date: new Date(art.updateDate),
-            published: new Date(art.publishDate),
-            content,
-        });
-    }
+            return {
+                title: art.title,
+                description,
+                link,
+                updatedAt: new Date(art.updateDate),
+                publishedAt: new Date(art.publishDate),
+                content,
+            };
+        }),
+    });
 
-    return feed.atom1();
+    return generateAtom1(feed);
 });

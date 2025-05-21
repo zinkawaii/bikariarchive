@@ -46,7 +46,7 @@ export default defineNuxtConfig({
             cert: "<!-- ??? -->",
         },
         host: clientConfig.domain,
-        port: 443,
+        port: 4615,
     },
     devtools: {
         enabled: true,
@@ -59,7 +59,6 @@ export default defineNuxtConfig({
     },
     nitro: {
         rollupConfig: {
-            // @ts-expect-error 类型实例化过深，且可能无限
             plugins: [
                 vue(),
             ],
@@ -95,8 +94,6 @@ export default defineNuxtConfig({
         "@vueuse/nuxt",
         "@zinkawaii/nuxt-shiki",
         "pinia-plugin-persistedstate/nuxt",
-        "./modules/article",
-        "./modules/font-split",
     ],
     robots: robotsConfig,
     sitemap: {

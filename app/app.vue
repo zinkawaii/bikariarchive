@@ -7,7 +7,7 @@
 
     useHead({
         link: [
-            { rel: "icon", href: "/garden/favicon.svg" },
+            { rel: "icon", href: config.public.favicon },
             { rel: "apple-touch-icon", href: config.public.avatar },
             { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" },
         ],

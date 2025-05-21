@@ -1,5 +1,3 @@
-<!-- @fallthroughAttributes true -->
-
 <script lang="ts" setup>
     withDefaults(defineProps<{
         direction?: "top" | "right" | "bottom" | "left";

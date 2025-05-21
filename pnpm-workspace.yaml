@@ -1,7 +1,7 @@
 shamefullyHoist: true
 
 packages:
-  - packages/**
+  - packages/*
 
 patchedDependencies:
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
@@ -10,15 +10,15 @@ catalogs:
   backend:
     "@iconify-json/fa6-solid": ^1.2.3
     "@kikiutils/nuxt-session": ^4.0.1
-    "@nuxt/devtools": ^2.4.0
-    "@nuxt/fonts": ^0.11.3
-    "@nuxt/icon": ^1.12.0
+    "@nuxt/devtools": ^2.4.1
+    "@nuxt/fonts": ^0.11.4
+    "@nuxt/icon": ^1.13.0
     "@nuxt/image": ^1.10.0
     "@nuxtjs/seo": ^3.0.3
     "@pinia/nuxt": ^0.11.0
     "@vitejs/plugin-vue": ^5.2.4
     "@vue-email/render": ^0.0.9
-    "@vueuse/nuxt": ^13.1.0
+    "@vueuse/nuxt": ^13.2.0
     "@zinkawaii/nuxt-shiki": ^0.9.0
     "@zinkawaii/tsconfig": ^0.0.2
     arktype: ^2.1.20
@@ -28,45 +28,45 @@ catalogs:
     cross-env: ^7.0.3
     crypto-es: ^2.1.0
     defu: ^6.1.4
-    feed: ^5.0.1
-    hookable: ^5.5.3
-    mongoose: ^8.14.2
+    mongoose: ^8.15.0
     nodemailer: ^7.0.3
-    nuxt: ^3.17.3
+    nuxt: ^3.17.4
     pathe: ^2.0.3
-    propathy: ^0.2.0
-    sass: ^1.88.0
+    propathy: ^0.2.1
+    sass: ^1.89.0
     svgo: ^3.3.2
-    undici: ^7.9.0
-    yaml: ^2.7.1
+    undici: ^7.10.0
+    yaml: ^2.8.0
+    zfeed: ^0.1.0
   build:
     assemblyscript: ^0.27.36
     unbuild: ^3.5.0
     vue-tsc: ^2.2.10
   frontend:
-    "@vueuse/core": ^13.1.0
-    "@vueuse/router": ^13.1.0
+    "@vueuse/core": ^13.2.0
+    "@vueuse/router": ^13.2.0
     animejs: ^4.0.2
     date-fns: ^4.1.0
     github-slugger: ^2.0.0
+    hookable: ^5.5.3
     katex: ^0.16.22
     lunisolar: ^2.5.2
     pinia: ^3.0.2
     pinia-plugin-persistedstate: ^4.3.0
     plain-shiki: ^0.2.0
-    shiki: ^3.4.0
+    shiki: ^3.4.2
     uqr: ^0.1.2
-    vue: ^3.5.13
+    vue: ^3.5.14
     vue-router: ^4.5.1
   lint:
-    "@antfu/eslint-config": ^4.13.0
+    "@antfu/eslint-config": ^4.13.2
     "@zinkawaii/eslint-config": ^0.3.0
     "@zinkawaii/stylelint-config": ^0.3.1
-    eslint: ^9.26.0
+    eslint: ^9.27.0
     stylelint: ^16.19.1
   markdown:
     "@mdzjs/config": ^0.0.1
-    kerria: ^0.2.3
+    kerria: ^0.3.1
     mdast-util-frontmatter: ^2.0.1
     mdast-util-gfm-footnote: ^2.1.0
     mdast-util-gfm-strikethrough: ^2.0.0
@@ -83,7 +83,7 @@ catalogs:
     unified: ^11.0.5
     unist-util-visit: ^5.0.0
   test:
-    vitest: ^3.1.3
+    vitest: ^3.1.4
   types:
     "@types/nodemailer": ^6.4.17
     "@types/wicg-file-system-access": ^2023.10.6
@@ -96,4 +96,3 @@ onlyBuiltDependencies:
   - protobufjs
   - sharp
   - unrs-resolver
-  - vue-demi

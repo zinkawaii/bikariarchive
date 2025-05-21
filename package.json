@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.11.0",
   "scripts": {
     "dev": "nuxi dev --no-qr",
     "build": "pnpm --filter @bikari/excalc run build && nuxi build",
@@ -21,10 +21,9 @@
     "@vueuse/core": "catalog:frontend",
     "@vueuse/router": "catalog:frontend",
     "animejs": "catalog:frontend",
-    "crypto-es": "catalog:backend",
     "date-fns": "catalog:frontend",
     "github-slugger": "catalog:frontend",
-    "hookable": "catalog:backend",
+    "hookable": "catalog:frontend",
     "katex": "catalog:frontend",
     "lunisolar": "catalog:frontend",
     "pinia": "catalog:frontend",
@@ -59,9 +58,9 @@
     "cn-font-split": "catalog:backend",
     "consola": "catalog:backend",
     "cross-env": "catalog:backend",
+    "crypto-es": "catalog:backend",
     "defu": "catalog:backend",
     "eslint": "catalog:lint",
-    "feed": "catalog:backend",
     "mongoose": "catalog:backend",
     "nodemailer": "catalog:backend",
     "nuxt": "catalog:backend",
@@ -70,6 +69,7 @@
     "stylelint": "catalog:lint",
     "svgo": "catalog:backend",
     "undici": "catalog:backend",
-    "vue-tsc": "catalog:build"
+    "vue-tsc": "catalog:build",
+    "zfeed": "catalog:backend"
   }
 }

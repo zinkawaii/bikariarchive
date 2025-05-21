@@ -63,8 +63,9 @@ const client = {
     global: {
         title: "微光档案",
         author: "山吹色御守",
-        avatar: "/garden/avatar/maestrale.webp",
         description: "虚幻的幸福",
+        avatar: "/garden/avatar/maestrale.webp",
+        favicon: "/garden/favicon.svg",
         jumbotron: {
             title: "微光茶馆",
             summary: "微かの力を尽くして、光の届いた彼方へ",

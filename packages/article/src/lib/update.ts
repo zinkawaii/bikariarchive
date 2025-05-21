@@ -1,12 +1,12 @@
 import { readFile } from "node:fs/promises";
-import { createProcessor, useSource } from "kerria";
+import { createKerria, useSource } from "kerria";
 import { parseUpdate } from "../remark";
 import type { JUpdate } from "./types";
 
 const TITLE_REGEX = /^(.+) \[v(.+)\]$/;
 const PREFIX_REGEX = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
-export default createProcessor("Update", () => {
+export default createKerria("Update", () => {
     useSource(0, {
         base: "data",
         dist: ".data",

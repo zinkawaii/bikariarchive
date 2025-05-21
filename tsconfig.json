@@ -16,6 +16,7 @@
     "inferTemplateDollarEl": true,
     "inferTemplateDollarRefs": true,
     "inferTemplateDollarSlots": true,
+    "fallthroughAttributes": true,
     "experimentalResolveStyleCssClasses": "always"
   }
 }
