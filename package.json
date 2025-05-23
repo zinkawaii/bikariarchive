@@ -4,7 +4,7 @@
   "packageManager": "pnpm@10.11.0",
   "scripts": {
     "dev": "nuxi dev --no-qr",
-    "build": "pnpm --filter @bikari/excalc run build && nuxi build",
+    "build": "nuxi build",
     "prepare": "nuxi prepare",
     "preview": "nuxi preview",
     "tscheck": "vue-tsc",

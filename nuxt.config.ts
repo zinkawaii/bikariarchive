@@ -18,7 +18,6 @@ export default defineNuxtConfig({
     },
     alias: {
         "@bikari/article": resolve(import.meta.dirname, "./packages/article/src"),
-        "@bikari/excalc": resolve(import.meta.dirname, "./packages/excalc"),
         "@bikari/shared": resolve(import.meta.dirname, "./packages/shared/src"),
     },
     css: [
@@ -69,9 +68,6 @@ export default defineNuxtConfig({
         public: clientConfig,
     },
     vite: {
-        build: {
-            target: "esnext",
-        },
         css: {
             preprocessorOptions: {
                 scss: {

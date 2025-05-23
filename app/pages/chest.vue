@@ -16,12 +16,6 @@
             icon: "mdi:timeline-clock",
             to: { name: "lyricaxis" },
         },
-        {
-            title: "西北风计算器",
-            description: "骗人凹分用",
-            icon: "streamline:calculator-2-solid",
-            to: { name: "excalc" },
-        },
     ];
 </script>
 

@@ -39,7 +39,6 @@ catalogs:
     yaml: ^2.8.0
     zfeed: ^0.1.0
   build:
-    assemblyscript: ^0.27.36
     unbuild: ^3.5.0
     vue-tsc: ^2.2.10
   frontend:

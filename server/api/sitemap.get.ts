@@ -13,7 +13,6 @@ export default defineSitemapEventHandler(() => {
         "/intel",
         "/search",
         "/update",
-        "/tools/excalc",
         "/tools/lyricaxis",
         "/tools/namaemaker",
         ...Object.entries(Article.meta).map(([novel, { chapters }]) => [

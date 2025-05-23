@@ -106,11 +106,6 @@ export default <RouterConfig> {
             },
         },
         {
-            name: "excalc",
-            path: "/tools/excalc",
-            component: () => import("~/pages/tools/excalc.vue"),
-        },
-        {
             name: "lyricaxis",
             path: "/tools/lyricaxis",
             component: () => import("~/pages/tools/lyricaxis.vue"),
