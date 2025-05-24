@@ -78,6 +78,11 @@ export default defineNuxtConfig({
         },
         server: {
             allowedHosts: true,
+            watch: {
+                ignored: [
+                    "!**/.data/**",
+                ],
+            },
         },
         $server: {
             build: {
