@@ -5,6 +5,7 @@ declare module "~/assets/json/Friend.json" {
         title: string;
         link: string;
         icon: string;
+        nickname: string;
         description: string;
     }
 

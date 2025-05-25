@@ -3,48 +3,56 @@
     "title": "蜡羽集",
     "link": "https://layuji.com",
     "icon": "https://layuji.com/images/meidoavatar.jpg",
-    "description": "幻猫的随笔博客"
+    "nickname": "双子幻猫",
+    "description": "良知就是承受对立双方同时为真"
   },
   {
     "title": "Kloudy Shape",
     "link": "https://shape.kloudy.cn",
     "icon": "https://api.kloudy.cn/img/icon.webp",
+    "nickname": "Kloudy",
     "description": "Stay Hungry, Stay Foolish"
   },
   {
     "title": "纸鹿摸鱼处",
     "link": "https://blog.zhilu.cyou",
     "icon": "https://weavatar.com/avatar/c909847cf0c0af3eef65a90375949c31f2328f195bb6f7145134b965d42c81cf?s=512",
+    "nickname": "纸鹿本鹿",
     "description": "纸鹿至麓不知路，支炉制露不止漉"
   },
   {
-    "title": "FloatSheep",
+    "title": "FloatSheep's Blog",
     "link": "https://blog.hesiy.cn",
     "icon": "https://registry.npmmirror.com/@floatsheep/fsl-fim/1.0.23/files/avatar%202024.main.webp",
+    "nickname": "FloatSheep",
     "description": "On the other side of obstacles"
   },
   {
-    "title": "Tianli",
+    "title": "Tianli's Blog",
     "link": "https://blog.tianli0.top",
     "icon": "https://q2.qlogo.cn/headimg_dl?dst_uin=507249007&spec=640",
+    "nickname": "Tianli",
     "description": "自知之明是最可贵的知识！"
   },
   {
     "title": "汐塔魔法屋",
     "link": "https://blog.storical.space",
     "icon": "https://blog.storical.space/images/icon.png",
+    "nickname": "王九弦SZ·Ninty",
     "description": "种下一颗有故事的种子，让它带着魔法和奇迹生根发芽"
   },
   {
-    "title": "Restent Ou",
+    "title": "Restent's Notebook",
     "link": "https://blog.gxres.net",
     "icon": "https://library.gxres.net/images/avatars/gxres042.webp",
+    "nickname": "Restent Ou",
     "description": "Secret with Silent"
   },
   {
     "title": "ZLA 小站",
     "link": "https://zla.pub",
     "icon": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
+    "nickname": "ZL Asica",
     "description": "月亮不抱你，星星会落在你怀里✨🌙"
   }
 ]

@@ -23,8 +23,9 @@
                     <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
                     <div class="friend-info">
                         <div class="friend-title content-h2 text-truncate">{{ item.title }}</div>
-                        <span class="friend-desc">{{ item.description }}</span>
+                        <span class="friend-nickname">{{ item.nickname }}</span>
                     </div>
+                    <p class="friend-desc">{{ item.description }}</p>
                 </nuxt-link>
             </div>
             <h2>交换基准</h2>
@@ -47,16 +48,18 @@
     .friend-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
-        gap: 16px;
+        gap: 1rem;
     }
 
     .friend-item {
-        display: flex;
-        gap: 16px;
-        height: 112px;
-        padding: 16px;
+        display: grid;
+        grid-template:
+            "A B" auto
+            "C C" 1fr / auto 1fr;
+        gap: 0.75rem;
+        padding: 1rem;
         border: 1px solid var(--color-border-lighter);
-        border-radius: 16px;
+        border-radius: 1rem;
         background-color: var(--color-background);
         transition: border 0.25s;
 
@@ -70,29 +73,30 @@
     }
 
     .friend-icon {
-        width: 72px;
+        width: 48px;
         aspect-ratio: 1;
-        margin: auto;
-        border-radius: 8px;
-    }
-
-    .friend-info {
-        flex: 1;
-        overflow: hidden;
+        border-radius: 0.5rem;
     }
 
     .friend-title {
-        margin-bottom: 5px;
-        padding-bottom: 5px;
-        border-bottom: 1px solid var(--color-border-lighter);
         transition: color 0.25s;
+    }
+
+    .friend-nickname {
+        grid-area: C;
+        font-family: var(--font-smooth);
+        line-height: 1.5;
+        color: var(--color-info);
     }
 
     .friend-desc {
         display: -webkit-box;
-        font-size: 14px;
-        -webkit-line-clamp: 2;
-        line-height: 21px;
+        grid-area: C;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--color-border-lighter);
+        -webkit-line-clamp: 1;
+        line-height: 1.5;
+        text-indent: 0;
         text-overflow: ellipsis;
         color: var(--color-info);
         -webkit-box-orient: vertical;
