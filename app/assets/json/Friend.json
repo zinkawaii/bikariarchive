@@ -4,7 +4,7 @@
     "link": "https://layuji.com",
     "icon": "https://layuji.com/images/meidoavatar.jpg",
     "nickname": "双子幻猫",
-    "description": "良知就是承受对立双方同时为真"
+    "description": "良知就是承受对立双方同时为真。"
   },
   {
     "title": "Kloudy Shape",
@@ -54,5 +54,12 @@
     "icon": "https://cdn.v2ex.com/gravatar/de403bb7bb2abb235c02dffd7ce5419a?size=512",
     "nickname": "ZL Asica",
     "description": "月亮不抱你，星星会落在你怀里✨🌙"
+  },
+  {
+    "title": "Greyflowers",
+    "link": "https://www.greyflowers.moe",
+    "icon": "https://moe.greyflowers.pics/avatar.webp",
+    "nickname": "non_hana",
+    "description": "『灰色的花，终有一天会盛开吧。』"
   }
 ]
