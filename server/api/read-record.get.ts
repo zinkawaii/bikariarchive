@@ -16,6 +16,9 @@ export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => 
     //权限验证
     identityValidate(event, 9);
 
+    //连接数据库
+    await connectMongoose();
+
     const sizes = 20;
 
     const total = await ReadRecordModel.countDocuments();

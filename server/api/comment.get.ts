@@ -25,6 +25,9 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
         return 1;
     }
 
+    //连接数据库
+    await connectMongoose();
+
     //单页评论数
     const limit = 10;
 

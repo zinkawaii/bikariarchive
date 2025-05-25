@@ -6,8 +6,9 @@ import "~~/server/models/SearchRecord";
 import "~~/server/models/TempVerify";
 import "~~/server/models/UserData";
 
-export default defineNitroPlugin(async (nitroApp) => {
+export async function connectMongoose() {
     const config = useRuntimeConfig();
+    const nitroApp = useNitroApp();
 
     nitroApp.hooks.hook("close", () => {
         mongoose.disconnect();
@@ -21,4 +22,4 @@ export default defineNitroPlugin(async (nitroApp) => {
     catch (err) {
         consola.error(`Failed to connect to MongoDB: ${err}`);
     }
-});
+}

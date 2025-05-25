@@ -14,6 +14,9 @@ export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
         await readBody<PostLoginBody>(event),
     );
 
+    //连接数据库
+    await connectMongoose();
+
     //查询UID、昵称或邮箱
     const qUser = await UserDataModel.findOne({
         $or: [

@@ -25,6 +25,9 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
         return 2;
     }
 
+    //连接数据库
+    await connectMongoose();
+
     //读取文章
     res.body = await readArticle(art);
 

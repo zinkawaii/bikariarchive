@@ -18,6 +18,9 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
         await readBody<GetLoginBody>(event),
     );
 
+    //连接数据库
+    await connectMongoose();
+
     //查询用户信息中是否存在该邮箱所注册的账号
     const qUser = await UserDataModel.findOne({ email });
 

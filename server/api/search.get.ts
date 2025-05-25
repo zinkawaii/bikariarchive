@@ -14,6 +14,9 @@ const schema = type({
 export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res) => {
     const { novel, word } = schema.assert(getQuery(event));
 
+    //连接数据库
+    await connectMongoose();
+
     const jNovels = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
     const jChapters = jNovels.flatMap((jNovel) => jNovel?.chapters).filter(Boolean);
 

@@ -19,6 +19,9 @@ export default defineJEventHandler(async (event) => {
     //权限验证
     identityValidate(event, 9);
 
+    //连接数据库
+    await connectMongoose();
+
     //获取时间
     const time = new Date();
 

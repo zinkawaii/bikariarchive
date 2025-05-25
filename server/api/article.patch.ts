@@ -14,6 +14,9 @@ export default defineJEventHandler(async (event, res) => {
         await readBody<PatchArticleBody>(event),
     );
 
+    //连接数据库
+    await connectMongoose();
+
     const ip = getRequestIP(event, { xForwardedFor: true });
     const time = new Date();
     const uid = event.context.session?.uid;

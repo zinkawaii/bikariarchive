@@ -11,6 +11,9 @@ const schema = type({
 export default defineJEventHandler(async (event) => {
     const { email } = schema.assert(getQuery(event));
 
+    //连接数据库
+    await connectMongoose();
+
     //预生成验证码
     const time = Date.now();
     let verify = randomInt(0, 1000000).toString().padStart(6, "0");

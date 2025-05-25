@@ -15,6 +15,9 @@ export default defineJEventHandler(async (event) => {
     //权限验证
     identityValidate(event, 1);
 
+    //连接数据库
+    await connectMongoose();
+
     const qUser = await UserDataModel.updateOne({
         uid: session.uid,
     }, {

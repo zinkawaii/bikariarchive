@@ -11,6 +11,9 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
     const { session } = event.context;
     const { uid = session.uid } = schema.assert(getQuery(event));
 
+    //连接数据库
+    await connectMongoose();
+
     const qUser = await UserDataModel.findOne({
         uid,
     }, "nickname email identity sign");

@@ -14,6 +14,9 @@ export default defineJEventHandler(async (event) => {
     //权限验证
     identityValidate(event, 9);
 
+    //连接数据库
+    await connectMongoose();
+
     //删除评论
     await CommentDataModel.deleteOne({
         _id: id,
