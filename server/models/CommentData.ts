@@ -7,12 +7,12 @@ export const CommentDataModel = model("CommentData", new Schema<CommentDataSchem
         required: true,
         index: true,
     },
-    parent: {
+    root: {
         type: Types.ObjectId,
         ref: "CommentData",
     },
-    children: {
-        type: [Types.ObjectId],
+    parent: {
+        type: Types.ObjectId,
         ref: "CommentData",
     },
     content: {

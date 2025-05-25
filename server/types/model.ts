@@ -3,8 +3,8 @@ import type { CommentMode } from "~~/server/types/api/comment";
 
 export interface CommentDataSchema {
     path: string;
+    root?: ObjectId;
     parent?: ObjectId;
-    children: ObjectId[];
     content: string;
     time: Date;
     updated: Date;

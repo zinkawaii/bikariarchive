@@ -64,9 +64,20 @@ export default defineJEventHandler(async (event) => {
         };
     }
 
+    //获取所回复评论的数据（如果有）
+    const qParent = await CommentDataModel.findOne({
+        _id: body.parent,
+    }).populate<{
+        user?: UserDataSchema;
+    }>({
+        path: "user",
+        select: "email",
+    });
+
     //将评论数据写入数据库
-    const qComment = await CommentDataModel.create({
+    await CommentDataModel.create({
         path,
+        root: qParent?.root ?? qParent?._id,
         parent: body.parent,
         content: body.content,
         time,
@@ -74,20 +85,6 @@ export default defineJEventHandler(async (event) => {
         ip: getRequestIP(event, { xForwardedFor: true }),
         mode: body.mode,
         ...extra,
-    });
-
-    //更新所回复评论的数据（如果有）
-    const qParent = await CommentDataModel.findOneAndUpdate({
-        _id: body.parent,
-    }, {
-        $push: {
-            children: qComment._id,
-        },
-    }).populate<{
-        user?: UserDataSchema;
-    }>({
-        path: "user",
-        select: "email",
     });
 
     if (!qParent) {

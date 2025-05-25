@@ -11,7 +11,7 @@ const schema = type({
 });
 
 //需要获取的属性
-const select = "_id children content time mode nickname email address user";
+const select = "_id root parent content time mode nickname email address user";
 
 export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
     const { session } = event.context;
@@ -49,57 +49,56 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
     .limit(limit);
 
     //获取子评论
-    res.list = await deference(qComments, {}, session.identity ?? 0);
-});
-
-//递归解引用
-async function deference<
-    T extends HydratedDocument<CommentDataSchema>,
->(
-    parent: T[],
-    users: Record<string, Pick<UserDataSchema, "nickname" | "email" | "address" | "identity">>,
-    identity: number,
-): Promise<CommentData[]> {
-    return await Promise.all(
-        parent.map(async (item) => {
-            let { mode, nickname = "", email, address } = item;
-            let character = "游客";
-
-            if (mode === "user") {
-                const key = String(item.user);
-                const user = users[key] ??= (await item.populate<{
-                    user: UserDataSchema;
-                }>({
-                    path: "user",
-                    select: "nickname email address identity",
-                })).user;
-
-                nickname = user.nickname;
-                email = user.email;
-                address = user.address;
-                character = user.identity >= 9 ? "站长" : "用户";
-            }
-
-            const children = item.children.length ? await deference(
-                (await item.populate<{
-                    children: T[];
-                }>("children", select)).children,
-                users,
-                identity,
-            ) : [];
-
-            return {
-                id: item.id,
-                children,
-                content: item.content,
-                time: item.time.toString(),
-                mode,
-                nickname,
-                avatar: generateAvatarUrl(email),
-                email: identity >= 9 ? email : void 0,
-                address,
-                character,
-            };
+    res.list = await Promise.all(
+        qComments.map(async (comment) => {
+            const children = await CommentDataModel.find({
+                root: comment._id,
+            }, select);
+            return transformComment(comment, children, {}, session?.identity ?? 0);
         }),
     );
+});
+
+async function transformComment<T extends HydratedDocument<CommentDataSchema>>(
+    item: T,
+    all: T[],
+    users: Record<string, UserDataSchema>,
+    identity: number,
+): Promise<CommentData> {
+    let { mode, nickname = "", email, address } = item;
+    let character = "游客";
+
+    if (mode === "user") {
+        const key = String(item.user);
+        const user = users[key] ??= (await item.populate<{
+            user: UserDataSchema;
+        }>({
+            path: "user",
+            select: "nickname email address identity",
+        })).user;
+
+        nickname = user.nickname;
+        email = user.email;
+        address = user.address;
+        character = user.identity >= 9 ? "站长" : "用户";
+    }
+
+    const children = await Promise.all(
+        all
+            .filter(({ parent }) => String(parent) === String(item._id))
+            .map((child) => transformComment(child, all, users, identity)),
+    );
+
+    return {
+        id: item.id,
+        children,
+        content: item.content,
+        time: item.time.toString(),
+        mode,
+        nickname,
+        avatar: generateAvatarUrl(email),
+        email: identity >= 9 ? email : void 0,
+        address,
+        character,
+    };
 }
