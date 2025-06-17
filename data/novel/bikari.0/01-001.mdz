@@ -6,7 +6,7 @@ date:
 ---
 
 ::mb-gallery{illustrator="狸猫森"}
-  :mb-image{src="/garden/illustration/山吹风铃_1.jpg" character="山吹风铃"}
+  :mb-image{src="/garden/illustration/山吹风铃_1.webp" character="山吹风铃"}
   :mb-image{src="/garden/illustration/浅井爱纱_1.jpg" character="浅井爱纱"}
   :mb-image{src="/garden/illustration/人物卡.jpg" character="山吹风铃,浅井爱纱,若叶舞,若叶遥" style="grid-column: 1 / 3;"}
 ::
