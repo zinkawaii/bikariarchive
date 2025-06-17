@@ -43,7 +43,6 @@
     .calendar-date {
         font-family: var(--font-smooth);
         font-size: 32px;
-        letter-spacing: 1px;
         color: var(--color-theme-text);
     }
 

@@ -10,15 +10,15 @@ catalogs:
   backend:
     "@iconify-json/fa6-solid": ^1.2.3
     "@kikiutils/nuxt-session": ^4.0.1
-    "@nuxt/devtools": ^2.4.1
+    "@nuxt/devtools": ^2.5.0
     "@nuxt/fonts": ^0.11.4
     "@nuxt/icon": ^1.13.0
     "@nuxt/image": ^1.10.0
     "@nuxtjs/seo": ^3.0.3
-    "@pinia/nuxt": ^0.11.0
+    "@pinia/nuxt": ^0.11.1
     "@vitejs/plugin-vue": ^5.2.4
     "@vue-email/render": ^0.0.9
-    "@vueuse/nuxt": ^13.2.0
+    "@vueuse/nuxt": ^13.3.0
     "@zinkawaii/nuxt-shiki": ^0.9.0
     "@zinkawaii/tsconfig": ^0.0.2
     arktype: ^2.1.20
@@ -28,44 +28,44 @@ catalogs:
     cross-env: ^7.0.3
     crypto-es: ^2.1.0
     defu: ^6.1.4
-    mongoose: ^8.15.0
+    mongoose: ^8.16.0
     nodemailer: ^7.0.3
-    nuxt: ^3.17.4
+    nuxt: ^3.17.5
     pathe: ^2.0.3
     propathy: ^0.2.1
-    sass: ^1.89.0
+    sass: ^1.89.2
     svgo: ^3.3.2
     undici: ^7.10.0
     yaml: ^2.8.0
-    zfeed: ^0.1.0
+    zfeed: ^0.2.3
   build:
     unbuild: ^3.5.0
     vue-tsc: ^2.2.10
   frontend:
-    "@vueuse/core": ^13.2.0
-    "@vueuse/router": ^13.2.0
+    "@vueuse/core": ^13.3.0
+    "@vueuse/router": ^13.3.0
     animejs: ^4.0.2
     date-fns: ^4.1.0
     github-slugger: ^2.0.0
     hookable: ^5.5.3
     katex: ^0.16.22
     lunisolar: ^2.5.2
-    pinia: ^3.0.2
+    pinia: ^3.0.3
     pinia-plugin-persistedstate: ^4.3.0
-    plain-shiki: ^0.2.0
-    shiki: ^3.4.2
+    plain-shiki: ^0.3.0
+    shiki: ^3.6.0
     uqr: ^0.1.2
-    vue: ^3.5.14
+    vue: ^3.5.16
     vue-router: ^4.5.1
   lint:
-    "@antfu/eslint-config": ^4.13.2
+    "@antfu/eslint-config": ^4.14.1
     "@zinkawaii/eslint-config": ^0.3.0
-    "@zinkawaii/stylelint-config": ^0.3.1
-    eslint: ^9.27.0
-    stylelint: ^16.19.1
+    "@zinkawaii/stylelint-config": ^0.3.2
+    eslint: ^9.29.0
+    stylelint: ^16.20.0
   markdown:
     "@mdzjs/config": ^0.0.1
-    kerria: ^0.3.1
+    kerria: ^0.3.3
     mdast-util-frontmatter: ^2.0.1
     mdast-util-gfm-footnote: ^2.1.0
     mdast-util-gfm-strikethrough: ^2.0.0
@@ -82,7 +82,7 @@ catalogs:
     unified: ^11.0.5
     unist-util-visit: ^5.0.0
   test:
-    vitest: ^3.1.4
+    vitest: ^3.2.3
   types:
     "@types/nodemailer": ^6.4.17
     "@types/wicg-file-system-access": ^2023.10.6

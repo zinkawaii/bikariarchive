@@ -1,10 +1,11 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "dev": "nuxi dev --no-qr",
     "build": "nuxi build",
+    "prebuild": "pnpm run task:jnm",
     "prepare": "nuxi prepare",
     "preview": "nuxi preview",
     "tscheck": "vue-tsc",
@@ -13,8 +14,8 @@
     "git:stash/pop": "git stash pop && git reset",
     "task:article": "node scripts/article.js",
     "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.js",
-    "task:bangumi": "cd scripts && node --watch bangumi.js",
-    "task:jnm": "cd scripts && node jnm.js",
+    "task:bangumi": "node --watch scripts/bangumi.js",
+    "task:jnm": "node scripts/jnm.js",
     "task:svgo": "svgo public/image/favicon.svg"
   },
   "dependencies": {

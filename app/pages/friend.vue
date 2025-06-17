@@ -25,7 +25,7 @@
                         <div class="friend-title content-h2 text-truncate">{{ item.title }}</div>
                         <span class="friend-nickname">{{ item.nickname }}</span>
                     </div>
-                    <p class="friend-desc">{{ item.description }}</p>
+                    <p class="friend-desc text-truncate">{{ item.description }}</p>
                 </nuxt-link>
             </div>
             <h2>交换基准</h2>
@@ -90,15 +90,11 @@
     }
 
     .friend-desc {
-        display: -webkit-box;
         grid-area: C;
         padding-top: 0.5rem;
         border-top: 1px solid var(--color-border-lighter);
-        -webkit-line-clamp: 1;
         line-height: 1.5;
         text-indent: 0;
-        text-overflow: ellipsis;
         color: var(--color-info);
-        -webkit-box-orient: vertical;
     }
 </style>
