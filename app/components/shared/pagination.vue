@@ -29,7 +29,7 @@
         const start = Math.max(1, current - expand);
         const end = Math.min(total, start + 2 * expand);
 
-        const res = [...new Array(end - start + 1)].map((_, i) => i + start);
+        const res = Array.from({ length: end - start + 1 }, (_, i) => i + start);
         if (start > 2) {
             res.unshift(start === 3 ? 2 : -Infinity);
         }

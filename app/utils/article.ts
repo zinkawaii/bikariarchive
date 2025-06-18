@@ -172,7 +172,7 @@ export function enrichJArticle(original: JArticle) {
         );
 
         //按名称对齐章节位置
-        const results: Article[] = [...new Array(chapters.length)];
+        const results: Article[] = Array.from({ length: chapters.length });
         for (const art of articles) {
             const i = hashs.get(art.index);
 

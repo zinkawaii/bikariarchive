@@ -42,7 +42,7 @@
 
     //行号
     const lineStr = computed(() => {
-        return [...new Array(lines.value + 1).keys()].slice(1).join("\n");
+        return Array.from({ length: lines.value }, (_, i) => i + 1).join("\n");
     });
 </script>
 
