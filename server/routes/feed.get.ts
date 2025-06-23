@@ -30,6 +30,7 @@ export default defineEventHandler(async (event: H3Event) => {
         feed: `https://${config.public.domain}/feed`,
         language: "zh-CN",
         generator: "https://github.com/KazariEX/zfeed",
+        stylesheet: "/feed/template.xsl",
         image: `https://${config.public.domain}${config.public.avatar}`,
         favicon: `https://${config.public.domain}${config.public.favicon}`,
         copyright: `© 2022-${currentDate.getFullYear()} KazariEX`,

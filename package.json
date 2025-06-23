@@ -15,6 +15,7 @@
     "task:article": "node scripts/article.js",
     "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.js",
     "task:bangumi": "node --watch scripts/bangumi.js",
+    "task:feed": "node scripts/feed.js",
     "task:jnm": "node scripts/jnm.js",
     "task:svgo": "svgo public/image/favicon.svg"
   },
