@@ -1,3 +1,5 @@
+import type { BaseResponse } from "../index";
+
 export interface GetFriendResponse extends BaseResponse {
     list: FriendData[];
 }

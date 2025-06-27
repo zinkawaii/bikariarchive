@@ -1,7 +1,5 @@
-declare global {
-    interface BaseResponse {
-        error: number;
-    }
+export interface BaseResponse {
+    error: number;
 }
 
 declare module "@kikiutils/nuxt-session" {
@@ -10,5 +8,3 @@ declare module "@kikiutils/nuxt-session" {
         identity: number;
     }
 }
-
-export {};

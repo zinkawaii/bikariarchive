@@ -1,3 +1,5 @@
+import type { BaseResponse } from "~~/server/types";
+
 export interface GetLoginBody {
     nickname: string;
     email: string;

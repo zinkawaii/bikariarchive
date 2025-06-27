@@ -1,3 +1,5 @@
+import type { BaseResponse } from "../index";
+
 export interface GetBangumiResponse extends BaseResponse {
     total: number;
     sizes: number;

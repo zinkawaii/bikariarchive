@@ -1,4 +1,5 @@
 import type { ReadRecordSchema, UserDataSchema } from "~~/server/types/model";
+import type { BaseResponse } from "../index";
 
 export interface DeleteReadRecordBody {
     id: string;

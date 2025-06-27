@@ -1,3 +1,5 @@
+import type { BaseResponse } from "../index";
+
 export type CommentMode = "guest" | "user";
 
 export interface DeleteCommentBody {
