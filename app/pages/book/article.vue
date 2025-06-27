@@ -91,7 +91,7 @@
         ogArticleTag: art.novelInfo.tag.join(","),
         ogArticlePublished_time: art.publishDate,
         ogArticleModified_time: art.updateDate,
-        description: () => post.value?.body.children
+        description: () => post.value?.body?.children
             .filter((node) => node.type === "element" && node.tag === "p")
             .map((p) => toString(p))
             .join("")
@@ -100,7 +100,7 @@
 
     //添加阅读记录
     onMounted(async () => {
-        await until(status).toBe("success");
+        await until(() => post.value?.error).toBe(0);
 
         $fetch("/api/article", {
             method: "patch",
