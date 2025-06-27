@@ -1,0 +1,98 @@
+---
+title: 自应用的 XSLT
+abbrlink: d3fea8b
+date:
+  created: 2025-06-28
+---
+
+样式化博客等网站的 Feed 页面是使用 [XSLT](https://developer.mozilla.org/zh-CN/docs/Web/XML/XSLT) 的高频场景。通过使用 XSLT 来自定义 HTML 结构与 CSS 样式，用户在访问订阅源时看到的将不再是浏览器自带的 XML 阅读器，而是由作者编写的精美页面。
+
+但在另一层面上，这种做法影响到了用户阅读原始 XML 的能力。虽然可以通过 `view-source:` 协议来直接查看页面的源代码，但如果作者对这些内容进行了压缩，那么不通过其他额外的手段就无法看到格式化后的内容了。
+
+于是我设想了一种方法，使得我们可以在拥有完整的 XML 阅读器功能的基础上，自定义这个页面的部分内容，让它看起来像是浏览器自带的，实际上却是完全由 XSLT 转换出来的页面。比如将开头的 "This XML file does not appear to..." 替换成其他文本，使用自己的语法高亮主题来显示 XML 代码等。
+
+要做到这一点并不费劲，只需要活用 XSLT 元素和 XPath 语法，遍历并渲染 XML 结构即可。
+
+在编写代码的过程中，我突然意识到 XSLT 本身也是 XML，这是否意味着它能够添加指向自己的 `xml-stylesheet`，来根据它本身的内容来渲染自己？
+
+你可以访问 [这个页面](/feed/template.xsl) 来查看一个 XSLT 文档是如何完成自应用的。同时，我会在下面简单介绍如何做到这一点。
+
+## 整体框架
+
+首先，我们需要一个如下所示的最小代码框架：
+
+```xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="/feed/template.xsl"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:output method="html"/>
+  <xsl:template match="/">
+    <head>
+      <link rel="stylesheet" href="/feed/style.css"/>
+    </head>
+    <body>
+      <div class="header">
+        <span>有的人只拥吻影子，于是只拥有幸福的幻影。</span>
+      </div>
+      <div class="pretty-print">
+        <xsl:call-template name="node"/>
+      </div>
+    </body>
+  </xsl:template>
+</xsl:stylesheet>
+```
+
+其中 `/feed/template.xsl` 是这个 XSLT 本身的链接，告诉浏览器当我们访问这个 XML 文档时，使用该文档自己的内容作为 XSLT 来渲染页面。
+
+而 `<body>` 元素中的 DOM 结构模拟了 Chrome 浏览器自带的 XML 阅读器，虽然这会导致在其他浏览器中与其原生效果不一致，但我们可以大胆假设大部分用户的浏览器都是 Chromium 系。如果不是自裁罢 ✘
+
+## 递归结构
+
+我们以节点为单位来递归地渲染 XML 数据。首先添加一个 XSL 模板，并对当前节点的类型进行判断：
+
+1. 如果该节点是 XML 处理指令，则跳过该节点的渲染。这是因为 XPath 无法正确访问处理指令节点的键值对，另外浏览器自带的阅读器也并不显示这些节点。
+
+2. 如果该节点的名称为空（即根节点），直接渲染它的后代节点。
+
+3. 如果该节点拥有后代节点或 CDATA 数据，则以可折叠的多行结构渲染。
+
+4. 如果该节点包含文本，则以单行结构渲染。
+
+5. 按照自闭合标签的形式渲染。
+
+```xml
+<xsl:template name="node">
+  <xsl:choose>
+    <xsl:when test="self::processing-instruction()"/>
+    <xsl:when test="name() = ''">
+      <xsl:call-template name="children"/>
+    </xsl:when>
+    <xsl:when test="*[1] or @type = 'html'">
+      <div class="folder">
+        <xsl:call-template name="open-tag"/>
+        <details open="">
+          <summary />
+          <div class="opened">
+            <xsl:call-template name="children"/>
+          </div>
+        </details>
+        <xsl:call-template name="close-tag"/>
+      </div>
+    </xsl:when>
+    <xsl:when test="text()">
+      <div class="line">
+        <xsl:call-template name="open-tag"/>
+        <xsl:value-of select="."/>
+        <xsl:call-template name="close-tag"/>
+      </div>
+    </xsl:when>
+    <xsl:otherwise>
+      <div class="line">
+        <xsl:call-template name="open-tag"/>
+      </div>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+```
+
+当完成这一步时，特定于 XML 数据结构的处理已经完成了一大半，后面的流程与常规的树遍历已经无异了。我们只需要继续实现 `open-tag`、`close-tag` 和 `children` 三个模板，而这应该是非常轻松的。
