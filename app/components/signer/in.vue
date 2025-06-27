@@ -51,7 +51,7 @@
                 glitch("password", "密码错误");
                 return;
             }
-            default: {
+            case 0: {
                 userStore.$patch({
                     uid,
                     nickname,

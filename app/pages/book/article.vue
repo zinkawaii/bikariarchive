@@ -114,11 +114,13 @@
     const debouncedExecute = Zin.debounce(async () => {
         await execute();
         switch (post.value?.error) {
-            case 1:
+            case 2: {
                 toastStore.error("[article]:password", "密码错误");
                 break;
-            default:
+            }
+            case 0: {
                 decrypted.value = true;
+            }
         }
     }, {
         title: "请求",

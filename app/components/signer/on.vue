@@ -59,12 +59,7 @@
                 },
             });
 
-            switch (error) {
-                case 1:
-                    return failed();
-                default:
-                    return successed();
-            }
+            error ? failed() : successed();
         }
         catch {
             failed();
@@ -107,20 +102,11 @@
             });
 
             switch (error) {
-                case 1:
-                    glitch("email", "该邮箱已注册");
-                    break;
-                case 2:
-                    glitch("verify", "验证码不存在");
-                    break;
-                case 3:
-                    glitch("verify", "验证码已过期");
-                    break;
-                case 4:
-                    glitch("verify", "验证码不正确");
-                    break;
-                default:
-                    signerStore.switchView("login");
+                case 1: return glitch("email", "该邮箱已注册");
+                case 2: return glitch("verify", "验证码不存在");
+                case 3: return glitch("verify", "验证码已过期");
+                case 4: return glitch("verify", "验证码不正确");
+                case 0: signerStore.switchView("login");
             }
         }
         catch {

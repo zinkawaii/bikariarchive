@@ -50,7 +50,7 @@
             return;
         }
 
-        switch (data.value!.error) {
+        switch (data.value?.error) {
             case 1: {
                 toastStore.error(key, "找不到用户");
                 break;
@@ -59,7 +59,7 @@
                 glitch("oldVal", "旧密码错误");
                 break;
             }
-            default: {
+            case 0: {
                 toastStore.success(key, "密码已修改");
                 oldVal.value = "";
                 newVal.value = "";
