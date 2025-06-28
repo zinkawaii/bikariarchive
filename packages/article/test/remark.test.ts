@@ -2,7 +2,7 @@ import raw from "rehype-raw";
 import mdc from "remark-mdc";
 import parse from "remark-parse";
 import rehype from "remark-rehype";
-import { type Processor, unified } from "unified";
+import { type CompileResults, type Processor, unified } from "unified";
 import { expect, it } from "vitest";
 import { ruby } from "../src/remark";
 import compiler from "../src/remark/plugins/compiler";
@@ -10,7 +10,7 @@ import emoji from "../src/remark/plugins/emoji";
 import frontmatter from "../src/remark/plugins/frontmatter";
 import interpolation from "../src/remark/plugins/interpolation";
 import slot from "../src/remark/plugins/slot";
-import type { Child, Element, Root } from "../src/remark/types";
+import type { Child, Element } from "../src/remark/types";
 
 it("emoji", async () => {
     const processor = unified()
@@ -120,11 +120,14 @@ it("interpolation", async () => {
     }]);
 });
 
-async function process(processor: Processor<any, any, any, any, Root>, text: string) {
+async function process<T extends CompileResults | undefined>(
+    processor: Processor<any, any, any, any, T>,
+    text: string,
+) {
     text = text.split("\n").map((line) => line.slice(8)).join("\n").trim();
     const result = await processor.process(text);
     return {
-        body: result.result,
+        body: result.result as T,
         data: result.data,
     };
 }

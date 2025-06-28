@@ -13,8 +13,6 @@ enum SourceKind {
     Article,
 }
 
-const PATH_REGEX = /^(.*?)\.(\d+)$/;
-
 export default createKerria("Article", () => {
     const metaInfo = useLoad("meta", {
         out: ".data/json/Article.json",
@@ -26,7 +24,7 @@ export default createKerria("Article", () => {
             for (const novel in newVal) {
                 delete newVal[novel].order;
                 newVal[novel].chapters = Object.entries(newVal[novel].chapters)
-                    .toSorted(([a], [b]) => a.localeCompare(b))
+                    .sort(([a], [b]) => a.localeCompare(b))
                     .map(([_, c]) => c);
             }
             return newVal;
@@ -123,7 +121,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
     }
 
     //解析文件名
-    const match = basename(resolve(path, "..")).match(PATH_REGEX);
+    const match = basename(resolve(path, "..")).match(/^(.*?)\.(\d+)$/)!;
     const novel = match[1];
     const volume = Number(match[2]);
     const name = basename(path, ".mdz");
@@ -153,7 +151,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
 
     //日期格式化
     for (const [key, value] of Object.entries(attributes.date ?? {})) {
-        attributes.date[key] = format(value, "yyyy-MM-dd");
+        Reflect.set(attributes.date!, key, format(value, "yyyy-MM-dd"));
     }
 
     //生成映射
@@ -161,7 +159,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
     let index = "";
     switch (metaInfo.value[novel].type) {
         case "novel": {
-            const match = name.match(/^([^-]*)-(.*)$/);
+            const match = name.match(/^([^-]*)-(.*)$/)!;
             order += match[1];
             index = match[2];
             break;
@@ -202,7 +200,6 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
 //键值对排序
 function sortKeyValues<T>(obj: Record<string, T>, compareFn: (a: T, b: T) => number) {
     return Object.fromEntries(
-        Object.entries(obj)
-            .toSorted(([, a], [, b]) => compareFn(a, b)),
+        Object.entries(obj).sort(([, a], [, b]) => compareFn(a, b)),
     );
 }

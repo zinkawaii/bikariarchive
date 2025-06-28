@@ -34,7 +34,8 @@ export default function(this: Processor, options?: Options & Matter) {
     });
 
     return (tree: Root, file: VFile) => {
-        const frontmatters = [];
+        const frontmatters: Record<string, unknown>[] = [];
+        file.data.frontmatters = frontmatters;
 
         if (tree.children[0]?.type !== "yaml") {
             tree.children.unshift({
@@ -44,6 +45,10 @@ export default function(this: Processor, options?: Options & Matter) {
         }
 
         visit(tree, "yaml", (node, index, parent) => {
+            if (parent === void 0 || index === void 0) {
+                return;
+            }
+
             const data = YAML.parse(node.value) ?? {};
             frontmatters.push(data);
 
@@ -59,9 +64,5 @@ export default function(this: Processor, options?: Options & Matter) {
                 });
             }
         });
-
-        file.data = {
-            frontmatters,
-        };
     };
 }

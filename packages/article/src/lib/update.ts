@@ -20,7 +20,7 @@ export default createKerria("Update", () => {
             const body = await parseUpdate(file);
 
             const updates: JUpdate[] = [];
-            let update: JUpdate;
+            let update: JUpdate | undefined;
 
             for (let i = 0; i < body.children.length; i++) {
                 const node = body.children[i];

@@ -24,7 +24,7 @@ declare module "mdast" {
 
     interface Var extends Parent {
         type: "var";
-        expression?: string;
+        expression: string;
     }
 }
 
@@ -36,6 +36,10 @@ export default function(this: Processor) {
 
     return (tree: Root, file: VFile) => {
         visit(tree, "var", (node, index, parent) => {
+            if (parent === void 0 || index === void 0 || !file.data.frontmatters?.length) {
+                return;
+            }
+
             const value = getProperty(file.data.frontmatters[0], node.expression, "") as string;
 
             const prev = parent.children[index - 1];
@@ -142,6 +146,7 @@ function interpolationFromMarkdown(): FromMarkdownExtension {
             var(token) {
                 this.enter({
                     type: "var",
+                    expression: "",
                     children: [],
                 }, token);
             },

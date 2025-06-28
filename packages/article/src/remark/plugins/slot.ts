@@ -7,14 +7,14 @@ import { transformNodes } from "./utils";
 export default function(this: Processor) {
     this.compiler = (root, file) => {
         const { frontmatters } = file.data;
-        let frontmatter: (typeof frontmatters)[number];
+        let frontmatter: Record<string, unknown> | undefined;
 
         visit(root as hast.Root, (node, index, parent) => {
-            if (node.type !== "element") {
+            if (index === void 0 || parent === void 0 || node.type !== "element") {
                 return;
             }
             if (node.tagName === "frontmatter") {
-                frontmatter = frontmatters[node.properties.order as number];
+                frontmatter = frontmatters?.[node.properties.order as number];
                 parent.children.splice(index, 1);
             }
             else if (node.tagName === "slots" && frontmatter) {
@@ -33,6 +33,6 @@ export default function(this: Processor) {
             }
         });
 
-        return void 0;
+        return (void 0)!;
     };
 }

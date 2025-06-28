@@ -13,6 +13,17 @@ interface AbilityInfo {
     class: string[];
 }
 
+interface AbilityItem {
+    name: string;
+    class: string[];
+    owners: AbilityOwner[];
+}
+
+interface AbilityOwner {
+    name: string;
+    star: number;
+}
+
 export default createKerria("Entry", () => {
     const metaInfo = useLoad("meta", {
         src: "data/json/Intel.json",
@@ -22,8 +33,8 @@ export default createKerria("Entry", () => {
             return newVal;
         },
         beforeOutput(val) {
-            const all = [];
-            const drafts = [];
+            const all: string[] = [];
+            const drafts: string[] = [];
             for (const [name, draft] of Object.entries(val.all)) {
                 (draft ? drafts : all).push(name);
             }
@@ -72,7 +83,7 @@ export default createKerria("Entry", () => {
     const abilityInfo = useLoad("ability", {
         out: ".data/json/Ability.json",
         beforeOutput(val) {
-            const items = [];
+            const items: AbilityItem[] = [];
             for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {
                 if (!(name in metaInfo.value.all)) {
                     continue;
@@ -130,7 +141,7 @@ export default createKerria("Entry", () => {
 
             //写入数据
             const name = basename(path, ".mdz");
-            const folder = basename(info.folders.find((dir) => path.startsWith(dir)));
+            const folder = basename(info.folders.find((dir) => path.startsWith(dir))!);
 
             //提取超能力信息
             const abilities = collectAbilities(attributes.talents ?? []);
@@ -167,7 +178,7 @@ function transformDetails(attributes: JEntry) {
     }
 
     const details: EntryDetail[] = [];
-    let detail: EntryDetail;
+    let detail: EntryDetail | undefined;
 
     for (let i = 0; i < originals.length; i++) {
         const node = originals[i];

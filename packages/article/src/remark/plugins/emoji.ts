@@ -17,6 +17,10 @@ const ICONIFY_REGEX = / ?i-[\w-]+:[\w-]+ ?/g;
 export default function(this: Processor) {
     return (tree: Root) => {
         visit(tree, "text", (node, index, parent) => {
+            if (parent === void 0 || index === void 0) {
+                return;
+            }
+
             const indices: [number, string][] = [];
             const matches = node.value.matchAll(ICONIFY_REGEX);
             for (const match of matches) {

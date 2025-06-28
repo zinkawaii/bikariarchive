@@ -24,8 +24,8 @@ declare module "mdast" {
 
     interface Ruby extends Parent {
         type: "ruby";
-        content?: string;
-        marker?: string;
+        content: string;
+        marker: string;
     }
 }
 
@@ -116,11 +116,13 @@ function rubyFromMarkdown(): FromMarkdownExtension {
             ruby(token) {
                 this.enter({
                     type: "ruby",
-                    children: [],
+                    content: "",
+                    marker: "",
                     data: {
                         hName: "ruby",
                         hChildren: [],
                     },
+                    children: [],
                 }, token);
             },
             rubyContent() {
@@ -133,7 +135,7 @@ function rubyFromMarkdown(): FromMarkdownExtension {
         exit: {
             ruby(token) {
                 const element = this.stack.at(-1) as Ruby;
-                element.data?.hChildren?.push(
+                element.data!.hChildren!.push(
                     { type: "text", value: element.content ?? "" },
                     {
                         type: "element",

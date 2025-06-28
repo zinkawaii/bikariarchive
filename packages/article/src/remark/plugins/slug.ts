@@ -13,7 +13,7 @@ export default function(this: Processor) {
 
         visit(tree, "heading", (node) => {
             ((node.data ??= {}).hProperties ??= {}).id ??= slugger.slug(
-                toString(node).replace(/^\d/, (match) => numerics[match]),
+                toString(node).replace(/^\d/, (match) => numerics[match as any]),
             );
         });
     };

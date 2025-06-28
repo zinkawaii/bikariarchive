@@ -17,7 +17,6 @@ import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
 import strikethrough from "./plugins/strikethrough";
-import type { Root } from "./types";
 
 export {
     compiler,
@@ -61,8 +60,8 @@ export async function parseArticle<T>(text: string) {
 
     const result = await processor.process(text);
     return {
-        attributes: result.data.frontmatters[0] as T,
-        body: result.result as Root,
+        attributes: result.data.frontmatters![0] as T,
+        body: result.result,
     };
 }
 
@@ -108,7 +107,7 @@ export async function parseUpdate(text: string) {
         .use(compiler);
 
     const result = await processor.process(text);
-    return result.result as Root;
+    return result.result;
 }
 
 function* generateSlottedText(text: string) {

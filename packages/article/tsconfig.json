@@ -1,8 +1,0 @@
-{
-  "extends": "@zinkawaii/tsconfig",
-  "compilerOptions": {
-    "strictFunctionTypes": false,
-    "strictNullChecks": false,
-    "noImplicitAny": false
-  }
-}
