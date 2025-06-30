@@ -29,13 +29,13 @@ catalogs:
     crypto-es: ^2.1.0
     defu: ^6.1.4
     mongoose: ^8.16.0
-    nodemailer: ^7.0.3
     nuxt: ^3.17.5
     pathe: ^2.0.3
     propathy: ^0.2.1
     sass: ^1.89.2
     svgo: ^3.3.2
     undici: ^7.10.0
+    unemail: ^0.2.0
     yaml: ^2.8.0
     zfeed: ^0.2.3
   build:
@@ -84,7 +84,6 @@ catalogs:
   test:
     vitest: ^3.2.3
   types:
-    "@types/nodemailer": ^6.4.17
     "@types/wicg-file-system-access": ^2023.10.6
 
 onlyBuiltDependencies:

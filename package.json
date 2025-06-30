@@ -47,7 +47,6 @@
     "@nuxt/image": "catalog:backend",
     "@nuxtjs/seo": "catalog:backend",
     "@pinia/nuxt": "catalog:backend",
-    "@types/nodemailer": "catalog:types",
     "@types/wicg-file-system-access": "catalog:types",
     "@vitejs/plugin-vue": "catalog:backend",
     "@vue-email/render": "catalog:backend",
@@ -64,13 +63,13 @@
     "defu": "catalog:backend",
     "eslint": "catalog:lint",
     "mongoose": "catalog:backend",
-    "nodemailer": "catalog:backend",
     "nuxt": "catalog:backend",
     "pathe": "catalog:backend",
     "sass": "catalog:backend",
     "stylelint": "catalog:lint",
     "svgo": "catalog:backend",
     "undici": "catalog:backend",
+    "unemail": "catalog:backend",
     "vue-tsc": "catalog:build",
     "zfeed": "catalog:backend"
   }

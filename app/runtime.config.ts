@@ -16,10 +16,8 @@ const server = {
             name: "微光档案",
             host: "smtp.qq.com",
             port: 465,
-            auth: {
-                user: "<!-- ??? -->",
-                pass: "<!-- ??? -->",
-            },
+            user: "<!-- ??? -->",
+            password: "<!-- ??? -->",
         },
         mongoose: {
             uri: "<!-- ??? -->",
