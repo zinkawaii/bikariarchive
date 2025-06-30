@@ -65,7 +65,7 @@
     "mongoose": "catalog:backend",
     "nuxt": "catalog:backend",
     "pathe": "catalog:backend",
-    "sass": "catalog:backend",
+    "sass-embedded": "catalog:backend",
     "stylelint": "catalog:lint",
     "svgo": "catalog:backend",
     "undici": "catalog:backend",
