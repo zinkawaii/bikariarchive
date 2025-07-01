@@ -1,8 +1,8 @@
-import article from "./lib/article";
-import entry from "./lib/entry";
-import update from "./lib/update";
+import article from "./core/article";
+import entry from "./core/entry";
+import update from "./core/update";
 
-export * from "./lib/types";
+export * from "./core/types";
 export * from "./remark/types";
 export {
     article,

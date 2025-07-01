@@ -18,7 +18,6 @@ export default defineNuxtConfig({
     },
     alias: {
         "@bikari/article": resolve(import.meta.dirname, "./packages/article/src"),
-        "@bikari/shared": resolve(import.meta.dirname, "./packages/shared/src"),
     },
     css: [
         "~/assets/scss/var.scss",

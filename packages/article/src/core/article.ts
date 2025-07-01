@@ -1,5 +1,4 @@
 import { readFile } from "node:fs/promises";
-import { isDev } from "@bikari/shared";
 import { format } from "date-fns";
 import { createKerria, type LoadInfo, type SourceInfo, useLoad, useSource } from "kerria";
 import { toString } from "mdast-util-to-string";
@@ -116,7 +115,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
     const { attributes, body } = await parseArticle<ArticleFrontmatter>(file);
 
     //生产环境下忽略草稿文件
-    if (attributes.draft && !isDev) {
+    if (attributes.draft && !import.meta.dev) {
         return null;
     }
 

@@ -39,7 +39,7 @@ catalogs:
     yaml: ^2.8.0
     zfeed: ^0.2.3
   build:
-    unbuild: ^3.5.0
+    tsdown: ^0.12.9
     vue-tsc: ^2.2.10
   frontend:
     "@vueuse/core": ^13.3.0

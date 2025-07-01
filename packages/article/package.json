@@ -2,13 +2,15 @@
   "name": "@bikari/article",
   "type": "module",
   "exports": {
-    ".": "./dist/index.mjs",
-    "./remark": "./dist/remark/index.mjs"
+    ".": "./dist/index.js",
+    "./remark": "./dist/remark/index.js"
   },
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "stub": "unbuild --stub",
+    "build": "tsdown",
+    "dev": "tsdown -w",
     "test": "vitest"
   },
   "dependencies": {
@@ -37,7 +39,7 @@
   },
   "devDependencies": {
     "@zinkawaii/tsconfig": "catalog:backend",
-    "unbuild": "catalog:build",
+    "tsdown": "catalog:build",
     "vitest": "catalog:test"
   }
 }

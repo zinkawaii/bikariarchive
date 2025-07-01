@@ -1,5 +1,4 @@
 import { readFile } from "node:fs/promises";
-import { isDev } from "@bikari/shared";
 import defu from "defu";
 import { createKerria, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
@@ -52,7 +51,7 @@ export default createKerria("Entry", () => {
 
             //在生产环境下隐藏未知标题，修剪草稿词条
             function transform(tree: IntelNode) {
-                if (tree.unknown && !(isDev && tree.title)) {
+                if (tree.unknown && !(import.meta.dev && tree.title)) {
                     tree.title = "? ? ?";
                 }
 
@@ -122,12 +121,12 @@ export default createKerria("Entry", () => {
             let { attributes, drafts } = await parseEntry<JEntry>(file);
 
             //生产环境下忽略草稿文件
-            if (attributes.draft && !isDev) {
+            if (attributes.draft && !import.meta.dev) {
                 return null;
             }
 
             //合并草稿数据
-            if (isDev) {
+            if (import.meta.dev) {
                 for (const draft of drafts) {
                     attributes = defu(draft, attributes);
                 }
