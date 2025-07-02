@@ -12,9 +12,6 @@ appearance:
   novel: bikari
   index: "111"
 illustrations:
-  - title: 人物卡
-    src: /garden/illustration/若叶遥_2.jpg
-    illustrator: 狸猫森
 talents:
 relationships:
   - name: 若叶舞
