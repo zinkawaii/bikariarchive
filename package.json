@@ -49,7 +49,6 @@
     "@pinia/nuxt": "catalog:backend",
     "@types/wicg-file-system-access": "catalog:types",
     "@vitejs/plugin-vue": "catalog:backend",
-    "@vue-email/render": "catalog:backend",
     "@vueuse/nuxt": "catalog:backend",
     "@zinkawaii/eslint-config": "catalog:lint",
     "@zinkawaii/nuxt-shiki": "catalog:backend",
@@ -70,6 +69,7 @@
     "svgo": "catalog:backend",
     "undici": "catalog:backend",
     "unemail": "catalog:backend",
+    "vue-component-type-helpers": "catalog:types",
     "vue-tsc": "catalog:build",
     "zfeed": "catalog:backend"
   }

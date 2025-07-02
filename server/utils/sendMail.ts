@@ -1,12 +1,13 @@
-import { render } from "@vue-email/render";
 import { createEmailService } from "unemail";
 import smtp from "unemail/providers/smtp";
-import type { Component } from "vue";
+import { type Component, createSSRApp } from "vue";
+import { renderToString } from "vue/server-renderer";
+import type { ComponentProps } from "vue-component-type-helpers";
 
-export async function sendMail(component: Component, options: {
+export async function sendMail<T extends Component>(component: T, options: {
     to: string;
     title: string;
-    props: Record<string, any>;
+    props: ComponentProps<T>;
 }) {
     const config = useRuntimeConfig();
 
@@ -22,7 +23,9 @@ export async function sendMail(component: Component, options: {
     });
 
     //编译模板
-    const html = await render(component, options.props);
+    const app = createSSRApp(component, options.props ?? {});
+    const text = await renderToString(app);
+    const html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">${text}`;
 
     //发送邮件
     return service.sendEmail({
