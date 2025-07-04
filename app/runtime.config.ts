@@ -69,6 +69,7 @@ const client = {
             summary: "微かの力を尽くして、光の届いた彼方へ",
         },
         cdnUrl: "https://cdn.bikari.top",
+        totalYears: Array.from({ length: new Date().getFullYear() - 2022 }, (_, i) => 2023 + i).reverse(),
     },
     development: {
         domain: "zinkawaii",

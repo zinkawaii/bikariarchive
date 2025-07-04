@@ -91,9 +91,16 @@ export default <RouterConfig> {
             },
         },
         {
-            name: "update",
             path: "/update",
-            component: () => import("~/pages/update.vue"),
+            redirect: { name: "unknown" },
+            component: () => import("~/pages/update/index.vue"),
+            children: [
+                {
+                    name: "update",
+                    path: ":year",
+                    component: () => import("~/pages/update/year.vue"),
+                },
+            ],
         },
         {
             name: "entry",

@@ -9,13 +9,14 @@ const schema = type({
 export default defineJEventHandler<GetUpdateResponse>(async (event, res) => {
     const { year } = schema.assert(getQuery(event));
 
-    //读取数据
-    if ([2023, 2024, 2025].includes(year)) {
-        const path = r(`/.data/update/${year}.json`);
-        const file = await readFile(path, "utf-8");
-        res.list = JSON.parse(file);
+    const config = useRuntimeConfig();
+
+    //年份不存在
+    if (!config.public.totalYears.includes(year)) {
+        return 1;
     }
-    else {
-        res.list = [];
-    }
+
+    const path = r(`/.data/update/${year}.json`);
+    const file = await readFile(path, "utf-8");
+    res.list = JSON.parse(file);
 });

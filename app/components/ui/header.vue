@@ -3,6 +3,7 @@
 
     const breadcrumbStore = useBreadcrumbStore();
     const shelfStore = useShelfStore();
+    const config = useRuntimeConfig();
     const router = useRouter();
     const word = ref("");
 
@@ -50,7 +51,7 @@
                 {
                     title: "更新日志",
                     icon: "fa6-solid:clock-rotate-left",
-                    to: { name: "update" },
+                    to: { name: "update", params: { year: config.public.totalYears[0] } },
                 },
                 {
                     title: "站点协议",

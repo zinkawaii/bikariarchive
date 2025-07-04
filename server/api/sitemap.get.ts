@@ -3,6 +3,8 @@ import { Article } from "~/utils/article";
 import { Entry } from "~/utils/entry";
 
 export default defineSitemapEventHandler(() => {
+    const config = useRuntimeConfig();
+
     return [
         "/about",
         "/borrowing",
@@ -12,7 +14,7 @@ export default defineSitemapEventHandler(() => {
         "/home",
         "/intel",
         "/search",
-        "/update",
+        ...config.public.totalYears.map((year) => `/update/${year}`),
         "/tools/lyricaxis",
         "/tools/namaemaker",
         ...Object.entries(Article.meta).map(([novel, { chapters }]) => [
