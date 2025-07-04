@@ -6,7 +6,7 @@ export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, "lang" | "themes
     themes: MaybeRefOrGetter<Record<string, BundledTheme>>;
 };
 
-export default function(
+export function usePlainShiki(
     el: MaybeRefOrGetter<HTMLElement | null | undefined>,
     options: MountPlainShikiOptions,
 ) {

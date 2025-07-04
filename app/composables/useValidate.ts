@@ -6,7 +6,7 @@ interface ValidateEntry {
     exec?: (value: string) => string | void;
 }
 
-export default function<T extends Record<string, ValidateEntry>>(entries: T) {
+export function useValidate<T extends Record<string, ValidateEntry>>(entries: T) {
     const toastStore = useToastStore();
 
     const errors: Ref<Record<keyof T, boolean>> = ref(Object.fromEntries(

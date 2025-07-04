@@ -20,7 +20,7 @@ export interface UseSourceRefsFieldOptions {
     readonly?: MaybeRefOrGetter<boolean>;
 }
 
-export default function<
+export function useSourceRefs<
     T extends object,
     F extends Record<string, UseSourceRefsFieldOptions>,
 >(

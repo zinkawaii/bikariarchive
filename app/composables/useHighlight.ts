@@ -5,7 +5,7 @@ export interface UseHighlightOptions {
     watch?: boolean;
 }
 
-export default function(
+export function useHighlight(
     target: MaybeComputedElementRef | MaybeComputedElementRef[] | MaybeRefOrGetter<MaybeElement[]>,
     word: MaybeRefOrGetter<string | RegExp>,
     options: UseHighlightOptions,

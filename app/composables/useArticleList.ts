@@ -8,7 +8,7 @@ export interface UseArticleListOptions {
     sticky?: MaybeRefOrGetter<boolean>;
 }
 
-export default function(options: UseArticleListOptions) {
+export function useArticleList(options: UseArticleListOptions) {
     //筛选类型
     const type = toRef(options.type);
 

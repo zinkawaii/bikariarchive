@@ -2,7 +2,7 @@ export interface UsePaginationOptions {
     sizes?: MaybeRefOrGetter<number>;
 }
 
-export default function<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginationOptions = {}) {
+export function usePagination<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginationOptions = {}) {
     const page = ref(1);
 
     watch(arr, () => {

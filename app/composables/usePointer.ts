@@ -9,7 +9,7 @@ export interface UsePointerOptions {
     onPointerup?: PointerFn<boolean>;
 }
 
-export default function(
+export function usePointer(
     el: MaybeRefOrGetter<HTMLElement | null | undefined>,
     options: UsePointerOptions,
 ) {

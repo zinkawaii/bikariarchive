@@ -1,4 +1,7 @@
-export default function(cssText: TemplateStringsArray, ...cssVars: MaybeRefOrGetter<unknown>[]) {
+export function useAdoptedStyleSheet(
+    cssText: TemplateStringsArray,
+    ...cssVars: MaybeRefOrGetter<unknown>[]
+) {
     let styleSheet: CSSStyleSheet;
 
     const entries = cssVars.map((source) => [
