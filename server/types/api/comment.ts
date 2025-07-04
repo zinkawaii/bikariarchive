@@ -19,7 +19,7 @@ export interface CommentData {
     time: string;
     mode: CommentMode;
     nickname: string;
-    avatar: string;
+    avatar?: string;
     email?: string;
     address?: string;
     character: string;
