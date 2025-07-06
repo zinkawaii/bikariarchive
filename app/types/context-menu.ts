@@ -1,6 +1,6 @@
 export interface ContextMenuGroup {
     title: string;
-    when?: MaybeRefOrGetter<any>;
+    when?: MaybeRefOrGetter<unknown>;
     shield?: string[];
     items: ContextMenuItem[];
 }

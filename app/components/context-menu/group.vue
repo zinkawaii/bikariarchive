@@ -12,7 +12,7 @@
     <fieldset class="menu-group" :class="{ [`is-root`]: root }">
         <legend v-if="root" class="menu-title">{{ title }}</legend>
         <menu class="menu-list">
-            <context-menu-item v-for="data in items" :data/>
+            <context-menu-item v-for="item in items" v-bind="item"/>
         </menu>
     </fieldset>
 </template>

@@ -16,25 +16,25 @@ const iconInfos: Record<ToastType, ToastIconInfo> = {
 };
 
 export const useToastStore = defineStore("toast", () => {
-    const map = ref(new Map<string, ToastItem>());
+    const toasts = shallowReactive(new Map<string, ToastItem>());
 
     function show(key: string, message: string, type: ToastType = "info") {
         const fullKey = `<${type}>${key}`;
         const hash = randomHash(8);
-        for (const item of map.value) {
-            if (item[0].startsWith(fullKey)) {
-                remove(item[0]);
+        for (const [name] of toasts) {
+            if (name.startsWith(fullKey)) {
+                remove(name);
                 break;
             }
         }
-        map.value.set(`${fullKey}(${hash})`, {
+        toasts.set(`${fullKey}(${hash})`, {
             icon: iconInfos[type],
             message,
         });
     }
 
-    function remove(key: string) {
-        map.value.delete(key);
+    function remove(name: string) {
+        toasts.delete(name);
     }
 
     function error(key: string, message: string) {
@@ -50,7 +50,7 @@ export const useToastStore = defineStore("toast", () => {
     }
 
     return {
-        map,
+        toasts,
         remove,
         error,
         info,

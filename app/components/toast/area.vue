@@ -2,7 +2,7 @@
     const toastStore = useToastStore();
 
     const toastList = computed(() => {
-        return [...toastStore.map].toReversed();
+        return [...toastStore.toasts].reverse();
     });
 </script>
 
@@ -10,9 +10,9 @@
     <div class="toast-area">
         <transition-group tag="ul">
             <toast-item
-                v-for="[key, { icon, message }] in toastList"
-                :key
-                :name="key"
+                v-for="[name, { icon, message }] in toastList"
+                :key="name"
+                :name
                 :icon-info="icon"
                 :message
             />

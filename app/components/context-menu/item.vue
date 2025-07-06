@@ -1,21 +1,19 @@
 <script lang="ts" setup>
     import type { ContextMenuItem } from "~/types/context-menu";
 
-    const props = defineProps<{
-        data: ContextMenuItem;
-    }>();
+    const props = defineProps<ContextMenuItem>();
 
-    const icon = computed(() => toValue(props.data.icon));
-    const checked = computed(() => toValue(props.data.checked));
-    const disabled = computed(() => toValue(props.data.disabled));
+    const icon = computed(() => toValue(props.icon));
+    const checked = computed(() => toValue(props.checked));
+    const disabled = computed(() => toValue(props.disabled));
 </script>
 
 <template>
-    <li class="menu-item" :class="{ [`is-disabled`]: disabled }" @click="data.action">
+    <li class="menu-item" :class="{ [`is-disabled`]: disabled }" @click="action">
         <iconify :name="icon ?? (checked ? `fa6-solid:check` : ``)"/>
-        <span>{{ data.title }}</span>
+        <span>{{ title }}</span>
         <iconify v-if="icon && checked" name="fa6-solid:check"/>
-        <context-menu-group v-if="data.children" :items="data.children"/>
+        <context-menu-group v-if="children" :items="children"/>
     </li>
 </template>
 

@@ -3,7 +3,7 @@ import type { WithParent } from "~/types";
 import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 
 export const useCommentStore = defineStore("comment", () => {
-    const comments = ref<WithParent<CommentData>[]>();
+    const comments = shallowRef<WithParent<CommentData>[]>();
     const mainCount = ref(0);
     const totalCount = ref(0);
     const isEmpty = ref(false);

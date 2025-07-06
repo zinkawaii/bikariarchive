@@ -5,6 +5,6 @@
 
 <template>
     <template v-for="{ vnode, zIndex, isOpening } in dialogs" :key="zIndex">
-        <component :is="vnode" :is-opening :style="{ zIndex }"/>
+        <component :is="vnode" :is-opening="isOpening.value" :style="{ zIndex }"/>
     </template>
 </template>

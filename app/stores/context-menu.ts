@@ -3,21 +3,21 @@ import type { ContextMenuGroup, ContextMenuItem } from "~/types/context-menu";
 
 export const useContextMenuStore = defineStore("context-menu", () => {
     const isOpening = ref(false);
-    const baseGroups = ref<ContextMenuGroup[]>([]);
-    const extraGroup = ref<ContextMenuGroup>();
+    const extraGroup = shallowRef<ContextMenuGroup>();
+    const basicGroups = shallowReactive(new Set<ContextMenuGroup>());
 
-    const displayExtra = computed(() => {
+    const filteredExtra = computed(() => {
         return extraGroup.value && (toValue(extraGroup.value.when) ?? true) ? extraGroup.value : void 0;
     });
 
-    const displayBasics = computed(() => {
-        return baseGroups.value.filter((group) => {
-            return (toValue(group.when) ?? true) && (!displayExtra.value?.shield?.includes(group.title));
+    const filteredBasics = computed(() => {
+        return [...basicGroups].filter((group) => {
+            return (toValue(group.when) ?? true) && (!filteredExtra.value?.shield?.includes(group.title));
         });
     });
 
     const groups = computed(() => {
-        return [displayExtra.value, ...displayBasics.value].filter(notNullish);
+        return [filteredExtra.value, ...filteredBasics.value].filter(notNullish);
     });
 
     function clear() {
@@ -26,7 +26,11 @@ export const useContextMenuStore = defineStore("context-menu", () => {
 
     function basic(group: ContextMenuGroup) {
         patchItems(group.items);
-        baseGroups.value.push(group as any);
+        basicGroups.add(group);
+
+        onUnmounted(() => {
+            basicGroups.delete(group);
+        });
     }
 
     function extra(el: MaybeRefOrGetter<HTMLElement | null | undefined>, group: ContextMenuGroup) {

@@ -2,7 +2,7 @@
     const dialogStore = useDialogStore();
 
     const filterDialogs = computed(() => {
-        return dialogStore.dialogs.filter((ctx) => ctx.isOpening);
+        return dialogStore.dialogs.filter((ctx) => ctx.isOpening.value);
     });
 </script>
 

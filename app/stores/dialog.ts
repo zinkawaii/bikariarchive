@@ -1,5 +1,3 @@
-import type { Raw } from "vue";
-
 interface DialogContext {
     vnode: VNode;
     zIndex: number;
@@ -15,7 +13,7 @@ interface UseDialogOptions {
 }
 
 export const useDialogStore = defineStore("dialog", () => {
-    const dialogs = ref<Raw<DialogContext>[]>([]);
+    const dialogs = shallowReactive<DialogContext[]>([]);
 
     function use(render: () => VNode, options: UseDialogOptions = {}) {
         const {
@@ -41,7 +39,7 @@ export const useDialogStore = defineStore("dialog", () => {
             }
 
             const vnode = render();
-            const last = dialogs.value.at(-1);
+            const last = dialogs.at(-1);
             const zIndex = (last?.zIndex ?? 510) + 2;
 
             ctx = {
@@ -52,7 +50,7 @@ export const useDialogStore = defineStore("dialog", () => {
                 close: (vnode.props ??= {}).onClose ??= close,
             };
 
-            dialogs.value.push(ctx);
+            dialogs.push(ctx);
             vnode.props.onVnodeMounted = () => {
                 isOpening.value = true;
             };
@@ -64,12 +62,12 @@ export const useDialogStore = defineStore("dialog", () => {
 
             const i = indexOf();
             if (i !== -1) {
-                dialogs.value.splice(i, 1);
+                dialogs.splice(i, 1);
             }
         }
 
         function indexOf() {
-            return dialogs.value.indexOf(ctx);
+            return dialogs.indexOf(ctx);
         }
 
         return {
