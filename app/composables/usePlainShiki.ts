@@ -14,24 +14,25 @@ export function usePlainShiki(
     const lang = toRef(options.lang);
     const themes = toRef(options.themes);
 
+    const shikiStore = useShikiStore();
+
     let plain: PlainShiki;
     let ctx: MountPlainShikiReturns;
 
     const { trigger } = watchTriggerable([target, lang, themes], async () => {
-        await loadShikiLanguages(lang.value);
-        const shikiOptions = await resolveShikiOptions();
+        await shikiStore.language(lang.value);
         ctx?.dispose();
 
         if (target.value) {
             ctx = plain?.mount(target.value, {
-                ...shikiOptions,
+                ...shikiStore.options,
                 ...options,
             });
         }
     });
 
     onMounted(async () => {
-        const shiki = await getShikiHighlighter();
+        const shiki = await shikiStore.load();
         plain = createPlainShiki(shiki);
         trigger();
     });

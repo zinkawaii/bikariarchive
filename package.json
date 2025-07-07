@@ -51,7 +51,6 @@
     "@vitejs/plugin-vue": "catalog:backend",
     "@vueuse/nuxt": "catalog:backend",
     "@zinkawaii/eslint-config": "catalog:lint",
-    "@zinkawaii/nuxt-shiki": "catalog:backend",
     "@zinkawaii/stylelint-config": "catalog:lint",
     "arktype": "catalog:backend",
     "chokidar": "catalog:backend",

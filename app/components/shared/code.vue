@@ -9,6 +9,8 @@
         raw: "",
     });
 
+    const shikiStore = useShikiStore();
+
     const [isCollapse, toggleCollapse] = useToggle(false);
     const [isExpand, toggleExpand] = useToggle(false);
     const codeEl = useTemplateRef("pre");
@@ -29,10 +31,12 @@
     //代码
     const code = ref(escapeHtml(props.raw));
     onMounted(async () => {
-        const shiki = await getShikiHighlighter();
-        const options = await resolveShikiOptions({ lang: props.lang });
-        await loadShikiLanguages(props.lang);
-        code.value = shiki.codeToHtml(props.raw, options);
+        const shiki = await shikiStore.load();
+        await shikiStore.language(props.lang);
+        code.value = shiki.codeToHtml(props.raw, {
+            ...shikiStore.options,
+            lang: props.lang,
+        });
     });
 
     //行数

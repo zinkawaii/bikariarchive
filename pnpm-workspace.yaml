@@ -18,7 +18,6 @@ catalogs:
     "@pinia/nuxt": ^0.11.1
     "@vitejs/plugin-vue": ^5.2.4
     "@vueuse/nuxt": ^13.3.0
-    "@zinkawaii/nuxt-shiki": ^0.9.0
     "@zinkawaii/tsconfig": ^0.0.2
     arktype: ^2.1.20
     chokidar: ^4.0.3

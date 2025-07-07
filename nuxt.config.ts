@@ -102,7 +102,6 @@ export default defineNuxtConfig({
         "@nuxtjs/seo",
         "@pinia/nuxt",
         "@vueuse/nuxt",
-        "@zinkawaii/nuxt-shiki",
         "pinia-plugin-persistedstate/nuxt",
     ],
     robots: robotsConfig,
@@ -140,12 +139,5 @@ export default defineNuxtConfig({
     },
     image: {
         provider: "none",
-    },
-    shiki: {
-        dynamic: true,
-        defaultTheme: {
-            light: "catppuccin-latte",
-            dark: "one-dark-pro",
-        },
     },
 });

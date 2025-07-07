@@ -7,9 +7,10 @@ import { visit } from "unist-util-visit";
 import type { Root } from "@bikari/article";
 import type hast from "hast";
 import type mdast from "mdast";
+import type { CodeToHastOptions, HighlighterCore } from "shiki";
 
-let shiki: Awaited<ReturnType<typeof getShikiHighlighter>>,
-    options: Awaited<ReturnType<typeof resolveShikiOptions>>;
+let shiki: HighlighterCore;
+let options: CodeToHastOptions;
 
 //收集并加载语言
 function code() {
@@ -21,9 +22,10 @@ function code() {
             }
         });
         if (languages.length) {
-            shiki ??= await getShikiHighlighter();
-            options ??= await resolveShikiOptions();
-            await loadShikiLanguages(...languages);
+            const shikiStore = useShikiStore();
+            shiki ??= await shikiStore.load();
+            options ??= shikiStore.options;
+            await shikiStore.language(...languages);
         }
     };
 }

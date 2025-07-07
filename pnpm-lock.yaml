@@ -36,9 +36,6 @@ catalogs:
     '@vueuse/nuxt':
       specifier: ^13.3.0
       version: 13.3.0
-    '@zinkawaii/nuxt-shiki':
-      specifier: ^0.9.0
-      version: 0.9.0
     '@zinkawaii/tsconfig':
       specifier: ^0.0.2
       version: 0.0.2
@@ -323,9 +320,6 @@ importers:
       '@zinkawaii/eslint-config':
         specifier: catalog:lint
         version: 0.3.0
-      '@zinkawaii/nuxt-shiki':
-        specifier: catalog:backend
-        version: 0.9.0(magicast@0.3.5)
       '@zinkawaii/stylelint-config':
         specifier: catalog:lint
         version: 0.3.2(postcss-html@1.8.0)(postcss@8.5.6)(stylelint@16.20.0(typescript@5.8.3))
@@ -2274,9 +2268,6 @@ packages:
 
   '@zinkawaii/eslint-config@0.3.0':
     resolution: {integrity: sha512-gwmqXUDZAnxMhSaZhEwAwGMLcij3IccB69n2zdIfA3JQVa9lS33m+etwgAVeGhNIAFZxKeVx8qQBLzY1rZf8pg==}
-
-  '@zinkawaii/nuxt-shiki@0.9.0':
-    resolution: {integrity: sha512-8itLhyFPgAg0EJedAi1qQL8H2JRtuvOKQWlkUV/GDIoIQeyw5M8bTJbpIdInAIfyCtTvktyCLBydfCwGHRn/AQ==}
 
   '@zinkawaii/stylelint-config@0.3.2':
     resolution: {integrity: sha512-DfJ0QP7glP+4fTStPuS6ikCqlxRXFrOtTZBEvKpINfVoorYvdKcly6kbewuWGZ70N3T/IDveVEmGMrUYyfaXRw==}
@@ -8846,16 +8837,6 @@ snapshots:
       tslib: 2.8.1
 
   '@zinkawaii/eslint-config@0.3.0': {}
-
-  '@zinkawaii/nuxt-shiki@0.9.0(magicast@0.3.5)':
-    dependencies:
-      '@nuxt/kit': 3.17.5(magicast@0.3.5)
-      defu: 6.1.4
-      knitwork: 1.2.0
-      pathe: 2.0.3
-      shiki: 3.6.0
-    transitivePeerDependencies:
-      - magicast
 
   '@zinkawaii/stylelint-config@0.3.2(postcss-html@1.8.0)(postcss@8.5.6)(stylelint@16.20.0(typescript@5.8.3))':
     dependencies:
