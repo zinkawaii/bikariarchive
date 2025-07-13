@@ -1,15 +1,15 @@
 export const Zin = new class Z {
     //默认动画配置
-    DEFAULT_ANIME_OPTION: KeyframeAnimationOptions = {
+    DEFAULT_ANIME_OPTIONS: KeyframeAnimationOptions = {
         duration: 400,
         easing: "ease",
         fill: "forwards",
     };
 
     //视口宽度常量
-    WINDOW_SIZE_MAX = 1024;
-    WINDOW_SIZE_MID = 768;
-    WINDOW_SIZE_MIN = 425;
+    MAX_WINDOW_SIZE = 1024;
+    MID_WINDOW_SIZE = 768;
+    MIN_WINDOW_SIZE = 425;
 
     //图床链接
     image(src: string, options: {
@@ -30,13 +30,13 @@ export const Zin = new class Z {
         let timer: NodeJS.Timeout | undefined;
         return <(this: unknown, ...args: T) => void> (
             immediate
-            ? function(...args) {
+            ? (...args) => {
                 timer ? clearAndToast() : func.apply(this, args);
                 timer = setTimeout(() => {
                     timer = void 0;
                 }, delay);
             }
-            : function(...args) {
+            : (...args) => {
                 timer && clearAndToast();
                 timer = setTimeout(() => {
                     func.apply(this, args);
@@ -65,10 +65,11 @@ export const Zin = new class Z {
     } = {}) {
         let mime = "text/plain";
         switch (type) {
-            case "json":
+            case "json": {
                 data = JSON.stringify(data);
                 mime = "application/json";
                 break;
+            }
         }
         const blob = new Blob([data], { type: mime });
 

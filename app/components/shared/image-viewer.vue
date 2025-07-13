@@ -139,7 +139,7 @@
             top: finalTop + "px",
             width: width * rate + "px",
             height: height * rate + "px",
-        }, Zin.DEFAULT_ANIME_OPTION);
+        }, Zin.DEFAULT_ANIME_OPTIONS);
     }
 
     //按下 ESC 键关闭
@@ -168,7 +168,7 @@
             width: Math.floor(finalWidth) + "px",
             height: Math.floor(finalHeight) + "px",
             clipPath: "inset(0)",
-        }], Zin.DEFAULT_ANIME_OPTION);
+        }], Zin.DEFAULT_ANIME_OPTIONS);
     };
 
     //关闭时
@@ -181,7 +181,7 @@
             top: 2 * y + elTop + "px",
             left: 2 * x + elLeft + "px",
             clipPath: "inset(0)",
-        }, getOriginalKeyframe(x, y)], Zin.DEFAULT_ANIME_OPTION);
+        }, getOriginalKeyframe(x, y)], Zin.DEFAULT_ANIME_OPTIONS);
 
         animation.addEventListener("finish", done);
     };

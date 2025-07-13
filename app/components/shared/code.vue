@@ -32,7 +32,7 @@
     const code = ref(escapeHtml(props.raw));
     onMounted(async () => {
         const shiki = await shikiStore.load();
-        await shikiStore.language(props.lang);
+        await shikiStore.loadLang(props.lang);
         code.value = shiki.codeToHtml(props.raw, {
             ...shikiStore.options,
             lang: props.lang,

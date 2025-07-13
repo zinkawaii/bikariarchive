@@ -10,8 +10,6 @@ export function useHighlight(
     word: MaybeRefOrGetter<string | RegExp>,
     options: UseHighlightOptions,
 ) {
-    const isSupported = useSupported(() => CSS.highlights);
-
     const targets = computed(() => {
         const value = toValue(target);
         return toArray(value).map(unrefElement).filter(notNullish);
@@ -64,30 +62,27 @@ export function useHighlight(
         });
     });
 
-    if (isSupported.value) {
-        if (options.watch) {
-            useMutationObserver(targets, textNodes.trigger, {
-                characterData: true,
-                childList: true,
-                subtree: true,
-            });
-        }
-
-        const highlight = CSS.highlights.get(options.name) ?? new Highlight();
-        CSS.highlights.set(options.name, highlight);
-
-        watch(ranges, (newVal, oldVal = []) => {
-            for (const range of oldVal) {
-                highlight.delete(range);
-            }
-            for (const range of newVal) {
-                highlight.add(range);
-            }
+    if (options.watch) {
+        useMutationObserver(targets, textNodes.trigger, {
+            characterData: true,
+            childList: true,
+            subtree: true,
         });
     }
 
+    const highlight = CSS.highlights.get(options.name) ?? new Highlight();
+    CSS.highlights.set(options.name, highlight);
+
+    watch(ranges, (newVal, oldVal = []) => {
+        for (const range of oldVal) {
+            highlight.delete(range);
+        }
+        for (const range of newVal) {
+            highlight.add(range);
+        }
+    });
+
     return {
-        isSupported,
         update: textNodes.trigger,
     };
 }

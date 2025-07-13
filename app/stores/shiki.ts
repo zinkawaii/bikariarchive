@@ -1,6 +1,7 @@
 import type { BundledLanguage, CodeToHastOptions, HighlighterCore } from "shiki";
 
 export const useShikiStore = defineStore("shiki", () => {
+    let promise: Promise<HighlighterCore>;
     let shiki: HighlighterCore;
 
     const options: CodeToHastOptions<BundledLanguage, any> = {
@@ -18,23 +19,30 @@ export const useShikiStore = defineStore("shiki", () => {
         }],
     };
 
-    async function load() {
-        if (!shiki) {
-            const { createHighlighterCore } = await import("shiki/core");
-            const { createJavaScriptRegexEngine } = await import("shiki/engine-javascript.mjs");
+    onMounted(() => {
+        shiki?.dispose();
+    });
 
-            shiki = await createHighlighterCore({
-                engine: createJavaScriptRegexEngine(),
-                themes: [
-                    await import("shiki/themes/catppuccin-latte.mjs"),
-                    await import("shiki/themes/one-dark-pro.mjs"),
-                ],
-            });
-        }
+    async function load() {
+        promise ??= loadShiki();
+        shiki ??= await promise;
         return shiki;
     }
 
-    async function language(...langs: string[]) {
+    async function loadShiki() {
+        const { createHighlighterCore } = await import("shiki/core");
+        const { createJavaScriptRegexEngine } = await import("shiki/engine-javascript.mjs");
+
+        return await createHighlighterCore({
+            engine: createJavaScriptRegexEngine(),
+            themes: [
+                await import("shiki/themes/catppuccin-latte.mjs"),
+                await import("shiki/themes/one-dark-pro.mjs"),
+            ],
+        });
+    }
+
+    async function loadLang(...langs: string[]) {
         const { bundledLanguages } = await import("shiki/langs");
         const loadedLanguages = shiki.getLoadedLanguages();
         await Promise.all(
@@ -48,6 +56,6 @@ export const useShikiStore = defineStore("shiki", () => {
     return {
         options,
         load,
-        language,
+        loadLang,
     };
 });

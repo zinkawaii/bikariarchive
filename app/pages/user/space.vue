@@ -29,7 +29,9 @@
         return isMyself.value || !data.value?.error;
     });
 
-    const { uid, nickname, sign, avatar } = useSourceRefs(() => (isMyself.value ? userStore : data.value!), {
+    const { uid, nickname, sign, avatar } = useSourceRefs(() => (
+        isMyself.value ? userStore : data.value!
+    ), {
         uid: {
             readonly: isNotMyself,
         },

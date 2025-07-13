@@ -1,4 +1,3 @@
-import { defineSitemapEventHandler } from "#imports";
 import { Article } from "~/utils/article";
 import { Entry } from "~/utils/entry";
 

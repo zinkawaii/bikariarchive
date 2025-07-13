@@ -22,7 +22,7 @@ export default defineJEventHandler(async (event) => {
             _id: id,
         });
     }
-    catch (err) {
+    catch {
         //ID不存在
         return 1;
     }

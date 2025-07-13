@@ -53,7 +53,7 @@
         maeEl.value!.animate([
             { rotate: "y 90deg" },
             {},
-        ], Zin.DEFAULT_ANIME_OPTION);
+        ], Zin.DEFAULT_ANIME_OPTIONS);
     }
 
     //随机播放语音

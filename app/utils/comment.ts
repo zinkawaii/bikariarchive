@@ -25,7 +25,7 @@ function code() {
             const shikiStore = useShikiStore();
             shiki ??= await shikiStore.load();
             options ??= shikiStore.options;
-            await shikiStore.language(...languages);
+            await shikiStore.loadLang(...languages);
         }
     };
 }

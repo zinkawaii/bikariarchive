@@ -7,10 +7,8 @@
     const verify = ref("");
     const password = ref("");
 
-    const verifyStage = ref({
-        stage: 0,
-        delay: 0,
-    });
+    const verifyStage = ref(0);
+    const verifyDelay = ref(0);
 
     const { errors, clear, glitch, validate } = useValidate({
         nickname: {
@@ -50,7 +48,7 @@
             return;
         }
 
-        verifyStage.value.stage = 1;
+        verifyStage.value = 1;
 
         try {
             const { error } = await $fetch("/api/user/logon/verify", {
@@ -68,18 +66,18 @@
         //发送成功
         async function successed() {
             const max = 60;
-            verifyStage.value.stage = 2;
-            verifyStage.value.delay = max;
+            verifyStage.value = 2;
+            verifyDelay.value = max;
 
             await Zin.interval(() => {
-                verifyStage.value.delay--;
+                verifyDelay.value--;
             }, {
                 immediate: false,
                 duration: 1000,
                 times: max,
             });
 
-            verifyStage.value.stage = 0;
+            verifyStage.value = 0;
         }
 
         //发送失败
@@ -144,9 +142,9 @@
             v-model:error="errors.verify"
             @input="onVerifyInput"
         />
-        <mb-button :disabled="verifyStage.stage > 0" @click="sendVerify">{{
-            verifyStage.stage === 1 ? "发送中……" :
-            verifyStage.stage === 2 ? `已发送(${verifyStage.delay})` :
+        <mb-button :disabled="verifyStage > 0" @click="sendVerify">{{
+            verifyStage === 1 ? "发送中……" :
+            verifyStage === 2 ? `已发送(${verifyDelay})` :
             "发送验证码"
         }}</mb-button>
     </div>

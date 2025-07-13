@@ -22,7 +22,7 @@ export function useAdoptedStyleSheet(
         update(getVals());
     });
 
-    tryOnUnmounted(() => {
+    onUnmounted(() => {
         const i = document.adoptedStyleSheets.indexOf(styleSheet);
         if (i !== -1) {
             document.adoptedStyleSheets.splice(i, 1);

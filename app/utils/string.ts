@@ -32,7 +32,7 @@ export function underlize(str: string) {
 //小驼峰转换
 export function camelize(str: string) {
     return getSplittedGroup(str)
-        .map((sub, i) => (i > 0 ? capitalize(sub) : sub.toLowerCase()))
+        .map((sub, i) => (i ? capitalize(sub) : sub.toLowerCase()))
         .join("");
 }
 

@@ -1,13 +1,10 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="/feed/template.xsl"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:atom="http://www.w3.org/2005/Atom" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output method="html"/>
     <xsl:template match="/">
         <html lang="{@xml:lang}">
             <head>
-                <title>
-                    <xsl:value-of select="atom:title"/>
-                </title>
                 <link rel="stylesheet" href="/feed/style.css"/>
                 <link rel="icon" href="/garden/favicon.svg"/>
             </head>

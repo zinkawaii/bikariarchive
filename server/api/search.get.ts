@@ -34,24 +34,21 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
             }
         });
 
-        const position = [];
+        const positions = [];
         for (let i = 0; i < lines.length; i++) {
-            let pos = -1;
             const line = lines[i][1];
 
-            do {
-                pos = line.indexOf(word, pos + 1);
-                if (pos !== -1) {
-                    position.push({
-                        line: i,
-                        pos: pos,
-                    });
-                }
-            } while (pos !== -1);
+            let pos = -1;
+            while (pos = line.indexOf(word, pos + 1), pos !== -1) {
+                positions.push({
+                    line: i,
+                    pos,
+                });
+            }
         }
 
-        if (position.length > 0) {
-            const line = position[0].line;
+        if (positions.length) {
+            const line = positions[0].line;
 
             //前后文
             const start = Math.max(line - 1, 0);
@@ -61,7 +58,7 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
             res.list.push({
                 novel: art.novel,
                 index: art.index,
-                count: position.length,
+                count: positions.length,
                 parts,
             });
         }

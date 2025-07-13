@@ -19,14 +19,6 @@ const server = {
             user: "<!-- ??? -->",
             password: "<!-- ??? -->",
         },
-        mongoose: {
-            uri: "<!-- ??? -->",
-            options: {
-                dbName: "<!-- ??? -->",
-                user: "<!-- ??? -->",
-                pass: "<!-- ??? -->",
-            },
-        },
         session: {
             maxAge: 86400 * 30,
             storage: {
@@ -41,8 +33,11 @@ const server = {
     },
     development: {
         mongoose: {
+            uri: "<!-- ??? -->",
             options: {
                 dbName: "<!-- ??? -->",
+                user: "<!-- ??? -->",
+                pass: "<!-- ??? -->",
             },
         },
     },
@@ -52,6 +47,7 @@ const server = {
             options: {
                 dbName: "<!-- ??? -->",
                 user: "<!-- ??? -->",
+                pass: "<!-- ??? -->",
             },
         },
     },

@@ -8,7 +8,7 @@
     useHead({
         link: [
             { rel: "icon", href: config.public.favicon },
-            { rel: "apple-touch-icon", href: config.public.avatar },
+            { rel: "apple-touch-icon", href: config.public.favicon },
             { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" },
         ],
         meta: [
@@ -38,7 +38,7 @@
 
     onMounted(() => {
         //移动端
-        if (window.innerWidth < Zin.WINDOW_SIZE_MAX) {
+        if (window.innerWidth < Zin.MAX_WINDOW_SIZE) {
             settingStore.set("ui-collapse", true);
         }
     });

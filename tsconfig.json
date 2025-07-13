@@ -1,22 +1,17 @@
 {
-  "extends": "./.nuxt/tsconfig.json",
-  "compilerOptions": {
-    "types": [
-      "@types/wicg-file-system-access"
-    ],
-    "strictFunctionTypes": false,
-    "noUncheckedIndexedAccess": false
-  },
-  "vueCompilerOptions": {
-    "checkUnknownComponents": true,
-    "checkUnknownDirectives": true,
-    "inferComponentDollarEl": true,
-    "inferComponentDollarRefs": true,
-    "inferTemplateDollarAttrs": true,
-    "inferTemplateDollarEl": true,
-    "inferTemplateDollarRefs": true,
-    "inferTemplateDollarSlots": true,
-    "fallthroughAttributes": true,
-    "experimentalResolveStyleCssClasses": "always"
-  }
+  "references": [
+    {
+      "path": "./.nuxt/tsconfig.app.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.node.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.server.json"
+    },
+    {
+      "path": "./.nuxt/tsconfig.shared.json"
+    }
+  ],
+  "files": []
 }

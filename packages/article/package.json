@@ -38,7 +38,7 @@
     "yaml": "catalog:backend"
   },
   "devDependencies": {
-    "@zinkawaii/tsconfig": "catalog:backend",
+    "@zinkawaii/tsconfig": "catalog:types",
     "tsdown": "catalog:build",
     "vitest": "catalog:test"
   }

@@ -1,8 +1,8 @@
 import vue from "@vitejs/plugin-vue";
-import { resolve } from "pathe";
 import { ProxyAgent, setGlobalDispatcher } from "undici";
 import robotsConfig from "./app/robots.config";
 import { clientConfig, serverConfig } from "./app/runtime.config";
+import typescriptConfig from "./app/typescript.config";
 
 try {
     const dispatcher = new ProxyAgent({ uri: new URL(process.env.HTTPS_PROXY!).toString() });
@@ -15,9 +15,6 @@ export default defineNuxtConfig({
         rootAttrs: {
             id: "z-root",
         },
-    },
-    alias: {
-        "@bikari/article": resolve(import.meta.dirname, "./packages/article/src"),
     },
     css: [
         "~/assets/scss/var.scss",
@@ -49,12 +46,6 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true,
     },
-    features: {
-        inlineStyles: false,
-    },
-    future: {
-        compatibilityVersion: 4,
-    },
     nitro: {
         rollupConfig: {
             plugins: [
@@ -66,11 +57,11 @@ export default defineNuxtConfig({
         ...serverConfig,
         public: clientConfig,
     },
+    typescript: typescriptConfig,
     vite: {
         css: {
             preprocessorOptions: {
                 scss: {
-                    api: "modern-compiler",
                     additionalData: `@use "~/assets/scss/mixin.scss" as *;`,
                 },
             },

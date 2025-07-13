@@ -1,3 +1,5 @@
+/// <reference types="@kikiutils/nuxt-session" />
+
 export interface BaseResponse {
     error: number;
 }

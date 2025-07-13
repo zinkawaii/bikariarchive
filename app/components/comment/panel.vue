@@ -13,7 +13,9 @@
         return kind.value === "modify";
     });
 
-    const { content, mode, nickname, email, address } = useSourceRefs(() => (isModifyKind.value ? modifyOptions.value : commentPanelStore), {
+    const { content, mode, nickname, email, address } = useSourceRefs(() => (
+        isModifyKind.value ? modifyOptions.value : commentPanelStore
+    ), {
         content: {},
         mode: {},
         nickname: {},

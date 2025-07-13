@@ -20,7 +20,7 @@ export function usePlainShiki(
     let ctx: MountPlainShikiReturns;
 
     const { trigger } = watchTriggerable([target, lang, themes], async () => {
-        await shikiStore.language(lang.value);
+        await shikiStore.loadLang(lang.value);
         ctx?.dispose();
 
         if (target.value) {
