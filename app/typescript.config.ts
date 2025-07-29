@@ -4,9 +4,6 @@ import type { TSConfig } from "pkg-types";
 const shared: TSConfig["compilerOptions"] = {
     strictFunctionTypes: false,
     noUncheckedIndexedAccess: false,
-    paths: {
-        "@bikari/article": ["../packages/article/src"],
-    },
 };
 
 export default <NuxtConfig["typescript"]> {

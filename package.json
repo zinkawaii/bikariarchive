@@ -6,7 +6,6 @@
     "dev": "nuxt dev --no-qr",
     "build": "nuxt build",
     "prebuild": "pnpm run task:jnm",
-    "prepare": "nuxt prepare",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
     "stylelint": "stylelint **/*.{vue,scss}",

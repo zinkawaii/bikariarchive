@@ -1,6 +1,6 @@
 import { cp } from "node:fs/promises";
-import { article, entry, update } from "@bikari/article";
 import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
+import { article, entry, update } from "../../packages/article/src";
 
 export default defineNuxtModule({
     meta: {

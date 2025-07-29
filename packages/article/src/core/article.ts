@@ -5,6 +5,7 @@ import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle, parseEntry } from "../remark";
+import { isDevelopment } from "../utils";
 import type { ArticleFrontmatter, NovelFrontmatter } from "./types";
 
 enum SourceKind {
@@ -115,7 +116,7 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
     const { attributes, body } = await parseArticle<ArticleFrontmatter>(file);
 
     //生产环境下忽略草稿文件
-    if (attributes.draft && !import.meta.dev) {
+    if (attributes.draft && !isDevelopment) {
         return null;
     }
 

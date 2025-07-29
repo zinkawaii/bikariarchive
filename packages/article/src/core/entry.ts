@@ -3,6 +3,7 @@ import defu from "defu";
 import { createKerria, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
 import { parseEntry } from "../remark";
+import { isDevelopment } from "../utils";
 import type { Child } from "../remark/types";
 import type { EntryDetail, EntryTalent, IntelNode, JEntry, JIntel } from "./types";
 
@@ -51,7 +52,7 @@ export default createKerria("Entry", () => {
 
             //在生产环境下隐藏未知标题，修剪草稿词条
             function transform(tree: IntelNode) {
-                if (tree.unknown && !(import.meta.dev && tree.title)) {
+                if (tree.unknown && !(isDevelopment && tree.title)) {
                     tree.title = "? ? ?";
                 }
 
@@ -121,12 +122,12 @@ export default createKerria("Entry", () => {
             let { attributes, drafts } = await parseEntry<JEntry>(file);
 
             //生产环境下忽略草稿文件
-            if (attributes.draft && !import.meta.dev) {
+            if (attributes.draft && !isDevelopment) {
                 return null;
             }
 
             //合并草稿数据
-            if (import.meta.dev) {
+            if (isDevelopment) {
                 for (const draft of drafts) {
                     attributes = defu(draft, attributes);
                 }

@@ -2,8 +2,7 @@
   "name": "@bikari/article",
   "type": "module",
   "exports": {
-    ".": "./dist/index.js",
-    "./remark": "./dist/remark/index.js"
+    ".": "./dist/index.js"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
