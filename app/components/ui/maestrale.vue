@@ -30,7 +30,7 @@
             },
             {
                 title: "誓约",
-                icon: "fa6-solid:heart",
+                icon: "fa7-solid:heart",
                 checked: isMarry,
                 action: toggleMarry,
             },

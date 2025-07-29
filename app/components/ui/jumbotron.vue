@@ -40,7 +40,7 @@
             <nuxt-img class="jumbo-image" :src="jumbotronUrl" alt="[jumbotron]"/>
             <jumbotron-banner />
             <button class="jumbo-hide" @click="toBottom">
-                <iconify name="fa6-solid:chevron-down"/>
+                <iconify name="fa7-solid:chevron-down"/>
             </button>
         </div>
     </transition>

@@ -20,37 +20,37 @@
         },
         {
             title: "情报",
-            icon: "fa6-solid:sitemap",
+            icon: "fa7-solid:sitemap",
             to: { name: "intel" },
         },
         {
             title: "档案",
-            icon: "fa6-solid:box-archive",
+            icon: "fa7-solid:box-archive",
             children: [
                 {
                     title: "借物表",
-                    icon: "fa6-solid:person-praying",
+                    icon: "fa7-solid:person-praying",
                     to: { name: "borrowing" },
                 },
                 {
                     title: "工具箱",
-                    icon: "fa6-solid:screwdriver-wrench",
+                    icon: "fa7-solid:screwdriver-wrench",
                     to: { name: "chest" },
                 },
                 {
                     title: "番剧",
-                    icon: "fa6-brands:bilibili",
+                    icon: "fa7-brands:bilibili",
                     to: { name: "bangumi" },
                 },
             ],
         },
         {
             title: "营业",
-            icon: "fa6-solid:mug-saucer",
+            icon: "fa7-solid:mug-saucer",
             children: [
                 {
                     title: "更新日志",
-                    icon: "fa6-solid:clock-rotate-left",
+                    icon: "fa7-solid:clock-rotate-left",
                     to: { name: "update", params: { year: config.public.totalYears[0] } },
                 },
                 {
@@ -60,18 +60,18 @@
                 },
                 {
                     title: "关于",
-                    icon: "fa6-solid:circle-info",
+                    icon: "fa7-solid:circle-info",
                     to: { name: "about" },
                 },
             ],
         },
         {
             title: "链接",
-            icon: "fa6-solid:link",
+            icon: "fa7-solid:link",
             children: [
                 {
                     title: "友情链接",
-                    icon: "fa6-solid:user-group",
+                    icon: "fa7-solid:user-group",
                     to: { name: "friend" },
                 },
             ],
@@ -115,7 +115,7 @@
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
             <button title="全文检索">
-                <iconify name="fa6-solid:magnifying-glass"/>
+                <iconify name="fa7-solid:magnifying-glass"/>
             </button>
         </form>
     </header>

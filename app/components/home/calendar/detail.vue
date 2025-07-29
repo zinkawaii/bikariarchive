@@ -14,9 +14,9 @@
             </time>
             <h6 class="calendar-title">事件</h6>
             <p v-if="date.event?.mono" class="calendar-event">
-                <iconify name="fa6-solid:quote-left"/>
+                <iconify name="fa7-solid:quote-left"/>
                 <span>{{ date.event.mono }}</span>
-                <iconify name="fa6-solid:quote-right"/>
+                <iconify name="fa7-solid:quote-right"/>
             </p>
             <span v-else class="calendar-none">No Special.</span>
             <h6 class="calendar-title">关键人物</h6>

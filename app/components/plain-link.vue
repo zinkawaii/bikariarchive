@@ -32,7 +32,7 @@
         <iconify
             v-if="isExternal && !hideExternal"
             class="plain-external"
-            name="fa6-solid:arrow-up-right-from-square"
+            name="fa7-solid:arrow-up-right-from-square"
         />
     </nuxt-link>
 </template>

@@ -21,14 +21,14 @@
             <span class="content-h2">{{ nickname }}</span>
             <ul class="user-tags">
                 <li class="user-tag">
-                    <iconify name="fa6-solid:user"/>
+                    <iconify name="fa7-solid:user"/>
                     <span>{{ character }}</span>
                 </li>
             </ul>
         </div>
         <div v-if="address" class="user-address">
             <plain-link :to="address" hide-external>
-                <iconify name="fa6-solid:link"/>
+                <iconify name="fa7-solid:link"/>
                 <span>{{ displayAddress }}</span>
             </plain-link>
         </div>

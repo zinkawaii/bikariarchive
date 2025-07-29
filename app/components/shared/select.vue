@@ -43,7 +43,7 @@
         @blur="toggleDrop(false)"
     >
         <span class="select-title">{{ activeItem?.label }}</span>
-        <iconify class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa6-solid:chevron-down"/>
+        <iconify class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa7-solid:chevron-down"/>
         <ul class="select-dropdown" :class="{ [`is-drop`]: isDrop }">
             <template v-for="{ label, group, value } in options">
                 <li v-if="group" class="select-group">{{ label }}</li>

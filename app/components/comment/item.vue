@@ -87,16 +87,16 @@
             <div class="comment-info">
                 <time>{{ elapsed }}</time>
                 <button class="comment-action" @click="replyComment">
-                    <iconify name="fa6-solid:comment-dots"/>
+                    <iconify name="fa7-solid:comment-dots"/>
                     <span>回复</span>
                 </button>
                 <template v-if="userStore.identity >= 9">
                     <button class="comment-action" @click="modifyComment">
-                        <iconify name="fa6-solid:pen-to-square"/>
+                        <iconify name="fa7-solid:pen-to-square"/>
                         <span>修改</span>
                     </button>
                     <button class="comment-action" @click="removeComment">
-                        <iconify name="fa6-solid:trash-can"/>
+                        <iconify name="fa7-solid:trash-can"/>
                         <span>删除</span>
                     </button>
                 </template>

@@ -26,7 +26,7 @@
                     <div class="signer-header">
                         <h2 class="signer-title">登录</h2>
                         <button class="signer-have" @click="signerStore.switchView(`logon`)">
-                            没有账号？立即注册<iconify name="fa6-solid:chevron-right"/>
+                            没有账号？立即注册<iconify name="fa7-solid:chevron-right"/>
                         </button>
                     </div>
                     <signer-in />
@@ -35,7 +35,7 @@
                     <div class="signer-header">
                         <h2 class="signer-title">注册</h2>
                         <button class="signer-have" @click="signerStore.switchView(`login`)">
-                            已有账号，前往登录<iconify name="fa6-solid:chevron-right"/>
+                            已有账号，前往登录<iconify name="fa7-solid:chevron-right"/>
                         </button>
                     </div>
                     <signer-on />

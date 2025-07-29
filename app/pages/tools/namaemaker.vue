@@ -211,7 +211,7 @@
                             v-anime="{ rotate: 360, duration: 1500, ease: `linear`, loop: true }"
                             name="mingcute:loading-fill"
                         />
-                        <iconify v-else name="fa6-solid:download"/>
+                        <iconify v-else name="fa7-solid:download"/>
                         <span>加载</span>
                     </template>
                     <template v-else>
@@ -220,7 +220,7 @@
                     </template>
                 </mb-button>
                 <mb-button :disabled="isResultEmpty" @click="clear">
-                    <iconify name="fa6-solid:trash-can"/>
+                    <iconify name="fa7-solid:trash-can"/>
                     <span>清除结果</span>
                 </mb-button>
             </div>

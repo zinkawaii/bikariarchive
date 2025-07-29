@@ -110,7 +110,7 @@
     </define-outline-list>
     <aside-widget class="aside-unified" title="目录">
         <template #icon>
-            <iconify name="fa6-solid:book-open"/>
+            <iconify name="fa7-solid:list-numeric"/>
         </template>
         <div v-if="nestedHeaders.length" class="aside-limited">
             <div class="outline-track">

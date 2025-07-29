@@ -21,7 +21,7 @@
                 <slot></slot>
             </div>
             <span class="dialog-xmark" @click="emit(`close`)">
-                <iconify name="fa6-solid:xmark"/>
+                <iconify name="fa7-solid:xmark"/>
             </span>
         </div>
     </transition-scale>
@@ -65,7 +65,7 @@
         aspect-ratio: 1;
         border-radius: var(--bounded-circle);
         background-color: var(--color-gray-800);
-        font-size: 1rem;
+        font-size: 0.75rem;
         color: var(--color-gray-300);
         transition: all 0.4s;
         cursor: pointer;

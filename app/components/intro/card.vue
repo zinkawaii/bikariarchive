@@ -39,9 +39,9 @@
         </h2>
         <intro-content :novel/>
         <div v-if="record" class="intro-record">
-            <iconify name="fa6-solid:chevron-right"/>
+            <iconify name="fa7-solid:chevron-right"/>
             <plain-link class="intro-link" :to="record.to">{{ record.title }}</plain-link>
-            <iconify name="fa6-solid:chevron-left"/>
+            <iconify name="fa7-solid:chevron-left"/>
         </div>
     </div>
 </template>

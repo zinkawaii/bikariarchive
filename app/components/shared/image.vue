@@ -51,7 +51,7 @@
         items: [
             {
                 title: "前往图源",
-                icon: "fa6-solid:arrow-up-right-from-square",
+                icon: "fa7-solid:arrow-up-right-from-square",
                 action() {
                     window.open(props.reference, "_blank");
                 },

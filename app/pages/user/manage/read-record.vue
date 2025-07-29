@@ -69,10 +69,10 @@
                     <td>{{ item.user?.uid || "--" }}</td>
                     <td class="manage-operators">
                         <mb-button>
-                            <iconify name="fa6-solid:pencil"/>
+                            <iconify name="fa7-solid:pencil"/>
                         </mb-button>
                         <mb-button @click="remove(item, i)">
-                            <iconify name="fa6-solid:trash-can"/>
+                            <iconify name="fa7-solid:trash-can"/>
                         </mb-button>
                     </td>
                 </tr>

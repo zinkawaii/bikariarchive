@@ -29,7 +29,7 @@
         <div class="history-title">
             <span>历史词条</span>
             <button @click="clear">
-                <iconify name="fa6-solid:trash-can"/>
+                <iconify name="fa7-solid:trash-can"/>
             </button>
         </div>
         <client-only>

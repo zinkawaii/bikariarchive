@@ -10,9 +10,9 @@
 
 <template>
     <li class="menu-item" :class="{ [`is-disabled`]: disabled }" @click="action">
-        <iconify :name="icon ?? (checked ? `fa6-solid:check` : ``)"/>
+        <iconify :name="icon ?? (checked ? `fa7-solid:check` : ``)"/>
         <span>{{ title }}</span>
-        <iconify v-if="icon && checked" name="fa6-solid:check"/>
+        <iconify v-if="icon && checked" name="fa7-solid:check"/>
         <context-menu-group v-if="children" :items="children"/>
     </li>
 </template>

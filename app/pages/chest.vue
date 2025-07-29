@@ -24,7 +24,7 @@
         <div class="chest-list">
             <nuxt-link v-for="{ title, description, icon, to } in tools" class="chest-item" :to>
                 <div class="chest-icon">
-                    <iconify :name="icon ?? `fa6-solid:wrench`"/>
+                    <iconify :name="icon ?? `fa7-solid:wrench`"/>
                 </div>
                 <div class="chest-title">
                     <h3>{{ title }}</h3>

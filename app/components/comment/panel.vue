@@ -121,7 +121,7 @@
             :disabled="isContentOverlength || isSending"
             @click="sendComment"
         >
-            <iconify name="fa6-solid:paper-plane"/>
+            <iconify name="fa7-solid:paper-plane"/>
             <span>{{ isSending ? "发送中……" : "发表评论" }}</span>
         </mb-button>
     </mb-dialog>

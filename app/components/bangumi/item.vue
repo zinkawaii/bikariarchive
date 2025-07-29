@@ -14,7 +14,7 @@
             <span class="bangumi-trans text-truncate">{{ title.zh }}</span>
             <ul class="bangumi-tags">
                 <li class="bangumi-tag">
-                    <iconify name="fa6-solid:circle-play"/>
+                    <iconify name="fa7-solid:circle-play"/>
                     <time>{{ date }}</time>
                 </li>
             </ul>

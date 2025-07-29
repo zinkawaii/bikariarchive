@@ -19,12 +19,12 @@
     }[] = [
         {
             attr: "volume",
-            icon: "fa6-solid:book-open",
+            icon: "fa7-solid:scroll",
             content: () => props.art.volumeInfo.title,
         },
         {
             attr: "read-count",
-            icon: "fa6-solid:eye",
+            icon: "fa7-solid:eye",
             content: () => `${props.post?.readCount ?? "?"} 阅读`,
         },
         {
@@ -34,12 +34,12 @@
         },
         {
             attr: "publish-date",
-            icon: "fa6-solid:pen",
+            icon: "fa7-solid:pen",
             content: () => props.art.publishDate,
         },
         {
             attr: "update-date",
-            icon: "fa6-solid:clock-rotate-left",
+            icon: "fa7-solid:clock-rotate-left",
             content: () => props.art.updateDate,
         },
     ];

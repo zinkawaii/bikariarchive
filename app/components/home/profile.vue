@@ -6,22 +6,22 @@
         {
             title: "GitHub",
             to: "https://github.com/KazariEX",
-            icon: "fa6-brands:github",
+            icon: "fa7-brands:github",
         },
         {
             title: "Twitter",
             to: "https://twitter.com/KazariEX_0929",
-            icon: "fa6-brands:twitter",
+            icon: "fa7-brands:twitter",
         },
         {
             title: "BiliBili",
             to: "https://space.bilibili.com/37810541",
-            icon: "fa6-brands:bilibili",
+            icon: "fa7-brands:bilibili",
         },
         {
             title: "RSS",
             to: "/feed",
-            icon: "fa6-solid:rss",
+            icon: "fa7-solid:rss",
         },
     ];
 

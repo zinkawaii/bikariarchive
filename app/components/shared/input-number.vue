@@ -90,7 +90,7 @@
             :class="{ [`is-disabled`]: readonly || modelValue - step < min }"
             @click="modelValue -= step"
         >
-            <iconify name="fa6-solid:chevron-left"/>
+            <iconify name="fa7-solid:chevron-left"/>
         </button>
         <mb-input
             :invalid="!isValid"
@@ -105,7 +105,7 @@
             :class="{ [`is-disabled`]: readonly || modelValue + step > max }"
             @click="modelValue += step"
         >
-            <iconify name="fa6-solid:chevron-right"/>
+            <iconify name="fa7-solid:chevron-right"/>
         </button>
     </div>
 </template>

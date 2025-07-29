@@ -17,13 +17,13 @@
 
     const actions = [
         {
-            icon: "fa6-solid:paste",
+            icon: "fa7-solid:paste",
             action() {
                 copyText(codeEl.value!.textContent!, "代码已复制");
             },
         },
         {
-            icon: () => `fa6-solid:chevron-${isCollapse.value ? `left` : `down`}`,
+            icon: () => `fa7-solid:chevron-${isCollapse.value ? `left` : `down`}`,
             action: () => toggleCollapse(),
         },
     ];
@@ -68,7 +68,7 @@
             <pre class="code-line">{{ lineStr }}</pre>
             <pre ref="pre" class="code-content shiki no-scrollbar" v-html="code"></pre>
             <button v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
-                <iconify :name="`fa6-solid:angles-${isExpand ? `up` : `down`}`"/>
+                <iconify :name="`fa7-solid:angles-${isExpand ? `up` : `down`}`"/>
             </button>
         </div>
     </figure>

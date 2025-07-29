@@ -28,28 +28,28 @@
     <div class="z-toolbar">
         <mb-popper direction="left" plaintext="开往">
             <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
-                <iconify name="fa6-solid:train-subway"/>
+                <iconify name="fa7-solid:train-subway"/>
             </nuxt-link>
         </mb-popper>
         <mb-popper direction="left" plaintext="设置">
             <button class="tool-item" @click="settingStore.open()">
-                <iconify name="fa6-solid:gear"/>
+                <iconify name="fa7-solid:gear"/>
             </button>
         </mb-popper>
         <mb-popper direction="left" plaintext="用户">
             <button class="tool-item" @click="signerStore.open()">
-                <iconify name="fa6-solid:user"/>
+                <iconify name="fa7-solid:user"/>
             </button>
         </mb-popper>
         <mb-popper direction="left" plaintext="回到顶部">
             <a class="tool-item" href="#">
                 <span class="tool-progress"></span>
-                <iconify class="tool-arrow-top" name="fa6-solid:arrow-up"/>
+                <iconify class="tool-arrow-top" name="fa7-solid:arrow-up"/>
             </a>
         </mb-popper>
         <mb-popper direction="left" :plaintext="collapse ? `展开` : `收起`">
             <button class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
-                <iconify :name="`fa6-solid:chevron-${collapse ? `left` : `right`}`"/>
+                <iconify :name="`fa7-solid:chevron-${collapse ? `left` : `right`}`"/>
             </button>
         </mb-popper>
     </div>

@@ -15,12 +15,12 @@
         },
         {
             title: "情报",
-            icon: "fa6-solid:sitemap",
+            icon: "fa7-solid:sitemap",
             to: { name: "intel" },
         },
         {
             title: "检索",
-            icon: "fa6-solid:magnifying-glass",
+            icon: "fa7-solid:magnifying-glass",
             to: { name: "search" },
         },
     ];

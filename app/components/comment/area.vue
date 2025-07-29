@@ -38,7 +38,7 @@
         <div class="comment-title">
             <h2>评论<span class="comment-count">{{ totalCount }}</span></h2>
             <meow-button
-                icon="fa6-solid:comment-dots"
+                icon="fa7-solid:comment-dots"
                 @click="commentPanelStore.post()"
             >发表评论</meow-button>
         </div>

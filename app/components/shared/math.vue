@@ -22,7 +22,7 @@
         items: [
             {
                 title: "复制公式",
-                icon: "fa6-solid:paste",
+                icon: "fa7-solid:paste",
                 action() {
                     copyText(props.raw, "公式已复制");
                 },

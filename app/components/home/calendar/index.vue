@@ -173,12 +173,12 @@
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isFirstMonth }"
                     @click="toLastMonth"
-                ><iconify name="fa6-solid:chevron-left"/></button>
+                ><iconify name="fa7-solid:chevron-left"/></button>
                 <button
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isLastMonth }"
                     @click="toNextMonth"
-                ><iconify name="fa6-solid:chevron-right"/></button>
+                ><iconify name="fa7-solid:chevron-right"/></button>
             </div>
             <ul class="calendar-week">
                 <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
