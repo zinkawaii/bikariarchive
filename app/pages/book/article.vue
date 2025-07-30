@@ -131,7 +131,7 @@
     <meow-widget>
         <novel-header :art :post/>
         <novel-decrypt v-if="art.encrypted && !decrypted" v-model="password" @decrypt="debouncedExecute"/>
-        <mb-skeleton v-else-if="status !== `success`"/>
+        <mb-skeleton v-else-if="status !== `success` && (!post || post?.error)"/>
         <novel-article
             v-else-if="post"
             :body="post.body"
