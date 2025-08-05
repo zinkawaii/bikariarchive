@@ -17,7 +17,7 @@ html {
 
 body {
     overflow: hidden scroll;
-    font-family: var(--font);
+    font-family: var(--font-primary);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;
@@ -61,7 +61,7 @@ code {
     border-radius: 4px;
     box-decoration-break: clone;
     background-color: color-mix(in srgb, var(--color-gray-700), transparent 66%);
-    font-family: var(--font-consolas);
+    font-family: var(--font-monospace);
     color: var(--color-theme-text);
 }
 

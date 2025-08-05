@@ -53,7 +53,7 @@
         }
 
         > option {
-            font-family: var(--font);
+            font-family: var(--font-primary);
             font-size: 1rem;
         }
     }

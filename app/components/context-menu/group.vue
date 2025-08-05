@@ -48,7 +48,7 @@
     .menu-title {
         margin-left: 1em;
         padding-inline: 0.5em;
-        font-family: var(--font-code);
+        font-family: var(--font-monospace);
         font-size: 12px;
         color: var(--color-info);
         user-select: none;

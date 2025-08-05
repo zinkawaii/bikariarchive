@@ -101,7 +101,7 @@
 
     .update-type {
         margin-right: 4px;
-        font-family: var(--font-consolas);
+        font-family: var(--font-monospace);
         color: var(--color-theme-text);
 
         &::before {
@@ -117,7 +117,7 @@
 
     .update-scope {
         margin-right: 4px;
-        font-family: var(--font-consolas);
+        font-family: var(--font-monospace);
         color: var(--color-info);
 
         &::after {

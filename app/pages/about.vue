@@ -436,6 +436,7 @@
         > :last-child {
             font-size: 8px;
             letter-spacing: 1px;
+            line-height: 1.75;
         }
 
         .azur-body-bottom & {
@@ -578,7 +579,7 @@
             font-size: 42cqh;
 
             > rt {
-                font-family: var(--font-code);
+                font-family: var(--font-monospace);
                 font-size: 12cqh;
                 letter-spacing: 1px;
                 color: var(--azur-text-gray);

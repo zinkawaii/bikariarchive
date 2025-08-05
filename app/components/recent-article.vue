@@ -35,21 +35,25 @@
 
     .recent-item {
         display: grid;
+        grid-template:
+            "A A"
+            "B C" / 1fr;
+        align-items: center;
+        column-gap: 8px;
         padding-bottom: 4px;
         border-bottom: 1px dashed var(--color-border-light);
         font-size: 14px;
     }
 
     .recent-title {
+        grid-area: A;
         width: fit-content;
         max-width: 100%;
         line-height: 28px;
     }
 
     .recent-info {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 8px;
+        display: contents;
         font-size: 12px;
         color: var(--color-info);
     }

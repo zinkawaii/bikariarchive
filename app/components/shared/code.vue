@@ -133,7 +133,7 @@
 
     .code-line, .code-content {
         padding: 8px;
-        font-family: var(--font-code);
+        font-family: var(--font-monospace);
     }
 
     .code-line {

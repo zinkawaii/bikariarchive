@@ -245,7 +245,7 @@
                 display: grid;
                 margin-top: 7px;
                 padding-top: 3px;
-                font-family: var(--font-code);
+                font-family: var(--font-monospace);
                 font-size: 14px;
                 line-height: 20px;
 

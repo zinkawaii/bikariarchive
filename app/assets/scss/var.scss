@@ -30,12 +30,9 @@
     --box-shadow-dark        : 0 0 8px rgb(0 0 0 / 16%);
     --box-shadow-darker      : 0 0 8px rgb(0 0 0 / 32%);
     --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%);
-    --font                   :
-        system-ui, -apple-system, blinkmacsystemfont, "Helvetica Neue",
-        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Source Han Sans CN", sans-serif;
-    --font-consolas          : consolas, var(--font-code);
-    --font-code              : "Source Code Pro", var(--font);
-    --font-smooth            : "ChillRoundF", var(--font);
+    --font-primary           : "Noto Sans SC", system-ui, sans-serif;
+    --font-monospace         : "JetBrains Mono", monospace, var(--font-primary);
+    --font-smooth            : "ChillRoundF", var(--font-primary);
     --bounded-circle         : 100%;
     --bounded-full           : calc(1px * infinity);
     --size-min-width         : 320px;

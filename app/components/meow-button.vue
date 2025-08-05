@@ -51,7 +51,7 @@
             position: absolute;
             top: calc(-2px - 1em);
             right: 0;
-            font-family: var(--font-code);
+            font-family: var(--font-monospace);
             font-size: 12px;
             color: var(--color-info);
         }

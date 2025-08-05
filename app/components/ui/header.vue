@@ -185,7 +185,7 @@
 
         &::before, &::after {
             margin-inline: 2px;
-            translate: 0 -3px;
+            translate: 0 -4px;
         }
 
         &::before {

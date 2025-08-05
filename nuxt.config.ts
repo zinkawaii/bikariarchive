@@ -118,10 +118,6 @@ export default defineNuxtConfig({
     },
     fonts: {
         provider: "google",
-        families: [{
-            name: "Source Code Pro",
-            global: true,
-        }],
     },
     splittedFonts: {
         fonts: [{
