@@ -1,9 +1,13 @@
 import jArticle from "~~/.data/json/Article.json";
 import jIntel from "~~/.data/json/Intel.json";
 
-export default defineNuxtPlugin(() => {
+const initialize = once(() => {
     enrichJArticle(jArticle as any);
     enrichJIntel(jIntel as any);
+});
+
+export default defineNuxtPlugin(() => {
+    initialize();
 
     if (import.meta.hot) {
         import.meta.hot.accept("../../../.data/json/Article.json", (mod) => {
@@ -14,3 +18,14 @@ export default defineNuxtPlugin(() => {
         });
     }
 });
+
+function once(func: () => void) {
+    let called = false;
+    return () => {
+        if (called && import.meta.server) {
+            return;
+        }
+        called = true;
+        func();
+    };
+}
