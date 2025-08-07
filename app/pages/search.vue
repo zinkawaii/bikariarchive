@@ -45,7 +45,7 @@
         return (data.value ?? {}).list ?? [];
     });
 
-    const { page, total, paginatedArr } = usePagination(results);
+    const { page, total, paginatedList } = usePagination(results);
 
     //全文检索
     const fullTextSearch = Zin.debounce(async () => {
@@ -105,7 +105,7 @@
         <div class="search-results">
             <mb-skeleton v-if="status !== `success`"/>
             <template v-else>
-                <search-result v-for="result in paginatedArr" :key="result.index" v-bind="result"/>
+                <search-result v-for="result in paginatedList" :key="result.index" v-bind="result"/>
             </template>
         </div>
         <mb-pagination :total scroll-target=".content-widget" v-model="page"/>

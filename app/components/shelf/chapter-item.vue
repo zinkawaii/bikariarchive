@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-    import type { Article } from "~/utils/article";
-
     const props = defineProps<{
         art: Article;
     }>();
@@ -70,7 +68,7 @@
         display: flex;
         align-items: center;
         gap: 0.5em;
-        line-height: 1.5em;
+        line-height: 1.5;
         text-wrap: nowrap;
     }
 

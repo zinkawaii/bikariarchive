@@ -1,19 +1,19 @@
 <script lang="ts" setup>
     const shelfStore = useShelfStore();
-    const { jChapters } = storeToRefs(shelfStore);
+    const { articles } = storeToRefs(shelfStore);
 
     const properties = [
         {
             label: "总字数",
             value: computed(() => {
-                return jChapters.value.reduce((res, c) => res + c.wordCount, 0);
+                return articles.value.reduce((res, c) => res + c.wordCount, 0);
             }),
         },
         {
             label: "最近更新",
             value: computed(() => {
-                return jChapters.value.length
-                    ? jChapters.value.reduce((prev, curr) => (
+                return articles.value.length
+                    ? articles.value.reduce((prev, curr) => (
                         curr.updateDate !== Article.FARAWAY &&
                         curr.updateDate.localeCompare(prev.updateDate) > 0
                             ? curr
@@ -25,12 +25,12 @@
         {
             label: "状态",
             value: computed(() => {
-                return jChapters.value.some((c) => c.ending) ? "已完结" : "连载中";
+                return articles.value.some((art) => art.ending) ? "已完结" : "连载中";
             }),
         },
     ];
 
-    const { page, total, sizes, paginatedArr } = usePagination(jChapters, {
+    const { page, total, sizes, paginatedList } = usePagination(articles, {
         sizes: 32,
     });
 </script>
@@ -43,7 +43,7 @@
         </div>
     </div>
     <ul class="shelf-chapter">
-        <li v-for="art in paginatedArr" :key="art.index">
+        <li v-for="art in paginatedList" :key="art.index">
             <shelf-chapter-item :art/>
         </li>
     </ul>
@@ -57,7 +57,7 @@
         column-gap: 1.5em;
         margin-bottom: 4px;
         font-size: 14px;
-        line-height: 2em;
+        line-height: 2;
         color: var(--color-info);
     }
 

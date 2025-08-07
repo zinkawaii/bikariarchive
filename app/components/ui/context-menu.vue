@@ -189,9 +189,13 @@
                     <iconify :name="icon"/>
                 </li>
             </menu>
-            <template v-for="{ title, items } in contextMenuStore.groups" :key="title">
-                <context-menu-group :title :items root/>
-            </template>
+            <context-menu-group
+                v-for="{ title, items } in contextMenuStore.groups"
+                :key="title"
+                :title
+                :items
+                root
+            />
         </div>
     </transition-scale>
 </template>

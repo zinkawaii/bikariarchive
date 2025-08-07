@@ -9,14 +9,12 @@ const initialize = once(() => {
 export default defineNuxtPlugin(() => {
     initialize();
 
-    if (import.meta.hot) {
-        import.meta.hot.accept("../../../.data/json/Article.json", (mod) => {
-            enrichJArticle(mod?.default);
-        });
-        import.meta.hot.accept("../../../.data/json/Intel.json", (mod) => {
-            enrichJIntel(mod?.default);
-        });
-    }
+    import.meta.hot?.accept("~~/.data/json/Article.json", (mod) => {
+        enrichJArticle(mod?.default);
+    });
+    import.meta.hot?.accept("~~/.data/json/Intel.json", (mod) => {
+        enrichJIntel(mod?.default);
+    });
 });
 
 function once(func: () => void) {

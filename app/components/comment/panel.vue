@@ -132,7 +132,7 @@
         width: 512px;
 
         @include viewport("xs") {
-            --dialog-padding: 16px;
+            --dialog-padding: 1rem;
 
             height: 100dvh;
             border-radius: 0;

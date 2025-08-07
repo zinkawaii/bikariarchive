@@ -57,11 +57,12 @@ blockquote {
 
 code {
     padding: 1px 4px;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border-lighter);
     border-radius: 4px;
     box-decoration-break: clone;
     background-color: color-mix(in srgb, var(--color-gray-700), transparent 66%);
     font-family: var(--font-monospace);
+    font-size: 14px;
     color: var(--color-theme-text);
 }
 
@@ -73,7 +74,6 @@ img {
 
 rt, sub, sup {
     font-size: 0.75em;
-    line-height: 1em;
 }
 
 table {
@@ -177,8 +177,8 @@ textarea {
 
 /* 通用内容部件 */
 .content-widget {
-    --meow-large: 32px;
-    --meow-medium: 24px;
+    --meow-large: 2rem;
+    --meow-medium: 1.5rem;
 
     border: 2px solid var(--color-theme-dark);
     border-radius: 16px;
@@ -186,12 +186,12 @@ textarea {
     background-color: var(--color-background-alpha);
 
     @include viewport("lg") {
-        --meow-large: 24px;
+        --meow-large: 1.5rem;
     }
 
     @include viewport("xs") {
-        --meow-large: 16px;
-        --meow-medium: 16px;
+        --meow-large: 1rem;
+        --meow-medium: 1rem;
     }
 }
 

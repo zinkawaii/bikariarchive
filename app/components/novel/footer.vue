@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-    import type { Article } from "~/utils/article";
-
     defineProps<{
         art: Article;
     }>();

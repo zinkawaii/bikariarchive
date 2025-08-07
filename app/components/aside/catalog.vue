@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-    import type { Article } from "~/utils/article";
-
     const props = defineProps<{
         art: Article;
     }>();
@@ -11,14 +9,9 @@
         currentVolume.value = props.art.volume;
     });
 
-    //当前小说
-    const jNovel = computed(() => {
-        return props.art.novelInfo;
-    });
-
     //本卷章节
-    const jChapters = computed(() => {
-        return jNovel.value.chapters.filter((c) => c.volume === currentVolume.value);
+    const articles = computed(() => {
+        return props.art.novelInfo.chapters.filter((c) => c.volume === currentVolume.value);
     });
 </script>
 
@@ -26,13 +19,13 @@
     <aside-widget class="aside-unified">
         <form class="catalog-volume">
             <select class="catalog-selector content-h2" v-model="currentVolume">
-                <option v-for="{ title }, i in jNovel.volumes" :value="i">{{ title }}</option>
+                <option v-for="{ title }, i in art.novelInfo.volumes" :value="i">{{ title }}</option>
             </select>
             <span class="catalog-underline"></span>
         </form>
         <ul class="aside-limited">
-            <li v-for="c in jChapters" class="catalog-item">
-                <nuxt-link class="aside-anchor text-truncate" :to="c.route">{{ c.title }}</nuxt-link>
+            <li v-for="{ title, route } in articles" class="catalog-item">
+                <nuxt-link class="aside-anchor text-truncate" :to="route">{{ title }}</nuxt-link>
             </li>
         </ul>
     </aside-widget>

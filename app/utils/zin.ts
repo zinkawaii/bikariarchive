@@ -59,19 +59,16 @@ export const Zin = new class Z {
     }
 
     //从字符串或对象下载文本文件
-    download(data: any, {
-        type = "",
-        filename = "",
-    } = {}) {
-        let mime = "text/plain";
-        switch (type) {
+    download(data: any, filename = "") {
+        let type = "text/plain";
+        switch (filename.split(".").pop()) {
             case "json": {
                 data = JSON.stringify(data);
-                mime = "application/json";
+                type = "application/json";
                 break;
             }
         }
-        const blob = new Blob([data], { type: mime });
+        const blob = new Blob([data], { type });
 
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -89,28 +86,23 @@ export const Zin = new class Z {
         duration = 1000,
         times = -1,
     } = {}) {
-        return new Promise<void>((resolve, reject) => {
-            try {
-                let t = 0;
-                const { pause } = useIntervalFn(recursion, duration);
+        return new Promise<void>((resolve) => {
+            let t = 0;
+            const { pause } = useIntervalFn(recursion, duration);
 
-                immediate && (
-                    server ? recursion() : tryOnMounted(recursion)
-                );
+            immediate && (
+                server ? recursion() : tryOnMounted(recursion)
+            );
 
-                function recursion() {
-                    if (times >= 0 && t === times) {
-                        pause();
-                        resolve();
-                    }
-                    else {
-                        func(t);
-                        t++;
-                    }
+            function recursion() {
+                if (times >= 0 && t === times) {
+                    pause();
+                    resolve();
                 }
-            }
-            catch (err) {
-                reject(err);
+                else {
+                    func(t);
+                    t++;
+                }
             }
         });
     }

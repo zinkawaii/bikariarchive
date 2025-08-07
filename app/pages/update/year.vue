@@ -9,15 +9,15 @@
         },
     });
 
-    const { page, total, sizes, paginatedArr } = usePagination(() => data.value?.list ?? [], {
+    const { page, total, sizes, paginatedList } = usePagination(() => data.value?.list ?? [], {
         sizes: 24,
     });
 </script>
 
 <template>
-    <mb-skeleton v-if="status === `pending`" class="update-skeleton"/>
+    <mb-skeleton v-if="status !== `success`" class="update-skeleton"/>
     <ul v-else class="update-list">
-        <li v-for="{ date, version, items } in paginatedArr" class="update-item">
+        <li v-for="{ date, version, items } in paginatedList" class="update-item">
             <div class="update-title">
                 <h2><time>{{ date }}</time></h2>
                 <code v-if="version" class="update-version">v{{ version }}</code>
@@ -40,17 +40,17 @@
     }
 
     .update-list {
-        margin-block: 1rem;
-        padding-left: 2rem;
+        margin-block: 16px;
+        padding-left: 32px;
 
         @include viewport("xs") {
-            padding-left: 1.5rem;
+            padding-left: 24px;
         }
     }
 
     .update-item {
         position: relative;
-        padding-block: 0.75rem;
+        padding-block: 12px;
 
         &::before {
             content: "";
@@ -76,21 +76,20 @@
 
     .update-title {
         display: flex;
-        gap: 0.5rem;
-        margin-bottom: 0.75rem;
-        padding-left: 0.5rem;
+        gap: 8px;
+        margin-bottom: 12px;
+        padding-left: 8px;
     }
 
     .update-version {
-        font-size: 14px;
-        line-height: 20px;
+        line-height: 1.4;
     }
 
     .update-content {
         --shadow: 6%;
 
-        padding: 0.8rem 1rem;
-        border-radius: 1.5rem;
+        padding: 12px 16px;
+        border-radius: 24px;
         box-shadow: 6px 6px rgb(0 0 0 / var(--shadow));
         background-color: var(--color-background);
 

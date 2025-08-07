@@ -51,7 +51,7 @@
             ~ .input-placeholder {
                 top: -1em;
                 font-size: 12px;
-                line-height: 1em;
+                line-height: 1;
             }
         }
     }

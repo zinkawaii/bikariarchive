@@ -8,7 +8,6 @@
     const props = defineProps<{
         options: Option[];
     }>();
-
     const modelValue = defineModel<T>({
         required: true,
     });
@@ -106,7 +105,7 @@
         top: 100%;
         width: 100%;
         margin-top: 8px;
-        padding: 8px;
+        padding: 6px 8px;
         border: 1px solid var(--color-border-light);
         border-radius: 6px;
         box-shadow: var(--box-shadow-dark);
@@ -123,10 +122,10 @@
     }
 
     .select-option {
-        height: 2em;
+        margin-block: 2px;
         padding-inline: 12px;
         border-radius: 8px;
-        line-height: 2em;
+        line-height: 2;
         cursor: pointer;
 
         &:hover {
@@ -139,7 +138,7 @@
     }
 
     .select-group {
-        padding: 6px 12px;
+        padding: 4px 12px;
         font-size: 12px;
         color: var(--color-info);
     }

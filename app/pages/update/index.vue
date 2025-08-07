@@ -34,9 +34,9 @@
     .update-years {
         display: flex;
         align-items: flex-end;
-        gap: 0.5rem;
+        gap: 8px;
         position: relative;
-        height: 2rem;
+        height: 32px;
     }
 
     .update-year {

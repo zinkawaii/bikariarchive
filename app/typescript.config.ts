@@ -17,6 +17,9 @@ export default <NuxtConfig["typescript"]> {
             ],
             ...shared,
         },
+        include: [
+            "../data/**/*.mdz",
+        ],
         vueCompilerOptions: {
             checkUnknownComponents: true,
             checkUnknownDirectives: true,

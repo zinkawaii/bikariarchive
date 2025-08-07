@@ -40,7 +40,7 @@
 <style lang="scss" scoped>
     .panel-editor {
         overflow: auto;
-        height: 180px;
+        height: 196px;
         padding: 6px 8px;
         border: 1px solid var(--color-border-lighter);
         border-radius: 6px;
@@ -63,7 +63,7 @@
     .panel-count {
         position: absolute;
         right: 8px;
-        bottom: 30px;
+        bottom: 32px;
         font-size: 12px;
         color: var(--color-info);
     }

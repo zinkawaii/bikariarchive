@@ -47,7 +47,7 @@
 <style lang="scss" scoped>
     .friend-list {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
         gap: 1rem;
     }
 
@@ -73,7 +73,7 @@
     }
 
     .friend-icon {
-        width: 48px;
+        width: 3rem;
         aspect-ratio: 1;
         border-radius: 0.5rem;
     }

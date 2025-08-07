@@ -142,9 +142,7 @@
     //导出
     function exporter() {
         const output = getCompileText();
-        Zin.download(output, {
-            filename: `${filename.value}.lrc`,
-        });
+        Zin.download(output, `${filename.value}.lrc`);
     }
 
     //打轴

@@ -17,7 +17,7 @@ export function usePagination<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginat
         return toValue(options.sizes ?? 10);
     });
 
-    const paginatedArr = computed(() => {
+    const paginatedList = computed(() => {
         const start = (page.value - 1) * sizes.value;
         const end = start + sizes.value;
         return toValue(arr).slice(start, end);
@@ -27,6 +27,6 @@ export function usePagination<T>(arr: MaybeRefOrGetter<T[]>, options: UsePaginat
         page,
         total,
         sizes,
-        paginatedArr,
+        paginatedList,
     };
 }

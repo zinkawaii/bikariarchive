@@ -52,12 +52,12 @@
         <table class="manage-table">
             <tbody>
                 <tr>
-                    <th width="60px">序号</th>
+                    <th width="60">序号</th>
                     <th>IP</th>
-                    <th width="176px">时间</th>
-                    <th width="96px">小说</th>
-                    <th width="96px">章节</th>
-                    <th width="96px">用户</th>
+                    <th width="176">时间</th>
+                    <th width="96">小说</th>
+                    <th width="96">章节</th>
+                    <th width="96">用户</th>
                     <th width="1%">操作</th>
                 </tr>
                 <tr v-for="(item, i) in records" :key="item._id">

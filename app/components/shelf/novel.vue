@@ -80,10 +80,10 @@
             :style="{ translate: `${translateX}px` }"
         >
             <shelf-novel-item
-                v-for="(jNovel, key) in Article.meta"
+                v-for="(novelInfo, key) in Article.meta"
                 :key
                 :novel="key"
-                v-bind="jNovel"
+                v-bind="novelInfo"
             />
         </ul>
     </div>

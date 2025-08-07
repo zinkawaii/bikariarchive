@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-    import type { Article } from "~/utils/article";
-
     defineProps<{
         art: Article;
         type: "prev" | "next";
@@ -8,12 +6,12 @@
 </script>
 
 <template>
-    <nuxt-link class="novel-adjacent" :class="`is-${type}`" :to="art?.route">
+    <nuxt-link class="novel-adjacent" :class="`is-${type}`" :to="art.route">
         <h3 class="adjacent-sign">
             <iconify name="solar:rewind-forward-bold-duotone"/>
-            <span>{{ art?.title }}</span>
+            <span>{{ art.title }}</span>
         </h3>
-        <p class="text-small text-gray">{{ art?.volumeInfo.title }}</p>
+        <p class="text-small text-gray">{{ art.volumeInfo.title }}</p>
     </nuxt-link>
 </template>
 
@@ -34,7 +32,7 @@
 
     .adjacent-sign {
         margin-bottom: 2px;
-        line-height: 1.5em;
+        line-height: 1.5;
         color: var(--color-theme-text);
 
         > .iconify {

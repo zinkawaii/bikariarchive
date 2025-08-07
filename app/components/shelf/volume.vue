@@ -1,9 +1,9 @@
 <script lang="ts" setup>
     const shelfStore = useShelfStore();
-    const { currentVolumeIdx, jNovel } = storeToRefs(shelfStore);
+    const { currentVolumeIdx, novelInfo } = storeToRefs(shelfStore);
 
     const volumes = computed(() => {
-        return jNovel.value.volumes.map((item) => item.title);
+        return novelInfo.value.volumes.map((item) => item.title);
     });
 </script>
 
@@ -33,7 +33,7 @@
         align-items: center;
         gap: 8px;
         border-bottom: 1px dashed var(--color-border-light);
-        line-height: 32px;
+        line-height: 2;
         cursor: pointer;
 
         &.is-checked {

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-    import type { Article } from "~/utils/article";
     import type { GetArticleResponse } from "~~/server/types/api/article";
 
     defineProps<{

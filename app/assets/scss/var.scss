@@ -30,7 +30,7 @@
     --box-shadow-dark        : 0 0 8px rgb(0 0 0 / 16%);
     --box-shadow-darker      : 0 0 8px rgb(0 0 0 / 32%);
     --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%);
-    --font-primary           : "Noto Sans SC", system-ui, sans-serif;
+    --font-primary           : system-ui, "PingFang SC", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;
     --font-monospace         : "JetBrains Mono", monospace, var(--font-primary);
     --font-smooth            : "ChillRoundF", var(--font-primary);
     --bounded-circle         : 100%;

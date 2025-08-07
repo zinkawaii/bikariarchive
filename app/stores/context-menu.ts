@@ -12,7 +12,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
 
     const filteredBasics = computed(() => {
         return [...basicGroups].filter((group) => {
-            return (toValue(group.when) ?? true) && (!filteredExtra.value?.shield?.includes(group.title));
+            return (toValue(group.when) ?? true) && !filteredExtra.value?.shield?.includes(group.title);
         });
     });
 

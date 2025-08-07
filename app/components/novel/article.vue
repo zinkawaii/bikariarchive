@@ -114,7 +114,7 @@
         }
 
         p {
-            line-height: 2em;
+            line-height: 2;
             text-indent: 2em;
         }
 
@@ -123,7 +123,7 @@
         }
 
         ol, ul {
-            line-height: 2em;
+            line-height: 2;
         }
 
         ol {

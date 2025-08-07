@@ -37,13 +37,7 @@
     const currentDate = ref<CalendarDate>();
 
     //监听年月并显示日期
-    watchImmediate([
-        currentYear,
-        currentMonth,
-    ], ([
-        year,
-        month,
-    ]) => {
+    watchImmediate([currentYear, currentMonth], ([year, month]) => {
         const dates = [];
 
         //当月第一天

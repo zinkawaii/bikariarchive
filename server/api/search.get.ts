@@ -17,12 +17,12 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
     //连接数据库
     await connectMongoose();
 
-    const jNovels = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
-    const jChapters = jNovels.flatMap((jNovel) => jNovel?.chapters).filter(Boolean);
+    const novelInfos = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
+    const articles = novelInfos.flatMap((info) => info?.chapters).filter(Boolean);
 
     //按章节遍历
     res.list = [];
-    for (const art of jChapters) {
+    for (const art of articles) {
         //读取整章
         const root = await readArticle(art);
 

@@ -52,7 +52,7 @@
 
     .dialog-wrapper {
         overflow: auto;
-        padding: var(--dialog-padding, 32px);
+        padding: var(--dialog-padding, 2rem);
     }
 
     .dialog-xmark {

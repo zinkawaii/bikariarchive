@@ -1,5 +1,3 @@
-import { Article } from "~/utils/article";
-
 export const useShelfStore = defineStore("shelf", () => {
     const route = useRoute();
     const router = useRouter();
@@ -34,16 +32,16 @@ export const useShelfStore = defineStore("shelf", () => {
         return novels.value.indexOf(novel.value);
     });
 
-    const jNovel = computed(() => {
+    const novelInfo = computed(() => {
         return Article.meta[novel.value];
     });
 
-    const jVolume = computed(() => {
-        return jNovel.value.volumes[currentVolumeIdx.value];
+    const volumeInfo = computed(() => {
+        return novelInfo.value.volumes[currentVolumeIdx.value];
     });
 
-    const jChapters = computed(() => {
-        return jNovel.value.chapters.filter((c) => {
+    const articles = computed(() => {
+        return novelInfo.value.chapters.filter((c) => {
             return currentVolumeIdx.value === c.volume;
         });
     });
@@ -82,9 +80,9 @@ export const useShelfStore = defineStore("shelf", () => {
         novels,
         currentNovelIdx,
         currentVolumeIdx,
-        jNovel,
-        jVolume,
-        jChapters,
+        novelInfo,
+        volumeInfo,
+        articles,
         route: currentRoute,
         goto,
         selectNovel,

@@ -49,7 +49,7 @@
         grid-area: A;
         width: fit-content;
         max-width: 100%;
-        line-height: 28px;
+        line-height: 2;
     }
 
     .recent-info {

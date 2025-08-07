@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     const shelfStore = useShelfStore();
-    const { novel, jNovel, jChapters } = storeToRefs(shelfStore);
+    const { novel, novelInfo, articles } = storeToRefs(shelfStore);
 
     useHead({
         title: () => Article.meta[novel.value].title,
@@ -10,15 +10,15 @@
 <template>
     <div class="shelf-section">
         <fieldset class="shelf-fieldset">
-            <legend class="content-h2">{{ jNovel.title }}</legend>
+            <legend class="content-h2">{{ novelInfo.title }}</legend>
             <intro-content :novel/>
         </fieldset>
-        <fieldset v-show="jNovel.volumes.length" class="shelf-fieldset">
+        <fieldset v-show="novelInfo.volumes.length" class="shelf-fieldset">
             <legend class="content-h2">卷册列表</legend>
             <shelf-volume />
         </fieldset>
     </div>
-    <fieldset v-show="jChapters.length" class="shelf-fieldset">
+    <fieldset v-show="articles.length" class="shelf-fieldset">
         <legend class="content-h2">章节列表</legend>
         <shelf-chapter />
     </fieldset>

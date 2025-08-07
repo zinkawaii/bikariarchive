@@ -12,7 +12,7 @@
     });
 
     const cover = computed(() => {
-        return isCurrentNovel.value && shelfStore.jVolume.cover || props.cover;
+        return isCurrentNovel.value && shelfStore.volumeInfo.cover || props.cover;
     });
 
     function onClick() {

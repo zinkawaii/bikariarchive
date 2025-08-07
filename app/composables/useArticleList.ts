@@ -38,7 +38,7 @@ export function useArticleList(options: UseArticleListOptions) {
         return arr;
     });
 
-    const { page, total, sizes, paginatedArr: articles } = usePagination(totals, {
+    const { page, total, sizes, paginatedList: articles } = usePagination(totals, {
         sizes: options.sizes,
     });
 

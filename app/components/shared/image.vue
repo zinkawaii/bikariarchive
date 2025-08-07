@@ -47,7 +47,7 @@
     contextMenuStore.extra(imgEl, {
         title: "image",
         shield: ["image"],
-        when: () => !!props.reference,
+        when: () => props.reference,
         items: [
             {
                 title: "前往图源",
@@ -140,17 +140,17 @@
         display: flex;
         flex-wrap: wrap-reverse;
         justify-content: flex-end;
-        gap: 0.5em;
+        gap: 8px;
         position: absolute;
         overflow: hidden;
         inset: auto 0 0;
-        padding: 0.5em;
+        padding: 8px;
     }
 
     .image-caption {
-        margin-top: 0.5rem;
+        margin-top: 8px;
         font-size: 13px;
-        line-height: 2em;
+        line-height: 2;
         text-align: center;
         color: var(--color-text-secondary);
     }

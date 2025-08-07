@@ -134,7 +134,7 @@
         align-items: center;
         gap: 2px;
         font-size: 12px;
-        line-height: 1.5em;
+        line-height: 1.5;
         text-align: right;
         color: var(--color-gray-50);
 
