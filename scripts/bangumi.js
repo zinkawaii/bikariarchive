@@ -1,5 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import defu from "defu";
+import { resolve } from "pathe";
 
 //读取文件
 const path = resolve(import.meta.dirname, "../data/bangumi.json");

@@ -41,9 +41,7 @@ export const useShelfStore = defineStore("shelf", () => {
     });
 
     const articles = computed(() => {
-        return novelInfo.value.chapters.filter((c) => {
-            return currentVolumeIdx.value === c.volume;
-        });
+        return novelInfo.value.chapters.filter((art) => art.volume === currentVolumeIdx.value);
     });
 
     const currentRoute = computed(() => {

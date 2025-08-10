@@ -26,7 +26,7 @@
 
     const charEl = useTemplateRef("char");
     const tagEls = computed(() => {
-        return [...charEl.value?.children ?? []].toReversed();
+        return [...charEl.value?.children ?? []].reverse();
     });
 
     //角色列表

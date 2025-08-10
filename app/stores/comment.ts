@@ -24,7 +24,7 @@ export const useCommentStore = defineStore("comment", () => {
         const res = await $fetch("/api/comment", {
             query: {
                 path: route.path,
-                page: page,
+                page,
             },
         });
         if (res.error) {

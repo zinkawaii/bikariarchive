@@ -11,7 +11,7 @@
 
     //本卷章节
     const articles = computed(() => {
-        return props.art.novelInfo.chapters.filter((c) => c.volume === currentVolume.value);
+        return props.art.novelInfo.chapters.filter((art) => art.volume === currentVolume.value);
     });
 </script>
 

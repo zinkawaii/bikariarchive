@@ -91,6 +91,7 @@ export default defineNuxtConfig({
     },
     modules: [
         ["@kikiutils/nuxt-session", serverConfig.session],
+        "@nuxt/eslint",
         "@nuxt/fonts",
         "@nuxt/icon",
         "@nuxt/image",

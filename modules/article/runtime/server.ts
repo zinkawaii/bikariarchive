@@ -11,7 +11,7 @@ export default defineNitroPlugin(async () => {
         "Artmap",
         "Intel",
         "Intmap",
-    ].map((name) => baseDir + `/${name}.json`);
+    ].map((name) => `${baseDir}/${name}.json`);
 
     for (const path of list) {
         await update(path);

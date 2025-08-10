@@ -36,11 +36,11 @@
     "vue-router": "catalog:frontend"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:lint",
     "@iconify-json/fa6-solid": "catalog:backend",
     "@kikiutils/nuxt-session": "catalog:backend",
     "@mdzjs/config": "catalog:markdown",
     "@nuxt/devtools": "catalog:backend",
+    "@nuxt/eslint": "catalog:backend",
     "@nuxt/fonts": "catalog:backend",
     "@nuxt/icon": "catalog:backend",
     "@nuxt/image": "catalog:backend",

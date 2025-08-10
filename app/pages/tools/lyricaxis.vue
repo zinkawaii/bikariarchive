@@ -152,10 +152,11 @@
                 let time = 0;
                 let timing = "";
                 let signed = false;
-                const re = /\[(\d{2}):(\d{2}\.\d{2})\]/;
+                const re = /\[(?<minute>\d{2}):(?<second>\d{2}\.\d{2})\]/;
                 const match = line.match(re);
                 if (match) {
-                    time = Number(match[1]) * 60 + Number(match[2]);
+                    const { minute, second } = match.groups!;
+                    time = Number(minute) * 60 + Number(second);
                     timing = match[0] + " ";
                     signed = true;
                 }

@@ -13,14 +13,14 @@ export default defineEventHandler(async (event: H3Event) => {
     const currentDate = new Date();
 
     const arts = Object.values(Article.meta)
-    .flatMap(({ chapters }) => chapters)
-    .filter((c) => c.updateDate !== Article.FARAWAY)
-    .sort((a, b) => {
-        const x = a.updateDate;
-        const y = b.updateDate;
-        return y.localeCompare(x);
-    })
-    .slice(0, 10);
+        .flatMap(({ chapters }) => chapters)
+        .filter((art) => art.updateDate !== Article.FARAWAY)
+        .sort((a, b) => {
+            const x = a.updateDate;
+            const y = b.updateDate;
+            return y.localeCompare(x);
+        })
+        .slice(0, 10);
 
     const feed = createFeed({
         id: "BikariArchive",
