@@ -17,15 +17,15 @@ export default createKerria("Article", () => {
     const metaInfo = useLoad("meta", {
         out: ".data/json/Article.json",
         beforeOutput(val) {
-            const newVal = sortKeyValues<any>(
-                structuredClone(val),
-                ({ order: a }, { order: b }) => a.localeCompare(b),
+            const newVal = Object.fromEntries(
+                Object.entries<any>(structuredClone(val))
+                    .sort(([, { order: a }], [, { order: b }]) => a.localeCompare(b)),
             );
             for (const novel in newVal) {
                 delete newVal[novel].order;
                 newVal[novel].chapters = Object.entries(newVal[novel].chapters)
                     .sort(([a], [b]) => a.localeCompare(b))
-                    .map(([_, c]) => c);
+                    .map(([, c]) => c);
             }
             return newVal;
         },
@@ -54,14 +54,12 @@ export default createKerria("Article", () => {
         onCacheHit(cache) {
             const { novel, order, data } = cache;
 
-            if (!(novel in metaInfo.value)) {
-                mapInfo.value[novel] = {};
-                metaInfo.value[novel] = {
-                    order,
-                    chapters: [],
-                };
-            }
-            Object.assign(metaInfo.value[novel], data);
+            mapInfo.value[novel] ??= {};
+            metaInfo.value[novel] = {
+                ...data,
+                order,
+                chapters: metaInfo.value[novel]?.chapters ?? [],
+            };
         },
     });
 
@@ -195,11 +193,4 @@ async function processArticle(path: string, info: SourceInfo, metaInfo: LoadInfo
         password,
         data,
     };
-}
-
-//键值对排序
-function sortKeyValues<T>(obj: Record<string, T>, compareFn: (a: T, b: T) => number) {
-    return Object.fromEntries(
-        Object.entries(obj).sort(([, a], [, b]) => compareFn(a, b)),
-    );
 }
