@@ -22,7 +22,8 @@
     useBreadcrumb({
         name: "shelf",
         params: {
-            novel,
+            novel: art.novel,
+            volume: art.volume,
         },
     });
 

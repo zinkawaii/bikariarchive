@@ -2,7 +2,11 @@
     import { executeTransition } from "@vueuse/core";
 
     const shelfStore = useShelfStore();
-    const { novels, currentNovelIdx } = storeToRefs(shelfStore);
+    const { novel, novels } = storeToRefs(shelfStore);
+
+    const currentNovelIdx = computed(() => {
+        return novels.value.indexOf(novel.value);
+    });
 
     const width = -144;
     const translateX = ref(currentNovelIdx.value * width);
@@ -58,7 +62,9 @@
     }
 
     const throttledSelectNovel = Zin.throttle((delta: number) => {
-        shelfStore.selectNovel(delta);
+        const raw = currentNovelIdx.value + Math.sign(delta);
+        const idx = clamp(0, raw, novels.value.length - 1);
+        shelfStore.selectNovel(novels.value[idx]);
     }, 250);
 
     function onWheel(event: WheelEvent) {

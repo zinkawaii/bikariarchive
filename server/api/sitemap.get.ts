@@ -16,9 +16,9 @@ export default defineSitemapEventHandler(() => {
         ...config.public.totalYears.map((year) => `/update/${year}`),
         "/tools/lyricaxis",
         "/tools/namaemaker",
-        ...Object.entries(Article.meta).map(([novel, { chapters }]) => [
-            `/book/${novel}`,
-            ...chapters.map((item) => `/book/${novel}/${item.index}`),
+        ...Object.entries(Article.meta).map(([novel, { volumes, chapters }]) => [
+            ...volumes.map((vol, i) => `/book/${novel}.${i}`),
+            ...chapters.map((art) => `/book/${novel}/${art.index}`),
         ]),
         ...Entry.meta.all,
     ].flat();

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
     const shelfStore = useShelfStore();
-    const { novel, novelInfo, articles } = storeToRefs(shelfStore);
+    const { novel, novelInfo, volumeInfo, articles } = storeToRefs(shelfStore);
 
     useHead({
-        title: () => Article.meta[novel.value].title,
+        title: () => `${volumeInfo.value.title} - ${novelInfo.value.title}`,
     });
 </script>
 

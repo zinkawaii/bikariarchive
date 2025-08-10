@@ -17,7 +17,7 @@ export default <RouterConfig> {
             children: [
                 {
                     name: "shelf",
-                    path: ":novel",
+                    path: ":novel.:volume",
                     component: () => import("~/pages/book/shelf.vue"),
                 },
             ],
@@ -170,4 +170,13 @@ export default <RouterConfig> {
             component: () => import("~/pages/unknown.vue"),
         },
     ],
+    scrollBehavior(to, from) {
+        if (to.name === "shelf" && from.name === "shelf" && to.params.novel === from.params.novel) {
+            return {
+                el: ".shelf-section",
+                top: 64,
+            };
+        }
+        return { top: 0 };
+    },
 };

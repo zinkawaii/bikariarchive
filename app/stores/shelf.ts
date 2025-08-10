@@ -3,6 +3,8 @@ export const useShelfStore = defineStore("shelf", () => {
     const router = useRouter();
 
     let novelRaw: string;
+    let volumeRaw: number;
+
     const novel = computed({
         get() {
             if (route.name === "shelf") {
@@ -16,6 +18,27 @@ export const useShelfStore = defineStore("shelf", () => {
                 router.replace({
                     params: {
                         novel: val,
+                        volume: volumeRaw,
+                    },
+                });
+            }
+        },
+    });
+
+    const volume = computed({
+        get() {
+            if (route.name === "shelf") {
+                volumeRaw = Number(route.params.volume);
+            }
+            return volumeRaw || 0;
+        },
+        set(val) {
+            volumeRaw = val;
+            if (route.name === "shelf") {
+                router.replace({
+                    params: {
+                        novel: novelRaw,
+                        volume: val,
                     },
                 });
             }
@@ -26,22 +49,16 @@ export const useShelfStore = defineStore("shelf", () => {
         return Object.keys(Article.meta);
     });
 
-    const currentVolumeIdx = ref(0);
-
-    const currentNovelIdx = computed(() => {
-        return novels.value.indexOf(novel.value);
-    });
-
     const novelInfo = computed(() => {
         return Article.meta[novel.value];
     });
 
     const volumeInfo = computed(() => {
-        return novelInfo.value.volumes[currentVolumeIdx.value];
+        return novelInfo.value.volumes[volume.value];
     });
 
     const articles = computed(() => {
-        return novelInfo.value.chapters.filter((art) => art.volume === currentVolumeIdx.value);
+        return novelInfo.value.chapters.filter((art) => art.volume === volume.value);
     });
 
     const currentRoute = computed(() => {
@@ -49,36 +66,31 @@ export const useShelfStore = defineStore("shelf", () => {
             name: "shelf",
             params: {
                 novel: novel.value,
+                volume: volume.value,
             },
         };
     });
 
-    function goto(novel: string, volume: number) {
-        selectNovel(novel);
-        selectVolume(volume);
+    function goto(...args: [novel: string, volume: number]) {
+        novel.value = args[0];
+        volume.value = args[1];
         router.push(currentRoute.value);
     }
 
-    function selectNovel(key: string | number) {
-        if (typeof key === "number") {
-            const raw = currentNovelIdx.value + Math.sign(key);
-            const idx = clamp(0, raw, novels.value.length - 1);
-            key = novels.value[idx];
-        }
-        novel.value = key;
-        currentVolumeIdx.value = 0;
+    function selectNovel(name: string) {
+        novel.value = name;
+        volume.value = 0;
     }
 
     function selectVolume(i: number) {
-        currentVolumeIdx.value = i;
+        volume.value = i;
     }
 
     return {
         novel,
         novels,
-        currentNovelIdx,
-        currentVolumeIdx,
         novelInfo,
+        volume,
         volumeInfo,
         articles,
         route: currentRoute,
