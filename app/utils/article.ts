@@ -1,135 +1,16 @@
-import { reactive, type Reactive } from "vue";
-import type { ArticleCover, ArticleVariant, Child, JArticle, JArtmap, JChapter } from "@bikari/article";
-import type { PickOptional } from "~/types";
+import { computed, reactive, shallowRef } from "vue";
+import type { JArticle, JArtmap, JChapter, JNovel, JVolume } from "@bikari/article";
+import type { RouteLocationRaw } from "vue-router";
+import type { WithRequired } from "~/types";
 
-const defaults: PickOptional<JChapter> = {
-    excerpt: void 0,
-    date: {},
-    cover: void 0,
-    variant: void 0,
-    draft: false,
-    encrypted: false,
-    ending: false,
-    sticky: Infinity,
-};
-
-export class Article implements JChapter {
-    novel!: string;           //小说名
-    volume!: number;          //卷序号
-    order!: number;           //章序号
-    orderInVol!: number;      //章序号（卷内）
-    index!: string;           //章文件名
-    title!: string;           //章节名
-    excerpt?: Child[];        //摘要
-    cover?: ArticleCover;     //封面
-    variant?: ArticleVariant; //变体
-    draft!: boolean;          //草稿
-    encrypted!: boolean;      //加密
-    ending!: boolean;         //终章
-    sticky!: number;          //置顶
-    wordCount!: number;       //字数
-
-    date!: {
-        created?: string;     //创建日期
-        published?: string;   //发布日期
-        refactored?: string;  //重构日期
-        updated?: string;     //更新日期
-    };
-
-    private constructor(novel: string, order: number, raw: JChapter) {
-        this.assign(novel, order, raw);
-    }
-
-    assign(novel: string, order: number, raw: JChapter) {
-        //合并属性
-        Object.assign(this, defaults, raw);
-        this.novel = novel;
-        this.order = order;
-
-        //计算卷内序号
-        this.orderInVol = Article.meta[novel].chapters
-            .filter((n) => n.volume === raw.volume)
-            .findIndex((n) => n.index === raw.index);
-
-        //后备变体值
-        this.variant ??= this.volumeInfo.variant;
-
-        return this;
-    }
-
-    get createDate() {
-        return this.date?.created ?? this.date?.refactored ?? Article.FARAWAY;
-    }
-
-    get publishDate() {
-        return this.date?.published ?? this.createDate;
-    }
-
-    get updateDate() {
-        return this.date?.updated ?? this.publishDate;
-    }
-
-    get route() {
-        return {
-            name: "article",
-            params: {
-                novel: this.novel,
-                index: this.index,
-            },
-        };
-    }
-
-    get novelInfo() {
-        return Article.meta[this.novel];
-    }
-
-    get volumeInfo() {
-        return this.novelInfo.volumes[this.volume];
-    }
-
-    get prev(): Article | undefined {
-        const prev = this.novelInfo.chapters[this.order - 1];
-        if (this.novelInfo.type === "novel" || this.volume === prev?.volume) {
-            return prev;
-        }
-        return void 0;
-    }
-
-    get next(): Article | undefined {
-        const next = this.novelInfo.chapters[this.order + 1];
-        if (this.novelInfo.type === "novel" || this.volume === next?.volume) {
-            return next;
-        }
-        return void 0;
-    }
-
-    get isFirst() {
-        return this.novelInfo.type === "novel"
-            ? this.order === 0
-            : this.isFirstInVol;
-    }
-
-    get isLast() {
-        return this.novelInfo.type === "novel"
-            ? this.order === this.novelInfo.chapters.length - 1
-            : this.isLastInVol;
-    }
-
-    get isFirstInVol() {
-        return (this.prev?.volume ?? -Infinity) < this.volume;
-    }
-
-    get isLastInVol() {
-        return (this.next?.volume ?? Infinity) > this.volume;
-    }
-
-    static FARAWAY = "很久以前";
-
+export class Article {
     static meta = reactive({} as JArticle<Article>);
     static map: JArtmap;
 
+    static FARAWAY = "很久以前";
+
     //根据参数获取章节单例
-    static for(novel: string, index: string): Reactive<Article>;
+    static for(novel: string, index: string): Article;
     static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>): ComputedRef<Article>;
     static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>) {
         if (typeof novel !== "string" || typeof index !== "string") {
@@ -139,54 +20,211 @@ export class Article implements JChapter {
                 return Article.for(novelVal, indexVal);
             });
         }
-
-        const jNovel = this.meta[novel];
-        if (!jNovel) {
-            return null;
-        }
-
-        const order = jNovel.chapters.findIndex((c) => c.index === index);
-        if (order === -1) {
-            return null;
-        }
-
-        const raw = jNovel.chapters[order];
-        return raw instanceof Article ? raw : reactive(
-            new Article(novel, order, raw),
-        );
+        return this.meta[novel]?.chapters.find((art) => art.index === index);
     }
+}
+
+export interface Article extends WithRequired<JChapter, "date" | "draft" | "encrypted" | "ending" | "sticky"> {
+    raw: JChapter;
+    novel: string;
+    novelInfo: JNovel<Article>;
+    volumeInfo: JVolume;
+    order: number;
+    orderInVol: number;
+    createDate: string;
+    publishDate: string;
+    updateDate: string;
+    prev?: Article;
+    next?: Article;
+    isFirstInVol: boolean;
+    isLastInVol: boolean;
+    isFirst: boolean;
+    isLast: boolean;
+    route: RouteLocationRaw;
+}
+
+function createArticle(...args: [novel: string, raw: JChapter]): Article {
+    //原始数据
+    const raw = shallowRef(args[1]);
+
+    //书籍名称
+    const novel = args[0];
+
+    //书籍信息
+    const novelInfo = computed(() => {
+        return Article.meta[novel];
+    });
+
+    //卷册序号
+    const volume = computed(() => raw.value.volume);
+
+    //卷册信息
+    const volumeInfo = computed(() => {
+        return novelInfo.value.volumes[raw.value.volume];
+    });
+
+    //章节名称
+    const index = computed(() => raw.value.index);
+
+    //章节序号
+    const order = computed(() => {
+        return novelInfo.value.chapters.findIndex((art) => art.index === index.value);
+    });
+
+    //卷内章节序号
+    const orderInVol = computed(() => {
+        return novelInfo.value.chapters
+            .filter((art) => art.volume === raw.value.volume)
+            .findIndex((art) => art.index === raw.value.index);
+    });
+
+    //章节名称
+    const title = computed(() => raw.value.title);
+
+    //摘要
+    const excerpt = computed(() => raw.value.excerpt);
+
+    //日期
+    const date = computed(() => raw.value.date ?? {});
+
+    //创建日期
+    const createDate = computed(() => {
+        return date.value.created ?? date.value.refactored ?? Article.FARAWAY;
+    });
+
+    //发布日期
+    const publishDate = computed(() => {
+        return date.value.published ?? createDate.value;
+    });
+
+    //更新日期
+    const updateDate = computed(() => {
+        return date.value.updated ?? publishDate.value;
+    });
+
+    //封面
+    const cover = computed(() => raw.value.cover);
+
+    //变体
+    const variant = computed(() => raw.value.variant ?? volumeInfo.value.variant);
+
+    //草稿
+    const draft = computed(() => raw.value.draft ?? false);
+
+    //加密
+    const encrypted = computed(() => raw.value.encrypted ?? false);
+
+    //终章
+    const ending = computed(() => raw.value.ending ?? false);
+
+    //置顶
+    const sticky = computed(() => raw.value.sticky ?? Infinity);
+
+    //字数
+    const wordCount = computed(() => raw.value.wordCount);
+
+    //上一章节
+    const prev = computed(() => {
+        const prev = novelInfo.value.chapters[order.value - 1];
+        if (novelInfo.value.type === "novel" || volume.value === prev?.volume) {
+            return prev;
+        }
+    });
+
+    //下一章节
+    const next = computed(() => {
+        const next = novelInfo.value.chapters[order.value + 1];
+        if (novelInfo.value.type === "novel" || volume.value === next?.volume) {
+            return next;
+        }
+    });
+
+    //是否为卷内起始章节
+    const isFirstInVol = computed(() => {
+        return (prev.value?.volume ?? -Infinity) < volume.value;
+    });
+
+    //是否为卷内最终章节
+    const isLastInVol = computed(() => {
+        return (next.value?.volume ?? Infinity) > volume.value;
+    });
+
+    //是否为起始章节
+    const isFirst = computed(() => {
+        return novelInfo.value.type === "novel"
+            ? order.value === 0
+            : isFirstInVol.value;
+    });
+
+    //是否为最终章节
+    const isLast = computed(() => {
+        return novelInfo.value.type === "novel"
+            ? order.value === novelInfo.value.chapters.length - 1
+            : isLastInVol.value;
+    });
+
+    //路由
+    const route = computed(() => ({
+        name: "article",
+        params: {
+            novel,
+            index: index.value,
+        },
+    }));
+
+    return reactive({
+        raw,
+        novel,
+        novelInfo,
+        volume,
+        volumeInfo,
+        index,
+        order,
+        orderInVol,
+        title,
+        excerpt,
+        date,
+        createDate,
+        publishDate,
+        updateDate,
+        cover,
+        variant,
+        draft,
+        encrypted,
+        ending,
+        sticky,
+        wordCount,
+        prev,
+        next,
+        isFirstInVol,
+        isLastInVol,
+        isFirst,
+        isLast,
+        route,
+    });
 }
 
 //将元数据引用注入原型
 export function enrichJArticle(original: JArticle) {
     for (const novel in original) {
-        const { chapters } = original[novel];
-        const { chapters: articles } = Article.meta[novel] ?? original[novel];
-
-        //全量覆盖
-        Object.assign(Article.meta[novel] ??= {} as any, original[novel]);
-
-        //名称与序号的映射
-        const hashs = new Map(
-            chapters.map(({ index }, i) => [index, i]),
+        const articles = Object.fromEntries(
+            Article.meta[novel]?.chapters.map((art) => [art.index, art]) ?? [],
         );
 
-        //按名称对齐章节位置
-        const results: Article[] = Array.from({ length: chapters.length });
-        for (const art of articles) {
-            const i = hashs.get(art.index);
+        Article.meta[novel] = structuredClone(original[novel]) as any;
 
-            //不存在时相当于删除章节
-            if (i !== void 0) {
-                results[i] = art instanceof Article
-                    ? art.assign(novel, i, chapters[i])
-                    : Article.for(novel, chapters[i].index);
+        const { chapters } = original[novel];
+        for (let i = 0; i < chapters.length; i++) {
+            const chapter = chapters[i];
+
+            let art = articles[chapter.index];
+            if (art !== void 0) {
+                art.raw = chapter;
             }
+            else {
+                art = createArticle(novel, chapter);
+            }
+            Article.meta[novel].chapters[i] = art;
         }
-
-        //挂载章节列表
-        Article.meta[novel].chapters = results.map((art, i) => {
-            return art ?? Article.for(novel, chapters[i].index);
-        });
     }
 }
