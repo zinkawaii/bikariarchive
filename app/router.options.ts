@@ -21,7 +21,7 @@ export default <RouterConfig> {
                     component: () => import("~/pages/book/shelf.vue"),
                     meta: {
                         scrollToTop(to, from) {
-                            if (to.params.novel === from.params.novel) {
+                            if (to.name === from.name && to.params.novel === from.params.novel) {
                                 return false;
                             }
                         },
