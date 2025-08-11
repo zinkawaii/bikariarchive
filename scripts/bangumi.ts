@@ -3,7 +3,7 @@ import defu from "defu";
 import { resolve } from "pathe";
 
 //读取文件
-const path = resolve(import.meta.dirname, "../data/bangumi.json");
+const path = resolve(import.meta.dirname, "../data/json/Bangumi.json");
 const file = await readFile(path, "utf-8");
 const data = JSON.parse(file);
 
@@ -11,7 +11,7 @@ const data = JSON.parse(file);
 const list = [];
 
 for (const id of list) {
-    let item = {};
+    let item: any = {};
     if (typeof id === "number") {
         item.id = id;
     }

@@ -1,15 +1,8 @@
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "pathe";
-import { ProxyAgent, setGlobalDispatcher } from "undici";
 import robotsConfig from "./app/robots.config";
 import { clientConfig, serverConfig } from "./app/runtime.config";
 import typescriptConfig from "./app/typescript.config";
-
-try {
-    const dispatcher = new ProxyAgent({ uri: new URL(process.env.HTTPS_PROXY!).toString() });
-    setGlobalDispatcher(dispatcher);
-}
-catch {}
 
 export default defineNuxtConfig({
     app: {
@@ -40,10 +33,7 @@ export default defineNuxtConfig({
         },
     ],
     devServer: {
-        https: {
-            key: "<!-- ??? -->",
-            cert: "<!-- ??? -->",
-        },
+        https: true,
         host: clientConfig.domain,
         port: 4615,
     },

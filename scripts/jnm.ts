@@ -9,7 +9,7 @@ const Jnm = {};
 
 const reg = /randWordJnm(?<order>\d+(?:_kana)?)=new Array\((?<items>.*?)\)/g;
 for (const match of text.matchAll(reg)) {
-    const { order, items } = match.groups;
+    const { order, items } = match.groups!;
     Jnm[order] = items.split(",").map((item) => item.slice(1, -1));
 }
 

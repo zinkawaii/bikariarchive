@@ -32,7 +32,6 @@ catalogs:
     propathy: ^0.2.1
     sass-embedded: ^1.90.0
     svgo: ^4.0.0
-    undici: ^7.13.0
     unemail: ^0.3.0
     yaml: ^2.8.1
     zfeed: ^0.2.3

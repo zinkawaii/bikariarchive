@@ -47,5 +47,5 @@ const client = {
     },
 };
 
-const env = import.meta.env.NODE_ENV as "development" | "production";
+const env = process.env.NODE_ENV as "development" | "production";
 export const clientConfig = defu(client[env], client.global);
