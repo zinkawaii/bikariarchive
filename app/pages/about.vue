@@ -600,10 +600,12 @@
 
         > :first-child {
             font-size: 18cqh;
+            line-height: 22cqh;
         }
 
         > :last-child {
             font-size: 42cqh;
+            line-height: 48cqh;
             text-align: right;
         }
     }

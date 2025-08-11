@@ -12,7 +12,7 @@
 
 <template>
     <h2 :id class="story-heading" :modifier>
-        <span class="heading-title"><slot></slot></span>
+        <slot></slot>
     </h2>
 </template>
 
@@ -23,7 +23,8 @@
         display: grid;
         justify-content: center;
         overflow-x: clip;
-        margin-block: 16px 8px;
+        margin-block: 16px;
+        line-height: 1;
         text-align: center;
         animation-name: edge-fades;
         animation-timeline: view();
@@ -31,17 +32,14 @@
         &::before {
             content: attr(modifier);
             opacity: 0.5;
+            margin-bottom: -32px;
             mask: linear-gradient(black 33%, transparent);
             font-size: 64px;
             text-wrap: nowrap;
             color: transparent;
             transition: color 0.25s;
+            z-index: -1;
             -webkit-text-stroke: 1px var(--color-info);
         }
-    }
-
-    .heading-title {
-        margin-top: -32px;
-        isolation: isolate;
     }
 </style>

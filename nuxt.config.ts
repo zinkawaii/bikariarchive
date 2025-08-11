@@ -33,8 +33,6 @@ export default defineNuxtConfig({
         },
     ],
     devServer: {
-        https: true,
-        host: clientConfig.domain,
         port: 4615,
     },
     devtools: {

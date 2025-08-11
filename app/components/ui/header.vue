@@ -185,7 +185,6 @@
 
         &::before, &::after {
             margin-inline: 2px;
-            translate: 0 -4px;
         }
 
         &::before {
@@ -267,9 +266,9 @@
     .nav-link {
         display: grid;
         justify-items: center;
-        gap: 4px;
+        gap: 8px;
         width: $nav;
-        margin: auto;
+        line-height: 1;
 
         @media (width >= #{$max}) {
             color: white;

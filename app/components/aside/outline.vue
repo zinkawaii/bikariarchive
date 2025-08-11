@@ -161,6 +161,7 @@
         position: absolute;
         opacity: 0.5;
         right: calc(100% - 16px);
+        font-feature-settings: "tnum";
         font-size: 12px;
     }
 

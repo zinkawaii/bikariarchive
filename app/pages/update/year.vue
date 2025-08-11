@@ -76,8 +76,9 @@
 
     .update-title {
         display: flex;
+        align-items: center;
         gap: 8px;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
         padding-left: 8px;
     }
 

@@ -134,7 +134,6 @@
 
     .search-statistics {
         display: grid;
-        gap: 4px;
         font-size: 15px;
 
         @include viewport("lg") {
