@@ -90,7 +90,7 @@ export default defineNuxtConfig({
         },
     },
     modules: [
-        ["@kikiutils/nuxt-session", serverConfig.session],
+        "@kikiutils/nuxt-session",
         "@nuxt/eslint",
         "@nuxt/fonts",
         "@nuxt/icon",
@@ -100,12 +100,29 @@ export default defineNuxtConfig({
         "@vueuse/nuxt",
         "pinia-plugin-persistedstate/nuxt",
     ],
+    fonts: {
+        provider: "google",
+    },
+    icon: {
+        componentName: "iconify",
+    },
+    image: {
+        provider: "none",
+    },
+    ogImage: {
+        enabled: false,
+    },
     robots: robotsConfig,
-    sitemap: {
-        excludeAppSources: true,
-        sources: [
-            "/api/sitemap",
-        ],
+    nuxtSession: {
+        maxAge: 86400 * 30,
+        storage: {
+            data: {
+                driver: "cookie/header",
+                options: {
+                    key: process.env.NUXT_SESSION_KEY!,
+                },
+            },
+        },
     },
     site: {
         name: clientConfig.title,
@@ -114,22 +131,16 @@ export default defineNuxtConfig({
         defaultLocale: "zh-CN",
         indexable: true,
     },
-    ogImage: {
-        enabled: false,
-    },
-    fonts: {
-        provider: "google",
+    sitemap: {
+        excludeAppSources: true,
+        sources: [
+            "/api/sitemap",
+        ],
     },
     splittedFonts: {
         fonts: [{
             name: "ChillRoundF",
             path: "~/assets/fonts/ChillRoundFRegular.ttf",
         }],
-    },
-    icon: {
-        componentName: "iconify",
-    },
-    image: {
-        provider: "none",
     },
 });

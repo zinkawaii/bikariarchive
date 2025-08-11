@@ -15,7 +15,7 @@ export async function sendMail<T extends Component>(component: T, options: {
     const service = createEmailService({
         provider: smtp({
             host: config.mail.host,
-            port: config.mail.port,
+            port: +config.mail.port,
             user: config.mail.user,
             password: config.mail.password,
             secure: true,
@@ -31,7 +31,7 @@ export async function sendMail<T extends Component>(component: T, options: {
     return service.sendEmail({
         from: {
             email: config.mail.user,
-            name: config.mail.name,
+            name: config.public.title,
         },
         to: {
             email: options.to,
