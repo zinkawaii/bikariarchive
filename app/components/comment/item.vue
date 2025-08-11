@@ -131,9 +131,6 @@
     }
 
     .comment-main {
-        display: grid;
-        gap: 0.5em;
-
         &:hover .comment-action {
             opacity: 1;
         }

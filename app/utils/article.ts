@@ -24,7 +24,10 @@ export class Article {
     }
 }
 
-export interface Article extends WithRequired<JChapter, "date" | "draft" | "encrypted" | "ending" | "sticky"> {
+export interface Article extends WithRequired<
+    JChapter,
+    "date" | "variant" | "draft" | "encrypted" | "ending" | "sticky"
+> {
     raw: JChapter;
     novel: string;
     novelInfo: JNovel<Article>;
@@ -106,7 +109,7 @@ function createArticle(...args: [novel: string, raw: JChapter]): Article {
     const cover = computed(() => raw.value.cover);
 
     //变体
-    const variant = computed(() => raw.value.variant ?? volumeInfo.value.variant);
+    const variant = computed(() => raw.value.variant ?? volumeInfo.value.variant ?? `article`);
 
     //草稿
     const draft = computed(() => raw.value.draft ?? false);

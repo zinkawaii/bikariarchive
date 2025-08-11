@@ -57,7 +57,7 @@ export interface ArticleCover {
     align?: string;
 }
 
-export type ArticleVariant = "general" | "story" | "comment";
+export type ArticleVariant = "general" | "article" | "story" | "comment";
 
 export interface JArtmap {
     [novel: string]: {

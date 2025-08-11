@@ -9,7 +9,7 @@
         <ul class="intro-tags edge-fades-x no-scrollbar">
             <li v-for="tag in Article.meta[novel].tag" class="intro-tag">{{ tag }}</li>
         </ul>
-        <novel-article class="intro-synopsis" :body="Article.meta[props.novel].synopsis"/>
+        <novel-article class="intro-synopsis edge-fades-y" :body="Article.meta[props.novel].synopsis"/>
     </div>
 </template>
 
@@ -37,8 +37,9 @@
 
     .intro-synopsis {
         overflow: auto;
+        padding-bottom: 4px;
 
-        :deep(p) {
+        :deep(> p) {
             line-height: 24px;
         }
     }

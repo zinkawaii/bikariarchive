@@ -86,14 +86,13 @@
 
         :deep(> h2) {
             margin-bottom: 8px;
-            padding-bottom: 12px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--color-border);
         }
 
         :deep(h3) {
             display: inline-block;
             margin: 8px 0 4px 12px;
-            line-height: 26px;
 
             &::before {
                 content: "•";

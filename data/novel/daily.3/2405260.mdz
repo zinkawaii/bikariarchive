@@ -45,7 +45,7 @@ export default zin();
 }
 ```
 
-## 尽可能使用 grid 而不是 flex
+## 尽可能使用 `grid` 而不是 `flex`
 
 Grid 就是现代 CSS 黑魔法，每个人都应该学会使用 Grid（混乱 ✘
 

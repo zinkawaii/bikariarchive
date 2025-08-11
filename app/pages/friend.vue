@@ -17,7 +17,7 @@
 
 <template>
     <meow-widget title="友情链接">
-        <novel-article class="text-small">
+        <novel-article class="text-small" variant="article">
             <div class="friend-list">
                 <nuxt-link v-for="item in jFriend" class="friend-item" :to="item.link" target="_blank">
                     <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
@@ -94,7 +94,6 @@
         padding-top: 0.5rem;
         border-top: 1px solid var(--color-border-lighter);
         line-height: 1.5;
-        text-indent: 0;
         color: var(--color-info);
     }
 </style>

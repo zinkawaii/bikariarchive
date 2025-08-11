@@ -39,9 +39,10 @@
 
 <style lang="scss" scoped>
     .talent-tag {
-        margin: 2px 0 0 6px;
+        margin-left: 6px;
         padding: 2px 8px;
         border-radius: 4px;
         font-size: 13px;
+        vertical-align: text-top;
     }
 </style>

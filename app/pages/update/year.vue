@@ -18,10 +18,10 @@
     <mb-skeleton v-if="status !== `success`" class="update-skeleton"/>
     <ul v-else class="update-list">
         <li v-for="{ date, version, items } in paginatedList" class="update-item">
-            <div class="update-title">
+            <hgroup class="update-title">
                 <h2><time>{{ date }}</time></h2>
                 <code v-if="version" class="update-version">v{{ version }}</code>
-            </div>
+            </hgroup>
             <div class="update-content">
                 <p v-for="{ type, scope, content } in items" class="p-small">
                     <span class="update-type">{{ type }}</span>

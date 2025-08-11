@@ -8,9 +8,9 @@
     <section class="entry-section">
         <h2 v-if="title" :id="title">{{ title }}</h2>
         <slot>
-            <div class="novel-text">
+            <novel-article>
                 <p>未知。</p>
-            </div>
+            </novel-article>
         </slot>
     </section>
 </template>

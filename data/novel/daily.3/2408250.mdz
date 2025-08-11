@@ -62,7 +62,7 @@ interface Entry {
 
 于是，一种以双尖括号包裹内容的语法横空出世：
 
-``` markdown
+```markdown
 << summary
 有些人只拥吻影子，于是只拥有幸福的幻影。
 <<

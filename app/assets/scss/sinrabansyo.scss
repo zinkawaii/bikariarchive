@@ -47,15 +47,6 @@ a {
     cursor: pointer;
 }
 
-blockquote {
-    margin-block: 16px;
-    padding: 12px 16px;
-    border-block: 1px solid var(--color-border-lighter);
-    border-inline: 4px solid var(--color-theme);
-    background-color: var(--color-background);
-    font-size: 14px;
-}
-
 code {
     padding: 1px 4px;
     border: 1px solid var(--color-border-lighter);
@@ -63,7 +54,7 @@ code {
     box-decoration-break: clone;
     background-color: color-mix(in srgb, var(--color-gray-700), transparent 66%);
     font-family: var(--font-monospace);
-    font-size: 14px;
+    font-size: 0.875em;
     color: var(--color-theme-text);
 }
 
@@ -73,7 +64,11 @@ img {
     vertical-align: middle;
 }
 
-rt, sub, sup {
+rt {
+    font-size: 0.6em;
+}
+
+sub, sup {
     font-size: 0.75em;
 }
 

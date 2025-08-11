@@ -3,7 +3,7 @@ title: 阅读页样式用例
 abbrlink: 93ec4a4
 date:
   created: 2024-03-31
-  updated: 2025-04-05
+  updated: 2025-08-12
 ---
 
 ::excerpt
@@ -11,8 +11,6 @@ date:
 ::
 
 ## 二级标题
-
-这是段落，没有上下间距，首行缩进和行高均为两倍字体大小。
 
 没有一级标题，因为已经在文章头里使用了。
 
@@ -22,21 +20,12 @@ date:
 
 **这是粗体**，*这是夺舍了斜体的高亮文字*，这是|注音文字(rubyetic)|，这是 `inline-code`，这是~~模糊文字~~，这是 i-twemoji:face-with-monocle，这是 [外链](https://bikari.top)，下面是换行[^1]。
 
-<br />
-
 - 这是无序列表项；
-
-- 缩进和 `<p>` 元素对齐；
-
-- 看起来难以和段落进行有效的区分，但一般和三级标题搭配使用。
-
-<br />
+- 缩进和 `<p>` 元素对齐。
 
 1. 这是有序列表项；
-
-2. 缩进为三个中文字符；
-
-3. 它是普通列表的通常表示法。
+   - 这是嵌套列表项。
+2. 它是普通列表的通常表示法。
 
 :mb-image{src="https://cdn.bikari.top/image/pixiv/103842593.jpg!style:webp" reference="https://www.pixiv.net/artworks/103842593" max-width="616" caption="这是图片，可点击放大，可通过右键前往图源"}
 

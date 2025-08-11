@@ -42,7 +42,7 @@
             "C A D"
             "C B D" / auto 1fr auto;
         row-gap: 8px;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
     }
 
     .novel-title {

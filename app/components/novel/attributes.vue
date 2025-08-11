@@ -15,6 +15,7 @@
     const infos: {
         attr: Attr;
         icon: string;
+        tag?: string;
         content: MaybeRefOrGetter<unknown>;
     }[] = [
         {
@@ -35,11 +36,13 @@
         {
             attr: "publish-date",
             icon: "fa7-solid:pen",
+            tag: "time",
             content: () => props.art.publishDate,
         },
         {
             attr: "update-date",
             icon: "fa7-solid:clock-rotate-left",
+            tag: "time",
             content: () => props.art.updateDate,
         },
     ];
@@ -57,9 +60,9 @@
             [`edge-fades-x no-scrollbar`]: !wrap,
         }"
     >
-        <li v-for="{ icon, content } in filterred" class="novel-attr">
+        <li v-for="{ icon, tag, content } in filterred" class="novel-attr">
             <iconify :name="icon"/>
-            <span>{{ toValue(content) }}</span>
+            <component :is="tag ?? `span`">{{ toValue(content) }}</component>
         </li>
     </ul>
 </template>

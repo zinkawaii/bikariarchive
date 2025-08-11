@@ -38,6 +38,9 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true,
     },
+    features: {
+        inlineStyles: false,
+    },
     nitro: {
         rollupConfig: {
             plugins: [

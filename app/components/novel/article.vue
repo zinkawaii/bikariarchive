@@ -48,7 +48,7 @@
         return props;
     }
 
-    function transformVariant(node: Element, variant: ArticleVariant) {
+    function transformVariant(node: Element, variant?: ArticleVariant) {
         //避免直接修改原始节点
         let { tag, props, children } = node;
 
@@ -108,37 +108,40 @@
     .novel-text {
         overflow-wrap: anywhere;
 
-        h3 {
-            margin-block: 20px 8px;
-            line-height: 24px;
+        :where(h2, h3, h4, h5, h6) {
+            margin-block: 1.4em 0.7em;
         }
 
-        p {
-            line-height: 2;
+        > p {
             text-indent: 2em;
         }
 
-        :where(blockquote, li) > p {
-            text-indent: 0;
+        blockquote {
+            margin-block: 1em;
+            padding: 1em;
+            border-block: 1px solid var(--color-border-lighter);
+            border-inline: 4px solid var(--color-theme);
+            background-color: var(--color-background);
+            font-size: 14px;
         }
 
-        ol, ul {
-            line-height: 2;
-        }
-
-        ol {
-            padding-left: 3em;
-            list-style-type: decimal;
-
-            > li::marker {
-                font-weight: bold;
-                color: var(--color-theme-text);
-            }
-        }
-
-        ul {
+        :where(ol, ul) {
+            margin-block: 1em;
             padding-left: 2em;
-            list-style-type: disc;
+            list-style-type: revert;
+
+            > li {
+                margin-block: 0.2em;
+
+                &::marker {
+                    font-weight: bold;
+                    color: var(--color-theme-text);
+                }
+            }
+
+            :is(ol, ul) {
+                margin-block: 0;
+            }
         }
 
         del {
@@ -154,15 +157,7 @@
         }
 
         :where(.mb-code, .mb-gallery, .mb-image, .mb-math) {
-            margin-block: 16px;
-        }
-
-        > :first-child {
-            margin-top: 0;
-        }
-
-        > :last-child {
-            margin-bottom: 0;
+            margin-block: 1em;
         }
 
         :target {
@@ -177,7 +172,7 @@
         }
 
         > .footnotes {
-            margin-top: 16px;
+            margin-top: 1em;
             font-size: 14px;
         }
 
@@ -203,12 +198,24 @@
             }
         }
 
-        &:where(.is-general, .is-comment) {
+        &:where(.is-general) {
+            p {
+                line-height: 2;
+            }
+        }
+
+        &:where(.is-article, .is-story, .is-comment) {
+            line-height: 1.8;
+
+            > p {
+                margin-block: 0.8em;
+            }
+        }
+
+        &:where(.is-article, .is-comment) {
             h2 {
                 position: relative;
-                margin-block: 24px 12px;
                 padding-left: 16px;
-                line-height: 36px;
 
                 &::before {
                     content: "";
@@ -229,22 +236,26 @@
         }
 
         &:where(.is-comment) {
-            ol {
-                padding-left: 2em;
+            margin-block: 0.5em;
+
+            > p {
+                margin-block: 0.5em;
+                text-indent: 0;
+            }
+
+            :where(ol, ul) {
+                margin-block: 0.5em;
+                padding-left: 1em;
             }
 
             img {
                 max-width: 411px;
             }
 
-            p {
-                text-indent: 0;
-            }
-
             .shiki {
                 display: grid;
-                margin-top: 7px;
-                padding-top: 3px;
+                margin-block: 0.5em -0.5em;
+                padding-top: 0.5em;
                 font-family: var(--font-monospace);
                 font-size: 14px;
                 line-height: 20px;
@@ -253,6 +264,14 @@
                     display: none;
                 }
             }
+        }
+
+        > :first-child {
+            margin-top: 0;
+        }
+
+        > :last-child {
+            margin-bottom: 0;
         }
     }
 </style>

@@ -87,6 +87,7 @@
     .shech-order {
         grid-area: D;
         opacity: 0.5;
+        font-feature-settings: "tnum";
         font-size: 28px;
         font-style: italic;
         font-weight: bold;

@@ -16,7 +16,7 @@
                 :art
                 :attrs="[`volume`, `word-count`, `publish-date`, `update-date`]"
             />
-            <novel-article v-if="art.excerpt" class="p-small text-secondary" tag="p" :body="art.excerpt"/>
+            <novel-article v-if="art.excerpt" class="p-small text-secondary" as="p" :body="art.excerpt"/>
             <p v-else class="p-small text-gray">这篇文章还没有简介。</p>
         </div>
         <span class="tabular-thumb"></span>

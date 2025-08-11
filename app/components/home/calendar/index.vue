@@ -198,6 +198,9 @@
 </template>
 
 <style lang="scss" scoped>
+    $width: 48px;
+    $gap: 2px;
+
     .home-calendar {
         display: grid;
         grid-template-columns: auto 1fr;
@@ -207,13 +210,12 @@
     }
 
     .calendar-wrapper, .calendar-detail {
-        min-width: 334px;
+        min-width: $width * 7 + $gap * 6;
         margin: 4px;
         scroll-snap-align: center;
     }
 
     .calendar-wrapper {
-        overflow: auto;
         border-bottom-left-radius: 12px;
     }
 
@@ -246,8 +248,8 @@
 
     .calendar-week, .calendar-days {
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 2px;
+        grid-template-columns: repeat(7, $width);
+        gap: $gap;
         text-align: center;
     }
 
@@ -259,9 +261,8 @@
 
     .calendar-day {
         display: grid;
-        position: relative;
-        width: 46px;
         padding: 4px;
+        font-feature-settings: "tnum";
 
         &:hover {
             box-shadow: 0 0 0 1px var(--color-theme-dark) inset;
