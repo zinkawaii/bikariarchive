@@ -71,12 +71,6 @@ export const useShelfStore = defineStore("shelf", () => {
         };
     });
 
-    function goto(...args: [novel: string, volume: number]) {
-        novel.value = args[0];
-        volume.value = args[1];
-        router.push(currentRoute.value);
-    }
-
     function selectNovel(name: string) {
         novel.value = name;
         volume.value = 0;
@@ -94,7 +88,6 @@ export const useShelfStore = defineStore("shelf", () => {
         volumeInfo,
         articles,
         route: currentRoute,
-        goto,
         selectNovel,
         selectVolume,
     };

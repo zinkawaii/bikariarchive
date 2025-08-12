@@ -22,28 +22,29 @@
 </script>
 
 <template>
-    <nuxt-link class="shelf-chapter" :to="art.route">
-        <span class="chapter-title text-truncate">{{ art.title }}</span>
-        <ul class="chapter-tags">
-            <template v-for="{ name, color, when } in tags">
-                <li
-                    v-if="toValue(when)"
-                    class="chapter-tag"
-                    :style="`--color: ${color}`"
-                >{{ name }}</li>
-            </template>
-        </ul>
-        <novel-attributes
-            :art
-            :attrs="[`word-count`, `publish-date`, `update-date`]"
-            :wrap="false"
-        />
-        <span class="chapter-order">{{ art.orderInVol + 1 }}</span>
-    </nuxt-link>
+    <li class="shelf-chapter">
+        <nuxt-link class="chapter-link" :to="art.route">
+            <span class="chapter-title text-truncate">{{ art.title }}</span>
+            <ul class="chapter-tags">
+                <template v-for="{ name, color, when } in tags">
+                    <li
+                        v-if="toValue(when)"
+                        class="chapter-tag"
+                        :style="`--color: ${color}`"
+                    >{{ name }}</li>
+                </template>
+            </ul>
+            <novel-attributes
+                :art
+                :attrs="[`word-count`, `publish-date`, `update-date`]"
+                :wrap="false"
+            />
+        </nuxt-link>
+    </li>
 </template>
 
 <style lang="scss" scoped>
-    .shelf-chapter {
+    .chapter-link {
         display: grid;
         grid-template:
             "A B D" 26px
@@ -53,10 +54,22 @@
         padding-top: 8px;
         border-bottom: 1px dashed var(--color-border-light);
         font-size: 14px;
+        counter-increment: chapter-order;
         break-inside: avoid;
 
         &:hover {
             color: var(--color-theme-text);
+        }
+
+        &::after {
+            content: counter(chapter-order);
+            grid-area: D;
+            opacity: 0.5;
+            font-feature-settings: "tnum";
+            font-size: 28px;
+            font-style: italic;
+            font-weight: bold;
+            color: var(--color-info);
         }
     }
 
@@ -82,15 +95,5 @@
 
     .novel-attributes {
         grid-area: C;
-    }
-
-    .chapter-order {
-        grid-area: D;
-        opacity: 0.5;
-        font-feature-settings: "tnum";
-        font-size: 28px;
-        font-style: italic;
-        font-weight: bold;
-        color: var(--color-info);
     }
 </style>

@@ -33,6 +33,14 @@
     const { page, total, sizes, paginatedList } = usePagination(articles, {
         sizes: 32,
     });
+
+    const start = computed(() => (page.value - 1) * sizes.value || void 0);
+
+    useAdoptedStyleSheet/* CSS */`
+        .shelf-chapters {
+            counter-reset: chapter-order ${start};
+        }
+    `;
 </script>
 
 <template>
@@ -42,11 +50,9 @@
             <span>{{ value }}</span>
         </div>
     </div>
-    <ul class="shelf-chapters">
-        <li v-for="art in paginatedList" :key="art.index">
-            <shelf-chapter :art/>
-        </li>
-    </ul>
+    <ol class="shelf-chapters" :start>
+        <shelf-chapter v-for="art in paginatedList" :key="art.index" :art/>
+    </ol>
     <mb-pagination v-if="total > sizes" class="shelf-pagination" :total :sizes v-model="page"/>
 </template>
 

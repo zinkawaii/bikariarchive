@@ -2,7 +2,7 @@
     import type { JNovel } from "@bikari/article";
 
     const props = defineProps<JNovel<Article> & {
-        novel: PropertyKey;
+        novel: string | number;
     }>();
 
     const shelfStore = useShelfStore();
@@ -14,31 +14,26 @@
     const cover = computed(() => {
         return isCurrentNovel.value && shelfStore.volumeInfo.cover || props.cover;
     });
-
-    function onClick() {
-        if (!isCurrentNovel.value) {
-            shelfStore.selectNovel(props.novel as string);
-        }
-    }
 </script>
 
 <template>
     <li class="shelf-novel">
-        <button
+        <nuxt-link
             :class="{ [`is-checked`]: isCurrentNovel }"
-            @click="onClick"
+            :to="{ params: { novel, volume: 0 } }"
         >
             <div class="novel-cover">
                 <mb-image v-if="cover" :src="cover" alt="[cover]" align="center" :viewable="isCurrentNovel"/>
                 <div v-else class="novel-placeholder">Cover.</div>
             </div>
             <span class="novel-title">{{ title }}</span>
-        </button>
+        </nuxt-link>
     </li>
 </template>
 
 <style lang="scss" scoped>
     .shelf-novel {
+        display: grid;
         margin-inline: 8px;
         text-align: center;
         color: var(--color-info);
