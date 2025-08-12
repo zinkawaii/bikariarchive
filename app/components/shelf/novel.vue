@@ -1,114 +1,77 @@
 <script lang="ts" setup>
-    import { executeTransition } from "@vueuse/core";
+    import type { JNovel } from "@bikari/article";
+
+    const props = defineProps<JNovel<Article> & {
+        novel: PropertyKey;
+    }>();
 
     const shelfStore = useShelfStore();
-    const { novel, novels } = storeToRefs(shelfStore);
 
-    const currentNovelIdx = computed(() => {
-        return novels.value.indexOf(novel.value);
+    const isCurrentNovel = computed(() => {
+        return props.novel === shelfStore.novel;
     });
 
-    const width = -144;
-    const translateX = ref(currentNovelIdx.value * width);
-    const rootEl = useTemplateRef("root");
-
-    let min = 0;
-    let start = 0;
-    let mouseX = 0;
-
-    const { isHolding } = usePointer(rootEl, {
-        onPointerdown(event) {
-            min = (novels.value.length - 1) * width;
-            start = translateX.value;
-            mouseX = event.x;
-        },
-        onPointermove(event) {
-            const delta = event.x - mouseX;
-            const end =
-                start > 0 ? start ** (4 / 3) + delta :
-                start < min ? min - (min - start) ** (4 / 3) + delta :
-                start + delta;
-
-            translateX.value =
-                end > 0 ? end ** 0.75 :
-                end < min ? min - (min - end) ** 0.75 :
-                end;
-        },
-        onPointerup() {
-            const raw = (translateX.value - 72) / width;
-            const index = clamp(0, Math.floor(raw), novels.value.length - 1);
-
-            if (index !== currentNovelIdx.value) {
-                shelfStore.selectNovel(novels.value[index]);
-            }
-            else {
-                nextTick(() => {
-                    move(index);
-                });
-            }
-        },
+    const cover = computed(() => {
+        return isCurrentNovel.value && shelfStore.volumeInfo.cover || props.cover;
     });
 
-    watch(currentNovelIdx, move);
-
-    function move(index: number) {
-        executeTransition(translateX, translateX.value, index * width, {
-            duration: 400,
-            transition: [0.25, 0.1, 0.25, 1],
-            abort() {
-                return isHolding.value;
-            },
-        });
-    }
-
-    const throttledSelectNovel = Zin.throttle((delta: number) => {
-        const raw = currentNovelIdx.value + Math.sign(delta);
-        const idx = clamp(0, raw, novels.value.length - 1);
-        shelfStore.selectNovel(novels.value[idx]);
-    }, 250);
-
-    function onWheel(event: WheelEvent) {
-        const delta = event.shiftKey ? event.deltaY : event.deltaX;
-        if (Math.abs(delta) > 0) {
-            event.preventDefault();
-        }
-        if (Math.abs(delta) >= 4) {
-            throttledSelectNovel(delta);
+    function onClick() {
+        if (!isCurrentNovel.value) {
+            shelfStore.selectNovel(props.novel as string);
         }
     }
 </script>
 
 <template>
-    <div ref="root" class="shelf-novel" @wheel="onWheel">
-        <ul
-            class="sheno-list"
-            :class="{ [`is-holding`]: isHolding && translateX !== start }"
-            :style="{ translate: `${translateX}px` }"
+    <li class="shelf-novel">
+        <button
+            :class="{ [`is-checked`]: isCurrentNovel }"
+            @click="onClick"
         >
-            <shelf-novel-item
-                v-for="(novelInfo, key) in Article.meta"
-                :key
-                :novel="key"
-                v-bind="novelInfo"
-            />
-        </ul>
-    </div>
+            <div class="novel-cover">
+                <mb-image v-if="cover" :src="cover" alt="[cover]" align="center" :viewable="isCurrentNovel"/>
+                <div v-else class="novel-placeholder">Cover.</div>
+            </div>
+            <span class="novel-title">{{ title }}</span>
+        </button>
+    </li>
 </template>
 
 <style lang="scss" scoped>
     .shelf-novel {
-        overflow: hidden;
-        padding-left: calc(50% - 72px);
-        mask: linear-gradient(to right, transparent, white 2rem, white calc(100% - 2rem), transparent);
-        touch-action: none;
-        user-select: none;
+        margin-inline: 8px;
+        text-align: center;
+        color: var(--color-info);
     }
 
-    .sheno-list {
-        display: flex;
+    .novel-cover {
+        display: grid;
+        width: 128px;
+        aspect-ratio: 1 / 1.414;
+        transform-origin: bottom;
+        transition: all 0.4s;
+        filter: drop-shadow(8px 8px 2px rgb(0 0 0 / 16%));
 
-        &.is-holding {
-            pointer-events: none;
+        :not(.is-checked) > & {
+            opacity: 0.66;
+            scale: 0.9;
+        }
+    }
+
+    .novel-placeholder {
+        display: grid;
+        align-items: center;
+        border: 4px dashed var(--color-border);
+        border-radius: 8px;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .novel-title {
+        line-height: 42px;
+
+        .is-checked > & {
+            color: var(--color-theme-text);
         }
     }
 </style>

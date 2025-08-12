@@ -1,6 +1,6 @@
 <template>
     <meow-widget title="目录">
-        <shelf-novel />
+        <shelf-novels />
         <nuxt-page />
     </meow-widget>
 </template>

@@ -20,7 +20,7 @@
         <home-calendar />
         <home-blank />
     </div>
-    <home-tabular />
+    <home-tabulars />
 </template>
 
 <style lang="scss" scoped>

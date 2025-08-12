@@ -8,10 +8,10 @@
 </script>
 
 <template>
-    <ul class="shelf-volume">
+    <ul class="shelf-volumes">
         <li
             v-for="(title, i) in volumes"
-            class="shevo-item"
+            class="shelf-volume"
             :class="{ [`is-checked`]: i === volume }"
             @click="shelfStore.selectVolume(i)"
         >
@@ -22,13 +22,13 @@
 </template>
 
 <style lang="scss" scoped>
-    .shelf-volume {
+    .shelf-volumes {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
         gap: 4px 16px;
     }
 
-    .shevo-item {
+    .shelf-volume {
         display: flex;
         align-items: center;
         gap: 8px;

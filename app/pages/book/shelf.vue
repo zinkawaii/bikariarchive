@@ -15,12 +15,12 @@
         </fieldset>
         <fieldset v-show="novelInfo.volumes.length" class="shelf-fieldset">
             <legend class="content-h2">卷册列表</legend>
-            <shelf-volume />
+            <shelf-volumes />
         </fieldset>
     </div>
     <fieldset v-show="articles.length" class="shelf-fieldset">
         <legend class="content-h2">章节列表</legend>
-        <shelf-chapter />
+        <shelf-chapters />
     </fieldset>
 </template>
 
