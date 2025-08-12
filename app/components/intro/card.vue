@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import { capitalize } from "vue";
+
     const props = defineProps<{
         layer: string;
         novel: string;

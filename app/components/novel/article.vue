@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import { hyphenate } from "@vueuse/core";
     import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
     import type { VNodeArrayChildren } from "vue";
     import { Iconify, MbCode, MbGallery, MbImage, MbMath, PlainLink, StoryHeading } from "#components";
