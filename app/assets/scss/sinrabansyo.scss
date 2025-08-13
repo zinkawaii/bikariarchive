@@ -291,12 +291,35 @@ textarea {
 /* ---------------------------------------------------------------- */
 
 /* 代码高亮 */
-.shiki span {
-    background-color: var(--shiki-light-bg);
-    color: var(--shiki-light);
+.shiki {
+    span {
+        background-color: var(--shiki-light-bg);
+        color: var(--shiki-light);
 
-    @include dark {
-        background-color: var(--shiki-dark-bg);
-        color: var(--shiki-dark);
+        @include dark {
+            background-color: var(--shiki-dark-bg);
+            color: var(--shiki-dark);
+        }
+    }
+
+    .indent {
+        display: inline-block;
+        position: relative;
+        left: var(--indent-offset);
+
+        &:empty {
+            width: 0;
+            height: 1lh;
+            vertical-align: bottom;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            opacity: 0.4;
+            width: 1px;
+            height: 100%;
+            background-color: var(--color-border);
+        }
     }
 }

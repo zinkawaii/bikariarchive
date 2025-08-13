@@ -3,6 +3,7 @@
 
     const props = withDefaults(defineProps<{
         lang?: BundledLanguage;
+        meta?: string;
         raw?: string;
     }>(), {
         lang: "js",
@@ -30,13 +31,16 @@
 
     //代码
     const code = ref(escapeHtml(props.raw));
-    onMounted(async () => {
+    watch(props, async () => {
         const shiki = await shikiStore.load();
         await shikiStore.loadLang(props.lang);
         code.value = shiki.codeToHtml(props.raw, {
             ...shikiStore.options,
             lang: props.lang,
+            meta: { __raw: props.meta },
         });
+    }, {
+        immediate: import.meta.browser,
     });
 
     //行数
@@ -66,7 +70,7 @@
             }"
         >
             <pre class="code-line">{{ lineStr }}</pre>
-            <pre ref="pre" class="code-content shiki no-scrollbar" v-html="code"></pre>
+            <pre ref="pre" class="shiki edge-fades-x no-scrollbar" v-html="code"></pre>
             <button v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
                 <iconify :name="`fa7-solid:angles-${isExpand ? `up` : `down`}`"/>
             </button>
@@ -110,8 +114,9 @@
         display: flex;
         position: relative;
         overflow: hidden;
-        max-height: 194px;
+        max-height: 196px;
         margin-top: -4px;
+        font-family: var(--font-monospace);
         font-size: 14px;
         line-height: 20px;
         transition-property: max-height, margin;
@@ -120,8 +125,8 @@
         &.is-expand {
             max-height: fit-content;
 
-            > .code-content {
-                padding-bottom: 24px;
+            > .shiki {
+                padding-bottom: 2em;
             }
         }
 
@@ -131,21 +136,19 @@
         }
     }
 
-    .code-line, .code-content {
-        padding: 8px;
-        font-family: var(--font-monospace);
+    .code-line, .shiki {
+        padding: 1ch;
     }
 
     .code-line {
-        margin-left: 4px;
+        margin-left: 1ch;
         text-align: right;
         color: var(--color-info);
         user-select: none;
     }
 
-    .code-content {
-        overflow: auto hidden;
-        border-left: 1px solid var(--color-border-lighter);
+    .shiki {
+        overflow-y: hidden;
     }
 
     .code-expand {
@@ -153,7 +156,7 @@
         place-items: center;
         position: absolute;
         inset: auto 0 0;
-        height: 28px;
+        height: 2em;
         background: linear-gradient(to bottom, transparent, var(--color-background));
 
         > .iconify {

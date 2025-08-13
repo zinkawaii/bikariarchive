@@ -8,6 +8,7 @@ export default <Handler> function(state, node: Code) {
         tagName: "mb-code",
         properties: {
             lang: node.lang,
+            meta: node.meta,
             raw: node.value,
         },
         children: [],

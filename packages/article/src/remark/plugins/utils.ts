@@ -16,11 +16,11 @@ export function appendExtensions(processor: Processor, options: PushExtensionsOp
     (data.fromMarkdownExtensions ??= []).push(options.fromMarkdown);
 }
 
-export function transformRoot(root: hast.Root) {
+export function transformRoot(root: hast.Root): Root {
     return {
         type: "root",
         children: transformNodes(root.children).filter((node) => node.type !== "text"),
-    } as Root;
+    };
 }
 
 export function transformNodes(nodes: hast.RootContent[]) {

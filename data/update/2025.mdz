@@ -1,5 +1,7 @@
 ## 2025-08-13 [v0.6.5]
 
+feat(mb-code): 渲染缩进参考线
+
 chore: 更换网站域名至 `archive.bikari.top`
 
 ## 2025-08-11 [v0.6.4]

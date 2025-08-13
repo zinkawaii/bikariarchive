@@ -4,7 +4,6 @@ import parse from "remark-parse";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
-import type { Root } from "@bikari/article";
 import type hast from "hast";
 import type mdast from "mdast";
 import type { CodeToHastOptions, HighlighterCore } from "shiki";
@@ -37,6 +36,7 @@ const rehypeOptions: RehypeOptions = {
             const hast = shiki.codeToHast(node.value, {
                 ...options,
                 lang: node.lang,
+                meta: { __raw: node.meta },
             });
             const result: hast.Element = {
                 type: "element",
@@ -84,5 +84,5 @@ export async function parseComment(text: string) {
         .use(compiler);
 
     const result = await processor.process(text);
-    return result.result as Root;
+    return result.result;
 }
