@@ -12,12 +12,10 @@ export async function connectMongoose() {
 
     nitroApp.hooks.hook("close", () => {
         mongoose.disconnect();
-        consola.info("Disconnected from MongoDB");
     });
 
     try {
         await mongoose.connect(config.mongoose.uri, config.mongoose.options);
-        consola.success("Connected to MongoDB");
     }
     catch (err) {
         consola.error(`Failed to connect to MongoDB: ${err}`);
