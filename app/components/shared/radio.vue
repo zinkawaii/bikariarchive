@@ -26,7 +26,7 @@
         aspect-ratio: 1;
         padding: calc(0.5em - 1px);
         border: 1px solid var(--color-border);
-        border-radius: var(--bounded-circle);
+        border-radius: var(--rounded-circle);
         background-clip: content-box;
         background-color: var(--color-theme-dark);
         transition: all 0.1s;

@@ -49,7 +49,7 @@
         }
 
         &.is-round {
-            border-radius: var(--bounded-full);
+            border-radius: var(--rounded-full);
         }
 
         & + & {

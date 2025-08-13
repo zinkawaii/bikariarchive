@@ -85,7 +85,7 @@
         width: 4px;
         height: 80px;
         margin: auto 8px;
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
         background-color: var(--color-theme-dark);
 
         @include viewport("sm") {

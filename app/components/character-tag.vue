@@ -17,7 +17,7 @@
         align-items: center;
         padding-right: 8px;
         border: 1px solid var(--color-theme-dark);
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
         background-color: var(--color-background);
         font-family: var(--font-primary);
         font-size: 14px;
@@ -29,7 +29,7 @@
         width: 28px;
         aspect-ratio: 1;
         margin: 2px;
-        border-radius: var(--bounded-circle);
+        border-radius: var(--rounded-circle);
     }
 
     .tag-name {

@@ -27,7 +27,7 @@
         align-items: stretch;
         padding: 6px;
         border: 1px solid var(--color-border);
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
         line-height: 26px;
         user-select: none;
     }
@@ -37,7 +37,7 @@
         width: 48px;
         padding: 3px;
         border: 1px solid var(--color-border);
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
         transition: all 0.25s;
 
         &.is-checked {
@@ -48,7 +48,7 @@
 
     .switch-thumb {
         aspect-ratio: 1;
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
         background-color: var(--color-gray-500);
         transition: all 0.25s;
 

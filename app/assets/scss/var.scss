@@ -33,8 +33,8 @@
     --font-primary           : "Inter", "PingFang SC", "Noto Sans SC", sans-serif;
     --font-monospace         : "JetBrains Mono", monospace, var(--font-primary);
     --font-smooth            : "ChillRoundF", var(--font-primary);
-    --bounded-circle         : 100%;
-    --bounded-full           : calc(1px * infinity);
+    --rounded-circle         : 100%;
+    --rounded-full           : calc(1px * infinity);
     --size-min-width         : 320px;
 }
 

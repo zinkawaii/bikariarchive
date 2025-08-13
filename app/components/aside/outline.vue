@@ -135,7 +135,7 @@
 
     .outline-thumb {
         height: 30px;
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
         background-color: var(--color-theme-dark);
         transition: translate 0.12s;
     }

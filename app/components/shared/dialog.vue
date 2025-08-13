@@ -63,7 +63,7 @@
         right: 1rem;
         width: 1.5rem;
         aspect-ratio: 1;
-        border-radius: var(--bounded-circle);
+        border-radius: var(--rounded-circle);
         background-color: var(--color-gray-800);
         font-size: 0.75rem;
         color: var(--color-gray-300);

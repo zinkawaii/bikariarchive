@@ -69,7 +69,7 @@
             width: 14px;
             aspect-ratio: 1;
             border: 2px solid var(--color-theme-dark);
-            border-radius: var(--bounded-full);
+            border-radius: var(--rounded-full);
             translate: -24px;
         }
     }

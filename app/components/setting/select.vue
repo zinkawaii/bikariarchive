@@ -26,7 +26,7 @@
         column-gap: 16px;
         padding-inline: 16px;
         border: 1px solid var(--color-border);
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
         line-height: 38px;
         word-break: keep-all;
         user-select: none;

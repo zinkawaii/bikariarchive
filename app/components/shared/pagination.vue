@@ -133,7 +133,7 @@
 
     .pagina-arr {
         width: 3em;
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
     }
 
     .pagina-list {

@@ -86,7 +86,7 @@
         position: absolute;
         overflow: hidden;
         inset: 4px 0;
-        border-radius: var(--bounded-full);
+        border-radius: var(--rounded-full);
         background-color: color-mix(in srgb, var(--color-gray-500), transparent 50%);
     }
 
@@ -101,7 +101,7 @@
         width: 20px;
         aspect-ratio: 1;
         border: 2px solid var(--color-theme-dark);
-        border-radius: var(--bounded-circle);
+        border-radius: var(--rounded-circle);
         box-shadow: var(--box-shadow);
         outline: 0 solid color-mix(in srgb, var(--color-theme-dark), transparent 66%);
         background-color: var(--color-background);
