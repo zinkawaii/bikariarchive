@@ -122,39 +122,46 @@
 </script>
 
 <template>
-    <meow-input
-        type="text"
-        placeholder="昵称"
-        v-model="nickname"
-        v-model:error="errors.nickname"
-    />
-    <meow-input
-        type="text"
-        placeholder="电子邮箱"
-        v-model="email"
-        v-model:error="errors.email"
-    />
-    <div class="sign-verify">
+    <signer-view title="注册">
+        <template #subtitle>
+            <button @click="signerStore.switchView(`login`)">
+                已有账号，前往登录<iconify name="fa7-solid:chevron-right"/>
+            </button>
+        </template>
         <meow-input
             type="text"
-            placeholder="验证码"
-            v-model="verify"
-            v-model:error="errors.verify"
-            @input="onVerifyInput"
+            placeholder="昵称"
+            v-model="nickname"
+            v-model:error="errors.nickname"
         />
-        <mb-button :disabled="verifyStage > 0" @click="sendVerify">{{
-            verifyStage === 1 ? "发送中……" :
-            verifyStage === 2 ? `已发送(${verifyDelay})` :
-            "发送验证码"
-        }}</mb-button>
-    </div>
-    <meow-input
-        type="password"
-        placeholder="密码"
-        v-model="password"
-        v-model:error="errors.password"
-        @keyup.enter="submit"
-    />
+        <meow-input
+            type="text"
+            placeholder="电子邮箱"
+            v-model="email"
+            v-model:error="errors.email"
+        />
+        <div class="sign-verify">
+            <meow-input
+                type="text"
+                placeholder="验证码"
+                v-model="verify"
+                v-model:error="errors.verify"
+                @input="onVerifyInput"
+            />
+            <mb-button :disabled="verifyStage > 0" @click="sendVerify">{{
+                verifyStage === 1 ? "发送中……" :
+                verifyStage === 2 ? `已发送(${verifyDelay})` :
+                "发送验证码"
+            }}</mb-button>
+        </div>
+        <meow-input
+            type="password"
+            placeholder="密码"
+            v-model="password"
+            v-model:error="errors.password"
+            @keyup.enter="submit"
+        />
+    </signer-view>
 </template>
 
 <style lang="scss" scoped>

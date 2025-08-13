@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    const signerStore = useSignerStore();
     const toastStore = useToastStore();
     const userStore = useUserStore();
 
@@ -67,17 +68,24 @@
 </script>
 
 <template>
-    <meow-input
-        type="text"
-        placeholder="昵称／UID／电子邮箱"
-        v-model="nickname"
-        v-model:error="errors.nickname"
-    />
-    <meow-input
-        type="password"
-        placeholder="密码"
-        v-model="password"
-        v-model:error="errors.password"
-        @keyup.enter="submit"
-    />
+    <signer-view title="登录">
+        <template #subtitle>
+            <button @click="signerStore.switchView(`logon`)">
+                没有账号？立即注册<iconify name="fa7-solid:chevron-right"/>
+            </button>
+        </template>
+        <meow-input
+            type="text"
+            placeholder="昵称／UID／电子邮箱"
+            v-model="nickname"
+            v-model:error="errors.nickname"
+        />
+        <meow-input
+            type="password"
+            placeholder="密码"
+            v-model="password"
+            v-model:error="errors.password"
+            @keyup.enter="submit"
+        />
+    </signer-view>
 </template>

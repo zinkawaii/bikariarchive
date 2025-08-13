@@ -20,35 +20,11 @@
 <template>
     <mb-dialog class="z-signer" @close="signerStore.close()">
         <div class="signer-innerworld"></div>
-        <div class="signer-wrapper">
-            <transition mode="out-in">
-                <div v-if="signerStore.currentView === `login`">
-                    <div class="signer-header">
-                        <h2 class="signer-title">登录</h2>
-                        <button class="signer-have" @click="signerStore.switchView(`logon`)">
-                            没有账号？立即注册<iconify name="fa7-solid:chevron-right"/>
-                        </button>
-                    </div>
-                    <signer-in />
-                </div>
-                <div v-else-if="signerStore.currentView === `logon`">
-                    <div class="signer-header">
-                        <h2 class="signer-title">注册</h2>
-                        <button class="signer-have" @click="signerStore.switchView(`login`)">
-                            已有账号，前往登录<iconify name="fa7-solid:chevron-right"/>
-                        </button>
-                    </div>
-                    <signer-on />
-                </div>
-                <div v-else-if="signerStore.currentView === `profile`">
-                    <div class="signer-header">
-                        <h2 class="signer-title">资料卡</h2>
-                        <span class="signer-have">{{ userStore.sign }}</span>
-                    </div>
-                    <signer-profile />
-                </div>
-            </transition>
-        </div>
+        <transition mode="out-in">
+            <signer-in v-if="signerStore.currentView === `login`"/>
+            <signer-on v-else-if="signerStore.currentView === `logon`" />
+            <signer-profile v-else-if="signerStore.currentView === `profile`" />
+        </transition>
     </mb-dialog>
 </template>
 
@@ -87,59 +63,6 @@
             --direction: bottom;
 
             height: 75%;
-        }
-    }
-
-    .signer-wrapper {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 288px;
-        padding: 32px;
-
-        > :where(.v-enter-active, .v-leave-active) {
-            transition: all 0.15s;
-        }
-
-        > :where(.v-enter-from, .v-leave-to) {
-            opacity: 0;
-        }
-    }
-
-    .signer-header {
-        display: grid;
-        justify-items: flex-end;
-        padding-bottom: 8px;
-    }
-
-    .signer-title {
-        position: relative;
-        margin-bottom: 16px;
-        font-size: 28px;
-
-        &::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            bottom: -8px;
-            width: calc(100% + 6px);
-            height: 3px;
-            border-radius: 3px;
-            background-color: var(--color-theme-dark);
-        }
-    }
-
-    .signer-have {
-        display: flex;
-        align-items: center;
-        gap: 2px;
-        font-size: 12px;
-        line-height: 1.5;
-        text-align: right;
-        color: var(--color-gray-50);
-
-        &:hover {
-            color: var(--color-theme-text);
         }
     }
 

@@ -31,15 +31,20 @@
 </script>
 
 <template>
-    <div class="signer-profile">
-        <span class="signer-nickname">{{ userStore.nickname }}</span>
-        <div class="signer-operator">
-            <mb-button @click="logout">退出登录</mb-button>
+    <signer-view title="资料卡">
+        <template #subtitle>
+            {{ userStore.sign }}
+        </template>
+        <div class="signer-profile">
+            <span class="signer-nickname">{{ userStore.nickname }}</span>
+            <div class="signer-operator">
+                <mb-button @click="logout">退出登录</mb-button>
+            </div>
+            <nuxt-link class="signer-avatar" :to="toSpace">
+                <user-avatar :src="userStore.avatar"/>
+            </nuxt-link>
         </div>
-        <nuxt-link class="signer-avatar" :to="toSpace">
-            <user-avatar :src="userStore.avatar"/>
-        </nuxt-link>
-    </div>
+    </signer-view>
 </template>
 
 <style lang="scss" scoped>
