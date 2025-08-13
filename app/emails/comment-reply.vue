@@ -7,5 +7,5 @@
 
 <template>
     <p>{{ content }}</p>
-    <p>https://bikari.top{{ path }}</p>
+    <p>https://archive.bikari.top{{ path }}</p>
 </template>

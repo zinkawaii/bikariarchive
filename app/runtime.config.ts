@@ -43,7 +43,7 @@ const client = {
         domain: "zinkawaii",
     },
     production: {
-        domain: "bikari.top",
+        domain: "archive.bikari.top",
     },
 };
 
