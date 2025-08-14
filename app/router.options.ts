@@ -3,6 +3,14 @@ import type { RouterConfig } from "@nuxt/schema";
 export default <RouterConfig> {
     routes: () => [
         {
+            name: "home",
+            path: "/",
+            component: () => import("~/pages/home.vue"),
+            meta: {
+                jumbotron: true,
+            },
+        },
+        {
             name: "about",
             path: "/about",
             component: () => import("~/pages/about.vue"),
@@ -68,15 +76,6 @@ export default <RouterConfig> {
             component: () => import("~/pages/friend.vue"),
             meta: {
                 comment: true,
-            },
-        },
-        {
-            name: "home",
-            path: "/home",
-            alias: "/",
-            component: () => import("~/pages/home.vue"),
-            meta: {
-                jumbotron: true,
             },
         },
         {

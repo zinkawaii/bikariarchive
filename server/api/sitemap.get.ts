@@ -5,12 +5,12 @@ export default defineSitemapEventHandler(() => {
     const config = useRuntimeConfig();
 
     return [
+        "/",
         "/about",
         "/borrowing",
         "/chest",
         "/compact",
         "/friend",
-        "/home",
         "/intel",
         "/search",
         ...config.public.totalYears.map((year) => `/update/${year}`),
