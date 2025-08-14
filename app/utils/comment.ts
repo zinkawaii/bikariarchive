@@ -16,9 +16,7 @@ function code() {
     return async (tree: hast.Root) => {
         const languages: string[] = [];
         visit(tree, "code", (node: mdast.Code) => {
-            if (node.lang) {
-                languages.push(node.lang);
-            }
+            languages.push(node.lang ??= "txt");
         });
         if (languages.length) {
             const shikiStore = useShikiStore();
