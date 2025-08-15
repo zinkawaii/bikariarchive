@@ -36,6 +36,10 @@
     --rounded-circle         : 100%;
     --rounded-full           : calc(1px * infinity);
     --size-min-width         : 320px;
+
+    @media (resolution < 1.5x) {
+        --font-primary: system-ui, sans-serif;
+    }
 }
 
 [theme="hatsusora"] {
