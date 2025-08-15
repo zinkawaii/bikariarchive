@@ -36,7 +36,7 @@
         padding: 16px;
         border-radius: 8px;
         box-shadow: var(--box-shadow);
-        background: linear-gradient(to left, var(--color-theme), var(--color-theme-dark));
+        background-image: linear-gradient(to left, var(--color-theme), var(--color-theme-dark));
         color: white;
         transition: all 0.4s;
 

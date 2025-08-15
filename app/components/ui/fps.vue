@@ -23,8 +23,8 @@
         position: fixed;
         top: 0;
         left: 2px;
-        background: linear-gradient(120deg, rgb(240 144 255), rgb(240 88 104));
         background-clip: text;
+        background-image: linear-gradient(120deg, rgb(240 144 255), rgb(240 88 104));
         font-size: 12px;
         font-weight: bold;
         color: transparent;

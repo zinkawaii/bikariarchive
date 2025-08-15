@@ -58,7 +58,7 @@
     .z-jumbotron {
         height: $h;
         margin-bottom: calc($h * (var(--jumbotron-percent) - 1));
-        mask: linear-gradient(black calc(100% * var(--jumbotron-percent)), transparent 0);
+        mask-image: linear-gradient(black calc(100% * var(--jumbotron-percent)), transparent 0);
 
         &:where(.v-enter-active, .v-leave-active) {
             transition: --jumbotron-percent 0.4s;
@@ -83,7 +83,7 @@
         position: absolute;
         opacity: 0;
         inset: ($h - 14svh) 0 (100svh - $h);
-        background: linear-gradient(transparent, black);
+        background-image: linear-gradient(transparent, black);
         font-size: 64px;
         color: white;
         transition: opacity 0.4s;

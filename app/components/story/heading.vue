@@ -33,7 +33,7 @@
             content: attr(modifier);
             opacity: 0.5;
             margin-bottom: -32px;
-            mask: linear-gradient(black 33%, transparent);
+            mask-image: linear-gradient(black 33%, transparent);
             font-size: 64px;
             text-wrap: nowrap;
             color: transparent;

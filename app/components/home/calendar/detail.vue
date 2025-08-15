@@ -97,7 +97,7 @@
         $h: 28px;
 
         margin: auto;
-        background:
+        background-image:
             repeating-linear-gradient(
                 to bottom,
                 transparent 0,

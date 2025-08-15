@@ -93,7 +93,7 @@
         margin: 4px;
         padding-inline: 12px;
         border-radius: 12px;
-        background: var(--color-theme);
+        background-color: var(--color-theme);
         font-family: var(--font-smooth);
         font-size: 1rem;
         line-height: 28px;
@@ -157,7 +157,7 @@
         position: absolute;
         inset: auto 0 0;
         height: 2em;
-        background: linear-gradient(to bottom, transparent, var(--color-background));
+        background-image: linear-gradient(to top, var(--color-background) 4px, transparent);
 
         > .iconify {
             animation: expand-flash 2s infinite;

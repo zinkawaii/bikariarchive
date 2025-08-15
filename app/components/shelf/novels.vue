@@ -99,7 +99,7 @@
     .shelf-novels {
         overflow: hidden;
         padding-left: calc(50% - 72px);
-        mask: linear-gradient(to right, transparent, white 2rem, white calc(100% - 2rem), transparent);
+        mask-image: linear-gradient(to right, transparent, white 2rem, white calc(100% - 2rem), transparent);
         touch-action: none;
         user-select: none;
     }

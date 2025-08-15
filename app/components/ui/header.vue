@@ -132,7 +132,7 @@
         min-width: var(--size-min-width);
         padding-inline: 16px;
         box-shadow: var(--box-shadow-darker);
-        background:
+        background-image:
             linear-gradient(
                 to right,
                 rgb(240 188 255 / 50%),
@@ -326,7 +326,7 @@
         > button {
             display: grid;
             place-items: center;
-            background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
+            background-image: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
             color: white;
         }
     }

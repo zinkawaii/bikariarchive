@@ -257,7 +257,7 @@
         left: 112px;
         height: $h;
         padding-inline: $hh $pr;
-        background: linear-gradient(to right, rgb(35 31 45), transparent);
+        background-image: linear-gradient(to right, rgb(35 31 45), transparent);
         clip-path:
             polygon(
                 $hh 0,

@@ -21,7 +21,7 @@
     .z-loader {
         position: fixed;
         inset: 0;
-        background: linear-gradient(135deg, rgb(153 210 228), rgb(255 212 218));
+        background-image: linear-gradient(135deg, rgb(153 210 228), rgb(255 212 218));
 
         &.v-leave-active {
             transition: opacity 0.2s ease;

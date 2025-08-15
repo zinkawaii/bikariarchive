@@ -17,7 +17,7 @@
         padding: 16px 32px;
         border-radius: 16px;
         box-shadow: var(--box-shadow);
-        background: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
+        background-image: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
         font-size: 14px;
         line-height: 24px;
         text-align: center;
