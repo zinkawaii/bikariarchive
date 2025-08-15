@@ -108,8 +108,8 @@
     }
 
     .banner-nickname {
+        font-family: var(--font-smooth);
         font-size: 18px;
-        font-weight: bold;
         text-shadow: var(--text-shadow);
         color: white;
     }

@@ -148,7 +148,6 @@
         &.active {
             border-color: var(--color-theme-dark);
             background-color: var(--color-theme-dark);
-            font-weight: bold;
             color: white;
         }
     }

@@ -89,7 +89,7 @@
                 <div class="azur-block azur-data">
                     <div class="azur-block-title">
                         <span reset>数据</span>
-                        <span reset>NOVEL DATA</span>
+                        <span reset>DATA</span>
                     </div>
                     <div class="azur-block-wrapper">
                     </div>
@@ -311,7 +311,6 @@
 
         > :first-child {
             font-size: 28px;
-            font-weight: bold;
             letter-spacing: 1px;
             text-shadow: 0 0 16px var(--azur-blue-1);
             color: var(--azur-text-white);
@@ -411,10 +410,8 @@
         gap: 4px;
         position: relative;
         width: fit-content;
-        height: 22px;
         min-width: 112px;
         padding-inline: 6px 14px;
-        font-weight: bold;
         color: var(--azur-text-black);
 
         &::before {
@@ -427,7 +424,7 @@
         &::after {
             content: "";
             position: absolute;
-            right: -19px;
+            inset: 0 -19px 0 auto;
             width: 13px;
             height: inherit;
             background-color: var(--azur-blue-2);
@@ -435,14 +432,14 @@
 
         > :last-child {
             font-size: 8px;
-            letter-spacing: 1px;
-            line-height: 1.75;
+            letter-spacing: 0.1em;
+            line-height: 1.8;
         }
 
         .azur-body-bottom & {
             $w: 26px;
 
-            gap: 10px;
+            gap: 9px;
             padding-right: 21px;
 
             &::before {

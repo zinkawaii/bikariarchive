@@ -135,7 +135,6 @@
                 margin-block: 0.2em;
 
                 &::marker {
-                    font-weight: bold;
                     color: var(--color-theme-text);
                 }
             }

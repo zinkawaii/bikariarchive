@@ -55,7 +55,6 @@
     .novel-adjacent-top {
         display: flex;
         align-items: center;
-        font-weight: bold;
         color: var(--color-theme-text);
 
         &:first-of-type {

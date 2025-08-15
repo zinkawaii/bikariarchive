@@ -243,7 +243,6 @@
 
     .calendar-month {
         font-size: 16px;
-        font-weight: bold;
     }
 
     .calendar-week, .calendar-days {
@@ -274,19 +273,16 @@
         }
 
         &.is-special {
-            font-weight: bold;
             color: var(--color-theme-text);
         }
 
         &.is-checked {
             background-color: var(--color-theme-dark);
-            font-weight: bold;
             color: white;
         }
 
         > .lunar {
             font-size: 12px;
-            font-weight: normal;
         }
     }
 </style>

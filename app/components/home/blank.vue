@@ -39,7 +39,6 @@
     .blank-title {
         border-radius: 12px;
         background-color: var(--color-theme);
-        font-weight: bold;
         line-height: 28px;
         text-align: center;
     }

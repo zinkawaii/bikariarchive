@@ -73,7 +73,6 @@
     }
 
     .shelf-label {
-        font-weight: bold;
         color: var(--color-theme-text);
     }
 

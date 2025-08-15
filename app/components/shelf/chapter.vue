@@ -53,7 +53,6 @@
         column-gap: 8px;
         padding-top: 8px;
         border-bottom: 1px dashed var(--color-border-light);
-        font-size: 14px;
         counter-increment: chapter-order;
         break-inside: avoid;
 
@@ -71,10 +70,6 @@
             font-weight: bold;
             color: var(--color-info);
         }
-    }
-
-    .chapter-title {
-        font-size: 1rem;
     }
 
     .chapter-tags {
