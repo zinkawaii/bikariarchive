@@ -4,8 +4,8 @@
     const lightUrl = ref("");
     const darkUrl = Zin.image("/garden/background/dark.webp", { wrap: true });
 
-    settingStore.listen("theme", () => {
-        lightUrl.value = Zin.image(`/garden/background/${settingStore.themeName}.webp`, { wrap: true });
+    settingStore.listen("theme", (name) => {
+        lightUrl.value = Zin.image(`/garden/background/${name}.webp`, { wrap: true });
     });
 </script>
 

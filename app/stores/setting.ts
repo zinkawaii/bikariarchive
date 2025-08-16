@@ -57,7 +57,13 @@ export const useSettingStore = defineStore("setting", () => {
     }>();
 
     //监听
-    function listen<K extends SettingField>(key: K, handler: WatchCallback<Setting[K]>) {
+    function listen<
+        T extends Omit<Setting, "theme" | "dark-mode"> & {
+            theme: string;
+            "dark-mode": boolean;
+        },
+        K extends keyof T & string,
+    >(key: K, handler: WatchCallback<T[K]>) {
         const handlers = mapping.get(key)?.handlers ?? new Set();
         handlers.add(handler);
 
@@ -66,7 +72,11 @@ export const useSettingStore = defineStore("setting", () => {
         });
 
         if (!mapping.has(key)) {
-            const { trigger } = watchTriggerable(() => setting.value[key], (newVal, oldVal, onCleanup) => {
+            const source =
+                key === "dark-mode" ? isDarkMode :
+                key === "theme" ? themeName :
+                () => setting.value[key as SettingField];
+            const { trigger } = watchTriggerable(source, (newVal, oldVal, onCleanup) => {
                 if (oldVal !== void 0) {
                     document.startViewTransition?.(fn) ?? fn();
                 }

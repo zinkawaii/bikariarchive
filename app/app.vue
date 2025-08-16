@@ -27,13 +27,13 @@
     });
 
     //主题颜色
-    settingStore.listen("theme", () => {
-        theme.value = settingStore.themeName;
+    settingStore.listen("theme", (val) => {
+        theme.value = val;
     });
 
     //夜间模式
-    settingStore.listen("dark-mode", () => {
-        dark.value = settingStore.isDarkMode;
+    settingStore.listen("dark-mode", (val) => {
+        dark.value = val;
     });
 
     onMounted(() => {
