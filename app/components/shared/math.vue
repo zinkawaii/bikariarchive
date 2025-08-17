@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { renderToString } from "katex";
+    import css from "katex/dist/katex.min.css?url";
 
     const props = withDefaults(defineProps<{
         type: "inline" | "block";
@@ -10,7 +10,7 @@
 
     useHead({
         link: [
-            { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" },
+            { rel: "stylesheet", href: css },
         ],
     });
 
@@ -30,7 +30,9 @@
         ],
     });
 
-    const code = computed(() => {
+    const code = computedAsync(async () => {
+        const { renderToString } = await import("katex");
+
         return renderToString(props.raw, {
             displayMode: props.type === "block",
             errorColor: "var(--color-danger)",
@@ -42,7 +44,7 @@
                 return "warn";
             },
         });
-    });
+    }, `<span class="katex">${props.raw}</span>`, { lazy: true });
 
     function render() {
         if (props.type === "block") {
