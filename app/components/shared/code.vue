@@ -30,18 +30,17 @@
     ];
 
     //代码
-    const code = ref(escapeHtml(props.raw));
-    watch(props, async () => {
+    const code = computedAsync(async () => {
+        const { lang, meta, raw } = props;
         const shiki = await shikiStore.load();
-        await shikiStore.loadLang(props.lang);
-        code.value = shiki.codeToHtml(props.raw, {
+        await shikiStore.loadLang(lang);
+
+        return shiki.codeToHtml(raw, {
             ...shikiStore.options,
-            lang: props.lang,
-            meta: { __raw: props.meta },
+            lang,
+            meta: { __raw: meta },
         });
-    }, {
-        immediate: import.meta.browser,
-    });
+    }, escapeHtml(props.raw), { lazy: true });
 
     //行数
     const lines = computed(() => {
@@ -57,7 +56,7 @@
 <template>
     <figure class="mb-code">
         <figcaption class="code-header">
-            <span class="code-lang text-uppercase">{{ lang }}</span>
+            <span class="text-uppercase">{{ lang }}</span>
             <button v-for="{ icon, action } in actions" class="code-action" @click="action">
                 <iconify :name="toValue(icon)"/>
             </button>
@@ -100,14 +99,14 @@
         color: var(--color-theme-text);
     }
 
-    .code-lang {
-        flex: 1;
-    }
-
     .code-action {
         display: grid;
         place-items: center;
         width: 1rem;
+
+        &:first-of-type {
+            margin-left: auto;
+        }
     }
 
     .code-area {

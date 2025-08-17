@@ -8,7 +8,7 @@
 </script>
 
 <template>
-    <div class="shelf-section">
+    <div class="shelf-combine">
         <fieldset class="shelf-fieldset">
             <legend class="content-h2">{{ novelInfo.title }}</legend>
             <intro-content :novel/>
@@ -25,18 +25,17 @@
 </template>
 
 <style lang="scss" scoped>
-    .shelf-section {
-        display: flex;
-        column-gap: 32px;
+    .shelf-combine {
+        display: grid;
+        gap: 16px 36px;
+        margin-block: 16px;
 
-        @include viewport("md") {
-            flex-direction: column;
+        @include viewport(">md") {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
     .shelf-fieldset {
-        flex: 1;
-        margin-top: 16px;
         padding-top: 8px;
         border-top: 1px solid var(--color-border);
 

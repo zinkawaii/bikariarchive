@@ -35,13 +35,13 @@
 
 <template>
     <meow-widget ref="root" class="comment-area">
-        <div class="comment-title">
+        <hgroup class="comment-title">
             <h2>评论<span class="comment-count">{{ totalCount }}</span></h2>
             <meow-button
                 icon="fa7-solid:comment-dots"
                 @click="commentPanelStore.post()"
             >发表评论</meow-button>
-        </div>
+        </hgroup>
         <mb-skeleton v-if="isEmpty"/>
         <comment-item v-for="item in comments" :key="item.id" :data="item"/>
         <mb-pagination v-if="mainCount" :total="mainCount" scroll-target=".comment-area" v-model="page"/>

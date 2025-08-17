@@ -34,13 +34,7 @@
         sizes: 32,
     });
 
-    const start = computed(() => (page.value - 1) * sizes.value || void 0);
-
-    useAdoptedStyleSheet/* CSS */`
-        .shelf-chapters {
-            counter-reset: chapter-order ${start};
-        }
-    `;
+    const start = computed(() => (page.value - 1) * sizes.value);
 </script>
 
 <template>
@@ -50,7 +44,11 @@
             <span>{{ value }}</span>
         </div>
     </div>
-    <ol class="shelf-chapters" :start>
+    <ol
+        class="shelf-chapters"
+        :style="{ counterReset: `chapter-order ${start}` }"
+        :start
+    >
         <shelf-chapter v-for="art in paginatedList" :key="art.index" :art/>
     </ol>
     <mb-pagination v-if="total > sizes" class="shelf-pagination" :total :sizes v-model="page"/>

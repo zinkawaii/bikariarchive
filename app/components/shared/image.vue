@@ -111,8 +111,8 @@
             :loading
             @click="viewable && open()"
         />
-        <transition @enter="displayCharacters">
-            <div v-if="character && isLoaded" ref="char" class="image-characters">
+        <transition v-if="character" @enter="displayCharacters">
+            <div v-if="isLoaded" ref="char" class="image-characters">
                 <character-tag v-for="name in characters" :name/>
             </div>
         </transition>

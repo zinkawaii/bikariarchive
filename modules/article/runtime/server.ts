@@ -18,8 +18,7 @@ export default defineNitroPlugin(async () => {
     }
 
     if (import.meta.dev) {
-        const watcher = chokidar.watch(list, {});
-        watcher.on("change", update);
+        chokidar.watch(list).on("change", update);
     }
 });
 

@@ -37,7 +37,7 @@
 
         margin-top: 8px;
 
-        @container entry-main (width < 512px) {
+        @container entry-primary (width < 512px) {
             flex-direction: column;
         }
     }

@@ -13,7 +13,7 @@
 <template>
     <button class="meow-button">
         <iconify class="button-icon" :name="icon"/>
-        <span class="button-title" :code><slot></slot></span>
+        <span class="button-title" :data-code="code"><slot></slot></span>
     </button>
 </template>
 
@@ -47,7 +47,7 @@
         color: var(--color-theme-text);
 
         &::before {
-            content: attr(code);
+            content: attr(data-code);
             position: absolute;
             top: calc(-2px - 1em);
             right: 0;

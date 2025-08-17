@@ -35,18 +35,17 @@
         display: flex;
         align-items: flex-end;
         gap: 8px;
-        position: relative;
         height: 32px;
     }
 
     .update-year {
-        position: relative;
         width: 72px;
         margin-left: 8px;
         font-family: var(--font-smooth);
         font-size: 28px;
         text-align: center;
         transition: all 0.25s;
+        isolation: isolate;
 
         &:not(.is-checked) {
             opacity: 0.5;

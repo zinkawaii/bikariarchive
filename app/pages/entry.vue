@@ -45,8 +45,8 @@
             class="entry-article"
             @vue:mounted="hooks.callHook(`article:rendered`, `.entry-article`)"
         >
-            <section class="entry-section">
-                <div class="entry-main">
+            <section class="entry-leading">
+                <div class="entry-primary">
                     <novel-article as="div" :body="data.summary"/>
                     <entry-appearance v-if="data.appearance" v-bind="data.appearance"/>
                     <entry-brief v-if="data.brief" v-bind="data.brief"/>
@@ -73,24 +73,34 @@
         margin-top: 24px;
     }
 
-    .entry-section {
-        &:first-child {
-            display: flex;
-            gap: 16px;
-            margin-top: 8px;
+    .entry-leading {
+        display: flex;
+        gap: 16px;
+        margin-top: 8px;
 
-            @include viewport("md") {
-                flex-direction: column;
-            }
+        @include viewport("md") {
+            flex-direction: column;
         }
+    }
 
-        :deep(> h2) {
+    .entry-primary {
+        container: entry-primary / inline-size;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+</style>
+
+<style lang="scss">
+    .entry-section {
+        > h2 {
             margin-bottom: 8px;
             padding-bottom: 8px;
             border-bottom: 1px solid var(--color-border);
         }
 
-        :deep(h3) {
+        h3 {
             display: inline-block;
             margin: 8px 0 4px 12px;
 
@@ -101,13 +111,5 @@
                 text-align: center;
             }
         }
-    }
-
-    .entry-main {
-        container: entry-main / inline-size;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: space-between;
     }
 </style>

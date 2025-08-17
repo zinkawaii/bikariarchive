@@ -30,7 +30,7 @@ const client = {
         title: "微光档案",
         author: "山吹色御守",
         description: "虚幻的幸福",
-        summary: "微かの力を尽くして、光の届いた彼方へ",
+        summary: "微かな力を尽くして、光の届いた彼方へ",
         avatar: "/garden/avatar/maestrale.webp",
         favicon: "/garden/favicon.svg",
         cdnUrl: "https://cdn.bikari.top",

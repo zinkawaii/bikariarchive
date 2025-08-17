@@ -150,6 +150,7 @@
 
     .comment-sanitized {
         color: var(--color-text-disabled);
+        user-select: none;
     }
 
     .comment-info {

@@ -11,7 +11,7 @@
 </script>
 
 <template>
-    <h2 :id class="story-heading" :modifier>
+    <h2 :id class="story-heading" :data-modifier="modifier">
         <slot></slot>
     </h2>
 </template>
@@ -30,7 +30,7 @@
         animation-timeline: view();
 
         &::before {
-            content: attr(modifier);
+            content: attr(data-modifier);
             opacity: 0.5;
             margin-bottom: -32px;
             mask-image: linear-gradient(black 33%, transparent);

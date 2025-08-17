@@ -19,7 +19,8 @@ export function useAdoptedStyleSheet(
         }, "");
 
         styleSheet.replaceSync(`:root {} ${css}`);
-        update(getVals());
+        const newVals = cssVars.map((source) => toValue(source));
+        update(newVals);
     });
 
     onUnmounted(() => {
@@ -29,13 +30,9 @@ export function useAdoptedStyleSheet(
         }
     });
 
-    watch(getVals, update, {
+    watch(cssVars, update, {
         flush: "sync",
     });
-
-    function getVals() {
-        return entries.map(([, source]) => toValue(source));
-    }
 
     function update(newVals: unknown[]) {
         styleSheet.deleteRule(0);
