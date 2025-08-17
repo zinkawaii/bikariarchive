@@ -22,10 +22,6 @@ export const useShikiStore = defineStore("shiki", () => {
         ],
     };
 
-    onMounted(() => {
-        shiki?.dispose();
-    });
-
     async function load() {
         promise ??= loadShiki();
         shiki ??= await promise;
@@ -33,15 +29,21 @@ export const useShikiStore = defineStore("shiki", () => {
     }
 
     async function loadShiki() {
-        const { createHighlighterCore } = await import("shiki/core");
-        const { createJavaScriptRegexEngine } = await import("shiki/engine-javascript.mjs");
+        const [
+            { createHighlighterCore },
+            { createJavaScriptRegexEngine },
+            light,
+            dark,
+        ] = await Promise.all([
+            import("shiki/core"),
+            import("shiki/engine-javascript.mjs"),
+            import("shiki/themes/catppuccin-latte.mjs"),
+            import("shiki/themes/one-dark-pro.mjs"),
+        ]);
 
         return await createHighlighterCore({
             engine: createJavaScriptRegexEngine(),
-            themes: [
-                await import("shiki/themes/catppuccin-latte.mjs"),
-                await import("shiki/themes/one-dark-pro.mjs"),
-            ],
+            themes: [light, dark],
         });
     }
 
