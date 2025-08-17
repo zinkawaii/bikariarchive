@@ -7,12 +7,13 @@
 
     const config = useRuntimeConfig();
 
-    const schema = `export default {
+    const schema = `export default defineFriend({
   title: "${config.public.title}",
   link: "https://${config.public.domain}",
   icon: "https://${config.public.domain}${config.public.favicon}",
+  nickname: "${config.public.author}",
   description: "${config.public.description}",
-};`;
+});`;
 </script>
 
 <template>
