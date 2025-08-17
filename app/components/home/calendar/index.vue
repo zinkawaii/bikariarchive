@@ -261,7 +261,7 @@
     .calendar-day {
         display: grid;
         padding: 4px;
-        font-feature-settings: "tnum";
+        font-variant-numeric: tabular-nums;
 
         &:hover {
             box-shadow: 0 0 0 1px var(--color-theme-dark) inset;

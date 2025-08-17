@@ -44,7 +44,7 @@
 
         &::before {
             content: "#" counter(volume-order) " ";
-            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
             font-size: 14px;
             font-style: italic;
             color: var(--color-info);

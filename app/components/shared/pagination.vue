@@ -105,6 +105,7 @@
         display: flex;
         justify-content: center;
         font-size: 14px;
+        font-variant-numeric: tabular-nums;
         color: var(--color-info);
         user-select: none;
     }
