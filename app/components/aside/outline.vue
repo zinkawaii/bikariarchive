@@ -22,7 +22,7 @@
     const headerOffsets = computedWithControl(() => [flatHeaders.value, height.value], () => {
         return flatHeaders.value?.map(({ element, link }) => ({
             link,
-            top: getPosition(element).top,
+            top: Math.floor(getPosition(element).top),
         })) ?? [];
     });
 
