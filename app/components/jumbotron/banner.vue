@@ -4,7 +4,7 @@
     const duration = 400;
     const titleDelay = 80;
     const summaryDelay = 20;
-    const { title, summary } = config.public.jumbotron;
+    const { title, summary } = config.public;
     const titleChars = [...title];
     const summaryChars = ref<string[]>([]);
     const [isMotion, toggleMotion] = useToggle(true);
@@ -27,7 +27,11 @@
     <div class="jumbo-banner">
         <h1 class="jumbo-title">
             <template v-if="isMotion">
-                <span v-for="(char, i) in titleChars" class="jumbo-char" :style="{ animationDelay: `${i * titleDelay}ms` }">{{ char }}</span>
+                <span
+                    v-for="(char, i) in titleChars"
+                    class="jumbo-char"
+                    :style="{ animationDelay: `${i * titleDelay}ms` }"
+                >{{ char }}</span>
             </template>
             <template v-else>{{ title }}</template>
         </h1>
@@ -62,10 +66,6 @@
         }
     }
 
-    .jumbo-title, .jumbo-phrase {
-        line-height: 1.25;
-    }
-
     .jumbo-title {
         font-size: 72px;
 
@@ -81,7 +81,8 @@
     }
 
     .jumbo-phrase {
-        margin-top: 0.25em;
+        height: 1lh;
+        margin-bottom: 0.5em;
 
         > .jumbo-char {
             animation-name: jumbo-char-jump;

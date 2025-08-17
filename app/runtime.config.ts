@@ -30,12 +30,9 @@ const client = {
         title: "微光档案",
         author: "山吹色御守",
         description: "虚幻的幸福",
+        summary: "微かの力を尽くして、光の届いた彼方へ",
         avatar: "/garden/avatar/maestrale.webp",
         favicon: "/garden/favicon.svg",
-        jumbotron: {
-            title: "微光茶馆",
-            summary: "微かの力を尽くして、光の届いた彼方へ",
-        },
         cdnUrl: "https://cdn.bikari.top",
         totalYears: Array.from({ length: new Date().getFullYear() - 2022 }, (_, i) => 2023 + i).reverse(),
     },

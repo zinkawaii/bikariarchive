@@ -1,6 +1,9 @@
 <script lang="ts" setup>
+    const config = useRuntimeConfig();
+
     useHead({
-        title: "主页",
+        title: config.public.summary,
+        titleTemplate: "%site.name ~ %s ~",
     });
 </script>
 
