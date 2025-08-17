@@ -31,7 +31,7 @@
     --box-shadow-darker      : 0 0 8px rgb(0 0 0 / 32%);
     --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%);
     --font-primary           : "Inter", "PingFang SC", "Noto Sans SC", sans-serif;
-    --font-monospace         : "JetBrains Mono", monospace, var(--font-primary);
+    --font-monospace         : "JetBrains Mono", var(--font-primary);
     --font-smooth            : "ChillRoundF", var(--font-primary);
     --rounded-circle         : 100%;
     --rounded-full           : calc(1px * infinity);
