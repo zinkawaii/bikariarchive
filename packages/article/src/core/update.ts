@@ -3,8 +3,8 @@ import { createKerria, useSource } from "kerria";
 import { parseUpdate } from "../remark";
 import type { JUpdate } from "./types";
 
-const TITLE_REGEX = /^(.+) \[v(.+)\]$/;
-const PREFIX_REGEX = /^([-\w]+)(?:\(([-\w]+)\))?:/;
+const titleRE = /^(.+) \[v(.+)\]$/;
+const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
 export default createKerria("Update", () => {
     useSource(0, {
@@ -38,7 +38,7 @@ export default createKerria("Update", () => {
                         continue;
                     }
 
-                    const match = firstNode.value.match(TITLE_REGEX);
+                    const match = firstNode.value.match(titleRE);
                     if (!match) {
                         continue;
                     }
@@ -56,7 +56,7 @@ export default createKerria("Update", () => {
                         continue;
                     }
 
-                    const match = firstNode.value.match(PREFIX_REGEX);
+                    const match = firstNode.value.match(prefixRE);
                     if (!match) {
                         continue;
                     }

@@ -12,7 +12,7 @@ interface Emoji extends Parent {
     type: "emoji";
 }
 
-const ICONIFY_REGEX = / ?i-[\w-]+:[\w-]+ ?/g;
+const iconifyRE = / ?i-[\w-]+:[\w-]+ ?/g;
 
 export default function(this: Processor) {
     return (tree: Root) => {
@@ -22,7 +22,7 @@ export default function(this: Processor) {
             }
 
             const indices: [number, string][] = [];
-            const matches = node.value.matchAll(ICONIFY_REGEX);
+            const matches = node.value.matchAll(iconifyRE);
             for (const match of matches) {
                 indices.push([match.index, match[0]]);
             }

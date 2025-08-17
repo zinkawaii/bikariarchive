@@ -17,7 +17,7 @@
         required: true,
     });
 
-    const NUMBER_REGEX = /^([-+]?\d*)(\.\d*)?$/;
+    const numberRE = /^([-+]?\d*)(\.\d*)?$/;
 
     //组件根元素
     const displayValue = ref("");
@@ -38,7 +38,7 @@
 
     //输入时
     function input() {
-        const match = displayValue.value.match(NUMBER_REGEX);
+        const match = displayValue.value.match(numberRE);
         if (!match) {
             toggleValid(false);
             return;
@@ -64,7 +64,7 @@
 
     //失焦时
     function blur() {
-        const match = oldDisplayValue.match(NUMBER_REGEX)!;
+        const match = oldDisplayValue.match(numberRE)!;
         const i = Number(match[1]) || "0";
 
         let d = match[2] || ".";
