@@ -32,41 +32,33 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
     res.body = await readArticle(art);
 
     //获取阅读量
-    const qRecords = await ReadRecordModel.find({
-        novel,
-        index,
-    }, "ip time");
+    const qCounts = await ReadRecordModel.aggregate([
+        {
+            $match: {
+                novel,
+                index,
+            },
+        },
+        {
+            $group: {
+                _id: {
+                    ip: "$ip",
+                    window: {
+                        $dateTrunc: {
+                            date: "$time",
+                            unit: "hour",
+                            binSize: 8,
+                        },
+                    },
+                },
+            },
+        },
+        {
+            $count: "count",
+        },
+    ]);
 
-    //处理阅读量
-    const interval = 8 * 60 * 60 * 1000;
-    const records: Record<string, {
-        count: number;
-        time: number;
-    }> = {};
-    for (const { ip, time } of qRecords) {
-        if (ip in records) {
-            const next = time.getTime();
-            const last = records[ip].time;
-
-            //同IP下阅读间隔大于8小时
-            if (next - last >= interval) {
-                records[ip].count++;
-                records[ip].time = next;
-            }
-        }
-        else {
-            records[ip] = {
-                count: 1,
-                time: time.getTime(),
-            };
-        }
-    }
-
-    //统计阅读量
-    res.readCount = 0;
-    for (const ip in records) {
-        res.readCount += records[ip].count;
-    }
+    res.readCount = qCounts.length ? qCounts[0].count : 0;
 
     //生成代币
     const token = {
