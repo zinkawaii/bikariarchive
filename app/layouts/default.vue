@@ -7,7 +7,6 @@
     <z-background />
     <z-header />
     <z-toolbar />
-    <z-maestrale />
     <div
         class="sotomi"
         :class="{
@@ -106,10 +105,6 @@
 
     .z-toolbar {
         z-index: 128;
-    }
-
-    .z-maestrale {
-        z-index: 256;
     }
 
     .toast-area {
