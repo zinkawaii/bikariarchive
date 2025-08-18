@@ -85,6 +85,7 @@
         </aside-widget>
         <div class="aside-sticky">
             <aside-unified v-if="route.meta.catalog"/>
+            <aside-statistics />
             <aside-widget title="最近更新">
                 <template #icon>
                     <iconify name="fa7-solid:clock-rotate-left"/>
@@ -108,7 +109,7 @@
         @include viewport("lg") {
             display: grid;
             grid-template-columns: 256px;
-            justify-content: center;
+            place-content: start center;
             position: fixed;
             overflow: auto;
             inset: 80px 0 0;
