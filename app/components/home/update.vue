@@ -13,9 +13,10 @@
 
         @include viewport("sm") {
             width: 100%;
+            padding-block: 0;
 
             > .recent-article {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 column-gap: 16px;
             }
         }

@@ -34,9 +34,11 @@
             --direction: row-reverse;
         }
 
-        &:hover {
-            background-color: var(--color-background);
-            translate: 0 -4px;
+        @include viewport(">sm") {
+            &:hover {
+                background-color: var(--color-background);
+                translate: 0 -4px;
+            }
         }
 
         @include viewport("sm") {

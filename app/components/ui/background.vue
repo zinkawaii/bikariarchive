@@ -15,16 +15,23 @@
 
 <style lang="scss" scoped>
     .z-background {
+        display: grid;
         position: fixed;
         inset: 0;
         height: 100lvh;
         background-image: v-bind("lightUrl");
         background-position: center;
-        background-repeat: no-repeat;
         background-size: cover;
 
         @include dark {
             background-image: v-bind("darkUrl");
+        }
+
+        @include viewport("sm") {
+            &::after {
+                content: "";
+                background-color: var(--color-background-alpha);
+            }
         }
     }
 </style>

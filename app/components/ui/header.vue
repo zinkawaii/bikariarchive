@@ -146,7 +146,7 @@
 
     $title: 298px;
     $nav: 60px;
-    $count: 6;
+    $count: 7;
     $padding: 16px * 2;
     $nav-full: $nav * $count;
     $max: $title + $nav-full + $padding;

@@ -46,14 +46,22 @@
 
             flex-direction: column;
         }
+
+        @include viewport("sm") {
+            --sotomi-padding: 0;
+
+            .z-footer, > .z-sidebar {
+                display: none;
+            }
+        }
     }
 
     .wide-page {
-        .nakami {
+        > .nakami {
             max-width: 1308px;
         }
 
-        .z-sidebar {
+        > .z-sidebar {
             display: none;
         }
     }
@@ -61,11 +69,11 @@
     .full-page {
         --sotomi-padding: 0;
 
-        .nakami {
+        > .nakami {
             max-width: none;
         }
 
-        .z-footer, .z-sidebar {
+        .z-footer, > .z-sidebar {
             display: none;
         }
     }
@@ -81,6 +89,10 @@
 
         @include viewport("lg") {
             gap: 16px;
+        }
+
+        @include viewport("sm") {
+            gap: 0;
         }
     }
 

@@ -32,8 +32,8 @@
         align-items: center;
         justify-content: center;
         gap: 0.5em;
+        margin-top: 16px;
         font-size: 13px;
-        line-height: 32px;
         color: var(--color-gray-300);
 
         &::before, &::after {
@@ -45,7 +45,7 @@
     }
 
     .novel-copyright {
-        margin-top: 16px;
+        margin-top: 24px;
         padding: 4px;
         border: 1px solid var(--color-border-lighter);
         border-radius: 16px;

@@ -175,10 +175,12 @@ textarea {
     --meow-large: 2rem;
     --meow-medium: 1.5rem;
 
-    border: 2px solid var(--color-theme-dark);
-    border-radius: 16px;
-    box-shadow: var(--box-shadow);
-    background-color: var(--color-background-alpha);
+    @include viewport(">sm") {
+        border: 2px solid var(--color-theme-dark);
+        border-radius: 16px;
+        box-shadow: var(--box-shadow);
+        background-color: var(--color-background-alpha);
+    }
 
     @include viewport("lg") {
         --meow-large: 1.5rem;

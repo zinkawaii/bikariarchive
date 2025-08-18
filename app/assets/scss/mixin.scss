@@ -20,7 +20,7 @@ $breakpoints: (
 
     $value: map.get($breakpoints, $media);
 
-    @if list.index(("sm", "md"), $media) {
+    @if $media == "md" {
         @container main (width #{$operator} #{$value}) {
             @content;
         }

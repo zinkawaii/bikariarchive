@@ -216,6 +216,7 @@
     }
 
     .calendar-wrapper {
+        overflow: hidden;
         border-bottom-left-radius: 12px;
     }
 
