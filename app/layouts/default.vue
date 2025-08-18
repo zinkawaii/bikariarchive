@@ -6,7 +6,6 @@
     <z-jumbotron />
     <z-background />
     <z-header />
-    <z-navbar />
     <z-toolbar />
     <z-maestrale />
     <div
@@ -93,12 +92,8 @@
         z-index: 64;
     }
 
-    .z-navbar {
-        z-index: 128;
-    }
-
     .z-toolbar {
-        z-index: 256;
+        z-index: 128;
     }
 
     .z-maestrale {
