@@ -45,13 +45,11 @@
 </template>
 
 <style lang="scss" scoped>
-    $h: 72svh;
-
     .jumbo-banner {
         display: grid;
         align-content: center;
         position: absolute;
-        inset: 0 0 calc(100svh - var(--jumbotron-percent) * $h);
+        inset: 0;
         text-align: center;
         text-shadow: 0 0 12px rgb(0 0 0 / 66%);
         color: white;
@@ -61,8 +59,12 @@
     }
 
     @keyframes jumbo-parallax {
+        from {
+            translate: 0 calc(36svh * (var(--jumbotron-percent) - 1));
+        }
+
         to {
-            translate: 0 calc(var(--jumbotron-percent) * $h / 2);
+            translate: 0 36svh;
         }
     }
 

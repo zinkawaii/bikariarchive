@@ -56,6 +56,7 @@
     $h: 72svh;
 
     .z-jumbotron {
+        position: relative;
         height: $h;
         margin-bottom: calc($h * (var(--jumbotron-percent) - 1));
         mask-image: linear-gradient(black calc(100% * var(--jumbotron-percent)), transparent 0);
@@ -82,7 +83,7 @@
         display: flex;
         position: absolute;
         opacity: 0;
-        inset: ($h - 14svh) 0 (100svh - $h);
+        inset: calc(100% - 14svh) 0 0;
         background-image: linear-gradient(transparent, black);
         font-size: 64px;
         color: white;

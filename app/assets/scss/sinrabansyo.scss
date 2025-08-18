@@ -175,11 +175,18 @@ textarea {
     --meow-large: 2rem;
     --meow-medium: 1.5rem;
 
-    @include viewport(">sm") {
-        border: 2px solid var(--color-theme-dark);
-        border-radius: 16px;
-        box-shadow: var(--box-shadow);
-        background-color: var(--color-background-alpha);
+    border: 2px solid var(--color-theme-dark);
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-background-alpha);
+
+    @include viewport("sm") {
+        .nakami & {
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            background-color: transparent;
+        }
     }
 
     @include viewport("lg") {

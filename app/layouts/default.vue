@@ -47,9 +47,9 @@
         }
 
         @include viewport("sm") {
-            --sotomi-padding: 0;
+            --sotomi-padding: 0px;
 
-            .z-footer, > .z-sidebar {
+            .z-footer {
                 display: none;
             }
         }
@@ -66,7 +66,7 @@
     }
 
     .full-page {
-        --sotomi-padding: 0;
+        --sotomi-padding: 0px;
 
         > .nakami {
             max-width: none;
@@ -99,19 +99,15 @@
         z-index: -1;
     }
 
-    .z-header {
+    .z-sidebar {
+        z-index: 32;
+    }
+
+    .z-jumbotron, .z-header, .z-toolbar {
         z-index: 64;
     }
 
-    .z-toolbar {
-        z-index: 128;
-    }
-
-    .toast-area {
-        z-index: 768;
-    }
-
-    .z-fps {
+    .toast-area, .z-fps {
         z-index: 768;
     }
 
