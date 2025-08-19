@@ -36,13 +36,17 @@
 
     .home-complex {
         display: grid;
-        grid-gap: 16px;
         grid-template:
             "A B" auto
             "A C" 1fr / auto 1fr;
+        gap: 16px;
 
         @include viewport("sm") {
             grid-template: "A" "B" "C";
+
+            > .content-widget {
+                padding: 0 var(--meow-medium);
+            }
         }
     }
 </style>

@@ -27,6 +27,8 @@
     .home-tabular {
         display: flex;
         flex-direction: var(--direction);
+        gap: 8px;
+        padding: 8px;
         border-block: none;
         transition: all 0.25s;
 
@@ -43,13 +45,17 @@
 
         @include viewport("sm") {
             flex-direction: column;
+            padding-inline: var(--meow-medium);
+
+            & + & {
+                margin-top: 16px;
+            }
         }
     }
 
     .tabular-cover {
         flex: 0.75;
         height: 160px;
-        margin: 8px;
         border-radius: 8px;
 
         @include viewport("sm") {
@@ -62,12 +68,8 @@
         flex: 1;
         align-content: center;
         gap: 4px;
-        padding: 16px;
+        padding-inline: 8px;
         text-align: center;
-
-        @include viewport("sm") {
-            padding-top: 0;
-        }
     }
 
     .tabular-title {
@@ -86,7 +88,7 @@
     .tabular-thumb {
         width: 4px;
         height: 80px;
-        margin: auto 8px;
+        margin-block: auto;
         border-radius: var(--rounded-full);
         background-color: var(--color-theme-dark);
 

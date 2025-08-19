@@ -13,7 +13,6 @@
 
         @include viewport("sm") {
             width: 100%;
-            padding-block: 0;
 
             > .recent-article {
                 grid-template-columns: repeat(2, 1fr);

@@ -200,18 +200,19 @@
 <style lang="scss" scoped>
     $width: 48px;
     $gap: 2px;
+    $min: $width * 7 + $gap * 6;
 
     .home-calendar {
         display: grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: $min minmax($min, auto);
+        gap: 8px;
         overflow: auto;
+        padding: 4px;
         font-size: 14px;
         scroll-snap-type: x mandatory;
     }
 
     .calendar-wrapper, .calendar-detail {
-        min-width: $width * 7 + $gap * 6;
-        margin: 4px;
         scroll-snap-align: center;
     }
 

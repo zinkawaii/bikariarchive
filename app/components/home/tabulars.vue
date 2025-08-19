@@ -8,7 +8,7 @@
 <template>
     <home-tabular v-for="art in articles" :art/>
     <div class="home-pagination content-widget">
-        <mb-pagination :total scroll-target=".tabular-item" v-model="page"/>
+        <mb-pagination :total scroll-target=".home-tabular" v-model="page"/>
     </div>
 </template>
 
