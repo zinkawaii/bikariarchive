@@ -6,10 +6,10 @@
 
 <template>
     <section class="aside-widget content-widget">
-        <h2 v-if="title" class="aside-title content-h2">
+        <h3 v-if="title" class="aside-title">
             <slot name="icon"></slot>
             <span>{{ title }}</span>
-        </h2>
+        </h3>
         <slot></slot>
     </section>
 </template>

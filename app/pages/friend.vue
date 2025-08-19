@@ -21,11 +21,11 @@
         <novel-article class="text-small" variant="article">
             <div class="friend-list">
                 <nuxt-link v-for="item in jFriend" class="friend-item" :to="item.link" target="_blank">
-                    <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
-                    <div class="friend-info">
-                        <div class="friend-title content-h2 text-truncate">{{ item.title }}</div>
-                        <span class="friend-nickname">{{ item.nickname }}</span>
-                    </div>
+                    <hgroup class="friend-info">
+                        <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
+                        <h3 class="friend-title text-truncate">{{ item.title }}</h3>
+                        <span class="text-gray">{{ item.nickname }}</span>
+                    </hgroup>
                     <p class="friend-desc text-truncate">{{ item.description }}</p>
                 </nuxt-link>
             </div>
@@ -53,11 +53,6 @@
     }
 
     .friend-item {
-        display: grid;
-        grid-template:
-            "A B" auto
-            "C C" 1fr / auto 1fr;
-        gap: 0.75rem;
         padding: 1rem;
         border: 1px solid var(--color-border-lighter);
         border-radius: 1rem;
@@ -73,27 +68,32 @@
         }
     }
 
+    .friend-info {
+        display: grid;
+        grid-template:
+            "A B"
+            "A C" / auto 1fr;
+        column-gap: 0.75rem;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--color-border-lighter);
+        font-family: var(--font-smooth);
+    }
+
     .friend-icon {
+        grid-area: A;
         width: 3rem;
         aspect-ratio: 1;
         border-radius: 0.5rem;
     }
 
     .friend-title {
+        margin-block: 0;
+        line-height: 1.25;
         transition: color 0.25s;
     }
 
-    .friend-nickname {
-        grid-area: C;
-        font-family: var(--font-smooth);
-        line-height: 1.5;
-        color: var(--color-info);
-    }
-
     .friend-desc {
-        grid-area: C;
-        padding-top: 0.5rem;
-        border-top: 1px solid var(--color-border-lighter);
         line-height: 1.5;
         color: var(--color-info);
     }

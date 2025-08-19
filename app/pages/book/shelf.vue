@@ -10,16 +10,16 @@
 <template>
     <div class="shelf-combine">
         <fieldset class="shelf-fieldset">
-            <legend class="content-h2">{{ novelInfo.title }}</legend>
+            <legend>{{ novelInfo.title }}</legend>
             <intro-content :novel/>
         </fieldset>
         <fieldset v-show="novelInfo.volumes.length" class="shelf-fieldset">
-            <legend class="content-h2">卷册列表</legend>
+            <legend>卷册列表</legend>
             <shelf-volumes />
         </fieldset>
     </div>
     <fieldset v-show="articles.length" class="shelf-fieldset">
-        <legend class="content-h2">章节列表</legend>
+        <legend>章节列表</legend>
         <shelf-chapters />
     </fieldset>
 </template>
@@ -40,8 +40,10 @@
         border-top: 1px solid var(--color-border);
 
         > legend {
-            margin: auto;
+            margin-inline: auto;
             padding-inline: 8px;
+            font-family: var(--font-smooth);
+            font-size: 20px;
         }
     }
 </style>

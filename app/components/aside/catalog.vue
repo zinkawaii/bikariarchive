@@ -17,12 +17,12 @@
 
 <template>
     <aside-widget class="aside-unified">
-        <form class="catalog-volume">
-            <select class="catalog-selector content-h2" v-model="currentVolume">
+        <h3 class="catalog-volume">
+            <select class="catalog-selector" v-model="currentVolume">
                 <option v-for="{ title }, i in art.novelInfo.volumes" :value="i">{{ title }}</option>
             </select>
             <span class="catalog-underline"></span>
-        </form>
+        </h3>
         <ul class="aside-limited">
             <li v-for="{ title, route } in articles" class="catalog-item">
                 <nuxt-link class="aside-anchor text-truncate" :to="route">{{ title }}</nuxt-link>

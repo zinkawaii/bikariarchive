@@ -8,10 +8,10 @@
     <nuxt-link class="home-tabular content-widget" :to="art.route">
         <novel-cover class="tabular-cover" v-bind="art.cover"/>
         <div class="tabular-wrapper">
-            <h2 class="tabular-title content-h2">
+            <h3 class="tabular-title">
                 <iconify v-if="art.sticky < Infinity" name="pepicons-print:pin"/>
                 {{ art.title }}
-            </h2>
+            </h3>
             <novel-attributes
                 :art
                 :attrs="[`volume`, `word-count`, `publish-date`, `update-date`]"

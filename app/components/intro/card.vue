@@ -35,10 +35,10 @@
 
 <template>
     <div class="intro-card content-table" :class="`is-${layer}`" @click="exchange">
-        <h2 class="intro-header content-h2">
+        <h3 class="intro-header">
             {{ Article.meta[novel].title }}
             <span class="text-truncate text-gray">{{ code }}</span>
-        </h2>
+        </h3>
         <intro-content :novel/>
         <div v-if="record" class="intro-record">
             <iconify name="fa7-solid:chevron-right"/>

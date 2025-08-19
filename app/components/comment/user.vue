@@ -18,7 +18,7 @@
     <mb-dialog class="comment-user" @close="$emit(`close`)">
         <div class="user-main">
             <user-avatar :src="avatar"/>
-            <span class="content-h2">{{ nickname }}</span>
+            <h3>{{ nickname }}</h3>
             <ul class="user-tags">
                 <li class="user-tag">
                     <iconify name="fa7-solid:user"/>
