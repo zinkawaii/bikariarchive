@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-    const jumbotronUrl = Zin.image("/garden/jumbotron.webp");
-
     const percent = ref(1);
 
     useAdoptedStyleSheet/* CSS */`
@@ -37,7 +35,7 @@
 <template>
     <transition @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
         <div v-if="$route.meta.jumbotron" class="z-jumbotron">
-            <nuxt-img class="jumbo-image" :src="jumbotronUrl" alt="[jumbotron]"/>
+            <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp" provider="cdn" alt="[jumbotron]"/>
             <jumbotron-banner />
             <button class="jumbo-hide" @click="toBottom">
                 <iconify name="fa7-solid:chevron-down"/>

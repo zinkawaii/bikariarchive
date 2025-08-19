@@ -3,9 +3,6 @@
     const userStore = useUserStore();
     const route = useRoute();
 
-    const outerworld = Zin.image("/garden/outerworld.webp", { wrap: true });
-    const innerworld = Zin.image("/garden/innerworld.webp", { wrap: true });
-
     //根据登录状态切换视图
     watchImmediate(() => userStore.isLogin, (value) => {
         signerStore.currentView = value ? "profile" : "login";
@@ -45,13 +42,13 @@
 
     .signer-innerworld {
         box-shadow: var(--box-shadow);
-        background-image: v-bind(outerworld);
+        background-image: cdn("/garden/outerworld.webp");
         background-position: center 15%;
         background-size: cover;
         mask-image: linear-gradient(to var(--direction, right), white, transparent);
 
         @include dark {
-            background-image: v-bind(innerworld);
+            background-image: cdn("/garden/innerworld.webp");
         }
 
         @include viewport(">xs") {

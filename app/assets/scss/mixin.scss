@@ -32,8 +32,22 @@ $breakpoints: (
     }
 }
 
+$themes: ("hatsusora", "ayame", "sakura");
+
+@mixin theme() {
+    @each $theme in $themes {
+        [theme="#{$theme}"] & {
+            @content($theme);
+        }
+    }
+}
+
 @mixin dark() {
     [z-dark] & {
         @content;
     }
+}
+
+@function cdn($path) {
+    @return url("https://cdn.bikari.top#{$path}");
 }

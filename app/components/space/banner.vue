@@ -9,7 +9,6 @@
     } = inject(injectionKey)!;
 
     const toastStore = useToastStore();
-    const headerUrl = Zin.image("/garden/background/alice.webp", { wrap: true });
 
     const sign = ref(userSign.value);
     let oldSign = "";
@@ -75,7 +74,7 @@
         border-radius: 0 0 16px 16px;
         box-shadow: var(--box-shadow);
         background-attachment: fixed;
-        background-image: v-bind("headerUrl");
+        background-image: cdn("/garden/background/alice.webp");
         background-position: 0 37.5%;
         background-size: cover;
         clip-path: inset(var(--scroll-banner) -4px -4px -4px);

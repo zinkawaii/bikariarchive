@@ -1,14 +1,3 @@
-<script lang="ts" setup>
-    const settingStore = useSettingStore();
-
-    const lightUrl = ref("");
-    const darkUrl = Zin.image("/garden/background/dark.webp", { wrap: true });
-
-    settingStore.listen("theme", (name) => {
-        lightUrl.value = Zin.image(`/garden/background/${name}.webp`, { wrap: true });
-    });
-</script>
-
 <template>
     <div class="z-background"></div>
 </template>
@@ -19,12 +8,15 @@
         position: fixed;
         inset: 0;
         height: 100lvh;
-        background-image: v-bind("lightUrl");
         background-position: center;
         background-size: cover;
 
+        @include theme using ($theme) {
+            background-image: cdn("/garden/background/#{$theme}.webp");
+        }
+
         @include dark {
-            background-image: v-bind("darkUrl");
+            background-image: cdn("/garden/background/dark.webp");
         }
 
         @include viewport("sm") {

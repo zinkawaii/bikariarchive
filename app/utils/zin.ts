@@ -11,15 +11,6 @@ export const Zin = new class Z {
     MID_WINDOW_SIZE = 768;
     MIN_WINDOW_SIZE = 425;
 
-    //图床链接
-    image(src: string, options: {
-        wrap?: boolean;
-    } = {}) {
-        const config = useRuntimeConfig();
-        const url = config.public.cdnUrl + src;
-        return options.wrap ? `url(${url})` : url;
-    }
-
     //防抖（立即执行）
     debounce<T extends unknown[]>(func: (...args: T) => void, {
         delay = 1500,
