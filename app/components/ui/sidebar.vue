@@ -69,11 +69,7 @@
         }"
         @click="onClick"
     >
-        <aside-widget class="aside-profile">
-            <nuxt-img class="aside-avatar" :src="$config.public.avatar" alt="[avatar]"/>
-            <span class="aside-author content-h2">{{ $config.public.author }}</span>
-            <p class="p-small">うたかたなしあわせ</p>
-        </aside-widget>
+        <aside-profile />
         <aside-widget title="公告">
             <template #icon>
                 <iconify name="fa7-solid:bullhorn"/>
@@ -98,6 +94,9 @@
 
 <style lang="scss" scoped>
     .z-sidebar {
+        display: grid;
+        grid-template-columns: 256px;
+        place-content: start center;
         margin-top: -16px;
 
         @include viewport(">lg") {
@@ -107,9 +106,6 @@
         }
 
         @include viewport("lg") {
-            display: grid;
-            grid-template-columns: 256px;
-            place-content: start center;
             position: fixed;
             overflow: auto;
             inset: 80px 0 0;
@@ -129,24 +125,8 @@
         }
     }
 
-    .aside-profile {
-        display: grid;
-        justify-items: center;
-    }
-
-    .aside-avatar {
-        width: 96px;
-        aspect-ratio: 1;
-        border-radius: 24px;
-        filter: drop-shadow(0 0 2px rgb(0 0 0 / 16%));
-    }
-
-    .aside-author {
-        padding-block: 12px 4px;
-    }
-
     .aside-sticky {
         position: sticky;
-        top: 80px;
+        top: 64px;
     }
 </style>
