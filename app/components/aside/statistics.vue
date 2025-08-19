@@ -18,7 +18,7 @@
             text: () => [
                 articles.value.length,
                 h("span", { class: "text-gray" }, " / "),
-                Entry.meta.all.length,
+                Entry.meta.all.length + Entry.meta.drafts.length,
             ],
         },
         {
