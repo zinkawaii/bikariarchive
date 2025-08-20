@@ -2,6 +2,8 @@
 
 feat(sidebar): 新的资料卡样式
 
+refactor(article): 以 `serif` 和 `cursive` 字族渲染宋体和楷体
+
 ## 2025-08-18 [v0.6.9]
 
 feat(sidebar): 添加站点统计

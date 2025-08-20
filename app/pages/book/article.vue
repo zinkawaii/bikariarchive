@@ -45,8 +45,8 @@
     const fontFamily = computed(() => {
         return {
             0: "inherit",
-            1: "宋体",
-            2: "楷体",
+            1: "serif",
+            2: "cursive",
         }[settingStore.get("font-family")];
     });
 
