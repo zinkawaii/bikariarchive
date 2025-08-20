@@ -172,9 +172,6 @@ textarea {
 
 /* 通用内容部件 */
 .content-widget {
-    --meow-large: 2rem;
-    --meow-medium: 1.5rem;
-
     border: 2px solid var(--color-theme-dark);
     border-radius: 16px;
     box-shadow: var(--box-shadow);
@@ -187,15 +184,6 @@ textarea {
             box-shadow: none;
             background-color: transparent;
         }
-    }
-
-    @include viewport("lg") {
-        --meow-large: 1.5rem;
-    }
-
-    @include viewport("xs") {
-        --meow-large: 1rem;
-        --meow-medium: 1rem;
     }
 }
 

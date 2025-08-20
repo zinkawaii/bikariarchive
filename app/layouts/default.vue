@@ -48,10 +48,6 @@
 
         @include viewport("sm") {
             --sotomi-padding: 0px;
-
-            .z-footer {
-                display: none;
-            }
         }
     }
 
@@ -78,6 +74,9 @@
     }
 
     .nakami {
+        --meow-large: 2rem;
+        --meow-medium: 1.5rem;
+
         container: main / inline-size;
         display: flex;
         flex: 1;
@@ -87,11 +86,18 @@
         z-index: 1;
 
         @include viewport("lg") {
+            --meow-large: 1.5rem;
+
             gap: 16px;
         }
 
         @include viewport("sm") {
             gap: 0;
+        }
+
+        @include viewport("xs") {
+            --meow-large: 1rem;
+            --meow-medium: 1rem;
         }
     }
 

@@ -1,27 +1,62 @@
 <script lang="ts" setup>
-    const startDate = new Date("2022/09/30");
-    const currentDate = new Date();
+    import { differenceInDays } from "date-fns";
 
-    const day = Math.floor((currentDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24);
+    const currentDate = new Date();
+    const days = differenceInDays(currentDate, "2022/09/30");
+
+    const icps = [
+        {
+            title: "萌ICP备20230904号",
+            to: "https://icp.gov.moe/?keyword=20230904",
+        },
+        {
+            title: "浙ICP备2024064887号",
+            to: "https://beian.miit.gov.cn",
+        },
+    ];
 </script>
 
 <template>
     <footer class="z-footer">
-        <p>茶馆已营业 {{ day }} 天・おはびかり・</p>
-        <p>Copyright © 2022-{{ currentDate.getFullYear() }} KazariEX｜<nuxt-link to="https://icp.gov.moe/?keyword=20230904" target="_blank">萌ICP备20230904号</nuxt-link>｜<nuxt-link to="https://beian.miit.gov.cn" target="_blank">浙ICP备2024064887号</nuxt-link></p>
+        <p>茶馆已营业 {{ days }} 天・おはびかり・</p>
+        <p>
+            <cite>Copyright © 2022-{{ currentDate.getFullYear() }} KazariEX</cite>
+            <template v-for="{ title, to } in icps">
+                <span class="footer-seperator">｜</span>
+                <nuxt-link :to>{{ title }}</nuxt-link>
+            </template>
+        </p>
     </footer>
 </template>
 
 <style lang="scss" scoped>
     .z-footer {
-        padding: 16px 32px;
-        border-radius: 16px;
-        box-shadow: var(--box-shadow);
-        background-image: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
         font-size: 14px;
-        line-height: 24px;
         text-align: center;
-        text-shadow: var(--text-shadow);
-        color: white;
+
+        @include viewport(">sm") {
+            padding: 16px 32px;
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            background-image: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
+            line-height: 24px;
+            text-shadow: var(--text-shadow);
+            color: white;
+        }
+
+        @include viewport("sm") {
+            margin-top: auto;
+            padding: 64px var(--meow-medium) 32px;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+        }
+    }
+
+    .footer-seperator:first-of-type {
+        @include viewport("sm") {
+            display: block;
+            visibility: hidden;
+            height: 0;
+        }
     }
 </style>
