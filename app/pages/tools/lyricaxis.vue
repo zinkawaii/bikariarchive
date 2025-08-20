@@ -230,7 +230,7 @@
 </script>
 
 <template>
-    <meow-widget>
+    <meow-widget title="歌词打轴">
         <audio ref="audio"></audio>
         <div class="text-small">
             <div class="lyric-operator">

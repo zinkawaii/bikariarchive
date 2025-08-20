@@ -168,7 +168,7 @@
 </script>
 
 <template>
-    <meow-widget>
+    <meow-widget title="日文名发生装置">
         <div class="p-small">
             <div class="namae-option">
                 <span class="text-gray">介绍</span>

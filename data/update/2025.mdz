@@ -8,6 +8,8 @@ fix(friend): 移除友链标签上的 `noreferrer`
 
 refactor(article): 以 `serif` 和 `cursive` 字族渲染宋体和楷体
 
+refactor: 在工具箱的各个页面下显示大标题
+
 ## 2025-08-18 [v0.6.9]
 
 feat(sidebar): 添加站点统计
