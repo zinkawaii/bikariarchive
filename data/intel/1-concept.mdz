@@ -1,7 +1,7 @@
 ---
 title: 世界观设定
 children:
-  - title: 地区
+  - title: 地点
     children:
       - title: 蝴蝶岛
         children:
@@ -14,6 +14,20 @@ children:
               - 未名
               - 十二名月
               - 寂静之里
+          - title: 十二名月
+            children:
+              - 初空
+              - 梅见
+              - 夜樱
+              - 清和
+              - 浴兰
+              - 蝉羽
+              - 凉月
+              - 月见
+              - 竹醉
+              - 时雨
+              - 神乐
+              - 胧月
           - title: 华夏
             children:
               - 冬祈
