@@ -19,6 +19,7 @@
     "task:svgo": "svgo public/image/favicon.svg --pretty"
   },
   "dependencies": {
+    "@kabeep/lunar-date-fns": "catalog:frontend",
     "@vueuse/core": "catalog:frontend",
     "@vueuse/router": "catalog:frontend",
     "animejs": "catalog:frontend",
@@ -26,7 +27,6 @@
     "github-slugger": "catalog:frontend",
     "hookable": "catalog:frontend",
     "katex": "catalog:frontend",
-    "lunisolar": "catalog:frontend",
     "pinia": "catalog:frontend",
     "pinia-plugin-persistedstate": "catalog:frontend",
     "plain-shiki": "catalog:frontend",

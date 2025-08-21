@@ -1,30 +1,35 @@
 <script lang="ts" setup>
+    import jTimeline from "~/assets/json/Timeline.json";
     import type { CalendarDate } from "./index.vue";
 
-    defineProps<{
+    const props = defineProps<{
         date?: CalendarDate;
     }>();
+
+    const event = computed(() => {
+        return props.date ? jTimeline[props.date.key] : void 0;
+    });
 </script>
 
 <template>
     <div class="calendar-detail">
         <template v-if="date">
             <time class="calendar-date">
-                {{ date.month + 1 || "" }}月{{ date.solar }}日
+                {{ date.month + 1 || "" }}月{{ date.day }}日
             </time>
             <h6 class="calendar-title">事件</h6>
-            <p v-if="date.event?.mono" class="calendar-event">
+            <p v-if="event?.mono" class="calendar-event">
                 <iconify name="fa7-solid:quote-left"/>
-                <span>{{ date.event.mono }}</span>
+                <span>{{ event.mono }}</span>
                 <iconify name="fa7-solid:quote-right"/>
             </p>
             <span v-else class="calendar-none">No Special.</span>
             <h6 class="calendar-title">关键人物</h6>
-            <div v-if="date.event?.heroines" class="calendar-heroine edge-fades-x">
-                <character-tag v-for="heroine in date.event.heroines" :key="heroine" :name="heroine"/>
+            <div v-if="event?.heroines" class="calendar-heroine edge-fades-x">
+                <character-tag v-for="heroine in event.heroines" :key="heroine" :name="heroine"/>
             </div>
             <span v-else class="calendar-none">No Character.</span>
-            <p class="calendar-hitokoto">{{ date.event?.hitokoto }}</p>
+            <p class="calendar-hitokoto">{{ event?.hitokoto }}</p>
         </template>
         <span v-else class="calendar-default">No Data</span>
     </div>

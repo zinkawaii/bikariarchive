@@ -1,18 +1,18 @@
 <script lang="ts" setup>
+    import { toLunar } from "@kabeep/lunar-date-fns";
     import { format, getDay, getDaysInMonth, getMonth, getYear } from "date-fns";
-    import lunisolar from "lunisolar";
-    import jTimeline, { type TimelineEvent } from "~/assets/json/Timeline.json";
+    import jTimeline from "~/assets/json/Timeline.json";
 
     export interface CalendarDate {
+        key: string;
         year: number;
         month: number;
-        solar: number;
+        day: number;
         lunar: string;
-        event?: TimelineEvent;
     }
 
     //月份别名
-    const monthMap = [
+    const monthAlias = [
         ["初空", "はつそら"],
         ["梅见", "うめみ"],
         ["夜樱", "よざくら"],
@@ -27,101 +27,104 @@
         ["胧月", "おぼろづき"],
     ];
 
-    //日期范围
+    //二十四节气
+    const solarTerms: Record<number, string>[] = [
+        { 4: "立春", 19: "雨水" },
+        { 4: "惊蛰", 19: "春分" },
+        { 5: "清明", 20: "谷雨" },
+        { 5: "立夏", 20: "小满" },
+        { 5: "芒种", 21: "夏至" },
+        { 6: "小暑", 22: "大暑" },
+        { 7: "立秋", 23: "处暑" },
+        { 7: "白露", 23: "秋分" },
+        { 8: "寒露", 23: "霜降" },
+        { 8: "立冬", 23: "小雪" },
+        { 7: "大雪", 22: "冬至" },
+        { 7: "小寒", 21: "大寒" },
+    ];
+
+    //月份名称
+    const monthNames = ["正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "冬月", "腊月"];
+
+    //日期名称
+    const dayNames = [
+        ["初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十"],
+        ["十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十"],
+        ["廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"],
+    ].flat();
+
     const startDate = new Date("2018-11-07");
     const endDate = new Date("2019-12-31");
 
     const currentYear = ref(2019);
     const currentMonth = ref(6);
-    const currentDates = ref<CalendarDate[]>([]);
-    const currentDate = ref<CalendarDate>();
 
-    //监听年月并显示日期
-    watchImmediate([currentYear, currentMonth], ([year, month]) => {
-        const dates = [];
+    const currentDates = computed(() => {
+        return [...generateDates(currentYear.value, currentMonth.value)];
+    });
 
+    const currentKey = ref<string>();
+    const currentDate = computed(() => {
+        return currentDates.value.find(({ key }) => currentKey.value === key);
+    });
+
+    function* generateDates(year: number, month: number) {
         //当月第一天
         const firstDay = new Date(year, month);
 
-        //添加当月日期
-        const count = getDaysInMonth(firstDay);
-        for (let i = 0; i < count; i++) {
-            dates.push(createDate(year, month, i + 1));
-        }
-
-        //添加上月日期
+        //上月日期
         const weekday = (getDay(firstDay) + 6) % 7;
         if (weekday > 0) {
             const [y, m] = month === 0
-                ? [year - 1, 0]
+                ? [year - 1, 11]
                 : [year, month - 1];
 
             const firstDay = new Date(y, m);
             const count = getDaysInMonth(firstDay);
-            for (let i = weekday; i > 0; i--) {
-                const d = count - weekday + i;
-                dates.unshift(createDate(y, m, d));
+            for (let i = 0; i < weekday; i++) {
+                const d = count - weekday + i + 1;
+                yield createDate(y, m, d);
             }
         }
 
-        //添加下月日期
+        //当月日期
+        const count = getDaysInMonth(firstDay);
+        for (let i = 0; i < count; i++) {
+            yield createDate(year, month, i + 1);
+        }
+
+        //下月日期
         const total = 42;
-        const length = dates.length;
-        if (length < total) {
+        if (weekday + count < total) {
             const [y, m] = month === 11
                 ? [year + 1, 0]
                 : [year, month + 1];
 
-            for (let i = 0; i < total - length; i++) {
-                dates.push(createDate(y, m, i + 1));
+            for (let i = 0; i < total - weekday - count; i++) {
+                yield createDate(y, m, i + 1);
             }
         }
-
-        //设置选中日期
-        if (currentDate.value) {
-            for (const date of dates) {
-                if (currentDate.value.solar === date.solar &&
-                    currentDate.value.month === date.month &&
-                    currentDate.value.year === date.year
-                ) {
-                    currentDate.value = date;
-                    break;
-                }
-            }
-        }
-
-        //更新日期列表
-        currentDates.value = dates;
-    });
+    }
 
     //创建日期对象
     function createDate(year: number, month: number, day: number): CalendarDate {
         const solar = new Date(year, month, day);
-        const lunar = lunisolar(solar);
+        const lunar = toLunar(solar);
+        const key = format(solar, "yyyy-MM-dd");
 
         return {
+            key,
             year,
             month,
-            solar: day,
-            lunar: getSubTitle(),
-            event: jTimeline[format(solar, "yyyy-MM-dd")],
+            day,
+            lunar: lunar !== -1
+                ? solarTerms[lunar.month - 1]?.[lunar.day] ?? (
+                    lunar.day === 1
+                        ? monthNames[lunar.month - 1]
+                        : dayNames[lunar.day - 1]
+                )
+                : "",
         };
-
-        //副标题
-        function getSubTitle() {
-            //节气
-            if (lunar.solarTerm) {
-                return lunar.solarTerm.name;
-            }
-
-            //月初
-            if (lunar.lunar.day === 1) {
-                return lunar.lunar.getMonthName();
-            }
-
-            //日期
-            return lunar.lunar.getDayName();
-        }
     }
 
     //是否为起始月份
@@ -137,23 +140,17 @@
     //上一月份
     function toLastMonth() {
         if (currentMonth.value === 0) {
-            currentMonth.value = 11;
             currentYear.value--;
         }
-        else {
-            currentMonth.value--;
-        }
+        currentMonth.value = (currentMonth.value + 11) % 12;
     }
 
     //下一月份
     function toNextMonth() {
         if (currentMonth.value === 11) {
-            currentMonth.value = 0;
             currentYear.value++;
         }
-        else {
-            currentMonth.value++;
-        }
+        currentMonth.value = (currentMonth.value + 1) % 12;
     }
 </script>
 
@@ -161,8 +158,8 @@
     <div class="home-calendar content-widget no-scrollbar">
         <div class="calendar-wrapper">
             <div class="calendar-header">
-                <span class="calendar-month">{{ currentMonth + 1 }}° {{ monthMap[currentMonth][0] }}</span>
-                <span class="text-primary">「{{ monthMap[currentMonth][1] }}」</span>
+                <span class="calendar-month">{{ currentMonth + 1 }}° {{ monthAlias[currentMonth][0] }}</span>
+                <span class="text-primary">「{{ monthAlias[currentMonth][1] }}」</span>
                 <button
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isFirstMonth }"
@@ -175,21 +172,21 @@
                 ><iconify name="fa7-solid:chevron-right"/></button>
             </div>
             <ul class="calendar-week">
-                <li v-for="date in ['一', '二', '三', '四', '五', '六', '日']">{{ date }}</li>
+                <li v-for="date in [`一`, `二`, `三`, `四`, `五`, `六`, `日`]">{{ date }}</li>
             </ul>
             <div class="calendar-days">
                 <button
-                    v-for="date in currentDates"
+                    v-for="{ key, month, day, lunar } in currentDates"
+                    :key
                     class="calendar-day"
                     :class="{
-                        [`is-sub`]: currentMonth !== date.month,
-                        [`is-special`]: date.event,
-                        [`is-checked`]: currentDate === date,
+                        [`is-sub`]: currentMonth !== month,
+                        [`is-special`]: key in jTimeline,
+                        [`is-checked`]: currentKey === key,
                     }"
-                    @click="currentDate = (currentDate === date) ? void 0 : date"
+                    @click="currentKey = (currentKey === key) ? void 0 : key"
                 >
-                    <span class="solar">{{ date.solar }}</span>
-                    <span class="lunar">{{ date.lunar }}</span>
+                    {{ day }}<span class="is-lunar">{{ lunar }}</span>
                 </button>
             </div>
         </div>
@@ -244,7 +241,7 @@
     }
 
     .calendar-month {
-        font-size: 16px;
+        font-size: 1rem;
     }
 
     .calendar-week, .calendar-days {
@@ -283,7 +280,7 @@
             color: white;
         }
 
-        > .lunar {
+        > .is-lunar {
             font-size: 12px;
         }
     }

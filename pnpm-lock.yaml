@@ -95,6 +95,9 @@ catalogs:
       specifier: ^3.0.5
       version: 3.0.5
   frontend:
+    '@kabeep/lunar-date-fns':
+      specifier: ^1.1.0
+      version: 1.1.0
     '@vueuse/core':
       specifier: ^13.6.0
       version: 13.6.0
@@ -116,9 +119,6 @@ catalogs:
     katex:
       specifier: ^0.16.22
       version: 0.16.22
-    lunisolar:
-      specifier: ^2.6.0
-      version: 2.6.0
     pinia:
       specifier: ^3.0.3
       version: 3.0.3
@@ -229,6 +229,9 @@ importers:
 
   .:
     dependencies:
+      '@kabeep/lunar-date-fns':
+        specifier: catalog:frontend
+        version: 1.1.0
       '@vueuse/core':
         specifier: catalog:frontend
         version: 13.6.0(vue@3.5.18(typescript@5.9.2))
@@ -250,9 +253,6 @@ importers:
       katex:
         specifier: catalog:frontend
         version: 0.16.22
-      lunisolar:
-        specifier: catalog:frontend
-        version: 2.6.0
       pinia:
         specifier: catalog:frontend
         version: 3.0.3(typescript@5.9.2)(vue@3.5.18(typescript@5.9.2))
@@ -1188,6 +1188,10 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.30':
     resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
+
+  '@kabeep/lunar-date-fns@1.1.0':
+    resolution: {integrity: sha512-RrZNtarCrBVByPqfl6RXg5jmjh/vvy3dWDFQO24i6MQHB1dsMBCUlLFymnrSASYPmaGt+fiuXkJNo0mBejZeNA==}
+    engines: {node: '>=18'}
 
   '@keyv/serialize@1.1.0':
     resolution: {integrity: sha512-RlDgexML7Z63Q8BSaqhXdCYNBy/JQnqYIwxofUrNLGCblOMHp+xux2Q8nLMLlPpgHQPoU0Do8Z6btCpRBEqZ8g==}
@@ -4677,9 +4681,6 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lunisolar@2.6.0:
-    resolution: {integrity: sha512-Q2Ph0MtYDovbX5lvvo2FvM+bFzZVZaIb70q+FyQLheZ4xuL5tvCBP/uEU5KwG+vfo0ztzGPrlIitOcGhltfwvQ==}
-
   luxon@3.7.1:
     resolution: {integrity: sha512-RkRWjA926cTvz5rAb1BqyWkKbbjzCGchDUIKMCUvNi17j6f6j8uHGDV82Aqcqtzd+icoYpELmG3ksgGiFNNcNg==}
     engines: {node: '>=12'}
@@ -7807,6 +7808,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@kabeep/lunar-date-fns@1.1.0': {}
 
   '@keyv/serialize@1.1.0': {}
 
@@ -11824,8 +11827,6 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
-
-  lunisolar@2.6.0: {}
 
   luxon@3.7.1: {}
 
