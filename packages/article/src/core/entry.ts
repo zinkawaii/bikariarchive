@@ -5,7 +5,7 @@ import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import { isDevelopment } from "../utils";
 import type { Child } from "../remark/types";
-import type { EntryDetail, EntryTalent, IntelNode, JEntry, JIntel } from "./types";
+import type { EntryDetail, EntryTalent, IntelNode, JEntry } from "./types";
 
 interface AbilityInfo {
     name: string;
@@ -24,28 +24,31 @@ interface AbilityOwner {
     star: number;
 }
 
+enum SourceKind {
+    Meta,
+    Entry,
+}
+
 export default createKerria("Entry", () => {
     const metaInfo = useLoad("meta", {
-        src: "data/json/Intel.json",
         out: ".data/json/Intel.json",
-        onUpdate(newVal, oldVal) {
-            newVal.all = oldVal?.all ?? {};
-            return newVal;
+        defaultValue: {
+            blocks: [],
+            all: {},
         },
-        beforeOutput(val) {
+        output(val) {
             const all: string[] = [];
             const drafts: string[] = [];
             for (const [name, draft] of Object.entries(val.all)) {
                 (draft ? drafts : all).push(name);
             }
 
-            const newVal = structuredClone(val) as JIntel;
-            for (const block of newVal.blocks) {
-                transform(block);
-            }
+            const blocks = Object.entries<any>(structuredClone(val.blocks))
+                .sort(([, { order: a }], [, { order: b }]) => a.localeCompare(b))
+                .map(([abbr, block]) => (delete block.order, transform(block), { abbr, ...block }));
 
             return {
-                ...newVal,
+                blocks,
                 all,
                 drafts,
             };
@@ -82,7 +85,7 @@ export default createKerria("Entry", () => {
 
     const abilityInfo = useLoad("ability", {
         out: ".data/json/Ability.json",
-        beforeOutput(val) {
+        output(val) {
             const items: AbilityItem[] = [];
             for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {
                 if (!(name in metaInfo.value.all)) {
@@ -107,7 +110,41 @@ export default createKerria("Entry", () => {
         },
     });
 
-    useSource(0, {
+    useSource(SourceKind.Meta, {
+        base: "data",
+        folders: [
+            "intel",
+        ],
+        ext: ".mdz",
+        async parse(path) {
+            //处理文件
+            const file = await readFile(path, "utf-8");
+            const { attributes } = await parseEntry<IntelNode>(file);
+            const [order, abbr] = basename(path, ".mdz").split("-");
+
+            //写入缓存
+            return {
+                order,
+                abbr,
+                data: attributes,
+            };
+        },
+        cache(cache) {
+            const { order, abbr, data } = cache;
+
+            metaInfo.value.blocks[abbr] = {
+                order,
+                ...data,
+            };
+        },
+        unlink(cache) {
+            const { abbr } = cache;
+
+            delete metaInfo.value.blocks[abbr];
+        },
+    });
+
+    useSource(SourceKind.Entry, {
         base: "data",
         dist: ".data",
         folders: [
@@ -154,19 +191,19 @@ export default createKerria("Entry", () => {
                 abilities,
             };
         },
+        cache(cache) {
+            const { name, folder, draft, abilities } = cache;
+
+            metaInfo.value.all[name] = draft;
+            mapInfo.value[name] = folder;
+            abilityInfo.value[name] = abilities;
+        },
         unlink(cache) {
             const { name } = cache;
 
             delete metaInfo.value.all[name];
             delete mapInfo.value[name];
             delete abilityInfo.value[name];
-        },
-        onCacheHit(cache) {
-            const { name, folder, draft, abilities } = cache;
-
-            metaInfo.value.all[name] = draft;
-            mapInfo.value[name] = folder;
-            abilityInfo.value[name] = abilities;
         },
     });
 });

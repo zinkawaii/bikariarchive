@@ -158,8 +158,8 @@ catalogs:
       specifier: ^0.0.1
       version: 0.0.1
     kerria:
-      specifier: ^0.3.4
-      version: 0.3.4
+      specifier: ^0.4.0
+      version: 0.4.0
     mdast-util-frontmatter:
       specifier: ^2.0.1
       version: 2.0.1
@@ -388,7 +388,7 @@ importers:
         version: 2.0.0
       kerria:
         specifier: catalog:markdown
-        version: 0.3.4
+        version: 0.4.0
       mdast-util-frontmatter:
         specifier: catalog:markdown
         version: 2.0.1
@@ -4543,8 +4543,8 @@ packages:
     resolution: {integrity: sha512-XCHRdUw4lf3SKBaJe4EvgqIuWwkPSo9XoeO8GjQW94Bp7TWv9hNhzZjZ+OH9yf1UmLygb7DIT5GSFQiyt16zYg==}
     hasBin: true
 
-  kerria@0.3.4:
-    resolution: {integrity: sha512-GDdH1GMCUXCUp/DtL6H+FuIf4rdTehareVodLMyYgf/sb+4uucs+Vwcg/hnarJTJ0l5xW7h2bFMfmBbhKIYgVQ==}
+  kerria@0.4.0:
+    resolution: {integrity: sha512-EvHeAvnTxPac4SPNwAOOzK9UAZcNSVBHCI7k4xUpQ3gNT18/UDkFuTo6aISrtv2+RXXYwsm5SwLDP8iWBwz/pQ==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -11680,7 +11680,7 @@ snapshots:
     dependencies:
       commander: 8.3.0
 
-  kerria@0.3.4:
+  kerria@0.4.0:
     dependencies:
       chokidar: 4.0.3
       consola: 3.4.2

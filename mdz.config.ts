@@ -16,6 +16,15 @@ export default defineConfig({
         },
         {
             patterns: [
+                "./intel/*",
+            ],
+            import: [
+                "@bikari/article",
+                "IntelFrontmatter",
+            ],
+        },
+        {
+            patterns: [
                 "./novel/*",
             ],
             import: [

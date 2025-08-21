@@ -75,20 +75,22 @@ export interface JIntel {
 }
 
 export interface IntelNode<T = unknown> {
-    title: string;
+    title?: string;
     unknown?: boolean;
     children: T[];
 }
 
-export interface IntelBlock extends IntelNode<IntelBranch> {
+export interface IntelBlock extends IntelFrontmatter {
     abbr: string;
 }
 
-export interface IntelBranch extends IntelNode<IntelLeaf | IntelItem> {}
+export type IntelFrontmatter = IntelNode<IntelBranch>;
 
-export interface IntelLeaf extends IntelNode<IntelItem> {}
+export type IntelBranch = IntelNode<IntelLeaf | IntelItem>;
 
-export interface IntelItem extends IntelNode<string | [string, string]> {}
+export type IntelLeaf = IntelNode<IntelItem>;
+
+export type IntelItem = IntelNode<string | [string, string]>;
 
 export interface JIntmap {
     [entry: string]: string;
