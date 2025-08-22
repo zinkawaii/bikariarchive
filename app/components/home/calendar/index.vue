@@ -163,11 +163,13 @@
                 <button
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isFirstMonth }"
+                    aria-label="上个月"
                     @click="toLastMonth"
                 ><iconify name="fa7-solid:chevron-left"/></button>
                 <button
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isLastMonth }"
+                    aria-label="下个月"
                     @click="toNextMonth"
                 ><iconify name="fa7-solid:chevron-right"/></button>
             </div>

@@ -18,12 +18,14 @@
 
     const actions = [
         {
+            title: "复制",
             icon: "fa7-solid:paste",
             action() {
                 copyText(codeEl.value!.textContent!, "代码已复制");
             },
         },
         {
+            title: "折叠",
             icon: () => `fa7-solid:chevron-${isCollapse.value ? `left` : `down`}`,
             action: () => toggleCollapse(),
         },
@@ -57,7 +59,12 @@
     <figure class="mb-code">
         <figcaption class="code-header">
             <span class="text-uppercase">{{ lang }}</span>
-            <button v-for="{ icon, action } in actions" class="code-action" @click="action">
+            <button
+                v-for="{ title, icon, action } in actions"
+                class="code-action"
+                :aria-label="title"
+                @click="action"
+            >
                 <iconify :name="toValue(icon)"/>
             </button>
         </figcaption>

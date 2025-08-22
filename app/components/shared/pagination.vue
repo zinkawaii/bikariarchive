@@ -76,7 +76,12 @@
 
 <template>
     <div ref="root" class="mb-pagination">
-        <button class="pagina-arr" :class="{ [`is-disabled`]: modelValue === 1 }" @click="modelValue--">
+        <button
+            class="pagina-arr"
+            :class="{ [`is-disabled`]: modelValue === 1 }"
+            aria-label="上一页"
+            @click="modelValue--"
+        >
             <iconify name="fa7-solid:chevron-left"/>
         </button>
         <div class="pagina-list">
@@ -94,7 +99,12 @@
                 >...</button>
             </template>
         </div>
-        <button class="pagina-arr" :class="{ [`is-disabled`]: modelValue === totalPages }" @click="modelValue++">
+        <button
+            class="pagina-arr"
+            :class="{ [`is-disabled`]: modelValue === totalPages }"
+            aria-label="下一页"
+            @click="modelValue++"
+        >
             <iconify name="fa7-solid:chevron-right" />
         </button>
     </div>

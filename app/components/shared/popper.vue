@@ -1,17 +1,27 @@
 <script lang="ts" setup>
-    withDefaults(defineProps<{
+    import { cloneVNode } from "vue";
+
+    const props = withDefaults(defineProps<{
         direction?: "top" | "right" | "bottom" | "left";
         plaintext?: string;
     }>(), {
         direction: "bottom",
     });
+    const slots = defineSlots<{
+        default?: () => any;
+        floating?: () => any;
+    }>();
+
+    const vnode = computed(() => {
+        return cloneVNode(slots.default?.()[0], { "aria-label": props.plaintext });
+    });
 </script>
 
 <template>
     <mb-primitive class="mb-popper">
-        <slot></slot>
+        <component :is="vnode"/>
         <div
-            v-if="$slots.floating || plaintext"
+            v-if="slots.floating || plaintext"
             class="popper-outer"
             :class="[`is-${direction}`, {
                 [`is-plain`]: plaintext,

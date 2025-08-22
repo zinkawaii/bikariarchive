@@ -35,9 +35,9 @@
 <template>
     <transition @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
         <div v-if="$route.meta.jumbotron" class="z-jumbotron">
-            <nuxt-img class="jumbo-image" src="/garden/jumbotron.webp" provider="cdn" alt="[jumbotron]"/>
+            <nuxt-img class="jumbotron-image" src="/garden/jumbotron.webp" provider="cdn" alt="[jumbotron]"/>
             <jumbotron-banner />
-            <button class="jumbo-hide" @click="toBottom">
+            <button class="jumbotron-skip" aria-label="跳转到主要内容" @click="toBottom">
                 <iconify name="fa7-solid:chevron-down"/>
             </button>
         </div>
@@ -68,7 +68,7 @@
         }
     }
 
-    .jumbo-image {
+    .jumbotron-image {
         display: block;
         position: sticky;
         top: 0;
@@ -77,7 +77,7 @@
         object-fit: cover;
     }
 
-    .jumbo-hide {
+    .jumbotron-skip {
         display: flex;
         position: absolute;
         opacity: 0;

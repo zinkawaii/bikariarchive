@@ -114,7 +114,7 @@
         </nav>
         <form class="header-search" @submit.prevent="search">
             <input type="search" placeholder="输入关键词..." v-model="word"/>
-            <button title="全文检索">
+            <button aria-label="全文检索">
                 <iconify name="fa7-solid:magnifying-glass"/>
             </button>
         </form>

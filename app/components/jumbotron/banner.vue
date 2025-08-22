@@ -24,20 +24,20 @@
 </script>
 
 <template>
-    <div class="jumbo-banner">
-        <h1 class="jumbo-title">
+    <div class="jumbotron-banner">
+        <h1 class="jumbotron-title">
             <template v-if="isMotion">
                 <span
                     v-for="(char, i) in titleChars"
-                    class="jumbo-char"
+                    class="jumbotron-char"
                     :style="{ animationDelay: `${i * titleDelay}ms` }"
                 >{{ char }}</span>
             </template>
             <template v-else>{{ title }}</template>
         </h1>
-        <h2 class="jumbo-phrase">
+        <h2 class="jumbotron-phrase">
             <template v-if="isMotion">
-                <span v-for="char in summaryChars" class="jumbo-char">{{ char }}</span>
+                <span v-for="char in summaryChars" class="jumbotron-char">{{ char }}</span>
             </template>
             <template v-else>{{ summary }}</template>
         </h2>
@@ -45,7 +45,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .jumbo-banner {
+    .jumbotron-banner {
         display: grid;
         align-content: center;
         position: absolute;
@@ -68,10 +68,10 @@
         }
     }
 
-    .jumbo-title {
+    .jumbotron-title {
         font-size: 72px;
 
-        > .jumbo-char {
+        > .jumbotron-char {
             &:nth-child(2n) {
                 animation-name: jumbo-char-cross-up;
             }
@@ -82,16 +82,16 @@
         }
     }
 
-    .jumbo-phrase {
+    .jumbotron-phrase {
         height: 1lh;
         margin-bottom: 0.5em;
 
-        > .jumbo-char {
+        > .jumbotron-char {
             animation-name: jumbo-char-jump;
         }
     }
 
-    .jumbo-char {
+    .jumbotron-char {
         display: inline-block;
         opacity: 0;
         animation: 0.4s ease-out both;
