@@ -14,7 +14,7 @@
             for (let i = 0; i < sortedItems.length; i++) {
                 const el = sortedItems[i];
                 animate(el, {
-                    x: collapse.value ? 60 : 0,
+                    x: collapse.value ? 64 : 0,
                     delay: i * 50,
                     duration: 400,
                     ease: `${collapse.value ? `in` : `out`}Back`,
