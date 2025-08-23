@@ -35,19 +35,14 @@ export default defineJEventHandler(async (event) => {
         return 1;
     }
 
-    let extra = {};
-    if (qComment.mode === "guest") {
-        extra = {
-            nickname: body.nickname,
-            email: body.email,
-            address: body.address,
-        };
-    }
-
     //更新评论数据
     await qComment.updateOne({
         content: body.content,
         updated: time,
-        ...extra,
+        ...qComment.mode === "guest" ? {
+            nickname: body.nickname,
+            email: body.email,
+            address: body.address,
+        } : void 0,
     });
 });

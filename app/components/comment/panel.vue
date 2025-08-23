@@ -80,7 +80,6 @@
                     path: commentPanelStore.path,
                     parent: isReplyKind.value ? replyOptions.value.id : void 0,
                     content: content.value,
-                    mode: mode.value,
                     nickname: nickname.value,
                     email: email.value || void 0,
                     address: address.value || void 0,
@@ -98,20 +97,18 @@
 <template>
     <mb-dialog class="comment-panel" @close="commentPanelStore.close()">
         <meow-title>{{ title }}</meow-title>
-        <template v-if="mode === `guest`">
-            <div class="panel-form">
-                <meow-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>
-                <p class="panel-tip">必填，用于展示评论昵称</p>
-            </div>
-            <div class="panel-form">
-                <meow-input placeholder="邮箱" v-model="email" v-model:error="errors.email"/>
-                <p class="panel-tip">选填，用于从 WeAvatar 服务获取头像与评论回复通知</p>
-            </div>
-            <div class="panel-form">
-                <meow-input placeholder="网址" v-model="address" v-model:error="errors.address"/>
-                <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
-            </div>
-        </template>
+        <div class="panel-form">
+            <meow-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>
+            <p class="panel-tip">必填，用于展示评论昵称</p>
+        </div>
+        <div class="panel-form">
+            <meow-input placeholder="邮箱" v-model="email" v-model:error="errors.email"/>
+            <p class="panel-tip">选填，用于从 WeAvatar 服务获取头像与评论回复通知</p>
+        </div>
+        <div class="panel-form">
+            <meow-input placeholder="网址" v-model="address" v-model:error="errors.address"/>
+            <p class="panel-tip">选填，用于点击昵称时链向你的个人网站</p>
+        </div>
         <div class="panel-form">
             <comment-editor v-model="content"/>
             <p class="panel-tip">支持部分 Markdown 语法</p>

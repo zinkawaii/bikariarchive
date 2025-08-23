@@ -5,7 +5,7 @@ export const useUserStore = defineStore("user", () => {
     const identity = ref(0);
     const sign = ref("");
 
-    const isLogin = computed(() => {
+    const isLoggedIn = computed(() => {
         return uid.value !== -1;
     });
 
@@ -38,7 +38,7 @@ export const useUserStore = defineStore("user", () => {
         avatar,
         identity,
         sign,
-        isLogin,
+        isLoggedIn,
         getInfo,
         reset,
     };

@@ -4,7 +4,7 @@
     const route = useRoute();
 
     //根据登录状态切换视图
-    watchImmediate(() => userStore.isLogin, (value) => {
+    watchImmediate(() => userStore.isLoggedIn, (value) => {
         signerStore.currentView = value ? "profile" : "login";
     });
 

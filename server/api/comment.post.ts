@@ -4,19 +4,19 @@ import { Zexp } from "~/utils";
 import { CommentDataModel } from "~~/server/models/CommentData";
 import { UserDataModel } from "~~/server/models/UserData";
 import type { PostCommentBody } from "~~/server/types/api/comment";
-import type { UserDataSchema } from "~~/server/types/model";
+import type { CommentDataSchema, UserDataSchema } from "~~/server/types/model";
 
 const schema = type({
     path: "string",
     parent: "string?",
     content: "string <= 512",
-    mode: `"guest" | "user"`,
     nickname: type(Zexp.nickname),
     email: type(Zexp.email).optional(),
     address: type(Zexp.url).optional(),
 });
 
 export default defineJEventHandler(async (event) => {
+    const { session } = event.context;
     const config = useRuntimeConfig();
     const body = schema.assert(
         await readBody<PostCommentBody>(event),
@@ -36,18 +36,21 @@ export default defineJEventHandler(async (event) => {
     //连接数据库
     await connectMongoose();
 
-    //获取时间，UID
     const time = new Date();
     const uid = event.context.session?.uid;
+    const mode = session.uid !== 0 ? "user" : "guest";
 
-    let extra = {};
-    if (body.mode === "guest") {
+    let info:
+        | Pick<CommentDataSchema, "nickname" | "email" | "address">
+        | Pick<CommentDataSchema, "user">;
+
+    if (mode === "guest") {
         //无游客昵称
         if (!body.nickname) {
             return 2;
         }
 
-        extra = {
+        info = {
             nickname: body.nickname,
             email: body.email,
             address: body.address,
@@ -62,7 +65,7 @@ export default defineJEventHandler(async (event) => {
             return 3;
         }
 
-        extra = {
+        info = {
             user: qUser.id,
         };
     }
@@ -86,8 +89,8 @@ export default defineJEventHandler(async (event) => {
         time,
         updated: time,
         ip: getRequestIP(event, { xForwardedFor: true }),
-        mode: body.mode,
-        ...extra,
+        mode,
+        ...info,
     });
 
     if (!qParent) {
