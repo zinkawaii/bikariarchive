@@ -10,7 +10,6 @@ export const useSettingStore = defineStore("setting", () => {
         interaction: true,
         "shortcut-last": "ArrowLeft",
         "shortcut-next": "ArrowRight",
-        "font-family": 0,
         "font-size": 1,
         "ui-collapse": false,
     });

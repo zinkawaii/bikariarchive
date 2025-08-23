@@ -41,24 +41,6 @@
         }
     });
 
-    //字体系列
-    const fontFamily = computed(() => {
-        return {
-            0: "inherit",
-            1: "serif",
-            2: "cursive",
-        }[settingStore.get("font-family")];
-    });
-
-    //字体大小
-    const fontSize = computed(() => {
-        return {
-            0: 14,
-            1: 16,
-            2: 18,
-        }[settingStore.get("font-size")] + "px";
-    });
-
     //写入阅读记录
     readRecordStore.set(art.novel, {
         index: art.index,
@@ -144,11 +126,6 @@
 </template>
 
 <style lang="scss" scoped>
-    .novel-text {
-        font-family: v-bind("fontFamily");
-        font-size: v-bind("fontSize");
-    }
-
     @include viewport(">md") {
         :where(.mb-skeleton, .novel-text) {
             padding-inline: var(--meow-large);

@@ -7,7 +7,6 @@ export interface Setting {
     interaction: boolean;
     "shortcut-last": string;
     "shortcut-next": string;
-    "font-family": number;
     "font-size": number;
     "ui-collapse": boolean;
 }

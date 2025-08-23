@@ -18,7 +18,7 @@
 
 <template>
     <meow-widget title="友情链接">
-        <novel-article class="text-small" variant="article">
+        <novel-article variant="article" size="small">
             <div class="friend-list">
                 <nuxt-link v-for="item in jFriend" class="friend-item" :to="item.link" rel="noopener" target="_blank">
                     <hgroup class="friend-info">

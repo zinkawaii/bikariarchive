@@ -59,6 +59,10 @@
         <setting-form title="交互模块" desc="是否开启评论区等交互功能">
             <setting-switch name="interaction"/>
         </setting-form>
+        <meow-title>阅读设置</meow-title>
+        <setting-form title="字体大小">
+            <setting-select name="font-size" :options="[`小`, `中`, `大`]"/>
+        </setting-form>
         <meow-title>快捷键设置</meow-title>
         <setting-form title="切换章节" type="input">
             <div class="setting-input">
@@ -71,13 +75,6 @@
                     @keyup.stop="onShortcutKeyup(name, $event)"
                 />
             </div>
-        </setting-form>
-        <meow-title>阅读设置</meow-title>
-        <setting-form title="字体选择">
-            <setting-select name="font-family" :options="[`默认`, `宋体`, `楷体`]"/>
-        </setting-form>
-        <setting-form title="字体大小">
-            <setting-select name="font-size" :options="[`小`, `中`, `大`]"/>
         </setting-form>
     </mb-dialog>
 </template>
