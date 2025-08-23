@@ -1,9 +1,9 @@
 interface DialogContext {
-    vnode: VNode;
+    vnode: ComputedRef<VNode>;
     zIndex: number;
     duration: number;
     isOpening: Ref<boolean>;
-    close: () => any;
+    close: ComputedRef<() => void>;
 }
 
 interface UseDialogOptions {
@@ -38,7 +38,15 @@ export const useDialogStore = defineStore("dialog", () => {
                 return;
             }
 
-            const vnode = render();
+            const vnode = computed(render);
+            watchEffect(() => {
+                vnode.value.props ??= {};
+                vnode.value.props.onClose ??= close;
+                vnode.value.props.onVnodeMounted ??= () => {
+                    isOpening.value = true;
+                };
+            });
+
             const last = dialogs.at(-1);
             const zIndex = (last?.zIndex ?? 510) + 2;
 
@@ -47,13 +55,10 @@ export const useDialogStore = defineStore("dialog", () => {
                 zIndex,
                 duration,
                 isOpening,
-                close: (vnode.props ??= {}).onClose ??= close,
+                close: computed(() => vnode.value.props?.onClose),
             };
 
             dialogs.push(ctx);
-            vnode.props.onVnodeMounted = () => {
-                isOpening.value = true;
-            };
         }
 
         async function close() {

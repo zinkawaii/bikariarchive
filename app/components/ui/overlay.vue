@@ -13,7 +13,7 @@
             :key="zIndex"
             class="mb-overlay"
             :style="{ zIndex: zIndex - 1 }"
-            @click="close()"
+            @click="close.value"
         ></div>
     </transition-group>
 </template>

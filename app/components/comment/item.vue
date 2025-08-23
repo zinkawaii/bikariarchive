@@ -9,7 +9,6 @@
     }>();
 
     const commentStore = useCommentStore();
-    const commentPanelStore = useCommentPanelStore();
     const dialogStore = useDialogStore();
     const userStore = useUserStore();
 
@@ -42,21 +41,12 @@
 
     //回复评论
     function replyComment() {
-        commentPanelStore.reply({
-            id: props.data.id,
-            nickname: props.data.nickname,
-        });
+        commentStore.requirePost(props.data);
     }
 
     //修改评论
     function modifyComment() {
-        commentPanelStore.modify({
-            id: props.data.id,
-            content: props.data.content,
-            nickname: props.data.nickname,
-            email: props.data.email,
-            address: props.data.address,
-        });
+        commentStore.requireModify(props.data);
     }
 
     //删除评论

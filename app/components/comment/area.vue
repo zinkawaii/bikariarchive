@@ -2,7 +2,6 @@
     import type { UseIntersectionObserverReturn } from "@vueuse/core";
 
     const commentStore = useCommentStore();
-    const commentPanelStore = useCommentPanelStore();
     const route = useRoute();
     const rootComp = useTemplateRef("root");
 
@@ -39,7 +38,7 @@
             <h2>评论<span class="comment-count">{{ totalCount }}</span></h2>
             <meow-button
                 icon="fa7-solid:comment-dots"
-                @click="commentPanelStore.post()"
+                @click="commentStore.requirePost()"
             >发表评论</meow-button>
         </hgroup>
         <mb-skeleton v-if="isEmpty"/>

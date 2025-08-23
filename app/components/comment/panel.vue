@@ -1,31 +1,34 @@
 <script lang="ts" setup>
+    import type { CommentData } from "~~/server/types/api/comment";
+
+    const props = defineProps<{
+        parent?: CommentData;
+    } & ({
+        kind: "post";
+        path: string;
+    } | {
+        kind: "modify";
+        id: string;
+    })>();
+    const content = defineModel<string>("content", {
+        required: true,
+    });
+    const nickname = defineModel<string>("nickname", {
+        required: true,
+    });
+    const email = defineModel<string>("email", {
+        default: "",
+    });
+    const address = defineModel<string>("address", {
+        default: "",
+    });
+    const emit = defineEmits<{
+        close: [];
+    }>();
+
     const commentStore = useCommentStore();
-    const commentPanelStore = useCommentPanelStore();
 
-    const { kind, replyOptions, modifyOptions } = storeToRefs(commentPanelStore);
     const [isSending, toggleSending] = useToggle(false);
-
-    const isReplyKind = computed(() => {
-        return kind.value === "reply";
-    });
-
-    const isModifyKind = computed(() => {
-        return kind.value === "modify";
-    });
-
-    const { content, mode, nickname, email, address } = useSourceRefs(() => (
-        isModifyKind.value ? modifyOptions.value : commentPanelStore
-    ), {
-        content: {},
-        mode: {},
-        nickname: {},
-        email: {
-            default: "",
-        },
-        address: {
-            default: "",
-        },
-    });
 
     const { errors, validate } = useValidate({
         nickname: {
@@ -47,9 +50,7 @@
 
     //标题
     const title = computed(() => {
-        return isReplyKind.value
-            ? `回复 @${replyOptions.value.nickname}`
-            : "评论";
+        return props.parent ? `回复 @${props.parent.nickname}` : "评论";
     });
 
     //内容是否超长
@@ -66,9 +67,9 @@
 
         toggleSending(true);
         try {
-            if (isModifyKind.value) {
+            if (props.kind === "modify") {
                 await commentStore.modify({
-                    id: modifyOptions.value.id,
+                    id: props.id,
                     content: content.value,
                     nickname: nickname.value,
                     email: email.value || void 0,
@@ -77,8 +78,8 @@
             }
             else {
                 await commentStore.post({
-                    path: commentPanelStore.path,
-                    parent: isReplyKind.value ? replyOptions.value.id : void 0,
+                    path: props.path,
+                    parent: props.parent?.id,
                     content: content.value,
                     nickname: nickname.value,
                     email: email.value || void 0,
@@ -86,7 +87,7 @@
                 });
             }
             content.value = "";
-            commentPanelStore.close();
+            emit("close");
         }
         finally {
             toggleSending(false);
@@ -95,7 +96,7 @@
 </script>
 
 <template>
-    <mb-dialog class="comment-panel" @close="commentPanelStore.close()">
+    <mb-dialog class="comment-panel" @close="emit(`close`)">
         <meow-title>{{ title }}</meow-title>
         <div class="panel-form">
             <meow-input placeholder="昵称" v-model="nickname" v-model:error="errors.nickname"/>

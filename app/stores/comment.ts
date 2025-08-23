@@ -1,4 +1,5 @@
 import { isObject } from "@vueuse/core";
+import { LazyCommentPanel } from "#components";
 import type { WithParent } from "~/types";
 import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 
@@ -8,7 +9,13 @@ export const useCommentStore = defineStore("comment", () => {
     const totalCount = ref(0);
     const isEmpty = ref(false);
 
+    const content = ref("");
+    const nickname = ref("");
+    const email = ref("");
+    const address = ref("");
+
     const route = useRoute();
+    const dialogStore = useDialogStore();
     const toastStore = useToastStore();
 
     //清空评论
@@ -58,7 +65,10 @@ export const useCommentStore = defineStore("comment", () => {
             : "评论删除失败";
     });
 
-    function createRequest<T extends Record<string, any>>(method: "post" | "put" | "delete", getter: (statusCode: number) => string) {
+    function createRequest<T extends Record<string, any>>(
+        method: "post" | "put" | "delete",
+        getter: (statusCode: number) => string,
+    ) {
         return async (body: T) => {
             try {
                 const res = await $fetch("/api/comment", {
@@ -79,17 +89,58 @@ export const useCommentStore = defineStore("comment", () => {
         };
     }
 
+    function requirePost(parent?: CommentData) {
+        dialogStore.use(() => h(LazyCommentPanel, {
+            kind: "post",
+            parent,
+            path: route.path,
+            content: content.value,
+            nickname: nickname.value,
+            email: email.value,
+            address: address.value,
+            "onUpdate:content": (val) => (content.value = val),
+            "onUpdate:nickname": (val) => (nickname.value = val),
+            "onUpdate:email": (val) => (email.value = val),
+            "onUpdate:address": (val) => (address.value = val),
+        }), {
+            immediate: true,
+        });
+    }
+
+    function requireModify(data: CommentData) {
+        dialogStore.use(() => h(LazyCommentPanel, {
+            kind: "modify",
+            ...data,
+        }), {
+            immediate: true,
+        });
+    }
+
     return {
         comments,
         mainCount,
         totalCount,
         isEmpty,
+        nickname,
+        email,
+        address,
         clear,
         update,
         post,
         modify,
         remove,
+        requirePost,
+        requireModify,
     };
+}, {
+    persist: {
+        pick: [
+            "nickname",
+            "email",
+            "address",
+        ],
+        storage: piniaPluginPersistedstate.localStorage(),
+    },
 });
 
 //处理评论
