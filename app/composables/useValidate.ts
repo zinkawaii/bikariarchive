@@ -3,7 +3,7 @@ interface ValidateEntry {
     required?: boolean;
     rule?: RegExp;
     message?: string;
-    exec?: (value: string) => string | void;
+    exec?: (input: string) => string | void;
 }
 
 export function useValidate<T extends Record<string, ValidateEntry>>(entries: T) {
@@ -55,15 +55,14 @@ export function useValidate<T extends Record<string, ValidateEntry>>(entries: T)
 }
 
 export const nicknameValidates: Partial<ValidateEntry> = {
-    rule: /^[\w\u4E00-\u9FA5]*$/,
+    rule: /^[\w\p{Script=Han}]*$/u,
     message: "昵称不可包含非法字符",
-    exec(value) {
-        const count = getByteLength(value);
-        if (count === 0) {
+    exec(input) {
+        if (input.length === 0) {
             return "昵称不能为空";
         }
-        else if (count > 24) {
-            return "昵称长度不能超过 24 个字符";
+        else if (input.length > 18) {
+            return "昵称长度不能超过 18 个字符";
         }
     },
 };
@@ -71,9 +70,8 @@ export const nicknameValidates: Partial<ValidateEntry> = {
 export const passwordValidates: Partial<ValidateEntry> = {
     rule: /^\w*$/,
     message: "密码仅由大小写字母、数字以及下划线组成",
-    exec(value) {
-        const count = getByteLength(value);
-        if (count < 6 || count > 18) {
+    exec(input) {
+        if (input.length < 6 || input.length > 18) {
             return "密码位数必须在 6-18 位之间";
         }
     },
