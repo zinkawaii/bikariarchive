@@ -225,14 +225,14 @@
                 </mb-button>
             </div>
         </div>
-        <div v-if="!isResultEmpty" class="namae-result div-table">
+        <meow-table v-if="!isResultEmpty" class="namae-result" variant="div">
             <dl v-for="chunk in chunkedResults">
                 <template v-for="{ kanji, kana } in chunk">
                     <dt>{{ kanji }}</dt>
                     <dd>{{ kana }}</dd>
                 </template>
             </dl>
-        </div>
+        </meow-table>
     </meow-widget>
 </template>
 
@@ -266,6 +266,7 @@
 
     .namae-result {
         margin-top: 16px;
+        font-size: 14px;
 
         @include viewport("md") {
             flex-direction: column;

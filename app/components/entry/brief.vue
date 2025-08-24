@@ -18,7 +18,7 @@
 </script>
 
 <template>
-    <div class="entry-brief div-table">
+    <meow-table class="entry-brief" variant="div">
         <dl v-for="arr in fields">
             <template v-for="{ key, val } in arr">
                 <template v-if="val !== void 0">
@@ -27,7 +27,7 @@
                 </template>
             </template>
         </dl>
-    </div>
+    </meow-table>
 </template>
 
 <style lang="scss" scoped>
@@ -36,6 +36,7 @@
         --dd-fr: 0.7fr;
 
         margin-top: 8px;
+        font-size: 14px;
 
         @container entry-primary (width < 512px) {
             flex-direction: column;

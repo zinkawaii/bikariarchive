@@ -48,8 +48,8 @@
 </script>
 
 <template>
-    <meow-widget class="manage-read-record" title="阅读记录">
-        <meow-table>
+    <meow-widget title="阅读记录">
+        <meow-table class="manage-table">
             <tbody>
                 <tr>
                     <th width="60">序号</th>
@@ -83,14 +83,14 @@
 </template>
 
 <style lang="scss" scoped>
-    .meow-table-wrapper {
+    .manage-table {
+        --font-size-td: 14px;
+
         text-align: center;
         text-wrap: nowrap;
     }
 
     .manage-operators {
-        text-wrap: nowrap;
-
         > .mb-button {
             width: 24px;
             aspect-ratio: 1;

@@ -71,27 +71,6 @@ sub, sup {
     font-size: 0.75em;
 }
 
-table {
-    width: 100%;
-}
-
-th, td, dt, dd {
-    line-height: 24px;
-}
-
-th, dt {
-    padding: 2px 12px;
-    background-color: var(--color-theme);
-    font-family: var(--font-smooth);
-    font-size: var(--font-size-th);
-    text-align: center;
-}
-
-td, dd {
-    padding: 2px 6px;
-    font-size: var(--font-size-td);
-}
-
 ol, ul, menu {
     list-style-type: none;
 }
@@ -194,23 +173,6 @@ textarea {
     border-left: 32px solid var(--color-theme);
     background-color: var(--color-background);
     font-size: 14px;
-}
-
-.div-table {
-    --font-size-th: 14px;
-    --font-size-td: 14px;
-
-    display: flex;
-    gap: 2px;
-    padding: 2px;
-    border: 1px solid var(--color-border);
-
-    > dl {
-        display: grid;
-        flex: 1;
-        grid-template-columns: var(--dt-fr, 1fr) var(--dd-fr, 1fr);
-        row-gap: 2px;
-    }
 }
 
 .tag {
