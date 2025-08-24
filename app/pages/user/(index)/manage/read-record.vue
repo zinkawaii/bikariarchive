@@ -48,8 +48,8 @@
 </script>
 
 <template>
-    <div class="manage-table-wrapper">
-        <table class="manage-table">
+    <meow-widget class="manage-read-record" title="阅读记录">
+        <meow-table>
             <tbody>
                 <tr>
                     <th width="60">序号</th>
@@ -77,14 +77,17 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
-    </div>
-    <div class="manage-pagination content-widget">
-        <mb-pagination :total="data?.total ?? 0" :sizes="data?.sizes" v-model="page"/>
-    </div>
+        </meow-table>
+        <mb-pagination class="manage-pagination" :total="data?.total ?? 0" :sizes="data?.sizes" v-model="page"/>
+    </meow-widget>
 </template>
 
 <style lang="scss" scoped>
+    .meow-table-wrapper {
+        text-align: center;
+        text-wrap: nowrap;
+    }
+
     .manage-operators {
         text-wrap: nowrap;
 
@@ -96,7 +99,6 @@
     }
 
     .manage-pagination {
-        padding-block: 16px;
-        border-block: none;
+        margin-top: var(--meow-medium);
     }
 </style>
