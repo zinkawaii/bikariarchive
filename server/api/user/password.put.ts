@@ -15,7 +15,7 @@ export default defineJEventHandler(async (event) => {
     );
 
     //权限验证
-    identityValidate(event, 1);
+    validateIdentity(event, 1);
 
     //连接数据库
     await connectMongoose();

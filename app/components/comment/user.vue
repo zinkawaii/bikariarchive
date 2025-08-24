@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     const props = defineProps<{
-        avatar: string;
+        avatar?: string;
         nickname: string;
         address?: string;
         character: string;

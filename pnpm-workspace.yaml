@@ -10,23 +10,23 @@ catalogs:
   backend:
     "@iconify-json/fa7-solid": ^1.2.0
     "@kikiutils/nuxt-session": ^4.0.1
-    "@nuxt/devtools": ^2.6.2
-    "@nuxt/eslint": ^1.8.0
+    "@nuxt/devtools": ^2.6.3
+    "@nuxt/eslint": ^1.9.0
     "@nuxt/fonts": ^0.11.4
     "@nuxt/icon": ^2.0.0
     "@nuxt/image": ^1.11.0
     "@nuxtjs/seo": ^3.1.0
     "@pinia/nuxt": ^0.11.2
     "@vitejs/plugin-vue": ^6.0.1
-    "@vueuse/nuxt": ^13.6.0
+    "@vueuse/nuxt": ^13.7.0
     arktype: ^2.1.20
     chokidar: ^4.0.3
     cn-font-split: ^7.2.9
     consola: ^3.4.2
     cross-env: ^10.0.0
-    crypto-es: ^2.1.0
+    crypto-es: ^3.0.1
     defu: ^6.1.4
-    mongoose: ^8.17.1
+    mongoose: ^8.18.0
     nuxt: ^4.0.3
     pathe: ^2.0.3
     propathy: ^0.2.1
@@ -37,11 +37,11 @@ catalogs:
     zfeed: ^0.2.3
   build:
     tsdown: ^0.14.1
-    vue-tsc: ^3.0.5
+    vue-tsc: ^3.0.6
   frontend:
     "@kabeep/lunar-date-fns": ^1.1.0
-    "@vueuse/core": ^13.6.0
-    "@vueuse/router": ^13.6.0
+    "@vueuse/core": ^13.7.0
+    "@vueuse/router": ^13.7.0
     animejs: ^4.1.3
     date-fns: ^4.1.0
     github-slugger: ^2.0.0
@@ -50,14 +50,14 @@ catalogs:
     pinia: ^3.0.3
     pinia-plugin-persistedstate: ^4.5.0
     plain-shiki: ^0.3.0
-    shiki: ^3.9.2
+    shiki: ^3.11.0
     uqr: ^0.1.2
-    vue: ^3.5.18
+    vue: ^3.5.19
     vue-router: ^4.5.1
   lint:
     "@zinkawaii/eslint-config": ^0.4.1
     "@zinkawaii/stylelint-config": ^0.3.3
-    eslint: ^9.33.0
+    eslint: ^9.34.0
     stylelint: ^16.23.1
   markdown:
     "@mdzjs/config": ^0.0.1
@@ -82,7 +82,7 @@ catalogs:
   types:
     "@types/wicg-file-system-access": ^2023.10.6
     "@zinkawaii/tsconfig": ^0.0.2
-    vue-component-type-helpers: ^3.0.5
+    vue-component-type-helpers: ^3.0.6
 
 onlyBuiltDependencies:
   - "@parcel/watcher"

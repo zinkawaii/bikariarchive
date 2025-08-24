@@ -12,7 +12,7 @@ export default defineJEventHandler(async (event) => {
     );
 
     //权限验证
-    identityValidate(event, 9);
+    validateIdentity(event, 9);
 
     //连接数据库
     await connectMongoose();

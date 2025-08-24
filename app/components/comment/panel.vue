@@ -1,15 +1,19 @@
 <script lang="ts" setup>
     import type { CommentData } from "~~/server/types/api/comment";
 
-    const props = defineProps<{
-        parent?: CommentData;
-    } & ({
+    interface CommentPanelPostProps {
         kind: "post";
         path: string;
-    } | {
+    }
+
+    interface CommentPanelModifyProps {
         kind: "modify";
         id: string;
-    })>();
+    }
+
+    const props = defineProps<(CommentPanelPostProps | CommentPanelModifyProps) & {
+        parent?: CommentData;
+    }>();
     const content = defineModel<string>("content", {
         required: true,
     });

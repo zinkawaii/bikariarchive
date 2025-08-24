@@ -12,14 +12,8 @@
 
     const countList = [1, 10, 100, 500];
     const genderList = [
-        {
-            title: "男",
-            value: "male",
-        },
-        {
-            title: "女",
-            value: "female",
-        },
+        { title: "男", value: "male" },
+        { title: "女", value: "female" },
     ];
 
     //数量

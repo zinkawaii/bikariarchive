@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import { animate } from "animejs";
 
-    const signerStore = useSignerStore();
     const settingStore = useSettingStore();
+    const signerStore = useSignerStore();
 
     const collapse = computed(() => settingStore.get("ui-collapse"));
 

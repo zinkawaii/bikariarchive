@@ -1,8 +1,8 @@
 import { LazyZSigner } from "#components";
-import type { SignerCurrentView } from "~/types/signer";
+import type { SignerView } from "~/types/signer";
 
 export const useSignerStore = defineStore("signer", () => {
-    const currentView = ref<SignerCurrentView>("login");
+    const currentView = ref<SignerView>("login");
 
     const dialogStore = useDialogStore();
 
@@ -12,7 +12,7 @@ export const useSignerStore = defineStore("signer", () => {
     });
 
     //切换当前视图
-    function switchView(view: SignerCurrentView) {
+    function switchView(view: SignerView) {
         currentView.value = view;
     }
 

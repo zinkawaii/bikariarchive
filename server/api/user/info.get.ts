@@ -1,6 +1,5 @@
 import { type } from "arktype";
 import { UserDataModel } from "~~/server/models/UserData";
-import { generateAvatarUrl } from "~~/server/utils";
 import type { GetUserInfoResponse } from "~~/server/types/api/user/info";
 
 const schema = type({
@@ -30,7 +29,7 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
 
     try {
         //只有本人才能获取的信息
-        myselfValidate(event, uid!);
+        validateMyself(event, uid!);
         res.identity = qUser.identity;
     }
     catch {}

@@ -33,20 +33,20 @@
         <template #icon>
             <iconify name="fa7-solid:chart-line"/>
         </template>
-        <ul class="aside-statistics">
-            <li v-for="{ label, text } in items">
-                <small class="statistics-label">{{ label }}</small>
-                <br />
-                <span><component :is="text"/></span>
-            </li>
-        </ul>
+        <dl class="aside-statistics">
+            <template v-for="{ label, text } in items">
+                <dt class="statistics-label">{{ label }}</dt>
+                <dd><component :is="text"/></dd>
+            </template>
+        </dl>
     </aside-widget>
 </template>
 
 <style lang="scss" scoped>
     .aside-statistics {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-auto-flow: column;
+        grid-template-rows: auto 1fr;
         column-gap: 8px;
         margin-top: 8px;
         font-size: 14px;

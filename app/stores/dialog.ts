@@ -40,10 +40,12 @@ export const useDialogStore = defineStore("dialog", () => {
 
             const vnode = computed(render);
             watchEffect(() => {
-                vnode.value.props ??= {};
-                vnode.value.props.onClose ??= close;
-                vnode.value.props.onVnodeMounted ??= () => {
-                    isOpening.value = true;
+                vnode.value.props = {
+                    onClose: close,
+                    onVnodeMounted() {
+                        isOpening.value = true;
+                    },
+                    ...vnode.value.props,
                 };
             });
 

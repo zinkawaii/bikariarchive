@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-    import { cloneVNode } from "vue";
-
-    const props = withDefaults(defineProps<{
+    withDefaults(defineProps<{
         direction?: "top" | "right" | "bottom" | "left";
         plaintext?: string;
     }>(), {
@@ -13,13 +11,13 @@
     }>();
 
     const vnode = computed(() => {
-        return cloneVNode(slots.default?.()[0], { "aria-label": props.plaintext });
+        return slots.default?.()[0];
     });
 </script>
 
 <template>
     <mb-primitive class="mb-popper">
-        <component :is="vnode"/>
+        <component :is="vnode" :aria-label="plaintext"/>
         <div
             v-if="slots.floating || plaintext"
             class="popper-outer"

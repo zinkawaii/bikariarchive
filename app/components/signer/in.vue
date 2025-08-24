@@ -33,12 +33,10 @@
         if (!validate()) {
             return;
         }
-
-        const key = "[login]";
         await execute();
 
         if (status.value !== "success") {
-            toastStore.error(key, "登录失败");
+            toastStore.error("[login]", "登录失败");
             return;
         }
 

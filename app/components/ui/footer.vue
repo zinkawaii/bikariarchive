@@ -23,7 +23,7 @@
             <cite>Copyright © 2022-{{ currentDate.getFullYear() }} KazariEX</cite>
             <template v-for="{ title, to } in icps">
                 <span class="footer-seperator">｜</span>
-                <nuxt-link :to>{{ title }}</nuxt-link>
+                <nuxt-link :to target="_blank">{{ title }}</nuxt-link>
             </template>
         </p>
     </footer>
@@ -31,11 +31,12 @@
 
 <style lang="scss" scoped>
     .z-footer {
+        padding-inline: var(--meow-large);
         font-size: 14px;
         text-align: center;
 
         @include viewport(">sm") {
-            padding: 16px 32px;
+            padding-block: 16px;
             border-radius: 16px;
             box-shadow: var(--box-shadow);
             background-image: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
@@ -46,7 +47,7 @@
 
         @include viewport("sm") {
             margin-top: auto;
-            padding: 64px var(--meow-medium) 32px;
+            padding-block: 64px 32px;
             line-height: 1.8;
             color: var(--color-text-secondary);
         }
