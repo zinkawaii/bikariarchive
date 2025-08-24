@@ -1,6 +1,10 @@
 <script lang="ts" setup>
     import jFriend from "~/assets/json/Friend.json";
 
+    definePageMeta({
+        comment: true,
+    });
+
     useHead({
         title: "友情链接",
     });

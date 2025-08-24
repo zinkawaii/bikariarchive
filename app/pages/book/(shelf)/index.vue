@@ -1,4 +1,14 @@
 <script lang="ts" setup>
+    import type { RouteLocationNormalizedLoaded } from "vue-router";
+
+    definePageMeta({
+        name: "shelf",
+        path: ":novel().:volume()",
+        scrollToTop(to: RouteLocationNormalizedLoaded<"shelf">, from) {
+            return to.name !== from.name || to.params.novel !== from.params.novel;
+        },
+    });
+
     const shelfStore = useShelfStore();
     const { novel, novelInfo, volumeInfo, articles } = storeToRefs(shelfStore);
 

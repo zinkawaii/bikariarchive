@@ -3,7 +3,7 @@ import type { RouteLocationRaw } from "vue-router";
 export const useBreadcrumbStore = defineStore("breadcrumb", () => {
     const routes = shallowReactive(new Set<RouteLocationRaw>());
 
-    const route = computed(() => {
+    const route = computed<RouteLocationRaw>(() => {
         return [...routes].pop() ?? {
             name: "home",
         };

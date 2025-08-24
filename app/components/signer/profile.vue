@@ -1,12 +1,14 @@
 <script lang="ts" setup>
+    import type { RouteLocationRaw } from "vue-router";
+
     const toastStore = useToastStore();
     const userStore = useUserStore();
     const route = useRoute();
     const router = useRouter();
 
     //空间链接
-    const toSpace = computed(() => ({
-        name: "space",
+    const toSpace = computed<RouteLocationRaw>(() => ({
+        name: "user-space",
         params: {
             uid: userStore.uid ?? -1,
         },

@@ -1,8 +1,18 @@
 <script lang="ts" setup>
     import { injectionKey } from "~/types/space";
 
+    const props = defineProps<{
+        uid: string;
+    }>();
+
+    definePageMeta({
+        path: "space/:uid",
+        props: true,
+        identity: 1,
+        middleware: ["auth"],
+    });
+
     const userStore = useUserStore();
-    const route = useRoute();
 
     useHead({
         title: userStore.nickname,
@@ -10,7 +20,7 @@
 
     //是否是本人
     const isMyself = computed(() => {
-        return userStore.uid === Number(route.params.uid);
+        return userStore.uid === Number(props.uid);
     });
 
     //不是本人
@@ -19,7 +29,7 @@
     //获取用户信息
     const { data } = useLazyFetch("/api/user/info", {
         query: {
-            uid: route.params.uid,
+            uid: props.uid,
         },
         immediate: isNotMyself.value,
     });
@@ -29,7 +39,7 @@
         return isMyself.value || !data.value?.error;
     });
 
-    const { uid, nickname, sign, avatar } = useSourceRefs(() => (
+    const { uid: id, nickname, sign, avatar } = useSourceRefs(() => (
         isMyself.value ? userStore : data.value!
     ), {
         uid: {
@@ -48,7 +58,7 @@
 
     provide(injectionKey, {
         isMyself,
-        uid,
+        uid: id,
         nickname,
         sign,
         avatar,

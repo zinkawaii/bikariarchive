@@ -1,14 +1,26 @@
 <script lang="ts" setup>
-    const views = [
+    import type { RouteLocationRaw } from "vue-router";
+
+    definePageMeta({
+        redirect: { name: "user-manage-read-record" },
+        identity: 9,
+        middleware: ["auth"],
+    });
+
+    const views: {
+        title: string;
+        subtitle: string;
+        to: RouteLocationRaw;
+    }[] = [
         {
             title: "阅读记录",
             subtitle: "Read Record",
-            to: { name: "read-record" },
+            to: { name: "user-manage-read-record" },
         },
         {
             title: "用户数据",
             subtitle: "User Data",
-            to: { name: "user-data" },
+            to: { name: "user-manage-user-data" },
         },
     ];
 </script>
@@ -26,8 +38,8 @@
 <style lang="scss" scoped>
     .manage-banner {
         display: grid;
-        grid: auto / repeat(auto-fill, minmax(146px, 1fr));
-        grid-gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(146px, 1fr));
+        gap: 16px;
     }
 
     .manage-link {

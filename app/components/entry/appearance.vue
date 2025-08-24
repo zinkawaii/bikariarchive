@@ -1,11 +1,12 @@
 <script lang="ts" setup>
     import type { EntryAppearance } from "@bikari/article";
+    import type { RouteLocationRaw } from "vue-router";
 
     const props = defineProps<EntryAppearance>();
 
     const art = Article.for(() => props.novel, () => props.index);
 
-    const volumeRoute = computed(() => ({
+    const volumeRoute = computed<RouteLocationRaw>(() => ({
         name: "shelf",
         params: {
             novel: art.value.novel,

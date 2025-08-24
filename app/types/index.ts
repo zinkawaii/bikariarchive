@@ -9,8 +9,8 @@ export type WithParent<T> = T & {
     children: WithParent<T>[];
 };
 
-declare module "vue-router" {
-    interface RouteMeta {
+declare module "nuxt/app" {
+    interface PageMeta {
         identity?: number;
         catalog?: boolean;
         comment?: boolean;

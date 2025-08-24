@@ -1,5 +1,13 @@
 <script lang="ts" setup>
+    import type { RouteLocationRaw } from "vue-router";
     import { NuxtLink } from "#components";
+
+    interface NavItem {
+        title: string;
+        icon: string;
+        to?: MaybeRefOrGetter<RouteLocationRaw>;
+        children?: NavItem[];
+    }
 
     const breadcrumbStore = useBreadcrumbStore();
     const shelfStore = useShelfStore();
@@ -7,7 +15,7 @@
     const router = useRouter();
     const word = ref("");
 
-    const navs = [
+    const navs: NavItem[] = [
         {
             title: "主页",
             icon: "fa6-solid:house",
@@ -35,7 +43,7 @@
                 {
                     title: "工具箱",
                     icon: "fa7-solid:screwdriver-wrench",
-                    to: { name: "chest" },
+                    to: { name: "tools" },
                 },
                 {
                     title: "番剧",
@@ -104,7 +112,7 @@
                         <span>{{ title }}</span>
                     </component>
                     <template v-if="children?.length" #floating>
-                        <nuxt-link v-for="child in children" class="nav-pop" :to="child.to">
+                        <nuxt-link v-for="child in children" class="nav-pop" :to="toValue(child.to)">
                             <iconify :name="child.icon"/>
                             <span>{{ child.title }}</span>
                         </nuxt-link>

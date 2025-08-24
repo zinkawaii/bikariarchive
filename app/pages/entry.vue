@@ -3,6 +3,13 @@
         title: string;
     }>();
 
+    definePageMeta({
+        path: "/:title()",
+        props: true,
+        catalog: true,
+        comment: true,
+    });
+
     useHead({
         title,
     });

@@ -3,6 +3,12 @@
         year: number;
     }>();
 
+    definePageMeta({
+        name: "update",
+        path: ":year()",
+        props: true,
+    });
+
     const { status, data } = useFetch("/api/update", {
         query: {
             year,

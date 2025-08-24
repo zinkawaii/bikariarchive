@@ -1,3 +1,5 @@
+import type { RouteLocationRaw } from "vue-router";
+
 //可复用正则表
 export const Zexp = {
     email: /^[-\w]+@(?:[-\w]+\.)+[-\w]+$/,
@@ -31,7 +33,7 @@ export function isFocusedEditable() {
 }
 
 //路由：词条
-export function toEntry(title: string) {
+export function toEntry(title: string): RouteLocationRaw {
     return {
         name: "entry",
         params: { title },
@@ -39,7 +41,7 @@ export function toEntry(title: string) {
 }
 
 //路由：全文检索
-export function toSearch(word: string) {
+export function toSearch(word: string): RouteLocationRaw {
     return {
         name: "search",
         query: { word },

@@ -1,34 +1,41 @@
 <script lang="ts" setup>
+    import type { RouteLocationRaw } from "vue-router";
+
     useHead({
         title: "工具箱",
     });
 
-    const tools = [
+    const tools: {
+        title: string;
+        description: string;
+        icon: string;
+        to: RouteLocationRaw;
+    }[] = [
         {
             title: "日文名发生装置",
             description: "治好了孩子的起名困难症",
             icon: "material-symbols:language-japanese-kana",
-            to: { name: "namaemaker" },
+            to: { name: "tools-namaemaker" },
         },
         {
             title: "歌词打轴",
             description: "为你的歌词快速打轴",
             icon: "mdi:timeline-clock",
-            to: { name: "lyricaxis" },
+            to: { name: "tools-lyricaxis" },
         },
     ];
 </script>
 
 <template>
     <meow-widget title="工具箱">
-        <div class="chest-list">
-            <nuxt-link v-for="{ title, description, icon, to } in tools" class="chest-item" :to>
-                <div class="chest-icon">
+        <div class="tools-list">
+            <nuxt-link v-for="{ title, description, icon, to } in tools" class="tools-item" :to>
+                <div class="tools-icon">
                     <iconify :name="icon ?? `fa7-solid:wrench`"/>
                 </div>
-                <div class="chest-title">
+                <div class="tools-title">
                     <h3>{{ title }}</h3>
-                    <span class="chest-underline"></span>
+                    <span class="tools-underline"></span>
                 </div>
                 <p class="p-small text-truncate text-gray">{{ description }}</p>
             </nuxt-link>
@@ -37,13 +44,13 @@
 </template>
 
 <style lang="scss" scoped>
-    .chest-list {
+    .tools-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
         gap: 16px;
     }
 
-    .chest-item {
+    .tools-item {
         display: grid;
         grid-template:
             "A B"
@@ -54,13 +61,13 @@
         &:hover {
             color: var(--color-theme-text);
 
-            .chest-underline::before {
+            .tools-underline::before {
                 width: 100%;
             }
         }
     }
 
-    .chest-icon {
+    .tools-icon {
         display: grid;
         grid-area: A;
         place-items: center;
@@ -72,14 +79,14 @@
         color: var(--color-info);
     }
 
-    .chest-title {
+    .tools-title {
         display: grid;
         gap: 4px;
         line-height: 28px;
         transition: color 0.25s;
     }
 
-    .chest-underline {
+    .tools-underline {
         height: 1px;
         background-color: var(--color-border-lighter);
 

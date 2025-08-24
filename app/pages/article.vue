@@ -6,6 +6,13 @@
         index: string;
     }>();
 
+    definePageMeta({
+        path: "/book/:novel()/:index()",
+        props: true,
+        catalog: true,
+        comment: true,
+    });
+
     const { hooks } = useHookStore();
     const readRecordStore = useReadRecordStore();
     const settingStore = useSettingStore();

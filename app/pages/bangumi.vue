@@ -3,6 +3,10 @@
         title: "番剧",
     });
 
+    definePageMeta({
+        widePage: true,
+    });
+
     const page = useRouteQuery("page", 1, {
         transform: Number,
     });

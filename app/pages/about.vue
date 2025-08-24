@@ -1,6 +1,10 @@
 <script lang="ts" setup>
     import { differenceInDays, getYear, isBefore, isLeapYear } from "date-fns";
 
+    definePageMeta({
+        fullPage: true,
+    });
+
     useHead({
         title: "关于",
     });

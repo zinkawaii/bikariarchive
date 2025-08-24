@@ -3,6 +3,10 @@
         title: "更新日志",
     });
 
+    definePageMeta({
+        redirect: { name: "unknown" },
+    });
+
     const config = useRuntimeConfig();
     const { totalYears } = config.public;
 

@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+    definePageMeta({
+        path: "/",
+        jumbotron: true,
+    });
+
     const config = useRuntimeConfig();
 
     useHead({

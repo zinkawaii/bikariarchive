@@ -1,9 +1,10 @@
 <script lang="ts" setup>
     definePageMeta({
-        path: "/:path(.*)*",
+        redirect: { name: "unknown" },
+        sidebar: false,
     });
 </script>
 
 <template>
-    <not-found />
+    <nuxt-page />
 </template>

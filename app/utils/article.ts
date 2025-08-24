@@ -167,7 +167,7 @@ function createArticle(...args: [novel: string, raw: JChapter]): Article {
     });
 
     //路由
-    const route = computed(() => ({
+    const route = computed<RouteLocationRaw>(() => ({
         name: "article",
         params: {
             novel,

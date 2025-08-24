@@ -1,3 +1,5 @@
+import type { RouteLocationRaw } from "vue-router";
+
 export const useShelfStore = defineStore("shelf", () => {
     const route = useRoute();
     const router = useRouter();
@@ -8,7 +10,7 @@ export const useShelfStore = defineStore("shelf", () => {
     const novel = computed({
         get() {
             if (route.name === "shelf") {
-                novelRaw = route.params.novel as string;
+                novelRaw = route.params.novel;
             }
             return novelRaw ?? "bikari";
         },
@@ -61,7 +63,7 @@ export const useShelfStore = defineStore("shelf", () => {
         return novelInfo.value.chapters.filter((art) => art.volume === volume.value);
     });
 
-    const currentRoute = computed(() => {
+    const currentRoute = computed<RouteLocationRaw>(() => {
         return {
             name: "shelf",
             params: {
