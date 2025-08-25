@@ -7,7 +7,7 @@
     const config = useRuntimeConfig();
 
     useHead({
-        title: config.public.summary,
+        title: config.public.subtitle,
         titleTemplate: "%site.name ~ %s ~",
     });
 </script>

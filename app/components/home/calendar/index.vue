@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { toLunar } from "@kabeep/lunar-date-fns";
     import { format, getDay, getDaysInMonth, getMonth, getYear } from "date-fns";
-    import jTimeline from "~/assets/json/Timeline.json";
+    import jSpecial from "~/assets/json/Special.json";
 
     export interface CalendarDate {
         key: string;
@@ -183,7 +183,7 @@
                     class="calendar-day"
                     :class="{
                         [`is-sub`]: currentMonth !== month,
-                        [`is-special`]: key in jTimeline,
+                        [`is-special`]: key in jSpecial,
                         [`is-checked`]: currentKey === key,
                     }"
                     @click="currentKey = (currentKey === key) ? void 0 : key"

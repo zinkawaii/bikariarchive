@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import jTimeline from "~/assets/json/Timeline.json";
+    import jSpecial from "~/assets/json/Special.json";
     import type { CalendarDate } from "./index.vue";
 
     const props = defineProps<{
@@ -7,7 +7,7 @@
     }>();
 
     const event = computed(() => {
-        return props.date ? jTimeline[props.date.key] : void 0;
+        return props.date ? jSpecial[props.date.key] : void 0;
     });
 </script>
 

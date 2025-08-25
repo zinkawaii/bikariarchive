@@ -1,5 +1,5 @@
-declare module "~/assets/json/Timeline.json" {
-    export type JTimeline = Record<string, TimelineEvent>;
+declare module "~/assets/json/Special.json" {
+    export type JSpecial = Record<string, TimelineEvent>;
 
     export interface TimelineEvent {
         mono: string;
@@ -7,6 +7,6 @@ declare module "~/assets/json/Timeline.json" {
         hitokoto?: string;
     }
 
-    const data: JTimeline;
+    const data: JSpecial;
     export default data;
 }

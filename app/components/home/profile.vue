@@ -19,6 +19,11 @@
             icon: "fa7-brands:bilibili",
         },
         {
+            title: "QQ",
+            to: "https://jq.qq.com/?_wv=1027&k=ezy4Y5TS",
+            icon: "fa7-brands:qq",
+        },
+        {
             title: "RSS",
             to: "/feed",
             icon: "fa7-solid:rss",
@@ -43,85 +48,113 @@
 
 <template>
     <div class="home-profile content-table">
-        <div ref="avatar" class="profile-avatar">
-            <nuxt-img :src="$config.public.avatar" alt="[avatar]"/>
-        </div>
-        <table class="profile-table">
-            <tbody>
-                <tr>
-                    <th width="40%">作者</th>
-                    <td>{{ $config.public.author }}</td>
-                </tr>
-                <tr>
-                    <th>个人群</th>
-                    <td><plain-link to="https://jq.qq.com/?_wv=1027&k=ezy4Y5TS" target="_blank">836164664</plain-link></td>
-                </tr>
-                <tr>
-                    <th>读者群</th>
-                    <td><plain-link to="https://jq.qq.com/?_wv=1027&k=pCxzWpRr" target="_blank">743284714</plain-link></td>
-                </tr>
-            </tbody>
-        </table>
-        <nav class="profile-links">
-            <mb-popper v-for="{ title, to, icon } in links" :plaintext="title">
-                <nuxt-link class="profile-link" :to target="_blank">
+        <profile-backdrop light="10%" dark="54%"/>
+        <hgroup class="profile-header">
+            <img ref="avatar" class="profile-avatar" :src="$config.public.avatar" alt="[avatar]"/>
+            <h3 class="profile-author">{{ $config.public.author }}</h3>
+            <p class="profile-phrase">{{ $config.public.phrase }}</p>
+            <nav class="profile-links">
+                <nuxt-link
+                    v-for="{ title, icon, to } in links"
+                    class="profile-link"
+                    :to
+                    target="_blank"
+                    :aria-label="title"
+                >
                     <iconify :name="icon"/>
                 </nuxt-link>
-            </mb-popper>
-        </nav>
+            </nav>
+        </hgroup>
+        <span class="profile-irregular">Story<br />Irregular</span>
+        <div class="profile-confession">
+            <p>あなただけのために存在する<ruby>世界<rt>イレギュラー</rt></ruby>、<br />それが物語。</p>
+            <p>筆を執ることは、一生をかけて、<br />言葉で自らを癒すこと。</p>
+            <p>努力が報いられるということ自体、<br />誰かにとっての得がたい幸運。</p>
+            <p>頑張ると幸せになる世界、<br />つらいことをしなくてもいい世界、<br />やがて夢が叶う世界、</p>
+            <p>僕は書きたいんだ。</p>
+        </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .profile-table {
-        border-spacing: 8px;
-        font-size: 16px;
-        text-align: center;
+    .home-profile {
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+    }
 
-        td {
-            border-bottom: 1px solid var(--color-border-lighter);
-        }
+    .profile-backdrop {
+        height: 144px;
+        margin-bottom: -64px;
+    }
+
+    .profile-header {
+        display: grid;
+        grid-template:
+            "A B"
+            "A C"
+            "A D" 1fr / auto 1fr;
+        column-gap: 12px;
+        isolation: isolate;
     }
 
     .profile-avatar {
-        width: min(80%, 256px);
-        aspect-ratio: 1;
-        margin: -32px auto 8px;
-        border-radius: var(--rounded-circle);
-        filter: drop-shadow(4px 8px 12px rgb(0 0 0 / 16%));
+        grid-area: A;
+        width: 96px;
+        margin-left: 16px;
+        border-radius: 0 0 var(--rounded-full) var(--rounded-full);
+        filter: drop-shadow(var(--box-shadow-dark));
+    }
 
-        &:hover {
-            > img {
-                animation: profile-avatar-jump 0.4s ease;
-            }
-        }
+    .profile-author {
+        align-self: end;
+        margin-top: 24px;
+    }
 
-        > img {
-            border-radius: inherit;
-        }
-
-        @keyframes profile-avatar-jump {
-            50% {
-                transform: rotateY(90deg) translateY(-32px);
-            }
-        }
+    .profile-phrase {
+        padding-block: 2px;
+        color: var(--color-text-secondary);
     }
 
     .profile-links {
         display: flex;
-        justify-content: flex-end;
-        gap: 8px;
-        padding-inline: 8px;
+        gap: 6px;
     }
 
     .profile-link {
         display: grid;
         place-items: center;
-        width: 24px;
+        width: 18px;
         aspect-ratio: 1;
-        border: 1px solid var(--color-border-lighter);
-        border-radius: 4px;
-        font-size: 16px;
-        color: var(--color-theme-dark);
+        color: var(--color-info);
+
+        &:hover {
+            color: var(--color-theme-text);
+        }
+    }
+
+    .profile-confession {
+        display: grid;
+        gap: 1lh;
+        margin-left: auto;
+        padding: 12px 16px;
+        color: var(--color-text-secondary);
+        isolation: isolate;
+        writing-mode: vertical-rl;
+
+        ruby {
+            ruby-align: center;
+        }
+    }
+
+    .profile-irregular {
+        position: absolute;
+        opacity: 0.2;
+        inset: auto auto 24px 24px;
+        font-family: var(--font-smooth);
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 1.2;
+        color: var(--color-info);
     }
 </style>

@@ -1,9 +1,9 @@
 <template>
     <aside-widget class="aside-profile">
-        <div class="aside-backdrop"></div>
-        <h3 class="aside-author">{{ $config.public.author }}</h3>
-        <p class="aside-phrase">うたかたなしあわせ</p>
-        <nuxt-img class="aside-avatar" :src="$config.public.avatar" alt="[avatar]"/>
+        <profile-backdrop light="10%"/>
+        <h3 class="profile-author">{{ $config.public.author }}</h3>
+        <p class="profile-phrase">{{ $config.public.phrase }}</p>
+        <nuxt-img class="profile-avatar" :src="$config.public.avatar" alt="[avatar]"/>
     </aside-widget>
 </template>
 
@@ -21,33 +21,24 @@
         isolation: isolate;
     }
 
-    .aside-backdrop {
+    .profile-backdrop {
         grid-area: A;
         justify-self: stretch;
         height: 96px;
-        background-image: cdn("/garden/outerworld.webp");
-        background-position: center 10%;
-        background-size: cover;
-        mask-image: linear-gradient(to bottom, white, transparent);
         z-index: -1;
-
-        @include dark {
-            background-image: url("/garden/illustration/utakata_1.webp");
-            background-position: center;
-        }
     }
 
-    .aside-author {
+    .profile-author {
         margin-top: -100%;
     }
 
-    .aside-phrase {
+    .profile-phrase {
         padding-block: 2px 12px;
         font-size: 14px;
         color: var(--color-text-secondary);
     }
 
-    .aside-avatar {
+    .profile-avatar {
         grid-area: D;
         width: 96px;
         aspect-ratio: 1;

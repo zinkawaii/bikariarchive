@@ -4,19 +4,19 @@
     const duration = 400;
     const titleDelay = 80;
     const summaryDelay = 20;
-    const { title, summary } = config.public;
+    const { title, subtitle } = config.public;
     const titleChars = [...title];
-    const summaryChars = ref<string[]>([]);
+    const subtitleChars = ref<string[]>([]);
     const [isMotion, toggleMotion] = useToggle(true);
 
     //标题动效
     Zin.delay(duration + titleDelay).then(async () => {
         await Zin.interval((i) => {
-            const char = summary[i];
-            summaryChars.value.push(char);
+            const char = subtitle[i];
+            subtitleChars.value.push(char);
         }, {
             duration: summaryDelay,
-            times: summary.length,
+            times: subtitle.length,
         });
         await Zin.delay(duration);
         toggleMotion(false);
@@ -35,11 +35,11 @@
             </template>
             <template v-else>{{ title }}</template>
         </h1>
-        <h2 class="jumbotron-phrase">
+        <h2 class="jumbotron-subtitle">
             <template v-if="isMotion">
-                <span v-for="char in summaryChars" class="jumbotron-char">{{ char }}</span>
+                <span v-for="char in subtitleChars" class="jumbotron-char">{{ char }}</span>
             </template>
-            <template v-else>{{ summary }}</template>
+            <template v-else>{{ subtitle }}</template>
         </h2>
     </div>
 </template>
@@ -82,7 +82,7 @@
         }
     }
 
-    .jumbotron-phrase {
+    .jumbotron-subtitle {
         height: 1lh;
         margin-bottom: 0.5em;
 
