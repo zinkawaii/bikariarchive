@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import type { JUpdate } from "@bikari/article";
+
     const { year } = defineProps<{
         year: number;
     }>();
@@ -9,13 +11,14 @@
         props: true,
     });
 
-    const { status, data } = useFetch("/api/update", {
-        query: {
-            year,
-        },
+    const { status, data } = useAsyncData<JUpdate[]>(`update:${year}`, async () => {
+        const module = await import(`~~/.data/update/${year}.json`);
+        return module.default;
+    }, {
+        default: () => [],
     });
 
-    const { page, total, sizes, paginatedList } = usePagination(() => data.value?.list ?? [], {
+    const { page, total, sizes, paginatedList } = usePagination(data, {
         sizes: 24,
     });
 </script>
