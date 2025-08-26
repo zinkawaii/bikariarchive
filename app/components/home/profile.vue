@@ -65,21 +65,17 @@
                 </nuxt-link>
             </nav>
         </hgroup>
-        <span class="profile-irregular">Story<br />Irregular</span>
-        <div class="profile-confession">
-            <p>あなただけのために存在する<ruby>世界<rt>イレギュラー</rt></ruby>、<br />それが物語。</p>
-            <p>筆を執ることは、一生をかけて、<br />言葉で自らを癒すこと。</p>
-            <p>努力が報いられるということ自体、<br />誰かにとっての得がたい幸運。</p>
-            <p>頑張ると幸せになる世界、<br />つらいことをしなくてもいい世界、<br />やがて夢が叶う世界、</p>
-            <p>僕は書きたいんだ。</p>
+        <div class="profile-story">
+            <p class="profile-line">あなただけのために存在する<ruby>世界<rt>イレギュラー</rt></ruby>、</p>
+            <p class="profile-line">それが物語。</p>
+            <p class="profile-line"></p>
         </div>
+        <div class="profile-irregular">Silent,<br />Irregular.</div>
     </div>
 </template>
 
 <style lang="scss" scoped>
     .home-profile {
-        position: relative;
-        overflow: hidden;
         padding: 0;
     }
 
@@ -133,28 +129,29 @@
         }
     }
 
-    .profile-confession {
-        display: grid;
-        gap: 1lh;
-        margin-left: auto;
-        padding: 12px 16px;
+    .profile-story {
+        margin-block: 12px;
+        padding-inline: 16px;
+        text-wrap: nowrap;
         color: var(--color-text-secondary);
-        isolation: isolate;
-        writing-mode: vertical-rl;
+        ruby-align: center;
+    }
 
-        ruby {
-            ruby-align: center;
-        }
+    .profile-line {
+        min-height: 28px;
+        padding-top: 6px;
+        border-bottom: 1px solid var(--color-gray-800);
     }
 
     .profile-irregular {
-        position: absolute;
         opacity: 0.2;
-        inset: auto auto 24px 24px;
+        margin: 16px;
         font-family: var(--font-smooth);
         font-size: 48px;
         font-weight: bold;
-        line-height: 1.2;
+        line-height: 1.1;
+        text-align: right;
         color: var(--color-info);
+        user-select: none;
     }
 </style>
