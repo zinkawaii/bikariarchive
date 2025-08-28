@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-    import type { GetArticleResponse } from "~~/server/types/api/article";
-
     type Attr = "volume" | "read-count" | "word-count" | "publish-date" | "update-date";
 
     const props = withDefaults(defineProps<{
         art: Article;
-        post?: GetArticleResponse;
+        count?: number;
         attrs: Attr[];
         wrap?: boolean;
     }>(), {
@@ -26,7 +24,7 @@
         {
             attr: "read-count",
             icon: "fa7-solid:eye",
-            content: () => `${props.post?.readCount ?? "?"} 阅读`,
+            content: () => `${props.count ?? "?"} 阅读`,
         },
         {
             attr: "word-count",

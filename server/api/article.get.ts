@@ -1,7 +1,6 @@
 import { type } from "arktype";
 import CryptoES from "crypto-es";
 import { Article } from "~/utils/article";
-import { ReadRecordModel } from "~~/server/models/ReadRecord";
 import type { GetArticleResponse } from "~~/server/types/api/article";
 
 const schema = type({
@@ -30,35 +29,6 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
 
     //读取文章
     res.body = await readArticle(art);
-
-    //获取阅读量
-    const qCounts = await ReadRecordModel.aggregate([
-        {
-            $match: {
-                novel,
-                index,
-            },
-        },
-        {
-            $group: {
-                _id: {
-                    ip: "$ip",
-                    window: {
-                        $dateTrunc: {
-                            date: "$time",
-                            unit: "hour",
-                            binSize: 8,
-                        },
-                    },
-                },
-            },
-        },
-        {
-            $count: "count",
-        },
-    ]);
-
-    res.readCount = qCounts.length ? qCounts[0].count : 0;
 
     //生成代币
     const token = {

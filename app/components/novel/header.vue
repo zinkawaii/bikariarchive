@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-    import type { GetArticleResponse } from "~~/server/types/api/article";
-
     defineProps<{
         art: Article;
-        post?: GetArticleResponse;
+        count?: number;
     }>();
 </script>
 
@@ -13,7 +11,7 @@
         <h1 class="novel-title">{{ art.title }}</h1>
         <novel-attributes
             :art
-            :post
+            :count
             :attrs="[`read-count`, `word-count`, `publish-date`, `update-date`]"
         />
         <nuxt-link v-visible="art.prev" class="novel-adjacent-top" :to="art.prev?.route">

@@ -2,13 +2,13 @@ import { type } from "arktype";
 import CryptoES from "crypto-es";
 import { ReadRecordModel } from "~~/server/models/ReadRecord";
 import { UserDataModel } from "~~/server/models/UserData";
-import type { PatchArticleBody } from "~~/server/types/api/article";
+import type { PatchArticleBody, PatchArticleResponse } from "~~/server/types/api/article";
 
 const schema = type({
     token: "string",
 });
 
-export default defineJEventHandler(async (event, res) => {
+export default defineJEventHandler<PatchArticleResponse>(async (event, res) => {
     const config = useRuntimeConfig();
     const { token } = schema.assert(
         await readBody<PatchArticleBody>(event),
@@ -37,6 +37,35 @@ export default defineJEventHandler(async (event, res) => {
             index,
             user,
         });
+
+        //获取阅读量
+        const qCounts = await ReadRecordModel.aggregate([
+            {
+                $match: {
+                    novel,
+                    index,
+                },
+            },
+            {
+                $group: {
+                    _id: {
+                        ip: "$ip",
+                        window: {
+                            $dateTrunc: {
+                                date: "$time",
+                                unit: "hour",
+                                binSize: 8,
+                            },
+                        },
+                    },
+                },
+            },
+            {
+                $count: "count",
+            },
+        ]);
+
+        res.count = qCounts.length ? qCounts[0].count : 0;
     }
     catch {
         //代币解析错误
