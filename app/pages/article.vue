@@ -71,15 +71,14 @@
     //设置元信息
     useSeoMeta({
         title: `${art.title} - ${art.volumeInfo.title}`,
+        articleAuthor: [art.novelInfo.author],
+        articleSection: art.novelInfo.type,
+        articleTag: art.novelInfo.tag,
+        articlePublishedTime: art.publishDate,
+        articleModifiedTime: art.updateDate,
         ogTitle: art.title,
         ogType: "article",
         ogImage: art.cover?.src,
-        // @ts-expect-error 自定义键值
-        ogArticleAuthor: art.novelInfo.author,
-        ogArticleSection: art.novelInfo.type,
-        ogArticleTag: art.novelInfo.tag.join(","),
-        ogArticlePublished_time: art.publishDate,
-        ogArticleModified_time: art.updateDate,
         description: () => post.value?.body?.children
             .filter((node) => node.type === "element" && node.tag === "p")
             .map((p) => toString(p))
