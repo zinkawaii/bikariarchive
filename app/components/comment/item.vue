@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import { parseComment } from "@bikari/article/remark";
     import { format, formatDistanceToNow } from "date-fns";
     import { LazyCommentUser } from "#components";
     import type { WithParent } from "~/types";

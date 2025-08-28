@@ -18,16 +18,6 @@ import slot from "./plugins/slot";
 import slug from "./plugins/slug";
 import strikethrough from "./plugins/strikethrough";
 
-export {
-    compiler,
-    emoji,
-    image,
-    link,
-    maths,
-    ruby,
-    strikethrough,
-};
-
 const rehypeOptions: RehypeOptions = {
     allowDangerousHtml: true,
     footnoteLabel: "参考资料",
@@ -104,6 +94,20 @@ export async function parseUpdate(text: string) {
         .use(strikethrough)
         .use(rehype, rehypeOptions)
         .use(raw)
+        .use(compiler);
+
+    const result = await processor.process(text);
+    return result.result;
+}
+
+export async function parseComment(text: string) {
+    const processor = unified()
+        .use(parse)
+        .use(emoji)
+        .use(math)
+        .use(ruby)
+        .use(strikethrough)
+        .use(rehype, rehypeOptions)
         .use(compiler);
 
     const result = await processor.process(text);

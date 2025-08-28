@@ -2,11 +2,12 @@
     import { hyphenate } from "@vueuse/core";
     import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
     import type { VNodeChild } from "vue";
-    import { Iconify, MbCode, MbGallery, MbImage, MbMath, PlainLink, StoryHeading } from "#components";
+    import { CommentCode, Iconify, MbCode, MbGallery, MbImage, MbMath, PlainLink, StoryHeading } from "#components";
 
     const ariaRE = /^aria[A-Z]/;
 
     const globalComponents = {
+        CommentCode,
         Iconify,
         MbCode,
         MbGallery,
@@ -60,13 +61,18 @@
         if (variant === "story") {
             if (tag === "h2") {
                 tag = "story-heading";
-                const last = node.children.at(-1);
+                const last = children.at(-1);
                 if (last?.type === "text") {
                     const [left, right] = last.value.split(" | ");
                     children = children.with(-1, { type: "text", value: left });
                     props.modifier = right;
                     delete props.id;
                 }
+            }
+        }
+        else if (variant === "comment") {
+            if (tag === "mb-code") {
+                tag = "comment-code";
             }
         }
         const comp = resolvedComponents.value[tag];
@@ -274,19 +280,6 @@
 
             img {
                 max-width: 411px;
-            }
-
-            .shiki {
-                display: grid;
-                margin-block: 0.5em -0.5em;
-                padding-top: 0.5em;
-                font-family: var(--font-monospace);
-                font-size: 14px;
-                line-height: 20px;
-
-                > ::-webkit-scrollbar {
-                    display: none;
-                }
             }
         }
 
