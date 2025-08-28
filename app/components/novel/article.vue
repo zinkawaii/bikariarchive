@@ -44,18 +44,16 @@
     });
 
     const resolvedComponents = computed(() => {
-        const comps: Record<string, Component> = {
-            ...globalComponents,
-            ...props.components,
-        };
-        for (const name in comps) {
-            comps[hyphenate(name)] = comps[name];
+        const comps: Record<string, Component> = {};
+        for (const [name, comp] of Object.entries({ ...globalComponents, ...props.components })) {
+            comps[hyphenate(name)] = comp;
         }
         return comps;
     });
 
     function transform(node: Element, variant?: ArticleVariant) {
-        let { tag, children } = node;
+        let { children } = node;
+        let tag = hyphenate(node.tag);
         const props = { ...node.props };
 
         if (variant === "story") {
@@ -75,7 +73,7 @@
                 tag = "comment-code";
             }
         }
-        const comp = resolvedComponents.value[tag];
+        const comp = resolvedComponents.value[tag] ?? resolvedComponents.value["lazy-" + tag];
 
         if ("className" in props) {
             props.class = props.className;

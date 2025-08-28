@@ -4,8 +4,8 @@
 
     defineOptions({
         components: {
-            "known-ability": LazyEntryKnownAbility,
-            "starred-ability": LazyEntryStarredAbility,
+            LazyEntryKnownAbility,
+            LazyEntryStarredAbility,
         },
     });
     defineProps<EntryDetail>();
