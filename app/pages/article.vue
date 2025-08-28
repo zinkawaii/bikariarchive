@@ -65,10 +65,13 @@
             password,
         },
         immediate: !art.encrypted,
-        watch: [art],
+        watch: false,
     });
 
-    //设置元信息
+    //热重载
+    watch(art, () => execute());
+
+    //元信息
     useSeoMeta({
         title: `${art.title} - ${art.volumeInfo.title}`,
         articleAuthor: [art.novelInfo.author],
