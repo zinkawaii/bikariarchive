@@ -1,9 +1,23 @@
-<script lang="ts" setup>
+<script lang="ts">
     import { hyphenate } from "@vueuse/core";
     import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
-    import type { VNodeArrayChildren } from "vue";
+    import type { VNodeChild } from "vue";
     import { Iconify, MbCode, MbGallery, MbImage, MbMath, PlainLink, StoryHeading } from "#components";
 
+    const ariaRE = /^aria[A-Z]/;
+
+    const globalComponents = {
+        Iconify,
+        MbCode,
+        MbGallery,
+        MbImage,
+        MbMath,
+        PlainLink,
+        StoryHeading,
+    };
+</script>
+
+<script lang="ts" setup>
     const props = withDefaults(defineProps<{
         body?: Root | Child[];
         components?: Record<string, Component>;
@@ -28,41 +42,20 @@
         }[["article", "story"].includes(props.variant) ? settingStore.get("font-size") : 1];
     });
 
-    const globalComponents = {
-        Iconify,
-        MbCode,
-        MbGallery,
-        MbImage,
-        MbMath,
-        PlainLink,
-        StoryHeading,
-    };
-
     const resolvedComponents = computed(() => {
-        return createComponentsMap({
+        const comps: Record<string, Component> = {
             ...globalComponents,
             ...props.components,
-        });
-    });
-
-    function createComponentsMap(comps: Record<string, Component>) {
+        };
         for (const name in comps) {
             comps[hyphenate(name)] = comps[name];
         }
         return comps;
-    }
+    });
 
-    function transformProps(props: Record<string, any>) {
-        if ("className" in props) {
-            props.class = props.className;
-            delete props.className;
-        }
-        return props;
-    }
-
-    function transformVariant(node: Element, variant?: ArticleVariant) {
-        //避免直接修改原始节点
-        let { tag, props, children } = node;
+    function transform(node: Element, variant?: ArticleVariant) {
+        let { tag, children } = node;
+        const props = { ...node.props };
 
         if (variant === "story") {
             if (tag === "h2") {
@@ -70,21 +63,37 @@
                 const last = node.children.at(-1);
                 if (last?.type === "text") {
                     const [left, right] = last.value.split(" | ");
-                    props = {
-                        ...props,
-                        modifier: right,
-                    };
+                    children = children.with(-1, { type: "text", value: left });
+                    props.modifier = right;
                     delete props.id;
-                    children = children.slice(0, -1);
-                    children.push({ type: "text", value: left });
+                }
+            }
+        }
+        const comp = resolvedComponents.value[tag];
+
+        if ("className" in props) {
+            props.class = props.className;
+            delete props.className;
+        }
+
+        for (const key in props) {
+            if (ariaRE.test(key)) {
+                props["aria-" + key.slice("aria".length).toLowerCase()] = props[key];
+                delete props[key];
+            }
+            else if (!comp) {
+                const hyphenated = hyphenate(key);
+                if (hyphenated !== key) {
+                    props[hyphenated] = props[key];
+                    delete props[key];
                 }
             }
         }
 
         return {
             tag,
-            comp: resolvedComponents.value[tag] || tag,
-            props: transformProps(props),
+            comp,
+            props,
             children,
         };
     }
@@ -92,20 +101,18 @@
     function render() {
         const { body, variant } = props;
         const children = Array.isArray(body) ? body : body.children;
-        return children.length ? r(children) : slots.default?.();
+        return children.length ? children.map(r) : slots.default?.();
 
-        function r(children: Child[]): VNodeArrayChildren {
-            return children.map((node) => {
-                if (node.type === "element") {
-                    const { tag, comp, props, children } = transformVariant(node, variant);
-                    return h(comp, props, tag in resolvedComponents.value ? {
-                        default: () => r(children),
-                    } : r(children));
-                }
-                else {
-                    return node.value;
-                }
-            });
+        function r(node: Child): VNodeChild {
+            if (node.type === "element") {
+                const { tag, comp, props, children } = transform(node, variant);
+                return comp
+                    ? h(comp, props, { default: () => children.map(r) })
+                    : h(tag, props, children.map(r));
+            }
+            else {
+                return node.value;
+            }
         }
     }
 </script>
