@@ -29,7 +29,7 @@ const client = {
     global: {
         title: "微光档案",
         author: "山吹色御守",
-        description: "虚幻的幸福",
+        description: "故事就是只为你一个人而存在的世界",
         phrase: "うたかたなしあわせ",
         subtitle: "微かな力を尽くして、光の届いた彼方へ",
         avatar: "/garden/avatar/maestrale.webp",
