@@ -8,9 +8,6 @@ export const useSettingStore = defineStore("setting", () => {
         "dark-mode": 0,
         "sidebar-display": 0,
         interaction: true,
-        "shortcut-last": "ArrowLeft",
-        "shortcut-next": "ArrowRight",
-        "font-size": 1,
         "ui-collapse": false,
     });
 

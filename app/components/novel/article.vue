@@ -23,7 +23,6 @@
         body?: Root | Child[];
         components?: Record<string, Component>;
         variant?: ArticleVariant;
-        size?: "small" | "medium" | "large";
     }>(), {
         body: () => [],
         components: () => ({}),
@@ -32,16 +31,6 @@
     const slots = defineSlots<{
         default: () => any;
     }>();
-
-    const settingStore = useSettingStore();
-
-    const fontSize = computed(() => {
-        return props.size ?? {
-            0: "small",
-            1: "medium",
-            2: "large",
-        }[["article", "story"].includes(props.variant) ? settingStore.get("font-size") : 1];
-    });
 
     const resolvedComponents = computed(() => {
         const comps: Record<string, Component> = {};
@@ -122,7 +111,7 @@
 </script>
 
 <template>
-    <mb-primitive class="novel-text" :class="`is-${variant} is-${fontSize}`" as="article">
+    <mb-primitive class="novel-text" :class="`is-${variant}`" as="article">
         <render />
     </mb-primitive>
 </template>
@@ -130,12 +119,6 @@
 <style lang="scss">
     .novel-text {
         overflow-wrap: anywhere;
-
-        @each $key, $size in (small, 14px), (large, 18px) {
-            &.is-#{$key} {
-                font-size: $size;
-            }
-        }
 
         :where(h2, h3, h4, h5, h6) {
             margin-block: 1.4em 0.7em;

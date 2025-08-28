@@ -15,7 +15,6 @@
 
     const { hooks } = useHookStore();
     const readRecordStore = useReadRecordStore();
-    const settingStore = useSettingStore();
     const toastStore = useToastStore();
     const router = useRouter();
 
@@ -40,10 +39,10 @@
             return;
         }
 
-        if (!art.isFirst && event.key === settingStore.get("shortcut-last")) {
+        if (!art.isFirst && event.key === "ArrowLeft") {
             router.push(art.prev!.route);
         }
-        else if (!art.isLast && event.key === settingStore.get("shortcut-next")) {
+        else if (!art.isLast && event.key === "ArrowRight") {
             router.push(art.next!.route);
         }
     });

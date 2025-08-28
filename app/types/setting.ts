@@ -5,9 +5,6 @@ export interface Setting {
     "dark-mode": number;
     "sidebar-display": number;
     interaction: boolean;
-    "shortcut-last": string;
-    "shortcut-next": string;
-    "font-size": number;
     "ui-collapse": boolean;
 }
 
