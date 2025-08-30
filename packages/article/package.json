@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown -w",
-    "test": "vitest"
+    "test": "vitest",
+    "new": "node scripts/index.ts"
   },
   "dependencies": {
     "date-fns": "catalog:frontend",
@@ -37,8 +38,11 @@
     "yaml": "catalog:backend"
   },
   "devDependencies": {
+    "@clack/prompts": "catalog:backend",
     "@zinkawaii/tsconfig": "catalog:types",
+    "nanoid": "catalog:backend",
     "tsdown": "catalog:build",
-    "vitest": "catalog:test"
+    "vitest": "catalog:test",
+    "zx": "catalog:backend"
   }
 }

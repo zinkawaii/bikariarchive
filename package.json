@@ -11,6 +11,7 @@
     "stylelint": "stylelint **/*.{vue,scss}",
     "git:stash": "git add -A && git stash",
     "git:stash/pop": "git stash pop && git reset",
+    "new": "pnpm --filter @bikari/article new",
     "task:article": "node scripts/article.ts",
     "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.ts",
     "task:bangumi": "node --watch scripts/bangumi.ts",
