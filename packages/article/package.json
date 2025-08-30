@@ -14,9 +14,9 @@
     "new": "node scripts/index.ts"
   },
   "dependencies": {
-    "date-fns": "catalog:frontend",
-    "defu": "catalog:backend",
-    "github-slugger": "catalog:frontend",
+    "date-fns": "catalog:utils",
+    "defu": "catalog:utils",
+    "github-slugger": "catalog:utils",
     "kerria": "catalog:markdown",
     "mdast-util-frontmatter": "catalog:markdown",
     "mdast-util-gfm-footnote": "catalog:markdown",
@@ -26,8 +26,8 @@
     "micromark-extension-gfm-footnote": "catalog:markdown",
     "micromark-extension-gfm-strikethrough": "catalog:markdown",
     "micromark-util-symbol": "catalog:markdown",
-    "pathe": "catalog:backend",
-    "propathy": "catalog:backend",
+    "pathe": "catalog:utils",
+    "propathy": "catalog:utils",
     "rehype-raw": "catalog:markdown",
     "remark-math": "catalog:markdown",
     "remark-mdc": "catalog:markdown",
@@ -35,15 +35,15 @@
     "remark-rehype": "catalog:markdown",
     "unified": "catalog:markdown",
     "unist-util-visit": "catalog:markdown",
-    "yaml": "catalog:backend"
+    "yaml": "catalog:utils"
   },
   "devDependencies": {
-    "@clack/prompts": "catalog:backend",
+    "@clack/prompts": "catalog:utils",
     "@zinkawaii/tsconfig": "catalog:types",
-    "nanoid": "catalog:backend",
-    "picocolors": "catalog:backend",
-    "tsdown": "catalog:build",
+    "nanoid": "catalog:utils",
+    "picocolors": "catalog:utils",
+    "tsdown": "catalog:typescript",
     "vitest": "catalog:test",
-    "zx": "catalog:backend"
+    "zx": "catalog:utils"
   }
 }
