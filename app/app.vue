@@ -10,6 +10,7 @@
             { rel: "icon", href: config.public.favicon },
             { rel: "apple-touch-icon", href: config.public.favicon },
             { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" },
+            { rel: "stylesheet", href: "https://esm.sh/katex/dist/katex.min.css" },
         ],
         meta: [
             { name: "mobile-web-app-capable", content: "yes" },

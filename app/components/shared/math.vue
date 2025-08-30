@@ -1,17 +1,9 @@
 <script lang="ts" setup>
-    import css from "katex/dist/katex.min.css?url";
-
     const props = withDefaults(defineProps<{
         type: "inline" | "block";
         raw?: string;
     }>(), {
         raw: "",
-    });
-
-    useHead({
-        link: [
-            { rel: "stylesheet", href: css },
-        ],
     });
 
     const contextMenuStore = useContextMenuStore();
