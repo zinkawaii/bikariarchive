@@ -48,7 +48,8 @@ export const useShikiStore = defineStore("shiki", () => {
     }
 
     async function loadLang(...langs: string[]) {
-        const { bundledLanguages } = await import("shiki/langs");
+        // @ts-expect-error https://typescript.tv/errors/#ts2307
+        const { bundledLanguages } = await import("https://esm.sh/shiki/langs") as typeof import("shiki/langs");
         const loadedLanguages = shiki.getLoadedLanguages();
         await Promise.all(
             langs
