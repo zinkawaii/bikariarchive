@@ -1,64 +1,17 @@
-import { readFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { readFile, writeFile } from "node:fs/promises";
 import * as p from "@clack/prompts";
 import { format } from "date-fns";
 import { customAlphabet } from "nanoid";
-import type { JArticle, JNovel } from "@bikari/article";
-import { defineCreator, resolveRoot } from "./utils.ts";
-
-const createNovel = defineCreator(async (novelInfo: JNovel, novel: string, volume: number) => {
-    const recents = novelInfo.chapters.slice(-3).map((chapter) => chapter.index).reverse();
-
-    const index = await p.text({
-        message: "章节索引：",
-        placeholder: recents + ",...",
-    });
-
-    if (p.isCancel(index)) {
-        return;
-    }
-
-    const chapters = novelInfo.chapters.filter((chapter) => chapter.volume === volume);
-    const order = String(chapters.length).padStart(2, "0");
-
-    return {
-        fileName: `/data/novel/${novel}.${volume}/${order}-${index}.mdz`,
-        frontmatter: {
-            title: await p.text({
-                message: "文章标题：",
-                defaultValue: "",
-            }),
-            draft: true,
-        },
-    };
-});
-
-const createBlog = defineCreator(async (novelInfo: JNovel, novel: string, volume: number) => {
-    const now = new Date();
-    const date = format(now, "yyMMdd");
-    const order = novelInfo.chapters.filter((chapter) => chapter.index.startsWith(date)).length;
-
-    return {
-        fileName: `/data/novel/${novel}.${volume}/${date + order}.mdz`,
-        frontmatter: {
-            title: await p.text({
-                message: "文章标题：",
-                defaultValue: "",
-            }),
-            abbrlink: createAbbrlink(),
-            date: {
-                created: format(now, "yyyy-MM-dd"),
-            },
-            draft: true,
-        },
-    };
-});
+import YAML from "yaml";
+import { $ } from "zx";
+import type { JArticle, JChapter } from "@bikari/article";
+import { resolveRoot } from "./utils.ts";
 
 export async function createArticle() {
-    p.intro("新建文章");
-
     const path = resolveRoot("/.data/json/Article.json");
-    const text = await readFile(path, "utf-8");
-    const meta = JSON.parse(text) as JArticle;
+    const file = await readFile(path, "utf-8");
+    const meta = JSON.parse(file) as JArticle;
 
     const novels = Object.entries(meta).map(([k, v]) => ({ label: v.title, value: k }));
 
@@ -88,7 +41,83 @@ export async function createArticle() {
     }
 
     const create = novelInfo.type === "novel" ? createNovel : createBlog;
-    await create(novelInfo, novel, volume);
+    const chapters = novelInfo.chapters.filter((chapter) => chapter.volume === volume);
+
+    const returns = await create(chapters);
+    if (returns) {
+        const { fileName, frontmatter } = returns;
+
+        const path = resolveRoot(`/data/novel/${novel}.${volume}/` + fileName);
+        const text = `---\n${YAML.stringify(frontmatter)}---\n`;
+
+        if (existsSync(path)) {
+            p.log.error(`文件 "${path}" 已存在！`);
+        }
+        else {
+            await writeFile(path, text);
+        }
+
+        await $`code-insiders ${path}`;
+    }
+}
+
+async function createNovel(chapters: JChapter[]) {
+    const recents = chapters.slice(-3).map((chapter) => chapter.index).reverse();
+
+    const index = await p.text({
+        message: "章节索引：",
+        placeholder: recents + ",...",
+    });
+
+    if (p.isCancel(index)) {
+        return;
+    }
+
+    const title = p.text({
+        message: "章节标题：",
+        defaultValue: "",
+    });
+
+    if (p.isCancel(title)) {
+        return;
+    }
+
+    const order = String(chapters.length).padStart(2, "0");
+
+    return {
+        fileName: `${order}-${index}.mdz`,
+        frontmatter: {
+            title,
+            draft: true,
+        },
+    };
+}
+
+async function createBlog(chapters: JChapter[]) {
+    const title = p.text({
+        message: "章节标题：",
+        defaultValue: "",
+    });
+
+    if (p.isCancel(title)) {
+        return;
+    }
+
+    const now = new Date();
+    const date = format(now, "yyMMdd");
+    const order = chapters.filter((chapter) => chapter.index.startsWith(date)).length;
+
+    return {
+        fileName: `${date + order}.mdz`,
+        frontmatter: {
+            title,
+            abbrlink: createAbbrlink(),
+            date: {
+                created: format(now, "yyyy-MM-dd"),
+            },
+            draft: true,
+        },
+    };
 }
 
 function createAbbrlink() {

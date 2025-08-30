@@ -41,6 +41,7 @@
     "@clack/prompts": "catalog:backend",
     "@zinkawaii/tsconfig": "catalog:types",
     "nanoid": "catalog:backend",
+    "picocolors": "catalog:backend",
     "tsdown": "catalog:build",
     "vitest": "catalog:test",
     "zx": "catalog:backend"
