@@ -41,9 +41,6 @@ export default defineNuxtConfig({
     experimental: {
         typedPages: true,
     },
-    features: {
-        inlineStyles: false,
-    },
     nitro: {
         rollupConfig: {
             plugins: [

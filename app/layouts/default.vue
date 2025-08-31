@@ -26,7 +26,6 @@
     <toast-area />
     <z-fps />
     <z-context-menu />
-    <z-loader />
 </template>
 
 <style lang="scss">
@@ -119,9 +118,5 @@
 
     .z-context-menu {
         z-index: 1024;
-    }
-
-    .z-loader {
-        z-index: 2048;
     }
 </style>

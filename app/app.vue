@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import scriptDark from "~/scripts/dark?url";
+
     const settingStore = useSettingStore();
     const config = useRuntimeConfig();
 
@@ -11,6 +13,9 @@
             { rel: "apple-touch-icon", href: config.public.favicon },
             { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" },
             { rel: "stylesheet", href: "https://esm.sh/katex/dist/katex.min.css" },
+        ],
+        script: [
+            { src: scriptDark },
         ],
         meta: [
             { name: "mobile-web-app-capable", content: "yes" },
