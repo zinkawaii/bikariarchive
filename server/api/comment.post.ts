@@ -38,7 +38,7 @@ export default defineJEventHandler(async (event) => {
 
     const time = new Date();
     const uid = event.context.session?.uid;
-    const mode = session.uid !== 0 ? "user" : "guest";
+    const mode = session.uid ? "user" : "guest";
 
     let info:
         | Pick<CommentDataSchema, "nickname" | "email" | "address">

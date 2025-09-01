@@ -2,6 +2,8 @@
 
 improve: 同步初始化夜间模式，移除 Loader
 
+fix(comment): 修复游客无法发送评论的问题
+
 ## 2025-08-29 [v0.6.13]
 
 improve(article): 延迟请求阅读量数据
