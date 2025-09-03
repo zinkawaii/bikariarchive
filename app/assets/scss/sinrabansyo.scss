@@ -57,6 +57,27 @@ code {
     color: var(--color-theme-text);
 }
 
+kbd {
+    display: inline-block;
+    padding-inline: 0.25em;
+    border-bottom: 0.15em solid var(--color-gray-600);
+    border-radius: 0.25em;
+    background-color: var(--color-gray-800);
+    font-family: var(--font-monospace);
+    font-size: 0.875em;
+    line-height: 1.4;
+    vertical-align: 0.1em;
+    color: var(--color-text-secondary);
+    transition: all 0.1s;
+    user-select: none;
+
+    &:active {
+        border-bottom-color: var(--color-theme-dark);
+        color: var(--color-theme-text);
+        translate: 0 0.05em;
+    }
+}
+
 img {
     width: 100%;
     height: auto;
