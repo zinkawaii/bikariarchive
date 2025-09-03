@@ -48,6 +48,11 @@ export default defineNuxtConfig({
             ],
         },
     },
+    routeRules: {
+        "/favicon.ico": {
+            redirect: "/garden/favicon.svg",
+        },
+    },
     runtimeConfig: {
         ...serverConfig,
         public: clientConfig,
