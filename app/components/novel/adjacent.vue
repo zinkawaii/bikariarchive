@@ -19,13 +19,13 @@
     .novel-adjacent {
         display: grid;
         align-items: center;
+        margin-inline-end: auto;
 
         &.is-prev .iconify {
             scale: -1;
         }
 
         &.is-next {
-            margin-left: auto;
             direction: rtl;
         }
     }
