@@ -74,16 +74,6 @@ export default defineNuxtConfig({
                 ],
             },
         },
-        $server: {
-            build: {
-                rollupOptions: {
-                    output: {
-                        // https://github.com/nuxt/nuxt/issues/32175#issuecomment-2898200099
-                        preserveModules: true,
-                    },
-                },
-            },
-        },
     },
     modules: [
         "@kikiutils/nuxt-session",

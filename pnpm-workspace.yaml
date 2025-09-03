@@ -3,6 +3,9 @@ shamefullyHoist: true
 packages:
   - packages/*
 
+overrides:
+  vite: npm:rolldown-vite@latest
+
 patchedDependencies:
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
 
