@@ -1,23 +1,15 @@
 <script lang="ts" setup>
-    import type { SettingField } from "~/types/setting";
-
-    const props = defineProps<{
-        name: SettingField<boolean>;
-    }>();
-
-    const settingStore = useSettingStore();
-
-    const state = computed(() => {
-        return settingStore.get(props.name);
+    const modelValue = defineModel<boolean>({
+        required: true,
     });
 </script>
 
 <template>
-    <button class="setting-switch" @click="settingStore.toggle(name)">
-        <span class="switch-button" :class="{ [`is-checked`]: state }">
+    <button class="setting-switch" @click="modelValue = !modelValue">
+        <span class="switch-button" :class="{ [`is-checked`]: modelValue }">
             <span class="switch-thumb"></span>
         </span>
-        <span class="switch-title">{{ state ? "打开" : "关闭" }}</span>
+        <span class="switch-title">{{ modelValue ? "打开" : "关闭" }}</span>
     </button>
 </template>
 

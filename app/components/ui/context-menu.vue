@@ -145,7 +145,7 @@
     });
 
     useEventListener("contextmenu", (event) => {
-        if (event.ctrlKey) {
+        if (event.ctrlKey === settingStore.get("contextmenu")) {
             return;
         }
 

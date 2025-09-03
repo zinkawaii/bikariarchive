@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-    import type { SettingField } from "~/types/setting";
-
     defineProps<{
-        name: SettingField<number>;
         options: string[];
     }>();
-
-    const settingStore = useSettingStore();
+    const modelValue = defineModel<number>({
+        required: true,
+    });
 </script>
 
 <template>
@@ -14,8 +12,8 @@
         <li
             v-for="(item, i) in options"
             class="select-item"
-            :class="{ [`is-checked`]: i === settingStore.get(name) }"
-            @click="settingStore.set(name, i)"
+            :class="{ [`is-checked`]: modelValue === i }"
+            @click="modelValue = i"
         >{{ item }}</li>
     </ul>
 </template>

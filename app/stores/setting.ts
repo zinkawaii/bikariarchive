@@ -1,12 +1,13 @@
 import type { WatchCallback } from "vue";
 import { LazyZSetting } from "#components";
-import type { Setting, SettingField } from "~/types/setting";
+import type { SettingField, Settings } from "~/types/setting";
 
 export const useSettingStore = defineStore("setting", () => {
-    const setting = ref<Setting>({
+    const settings = ref<Settings>({
         theme: 0,
         "dark-mode": 0,
         "sidebar-display": 0,
+        contextmenu: false,
         interaction: true,
         "ui-collapse": false,
     });
@@ -25,25 +26,25 @@ export const useSettingStore = defineStore("setting", () => {
             /* 初空 */ 0: "hatsusora",
             /* 抹茶 */ 1: "ayame",
             /* 早樱 */ 2: "sakura",
-        }[setting.value.theme];
+        }[settings.value.theme];
     });
 
     //是否为夜间模式
     const isDarkMode = computed(() => ({
         1: false,
         2: true,
-    }[setting.value["dark-mode"]] ?? isPreferredDark.value));
+    }[settings.value["dark-mode"]] ?? isPreferredDark.value));
 
     function get<K extends SettingField>(key: K) {
-        return setting.value[key];
+        return settings.value[key];
     }
 
-    function set<K extends SettingField>(key: K, value: Setting[K]) {
-        setting.value[key] = value;
+    function set<K extends SettingField>(key: K, value: Settings[K]) {
+        settings.value[key] = value;
     }
 
-    function toggle<K extends SettingField<boolean>>(key: K, value?: Setting[K]) {
-        setting.value[key] = value ?? !setting.value[key];
+    function toggle<K extends SettingField<boolean>>(key: K, value?: Settings[K]) {
+        settings.value[key] = value ?? !settings.value[key];
     }
 
     //事件映射
@@ -54,7 +55,7 @@ export const useSettingStore = defineStore("setting", () => {
 
     //监听
     function listen<
-        T extends Omit<Setting, "theme" | "dark-mode"> & {
+        T extends Omit<Settings, "theme" | "dark-mode"> & {
             theme: string;
             "dark-mode": boolean;
         },
@@ -71,7 +72,7 @@ export const useSettingStore = defineStore("setting", () => {
             const source =
                 key === "dark-mode" ? isDarkMode :
                 key === "theme" ? themeName :
-                () => setting.value[key as SettingField];
+                () => settings.value[key as SettingField];
             const { trigger } = watchTriggerable(source, (newVal, oldVal, onCleanup) => {
                 if (oldVal !== void 0) {
                     document.startViewTransition?.(fn) ?? fn();
@@ -97,7 +98,7 @@ export const useSettingStore = defineStore("setting", () => {
     }
 
     return {
-        setting,
+        settings,
         open,
         close,
         themeName,
@@ -109,6 +110,6 @@ export const useSettingStore = defineStore("setting", () => {
     };
 }, {
     persist: {
-        pick: ["setting"],
+        pick: ["settings"],
     },
 });
