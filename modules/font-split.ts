@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { fontSplit } from "cn-font-split";
-import { defineNuxtModule, resolvePath } from "nuxt/kit";
+import { addPluginTemplate, defineNuxtModule, resolvePath } from "nuxt/kit";
 import { resolve } from "pathe";
 
 interface FontSplitOptions {
@@ -23,7 +23,9 @@ export default defineNuxtModule<FontSplitOptions>({
     defaults: {
         fonts: [],
     },
-    async setup(options, nuxt) {
+    async setup(options) {
+        const paths: string[] = [];
+
         for (const font of options.fonts!) {
             const fontPath = await resolvePath(font.path);
             const fontName = font.name.replaceAll(/\s+/g, "_");
@@ -45,8 +47,23 @@ export default defineNuxtModule<FontSplitOptions>({
                     },
                 });
             }
-
-            nuxt.options.css.push(resolve(dirName, cssName));
+            paths.push(resolve(dirName, cssName));
         }
+
+        addPluginTemplate({
+            filename: "font-split.client.mjs",
+            getContents: () => /* TS */`
+${paths.map((path, i) => `import css${i} from "${path}?url";`).join("\n")}
+
+export default defineNuxtPlugin(() => {
+    for (const css of [${paths.map((path, i) => `css${i}`)}]) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = css;
+        document.head.appendChild(link);
+    }
+});
+`.trimStart(),
+        });
     },
 });
