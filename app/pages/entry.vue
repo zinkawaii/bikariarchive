@@ -18,7 +18,6 @@
         name: "intel",
     });
 
-    const { hooks } = useHookStore();
     const route = useRoute();
 
     const isExist = computed(() => {
@@ -47,11 +46,7 @@
             <h1 class="entry-title">{{ data?.title ?? title }}</h1>
         </header>
         <mb-skeleton v-if="status !== `success`"/>
-        <article
-            v-else-if="data"
-            class="entry-article"
-            @vue:mounted="hooks.callHook(`article:rendered`, `.entry-article`)"
-        >
+        <article v-else-if="data" v-outline class="entry-article">
             <section class="entry-leading">
                 <div class="entry-primary">
                     <novel-article as="div" :body="data.summary"/>

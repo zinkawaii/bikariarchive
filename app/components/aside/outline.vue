@@ -34,13 +34,13 @@
     });
 
     //文章渲染完成时更新标题列表
-    hooks.hook("article:rendered", update);
+    hooks.hook("outline:update", update);
     onUnmounted(() => {
-        hooks.removeHook("article:rendered", update);
+        hooks.removeHook("outline:update", update);
     });
 
-    function update(selector: string) {
-        const headingEls = document.querySelectorAll<HTMLHeadingElement>(`${selector} :where(h2, h3):not(.sr-only)`);
+    function update(el: HTMLElement) {
+        const headingEls = el.querySelectorAll<HTMLHeadingElement>(`:where(h2, h3):not(.sr-only)`);
 
         flatHeaders.value = [...headingEls]
             .map((el) => ({

@@ -1,3 +1,3 @@
 export interface BikariHooks {
-    "article:rendered": (selector: string) => void;
+    "outline:update": (el: HTMLElement) => void;
 }

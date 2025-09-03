@@ -13,7 +13,6 @@
         comment: true,
     });
 
-    const { hooks } = useHookStore();
     const readRecordStore = useReadRecordStore();
     const toastStore = useToastStore();
     const router = useRouter();
@@ -130,9 +129,9 @@
         <mb-skeleton v-else-if="status !== `success` && (!post || post?.error)"/>
         <novel-article
             v-else-if="post"
+            v-outline
             :body="post.body"
             :variant="art.variant"
-            @vue:mounted="hooks.callHook(`article:rendered`, `.novel-text`)"
         />
         <novel-footer :art/>
     </meow-widget>
