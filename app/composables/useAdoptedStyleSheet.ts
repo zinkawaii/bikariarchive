@@ -9,7 +9,7 @@ export function useAdoptedStyleSheet(
         source,
     ]);
 
-    tryOnMounted(() => {
+    onMounted(() => {
         styleSheet = new CSSStyleSheet();
         document.adoptedStyleSheets.push(styleSheet);
 

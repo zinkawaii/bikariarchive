@@ -76,12 +76,13 @@
 
 <style lang="scss" scoped>
     .home-profile {
-        padding: 0;
+        padding: 0 16px;
+        text-wrap: nowrap;
     }
 
     .profile-backdrop {
         height: 144px;
-        margin-bottom: -64px;
+        margin: 0 -16px -64px;
     }
 
     .profile-header {
@@ -97,7 +98,6 @@
     .profile-avatar {
         grid-area: A;
         width: 96px;
-        margin-left: 16px;
         border-radius: 0 0 var(--rounded-full) var(--rounded-full);
         filter: drop-shadow(var(--box-shadow-dark));
     }
@@ -131,8 +131,6 @@
 
     .profile-story {
         margin-block: 12px;
-        padding-inline: 16px;
-        text-wrap: nowrap;
         color: var(--color-text-secondary);
         ruby-align: center;
     }
@@ -145,7 +143,7 @@
 
     .profile-irregular {
         opacity: 0.2;
-        margin: 16px;
+        margin-block: 16px;
         font-family: var(--font-smooth);
         font-size: 48px;
         font-weight: bold;

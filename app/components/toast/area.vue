@@ -7,17 +7,15 @@
 </script>
 
 <template>
-    <div class="toast-area">
-        <transition-group tag="ul">
-            <toast-item
-                v-for="[name, { icon, message }] in toastList"
-                :key="name"
-                :name
-                :icon-info="icon"
-                :message
-            />
-        </transition-group>
-    </div>
+    <transition-group class="toast-area" tag="ul">
+        <toast-item
+            v-for="[name, { icon, message }] in toastList"
+            :key="name"
+            :name
+            :icon-info="icon"
+            :message
+        />
+    </transition-group>
 </template>
 
 <style lang="scss" scoped>
@@ -25,8 +23,7 @@
         display: grid;
         justify-items: center;
         position: fixed;
-        top: 80px;
+        inset: 80px 0 auto;
         pointer-events: none;
-        inset-inline: 0;
     }
 </style>

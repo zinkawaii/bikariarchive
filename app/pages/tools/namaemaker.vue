@@ -12,8 +12,8 @@
 
     const countList = [1, 10, 100, 500];
     const genderList = [
-        { title: "男", value: "male" },
-        { title: "女", value: "female" },
+        { label: "男", value: "male" },
+        { label: "女", value: "female" },
     ];
 
     //数量
@@ -35,13 +35,13 @@
     });
 
     //结果
-    const results = ref<{
+    const results = shallowRef<{
         kanji: string;
         kana: string;
     }[]>([]);
 
     //分列结果
-    const chunkedResults = computed(() => {
+    const chunks = computed(() => {
         const median = Math.ceil(results.value.length / 2);
         return [
             results.value.slice(0, median),
@@ -49,10 +49,10 @@
         ];
     });
 
-    //结果是否为空
-    const isResultEmpty = computed(() => {
-        return !results.value.length;
-    });
+    //清空结果
+    function clear() {
+        results.value = [];
+    }
 
     //生成
     async function generate() {
@@ -73,7 +73,7 @@
         const specFirstKanji = specFirst.value.kanji || specFirst.value.kana;
         const specFirstKana = specFirst.value.kana || specFirst.value.kanji;
 
-        for (let i = 0; i < count.value; i++) {
+        results.value = Array.from({ length: count.value }, () => {
             const [
                 lastKanji = specLastKanji,
                 lastKana = specLastKana,
@@ -83,26 +83,21 @@
                 firstKana = specFirstKana,
             ] = specFirstKana ? [] : getFirstName(gender.value);
 
-            results.value.push({
+            return {
                 kanji: lastKanji + " " + firstKanji,
                 kana: lastKana + "　" + firstKana,
-            });
-        }
-    }
-
-    //清空结果
-    function clear() {
-        results.value.length = 0;
+            };
+        });
     }
 
     //姓
     function getLastName() {
         const r = randomInt(0, 100);
-        const [kanji, kana] = r < 10 ?
-            randomItems(Jnm["01"], Jnm["01_kana"]) : r < 55 ?
-            randomItems(Jnm["02"], Jnm["02_kana"]) : r < 65 ?
-            randomItems(Jnm["03"], Jnm["03_kana"]) : r < 70 ?
-            randomItems(Jnm["04"], Jnm["04_kana"]) :
+        const [kanji, kana] =
+            r < 10 ? randomItems(Jnm["01"], Jnm["01_kana"]) :
+            r < 55 ? randomItems(Jnm["02"], Jnm["02_kana"]) :
+            r < 65 ? randomItems(Jnm["03"], Jnm["03_kana"]) :
+            r < 70 ? randomItems(Jnm["04"], Jnm["04_kana"]) :
             randomItems(Jnm["23"], Jnm["23_kana"]);
 
         return [kanji, kana] as const;
@@ -182,19 +177,19 @@
                 <span class="text-gray">性别</span>
                 <div class="namae-radio">
                     <mb-radio
-                        v-for="{ title, value } in genderList"
+                        v-for="{ label, value } in genderList"
                         :value
                         v-model="gender"
-                    >{{ title }}</mb-radio>
+                    >{{ label }}</mb-radio>
                 </div>
             </div>
             <div class="namae-option">
                 <span class="text-gray">指定</span>
                 <div class="namae-specific">
-                    <input type="text" placeholder="姓" v-model="specLast.kanji"/>
-                    <input type="text" placeholder="姓（读音）" v-model="specLast.kana"/>
-                    <input type="text" placeholder="名" v-model="specFirst.kanji"/>
-                    <input type="text" placeholder="名（读音）" v-model="specFirst.kana"/>
+                    <input placeholder="姓" v-model="specLast.kanji"/>
+                    <input placeholder="姓（读音）" v-model="specLast.kana"/>
+                    <input placeholder="名" v-model="specFirst.kanji"/>
+                    <input placeholder="名（读音）" v-model="specFirst.kana"/>
                 </div>
             </div>
             <div class="namae-operator">
@@ -213,14 +208,14 @@
                         <span>生成</span>
                     </template>
                 </mb-button>
-                <mb-button :disabled="isResultEmpty" @click="clear">
+                <mb-button :disabled="!results.length" @click="clear">
                     <iconify name="fa7-solid:trash-can"/>
                     <span>清除结果</span>
                 </mb-button>
             </div>
         </div>
-        <meow-table v-if="!isResultEmpty" class="namae-result" variant="div">
-            <dl v-for="chunk in chunkedResults">
+        <meow-table v-if="results.length" class="namae-result" variant="div">
+            <dl v-for="chunk in chunks">
                 <template v-for="{ kanji, kana } in chunk">
                     <dt>{{ kanji }}</dt>
                     <dd>{{ kana }}</dd>

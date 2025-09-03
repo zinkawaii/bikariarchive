@@ -42,7 +42,7 @@
     });
 
     const results = computed(() => {
-        return (data.value ?? {}).list ?? [];
+        return data.value?.list ?? [];
     });
 
     const { page, total, paginatedList } = usePagination(results);
