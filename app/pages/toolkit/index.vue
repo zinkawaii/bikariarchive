@@ -5,7 +5,7 @@
         title: "工具箱",
     });
 
-    const tools: {
+    const toolkit: {
         title: string;
         description: string;
         icon: string;
@@ -15,27 +15,27 @@
             title: "日文名发生装置",
             description: "治好了孩子的起名困难症",
             icon: "material-symbols:language-japanese-kana",
-            to: { name: "tools-namaemaker" },
+            to: { name: "toolkit-namaemaker" },
         },
         {
             title: "歌词打轴",
             description: "为你的歌词快速打轴",
             icon: "mdi:timeline-clock",
-            to: { name: "tools-lyricaxis" },
+            to: { name: "toolkit-lyricaxis" },
         },
     ];
 </script>
 
 <template>
     <meow-widget title="工具箱">
-        <div class="tools-list">
-            <nuxt-link v-for="{ title, description, icon, to } in tools" class="tools-item" :to>
-                <div class="tools-icon">
+        <div class="toolkit-list">
+            <nuxt-link v-for="{ title, description, icon, to } in toolkit" class="toolkit-item" :to>
+                <div class="toolkit-icon">
                     <iconify :name="icon ?? `fa7-solid:wrench`"/>
                 </div>
-                <div class="tools-title">
+                <div class="toolkit-title">
                     <h3>{{ title }}</h3>
-                    <span class="tools-underline"></span>
+                    <span class="toolkit-underline"></span>
                 </div>
                 <p class="p-small text-truncate text-gray">{{ description }}</p>
             </nuxt-link>
@@ -44,13 +44,13 @@
 </template>
 
 <style lang="scss" scoped>
-    .tools-list {
+    .toolkit-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
         gap: 16px;
     }
 
-    .tools-item {
+    .toolkit-item {
         display: grid;
         grid-template:
             "A B"
@@ -61,13 +61,13 @@
         &:hover {
             color: var(--color-theme-text);
 
-            .tools-underline::before {
+            .toolkit-underline::before {
                 width: 100%;
             }
         }
     }
 
-    .tools-icon {
+    .toolkit-icon {
         display: grid;
         grid-area: A;
         place-items: center;
@@ -79,14 +79,14 @@
         color: var(--color-info);
     }
 
-    .tools-title {
+    .toolkit-title {
         display: grid;
         gap: 4px;
         line-height: 28px;
         transition: color 0.25s;
     }
 
-    .tools-underline {
+    .toolkit-underline {
         height: 1px;
         background-color: var(--color-border-lighter);
 

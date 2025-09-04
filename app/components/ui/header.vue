@@ -43,7 +43,7 @@
                 {
                     title: "工具箱",
                     icon: "fa7-solid:screwdriver-wrench",
-                    to: { name: "tools" },
+                    to: { name: "toolkit" },
                 },
                 {
                     title: "番剧",

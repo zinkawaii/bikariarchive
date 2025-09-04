@@ -12,9 +12,9 @@ export default defineSitemapEventHandler(() => {
         "/friend",
         "/intel",
         "/search",
-        "/tools",
-        "/tools/lyricaxis",
-        "/tools/namaemaker",
+        "/toolkit",
+        "/toolkit/lyricaxis",
+        "/toolkit/namaemaker",
         ...config.public.totalYears.map((year) => `/update/${year}`),
         ...Object.entries(Article.meta).map(([novel, { volumes, chapters }]) => [
             ...volumes.map((vol, i) => `/book/${novel}.${i}`),
