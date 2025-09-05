@@ -12,7 +12,7 @@ export default defineJEventHandler<GetBangumiResponse>(async (event, res) => {
         return 1;
     }
 
-    const sizes = 32;
+    const sizes = 30;
     const {
         total,
         data,
