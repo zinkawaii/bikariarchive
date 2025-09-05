@@ -59,6 +59,7 @@ export default defineNuxtPlugin(() => {
     for (const css of [${paths.map((path, i) => `css${i}`)}]) {
         const link = document.createElement("link");
         link.rel = "stylesheet";
+        link.crossOrigin = "";
         link.href = css;
         document.head.appendChild(link);
     }
