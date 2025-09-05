@@ -10,7 +10,8 @@
     const [isMotion, toggleMotion] = useToggle(true);
 
     //标题动效
-    Zin.delay(duration + titleDelay).then(async () => {
+    onMounted(async () => {
+        await Zin.delay(duration + titleDelay);
         await Zin.interval((i) => {
             const char = subtitle[i];
             subtitleChars.value.push(char);
