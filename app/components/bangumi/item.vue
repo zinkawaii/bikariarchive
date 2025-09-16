@@ -24,24 +24,14 @@
 
 <style lang="scss" scoped>
     .bangumi-item {
-        display: flex;
-        gap: 12px;
-        transition: border-color 0.25s;
-
-        &:hover {
-            border-color: var(--color-theme-dark);
-
-            .bangumi-title {
-                color: var(--color-theme-text);
-            }
-        }
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
     }
 
     .bangumi-cover {
         overflow: hidden;
-        width: 64px;
         aspect-ratio: 1 / 1.414;
-        border-radius: 4px;
         background-color: var(--color-gray-900);
     }
 
@@ -52,9 +42,12 @@
 
     .bangumi-info {
         display: grid;
-        flex: 1;
-        gap: 9px;
+        gap: 4px;
+        position: absolute;
+        inset: auto 0 0;
         margin-block: auto;
+        padding: 32px 12px 8px;
+        background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 75%) 50%);
     }
 
     .bangumi-title {

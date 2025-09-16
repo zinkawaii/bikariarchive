@@ -33,16 +33,8 @@
 <style lang="scss" scoped>
     .bangumi-list {
         display: grid;
-        grid-template-columns: repeat(var(--column, 3), 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: var(--meow-medium);
         margin-bottom: 16px;
-
-        @include viewport("lg") {
-            --column: 2;
-        }
-
-        @include viewport("md") {
-            --column: 1;
-        }
     }
 </style>
