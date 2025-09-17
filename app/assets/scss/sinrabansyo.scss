@@ -9,19 +9,17 @@
     box-sizing: border-box;
 }
 
-html {
-    color-scheme: light only;
-    scroll-behavior: smooth;
-    interpolate-size: allow-keywords;
-}
-
-body {
+:root {
     overflow: hidden scroll;
     font-family: var(--font-primary);
     font-size: 16px;
     line-height: 1.4;
+    text-autospace: normal;
     text-size-adjust: 100%;
     color: var(--color-text-primary);
+    color-scheme: light only;
+    scroll-behavior: smooth;
+    interpolate-size: allow-keywords;
 }
 
 h1, h2, h3 {
@@ -55,6 +53,10 @@ code {
     font-family: var(--font-monospace);
     font-size: 0.875em;
     color: var(--color-theme-text);
+}
+
+code, pre {
+    text-autospace: no-autospace;
 }
 
 kbd {
@@ -117,14 +119,12 @@ textarea {
     resize: none;
 }
 
-:root {
-    &::highlight(danger) {
-        color: var(--color-danger);
-    }
-}
-
 :focus {
     outline: none;
+}
+
+::highlight(danger) {
+    color: var(--color-danger);
 }
 
 ::placeholder {
