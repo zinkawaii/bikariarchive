@@ -4,11 +4,11 @@ import parse from "remark-parse";
 import rehype from "remark-rehype";
 import { type CompileResults, type Processor, unified } from "unified";
 import { expect, it } from "vitest";
-import { ruby } from "../src/remark";
 import compiler from "../src/remark/plugins/compiler";
 import emoji from "../src/remark/plugins/emoji";
 import frontmatter from "../src/remark/plugins/frontmatter";
 import interpolation from "../src/remark/plugins/interpolation";
+import ruby from "../src/remark/plugins/ruby";
 import slot from "../src/remark/plugins/slot";
 import type { Child, Element } from "../src/remark/types";
 

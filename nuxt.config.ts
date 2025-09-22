@@ -50,7 +50,7 @@ export default defineNuxtConfig({
     },
     routeRules: {
         "/favicon.ico": {
-            redirect: "/garden/favicon.svg",
+            redirect: clientConfig.favicon,
         },
     },
     runtimeConfig: {
@@ -85,6 +85,9 @@ export default defineNuxtConfig({
         "@vueuse/nuxt",
         "pinia-plugin-persistedstate/nuxt",
     ],
+    eslint: {
+        config: false,
+    },
     fonts: {
         provider: "google",
     },

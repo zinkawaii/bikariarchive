@@ -13,7 +13,7 @@ export async function createArticle() {
     const file = await readFile(path, "utf-8");
     const meta = JSON.parse(file) as JArticle;
 
-    const novels = Object.entries(meta).map(([k, v]) => ({ label: v.title, value: k }));
+    const novels = Object.entries(meta).map(([id, info]) => ({ label: info.title, value: id }));
 
     const novel = await p.select({
         options: novels,
@@ -73,7 +73,7 @@ async function createNovel(chapters: JChapter[]) {
         return;
     }
 
-    const title = p.text({
+    const title = await p.text({
         message: "章节标题：",
         defaultValue: "",
     });
@@ -94,7 +94,7 @@ async function createNovel(chapters: JChapter[]) {
 }
 
 async function createBlog(chapters: JChapter[]) {
-    const title = p.text({
+    const title = await p.text({
         message: "章节标题：",
         defaultValue: "",
     });

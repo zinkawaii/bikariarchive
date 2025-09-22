@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import CryptoES from "crypto-es";
+import { AES, Utf8 } from "crypto-es";
 import { ReadRecordModel } from "~~/server/models/ReadRecord";
 import { UserDataModel } from "~~/server/models/UserData";
 import type { PatchArticleBody, PatchArticleResponse } from "~~/server/types/api/article";
@@ -28,7 +28,7 @@ export default defineJEventHandler<PatchArticleResponse>(async (event, res) => {
 
     try {
         const { novel, index } = JSON.parse(
-            CryptoES.AES.decrypt(token, config.article.key).toString(CryptoES.enc.Utf8),
+            AES.decrypt(token, config.article.key).toString(Utf8),
         );
 
         //添加阅读记录

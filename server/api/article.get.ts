@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import CryptoES from "crypto-es";
+import { AES } from "crypto-es";
 import type { GetArticleResponse } from "~~/server/types/api/article";
 
 const schema = type({
@@ -35,5 +35,5 @@ export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
         index,
     };
 
-    res.token = CryptoES.AES.encrypt(JSON.stringify(token), config.article.key).toString();
+    res.token = AES.encrypt(JSON.stringify(token), config.article.key).toString();
 });
