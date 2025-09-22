@@ -39,7 +39,6 @@
   "devDependencies": {
     "@iconify-json/fa7-brands": "catalog:iconify",
     "@iconify-json/fa7-solid": "catalog:iconify",
-    "@kikiutils/nuxt-session": "catalog:nuxt",
     "@mdzjs/config": "catalog:markdown",
     "@nuxt/devtools": "catalog:nuxt",
     "@nuxt/eslint": "catalog:nuxt",

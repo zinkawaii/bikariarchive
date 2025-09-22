@@ -76,7 +76,6 @@ export default defineNuxtConfig({
         },
     },
     modules: [
-        "@kikiutils/nuxt-session",
         "@nuxt/eslint",
         "@nuxt/fonts",
         "@nuxt/icon",
@@ -107,17 +106,6 @@ export default defineNuxtConfig({
         enabled: false,
     },
     robots: robotsConfig,
-    nuxtSession: {
-        maxAge: 86400 * 30,
-        storage: {
-            data: {
-                driver: "cookie/header",
-                options: {
-                    key: process.env.NUXT_SESSION_KEY!,
-                },
-            },
-        },
-    },
     site: {
         name: clientConfig.title,
         url: `https://${clientConfig.domain}`,

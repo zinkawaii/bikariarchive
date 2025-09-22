@@ -7,8 +7,8 @@ const schema = type({
 });
 
 export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
-    const { session } = event.context;
-    const { uid = session.uid } = schema.assert(getQuery(event));
+    const session = await readSession(event);
+    const { uid = session.data.uid } = schema.assert(getQuery(event));
 
     //连接数据库
     await connectMongoose();
@@ -29,7 +29,7 @@ export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
 
     try {
         //只有本人才能获取的信息
-        validateMyself(event, uid!);
+        validateMyself(session.data, uid!);
         res.identity = qUser.identity;
     }
     catch {}

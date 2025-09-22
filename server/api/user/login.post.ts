@@ -8,7 +8,7 @@ const schema = type({
 });
 
 export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
-    const { session } = event.context;
+    const session = await readSession(event);
     const { account, password } = schema.assert(
         await readBody<PostLoginBody>(event),
     );
@@ -44,6 +44,8 @@ export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
     res.sign = sign;
 
     //写入会话
-    session.uid = uid;
-    session.identity = identity;
+    await session.update({
+        uid,
+        identity,
+    });
 });

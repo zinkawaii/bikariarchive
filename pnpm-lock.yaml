@@ -86,9 +86,6 @@ catalogs:
       specifier: ^5.0.0
       version: 5.0.0
   nuxt:
-    '@kikiutils/nuxt-session':
-      specifier: ^4.0.1
-      version: 4.0.1
     '@nuxt/devtools':
       specifier: ^2.6.3
       version: 2.6.3
@@ -306,9 +303,6 @@ importers:
       '@iconify-json/fa7-solid':
         specifier: catalog:iconify
         version: 1.2.0
-      '@kikiutils/nuxt-session':
-        specifier: catalog:nuxt
-        version: 4.0.1(db0@0.3.2)(ioredis@5.7.0)(magicast@0.3.5)
       '@mdzjs/config':
         specifier: catalog:markdown
         version: 0.0.1
@@ -1082,14 +1076,6 @@ packages:
 
   '@keyv/serialize@1.1.0':
     resolution: {integrity: sha512-RlDgexML7Z63Q8BSaqhXdCYNBy/JQnqYIwxofUrNLGCblOMHp+xux2Q8nLMLlPpgHQPoU0Do8Z6btCpRBEqZ8g==}
-
-  '@kikiutils/nitro-session@3.0.1':
-    resolution: {integrity: sha512-63ytFL9ni0gDiecRq5rTQtaXjnfVibhMcjPzlufoxHLnBwbsuHo+qEyFfHIdzBttVzpn6rTWkWjKINN67GQR3g==}
-    engines: {node: '>=18.12.1'}
-
-  '@kikiutils/nuxt-session@4.0.1':
-    resolution: {integrity: sha512-9ksyjV/81uqrgDTLS4D2exvsK1094Yg5Zw+vcyuS26gQQTxht3fPwyS7TPGpD0B8ZzbMbEXWkXPz/03EhtgQkw==}
-    engines: {node: '>=18.12.1'}
 
   '@kwsites/file-exists@1.1.1':
     resolution: {integrity: sha512-m9/5YGR18lIwxSFDwfE3oA7bWuq9kdau6ugN4H2rJeyhFQZcG9AgSHkQtSD15a8WvTgfz9aikZMrKPHvbpqFiw==}
@@ -4292,9 +4278,6 @@ packages:
     resolution: {integrity: sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-
   lodash.defaults@4.2.0:
     resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
 
@@ -4687,10 +4670,6 @@ packages:
 
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
-
-  node-ciphers@3.0.1:
-    resolution: {integrity: sha512-xCfdJz7Lyags7I1Q4pZUUrIzJEfOnhP+yaUysIamuCjiyBRYOiUxLXob5hB8GxndJX9qyUjpmnMLbaeasEzR0w==}
-    engines: {node: '>=18.12.1'}
 
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
@@ -7237,61 +7216,6 @@ snapshots:
   '@kabeep/lunar-date-fns@1.1.0': {}
 
   '@keyv/serialize@1.1.0': {}
-
-  '@kikiutils/nitro-session@3.0.1(db0@0.3.2)(ioredis@5.7.0)':
-    dependencies:
-      consola: 3.4.2
-      lodash-es: 4.17.21
-      nanoid: 5.1.5
-      node-ciphers: 3.0.1
-      on-change: 5.0.1
-      unstorage: 1.17.0(db0@0.3.2)(ioredis@5.7.0)
-    transitivePeerDependencies:
-      - '@azure/app-configuration'
-      - '@azure/cosmos'
-      - '@azure/data-tables'
-      - '@azure/identity'
-      - '@azure/keyvault-secrets'
-      - '@azure/storage-blob'
-      - '@capacitor/preferences'
-      - '@deno/kv'
-      - '@netlify/blobs'
-      - '@planetscale/database'
-      - '@upstash/redis'
-      - '@vercel/blob'
-      - '@vercel/functions'
-      - '@vercel/kv'
-      - aws4fetch
-      - db0
-      - idb-keyval
-      - ioredis
-      - uploadthing
-
-  '@kikiutils/nuxt-session@4.0.1(db0@0.3.2)(ioredis@5.7.0)(magicast@0.3.5)':
-    dependencies:
-      '@kikiutils/nitro-session': 3.0.1(db0@0.3.2)(ioredis@5.7.0)
-      '@nuxt/kit': 3.19.0(magicast@0.3.5)
-    transitivePeerDependencies:
-      - '@azure/app-configuration'
-      - '@azure/cosmos'
-      - '@azure/data-tables'
-      - '@azure/identity'
-      - '@azure/keyvault-secrets'
-      - '@azure/storage-blob'
-      - '@capacitor/preferences'
-      - '@deno/kv'
-      - '@netlify/blobs'
-      - '@planetscale/database'
-      - '@upstash/redis'
-      - '@vercel/blob'
-      - '@vercel/functions'
-      - '@vercel/kv'
-      - aws4fetch
-      - db0
-      - idb-keyval
-      - ioredis
-      - magicast
-      - uploadthing
 
   '@kwsites/file-exists@1.1.1':
     dependencies:
@@ -10881,8 +10805,6 @@ snapshots:
     dependencies:
       p-locate: 6.0.0
 
-  lodash-es@4.17.21: {}
-
   lodash.defaults@4.2.0: {}
 
   lodash.isarguments@3.1.0: {}
@@ -11532,10 +11454,6 @@ snapshots:
     optional: true
 
   node-addon-api@7.1.1: {}
-
-  node-ciphers@3.0.1:
-    dependencies:
-      type-fest: 4.41.0
 
   node-fetch-native@1.6.7: {}
 

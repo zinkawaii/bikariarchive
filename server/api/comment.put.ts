@@ -11,12 +11,13 @@ const schema = type({
 });
 
 export default defineJEventHandler(async (event) => {
+    const session = await readSession(event);
     const body = schema.assert(
         await readBody<PutCommentBody>(event),
     );
 
     //权限验证
-    validateIdentity(event, 9);
+    validateIdentity(session.data, 9);
 
     //连接数据库
     await connectMongoose();

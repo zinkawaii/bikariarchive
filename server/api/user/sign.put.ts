@@ -7,19 +7,19 @@ const schema = type({
 });
 
 export default defineJEventHandler(async (event) => {
-    const { session } = event.context;
+    const session = await readSession(event);
     const { content } = schema.assert(
         await readBody<PutUserSignBody>(event),
     );
 
     //权限验证
-    validateIdentity(event, 1);
+    validateIdentity(session.data, 1);
 
     //连接数据库
     await connectMongoose();
 
     const qUser = await UserDataModel.updateOne({
-        uid: session.uid,
+        uid: session.data.uid,
     }, {
         sign: content,
     });

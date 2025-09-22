@@ -11,7 +11,7 @@ const schema = type({
 });
 
 export default defineJEventHandler<GetLogonResponse>(async (event) => {
-    const { session } = event.context;
+    const session = await readSession(event);
     const { nickname, email, verify, password } = schema.assert(
         await readBody<GetLoginBody>(event),
     );
@@ -76,8 +76,10 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
     });
 
     //写入会话
-    session.uid = uid;
-    session.identity = identity;
+    await session.update({
+        uid,
+        identity,
+    });
 });
 
 //UID生成

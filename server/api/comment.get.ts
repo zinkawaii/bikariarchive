@@ -13,7 +13,7 @@ const schema = type({
 const select = "_id root parent content time mode nickname email address user";
 
 export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
-    const { session } = event.context;
+    const session = await readSession(event);
     const body = schema.assert(getQuery(event));
 
     //获取严格路径
@@ -56,7 +56,7 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
             const children = await CommentDataModel.find({
                 root: comment._id,
             }, select);
-            return transformComment(comment, children, {}, session?.identity ?? 0);
+            return transformComment(comment, children, {}, session.data.identity ?? 0);
         }),
     );
 });

@@ -23,6 +23,9 @@ export const serverConfig = {
             pass: "<!-- ??? -->",
         },
     },
+    session: {
+        password: "<!-- ??? -->",
+    },
 };
 
 const client = {

@@ -10,6 +10,7 @@ const schema = type({
 
 export default defineJEventHandler<PatchArticleResponse>(async (event, res) => {
     const config = useRuntimeConfig();
+    const session = await readSession(event);
     const { token } = schema.assert(
         await readBody<PatchArticleBody>(event),
     );
@@ -19,10 +20,11 @@ export default defineJEventHandler<PatchArticleResponse>(async (event, res) => {
 
     const ip = getRequestIP(event, { xForwardedFor: true });
     const time = new Date();
-    const uid = event.context.session?.uid;
 
     //获取用户
-    const user = await UserDataModel.findOne({ uid });
+    const user = await UserDataModel.findOne({
+        uid: session.data.uid,
+    });
 
     try {
         const { novel, index } = JSON.parse(

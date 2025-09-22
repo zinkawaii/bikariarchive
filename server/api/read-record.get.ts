@@ -7,6 +7,7 @@ const schema = type({
 });
 
 export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => {
+    const session = await readSession(event);
     const { page } = schema.assert(getQuery(event));
 
     if (page < 1) {
@@ -14,7 +15,7 @@ export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => 
     }
 
     //权限验证
-    validateIdentity(event, 9);
+    validateIdentity(session.data, 9);
 
     //连接数据库
     await connectMongoose();

@@ -15,8 +15,8 @@ const schema = type({
 });
 
 export default defineJEventHandler(async (event) => {
-    const { session } = event.context;
     const config = useRuntimeConfig();
+    const session = await readSession(event);
     const body = schema.assert(
         await readBody<PostCommentBody>(event),
     );
@@ -30,15 +30,15 @@ export default defineJEventHandler(async (event) => {
     }
 
     //权限验证
-    validateIdentity(event, Reflect.get(config.comment, path)?.identity ?? 0);
+    validateIdentity(session.data, Reflect.get(config.comment, path)?.identity ?? 0);
 
     //连接数据库
     await connectMongoose();
 
+    const mode = session.data.uid !== void 0 ? "user" : "guest";
     const time = new Date();
-    const uid = event.context.session?.uid;
-    const mode = session.uid ? "user" : "guest";
 
+    //附加信息
     let info:
         | Pick<CommentDataSchema, "nickname" | "email" | "address">
         | Pick<CommentDataSchema, "user">;
@@ -57,7 +57,9 @@ export default defineJEventHandler(async (event) => {
     }
     else {
         //获取用户
-        const qUser = await UserDataModel.findOne({ uid });
+        const qUser = await UserDataModel.findOne({
+            uid: session.data.uid,
+        });
 
         //用户不存在
         if (!qUser) {
