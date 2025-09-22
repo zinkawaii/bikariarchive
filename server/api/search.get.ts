@@ -2,7 +2,6 @@ import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 import type { Element } from "@bikari/article";
-import { Article } from "~/utils/article";
 import { SearchRecordModel } from "~~/server/models/SearchRecord";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 

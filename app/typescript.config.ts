@@ -10,6 +10,9 @@ export default <NuxtConfig["typescript"]> {
     nodeTsConfig: {
         compilerOptions: shared,
     },
+    sharedTsConfig: {
+        compilerOptions: shared,
+    },
     tsConfig: {
         compilerOptions: {
             types: [

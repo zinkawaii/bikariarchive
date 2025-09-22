@@ -1,5 +1,4 @@
 import { type } from "arktype";
-import { Zexp } from "~/utils";
 import { CommentDataModel } from "~~/server/models/CommentData";
 import type { PutCommentBody } from "~~/server/types/api/comment";
 

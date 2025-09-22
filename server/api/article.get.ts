@@ -1,6 +1,5 @@
 import { type } from "arktype";
 import CryptoES from "crypto-es";
-import { Article } from "~/utils/article";
 import type { GetArticleResponse } from "~~/server/types/api/article";
 
 const schema = type({

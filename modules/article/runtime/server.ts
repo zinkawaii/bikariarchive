@@ -1,8 +1,6 @@
 import { readFile } from "node:fs/promises";
 import chokidar from "chokidar";
 import { basename } from "pathe";
-import { Article, enrichJArticle } from "~/utils/article";
-import { enrichJIntel, Entry } from "~/utils/entry";
 
 export default defineNitroPlugin(async () => {
     const baseDir = r("/.data/json");

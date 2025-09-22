@@ -1,5 +1,3 @@
-import type { PickAsType } from "~/types";
-
 export interface Settings {
     theme: number;
     "dark-mode": number;

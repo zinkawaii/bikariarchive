@@ -1,7 +1,7 @@
-import { computed, reactive, shallowRef } from "vue";
+import { computed, type ComputedRef, type MaybeRefOrGetter, reactive, shallowRef, toValue } from "vue";
 import type { JArticle, JArtmap, JChapter, JNovel, JVolume } from "@bikari/article";
 import type { RouteLocationRaw } from "vue-router";
-import type { WithRequired } from "~/types";
+import type { WithRequired } from "#shared/types";
 
 export class Article {
     static meta = reactive({} as JArticle<Article>);

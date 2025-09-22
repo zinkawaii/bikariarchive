@@ -1,6 +1,5 @@
 import { type } from "arktype";
 import CommentReply from "~/emails/comment-reply.vue";
-import { Zexp } from "~/utils";
 import { CommentDataModel } from "~~/server/models/CommentData";
 import { UserDataModel } from "~~/server/models/UserData";
 import type { PostCommentBody } from "~~/server/types/api/comment";

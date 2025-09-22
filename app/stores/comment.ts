@@ -1,6 +1,5 @@
 import { isObject } from "@vueuse/core";
 import { LazyCommentPanel } from "#components";
-import type { WithParent } from "~/types";
 import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 
 export const useCommentStore = defineStore("comment", () => {
@@ -144,15 +143,16 @@ export const useCommentStore = defineStore("comment", () => {
 });
 
 //处理评论
-function processComments<T extends CommentData>(comments: T[]) {
-    return (comments as WithParent<T>[]).map((item) => {
+function processComments<T extends CommentData>(comments: WithParent<T>[]) {
+    return comments.map((item) => {
         //子评论回归指向
-        (function func(parent) {
+        function assign(parent: WithParent<T>) {
             for (const child of parent.children) {
                 child.parent = parent;
-                func(child);
+                assign(child);
             }
-        })(item);
+        }
+        assign(item);
 
         //将嵌套子评论拍平
         for (const child of item.children) {

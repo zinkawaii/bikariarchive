@@ -1,6 +1,5 @@
 import { readFile } from "node:fs/promises";
 import { type } from "arktype";
-import { Entry } from "~/utils/entry";
 import type { GetEntryResponse } from "~~/server/types/api/entry";
 
 const schema = type({

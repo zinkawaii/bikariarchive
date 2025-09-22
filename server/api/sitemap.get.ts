@@ -1,6 +1,3 @@
-import { Article } from "~/utils/article";
-import { Entry } from "~/utils/entry";
-
 export default defineSitemapEventHandler(() => {
     const config = useRuntimeConfig();
 

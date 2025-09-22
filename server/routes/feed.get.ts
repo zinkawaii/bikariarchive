@@ -1,7 +1,6 @@
 import { toString } from "mdast-util-to-string";
 import { createFeed, generateAtom1 } from "zfeed";
 import type { H3Event } from "h3";
-import { Article } from "~/utils/article";
 
 export default defineEventHandler(async (event: H3Event) => {
     setHeaders(event, {
