@@ -3,7 +3,7 @@ import { resolve } from "pathe";
 
 const url = await fetch("https://namaemaker.net/archives/japanese-name.html")
     .then((res) => res.text())
-    .then((text) => text.match(/src="([^"]*autoptimize[^"]*.php)"/)![1]);
+    .then((text) => text.match(/src="([^"]*load_Jnm[^"]*.js)"/)![1]);
 
 const res = await fetch(url);
 const text = await res.text();
