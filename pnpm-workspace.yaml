@@ -34,6 +34,7 @@ catalogs:
     micromark-extension-gfm-strikethrough: ^2.1.0
     micromark-util-symbol: ^2.0.1
     rehype-raw: ^7.0.0
+    remark-breaks: ^4.0.0
     remark-math: ^6.0.0
     remark-mdc: ^3.6.0
     remark-parse: ^11.0.0

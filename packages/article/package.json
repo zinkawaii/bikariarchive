@@ -29,6 +29,7 @@
     "pathe": "catalog:utils",
     "propathy": "catalog:utils",
     "rehype-raw": "catalog:markdown",
+    "remark-breaks": "catalog:markdown",
     "remark-math": "catalog:markdown",
     "remark-mdc": "catalog:markdown",
     "remark-parse": "catalog:markdown",

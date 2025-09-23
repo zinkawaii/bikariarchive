@@ -1,4 +1,5 @@
 import raw from "rehype-raw";
+import breaks from "remark-breaks";
 import math from "remark-math";
 import mdc from "remark-mdc";
 import parse from "remark-parse";
@@ -103,6 +104,7 @@ export async function parseUpdate(text: string) {
 export async function parseComment(text: string) {
     const processor = unified()
         .use(parse)
+        .use(breaks)
         .use(emoji)
         .use(math)
         .use(ruby)
