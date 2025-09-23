@@ -1,4 +1,5 @@
-import type { BundledLanguage, CodeToHastOptions, HighlighterCore, ShikiTransformer } from "shiki";
+import { transformerRenderIndentGuides } from "@shikijs/transformers";
+import type { BundledLanguage, CodeToHastOptions, HighlighterCore } from "shiki";
 
 export const useShikiStore = defineStore("shiki", () => {
     let promise: Promise<HighlighterCore>;
@@ -65,80 +66,3 @@ export const useShikiStore = defineStore("shiki", () => {
         loadLang,
     };
 });
-
-function transformerRenderIndentGuides(options: {
-    indent?: number;
-} = {}): ShikiTransformer {
-    return {
-        name: "render-indent-guides",
-        code(hast) {
-            let { indent = 2 } = options;
-
-            const match = this.options.meta?.__raw?.match(/\{indent:(\d+|false)\}/);
-            if (match) {
-                if (match[1] === "false") {
-                    return hast;
-                }
-                indent = Number(match[1]);
-            }
-            const indentRE = new RegExp(` {${indent}}| {0,${indent - 1}}\t| {1,}$`, "g");
-
-            const emptyLines: [import("hast").Element, number][] = [];
-            let level = 0;
-
-            for (const line of hast.children) {
-                if (line.type !== "element") {
-                    continue;
-                }
-
-                const first = line.children[0];
-                if (first?.type !== "element" || first?.children[0]?.type !== "text") {
-                    emptyLines.push([line, level]);
-                    continue;
-                }
-
-                const text = first.children[0];
-                const leading = text.value.split(/[^ \t]/, 1)[0];
-
-                const ranges: [number, number][] = [];
-                for (const match of leading.matchAll(indentRE)) {
-                    const start = match.index;
-                    const end = start + match[0].length;
-                    ranges.push([start, end]);
-                }
-
-                for (const [line, level] of emptyLines) {
-                    line.children.unshift(...Array.from({ length: Math.min(ranges.length, level + 1) }, (_, i) => ({
-                        type: "element",
-                        tagName: "span",
-                        properties: {
-                            class: "indent",
-                            style: `--indent-offset: ${i * indent}ch;`,
-                        },
-                        children: [],
-                    } satisfies import("hast").Element)));
-                }
-                emptyLines.length = 0;
-                level = ranges.length;
-
-                if (ranges.length) {
-                    line.children.unshift(
-                        ...ranges.map(([start, end]) => ({
-                            type: "element",
-                            tagName: "span",
-                            properties: {
-                                class: "indent",
-                            },
-                            children: [{
-                                type: "text",
-                                value: text.value.slice(start, end),
-                            }],
-                        } satisfies import("hast").Element)),
-                    );
-                    text.value = text.value.slice(ranges.at(-1)![1]);
-                }
-            }
-            return hast;
-        },
-    };
-}

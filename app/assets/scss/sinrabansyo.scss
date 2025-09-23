@@ -278,10 +278,9 @@ textarea {
     .indent {
         display: inline-block;
         position: relative;
-        left: var(--indent-offset);
 
         &:empty {
-            width: 0;
+            left: var(--indent-offset);
             height: 1lh;
             vertical-align: bottom;
         }

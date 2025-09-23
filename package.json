@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@kabeep/lunar-date-fns": "catalog:utils",
+    "@shikijs/transformers": "catalog:utils",
     "@vueuse/core": "catalog:vue",
     "@vueuse/router": "catalog:vue",
     "animejs": "catalog:utils",
