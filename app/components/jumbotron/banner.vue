@@ -95,7 +95,7 @@
     .jumbotron-char {
         display: inline-block;
         opacity: 0;
-        animation: 0.4s ease-out both;
+        animation: _ 0.4s ease-out both;
     }
 
     @keyframes jumbo-char-cross-up {
