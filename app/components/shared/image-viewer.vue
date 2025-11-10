@@ -10,7 +10,7 @@
     }>();
 
     const rootComp = useTemplateRef("root");
-    const rootEl = computed(() => rootComp.value?.$refs.imgEl);
+    const rootEl = computed<HTMLImageElement>(() => rootComp.value?.imgEl);
 
     //放大后占窗口比率
     const rate = 0.9;

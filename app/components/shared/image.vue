@@ -22,7 +22,7 @@
     const dialogStore = useDialogStore();
 
     const imgComp = useTemplateRef("img");
-    const imgEl = computed(() => imgComp.value?.$refs.imgEl ?? null);
+    const imgEl = computed<HTMLImageElement>(() => imgComp.value?.imgEl);
 
     const charEl = useTemplateRef("char");
     const tagEls = computed(() => {
