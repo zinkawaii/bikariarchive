@@ -68,5 +68,12 @@
     "icon": "https://soft.moe/avatar.webp",
     "nickname": "鲲",
     "description": "KUN IS THE CUTEST!"
+  },
+  {
+    "title": "Ray's Blog",
+    "link": "https://blog.mk1.io",
+    "icon": "https://img.mk1.io/img/avatar.jpg",
+    "nickname": "Ray",
+    "description": "Never say never."
   }
 ]
