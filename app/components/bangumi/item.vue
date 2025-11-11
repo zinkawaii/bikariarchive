@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-    import type { BangumiData } from "~~/server/types/api/bangumi";
+    import type { Bangumi } from "#build/bangumi";
 
-    defineProps<BangumiData>();
+    defineProps<Bangumi>();
 </script>
 
 <template>

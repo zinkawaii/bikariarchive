@@ -1,10 +1,6 @@
-import { mkdir, writeFile } from "node:fs/promises";
-import { getFullBangumis } from "bgmc/data";
-import { dirname, resolve } from "pathe";
-
 // @keep-sorted
 // @keep-unique
-const list = new Set([
+export const ids = new Set([
     100040,
     100205,
     100403,
@@ -509,21 +505,3 @@ const list = new Set([
     98286,
     99538,
 ]);
-
-const full = await getFullBangumis();
-const bangumis = full
-    .filter(({ id }) => list.has(id))
-    .map((item) => ({
-        id: item.id,
-        title: {
-            jp: item.name,
-            zh: item.bangumi?.name_cn || item.name,
-        },
-        cover: item.bangumi?.images.common,
-        date: item.air_date,
-    }))
-    .sort((a, b) => b.date.localeCompare(a.date) || a.id - b.id);
-
-const path = resolve(import.meta.dirname, "../.data/json/Bangumi.json");
-await mkdir(dirname(path), { recursive: true });
-await writeFile(path, JSON.stringify(bangumis));

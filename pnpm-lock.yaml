@@ -147,9 +147,9 @@ catalogs:
     arktype:
       specifier: ^2.1.25
       version: 2.1.25
-    bgmc:
-      specifier: ^0.0.12
-      version: 0.0.12
+    bgmt:
+      specifier: ^0.1.3
+      version: 0.1.3
     chokidar:
       specifier: ^4.0.3
       version: 4.0.3
@@ -351,9 +351,9 @@ importers:
       arktype:
         specifier: catalog:utils
         version: 2.1.25
-      bgmc:
+      bgmt:
         specifier: catalog:utils
-        version: 0.0.12
+        version: 0.1.3
       chokidar:
         specifier: catalog:utils
         version: 4.0.3
@@ -2855,6 +2855,10 @@ packages:
     resolution: {integrity: sha512-jfQHXcaznbnbeGpWQQXOo17DMD+iMgM7cFgjq6VCXzwbL2ri9LydT2TDQKl7MHdCSxTILQFaWqbk1BvTi+Qeyw==}
     engines: {node: '>=v20.8.0'}
     hasBin: true
+
+  bgmt@0.1.3:
+    resolution: {integrity: sha512-Qdjem47ob7ftoWdCxQ7HrWL7hXMt4RnMijHGCqOFXQPgcRXPcvoFrTIqE5c/Nnltzda3XWRKthcZtOf7omX4+Q==}
+    engines: {node: '>=v20.8.0'}
 
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
@@ -5806,6 +5810,9 @@ packages:
 
   simple-git@3.30.0:
     resolution: {integrity: sha512-q6lxyDsCmEal/MEGhP1aVyQ3oxnagGlBDOVSIB4XUVLl1iZh0Pah6ebC9V4xBap/RfgP2WlI8EKs0WS0rMEJHg==}
+
+  simptrad@0.2.0:
+    resolution: {integrity: sha512-SADENHX3KNuTLThG/LQCZvIywDOwCFTC2aLufwmSgjVbHUEZKIjRzleb28J856kL4ozkKptv08eR3GyJFRCnMg==}
 
   sirv@3.0.2:
     resolution: {integrity: sha512-2wcC/oGxHis/BoHkkPwldgiPSYcpZK3JU28WoMVv55yHJgcZ8rlXvuG9iZggz+sU1d4bRgIGASwyWqjxu3FM0g==}
@@ -9405,6 +9412,11 @@ snapshots:
   bgmc@0.0.12:
     dependencies:
       breadc: 0.9.7
+
+  bgmt@0.1.3:
+    dependencies:
+      bgmc: 0.0.12
+      simptrad: 0.2.0
 
   bindings@1.5.0:
     dependencies:
@@ -13097,6 +13109,8 @@ snapshots:
       debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
+
+  simptrad@0.2.0: {}
 
   sirv@3.0.2:
     dependencies:

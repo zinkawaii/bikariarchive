@@ -14,7 +14,6 @@
     "new": "pnpm --filter @bikari/article new",
     "task:article": "node scripts/article.ts",
     "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.ts",
-    "task:bangumi": "node scripts/bangumi.ts",
     "task:feed": "node scripts/feed.ts",
     "task:jnm": "node scripts/jnm.ts",
     "task:svgo": "svgo public/image/favicon.svg --pretty"
@@ -54,7 +53,7 @@
     "@zinkawaii/eslint-config": "catalog:lint",
     "@zinkawaii/stylelint-config": "catalog:lint",
     "arktype": "catalog:utils",
-    "bgmc": "catalog:utils",
+    "bgmt": "catalog:utils",
     "chokidar": "catalog:utils",
     "cn-font-split": "catalog:utils",
     "consola": "catalog:utils",

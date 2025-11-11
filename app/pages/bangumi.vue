@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import { chunks, sizes, total } from "#build/bangumi";
+
     useHead({
         title: "番剧",
     });
@@ -11,11 +13,7 @@
         transform: Number,
     });
 
-    const { status, data } = useLazyFetch("/api/bangumi", {
-        query: {
-            page,
-        },
-    });
+    const { status, data } = useAsyncData(() => `bangumi:${page.value}`, () => chunks[page.value]());
 </script>
 
 <template>
@@ -23,9 +21,9 @@
         <mb-skeleton v-if="status !== `success`"/>
         <template v-else-if="data">
             <div class="bangumi-list">
-                <bangumi-item v-for="bangumi in data.list" :key="bangumi.id" v-bind="bangumi"/>
+                <bangumi-item v-for="bangumi in data" :key="bangumi.id" v-bind="bangumi"/>
             </div>
-            <mb-pagination :total="data.total" :sizes="data.sizes" scroll-target="body" v-model="page"/>
+            <mb-pagination :total :sizes scroll-target="body" v-model="page"/>
         </template>
     </meow-widget>
 </template>
