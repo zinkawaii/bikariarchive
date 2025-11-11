@@ -44,23 +44,18 @@ export default defineNuxtModule<Options>({
                 }))
                 .sort((a, b) => a.date && b.date?.localeCompare(a.date) || a.id - b.id);
 
+            await mkdir(chunksDir, { recursive: true });
             const writes = [
                 writeFile(idsPath, JSON.stringify([...ids])),
             ];
 
-            const chunks: typeof bangumis[] = [];
             for (let i = 0; i < pages; i++) {
                 const chunk = bangumis.slice(i * options.sizes!, (i + 1) * options.sizes!);
-                chunks.push(chunk);
-
                 const chunkPath = join(chunksDir, `${i + 1}.json`);
                 writes.push(writeFile(chunkPath, JSON.stringify(chunk)));
             }
 
-            await mkdir(cacheDir, { recursive: true });
-            await mkdir(chunksDir);
             await Promise.all(writes);
-
             consola.success("[Bangumi] Fetch");
         }
 
