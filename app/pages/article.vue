@@ -57,7 +57,7 @@
     const decrypted = ref(false);
 
     //获取正文
-    const { execute, status, data: post } = useLazyFetch("/api/article", {
+    const { execute, status, data: post, error } = useLazyFetch("/api/article", {
         query: {
             novel,
             index,
@@ -100,23 +100,21 @@
             },
         });
 
-        if (!res.error) {
-            count.value = res.count;
-        }
+        count.value = res.count;
     });
 
     //防抖化请求
     const debouncedExecute = Zin.debounce(async () => {
         await execute();
-        switch (post.value?.error) {
-            case 2: {
-                toastStore.error("[article]:password", "密码错误");
-                break;
+
+        if (error.value) {
+            switch (error.value.data?.message) {
+                case "2": return toastStore.error("[article]:password", "密码错误");
             }
-            case 0: {
-                decrypted.value = true;
-            }
+            toastStore.error("[article]:password", "密码验证失败");
+            return;
         }
+        decrypted.value = true;
     }, {
         title: "请求",
     });

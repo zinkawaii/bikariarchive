@@ -11,36 +11,41 @@ const createHandler = <T extends BaseResponse>(
     handler: Handler<T>,
 ) => async (event: H3Event) => {
     try {
-        const res = { error: 0 } as T;
-        res.error = await handler(event, res) || 0;
+        const res = {} as T;
+        const code = await handler(event, res);
+        if (code !== void 0) {
+            throw code;
+        }
         return res;
     }
     catch (err) {
-        let status: number;
+        if (isError(err)) {
+            throw err;
+        }
+
+        let statusCode: number;
+        let statusMessage: string | undefined;
         let data: unknown;
 
         if (err instanceof TraversalError) {
-            status = 400;
+            statusCode = 400;
             data = err.message;
         }
-        else if (isError(err)) {
-            status = err.statusCode;
-            data = err.data;
+        else if (typeof err === "number") {
+            statusCode = 400;
+            statusMessage = err.toString();
         }
         else {
-            status = 500;
+            statusCode = 500;
             data = err;
         }
 
-        console.error(err);
-        sendError(event, createError({
-            status,
+        throw createError({
+            statusCode,
+            statusMessage,
             data: import.meta.dev ? data : void 0,
-        }));
+        });
     }
-
-    //防止类型推断返回空值
-    return {} as T;
 };
 
 export const defineJEventHandler = <T extends BaseResponse>(

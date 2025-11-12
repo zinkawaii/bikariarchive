@@ -1,4 +1,3 @@
-import { isObject } from "@vueuse/core";
 import { LazyCommentPanel } from "#components";
 import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "~~/server/types/api/comment";
 
@@ -33,9 +32,6 @@ export const useCommentStore = defineStore("comment", () => {
                 page,
             },
         });
-        if (res.error) {
-            return;
-        }
 
         comments.value = processComments(res.list);
         mainCount.value = res.mainCount;
@@ -70,18 +66,14 @@ export const useCommentStore = defineStore("comment", () => {
     ) {
         return async (body: T) => {
             try {
-                const res = await $fetch("/api/comment", {
+                await $fetch("/api/comment", {
                     method,
                     body,
                 });
-                if (res.error) {
-                    throw createError({ status: res.error });
-                }
                 update(1);
             }
-            catch (err) {
-                const statusCode = isObject(err) ? Reflect.get(err, "statusCode") : void 0;
-                const message = typeof statusCode === "number" ? getter(statusCode) : String(err);
+            catch (err: any) {
+                const message = typeof err?.statusCode === "number" ? getter(err.statusCode) : String(err);
                 toastStore.error(`[comment]:${method}`, message);
                 throw err;
             }

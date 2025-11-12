@@ -71,6 +71,6 @@ export default defineJEventHandler<PatchArticleResponse>(async (event, res) => {
     }
     catch {
         //代币解析错误
-        res.error = 1;
+        return 1;
     }
 });

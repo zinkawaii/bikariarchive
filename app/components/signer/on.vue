@@ -51,20 +51,12 @@
         verifyStage.value = 1;
 
         try {
-            const { error } = await $fetch("/api/user/logon/verify", {
+            await $fetch("/api/user/logon/verify", {
                 query: {
                     email: email.value,
                 },
             });
 
-            error ? failed() : successed();
-        }
-        catch {
-            failed();
-        }
-
-        //发送成功
-        async function successed() {
             const max = 60;
             verifyStage.value = 2;
             verifyDelay.value = max;
@@ -79,9 +71,7 @@
 
             verifyStage.value = 0;
         }
-
-        //发送失败
-        function failed() {
+        catch {
             toastStore.error("[verify]:send", "验证码发送失败");
         }
     }
@@ -89,7 +79,7 @@
     //注册
     const register = Zin.debounce(async () => {
         try {
-            const { error } = await $fetch("/api/user/logon", {
+            await $fetch("/api/user/logon", {
                 method: "post",
                 body: {
                     nickname: nickname.value,
@@ -98,16 +88,15 @@
                     password: password.value,
                 },
             });
-
-            switch (error) {
-                case 1: return glitch("email", "该邮箱已注册");
-                case 2: return glitch("verify", "验证码不存在");
-                case 3: return glitch("verify", "验证码已过期");
-                case 4: return glitch("verify", "验证码不正确");
-                case 0: signerStore.switchView("login");
-            }
+            signerStore.switchView("login");
         }
-        catch {
+        catch (err: any) {
+            switch (err?.data?.message) {
+                case "1": return glitch("email", "该邮箱已注册");
+                case "2": return glitch("verify", "验证码不存在");
+                case "3": return glitch("verify", "验证码已过期");
+                case "4": return glitch("verify", "验证码不正确");
+            }
             toastStore.error("[logon]", "注册失败");
         }
     }, {

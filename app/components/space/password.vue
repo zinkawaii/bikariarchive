@@ -27,7 +27,7 @@
         },
     });
 
-    const { status, execute, data } = useLazyFetch("/api/user/password", {
+    const { status, execute, error } = useLazyFetch("/api/user/password", {
         method: "put",
         body: {
             old: oldVal,
@@ -45,27 +45,19 @@
         const key = "[password]:update";
         await execute();
 
-        if (status.value !== "success") {
+        if (error.value) {
+            switch (error.value.data?.message) {
+                case "1": return toastStore.error(key, "找不到用户");
+                case "2": return glitch("oldVal", "旧密码错误");
+            }
             toastStore.error(key, "密码修改失败");
             return;
         }
 
-        switch (data.value?.error) {
-            case 1: {
-                toastStore.error(key, "找不到用户");
-                break;
-            }
-            case 2: {
-                glitch("oldVal", "旧密码错误");
-                break;
-            }
-            case 0: {
-                toastStore.success(key, "密码已修改");
-                oldVal.value = "";
-                newVal.value = "";
-                confirmVal.value = "";
-            }
-        }
+        toastStore.success(key, "密码已修改");
+        oldVal.value = "";
+        newVal.value = "";
+        confirmVal.value = "";
     }, {
         title: "修改密码",
     });

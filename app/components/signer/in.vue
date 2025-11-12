@@ -19,7 +19,7 @@
         },
     });
 
-    const { status, execute, data } = useLazyFetch("/api/user/login", {
+    const { execute, data, error } = useLazyFetch("/api/user/login", {
         method: "post",
         body: {
             account: nickname,
@@ -35,31 +35,16 @@
         }
         await execute();
 
-        if (status.value !== "success") {
+        if (error.value) {
+            switch (error.value.data?.message) {
+                case "1": return glitch("nickname", "账号不存在");
+                case "2": return glitch("password", "密码错误");
+            }
             toastStore.error("[login]", "登录失败");
             return;
         }
 
-        const { error, uid, nickname, avatar, identity, sign } = data.value!;
-        switch (error) {
-            case 1: {
-                glitch("nickname", "账号不存在");
-                return;
-            }
-            case 2: {
-                glitch("password", "密码错误");
-                return;
-            }
-            case 0: {
-                userStore.$patch({
-                    uid,
-                    nickname,
-                    avatar,
-                    identity,
-                    sign,
-                });
-            }
-        }
+        userStore.$patch(data.value!);
     }, {
         title: "登录",
     });
