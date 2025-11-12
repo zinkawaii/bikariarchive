@@ -10,8 +10,8 @@
             { key: "性别", val: props.sex },
         ],
         [
-            { key: "日文名", val: props.name?.jp },
-            { key: "振假名", val: props.name?.ka },
+            { key: "日文名", val: props.name?.ja },
+            { key: "振假名", val: props.name?.ruby?.replaceAll(" ", "\u2007") },
             { key: "年龄", val: props.age },
         ],
     ]);

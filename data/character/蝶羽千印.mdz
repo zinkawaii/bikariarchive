@@ -3,9 +3,9 @@ title: 蝶羽千印
 brief:
   name:
     zh: 蝶羽千印
-    jp: 蝶羽千印
-    ka: ちょうわ　ちるこ
+    ja: 蝶羽千印
     en: Chōwa Chiruko
+    ruby: ちょうわ ちるこ
   sex: 女
   age: 16
 appearance:
@@ -16,7 +16,7 @@ talents:
   - type: 超能力
     name:
       zh: 镜胆鉴心
-      jp: 鏡胆鑑心
+      ja: 鏡胆鑑心
       en: Emotion Copy
     star: 2
     class:

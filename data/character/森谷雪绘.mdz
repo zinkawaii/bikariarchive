@@ -3,9 +3,9 @@ title: 森谷雪绘
 brief:
   name:
     zh: 森谷雪绘
-    jp: 森谷雪絵
-    ka: もりや　ゆきえ
+    ja: 森谷雪絵
     en: Moriya Yukie
+    ruby: もりや ゆきえ
   sex: 女
   age: 21
 appearance:
@@ -23,7 +23,7 @@ talents:
   - type: 超能力
     name:
       zh: 花札茶语
-      jp: 花札のお茶語り
+      ja: 花札のお茶語り
     star: 2
     class:
       - 生物

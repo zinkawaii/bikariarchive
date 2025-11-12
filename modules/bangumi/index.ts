@@ -36,7 +36,7 @@ export default defineNuxtModule<Options>({
                 .map((item) => ({
                     id: item.id,
                     title: {
-                        jp: item.title,
+                        ja: item.title,
                         zh: item.title,
                     },
                     cover: item.images.find((image) => image.quality === "common")?.src,
@@ -78,7 +78,7 @@ export const chunks = {${Array.from({ length: pages }, (_, i) => `
 export interface Bangumi {
     id: number;
     title: {
-        jp: string;
+        ja: string;
         zh: string;
     };
     cover: string;

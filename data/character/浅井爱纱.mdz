@@ -3,9 +3,9 @@ title: 浅井爱纱
 brief:
   name:
     zh: 浅井爱纱
-    jp: 浅井愛紗
-    ka: あさい　あいさ
+    ja: 浅井愛紗
     en: Asai Aisa
+    ruby: あさい あいさ
   sex: 女
   age: 15
 appearance:
@@ -19,7 +19,7 @@ talents:
   - type: 超能力
     name:
       zh: 风力使
-      jp: 風力使い
+      ja: 風力使い
       en: Aero Shooter
     star: 3
     class:

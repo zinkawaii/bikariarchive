@@ -4,9 +4,9 @@ draft: true
 brief:
   name:
     zh: 浅井稻荷
-    jp: 浅井稻荷
-    ka: あさい　いなり
+    ja: 浅井稻荷
     en: Asai Inari
+    ruby: あさい いなり
   sex: 女
   age: null
 appearance:

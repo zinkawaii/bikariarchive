@@ -4,9 +4,9 @@ draft: true
 brief:
   name:
     zh: 幸山夏眠
-    jp: 幸山夏眠
-    ka: さちやま　なつね
+    ja: 幸山夏眠
     en: Sachiyama Natsune
+    ruby: さちやま なつね
   sex: 男
   age: 20
 appearance:
@@ -15,7 +15,7 @@ talents:
   - type: 超能力
     name:
       zh: 速笔模写
-      jp: 速筆模写
+      ja: 速筆模写
     star: 2
     class:
       - 原石

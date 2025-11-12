@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { createKerria, useSource } from "kerria";
 import { parseUpdate } from "../remark";
-import type { JUpdate } from "./types";
+import type { JUpdate } from "../types/update";
 
 const titleRE = /^(.+) \[v(.+)\]$/;
 const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;

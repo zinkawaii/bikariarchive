@@ -6,7 +6,7 @@ import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle, parseEntry } from "../remark";
 import { isDevelopment } from "../utils";
-import type { ArticleFrontmatter, NovelFrontmatter } from "./types";
+import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article";
 
 enum SourceKind {
     Meta,

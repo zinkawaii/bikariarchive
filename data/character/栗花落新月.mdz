@@ -3,9 +3,9 @@ title: 栗花落新月
 brief:
   name:
     zh: 栗花落新月
-    jp: 栗花落新月
-    ka: つゆり　にいづき
+    ja: 栗花落新月
     en: Tsuyuri Niizuki
+    ruby: つゆり にいづき
   sex: 女
   age: 15
 appearance:
@@ -16,7 +16,7 @@ talents:
   - type: 超能力
     name:
       zh: 月下夕颜
-      jp: 月下夕顔
+      ja: 月下夕顔
       en: Gekka Yugao
     star: 3
     class:

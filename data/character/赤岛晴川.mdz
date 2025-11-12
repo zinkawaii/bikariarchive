@@ -3,9 +3,9 @@ title: 赤岛晴川
 brief:
   name:
     zh: 赤岛晴川
-    jp: 赤島晴川
-    ka: あかしま　はるかわ
+    ja: 赤島晴川
     en: Akashima Harukawa
+    ruby: あかしま はるかわ
   sex: 男
   age: 16
 appearance:
@@ -16,7 +16,7 @@ talents:
   - type: 超能力
     name:
       zh: 炽热火羽
-      jp: 灼熱火羽
+      ja: 灼熱火羽
       en: Heat Feather
     star: 3
     class:

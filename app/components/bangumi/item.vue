@@ -10,7 +10,7 @@
             <nuxt-img v-if="cover" class="bangumi-image" :src="cover" alt="[cover]" loading="lazy"/>
         </div>
         <div class="bangumi-info">
-            <h3 class="bangumi-title text-truncate">{{ title.jp }}</h3>
+            <h3 class="bangumi-title text-truncate">{{ title.ja }}</h3>
             <span class="bangumi-trans text-truncate">{{ title.zh }}</span>
             <ul class="bangumi-tags">
                 <li class="bangumi-tag">

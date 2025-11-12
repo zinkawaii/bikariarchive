@@ -3,9 +3,9 @@ title: 山吹风铃
 brief:
   name:
     zh: 山吹风铃
-    jp: 山吹風鈴
-    ka: やまぶき　かざり
+    ja: 山吹風鈴
     en: Yamabuki Kazari
+    ruby: やまぶき かざり
   sex: 女
   age: 13
 appearance:
@@ -19,7 +19,7 @@ talents:
   - type: 超能力
     name:
       zh: 琉璃星舞
-      jp: 琉璃星舞
+      ja: 琉璃星舞
       en: Constellation Call
     star: 4
     class:

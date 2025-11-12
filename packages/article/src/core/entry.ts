@@ -5,7 +5,8 @@ import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import { isDevelopment } from "../utils";
 import type { Child } from "../remark/types";
-import type { EntryDetail, EntryTalent, IntelNode, JEntry } from "./types";
+import type { EntryDetail, EntryTalent, JEntry } from "../types/entry";
+import type { IntelNode } from "../types/intel";
 
 interface AbilityInfo {
     name: string;

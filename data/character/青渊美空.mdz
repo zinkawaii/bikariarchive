@@ -4,9 +4,9 @@ draft: true
 brief:
   name:
     zh: 青渊美空
-    jp: 青淵美空
-    ka: あおふち　みく
+    ja: 青淵美空
     en: Aofuchi Miku
+    ruby: あおふち みく
   sex: 女
   age: 18
 appearance:
@@ -15,7 +15,7 @@ talents:
   - type: 超能力
     name:
       zh: 血染苍空
-      jp: 蒼空血染
+      ja: 蒼空血染
     star: 4
     class:
       - 元素
