@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "nuxt dev --no-qr",
     "build": "nuxt build",
-    "prebuild": "pnpm \"/^task:(?:bangumi|jnm)$/\" --parallel",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
     "stylelint": "stylelint **/*.{vue,scss}",
@@ -15,7 +14,6 @@
     "task:article": "node scripts/article.ts",
     "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.ts",
     "task:feed": "node scripts/feed.ts",
-    "task:jnm": "node scripts/jnm.ts",
     "task:svgo": "svgo public/image/favicon.svg --pretty"
   },
   "dependencies": {

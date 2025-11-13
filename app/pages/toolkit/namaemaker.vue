@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import { load } from "#build/namaemaker";
+
     useHead({
         title: "日文名发生装置",
     });
@@ -6,7 +8,7 @@
     const toastStore = useToastStore();
 
     let Jnm: Record<string, string[]>;
-    const { execute, status, data } = useLazyFetch<typeof Jnm>("/json/Jnm.json", {
+    const { execute, status, data } = useAsyncData(load, {
         immediate: false,
     });
 
@@ -56,7 +58,6 @@
 
     //生成
     async function generate() {
-        //从静态资源服务器读取数据，防止打包文件过大
         if (status.value === "idle") {
             await execute();
             Jnm = data.value!;
