@@ -10,18 +10,12 @@ export const useUserStore = defineStore("user", () => {
     });
 
     //获取登陆信息
-    const getInfo = useFetch("/api/user/info");
-
-    getInfo.then(({ data }) => {
-        const info = data.value!;
-
-        if (!info.error) {
-            uid.value = info.uid;
-            nickname.value = info.nickname;
-            avatar.value = info.avatar;
-            identity.value = info.identity;
-            sign.value = info.sign;
-        }
+    const getInfo = $fetch("/api/user/info").then((info) => {
+        uid.value = info.uid;
+        nickname.value = info.nickname;
+        avatar.value = info.avatar;
+        identity.value = info.identity;
+        sign.value = info.sign;
     });
 
     function reset() {

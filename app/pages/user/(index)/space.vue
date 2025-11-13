@@ -27,7 +27,7 @@
     const isNotMyself = computed(() => !isMyself.value);
 
     //获取用户信息
-    const { data } = useLazyFetch("/api/user/info", {
+    const { status, data } = useLazyFetch("/api/user/info", {
         query: {
             uid: props.uid,
         },
@@ -36,7 +36,7 @@
 
     //用户是否存在
     const isExist = computed(() => {
-        return isMyself.value || !data.value?.error;
+        return isMyself.value || status.value === "success";
     });
 
     const { uid: id, nickname, sign, avatar } = useSourceRefs(() => (

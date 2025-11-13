@@ -1,11 +1,10 @@
 import type { ReadRecordSchema, UserDataSchema } from "~~/server/types/model";
-import type { BaseResponse } from "../index";
 
 export interface DeleteReadRecordBody {
     id: string;
 }
 
-export interface GetReadRecordResponse extends BaseResponse {
+export interface GetReadRecordResponse {
     total: number;
     sizes: number;
     list: (Omit<ReadRecordSchema, "user"> & {

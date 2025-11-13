@@ -1,7 +1,6 @@
 import type { Root } from "@bikari/article";
-import type { BaseResponse } from "../index";
 
-export interface GetArticleResponse extends BaseResponse {
+export interface GetArticleResponse {
     body: Root;
     token: string;
 }
@@ -10,6 +9,6 @@ export interface PatchArticleBody {
     token: string;
 }
 
-export interface PatchArticleResponse extends BaseResponse {
+export interface PatchArticleResponse {
     count: number;
 }

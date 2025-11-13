@@ -1,5 +1,3 @@
-import type { BaseResponse } from "~~/server/types";
-
 export interface GetLoginBody {
     nickname: string;
     email: string;
@@ -7,7 +5,7 @@ export interface GetLoginBody {
     password: string;
 }
 
-export interface GetLogonResponse extends BaseResponse {
+export interface GetLogonResponse {
     uid: number;
     nickname: string;
     identity: number;

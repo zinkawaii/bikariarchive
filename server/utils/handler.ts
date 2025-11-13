@@ -1,15 +1,12 @@
 import { TraversalError } from "arktype";
 import type { H3Event } from "h3";
 import type { CachedEventHandlerOptions } from "nitropack";
-import type { BaseResponse } from "../types";
 
 interface Handler<T> {
     (event: H3Event<Request>, res: T): Awaited<any>;
 }
 
-const createHandler = <T extends BaseResponse>(
-    handler: Handler<T>,
-) => async (event: H3Event) => {
+const createHandler = <T>(handler: Handler<T>) => async (event: H3Event) => {
     try {
         const res = {} as T;
         const code = await handler(event, res);
@@ -48,16 +45,16 @@ const createHandler = <T extends BaseResponse>(
     }
 };
 
-export const defineJEventHandler = <T extends BaseResponse>(
+export const defineJEventHandler = <T>(
     handler: Handler<T>,
 ) => defineEventHandler(createHandler<T>(handler));
 
-export const defineJCachedEventHandler = <T extends BaseResponse>(
+export const defineJCachedEventHandler = <T>(
     handler: Handler<T>,
     options?: CachedEventHandlerOptions,
 ) => defineCachedEventHandler(createHandler<T>(handler), options);
 
-export const defineJThrottledEventHandler = <T extends BaseResponse>(
+export const defineJThrottledEventHandler = <T>(
     handler: Handler<T>,
     delay: number,
 ) => {

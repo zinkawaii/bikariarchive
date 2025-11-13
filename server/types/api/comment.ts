@@ -1,12 +1,10 @@
-import type { BaseResponse } from "../index";
-
 export type CommentMode = "guest" | "user";
 
 export interface DeleteCommentBody {
     id: string;
 }
 
-export interface GetCommentResponse extends BaseResponse {
+export interface GetCommentResponse {
     totalCount: number;
     mainCount: number;
     list: CommentData[];

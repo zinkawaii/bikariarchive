@@ -1,11 +1,9 @@
-import type { BaseResponse } from "../../index";
-
 export interface PostLoginBody {
     account: string;
     password: string;
 }
 
-export interface PostLoginResponse extends BaseResponse {
+export interface PostLoginResponse {
     uid: number;
     nickname: string;
     avatar: string;

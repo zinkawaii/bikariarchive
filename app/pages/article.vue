@@ -91,7 +91,7 @@
     //添加阅读记录
     const count = ref<number>();
     onMounted(async () => {
-        await until(() => post.value?.error).toBe(0);
+        await until(status).toBe("success");
 
         const res = await $fetch("/api/article", {
             method: "patch",
@@ -124,7 +124,7 @@
     <meow-widget>
         <novel-header :art :count/>
         <novel-decrypt v-if="art.encrypted && !decrypted" v-model="password" @decrypt="debouncedExecute"/>
-        <mb-skeleton v-else-if="status !== `success` && (!post || post?.error)"/>
+        <mb-skeleton v-else-if="status !== `success` && !post"/>
         <novel-article
             v-else-if="post"
             v-outline
