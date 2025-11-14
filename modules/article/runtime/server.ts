@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import chokidar from "chokidar";
 import { basename } from "pathe";
 
-export default defineNitroPlugin(async () => {
+export default defineNitroPlugin(async (nitroApp) => {
     const baseDir = r("/.data/json");
     const list = [
         "Article",
@@ -16,7 +16,8 @@ export default defineNitroPlugin(async () => {
     }
 
     if (import.meta.dev) {
-        chokidar.watch(list).on("change", update);
+        const watcher = chokidar.watch(list).on("change", update);
+        nitroApp.hooks.hook("close", () => watcher.close());
     }
 });
 
