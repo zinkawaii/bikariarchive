@@ -41,7 +41,9 @@ export default defineNuxtConfig({
     experimental: {
         typedPages: true,
         typescriptPlugin: true,
-        viteEnvironmentApi: true,
+    },
+    future: {
+        compatibilityVersion: 5,
     },
     nitro: {
         rollupConfig: {
