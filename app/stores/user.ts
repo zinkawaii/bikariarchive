@@ -10,12 +10,14 @@ export const useUserStore = defineStore("user", () => {
     });
 
     //获取登陆信息
-    const getInfo = $fetch("/api/user/info").then((info) => {
-        uid.value = info.uid;
-        nickname.value = info.nickname;
-        avatar.value = info.avatar;
-        identity.value = info.identity;
-        sign.value = info.sign;
+    const promise = useFetch("/api/user/info").then(({ data }) => {
+        if (data.value) {
+            uid.value = data.value.uid;
+            nickname.value = data.value.nickname;
+            avatar.value = data.value.avatar;
+            identity.value = data.value.identity;
+            sign.value = data.value.sign;
+        }
     });
 
     function reset() {
@@ -33,7 +35,7 @@ export const useUserStore = defineStore("user", () => {
         identity,
         sign,
         isLoggedIn,
-        getInfo,
+        promise,
         reset,
     };
 });

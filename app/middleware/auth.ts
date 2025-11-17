@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     const userStore = useUserStore();
 
     //等待登录信息获取
-    await userStore.getInfo;
+    await userStore.promise;
 
     //权限验证
     if (!userStore.isLoggedIn) {
