@@ -1,12 +1,13 @@
 import { existsSync } from "node:fs";
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import * as p from "@clack/prompts";
 import { format } from "date-fns";
 import { customAlphabet } from "nanoid";
+import { dirname } from "pathe";
 import YAML from "yaml";
 import { $ } from "zx";
-import type { JArticle, JChapter } from "@bikari/article";
 import { resolveRoot } from "./utils.ts";
+import type { JArticle, JChapter } from "../src/types/article";
 
 export async function createArticle() {
     const path = resolveRoot("/.data/json/Article.json");
@@ -54,6 +55,7 @@ export async function createArticle() {
             p.log.error(`文件 "${path}" 已存在！`);
         }
         else {
+            await mkdir(dirname(path), { recursive: true });
             await writeFile(path, text);
         }
 
