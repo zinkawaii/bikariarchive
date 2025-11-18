@@ -7,7 +7,7 @@ import { dirname } from "pathe";
 import YAML from "yaml";
 import { $ } from "zx";
 import { resolveRoot } from "./utils.ts";
-import type { JArticle, JChapter } from "../src/types/article";
+import type { JArticle, JChapter } from "../../src/types/article.ts";
 
 export async function createArticle() {
     const path = resolveRoot("/.data/json/Article.json");

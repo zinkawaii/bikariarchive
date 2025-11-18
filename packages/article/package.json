@@ -11,7 +11,7 @@
     "build": "tsdown",
     "dev": "tsdown -w",
     "test": "vitest",
-    "new": "node scripts/index.ts"
+    "new": "node scripts/new/index.ts"
   },
   "dependencies": {
     "date-fns": "catalog:utils",
