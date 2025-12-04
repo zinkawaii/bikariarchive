@@ -28,7 +28,7 @@
         },
         {
             attr: "word-count",
-            icon: "nonicons:keyword-16",
+            icon: "fa7-solid:outdent",
             content: () => `${props.art.wordCount} 字`,
         },
         {

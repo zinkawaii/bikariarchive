@@ -18,12 +18,12 @@
     const navs: NavItem[] = [
         {
             title: "主页",
-            icon: "fa6-solid:house",
+            icon: "fa7-solid:mug-saucer",
             to: { name: "home" },
         },
         {
             title: "目录",
-            icon: "fa6-solid:book-open",
+            icon: "fa7-solid:book",
             to: computed(() => shelfStore.route),
         },
         {
@@ -47,14 +47,14 @@
                 },
                 {
                     title: "番剧",
-                    icon: "fa7-brands:bilibili",
+                    icon: "ri:bilibili-fill",
                     to: { name: "bangumi" },
                 },
             ],
         },
         {
             title: "营业",
-            icon: "fa7-solid:mug-saucer",
+            icon: "fa7-solid:dumpster",
             children: [
                 {
                     title: "更新日志",
@@ -63,7 +63,7 @@
                 },
                 {
                     title: "站点协议",
-                    icon: "teenyicons:contract-solid",
+                    icon: "fa7-solid:handshake",
                     to: { name: "compact" },
                 },
                 {
@@ -274,9 +274,8 @@
     .nav-link {
         display: grid;
         justify-items: center;
-        gap: 8px;
+        gap: 4px;
         width: $nav;
-        line-height: 1;
 
         @media (width >= #{$max}) {
             color: white;
@@ -295,6 +294,7 @@
     .nav-pop {
         display: grid;
         grid-template-columns: 16px 1fr;
+        align-items: center;
         gap: 6px;
         width: 100px;
         padding-inline: 10px;
@@ -306,10 +306,6 @@
         &:hover {
             background-color: var(--color-theme);
             color: white;
-        }
-
-        > .iconify {
-            margin: auto;
         }
     }
 

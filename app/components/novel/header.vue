@@ -73,7 +73,6 @@
         }
 
         > .iconify {
-            width: 1em;
             font-size: 42px;
         }
     }

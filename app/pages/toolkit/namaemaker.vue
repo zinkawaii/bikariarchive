@@ -205,7 +205,7 @@
                         <span>加载</span>
                     </template>
                     <template v-else>
-                        <iconify name="iconamoon:star-bold"/>
+                        <iconify name="fa7-solid:star"/>
                         <span>生成</span>
                     </template>
                 </mb-button>

@@ -37,7 +37,6 @@
 
         > .iconify {
             margin-inline-end: 8px;
-            vertical-align: -3px;
         }
     }
 </style>

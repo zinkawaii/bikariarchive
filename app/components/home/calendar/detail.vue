@@ -76,11 +76,11 @@
             color: var(--color-theme-dark);
 
             &:nth-of-type(1) {
-                translate: -2px -1px;
+                translate: -1px -6px;
             }
 
             &:nth-of-type(3) {
-                translate: 2px 3px;
+                translate: 1px 1px;
             }
         }
     }

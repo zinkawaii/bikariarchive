@@ -121,7 +121,7 @@
         items: [
             {
                 title: "返回主页",
-                icon: "fa6-solid:house",
+                icon: "fa7-solid:mug-saucer",
                 action: () => {
                     router.push({ name: "home" });
                 },

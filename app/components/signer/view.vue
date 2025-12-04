@@ -64,10 +64,5 @@
         &:hover {
             color: var(--color-theme-text);
         }
-
-        :deep(.iconify) {
-            margin-left: 2px;
-            vertical-align: -2px;
-        }
     }
 </style>

@@ -80,7 +80,6 @@
         line-height: 32px;
 
         > .iconify {
-            font-size: 24px;
             color: var(--color-theme-text);
         }
     }

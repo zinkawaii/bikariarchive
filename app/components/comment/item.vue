@@ -66,7 +66,7 @@
             <div class="comment-header">
                 <button class="comment-nickname" @click="openUserInfo(data)">{{ data.nickname }}</button>
                 <template v-if="data.parent?.parent">
-                    <iconify class="text-gray" name="vaadin:chat"/>
+                    <iconify class="text-gray" name="fa7-solid:comments"/>
                     <button class="comment-nickname" @click="openUserInfo(data.parent)">{{ data.parent.nickname }}</button>
                 </template>
             </div>
@@ -145,7 +145,7 @@
     .comment-info {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px 16px;
+        gap: 7px 14px;
         font-size: 14px;
         color: var(--color-info);
     }
@@ -153,7 +153,7 @@
     .comment-action {
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 2px;
         opacity: 0;
         transition: all 0.25s;
 

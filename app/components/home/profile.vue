@@ -6,22 +6,22 @@
         {
             title: "GitHub",
             to: "https://github.com/KazariEX",
-            icon: "fa7-brands:github",
+            icon: "ri:github-fill",
         },
         {
             title: "Twitter",
             to: "https://twitter.com/KazariEX_0929",
-            icon: "fa7-brands:twitter",
+            icon: "ri:twitter-fill",
         },
         {
             title: "BiliBili",
             to: "https://space.bilibili.com/37810541",
-            icon: "fa7-brands:bilibili",
+            icon: "ri:bilibili-fill",
         },
         {
             title: "QQ",
             to: "https://jq.qq.com/?_wv=1027&k=ezy4Y5TS",
-            icon: "fa7-brands:qq",
+            icon: "ri:qq-fill",
         },
         {
             title: "RSS",
@@ -37,7 +37,7 @@
         items: [
             {
                 title: "说说",
-                icon: "bi:chat-dots-fill",
+                icon: "fa7-solid:comment-dots",
                 action() {
                     router.push({ name: "tweet" });
                 },
@@ -114,13 +114,13 @@
 
     .profile-links {
         display: flex;
-        gap: 6px;
+        gap: 4px;
     }
 
     .profile-link {
         display: grid;
         place-items: center;
-        width: 18px;
+        width: 20px;
         aspect-ratio: 1;
         color: var(--color-info);
 

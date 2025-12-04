@@ -176,10 +176,7 @@
         }
 
         .emoji {
-            width: 1.25em;
-            height: 1.25em;
             margin-inline: 2px;
-            vertical-align: -0.25em;
         }
 
         > .footnotes {

@@ -41,9 +41,5 @@
             color: var(--color-text-disabled);
             pointer-events: none;
         }
-
-        > .iconify {
-            margin: auto;
-        }
     }
 </style>

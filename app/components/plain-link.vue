@@ -47,7 +47,8 @@
     }
 
     .plain-external {
-        margin-left: 4px;
-        font-size: 12px;
+        margin-left: 2px;
+        font-size: 1em;
+        vertical-align: -2px;
     }
 </style>
