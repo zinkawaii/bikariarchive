@@ -1,5 +1,5 @@
 import type hast from "hast";
-import type { Plugin, Processor } from "unified";
+import type { Plugin } from "unified";
 import { transformRoot } from "./utils";
 import type { Root } from "../types";
 
@@ -9,8 +9,8 @@ declare module "unified" {
     }
 }
 
-export default <Plugin<[], Root>> function(this: Processor) {
-    this.compiler = (root: hast.Root) => {
-        return transformRoot(root);
+export default <Plugin<[], hast.Root, Root>> function() {
+    this.compiler = (root) => {
+        return transformRoot(root as hast.Root);
     };
 };

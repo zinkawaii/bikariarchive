@@ -50,7 +50,6 @@
         if (props.scrollTarget) {
             return rootEl.value?.closest(props.scrollTarget) ?? document.querySelector(props.scrollTarget);
         }
-        return null;
     });
 
     //切换页码时滑动到指定元素的起始位置
@@ -105,7 +104,7 @@
             aria-label="下一页"
             @click="modelValue++"
         >
-            <iconify name="fa7-solid:chevron-right" />
+            <iconify name="fa7-solid:chevron-right"/>
         </button>
     </div>
 </template>

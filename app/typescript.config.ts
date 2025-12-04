@@ -8,10 +8,14 @@ const shared: TSConfig["compilerOptions"] = {
 
 export default <NuxtConfig["typescript"]> {
     nodeTsConfig: {
-        compilerOptions: shared,
+        compilerOptions: {
+            ...shared,
+        },
     },
     sharedTsConfig: {
-        compilerOptions: shared,
+        compilerOptions: {
+            ...shared,
+        },
     },
     tsConfig: {
         compilerOptions: {

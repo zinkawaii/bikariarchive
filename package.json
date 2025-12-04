@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.21.0",
+  "packageManager": "pnpm@10.24.0",
   "scripts": {
     "dev": "nuxt dev --no-qr",
     "build": "nuxt build",
@@ -35,8 +35,8 @@
     "vue-router": "catalog:vue"
   },
   "devDependencies": {
-    "@iconify-json/fa7-brands": "catalog:iconify",
     "@iconify-json/fa7-solid": "catalog:iconify",
+    "@iconify-json/ri": "catalog:iconify",
     "@mdzjs/config": "catalog:markdown",
     "@nuxt/devtools": "catalog:nuxt",
     "@nuxt/eslint": "catalog:nuxt",

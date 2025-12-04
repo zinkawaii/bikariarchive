@@ -19,8 +19,8 @@
         <div class="signer-innerworld"></div>
         <transition mode="out-in">
             <signer-in v-if="signerStore.currentView === `login`"/>
-            <signer-on v-else-if="signerStore.currentView === `logon`" />
-            <signer-profile v-else-if="signerStore.currentView === `profile`" />
+            <signer-on v-else-if="signerStore.currentView === `logon`"/>
+            <signer-profile v-else-if="signerStore.currentView === `profile`"/>
         </transition>
     </mb-dialog>
 </template>
