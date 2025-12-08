@@ -1,10 +1,10 @@
-import type { ObjectId } from "mongoose";
+import type { Types } from "mongoose";
 import type { CommentMode } from "~~/server/types/api/comment";
 
 export interface CommentDataSchema {
     path: string;
-    root?: ObjectId;
-    parent?: ObjectId;
+    root?: Types.ObjectId;
+    parent?: Types.ObjectId;
     content: string;
     time: Date;
     updated: Date;
@@ -13,7 +13,7 @@ export interface CommentDataSchema {
     nickname?: string;
     email?: string;
     address?: string;
-    user?: ObjectId;
+    user?: Types.ObjectId;
 }
 
 export interface ReadRecordSchema {
@@ -21,14 +21,14 @@ export interface ReadRecordSchema {
     time: Date;
     novel: string;
     index: string;
-    user?: ObjectId;
+    user?: Types.ObjectId;
 }
 
 export interface SearchRecordSchema {
     ip: string;
     time: Date;
     word: string;
-    user?: ObjectId;
+    user?: Types.ObjectId;
 }
 
 export interface TempVerifySchema {

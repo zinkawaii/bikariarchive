@@ -87,12 +87,12 @@ async function transformComment<T extends HydratedDocument<CommentDataSchema>>(
 
     const children = await Promise.all(
         all
-            .filter(({ parent }) => String(parent) === String(item._id))
+            .filter(({ parent }) => parent?.toString() === item._id.toString())
             .map((child) => transformComment(child, all, users, identity)),
     );
 
     return {
-        id: item.id,
+        id: item._id.toString(),
         children,
         content: item.content,
         time: item.time.toString(),

@@ -67,7 +67,7 @@ export default defineJEventHandler(async (event) => {
         }
 
         info = {
-            user: qUser.id,
+            user: qUser._id,
         };
     }
 

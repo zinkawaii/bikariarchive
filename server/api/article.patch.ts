@@ -37,7 +37,7 @@ export default defineJEventHandler<PatchArticleResponse>(async (event, res) => {
             time,
             novel,
             index,
-            user,
+            user: user?._id,
         });
 
         //获取阅读量
