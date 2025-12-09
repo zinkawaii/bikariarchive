@@ -17,7 +17,7 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
     await connectMongoose();
 
     const novelInfos = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
-    const articles = novelInfos.flatMap((info) => info?.chapters).filter(Boolean);
+    const articles = novelInfos.flatMap((info) => info?.chapters).filter((art) => !art.encrypted);
 
     //按章节遍历
     res.list = [];
