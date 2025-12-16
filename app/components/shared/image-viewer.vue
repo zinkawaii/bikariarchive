@@ -125,7 +125,7 @@
         }
 
         //缩放比率
-        let rate = 1 + Math.abs(event.deltaY) / 200;
+        let rate = 1 + Math.abs(event.deltaY) / (event.ctrlKey ? 20 : 200);
         if (event.deltaY > 0) {
             rate = 1 / rate;
         }
