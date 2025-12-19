@@ -4,9 +4,9 @@ import type { MbNumericProps } from "~/components/shared/numeric.vue";
 //判断对话框
 export function requireConfirm(message: string) {
     return new Promise<boolean>((resolve) => {
-        const dialogStore = useDialogStore();
+        const modalStore = useModalStore();
 
-        const { close } = dialogStore.use(() => h(LazyMbConfirm, {
+        const { close } = modalStore.use(() => h(LazyMbConfirm, {
             message,
             onClose(val = false) {
                 close();
@@ -21,9 +21,9 @@ export function requireConfirm(message: string) {
 //数字选择框
 export function requireNumeric(options: MbNumericProps) {
     return new Promise<number>((resolve) => {
-        const dialogStore = useDialogStore();
+        const modalStore = useModalStore();
 
-        const { close } = dialogStore.use(() => h(LazyMbNumeric, {
+        const { close } = modalStore.use(() => h(LazyMbNumeric, {
             ...options,
             onClose(val = options.initialValue) {
                 close();

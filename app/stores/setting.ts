@@ -12,11 +12,11 @@ export const useSettingStore = defineStore("setting", () => {
         "ui-collapse": false,
     });
 
-    const dialogStore = useDialogStore();
+    const modalStore = useModalStore();
     const isPreferredDark = usePreferredDark();
 
     //挂载弹窗实例
-    const { open, close } = dialogStore.use(() => h(LazyZSetting), {
+    const { open, close } = modalStore.use(() => h(LazyZSetting), {
         unique: true,
     });
 

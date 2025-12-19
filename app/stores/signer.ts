@@ -4,10 +4,10 @@ import type { SignerView } from "~/types/signer";
 export const useSignerStore = defineStore("signer", () => {
     const currentView = ref<SignerView>("login");
 
-    const dialogStore = useDialogStore();
+    const modalStore = useModalStore();
 
     //挂载弹窗实例
-    const { open, close } = dialogStore.use(() => h(LazyZSigner), {
+    const { open, close } = modalStore.use(() => h(LazyZSigner), {
         unique: true,
     });
 

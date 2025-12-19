@@ -21,8 +21,7 @@
         </main>
         <z-sidebar v-show="$route.meta.sidebar ?? true"/>
     </div>
-    <z-overlay />
-    <z-dialog />
+    <bikariya-modals />
     <toast-area />
     <z-fps />
     <z-context-menu />
@@ -97,6 +96,30 @@
         @include viewport("xs") {
             --meow-large: 1rem;
             --meow-medium: 1rem;
+        }
+    }
+
+    .bikariya-overlay {
+        position: fixed;
+        opacity: 0.5;
+        inset: 0;
+        background-color: black;
+
+        &:where(.v-enter-active, .v-leave-active) {
+            transition: opacity 0.4s;
+            transition-timing-function: cubic-bezier(var(--bezier));
+        }
+
+        &.v-enter-active {
+            --bezier: 0, 0.43, 0.37, 1;
+        }
+
+        &.v-leave-active {
+            --bezier: 0.43, 0, 1, 0.87;
+        }
+
+        &:where(.v-enter-from, .v-leave-to) {
+            opacity: 0;
         }
     }
 

@@ -13,7 +13,7 @@ export const useCommentStore = defineStore("comment", () => {
     const address = ref("");
 
     const route = useRoute();
-    const dialogStore = useDialogStore();
+    const modalStore = useModalStore();
     const toastStore = useToastStore();
 
     //清空评论
@@ -81,7 +81,7 @@ export const useCommentStore = defineStore("comment", () => {
     }
 
     function requirePost(parent?: CommentData) {
-        dialogStore.use(() => h(LazyCommentPanel, {
+        modalStore.use(() => h(LazyCommentPanel, {
             kind: "post",
             parent,
             path: route.path,
@@ -99,7 +99,7 @@ export const useCommentStore = defineStore("comment", () => {
     }
 
     function requireModify(data: CommentData) {
-        dialogStore.use(() => h(LazyCommentPanel, {
+        modalStore.use(() => h(LazyCommentPanel, {
             kind: "modify",
             ...data,
         }), {

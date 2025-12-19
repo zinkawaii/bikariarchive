@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { animate } from "animejs";
     import type { ImgHTMLAttributes } from "vue";
-    import { LazyMbImageViewer } from "#components";
+    import { LazyBikariyaImageViewer } from "#components";
 
     const props = withDefaults(defineProps<{
         src: ImgHTMLAttributes["src"];
@@ -19,7 +19,7 @@
     });
 
     const contextMenuStore = useContextMenuStore();
-    const dialogStore = useDialogStore();
+    const modalStore = useModalStore();
 
     const imgComp = useTemplateRef("img");
     const imgEl = computed<HTMLImageElement>(() => imgComp.value?.imgEl);
@@ -61,7 +61,7 @@
     });
 
     //查看器
-    const { open, close } = dialogStore.use(() => h(LazyMbImageViewer, {
+    const { open, close } = modalStore.use(() => h(LazyBikariyaImageViewer, {
         target: imgEl.value!,
         async onClose() {
             await close();

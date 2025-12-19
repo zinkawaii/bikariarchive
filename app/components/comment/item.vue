@@ -9,7 +9,7 @@
     }>();
 
     const commentStore = useCommentStore();
-    const dialogStore = useDialogStore();
+    const modalStore = useModalStore();
     const userStore = useUserStore();
 
     const body = computedAsync(() => {
@@ -29,7 +29,7 @@
 
     //查看用户信息
     function openUserInfo(data: CommentData) {
-        dialogStore.use(() => h(LazyCommentUser, {
+        modalStore.use(() => h(LazyCommentUser, {
             avatar: data.avatar,
             nickname: data.nickname,
             address: data.address,

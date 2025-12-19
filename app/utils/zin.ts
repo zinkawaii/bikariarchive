@@ -1,11 +1,4 @@
 export const Zin = new class Z {
-    //默认动画配置
-    DEFAULT_ANIME_OPTIONS: KeyframeAnimationOptions = {
-        duration: 400,
-        easing: "ease",
-        fill: "forwards",
-    };
-
     //视口宽度常量
     MAX_WINDOW_SIZE = 1024;
     MID_WINDOW_SIZE = 768;
