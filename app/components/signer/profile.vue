@@ -1,18 +1,8 @@
 <script lang="ts" setup>
-    import type { RouteLocationRaw } from "vue-router";
-
     const toastStore = useToastStore();
     const userStore = useUserStore();
     const route = useRoute();
     const router = useRouter();
-
-    //空间链接
-    const toSpace = computed<RouteLocationRaw>(() => ({
-        name: "user-space",
-        params: {
-            uid: userStore.uid ?? -1,
-        },
-    }));
 
     //退出登录
     async function logout() {
@@ -42,9 +32,7 @@
             <div class="signer-operator">
                 <mb-button @click="logout">退出登录</mb-button>
             </div>
-            <nuxt-link class="signer-avatar" :to="toSpace">
-                <user-avatar :src="userStore.avatar"/>
-            </nuxt-link>
+            <user-avatar class="signer-avatar" :src="userStore.avatar"/>
         </div>
     </signer-view>
 </template>
