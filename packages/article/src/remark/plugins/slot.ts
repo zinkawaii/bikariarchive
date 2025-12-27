@@ -18,17 +18,13 @@ export default function(this: Processor) {
                 parent.children.splice(index, 1);
             }
             else if (node.tagName === "slots" && frontmatter) {
-                const slots = node.children
-                    .filter((node): node is hast.Element => node.type === "element" && node.tagName === "component-slot")
-                    .map((slot) => ({
-                        tag: Object.keys(slot.properties)[0].slice("v-slot:".length),
-                        children: transformNodes(slot.children),
-                    })) ?? [];
-
-                for (const slot of slots) {
-                    const path = slot.tag;
-                    const content = slot.children;
-                    setProperty(frontmatter, path, content);
+                for (const child of node.children) {
+                    if (child.type !== "element" || child.tagName !== "component-slot") {
+                        continue;
+                    }
+                    const tag = Object.keys(child.properties)[0].slice("v-slot:".length);
+                    const children = transformNodes(child.children);
+                    setProperty(frontmatter, tag, children);
                 }
             }
         });

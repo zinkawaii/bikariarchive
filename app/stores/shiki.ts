@@ -23,6 +23,10 @@ export const useShikiStore = defineStore("shiki", () => {
         ],
     };
 
+    onUnmounted(() => {
+        promise?.then((shiki) => shiki.dispose());
+    });
+
     async function load() {
         promise ??= loadShiki();
         shiki ??= await promise;
@@ -54,9 +58,8 @@ export const useShikiStore = defineStore("shiki", () => {
         const loadedLanguages = shiki.getLoadedLanguages();
         await Promise.all(
             langs
-                .filter((lang) => !loadedLanguages.includes(lang) && lang in bundledLanguages)
-                .map((lang) => bundledLanguages[lang as BundledLanguage])
-                .map((dynamicLang) => dynamicLang().then((loadedLang) => shiki.loadLanguage(loadedLang))),
+                .filter((lang) => !loadedLanguages.includes(lang))
+                .map((lang) => bundledLanguages[lang as BundledLanguage]?.().then(shiki.loadLanguage)),
         );
     }
 

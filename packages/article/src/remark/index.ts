@@ -79,10 +79,10 @@ export async function parseEntry<T>(text: string) {
     text = [...generateSlottedText(text)].join("");
 
     const result = await processor.process(text);
-    const [data, ...drafts] = result.data.frontmatters as T[];
+    const [attributes, ...drafts] = result.data.frontmatters as T[];
 
     return {
-        attributes: data,
+        attributes,
         drafts,
     };
 }

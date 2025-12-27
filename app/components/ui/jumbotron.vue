@@ -13,8 +13,8 @@
 
     function onBeforeLeave() {
         const { scrollY, innerHeight } = window;
-        const marginTop = innerHeight * 0.7 - scrollY;
-        percent.value = marginTop > 0 ? Math.min(1, marginTop / (innerHeight * 0.7)) : 0;
+        const marginTop = innerHeight * 0.72 - scrollY;
+        percent.value = marginTop > 0 ? Math.min(1, marginTop / (innerHeight * 0.72)) : 0;
 
         if (percent.value) {
             window.scrollTo({

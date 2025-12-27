@@ -70,15 +70,6 @@
         @click="onClick"
     >
         <aside-profile />
-        <aside-widget title="公告">
-            <template #icon>
-                <iconify name="fa7-solid:bullhorn"/>
-            </template>
-            <p class="p-small">
-                欢迎来到<span class="text-primary">{{ $config.public.title }}</span>！(｡･ ω&lt;)ゞ♡<br />
-                小说正在缓慢更新中……
-            </p>
-        </aside-widget>
         <div class="aside-sticky">
             <aside-unified v-if="route.meta.catalog"/>
             <aside-statistics />

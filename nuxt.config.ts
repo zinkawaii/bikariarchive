@@ -48,6 +48,7 @@ export default defineNuxtConfig({
     nitro: {
         rollupConfig: {
             plugins: [
+                // @ts-expect-error rolldown !== rollup
                 vue(),
             ],
         },

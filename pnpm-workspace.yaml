@@ -3,21 +3,24 @@ shamefullyHoist: true
 packages:
   - packages/*
 
+overrides:
+  vite: 8.0.0-beta.3
+
 patchedDependencies:
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
 
 catalogs:
   css:
-    sass-embedded: ^1.93.3
+    sass-embedded: ^1.97.1
   database:
-    mongoose: ^9.0.0
+    mongoose: ^9.0.2
   iconify:
     "@iconify-json/fa7-solid": ^1.2.3
     "@iconify-json/ri": ^1.2.6
   lint:
     "@zinkawaii/eslint-config": ^0.4.1
     "@zinkawaii/stylelint-config": ^0.3.4
-    eslint: ^9.39.1
+    eslint: ^9.39.2
     stylelint: ^16.26.1
   markdown:
     "@mdzjs/config": ^0.0.1
@@ -33,7 +36,7 @@ catalogs:
     rehype-raw: ^7.0.0
     remark-breaks: ^4.0.0
     remark-math: ^6.0.0
-    remark-mdc: ^3.9.0
+    remark-mdc: ^3.10.0
     remark-parse: ^11.0.0
     remark-rehype: ^11.1.2
     unified: ^11.0.5
@@ -42,44 +45,44 @@ catalogs:
     "@bikariya/image-viewer": ^0.0.2
     "@bikariya/modals": ^0.0.2
     "@nuxt/devtools": ^3.1.1
-    "@nuxt/eslint": ^1.11.0
+    "@nuxt/eslint": ^1.12.1
     "@nuxt/fonts": ^0.12.1
-    "@nuxt/icon": ^2.1.0
+    "@nuxt/icon": ^2.1.1
     "@nuxt/image": ^2.0.0
-    "@nuxtjs/seo": ^3.2.2
+    "@nuxtjs/seo": ^3.3.0
     "@pinia/nuxt": ^0.11.3
     "@vueuse/nuxt": ^14.1.0
-    nuxt: ^4.2.1
+    nuxt: ^4.2.2
   test:
-    vitest: ^4.0.15
+    vitest: ^4.0.16
   types:
     "@types/wicg-file-system-access": ^2023.10.7
     "@zinkawaii/tsconfig": ^0.0.2
   typescript:
-    tsdown: ^0.17.0
+    tsdown: ^0.18.2
   utils:
     "@clack/prompts": ^0.11.0
     "@kabeep/lunar-date-fns": ^1.1.0
-    "@shikijs/transformers": ^3.19.0
+    "@shikijs/transformers": ^3.20.0
     animejs: ^4.2.2
-    arktype: ^2.1.28
+    arktype: ^2.1.29
     bgmt: ^0.1.3
     chokidar: ^5.0.0
-    cn-font-split: ^7.3.0
+    cn-font-split: ^7.4.1
     consola: ^3.4.2
     cross-env: ^10.1.0
     crypto-es: ^3.1.2
     date-fns: ^4.1.0
     defu: ^6.1.4
     github-slugger: ^2.0.0
-    hookable: ^5.5.3
-    katex: ^0.16.25
+    hookable: ^6.0.1
+    katex: ^0.16.27
     nanoid: ^5.1.6
     pathe: ^2.0.3
     picocolors: ^1.1.1
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
-    shiki: ^3.19.0
+    shiki: ^3.20.0
     svgo: ^4.0.0
     unemail: ^0.3.0
     uqr: ^0.1.2
@@ -87,15 +90,15 @@ catalogs:
     zfeed: ^0.2.4
     zx: ^8.8.5
   vue:
-    "@vitejs/plugin-vue": ^6.0.2
+    "@vitejs/plugin-vue": ^6.0.3
     "@vueuse/core": ^14.1.0
     "@vueuse/router": ^14.1.0
     pinia: ^3.0.4
     pinia-plugin-persistedstate: ^4.7.1
-    vue: ^3.5.25
-    vue-component-type-helpers: ^3.1.5
-    vue-router: ^4.6.3
-    vue-tsc: ^3.1.5
+    vue: ^3.5.26
+    vue-component-type-helpers: ^3.2.1
+    vue-router: ^4.6.4
+    vue-tsc: ^3.2.1
 
 onlyBuiltDependencies:
   - "@parcel/watcher"

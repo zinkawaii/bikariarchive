@@ -15,7 +15,7 @@ const content = file.replace(
 await writeFile(path, content);
 
 export async function getShikiTokens() {
-    const shiki = await createHighlighterCore({
+    using shiki = await createHighlighterCore({
         engine: createJavaScriptRegexEngine(),
         langs: [
             html,
@@ -30,8 +30,6 @@ export async function getShikiTokens() {
         lang: "html",
         defaultColor: false,
     });
-
-    shiki.dispose();
 
     return {
         ...get("light"),

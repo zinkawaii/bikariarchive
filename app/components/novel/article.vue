@@ -218,6 +218,14 @@
             > p {
                 margin-block: 0.8em;
             }
+
+            > :first-child {
+                margin-top: 0;
+            }
+
+            > :last-child {
+                margin-bottom: 0;
+            }
         }
 
         &:where(.is-article, .is-comment) {
@@ -259,14 +267,6 @@
             img {
                 max-width: 411px;
             }
-        }
-
-        > :first-child {
-            margin-top: 0;
-        }
-
-        > :last-child {
-            margin-bottom: 0;
         }
     }
 </style>

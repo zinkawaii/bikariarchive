@@ -24,7 +24,7 @@ export const useSettingStore = defineStore("setting", () => {
     const themeName = computed(() => {
         return {
             /* 初空 */ 0: "hatsusora",
-            /* 抹茶 */ 1: "ayame",
+            /* 菖蒲 */ 1: "ayame",
             /* 早樱 */ 2: "sakura",
         }[settings.value.theme];
     });
@@ -73,6 +73,7 @@ export const useSettingStore = defineStore("setting", () => {
                 key === "dark-mode" ? isDarkMode :
                 key === "theme" ? themeName :
                 () => settings.value[key as SettingField];
+
             const { trigger } = watchTriggerable(source, (newVal, oldVal, onCleanup) => {
                 if (oldVal !== void 0) {
                     document.startViewTransition?.(fn) ?? fn();
