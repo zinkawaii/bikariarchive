@@ -37,6 +37,8 @@
     --rounded-full           : calc(1px * infinity);
     --size-min-width         : 320px;
 
+    color-scheme: light only;
+
     @media (resolution < 1.5x) {
         --font-primary: system-ui, sans-serif;
     }
