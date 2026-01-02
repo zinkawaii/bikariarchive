@@ -24,7 +24,7 @@ catalogs:
     stylelint: ^16.26.1
   markdown:
     "@mdzjs/config": ^0.0.1
-    kerria: ^0.4.0
+    kerria: ^0.4.2
     mdast-util-frontmatter: ^2.0.1
     mdast-util-gfm-footnote: ^2.1.0
     mdast-util-gfm-strikethrough: ^2.0.0

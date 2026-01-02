@@ -15,15 +15,17 @@ export default defineNuxtModule({
 
         addServerPlugin(resolve("runtime/server"));
 
-        await article.build();
-        await entry.build();
-        await update.build();
-
-        if (nuxt.options.dev) {
-            article.watch();
-            entry.watch();
-            update.watch();
+        const disposables: (() => Promise<unknown>)[] = [];
+        for (const processor of [article, entry, update]) {
+            await processor.build();
+            if (nuxt.options.dev) {
+                disposables.push(processor.watch());
+            }
         }
+
+        nuxt.hook("close", async () => {
+            await Promise.all(disposables.map((dispose) => dispose()));
+        });
 
         nuxt.hook("nitro:build:public-assets", async () => {
             const source = resolve("../../.data");
