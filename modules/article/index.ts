@@ -1,6 +1,7 @@
 import { cp } from "node:fs/promises";
 import { addPlugin, addServerPlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 import { article, entry, update } from "../../packages/article/src";
+import { buildSearch } from "./search";
 
 export default defineNuxtModule({
     meta: {
@@ -22,6 +23,7 @@ export default defineNuxtModule({
                 disposables.push(processor.watch());
             }
         }
+        await buildSearch();
 
         nuxt.hook("close", async () => {
             await Promise.all(disposables.map((dispose) => dispose()));

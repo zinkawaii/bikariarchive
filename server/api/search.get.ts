@@ -1,7 +1,8 @@
+import { readFile } from "node:fs/promises";
 import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
-import type { Element } from "@bikari/article";
+import type { Child, Element, Root } from "@bikari/article";
 import { SearchRecordModel } from "~~/server/models/SearchRecord";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 
@@ -16,51 +17,70 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
     //连接数据库
     await connectMongoose();
 
-    const novelInfos = novel === void 0 ? Object.values(Article.meta) : [Article.meta[novel]];
-    const articles = novelInfos.flatMap((info) => info?.chapters).filter((art) => !art.encrypted);
+    const code = word.codePointAt(0)!.toString();
+    const path = r(`/.data/search/${code.slice(0, 2)}/${code}.json`);
+    const data = JSON.parse(await readFile(path, "utf-8").catch(() => "{}")) as Record<string, number[][]>;
+
+    const novels = new Set(novel === void 0 ? Object.keys(Article.meta) : [novel]);
+    const weakTexts = new WeakMap<Element, string>();
 
     //按章节遍历
     res.list = [];
-    for (const art of articles) {
-        //读取整章
-        const root = await readArticle(art);
 
-        //开始检索
-        const lines: [Element, string][] = [];
+    for (const [uri, vectors] of Object.entries(data)) {
+        const [novel, index] = uri.split("/");
+        if (!novels.has(novel)) {
+            continue;
+        }
+
+        const art = Article.for(novel, index);
+        const root = await readArticle(art);
+        const nodes: Element[] = [];
+
+        for (const vector of vectors) {
+            let node: Root | Child = root;
+            for (let i = 0; i < vector.length - 1; i++) {
+                if (node.type === "text") {
+                    break;
+                }
+                node = node.children[vector[i]];
+            }
+
+            if (node.type !== "element" || node.tag !== "p") {
+                continue;
+            }
+
+            let text = weakTexts.get(node);
+            if (text === void 0) {
+                weakTexts.set(node, text = toString(node));
+            }
+
+            if (text.startsWith(word, vector.at(-1))) {
+                nodes.push(node);
+            }
+        }
+
+        if (!nodes.length) {
+            continue;
+        }
+
+        const paragraphs: Element[] = [];
         visit(root, "element", (node) => {
             if (node.tag === "p") {
-                lines.push([node, toString(node)]);
+                paragraphs.push(node);
             }
         });
 
-        const positions = [];
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i][1];
+        const line = paragraphs.findIndex((p) => p === nodes[0]);
+        const start = Math.max(line - 1, 0);
+        const end = Math.min(line + 2, paragraphs.length);
 
-            let pos = -1;
-            while (pos = line.indexOf(word, pos + 1), pos !== -1) {
-                positions.push({
-                    line: i,
-                    pos,
-                });
-            }
-        }
-
-        if (positions.length) {
-            const line = positions[0].line;
-
-            //前后文
-            const start = Math.max(line - 1, 0);
-            const end = Math.min(line + 2, lines.length);
-            const parts = Array.from({ length: end - start }, (_, i) => lines[i + start][0]);
-
-            res.list.push({
-                novel: art.novel,
-                index: art.index,
-                count: positions.length,
-                parts,
-            });
-        }
+        res.list.push({
+            novel: art.novel,
+            index: art.index,
+            count: nodes.length,
+            parts: Array.from({ length: end - start }, (_, i) => paragraphs[i + start]),
+        });
     }
 
     //将检索记录写入数据库

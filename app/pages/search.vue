@@ -37,15 +37,15 @@
             novel,
             word: computed(() => inputWord.value.slice(0, 64)),
         },
-        immediate: false,
+        immediate: import.meta.server,
         watch: false,
     });
 
-    const results = computed(() => {
+    const list = computed(() => {
         return data.value?.list ?? [];
     });
 
-    const { page, total, paginatedList } = usePagination(results);
+    const { page, total, paginatedList } = usePagination(list);
 
     //全文检索
     const fullTextSearch = Zin.debounce(async () => {
@@ -82,7 +82,7 @@
 
     //总出现次数
     const totalCount = computed(() => {
-        return results.value.reduce((count, item) => {
+        return list.value.reduce((count, item) => {
             return count + item.count;
         }, 0);
     });
@@ -100,7 +100,7 @@
     <meow-widget v-if="searchWord.length">
         <div class="search-statistics">
             <h2>"{{ searchWord }}"的检索结果</h2>
-            <p class="text-gray">共检索到 {{ results.length }} 章，总出现次数为 {{ totalCount }} 次</p>
+            <p class="text-gray">共检索到 {{ list.length }} 章，总出现次数为 {{ totalCount }} 次</p>
         </div>
         <div class="search-results">
             <mb-skeleton v-if="status !== `success`"/>
