@@ -2,7 +2,6 @@ import consola from "consola";
 import mongoose from "mongoose";
 import "~~/server/models/CommentData";
 import "~~/server/models/ReadRecord";
-import "~~/server/models/SearchRecord";
 import "~~/server/models/TempVerify";
 import "~~/server/models/UserData";
 

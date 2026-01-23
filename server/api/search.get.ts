@@ -3,7 +3,6 @@ import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 import type { Child, Element, Root } from "@bikari/article";
-import { SearchRecordModel } from "~~/server/models/SearchRecord";
 import type { GetSearchResponse } from "~~/server/types/api/search";
 
 const schema = type({
@@ -82,11 +81,4 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
             parts: Array.from({ length: end - start }, (_, i) => paragraphs[i + start]),
         });
     }
-
-    //将检索记录写入数据库
-    new SearchRecordModel({
-        ip: getRequestIP(event, { xForwardedFor: true }),
-        time: new Date(),
-        word,
-    }).save();
 }, 1500);

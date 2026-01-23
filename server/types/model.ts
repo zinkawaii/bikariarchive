@@ -24,13 +24,6 @@ export interface ReadRecordSchema {
     user?: Types.ObjectId;
 }
 
-export interface SearchRecordSchema {
-    ip: string;
-    time: Date;
-    word: string;
-    user?: Types.ObjectId;
-}
-
 export interface TempVerifySchema {
     email: string;
     time: Date;
