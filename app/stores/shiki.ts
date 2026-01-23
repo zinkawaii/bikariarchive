@@ -23,7 +23,7 @@ export const useShikiStore = defineStore("shiki", () => {
         ],
     };
 
-    onUnmounted(() => {
+    onScopeDispose(() => {
         promise?.then((shiki) => shiki.dispose());
     });
 
