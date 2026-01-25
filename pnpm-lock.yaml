@@ -207,6 +207,9 @@ catalogs:
     svgo:
       specifier: ^4.0.0
       version: 4.0.0
+    tinyglobby:
+      specifier: ^0.2.15
+      version: 0.2.15
     unemail:
       specifier: ^0.3.0
       version: 0.3.0
@@ -408,6 +411,9 @@ importers:
       svgo:
         specifier: catalog:utils
         version: 4.0.0
+      tinyglobby:
+        specifier: catalog:utils
+        version: 0.2.15
       unemail:
         specifier: catalog:utils
         version: 0.3.0

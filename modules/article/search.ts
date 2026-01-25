@@ -1,6 +1,8 @@
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import consola from "consola";
 import { toString } from "mdast-util-to-string";
+import { basename, dirname } from "pathe";
+import { glob } from "tinyglobby";
 import type { Child, JArticle, JArtmap, Root } from "../../packages/article/src";
 
 export async function buildSearch() {
@@ -24,14 +26,27 @@ export async function buildSearch() {
         }
     }
 
-    await rm(".data/search", { recursive: true, force: true });
+    await Promise.all(
+        await glob(".data/search/**/*.json", { absolute: true }).then(
+            (paths) => paths
+                .filter((path) => !(String.fromCodePoint(+basename(path, ".json")) in data))
+                .map((path) => rm(path)),
+        ),
+    );
 
-    for (const [char, vectors] of Object.entries(data)) {
-        const code = char.codePointAt(0)!.toString();
+    await Promise.all(
+        Object.entries(data).map(async ([char, vectors]) => {
+            const code = char.codePointAt(0)!.toString();
+            const path = `.data/search/${code.slice(0, 2)}/${code}.json`;
+            const text = JSON.stringify(vectors);
 
-        await mkdir(`.data/search/${code.slice(0, 2)}`, { recursive: true });
-        await writeFile(`.data/search/${code.slice(0, 2)}/${code}.json`, JSON.stringify(vectors));
-    }
+            const stats = await stat(path).catch(() => void 0);
+            if (!stats || stats.size !== text.length) {
+                await mkdir(dirname(path), { recursive: true });
+                await writeFile(path, text);
+            }
+        }),
+    );
 
     consola.success("[Search] Build");
 }

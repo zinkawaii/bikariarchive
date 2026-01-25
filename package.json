@@ -67,6 +67,7 @@
     "sass-embedded": "catalog:css",
     "stylelint": "catalog:lint",
     "svgo": "catalog:utils",
+    "tinyglobby": "catalog:utils",
     "unemail": "catalog:utils",
     "vue-component-type-helpers": "catalog:vue",
     "vue-tsc": "catalog:vue",
