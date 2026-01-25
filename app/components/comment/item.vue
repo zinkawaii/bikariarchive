@@ -2,7 +2,7 @@
     import { parseComment } from "@bikari/article/remark";
     import { format, formatDistanceToNow } from "date-fns";
     import { LazyCommentUser } from "#components";
-    import type { CommentData } from "~~/server/types/api/comment";
+    import type { CommentData } from "#server/types/api/comment";
 
     const props = defineProps<{
         data: WithParent<CommentData>;

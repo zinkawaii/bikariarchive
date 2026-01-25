@@ -33,7 +33,6 @@ export interface Article extends WithRequired<
     novelInfo: JNovel<Article>;
     volumeInfo: JVolume;
     order: number;
-    orderInVol: number;
     createDate: string;
     publishDate: string;
     updateDate: string;
@@ -54,17 +53,13 @@ function createArticle(...args: [novel: string, raw: JChapter]): Article {
     const novel = args[0];
 
     //书籍信息
-    const novelInfo = computed(() => {
-        return Article.meta[novel];
-    });
+    const novelInfo = computed(() => Article.meta[novel]);
 
     //卷册序号
     const volume = computed(() => raw.value.volume);
 
     //卷册信息
-    const volumeInfo = computed(() => {
-        return novelInfo.value.volumes[raw.value.volume];
-    });
+    const volumeInfo = computed(() => novelInfo.value.volumes[raw.value.volume]);
 
     //章节名称
     const index = computed(() => raw.value.index);
@@ -72,13 +67,6 @@ function createArticle(...args: [novel: string, raw: JChapter]): Article {
     //章节序号
     const order = computed(() => {
         return novelInfo.value.chapters.findIndex((art) => art.index === index.value);
-    });
-
-    //卷内章节序号
-    const orderInVol = computed(() => {
-        return novelInfo.value.chapters
-            .filter((art) => art.volume === raw.value.volume)
-            .findIndex((art) => art.index === raw.value.index);
     });
 
     //章节名称
@@ -183,7 +171,6 @@ function createArticle(...args: [novel: string, raw: JChapter]): Article {
         volumeInfo,
         index,
         order,
-        orderInVol,
         title,
         excerpt,
         date,

@@ -1,6 +1,7 @@
 import { type } from "arktype";
-import { CommentDataModel } from "~~/server/models/CommentData";
-import type { PutCommentBody } from "~~/server/types/api/comment";
+import { CommentDataModel } from "#server/models/CommentData";
+import { Zexp } from "#shared/utils/index";
+import type { PutCommentBody } from "#server/types/api/comment";
 
 const schema = type({
     id: "string",

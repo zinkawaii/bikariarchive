@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import type { Root } from "@bikari/article";
+import { Article } from "#shared/utils/article";
 
 export async function readArticle(art: Article) {
     const { novel, volume, index } = art;

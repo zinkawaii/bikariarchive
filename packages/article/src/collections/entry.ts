@@ -87,27 +87,21 @@ export default createKerria("Entry", () => {
     const abilityInfo = useLoad("ability", {
         out: ".data/json/Ability.json",
         output(val) {
-            const items: AbilityItem[] = [];
+            const items: Record<string, AbilityItem> = {};
             for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {
-                if (!(name in metaInfo.value.all)) {
-                    continue;
-                }
                 for (const ability of abilities) {
-                    let item = items.find(({ name }) => name === ability.name);
-                    if (!item) {
-                        items.push(item = {
-                            name: ability.name,
-                            class: ability.class,
-                            owners: [],
-                        });
-                    }
-                    item.owners.push({
+                    items[ability.name] ??= {
+                        name: ability.name,
+                        class: ability.class,
+                        owners: [],
+                    };
+                    items[ability.name].owners.push({
                         name,
                         star: ability.star,
                     });
                 }
             }
-            return items;
+            return Object.values(items);
         },
     });
 

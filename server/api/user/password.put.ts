@@ -1,6 +1,7 @@
 import { type } from "arktype";
-import { UserDataModel } from "~~/server/models/UserData";
-import type { PutPasswordBody } from "~~/server/types/api/user/password";
+import { UserDataModel } from "#server/models/UserData";
+import { Zexp } from "#shared/utils";
+import type { PutPasswordBody } from "#server/types/api/user/password";
 
 const schema = type({
     old: type(Zexp.password),

@@ -1,5 +1,5 @@
 import { model, Schema, Types } from "mongoose";
-import type { ReadRecordSchema } from "~~/server/types/model";
+import type { ReadRecordSchema } from "#server/types/model";
 
 export const ReadRecordModel = model("ReadRecord", new Schema<ReadRecordSchema>({
     ip: {

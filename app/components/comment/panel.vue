@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import type { CommentData } from "~~/server/types/api/comment";
+    import type { CommentData } from "#server/types/api/comment";
 
     interface CommentPanelPostProps {
         kind: "post";

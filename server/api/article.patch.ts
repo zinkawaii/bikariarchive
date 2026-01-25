@@ -1,8 +1,8 @@
 import { type } from "arktype";
 import { AES, Utf8 } from "crypto-es";
-import { ReadRecordModel } from "~~/server/models/ReadRecord";
-import { UserDataModel } from "~~/server/models/UserData";
-import type { PatchArticleBody, PatchArticleResponse } from "~~/server/types/api/article";
+import { ReadRecordModel } from "#server/models/ReadRecord";
+import { UserDataModel } from "#server/models/UserData";
+import type { PatchArticleBody, PatchArticleResponse } from "#server/types/api/article";
 
 const schema = type({
     token: "string",

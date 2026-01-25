@@ -6,13 +6,18 @@ const shared: TSConfig["compilerOptions"] = {
     noUncheckedIndexedAccess: false,
 };
 
-export default <NuxtConfig["typescript"]> {
+export default <NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig>> {
     nodeTsConfig: {
         compilerOptions: {
             ...shared,
         },
     },
     sharedTsConfig: {
+        compilerOptions: {
+            ...shared,
+        },
+    },
+    serverTsConfig: {
         compilerOptions: {
             ...shared,
         },
@@ -24,9 +29,6 @@ export default <NuxtConfig["typescript"]> {
             ],
             ...shared,
         },
-        include: [
-            "../data/**/*.mdz",
-        ],
         vueCompilerOptions: {
             checkUnknownComponents: true,
             checkUnknownDirectives: true,

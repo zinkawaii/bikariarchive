@@ -1,6 +1,8 @@
 import { type } from "arktype";
+import { TempVerifyModel } from "#server/models/TempVerify";
+import { Zexp } from "#shared/utils";
+import { randomInt } from "#shared/utils/random";
 import Verify from "~/emails/verify.vue";
-import { TempVerifyModel } from "~~/server/models/TempVerify";
 
 const schema = type({
     email: type(Zexp.email),

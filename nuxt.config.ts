@@ -52,6 +52,9 @@ export default defineNuxtConfig({
                 vue(),
             ],
         },
+        typescript: {
+            tsConfig: typescriptConfig.serverTsConfig,
+        },
     },
     routeRules: {
         "/favicon.ico": {

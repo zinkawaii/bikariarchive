@@ -1,6 +1,6 @@
 import { type } from "arktype";
-import { UserDataModel } from "~~/server/models/UserData";
-import type { PostLoginBody, PostLoginResponse } from "~~/server/types/api/user/login";
+import { UserDataModel } from "#server/models/UserData";
+import type { PostLoginBody, PostLoginResponse } from "#server/types/api/user/login";
 
 const schema = type({
     account: "string",

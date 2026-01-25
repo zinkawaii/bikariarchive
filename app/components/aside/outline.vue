@@ -1,26 +1,26 @@
 <script lang="ts" setup>
-    interface HeaderInfo {
+    interface HeadingInfo {
         element: HTMLHeadingElement;
         title: string;
         link: string;
         level: number;
         order: string;
-        children: HeaderInfo[];
+        children: HeadingInfo[];
     }
 
     const { hooks } = useHookStore();
     const { height } = useElementSize(document?.body);
 
     const activeIdx = ref(0);
-    const flatHeaders = shallowRef<HeaderInfo[]>([]);
-    const nestedHeaders = shallowRef<HeaderInfo[]>([]);
+    const flatHeadings = shallowRef<HeadingInfo[]>([]);
+    const nestedHeadings = shallowRef<HeadingInfo[]>([]);
 
     const activeLink = computed(() => {
-        return flatHeaders.value[activeIdx.value]?.link;
+        return flatHeadings.value[activeIdx.value]?.link;
     });
 
-    const headerOffsets = computedWithControl(() => [flatHeaders.value, height.value], () => {
-        return flatHeaders.value?.map(({ element, link }) => ({
+    const headingOffsets = computedWithControl(() => [flatHeadings.value, height.value], () => {
+        return flatHeadings.value?.map(({ element, link }) => ({
             link,
             top: Math.floor(getPosition(element).top),
         })) ?? [];
@@ -28,7 +28,7 @@
 
     //列表模板重用
     const [DefineOutlineList, OutlineList] = createReusableTemplate<{
-        headers: HeaderInfo[];
+        headings: HeadingInfo[];
     }>({
         inheritAttrs: false,
     });
@@ -42,7 +42,7 @@
     function update(el: HTMLElement) {
         const headingEls = el.querySelectorAll<HTMLHeadingElement>(`:where(h2, h3):not(.sr-only)`);
 
-        flatHeaders.value = [...headingEls]
+        flatHeadings.value = [...headingEls]
             .map((el) => ({
                 element: el,
                 title: el.textContent!,
@@ -53,19 +53,22 @@
             }))
             .filter((el) => el.link.length > 1 && el.level <= 3);
 
-        nestedHeaders.value = [];
-        outer: for (let i = 0; i < flatHeaders.value.length; i++) {
-            const cur = flatHeaders.value[i];
+        nestedHeadings.value = [];
+        for (let i = 0; i < flatHeadings.value.length; i++) {
+            const curr = flatHeadings.value[i];
+            if (curr.level === 2) {
+                curr.order = `${nestedHeadings.value.length + 1}`;
+                nestedHeadings.value.push(curr);
+                continue;
+            }
             for (let j = i - 1; j >= 0; j--) {
-                const prev = flatHeaders.value[j];
-                if (prev.level < cur.level) {
-                    cur.order = `${prev.order}.${prev.children.length + 1}`;
-                    prev.children.push(cur);
-                    continue outer;
+                const prev = flatHeadings.value[j];
+                if (prev.level < curr.level) {
+                    curr.order = `${prev.order}.${prev.children.length + 1}`;
+                    prev.children.push(curr);
+                    break;
                 }
             }
-            cur.order = `${nestedHeaders.value.length + 1}`;
-            nestedHeaders.value.push(cur);
         }
     }
 
@@ -73,18 +76,18 @@
     useEventListener("scroll", Zin.throttle(() => {
         const { scrollY, innerHeight } = window;
 
-        if (!headerOffsets.value.length || scrollY < 1) {
+        if (!headingOffsets.value.length || scrollY < 1) {
             activeIdx.value = 0;
             return;
         }
 
-        activeIdx.value = headerOffsets.value.length - 1;
+        activeIdx.value = headingOffsets.value.length - 1;
         if (Math.abs(scrollY + innerHeight - height.value) < 1) {
             return;
         }
 
-        for (let i = 0; i < headerOffsets.value.length; i++) {
-            if (headerOffsets.value[i].top > scrollY + 80) {
+        for (let i = 0; i < headingOffsets.value.length; i++) {
+            if (headingOffsets.value[i].top > scrollY + 80) {
                 activeIdx.value = Math.max(0, i - 1);
                 return;
             }
@@ -93,9 +96,9 @@
 </script>
 
 <template>
-    <define-outline-list v-slot="{ headers }">
+    <define-outline-list v-slot="{ headings }">
         <ul class="outline-list">
-            <li v-for="{ title, link, order, children } in headers" class="outline-item">
+            <li v-for="{ title, link, order, children } in headings" class="outline-item">
                 <a
                     class="aside-anchor text-truncate"
                     :class="{ [`is-active`]: link === activeLink }"
@@ -104,7 +107,7 @@
                     <span class="outline-order">{{ order }}</span>
                     <span>{{ title }}</span>
                 </a>
-                <outline-list v-if="children.length" :headers="children"/>
+                <outline-list v-if="children.length" :headings="children"/>
             </li>
         </ul>
     </define-outline-list>
@@ -112,11 +115,11 @@
         <template #icon>
             <iconify name="fa7-solid:list-numeric"/>
         </template>
-        <div v-if="nestedHeaders.length" class="aside-limited">
+        <div v-if="nestedHeadings.length" class="aside-limited">
             <div class="outline-track">
                 <div class="outline-thumb" :style="{ translate: `0 ${activeIdx * 30}px` }"></div>
             </div>
-            <outline-list v-bind="{ headers: nestedHeaders }"/>
+            <outline-list v-bind="{ headings: nestedHeadings }"/>
         </div>
         <p v-else class="outline-empty p-small">这篇文章还没有目录哦~</p>
     </aside-widget>

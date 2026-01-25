@@ -1,6 +1,6 @@
 import { type } from "arktype";
-import { UserDataModel } from "~~/server/models/UserData";
-import type { GetUserInfoResponse } from "~~/server/types/api/user/info";
+import { UserDataModel } from "#server/models/UserData";
+import type { GetUserInfoResponse } from "#server/types/api/user/info";
 
 const schema = type({
     uid: "string.numeric.parse?",

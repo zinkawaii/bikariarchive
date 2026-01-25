@@ -3,7 +3,8 @@ import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 import type { Child, Element, Root } from "@bikari/article";
-import type { GetSearchResponse } from "~~/server/types/api/search";
+import { Article } from "#shared/utils/article";
+import type { GetSearchResponse } from "#server/types/api/search";
 
 const schema = type({
     novel: "string?",

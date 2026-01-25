@@ -1,7 +1,9 @@
 import { type } from "arktype";
-import { TempVerifyModel } from "~~/server/models/TempVerify";
-import { UserDataModel } from "~~/server/models/UserData";
-import type { GetLoginBody, GetLogonResponse } from "~~/server/types/api/user/logon";
+import { TempVerifyModel } from "#server/models/TempVerify";
+import { UserDataModel } from "#server/models/UserData";
+import { Zexp } from "#shared/utils/index";
+import { randomInt } from "#shared/utils/random";
+import type { GetLoginBody, GetLogonResponse } from "#server/types/api/user/logon";
 
 const schema = type({
     nickname: type(Zexp.nickname),

@@ -1,5 +1,5 @@
 import type { Types } from "mongoose";
-import type { CommentMode } from "~~/server/types/api/comment";
+import type { CommentMode } from "#server/types/api/comment";
 
 export interface CommentDataSchema {
     path: string;

@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import type { TempVerifySchema } from "~~/server/types/model";
+import type { TempVerifySchema } from "#server/types/model";
 
 export const TempVerifyModel = model("TempVerify", new Schema<TempVerifySchema>({
     email: {

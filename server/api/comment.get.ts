@@ -1,8 +1,8 @@
 import { type } from "arktype";
 import type { HydratedDocument } from "mongoose";
-import { CommentDataModel } from "~~/server/models/CommentData";
-import type { CommentData, GetCommentResponse } from "~~/server/types/api/comment";
-import type { CommentDataSchema, UserDataSchema } from "~~/server/types/model";
+import { CommentDataModel } from "#server/models/CommentData";
+import type { CommentData, GetCommentResponse } from "#server/types/api/comment";
+import type { CommentDataSchema, UserDataSchema } from "#server/types/model";
 
 const schema = type({
     path: "string",

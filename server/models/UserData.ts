@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import type { UserDataSchema } from "~~/server/types/model";
+import type { UserDataSchema } from "#server/types/model";
 
 export const UserDataModel = model("UserData", new Schema<UserDataSchema>({
     uid: {

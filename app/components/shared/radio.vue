@@ -28,13 +28,13 @@
         border: 1px solid var(--color-border);
         border-radius: var(--rounded-circle);
         background-clip: content-box;
-        background-color: var(--color-theme-dark);
         transition: all 0.1s;
         appearance: none;
         cursor: pointer;
 
         &:checked {
-            padding: 2px;
+            padding: 0.15em;
+            background-color: var(--color-theme-dark);
 
             + .radio-title {
                 color: var(--color-theme-text);

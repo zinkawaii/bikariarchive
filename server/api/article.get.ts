@@ -1,6 +1,7 @@
 import { type } from "arktype";
 import { AES } from "crypto-es";
-import type { GetArticleResponse } from "~~/server/types/api/article";
+import { Article } from "#shared/utils/article";
+import type { GetArticleResponse } from "#server/types/api/article";
 
 const schema = type({
     novel: "string",
