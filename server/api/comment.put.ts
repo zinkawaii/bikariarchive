@@ -1,14 +1,13 @@
 import { type } from "arktype";
 import { CommentDataModel } from "#server/models/CommentData";
-import { Zexp } from "#shared/utils/index";
 import type { PutCommentBody } from "#server/types/api/comment";
 
 const schema = type({
     id: "string",
     content: "string <= 512",
-    nickname: type(Zexp.nickname).optional(),
-    email: type(Zexp.email).optional(),
-    address: type(Zexp.url).optional(),
+    nickname: "string <= 18?",
+    email: "string.email?",
+    address: "string.url?",
 });
 
 export default defineJEventHandler(async (event) => {

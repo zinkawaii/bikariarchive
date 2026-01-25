@@ -10,12 +10,12 @@
         nickname: {
             target: nickname,
             required: true,
-            ...nicknameValidates,
+            preset: "nickname",
         },
         password: {
             target: password,
             required: true,
-            ...passwordValidates,
+            preset: "password",
         },
     });
 

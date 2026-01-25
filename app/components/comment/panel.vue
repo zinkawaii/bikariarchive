@@ -38,17 +38,15 @@
         nickname: {
             target: nickname,
             required: true,
-            ...nicknameValidates,
+            preset: "nickname",
         },
         email: {
             target: email,
-            rule: Zexp.email,
-            message: "邮箱格式不正确",
+            preset: "email",
         },
         address: {
             target: address,
-            rule: Zexp.url,
-            message: "网址格式不正确",
+            preset: "url",
         },
     });
 

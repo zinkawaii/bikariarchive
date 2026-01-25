@@ -1,7 +1,7 @@
 export interface GetLoginBody {
     nickname: string;
     email: string;
-    verify: string;
+    captcha: string;
     password: string;
 }
 

@@ -1,7 +1,6 @@
 import { type } from "arktype";
 import { CommentDataModel } from "#server/models/CommentData";
 import { UserDataModel } from "#server/models/UserData";
-import { Zexp } from "#shared/utils/index";
 import CommentReply from "~/emails/comment-reply.vue";
 import type { PostCommentBody } from "#server/types/api/comment";
 import type { CommentDataSchema, UserDataSchema } from "#server/types/model";
@@ -10,9 +9,9 @@ const schema = type({
     path: "string",
     parent: "string?",
     content: "string <= 512",
-    nickname: type(Zexp.nickname),
-    email: type(Zexp.email).optional(),
-    address: type(Zexp.url).optional(),
+    nickname: "string <= 18",
+    email: "string.email?",
+    address: "string.url?",
 });
 
 export default defineJEventHandler(async (event) => {

@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
-import type { TempVerifySchema } from "#server/types/model";
+import type { TempCaptchaSchema } from "#server/types/model";
 
-export const TempVerifyModel = model("TempVerify", new Schema<TempVerifySchema>({
+export const TempCaptchaModel = model("TempCaptcha", new Schema<TempCaptchaSchema>({
     email: {
         type: String,
         required: true,
@@ -10,10 +10,10 @@ export const TempVerifyModel = model("TempVerify", new Schema<TempVerifySchema>(
         type: Date,
         required: true,
     },
-    verify: {
+    captcha: {
         type: String,
         required: true,
     },
 }, {
-    collection: "temp_verify",
+    collection: "temp_captcha",
 }));

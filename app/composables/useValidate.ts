@@ -1,7 +1,13 @@
-interface ValidateEntry {
+import { type, type Type } from "arktype";
+
+interface ValidateEntry extends ValidatePreset {
     target: Ref<string>;
     required?: boolean;
-    rule?: RegExp;
+    preset?: keyof typeof presets;
+}
+
+interface ValidatePreset {
+    rule?: Type;
     message?: string;
     exec?: (input: string) => string | void;
 }
@@ -9,9 +15,16 @@ interface ValidateEntry {
 export function useValidate<T extends Record<string, ValidateEntry>>(entries: T) {
     const toastStore = useToastStore();
 
-    const errors: Ref<Record<keyof T, boolean>> = ref(Object.fromEntries(
-        Object.keys(entries).map((key) => [key, false]),
-    ) as any);
+    for (const key in entries) {
+        if (entries[key].preset !== void 0) {
+            // eslint-disable-next-line ts/no-use-before-define
+            Object.assign(entries[key], presets[entries[key].preset]);
+        }
+    }
+
+    const errors = ref(
+        Object.fromEntries(Object.keys(entries).map((key) => [key, false])) as Record<keyof T, boolean>,
+    );
 
     //清除错误
     function clear() {
@@ -36,7 +49,9 @@ export function useValidate<T extends Record<string, ValidateEntry>>(entries: T)
         const { target, required, rule, message, exec } = entries[key];
 
         if (required || target.value) {
-            const msg = rule && !rule.test(target.value) ? message : exec?.(target.value);
+            const msg = exec?.(target.value) ?? (
+                rule?.(target.value) instanceof type.errors ? message : void 0
+            );
 
             if (msg?.length) {
                 glitch(key, msg);
@@ -54,25 +69,37 @@ export function useValidate<T extends Record<string, ValidateEntry>>(entries: T)
     };
 }
 
-export const nicknameValidates: Partial<ValidateEntry> = {
-    rule: /^[\w\p{Script=Han}]*$/u,
-    message: "昵称不可包含非法字符",
-    exec(input) {
-        if (input.length === 0) {
-            return "昵称不能为空";
-        }
-        else if (input.length > 18) {
-            return "昵称长度不能超过 18 个字符";
-        }
+const presets = {
+    nickname: {
+        exec(input) {
+            if (input.length === 0) {
+                return "昵称不能为空";
+            }
+            else if (input.length > 18) {
+                return "昵称长度不能超过 18 个字符";
+            }
+        },
     },
-};
-
-export const passwordValidates: Partial<ValidateEntry> = {
-    rule: /^\w*$/,
-    message: "密码仅由大小写字母、数字以及下划线组成",
-    exec(input) {
-        if (input.length < 6 || input.length > 18) {
-            return "密码位数必须在 6-18 位之间";
-        }
+    password: {
+        exec(input) {
+            if (input.length < 12 || input.length > 24) {
+                return "密码位数必须在 12-24 位之间";
+            }
+        },
     },
-};
+    email: {
+        rule: type("string.email"),
+        message: "邮箱格式不正确",
+    },
+    url: {
+        rule: type("string.url"),
+        message: "网址格式不正确",
+    },
+    captcha: {
+        exec(input) {
+            if (input.length !== 6) {
+                return "验证码长度必须为 6 位";
+            }
+        },
+    },
+} satisfies Record<string, ValidatePreset>;

@@ -1,20 +1,19 @@
 import { type } from "arktype";
-import { TempVerifyModel } from "#server/models/TempVerify";
+import { TempCaptchaModel } from "#server/models/TempCaptcha";
 import { UserDataModel } from "#server/models/UserData";
-import { Zexp } from "#shared/utils/index";
 import { randomInt } from "#shared/utils/random";
 import type { GetLoginBody, GetLogonResponse } from "#server/types/api/user/logon";
 
 const schema = type({
-    nickname: type(Zexp.nickname),
-    email: type(Zexp.email),
-    verify: "string == 6",
-    password: type(Zexp.password),
+    nickname: "string <= 18",
+    email: "string.email",
+    captcha: "string == 6",
+    password: "12 <= string <= 24",
 });
 
 export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const session = await readSession(event);
-    const { nickname, email, verify, password } = schema.assert(
+    const { nickname, email, captcha, password } = schema.assert(
         await readBody<GetLoginBody>(event),
     );
 
@@ -30,25 +29,25 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
     }
 
     //查询数据库中是否已存在该邮箱未处理的验证码
-    const qVerify = await TempVerifyModel.findOne({ email });
+    const qCaptcha = await TempCaptchaModel.findOne({ email });
 
     //验证码不存在
-    if (!qVerify) {
+    if (!qCaptcha) {
         return 2;
     }
 
     //验证码已过期
-    if (qVerify.time.getTime() + 1800000 < Date.now()) {
+    if (qCaptcha.time.getTime() + 1800000 < Date.now()) {
         return 3;
     }
 
     //验证码不正确
-    if (verify !== qVerify.verify) {
+    if (captcha !== qCaptcha.captcha) {
         return 4;
     }
 
     //验证成功，从数据库中删除临时数据
-    TempVerifyModel.deleteOne({ email }).exec();
+    TempCaptchaModel.deleteOne({ email }).exec();
 
     //UID
     const uid = createUid();

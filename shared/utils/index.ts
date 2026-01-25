@@ -1,11 +1,3 @@
-//可复用正则表
-export const Zexp = {
-    email: /^[-\w]+@(?:[-\w]+\.)+[-\w]+$/,
-    nickname: /^[\w\p{Script=Han}]{0,18}$/u,
-    password: /^\w{6,18}$/,
-    url: /^https?:\/\/(?:[-\w]+\.)+[-\w]+(?::\d+)?(?:\/.*)?$/,
-};
-
 //转义实体字符
 export function escapeHtml(html: string) {
     return html

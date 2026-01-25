@@ -1,11 +1,10 @@
 import { type } from "arktype";
 import { UserDataModel } from "#server/models/UserData";
-import { Zexp } from "#shared/utils";
 import type { PutPasswordBody } from "#server/types/api/user/password";
 
 const schema = type({
-    old: type(Zexp.password),
-    new: type(Zexp.password),
+    old: "12 <= string <= 24",
+    new: "12 <= string <= 24",
 });
 
 export default defineJEventHandler(async (event) => {

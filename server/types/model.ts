@@ -24,10 +24,10 @@ export interface ReadRecordSchema {
     user?: Types.ObjectId;
 }
 
-export interface TempVerifySchema {
+export interface TempCaptchaSchema {
     email: string;
     time: Date;
-    verify: string;
+    captcha: string;
 }
 
 export interface UserDataSchema {
