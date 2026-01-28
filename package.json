@@ -37,6 +37,7 @@
   "devDependencies": {
     "@bikariya/image-viewer": "catalog:nuxt",
     "@bikariya/modals": "catalog:nuxt",
+    "@bikariya/shiki": "catalog:nuxt",
     "@iconify-json/fa7-solid": "catalog:iconify",
     "@iconify-json/ri": "catalog:iconify",
     "@mdzjs/config": "catalog:markdown",

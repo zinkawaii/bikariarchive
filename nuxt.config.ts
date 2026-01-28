@@ -86,6 +86,7 @@ export default defineNuxtConfig({
     modules: [
         "@bikariya/image-viewer",
         "@bikariya/modals",
+        "@bikariya/shiki",
         "@nuxt/eslint",
         "@nuxt/fonts",
         "@nuxt/icon",

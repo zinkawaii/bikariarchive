@@ -42,8 +42,9 @@ catalogs:
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
   nuxt:
-    "@bikariya/image-viewer": ^0.0.2
-    "@bikariya/modals": ^0.0.2
+    "@bikariya/image-viewer": ^0.0.3
+    "@bikariya/modals": ^0.0.3
+    "@bikariya/shiki": ^0.0.3
     "@nuxt/devtools": ^3.1.1
     "@nuxt/eslint": ^1.13.0
     "@nuxt/fonts": ^0.13.0

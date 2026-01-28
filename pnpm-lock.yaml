@@ -90,11 +90,14 @@ catalogs:
       version: 5.1.0
   nuxt:
     '@bikariya/image-viewer':
-      specifier: ^0.0.2
-      version: 0.0.2
+      specifier: ^0.0.3
+      version: 0.0.3
     '@bikariya/modals':
-      specifier: ^0.0.2
-      version: 0.0.2
+      specifier: ^0.0.3
+      version: 0.0.3
+    '@bikariya/shiki':
+      specifier: ^0.0.3
+      version: 0.0.3
     '@nuxt/devtools':
       specifier: ^3.1.1
       version: 3.1.1
@@ -317,10 +320,13 @@ importers:
     devDependencies:
       '@bikariya/image-viewer':
         specifier: catalog:nuxt
-        version: 0.0.2(magicast@0.5.1)
+        version: 0.0.3(magicast@0.5.1)
       '@bikariya/modals':
         specifier: catalog:nuxt
-        version: 0.0.2(magicast@0.5.1)
+        version: 0.0.3(magicast@0.5.1)
+      '@bikariya/shiki':
+        specifier: catalog:nuxt
+        version: 0.0.3(magicast@0.5.1)(shiki@3.21.0)
       '@iconify-json/fa7-solid':
         specifier: catalog:iconify
         version: 1.2.3
@@ -731,14 +737,19 @@ packages:
     resolution: {integrity: sha512-xjk2xqYp25ePzAs0I08hN2lrbUDDQFfCjwq6MIEa8HwHa0WK8NfNtdvtXod8Ku2CbE1iui7qwWojGvjQiyrQeA==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
-  '@bikariya/core@0.0.2':
-    resolution: {integrity: sha512-QwXnOy4mMhHwXCIPpw8aH22yYT3xPdsvaQ8fYfPi0pXe0JgwTT9urtwWGxEZG3ZAapfzjzSbZIDHA3knPf3ldg==}
+  '@bikariya/core@0.0.3':
+    resolution: {integrity: sha512-otT0AHP4dd7m8uGPqOkI2AaV25W8vD/U7S4ycMYYA4BHwF71ua+r43dtUDZ6gN94jh2VNVfAmSHaQOxXFYjczg==}
 
-  '@bikariya/image-viewer@0.0.2':
-    resolution: {integrity: sha512-9iGDUvpNPVx3OQfVFv10W3hxqsr34eCbaPqSRYyLtDgEQSQEu/IqCNdRJ6KQLAsFKF8eYLqqcAMWeJQogzvRtA==}
+  '@bikariya/image-viewer@0.0.3':
+    resolution: {integrity: sha512-EI9aoeijDkWQYjPaKvfWM+F9MK4vy/W6jNQcbncZh776lyjTeYwUoOH+azeyKfFIXL+MtLwpfCZG7XZ6VANzsg==}
 
-  '@bikariya/modals@0.0.2':
-    resolution: {integrity: sha512-iphCivQaQvyh+ReBJs3teORD5qwE0VNceFWhtjUlYCltrmS6KbqGGg4agi9M0RIVoTFq481pcMkvZqQaGeKVow==}
+  '@bikariya/modals@0.0.3':
+    resolution: {integrity: sha512-hKZxaQk7TWf1QwnU6CfUvRfTBXUN2R2Bde4cAQXb+LoifaG+puIiiuMpeOhx5hRc0JBqlrE8kbrP+CUP8iNt7Q==}
+
+  '@bikariya/shiki@0.0.3':
+    resolution: {integrity: sha512-iSunW+dTSzFNr1rCMGfuACXd7BLtX1GtIwCgAnWR/35DGSl7+n6/YI5XfFvqvyHvMNNonv/GK/ZYXCUSoKApxw==}
+    peerDependencies:
+      shiki: '*'
 
   '@bomb.sh/tab@0.0.11':
     resolution: {integrity: sha512-RSqyreeicYBALcMaNxIUJTBknftXsyW45VRq5gKDNwKroh0Re5SDoWwXZaphb+OTEzVdpm/BA8Uq6y0P+AtVYw==}
@@ -7368,23 +7379,31 @@ snapshots:
       '@babel/helper-string-parser': 8.0.0-beta.4
       '@babel/helper-validator-identifier': 8.0.0-beta.4
 
-  '@bikariya/core@0.0.2(magicast@0.5.1)':
+  '@bikariya/core@0.0.3(magicast@0.5.1)':
     dependencies:
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
     transitivePeerDependencies:
       - magicast
 
-  '@bikariya/image-viewer@0.0.2(magicast@0.5.1)':
+  '@bikariya/image-viewer@0.0.3(magicast@0.5.1)':
     dependencies:
-      '@bikariya/modals': 0.0.2(magicast@0.5.1)
+      '@bikariya/modals': 0.0.3(magicast@0.5.1)
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
     transitivePeerDependencies:
       - magicast
 
-  '@bikariya/modals@0.0.2(magicast@0.5.1)':
+  '@bikariya/modals@0.0.3(magicast@0.5.1)':
     dependencies:
-      '@bikariya/core': 0.0.2(magicast@0.5.1)
+      '@bikariya/core': 0.0.3(magicast@0.5.1)
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
+    transitivePeerDependencies:
+      - magicast
+
+  '@bikariya/shiki@0.0.3(magicast@0.5.1)(shiki@3.21.0)':
+    dependencies:
+      '@bikariya/core': 0.0.3(magicast@0.5.1)
+      '@nuxt/kit': 4.3.0(magicast@0.5.1)
+      shiki: 3.21.0
     transitivePeerDependencies:
       - magicast
 
