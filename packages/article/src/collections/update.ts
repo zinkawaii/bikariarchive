@@ -8,7 +8,7 @@ const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
 export default createKerria("Update", () => {
     useSource(0, {
-        base: "data",
+        base: "content",
         dist: ".data",
         folders: [
             "update",

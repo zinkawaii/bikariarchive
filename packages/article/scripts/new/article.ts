@@ -48,7 +48,7 @@ export async function createArticle() {
     if (returns) {
         const { fileName, frontmatter } = returns;
 
-        const path = resolveRoot(`/data/novel/${novel}.${volume}/` + fileName);
+        const path = resolveRoot(`/content/novel/${novel}.${volume}/` + fileName);
         const text = `---\n${YAML.stringify(frontmatter)}---\n`;
 
         if (existsSync(path)) {

@@ -36,7 +36,7 @@ export default createKerria("Article", () => {
     });
 
     useSource(SourceKind.Meta, {
-        base: "data",
+        base: "content",
         folders: [
             "novel",
         ],
@@ -74,7 +74,7 @@ export default createKerria("Article", () => {
     });
 
     useSource(SourceKind.Article, {
-        base: "data",
+        base: "content",
         dist: ".data",
         folders: [
             "novel",

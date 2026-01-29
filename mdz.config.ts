@@ -1,7 +1,7 @@
 import { defineConfig } from "@mdzjs/config";
 
 export default defineConfig({
-    baseDir: "./data",
+    baseDir: "./content",
     mappings: [
         {
             patterns: [

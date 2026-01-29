@@ -106,7 +106,7 @@ export default createKerria("Entry", () => {
     });
 
     useSource(SourceKind.Meta, {
-        base: "data",
+        base: "content",
         folders: [
             "intel",
         ],
@@ -140,7 +140,7 @@ export default createKerria("Entry", () => {
     });
 
     useSource(SourceKind.Entry, {
-        base: "data",
+        base: "content",
         dist: ".data",
         folders: [
             "area",
