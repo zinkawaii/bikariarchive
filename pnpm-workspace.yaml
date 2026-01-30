@@ -23,7 +23,6 @@ catalogs:
     eslint: ^9.39.2
     stylelint: ^17.0.0
   markdown:
-    "@mdzjs/config": ^0.0.1
     kerria: ^0.4.2
     mdast-util-frontmatter: ^2.0.1
     mdast-util-gfm-footnote: ^2.1.0

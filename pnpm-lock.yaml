@@ -34,9 +34,6 @@ catalogs:
       specifier: ^17.0.0
       version: 17.0.0
   markdown:
-    '@mdzjs/config':
-      specifier: ^0.0.1
-      version: 0.0.1
     kerria:
       specifier: ^0.4.2
       version: 0.4.2
@@ -287,6 +284,9 @@ importers:
       date-fns:
         specifier: catalog:utils
         version: 4.1.0
+      arktype:
+        specifier: catalog:utils
+        version: 2.1.29
       github-slugger:
         specifier: catalog:utils
         version: 2.0.0
@@ -333,9 +333,6 @@ importers:
       '@iconify-json/ri':
         specifier: catalog:iconify
         version: 1.2.7
-      '@mdzjs/config':
-        specifier: catalog:markdown
-        version: 0.0.1
       '@nuxt/devtools':
         specifier: catalog:nuxt
         version: 3.1.1(vite@8.0.0-beta.10(@types/node@25.0.10)(esbuild@0.27.2)(jiti@2.6.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))
@@ -372,9 +369,6 @@ importers:
       '@zinkawaii/stylelint-config':
         specifier: catalog:lint
         version: 0.4.0(postcss-html@1.8.1)(postcss@8.5.6)(stylelint@17.0.0(typescript@5.9.3))
-      arktype:
-        specifier: catalog:utils
-        version: 2.1.29
       bgmt:
         specifier: catalog:utils
         version: 0.1.3
@@ -737,14 +731,17 @@ packages:
     resolution: {integrity: sha512-xjk2xqYp25ePzAs0I08hN2lrbUDDQFfCjwq6MIEa8HwHa0WK8NfNtdvtXod8Ku2CbE1iui7qwWojGvjQiyrQeA==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
-  '@bikariya/core@0.0.3':
-    resolution: {integrity: sha512-otT0AHP4dd7m8uGPqOkI2AaV25W8vD/U7S4ycMYYA4BHwF71ua+r43dtUDZ6gN94jh2VNVfAmSHaQOxXFYjczg==}
+  '@bikariya/core@0.0.5':
+    resolution: {integrity: sha512-eOSN7EXnLb1g1cRHPGHyHX7eOdxTWbtTXtoEtmhyAhoOlf3H7O8U+dUdZ//gNDEj6CxgGcnEogLxljDCtlFbmg==}
 
   '@bikariya/image-viewer@0.0.3':
     resolution: {integrity: sha512-EI9aoeijDkWQYjPaKvfWM+F9MK4vy/W6jNQcbncZh776lyjTeYwUoOH+azeyKfFIXL+MtLwpfCZG7XZ6VANzsg==}
 
   '@bikariya/modals@0.0.3':
     resolution: {integrity: sha512-hKZxaQk7TWf1QwnU6CfUvRfTBXUN2R2Bde4cAQXb+LoifaG+puIiiuMpeOhx5hRc0JBqlrE8kbrP+CUP8iNt7Q==}
+
+  '@bikariya/modals@0.0.5':
+    resolution: {integrity: sha512-+9trgcxC3cFLEj80hundrkQ3vKzR8Hi15bG5eNuu+/3NhVjYq4TzjYfzmOkMZdFbguUCnyUgu3MNxXi+DiQTNQ==}
 
   '@bikariya/shiki@0.0.3':
     resolution: {integrity: sha512-iSunW+dTSzFNr1rCMGfuACXd7BLtX1GtIwCgAnWR/35DGSl7+n6/YI5XfFvqvyHvMNNonv/GK/ZYXCUSoKApxw==}
@@ -1500,9 +1497,6 @@ packages:
     resolution: {integrity: sha512-uwPAhccfFJlsfCxMYTwOdVfOz3xqyj8xYL3zJj8f0pb30tLohnnFPhLuqp4/qoEz8sNxe4SESZedcBojRefIzg==}
     engines: {node: '>=18'}
     hasBin: true
-
-  '@mdzjs/config@0.0.1':
-    resolution: {integrity: sha512-JuYkmT5QBCJqA9fDjo2/TV8nujTNpgmKZSpPqVtN/WkEY1Faej/w4xKY5WuCqpDtssZioD9LkFJpmloqBxoKiA==}
 
   '@mongodb-js/saslprep@1.4.5':
     resolution: {integrity: sha512-k64Lbyb7ycCSXHSLzxVdb2xsKGPMvYZfCICXvDsI8Z65CeWQzTEKS4YmGbnqw+U9RBvLPTsB6UCmwkgsDTGWIw==}
@@ -6457,6 +6451,7 @@ packages:
   tar@7.5.6:
     resolution: {integrity: sha512-xqUeu2JAIJpXyvskvU3uvQW8PAmHrtXp2KDuMJwQqW8Sqq0CaZBAQ+dKS3RBXVhU4wC5NjAdKrmh84241gO9cA==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
 
   terser@5.46.0:
     resolution: {integrity: sha512-jTwoImyr/QbOWFFso3YoU3ik0jBBDJ6JTOQiy/J2YxVJdZCc+5u7skhNwiOR3FQIygFqVUPHl7qbbxtjW2K3Qg==}
@@ -7379,7 +7374,7 @@ snapshots:
       '@babel/helper-string-parser': 8.0.0-beta.4
       '@babel/helper-validator-identifier': 8.0.0-beta.4
 
-  '@bikariya/core@0.0.3(magicast@0.5.1)':
+  '@bikariya/core@0.0.5(magicast@0.5.1)':
     dependencies:
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
     transitivePeerDependencies:
@@ -7387,21 +7382,28 @@ snapshots:
 
   '@bikariya/image-viewer@0.0.3(magicast@0.5.1)':
     dependencies:
-      '@bikariya/modals': 0.0.3(magicast@0.5.1)
+      '@bikariya/modals': 0.0.5(magicast@0.5.1)
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
     transitivePeerDependencies:
       - magicast
 
   '@bikariya/modals@0.0.3(magicast@0.5.1)':
     dependencies:
-      '@bikariya/core': 0.0.3(magicast@0.5.1)
+      '@bikariya/core': 0.0.5(magicast@0.5.1)
+      '@nuxt/kit': 4.3.0(magicast@0.5.1)
+    transitivePeerDependencies:
+      - magicast
+
+  '@bikariya/modals@0.0.5(magicast@0.5.1)':
+    dependencies:
+      '@bikariya/core': 0.0.5(magicast@0.5.1)
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
     transitivePeerDependencies:
       - magicast
 
   '@bikariya/shiki@0.0.3(magicast@0.5.1)(shiki@3.21.0)':
     dependencies:
-      '@bikariya/core': 0.0.3(magicast@0.5.1)
+      '@bikariya/core': 0.0.5(magicast@0.5.1)
       '@nuxt/kit': 4.3.0(magicast@0.5.1)
       shiki: 3.21.0
     transitivePeerDependencies:
@@ -8011,8 +8013,6 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
-
-  '@mdzjs/config@0.0.1': {}
 
   '@mongodb-js/saslprep@1.4.5':
     dependencies:

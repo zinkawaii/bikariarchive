@@ -1,0 +1,36 @@
+{
+  "extends": "@zinkawaii/tsconfig",
+  "mdz": {
+    "mappings": [
+      {
+        "frontmatter": ["@bikari/article", "JEntry"],
+        "patterns": [
+          "./area/*",
+          "./character/*",
+          "./concept/*"
+        ]
+      },
+      {
+        "frontmatter": ["@bikari/article", "IntelFrontmatter"],
+        "patterns": [
+          "./intel/*"
+        ]
+      },
+      {
+        "frontmatter": ["@bikari/article", "NovelFrontmatter"],
+        "patterns": [
+          "./novel/*"
+        ]
+      },
+      {
+        "frontmatter": ["@bikari/article", "ArticleFrontmatter"],
+        "patterns": [
+          "./novel/*/*"
+        ]
+      }
+    ]
+  },
+  "include": [
+    "./**/*.mdz"
+  ]
+}

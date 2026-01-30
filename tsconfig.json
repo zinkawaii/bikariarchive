@@ -13,6 +13,9 @@
       "path": "./.nuxt/tsconfig.shared.json"
     },
     {
+      "path": "./content/tsconfig.json"
+    },
+    {
       "path": "./packages/article/tsconfig.json"
     }
   ],
