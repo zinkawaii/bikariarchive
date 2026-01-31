@@ -23,7 +23,14 @@
             :to="{ params: { novel, volume: 0 } }"
         >
             <div class="novel-cover">
-                <mb-image v-if="cover" :src="cover" alt="[cover]" align="center" :viewable="isCurrentNovel"/>
+                <mb-image
+                    v-if="cover"
+                    :src="cover"
+                    alt="[cover]"
+                    align="center"
+                    :viewable="isCurrentNovel"
+                    @click="isCurrentNovel && $event.preventDefault()"
+                />
                 <div v-else class="novel-placeholder">Cover.</div>
             </div>
             <span class="novel-title">{{ title }}</span>
