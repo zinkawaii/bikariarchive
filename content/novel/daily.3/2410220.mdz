@@ -12,24 +12,28 @@ date:
   再也不用担心孩子的全局状态管理了。
 ::
 
+## 太长不看
+
+i-twemoji:face-with-monocle 直接看[源码](https://github.com/KazariEX/bikariya/tree/main/packages/modals)。
+
 ## 快速实现
 
 首先创建一个用来管理弹窗列表的 Store：
 
 ```ts
 import { defineStore } from "pinia";
-import { type Raw, ref, type VNode } from "vue";
+import { ref, shallowReactive, type VNode } from "vue";
 
 export interface ModalContext {
   vnode: VNode;
   zIndex: number;
   duration: number;
-  isOpening: Ref<boolean>;
+  open: Ref<boolean>;
   close: () => any;
 }
 
 export const useModalStore = defineStore("modal", () => {
-  const modals = ref<Raw<ModalContext>[]>([]);
+  const modals = shallowReactive<ModalContext[]>([]);
 
   return {
     modals,
@@ -72,10 +76,12 @@ function use(render: () => VNode, options: UseModalOptions = {}) {
 ```ts
 import { promiseTimeout } from "@vueuse/core";
 
-const isOpening = ref(false);
+const status = ref("closed");
 
 function open() {
-  if (unique && indexOf() !== -1) return;
+  if (unique && modals.indexOf(ctx) !== -1) {
+    return;
+  }
 
   const vnode = render();
   const last = dialog.value.at(-1);
@@ -85,38 +91,35 @@ function open() {
     vnode,
     zIndex,
     duration,
-    isOpening,
+    open: computed(() => status.value === "open"),
     close: (vnode.props ??= {}).onClose ??= close,
   };
 
   dialog.value.push(ctx);
   vnode.props.onVnodeMounted = () => {
-    isOpening.value = true;
+    status.value = "open";
   };
 }
 
 async function close() {
-  isOpening.value = false;
+  status.value = "closing";
   await promiseTimeout(duration);
+  status.value = "closed";
 
-  const i = indexOf();
+  const i = modals.indexOf(ctx);
   if (i !== -1) {
-    modals.value.splice(i, 1);
+    modals.splice(i, 1);
   }
-}
-
-function indexOf() {
-  return modals.value.indexOf(ctx);
 }
 ```
 
-我们先看 `isOpening` 变量，它为弹窗提供了利用 `Transition` 组件实现过渡动画的能力：首先在 `open` 方法的末尾通过 `onVNodeMounted` 事件开启，然后在 `close` 方法的开头关闭，等待一段时间后才将弹窗上下文从 Store 中移除。
+我们先看 `status` 变量，它为弹窗提供了利用 `Transition` 组件实现过渡动画的能力：首先在 `open` 方法的末尾通过 `onVNodeMounted` 事件设置能够使得 `ctx.open` 被计算为 `true` 的值，然后在 `close` 方法的开头关闭，等待一段时间后才将弹窗上下文从 Store 中移除。
 
 之后是 `zIndex` 的计算，它有助于使弹窗按照打开的顺序正确叠加。之所以间隔 2 个单位，是因为中间还需要一层遮罩。
 
 再看 `ctx.close` 相关的部分，会发现这里采用了一连串稍微复杂的赋值逻辑，简单来讲就是将组件发出的关闭事件默认绑定到弹窗上下文的 `close` 方法上。而将该方法存储到上下文中，是为了便于让遮罩层获得关闭弹窗的能力。
 
-最后，再将 Store 与视图绑定。创建一个列表渲染的组件并挂载到 Layout 上即可：
+最后，再将 Store 与视图绑定。创建一个列表渲染的组件并放置到应用布局上即可：
 
 ```vue
 <script lang="ts" setup>
@@ -128,8 +131,8 @@ function indexOf() {
 </script>
 
 <template>
-  <template v-for="{ vnode, zIndex, isOpening } in modals" :key="zIndex">
-    <component :is="vnode" :isOpening :style="{ zIndex }"/>
+  <template v-for="{ vnode, zIndex, open } in modals" :key="zIndex">
+    <component :is="vnode" :open="open.value" :style="{ zIndex }"/>
   </template>
 </template>
 ```
@@ -140,7 +143,7 @@ function indexOf() {
 
 ### 全局弹窗
 
-依然采用 Store 管理，不同的是我们不再需要提前将该弹窗挂载到 Layout 上：
+依然采用 Store 管理，不同的是我们不再需要提前将该弹窗挂载到 DOM 树上：
 
 ```ts
 import { defineStore } from "pinia";
@@ -164,7 +167,7 @@ export const useSettingStore = defineStore("setting", () => {
 
 ### 临时弹窗
 
-创建一个 Util，在调用时立即召唤弹窗，剩下的就是具体的业务逻辑了：
+创建一个实用函数，在调用时立即召唤弹窗，剩下的就是具体的业务逻辑了：
 
 ```ts
 import { h } from "vue";
