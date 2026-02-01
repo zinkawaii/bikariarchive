@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-    import { differenceInDays } from "date-fns";
+    import { Temporal } from "temporal-polyfill";
 
-    const currentDate = new Date();
-    const days = differenceInDays(currentDate, "2022/09/30");
+    const today = Temporal.Now.plainDateISO();
+    const days = today.since("2022-09-30").days;
 
     const icps = [
         {
@@ -20,7 +20,7 @@
     <footer class="z-footer">
         <p>茶馆已营业 {{ days }} 天・おはびかり・</p>
         <p>
-            <cite>Copyright © 2022-{{ currentDate.getFullYear() }} KazariEX</cite>
+            <cite>Copyright © 2022-{{ today.year }} KazariEX</cite>
             <template v-for="{ title, to } in icps">
                 <span class="footer-seperator">｜</span>
                 <nuxt-link :to target="_blank">{{ title }}</nuxt-link>

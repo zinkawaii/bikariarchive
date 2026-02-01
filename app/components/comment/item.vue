@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { parseComment } from "@bikari/article/remark";
-    import { format, formatDistanceToNow } from "date-fns";
+    import { Temporal } from "temporal-polyfill";
     import { LazyCommentUser } from "#components";
     import type { CommentData } from "#server/types/api/comment";
 
@@ -16,14 +16,20 @@
         return parseComment(props.data.content);
     });
 
+    const timeAgo = useTimeAgoIntl(() => props.data.time, {
+        locale: "zh-CN",
+    });
+
     //相对时间
     const elapsed = computed(() => {
-        const date = new Date(props.data.time);
-        return Date.now() - date.valueOf() >= 86400000
-            ? format(date, "yyyy-MM-dd HH:mm")
-            : formatDistanceToNow(date, {
-                addSuffix: true,
-                includeSeconds: true,
+        const now = Temporal.Now.instant();
+        const instant = Temporal.Instant.from(props.data.time);
+
+        return now.since(instant).total("second") < 86400
+            ? timeAgo.value
+            : instant.toLocaleString("sv-SE", {
+                dateStyle: "short",
+                timeStyle: "short",
             });
     });
 

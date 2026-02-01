@@ -95,7 +95,7 @@ async function transformComment<T extends HydratedDocument<CommentDataSchema>>(
         id: item._id.toString(),
         children,
         content: item.content,
-        time: item.time.toString(),
+        time: item.time.toISOString(),
         mode,
         nickname,
         avatar: email ? generateAvatarUrl(email) : void 0,

@@ -2,6 +2,8 @@
 
 fix(shelf): 修复点击非第一卷封面时切换到第一卷的问题
 
+refactor: 切换时间库至 [Temporal](https://github.com/fullcalendar/temporal-polyfill)
+
 ## 2026-01-24 [v0.6.20]
 
 feat(search): 按字符分片构建索引以加速全文检索

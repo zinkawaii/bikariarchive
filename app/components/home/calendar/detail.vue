@@ -15,7 +15,7 @@
     <div class="calendar-detail">
         <template v-if="date">
             <time class="calendar-date">
-                {{ date.month + 1 || "" }}月{{ date.day }}日
+                {{ date.month }}月{{ date.day }}日
             </time>
             <h6 class="calendar-title">事件</h6>
             <p v-if="event?.mono" class="calendar-event">

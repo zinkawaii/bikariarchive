@@ -137,9 +137,6 @@ catalogs:
     '@clack/prompts':
       specifier: ^0.11.0
       version: 0.11.0
-    '@kabeep/lunar-date-fns':
-      specifier: ^1.1.0
-      version: 1.1.0
     '@shikijs/transformers':
       specifier: ^3.21.0
       version: 3.21.0
@@ -167,9 +164,6 @@ catalogs:
     crypto-es:
       specifier: ^3.1.2
       version: 3.1.2
-    date-fns:
-      specifier: ^4.1.0
-      version: 4.1.0
     defu:
       specifier: ^6.1.4
       version: 6.1.4
@@ -200,6 +194,9 @@ catalogs:
     svgo:
       specifier: ^4.0.0
       version: 4.0.0
+    temporal-polyfill:
+      specifier: ^0.3.0
+      version: 0.3.0
     tinyexec:
       specifier: ^1.0.2
       version: 1.0.2
@@ -262,9 +259,6 @@ importers:
 
   .:
     dependencies:
-      '@kabeep/lunar-date-fns':
-        specifier: catalog:utils
-        version: 1.1.0
       '@shikijs/transformers':
         specifier: catalog:utils
         version: 3.21.0
@@ -280,9 +274,6 @@ importers:
       arktype:
         specifier: catalog:utils
         version: 2.1.29
-      date-fns:
-        specifier: catalog:utils
-        version: 4.1.0
       github-slugger:
         specifier: catalog:utils
         version: 2.0.0
@@ -304,6 +295,9 @@ importers:
       shiki:
         specifier: catalog:utils
         version: 3.21.0
+      temporal-polyfill:
+        specifier: catalog:utils
+        version: 0.3.0
       uqr:
         specifier: catalog:utils
         version: 0.1.2
@@ -428,9 +422,6 @@ importers:
 
   packages/article:
     dependencies:
-      date-fns:
-        specifier: catalog:utils
-        version: 4.1.0
       defu:
         specifier: catalog:utils
         version: 6.1.4
@@ -488,6 +479,9 @@ importers:
       remark-rehype:
         specifier: catalog:markdown
         version: 11.1.2
+      temporal-polyfill:
+        specifier: catalog:utils
+        version: 0.3.0
       unified:
         specifier: catalog:markdown
         version: 11.0.5
@@ -1445,10 +1439,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
-
-  '@kabeep/lunar-date-fns@1.1.0':
-    resolution: {integrity: sha512-RrZNtarCrBVByPqfl6RXg5jmjh/vvy3dWDFQO24i6MQHB1dsMBCUlLFymnrSASYPmaGt+fiuXkJNo0mBejZeNA==}
-    engines: {node: '>=18'}
 
   '@keyv/bigmap@1.3.1':
     resolution: {integrity: sha512-WbzE9sdmQtKy8vrNPa9BRnwZh5UF4s1KTmSK0KUVLo3eff5BlQNNWDnFOouNpKfPKDnms9xynJjsMYjMaT/aFQ==}
@@ -3508,9 +3498,6 @@ packages:
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
-
-  date-fns@4.1.0:
-    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
 
   db0@0.3.4:
     resolution: {integrity: sha512-RiXXi4WaNzPTHEOu8UPQKMooIbqOEyqA1t7Z6MsdxSCeb8iUC9ko3LcmsLmeUt2SM5bctfArZKkRQggKZz7JNw==}
@@ -6377,6 +6364,12 @@ packages:
     engines: {node: '>=18'}
     deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
 
+  temporal-polyfill@0.3.0:
+    resolution: {integrity: sha512-qNsTkX9K8hi+FHDfHmf22e/OGuXmfBm9RqNismxBrnSmZVJKegQ+HYYXT+R7Ha8F/YSm2Y34vmzD4cxMu2u95g==}
+
+  temporal-spec@0.3.0:
+    resolution: {integrity: sha512-n+noVpIqz4hYgFSMOSiINNOUOMFtV5cZQNCmmszA6GiVFVRt3G7AqVyhXjhCSmowvQn+NsGn+jMDMKJYHd3bSQ==}
+
   terser@5.46.0:
     resolution: {integrity: sha512-jTwoImyr/QbOWFFso3YoU3ik0jBBDJ6JTOQiy/J2YxVJdZCc+5u7skhNwiOR3FQIygFqVUPHl7qbbxtjW2K3Qg==}
     engines: {node: '>=10'}
@@ -7847,8 +7840,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
-
-  '@kabeep/lunar-date-fns@1.1.0': {}
 
   '@keyv/bigmap@1.3.1(keyv@5.6.0)':
     dependencies:
@@ -10167,8 +10158,6 @@ snapshots:
       css-tree: 2.2.1
 
   csstype@3.2.3: {}
-
-  date-fns@4.1.0: {}
 
   db0@0.3.4: {}
 
@@ -13838,6 +13827,12 @@ snapshots:
       minipass: 7.1.2
       minizlib: 3.1.0
       yallist: 5.0.0
+
+  temporal-polyfill@0.3.0:
+    dependencies:
+      temporal-spec: 0.3.0
+
+  temporal-spec@0.3.0: {}
 
   terser@5.46.0:
     dependencies:

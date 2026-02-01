@@ -2,7 +2,6 @@ import { randomBytes } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import * as p from "@clack/prompts";
-import { format } from "date-fns";
 import { dirname } from "pathe";
 import { exec } from "tinyexec";
 import YAML from "yaml";
@@ -105,17 +104,17 @@ async function createBlog(chapters: JChapter[]) {
         return;
     }
 
-    const now = new Date();
-    const date = format(now, "yyMMdd");
-    const order = chapters.filter((chapter) => chapter.index.startsWith(date)).length;
+    const date = new Intl.DateTimeFormat("sv-SE").format();
+    const short = date.replaceAll("-", "").slice(2);
+    const order = chapters.filter((chapter) => chapter.index.startsWith(short)).length;
 
     return {
-        fileName: `${date + order}.mdz`,
+        fileName: `${short + order}.mdz`,
         frontmatter: {
             title,
             abbrlink: randomBytes(4).toString("hex").slice(0, 7),
             date: {
-                created: format(now, "yyyy-MM-dd"),
+                created: date,
             },
             draft: true,
         },

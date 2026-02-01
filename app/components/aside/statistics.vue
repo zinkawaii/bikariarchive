@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { differenceInDays } from "date-fns";
+    import { Temporal } from "temporal-polyfill";
 
     const articles = computed(() => {
         return Object.values(Article.meta).flatMap(({ chapters }) => chapters);
@@ -11,7 +11,7 @@
     }[] = [
         {
             label: "营业时长",
-            text: () => differenceInDays(new Date(), "2022/09/30") + "天",
+            text: () => Temporal.Now.plainDateISO().since("2022-09-30").days + "天",
         },
         {
             label: "章节数",

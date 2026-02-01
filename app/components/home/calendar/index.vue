@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-    import { toLunar } from "@kabeep/lunar-date-fns";
-    import { format, getDay, getDaysInMonth, getMonth, getYear } from "date-fns";
+    import { Temporal } from "temporal-polyfill";
     import jSpecial from "~/assets/json/Special.json";
 
     export interface CalendarDate {
@@ -53,11 +52,11 @@
         ["廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"],
     ].flat();
 
-    const startDate = new Date("2018-11-07");
-    const endDate = new Date("2019-12-31");
+    const startDate = new Temporal.PlainDate(2018, 11, 7);
+    const endDate = new Temporal.PlainDate(2019, 12, 31);
 
     const currentYear = ref(2019);
-    const currentMonth = ref(6);
+    const currentMonth = ref(7);
 
     const currentDates = computed(() => {
         return [...generateDates(currentYear.value, currentMonth.value)];
@@ -70,87 +69,82 @@
 
     function* generateDates(year: number, month: number) {
         //当月第一天
-        const firstDay = new Date(year, month);
+        const firstDay = new Temporal.PlainDate(year, month, 1);
 
         //上月日期
-        const weekday = (getDay(firstDay) + 6) % 7;
+        const weekday = (firstDay.dayOfWeek + 6) % 7;
         if (weekday > 0) {
-            const [y, m] = month === 0
-                ? [year - 1, 11]
+            const [y, m] = month === 1
+                ? [year - 1, 12]
                 : [year, month - 1];
 
-            const firstDay = new Date(y, m);
-            const count = getDaysInMonth(firstDay);
+            const firstDay = new Temporal.PlainDate(y, m, 1);
             for (let i = 0; i < weekday; i++) {
-                const d = count - weekday + i + 1;
+                const d = firstDay.daysInMonth - weekday + i + 1;
                 yield createDate(y, m, d);
             }
         }
 
         //当月日期
-        const count = getDaysInMonth(firstDay);
-        for (let i = 0; i < count; i++) {
-            yield createDate(year, month, i + 1);
+        for (let i = 1; i <= firstDay.daysInMonth; i++) {
+            yield createDate(year, month, i);
         }
 
         //下月日期
         const total = 42;
-        if (weekday + count < total) {
-            const [y, m] = month === 11
-                ? [year + 1, 0]
+        if (weekday + firstDay.daysInMonth < total) {
+            const [y, m] = month === 12
+                ? [year + 1, 1]
                 : [year, month + 1];
 
-            for (let i = 0; i < total - weekday - count; i++) {
-                yield createDate(y, m, i + 1);
+            for (let i = 1; i <= total - weekday - firstDay.daysInMonth; i++) {
+                yield createDate(y, m, i);
             }
         }
     }
 
     //创建日期对象
     function createDate(year: number, month: number, day: number): CalendarDate {
-        const solar = new Date(year, month, day);
-        const lunar = toLunar(solar);
-        const key = format(solar, "yyyy-MM-dd");
+        const solar = new Temporal.PlainDate(year, month, day);
+        const lunar = solar.withCalendar("chinese");
 
         return {
-            key,
+            key: solar.toString(),
             year,
             month,
             day,
-            lunar: lunar !== -1
-                ? solarTerms[lunar.month - 1]?.[lunar.day] ?? (
-                    lunar.day === 1
-                        ? monthNames[lunar.month - 1]
-                        : dayNames[lunar.day - 1]
-                )
-                : "",
+            lunar: solarTerms[lunar.month - 1]?.[lunar.day] ?? (
+                lunar.day === 1
+                    ? monthNames[lunar.month - 1]
+                    : dayNames[lunar.day - 1]
+            ),
         };
     }
 
     //是否为起始月份
     const isFirstMonth = computed(() => {
-        return currentYear.value === getYear(startDate) && currentMonth.value === getMonth(startDate);
+        return currentYear.value === startDate.year && currentMonth.value === startDate.month;
     });
 
     //是否为结束月份
     const isLastMonth = computed(() => {
-        return currentYear.value === getYear(endDate) && currentMonth.value === getMonth(endDate);
+        return currentYear.value === endDate.year && currentMonth.value === endDate.month;
     });
 
     //上一月份
     function toLastMonth() {
-        if (currentMonth.value === 0) {
+        if (currentMonth.value === 1) {
             currentYear.value--;
         }
-        currentMonth.value = (currentMonth.value + 11) % 12;
+        currentMonth.value = (currentMonth.value + 10) % 12 + 1;
     }
 
     //下一月份
     function toNextMonth() {
-        if (currentMonth.value === 11) {
+        if (currentMonth.value === 12) {
             currentYear.value++;
         }
-        currentMonth.value = (currentMonth.value + 1) % 12;
+        currentMonth.value = (currentMonth.value % 12) + 1;
     }
 </script>
 
@@ -158,8 +152,8 @@
     <div class="home-calendar content-widget no-scrollbar">
         <div class="calendar-wrapper">
             <div class="calendar-header">
-                <span class="calendar-month">{{ currentMonth + 1 }}° {{ monthAlias[currentMonth][0] }}</span>
-                <span class="text-primary">「{{ monthAlias[currentMonth][1] }}」</span>
+                <span class="calendar-month">{{ currentMonth }}° {{ monthAlias[currentMonth - 1][0] }}</span>
+                <span class="text-primary">「{{ monthAlias[currentMonth - 1][1] }}」</span>
                 <button
                     class="calendar-switch"
                     :class="{ [`is-hidden`]: isFirstMonth }"

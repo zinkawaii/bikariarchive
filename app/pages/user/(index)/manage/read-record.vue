@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { format } from "date-fns";
+    import { Temporal } from "temporal-polyfill";
     import type { FetchResult } from "#app";
 
     useHead({
@@ -43,7 +43,7 @@
     }
 
     function formatTime(time: string) {
-        return format(time, "yyyy-MM-dd HH:mm:ss");
+        return Temporal.Instant.from(time).toLocaleString("sv-SE");
     }
 </script>
 

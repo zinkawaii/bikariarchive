@@ -17,13 +17,11 @@
     "task:svgo": "svgo public/image/favicon.svg --pretty"
   },
   "dependencies": {
-    "@kabeep/lunar-date-fns": "catalog:utils",
     "@shikijs/transformers": "catalog:utils",
     "@vueuse/core": "catalog:vue",
     "@vueuse/router": "catalog:vue",
     "animejs": "catalog:utils",
     "arktype": "catalog:utils",
-    "date-fns": "catalog:utils",
     "github-slugger": "catalog:utils",
     "hookable": "catalog:utils",
     "katex": "catalog:utils",
@@ -31,6 +29,7 @@
     "pinia-plugin-persistedstate": "catalog:vue",
     "plain-shiki": "catalog:utils",
     "shiki": "catalog:utils",
+    "temporal-polyfill": "catalog:utils",
     "uqr": "catalog:utils",
     "vue": "catalog:vue",
     "vue-router": "catalog:vue"

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { differenceInDays, getYear, isBefore, isLeapYear } from "date-fns";
+    import { Temporal } from "temporal-polyfill";
 
     definePageMeta({
         fullPage: true,
@@ -9,16 +9,15 @@
         title: "关于",
     });
 
-    const today = new Date();
-    const year = getYear(today);
+    const today = Temporal.Now.plainDateISO();
+    const thisYear = new Temporal.PlainDate(today.year, 9, 29);
+    const before = Temporal.PlainDate.compare(today, thisYear) === -1;
+    const lastBirthday = before ? thisYear.with({ year: today.year - 1 }) : thisYear;
+    const nextBirthday = before ? thisYear : thisYear.with({ year: today.year + 1 });
 
-    const birth = "09-29";
-    const before = isBefore(today, `${year}-${birth}`);
-    const birthday = new Date(`${year - (before ? 1 : 0)}-${birth}`);
-
-    const level = year - 2003 + (before ? 0 : 1);
-    const total = isLeapYear(today) && before ? 366 : 365;
-    const exp = differenceInDays(today, birthday);
+    const level = lastBirthday.year - 2003;
+    const total = (before ? lastBirthday.inLeapYear : nextBirthday.inLeapYear) ? 366 : 365;
+    const exp = today.since(lastBirthday).days;
 </script>
 
 <template>

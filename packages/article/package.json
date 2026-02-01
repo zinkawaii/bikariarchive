@@ -6,7 +6,6 @@
     "new": "unrun scripts/new/index.ts"
   },
   "dependencies": {
-    "date-fns": "catalog:utils",
     "defu": "catalog:utils",
     "github-slugger": "catalog:utils",
     "kerria": "catalog:markdown",
@@ -26,6 +25,7 @@
     "remark-mdc": "catalog:markdown",
     "remark-parse": "catalog:markdown",
     "remark-rehype": "catalog:markdown",
+    "temporal-polyfill": "catalog:utils",
     "unified": "catalog:markdown",
     "unist-util-visit": "catalog:markdown",
     "yaml": "catalog:utils"

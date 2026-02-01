@@ -1,5 +1,4 @@
 import { readFile } from "node:fs/promises";
-import { format } from "date-fns";
 import { createKerria, useLoad, useSource } from "kerria";
 import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
@@ -119,11 +118,6 @@ export default createKerria("Article", () => {
             const password = String(attributes.password || "") || void 0;
             const encrypted = Boolean(password) || void 0;
             delete attributes.password;
-
-            //日期格式化
-            for (const [key, value] of Object.entries(attributes.date ?? {})) {
-                Reflect.set(attributes.date!, key, format(value, "yyyy-MM-dd"));
-            }
 
             //生成映射
             let order = `[${volume}]`;
