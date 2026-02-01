@@ -1,8 +1,8 @@
+import { randomBytes } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import * as p from "@clack/prompts";
 import { format } from "date-fns";
-import { customAlphabet } from "nanoid";
 import { dirname } from "pathe";
 import { exec } from "tinyexec";
 import YAML from "yaml";
@@ -113,16 +113,11 @@ async function createBlog(chapters: JChapter[]) {
         fileName: `${date + order}.mdz`,
         frontmatter: {
             title,
-            abbrlink: createAbbrlink(),
+            abbrlink: randomBytes(4).toString("hex").slice(0, 7),
             date: {
                 created: format(now, "yyyy-MM-dd"),
             },
             draft: true,
         },
     };
-}
-
-function createAbbrlink() {
-    const nanoid = customAlphabet("0123456789abcdef", 7);
-    return nanoid();
 }

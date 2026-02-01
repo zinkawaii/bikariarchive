@@ -39,7 +39,6 @@
   "devDependencies": {
     "@clack/prompts": "catalog:utils",
     "@zinkawaii/tsconfig": "catalog:types",
-    "nanoid": "catalog:utils",
     "picocolors": "catalog:utils",
     "tinyexec": "catalog:utils",
     "tsdown": "catalog:typescript",
