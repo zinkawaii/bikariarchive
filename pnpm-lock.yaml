@@ -207,6 +207,9 @@ catalogs:
     svgo:
       specifier: ^4.0.0
       version: 4.0.0
+    tinyexec:
+      specifier: ^1.0.2
+      version: 1.0.2
     tinyglobby:
       specifier: ^0.2.15
       version: 0.2.15
@@ -222,9 +225,6 @@ catalogs:
     zfeed:
       specifier: ^0.2.4
       version: 0.2.4
-    zx:
-      specifier: ^8.8.5
-      version: 8.8.5
   vue:
     '@vitejs/plugin-vue':
       specifier: ^6.0.3
@@ -511,15 +511,15 @@ importers:
       picocolors:
         specifier: catalog:utils
         version: 1.1.1
+      tinyexec:
+        specifier: catalog:utils
+        version: 1.0.2
       tsdown:
         specifier: catalog:typescript
         version: 0.20.1(synckit@0.11.12)(typescript@5.9.3)(vue-tsc@3.2.3(typescript@5.9.3))
       vitest:
         specifier: catalog:test
         version: 4.0.18(@types/node@25.0.10)(esbuild@0.27.2)(jiti@2.6.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
-      zx:
-        specifier: catalog:utils
-        version: 8.8.5
 
 packages:
 
@@ -7115,11 +7115,6 @@ packages:
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
-
-  zx@8.8.5:
-    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
-    engines: {node: '>= 12.17.0'}
-    hasBin: true
 
 snapshots:
 
@@ -14678,5 +14673,3 @@ snapshots:
       readable-stream: 4.7.0
 
   zwitch@2.0.4: {}
-
-  zx@8.8.5: {}

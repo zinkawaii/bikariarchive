@@ -4,8 +4,8 @@ import * as p from "@clack/prompts";
 import { format } from "date-fns";
 import { customAlphabet } from "nanoid";
 import { dirname } from "pathe";
+import { exec } from "tinyexec";
 import YAML from "yaml";
-import { $ } from "zx";
 import { resolveRoot } from "./utils.ts";
 import type { JArticle, JChapter } from "../../src/types/article.ts";
 
@@ -59,7 +59,7 @@ export async function createArticle() {
             await writeFile(path, text);
         }
 
-        await $`code-insiders ${path}`;
+        await exec(`code-insiders`, [path]);
     }
 }
 

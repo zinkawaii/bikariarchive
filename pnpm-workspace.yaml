@@ -84,12 +84,12 @@ catalogs:
     propathy: ^0.2.1
     shiki: ^3.21.0
     svgo: ^4.0.0
+    tinyexec: ^1.0.2
     tinyglobby: ^0.2.15
     unemail: ^0.3.0
     uqr: ^0.1.2
     yaml: ^2.8.2
     zfeed: ^0.2.4
-    zx: ^8.8.5
   vue:
     "@vitejs/plugin-vue": ^6.0.3
     "@vueuse/core": ^14.1.0

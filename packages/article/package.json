@@ -41,8 +41,8 @@
     "@zinkawaii/tsconfig": "catalog:types",
     "nanoid": "catalog:utils",
     "picocolors": "catalog:utils",
+    "tinyexec": "catalog:utils",
     "tsdown": "catalog:typescript",
-    "vitest": "catalog:test",
-    "zx": "catalog:utils"
+    "vitest": "catalog:test"
   }
 }
