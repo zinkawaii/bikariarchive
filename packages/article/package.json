@@ -33,7 +33,6 @@
   "devDependencies": {
     "@clack/prompts": "catalog:utils",
     "@zinkawaii/tsconfig": "catalog:types",
-    "picocolors": "catalog:utils",
     "tinyexec": "catalog:utils",
     "vitest": "catalog:test"
   }

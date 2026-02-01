@@ -74,7 +74,6 @@ catalogs:
     hookable: ^6.0.1
     katex: ^0.16.27
     pathe: ^2.0.3
-    picocolors: ^1.1.1
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
     shiki: ^3.21.0
