@@ -58,8 +58,6 @@ catalogs:
   types:
     "@types/wicg-file-system-access": ^2023.10.7
     "@zinkawaii/tsconfig": ^0.0.2
-  typescript:
-    tsdown: ^0.20.1
   utils:
     "@clack/prompts": ^0.11.0
     "@kabeep/lunar-date-fns": ^1.1.0
@@ -86,6 +84,7 @@ catalogs:
     tinyexec: ^1.0.2
     tinyglobby: ^0.2.15
     unemail: ^0.3.0
+    unrun: ^0.2.26
     uqr: ^0.1.2
     yaml: ^2.8.2
     zfeed: ^0.2.4

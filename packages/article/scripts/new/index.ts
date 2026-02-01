@@ -1,7 +1,7 @@
 import * as p from "@clack/prompts";
 import pc from "picocolors";
 import packageJson from "../../package.json" with { type: "json" };
-import { createArticle } from "./article.ts";
+import { createArticle } from "./article";
 
 process.on("exit", () => {
     p.outro();

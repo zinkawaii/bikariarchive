@@ -1,4 +1,4 @@
-import { article, entry, update } from "@bikari/article";
+import { article, entry, update } from "../packages/article/src";
 
 article.build();
 entry.build();

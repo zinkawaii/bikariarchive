@@ -1,15 +1,9 @@
 {
   "name": "@bikari/article",
   "type": "module",
-  "exports": {
-    ".": "./dist/index.mjs"
-  },
-  "types": "./dist/index.d.mts",
   "scripts": {
-    "build": "tsdown",
-    "dev": "tsdown -w",
     "test": "vitest",
-    "new": "node scripts/new/index.ts"
+    "new": "unrun scripts/new/index.ts"
   },
   "dependencies": {
     "date-fns": "catalog:utils",
@@ -41,7 +35,6 @@
     "@zinkawaii/tsconfig": "catalog:types",
     "picocolors": "catalog:utils",
     "tinyexec": "catalog:utils",
-    "tsdown": "catalog:typescript",
     "vitest": "catalog:test"
   }
 }

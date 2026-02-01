@@ -6,8 +6,8 @@ import { format } from "date-fns";
 import { dirname } from "pathe";
 import { exec } from "tinyexec";
 import YAML from "yaml";
-import { resolveRoot } from "./utils.ts";
-import type { JArticle, JChapter } from "../../src/types/article.ts";
+import { resolveRoot } from "./utils";
+import type { JArticle, JChapter } from "../../src/types/article";
 
 export async function createArticle() {
     const path = resolveRoot("/.data/json/Article.json");

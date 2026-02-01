@@ -11,9 +11,9 @@
     "git:stash": "git add -A && git stash",
     "git:stash/pop": "git stash pop && git reset",
     "new": "pnpm --filter @bikari/article new",
-    "task:article": "node scripts/article.ts",
-    "task:article/dev": "cross-env NODE_ENV=\"development\" node --watch scripts/article.ts",
-    "task:feed": "node scripts/feed.ts",
+    "task:article": "unrun scripts/article.ts",
+    "task:article/dev": "cross-env NODE_ENV=\"development\" unrun --watch scripts/article.ts",
+    "task:feed": "unrun scripts/feed.ts",
     "task:svgo": "svgo public/image/favicon.svg --pretty"
   },
   "dependencies": {
@@ -69,6 +69,7 @@
     "svgo": "catalog:utils",
     "tinyglobby": "catalog:utils",
     "unemail": "catalog:utils",
+    "unrun": "catalog:utils",
     "vue-component-type-helpers": "catalog:vue",
     "vue-tsc": "catalog:vue",
     "zfeed": "catalog:utils"
