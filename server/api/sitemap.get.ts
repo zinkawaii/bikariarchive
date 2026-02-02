@@ -1,9 +1,8 @@
 import { Article } from "#shared/utils/article";
 import { Entry } from "#shared/utils/entry";
+import { totalYears } from "~~/.data/json/update.json";
 
 export default defineSitemapEventHandler(() => {
-    const config = useRuntimeConfig();
-
     return [
         "/",
         "/about",
@@ -15,7 +14,7 @@ export default defineSitemapEventHandler(() => {
         "/toolkit",
         "/toolkit/lyricaxis",
         "/toolkit/namaemaker",
-        ...config.public.totalYears.map((year) => `/update/${year}`),
+        ...totalYears.map((year) => `/update/${year}`),
         ...Object.entries(Article.meta).map(([novel, { volumes, chapters }]) => [
             ...volumes.map((vol, i) => `/book/${novel}.${i}`),
             ...chapters.map((art) => `/book/${novel}/${art.index}`),

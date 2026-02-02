@@ -37,7 +37,6 @@ const client = {
         subtitle: "微かな力を尽くして、光の届いた彼方へ",
         avatar: "/garden/avatar/maestrale.webp",
         favicon: "/garden/favicon.svg",
-        totalYears: Array.from({ length: new Date().getFullYear() - 2022 }, (_, i) => 2023 + i).reverse(),
     },
     development: {
         domain: "zinkawaii",

@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
-import { createKerria, useSource } from "kerria";
+import { createKerria, useLoad, useSource } from "kerria";
+import { basename } from "pathe";
 import { parseUpdate } from "../remark";
 import type { JUpdate } from "../types/update";
 
@@ -7,6 +8,18 @@ const titleRE = /^(.+) \[v(.+)\]$/;
 const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
 export default createKerria("Update", () => {
+    const meta = useLoad("update", {
+        out: ".data/json/update.json",
+        defaultValue: {
+            totalYears: new Set(),
+        },
+        output(val) {
+            return {
+                totalYears: Array.from(val.totalYears).sort().reverse(),
+            };
+        },
+    });
+
     useSource(0, {
         base: "content",
         dist: ".data",
@@ -73,6 +86,16 @@ export default createKerria("Update", () => {
 
             //写入文件
             await info.output(path, updates);
+
+            return {
+                year: Number(basename(path, ".mdz")),
+            };
+        },
+        cache(cache) {
+            meta.value.totalYears.add(cache.year);
+        },
+        unlink(cache) {
+            meta.value.totalYears.delete(cache.year);
         },
     });
 });

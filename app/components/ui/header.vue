@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import type { RouteLocationRaw } from "vue-router";
     import { NuxtLink } from "#components";
+    import { totalYears } from "~~/.data/json/update.json";
 
     interface NavItem {
         title: string;
@@ -11,7 +12,6 @@
 
     const breadcrumbStore = useBreadcrumbStore();
     const shelfStore = useShelfStore();
-    const config = useRuntimeConfig();
     const router = useRouter();
     const word = ref("");
 
@@ -59,7 +59,7 @@
                 {
                     title: "更新日志",
                     icon: "fa7-solid:clock-rotate-left",
-                    to: { name: "update", params: { year: config.public.totalYears[0] } },
+                    to: { name: "update", params: { year: totalYears[0] } },
                 },
                 {
                     title: "站点协议",

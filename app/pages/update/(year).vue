@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import { totalYears } from "~~/.data/json/update.json";
+
     useHead({
         title: "更新日志",
     });
@@ -6,9 +8,6 @@
     definePageMeta({
         redirect: { name: "unknown" },
     });
-
-    const config = useRuntimeConfig();
-    const { totalYears } = config.public;
 
     const currentYear = useRouteParams("year", void 0, {
         transform: Number,
