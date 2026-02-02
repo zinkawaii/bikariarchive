@@ -7,6 +7,10 @@
     const collapse = computed(() => settingStore.get("ui-collapse"));
 
     onMounted(() => {
+        if (window.innerWidth < Zin.MAX_WINDOW_SIZE) {
+            settingStore.set("ui-collapse", true);
+        }
+
         const items = [...document.querySelectorAll(".z-toolbar > .mb-popper")].slice(0, -1);
 
         watchEffect(() => {

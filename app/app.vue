@@ -46,13 +46,6 @@
     settingStore.listen("dark-mode", (val) => {
         dark.value = val;
     });
-
-    onMounted(() => {
-        //移动端
-        if (window.innerWidth < Zin.MAX_WINDOW_SIZE) {
-            settingStore.set("ui-collapse", true);
-        }
-    });
 </script>
 
 <template>

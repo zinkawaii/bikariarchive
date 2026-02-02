@@ -1,26 +1,19 @@
 <script lang="ts" setup>
-    import { animate, utils } from "animejs";
+    import { animate } from "animejs";
+    import type { TransitionProps } from "vue";
 
     const settingStore = useSettingStore();
     const route = useRoute();
 
     const isSmallWindow = useMediaQuery("(width < 1024px)");
 
-    const isCollapse = computed(() => {
+    const isCollapsed = computed(() => {
         const collapse = settingStore.get("ui-collapse");
         const display = settingStore.get("sidebar-display");
-        return {
-            0: collapse,
-            1: false,
-            2: true,
-        }[display]!;
+        return !isSmallWindow.value && display ? Boolean(display - 1) : collapse;
     });
 
-    watch(isCollapse, async () => {
-        if (isSmallWindow.value) {
-            return;
-        }
-
+    watch(isCollapsed, async () => {
         const nakami = document.querySelector(".nakami")!;
         const start = getPosition(nakami);
         await nextTick();
@@ -34,24 +27,20 @@
         });
     });
 
-    watch(() => settingStore.get("ui-collapse"), async (collapse) => {
-        if (!isSmallWindow.value) {
-            return;
+    const onEnterLeave: TransitionProps["onEnter"] = async (el, done) => {
+        if (isSmallWindow.value) {
+            const widgets = document.querySelectorAll(".aside-widget");
+            await animate(widgets, {
+                opacity: [0, 1],
+                y: ["4rem", 0],
+                duration: 400,
+                delay: (el, i) => i * 50,
+                ease: "outBack",
+                reversed: settingStore.get("ui-collapse"),
+            });
         }
-
-        await nextTick();
-        const widgets = document.querySelectorAll(".aside-widget");
-
-        animate(widgets, {
-            opacity: 1,
-            y: ["4rem", 0],
-            duration: 400,
-            delay: (el, i) => i * 50,
-            ease: "outBack",
-            reversed: collapse,
-            onComplete: utils.cleanInlineStyles,
-        });
-    });
+        done();
+    };
 
     function onClick(event: MouseEvent) {
         if (isSmallWindow.value && event.target === event.currentTarget) {
@@ -61,26 +50,21 @@
 </script>
 
 <template>
-    <aside
-        class="z-sidebar"
-        :class="{
-            [`is-collapse`]: isCollapse,
-            [`is-shown`]: !settingStore.get(`ui-collapse`),
-        }"
-        @click="onClick"
-    >
-        <aside-profile />
-        <div class="aside-sticky">
-            <aside-unified v-if="route.meta.catalog"/>
-            <aside-statistics />
-            <aside-widget title="最近更新">
-                <template #icon>
-                    <iconify name="fa7-solid:clock-rotate-left"/>
-                </template>
-                <recent-article :sizes="5" sort-by="updated"/>
-            </aside-widget>
-        </div>
-    </aside>
+    <transition @enter="onEnterLeave" @leave="onEnterLeave">
+        <aside v-if="!isCollapsed" class="z-sidebar" @click="onClick">
+            <aside-profile />
+            <div class="aside-sticky">
+                <aside-unified v-if="route.meta.catalog"/>
+                <aside-statistics />
+                <aside-widget title="最近更新">
+                    <template #icon>
+                        <iconify name="fa7-solid:clock-rotate-left"/>
+                    </template>
+                    <recent-article :sizes="5" sort-by="updated"/>
+                </aside-widget>
+            </div>
+        </aside>
+    </transition>
 </template>
 
 <style lang="scss" scoped>
@@ -90,12 +74,6 @@
         place-content: start center;
         margin-top: -16px;
 
-        @include viewport(">lg") {
-            &.is-collapse {
-                display: none;
-            }
-        }
-
         @include viewport("lg") {
             position: fixed;
             overflow: auto;
@@ -104,11 +82,6 @@
             backdrop-filter: blur(4px);
             transition: all 0.4s;
             overscroll-behavior: contain;
-
-            &:not(.is-shown) {
-                opacity: 0;
-                pointer-events: none;
-            }
 
             &::-webkit-scrollbar {
                 display: none;
