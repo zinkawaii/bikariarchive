@@ -9,7 +9,7 @@ import { resolveRoot } from "./utils";
 import type { JArticle, JChapter } from "../../src/types/article";
 
 export async function createArticle() {
-    const path = resolveRoot("/.data/json/Article.json");
+    const path = resolveRoot("/.data/json/article.json");
     const file = await readFile(path, "utf-8");
     const meta = JSON.parse(file) as JArticle;
 

@@ -1,4 +1,4 @@
-declare module "~/assets/json/Special.json" {
+declare module "~/assets/json/special.json" {
     export type JSpecial = Record<string, TimelineEvent>;
 
     export interface TimelineEvent {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import jFriend from "~/assets/json/Friend.json";
+    import jFriend from "~/assets/json/friend.json";
 
     definePageMeta({
         comment: true,

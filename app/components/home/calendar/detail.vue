@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import jSpecial from "~/assets/json/Special.json";
+    import jSpecial from "~/assets/json/special.json";
     import type { CalendarDate } from "./index.vue";
 
     const props = defineProps<{

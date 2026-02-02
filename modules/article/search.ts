@@ -6,8 +6,8 @@ import { glob } from "tinyglobby";
 import type { Child, JArticle, JArtmap, Root } from "../../packages/article/src";
 
 export async function buildSearch() {
-    const meta = JSON.parse(await readFile(".data/json/Article.json", "utf-8")) as JArticle;
-    const map = JSON.parse(await readFile(".data/json/Artmap.json", "utf-8")) as JArtmap;
+    const meta = JSON.parse(await readFile(".data/json/article.json", "utf-8")) as JArticle;
+    const map = JSON.parse(await readFile(".data/json/artmap.json", "utf-8")) as JArtmap;
 
     const data: Record<string, Record<string, number[][]>> = {};
 

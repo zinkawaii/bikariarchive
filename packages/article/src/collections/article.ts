@@ -14,7 +14,7 @@ enum SourceKind {
 
 export default createKerria("Article", () => {
     const metaInfo = useLoad("meta", {
-        out: ".data/json/Article.json",
+        out: ".data/json/article.json",
         output(val) {
             const newVal = Object.fromEntries(
                 Object.entries<any>(structuredClone(val))
@@ -31,7 +31,7 @@ export default createKerria("Article", () => {
     });
 
     const mapInfo = useLoad("map", {
-        out: ".data/json/Artmap.json",
+        out: ".data/json/artmap.json",
     });
 
     useSource(SourceKind.Meta, {

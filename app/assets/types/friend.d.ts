@@ -1,4 +1,4 @@
-declare module "~/assets/json/Friend.json" {
+declare module "~/assets/json/friend.json" {
     export type JFriend = FriendItem[];
 
     export interface FriendItem {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import jBorrowing from "~/assets/json/Borrowing.json";
+    import jBorrowing from "~/assets/json/borrowing.json";
 
     useHead({
         title: "借物表",

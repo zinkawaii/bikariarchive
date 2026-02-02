@@ -1,4 +1,4 @@
-declare module "~/assets/json/Borrowing.json" {
+declare module "~/assets/json/borrowing.json" {
     export type JBorrowing = BorrowingBlock[];
 
     export interface BorrowingBlock {
