@@ -16,7 +16,7 @@
 </script>
 
 <template>
-    <mb-dialog class="mb-confirm" @close="cancel">
+    <mb-dialog class="dialog-confirm" @close="cancel">
         <meow-title>确认</meow-title>
         <p class="confirm-content">{{ message }}</p>
         <div class="confirm-operator">
@@ -27,7 +27,7 @@
 </template>
 
 <style lang="scss" scoped>
-    .mb-confirm {
+    .dialog-confirm {
         --dialog-padding: 1rem 1.5rem;
 
         max-width: 720px;

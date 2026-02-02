@@ -1,106 +1,167 @@
 <script lang="ts" setup>
-    export interface MbNumericProps {
-        title?: string;
-        initialValue?: number;
+    const props = withDefaults(defineProps<{
+        accuracy?: number;
         min?: number;
-        max: number;
-    }
-
-    const props = withDefaults(defineProps<MbNumericProps>(), {
-        title: "选择",
-        initialValue: 0,
-        min: 0,
+        max?: number;
+        step?: number;
+        controls?: boolean;
+        readonly?: boolean;
+        trim?: boolean;
+    }>(), {
+        accuracy: 0,
+        min: -Infinity,
+        max: Infinity,
+        step: 1,
     });
-    const emit = defineEmits<{
-        close: [value: number];
-    }>();
+    const modelValue = defineModel<number>({
+        required: true,
+    });
 
-    const currentValue = ref(props.initialValue);
+    const numberRE = /^([-+]?\d*)(\.\d*)?$/;
+    const displayValue = ref("");
+    const [isInvalid, toggleInvalid] = useToggle(false);
 
-    function cancel() {
-        emit("close", props.initialValue);
+    //记录旧值
+    let oldValue: number, oldDisplayValue: string;
+
+    //响应源数据变化
+    watchImmediate(modelValue, (val: number/* FIXME */) => {
+        if (val !== oldValue) {
+            oldDisplayValue = String(val);
+            oldValue = val;
+            onBlur();
+        }
+    });
+
+    //输入时
+    function onInput() {
+        const match = displayValue.value.match(numberRE);
+        if (!match) {
+            toggleInvalid(true);
+            return;
+        }
+
+        const d = match[2] || ".";
+        if (d.length > props.accuracy + 1) {
+            toggleInvalid(true);
+            return;
+        }
+
+        const str = match[1] + d;
+        const val = Number(str) || 0;
+        if (val < props.min || val > props.max) {
+            toggleInvalid(true);
+            return;
+        }
+
+        oldDisplayValue = str;
+        modelValue.value = oldValue = val;
+        toggleInvalid(false);
     }
 
-    function confirm() {
-        emit("close", currentValue.value);
+    //失焦时
+    function onBlur() {
+        const match = oldDisplayValue.match(numberRE)!;
+        const i = Number(match[1]) || "0";
+
+        let d = match[2] || ".";
+        if (props.accuracy) {
+            d = d.padEnd(props.accuracy + 1, "0");
+        }
+        if (props.trim) {
+            d = d.replace(/0+$/, "");
+        }
+        d === "." && (d = "");
+
+        //规整格式
+        displayValue.value = i + d;
+        toggleInvalid(false);
     }
 </script>
 
 <template>
-    <mb-dialog class="mb-numeric" @close="cancel">
-        <meow-title>{{ title }}</meow-title>
-        <div class="numeric-editor">
-            <mb-button
-                :disabled="currentValue <= min"
-                @click="currentValue = min"
-            >最小</mb-button>
-            <mb-input-number
-                :accuracy="0"
-                :min
-                :max
-                controls
-                v-model="currentValue"
-                @keyup.enter="confirm"
-            />
-            <mb-button
-                :disabled="currentValue >= max"
-                @click="currentValue = max"
-            >最大</mb-button>
-        </div>
-        <div class="numeric-selector">
-            <span
-                class="numeric-limit"
-                :class="{ [`is-equal`]: currentValue === min }"
-            >{{ min }}</span>
-            <mb-slider
-                :min
-                :max
-                :step="1"
-                v-model="currentValue"
-            />
-            <span
-                class="numeric-limit"
-                :class="{ [`is-equal`]: currentValue === max }"
-            >{{ max }}</span>
-        </div>
-        <div class="numeric-operator">
-            <mb-button @click="cancel">取消</mb-button>
-            <mb-button @click="confirm">确定</mb-button>
-        </div>
-    </mb-dialog>
+    <div class="mb-numeric" :class="{ [`is-invalid`]: isInvalid }">
+        <button
+            v-if="controls"
+            class="numeric-arrow"
+            :class="{ [`is-disabled`]: readonly || modelValue - step < min }"
+            @click="modelValue -= step"
+        >
+            <iconify name="fa7-solid:chevron-left"/>
+        </button>
+        <input
+            class="numeric-entity"
+            :readonly
+            v-model="displayValue"
+            @input="onInput"
+            @blur="onBlur"
+        />
+        <button
+            v-if="controls"
+            class="numeric-arrow"
+            :class="{ [`is-disabled`]: readonly || modelValue + step > max }"
+            @click="modelValue += step"
+        >
+            <iconify name="fa7-solid:chevron-right"/>
+        </button>
+    </div>
 </template>
 
 <style lang="scss" scoped>
     .mb-numeric {
-        --dialog-padding: 1rem 1.5rem;
-
-        font-size: 14px;
-    }
-
-    .numeric-editor {
         display: flex;
-        align-items: center;
-        gap: 16px;
-        margin: 16px 24px;
-    }
+        position: relative;
+        height: 2rem;
+        border: 1px solid var(--color-border-light);
+        border-radius: 6px;
+        outline: 2px solid transparent;
+        outline-offset: -1px;
+        background-color: var(--color-background);
+        transition: outline 0.25s;
 
-    .numeric-selector {
-        display: flex;
-        gap: 8px;
-        margin-block: 16px;
-    }
+        &:focus-within {
+            outline-color: var(--color-theme-dark);
+        }
 
-    .numeric-limit {
-        transition: color 0.25s;
-
-        &.is-equal {
-            color: var(--color-theme-text);
+        &.is-invalid {
+            outline-color: var(--color-danger);
         }
     }
 
-    .numeric-operator {
+    .numeric-arrow {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        place-items: center;
+        position: absolute;
+        height: 100%;
+        aspect-ratio: 1;
+        background-color: var(--color-gray-900);
+        color: var(--color-text-secondary);
+        transition: color 0.25s;
+
+        &:hover {
+            color: var(--color-theme-text);
+        }
+
+        &:first-child {
+            left: 0;
+            border-right: 1px solid var(--color-border-light);
+            border-radius: 5px 0 0 5px;
+        }
+
+        &:last-child {
+            right: 0;
+            border-left: 1px solid var(--color-border-light);
+            border-radius: 0 5px 5px 0;
+        }
+
+        &.is-disabled {
+            color: var(--color-text-disabled);
+            pointer-events: none;
+        }
+    }
+
+    .numeric-entity {
+        width: 100%;
+        text-align: center;
     }
 </style>
