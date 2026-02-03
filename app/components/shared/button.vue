@@ -19,7 +19,7 @@
 
 <style lang="scss">
     .mb-button {
-        display: inline-flex;
+        display: inline flex;
         align-items: center;
         justify-content: center;
         gap: 0.4em;

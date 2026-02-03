@@ -103,12 +103,12 @@
         }
 
         h3 {
-            display: inline-block;
+            display: inline flow-root;
             margin: 8px 0 4px 12px;
 
             &::before {
                 content: "•";
-                display: inline-block;
+                display: inline flow-root;
                 width: 1em;
                 text-align: center;
             }

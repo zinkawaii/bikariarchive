@@ -13,7 +13,7 @@
 
 <style lang="scss" scoped>
     .character-tag {
-        display: inline-flex;
+        display: inline flex;
         align-items: center;
         padding-right: 8px;
         border: 1px solid var(--color-theme-dark);

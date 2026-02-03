@@ -93,7 +93,7 @@
     }
 
     .jumbotron-char {
-        display: inline-block;
+        display: inline flow-root;
         opacity: 0;
         animation: _ 0.4s ease-out both;
     }

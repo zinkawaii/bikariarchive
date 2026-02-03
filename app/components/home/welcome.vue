@@ -40,7 +40,7 @@
     }
 
     .welcome-title {
-        display: inline-block;
+        display: inline flow-root;
         margin-block: $mt 4px;
     }
 </style>

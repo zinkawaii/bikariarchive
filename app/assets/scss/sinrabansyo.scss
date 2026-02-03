@@ -59,7 +59,7 @@ code, pre {
 }
 
 kbd {
-    display: inline-block;
+    display: inline flow-root;
     padding-inline: 0.25em;
     border-bottom: 0.15em solid var(--color-gray-600);
     border-radius: 0.25em;
@@ -284,7 +284,7 @@ textarea {
     }
 
     .indent {
-        display: inline-block;
+        display: inline flow-root;
         position: relative;
 
         &:empty {
