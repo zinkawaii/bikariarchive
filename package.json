@@ -41,7 +41,6 @@
     "@iconify-json/fa7-solid": "catalog:iconify",
     "@iconify-json/ri": "catalog:iconify",
     "@nuxt/devtools": "catalog:nuxt",
-    "@nuxt/eslint": "catalog:nuxt",
     "@nuxt/fonts": "catalog:nuxt",
     "@nuxt/icon": "catalog:nuxt",
     "@nuxt/image": "catalog:nuxt",
