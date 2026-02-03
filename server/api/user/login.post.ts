@@ -33,7 +33,7 @@ export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
     const { uid, nickname, email, identity, sign, hash, salt } = qUser;
 
     //密码错误
-    if (hash !== InnerCode.encrypt(password, salt)) {
+    if (hash !== encryptSecret(password, salt)) {
         return 2;
     }
 

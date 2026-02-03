@@ -62,7 +62,7 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const createTime = new Date();
 
     //哈希和盐值
-    const { hash, salt } = InnerCode.create(password);
+    const { hash, salt } = createSecret(password);
 
     //新增用户信息
     UserDataModel.insertMany({

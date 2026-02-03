@@ -28,19 +28,11 @@ export default defineJEventHandler(async (event) => {
         return 1;
     }
 
-    let { hash, salt } = qUser;
-
     //密码错误
-    if (hash !== InnerCode.encrypt(oldPassword, salt)) {
+    if (qUser.hash !== encryptSecret(oldPassword, qUser.salt)) {
         return 2;
     }
 
     //更新哈希和盐值
-    ({ hash, salt } = InnerCode.create(newPassword));
-
-    //更新用户信息
-    await qUser.updateOne({
-        hash,
-        salt,
-    });
+    await qUser.updateOne(createSecret(newPassword));
 });
