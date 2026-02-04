@@ -132,10 +132,4 @@ export default defineNuxtConfig({
             "/api/sitemap",
         ],
     },
-    splittedFonts: {
-        fonts: [{
-            name: "ChillRoundF",
-            path: "~/assets/fonts/ChillRoundFRegular.ttf",
-        }],
-    },
 });

@@ -53,7 +53,6 @@
     "@zinkawaii/stylelint-config": "catalog:lint",
     "bgmt": "catalog:utils",
     "chokidar": "catalog:utils",
-    "cn-font-split": "catalog:utils",
     "consola": "catalog:utils",
     "crypto-es": "catalog:utils",
     "defu": "catalog:utils",
