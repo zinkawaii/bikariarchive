@@ -1,4 +1,5 @@
 shamefullyHoist: true
+shellEmulator: true
 
 packages:
   - packages/*
@@ -66,7 +67,6 @@ catalogs:
     chokidar: ^5.0.0
     cn-font-split: ^7.4.1
     consola: ^3.4.2
-    cross-env: ^10.1.0
     crypto-es: ^3.1.2
     defu: ^6.1.4
     github-slugger: ^2.0.0

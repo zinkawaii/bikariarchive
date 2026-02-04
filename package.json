@@ -12,7 +12,7 @@
     "git:stash/pop": "git stash pop && git reset",
     "new": "pnpm --filter @bikari/article new",
     "task:article": "unrun scripts/article.ts",
-    "task:article/dev": "cross-env NODE_ENV=\"development\" unrun --watch scripts/article.ts",
+    "task:article/dev": "NODE_ENV=\"development\" unrun --watch scripts/article.ts",
     "task:feed": "unrun scripts/feed.ts",
     "task:svgo": "svgo public/image/favicon.svg --pretty"
   },
@@ -55,7 +55,6 @@
     "chokidar": "catalog:utils",
     "cn-font-split": "catalog:utils",
     "consola": "catalog:utils",
-    "cross-env": "catalog:utils",
     "crypto-es": "catalog:utils",
     "defu": "catalog:utils",
     "eslint": "catalog:lint",
