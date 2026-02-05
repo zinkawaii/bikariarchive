@@ -4,7 +4,6 @@ import { basename } from "pathe";
 import { parseUpdate } from "../remark";
 import type { JUpdate } from "../types/update";
 
-const titleRE = /^(.+) \[v(.+)\]$/;
 const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
 export default createKerria("Update", () => {
@@ -42,39 +41,30 @@ export default createKerria("Update", () => {
                     continue;
                 }
                 else if (node.tag === "h2") {
-                    if (node.children.length !== 1) {
-                        continue;
-                    }
-
-                    const firstNode = node.children[0];
-                    if (firstNode.type !== "text") {
-                        continue;
-                    }
-
-                    const match = firstNode.value.match(titleRE);
-                    if (!match) {
+                    const [text, span] = node.children;
+                    if (text.type !== "text" || span.type !== "element" || span.children[0]?.type !== "text") {
                         continue;
                     }
 
                     update = {
-                        date: match[1],
-                        version: match[2],
+                        date: text.value.trim(),
+                        version: span.children[0].value,
                         items: [],
                     };
                     updates.push(update);
                 }
                 else if (node.tag === "p") {
-                    const firstNode = node.children[0];
-                    if (firstNode?.type !== "text") {
+                    const child = node.children[0];
+                    if (child?.type !== "text") {
                         continue;
                     }
 
-                    const match = firstNode.value.match(prefixRE);
+                    const match = child.value.match(prefixRE);
                     if (!match) {
                         continue;
                     }
 
-                    firstNode.value = firstNode.value.slice(match[0].length).trimStart();
+                    child.value = child.value.slice(match[0].length).trimStart();
 
                     update?.items.push({
                         type: match[1],

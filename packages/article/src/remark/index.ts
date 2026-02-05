@@ -1,4 +1,3 @@
-import raw from "rehype-raw";
 import breaks from "remark-breaks";
 import math from "remark-math";
 import mdc from "remark-mdc";
@@ -43,7 +42,6 @@ export async function parseArticle<T>(text: string) {
         .use(slug)
         .use(strikethrough)
         .use(rehype, rehypeOptions)
-        .use(raw)
         .use(compiler);
 
     //文本预处理
@@ -72,7 +70,6 @@ export async function parseEntry<T>(text: string) {
         .use(ruby)
         .use(strikethrough)
         .use(rehype, rehypeOptions)
-        .use(raw)
         .use(slot);
 
     //文本预处理
@@ -90,11 +87,11 @@ export async function parseEntry<T>(text: string) {
 export async function parseUpdate(text: string) {
     const processor = unified()
         .use(parse)
+        .use(mdc)
         .use(emoji)
         .use(ruby)
         .use(strikethrough)
         .use(rehype, rehypeOptions)
-        .use(raw)
         .use(compiler);
 
     const result = await processor.process(text);

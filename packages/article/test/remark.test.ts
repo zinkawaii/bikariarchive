@@ -1,4 +1,3 @@
-import raw from "rehype-raw";
 import mdc from "remark-mdc";
 import parse from "remark-parse";
 import rehype from "remark-rehype";
@@ -17,7 +16,6 @@ it("emoji", async () => {
         .use(parse)
         .use(emoji)
         .use(rehype)
-        .use(raw)
         .use(compiler);
 
     const { body } = await process(processor, `
@@ -41,7 +39,6 @@ it("ruby", async () => {
         .use(parse)
         .use(ruby)
         .use(rehype)
-        .use(raw)
         .use(compiler);
 
     const { body } = await process(processor, `
@@ -77,7 +74,6 @@ it("slot", async () => {
         })
         .use(mdc)
         .use(rehype)
-        .use(raw)
         .use(slot);
 
     const { data } = await process(processor, `
@@ -101,7 +97,6 @@ it("interpolation", async () => {
         .use(frontmatter)
         .use(interpolation)
         .use(rehype)
-        .use(raw)
         .use(compiler);
 
     const { body } = await process(processor, `
