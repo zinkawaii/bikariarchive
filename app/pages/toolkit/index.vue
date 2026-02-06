@@ -17,12 +17,6 @@
             icon: "material-symbols:language-japanese-kana",
             to: { name: "toolkit-namaemaker" },
         },
-        {
-            title: "歌词打轴",
-            description: "为你的歌词快速打轴",
-            icon: "mdi:timeline-clock",
-            to: { name: "toolkit-lyricaxis" },
-        },
     ];
 </script>
 

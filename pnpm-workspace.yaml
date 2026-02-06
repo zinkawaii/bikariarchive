@@ -55,7 +55,6 @@ catalogs:
   test:
     vitest: ^4.0.18
   types:
-    "@types/wicg-file-system-access": ^2023.10.7
     "@zinkawaii/tsconfig": ^0.0.2
   utils:
     "@clack/prompts": ^0.11.0

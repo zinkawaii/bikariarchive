@@ -46,7 +46,6 @@
     "@nuxt/image": "catalog:nuxt",
     "@nuxtjs/seo": "catalog:nuxt",
     "@pinia/nuxt": "catalog:nuxt",
-    "@types/wicg-file-system-access": "catalog:types",
     "@vitejs/plugin-vue": "catalog:vue",
     "@vueuse/nuxt": "catalog:nuxt",
     "@zinkawaii/eslint-config": "catalog:lint",

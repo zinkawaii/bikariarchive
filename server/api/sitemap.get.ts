@@ -12,7 +12,6 @@ export default defineSitemapEventHandler(() => {
         "/intel",
         "/search",
         "/toolkit",
-        "/toolkit/lyricaxis",
         "/toolkit/namaemaker",
         ...totalYears.map((year) => `/update/${year}`),
         ...Object.entries(Article.meta).map(([novel, { volumes, chapters }]) => [

@@ -42,27 +42,6 @@ export const Zin = new class Z {
         });
     }
 
-    //从字符串或对象下载文本文件
-    download(data: any, filename = "") {
-        let type = "text/plain";
-        switch (filename.split(".").pop()) {
-            case "json": {
-                data = JSON.stringify(data);
-                type = "application/json";
-                break;
-            }
-        }
-        const blob = new Blob([data], { type });
-
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = filename;
-        a.click();
-
-        URL.revokeObjectURL(url);
-    }
-
     //按照一定时间和次数循环执行函数
     interval(func: (time: number) => void, {
         immediate = true,

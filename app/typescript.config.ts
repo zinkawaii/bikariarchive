@@ -24,9 +24,6 @@ export default <NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig>> {
     },
     tsConfig: {
         compilerOptions: {
-            types: [
-                "@types/wicg-file-system-access",
-            ],
             ...shared,
         },
         vueCompilerOptions: {
