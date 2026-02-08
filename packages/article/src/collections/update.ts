@@ -48,7 +48,7 @@ export default createKerria("Update", () => {
 
                     update = {
                         date: text.value.trim(),
-                        version: span.children[0].value,
+                        version: span.children[0].value.slice(1),
                         items: [],
                     };
                     updates.push(update);
