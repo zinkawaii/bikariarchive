@@ -104,7 +104,7 @@ async function createBlog(chapters: JChapter[]) {
         return;
     }
 
-    const date = new Intl.DateTimeFormat("sv-SE").format();
+    const date = new Intl.DateTimeFormat("sv").format();
     const short = date.replaceAll("-", "").slice(2);
     const order = chapters.filter((chapter) => chapter.index.startsWith(short)).length;
 

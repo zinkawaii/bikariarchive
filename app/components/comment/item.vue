@@ -27,7 +27,7 @@
 
         return now.since(instant).total("second") < 86400
             ? timeAgo.value
-            : instant.toLocaleString("sv-SE", {
+            : instant.toLocaleString("sv", {
                 dateStyle: "short",
                 timeStyle: "short",
             });

@@ -43,7 +43,7 @@
     }
 
     function formatTime(time: string) {
-        return Temporal.Instant.from(time).toLocaleString("sv-SE");
+        return Temporal.Instant.from(time).toLocaleString("sv");
     }
 </script>
 
