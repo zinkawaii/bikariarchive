@@ -1,9 +1,9 @@
-import jArticle from "~~/.data/json/article.json";
-import jIntel from "~~/.data/json/intel.json";
+import articleJson from "~~/.data/json/article.json";
+import intelJson from "~~/.data/json/intel.json";
 
 const initialize = once(() => {
-    enrichJArticle(jArticle as any);
-    enrichJIntel(jIntel as any);
+    enrichJArticle(articleJson as any);
+    enrichJIntel(intelJson as any);
 });
 
 export default defineNuxtPlugin(() => {

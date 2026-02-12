@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import jFriend from "~/assets/json/friend.json";
+    import friendJson from "~/assets/json/friend.json";
 
     definePageMeta({
         comment: true,
@@ -24,7 +24,7 @@
     <meow-widget title="友情链接">
         <novel-article class="text-small" variant="article">
             <div class="friend-list">
-                <nuxt-link v-for="item in jFriend" class="friend-item" :to="item.link" rel="noopener" target="_blank">
+                <nuxt-link v-for="item in friendJson" class="friend-item" :to="item.link" rel="noopener" target="_blank">
                     <hgroup class="friend-info">
                         <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
                         <h3 class="friend-title text-truncate">{{ item.title }}</h3>

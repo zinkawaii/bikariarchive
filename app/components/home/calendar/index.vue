@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { Temporal } from "temporal-polyfill";
-    import jSpecial from "~/assets/json/special.json";
+    import specialJson from "~/assets/json/special.json";
 
     export interface CalendarDate {
         key: string;
@@ -168,7 +168,7 @@
                     class="calendar-day"
                     :class="{
                         [`is-sub`]: currentMonth !== month,
-                        [`is-special`]: key in jSpecial,
+                        [`is-special`]: key in specialJson,
                         [`is-checked`]: currentKey === key,
                     }"
                     @click="currentKey = (currentKey === key) ? void 0 : key"

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-    import jAbility from "~~/.data/json/ability.json";
+    import abilityJson from "~~/.data/json/ability.json";
 
     const props = defineProps<{
         classification?: string;
         star?: number;
     }>();
 
-    const filterred = jAbility.filter((item) => {
+    const filterred = abilityJson.filter((item) => {
         const { classification, star } = props;
         if (classification) {
             return item.class.includes(classification);

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import jSpecial from "~/assets/json/special.json";
+    import specialJson from "~/assets/json/special.json";
     import type { CalendarDate } from "./index.vue";
 
     const props = defineProps<{
@@ -7,7 +7,7 @@
     }>();
 
     const event = computed(() => {
-        return props.date ? jSpecial[props.date.key] : void 0;
+        return props.date ? specialJson[props.date.key] : void 0;
     });
 </script>
 
