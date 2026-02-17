@@ -19,7 +19,9 @@ export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res
 
     const code = word.codePointAt(0)!.toString();
     const path = r(`/.data/search/${code.slice(0, 2)}/${code}.json`);
-    const data = JSON.parse(await readFile(path, "utf-8").catch(() => "{}")) as Record<string, number[][]>;
+    const data = await readFile(path, "utf-8")
+        .then<Record<string, number[][]>>(JSON.parse)
+        .catch(() => ({}));
 
     const novels = new Set(novel === void 0 ? Object.keys(Article.meta) : [novel]);
     const weakTexts = new WeakMap<Element, string>();

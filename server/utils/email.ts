@@ -4,7 +4,7 @@ import { type Component, createSSRApp } from "vue";
 import { renderToString } from "vue/server-renderer";
 import type { ComponentProps } from "vue-component-type-helpers";
 
-export async function sendMail<T extends Component>(component: T, options: {
+export async function sendEmail<T extends Component>(component: T, options: {
     to: string;
     title: string;
     props: ComponentProps<T>;

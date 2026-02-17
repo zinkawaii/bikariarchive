@@ -6,8 +6,8 @@ import { glob } from "tinyglobby";
 import type { Child, JArticle, JArtmap, Root } from "../../packages/article/src";
 
 export async function buildSearch() {
-    const meta = JSON.parse(await readFile(".data/json/article.json", "utf-8")) as JArticle;
-    const map = JSON.parse(await readFile(".data/json/artmap.json", "utf-8")) as JArtmap;
+    const meta = await readFile(".data/json/article.json", "utf-8").then<JArticle>(JSON.parse);
+    const map = await readFile(".data/json/artmap.json", "utf-8").then<JArtmap>(JSON.parse);
 
     const data: Record<string, Record<string, number[][]>> = {};
 
@@ -18,7 +18,7 @@ export async function buildSearch() {
             }
 
             const path = `.data/novel/${novel}.${chapter.volume}/${map[novel][chapter.index].name}.json`;
-            const root = JSON.parse(await readFile(path, "utf-8")) as Root;
+            const root = await readFile(path, "utf-8").then<Root>(JSON.parse);
 
             for (const [char, vector] of forEachVector(root)) {
                 ((data[char] ??= {})[`${novel}/${chapter.index}`] ??= []).push(vector);

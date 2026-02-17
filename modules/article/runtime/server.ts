@@ -25,8 +25,7 @@ export default defineNitroPlugin(async (nitroApp) => {
 
 async function update(path: string) {
     const name = basename(path, ".json");
-    const file = await readFile(path, "utf-8");
-    const data = JSON.parse(file);
+    const data = await readFile(path, "utf-8").then(JSON.parse);
     switch (name) {
         case "article": {
             enrichJArticle(data);

@@ -18,8 +18,7 @@ export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
     }
 
     const path = r(`/.data/${category}/${title}.json`);
-    const file = await readFile(path, "utf-8");
-    const data = JSON.parse(file);
+    const data = await readFile(path, "utf-8").then(JSON.parse);
 
     res.category = category;
     Object.assign(res, data);

@@ -36,7 +36,7 @@ export default defineJEventHandler(async (event) => {
 
     //发送验证码
     try {
-        await sendMail(Captcha, {
+        await sendEmail(Captcha, {
             to: email,
             title: "注册验证码",
             props: { captcha },

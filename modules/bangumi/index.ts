@@ -24,8 +24,9 @@ export default defineNuxtModule<Options>({
         const chunksDir = join(cacheDir, "chunks");
 
         const idsPath = join(cacheDir, "ids.json");
-        const idsText = await readFile(idsPath, "utf-8").catch(() => "[]");
-        const cacheIds = new Set(JSON.parse(idsText));
+        const cacheIds = new Set(
+            await readFile(idsPath, "utf-8").then(JSON.parse).catch(() => []),
+        );
 
         const pages = Math.ceil(ids.size / options.sizes!);
 

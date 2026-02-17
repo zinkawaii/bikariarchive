@@ -10,8 +10,7 @@ import type { JArticle, JChapter } from "../../src/types/article";
 
 export async function createArticle() {
     const path = resolveRoot("/.data/json/article.json");
-    const file = await readFile(path, "utf-8");
-    const meta = JSON.parse(file) as JArticle;
+    const meta = await readFile(path, "utf-8").then<JArticle>(JSON.parse);
 
     const novels = Object.entries(meta).map(([id, info]) => ({ label: info.title, value: id }));
 

@@ -103,7 +103,7 @@ export default defineJEventHandler(async (event) => {
 
     //对被回复评论进行邮件通知
     if (email && email !== body.email) {
-        sendMail(CommentReply, {
+        sendEmail(CommentReply, {
             to: email,
             title: `@${body.nickname} 回复了您的评论`,
             props: {
