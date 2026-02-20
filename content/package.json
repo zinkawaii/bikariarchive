@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "prepare": "mkdir -p .vscode && cp ../.vscode/settings.json .vscode/settings.json"
+  },
+  "devDependencies": {
+    "@bikari/typescript-plugin": "workspace:",
+    "typescript": "catalog:build"
+  }
+}

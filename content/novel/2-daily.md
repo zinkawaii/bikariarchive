@@ -1,0 +1,22 @@
+---
+title: 真理笔记
+author: 山吹色御守
+type: blog
+tag:
+  - 日常
+  - 讨论
+  - 主观
+  - 意识流
+volumes:
+  - title: 日常相关
+    variant: story
+  - title: 梦境相关
+    variant: story
+  - title: 萌文化相关
+    variant: story
+  - title: 前端技术相关
+---
+
+# synopsis
+
+用于存放日常的一些想法。

@@ -6,7 +6,6 @@ import { expect, it } from "vitest";
 import compiler from "../src/remark/plugins/compiler";
 import emoji from "../src/remark/plugins/emoji";
 import frontmatter from "../src/remark/plugins/frontmatter";
-import interpolation from "../src/remark/plugins/interpolation";
 import ruby from "../src/remark/plugins/ruby";
 import slot from "../src/remark/plugins/slot";
 import type { Child, Element } from "../src/remark/types";
@@ -89,30 +88,6 @@ it("slot", async () => {
             bar: [],
         }],
     });
-});
-
-it("interpolation", async () => {
-    const processor = unified()
-        .use(parse)
-        .use(frontmatter)
-        .use(interpolation)
-        .use(rehype)
-        .use(compiler);
-
-    const { body } = await process(processor, `
-        ---
-        foo:
-          bar:
-            - baz: ...
-        ---
-        [...] {{ foo.bar[0].baz }} [...]
-    `);
-    const children = tryGetChildren(body.children[0], "p");
-
-    expect(children).toEqual([{
-        type: "text",
-        value: "[...] ... [...]",
-    }]);
 });
 
 async function process<T extends CompileResults | undefined>(

@@ -1,6 +1,7 @@
 {
   "name": "@bikari/article",
   "type": "module",
+  "private": true,
   "scripts": {
     "test": "vitest",
     "new": "unrun scripts/new/index.ts"
@@ -9,17 +10,16 @@
     "defu": "catalog:utils",
     "github-slugger": "catalog:utils",
     "kerria": "catalog:markdown",
-    "mdast-util-frontmatter": "catalog:markdown",
     "mdast-util-gfm-footnote": "catalog:markdown",
     "mdast-util-gfm-strikethrough": "catalog:markdown",
     "mdast-util-to-string": "catalog:markdown",
-    "micromark-extension-frontmatter": "catalog:markdown",
     "micromark-extension-gfm-footnote": "catalog:markdown",
     "micromark-extension-gfm-strikethrough": "catalog:markdown",
     "micromark-util-symbol": "catalog:markdown",
     "pathe": "catalog:utils",
     "propathy": "catalog:utils",
     "remark-breaks": "catalog:markdown",
+    "remark-frontmatter": "catalog:markdown",
     "remark-math": "catalog:markdown",
     "remark-mdc": "catalog:markdown",
     "remark-parse": "catalog:markdown",

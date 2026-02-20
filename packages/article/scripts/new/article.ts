@@ -85,7 +85,7 @@ async function createNovel(chapters: JChapter[]) {
     const order = String(chapters.length).padStart(2, "0");
 
     return {
-        fileName: `${order}-${index}.mdz`,
+        fileName: `${order}-${index}.md`,
         frontmatter: {
             title,
             draft: true,
@@ -108,7 +108,7 @@ async function createBlog(chapters: JChapter[]) {
     const order = chapters.filter((chapter) => chapter.index.startsWith(short)).length;
 
     return {
-        fileName: `${short + order}.mdz`,
+        fileName: `${short + order}.md`,
         frontmatter: {
             title,
             abbrlink: randomBytes(4).toString("hex").slice(0, 7),

@@ -12,7 +12,6 @@ import compiler from "./plugins/compiler";
 import emoji from "./plugins/emoji";
 import footnote from "./plugins/footnote";
 import frontmatter from "./plugins/frontmatter";
-import interpolation from "./plugins/interpolation";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
@@ -36,7 +35,6 @@ export async function parseArticle<T>(text: string) {
         .use(mdc)
         .use(emoji)
         .use(footnote)
-        .use(interpolation)
         .use(math)
         .use(ruby)
         .use(slug)
@@ -65,7 +63,6 @@ export async function parseEntry<T>(text: string) {
         })
         .use(mdc)
         .use(emoji)
-        .use(interpolation)
         .use(math)
         .use(ruby)
         .use(strikethrough)
@@ -73,7 +70,7 @@ export async function parseEntry<T>(text: string) {
         .use(slot);
 
     //文本预处理
-    text = [...generateSlottedText(text)].join("");
+    text = generateSlottedText(text);
 
     const result = await processor.process(text);
     const [attributes, ...drafts] = result.data.frontmatters as T[];
@@ -113,23 +110,25 @@ export async function parseComment(text: string) {
     return result.result;
 }
 
-function* generateSlottedText(text: string) {
-    let i = 0;
-    let lastIndex = 0;
-    for (const match of text.matchAll(/(?<=\n)---(?=\n|$)/g)) {
-        const { index } = match;
-        if (i % 2 === 0) {
-            yield text.slice(lastIndex, index + 3);
-            yield "\n\n::slots";
-            lastIndex = index + 3;
-        }
-        else {
-            yield text.slice(lastIndex, index);
-            yield "::\n\n";
-            lastIndex = index;
-        }
-        i++;
+function generateSlottedText(source: string) {
+    const start = source.match(/(?<=\n---\n)/)?.index ?? 0;
+    let text = "";
+
+    text += source.slice(0, start);
+    text += `\n::slots\n`;
+
+    const match = source.match(/^::draft\n(---[\s\S]*?\n---)/m);
+    if (match) {
+        text += source.slice(start, match.index);
+        text += "::\n\n";
+        text += match[1];
+        text += "\n\n::slots";
+        text += source.slice(match.index! + match[0].length);
     }
-    yield text.slice(lastIndex);
-    yield "\n::";
+    else {
+        text += source.slice(start);
+        text += "\n::";
+    }
+
+    return text.replaceAll(/(?<=\n#) \b/g, "");
 }

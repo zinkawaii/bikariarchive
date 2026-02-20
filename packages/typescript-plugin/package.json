@@ -1,0 +1,28 @@
+{
+  "name": "@bikari/typescript-plugin",
+  "type": "module",
+  "private": true,
+  "main": "./dist/index.cjs",
+  "scripts": {
+    "dev": "tsdown -w --sourcemap",
+    "build": "tsdown"
+  },
+  "dependencies": {
+    "@volar/language-core": "catalog:volar",
+    "@volar/typescript": "catalog:volar",
+    "pathe": "catalog:utils",
+    "picomatch": "catalog:utils",
+    "remark-frontmatter": "catalog:markdown",
+    "remark-mdc": "catalog:markdown",
+    "remark-parse": "catalog:markdown",
+    "unified": "catalog:markdown",
+    "unist-util-visit": "catalog:markdown",
+    "yaml": "catalog:utils"
+  },
+  "devDependencies": {
+    "@types/picomatch": "catalog:types",
+    "@zinkawaii/tsconfig": "catalog:types",
+    "tsdown": "catalog:build",
+    "typescript": "catalog:build"
+  }
+}

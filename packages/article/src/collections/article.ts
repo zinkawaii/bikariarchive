@@ -39,13 +39,13 @@ export default createKerria("Article", () => {
         folders: [
             "novel",
         ],
-        ext: ".mdz",
+        ext: ".md",
         deep: false,
         async parse(path) {
             //处理文件
             const file = await readFile(path, "utf-8");
             const { attributes } = await parseEntry<NovelFrontmatter>(file);
-            const [order, novel] = basename(path, ".mdz").split("-");
+            const [order, novel] = basename(path, ".md").split("-");
 
             //写入缓存
             return {
@@ -78,7 +78,7 @@ export default createKerria("Article", () => {
         folders: [
             "novel",
         ],
-        ext: ".mdz",
+        ext: ".md",
         skip: 1,
         async parse(path, info) {
             //处理文件
@@ -94,7 +94,7 @@ export default createKerria("Article", () => {
             const match = basename(resolve(path, "..")).match(/^(.*?)\.(\d+)$/)!;
             const novel = match[1];
             const volume = Number(match[2]);
-            const name = basename(path, ".mdz");
+            const name = basename(path, ".md");
 
             //简介转换
             const firstChild = body.children[0];

@@ -1,15 +1,13 @@
 {
-  "material-icon-theme.files.customClones": [
-    {
-      "base": "markdown",
-      "color": "#FA565D",
-      "fileExtensions": [
-        "mdz"
-      ],
-      "name": "mdz"
-    }
-  ],
   "material-icon-theme.folders.associations": {
     "novel": "docs"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "vue.server.includeLanguages": [
+    "mdc",
+    "vue"
+  ],
+  "files.exclude": {
+    "content/{.vscode,node_modules}": true
   }
 }

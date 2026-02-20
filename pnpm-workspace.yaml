@@ -1,16 +1,25 @@
 shamefullyHoist: true
 shellEmulator: true
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - chokidar@4.0.3
+  - semver@6.3.1
 
 packages:
+  - content
   - packages/*
 
 overrides:
-  vite: 8.0.0-beta.10
+  rolldown: ^1.0.0-rc.5
+  vite: 8.0.0-beta.15
 
 patchedDependencies:
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
 
 catalogs:
+  build:
+    tsdown: ^0.20.3
+    typescript: ^5.9.3
   css:
     sass-embedded: ^1.97.3
   database:
@@ -25,15 +34,14 @@ catalogs:
     stylelint: ^17.0.0
   markdown:
     kerria: ^0.4.2
-    mdast-util-frontmatter: ^2.0.1
     mdast-util-gfm-footnote: ^2.1.0
     mdast-util-gfm-strikethrough: ^2.0.0
     mdast-util-to-string: ^4.0.0
-    micromark-extension-frontmatter: ^2.0.0
     micromark-extension-gfm-footnote: ^2.1.0
     micromark-extension-gfm-strikethrough: ^2.1.0
     micromark-util-symbol: ^2.0.1
     remark-breaks: ^4.0.0
+    remark-frontmatter: ^5.0.0
     remark-math: ^6.0.0
     remark-mdc: ^3.10.0
     remark-parse: ^11.0.0
@@ -55,6 +63,8 @@ catalogs:
   test:
     vitest: ^4.0.18
   types:
+    "@types/node": ^25.3.0
+    "@types/picomatch": ^4.0.2
     "@zinkawaii/tsconfig": ^0.0.2
   utils:
     "@clack/prompts": ^0.11.0
@@ -70,6 +80,7 @@ catalogs:
     hookable: ^6.0.1
     katex: ^0.16.27
     pathe: ^2.0.3
+    picomatch: ^4.0.3
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
     shiki: ^3.21.0
@@ -82,6 +93,9 @@ catalogs:
     uqr: ^0.1.2
     yaml: ^2.8.2
     zfeed: ^0.2.4
+  volar:
+    "@volar/language-core": 2.4.27
+    "@volar/typescript": 2.4.27
   vue:
     "@vitejs/plugin-vue": ^6.0.3
     "@vueuse/core": ^14.1.0
@@ -95,8 +109,5 @@ catalogs:
 
 onlyBuiltDependencies:
   - "@parcel/watcher"
-  - cn-font-split
   - esbuild
-  - koffi
-  - protobufjs
   - sharp

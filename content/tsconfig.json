@@ -1,36 +1,44 @@
 {
   "extends": "@zinkawaii/tsconfig",
-  "mdz": {
-    "mappings": [
+  "compilerOptions": {
+    "paths": {
+      "@bikari/article": ["../packages/article/src"],
+    },
+    "plugins": [
       {
-        "frontmatter": ["@bikari/article", "JEntry"],
-        "patterns": [
-          "./area/*",
-          "./character/*",
-          "./concept/*"
-        ]
-      },
-      {
-        "frontmatter": ["@bikari/article", "IntelFrontmatter"],
-        "patterns": [
-          "./intel/*"
-        ]
-      },
-      {
-        "frontmatter": ["@bikari/article", "NovelFrontmatter"],
-        "patterns": [
-          "./novel/*"
-        ]
-      },
-      {
-        "frontmatter": ["@bikari/article", "ArticleFrontmatter"],
-        "patterns": [
-          "./novel/*/*"
+        "name": "@bikari/typescript-plugin",
+        "mappings": [
+          {
+            "frontmatter": ["@bikari/article", "JEntry"],
+            "patterns": [
+              "./area/*",
+              "./character/*",
+              "./concept/*"
+            ]
+          },
+          {
+            "frontmatter": ["@bikari/article", "IntelFrontmatter"],
+            "patterns": [
+              "./intel/*"
+            ]
+          },
+          {
+            "frontmatter": ["@bikari/article", "NovelFrontmatter"],
+            "patterns": [
+              "./novel/*"
+            ]
+          },
+          {
+            "frontmatter": ["@bikari/article", "ArticleFrontmatter"],
+            "patterns": [
+              "./novel/*/*"
+            ]
+          }
         ]
       }
     ]
   },
   "include": [
-    "./**/*.mdz"
+    "./**/*.md"
   ]
 }

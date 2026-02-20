@@ -1,0 +1,17 @@
+---
+title: 虚幻的幸福
+author: 山吹色御守
+type: novel
+tag:
+  - 纯爱
+cover: /garden/illustration/utakata_1.webp
+volumes:
+  - title: 伊始卷
+    cover: /garden/illustration/utakata_1.webp
+---
+
+# synopsis
+
+有些人只拥吻影子，于是只拥有幸福的幻影——
+
+但对我来说，那样就足够了。

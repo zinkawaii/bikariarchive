@@ -25,7 +25,7 @@ export default createKerria("Update", () => {
         folders: [
             "update",
         ],
-        ext: ".mdz",
+        ext: ".md",
         async parse(path, info) {
             //处理文件
             const file = await readFile(path, "utf-8");
@@ -78,7 +78,7 @@ export default createKerria("Update", () => {
             await info.output(path, updates);
 
             return {
-                year: Number(basename(path, ".mdz")),
+                year: Number(basename(path, ".md")),
             };
         },
         cache(cache) {

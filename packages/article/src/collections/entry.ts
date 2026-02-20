@@ -110,12 +110,12 @@ export default createKerria("Entry", () => {
         folders: [
             "intel",
         ],
-        ext: ".mdz",
+        ext: ".md",
         async parse(path) {
             //处理文件
             const file = await readFile(path, "utf-8");
             const { attributes } = await parseEntry<IntelNode>(file);
-            const [order, abbr] = basename(path, ".mdz").split("-");
+            const [order, abbr] = basename(path, ".md").split("-");
 
             //写入缓存
             return {
@@ -147,7 +147,7 @@ export default createKerria("Entry", () => {
             "character",
             "concept",
         ],
-        ext: ".mdz",
+        ext: ".md",
         async parse(path, info) {
             //处理文件
             const file = await readFile(path, "utf-8");
@@ -172,7 +172,7 @@ export default createKerria("Entry", () => {
             await info.output(path, attributes);
 
             //写入数据
-            const name = basename(path, ".mdz");
+            const name = basename(path, ".md");
             const folder = basename(info.folders.find((dir) => path.startsWith(dir))!);
 
             //提取超能力信息
