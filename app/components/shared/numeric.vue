@@ -25,7 +25,7 @@
     let oldValue: number, oldDisplayValue: string;
 
     //响应源数据变化
-    watchImmediate(modelValue, (val: number/* FIXME */) => {
+    watchImmediate(modelValue, (val: number) => {
         if (val !== oldValue) {
             oldDisplayValue = String(val);
             oldValue = val;
@@ -71,7 +71,9 @@
         if (props.trim) {
             d = d.replace(/0+$/, "");
         }
-        d === "." && (d = "");
+        if (d === ".") {
+            d = "";
+        }
 
         //规整格式
         displayValue.value = i + d;

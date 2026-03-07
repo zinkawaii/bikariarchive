@@ -10,7 +10,6 @@ export default defineEventHandler(async (event: H3Event) => {
     });
 
     const config = useRuntimeConfig();
-    const currentDate = new Date();
 
     const arts = Object.values(Article.meta)
         .flatMap(({ chapters }) => chapters)
@@ -33,7 +32,7 @@ export default defineEventHandler(async (event: H3Event) => {
         stylesheet: "/feed/template.xsl",
         image: `https://${config.public.domain}${config.public.avatar}`,
         favicon: `https://${config.public.domain}${config.public.favicon}`,
-        copyright: `© 2022-${currentDate.getFullYear()} KazariEX`,
+        copyright: `© 2022-${new Date().getFullYear()} KazariEX`,
         updatedAt: new Date(arts[0].updateDate),
         author: {
             name: "KazariEX",

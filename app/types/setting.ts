@@ -7,4 +7,6 @@ export interface Settings {
     "ui-collapse": boolean;
 }
 
-export type SettingField<T = any> = keyof PickAsType<Settings, T>;
+export type SettingField<T = any> = keyof {
+    [K in keyof Settings as Settings[K] extends T ? K : never]: void;
+};

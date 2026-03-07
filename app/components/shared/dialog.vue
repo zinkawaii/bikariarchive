@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-    defineProps<{
-        isOpening?: boolean;
-    }>();
-    const emit = defineEmits<{
-        close: [];
-    }>();
+    import type { ModalEmits, ModalProps } from "#modals";
+
+    defineProps<ModalProps>();
+    const emit = defineEmits<ModalEmits>();
 
     //按下 ESC 键关闭
     useEventListener("keydown", (event) => {
@@ -16,7 +14,7 @@
 
 <template>
     <transition-scale>
-        <div v-if="isOpening" class="mb-dialog">
+        <div v-if="open" class="mb-dialog">
             <div class="dialog-wrapper edge-fades-y no-scrollbar">
                 <slot></slot>
             </div>

@@ -36,23 +36,18 @@ export interface EntryIllustration {
     illustrator: string;
 }
 
-export type EntryTalentType = "超能力" | "体质" | "愿望";
-
-interface EntryTalentShared {
-    type: EntryTalentType;
-    content?: Child[];
-}
-
-export interface EntryTalentNouryoku extends EntryTalentShared {
+export interface EntryTalentNouryoku {
     type: "超能力";
     name: EntryName;
     star: number;
     class: string[];
+    content?: Child[];
 }
 
-export interface EntryTalentGeneral extends EntryTalentShared {
+export interface EntryTalentGeneral {
     type: "体质" | "愿望";
     name: string;
+    content?: Child[];
 }
 
 export type EntryTalent = EntryTalentNouryoku | EntryTalentGeneral;

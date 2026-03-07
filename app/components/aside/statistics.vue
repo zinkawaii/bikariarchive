@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import { Temporal } from "temporal-polyfill";
+    import type { RenderFunction } from "vue";
 
     const articles = computed(() => {
         return Object.values(Article.meta).flatMap(({ chapters }) => chapters);
@@ -7,7 +8,7 @@
 
     const items: {
         label: string;
-        text: () => any;
+        text: RenderFunction;
     }[] = [
         {
             label: "营业时长",

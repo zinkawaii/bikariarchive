@@ -150,7 +150,7 @@
         composedPath.value = event.composedPath();
 
         //显示菜单
-        contextMenuStore.open();
+        contextMenuStore.open = true;
 
         //阻止原生菜单
         event.preventDefault();
@@ -172,8 +172,8 @@
 
     //鼠标按下时
     useEventListener("mousedown", (event) => {
-        if (contextMenuStore.isOpening && !event.composedPath().includes(rootEl.value!)) {
-            contextMenuStore.close();
+        if (contextMenuStore.open && !event.composedPath().includes(rootEl.value!)) {
+            contextMenuStore.open = false;
         }
     });
 
@@ -185,7 +185,7 @@
 
 <template>
     <transition-scale :duration="250" @after-leave="cleanup">
-        <div v-show="contextMenuStore.isOpening" ref="root" class="z-context-menu content-widget">
+        <div v-show="contextMenuStore.open" ref="root" class="z-context-menu content-widget">
             <menu class="menu-tools">
                 <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
                     <iconify :name="icon"/>

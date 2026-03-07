@@ -1,8 +1,10 @@
 import { article, entry, update } from "../packages/article/src";
 
-article.build();
-entry.build();
-update.build();
+await Promise.all([
+    article.build(),
+    entry.build(),
+    update.build(),
+]);
 
 if (process.env.NODE_ENV === "development") {
     article.watch();

@@ -3,7 +3,7 @@
 
     const props = defineProps<{
         name: string;
-        iconInfo: ToastIconInfo;
+        icon: ToastIconInfo;
         message: string;
     }>();
 
@@ -22,7 +22,7 @@
 <template>
     <li class="toast-item" @click="remove">
         <p class="toast-content">
-            <iconify :name="iconInfo.name" size="20" :style="{ color: iconInfo.color }"/>
+            <iconify :name="icon.name" size="20" :style="{ color: icon.color }"/>
             <span>{{ message }}</span>
         </p>
         <div class="toast-progress"></div>

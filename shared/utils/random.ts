@@ -20,7 +20,7 @@ export function randomItem<T>(arr: T[]) {
 }
 
 //获取多个数组的同下标随机项
-export function randomItems<T extends any[][]>(...arrs: T) {
+export function randomItems<T extends unknown[][]>(...arrs: T) {
     const length = Math.min(...arrs.map((arr) => arr.length));
     const i = randomInt(0, length);
     return arrs.map((arr) => arr[i]) as {

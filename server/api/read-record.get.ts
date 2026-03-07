@@ -25,13 +25,13 @@ export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => 
     const total = await ReadRecordModel.countDocuments();
 
     const qRecords = await ReadRecordModel.find()
-    .sort({ _id: -1 })
-    .skip((page - 1) * sizes)
-    .limit(sizes)
-    .populate<{
-        _id: string;
-        user: { uid: number };
-    }>({ path: "user", select: "uid" });
+        .sort({ _id: "desc" })
+        .skip((page - 1) * sizes)
+        .limit(sizes)
+        .populate<{
+            _id: string;
+            user: { uid: number };
+        }>({ path: "user", select: "uid" });
 
     res.total = total;
     res.sizes = sizes;

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { animate } from "animejs";
+    import { animate, stagger } from "animejs";
     import type { ImgHTMLAttributes } from "vue";
     import { LazyBikariyaImageViewer } from "#components";
 
@@ -22,12 +22,8 @@
     const modalStore = useModalStore();
 
     const imgComp = useTemplateRef("img");
-    const imgEl = computed<HTMLImageElement>(() => imgComp.value?.imgEl);
-
     const charEl = useTemplateRef("char");
-    const tagEls = computed(() => {
-        return [...charEl.value?.children ?? []].reverse();
-    });
+    const imgEl = computed<HTMLImageElement>(() => imgComp.value?.imgEl);
 
     //角色列表
     const characters = computed(() => {
@@ -65,7 +61,7 @@
         target: imgEl.value!,
         async onClose() {
             await close();
-            if (tagEls.value.length) {
+            if (charEl.value?.children.length) {
                 displayCharacters();
             }
         },
@@ -84,15 +80,12 @@
 
     //触发回弹动画
     function displayCharacters() {
-        for (let i = 0; i < tagEls.value.length; i++) {
-            const el = tagEls.value[i];
-            animate(el, {
-                y: [42, 0],
-                delay: i * 50,
-                duration: 400,
-                ease: "outBack",
-            });
-        }
+        animate(charEl.value?.children ?? [], {
+            y: [42, 0],
+            delay: stagger(50, { reversed: true }),
+            duration: 400,
+            ease: "outBack",
+        });
     }
 </script>
 

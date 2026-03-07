@@ -2,6 +2,7 @@
     const toastStore = useToastStore();
 
     const toastList = computed(() => {
+        // eslint-disable-next-line e18e/prefer-array-to-reversed
         return [...toastStore.toasts].reverse();
     });
 </script>
@@ -12,7 +13,7 @@
             v-for="[name, { icon, message }] in toastList"
             :key="name"
             :name
-            :icon-info="icon"
+            :icon
             :message
         />
     </transition-group>

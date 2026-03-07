@@ -1,13 +1,13 @@
 {
+  "files.exclude": {
+    "content/{.vscode,node_modules}": true
+  },
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "material-icon-theme.folders.associations": {
     "novel": "docs"
   },
-  "typescript.tsdk": "node_modules/typescript/lib",
   "vue.server.includeLanguages": [
     "mdc",
     "vue"
-  ],
-  "files.exclude": {
-    "content/{.vscode,node_modules}": true
-  }
+  ]
 }

@@ -64,22 +64,25 @@
         &::before {
             content: "";
             position: absolute;
-            top: 0;
+            inset: 0 0 0 -18px;
             width: 2px;
-            height: 100%;
-            background-image: linear-gradient(var(--color-theme-dark) 18px, transparent 0, transparent 30px, var(--color-theme-dark) 0);
-            translate: -18px;
+            background-image:
+                linear-gradient(
+                    var(--color-theme-dark) 23px,
+                    transparent 0,
+                    transparent 36px,
+                    var(--color-theme-dark) 0
+                );
         }
 
         &::after {
             content: "";
             position: absolute;
-            top: 17px;
+            inset: 22px 0 0 -24px;
             width: 14px;
             aspect-ratio: 1;
             border: 2px solid var(--color-theme-dark);
             border-radius: var(--rounded-full);
-            translate: -24px;
         }
     }
 

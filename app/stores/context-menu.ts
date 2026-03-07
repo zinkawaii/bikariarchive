@@ -2,7 +2,7 @@ import { notNullish } from "@vueuse/core";
 import type { ContextMenuGroup, ContextMenuItem } from "~/types/context-menu";
 
 export const useContextMenuStore = defineStore("context-menu", () => {
-    const isOpening = ref(false);
+    const open = ref(false);
     const extraGroup = shallowRef<ContextMenuGroup>();
     const basicGroups = shallowReactive(new Set<ContextMenuGroup>());
 
@@ -40,29 +40,19 @@ export const useContextMenuStore = defineStore("context-menu", () => {
         });
     }
 
-    function open() {
-        isOpening.value = true;
-    }
-
-    function close() {
-        isOpening.value = false;
-    }
-
     return {
-        isOpening,
+        open,
         groups,
         clear,
         basic,
         extra,
-        open,
-        close,
     };
 
     //触发事件时关闭菜单
     function patchItems(items: ContextMenuItem[]) {
         for (const item of items) {
             const { action, children = [] } = item;
-            item.action &&= () => (action!(), close());
+            item.action &&= () => (action!(), open.value = false);
             patchItems(children);
         }
     }

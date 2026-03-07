@@ -16,21 +16,19 @@
         searchWord,
     });
 
-    const options = computed(() => {
-        return [
-            {
-                label: "全文检索",
-            },
-            {
-                label: "书名",
-                group: true,
-            },
-            ...Object.entries(Article.meta).map(([key, { title }]) => ({
-                label: title,
-                value: key,
-            })),
-        ];
-    });
+    const options = computed(() => [
+        {
+            label: "全文检索",
+        },
+        {
+            label: "书名",
+            group: true,
+        },
+        ...Object.entries(Article.meta).map(([key, { title }]) => ({
+            label: title,
+            value: key,
+        })),
+    ]);
 
     const { execute, status, data, error } = useLazyFetch("/api/search", {
         query: {

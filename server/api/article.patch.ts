@@ -41,7 +41,7 @@ export default defineJEventHandler<PatchArticleResponse>(async (event, res) => {
         });
 
         //获取阅读量
-        const qCounts = await ReadRecordModel.aggregate([
+        const qCounts = await ReadRecordModel.aggregate<{ count: number }>([
             {
                 $match: {
                     novel,

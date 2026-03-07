@@ -19,11 +19,11 @@
         records.value = val?.list ?? [];
     });
 
-    async function remove(item: any, i: number) {
+    async function remove(id: string, i: number) {
         await $fetch("/api/read-record", {
             method: "delete",
             body: {
-                id: item._id,
+                id,
             },
         });
 
@@ -71,7 +71,7 @@
                         <mb-button>
                             <iconify name="fa7-solid:pencil"/>
                         </mb-button>
-                        <mb-button @click="remove(item, i)">
+                        <mb-button @click="remove(item._id, i)">
                             <iconify name="fa7-solid:trash-can"/>
                         </mb-button>
                     </td>

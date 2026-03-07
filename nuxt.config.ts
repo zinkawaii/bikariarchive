@@ -95,9 +95,6 @@ export default defineNuxtConfig({
         "@vueuse/nuxt",
         "pinia-plugin-persistedstate/nuxt",
     ],
-    eslint: {
-        config: false,
-    },
     fonts: {
         provider: "google",
     },

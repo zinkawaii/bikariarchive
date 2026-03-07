@@ -3,7 +3,7 @@ import type { H3Event } from "h3";
 import type { CachedEventHandlerOptions } from "nitropack";
 
 interface Handler<T> {
-    (event: H3Event<Request>, res: T): Awaited<any>;
+    (event: H3Event<Request>, res: T): Awaited<unknown>;
 }
 
 const createHandler = <T>(handler: Handler<T>) => async (event: H3Event) => {

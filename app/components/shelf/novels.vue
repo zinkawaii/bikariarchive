@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { executeTransition } from "@vueuse/core";
+    import { transition } from "@vueuse/core";
 
     const shelfStore = useShelfStore();
     const { novel, novels } = storeToRefs(shelfStore);
@@ -52,7 +52,7 @@
     watch(currentNovelIdx, move);
 
     function move(index: number) {
-        executeTransition(translateX, translateX.value, index * width, {
+        transition(translateX, translateX.value, index * width, {
             duration: 400,
             transition: [0.25, 0.1, 0.25, 1],
             abort() {

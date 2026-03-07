@@ -1,4 +1,4 @@
-declare module "nuxt/app" {
+declare module "#app" {
     interface PageMeta {
         identity?: number;
         catalog?: boolean;

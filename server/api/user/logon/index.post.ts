@@ -47,7 +47,7 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
     }
 
     //验证成功，从数据库中删除临时数据
-    TempCaptchaModel.deleteOne({ email }).exec();
+    await TempCaptchaModel.deleteOne({ email }).exec();
 
     //UID
     const uid = createUid();
@@ -65,7 +65,7 @@ export default defineJEventHandler<GetLogonResponse>(async (event) => {
     const { hash, salt } = createSecret(password);
 
     //新增用户信息
-    UserDataModel.insertMany({
+    await UserDataModel.insertMany({
         uid,
         nickname,
         email,

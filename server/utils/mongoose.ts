@@ -9,14 +9,14 @@ export async function connectMongoose() {
     const config = useRuntimeConfig();
     const nitroApp = useNitroApp();
 
-    nitroApp.hooks.hook("close", () => {
-        mongoose.disconnect();
+    nitroApp.hooks.hook("close", async () => {
+        await mongoose.disconnect();
     });
 
     try {
         await mongoose.connect(config.mongoose.uri, config.mongoose.options);
     }
     catch (err) {
-        consola.error(`Failed to connect to MongoDB: ${err}`);
+        consola.error(`Failed to connect to MongoDB:`, err);
     }
 }

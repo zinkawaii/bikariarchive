@@ -42,18 +42,17 @@
     function update(el: HTMLElement) {
         const headingEls = el.querySelectorAll<HTMLHeadingElement>(`:where(h2, h3):not(.sr-only)`);
 
-        flatHeadings.value = [...headingEls]
-            .map((el) => ({
-                element: el,
-                title: el.textContent!,
-                link: "#" + el.id,
-                level: Number(el.tagName[1]),
-                order: "",
-                children: [],
-            }))
-            .filter((el) => el.link.length > 1 && el.level <= 3);
+        flatHeadings.value = Array.from(headingEls, (el) => ({
+            element: el,
+            title: el.textContent!,
+            link: "#" + el.id,
+            level: Number(el.tagName[1]),
+            order: "",
+            children: [],
+        })).filter(({ link, level }) => link.length > 1 && level <= 3);
 
         nestedHeadings.value = [];
+
         for (let i = 0; i < flatHeadings.value.length; i++) {
             const curr = flatHeadings.value[i];
             if (curr.level === 2) {

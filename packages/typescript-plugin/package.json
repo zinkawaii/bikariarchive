@@ -12,11 +12,11 @@
     "@volar/typescript": "catalog:volar",
     "pathe": "catalog:utils",
     "picomatch": "catalog:utils",
-    "remark-frontmatter": "catalog:markdown",
-    "remark-mdc": "catalog:markdown",
-    "remark-parse": "catalog:markdown",
-    "unified": "catalog:markdown",
-    "unist-util-visit": "catalog:markdown",
+    "remark-frontmatter": "catalog:content",
+    "remark-mdc": "catalog:content",
+    "remark-parse": "catalog:content",
+    "unified": "catalog:content",
+    "unist-util-visit": "catalog:content",
     "yaml": "catalog:utils"
   },
   "devDependencies": {

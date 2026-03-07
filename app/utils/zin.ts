@@ -1,3 +1,9 @@
+interface DebounceOptions {
+    delay?: number;
+    immediate?: boolean;
+    title?: string;
+}
+
 export const Zin = new class Z {
     //视口宽度常量
     MAX_WINDOW_SIZE = 1024;
@@ -5,33 +11,36 @@ export const Zin = new class Z {
     MIN_WINDOW_SIZE = 425;
 
     //防抖（立即执行）
-    debounce<T extends unknown[]>(func: (...args: T) => void, {
-        delay = 1500,
-        immediate = true,
-        title = "",
-    } = {}) {
+    debounce<T extends unknown[]>(func: (...args: T) => void, options: DebounceOptions = {}) {
+        const {
+            delay = 1500,
+            immediate = true,
+            title,
+        } = options;
+
         const toastStore = useToastStore();
         let timer: NodeJS.Timeout | undefined;
-        return <(this: unknown, ...args: T) => void> (
-            immediate
-            ? (...args) => {
+
+        return immediate
+            ? function(this: unknown, ...args: T) {
                 timer ? clearAndToast() : func.apply(this, args);
                 timer = setTimeout(() => {
                     timer = void 0;
                 }, delay);
             }
-            : (...args) => {
+            : function(this: unknown, ...args: T) {
                 timer && clearAndToast();
                 timer = setTimeout(() => {
                     func.apply(this, args);
                     timer = void 0;
                 }, delay);
-            }
-        );
+            };
 
         function clearAndToast() {
             clearTimeout(timer);
-            title && toastStore.info("[debounce]", `你的${title}速度太快了~`);
+            if (title !== void 0) {
+                toastStore.info("[debounce]", `你的${title}速度太快了~`);
+            }
         }
     }
 

@@ -25,7 +25,7 @@ export default defineNuxtModule({
             const entityRE = /randWordJnm(?<order>\d+(?:_kana)?)=new Array\((?<items>.*?)\)/g;
 
             const Jnm = Object.fromEntries(
-                [...text.matchAll(entityRE)].map((match) => {
+                Array.from(text.matchAll(entityRE), (match) => {
                     const { order, items } = match.groups!;
                     return [order, items.split(",").map((item) => item.slice(1, -1))];
                 }),

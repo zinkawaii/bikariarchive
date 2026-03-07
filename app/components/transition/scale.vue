@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { animate, type EasingParam } from "animejs";
-    import type { BaseTransitionProps } from "vue";
+    import type { TransitionProps } from "vue";
 
     const props = withDefaults(defineProps<{
         scale?: number;
@@ -12,7 +12,7 @@
         ease: () => ["outBack", "inBack"],
     });
 
-    const onEnter: BaseTransitionProps["onEnter"] = async (el, done) => {
+    const onEnter: TransitionProps["onEnter"] = async (el, done) => {
         await animate(el, {
             opacity: [0, 1],
             scale: [props.scale, 1],
@@ -22,7 +22,7 @@
         done();
     };
 
-    const onLeave: BaseTransitionProps["onLeave"] = async (el, done) => {
+    const onLeave: TransitionProps["onLeave"] = async (el, done) => {
         await animate(el, {
             opacity: [1, 0],
             scale: [1, props.scale],

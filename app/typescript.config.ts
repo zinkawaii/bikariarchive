@@ -11,6 +11,10 @@ export default <NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig>> {
         compilerOptions: {
             ...shared,
         },
+        include: [
+            "../packages/*/*.ts",
+            "../scripts/**/*.ts",
+        ],
     },
     sharedTsConfig: {
         compilerOptions: {

@@ -1,9 +1,9 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.30.3",
   "scripts": {
-    "dev": "nuxt dev --no-qr",
+    "dev": "nuxt dev",
     "build": "nuxt build",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
@@ -39,7 +39,6 @@
     "@bikariya/modals": "catalog:nuxt",
     "@bikariya/shiki": "catalog:nuxt",
     "@iconify-json/fa7-solid": "catalog:iconify",
-    "@iconify-json/ri": "catalog:iconify",
     "@nuxt/devtools": "catalog:nuxt",
     "@nuxt/fonts": "catalog:nuxt",
     "@nuxt/icon": "catalog:nuxt",
@@ -64,6 +63,7 @@
     "stylelint": "catalog:lint",
     "svgo": "catalog:utils",
     "tinyglobby": "catalog:utils",
+    "typescript": "catalog:build",
     "unemail": "catalog:utils",
     "unrun": "catalog:utils",
     "vue-component-type-helpers": "catalog:vue",

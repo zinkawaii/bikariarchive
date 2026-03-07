@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import type { RuntimeConfig } from "@nuxt/schema";
 import { CommentDataModel } from "#server/models/CommentData";
 import { UserDataModel } from "#server/models/UserData";
 import CommentReply from "~/emails/comment-reply.vue";
@@ -22,15 +23,16 @@ export default defineJEventHandler(async (event) => {
     );
 
     //获取严格路径
-    const path = getStrictPath(body.path);
+    const path = getStrictPath(body.path) as keyof RuntimeConfig["comment"];
 
     //路径格式错误
-    if (!path) {
+    if (!path.startsWith("/")) {
         return 1;
     }
 
     //权限验证
-    validateIdentity(session.data, Reflect.get(config.comment, path)?.identity ?? 0);
+    const identity = config.comment[path]?.identity ?? 0;
+    validateIdentity(session.data, identity);
 
     //连接数据库
     await connectMongoose();

@@ -5,6 +5,7 @@
     "prepare": "mkdir -p .vscode && cp ../.vscode/settings.json .vscode/settings.json"
   },
   "devDependencies": {
+    "@bikari/article": "workspace:",
     "@bikari/typescript-plugin": "workspace:",
     "typescript": "catalog:build"
   }

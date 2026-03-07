@@ -8,13 +8,14 @@ const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
 export default createKerria("Update", () => {
     const meta = useLoad("update", {
-        out: ".data/json/update.json",
+        dist: ".data/json/update.json",
         defaultValue: {
             totalYears: new Set(),
         },
         output(val) {
             return {
-                totalYears: Array.from(val.totalYears).sort().reverse(),
+                // eslint-disable-next-line e18e/prefer-array-to-sorted
+                totalYears: [...val.totalYears].sort().reverse(),
             };
         },
     });

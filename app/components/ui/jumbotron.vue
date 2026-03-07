@@ -35,7 +35,13 @@
 <template>
     <transition @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
         <div v-if="$route.meta.jumbotron" class="z-jumbotron">
-            <nuxt-img class="jumbotron-image" src="/garden/jumbotron.webp" provider="cdn" alt="[jumbotron]"/>
+            <nuxt-img
+                class="jumbotron-image"
+                src="/garden/jumbotron.webp"
+                alt="[jumbotron]"
+                provider="cdn"
+                fetchpriority="high"
+            />
             <jumbotron-banner />
             <button class="jumbotron-skip" aria-label="跳转到主要内容" @click="toBottom">
                 <iconify name="fa7-solid:chevron-down"/>

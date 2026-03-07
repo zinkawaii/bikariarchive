@@ -2,26 +2,16 @@
     defineOptions({
         inheritAttrs: false,
     });
-    const props = defineProps<{
-        value?: string;
+    defineProps<{
         placeholder: string;
     }>();
     const modelValue = defineModel<string>();
     const error = defineModel<boolean>("error");
-
-    const inputValue = computed({
-        get() {
-            return modelValue.value ?? props.value;
-        },
-        set(val) {
-            (props.value === void 0) && (modelValue.value = val);
-        },
-    });
 </script>
 
 <template>
     <div class="meow-input">
-        <input class="input-entity" required title="" v-bind="$attrs" v-model="inputValue" @blur="error = false"/>
+        <input class="input-entity" placeholder="" v-bind="$attrs" v-model="modelValue" @blur="error = false"/>
         <span class="input-underline"></span>
         <span class="input-placeholder" :class="{ [`is-error`]: error }">{{ placeholder }}</span>
     </div>
@@ -47,7 +37,7 @@
             }
         }
 
-        &:where(:focus, :valid) {
+        &:where(:focus, :not(:placeholder-shown)) {
             ~ .input-placeholder {
                 top: -1em;
                 font-size: 12px;

@@ -27,13 +27,12 @@
     });
 
     let current = modelValue.value;
-    let width = 0;
-    let left = 0;
+    let rect: DOMRect;
 
     //鼠标拖动时
     usePointer(rootEl, {
         onPointerdown(event) {
-            ({ width, left } = rootEl.value!.getBoundingClientRect());
+            rect = rootEl.value!.getBoundingClientRect();
             emit("dragstart");
 
             //进度预变化
@@ -42,7 +41,7 @@
         onPointermove(event) {
             const { min, max, step } = props;
 
-            rate.value = clamp(0, (event.clientX - left) / width, 1);
+            rate.value = clamp(0, (event.clientX - rect.left) / rect.width, 1);
             current = rate.value * (max - min) + min;
 
             if (step) {

@@ -32,7 +32,7 @@ enum SourceKind {
 
 export default createKerria("Entry", () => {
     const metaInfo = useLoad("meta", {
-        out: ".data/json/intel.json",
+        dist: ".data/json/intel.json",
         defaultValue: {
             blocks: [],
             all: {},
@@ -81,11 +81,11 @@ export default createKerria("Entry", () => {
     });
 
     const mapInfo = useLoad("map", {
-        out: ".data/json/intmap.json",
+        dist: ".data/json/intmap.json",
     });
 
     const abilityInfo = useLoad("ability", {
-        out: ".data/json/ability.json",
+        dist: ".data/json/ability.json",
         output(val) {
             const items: Record<string, AbilityItem> = {};
             for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {

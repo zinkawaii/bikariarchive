@@ -46,9 +46,9 @@ export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
         path,
         parent: null,
     }, select)
-    .sort({ time: "desc" })
-    .skip((body.page - 1) * limit)
-    .limit(limit);
+        .sort({ time: "desc" })
+        .skip((body.page - 1) * limit)
+        .limit(limit);
 
     //获取子评论
     res.list = await Promise.all(
@@ -67,10 +67,10 @@ async function transformComment<T extends HydratedDocument<CommentDataSchema>>(
     users: Record<string, UserDataSchema>,
     identity: number,
 ): Promise<CommentData> {
-    let { mode, nickname = "", email, address } = item;
+    let { nickname = "", email, address } = item;
     let character = "游客";
 
-    if (mode === "user") {
+    if (item.mode === "user") {
         const key = String(item.user);
         const user = users[key] ??= (await item.populate<{
             user: UserDataSchema;
@@ -96,7 +96,7 @@ async function transformComment<T extends HydratedDocument<CommentDataSchema>>(
         children,
         content: item.content,
         time: item.time.toISOString(),
-        mode,
+        mode: item.mode,
         nickname,
         avatar: email ? generateAvatarUrl(email) : void 0,
         email: identity >= 9 ? email : void 0,

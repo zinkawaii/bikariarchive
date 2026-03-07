@@ -1,9 +1,6 @@
 {
   "extends": "@zinkawaii/tsconfig",
   "compilerOptions": {
-    "paths": {
-      "@bikari/article": ["../packages/article/src"],
-    },
     "plugins": [
       {
         "name": "@bikari/typescript-plugin",
