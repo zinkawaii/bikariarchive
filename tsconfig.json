@@ -17,6 +17,9 @@
     },
     {
       "path": "./packages/article/tsconfig.json"
+    },
+    {
+      "path": "./packages/typescript-plugin/tsconfig.json"
     }
   ],
   "files": []
