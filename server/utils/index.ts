@@ -1,5 +1,6 @@
 import { SHA256 } from "crypto-es";
 import { resolve } from "pathe";
+import { parsePath } from "ufo";
 
 //从根目录合并路径
 export function r(path: string) {
@@ -8,7 +9,7 @@ export function r(path: string) {
 
 //获取无尾斜杠路径
 export function getStrictPath(path: string) {
-    return path.split("?", 1)[0].split("#", 1)[0].replace(/[\\/]+$/, "");
+    return parsePath(path).pathname.replace(/\/$/, "");
 }
 
 //从邮箱生成头像链接

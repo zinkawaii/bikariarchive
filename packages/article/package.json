@@ -28,8 +28,10 @@
     "remark-parse": "catalog:content",
     "remark-rehype": "catalog:content",
     "temporal-polyfill": "catalog:utils",
+    "ufo": "catalog:utils",
     "unified": "catalog:content",
     "unist-util-visit": "catalog:content",
+    "video-extensions": "catalog:utils",
     "yaml": "catalog:utils"
   },
   "devDependencies": {

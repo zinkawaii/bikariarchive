@@ -2,7 +2,7 @@
     import { hyphenate } from "@vueuse/core";
     import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
     import type { VNodeChild } from "vue";
-    import { CommentCode, Iconify, MbCode, MbGallery, MbImage, MbMath, PlainLink, StoryHeading } from "#components";
+    import { CommentCode, Iconify, MbCode, MbGallery, MbImage, MbMath, MbVideo, PlainLink, StoryHeading } from "#components";
 
     const ariaRE = /^aria[A-Z]/;
 
@@ -13,6 +13,7 @@
         MbGallery,
         MbImage,
         MbMath,
+        MbVideo,
         PlainLink,
         StoryHeading,
     };
@@ -167,8 +168,13 @@
             font-weight: bold;
         }
 
-        :where(.mb-code, .mb-gallery, .mb-image, .mb-math) {
+        :where(.mb-code, .mb-gallery, .mb-image, .mb-math, .mb-video) {
             margin-block: 1em;
+        }
+
+        :where(.mb-image, .mb-video) {
+            width: fit-content;
+            margin-inline: auto;
         }
 
         :target {
@@ -264,8 +270,9 @@
                 padding-left: 1em;
             }
 
-            .mb-image {
+            :where(.mb-image, .mb-video) {
                 max-width: 411px;
+                margin-inline: 0;
             }
         }
     }

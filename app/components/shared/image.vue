@@ -121,7 +121,6 @@
 
     .image-entity {
         height: 100%;
-        margin: auto;
         object-fit: cover;
 
         &.is-absolute {

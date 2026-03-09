@@ -30,6 +30,7 @@
     "plain-shiki": "catalog:utils",
     "shiki": "catalog:utils",
     "temporal-polyfill": "catalog:utils",
+    "ufo": "catalog:utils",
     "uqr": "catalog:utils",
     "vue": "catalog:vue",
     "vue-router": "catalog:vue"

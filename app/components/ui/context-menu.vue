@@ -14,6 +14,9 @@
     const targetImageLink = computed(() => {
         return getClosestEl("img")?.src ?? "";
     });
+    const targetVideoLink = computed(() => {
+        return getClosestEl("video")?.src ?? "";
+    });
 
     function getClosestEl<T extends keyof HTMLElementTagNameMap>(tag: T) {
         const tagName = tag.toUpperCase();
@@ -83,6 +86,20 @@
                 icon: "fa7-solid:link",
                 action: () => {
                     copyText(targetImageLink.value, "链接已复制");
+                },
+            },
+        ],
+    });
+
+    contextMenuStore.basic({
+        title: "video",
+        when: targetVideoLink,
+        items: [
+            {
+                title: "复制链接",
+                icon: "fa7-solid:link",
+                action: () => {
+                    copyText(targetVideoLink.value, "链接已复制");
                 },
             },
         ],
