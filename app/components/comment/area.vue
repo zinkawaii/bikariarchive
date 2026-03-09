@@ -5,8 +5,7 @@
     const route = useRoute();
     const rootComp = useTemplateRef("root");
 
-    const page = ref(1);
-    const { comments, totalCount, mainCount, isEmpty } = storeToRefs(commentStore);
+    const { comments, totalCount, mainCount, isEmpty, page } = storeToRefs(commentStore);
 
     //相对视口懒加载
     let observer: UseIntersectionObserverReturn;
@@ -20,15 +19,10 @@
         //更新观测器
         observer = useIntersectionObserver(rootComp, ([{ isIntersecting }]) => {
             if (isIntersecting) {
-                commentStore.update(page.value);
+                commentStore.update();
                 observer.stop();
             }
         });
-    });
-
-    //切换页数时立即更新
-    watch(page, (val) => {
-        commentStore.update(val);
     });
 </script>
 

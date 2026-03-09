@@ -6,6 +6,7 @@ export const useCommentStore = defineStore("comment", () => {
     const mainCount = ref(0);
     const totalCount = ref(0);
     const isEmpty = ref(false);
+    const page = ref(1);
 
     const content = ref("");
     const nickname = ref("");
@@ -16,20 +17,30 @@ export const useCommentStore = defineStore("comment", () => {
     const modalStore = useModalStore();
     const toastStore = useToastStore();
 
+    //切换页数时立即更新
+    const handle = watch(page, update);
+
     //清空评论
     function clear() {
+        //暂停更新
+        handle.pause();
+
         comments.value = [];
         mainCount.value = 0;
         totalCount.value = 0;
         isEmpty.value = true;
+        page.value = 1;
     }
 
     //更新评论
-    async function update(page: number) {
+    async function update(next?: number) {
+        //恢复更新
+        handle.resume();
+
         const res = await $fetch("/api/comment", {
             query: {
                 path: route.path,
-                page,
+                page: next ?? page.value,
             },
         });
 
@@ -37,6 +48,10 @@ export const useCommentStore = defineStore("comment", () => {
         mainCount.value = res.mainCount;
         totalCount.value = res.totalCount;
         isEmpty.value = false;
+
+        if (next !== void 0) {
+            page.value = next;
+        }
     }
 
     //发送评论
@@ -70,7 +85,7 @@ export const useCommentStore = defineStore("comment", () => {
                     method,
                     body,
                 });
-                update(1);
+                update();
             }
             catch (err: any) {
                 const message = typeof err?.statusCode === "number" ? getter(err.statusCode) : String(err);
@@ -112,6 +127,7 @@ export const useCommentStore = defineStore("comment", () => {
         mainCount,
         totalCount,
         isEmpty,
+        page,
         nickname,
         email,
         address,
