@@ -264,7 +264,7 @@
                 padding-left: 1em;
             }
 
-            img {
+            .mb-image {
                 max-width: 411px;
             }
         }
