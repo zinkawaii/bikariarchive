@@ -95,7 +95,7 @@
             ref="img"
             class="image-entity"
             :class="{
-                [`is-absolute`]: align,
+                [`is-aligned`]: align,
                 [`cursor-pointer`]: viewable,
             }"
             :style
@@ -120,11 +120,11 @@
     }
 
     .image-entity {
-        height: 100%;
         object-fit: cover;
 
-        &.is-absolute {
+        &.is-aligned {
             position: absolute;
+            height: 100%;
         }
     }
 
@@ -133,9 +133,8 @@
         flex-wrap: wrap-reverse;
         justify-content: flex-end;
         gap: 8px;
-        position: absolute;
         overflow: hidden;
-        inset: auto 0 0;
+        margin-top: -50px;
         padding: 8px;
     }
 

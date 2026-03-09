@@ -12,6 +12,7 @@ import compiler from "./plugins/compiler";
 import emoji from "./plugins/emoji";
 import footnote from "./plugins/footnote";
 import frontmatter from "./plugins/frontmatter";
+import hoistImage from "./plugins/hoistImage";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
@@ -35,6 +36,7 @@ export async function parseArticle<T>(text: string) {
         .use(mdc)
         .use(emoji)
         .use(footnote)
+        .use(hoistImage)
         .use(math)
         .use(ruby)
         .use(slug)
@@ -63,6 +65,7 @@ export async function parseEntry<T>(text: string) {
         })
         .use(mdc)
         .use(emoji)
+        .use(hoistImage)
         .use(math)
         .use(ruby)
         .use(strikethrough)
@@ -100,6 +103,7 @@ export async function parseComment(text: string) {
         .use(parse)
         .use(breaks)
         .use(emoji)
+        .use(hoistImage)
         .use(math)
         .use(ruby)
         .use(strikethrough)

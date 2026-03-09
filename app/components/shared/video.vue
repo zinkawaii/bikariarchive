@@ -5,6 +5,7 @@
         src: VideoHTMLAttributes["src"];
         maxWidth?: VideoHTMLAttributes["width"];
         maxHeight?: VideoHTMLAttributes["height"];
+        poster?: VideoHTMLAttributes["poster"];
         caption?: string;
     }>();
 
@@ -19,7 +20,7 @@
 
 <template>
     <figure class="mb-video">
-        <video :style :src controls></video>
+        <video :style :src :poster controls></video>
         <figcaption v-if="caption" class="video-caption">{{ caption }}</figcaption>
     </figure>
 </template>

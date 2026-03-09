@@ -13,9 +13,13 @@
 <template>
     <mb-tab class="entry-illustration" :items>
         <template v-for="{ title, illustrator, src } in data" #[title]>
-            <mb-gallery :illustrator>
-                <mb-image :src alt="[illustration]"/>
-            </mb-gallery>
+            <mb-image :src alt="[illustration]"/>
+            <meow-table class="entry-illustrator" variant="div">
+                <dl>
+                    <dt>画师</dt>
+                    <dd>{{ illustrator }}</dd>
+                </dl>
+            </meow-table>
         </template>
     </mb-tab>
 </template>
@@ -24,5 +28,13 @@
     .entry-illustration {
         width: min(336px, 100%);
         margin-inline: auto;
+    }
+
+    .entry-illustrator {
+        --dt-fr: 0.6fr;
+
+        margin-top: 8px;
+        font-size: 14px;
+        text-align: center;
     }
 </style>
