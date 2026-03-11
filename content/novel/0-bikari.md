@@ -12,9 +12,10 @@ volumes:
   - title: 插画卷 雪女乐园
   - title: 第一卷 回廊波动
     cover: /garden/illustration/bikari_1.webp
-  - title: 第二卷 复数现实
+  - title: 第二卷 浮海之恋
+  - title: 第三卷 静海摇曳的远光
+  - title: 第四卷 复数现实
     cover: /garden/illustration/bikari_2.webp
-  - title: 第三卷 浮海之恋
 ---
 
 # synopsis
