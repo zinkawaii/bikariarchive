@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import type { RouteLocationNormalized } from "vue-router";
+
     const { title } = defineProps<{
         title: string;
     }>();
@@ -6,6 +8,12 @@
     definePageMeta({
         path: "/:title()",
         props: true,
+        middleware: (to: RouteLocationNormalized<"entry">) => {
+            if (to.params.title in Entry.meta.redirects) {
+                const title = Entry.meta.redirects[to.params.title];
+                return toEntry(title);
+            }
+        },
         catalog: true,
         comment: true,
     });
@@ -20,20 +28,24 @@
 
     const route = useRoute();
 
-    const isExist = computed(() => {
-        return Entry.meta.all.includes(title) || Entry.meta.drafts.includes(title);
+    const canonicalTitle = computed(() => {
+        return Entry.meta.redirects[title] ?? title;
+    });
+
+    const isExisted = computed(() => {
+        return canonicalTitle.value in Entry.meta.entries;
     });
 
     const { status, data } = useLazyFetch("/api/entry", {
         query: {
-            title,
+            title: canonicalTitle,
         },
-        immediate: isExist.value,
+        immediate: isExisted.value,
         watch: [Entry.meta],
     });
 
     //显示评论区
-    watch(isExist, (val) => {
+    watch(isExisted, (val) => {
         route.meta.comment = val;
     }, {
         immediate: import.meta.browser,
@@ -41,7 +53,7 @@
 </script>
 
 <template>
-    <meow-widget v-if="isExist">
+    <meow-widget v-if="isExisted">
         <header class="entry-header">
             <h1 class="entry-title">{{ data?.title ?? title }}</h1>
         </header>

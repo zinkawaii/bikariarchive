@@ -9,13 +9,13 @@
     });
 
     //是否存在
-    const isExist = computed(() => {
-        return Entry.meta.all.includes(titles.value[0]);
+    const isExisted = computed(() => {
+        return Entry.meta.entries[titles.value[0]];
     });
 </script>
 
 <template>
     <span class="entry-link">
-        <plain-link :danger="!isExist" :to="toEntry(titles[0])">{{ titles[1] }}</plain-link>
+        <plain-link :danger="!isExisted" :to="toEntry(titles[0])">{{ titles[1] }}</plain-link>
     </span>
 </template>

@@ -1,7 +1,7 @@
 export interface JIntel {
     blocks: IntelBlock[];
-    all: string[];
-    drafts: string[];
+    entries: Record<string, boolean>;
+    redirects: Record<string, string>;
 }
 
 export interface IntelNode<T = unknown> {

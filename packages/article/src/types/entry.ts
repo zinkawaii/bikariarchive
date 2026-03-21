@@ -3,6 +3,7 @@ import type { Child } from "../remark/types";
 export interface JEntry {
     title: string;
     draft?: boolean;
+    alias?: string[];
     summary?: Child[];
     brief?: EntryBrief;
     appearance?: EntryAppearance;

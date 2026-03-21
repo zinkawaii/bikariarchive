@@ -18,6 +18,6 @@ export default defineSitemapEventHandler(() => {
             ...volumes.map((vol, i) => `/book/${novel}.${i}`),
             ...chapters.map((art) => `/book/${novel}/${art.index}`),
         ]),
-        ...Entry.meta.all,
+        ...Object.keys(Entry.meta.entries),
     ].flat();
 });

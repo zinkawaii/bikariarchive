@@ -5,8 +5,8 @@ import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import { isDevelopment } from "../utils";
 import type { Child } from "../remark/types";
-import type { EntryDetail, EntryTalent, JEntry } from "../types/entry";
-import type { IntelNode } from "../types/intel";
+import type { EntryDetail, JEntry } from "../types/entry";
+import type { IntelNode, JIntel } from "../types/intel";
 
 interface AbilityInfo {
     name: string;
@@ -38,10 +38,19 @@ export default createKerria("Entry", () => {
             all: {},
         },
         output(val) {
-            const all: string[] = [];
-            const drafts: string[] = [];
-            for (const [name, draft] of Object.entries(val.all)) {
-                (draft ? drafts : all).push(name);
+            const entries: JIntel["entries"] = {};
+            const redirects: JIntel["redirects"] = {};
+
+            for (const [name, { draft, alias }] of Object.entries<{
+                draft: boolean;
+                alias?: string[];
+            }>(val.all)) {
+                entries[name] = !draft;
+                if (alias?.length) {
+                    for (const item of alias) {
+                        redirects[item] = name;
+                    }
+                }
             }
 
             const blocks = Object.entries<any>(structuredClone(val.blocks))
@@ -50,8 +59,8 @@ export default createKerria("Entry", () => {
 
             return {
                 blocks,
-                all,
-                drafts,
+                entries,
+                redirects,
             };
 
             //在生产环境下隐藏未知标题，修剪草稿词条
@@ -168,6 +177,23 @@ export default createKerria("Entry", () => {
             //转换数据
             transformDetails(attributes);
 
+            //提取超能力信息
+            const abilities: AbilityInfo[] = [];
+            for (const talent of attributes.talents ?? []) {
+                if (talent.type !== "超能力") {
+                    continue;
+                }
+
+                abilities.push({
+                    name: talent.name.zh,
+                    star: talent.star,
+                    class: talent.class,
+                });
+
+                attributes.alias ??= [];
+                attributes.alias.push(talent.name.zh);
+            }
+
             //写入文件
             await info.output(path, attributes);
 
@@ -175,21 +201,19 @@ export default createKerria("Entry", () => {
             const name = basename(path, ".md");
             const folder = basename(info.folders.find((dir) => path.startsWith(dir))!);
 
-            //提取超能力信息
-            const abilities = collectAbilities(attributes.talents ?? []);
-
             //写入缓存
             return {
                 name,
                 folder,
                 draft: attributes.draft,
+                alias: attributes.alias,
                 abilities,
             };
         },
         cache(cache) {
-            const { name, folder, draft, abilities } = cache;
+            const { name, folder, draft, alias, abilities } = cache;
 
-            metaInfo.value.all[name] = draft;
+            metaInfo.value.all[name] = { draft, alias };
             mapInfo.value[name] = folder;
             abilityInfo.value[name] = abilities;
         },
@@ -236,20 +260,4 @@ function transformDetails(attributes: JEntry) {
         }
     }
     attributes.details = details;
-}
-
-function collectAbilities(talents: EntryTalent[]) {
-    const abilities: AbilityInfo[] = [];
-    for (const talent of talents) {
-        if (talent.type !== "超能力") {
-            continue;
-        }
-
-        abilities.push({
-            name: talent.name.zh,
-            star: talent.star,
-            class: talent.class,
-        });
-    }
-    return abilities;
 }
