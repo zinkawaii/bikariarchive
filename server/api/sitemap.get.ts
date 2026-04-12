@@ -16,7 +16,12 @@ export default defineSitemapEventHandler(() => {
         ...totalYears.map((year) => `/update/${year}`),
         ...Object.entries(Article.meta).map(([novel, { volumes, chapters }]) => [
             ...volumes.map((vol, i) => `/book/${novel}.${i}`),
-            ...chapters.map((art) => `/book/${novel}/${art.index}`),
+            ...chapters.map((art) => ({
+                loc: `/book/${novel}/${art.index}`,
+                lastmod: art.updateDate !== Article.FARAWAY
+                    ? art.updateDate
+                    : void 0,
+            })),
         ]),
         ...Object.keys(Entry.meta.entries),
     ].flat();
