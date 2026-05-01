@@ -11,7 +11,6 @@
     "@volar/language-core": "catalog:volar",
     "@volar/typescript": "catalog:volar",
     "pathe": "catalog:utils",
-    "picomatch": "catalog:utils",
     "remark-frontmatter": "catalog:content",
     "remark-mdc": "catalog:content",
     "remark-parse": "catalog:content",
@@ -20,7 +19,6 @@
     "yaml": "catalog:utils"
   },
   "devDependencies": {
-    "@types/picomatch": "catalog:types",
     "@zinkawaii/tsconfig": "catalog:types",
     "tsdown": "catalog:build",
     "typescript": "catalog:build"

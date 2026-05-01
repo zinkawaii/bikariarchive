@@ -1,8 +1,7 @@
 /// <reference types="@volar/typescript" />
 
 import { type CodeMapping, forEachEmbeddedCode, type LanguagePlugin, type VirtualCode } from "@volar/language-core";
-import { dirname, join } from "pathe";
-import { isMatch } from "picomatch";
+import { dirname, join, matchesGlob } from "pathe";
 import frontmatter from "remark-frontmatter";
 import mdc from "remark-mdc";
 import parse from "remark-parse";
@@ -79,7 +78,7 @@ export class MdzVirtualCode implements VirtualCode {
         const { root, config } = context;
         outer: for (const mapping of config.mappings) {
             for (const pattern of mapping.patterns) {
-                if (isMatch(fileName, join(root, pattern))) {
+                if (matchesGlob(fileName, join(root, pattern))) {
                     options = mapping;
                     break outer;
                 }
