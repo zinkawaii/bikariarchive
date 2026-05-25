@@ -14,7 +14,6 @@ export default createKerria("Update", () => {
         },
         output(val) {
             return {
-                // eslint-disable-next-line e18e/prefer-array-to-sorted
                 totalYears: [...val.totalYears].sort().reverse(),
             };
         },

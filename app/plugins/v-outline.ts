@@ -9,6 +9,6 @@ declare module "vue" {
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.directive<HTMLElement>("outline", (el) => {
         const { hooks } = useHookStore();
-        hooks.callHook(`outline:update`, el);
+        hooks.callHook("outline:update", el);
     });
 });

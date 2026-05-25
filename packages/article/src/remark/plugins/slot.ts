@@ -10,7 +10,7 @@ export default function(this: Processor) {
         let frontmatter: Record<string, unknown> | undefined;
 
         visit(root as hast.Root, (node, index, parent) => {
-            if (index === void 0 || parent === void 0 || node.type !== "element") {
+            if (parent === void 0 || index === void 0 || node.type !== "element") {
                 return;
             }
             if (node.tagName === "frontmatter") {

@@ -1,5 +1,10 @@
 {
   "extends": "@zinkawaii/tsconfig",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  },
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"

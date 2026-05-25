@@ -2,7 +2,7 @@
   "name": "@bikari/typescript-plugin",
   "type": "module",
   "private": true,
-  "main": "./dist/index.cjs",
+  "main": "./index.cjs",
   "scripts": {
     "dev": "tsdown -w --sourcemap",
     "build": "tsdown"

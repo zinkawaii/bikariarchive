@@ -7,12 +7,12 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     const basicGroups = shallowReactive(new Set<ContextMenuGroup>());
 
     const filteredExtra = computed(() => {
-        return extraGroup.value && (toValue(extraGroup.value.when) ?? true) ? extraGroup.value : void 0;
+        return extraGroup.value && toValue(extraGroup.value.when ?? true) ? extraGroup.value : void 0;
     });
 
     const filteredBasics = computed(() => {
         return [...basicGroups].filter((group) => {
-            return (toValue(group.when) ?? true) && !filteredExtra.value?.shield?.includes(group.title);
+            return toValue(group.when ?? true) && !filteredExtra.value?.shield?.includes(group.title);
         });
     });
 
