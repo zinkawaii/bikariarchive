@@ -6,6 +6,7 @@ import { expect, it } from "vitest";
 import compiler from "../src/remark/plugins/compiler";
 import emoji from "../src/remark/plugins/emoji";
 import frontmatter from "../src/remark/plugins/frontmatter";
+import interpolation from "../src/remark/plugins/interpolation";
 import ruby from "../src/remark/plugins/ruby";
 import slot from "../src/remark/plugins/slot";
 import type { Child, Element } from "../src/remark/types";
@@ -28,6 +29,28 @@ it("emoji", async () => {
         props: {
             className: ["emoji"],
             name: "i-twemoji:face-with-monocle",
+        },
+        children: [],
+    }]);
+});
+
+it("interpolation", async () => {
+    const processor = unified()
+        .use(parse)
+        .use(interpolation)
+        .use(rehype)
+        .use(compiler);
+
+    const { body } = await process(processor, `
+        {{ foo.bar[0].baz }}
+    `);
+    const children = tryGetChildren(body.children[0], "p");
+
+    expect(children).toEqual([{
+        type: "element",
+        tag: "interpolation",
+        props: {
+            path: "foo.bar[0].baz",
         },
         children: [],
     }]);

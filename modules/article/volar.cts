@@ -1,5 +1,7 @@
 import type { Code, VueLanguagePlugin } from "@vue/language-core";
 
+const interpolationRE = /\{\{(?<exp>[^}]*)\}\}/g;
+
 const plugin: VueLanguagePlugin = ({ modules }) => [{
     version: 2.2,
     getEmbeddedCodes(fileName, ir) {
@@ -37,17 +39,26 @@ const plugin: VueLanguagePlugin = ({ modules }) => [{
             return;
         }
 
-        const articles: string[] = [];
-
-        for (const block of ir.customBlocks) {
-            if (block.type === "article") {
-                const name = block.attrs.name;
-                articles.push(typeof name === "string" ? name : "default");
-            }
-        }
-        if (!articles.length) {
+        const blocks = ir.customBlocks.filter((block) => block.type === "article");
+        if (!blocks.length) {
             return;
         }
+
+        for (const block of blocks) {
+            for (const match of block.content.matchAll(interpolationRE)) {
+                embeddedFile.content.push(`__VLS_ctx.`, [
+                    match.groups!.exp,
+                    block.name,
+                    match.index! + "{{".length,
+                    modules["@vue/language-core"].allCodeFeatures,
+                ], `;\n`);
+            }
+        }
+
+        const articles = blocks.map((block) => {
+            const name = block.attrs.name;
+            return typeof name === "string" ? name : "default";
+        });
 
         augmentContext(embeddedFile.content, [
             `{} as { $articles: Record<${

@@ -1,5 +1,6 @@
 <script lang="ts">
     import { hyphenate } from "@vueuse/core";
+    import { getProperty } from "propathy";
     import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
     import type { VNodeChild } from "vue";
     import { CommentCode, Iconify, MbCode, MbImage, MbMath, MbVideo, PlainLink, StoryHeading } from "#components";
@@ -32,6 +33,7 @@
         default: () => any;
     }>();
 
+    const currentInstance = getCurrentInstance()!;
     const resolvedComponents = computed(() => {
         const comps: Record<string, Component> = {};
         for (const [name, comp] of Object.entries({ ...globalComponents, ...props.components })) {
@@ -98,6 +100,13 @@
 
         function r(node: Child): VNodeChild {
             if (node.type === "element") {
+                if (node.tag === "interpolation") {
+                    return String(
+                        currentInstance.parent?.proxy
+                            ? getProperty(currentInstance.parent.proxy, node.props.path)
+                            : void 0,
+                    );
+                }
                 const { tag, comp, props, children } = transform(node, variant);
                 return comp
                     ? h(comp, props, { default: () => children.map(r) })
