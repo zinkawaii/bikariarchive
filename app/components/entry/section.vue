@@ -8,7 +8,8 @@
     <section class="entry-section">
         <h2 v-if="title" :id="title">{{ title }}</h2>
         <slot>
-            <novel-article>
+            <!-- eslint-disable-next-line vue/valid-v-slot -->
+            <novel-article #fallback>
                 <p>未知。</p>
             </novel-article>
         </slot>

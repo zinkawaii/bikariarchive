@@ -2,7 +2,7 @@
     import { hyphenate } from "@vueuse/core";
     import { getProperty } from "propathy";
     import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
-    import type { VNodeChild } from "vue";
+    import type { RenderFunction, VNodeChild } from "vue";
     import { CommentCode, Iconify, MbCode, MbImage, MbMath, MbVideo, PlainLink, StoryHeading } from "#components";
 
     const ariaRE = /^aria[A-Z]/;
@@ -30,7 +30,8 @@
         variant: "general",
     });
     const slots = defineSlots<{
-        default: () => any;
+        default?: (props: { render: RenderFunction }) => any;
+        fallback?: () => any;
     }>();
 
     const currentInstance = getCurrentInstance()!;
@@ -96,7 +97,7 @@
     function render() {
         const { body, variant } = props;
         const children = Array.isArray(body) ? body : body.children;
-        return children.length ? children.map(r) : slots.default?.();
+        return children.length ? children.map(r) : slots.fallback?.();
 
         function r(node: Child): VNodeChild {
             if (node.type === "element") {
@@ -121,7 +122,8 @@
 
 <template>
     <mb-primitive class="novel-text" :class="`is-${variant}`" as="article">
-        <render />
+        <slot v-if="slots.default" :render></slot>
+        <render v-else/>
     </mb-primitive>
 </template>
 

@@ -76,7 +76,8 @@
                     <button class="comment-nickname" @click="openUserInfo(data.parent)">{{ data.parent.nickname }}</button>
                 </template>
             </div>
-            <novel-article :body variant="comment">
+            <!-- eslint-disable-next-line vue/valid-v-slot -->
+            <novel-article #fallback :body variant="comment">
                 <p class="comment-sanitized">好像说了什么，但是被清除了</p>
             </novel-article>
             <div class="comment-info">

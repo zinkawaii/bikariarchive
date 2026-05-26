@@ -16,8 +16,10 @@
                 :art
                 :attrs="[`volume`, `word-count`, `publish-date`, `update-date`]"
             />
-            <novel-article v-if="art.excerpt" class="p-small text-secondary" as="p" :body="art.excerpt"/>
-            <p v-else class="p-small text-gray">这篇文章还没有简介。</p>
+            <!-- eslint-disable-next-line vue/valid-v-slot -->
+            <novel-article #fallback class="p-small text-secondary" as="p" :body="art.excerpt">
+                <span class="text-gray">这篇文章还没有简介。</span>
+            </novel-article>
         </div>
         <span class="tabular-thumb"></span>
     </nuxt-link>
