@@ -49,5 +49,5 @@ $themes: ("hatsusora", "ayame", "sakura");
 }
 
 @function cdn($path) {
-    @return url("https://cdn.bikari.top#{$path}");
+    @return url("/api/image/#{$path}");
 }

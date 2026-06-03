@@ -36,6 +36,8 @@
     "vue-router": "catalog:vue"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "catalog:utils",
+    "@aws-sdk/s3-request-presigner": "catalog:utils",
     "@bikariya/image-viewer": "catalog:nuxt",
     "@bikariya/modals": "catalog:nuxt",
     "@bikariya/shiki": "catalog:nuxt",

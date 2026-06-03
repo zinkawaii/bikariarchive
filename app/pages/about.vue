@@ -136,7 +136,7 @@
     .azur-cover {
         position: fixed;
         inset: 0;
-        background-image: cdn("/garden/background/maestrale.webp");
+        background-image: cdn("/background/maestrale.webp");
         background-position: center;
         background-size: cover;
         scale: -1 1;

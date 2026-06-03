@@ -4,6 +4,12 @@ export const serverConfig = {
     article: {
         key: "<!-- ??? -->",
     },
+    bitiful: {
+        baseUrl: "<!-- ??? -->",
+        bucket: "<!-- ??? -->",
+        accessKey: "<!-- ??? -->",
+        secretKey: "<!-- ??? -->",
+    },
     comment: {
         "/tweet": {
             identity: 9,

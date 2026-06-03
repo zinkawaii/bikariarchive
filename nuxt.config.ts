@@ -104,11 +104,8 @@ export default defineNuxtConfig({
     image: {
         provider: "none",
         providers: {
-            cdn: {
-                provider: "~/providers/cdn",
-                options: {
-                    baseUrl: "https://cdn.bikari.top",
-                },
+            api: {
+                provider: "~/providers/api",
             },
         },
     },

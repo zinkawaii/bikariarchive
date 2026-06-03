@@ -42,13 +42,13 @@
 
     .signer-innerworld {
         box-shadow: var(--box-shadow);
-        background-image: cdn("/garden/outerworld.webp");
+        background-image: cdn("/outerworld.webp");
         background-position: center 15%;
         background-size: cover;
         mask-image: linear-gradient(to var(--direction, right), white, transparent);
 
         @include dark {
-            background-image: cdn("/garden/innerworld.webp");
+            background-image: cdn("/innerworld.webp");
         }
 
         @include viewport(">xs") {
