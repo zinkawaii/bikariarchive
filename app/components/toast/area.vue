@@ -2,7 +2,6 @@
     const toastStore = useToastStore();
 
     const toastList = computed(() => {
-        // eslint-disable-next-line e18e/prefer-array-to-reversed
         return [...toastStore.toasts].reverse();
     });
 </script>

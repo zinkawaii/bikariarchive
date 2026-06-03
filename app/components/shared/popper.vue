@@ -10,26 +10,51 @@
         floating?: () => any;
     }>();
 
+    const id = useId();
+    const isOpen = ref(false);
+    let closeTimer: NodeJS.Timeout;
+
     const vnode = computed(() => {
         return slots.default?.()[0];
     });
+
+    function open() {
+        clearTimeout(closeTimer);
+        isOpen.value = true;
+    }
+
+    function close() {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+            isOpen.value = false;
+        }, 0);
+    }
 </script>
 
 <template>
-    <mb-primitive class="mb-popper">
+    <mb-primitive
+        class="mb-popper"
+        :style="{ anchorName: `--popper-${id}` }"
+        @pointerenter="open"
+        @pointerleave="close"
+    >
         <component :is="vnode" :aria-label="plaintext"/>
-        <div
-            v-if="slots.floating || plaintext"
-            class="popper-outer"
-            :class="[`is-${direction}`, {
-                [`is-plain`]: plaintext,
-            }]"
-        >
-            <div class="popper-inner">
-                <template v-if="plaintext">{{ plaintext }}</template>
-                <slot v-else name="floating"></slot>
-            </div>
-        </div>
+        <transition v-if="slots.floating || plaintext">
+            <teleport v-if="isOpen" to="body">
+                <div
+                    class="popper-outer"
+                    :class="`is-${direction}`"
+                    :style="{ positionAnchor: `--popper-${id}` }"
+                    @pointerenter="plaintext === void 0 && open()"
+                    @pointerleave="plaintext === void 0 && close()"
+                >
+                    <div class="popper-inner" :class="{ [`is-plaintext`]: plaintext }">
+                        <template v-if="plaintext">{{ plaintext }}</template>
+                        <slot v-else name="floating"></slot>
+                    </div>
+                </div>
+            </teleport>
+        </transition>
     </mb-primitive>
 </template>
 
@@ -43,74 +68,75 @@
     .popper-outer {
         display: grid;
         place-items: center;
-        position: absolute;
-        opacity: 0;
-        transition: all 0.25s;
+        position: fixed;
+        position-area: var(--popper-area);
+        padding: var(--popper-padding);
+        transform-origin: var(--popper-origin);
         filter: drop-shadow(var(--box-shadow-dark));
-        pointer-events: none;
+        z-index: 1024;
+
+        &:where(.v-enter-active, .v-leave-active) {
+            transition: all 0.25s;
+        }
+
+        &:where(.v-enter-from, .v-leave-to) {
+            opacity: 0;
+
+            &:where(.is-top, .is-bottom) {
+                scale: 1 0.66;
+            }
+
+            &:where(.is-right, .is-left) {
+                scale: 0.66 1;
+            }
+        }
 
         &.is-top {
-            bottom: 100%;
-            padding-bottom: 8px;
-            transform-origin: bottom;
-            scale: 1 0.66;
-
-            &::before {
-                bottom: 4px;
-                rotate: -135deg;
-            }
+            --popper-area: top;
+            --popper-padding: 0 0 8px;
+            --popper-origin: bottom;
+            --arrow-bottom: 4px;
+            --arrow-rotate: -135deg;
         }
 
         &.is-right {
-            left: 100%;
-            padding-left: 8px;
-            transform-origin: left;
-            scale: 0.66 1;
-
-            &::before {
-                left: 4px;
-                rotate: -45deg;
-            }
+            --popper-area: right;
+            --popper-padding: 0 0 0 8px;
+            --popper-origin: left;
+            --arrow-left: 4px;
+            --arrow-rotate: -45deg;
         }
 
         &.is-bottom {
-            top: 100%;
-            padding-top: 8px;
-            transform-origin: top;
-            scale: 1 0.66;
-
-            &::before {
-                top: 4px;
-                rotate: 45deg;
-            }
+            --popper-area: bottom;
+            --popper-padding: 8px 0 0;
+            --popper-origin: top;
+            --arrow-top: 4px;
+            --arrow-rotate: 45deg;
         }
 
         &.is-left {
-            right: 100%;
-            padding-right: 8px;
-            transform-origin: right;
-            scale: 0.66 1;
-
-            &::before {
-                right: 4px;
-                rotate: 135deg;
-            }
-        }
-
-        :hover + &.is-plain, :hover > &:not(.is-plain) {
-            opacity: 1;
-            scale: 1;
-            pointer-events: auto;
+            --popper-area: left;
+            --popper-padding: 0 8px 0 0;
+            --popper-origin: right;
+            --arrow-right: 4px;
+            --arrow-rotate: 135deg;
         }
 
         &::before {
             content: "";
             position: absolute;
+            inset:
+                var(--arrow-top, auto)
+                var(--arrow-right, auto)
+                var(--arrow-bottom, auto)
+                var(--arrow-left, auto);
             width: 10px;
             aspect-ratio: 1;
             border: 1px solid var(--color-border-lighter);
             background-color: var(--color-background);
             clip-path: polygon(0 0, 0 100%, 100% 0);
+            rotate: var(--arrow-rotate);
         }
     }
 
@@ -120,7 +146,7 @@
         border-radius: 12px;
         background-color: var(--color-background);
 
-        .is-plain > & {
+        &.is-plaintext {
             padding-inline: 14px;
             font-size: 14px;
             line-height: 20px;

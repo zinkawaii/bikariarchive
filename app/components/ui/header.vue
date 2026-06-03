@@ -299,6 +299,7 @@
         width: 100px;
         padding-inline: 10px;
         border-radius: 8px;
+        font-size: 14px;
         line-height: 32px;
         word-break: keep-all;
         transition: all 0.25s;
