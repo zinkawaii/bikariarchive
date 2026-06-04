@@ -1,11 +1,5 @@
 import { SHA256 } from "crypto-es";
-import { resolve } from "pathe";
 import { parsePath } from "ufo";
-
-//从根目录合并路径
-export function r(path: string) {
-    return resolve("." + path);
-}
 
 //获取无尾斜杠路径
 export function getStrictPath(path: string) {

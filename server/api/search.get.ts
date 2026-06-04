@@ -1,7 +1,7 @@
-import { readFile } from "node:fs/promises";
 import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
 import { getQuery } from "nitro/h3";
+import { useStorage } from "nitro/storage";
 import { visit } from "unist-util-visit";
 import type { Child, Element, Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
@@ -27,16 +27,16 @@ const schema = type({
 export default defineJThrottledEventHandler<{
     query: GetSearchQuery;
 }, GetSearchResponse>(async (event, res) => {
+    const storage = useStorage("assets:data");
     const { novel, word } = schema.assert(getQuery(event));
 
     //连接数据库
     await connectMongoose();
 
     const code = word.codePointAt(0)!.toString();
-    const path = r(`/.data/search/${code.slice(0, 2)}/${code}.json`);
-    const data = await readFile(path, "utf-8")
-        .then<Record<string, number[][]>>(JSON.parse)
-        .catch(() => ({}));
+    const data = await storage
+        .getItem(`search/${code.slice(0, 2)}/${code}.json`)
+        .catch(() => ({})) as Record<string, number[][]>;
 
     const novels = new Set(novel === void 0 ? Object.keys(Article.meta) : [novel]);
     const weakTexts = new WeakMap<Element, string>();

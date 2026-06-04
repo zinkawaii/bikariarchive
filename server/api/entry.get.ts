@@ -1,6 +1,6 @@
-import { readFile } from "node:fs/promises";
 import { type } from "arktype";
 import { getQuery } from "nitro/h3";
+import { useStorage } from "nitro/storage";
 import type { JEntry } from "@bikari/article";
 import { Entry } from "#shared/utils/entry";
 
@@ -17,6 +17,7 @@ const schema = type({
 export default defineJEventHandler<{
     query: GetEntryQuery;
 }, GetEntryResponse>(async (event, res) => {
+    const storage = useStorage("assets:data");
     const { title } = schema.assert(getQuery(event));
 
     const category = Entry.map[title];
@@ -26,8 +27,8 @@ export default defineJEventHandler<{
         return 1;
     }
 
-    const path = r(`/.data/${category}/${title}.json`);
-    const data = await readFile(path, "utf-8").then(JSON.parse);
+    const key = `${category}/${title}.json`;
+    const data = await storage.getItem(key);
 
     res.category = category;
     Object.assign(res, data);

@@ -52,6 +52,13 @@ export default defineNuxtConfig({
                 vue(),
             ],
         },
+        serverAssets: [
+            {
+                baseName: "data",
+                dir: resolve(import.meta.dirname, "./.data"),
+                pattern: "**/*.json",
+            },
+        ],
         typescript: {
             tsConfig: typescriptConfig.serverTsConfig,
         },

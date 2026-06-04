@@ -1,4 +1,3 @@
-import { cp } from "node:fs/promises";
 import { addPlugin, addServerPlugin, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 import { relative } from "pathe";
 import { article, entry, update } from "../../packages/article/src";
@@ -33,14 +32,6 @@ export default defineNuxtModule({
 
         nuxt.hook("close", async () => {
             await Promise.all(disposables.map((dispose) => dispose()));
-        });
-
-        nuxt.hook("nitro:build:public-assets", async () => {
-            const source = resolve("../../.data");
-            const target = resolve("../../.netlify/functions-internal/server/.data");
-            await cp(source, target, {
-                recursive: true,
-            });
         });
     },
 });
