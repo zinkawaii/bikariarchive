@@ -14,7 +14,7 @@
 
 <style lang="scss" scoped>
     .profile-backdrop {
-        background-image: cdn("/outerworld.webp");
+        background-image: url("/api/image/outerworld.webp");
         background-position: center v-bind("light");
         background-size: cover;
         mask-image: linear-gradient(to bottom, white, transparent);

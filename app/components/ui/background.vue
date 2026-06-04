@@ -12,11 +12,11 @@
         background-size: cover;
 
         @include theme using ($theme) {
-            background-image: cdn("/background/#{$theme}.webp");
+            background-image: url("/api/image/background/#{$theme}.webp");
         }
 
         @include dark {
-            background-image: cdn("/background/dark.webp");
+            background-image: url("/api/image/background/dark.webp");
         }
 
         @include viewport("sm") {

@@ -47,7 +47,3 @@ $themes: ("hatsusora", "ayame", "sakura");
         @content;
     }
 }
-
-@function cdn($path) {
-    @return url("/api/image/#{$path}");
-}

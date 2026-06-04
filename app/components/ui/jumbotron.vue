@@ -37,9 +37,8 @@
         <div v-if="$route.meta.jumbotron" class="z-jumbotron">
             <nuxt-img
                 class="jumbotron-image"
-                src="/jumbotron.webp"
+                src="/api/image/jumbotron.webp"
                 alt="[jumbotron]"
-                provider="api"
                 fetchpriority="high"
             />
             <jumbotron-banner />

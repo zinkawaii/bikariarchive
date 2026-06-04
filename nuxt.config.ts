@@ -110,11 +110,6 @@ export default defineNuxtConfig({
     },
     image: {
         provider: "none",
-        providers: {
-            api: {
-                provider: "~/providers/api",
-            },
-        },
     },
     ogImage: {
         enabled: false,
