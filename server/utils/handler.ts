@@ -10,11 +10,7 @@ interface Handler<R extends EventHandlerRequest, T> {
 const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>) => async (event: H3Event<R>) => {
     try {
         const res = {} as T;
-        const code = await handler(event, res);
-        if (code !== void 0) {
-            throw code;
-        }
-        return res;
+        return await handler(event, res) ?? res;
     }
     catch (err) {
         if (HTTPError.isError(err)) {
@@ -46,19 +42,23 @@ const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>)
     }
 };
 
-export const defineJEventHandler = <R extends EventHandlerRequest, T = {}>(
+export function defineJEventHandler<R extends EventHandlerRequest, T = {}>(
     handler: Handler<R, T>,
-) => defineEventHandler(createHandler<R, T>(handler));
+) {
+    return defineEventHandler(createHandler<R, T>(handler));
+}
 
-export const defineJCachedEventHandler = <R extends EventHandlerRequest, T = {}>(
+export function defineJCachedEventHandler<R extends EventHandlerRequest, T = {}>(
     handler: Handler<R, T>,
     options?: CachedEventHandlerOptions,
-) => defineCachedHandler(createHandler<R, T>(handler), options);
+) {
+    return defineCachedHandler(createHandler<R, T>(handler), options);
+}
 
-export const defineJThrottledEventHandler = <R extends EventHandlerRequest, T = {}>(
+export function defineJThrottledEventHandler<R extends EventHandlerRequest, T = {}>(
     handler: Handler<R, T>,
     delay: number,
-) => {
+) {
     let timer: NodeJS.Timeout | undefined;
     function throttledHandler(this: unknown, ...args: Parameters<typeof handler>) {
         if (!timer) {
@@ -72,4 +72,4 @@ export const defineJThrottledEventHandler = <R extends EventHandlerRequest, T = 
         });
     }
     return defineEventHandler(createHandler<R, T>(throttledHandler));
-};
+}

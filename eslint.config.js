@@ -10,4 +10,11 @@ export default zin({
             },
         }],
     },
+}, {
+    files: [
+        "./server/api/**/*.ts",
+    ],
+    rules: {
+        "no-throw-literal": "off",
+    },
 });

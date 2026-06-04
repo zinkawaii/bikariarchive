@@ -48,6 +48,6 @@ export default defineJEventHandler<{
         });
     }
     catch {
-        return 1;
+        throw 1;
     }
 });

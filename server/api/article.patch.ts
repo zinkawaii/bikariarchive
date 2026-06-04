@@ -78,6 +78,6 @@ export default defineJEventHandler<{
     }
     catch {
         //代币解析错误
-        return 1;
+        throw 1;
     }
 });

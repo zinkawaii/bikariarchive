@@ -36,14 +36,14 @@ export default defineJEventHandler<{
 
     //账号不存在
     if (!qUser) {
-        return 1;
+        throw 1;
     }
 
     const { uid, nickname, email, identity, sign, hash, salt } = qUser;
 
     //密码错误
     if (hash !== encryptSecret(password, salt)) {
-        return 2;
+        throw 2;
     }
 
     res.uid = uid;

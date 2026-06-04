@@ -1,7 +1,7 @@
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { type } from "arktype";
-import { getQuery, getRouterParam, sendRedirect } from "nitro/h3";
+import { getQuery, getRouterParam, redirect } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 
 const schema = type({
@@ -17,7 +17,7 @@ export default defineJEventHandler(async (event) => {
     const slug = getRouterParam(event, "slug");
 
     if (slug === void 0) {
-        return 1;
+        throw 1;
     }
 
     const s3 = new S3Client({
@@ -56,5 +56,5 @@ export default defineJEventHandler(async (event) => {
         expiresIn: 3600,
     });
 
-    sendRedirect(event, signedUrl, 307);
+    return redirect(signedUrl, 307);
 });

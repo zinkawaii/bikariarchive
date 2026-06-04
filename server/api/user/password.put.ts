@@ -26,12 +26,12 @@ export default defineJEventHandler<{
 
     //账号不存在
     if (!qUser) {
-        return 1;
+        throw 1;
     }
 
     //密码错误
     if (qUser.hash !== encryptSecret(oldPassword, qUser.salt)) {
-        return 2;
+        throw 2;
     }
 
     //更新哈希和盐值

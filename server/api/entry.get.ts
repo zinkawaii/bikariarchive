@@ -24,7 +24,7 @@ export default defineJEventHandler<{
 
     //词条不存在
     if (!category) {
-        return 1;
+        throw 1;
     }
 
     const key = `${category}/${title}.json`;

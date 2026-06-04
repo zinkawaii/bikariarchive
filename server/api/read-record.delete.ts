@@ -26,6 +26,6 @@ export default defineJEventHandler<{
     }
     catch {
         //ID不存在
-        return 1;
+        throw 1;
     }
 });

@@ -30,7 +30,7 @@ export default defineJEventHandler<{
 
     //路径格式错误
     if (!path.startsWith("/")) {
-        return 1;
+        throw 1;
     }
 
     //权限验证
@@ -51,7 +51,7 @@ export default defineJEventHandler<{
     if (mode === "guest") {
         //无游客昵称
         if (!body.nickname) {
-            return 2;
+            throw 2;
         }
 
         info = {
@@ -68,7 +68,7 @@ export default defineJEventHandler<{
 
         //用户不存在
         if (!qUser) {
-            return 3;
+            throw 3;
         }
 
         info = {

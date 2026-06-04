@@ -32,7 +32,7 @@ export default defineJEventHandler<{
 
     //路径格式错误
     if (!path) {
-        return 1;
+        throw 1;
     }
 
     //连接数据库

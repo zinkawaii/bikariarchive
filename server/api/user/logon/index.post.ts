@@ -32,7 +32,7 @@ export default defineJEventHandler<{
 
     //邮箱已注册
     if (qUser) {
-        return 1;
+        throw 1;
     }
 
     //查询数据库中是否已存在该邮箱未处理的验证码
@@ -40,17 +40,17 @@ export default defineJEventHandler<{
 
     //验证码不存在
     if (!qCaptcha) {
-        return 2;
+        throw 2;
     }
 
     //验证码已过期
     if (qCaptcha.time.getTime() + 1800000 < Date.now()) {
-        return 3;
+        throw 3;
     }
 
     //验证码不正确
     if (captcha !== qCaptcha.captcha) {
-        return 4;
+        throw 4;
     }
 
     //验证成功，从数据库中删除临时数据

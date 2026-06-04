@@ -27,12 +27,12 @@ export default defineJEventHandler<{
     //初始化
     const art = Article.for(novel, index);
     if (!art) {
-        return 1;
+        throw 1;
     }
 
     //验证密码
     if (art.encrypted && password !== Article.map[novel][index].password) {
-        return 2;
+        throw 2;
     }
 
     //连接数据库

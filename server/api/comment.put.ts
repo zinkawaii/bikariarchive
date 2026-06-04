@@ -33,7 +33,7 @@ export default defineJEventHandler<{
 
     //评论不存在
     if (!qComment) {
-        return 1;
+        throw 1;
     }
 
     //更新评论数据

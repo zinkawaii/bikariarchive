@@ -26,7 +26,7 @@ export default defineJEventHandler<{
 
     //用户不存在
     if (!qUser) {
-        return 1;
+        throw 1;
     }
 
     res.uid = uid!;

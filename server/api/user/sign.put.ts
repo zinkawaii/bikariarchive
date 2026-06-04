@@ -25,6 +25,6 @@ export default defineJEventHandler(async (event) => {
 
     //找不到用户
     if (qUser.matchedCount === 0) {
-        return 1;
+        throw 1;
     }
 });

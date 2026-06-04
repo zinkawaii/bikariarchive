@@ -25,7 +25,7 @@ export default defineJEventHandler<{
     const { page } = schema.assert(getQuery(event));
 
     if (page < 1) {
-        return 1;
+        throw 1;
     }
 
     //权限验证
