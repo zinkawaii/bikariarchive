@@ -1,6 +1,7 @@
 import { toString } from "mdast-util-to-string";
+import { defineEventHandler, type H3Event, setHeaders } from "nitro/h3";
+import { useRuntimeConfig } from "nitro/runtime-config";
 import { createFeed, generateAtom1 } from "zfeed";
-import type { H3Event } from "h3";
 import { Article } from "#shared/utils/article";
 
 export default defineEventHandler(async (event: H3Event) => {

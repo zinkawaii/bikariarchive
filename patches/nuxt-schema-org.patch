@@ -1,0 +1,26 @@
+diff --git a/dist/runtime/server/plugins/nuxt-content-v2.js b/dist/runtime/server/plugins/nuxt-content-v2.js
+index 9aec185a14472e9627217f9733807c1ab79faaee..90d9524537b358870d84127b04b7e7e8566a6657 100644
+--- a/dist/runtime/server/plugins/nuxt-content-v2.js
++++ b/dist/runtime/server/plugins/nuxt-content-v2.js
+@@ -1,8 +1,8 @@
+ import { defineWebPage } from "@unhead/schema-org/vue";
+ import { defu } from "defu";
+-import { defineNitroPlugin } from "nitropack/runtime";
++import { definePlugin } from "nitro";
+ import { useSchemaOrgConfig } from "../utils/config.js";
+-export default defineNitroPlugin((nitroApp) => {
++export default definePlugin((nitroApp) => {
+   const config = useSchemaOrgConfig();
+   nitroApp.hooks.hook("content:file:afterParse", async (content) => {
+     if (content._draft || content._extension !== "md" || content._partial || content.indexable === false || content.index === false)
+diff --git a/dist/runtime/server/utils/config.js b/dist/runtime/server/utils/config.js
+index fc9086f629edb0e2f05408f5884a7a381b9ad297..b97182b9083eff4787c7ec59e0fa12ea3d16ccb8 100644
+--- a/dist/runtime/server/utils/config.js
++++ b/dist/runtime/server/utils/config.js
+@@ -1,5 +1,5 @@
+ import { defu } from "defu";
+-import { useRuntimeConfig } from "nitropack/runtime";
++import { useRuntimeConfig } from "nitro/runtime-config";
+ export function useSchemaOrgConfig(e) {
+   const runtimeConfig = useRuntimeConfig(e);
+   return defu(import.meta.client ? runtimeConfig.public["nuxt-schema-org"] : runtimeConfig["nuxt-schema-org"], {

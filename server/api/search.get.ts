@@ -1,17 +1,32 @@
 import { readFile } from "node:fs/promises";
 import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
+import { getQuery } from "nitro/h3";
 import { visit } from "unist-util-visit";
 import type { Child, Element, Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
-import type { GetSearchResponse } from "#server/types/api/search";
+
+export type GetSearchQuery = typeof schema.inferIn;
+
+export interface GetSearchResponse {
+    list: SearchResult[];
+}
+
+export interface SearchResult {
+    novel: string;
+    index: string;
+    count: number;
+    parts: Element[];
+}
 
 const schema = type({
     novel: "string?",
     word: "0 < string <= 64",
 });
 
-export default defineJThrottledEventHandler<GetSearchResponse>(async (event, res) => {
+export default defineJThrottledEventHandler<{
+    query: GetSearchQuery;
+}, GetSearchResponse>(async (event, res) => {
     const { novel, word } = schema.assert(getQuery(event));
 
     //连接数据库

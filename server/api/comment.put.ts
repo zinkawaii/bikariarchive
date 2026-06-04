@@ -1,6 +1,7 @@
 import { type } from "arktype";
 import { CommentDataModel } from "#server/models/CommentData";
-import type { PutCommentBody } from "#server/types/api/comment";
+
+export type PutCommentBody = typeof schema.inferIn;
 
 const schema = type({
     id: "string",
@@ -10,11 +11,11 @@ const schema = type({
     address: "string.url?",
 });
 
-export default defineJEventHandler(async (event) => {
+export default defineJEventHandler<{
+    body: PutCommentBody;
+}>(async (event) => {
     const session = await readSession(event);
-    const body = schema.assert(
-        await readBody<PutCommentBody>(event),
-    );
+    const body = schema.assert(await event.req.json());
 
     //权限验证
     validateIdentity(session.data, 9);

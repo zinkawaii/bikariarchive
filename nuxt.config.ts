@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     ],
     alias: {
         "@bikari/article": resolve(import.meta.dirname, "./packages/article/src"),
+        "#data": resolve(import.meta.dirname, "./.data"),
     },
     compatibilityDate: "2024-07-19",
     components: [
@@ -46,9 +47,8 @@ export default defineNuxtConfig({
         compatibilityVersion: 5,
     },
     nitro: {
-        rollupConfig: {
+        rolldownConfig: {
             plugins: [
-                // @ts-expect-error rolldown !== rollup
                 vue(),
             ],
         },

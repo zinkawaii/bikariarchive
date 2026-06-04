@@ -1,0 +1,93 @@
+diff --git a/dist/runtime/server/composables/getSiteConfig.js b/dist/runtime/server/composables/getSiteConfig.js
+index 746b0d154145dd30b6f6cb043acab707e6ae2e73..67d9d826e28135cc626a0f1e168201516284ca6b 100644
+--- a/dist/runtime/server/composables/getSiteConfig.js
++++ b/dist/runtime/server/composables/getSiteConfig.js
+@@ -1,5 +1,5 @@
+ import { defu } from "defu";
+-import { useRuntimeConfig } from "nitropack/runtime";
++import { useRuntimeConfig } from "nitro/runtime-config";
+ import { createSiteConfigStack } from "site-config-stack";
+ import { logger } from "../util.js";
+ export function getSiteConfig(e, _options) {
+diff --git a/dist/runtime/server/composables/utils.js b/dist/runtime/server/composables/utils.js
+index 852647113e9e37ebacc10c87e696b1d577b4b4e0..4fc4f92da4ef28654210eedc90009cd8a6eedb34 100644
+--- a/dist/runtime/server/composables/utils.js
++++ b/dist/runtime/server/composables/utils.js
+@@ -1,4 +1,4 @@
+-import { useRuntimeConfig } from "nitropack/runtime";
++import { useRuntimeConfig } from "nitro/runtime-config";
+ import { fixSlashes, resolveSitePath } from "site-config-stack/urls";
+ import { getNitroOrigin } from "./getNitroOrigin.js";
+ import { getSiteConfig } from "./getSiteConfig.js";
+@@ -28,7 +28,7 @@ export function withSiteUrl(e, path, options = {}) {
+     absolute: true,
+     siteUrl,
+     trailingSlash: siteConfig.trailingSlash,
+-    base: e.context.nitro.baseURL,
++    base: useRuntimeConfig().app.baseURL || "/",
+     withBase: options.withBase
+   });
+ }
+diff --git a/dist/runtime/server/middleware/init.js b/dist/runtime/server/middleware/init.js
+index 401790c8f32853c63ff63525e89fb3d5f31472b1..9d4c252101f3562f44463dd91da2a07d5af7faa2 100644
+--- a/dist/runtime/server/middleware/init.js
++++ b/dist/runtime/server/middleware/init.js
+@@ -1,5 +1,6 @@
+ import { eventHandler } from "h3";
+-import { useNitroApp, useRuntimeConfig } from "nitropack/runtime";
++import { useNitroApp } from "nitro/app";
++import { useRuntimeConfig } from "nitro/runtime-config";
+ import { createSiteConfigStack, envSiteConfig, SiteConfigPriority } from "site-config-stack";
+ import { parseURL } from "ufo";
+ import { getNitroOrigin } from "../composables/getNitroOrigin.js";
+@@ -32,10 +33,11 @@ export default eventHandler(async (e) => {
+   });
+   const buildStack = config.stack || [];
+   buildStack.forEach((c) => siteConfig.push(c));
+-  if (e.context._nitro.routeRules.site) {
++  const routeSiteConfig = e.context.routeRules?.site?.options;
++  if (routeSiteConfig) {
+     siteConfig.push({
+       _context: "route-rules",
+-      ...e.context._nitro.routeRules.site
++      ...routeSiteConfig
+     });
+   }
+   if (config.multiTenancy) {
+diff --git a/dist/runtime/server/plugins/injectState.js b/dist/runtime/server/plugins/injectState.js
+index 3b7945529e3d3b7fb9cd342509e23428a7165e1b..0bbe98dd8bb645846a1db355340baf1f03aa02ee 100644
+--- a/dist/runtime/server/plugins/injectState.js
++++ b/dist/runtime/server/plugins/injectState.js
+@@ -1,14 +1,16 @@
+-import devalue from "@nuxt/devalue";
+-import { defineNitroPlugin, getRouteRules } from "nitropack/runtime";
++import { uneval as devalue } from "devalue";
++import { definePlugin } from "nitro";
++import { getRouteRules } from "nitro/app";
+ import { toValue } from "vue";
+ import { getSiteConfig } from "../composables/getSiteConfig.js";
+ const PRERENDER_NO_SSR_ROUTES = /* @__PURE__ */ new Set(["/index.html", "/200.html", "/404.html"]);
+-export default defineNitroPlugin(async (nitroApp) => {
++export default definePlugin(async (nitroApp) => {
+   nitroApp.hooks.hook("render:html", async (ctx, { event }) => {
+-    const routeOptions = getRouteRules(event);
++    const routeOptions = event.context.routeRules || getRouteRules(event.req.method, event.url.pathname).routeRules || {};
++    const ssr = routeOptions.ssr?.options;
+     const isIsland = process.env.NUXT_COMPONENT_ISLANDS && event.path.startsWith("/__nuxt_island");
+     const url = event.path;
+-    const noSSR = !!process.env.NUXT_NO_SSR || event.context.nuxt?.noSSR || routeOptions.ssr === false && !isIsland || (import.meta.prerender ? PRERENDER_NO_SSR_ROUTES.has(url) : false);
++    const noSSR = !!process.env.NUXT_NO_SSR || event.context.nuxt?.noSSR || ssr === false && !isIsland || (import.meta.prerender ? PRERENDER_NO_SSR_ROUTES.has(url) : false);
+     if (noSSR) {
+       const siteConfig = Object.fromEntries(
+         Object.entries(getSiteConfig(event)).map(([k, v]) => [k, toValue(v)])
+diff --git a/dist/runtime/server/routes/__site-config__/debug.js b/dist/runtime/server/routes/__site-config__/debug.js
+index a0bb4930b386ce8922c3d546e7620de2d8e29ecf..10736d93b9f68f844a129149504bb569362ff18a 100644
+--- a/dist/runtime/server/routes/__site-config__/debug.js
++++ b/dist/runtime/server/routes/__site-config__/debug.js
+@@ -1,5 +1,5 @@
+ import { eventHandler, setHeader } from "h3";
+-import { useRuntimeConfig } from "nitropack/runtime";
++import { useRuntimeConfig } from "nitro/runtime-config";
+ import { getNitroOrigin } from "../../composables/getNitroOrigin.js";
+ import { getSiteConfig } from "../../composables/getSiteConfig.js";
+ export default eventHandler(async (e) => {

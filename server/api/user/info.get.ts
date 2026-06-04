@@ -1,12 +1,19 @@
 import { type } from "arktype";
+import { getQuery } from "nitro/h3";
 import { UserDataModel } from "#server/models/UserData";
-import type { GetUserInfoResponse } from "#server/types/api/user/info";
+import type { PostLoginResponse } from "#server/api/user/login.post";
+
+export type GetUserInfoQuery = typeof schema.inferIn;
+
+export interface GetUserInfoResponse extends PostLoginResponse {}
 
 const schema = type({
     uid: "string.numeric.parse?",
 });
 
-export default defineJEventHandler<GetUserInfoResponse>(async (event, res) => {
+export default defineJEventHandler<{
+    query: GetUserInfoQuery;
+}, GetUserInfoResponse>(async (event, res) => {
     const session = await readSession(event);
     const { uid = session.data.uid } = schema.assert(getQuery(event));
 

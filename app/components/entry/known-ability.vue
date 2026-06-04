@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import abilityJson from "~~/.data/json/ability.json";
+    import abilityJson from "#data/json/ability.json";
 
     const props = defineProps<{
         classification?: string;

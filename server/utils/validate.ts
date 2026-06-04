@@ -1,3 +1,5 @@
+import { createError } from "nitro/h3";
+
 export function validateIdentity(session: Session, identity: number) {
     if ((session.identity ?? 0) < identity) {
         throw createError({

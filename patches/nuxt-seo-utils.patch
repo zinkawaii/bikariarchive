@@ -1,0 +1,31 @@
+diff --git a/dist/runtime/server/plugins/minifyHtml.js b/dist/runtime/server/plugins/minifyHtml.js
+index 409e89816810a80be7d6f06640bd870da82f702b..9956eed0b2afe5ea8dc092c55bf9fbc07613660c 100644
+--- a/dist/runtime/server/plugins/minifyHtml.js
++++ b/dist/runtime/server/plugins/minifyHtml.js
+@@ -1,4 +1,4 @@
+-import { defineNitroPlugin } from "nitropack/runtime";
++import { definePlugin } from "nitro";
+ import { minifyCSS, minifyJS, minifyJSON } from "../../shared/minify.js";
+ const INLINE_SCRIPT_RE = /<script(?![^>]+\bsrc\b)([^>]*)>([\s\S]*?)<\/script\s*>/gi;
+ const INLINE_STYLE_RE = /<style([^>]*)>([\s\S]*?)<\/style\s*>/gi;
+@@ -39,7 +39,7 @@ function minifyChunk(chunk) {
+   });
+   return out;
+ }
+-export default defineNitroPlugin((nitroApp) => {
++export default definePlugin((nitroApp) => {
+   if (!import.meta.prerender)
+     return;
+   nitroApp.hooks.hook("render:html", (html) => {
+diff --git a/dist/runtime/server/routes/__nuxt-seo-utils/debug.js b/dist/runtime/server/routes/__nuxt-seo-utils/debug.js
+index 13e3bfc76f61a3511f44abe49d29b10e1391b75f..3abc54a776098e875b1561905b149772d66fd205 100644
+--- a/dist/runtime/server/routes/__nuxt-seo-utils/debug.js
++++ b/dist/runtime/server/routes/__nuxt-seo-utils/debug.js
+@@ -1,6 +1,6 @@
+ import { getSiteConfig } from "#site-config/server/composables";
+ import { defineEventHandler, getQuery } from "h3";
+-import { useRuntimeConfig } from "nitropack/runtime";
++import { useRuntimeConfig } from "nitro/runtime-config";
+ export default defineEventHandler((e) => {
+   const siteConfig = getSiteConfig(e);
+   const runtimeConfig = useRuntimeConfig(e);

@@ -1,7 +1,16 @@
 import { type } from "arktype";
 import { AES } from "crypto-es";
+import { getQuery } from "nitro/h3";
+import { useRuntimeConfig } from "nitro/runtime-config";
+import type { Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
-import type { GetArticleResponse } from "#server/types/api/article";
+
+export type GetArticleQuery = typeof schema.inferIn;
+
+export interface GetArticleResponse {
+    body: Root;
+    token: string;
+}
 
 const schema = type({
     novel: "string",
@@ -9,7 +18,9 @@ const schema = type({
     password: "string",
 });
 
-export default defineJEventHandler<GetArticleResponse>(async (event, res) => {
+export default defineJEventHandler<{
+    query: GetArticleQuery;
+}, GetArticleResponse>(async (event, res) => {
     const config = useRuntimeConfig();
     const { novel, index, password } = schema.assert(getQuery(event));
 

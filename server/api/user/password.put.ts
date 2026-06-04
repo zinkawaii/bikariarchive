@@ -1,17 +1,18 @@
 import { type } from "arktype";
 import { UserDataModel } from "#server/models/UserData";
-import type { PutPasswordBody } from "#server/types/api/user/password";
+
+export type PutPasswordBody = typeof schema.inferIn;
 
 const schema = type({
     old: "12 <= string <= 24",
     new: "12 <= string <= 24",
 });
 
-export default defineJEventHandler(async (event) => {
+export default defineJEventHandler<{
+    body: PutPasswordBody;
+}>(async (event) => {
     const session = await readSession(event);
-    const { old: oldPassword, new: newPassword } = schema.assert(
-        await readBody<PutPasswordBody>(event),
-    );
+    const { old: oldPassword, new: newPassword } = schema.assert(await event.req.json());
 
     //权限验证
     validateIdentity(session.data, 1);

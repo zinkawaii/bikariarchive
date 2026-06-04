@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { injectionKey } from "~/types/search";
-    import type { SearchResult } from "#server/types/api/search";
+    import type { SearchResult } from "#server/api/search.get";
 
     const props = defineProps<SearchResult>();
 

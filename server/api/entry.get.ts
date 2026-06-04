@@ -1,13 +1,22 @@
 import { readFile } from "node:fs/promises";
 import { type } from "arktype";
+import { getQuery } from "nitro/h3";
+import type { JEntry } from "@bikari/article";
 import { Entry } from "#shared/utils/entry";
-import type { GetEntryResponse } from "#server/types/api/entry";
+
+export type GetEntryQuery = typeof schema.inferIn;
+
+export interface GetEntryResponse extends JEntry {
+    category: string;
+}
 
 const schema = type({
     title: "string",
 });
 
-export default defineJEventHandler<GetEntryResponse>(async (event, res) => {
+export default defineJEventHandler<{
+    query: GetEntryQuery;
+}, GetEntryResponse>(async (event, res) => {
     const { title } = schema.assert(getQuery(event));
 
     const category = Entry.map[title];

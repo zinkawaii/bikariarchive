@@ -1,6 +1,8 @@
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { type } from "arktype";
+import { getQuery, getRouterParam, sendRedirect } from "nitro/h3";
+import { useRuntimeConfig } from "nitro/runtime-config";
 
 const schema = type({
     "fmt?": "string",
@@ -39,7 +41,7 @@ export default defineJEventHandler(async (event) => {
             ...request.query,
             ...query,
             // 之后在图床上传原图后再启用这段代码
-            // fmt: query.fmt ?? getHeader(event, "accept")?.includes("image/avif")
+            // fmt: query.fmt ?? event.req.headers.get("accept")?.includes("image/avif")
             //     ? "avif"
             //     : "webp",
         };

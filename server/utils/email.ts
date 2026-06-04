@@ -1,3 +1,4 @@
+import { useRuntimeConfig } from "nitro/runtime-config";
 import { createEmail } from "unemail";
 import smtp from "unemail/driver/smtp";
 import { type Component, createSSRApp } from "vue";

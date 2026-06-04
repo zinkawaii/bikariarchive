@@ -1,12 +1,13 @@
 import { TraversalError } from "arktype";
-import type { H3Event } from "h3";
-import type { CachedEventHandlerOptions } from "nitropack";
+import { defineCachedHandler } from "nitro/cache";
+import { defineEventHandler, type EventHandlerRequest, type H3Event, HTTPError } from "nitro/h3";
+import type { CachedEventHandlerOptions } from "nitro/types";
 
-interface Handler<T> {
-    (event: H3Event<Request>, res: T): Awaited<unknown>;
+interface Handler<R extends EventHandlerRequest, T> {
+    (event: H3Event<R>, res: T): Awaited<unknown>;
 }
 
-const createHandler = <T>(handler: Handler<T>) => async (event: H3Event) => {
+const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>) => async (event: H3Event<R>) => {
     try {
         const res = {} as T;
         const code = await handler(event, res);
@@ -16,7 +17,7 @@ const createHandler = <T>(handler: Handler<T>) => async (event: H3Event) => {
         return res;
     }
     catch (err) {
-        if (isError(err)) {
+        if (HTTPError.isError(err)) {
             throw err;
         }
 
@@ -37,7 +38,7 @@ const createHandler = <T>(handler: Handler<T>) => async (event: H3Event) => {
             data = err;
         }
 
-        throw createError({
+        throw new HTTPError({
             statusCode,
             statusMessage,
             data: import.meta.dev ? data : void 0,
@@ -45,17 +46,17 @@ const createHandler = <T>(handler: Handler<T>) => async (event: H3Event) => {
     }
 };
 
-export const defineJEventHandler = <T>(
-    handler: Handler<T>,
-) => defineEventHandler(createHandler<T>(handler));
+export const defineJEventHandler = <R extends EventHandlerRequest, T = {}>(
+    handler: Handler<R, T>,
+) => defineEventHandler(createHandler<R, T>(handler));
 
-export const defineJCachedEventHandler = <T>(
-    handler: Handler<T>,
+export const defineJCachedEventHandler = <R extends EventHandlerRequest, T = {}>(
+    handler: Handler<R, T>,
     options?: CachedEventHandlerOptions,
-) => defineCachedEventHandler(createHandler<T>(handler), options);
+) => defineCachedHandler(createHandler<R, T>(handler), options);
 
-export const defineJThrottledEventHandler = <T>(
-    handler: Handler<T>,
+export const defineJThrottledEventHandler = <R extends EventHandlerRequest, T = {}>(
+    handler: Handler<R, T>,
     delay: number,
 ) => {
     let timer: NodeJS.Timeout | undefined;
@@ -66,9 +67,9 @@ export const defineJThrottledEventHandler = <T>(
             }, delay);
             return handler.apply(this, args);
         }
-        throw createError({
+        throw new HTTPError({
             statusCode: 429,
         });
     }
-    return defineEventHandler(createHandler<T>(throttledHandler));
+    return defineEventHandler(createHandler<R, T>(throttledHandler));
 };

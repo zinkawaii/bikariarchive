@@ -1,13 +1,18 @@
 import { type } from "arktype";
+import { getQuery } from "nitro/h3";
+import Captcha from "#server/emails/captcha.vue";
 import { TempCaptchaModel } from "#server/models/TempCaptcha";
 import { randomInt } from "#shared/utils/random";
-import Captcha from "~/emails/captcha.vue";
+
+export type GetCaptchaQuery = typeof schema.inferIn;
 
 const schema = type({
     email: "string.email",
 });
 
-export default defineJEventHandler(async (event) => {
+export default defineJEventHandler<{
+    query: GetCaptchaQuery;
+}>(async (event) => {
     const { email } = schema.assert(getQuery(event));
 
     //连接数据库

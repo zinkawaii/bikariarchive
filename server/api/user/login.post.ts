@@ -1,17 +1,26 @@
 import { type } from "arktype";
 import { UserDataModel } from "#server/models/UserData";
-import type { PostLoginBody, PostLoginResponse } from "#server/types/api/user/login";
+
+export type PostLoginBody = typeof schema.inferIn;
+
+export interface PostLoginResponse {
+    uid: number;
+    nickname: string;
+    avatar: string;
+    identity: number;
+    sign: string;
+}
 
 const schema = type({
     account: "string",
     password: "string",
 });
 
-export default defineJEventHandler<PostLoginResponse>(async (event, res) => {
+export default defineJEventHandler<{
+    body: PostLoginBody;
+}, PostLoginResponse>(async (event, res) => {
     const session = await readSession(event);
-    const { account, password } = schema.assert(
-        await readBody<PostLoginBody>(event),
-    );
+    const { account, password } = schema.assert(await event.req.json());
 
     //连接数据库
     await connectMongoose();

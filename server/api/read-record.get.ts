@@ -1,12 +1,26 @@
 import { type } from "arktype";
+import { getQuery } from "nitro/h3";
 import { ReadRecordModel } from "#server/models/ReadRecord";
-import type { GetReadRecordResponse } from "#server/types/api/read-record";
+import type { ReadRecordSchema, UserDataSchema } from "#server/types/model";
+
+export type GetReadRecordQuery = typeof schema.inferIn;
+
+export interface GetReadRecordResponse {
+    total: number;
+    sizes: number;
+    list: (Omit<ReadRecordSchema, "user"> & {
+        _id: string;
+        user?: Pick<UserDataSchema, "uid">;
+    })[];
+}
 
 const schema = type({
     page: "string.numeric.parse",
 });
 
-export default defineJEventHandler<GetReadRecordResponse>(async (event, res) => {
+export default defineJEventHandler<{
+    query: GetReadRecordQuery;
+}, GetReadRecordResponse>(async (event, res) => {
     const session = await readSession(event);
     const { page } = schema.assert(getQuery(event));
 

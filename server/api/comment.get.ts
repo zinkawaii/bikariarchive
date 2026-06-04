@@ -1,8 +1,17 @@
 import { type } from "arktype";
+import { getQuery } from "nitro/h3";
 import type { HydratedDocument } from "mongoose";
 import { CommentDataModel } from "#server/models/CommentData";
-import type { CommentData, GetCommentResponse } from "#server/types/api/comment";
+import type { CommentData } from "#server/types/comment";
 import type { CommentDataSchema, UserDataSchema } from "#server/types/model";
+
+export type GetCommentQuery = typeof schema.inferIn;
+
+export interface GetCommentResponse {
+    totalCount: number;
+    mainCount: number;
+    list: CommentData[];
+}
 
 const schema = type({
     path: "string",
@@ -12,7 +21,9 @@ const schema = type({
 //需要获取的属性
 const select = "_id root parent content time mode nickname email address user";
 
-export default defineJEventHandler<GetCommentResponse>(async (event, res) => {
+export default defineJEventHandler<{
+    query: GetCommentQuery;
+}, GetCommentResponse>(async (event, res) => {
     const session = await readSession(event);
     const body = schema.assert(getQuery(event));
 

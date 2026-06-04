@@ -2,7 +2,14 @@ import { type } from "arktype";
 import { TempCaptchaModel } from "#server/models/TempCaptcha";
 import { UserDataModel } from "#server/models/UserData";
 import { randomInt } from "#shared/utils/random";
-import type { GetLoginBody, GetLogonResponse } from "#server/types/api/user/logon";
+
+export type GetLogonBody = typeof schema.inferIn;
+
+export interface GetLogonResponse {
+    uid: number;
+    nickname: string;
+    identity: number;
+}
 
 const schema = type({
     nickname: "string <= 18",
@@ -11,11 +18,11 @@ const schema = type({
     password: "12 <= string <= 24",
 });
 
-export default defineJEventHandler<GetLogonResponse>(async (event) => {
+export default defineJEventHandler<{
+    body: GetLogonBody;
+}, GetLogonResponse>(async (event) => {
     const session = await readSession(event);
-    const { nickname, email, captcha, password } = schema.assert(
-        await readBody<GetLoginBody>(event),
-    );
+    const { nickname, email, captcha, password } = schema.assert(await event.req.json());
 
     //连接数据库
     await connectMongoose();

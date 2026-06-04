@@ -1,5 +1,8 @@
 import { LazyCommentPanel } from "#components";
-import type { CommentData, DeleteCommentBody, PostCommentBody, PutCommentBody } from "#server/types/api/comment";
+import type { DeleteCommentBody } from "#server/api/comment.delete";
+import type { PostCommentBody } from "#server/api/comment.post";
+import type { PutCommentBody } from "#server/api/comment.put";
+import type { CommentData } from "#server/types/comment";
 
 export const useCommentStore = defineStore("comment", () => {
     const comments = shallowRef<WithParent<CommentData>[]>();

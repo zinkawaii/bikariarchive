@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { totalYears } from "~~/.data/json/update.json";
+    import { totalYears } from "#data/json/update.json";
 
     useHead({
         title: "更新日志",

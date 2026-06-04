@@ -1,6 +1,7 @@
 import { type } from "arktype";
 import { UserDataModel } from "#server/models/UserData";
-import type { PutUserSignBody } from "#server/types/api/user/sign";
+
+export type PutUserSignBody = typeof schema.inferIn;
 
 const schema = type({
     content: "string",
@@ -8,9 +9,7 @@ const schema = type({
 
 export default defineJEventHandler(async (event) => {
     const session = await readSession(event);
-    const { content } = schema.assert(
-        await readBody<PutUserSignBody>(event),
-    );
+    const { content } = schema.assert(await event.req.json());
 
     //权限验证
     validateIdentity(session.data, 1);

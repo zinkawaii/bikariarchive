@@ -1,19 +1,26 @@
 import { type } from "arktype";
 import { AES, Utf8 } from "crypto-es";
+import { getRequestIP } from "nitro/h3";
+import { useRuntimeConfig } from "nitro/runtime-config";
 import { ReadRecordModel } from "#server/models/ReadRecord";
 import { UserDataModel } from "#server/models/UserData";
-import type { PatchArticleBody, PatchArticleResponse } from "#server/types/api/article";
+
+export type PatchArticleBody = typeof schema.inferIn;
+
+export interface PatchArticleResponse {
+    count: number;
+}
 
 const schema = type({
     token: "string",
 });
 
-export default defineJEventHandler<PatchArticleResponse>(async (event, res) => {
+export default defineJEventHandler<{
+    body: PatchArticleBody;
+}, PatchArticleResponse>(async (event, res) => {
     const config = useRuntimeConfig();
     const session = await readSession(event);
-    const { token } = schema.assert(
-        await readBody<PatchArticleBody>(event),
-    );
+    const { token } = schema.assert(await event.req.json());
 
     //连接数据库
     await connectMongoose();

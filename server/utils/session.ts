@@ -1,4 +1,5 @@
-import type { H3Event } from "h3";
+import { type H3Event, useSession } from "nitro/h3";
+import { useRuntimeConfig } from "nitro/runtime-config";
 
 export interface Session {
     uid?: number;

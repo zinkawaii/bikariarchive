@@ -1,10 +1,13 @@
 import { type } from "arktype";
+import { getRequestIP } from "nitro/h3";
+import { useRuntimeConfig } from "nitro/runtime-config";
 import type { RuntimeConfig } from "@nuxt/schema";
+import CommentReply from "#server/emails/comment-reply.vue";
 import { CommentDataModel } from "#server/models/CommentData";
 import { UserDataModel } from "#server/models/UserData";
-import CommentReply from "~/emails/comment-reply.vue";
-import type { PostCommentBody } from "#server/types/api/comment";
 import type { CommentDataSchema, UserDataSchema } from "#server/types/model";
+
+export type PostCommentBody = typeof schema.inferIn;
 
 const schema = type({
     path: "string",
@@ -15,12 +18,12 @@ const schema = type({
     address: "string.url?",
 });
 
-export default defineJEventHandler(async (event) => {
+export default defineJEventHandler<{
+    body: PostCommentBody;
+}>(async (event) => {
     const config = useRuntimeConfig();
     const session = await readSession(event);
-    const body = schema.assert(
-        await readBody<PostCommentBody>(event),
-    );
+    const body = schema.assert(await event.req.json());
 
     //获取严格路径
     const path = getStrictPath(body.path) as keyof RuntimeConfig["comment"];

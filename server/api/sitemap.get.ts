@@ -1,6 +1,6 @@
+import { totalYears } from "#data/json/update.json";
 import { Article } from "#shared/utils/article";
 import { Entry } from "#shared/utils/entry";
-import { totalYears } from "~~/.data/json/update.json";
 
 export default defineSitemapEventHandler(() => {
     return [

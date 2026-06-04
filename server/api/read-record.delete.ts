@@ -1,16 +1,17 @@
 import { type } from "arktype";
 import { ReadRecordModel } from "#server/models/ReadRecord";
-import type { DeleteReadRecordBody } from "#server/types/api/read-record";
+
+export type DeleteReadRecordBody = typeof schema.inferIn;
 
 const schema = type({
     id: "string",
 });
 
-export default defineJEventHandler(async (event) => {
+export default defineJEventHandler<{
+    body: DeleteReadRecordBody;
+}>(async (event) => {
     const session = await readSession(event);
-    const { id } = schema.assert(
-        await readBody<DeleteReadRecordBody>(event),
-    );
+    const { id } = schema.assert(await event.req.json());
 
     //权限验证
     validateIdentity(session.data, 9);

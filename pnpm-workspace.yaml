@@ -1,10 +1,9 @@
+minimumReleaseAge: 0
 shamefullyHoist: true
 shellEmulator: true
 trustPolicy: no-downgrade
 trustPolicyExclude:
-  - chokidar@4.0.3
-  - semver@6.3.1
-  - tinyexec@1.2.2
+  - tinyclip@0.1.13
 
 packages:
   - content
@@ -12,28 +11,41 @@ packages:
 
 define:
   - &bikariya ^0.0.8
-  - &oxc ^0.132.0
+  - &oxc ^0.134.0
   - &shiki ^4.1.0
-  - &vls ^3.3.2
+  - &vls ^3.3.3
   - &volar 2.4.28
   - &vueuse ^14.3.0
 
 overrides:
+  "@nuxt/kit": npm:@nuxt/kit-nightly@5x
   esbuild: ^0.28.0
-  nuxt-og-image: 6.1.2
-  oxc-minify: ^0.132.0
-  oxc-parser: ^0.132.0
-  oxc-transform: ^0.132.0
-  rolldown: ^1.0.2
+  h3: 2.0.1-rc.22
+  nuxt: npm:nuxt-nightly@5x
+  oxc-minify: *oxc
+  oxc-parser: *oxc
+  oxc-transform: *oxc
+  rolldown: ^1.0.3
   tar-stream>bare-fs: link:???
-  vite: ^8.0.14
+  vite: ^8.0.16
 
 patchedDependencies:
+  "@nuxt/icon": patches/@nuxt__icon.patch
+  "@nuxt/image": patches/@nuxt__image.patch
+  "@nuxt/nitro-server-nightly": patches/@nuxt__nitro-server-nightly.patch
+  "@nuxtjs/robots": patches/@nuxtjs__robots.patch
+  "@nuxtjs/sitemap": patches/@nuxtjs__sitemap.patch
+  "@pinia/nuxt": patches/@pinia__nuxt.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
+  nuxt-link-checker: patches/nuxt-link-checker.patch
+  nuxt-og-image: patches/nuxt-og-image.patch
+  nuxt-schema-org: patches/nuxt-schema-org.patch
+  nuxt-seo-utils: patches/nuxt-seo-utils.patch
+  nuxt-site-config: patches/nuxt-site-config.patch
 
 catalogs:
   build:
-    tsdown: ^0.22.0
+    tsdown: ^0.22.1
     typescript: ^6.0.3
   content:
     kerria: ^0.5.0
@@ -54,36 +66,36 @@ catalogs:
   css:
     sass-embedded: ^1.100.0
   database:
-    mongoose: ^9.6.2
+    mongoose: ^9.6.3
   iconify:
     "@iconify-json/fa7-solid": ^1.2.4
   lint:
     "@zinkawaii/eslint-config": ^0.4.3
     "@zinkawaii/stylelint-config": ^0.4.0
-    eslint: ^10.4.0
+    eslint: ^10.4.1
     stylelint: ^17.12.0
   nuxt:
-    "@bikariya/image-viewer": ^0.0.8
-    "@bikariya/modals": ^0.0.8
-    "@bikariya/shiki": ^0.0.8
+    "@bikariya/image-viewer": *bikariya
+    "@bikariya/modals": *bikariya
+    "@bikariya/shiki": *bikariya
     "@nuxt/devtools": ^3.2.4
     "@nuxt/fonts": ^0.14.0
-    "@nuxt/icon": ^2.2.2
+    "@nuxt/icon": ^2.2.3
     "@nuxt/image": ^2.0.0
-    "@nuxtjs/seo": ^3.4.0
+    "@nuxtjs/seo": ^5.1.3
     "@pinia/nuxt": ^0.11.3
-    "@vueuse/nuxt": ^14.3.0
-    nuxt: ^4.4.6
+    "@vueuse/nuxt": *vueuse
+    nuxt: ^4.4.7
   test:
-    vitest: ^4.1.7
+    vitest: ^4.1.8
   types:
     "@types/node": ^25.9.1
     "@zinkawaii/tsconfig": ^0.1.0
   utils:
-    "@aws-sdk/client-s3": ^3.1057.0
-    "@aws-sdk/s3-request-presigner": ^3.1057.0
-    "@clack/prompts": ^1.4.0
-    "@shikijs/transformers": ^4.1.0
+    "@aws-sdk/client-s3": ^3.1060.0
+    "@aws-sdk/s3-request-presigner": ^3.1060.0
+    "@clack/prompts": ^1.5.0
+    "@shikijs/transformers": *shiki
     animejs: ^4.4.1
     arktype: ^2.2.0
     bgmt: ^0.1.3
@@ -97,11 +109,11 @@ catalogs:
     pathe: ^2.0.3
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
-    shiki: ^4.1.0
+    shiki: *shiki
     svgo: ^4.0.1
     temporal-polyfill: ^0.3.2
-    tinyexec: ^1.2.2
-    tinyglobby: ^0.2.16
+    tinyexec: ^1.2.4
+    tinyglobby: ^0.2.17
     ufo: ^1.6.4
     unemail: ^0.4.1
     unrun: ^0.3.0
@@ -110,20 +122,21 @@ catalogs:
     yaml: ^2.9.0
     zfeed: ^0.2.4
   volar:
-    "@volar/language-core": 2.4.28
-    "@volar/typescript": 2.4.28
+    "@volar/language-core": *volar
+    "@volar/typescript": *volar
   vue:
     "@vitejs/plugin-vue": ^6.0.7
-    "@vueuse/core": ^14.3.0
-    "@vueuse/router": ^14.3.0
+    "@vueuse/core": *vueuse
+    "@vueuse/router": *vueuse
     pinia: ^3.0.4
     pinia-plugin-persistedstate: ^4.7.1
-    vue: ^3.5.34
-    vue-component-type-helpers: ^3.3.2
-    vue-router: ^5.0.7
-    vue-tsc: ^3.3.2
+    vue: ^3.5.35
+    vue-component-type-helpers: *vls
+    vue-router: ^5.1.0
+    vue-tsc: *vls
 
 allowBuilds:
   "@parcel/watcher": true
   esbuild: true
   sharp: true
+  vue-demi: true

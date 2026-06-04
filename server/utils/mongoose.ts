@@ -1,5 +1,7 @@
 import consola from "consola";
 import mongoose from "mongoose";
+import { useNitroApp } from "nitro/app";
+import { useRuntimeConfig } from "nitro/runtime-config";
 import "#server/models/CommentData";
 import "#server/models/ReadRecord";
 import "#server/models/TempCaptcha";
@@ -9,7 +11,7 @@ export async function connectMongoose() {
     const config = useRuntimeConfig();
     const nitroApp = useNitroApp();
 
-    nitroApp.hooks.hook("close", async () => {
+    nitroApp.hooks?.hook("close", async () => {
         await mongoose.disconnect();
     });
 

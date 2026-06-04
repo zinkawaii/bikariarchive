@@ -1,15 +1,20 @@
 import type { NuxtConfig } from "@nuxt/schema";
 import type { TSConfig } from "pkg-types";
 
-const shared: TSConfig["compilerOptions"] = {
-    strictFunctionTypes: false,
-    noUncheckedIndexedAccess: false,
-};
+function shared(): TSConfig["compilerOptions"] {
+    return {
+        strictFunctionTypes: false,
+        noUncheckedIndexedAccess: false,
+        paths: {
+            "#data/*": ["../.data/*"],
+        },
+    };
+}
 
 export default <NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig>> {
     nodeTsConfig: {
         compilerOptions: {
-            ...shared,
+            ...shared(),
         },
         include: [
             "../packages/*/*.ts",
@@ -18,17 +23,20 @@ export default <NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig>> {
     },
     sharedTsConfig: {
         compilerOptions: {
-            ...shared,
+            ...shared(),
         },
     },
     serverTsConfig: {
         compilerOptions: {
-            ...shared,
+            ...shared(),
         },
+        include: [
+            "../server/emails/**/*.vue",
+        ],
     },
     tsConfig: {
         compilerOptions: {
-            ...shared,
+            ...shared(),
         },
         vueCompilerOptions: {
             checkUnknownComponents: true,
