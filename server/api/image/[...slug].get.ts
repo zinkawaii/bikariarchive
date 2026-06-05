@@ -4,14 +4,18 @@ import { type } from "arktype";
 import { getQuery, getRouterParam, redirect } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 
+export type GetImageQuery = typeof schema.inferIn;
+
 const schema = type({
-    "fmt?": "string",
-    "q?": "string",
-    "w?": "string",
-    "h?": "string",
+    fmt: "string?",
+    q: "string?",
+    w: "string?",
+    h: "string?",
 });
 
-export default defineJEventHandler(async (event) => {
+export default defineJEventHandler<{
+    query: GetImageQuery;
+}>(async (event) => {
     const config = useRuntimeConfig();
     const query = schema.assert(getQuery(event));
     const slug = getRouterParam(event, "slug");

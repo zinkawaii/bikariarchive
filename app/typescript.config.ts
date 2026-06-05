@@ -5,9 +5,6 @@ function shared(): TSConfig["compilerOptions"] {
     return {
         strictFunctionTypes: false,
         noUncheckedIndexedAccess: false,
-        paths: {
-            "#data/*": ["../.data/*"],
-        },
     };
 }
 

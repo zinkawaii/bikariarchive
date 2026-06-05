@@ -16,8 +16,8 @@ export default defineNuxtConfig({
         "~/assets/scss/animation.scss",
     ],
     alias: {
-        "@bikari/article": resolve(import.meta.dirname, "./packages/article/src"),
-        "#data": resolve(import.meta.dirname, "./.data"),
+        "@bikari/article": resolve(import.meta.dirname, "packages/article/src"),
+        "#data": resolve(import.meta.dirname, ".data"),
     },
     compatibilityDate: "2024-07-19",
     components: [
@@ -55,11 +55,12 @@ export default defineNuxtConfig({
         serverAssets: [
             {
                 baseName: "data",
-                dir: resolve(import.meta.dirname, "./.data"),
+                dir: resolve(import.meta.dirname, ".data"),
                 pattern: "**/*.json",
             },
         ],
         typescript: {
+            generatedTypesDir: ".nuxt/types",
             tsConfig: typescriptConfig.serverTsConfig,
         },
     },

@@ -6,7 +6,7 @@
         "name": "@bikari/typescript-plugin",
         "mappings": [
           {
-            "frontmatter": ["@bikari/article", "JEntry"],
+            "frontmatter": ["@bikari/article", "EntryFrontmatter"],
             "patterns": [
               "./area/*",
               "./character/*",

@@ -5,7 +5,7 @@ import { basename } from "pathe";
 import { parseEntry } from "../remark";
 import { isDevelopment } from "../utils";
 import type { Child } from "../remark/types";
-import type { EntryDetail, JEntry } from "../types/entry";
+import type { EntryCategory, EntryDetail, JEntry } from "../types/entry";
 import type { IntelNode, JIntel } from "../types/intel";
 
 interface AbilityInfo {
@@ -38,14 +38,18 @@ export default createKerria("Entry", () => {
             all: {},
         },
         output(val) {
-            const entries: JIntel["entries"] = {};
+            const entries: Record<string, null> = {};
+            const drafts: JIntel["drafts"] = [];
             const redirects: JIntel["redirects"] = {};
 
             for (const [name, { draft, alias }] of Object.entries<{
                 draft: boolean;
                 alias?: string[];
             }>(val.all)) {
-                entries[name] = !draft;
+                entries[name] = null;
+                if (draft) {
+                    drafts.push(name);
+                }
                 if (alias?.length) {
                     for (const item of alias) {
                         redirects[item] = name;
@@ -60,6 +64,7 @@ export default createKerria("Entry", () => {
             return {
                 blocks,
                 entries,
+                drafts,
                 redirects,
             };
 
@@ -87,10 +92,6 @@ export default createKerria("Entry", () => {
                 }
             }
         },
-    });
-
-    const mapInfo = useLoad("map", {
-        dist: ".data/json/intmap.json",
     });
 
     const abilityInfo = useLoad("ability", {
@@ -148,14 +149,16 @@ export default createKerria("Entry", () => {
         },
     });
 
+    const categories: EntryCategory[] = [
+        "area",
+        "character",
+        "concept",
+    ];
+
     useSource(SourceKind.Entry, {
         base: "content",
         dist: ".data",
-        folders: [
-            "area",
-            "character",
-            "concept",
-        ],
+        folders: categories,
         ext: ".md",
         async parse(path, info) {
             //处理文件
@@ -195,33 +198,30 @@ export default createKerria("Entry", () => {
             }
 
             //写入文件
-            await info.output(path, attributes);
+            attributes.category = categories.find((category) => path.includes(`/${category}/`))!;
+            await info.output(path.replace(attributes.category, "/entry/"), attributes);
 
             //写入数据
             const name = basename(path, ".md");
-            const folder = basename(info.folders.find((dir) => path.startsWith(dir))!);
 
             //写入缓存
             return {
                 name,
-                folder,
                 draft: attributes.draft,
                 alias: attributes.alias,
                 abilities,
             };
         },
         cache(cache) {
-            const { name, folder, draft, alias, abilities } = cache;
+            const { name, draft, alias, abilities } = cache;
 
             metaInfo.value.all[name] = { draft, alias };
-            mapInfo.value[name] = folder;
             abilityInfo.value[name] = abilities;
         },
         unlink(cache) {
             const { name } = cache;
 
             delete metaInfo.value.all[name];
-            delete mapInfo.value[name];
             delete abilityInfo.value[name];
         },
     });

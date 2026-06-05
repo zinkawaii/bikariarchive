@@ -1,6 +1,9 @@
+import type { JEntry } from "./entry";
+
 export interface JIntel {
     blocks: IntelBlock[];
-    entries: Record<string, boolean>;
+    entries: Record<string, JEntry>;
+    drafts: string[];
     redirects: Record<string, string>;
 }
 
@@ -21,7 +24,3 @@ export type IntelBranch = IntelNode<IntelLeaf | IntelItem>;
 export type IntelLeaf = IntelNode<IntelItem>;
 
 export type IntelItem = IntelNode<string | [string, string]>;
-
-export interface JIntmap {
-    [entry: string]: string;
-}

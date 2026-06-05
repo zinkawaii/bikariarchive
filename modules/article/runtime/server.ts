@@ -3,7 +3,7 @@ import chokidar from "chokidar";
 import { definePlugin } from "nitro";
 import { basename, resolve } from "pathe";
 import { Article, enrichJArticle } from "#shared/utils/article";
-import { enrichJIntel, Entry } from "#shared/utils/entry";
+import { enrichJIntel } from "#shared/utils/entry";
 
 export default definePlugin(async (nitroApp) => {
     const baseDir = resolve(".data/json");
@@ -11,7 +11,6 @@ export default definePlugin(async (nitroApp) => {
         "article",
         "artmap",
         "intel",
-        "intmap",
     ].map((name) => `${baseDir}/${name}.json`);
 
     for (const path of list) {
@@ -38,10 +37,6 @@ async function update(path: string) {
         }
         case "intel": {
             enrichJIntel(data);
-            break;
-        }
-        case "intmap": {
-            Entry.map = data;
             break;
         }
     }

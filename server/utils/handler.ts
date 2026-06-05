@@ -10,7 +10,7 @@ interface Handler<R extends EventHandlerRequest, T> {
 const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>) => async (event: H3Event<R>) => {
     try {
         const res = {} as T;
-        return await handler(event, res) ?? res;
+        return await handler(event, res) as T ?? res;
     }
     catch (err) {
         if (HTTPError.isError(err)) {

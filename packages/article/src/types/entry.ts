@@ -1,7 +1,10 @@
 import type { Child } from "../remark/types";
 
+export type EntryFrontmatter = Omit<JEntry, "category">;
+
 export interface JEntry {
     title: string;
+    category: EntryCategory;
     draft?: boolean;
     alias?: string[];
     summary?: Child[];
@@ -12,6 +15,8 @@ export interface JEntry {
     relationships?: EntryRelationship[];
     details?: EntryDetail[];
 }
+
+export type EntryCategory = "area" | "character" | "concept";
 
 export interface EntryName {
     zh: string;

@@ -8,9 +8,10 @@
         return Array.isArray(props.title) ? props.title : [props.title, props.title];
     });
 
-    //是否存在
+    //是否存在且不为草稿
     const isExisted = computed(() => {
-        return Entry.meta.entries[titles.value[0]];
+        const title = titles.value[0];
+        return title in Entry.meta.entries && !Entry.meta.drafts.includes(title);
     });
 </script>
 

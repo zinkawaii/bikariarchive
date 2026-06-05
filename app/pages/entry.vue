@@ -28,20 +28,12 @@
 
     const route = useRoute();
 
-    const canonicalTitle = computed(() => {
-        return Entry.meta.redirects[title] ?? title;
-    });
-
     const isExisted = computed(() => {
-        return canonicalTitle.value in Entry.meta.entries;
+        return title in Entry.meta.entries;
     });
 
-    const { status, data } = useLazyFetch("/api/entry", {
-        query: {
-            title: canonicalTitle,
-        },
+    const { status, data } = useAsyncData(`entry:${title}`, () => Entry.for(title), {
         immediate: isExisted.value,
-        watch: [Entry.meta],
     });
 
     //显示评论区
