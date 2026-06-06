@@ -1,14 +1,12 @@
 import { toString } from "mdast-util-to-string";
-import { defineEventHandler, type H3Event, setHeaders } from "nitro/h3";
+import { defineEventHandler, type H3Event } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 import { createFeed, generateAtom1 } from "zfeed";
 import { Article } from "#shared/utils/article";
 
 export default defineEventHandler(async (event: H3Event) => {
-    setHeaders(event, {
-        "content-type": "application/xml",
-        "cache-control": 60 * 15,
-    });
+    event.res.headers.set("content-type", "application/xml");
+    event.res.headers.set("cache-control", (60 * 15).toString());
 
     const config = useRuntimeConfig();
 

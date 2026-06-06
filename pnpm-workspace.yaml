@@ -12,7 +12,7 @@ packages:
 define:
   - &bikariya ^0.0.8
   - &oxc ^0.134.0
-  - &shiki ^4.1.0
+  - &shiki ^4.2.0
   - &vls ^3.3.3
   - &volar 2.4.28
   - &vueuse ^14.3.0
@@ -25,7 +25,7 @@ overrides:
   oxc-minify: *oxc
   oxc-parser: *oxc
   oxc-transform: *oxc
-  rolldown: ^1.0.3
+  rolldown: ^1.1.0
   tar-stream>bare-fs: link:???
   vite: ^8.0.16
 
@@ -45,7 +45,7 @@ patchedDependencies:
 
 catalogs:
   build:
-    tsdown: ^0.22.1
+    tsdown: ^0.22.2
     typescript: ^6.0.3
   content:
     kerria: ^0.5.0
@@ -89,12 +89,12 @@ catalogs:
   test:
     vitest: ^4.1.8
   types:
-    "@types/node": ^25.9.1
+    "@types/node": ^25.9.2
     "@zinkawaii/tsconfig": ^0.1.0
   utils:
-    "@aws-sdk/client-s3": ^3.1060.0
-    "@aws-sdk/s3-request-presigner": ^3.1060.0
-    "@clack/prompts": ^1.5.0
+    "@aws-sdk/client-s3": ^3.1063.0
+    "@aws-sdk/s3-request-presigner": ^3.1063.0
+    "@clack/prompts": ^1.5.1
     "@shikijs/transformers": *shiki
     animejs: ^4.4.1
     arktype: ^2.2.0
