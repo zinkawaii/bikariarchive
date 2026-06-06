@@ -1,5 +1,5 @@
 import { addPlugin, addServerPlugin, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
-import { relative } from "pathe";
+import { join, relative } from "pathe";
 import { article, entry, update } from "../../packages/article/src";
 import { buildSearch } from "./search";
 import vite from "./vite";
@@ -16,6 +16,14 @@ export default defineNuxtModule({
         addServerPlugin(resolve("runtime/server"));
 
         addVitePlugin(vite);
+
+        nuxt.options.alias["#data"] = join(nuxt.options.rootDir, ".data");
+
+        (nuxt.options.nitro.serverAssets ??= []).push({
+            baseName: "data",
+            dir: ".data",
+            pattern: "{json,novel,search}/**/*.json",
+        });
 
         ((nuxt.options.typescript.tsConfig.vueCompilerOptions ??= {}).plugins ??= []).push({
             name: relative(nuxt.options.buildDir, resolve("volar.cts")),
