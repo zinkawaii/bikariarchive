@@ -35,7 +35,7 @@ export default defineJEventHandler<{
 
     const command = new GetObjectCommand({
         Bucket: config.bitiful.bucket,
-        Key: "/garden/" + slug,
+        Key: "image/" + slug,
     });
 
     command.middlewareStack.add((next) => async (args) => {
