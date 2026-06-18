@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { animate } from "animejs";
+  import { animate, stagger } from "motion-v";
 
   const settingStore = useSettingStore();
   const signerStore = useSignerStore();
@@ -15,15 +15,14 @@
 
     watchEffect(() => {
       const sortedItems = collapse.value ? items : items.toReversed();
-      for (let i = 0; i < sortedItems.length; i++) {
-        const el = sortedItems[i];
-        animate(el, {
-          x: collapse.value ? 64 : 0,
-          delay: i * 50,
-          duration: 400,
-          ease: `${collapse.value ? `in` : `out`}Back`,
-        });
-      }
+
+      animate(sortedItems, {
+        x: collapse.value ? 64 : 0,
+      }, {
+        delay: stagger(0.05),
+        duration: 0.4,
+        ease: `back${collapse.value ? `In` : `Out`}`,
+      });
     });
   });
 </script>

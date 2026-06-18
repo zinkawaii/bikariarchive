@@ -196,11 +196,20 @@
       <div class="namae-operator">
         <mb-button :disabled="status === `pending`" @click="generate">
           <template v-if="status !== `success`">
-            <iconify
+            <motion
               v-if="status === `pending`"
-              v-anime="{ rotate: 360, duration: 1500, ease: `linear`, loop: true }"
-              name="mingcute:loading-fill"
-            />
+              :animate="{
+                rotate: 360,
+              }"
+              :transition="{
+                duration: 1.5,
+                ease: `linear`,
+                repeat: Infinity,
+              }"
+              as-child
+            >
+              <iconify name="mingcute:loading-fill"/>
+            </motion>
             <iconify v-else name="fa7-solid:download"/>
             <span>加载</span>
           </template>

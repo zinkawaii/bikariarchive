@@ -92,6 +92,7 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "@pinia/nuxt",
     "@vueuse/nuxt",
+    "motion-v/nuxt",
     "pinia-plugin-persistedstate/nuxt",
   ],
   fonts: {

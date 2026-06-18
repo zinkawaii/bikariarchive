@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { animate } from "animejs";
+  import { animate, stagger } from "motion-v";
   import type { TransitionProps } from "vue";
 
   const settingStore = useSettingStore();
@@ -22,21 +22,25 @@
     animate(nakami, {
       x: [start.left - end.left, 0],
       y: [start.top - end.top, 0],
-      duration: 400,
-      ease: "outBack",
+    }, {
+      duration: 0.4,
+      ease: "backOut",
     });
   });
 
   const onEnterLeave: TransitionProps["onEnter"] = async (el, done) => {
     if (isSmallWindow.value) {
-      const widgets = document.querySelectorAll(".aside-widget");
-      await animate(widgets, {
+      const reversed = settingStore.get("ui-collapse");
+      await animate(".aside-widget", reversed ? {
+        opacity: [1, 0],
+        y: [0, "4rem"],
+      } : {
         opacity: [0, 1],
         y: ["4rem", 0],
-        duration: 400,
-        delay: (el, i) => i * 50,
-        ease: "outBack",
-        reversed: settingStore.get("ui-collapse"),
+      }, {
+        duration: 0.4,
+        delay: stagger(0.05, { from: reversed ? "last" : "first" }),
+        ease: reversed ? "backIn" : "backOut",
       });
     }
     done();
@@ -51,7 +55,7 @@
 
 <template>
   <transition @enter="onEnterLeave" @leave="onEnterLeave">
-    <aside v-if="!isCollapsed" class="z-sidebar" @click="onClick">
+    <aside v-if="!isCollapsed" class="z-sidebar no-scrollbar" @click="onClick">
       <aside-profile />
       <div class="aside-sticky">
         <aside-unified v-if="route.meta.catalog"/>
@@ -82,10 +86,6 @@
       backdrop-filter: blur(4px);
       transition: all 0.4s;
       overscroll-behavior: contain;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
     }
   }
 

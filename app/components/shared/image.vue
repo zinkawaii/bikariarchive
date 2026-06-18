@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { animate, stagger } from "animejs";
+  import { animate, stagger } from "motion-v";
   import type { ImgHTMLAttributes } from "vue";
   import { LazyBikariyaImageViewer } from "#components";
 
@@ -22,7 +22,7 @@
   const modalStore = useModalStore();
 
   const imgComp = useTemplateRef("img");
-  const charEl = useTemplateRef("char");
+  const tagComps = useTemplateRef("tag");
   const imgEl = computed<HTMLImageElement>(() => imgComp.value?.imgEl);
 
   //角色列表
@@ -61,7 +61,7 @@
     target: imgEl.value!,
     async onClose() {
       await close();
-      if (charEl.value?.children.length) {
+      if (tagComps.value?.length) {
         displayCharacters();
       }
     },
@@ -80,11 +80,12 @@
 
   //触发回弹动画
   function displayCharacters() {
-    animate(charEl.value?.children ?? [], {
+    animate(tagComps.value!.map((comp) => comp?.$el), {
       y: [42, 0],
-      delay: stagger(50, { reversed: true }),
-      duration: 400,
-      ease: "outBack",
+    }, {
+      delay: stagger(0.05, { from: "last" }),
+      duration: 0.4,
+      ease: "backOut",
     });
   }
 </script>
@@ -105,8 +106,8 @@
       @click="viewable && open()"
     />
     <transition v-if="character" @enter="displayCharacters">
-      <div v-if="isLoaded" ref="char" class="image-characters">
-        <character-tag v-for="name in characters" :name/>
+      <div v-if="isLoaded" class="image-characters">
+        <character-tag v-for="name in characters" ref="tag" :name/>
       </div>
     </transition>
     <figcaption v-if="caption" class="image-caption">{{ caption }}</figcaption>
