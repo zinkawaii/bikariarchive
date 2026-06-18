@@ -1,153 +1,153 @@
 <script lang="ts" setup>
-    import { animate } from "animejs";
+  import { animate } from "animejs";
 
-    const settingStore = useSettingStore();
-    const signerStore = useSignerStore();
+  const settingStore = useSettingStore();
+  const signerStore = useSignerStore();
 
-    const collapse = computed(() => settingStore.get("ui-collapse"));
+  const collapse = computed(() => settingStore.get("ui-collapse"));
 
-    onMounted(() => {
-        if (window.innerWidth < Zin.MAX_WINDOW_SIZE) {
-            settingStore.set("ui-collapse", true);
-        }
+  onMounted(() => {
+    if (window.innerWidth < Zin.MAX_WINDOW_SIZE) {
+      settingStore.set("ui-collapse", true);
+    }
 
-        const items = [...document.querySelectorAll(".z-toolbar > .mb-popper")].slice(0, -1);
+    const items = [...document.querySelectorAll(".z-toolbar > .mb-popper")].slice(0, -1);
 
-        watchEffect(() => {
-            const sortedItems = collapse.value ? items : items.toReversed();
-            for (let i = 0; i < sortedItems.length; i++) {
-                const el = sortedItems[i];
-                animate(el, {
-                    x: collapse.value ? 64 : 0,
-                    delay: i * 50,
-                    duration: 400,
-                    ease: `${collapse.value ? `in` : `out`}Back`,
-                });
-            }
+    watchEffect(() => {
+      const sortedItems = collapse.value ? items : items.toReversed();
+      for (let i = 0; i < sortedItems.length; i++) {
+        const el = sortedItems[i];
+        animate(el, {
+          x: collapse.value ? 64 : 0,
+          delay: i * 50,
+          duration: 400,
+          ease: `${collapse.value ? `in` : `out`}Back`,
         });
+      }
     });
+  });
 </script>
 
 <template>
-    <menu class="z-toolbar">
-        <mb-popper as="li" direction="left" plaintext="开往">
-            <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
-                <iconify name="fa7-solid:train-subway"/>
-            </nuxt-link>
-        </mb-popper>
-        <mb-popper as="li" direction="left" plaintext="设置">
-            <button class="tool-item" @click="settingStore.open()">
-                <iconify name="fa7-solid:gear"/>
-            </button>
-        </mb-popper>
-        <mb-popper as="li" direction="left" plaintext="用户">
-            <button class="tool-item" @click="signerStore.open()">
-                <iconify name="fa7-solid:user"/>
-            </button>
-        </mb-popper>
-        <mb-popper as="li" direction="left" plaintext="回到顶部">
-            <a class="tool-item" href="#">
-                <span class="tool-progress"></span>
-                <iconify class="tool-arrow-top" name="fa7-solid:arrow-up"/>
-            </a>
-        </mb-popper>
-        <mb-popper as="li" direction="left" :plaintext="collapse ? `展开` : `收起`">
-            <button class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
-                <iconify :name="`fa7-solid:chevron-${collapse ? `left` : `right`}`"/>
-            </button>
-        </mb-popper>
-    </menu>
+  <menu class="z-toolbar">
+    <mb-popper as="li" direction="left" plaintext="开往">
+      <nuxt-link class="tool-item" to="https://www.travellings.cn/go.html">
+        <iconify name="fa7-solid:train-subway"/>
+      </nuxt-link>
+    </mb-popper>
+    <mb-popper as="li" direction="left" plaintext="设置">
+      <button class="tool-item" @click="settingStore.open()">
+        <iconify name="fa7-solid:gear"/>
+      </button>
+    </mb-popper>
+    <mb-popper as="li" direction="left" plaintext="用户">
+      <button class="tool-item" @click="signerStore.open()">
+        <iconify name="fa7-solid:user"/>
+      </button>
+    </mb-popper>
+    <mb-popper as="li" direction="left" plaintext="回到顶部">
+      <a class="tool-item" href="#">
+        <span class="tool-progress"></span>
+        <iconify class="tool-arrow-top" name="fa7-solid:arrow-up"/>
+      </a>
+    </mb-popper>
+    <mb-popper as="li" direction="left" :plaintext="collapse ? `展开` : `收起`">
+      <button class="tool-item" @click="settingStore.toggle(`ui-collapse`)">
+        <iconify :name="`fa7-solid:chevron-${collapse ? `left` : `right`}`"/>
+      </button>
+    </mb-popper>
+  </menu>
 </template>
 
 <style lang="scss" scoped>
-    .z-toolbar {
-        display: grid;
-        gap: 8px;
-        position: fixed;
-        right: 24px;
-        bottom: 32px;
-        pointer-events: none;
+  .z-toolbar {
+    display: grid;
+    gap: 8px;
+    position: fixed;
+    right: 24px;
+    bottom: 32px;
+    pointer-events: none;
+  }
+
+  .tool-item {
+    display: grid;
+    place-items: center;
+    position: relative;
+    width: 36px;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-theme-dark);
+    color: white;
+    pointer-events: auto;
+
+    &:hover {
+      background-color: var(--color-info);
+    }
+  }
+
+  @property --scroll-progress {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+  }
+
+  .tool-progress, .tool-arrow-top {
+    position: absolute;
+    opacity: var(--op0);
+    inset: 0;
+    margin: auto;
+    animation: scroll-progress linear;
+    animation-timeline: scroll();
+  }
+
+  .tool-progress {
+    --op1: 1;
+    --op0: 0;
+
+    font-family: var(--font-smooth);
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    counter-reset: scroll-progress var(--scroll-progress);
+
+    &::before {
+      content: counter(scroll-progress);
     }
 
-    .tool-item {
-        display: grid;
-        place-items: center;
-        position: relative;
-        width: 36px;
-        aspect-ratio: 1;
-        border-radius: 6px;
-        box-shadow: var(--box-shadow);
-        background-color: var(--color-theme-dark);
-        color: white;
-        pointer-events: auto;
-
-        &:hover {
-            background-color: var(--color-info);
-        }
+    &::after {
+      content: "%";
+      padding-left: 1px;
+      font-size: 12px;
     }
 
-    @property --scroll-progress {
-        syntax: "<integer>";
-        initial-value: 0;
-        inherits: false;
+    :hover > & {
+      --op1: 0;
+    }
+  }
+
+  .tool-arrow-top {
+    --op1: 0;
+    --op0: 1;
+
+    :hover > & {
+      --op1: 1;
+    }
+  }
+
+  @keyframes scroll-progress {
+    0% {
+      --scroll-progress: 0;
+
+      opacity: var(--op1);
     }
 
-    .tool-progress, .tool-arrow-top {
-        position: absolute;
-        opacity: var(--op0);
-        inset: 0;
-        margin: auto;
-        animation: scroll-progress linear;
-        animation-timeline: scroll();
+    99.9999999% {
+      opacity: var(--op1);
     }
 
-    .tool-progress {
-        --op1: 1;
-        --op0: 0;
-
-        font-family: var(--font-smooth);
-        font-size: 14px;
-        line-height: 36px;
-        text-align: center;
-        counter-reset: scroll-progress var(--scroll-progress);
-
-        &::before {
-            content: counter(scroll-progress);
-        }
-
-        &::after {
-            content: "%";
-            padding-left: 1px;
-            font-size: 12px;
-        }
-
-        :hover > & {
-            --op1: 0;
-        }
+    100% {
+      --scroll-progress: 99;
     }
-
-    .tool-arrow-top {
-        --op1: 0;
-        --op0: 1;
-
-        :hover > & {
-            --op1: 1;
-        }
-    }
-
-    @keyframes scroll-progress {
-        0% {
-            --scroll-progress: 0;
-
-            opacity: var(--op1);
-        }
-
-        99.9999999% {
-            opacity: var(--op1);
-        }
-
-        100% {
-            --scroll-progress: 99;
-        }
-    }
+  }
 </style>

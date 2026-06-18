@@ -1,11 +1,11 @@
 export type ToastType = "error" | "info" | "success";
 
 export interface ToastIconInfo {
-    name: string;
-    color: string;
+  name: string;
+  color: string;
 }
 
 export interface ToastItem {
-    icon: ToastIconInfo;
-    message: string;
+  icon: ToastIconInfo;
+  message: string;
 }

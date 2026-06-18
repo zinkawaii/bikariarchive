@@ -21,11 +21,10 @@ diff --git a/dist/runtime/server/routes/__nuxt-seo-utils/debug.js b/dist/runtime
 index 13e3bfc76f61a3511f44abe49d29b10e1391b75f..3abc54a776098e875b1561905b149772d66fd205 100644
 --- a/dist/runtime/server/routes/__nuxt-seo-utils/debug.js
 +++ b/dist/runtime/server/routes/__nuxt-seo-utils/debug.js
-@@ -1,6 +1,6 @@
- import { getSiteConfig } from "#site-config/server/composables";
+@@ -1,5 +1,5 @@
  import { defineEventHandler, getQuery } from "h3";
 -import { useRuntimeConfig } from "nitropack/runtime";
 +import { useRuntimeConfig } from "nitro/runtime-config";
+ import { getSiteConfig } from "#site-config/server/composables";
  export default defineEventHandler((e) => {
    const siteConfig = getSiteConfig(e);
-   const runtimeConfig = useRuntimeConfig(e);

@@ -1,121 +1,121 @@
 <script lang="ts" setup>
-    import type { RouteLocationNormalized } from "vue-router";
+  import type { RouteLocationNormalized } from "vue-router";
 
-    const { title } = defineProps<{
-        title: string;
-    }>();
+  const { title } = defineProps<{
+    title: string;
+  }>();
 
-    definePageMeta({
-        path: "/:title()",
-        props: true,
-        middleware: (to: RouteLocationNormalized<"entry">) => {
-            if (to.params.title in Entry.meta.redirects) {
-                const title = Entry.meta.redirects[to.params.title];
-                return toEntry(title);
-            }
-        },
-        catalog: true,
-        comment: true,
-    });
+  definePageMeta({
+    path: "/:title()",
+    props: true,
+    middleware: (to: RouteLocationNormalized<"entry">) => {
+      if (to.params.title in Entry.meta.redirects) {
+        const title = Entry.meta.redirects[to.params.title];
+        return toEntry(title);
+      }
+    },
+    catalog: true,
+    comment: true,
+  });
 
-    useHead({
-        title,
-    });
+  useHead({
+    title,
+  });
 
-    useBreadcrumb({
-        name: "intel",
-    });
+  useBreadcrumb({
+    name: "intel",
+  });
 
-    const route = useRoute();
+  const route = useRoute();
 
-    const isExisted = computed(() => {
-        return title in Entry.meta.entries;
-    });
+  const isExisted = computed(() => {
+    return title in Entry.meta.entries;
+  });
 
-    const { status, data } = useAsyncData(`entry:${title}`, () => Entry.for(title), {
-        immediate: isExisted.value,
-    });
+  const { status, data } = useAsyncData(`entry:${title}`, () => Entry.for(title), {
+    immediate: isExisted.value,
+  });
 
-    //显示评论区
-    watch(isExisted, (val) => {
-        route.meta.comment = val;
-    }, {
-        immediate: import.meta.browser,
-    });
+  //显示评论区
+  watch(isExisted, (val) => {
+    route.meta.comment = val;
+  }, {
+    immediate: import.meta.browser,
+  });
 </script>
 
 <template>
-    <meow-widget v-if="isExisted">
-        <header class="entry-header">
-            <h1 class="entry-title">{{ data?.title ?? title }}</h1>
-        </header>
-        <mb-skeleton v-if="status !== `success`"/>
-        <article v-else-if="data" v-outline class="entry-article">
-            <section class="entry-leading">
-                <div class="entry-primary">
-                    <novel-article as="div" :body="data.summary"/>
-                    <entry-appearance v-if="data.appearance" v-bind="data.appearance"/>
-                    <entry-brief v-if="data.brief" v-bind="data.brief"/>
-                </div>
-                <entry-illustration v-if="data.illustrations" :data="data.illustrations"/>
-            </section>
-            <template v-if="data.category === `character`">
-                <entry-talent :data="data.talents"/>
-                <entry-relationship :data="data.relationships"/>
-            </template>
-            <entry-detail v-for="detail in data.details" v-bind="detail"/>
-        </article>
-    </meow-widget>
-    <not-found v-else/>
+  <meow-widget v-if="isExisted">
+    <header class="entry-header">
+      <h1 class="entry-title">{{ data?.title ?? title }}</h1>
+    </header>
+    <mb-skeleton v-if="status !== `success`"/>
+    <article v-else-if="data" v-outline class="entry-article">
+      <section class="entry-leading">
+        <div class="entry-primary">
+          <novel-article as="div" :body="data.summary"/>
+          <entry-appearance v-if="data.appearance" v-bind="data.appearance"/>
+          <entry-brief v-if="data.brief" v-bind="data.brief"/>
+        </div>
+        <entry-illustration v-if="data.illustrations" :data="data.illustrations"/>
+      </section>
+      <template v-if="data.category === `character`">
+        <entry-talent :data="data.talents"/>
+        <entry-relationship :data="data.relationships"/>
+      </template>
+      <entry-detail v-for="detail in data.details" v-bind="detail"/>
+    </article>
+  </meow-widget>
+  <not-found v-else/>
 </template>
 
 <style lang="scss" scoped>
-    .entry-header {
-        padding-bottom: 8px;
-        border-bottom: 1px solid var(--color-border);
-    }
+  .entry-header {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border);
+  }
 
-    :where(.mb-skeleton, .entry-section) {
-        margin-top: 24px;
-    }
+  :where(.mb-skeleton, .entry-section) {
+    margin-top: 24px;
+  }
 
-    .entry-leading {
-        display: flex;
-        gap: 16px;
-        margin-top: 8px;
+  .entry-leading {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
 
-        @include viewport("md") {
-            flex-direction: column;
-        }
+    @include viewport("md") {
+      flex-direction: column;
     }
+  }
 
-    .entry-primary {
-        container: entry-primary / inline-size;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+  .entry-primary {
+    container: entry-primary / inline-size;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 </style>
 
 <style lang="scss">
-    .entry-section {
-        > h2 {
-            margin-bottom: 8px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        h3 {
-            display: inline flow-root;
-            margin: 8px 0 4px 12px;
-
-            &::before {
-                content: "•";
-                display: inline flow-root;
-                width: 1em;
-                text-align: center;
-            }
-        }
+  .entry-section {
+    > h2 {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-border);
     }
+
+    h3 {
+      display: inline flow-root;
+      margin: 8px 0 4px 12px;
+
+      &::before {
+        content: "•";
+        display: inline flow-root;
+        width: 1em;
+        text-align: center;
+      }
+    }
+  }
 </style>

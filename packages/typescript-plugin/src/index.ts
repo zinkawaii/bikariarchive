@@ -2,12 +2,12 @@ import { createLanguageServicePlugin } from "@volar/typescript/lib/quickstart/cr
 import { createLanguagePlugin } from "./languagePlugin";
 
 export default createLanguageServicePlugin((ts, info) => {
-    return {
-        languagePlugins: [
-            createLanguagePlugin(
-                info.project.getCompilerOptions(),
-                info.config,
-            ),
-        ],
-    };
+  return {
+    languagePlugins: [
+      createLanguagePlugin(
+        info.project.getCompilerOptions(),
+        info.config,
+      ),
+    ],
+  };
 });

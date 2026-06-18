@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-    import type { EntryDetail } from "@bikari/article";
-    import { LazyEntryKnownAbility, LazyEntryStarredAbility } from "#components";
+  import type { EntryDetail } from "@bikari/article";
+  import { LazyEntryKnownAbility, LazyEntryStarredAbility } from "#components";
 
-    defineProps<EntryDetail>();
+  defineProps<EntryDetail>();
 
-    const components = {
-        LazyEntryKnownAbility,
-        LazyEntryStarredAbility,
-    };
+  const components = {
+    LazyEntryKnownAbility,
+    LazyEntryStarredAbility,
+  };
 </script>
 
 <template>
-    <entry-section :title>
-        <novel-article as="div" :body="content" :components/>
-    </entry-section>
+  <entry-section :title>
+    <novel-article as="div" :body="content" :components/>
+  </entry-section>
 </template>

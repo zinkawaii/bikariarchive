@@ -8,61 +8,61 @@ import type { VFile } from "vfile";
 import { appendExtensions } from "./utils";
 
 declare module "vfile" {
-    interface DataMap {
-        frontmatters: Record<string, unknown>[];
-    }
+  interface DataMap {
+    frontmatters: Record<string, unknown>[];
+  }
 }
 
 declare module "mdast" {
-    interface RootContentMap {
-        frontmatter: Frontmatter;
-    }
+  interface RootContentMap {
+    frontmatter: Frontmatter;
+  }
 }
 
 interface Frontmatter extends Node {
-    type: "frontmatter";
+  type: "frontmatter";
 }
 
 interface Options {
-    fallthrough?: boolean;
+  fallthrough?: boolean;
 }
 
 export default function(this: Processor, options?: Options & Matter) {
-    appendExtensions(this, {
-        micromark: frontmatter(options),
-        fromMarkdown: frontmatterFromMarkdown(options),
-    });
+  appendExtensions(this, {
+    micromark: frontmatter(options),
+    fromMarkdown: frontmatterFromMarkdown(options),
+  });
 
-    return (tree: Root, file: VFile) => {
-        const frontmatters: Record<string, unknown>[] = [];
-        file.data.frontmatters = frontmatters;
+  return (tree: Root, file: VFile) => {
+    const frontmatters: Record<string, unknown>[] = [];
+    file.data.frontmatters = frontmatters;
 
-        if (tree.children[0]?.type !== "yaml") {
-            tree.children.unshift({
-                type: "yaml",
-                value: "",
-            });
-        }
+    if (tree.children[0]?.type !== "yaml") {
+      tree.children.unshift({
+        type: "yaml",
+        value: "",
+      });
+    }
 
-        visit(tree, "yaml", (node, index, parent) => {
-            if (parent === void 0 || index === void 0) {
-                return;
-            }
+    visit(tree, "yaml", (node, index, parent) => {
+      if (parent === void 0 || index === void 0) {
+        return;
+      }
 
-            const data = YAML.parse(node.value) ?? {};
-            frontmatters.push(data);
+      const data = YAML.parse(node.value) ?? {};
+      frontmatters.push(data);
 
-            if (options?.fallthrough) {
-                parent.children.splice(index, 1, {
-                    type: "frontmatter",
-                    data: {
-                        hName: "frontmatter",
-                        hProperties: {
-                            order: frontmatters.length - 1,
-                        },
-                    },
-                });
-            }
+      if (options?.fallthrough) {
+        parent.children.splice(index, 1, {
+          type: "frontmatter",
+          data: {
+            hName: "frontmatter",
+            hProperties: {
+              order: frontmatters.length - 1,
+            },
+          },
         });
-    };
+      }
+    });
+  };
 }

@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-    useHead({
-        title: "站点协议",
-    });
+  useHead({
+    title: "站点协议",
+  });
 </script>
 
 <template>
-    <meow-widget title="站点协议">
-        <novel-article :body="$articles.default" variant="article"/>
-    </meow-widget>
+  <meow-widget title="站点协议">
+    <novel-article :body="$articles.default" variant="article"/>
+  </meow-widget>
 </template>
 
 <article lang="md">

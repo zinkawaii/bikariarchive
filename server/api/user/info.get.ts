@@ -8,36 +8,36 @@ export type GetUserInfoQuery = typeof schema.inferIn;
 export interface GetUserInfoResponse extends PostLoginResponse {}
 
 const schema = type({
-    uid: "string.numeric.parse?",
+  uid: "string.numeric.parse?",
 });
 
 export default defineJEventHandler<{
-    query: GetUserInfoQuery;
+  query: GetUserInfoQuery;
 }, GetUserInfoResponse>(async (event, res) => {
-    const session = await readSession(event);
-    const { uid = session.data.uid } = schema.assert(getQuery(event));
+  const session = await readSession(event);
+  const { uid = session.data.uid } = schema.assert(getQuery(event));
 
-    //连接数据库
-    await connectMongoose();
+  //连接数据库
+  await connectMongoose();
 
-    const qUser = await UserDataModel.findOne({
-        uid,
-    }, "nickname email identity sign");
+  const qUser = await UserDataModel.findOne({
+    uid,
+  }, "nickname email identity sign");
 
-    //用户不存在
-    if (!qUser) {
-        throw 1;
-    }
+  //用户不存在
+  if (!qUser) {
+    throw 1;
+  }
 
-    res.uid = uid!;
-    res.nickname = qUser.nickname;
-    res.avatar = generateAvatarUrl(qUser.email);
-    res.sign = qUser.sign;
+  res.uid = uid!;
+  res.nickname = qUser.nickname;
+  res.avatar = generateAvatarUrl(qUser.email);
+  res.sign = qUser.sign;
 
-    try {
-        //只有本人才能获取的信息
-        validateMyself(session.data, uid!);
-        res.identity = qUser.identity;
-    }
-    catch {}
+  try {
+    //只有本人才能获取的信息
+    validateMyself(session.data, uid!);
+    res.identity = qUser.identity;
+  }
+  catch {}
 });

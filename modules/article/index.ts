@@ -5,41 +5,41 @@ import { buildSearch } from "./search";
 import vite from "./vite";
 
 export default defineNuxtModule({
-    meta: {
-        name: "@bikari/article",
-    },
-    async setup(options, nuxt) {
-        const { resolve } = createResolver(import.meta.url);
+  meta: {
+    name: "@bikari/article",
+  },
+  async setup(options, nuxt) {
+    const { resolve } = createResolver(import.meta.url);
 
-        addPlugin({ src: resolve("runtime/client") });
+    addPlugin({ src: resolve("runtime/client") });
 
-        addServerPlugin(resolve("runtime/server"));
+    addServerPlugin(resolve("runtime/server"));
 
-        addVitePlugin(vite);
+    addVitePlugin(vite);
 
-        nuxt.options.alias["#data"] = join(nuxt.options.rootDir, ".data");
+    nuxt.options.alias["#data"] = join(nuxt.options.rootDir, ".data");
 
-        (nuxt.options.nitro.serverAssets ??= []).push({
-            baseName: "data",
-            dir: ".data",
-            pattern: "{json,novel,search}/**/*.json",
-        });
+    (nuxt.options.nitro.serverAssets ??= []).push({
+      baseName: "data",
+      dir: ".data",
+      pattern: "{json,novel,search}/**/*.json",
+    });
 
-        ((nuxt.options.typescript.tsConfig.vueCompilerOptions ??= {}).plugins ??= []).push({
-            name: relative(nuxt.options.buildDir, resolve("volar.cts")),
-        });
+    ((nuxt.options.typescript.tsConfig.vueCompilerOptions ??= {}).plugins ??= []).push({
+      name: relative(nuxt.options.buildDir, resolve("volar.cts")),
+    });
 
-        const disposables: (() => Promise<unknown>)[] = [];
-        for (const processor of [article, entry, update]) {
-            await processor.build();
-            if (nuxt.options.dev) {
-                disposables.push(processor.watch());
-            }
-        }
-        await buildSearch();
+    const disposables: (() => Promise<unknown>)[] = [];
+    for (const processor of [article, entry, update]) {
+      await processor.build();
+      if (nuxt.options.dev) {
+        disposables.push(processor.watch());
+      }
+    }
+    await buildSearch();
 
-        nuxt.hook("close", async () => {
-            await Promise.all(disposables.map((dispose) => dispose()));
-        });
-    },
+    nuxt.hook("close", async () => {
+      await Promise.all(disposables.map((dispose) => dispose()));
+    });
+  },
 });

@@ -3,47 +3,47 @@
 @use "sass:string";
 
 $breakpoints: (
-    "xs": 425px,
-    "sm": 596px,
-    "md": 768px,
-    "lg": 1024px,
+  "xs": 425px,
+  "sm": 596px,
+  "md": 768px,
+  "lg": 1024px,
 );
 
 @mixin viewport($media) {
-    $then: string.slice($media, 1, 1);
-    $operator: "<";
+  $then: string.slice($media, 1, 1);
+  $operator: "<";
 
-    @if $then == ">" {
-        $media: string.slice($media, 2);
-        $operator: ">=";
-    }
+  @if $then == ">" {
+    $media: string.slice($media, 2);
+    $operator: ">=";
+  }
 
-    $value: map.get($breakpoints, $media);
+  $value: map.get($breakpoints, $media);
 
-    @if $media == "md" {
-        @container main (width #{$operator} #{$value}) {
-            @content;
-        }
+  @if $media == "md" {
+    @container main (width #{$operator} #{$value}) {
+      @content;
     }
-    @else {
-        @media (width #{$operator} #{$value}) {
-            @content;
-        }
+  }
+  @else {
+    @media (width #{$operator} #{$value}) {
+      @content;
     }
+  }
 }
 
 $themes: ("hatsusora", "ayame", "sakura");
 
 @mixin theme() {
-    @each $theme in $themes {
-        [theme="#{$theme}"] & {
-            @content($theme);
-        }
+  @each $theme in $themes {
+    [theme="#{$theme}"] & {
+      @content($theme);
     }
+  }
 }
 
 @mixin dark() {
-    [z-dark] & {
-        @content;
-    }
+  [z-dark] & {
+    @content;
+  }
 }

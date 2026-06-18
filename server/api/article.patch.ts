@@ -8,76 +8,76 @@ import { UserDataModel } from "#server/models/UserData";
 export type PatchArticleBody = typeof schema.inferIn;
 
 export interface PatchArticleResponse {
-    count: number;
+  count: number;
 }
 
 const schema = type({
-    token: "string",
+  token: "string",
 });
 
 export default defineJEventHandler<{
-    body: PatchArticleBody;
+  body: PatchArticleBody;
 }, PatchArticleResponse>(async (event, res) => {
-    const config = useRuntimeConfig();
-    const session = await readSession(event);
-    const { token } = schema.assert(await event.req.json());
+  const config = useRuntimeConfig();
+  const session = await readSession(event);
+  const { token } = schema.assert(await event.req.json());
 
-    //连接数据库
-    await connectMongoose();
+  //连接数据库
+  await connectMongoose();
 
-    const ip = getRequestIP(event, { xForwardedFor: true });
-    const time = new Date();
+  const ip = getRequestIP(event, { xForwardedFor: true });
+  const time = new Date();
 
-    //获取用户
-    const user = await UserDataModel.findOne({
-        uid: session.data.uid,
+  //获取用户
+  const user = await UserDataModel.findOne({
+    uid: session.data.uid,
+  });
+
+  try {
+    const { novel, index } = JSON.parse(
+      AES.decrypt(token, config.article.key).toString(Utf8),
+    );
+
+    //添加阅读记录
+    await ReadRecordModel.create({
+      ip,
+      time,
+      novel,
+      index,
+      user: user?._id,
     });
 
-    try {
-        const { novel, index } = JSON.parse(
-            AES.decrypt(token, config.article.key).toString(Utf8),
-        );
-
-        //添加阅读记录
-        await ReadRecordModel.create({
-            ip,
-            time,
-            novel,
-            index,
-            user: user?._id,
-        });
-
-        //获取阅读量
-        const qCounts = await ReadRecordModel.aggregate<{ count: number }>([
-            {
-                $match: {
-                    novel,
-                    index,
-                },
+    //获取阅读量
+    const qCounts = await ReadRecordModel.aggregate<{ count: number }>([
+      {
+        $match: {
+          novel,
+          index,
+        },
+      },
+      {
+        $group: {
+          _id: {
+            ip: "$ip",
+            window: {
+              $dateTrunc: {
+                date: "$time",
+                unit: "hour",
+                binSize: 8,
+              },
             },
-            {
-                $group: {
-                    _id: {
-                        ip: "$ip",
-                        window: {
-                            $dateTrunc: {
-                                date: "$time",
-                                unit: "hour",
-                                binSize: 8,
-                            },
-                        },
-                    },
-                },
-            },
-            {
-                $count: "count",
-            },
-        ]);
+          },
+        },
+      },
+      {
+        $count: "count",
+      },
+    ]);
 
-        res.count = qCounts.length ? qCounts[0].count : 0;
-    }
-    catch {
-        //代币解析错误
-        throw 1;
-    }
+    res.count = qCounts.length ? qCounts[0].count : 0;
+  }
+  catch {
+    //代币解析错误
+    throw 1;
+  }
 });

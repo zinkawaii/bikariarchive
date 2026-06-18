@@ -11,28 +11,29 @@ packages:
 
 define:
   - &bikariya ^0.0.8
-  - &oxc ^0.134.0
+  - &oxc ^0.136.0
   - &shiki ^4.2.0
-  - &vls ^3.3.3
+  - &vls ^3.3.5
   - &volar 2.4.28
   - &vueuse ^14.3.0
 
 overrides:
+  "@dxup/nuxt": ^0.5.0
   "@nuxt/kit": npm:@nuxt/kit-nightly@5x
-  esbuild: ^0.28.0
+  esbuild: ^0.28.1
   h3: 2.0.1-rc.22
   nuxt: npm:nuxt-nightly@5x
+  nuxtseo-layer-devtools: link:???
   oxc-minify: *oxc
   oxc-parser: *oxc
   oxc-transform: *oxc
-  rolldown: ^1.1.0
-  tar-stream>bare-fs: link:???
+  rolldown: ^1.1.1
+  sharp: ^0.35.1
   vite: ^8.0.16
 
 patchedDependencies:
   "@nuxt/icon": patches/@nuxt__icon.patch
   "@nuxt/image": patches/@nuxt__image.patch
-  "@nuxt/nitro-server-nightly": patches/@nuxt__nitro-server-nightly.patch
   "@nuxtjs/robots": patches/@nuxtjs__robots.patch
   "@nuxtjs/sitemap": patches/@nuxtjs__sitemap.patch
   "@pinia/nuxt": patches/@pinia__nuxt.patch
@@ -45,7 +46,7 @@ patchedDependencies:
 
 catalogs:
   build:
-    tsdown: ^0.22.2
+    tsdown: ^0.22.3
     typescript: ^6.0.3
   content:
     kerria: ^0.5.0
@@ -66,14 +67,14 @@ catalogs:
   css:
     sass-embedded: ^1.100.0
   database:
-    mongoose: ^9.6.3
+    mongoose: ^9.7.1
   iconify:
     "@iconify-json/fa7-solid": ^1.2.4
   lint:
-    "@zinkawaii/eslint-config": ^0.4.3
-    "@zinkawaii/stylelint-config": ^0.4.0
-    eslint: ^10.4.1
-    stylelint: ^17.12.0
+    "@zinkawaii/eslint-config": ^0.4.5
+    "@zinkawaii/stylelint-config": ^0.4.1
+    eslint: ^10.5.0
+    stylelint: ^17.13.0
   nuxt:
     "@bikariya/image-viewer": *bikariya
     "@bikariya/modals": *bikariya
@@ -82,22 +83,22 @@ catalogs:
     "@nuxt/fonts": ^0.14.0
     "@nuxt/icon": ^2.2.3
     "@nuxt/image": ^2.0.0
-    "@nuxtjs/seo": ^5.1.3
+    "@nuxtjs/seo": ^5.3.0
     "@pinia/nuxt": ^0.11.3
     "@vueuse/nuxt": *vueuse
-    nuxt: ^4.4.7
+    nuxt: ^4.4.8
   test:
-    vitest: ^4.1.8
+    vitest: ^4.1.9
   types:
-    "@types/node": ^25.9.2
+    "@types/node": ^25.9.3
     "@zinkawaii/tsconfig": ^0.1.0
   utils:
-    "@aws-sdk/client-s3": ^3.1063.0
-    "@aws-sdk/s3-request-presigner": ^3.1063.0
+    "@aws-sdk/client-s3": ^3.1071.0
+    "@aws-sdk/s3-request-presigner": ^3.1071.0
     "@clack/prompts": ^1.5.1
     "@shikijs/transformers": *shiki
     animejs: ^4.4.1
-    arktype: ^2.2.0
+    arktype: ^2.2.1
     bgmt: ^0.1.3
     chokidar: ^5.0.0
     consola: ^3.4.2
@@ -116,7 +117,7 @@ catalogs:
     tinyglobby: ^0.2.17
     ufo: ^1.6.4
     unemail: ^0.4.1
-    unrun: ^0.3.0
+    unrun: ^0.3.1
     uqr: ^0.1.3
     video-extensions: ^2.0.0
     yaml: ^2.9.0
@@ -130,7 +131,7 @@ catalogs:
     "@vueuse/router": *vueuse
     pinia: ^3.0.4
     pinia-plugin-persistedstate: ^4.7.1
-    vue: ^3.5.35
+    vue: ^3.5.38
     vue-component-type-helpers: *vls
     vue-router: ^5.1.0
     vue-tsc: *vls

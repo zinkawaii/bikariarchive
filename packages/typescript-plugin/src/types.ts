@@ -8,23 +8,23 @@ export type Code = string | [
 ];
 
 export interface Config {
-    mappings: Mapping[];
+  mappings: Mapping[];
 }
 
 export interface Mapping {
-    frontmatter: Import;
-    patterns: string[];
+  frontmatter: Import;
+  patterns: string[];
 }
 
 export type Import = [specifier: string, type: string] | [];
 
 export interface Frontmatter {
-    root: Document;
-    offset: number;
+  root: Document;
+  offset: number;
 }
 
 export interface Expression {
-    type: "slot" | "interpolation";
-    source: string;
-    offset: number;
+  type: "slot" | "interpolation";
+  source: string;
+  offset: number;
 }

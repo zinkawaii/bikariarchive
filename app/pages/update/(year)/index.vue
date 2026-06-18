@@ -1,139 +1,139 @@
 <script lang="ts" setup>
-    import type { JUpdate } from "@bikari/article";
+  import type { JUpdate } from "@bikari/article";
 
-    const { year } = defineProps<{
-        year: number;
-    }>();
+  const { year } = defineProps<{
+    year: number;
+  }>();
 
-    definePageMeta({
-        name: "update",
-        path: ":year()",
-        props: true,
-    });
+  definePageMeta({
+    name: "update",
+    path: ":year()",
+    props: true,
+  });
 
-    const { status, data } = useAsyncData<JUpdate[]>(`update:${year}`, async () => {
-        const module = await import(`#data/update/${year}.json`);
-        return module.default;
-    }, {
-        default: () => [],
-    });
+  const { status, data } = useAsyncData<JUpdate[]>(`update:${year}`, async () => {
+    const module = await import(`#data/update/${year}.json`);
+    return module.default;
+  }, {
+    default: () => [],
+  });
 
-    const { page, total, sizes, paginatedList } = usePagination(data, {
-        sizes: 24,
-    });
+  const { page, total, sizes, paginatedList } = usePagination(data, {
+    sizes: 24,
+  });
 </script>
 
 <template>
-    <mb-skeleton v-if="status !== `success`" class="update-skeleton"/>
-    <ul v-else class="update-list">
-        <li v-for="{ date, version, items } in paginatedList" class="update-item">
-            <hgroup class="update-title">
-                <h2><time>{{ date }}</time></h2>
-                <code v-if="version" class="update-version">v{{ version }}</code>
-            </hgroup>
-            <div class="update-content">
-                <p v-for="{ type, scope, content } in items" class="p-small">
-                    <span class="update-type">{{ type }}</span>
-                    <span v-if="scope" class="update-scope">{{ scope }}</span>
-                    <novel-article as="span" :body="content"/>
-                </p>
-            </div>
-        </li>
-    </ul>
-    <mb-pagination :total :sizes scroll-target="body" v-model="page"/>
+  <mb-skeleton v-if="status !== `success`" class="update-skeleton"/>
+  <ul v-else class="update-list">
+    <li v-for="{ date, version, items } in paginatedList" class="update-item">
+      <hgroup class="update-title">
+        <h2><time>{{ date }}</time></h2>
+        <code v-if="version" class="update-version">v{{ version }}</code>
+      </hgroup>
+      <div class="update-content">
+        <p v-for="{ type, scope, content } in items" class="p-small">
+          <span class="update-type">{{ type }}</span>
+          <span v-if="scope" class="update-scope">{{ scope }}</span>
+          <novel-article as="span" :body="content"/>
+        </p>
+      </div>
+    </li>
+  </ul>
+  <mb-pagination :total :sizes scroll-target="body" v-model="page"/>
 </template>
 
 <style lang="scss" scoped>
-    .update-skeleton {
-        margin-block: var(--meow-medium);
+  .update-skeleton {
+    margin-block: var(--meow-medium);
+  }
+
+  .update-list {
+    margin-block: 16px;
+    padding-left: 32px;
+
+    @include viewport("xs") {
+      padding-left: 24px;
+    }
+  }
+
+  .update-item {
+    position: relative;
+    padding-block: 12px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 0 -18px;
+      width: 2px;
+      background-image:
+        linear-gradient(
+          var(--color-theme-dark) 23px,
+          transparent 0,
+          transparent 36px,
+          var(--color-theme-dark) 0
+        );
     }
 
-    .update-list {
-        margin-block: 16px;
-        padding-left: 32px;
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 22px 0 0 -24px;
+      width: 14px;
+      aspect-ratio: 1;
+      border: 2px solid var(--color-theme-dark);
+      border-radius: var(--rounded-full);
+    }
+  }
 
-        @include viewport("xs") {
-            padding-left: 24px;
-        }
+  .update-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-left: 8px;
+  }
+
+  .update-version {
+    line-height: 1.4;
+  }
+
+  .update-content {
+    --shadow: 6%;
+
+    padding: 12px 16px;
+    border-radius: 24px;
+    box-shadow: 6px 6px rgb(0 0 0 / var(--shadow));
+    background-color: var(--color-background);
+
+    @include dark {
+      --shadow: 18%;
+    }
+  }
+
+  .update-type {
+    margin-right: 4px;
+    font-family: var(--font-monospace);
+    color: var(--color-theme-text);
+
+    &::before {
+      content: "(";
+      color: var(--color-info);
     }
 
-    .update-item {
-        position: relative;
-        padding-block: 12px;
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0 0 0 -18px;
-            width: 2px;
-            background-image:
-                linear-gradient(
-                    var(--color-theme-dark) 23px,
-                    transparent 0,
-                    transparent 36px,
-                    var(--color-theme-dark) 0
-                );
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 22px 0 0 -24px;
-            width: 14px;
-            aspect-ratio: 1;
-            border: 2px solid var(--color-theme-dark);
-            border-radius: var(--rounded-full);
-        }
+    &::after {
+      content: ")";
+      color: var(--color-info);
     }
+  }
 
-    .update-title {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 8px;
-        padding-left: 8px;
+  .update-scope {
+    margin-right: 4px;
+    font-family: var(--font-monospace);
+    color: var(--color-info);
+
+    &::after {
+      content: ":";
     }
-
-    .update-version {
-        line-height: 1.4;
-    }
-
-    .update-content {
-        --shadow: 6%;
-
-        padding: 12px 16px;
-        border-radius: 24px;
-        box-shadow: 6px 6px rgb(0 0 0 / var(--shadow));
-        background-color: var(--color-background);
-
-        @include dark {
-            --shadow: 18%;
-        }
-    }
-
-    .update-type {
-        margin-right: 4px;
-        font-family: var(--font-monospace);
-        color: var(--color-theme-text);
-
-        &::before {
-            content: "(";
-            color: var(--color-info);
-        }
-
-        &::after {
-            content: ")";
-            color: var(--color-info);
-        }
-    }
-
-    .update-scope {
-        margin-right: 4px;
-        font-family: var(--font-monospace);
-        color: var(--color-info);
-
-        &::after {
-            content: ":";
-        }
-    }
+  }
 </style>

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-    definePageMeta({
-        comment: true,
-    });
+  definePageMeta({
+    comment: true,
+  });
 
-    useHead({
-        title: "说说",
-    });
+  useHead({
+    title: "说说",
+  });
 </script>

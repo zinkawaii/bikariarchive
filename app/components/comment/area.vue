@@ -1,58 +1,58 @@
 <script lang="ts" setup>
-    import type { UseIntersectionObserverReturn } from "@vueuse/core";
+  import type { UseIntersectionObserverReturn } from "@vueuse/core";
 
-    const commentStore = useCommentStore();
-    const route = useRoute();
-    const rootComp = useTemplateRef("root");
+  const commentStore = useCommentStore();
+  const route = useRoute();
+  const rootComp = useTemplateRef("root");
 
-    const { comments, totalCount, mainCount, isEmpty, page } = storeToRefs(commentStore);
+  const { comments, totalCount, mainCount, isEmpty, page } = storeToRefs(commentStore);
 
-    //相对视口懒加载
-    let observer: UseIntersectionObserverReturn;
-    watchImmediate(() => route.path, () => {
-        //清空上一页的评论
-        commentStore.clear();
+  //相对视口懒加载
+  let observer: UseIntersectionObserverReturn;
+  watchImmediate(() => route.path, () => {
+    //清空上一页的评论
+    commentStore.clear();
 
-        //终止未触发的观测器
-        observer?.stop();
+    //终止未触发的观测器
+    observer?.stop();
 
-        //更新观测器
-        observer = useIntersectionObserver(rootComp, ([{ isIntersecting }]) => {
-            if (isIntersecting) {
-                commentStore.update();
-                observer.stop();
-            }
-        });
+    //更新观测器
+    observer = useIntersectionObserver(rootComp, ([{ isIntersecting }]) => {
+      if (isIntersecting) {
+        commentStore.update();
+        observer.stop();
+      }
     });
+  });
 </script>
 
 <template>
-    <meow-widget ref="root" class="comment-area">
-        <hgroup class="comment-title">
-            <h2>评论<span class="comment-count">{{ totalCount }}</span></h2>
-            <meow-button
-                icon="fa7-solid:comment-dots"
-                @click="commentStore.requirePost()"
-            >发表评论</meow-button>
-        </hgroup>
-        <mb-skeleton v-if="isEmpty"/>
-        <comment-item v-for="item in comments" :key="item.id" :data="item"/>
-        <mb-pagination v-if="mainCount" :total="mainCount" scroll-target=".comment-area" v-model="page"/>
-    </meow-widget>
+  <meow-widget ref="root" class="comment-area">
+    <hgroup class="comment-title">
+      <h2>评论<span class="comment-count">{{ totalCount }}</span></h2>
+      <meow-button
+        icon="fa7-solid:comment-dots"
+        @click="commentStore.requirePost()"
+      >发表评论</meow-button>
+    </hgroup>
+    <mb-skeleton v-if="isEmpty"/>
+    <comment-item v-for="item in comments" :key="item.id" :data="item"/>
+    <mb-pagination v-if="mainCount" :total="mainCount" scroll-target=".comment-area" v-model="page"/>
+  </meow-widget>
 </template>
 
 <style lang="scss" scoped>
-    .comment-title {
-        display: flex;
-        justify-content: space-between;
-    }
+  .comment-title {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    .comment-count {
-        margin-left: 0.5em;
-        color: var(--color-info);
-    }
+  .comment-count {
+    margin-left: 0.5em;
+    color: var(--color-info);
+  }
 
-    .mb-skeleton, .mb-pagination {
-        margin-top: 21px;
-    }
+  .mb-skeleton, .mb-pagination {
+    margin-top: 21px;
+  }
 </style>

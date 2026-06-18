@@ -1,305 +1,305 @@
 * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
 }
 
 *, ::before, ::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :root {
-    overflow: hidden scroll;
-    font-family: var(--font-primary);
-    font-size: 16px;
-    line-height: 1.4;
-    text-autospace: normal;
-    text-size-adjust: 100%;
-    color: var(--color-text-primary);
-    scroll-behavior: smooth;
-    interpolate-size: allow-keywords;
+  overflow: hidden scroll;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.4;
+  text-autospace: normal;
+  text-size-adjust: 100%;
+  color: var(--color-text-primary);
+  scroll-behavior: smooth;
+  interpolate-size: allow-keywords;
 }
 
 h1, h2, h3 {
-    font-family: var(--font-smooth);
+  font-family: var(--font-smooth);
 }
 
 h1 {
-    font-size: 32px;
+  font-size: 32px;
 }
 
 h2 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 h3 {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 code {
-    padding: 1px 4px;
-    border: 1px solid var(--color-border-lighter);
-    border-radius: 0.25em;
-    box-decoration-break: clone;
-    background-color: color-mix(in srgb, var(--color-gray-700), transparent 66%);
-    font-family: var(--font-monospace);
-    font-size: 0.875em;
-    color: var(--color-theme-text);
+  padding: 1px 4px;
+  border: 1px solid var(--color-border-lighter);
+  border-radius: 0.25em;
+  box-decoration-break: clone;
+  background-color: color-mix(in srgb, var(--color-gray-700), transparent 66%);
+  font-family: var(--font-monospace);
+  font-size: 0.875em;
+  color: var(--color-theme-text);
 }
 
 code, pre {
-    text-autospace: no-autospace;
+  text-autospace: no-autospace;
 }
 
 kbd {
-    display: inline flow-root;
-    padding-inline: 0.25em;
-    border-bottom: 0.15em solid var(--color-gray-600);
-    border-radius: 0.25em;
-    background-color: var(--color-gray-800);
-    font-family: var(--font-monospace);
-    font-size: 0.875em;
-    line-height: 1.4;
-    vertical-align: 0.1em;
-    text-indent: 0;
-    color: var(--color-text-secondary);
-    transition: all 0.1s;
-    user-select: none;
+  display: inline flow-root;
+  padding-inline: 0.25em;
+  border-bottom: 0.15em solid var(--color-gray-600);
+  border-radius: 0.25em;
+  background-color: var(--color-gray-800);
+  font-family: var(--font-monospace);
+  font-size: 0.875em;
+  line-height: 1.4;
+  vertical-align: 0.1em;
+  text-indent: 0;
+  color: var(--color-text-secondary);
+  transition: all 0.1s;
+  user-select: none;
 
-    &:active {
-        border-bottom-color: var(--color-theme-dark);
-        color: var(--color-theme-text);
-        translate: 0 0.05em;
-    }
+  &:active {
+    border-bottom-color: var(--color-theme-dark);
+    color: var(--color-theme-text);
+    translate: 0 0.05em;
+  }
 }
 
 img, video {
-    width: 100%;
-    height: auto;
-    vertical-align: middle;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
 }
 
 rt {
-    font-size: 0.6em;
+  font-size: 0.6em;
 }
 
 sub, sup {
-    font-size: 0.75em;
+  font-size: 0.75em;
 }
 
 ol, ul, menu {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 button, label, select {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button, input, textarea, select {
-    background-color: transparent;
-    color: inherit;
+  background-color: transparent;
+  color: inherit;
 }
 
 option {
-    background-color: var(--color-background);
+  background-color: var(--color-background);
 }
 
 input {
-    min-width: 0;
+  min-width: 0;
 }
 
 textarea {
-    resize: none;
+  resize: none;
 }
 
 :focus {
-    outline: none;
+  outline: none;
 }
 
 ::highlight(danger) {
-    color: var(--color-danger);
+  color: var(--color-danger);
 }
 
 ::placeholder {
-    color: var(--color-info);
+  color: var(--color-info);
 }
 
 ::selection {
-    background-color: var(--color-selection-bg);
-    color: white;
+  background-color: var(--color-selection-bg);
+  color: white;
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--color-background);
+  background-color: var(--color-background);
 
-    :not(:root) > & {
-        border-radius: 5px;
-    }
+  :not(:root) > & {
+    border-radius: 5px;
+  }
 }
 
 ::-webkit-scrollbar-thumb {
-    border: 2px solid transparent;
-    border-radius: 5px;
-    background-clip: content-box;
-    background-color: var(--color-theme-dark);
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-clip: content-box;
+  background-color: var(--color-theme-dark);
 }
 
 [type="number"] {
-    appearance: textfield;
+  appearance: textfield;
 
-    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
-        appearance: none;
-    }
+  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+    appearance: none;
+  }
 }
 
 [type="search"]::-webkit-search-cancel-button {
-    appearance: none;
+  appearance: none;
 }
 
 /* ---------------------------------------------------------------- */
 
 /* 通用内容部件 */
 .content-widget {
-    border: 2px solid var(--color-theme-dark);
-    border-radius: 16px;
-    box-shadow: var(--box-shadow);
-    background-color: var(--color-background-alpha);
+  border: 2px solid var(--color-theme-dark);
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+  background-color: var(--color-background-alpha);
 
-    @include viewport("sm") {
-        .nakami & {
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-            background-color: transparent;
-        }
+  @include viewport("sm") {
+    .nakami & {
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      background-color: transparent;
     }
+  }
 }
 
 /* 通用内容盒 */
 .content-table {
-    padding: 16px;
-    border: 1px solid var(--color-border-lighter);
-    border-left: 32px solid var(--color-theme);
-    background-color: var(--color-background);
-    font-size: 14px;
+  padding: 16px;
+  border: 1px solid var(--color-border-lighter);
+  border-left: 32px solid var(--color-theme);
+  background-color: var(--color-background);
+  font-size: 14px;
 }
 
 .tag {
-    box-decoration-break: clone;
-    background-color: var(--color-gray-700);
-    color: var(--color-text-secondary);
+  box-decoration-break: clone;
+  background-color: var(--color-gray-700);
+  color: var(--color-text-secondary);
 
-    &:is(a):hover {
-        color: var(--color-theme-text);
-    }
+  &:is(a):hover {
+    color: var(--color-theme-text);
+  }
 }
 
 .p-small {
-    font-size: 14px;
-    line-height: 24px;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 .text-small {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .text-danger {
-    color: var(--color-danger);
+  color: var(--color-danger);
 }
 
 .text-gray {
-    color: var(--color-info);
+  color: var(--color-info);
 }
 
 .text-primary {
-    color: var(--color-theme-text);
+  color: var(--color-theme-text);
 }
 
 .text-secondary {
-    color: var(--color-text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-truncate {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .text-uppercase {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .no-scrollbar {
-    scrollbar-width: none;
+  scrollbar-width: none;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .sr-only {
-    display: none;
+  display: none;
 }
 
 /* ---------------------------------------------------------------- */
 
 /* 图标 */
 .iconify {
-    font-size: 1.2em;
-    vertical-align: sub;
+  font-size: 1.2em;
+  vertical-align: sub;
 }
 
 /* ---------------------------------------------------------------- */
 
 /* 代码高亮 */
 .shiki {
-    span {
-        background-color: var(--shiki-light-bg);
-        color: var(--shiki-light);
+  span {
+    background-color: var(--shiki-light-bg);
+    color: var(--shiki-light);
 
-        @include dark {
-            background-color: var(--shiki-dark-bg);
-            color: var(--shiki-dark);
-        }
+    @include dark {
+      background-color: var(--shiki-dark-bg);
+      color: var(--shiki-dark);
+    }
+  }
+
+  .indent {
+    display: inline flow-root;
+    position: relative;
+
+    &:empty {
+      left: var(--indent-offset);
+      height: 1lh;
+      vertical-align: bottom;
     }
 
-    .indent {
-        display: inline flow-root;
-        position: relative;
-
-        &:empty {
-            left: var(--indent-offset);
-            height: 1lh;
-            vertical-align: bottom;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            opacity: 0.4;
-            width: 1px;
-            height: 100%;
-            background-color: var(--color-border);
-        }
+    &::before {
+      content: "";
+      position: absolute;
+      opacity: 0.4;
+      width: 1px;
+      height: 100%;
+      background-color: var(--color-border);
     }
+  }
 }

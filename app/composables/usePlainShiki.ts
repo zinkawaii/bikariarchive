@@ -2,42 +2,42 @@ import { createPlainShiki, type MountPlainShikiOptions, type MountPlainShikiRetu
 import type { BundledLanguage, BundledTheme } from "shiki";
 
 export type UsePlainShikiOptions = Omit<MountPlainShikiOptions, "lang" | "themes"> & {
-    lang: MaybeRefOrGetter<BundledLanguage>;
-    themes: MaybeRefOrGetter<Record<string, BundledTheme>>;
+  lang: MaybeRefOrGetter<BundledLanguage>;
+  themes: MaybeRefOrGetter<Record<string, BundledTheme>>;
 };
 
 export function usePlainShiki(
-    el: MaybeRefOrGetter<HTMLElement | null | undefined>,
-    options: MountPlainShikiOptions,
+  el: MaybeRefOrGetter<HTMLElement | null | undefined>,
+  options: MountPlainShikiOptions,
 ) {
-    const target = toRef(el);
-    const lang = toRef(options.lang);
-    const themes = toRef(options.themes);
+  const target = toRef(el);
+  const lang = toRef(options.lang);
+  const themes = toRef(options.themes);
 
-    const shikiStore = useShikiStore();
+  const shikiStore = useShikiStore();
 
-    let plain: PlainShiki;
-    let ctx: MountPlainShikiReturns;
+  let plain: PlainShiki;
+  let ctx: MountPlainShikiReturns;
 
-    const { trigger } = watchTriggerable([target, lang, themes], async () => {
-        await shikiStore.loadLang(lang.value);
-        ctx?.dispose();
+  const { trigger } = watchTriggerable([target, lang, themes], async () => {
+    await shikiStore.loadLang(lang.value);
+    ctx?.dispose();
 
-        if (target.value) {
-            ctx = plain?.mount(target.value, {
-                ...shikiStore.options,
-                ...options,
-            });
-        }
-    });
+    if (target.value) {
+      ctx = plain?.mount(target.value, {
+        ...shikiStore.options,
+        ...options,
+      });
+    }
+  });
 
-    onMounted(async () => {
-        const shiki = await shikiStore.load();
-        plain = createPlainShiki(shiki);
-        trigger();
-    });
+  onMounted(async () => {
+    const shiki = await shikiStore.load();
+    plain = createPlainShiki(shiki);
+    trigger();
+  });
 
-    onUnmounted(() => {
-        ctx?.dispose();
-    });
+  onUnmounted(() => {
+    ctx?.dispose();
+  });
 }

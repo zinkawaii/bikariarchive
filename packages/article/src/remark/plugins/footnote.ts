@@ -4,8 +4,8 @@ import type { Processor } from "unified";
 import { appendExtensions } from "./utils";
 
 export default function(this: Processor) {
-    appendExtensions(this, {
-        micromark: gfmFootnote(),
-        fromMarkdown: gfmFootnoteFromMarkdown(),
-    });
+  appendExtensions(this, {
+    micromark: gfmFootnote(),
+    fromMarkdown: gfmFootnoteFromMarkdown(),
+  });
 }

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-    definePageMeta({
-        path: "/:path(.*)*",
-    });
+  definePageMeta({
+    path: "/:path(.*)*",
+  });
 </script>
 
 <template>
-    <not-found />
+  <not-found />
 </template>

@@ -1,3 +1,3 @@
 export interface BikariHooks {
-    "outline:update": (el: HTMLElement) => void;
+  "outline:update": (el: HTMLElement) => void;
 }

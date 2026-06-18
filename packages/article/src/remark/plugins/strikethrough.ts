@@ -4,11 +4,11 @@ import type { Processor } from "unified";
 import { appendExtensions } from "./utils";
 
 export default function(this: Processor) {
-    const options: Options = {
-        singleTilde: false,
-    };
-    appendExtensions(this, {
-        micromark: gfmStrikethrough(options),
-        fromMarkdown: gfmStrikethroughFromMarkdown(),
-    });
+  const options: Options = {
+    singleTilde: false,
+  };
+  appendExtensions(this, {
+    micromark: gfmStrikethrough(options),
+    fromMarkdown: gfmStrikethroughFromMarkdown(),
+  });
 }

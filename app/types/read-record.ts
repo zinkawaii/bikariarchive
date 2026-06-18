@@ -1,4 +1,4 @@
 export interface ReadRecord {
-    index: string;
-    title: string;
+  index: string;
+  title: string;
 }

@@ -1,55 +1,55 @@
 import defu from "defu";
 
 export const serverConfig = {
-    article: {
-        key: "<!-- ??? -->",
+  article: {
+    key: "<!-- ??? -->",
+  },
+  bitiful: {
+    baseUrl: "<!-- ??? -->",
+    bucket: "<!-- ??? -->",
+    accessKey: "<!-- ??? -->",
+    secretKey: "<!-- ??? -->",
+  },
+  comment: {
+    "/tweet": {
+      identity: 9,
     },
-    bitiful: {
-        baseUrl: "<!-- ??? -->",
-        bucket: "<!-- ??? -->",
-        accessKey: "<!-- ??? -->",
-        secretKey: "<!-- ??? -->",
+  },
+  mail: {
+    host: "<!-- ??? -->",
+    port: "<!-- ??? -->",
+    user: "<!-- ??? -->",
+    password: "<!-- ??? -->",
+  },
+  mongoose: {
+    uri: "<!-- ??? -->",
+    options: {
+      dbName: "<!-- ??? -->",
+      user: "<!-- ??? -->",
+      pass: "<!-- ??? -->",
     },
-    comment: {
-        "/tweet": {
-            identity: 9,
-        },
-    },
-    mail: {
-        host: "<!-- ??? -->",
-        port: "<!-- ??? -->",
-        user: "<!-- ??? -->",
-        password: "<!-- ??? -->",
-    },
-    mongoose: {
-        uri: "<!-- ??? -->",
-        options: {
-            dbName: "<!-- ??? -->",
-            user: "<!-- ??? -->",
-            pass: "<!-- ??? -->",
-        },
-    },
-    session: {
-        password: "<!-- ??? -->",
-    },
+  },
+  session: {
+    password: "<!-- ??? -->",
+  },
 };
 
 const client = {
-    global: {
-        title: "微光档案",
-        author: "山吹色御守",
-        description: "故事就是只为你一个人而存在的世界",
-        phrase: "うたかたなしあわせ",
-        subtitle: "微かな力を尽くして、光の届いた彼方へ",
-        avatar: "/garden/avatar/maestrale.webp",
-        favicon: "/garden/favicon.svg",
-    },
-    development: {
-        domain: "zinkawaii",
-    },
-    production: {
-        domain: "archive.bikari.top",
-    },
+  global: {
+    title: "微光档案",
+    author: "山吹色御守",
+    description: "故事就是只为你一个人而存在的世界",
+    phrase: "うたかたなしあわせ",
+    subtitle: "微かな力を尽くして、光の届いた彼方へ",
+    avatar: "/garden/avatar/maestrale.webp",
+    favicon: "/garden/favicon.svg",
+  },
+  development: {
+    domain: "zinkawaii",
+  },
+  production: {
+    domain: "archive.bikari.top",
+  },
 };
 
 const env = process.env.NODE_ENV as "development" | "production";

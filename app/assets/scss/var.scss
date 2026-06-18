@@ -1,86 +1,86 @@
 :root {
-    --color-text-primary     : rgb(30 31 33); /* 文本色 - 主要 */
-    --color-text-regular     : rgb(60 62 66); /* 文本色 - 常规 */
-    --color-text-secondary   : rgb(90 93 99); /* 文本色 - 次要 */
-    --color-text-disabled    : var(--color-gray-300); /* 文本色 - 禁用 */
-    --color-info             : var(--color-gray-100); /* 信息色 */
-    --color-link             : rgb(63 81 181); /* 超链接色 */
-    --color-danger           : rgb(245 64 64); /* 危险色 */
-    --color-success          : rgb(103 194 58); /* 安全色 */
-    --color-warning          : rgb(230 162 60); /* 警告色 */
-    --color-gray-50          : rgb(108 115 129);
-    --color-gray-100         : rgb(142 148 160);
-    --color-gray-200         : rgb(153 159 171);
-    --color-gray-300         : rgb(165 170 181);
-    --color-gray-400         : rgb(176 181 192);
-    --color-gray-500         : rgb(187 192 202);
-    --color-gray-600         : rgb(198 203 213);
-    --color-gray-700         : rgb(210 214 223);
-    --color-gray-800         : rgb(221 225 234);
-    --color-gray-900         : rgb(232 236 244);
-    --color-border           : var(--color-gray-400);
-    --color-border-light     : var(--color-gray-600);
-    --color-border-lighter   : var(--color-gray-700);
-    --color-border-dark      : var(--color-gray-100);
-    --color-border-darker    : var(--color-gray-50);
-    --color-background       : rgb(248 248 248); /* 背景色 */
-    --color-background-alpha : rgb(248 248 248 / 88%); /* 背景色 - 透明 */
-    --color-selection-bg     : rgb(119 184 233 / 66%); /* 选区背景色 */
-    --box-shadow             : 0 0 4px rgb(0 0 0 / 32%);
-    --box-shadow-dark        : 0 0 8px rgb(0 0 0 / 16%);
-    --box-shadow-darker      : 0 0 8px rgb(0 0 0 / 32%);
-    --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%);
-    --font-primary           : "Inter", "PingFang SC", "Noto Sans SC", sans-serif;
-    --font-monospace         : "JetBrains Mono", var(--font-primary);
-    --font-smooth            : "ChillRoundF", var(--font-primary);
-    --rounded-circle         : 100%;
-    --rounded-full           : calc(1px * infinity);
-    --size-min-width         : 320px;
+  --color-text-primary     : rgb(30 31 33); /* 文本色 - 主要 */
+  --color-text-regular     : rgb(60 62 66); /* 文本色 - 常规 */
+  --color-text-secondary   : rgb(90 93 99); /* 文本色 - 次要 */
+  --color-text-disabled    : var(--color-gray-300); /* 文本色 - 禁用 */
+  --color-info             : var(--color-gray-100); /* 信息色 */
+  --color-link             : rgb(63 81 181); /* 超链接色 */
+  --color-danger           : rgb(245 64 64); /* 危险色 */
+  --color-success          : rgb(103 194 58); /* 安全色 */
+  --color-warning          : rgb(230 162 60); /* 警告色 */
+  --color-gray-50          : rgb(108 115 129);
+  --color-gray-100         : rgb(142 148 160);
+  --color-gray-200         : rgb(153 159 171);
+  --color-gray-300         : rgb(165 170 181);
+  --color-gray-400         : rgb(176 181 192);
+  --color-gray-500         : rgb(187 192 202);
+  --color-gray-600         : rgb(198 203 213);
+  --color-gray-700         : rgb(210 214 223);
+  --color-gray-800         : rgb(221 225 234);
+  --color-gray-900         : rgb(232 236 244);
+  --color-border           : var(--color-gray-400);
+  --color-border-light     : var(--color-gray-600);
+  --color-border-lighter   : var(--color-gray-700);
+  --color-border-dark      : var(--color-gray-100);
+  --color-border-darker    : var(--color-gray-50);
+  --color-background       : rgb(248 248 248); /* 背景色 */
+  --color-background-alpha : rgb(248 248 248 / 88%); /* 背景色 - 透明 */
+  --color-selection-bg     : rgb(119 184 233 / 66%); /* 选区背景色 */
+  --box-shadow             : 0 0 4px rgb(0 0 0 / 32%);
+  --box-shadow-dark        : 0 0 8px rgb(0 0 0 / 16%);
+  --box-shadow-darker      : 0 0 8px rgb(0 0 0 / 32%);
+  --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%);
+  --font-primary           : "Inter", "PingFang SC", "Noto Sans SC", sans-serif;
+  --font-monospace         : "JetBrains Mono", var(--font-primary);
+  --font-smooth            : "ChillRoundF", var(--font-primary);
+  --rounded-circle         : 100%;
+  --rounded-full           : calc(1px * infinity);
+  --size-min-width         : 320px;
 
-    color-scheme: light only;
+  color-scheme: light only;
 
-    @media (resolution < 1.5x) {
-        --font-primary: system-ui, sans-serif;
-    }
+  @media (resolution < 1.5x) {
+    --font-primary: system-ui, sans-serif;
+  }
 }
 
 [theme="hatsusora"] {
-    --color-theme            : oklch(88% 0.0672 258deg);
-    --color-theme-dark       : oklch(77% 0.1054 258deg);
-    --color-theme-text       : oklch(66% 0.1225 258deg);
+  --color-theme            : oklch(88% 0.0672 258deg);
+  --color-theme-dark       : oklch(77% 0.1054 258deg);
+  --color-theme-text       : oklch(66% 0.1225 258deg);
 }
 
 [theme="ayame"] {
-    --color-theme            : oklch(88% 0.0711 297deg);
-    --color-theme-dark       : oklch(77% 0.1184 297deg);
-    --color-theme-text       : oklch(66% 0.1359 297deg);
+  --color-theme            : oklch(88% 0.0711 297deg);
+  --color-theme-dark       : oklch(77% 0.1184 297deg);
+  --color-theme-text       : oklch(66% 0.1359 297deg);
 }
 
 [theme="sakura"] {
-    --color-theme            : oklch(88% 0.0582 18deg);
-    --color-theme-dark       : oklch(77% 0.0989 18deg);
-    --color-theme-text       : oklch(66% 0.1149 18deg);
+  --color-theme            : oklch(88% 0.0582 18deg);
+  --color-theme-dark       : oklch(77% 0.0989 18deg);
+  --color-theme-text       : oklch(66% 0.1149 18deg);
 }
 
 [z-dark] {
-    --color-text-primary     : rgb(255 255 255 / 88%); /* 文本色 */
-    --color-text-regular     : rgb(237 241 243 / 88%); /* 文本色 - 常规 */
-    --color-text-secondary   : rgb(204 210 213 / 88%); /* 文本色 - 次要 */
-    --color-link             : rgb(88 160 255); /* 超链接色 */
-    --color-gray-50          : rgb(179 184 198);
-    --color-gray-200         : rgb(130 136 148);
-    --color-gray-300         : rgb(118 124 135);
-    --color-gray-400         : rgb(105 112 123);
-    --color-gray-500         : rgb(93 100 110);
-    --color-gray-600         : rgb(81 88 98);
-    --color-gray-700         : rgb(69 76 85);
-    --color-gray-800         : rgb(56 64 73);
-    --color-gray-900         : rgb(44 52 60);
-    --color-background       : rgb(42 42 42); /* 背景色 */
-    --color-background-alpha : rgb(42 42 42 / 84%); /* 背景色 - 透明 */
-    --color-theme            : oklch(63% 0.1128 234deg);
-    --color-theme-dark       : oklch(74% 0.1037 234deg);
-    --color-theme-text       : oklch(78% 0.1026 234deg);
+  --color-text-primary     : rgb(255 255 255 / 88%); /* 文本色 */
+  --color-text-regular     : rgb(237 241 243 / 88%); /* 文本色 - 常规 */
+  --color-text-secondary   : rgb(204 210 213 / 88%); /* 文本色 - 次要 */
+  --color-link             : rgb(88 160 255); /* 超链接色 */
+  --color-gray-50          : rgb(179 184 198);
+  --color-gray-200         : rgb(130 136 148);
+  --color-gray-300         : rgb(118 124 135);
+  --color-gray-400         : rgb(105 112 123);
+  --color-gray-500         : rgb(93 100 110);
+  --color-gray-600         : rgb(81 88 98);
+  --color-gray-700         : rgb(69 76 85);
+  --color-gray-800         : rgb(56 64 73);
+  --color-gray-900         : rgb(44 52 60);
+  --color-background       : rgb(42 42 42); /* 背景色 */
+  --color-background-alpha : rgb(42 42 42 / 84%); /* 背景色 - 透明 */
+  --color-theme            : oklch(63% 0.1128 234deg);
+  --color-theme-dark       : oklch(74% 0.1037 234deg);
+  --color-theme-text       : oklch(78% 0.1026 234deg);
 
-    color-scheme: dark only;
+  color-scheme: dark only;
 }
