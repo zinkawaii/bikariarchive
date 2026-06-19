@@ -19,7 +19,9 @@
       <comment-area v-if="$route.meta.comment" v-show="settingStore.get(`interaction`)"/>
       <z-footer />
     </main>
-    <z-sidebar v-show="$route.meta.sidebar ?? true"/>
+    <z-sidebar v-show="$route.meta.sidebar ?? true">
+      <slot name="aside"></slot>
+    </z-sidebar>
   </div>
   <bikariya-modals />
   <toast-area />

@@ -14,7 +14,6 @@
         return toEntry(title);
       }
     },
-    catalog: true,
     comment: true,
   });
 
@@ -45,6 +44,9 @@
 </script>
 
 <template>
+  <template #aside>
+    <aside-outline />
+  </template>
   <meow-widget v-if="isExisted">
     <header class="entry-header">
       <h1 class="entry-title">{{ data?.title ?? title }}</h1>

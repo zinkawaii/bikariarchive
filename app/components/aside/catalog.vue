@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <aside-widget class="aside-unified">
+  <aside-unified>
     <h3 class="catalog-volume">
       <select class="catalog-selector" v-model="currentVolume">
         <option v-for="{ title }, i in art.novelInfo.volumes" :value="i">{{ title }}</option>
@@ -28,7 +28,7 @@
         <nuxt-link class="aside-anchor text-truncate" :to="route">{{ title }}</nuxt-link>
       </li>
     </ul>
-  </aside-widget>
+  </aside-unified>
 </template>
 
 <style lang="scss" scoped>

@@ -90,6 +90,11 @@ export default defineNuxtConfig({
     "motion-v/nuxt",
     "pinia-plugin-persistedstate/nuxt",
   ],
+  dxup: {
+    features: {
+      namedLayoutSlots: true,
+    },
+  },
   fonts: {
     provider: "google",
   },

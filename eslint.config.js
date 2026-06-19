@@ -14,6 +14,14 @@ export default zin(
   },
   {
     files: [
+      "./app/pages/**/*.vue",
+    ],
+    rules: {
+      "vue/valid-v-slot": "off",
+    },
+  },
+  {
+    files: [
       "./server/api/**/*.ts",
     ],
     rules: {

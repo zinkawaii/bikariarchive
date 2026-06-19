@@ -1,7 +1,6 @@
 declare module "#app" {
   interface PageMeta {
     identity?: number;
-    catalog?: boolean;
     comment?: boolean;
     jumbotron?: boolean;
     sidebar?: boolean;

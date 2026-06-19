@@ -3,7 +3,6 @@
   import type { TransitionProps } from "vue";
 
   const settingStore = useSettingStore();
-  const route = useRoute();
 
   const isSmallWindow = useMediaQuery("(width < 1024px)");
 
@@ -58,7 +57,7 @@
     <aside v-if="!isCollapsed" class="z-sidebar no-scrollbar" @click="onClick">
       <aside-profile />
       <div class="aside-sticky">
-        <aside-unified v-if="route.meta.catalog"/>
+        <slot></slot>
         <aside-statistics />
         <aside-widget title="最近更新">
           <template #icon>

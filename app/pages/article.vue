@@ -9,7 +9,6 @@
   definePageMeta({
     path: "/book/:novel()/:index()",
     props: true,
-    catalog: true,
     comment: true,
   });
 
@@ -122,6 +121,10 @@
 </script>
 
 <template>
+  <template #aside>
+    <aside-catalog v-if="art.novelInfo.type === `novel`" :art/>
+    <aside-outline v-else/>
+  </template>
   <meow-widget>
     <novel-header :art :count/>
     <novel-decrypt v-if="art.encrypted && !decrypted" v-model="password" @decrypt="debouncedExecute"/>

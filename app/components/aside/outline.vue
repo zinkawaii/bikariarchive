@@ -110,7 +110,7 @@
       </li>
     </ul>
   </define-outline-list>
-  <aside-widget class="aside-unified" title="目录">
+  <aside-unified title="目录">
     <template #icon>
       <iconify name="fa7-solid:list-numeric"/>
     </template>
@@ -121,7 +121,7 @@
       <outline-list v-bind="{ headings: nestedHeadings }"/>
     </div>
     <p v-else class="outline-empty p-small">这篇文章还没有目录哦~</p>
-  </aside-widget>
+  </aside-unified>
 </template>
 
 <style lang="scss" scoped>
