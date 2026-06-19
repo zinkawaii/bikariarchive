@@ -108,11 +108,12 @@
     await execute();
 
     if (error.value) {
-      switch (error.value.data?.message) {
-        case "2": return toastStore.error("[article]:password", "密码错误");
+      switch (getErrorCode(error.value)) {
+        case "2":
+          return toastStore.error("[article]:password", "密码错误");
+        default:
+          return toastStore.error("[article]:password", "密码验证失败");
       }
-      toastStore.error("[article]:password", "密码验证失败");
-      return;
     }
     decrypted.value = true;
   }, {

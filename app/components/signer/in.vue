@@ -36,12 +36,14 @@
     await execute();
 
     if (error.value) {
-      switch (error.value.data?.message) {
-        case "1": return glitch("nickname", "账号不存在");
-        case "2": return glitch("password", "密码错误");
+      switch (getErrorCode(error.value)) {
+        case "1":
+          return glitch("nickname", "账号不存在");
+        case "2":
+          return glitch("password", "密码错误");
+        default:
+          return toastStore.error("[login]", "登录失败");
       }
-      toastStore.error("[login]", "登录失败");
-      return;
     }
 
     userStore.$patch(data.value!);

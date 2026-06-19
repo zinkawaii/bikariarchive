@@ -88,14 +88,19 @@
       });
       signerStore.switchView("login");
     }
-    catch (err: any) {
-      switch (err?.data?.message) {
-        case "1": return glitch("email", "该邮箱已注册");
-        case "2": return glitch("captcha", "验证码不存在");
-        case "3": return glitch("captcha", "验证码已过期");
-        case "4": return glitch("captcha", "验证码不正确");
+    catch (error) {
+      switch (getErrorCode(error)) {
+        case "1":
+          return glitch("email", "该邮箱已注册");
+        case "2":
+          return glitch("captcha", "验证码不存在");
+        case "3":
+          return glitch("captcha", "验证码已过期");
+        case "4":
+          return glitch("captcha", "验证码不正确");
+        default:
+          return toastStore.error("[logon]", "注册失败");
       }
-      toastStore.error("[logon]", "注册失败");
     }
   }, {
     title: "注册",
