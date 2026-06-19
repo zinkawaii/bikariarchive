@@ -24,3 +24,6 @@ logs
 !.env.example
 
 content/.vscode/settings.json
+public/apple-touch-icon.png
+public/favicon.ico
+public/icon-*.png

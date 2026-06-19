@@ -55,11 +55,6 @@ export default defineNuxtConfig({
       tsConfig: typescriptConfig.serverTsConfig,
     },
   },
-  routeRules: {
-    "/favicon.ico": {
-      redirect: clientConfig.favicon,
-    },
-  },
   runtimeConfig: {
     ...serverConfig,
     public: clientConfig,

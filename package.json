@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
+    "prepare": "nuxt-seo-utils icons --source image/favicon.svg",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
     "stylelint": "stylelint **/*.{vue,scss}",
