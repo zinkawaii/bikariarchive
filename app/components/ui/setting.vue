@@ -12,7 +12,7 @@
       <setting-select :options="[`自动`, `白昼`, `暗夜`]" v-model="settingStore.settings[`dark-mode`]"/>
     </setting-form>
     <setting-form title="侧栏显隐" desc="侧边栏是否跟随其他 UI 折叠">
-      <setting-select :options="[`默认`, `显现`, `隐匿`]" v-model="settingStore.settings[`sidebar-display`]"/>
+      <setting-select :options="[`默认`, `显现`, `隐匿`]" v-model="settingStore.settings[`aside-display`]"/>
     </setting-form>
     <setting-form title="右键菜单" :desc="`按住 Ctrl 键唤起${settingStore.get(`contextmenu`) ? `原生` : `自定义`}菜单`">
       <setting-switch v-model="settingStore.settings.contextmenu"/>

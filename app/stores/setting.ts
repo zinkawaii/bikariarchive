@@ -6,7 +6,7 @@ export const useSettingStore = defineStore("setting", () => {
   const settings = ref<Settings>({
     theme: 0,
     "dark-mode": 0,
-    "sidebar-display": 0,
+    "aside-display": 0,
     contextmenu: false,
     interaction: true,
     "ui-collapse": false,

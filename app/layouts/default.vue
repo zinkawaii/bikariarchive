@@ -19,9 +19,9 @@
       <comment-area v-if="$route.meta.comment" v-show="settingStore.get(`interaction`)"/>
       <z-footer />
     </main>
-    <z-sidebar v-show="$route.meta.sidebar ?? true">
+    <z-aside v-show="$route.meta.aside ?? true">
       <slot name="aside"></slot>
-    </z-sidebar>
+    </z-aside>
   </div>
   <bikariya-modals />
   <toast-area />
@@ -56,7 +56,7 @@
       max-width: 1308px;
     }
 
-    > .z-sidebar {
+    > .z-aside {
       display: none;
     }
   }
@@ -68,7 +68,7 @@
       max-width: none;
     }
 
-    .z-footer, > .z-sidebar {
+    .z-footer, > .z-aside {
       display: none;
     }
   }
@@ -129,7 +129,7 @@
     z-index: -1;
   }
 
-  .z-sidebar {
+  .z-aside {
     z-index: 32;
   }
 

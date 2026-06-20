@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   definePageMeta({
     redirect: { name: "unknown" },
-    sidebar: false,
+    aside: false,
   });
 </script>
 

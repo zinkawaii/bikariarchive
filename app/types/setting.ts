@@ -1,7 +1,7 @@
 export interface Settings {
   theme: number;
   "dark-mode": number;
-  "sidebar-display": number;
+  "aside-display": number;
   contextmenu: boolean;
   interaction: boolean;
   "ui-collapse": boolean;

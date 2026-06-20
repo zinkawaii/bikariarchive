@@ -3,7 +3,7 @@ declare module "#app" {
     identity?: number;
     comment?: boolean;
     jumbotron?: boolean;
-    sidebar?: boolean;
+    aside?: boolean;
     widePage?: boolean;
     fullPage?: boolean;
   }

@@ -8,7 +8,7 @@
 
   const isCollapsed = computed(() => {
     const collapse = settingStore.get("ui-collapse");
-    const display = settingStore.get("sidebar-display");
+    const display = settingStore.get("aside-display");
     return !isSmallWindow.value && display ? Boolean(display - 1) : collapse;
   });
 
@@ -54,7 +54,7 @@
 
 <template>
   <transition @enter="onEnterLeave" @leave="onEnterLeave">
-    <aside v-if="!isCollapsed" class="z-sidebar no-scrollbar" @click="onClick">
+    <aside v-if="!isCollapsed" class="z-aside no-scrollbar" @click="onClick">
       <aside-profile />
       <div class="aside-sticky">
         <slot></slot>
@@ -71,7 +71,7 @@
 </template>
 
 <style lang="scss" scoped>
-  .z-sidebar {
+  .z-aside {
     display: grid;
     grid-template-columns: 256px;
     place-content: start center;
