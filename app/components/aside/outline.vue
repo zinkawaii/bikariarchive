@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+  const props = defineProps<{
+    target: HTMLElement | null;
+  }>();
+
   interface HeadingInfo {
     element: HTMLHeadingElement;
     title: string;
@@ -8,7 +12,6 @@
     children: HeadingInfo[];
   }
 
-  const { hooks } = useHookStore();
   const { height } = useElementSize(document?.body);
 
   const activeIdx = ref(0);
@@ -19,7 +22,7 @@
     return flatHeadings.value[activeIdx.value]?.link;
   });
 
-  const headingOffsets = computedWithControl(() => [flatHeadings.value, height.value], () => {
+  const headingOffsets = computedWithControl([flatHeadings, height], () => {
     return flatHeadings.value?.map(({ element, link }) => ({
       link,
       top: Math.floor(getPosition(element).top),
@@ -33,13 +36,7 @@
     inheritAttrs: false,
   });
 
-  //文章渲染完成时更新标题列表
-  hooks.hook("outline:update", update);
-  onUnmounted(() => {
-    hooks.removeHook("outline:update", update);
-  });
-
-  function update(el: HTMLElement) {
+  whenever(() => props.target, (el) => {
     const headingEls = el.querySelectorAll<HTMLHeadingElement>(`:where(h2, h3):not(.sr-only)`);
 
     flatHeadings.value = Array.from(headingEls, (el) => ({
@@ -69,7 +66,9 @@
         }
       }
     }
-  }
+  }, {
+    immediate: true,
+  });
 
   //页面滚动时
   useEventListener("scroll", Zin.throttle(() => {

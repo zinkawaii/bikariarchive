@@ -26,6 +26,7 @@
   });
 
   const route = useRoute();
+  const articleEl = useTemplateRef("article");
 
   const isExisted = computed(() => {
     return title in Entry.meta.entries;
@@ -45,14 +46,14 @@
 
 <template>
   <template #aside>
-    <aside-outline />
+    <aside-outline :target="articleEl"/>
   </template>
   <meow-widget v-if="isExisted">
     <header class="entry-header">
       <h1 class="entry-title">{{ data?.title ?? title }}</h1>
     </header>
     <mb-skeleton v-if="status !== `success`"/>
-    <article v-else-if="data" v-outline class="entry-article">
+    <article v-else-if="data" ref="article" class="entry-article">
       <section class="entry-leading">
         <div class="entry-primary">
           <novel-article as="div" :body="data.summary"/>

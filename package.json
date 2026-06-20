@@ -23,7 +23,6 @@
     "@vueuse/router": "catalog:vue",
     "arktype": "catalog:utils",
     "github-slugger": "catalog:utils",
-    "hookable": "catalog:utils",
     "katex": "catalog:utils",
     "motion-v": "catalog:utils",
     "pinia": "catalog:vue",

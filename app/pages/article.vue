@@ -15,6 +15,7 @@
   const readRecordStore = useReadRecordStore();
   const toastStore = useToastStore();
   const router = useRouter();
+  const articleComp = useTemplateRef("article");
 
   //初始化
   const art = Article.for(novel, index);
@@ -123,7 +124,7 @@
 <template>
   <template #aside>
     <aside-catalog v-if="art.novelInfo.type === `novel`" :art/>
-    <aside-outline v-else/>
+    <aside-outline v-else :target="articleComp?.$el"/>
   </template>
   <meow-widget>
     <novel-header :art :count/>
@@ -131,7 +132,7 @@
     <mb-skeleton v-else-if="status !== `success` && !post"/>
     <novel-article
       v-else-if="post"
-      v-outline
+      ref="article"
       :body="post.body"
       :variant="art.variant"
     />
