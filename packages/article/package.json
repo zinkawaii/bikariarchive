@@ -19,6 +19,7 @@
     "micromark-extension-gfm-footnote": "catalog:content",
     "micromark-extension-gfm-strikethrough": "catalog:content",
     "micromark-util-symbol": "catalog:content",
+    "mrmime": "catalog:utils",
     "pathe": "catalog:utils",
     "propathy": "catalog:utils",
     "remark-breaks": "catalog:content",
@@ -31,7 +32,6 @@
     "ufo": "catalog:utils",
     "unified": "catalog:content",
     "unist-util-visit": "catalog:content",
-    "video-extensions": "catalog:utils",
     "yaml": "catalog:utils"
   },
   "devDependencies": {
