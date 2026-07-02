@@ -1,6 +1,5 @@
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { type } from "arktype";
+import { AwsClient } from "aws4fetch";
 import { getQuery, getRouterParam, redirect } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 
@@ -24,41 +23,30 @@ export default defineJEventHandler<{
     throw 1;
   }
 
-  const s3 = new S3Client({
-    endpoint: "https://s3.bitiful.net",
+  const s3 = new AwsClient({
+    accessKeyId: config.bitiful.accessKey,
+    secretAccessKey: config.bitiful.secretKey,
+    service: "s3",
     region: "cn-east-1",
-    credentials: {
-      accessKeyId: config.bitiful.accessKey,
-      secretAccessKey: config.bitiful.secretKey,
+  });
+
+  const url = new URL(`https://${config.bitiful.bucket}.s3.bitiful.net/image/${slug}`);
+
+  for (const [key, value] of Object.entries(query)) {
+    if (value !== void 0) {
+      url.searchParams.set(key, value);
+    }
+  }
+  // 之后在图床上传原图后再启用这段代码
+  // const fmt = query.fmt ?? (event.req.headers.get("accept")?.includes("image/avif") ? "avif" : "webp");
+  // url.searchParams.set("fmt", fmt);
+  url.searchParams.set("X-Amz-Expires", "3600");
+
+  const request = await s3.sign(url, {
+    aws: {
+      signQuery: true,
     },
   });
 
-  const command = new GetObjectCommand({
-    Bucket: config.bitiful.bucket,
-    Key: "image/" + slug,
-  });
-
-  command.middlewareStack.add((next) => async (args) => {
-    const request = args.request as import("@smithy/types").HttpRequest;
-
-    request.query = {
-      ...request.query,
-      ...query,
-      // 之后在图床上传原图后再启用这段代码
-      // fmt: query.fmt ?? event.req.headers.get("accept")?.includes("image/avif")
-      //     ? "avif"
-      //     : "webp",
-    };
-
-    return next(args);
-  }, {
-    name: "bitifulImageQuery",
-    step: "build",
-  });
-
-  const signedUrl = await getSignedUrl(s3, command, {
-    expiresIn: 3600,
-  });
-
-  return redirect(signedUrl, 307);
+  return redirect(request.url, 307);
 });

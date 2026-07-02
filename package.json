@@ -36,8 +36,6 @@
     "vue-router": "catalog:vue"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "catalog:utils",
-    "@aws-sdk/s3-request-presigner": "catalog:utils",
     "@bikariya/image-viewer": "catalog:nuxt",
     "@bikariya/modals": "catalog:nuxt",
     "@bikariya/shiki": "catalog:nuxt",
@@ -53,6 +51,7 @@
     "@vueuse/nuxt": "catalog:nuxt",
     "@zinkawaii/eslint-config": "catalog:lint",
     "@zinkawaii/stylelint-config": "catalog:lint",
+    "aws4fetch": "catalog:utils",
     "bgmt": "catalog:utils",
     "chokidar": "catalog:utils",
     "consola": "catalog:utils",
