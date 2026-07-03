@@ -7,7 +7,6 @@ import compiler from "../src/remark/plugins/compiler";
 import emoji from "../src/remark/plugins/emoji";
 import frontmatter from "../src/remark/plugins/frontmatter";
 import interpolation from "../src/remark/plugins/interpolation";
-import ruby from "../src/remark/plugins/ruby";
 import slot from "../src/remark/plugins/slot";
 import type { Child, Element } from "../src/remark/types";
 
@@ -56,36 +55,6 @@ it("interpolation", async () => {
   }]);
 });
 
-it("ruby", async () => {
-  const processor = unified()
-    .use(parse)
-    .use(ruby)
-    .use(rehype)
-    .use(compiler);
-
-  const { body } = await process(processor, `
-        |山吹风铃(やまぶき かざり)|
-    `);
-  const children = tryGetChildren(body.children[0], "p");
-
-  expect(children).toEqual([{
-    type: "element",
-    tag: "ruby",
-    props: {},
-    children: [
-      { type: "text", value: "山吹风铃" },
-      {
-        type: "element",
-        tag: "rt",
-        props: {},
-        children: [
-          { type: "text", value: "やまぶき かざり" },
-        ],
-      },
-    ],
-  }]);
-});
-
 it("slot", async () => {
   const processor = unified()
     .use(parse)
@@ -99,11 +68,11 @@ it("slot", async () => {
     .use(slot);
 
   const { data } = await process(processor, `
-        ::slots
-        #foo
-        #bar
-        ::
-    `);
+    ::slots
+    #foo
+    #bar
+    ::
+  `);
 
   expect(data).toEqual({
     frontmatters: [{

@@ -40,10 +40,10 @@ export async function parseArticle<T>(text: string) {
     .use(hoistImage)
     .use(interpolation)
     .use(math)
-    .use(ruby)
     .use(slug)
     .use(strikethrough)
     .use(rehype, rehypeOptions)
+    .use(ruby)
     .use(compiler);
 
   //文本预处理
@@ -69,9 +69,9 @@ export async function parseEntry<T>(text: string) {
     .use(emoji)
     .use(hoistImage)
     .use(math)
-    .use(ruby)
     .use(strikethrough)
     .use(rehype, rehypeOptions)
+    .use(ruby)
     .use(slot);
 
   //文本预处理
@@ -91,9 +91,9 @@ export async function parseUpdate(text: string) {
     .use(parse)
     .use(mdc)
     .use(emoji)
-    .use(ruby)
     .use(strikethrough)
     .use(rehype, rehypeOptions)
+    .use(ruby)
     .use(compiler);
 
   const result = await processor.process(text);
@@ -107,9 +107,9 @@ export async function parseComment(text: string) {
     .use(emoji)
     .use(hoistImage)
     .use(math)
-    .use(ruby)
     .use(strikethrough)
     .use(rehype, rehypeOptions)
+    .use(ruby)
     .use(compiler);
 
   const result = await processor.process(text);

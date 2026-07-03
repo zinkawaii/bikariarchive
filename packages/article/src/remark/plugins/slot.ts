@@ -9,8 +9,8 @@ export default function(this: Processor) {
     const { frontmatters } = file.data;
     let frontmatter: Record<string, unknown> | undefined;
 
-    visit(root as hast.Root, (node, index, parent) => {
-      if (parent === void 0 || index === void 0 || node.type !== "element") {
+    visit(root as hast.Root, "element", (node, index, parent) => {
+      if (parent === void 0 || index === void 0) {
         return;
       }
       if (node.tagName === "frontmatter") {

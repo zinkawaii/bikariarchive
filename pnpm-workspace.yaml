@@ -43,6 +43,7 @@ patchedDependencies:
   nuxt-schema-org: patches/nuxt-schema-org.patch
   nuxt-seo-utils: patches/nuxt-seo-utils.patch
   nuxt-site-config: patches/nuxt-site-config.patch
+  remark-mdc: patches/remark-mdc.patch
 
 catalogs:
   build:
