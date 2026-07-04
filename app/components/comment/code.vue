@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+  import { encodeHTML } from "entities";
   import type { BundledLanguage } from "shiki";
 
   const props = withDefaults(defineProps<{
@@ -22,7 +23,7 @@
       lang,
       meta: { __raw: meta },
     });
-  }, escapeHtml(props.raw), { lazy: true });
+  }, encodeHTML(props.raw), { lazy: true });
 </script>
 
 <template>

@@ -23,6 +23,7 @@
     "@vueuse/router": "catalog:vue",
     "arktype": "catalog:utils",
     "easings-css": "catalog:utils",
+    "entities": "catalog:utils",
     "github-slugger": "catalog:utils",
     "katex": "catalog:utils",
     "pinia": "catalog:vue",
