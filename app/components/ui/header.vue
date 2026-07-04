@@ -230,13 +230,13 @@
   }
 
   .nav-expand {
-    $fs: 28px;
-    $p: 6px;
-
     display: flex;
-    margin-inline: -($fs + $p) (-$p);
-    padding: $p;
-    font-size: $fs;
+    position: absolute;
+    inset: 0 6px 0 auto;
+    height: fit-content;
+    margin-block: auto;
+    padding: 6px;
+    font-size: 28px;
     color: white;
     transition: all 0.25s;
     filter: drop-shadow(var(--text-shadow));

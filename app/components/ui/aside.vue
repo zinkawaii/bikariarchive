@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { animate, stagger } from "motion-v";
+  import { easeInBack, easeOutBack } from "easings-css";
   import type { TransitionProps } from "vue";
 
   const settingStore = useSettingStore();
@@ -18,29 +18,37 @@
     await nextTick();
     const end = getPosition(nakami);
 
-    animate(nakami, {
-      x: [start.left - end.left, 0],
-      y: [start.top - end.top, 0],
-    }, {
-      duration: 0.4,
-      ease: "backOut",
+    nakami.animate([
+      { translate: `${start.left - end.left}px ${start.top - end.top}px` },
+      { translate: "0" },
+    ], {
+      duration: 400,
+      easing: easeOutBack,
     });
   });
 
   const onEnterLeave: TransitionProps["onEnter"] = async (el, done) => {
     if (isSmallWindow.value) {
+      const widgetEls = el.querySelectorAll(".aside-widget");
       const reversed = settingStore.get("ui-collapse");
-      await animate(".aside-widget", reversed ? {
-        opacity: [1, 0],
-        y: [0, "4rem"],
-      } : {
-        opacity: [0, 1],
-        y: ["4rem", 0],
-      }, {
-        duration: 0.4,
-        delay: stagger(0.05, { from: reversed ? "last" : "first" }),
-        ease: reversed ? "backIn" : "backOut",
-      });
+      const keyframes = [
+        { opacity: 1, translate: "0" },
+        { opacity: 0, translate: "0 4rem" },
+      ];
+
+      await Promise.all(
+        Array.from(widgetEls, (el, i) => {
+          return new Promise((resolve) => {
+            const animation = el.animate(reversed ? keyframes : keyframes.toReversed(), {
+              duration: 400,
+              delay: 50 * (reversed ? widgetEls.length - 1 - i : i),
+              easing: reversed ? easeInBack : easeOutBack,
+              fill: "both",
+            });
+            animation.addEventListener("finish", resolve);
+          });
+        }),
+      );
     }
     done();
   };

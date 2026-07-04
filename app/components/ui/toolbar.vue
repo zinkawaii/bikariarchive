@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { animate, stagger } from "motion-v";
+  import { easeInBack, easeOutBack } from "easings-css";
 
   const settingStore = useSettingStore();
   const signerStore = useSignerStore();
@@ -11,18 +11,21 @@
       settingStore.set("ui-collapse", true);
     }
 
-    const items = [...document.querySelectorAll(".z-toolbar > .mb-popper")].slice(0, -1);
+    const popperEls = [...document.querySelectorAll(".z-toolbar > .mb-popper")].slice(0, -1);
 
     watchEffect(() => {
-      const sortedItems = collapse.value ? items : items.toReversed();
+      const sortedEls = collapse.value ? popperEls : popperEls.toReversed();
 
-      animate(sortedItems, {
-        x: collapse.value ? 64 : 0,
-      }, {
-        delay: stagger(0.05),
-        duration: 0.4,
-        ease: `back${collapse.value ? `In` : `Out`}`,
-      });
+      for (let i = 0; i < sortedEls.length; i++) {
+        sortedEls[i].animate({
+          translate: `${collapse.value ? 64 : 0}px`,
+        }, {
+          duration: 400,
+          delay: 50 * i,
+          easing: collapse.value ? easeInBack : easeOutBack,
+          fill: "forwards",
+        });
+      }
     });
   });
 </script>

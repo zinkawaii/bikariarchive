@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { animate, stagger } from "motion-v";
+  import { easeOutBack } from "easings-css";
   import type { ImgHTMLAttributes } from "vue";
   import { LazyBikariyaImageViewer } from "#components";
 
@@ -51,7 +51,6 @@
         action() {
           window.open(props.reference, "_blank");
         },
-
       },
     ],
   });
@@ -80,13 +79,18 @@
 
   //触发回弹动画
   function displayCharacters() {
-    animate(tagComps.value!.map((comp) => comp?.$el), {
-      y: [42, 0],
-    }, {
-      delay: stagger(0.05, { from: "last" }),
-      duration: 0.4,
-      ease: "backOut",
-    });
+    for (let i = 0; i < tagComps.value!.length; i++) {
+      const el = tagComps.value![i]!.$el as HTMLElement;
+      el.animate([
+        { translate: "0 42px" },
+        { translate: "0" },
+      ], {
+        delay: 50 * (tagComps.value!.length - i),
+        duration: 400,
+        easing: easeOutBack,
+        fill: "both",
+      });
+    }
   }
 </script>
 

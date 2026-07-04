@@ -27,3 +27,20 @@
     mask-image: linear-gradient(to var(--edge-fades-to), transparent, white 2rem);
   }
 }
+
+.animate-rotate {
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: rotate;
+  animation-timing-function: linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

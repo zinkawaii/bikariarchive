@@ -201,7 +201,7 @@
 </script>
 
 <template>
-  <transition-scale :duration="0.25" @after-leave="cleanup">
+  <transition-scale :duration="250" @after-leave="cleanup">
     <div v-show="contextMenuStore.open" ref="root" class="z-context-menu content-widget">
       <menu class="menu-tools">
         <li v-for="{ icon, action } in toolItems" class="menu-tool" @click="action">
