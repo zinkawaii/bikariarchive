@@ -15,7 +15,7 @@
     "task:article": "unrun scripts/article.ts",
     "task:article/dev": "NODE_ENV=\"development\" unrun --watch scripts/article.ts",
     "task:feed": "unrun scripts/feed.ts",
-    "task:svgo": "svgo public/image/favicon.svg --pretty"
+    "task:svgo": "pnpx svgo public/image/favicon.svg --pretty"
   },
   "dependencies": {
     "@shikijs/transformers": "catalog:utils",
@@ -64,7 +64,6 @@
     "pathe": "catalog:utils",
     "sass-embedded": "catalog:css",
     "stylelint": "catalog:lint",
-    "svgo": "catalog:utils",
     "tinyglobby": "catalog:utils",
     "typescript": "catalog:build",
     "unemail": "catalog:utils",

@@ -112,7 +112,6 @@ catalogs:
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
     shiki: *shiki
-    svgo: ^4.0.1
     temporal-polyfill: ^0.3.2
     tinyexec: ^1.2.4
     tinyglobby: ^0.2.17
