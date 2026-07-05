@@ -13,7 +13,6 @@ import emoji from "./plugins/emoji";
 import footnote from "./plugins/footnote";
 import frontmatter from "./plugins/frontmatter";
 import hoistImage from "./plugins/hoistImage";
-import interpolation from "./plugins/interpolation";
 import ruby from "./plugins/ruby";
 import slot from "./plugins/slot";
 import slug from "./plugins/slug";
@@ -44,7 +43,6 @@ export async function parseArticle<T>(text: string) {
     .use(emoji)
     .use(footnote)
     .use(hoistImage)
-    .use(interpolation)
     .use(math)
     .use(slug)
     .use(strikethrough)

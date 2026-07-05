@@ -101,10 +101,10 @@
 
     function r(node: Child): VNodeChild {
       if (node.type === "element") {
-        if (node.tag === "interpolation") {
+        if (node.tag === "binding") {
           return String(
             currentInstance.parent?.proxy
-              ? getProperty(currentInstance.parent.proxy, node.props.path)
+              ? getProperty(currentInstance.parent.proxy, node.props.value)
               : void 0,
           );
         }
