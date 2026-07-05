@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .search-history {
     margin-top: 16px;
     color: var(--color-info);

@@ -14,7 +14,7 @@
   </label>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-radio {
     display: flex;
     align-items: center;

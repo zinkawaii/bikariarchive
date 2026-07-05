@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .setting-form {
     display: grid;
     grid-template-columns: 0.8fr 1fr;

@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .meow-input {
     display: grid;
     position: relative;

@@ -85,7 +85,7 @@
   </figure>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-code {
     overflow: hidden;
     border: 1px solid var(--color-border-lighter);

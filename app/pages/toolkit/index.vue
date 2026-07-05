@@ -37,7 +37,7 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .toolkit-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

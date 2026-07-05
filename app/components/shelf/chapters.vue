@@ -54,7 +54,7 @@
   <mb-pagination v-if="total > sizes" class="shelf-pagination" :total :sizes v-model="page"/>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .shelf-control {
     display: flex;
     flex-wrap: wrap;
@@ -75,7 +75,7 @@
   }
 
   .shelf-chapters {
-    @include viewport(">sm") {
+    @media (width >= 596px) {
       columns: 2;
       column-gap: 2em;
     }

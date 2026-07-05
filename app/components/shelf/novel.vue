@@ -38,7 +38,7 @@
   </li>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .shelf-novel {
     display: grid;
     margin-inline: 8px;

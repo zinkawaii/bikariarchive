@@ -18,7 +18,7 @@
   </transition-group>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .toast-area {
     display: grid;
     justify-items: center;

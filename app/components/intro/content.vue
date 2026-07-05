@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .intro-content {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -39,7 +39,7 @@
     overflow: auto;
     padding-bottom: 4px;
 
-    :deep(> p) {
+    &:deep(> p) {
       line-height: 24px;
     }
   }

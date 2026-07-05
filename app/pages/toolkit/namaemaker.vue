@@ -222,7 +222,7 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .namae-option {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -254,7 +254,7 @@
     margin-top: 16px;
     font-size: 14px;
 
-    @include viewport("md") {
+    @container main (width < 768px) {
       flex-direction: column;
     }
   }

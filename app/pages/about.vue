@@ -111,7 +111,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .azur-wrapper {
     --azur-blue-1: rgb(97 153 245);
     --azur-blue-2: rgb(132 230 255);
@@ -152,6 +152,9 @@
   }
 
   .azur-header {
+    --corner-width: calc(62px * sqrt(2));
+    --nabla-width: calc(50px / sqrt(2));
+
     position: absolute;
     animation: azur-slide-down 0.4s backwards;
     z-index: 1;
@@ -167,7 +170,7 @@
     position: absolute;
     top: 62px;
     left: 1px;
-    width: 62px * sqrt(2);
+    width: var(--corner-width);
     height: 1px;
     background-color: var(--azur-gray-1);
     transform-origin: left;
@@ -175,19 +178,18 @@
   }
 
   .azur-header-return {
-    $w: 62px * sqrt(2);
-    $t: 64px - calc(62px / sqrt(2));
+    --offset: calc(64px - var(--corner-width) / 2);
 
     display: grid;
     place-content: center;
-    width: $w;
+    width: var(--corner-width);
     aspect-ratio: 1;
     padding: 3px;
     border: 2px solid var(--azur-blue-1);
     background-clip: content-box;
     background-color: rgb(35 31 48);
     rotate: -45deg;
-    translate: ($t + 3px) $t;
+    translate: calc(var(--offset) + 2px) var(--offset);
 
     &::before, &::after {
       content: "";
@@ -233,12 +235,10 @@
   }
 
   .azur-header-nabla {
-    $w: calc(50px / sqrt(2));
-
     position: absolute;
-    top: calc(-1 * $w / 2);
-    left: $w * 2 + 11px;
-    width: $w;
+    top: calc(-1 * var(--nabla-width) / 2);
+    left: calc(var(--nabla-width) * 2 + 11px);
+    width: var(--nabla-width);
     aspect-ratio: 1;
     border: 4px solid var(--azur-blue-1);
     outline: 1px solid var(--azur-gray-1);
@@ -247,25 +247,25 @@
   }
 
   .azur-header-title {
-    $h: 44px;
-    $hh: calc($h / 2);
-    $pr: 7px;
+    --height: 44px;
+    --half-height: calc(var(--height) / 2);
+    --padding-right: 7px;
 
     display: flex;
     align-items: center;
     position: absolute;
     top: 10px;
     left: 112px;
-    height: $h;
-    padding-inline: $hh $pr;
+    height: var(--height);
+    padding-inline: var(--half-height) var(--padding-right);
     background-image: linear-gradient(to right, rgb(35 31 45), transparent);
     clip-path:
       polygon(
-        $hh 0,
+        var(--half-height) 0,
         100% 0,
         100% 100%,
-        $hh 100%,
-        0 $hh
+        var(--half-height) 100%,
+        0 var(--half-height)
       );
 
     &::before {
@@ -278,8 +278,8 @@
           0 0,
           2px 0,
           22px calc(100% - 1px),
-          calc(100% - $pr) calc(100% - 1px),
-          calc(100% - $pr) 100%,
+          calc(100% - var(--padding-right)) calc(100% - 1px),
+          calc(100% - var(--padding-right)) 100%,
           21px 100%
         );
     }
@@ -289,7 +289,7 @@
       position: absolute;
       right: 0;
       bottom: 2px;
-      width: $pr - 2px;
+      width: calc(var(--padding-right) - 2px);
       height: 5px;
       background-image:
         linear-gradient(
@@ -310,14 +310,14 @@
     border-bottom: 3px solid rgb(0 0 0 / 25%);
     line-height: 1;
 
-    > :first-child {
+    & > :first-child {
       font-size: 28px;
       letter-spacing: 1px;
       text-shadow: 0 0 16px var(--azur-blue-1);
       color: var(--azur-text-white);
     }
 
-    > :last-child {
+    & > :last-child {
       font-size: 9px;
       letter-spacing: 3px;
       color: var(--azur-text-gray);
@@ -326,7 +326,7 @@
 
   .azur-body {
     position: fixed;
-    inset: 0 0 0 max(0px, calc(100vw - 87.5cqh));
+    inset: 0 0 0 max(0px, 100vw - 87.5cqh);
   }
 
   :where(.azur-body-top, .azur-body-bottom) {
@@ -431,14 +431,14 @@
       background-color: var(--azur-blue-2);
     }
 
-    > :last-child {
+    & > :last-child {
       font-size: 8px;
       letter-spacing: 0.1em;
       line-height: 1.8;
     }
 
     .azur-body-bottom & {
-      $w: 26px;
+      --corner-width: 26px;
 
       gap: 9px;
       padding-right: 21px;
@@ -447,7 +447,7 @@
         clip-path:
           polygon(
             0 0,
-            calc(100% - $w) 0,
+            calc(100% - var(--corner-width)) 0,
             100% 100%,
             0 100%
           );
@@ -458,9 +458,9 @@
         clip-path:
           polygon(
             0 0,
-            calc(100% - $w) 0,
+            calc(100% - var(--corner-width)) 0,
             100% 100%,
-            $w 100%
+            var(--corner-width) 100%
           );
       }
     }
@@ -513,7 +513,7 @@
     display: flex;
     gap: 0.25em;
 
-    > :first-child {
+    & > :first-child {
       color: var(--azur-text-gray);
     }
   }
@@ -521,7 +521,7 @@
   .azur-level {
     font-size: 32cqh;
 
-    > :first-child {
+    & > :first-child {
       letter-spacing: -2cqh;
     }
   }
@@ -596,12 +596,12 @@
     width: 120cqh;
     margin-block: 6cqh;
 
-    > :first-child {
+    & > :first-child {
       font-size: 18cqh;
       line-height: 22cqh;
     }
 
-    > :last-child {
+    & > :last-child {
       font-size: 42cqh;
       line-height: 48cqh;
       text-align: right;

@@ -74,7 +74,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .home-profile {
     padding: 0 16px;
     text-wrap: nowrap;

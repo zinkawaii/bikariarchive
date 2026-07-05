@@ -27,11 +27,11 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .home-introduction {
     position: relative;
 
-    @include viewport("md") {
+    @container main (width < 768px) {
       height: 332px;
     }
   }

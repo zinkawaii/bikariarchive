@@ -18,7 +18,7 @@
   </form>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .novel-encrypted {
     display: flex;
     align-items: center;

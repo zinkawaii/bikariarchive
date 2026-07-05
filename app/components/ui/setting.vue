@@ -23,11 +23,11 @@
   </mb-dialog>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-setting {
     width: 556px;
 
-    @include viewport("xs") {
+    @media (width < 425px) {
       --dialog-padding: 1rem;
 
       height: 100dvh;

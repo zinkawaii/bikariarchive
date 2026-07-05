@@ -110,13 +110,13 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .search-form {
     display: grid;
     grid-template: "A B C" / auto 1fr auto;
     gap: 16px 8px;
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       grid-template:
         "A A"
         "B C" / 1fr auto;
@@ -134,7 +134,7 @@
     display: grid;
     font-size: 15px;
 
-    @include viewport("lg") {
+    @media (width < 1024px) {
       margin: 8px;
     }
   }

@@ -43,7 +43,7 @@
   </aside-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .aside-statistics {
     display: grid;
     grid-auto-flow: column;

@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .novel-cover {
     display: grid;
     position: relative;

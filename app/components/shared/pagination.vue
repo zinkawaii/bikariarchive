@@ -109,7 +109,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-pagination {
     display: flex;
     justify-content: center;

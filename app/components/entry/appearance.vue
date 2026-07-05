@@ -24,7 +24,7 @@
   </p>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .entry-appearance {
     margin-top: auto;
     font-size: 12px;

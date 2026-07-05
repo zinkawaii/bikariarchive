@@ -31,7 +31,7 @@
   </aside-unified>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .catalog-volume {
     display: grid;
     margin: 8px 16px;

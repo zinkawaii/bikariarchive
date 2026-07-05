@@ -37,7 +37,7 @@
   </signer-view>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .signer-profile {
     display: grid;
     grid-template:

@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .signer-view {
     position: absolute;
     inset: auto 0 0 auto;

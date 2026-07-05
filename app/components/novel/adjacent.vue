@@ -15,7 +15,7 @@
   </nuxt-link>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .novel-adjacent {
     display: grid;
     align-items: center;

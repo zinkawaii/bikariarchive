@@ -72,7 +72,7 @@
   <not-found v-else/>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .entry-header {
     padding-bottom: 8px;
     border-bottom: 1px solid var(--color-border);
@@ -87,7 +87,7 @@
     gap: 16px;
     margin-top: 8px;
 
-    @include viewport("md") {
+    @container main (width < 768px) {
       flex-direction: column;
     }
   }
@@ -99,10 +99,8 @@
     flex-direction: column;
     justify-content: space-between;
   }
-</style>
 
-<style lang="scss">
-  .entry-section {
+  .entry-section:deep() {
     > h2 {
       margin-bottom: 8px;
       padding-bottom: 8px;

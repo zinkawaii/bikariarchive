@@ -11,9 +11,9 @@ export default defineNuxtConfig({
     },
   },
   css: [
-    "~/assets/scss/var.scss",
-    "~/assets/scss/sinrabansyo.scss",
-    "~/assets/scss/animation.scss",
+    "~/assets/styles/var.css",
+    "~/assets/styles/sinrabansyo.css",
+    "~/assets/styles/animation.css",
   ],
   alias: {
     "@bikari/article": resolve(import.meta.dirname, "packages/article/src"),
@@ -61,13 +61,6 @@ export default defineNuxtConfig({
   },
   typescript: typescriptConfig,
   vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@use "~/assets/scss/mixin.scss" as *;`,
-        },
-      },
-    },
     server: {
       allowedHosts: true,
       watch: {

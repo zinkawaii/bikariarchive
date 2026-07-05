@@ -29,13 +29,13 @@
   </footer>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-footer {
     padding-inline: var(--meow-large);
     font-size: 14px;
     text-align: center;
 
-    @include viewport(">sm") {
+    @media (width >= 596px) {
       padding-block: 16px;
       border-radius: 16px;
       box-shadow: var(--box-shadow);
@@ -45,7 +45,7 @@
       color: white;
     }
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       margin-top: auto;
       padding-block: 64px 32px;
       line-height: 1.8;
@@ -54,7 +54,7 @@
   }
 
   .footer-seperator:first-of-type {
-    @include viewport("sm") {
+    @media (width < 596px) {
       display: block;
       visibility: hidden;
       height: 0;

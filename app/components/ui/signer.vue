@@ -25,7 +25,7 @@
   </mb-dialog>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-signer {
     --dialog-padding: 0;
 
@@ -34,29 +34,29 @@
     backdrop-filter: blur(4px);
     font-size: 14px;
 
-    @include viewport("xs") {
+    @media (width < 425px) {
       height: 100dvh;
       border-radius: 0;
     }
   }
 
   .signer-innerworld {
+    height: 372px;
     box-shadow: var(--box-shadow);
     background-image: url("/api/image/outerworld.webp");
     background-position: center 15%;
     background-size: cover;
     mask-image: linear-gradient(to var(--direction, right), white, transparent);
 
-    @include dark {
+    [z-dark] & {
       background-image: url("/api/image/innerworld.webp");
     }
 
-    @include viewport(">xs") {
+    @media (width >= 425px) {
       width: 75%;
-      height: 372px;
     }
 
-    @include viewport("xs") {
+    @media (width < 425px) {
       --direction: bottom;
 
       height: 75%;

@@ -156,7 +156,7 @@
   </signer-view>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .sign-captcha {
     display: grid;
     grid-template-columns: repeat(2, auto);

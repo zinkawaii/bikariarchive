@@ -14,13 +14,19 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-skeleton {
     display: grid;
     gap: 16px;
 
     &.is-animated .skeleton-item {
-      background-image: linear-gradient(to right, var(--color-gray-500) 25%, var(--color-gray-300) 37%, var(--color-gray-500) 63%);
+      background-image:
+        linear-gradient(
+          to right,
+          var(--color-gray-500) 25%,
+          var(--color-gray-300) 37%,
+          var(--color-gray-500) 63%
+        );
       background-size: 400% 100%;
       animation: skeleton-loading 1.5s linear infinite;
     }

@@ -143,10 +143,10 @@ textarea {
 
 ::-webkit-scrollbar-track {
   background-color: var(--color-background);
+}
 
-  :not(:root) > & {
-    border-radius: 5px;
-  }
+:not(:root) > ::-webkit-scrollbar-track {
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -177,7 +177,7 @@ textarea {
   box-shadow: var(--box-shadow);
   background-color: var(--color-background-alpha);
 
-  @include viewport("sm") {
+  @media (width < 596px) {
     .nakami & {
       border: none;
       border-radius: 0;
@@ -277,7 +277,7 @@ textarea {
     background-color: var(--shiki-light-bg);
     color: var(--shiki-light);
 
-    @include dark {
+    [z-dark] & {
       background-color: var(--shiki-dark-bg);
       color: var(--shiki-dark);
     }

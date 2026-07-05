@@ -7,7 +7,7 @@
   </aside-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .aside-profile {
     display: grid;
     grid-template:

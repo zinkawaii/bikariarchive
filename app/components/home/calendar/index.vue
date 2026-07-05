@@ -181,14 +181,14 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  $width: 48px;
-  $gap: 2px;
-  $min: $width * 7 + $gap * 6;
-
+<style scoped>
   .home-calendar {
+    --day-width: 48px;
+    --day-gap: 2px;
+    --col-width: calc(var(--day-width) * 7 + var(--day-gap) * 6);
+
     display: grid;
-    grid-template-columns: $min minmax($min, auto);
+    grid-template-columns: var(--col-width) minmax(var(--col-width), auto);
     gap: 8px;
     overflow: auto;
     padding: 4px;
@@ -233,8 +233,8 @@
 
   .calendar-week, .calendar-days {
     display: grid;
-    grid-template-columns: repeat(7, $width);
-    gap: $gap;
+    grid-template-columns: repeat(7, var(--day-width));
+    gap: var(--day-gap);
     text-align: center;
   }
 

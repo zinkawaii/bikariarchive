@@ -82,7 +82,7 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .manage-table {
     --font-size-td: 14px;
 

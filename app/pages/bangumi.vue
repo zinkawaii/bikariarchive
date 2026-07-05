@@ -28,7 +28,7 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .bangumi-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

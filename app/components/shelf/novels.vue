@@ -95,7 +95,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .shelf-novels {
     overflow: hidden;
     padding-left: calc(50% - 72px);

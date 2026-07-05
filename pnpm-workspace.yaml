@@ -65,15 +65,13 @@ catalogs:
     remark-rehype: ^11.1.2
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
-  css:
-    sass-embedded: ^1.100.0
   database:
     mongoose: ^9.7.1
   iconify:
     "@iconify-json/fa7-solid": ^1.2.4
   lint:
     "@zinkawaii/eslint-config": ^0.4.5
-    "@zinkawaii/stylelint-config": ^0.4.1
+    "@zinkawaii/stylelint-config": ^0.5.2
     eslint: ^10.5.0
     stylelint: ^17.13.0
   nuxt:

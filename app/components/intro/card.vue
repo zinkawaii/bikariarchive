@@ -48,7 +48,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .intro-card {
     display: grid;
     grid-template-rows: auto 1fr auto;

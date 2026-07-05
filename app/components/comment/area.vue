@@ -41,7 +41,7 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .comment-title {
     display: flex;
     justify-content: space-between;

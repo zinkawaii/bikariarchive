@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import type { CommentData } from "#server/types/api/comment";
+  import type { CommentData } from "#server/types/comment";
 
   interface CommentPanelPostProps {
     kind: "post";
@@ -127,11 +127,11 @@
   </mb-dialog>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .comment-panel {
     width: 512px;
 
-    @include viewport("xs") {
+    @media (width < 425px) {
       --dialog-padding: 1rem;
 
       height: 100dvh;

@@ -34,7 +34,7 @@
   </figure>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .shiki {
     display: grid;
     margin-block: 0.5em -0.5em;

@@ -43,7 +43,7 @@
   </li>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .chapter-link {
     display: grid;
     grid-template:

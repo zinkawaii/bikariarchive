@@ -17,7 +17,7 @@
   </li>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .menu-item {
     display: grid;
     grid-template-columns: 16px 1fr 16px;

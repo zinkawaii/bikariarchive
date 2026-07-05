@@ -18,7 +18,7 @@
   </ul>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .setting-select {
     display: flex;
     column-gap: 16px;

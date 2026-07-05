@@ -17,7 +17,7 @@
   </fieldset>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .menu-group {
     margin-top: 8px;
     cursor: auto;

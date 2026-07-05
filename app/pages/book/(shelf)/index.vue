@@ -34,13 +34,13 @@
   </fieldset>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .shelf-combine {
     display: grid;
     gap: 16px 36px;
     margin-block: 16px;
 
-    @include viewport(">md") {
+    @container main (width >= 768px) {
       grid-template-columns: repeat(2, 1fr);
     }
   }

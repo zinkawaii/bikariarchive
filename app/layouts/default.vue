@@ -29,7 +29,7 @@
   <z-context-menu />
 </template>
 
-<style lang="scss">
+<style>
   .sotomi {
     --sotomi-padding: 32px;
 
@@ -40,13 +40,13 @@
     min-height: calc(100svh - 64px);
     padding: var(--sotomi-padding);
 
-    @include viewport("lg") {
+    @media (width < 1024px) {
       --sotomi-padding: 12px;
 
       flex-direction: column;
     }
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       --sotomi-padding: 0px;
     }
   }
@@ -85,17 +85,17 @@
     max-width: 1028px;
     z-index: 1;
 
-    @include viewport("lg") {
+    @media (width < 1024px) {
       --meow-large: 1.5rem;
 
       gap: 16px;
     }
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       gap: 0;
     }
 
-    @include viewport("xs") {
+    @media (width < 425px) {
       --meow-large: 1rem;
       --meow-medium: 1rem;
     }
@@ -109,15 +109,15 @@
 
     &:where(.v-enter-active, .v-leave-active) {
       transition: opacity 0.4s;
-      transition-timing-function: cubic-bezier(var(--bezier));
+      transition-timing-function: var(--easing);
     }
 
     &.v-enter-active {
-      --bezier: 0, 0.43, 0.37, 1;
+      --easing: cubic-bezier(0, 0.43, 0.37, 1);
     }
 
     &.v-leave-active {
-      --bezier: 0.43, 0, 1, 0.87;
+      --easing: cubic-bezier(0.43, 0, 1, 0.87);
     }
 
     &:where(.v-enter-from, .v-leave-to) {

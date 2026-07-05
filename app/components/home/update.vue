@@ -5,13 +5,13 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .home-update {
     grid-area: A;
     width: 256px;
     padding: 16px var(--meow-large) var(--meow-medium);
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       width: 100%;
 
       > .recent-article {

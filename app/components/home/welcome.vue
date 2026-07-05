@@ -23,12 +23,10 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  $mt: 10px;
-
+<style scoped>
   .home-welcome {
     grid-area: A;
-    padding-top: 16px - $mt;
+    padding-top: 6px;
   }
 
   .welcome-qrcode {
@@ -36,11 +34,11 @@
     float: right;
     width: 76px;
     aspect-ratio: 1;
-    margin: $mt 0 0 4px;
+    margin: 10px 0 0 4px;
   }
 
   .welcome-title {
     display: inline flow-root;
-    margin-block: $mt 4px;
+    margin-block: 10px 4px;
   }
 </style>

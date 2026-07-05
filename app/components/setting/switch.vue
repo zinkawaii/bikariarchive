@@ -13,7 +13,7 @@
   </button>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .setting-switch {
     display: flex;
     align-items: stretch;

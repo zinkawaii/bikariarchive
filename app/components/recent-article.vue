@@ -27,7 +27,7 @@
   </ul>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .recent-article {
     display: grid;
     row-gap: 4px;

@@ -33,7 +33,7 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .update-years {
     display: flex;
     align-items: flex-end;

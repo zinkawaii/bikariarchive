@@ -37,7 +37,7 @@
   </nuxt-link>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .plain-link {
     color: var(--color-link);
 

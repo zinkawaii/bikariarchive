@@ -2,24 +2,33 @@
   <div class="z-background"></div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-background {
     display: grid;
     position: fixed;
     inset: 0;
     height: 100lvh;
+    background-image: var(--image);
     background-position: center;
     background-size: cover;
 
-    @include theme using ($theme) {
-      background-image: url("/api/image/background/#{$theme}.webp");
+    [theme="hatsusora"] & {
+      --image: url("/api/image/background/hatsusora.webp");
     }
 
-    @include dark {
-      background-image: url("/api/image/background/dark.webp");
+    [theme="ayame"] & {
+      --image: url("/api/image/background/ayame.webp");
     }
 
-    @include viewport("sm") {
+    [theme="sakura"] & {
+      --image: url("/api/image/background/sakura.webp");
+    }
+
+    [z-dark] & {
+      --image: url("/api/image/background/dark.webp");
+    }
+
+    @media (width < 596px) {
       &::after {
         content: "";
         background-color: var(--color-background-alpha);

@@ -61,7 +61,7 @@
   </menu>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-toolbar {
     display: grid;
     gap: 8px;
@@ -96,7 +96,7 @@
 
   .tool-progress, .tool-arrow-top {
     position: absolute;
-    opacity: var(--op0);
+    opacity: var(--opacity0);
     inset: 0;
     margin: auto;
     animation: scroll-progress linear;
@@ -104,8 +104,8 @@
   }
 
   .tool-progress {
-    --op1: 1;
-    --op0: 0;
+    --opacity1: 1;
+    --opacity0: 0;
 
     font-family: var(--font-smooth);
     font-size: 14px;
@@ -124,16 +124,16 @@
     }
 
     :hover > & {
-      --op1: 0;
+      --opacity1: 0;
     }
   }
 
   .tool-arrow-top {
-    --op1: 0;
-    --op0: 1;
+    --opacity1: 0;
+    --opacity0: 1;
 
     :hover > & {
-      --op1: 1;
+      --opacity1: 1;
     }
   }
 
@@ -141,11 +141,11 @@
     0% {
       --scroll-progress: 0;
 
-      opacity: var(--op1);
+      opacity: var(--opacity1);
     }
 
     99.9999999% {
-      opacity: var(--op1);
+      opacity: var(--opacity1);
     }
 
     100% {

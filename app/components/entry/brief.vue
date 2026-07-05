@@ -30,7 +30,7 @@
   </meow-table>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .entry-brief {
     --dt-fr: 0.3fr;
     --dd-fr: 0.7fr;

@@ -37,7 +37,7 @@
   </entry-section>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .talent-tag {
     margin-left: 6px;
     padding: 2px 8px;

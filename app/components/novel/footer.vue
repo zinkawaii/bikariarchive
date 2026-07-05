@@ -6,7 +6,7 @@
 
 <template>
   <footer class="novel-footer">
-    <p v-if="art.ending" class="novel-endding">THE END</p>
+    <p v-if="art.ending" class="novel-ending">THE END</p>
     <div class="novel-copyright p-small">
       <div class="copyright-wrapper">
         <div class="copyright-crumb">
@@ -26,8 +26,8 @@
   </footer>
 </template>
 
-<style lang="scss" scoped>
-  .novel-endding {
+<style scoped>
+  .novel-ending {
     display: flex;
     align-items: center;
     justify-content: center;

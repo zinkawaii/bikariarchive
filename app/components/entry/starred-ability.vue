@@ -5,7 +5,7 @@
   </template>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .entry-known-ability {
     margin-left: 2em;
   }

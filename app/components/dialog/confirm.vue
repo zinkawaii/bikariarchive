@@ -26,7 +26,7 @@
   </mb-dialog>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .dialog-confirm {
     --dialog-padding: 1rem 1.5rem;
 

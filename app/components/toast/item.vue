@@ -29,7 +29,7 @@
   </li>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .toast-item {
     overflow: hidden;
     margin-bottom: 16px;

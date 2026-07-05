@@ -129,7 +129,7 @@
   </header>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-header {
     display: grid;
     grid-template-columns: 1fr auto auto;
@@ -152,18 +152,11 @@
     font-size: 14px;
   }
 
-  $title: 298px;
-  $nav: 60px;
-  $count: 7;
-  $padding: 16px * 2;
-  $nav-full: $nav * $count;
-  $max: $title + $nav-full + $padding;
-
   .header-logo {
     display: flex;
     padding-inline: 16px;
 
-    @media (width >= #{$max}) {
+    @media (width >= 768px) {
       max-width: 456px;
     }
   }
@@ -232,16 +225,16 @@
   .nav-expand {
     display: flex;
     position: absolute;
-    inset: 0 6px 0 auto;
+    inset: 0 8px 0 auto;
     height: fit-content;
     margin-block: auto;
-    padding: 6px;
+    padding: 8px;
     font-size: 28px;
     color: white;
     transition: all 0.25s;
     filter: drop-shadow(var(--text-shadow));
 
-    @media (width >= #{$max}) {
+    @media (width >= 768px) {
       display: none;
     }
   }
@@ -250,7 +243,7 @@
     display: flex;
     justify-content: center;
 
-    @media (width < #{$max}) {
+    @media (width < 768px) {
       gap: 4px;
       position: absolute;
       inset: calc(100% - 12px) 0 0 auto;
@@ -275,9 +268,9 @@
     display: grid;
     justify-items: center;
     gap: 4px;
-    width: $nav;
+    width: 60px;
 
-    @media (width >= #{$max}) {
+    @media (width >= 768px) {
       color: white;
       filter: drop-shadow(var(--text-shadow));
     }
@@ -320,7 +313,7 @@
     background-color: var(--color-background);
     line-height: 28px;
 
-    @include viewport("lg") {
+    @media (width < 1024px) {
       display: none;
     }
 

@@ -14,7 +14,7 @@
   </section>
 </template>
 
-<style lang="scss">
+<style scoped>
   .aside-widget {
     margin-top: 16px;
     padding: 16px;

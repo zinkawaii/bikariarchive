@@ -8,7 +8,7 @@
   </aside-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .aside-unified {
     display: flex;
     flex-direction: column;

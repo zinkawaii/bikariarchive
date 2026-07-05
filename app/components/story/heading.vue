@@ -16,7 +16,7 @@
   </h2>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .story-heading {
     --edge-fades-to: right;
 

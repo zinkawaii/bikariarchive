@@ -2,7 +2,7 @@
   <h3 class="meow-title"><slot></slot></h3>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .meow-title {
     width: fit-content;
     margin-bottom: 4px;

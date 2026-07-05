@@ -219,7 +219,7 @@
   </transition-scale>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-context-menu {
     position: fixed;
     padding: 8px;

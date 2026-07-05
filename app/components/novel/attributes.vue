@@ -65,7 +65,7 @@
   </ul>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .novel-attributes {
     display: flex;
     column-gap: 18px;

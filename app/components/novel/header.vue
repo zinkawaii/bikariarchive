@@ -25,7 +25,7 @@
   </header>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .novel-cover {
     height: 288px;
     margin: calc(-1 * var(--meow-large) + 8px);
@@ -68,7 +68,7 @@
       direction: rtl;
     }
 
-    @include viewport("md") {
+    @container main (width < 768px) {
       font-size: 0;
     }
 

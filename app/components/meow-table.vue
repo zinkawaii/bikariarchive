@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .meow-table {
     border: 1px solid var(--color-border);
     line-height: 1.6;
@@ -37,7 +37,7 @@
       padding: 2px;
     }
 
-    :deep() {
+    &:deep() {
       :where(th, dt) {
         padding: 3px 12px;
         background-color: var(--color-theme);

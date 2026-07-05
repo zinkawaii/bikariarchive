@@ -18,7 +18,7 @@
   <span class="z-fps">{{ displayValue }}FPS</span>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-fps {
     position: fixed;
     top: 0;

@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .home-pagination {
     padding-block: 16px;
     border-block: none;

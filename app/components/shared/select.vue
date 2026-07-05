@@ -61,7 +61,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-select {
     display: grid;
     grid-template-columns: 1fr auto;

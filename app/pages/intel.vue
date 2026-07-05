@@ -57,7 +57,7 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .intel-section {
     &:hover > .story-heading::before {
       color: var(--color-info);

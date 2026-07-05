@@ -17,7 +17,7 @@
   </button>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .meow-button {
     display: flex;
     align-items: flex-end;

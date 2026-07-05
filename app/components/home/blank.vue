@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .home-blank {
     display: grid;
     grid-template-rows: auto 1fr;

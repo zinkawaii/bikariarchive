@@ -22,7 +22,7 @@
   </nuxt-link>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .bangumi-item {
     position: relative;
     overflow: hidden;

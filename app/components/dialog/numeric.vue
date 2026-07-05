@@ -70,7 +70,7 @@
   </mb-dialog>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .dialog-numeric {
     --dialog-padding: 1rem 1.5rem;
 

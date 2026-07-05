@@ -28,7 +28,7 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .borrowing-tip {
     margin-top: 2px;
     font-size: 14px;

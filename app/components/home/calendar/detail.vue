@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .calendar-detail {
     display: flex;
     flex-direction: column;
@@ -99,18 +99,18 @@
   }
 
   .calendar-hitokoto {
-    $h: 28px;
+    --leading: 28px;
 
     margin: auto;
     background-image:
       repeating-linear-gradient(
         to bottom,
         transparent 0,
-        transparent $h - 1px,
+        transparent calc(var(--leading) - 1px),
         var(--color-theme) 0,
-        var(--color-theme-dark) $h
+        var(--color-theme-dark) var(--leading)
       );
-    line-height: $h;
+    line-height: var(--leading);
     white-space: pre-line;
   }
 

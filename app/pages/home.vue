@@ -26,7 +26,7 @@
   <home-tabulars />
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .home-brief {
     display: grid;
     grid-template:
@@ -34,7 +34,7 @@
       "B C" / 1fr 40%;
     gap: var(--meow-medium);
 
-    @include viewport("md") {
+    @container main (width < 768px) {
       grid-template: "A" "B" "C";
     }
   }
@@ -46,7 +46,7 @@
       "A C" 1fr / auto 1fr;
     gap: 16px;
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       grid-template: "A" "B" "C";
 
       > .content-widget {

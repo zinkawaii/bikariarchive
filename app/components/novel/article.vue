@@ -127,7 +127,7 @@
   </mb-primitive>
 </template>
 
-<style lang="scss">
+<style>
   .novel-text {
     overflow-wrap: anywhere;
 

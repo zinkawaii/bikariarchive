@@ -37,7 +37,7 @@
   <div class="panel-count">{{ length }} / {{ maxlength }}</div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .panel-editor {
     overflow: auto;
     height: 196px;

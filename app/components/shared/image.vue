@@ -118,7 +118,7 @@
   </figure>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-image {
     display: grid;
     position: relative;

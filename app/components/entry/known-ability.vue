@@ -28,7 +28,7 @@
   <p v-else>暂无。</p>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .entry-known-ability {
     padding-left: 4px;
     font-size: 14px;

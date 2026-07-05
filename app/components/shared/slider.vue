@@ -68,7 +68,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-slider {
     display: grid;
     align-items: center;

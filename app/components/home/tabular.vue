@@ -25,7 +25,7 @@
   </nuxt-link>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .home-tabular {
     display: flex;
     flex-direction: var(--direction);
@@ -38,14 +38,14 @@
       --direction: row-reverse;
     }
 
-    @include viewport(">sm") {
+    @media (width >= 596px) {
       &:hover {
         background-color: var(--color-background);
         translate: 0 -4px;
       }
     }
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       flex-direction: column;
       padding-inline: var(--meow-medium);
 
@@ -60,7 +60,7 @@
     height: 160px;
     border-radius: 8px;
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       flex: none;
     }
   }
@@ -93,7 +93,7 @@
     border-radius: var(--rounded-full);
     background-color: var(--color-theme-dark);
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       display: none;
     }
   }

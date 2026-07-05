@@ -140,8 +140,8 @@
   </meow-widget>
 </template>
 
-<style lang="scss" scoped>
-  @include viewport(">md") {
+<style scoped>
+  @container main (width >= 768px) {
     :where(.mb-skeleton, .novel-text) {
       padding-inline: var(--meow-large);
     }

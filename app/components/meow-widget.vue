@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .meow-widget {
     padding: var(--meow-large);
   }

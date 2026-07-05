@@ -1,71 +1,71 @@
 :root {
-    --shiki-light-text: #4C4F69;
-    --shiki-light-punctuation: #179299;
-    --shiki-light-tag: #1E66F5;
-    --shiki-light-attribute-name: #DF8E1D;
-    --shiki-light-attribute-value: #40A02B;
-    --shiki-dark-text: #ABB2BF;
-    --shiki-dark-punctuation: #ABB2BF;
-    --shiki-dark-tag: #E06C75;
-    --shiki-dark-attribute-name: #D19A66;
-    --shiki-dark-attribute-value: #98C379;
+  --shiki-light-text: #4C4F69;
+  --shiki-light-punctuation: #179299;
+  --shiki-light-tag: #1E66F5;
+  --shiki-light-attribute-name: #DF8E1D;
+  --shiki-light-attribute-value: #40A02B;
+  --shiki-dark-text: #ABB2BF;
+  --shiki-dark-punctuation: #ABB2BF;
+  --shiki-dark-tag: #E06C75;
+  --shiki-dark-attribute-name: #D19A66;
+  --shiki-dark-attribute-value: #98C379;
 
-    color-scheme: light dark;
+  color-scheme: light dark;
 }
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .header {
-    margin: 10px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid black;
+  margin: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid black;
 
-    @media (prefers-color-scheme: dark) {
-        border-color: white;
-    }
+  @media (prefers-color-scheme: dark) {
+    border-color: white;
+  }
 }
 
 .pretty-print {
-    margin: 1em 0 0 20px;
-    font-family: monospace;
-    font-size: 13px;
-    color: light-dark(var(--shiki-light-text), var(--shiki-dark-text));
+  margin: 1em 0 0 20px;
+  font-family: monospace;
+  font-size: 13px;
+  color: light-dark(var(--shiki-light-text), var(--shiki-dark-text));
 }
 
 details:not(:open)::after {
-    content: "...";
+  content: "...";
 }
 
 summary {
-    width: 0;
-    margin: -1em 0 0 -10px;
-    font-size: 12.4px;
-    line-height: 1;
+  width: 0;
+  margin: -1em 0 0 -10px;
+  font-size: 12.4px;
+  line-height: 1;
 
-    &::marker {
-        color: #909090;
-        cursor: pointer;
-    }
+  &::marker {
+    color: #909090;
+    cursor: pointer;
+  }
 }
 
 .html-punctuation {
-    color: light-dark(var(--shiki-light-punctuation), var(--shiki-dark-punctuation));
+  color: light-dark(var(--shiki-light-punctuation), var(--shiki-dark-punctuation));
 }
 
 .html-tag {
-    color: light-dark(var(--shiki-light-tag), var(--shiki-dark-tag));
+  color: light-dark(var(--shiki-light-tag), var(--shiki-dark-tag));
 }
 
 .html-attribute-name {
-    color: light-dark(var(--shiki-light-attribute-name), var(--shiki-dark-attribute-name));
+  color: light-dark(var(--shiki-light-attribute-name), var(--shiki-dark-attribute-name));
 }
 
 .html-attribute-value {
-    color: light-dark(var(--shiki-light-attribute-value), var(--shiki-dark-attribute-value));
+  color: light-dark(var(--shiki-light-attribute-value), var(--shiki-dark-attribute-value));
 }
 
 .opened {
-    margin-left: 1em;
+  margin-left: 1em;
 }

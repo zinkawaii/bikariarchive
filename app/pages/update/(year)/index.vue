@@ -43,7 +43,7 @@
   <mb-pagination :total :sizes scroll-target="body" v-model="page"/>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .update-skeleton {
     margin-block: var(--meow-medium);
   }
@@ -52,7 +52,7 @@
     margin-block: 16px;
     padding-left: 32px;
 
-    @include viewport("xs") {
+    @media (width < 425px) {
       padding-left: 24px;
     }
   }
@@ -99,15 +99,15 @@
   }
 
   .update-content {
-    --shadow: 6%;
+    --shadow-opacity: 6%;
 
     padding: 12px 16px;
     border-radius: 24px;
-    box-shadow: 6px 6px rgb(0 0 0 / var(--shadow));
+    box-shadow: 6px 6px rgb(0 0 0 / var(--shadow-opacity));
     background-color: var(--color-background);
 
-    @include dark {
-      --shadow: 18%;
+    [z-dark] & {
+      --shadow-opacity: 18%;
     }
   }
 

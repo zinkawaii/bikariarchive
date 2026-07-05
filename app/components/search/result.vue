@@ -23,7 +23,7 @@
   </nuxt-link>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .search-result {
     padding: 16px;
     border: 1px solid transparent;
@@ -51,7 +51,7 @@
     padding-block: 4px;
     font-size: 13px;
 
-    :deep(p) {
+    &:deep(> p) {
       line-height: 22px;
     }
   }

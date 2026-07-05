@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .tab-list {
     display: flex;
     align-items: flex-end;

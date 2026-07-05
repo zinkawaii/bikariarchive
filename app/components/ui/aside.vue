@@ -78,14 +78,14 @@
   </transition>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .z-aside {
     display: grid;
     grid-template-columns: 256px;
     place-content: start center;
     margin-top: -16px;
 
-    @include viewport("lg") {
+    @media (width < 1024px) {
       position: fixed;
       overflow: auto;
       inset: 80px 0 0;

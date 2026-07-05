@@ -17,7 +17,7 @@
   ><slot></slot></button>
 </template>
 
-<style lang="scss">
+<style>
   .mb-button {
     display: inline flex;
     align-items: center;

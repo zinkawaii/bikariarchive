@@ -17,7 +17,7 @@
   />
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .user-avatar {
     aspect-ratio: 1;
     border-radius: var(--rounded-full);

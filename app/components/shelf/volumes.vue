@@ -22,7 +22,7 @@
   </ol>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .shelf-volumes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));

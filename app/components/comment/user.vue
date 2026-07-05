@@ -35,7 +35,7 @@
   </mb-dialog>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .comment-user {
     --dialog-padding: 0;
 

@@ -58,7 +58,7 @@
   </mb-primitive>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-popper {
     display: grid;
     place-items: center;

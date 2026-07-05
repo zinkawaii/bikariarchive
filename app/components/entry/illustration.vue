@@ -24,7 +24,7 @@
   </mb-tab>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .entry-illustration {
     width: min(336px, 100%);
     margin-inline: auto;

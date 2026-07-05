@@ -11,7 +11,7 @@
   </nuxt-link>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .character-tag {
     display: inline flex;
     align-items: center;

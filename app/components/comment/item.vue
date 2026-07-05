@@ -2,7 +2,7 @@
   import { parseComment } from "@bikari/article/remark";
   import { Temporal } from "temporal-polyfill";
   import { LazyCommentUser } from "#components";
-  import type { CommentData } from "#server/types/api/comment";
+  import type { CommentData } from "#server/types/comment";
 
   const props = defineProps<{
     data: WithParent<CommentData>;
@@ -104,7 +104,7 @@
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .comment-item {
     display: grid;
     grid-template:
@@ -119,7 +119,7 @@
     width: 42px;
     cursor: pointer;
 
-    @include viewport("xs") {
+    @media (width < 425px) {
       .comment-reply & {
         width: 0;
       }
@@ -168,7 +168,7 @@
       color: var(--color-theme-text);
     }
 
-    @include viewport("sm") {
+    @media (width < 596px) {
       > .iconify + span {
         display: none;
       }

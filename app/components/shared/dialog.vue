@@ -25,9 +25,9 @@
   </transition-scale>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-dialog {
-    --m: 16px;
+    --margin: 16px;
 
     display: grid;
     grid-template-rows: 1fr;
@@ -37,14 +37,14 @@
     width: fit-content;
     height: fit-content;
     min-width: var(--size-min-width);
-    max-width: calc(100% - var(--m) * 2);
-    max-height: calc(100dvh - var(--m) * 2);
+    max-width: calc(100% - var(--margin) * 2);
+    max-height: calc(100dvh - var(--margin) * 2);
     margin: auto;
     border-radius: 16px;
     background-color: var(--color-background);
 
-    @include viewport("xs") {
-      --m: 0px;
+    @media (width < 425px) {
+      --margin: 0px;
     }
   }
 

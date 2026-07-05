@@ -25,7 +25,7 @@
   </figure>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .mb-video {
     display: grid;
     position: relative;

@@ -45,7 +45,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   .jumbotron-banner {
     display: grid;
     align-content: center;

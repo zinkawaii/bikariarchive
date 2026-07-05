@@ -2,10 +2,10 @@
   const percent = ref(1);
 
   useAdoptedStyleSheet/* CSS */`
-        .z-jumbotron {
-            --jumbotron-percent: ${percent};
-        }
-    `;
+    .z-jumbotron {
+      --jumbotron-percent: ${percent};
+    }
+  `;
 
   function onBeforeEnter() {
     percent.value = 1;
@@ -49,19 +49,19 @@
   </transition>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
   @property --jumbotron-percent {
     syntax: "<number>";
     inherits: true;
     initial-value: 1;
   }
 
-  $h: 72svh;
-
   .z-jumbotron {
+    --height: 72svh;
+
     position: relative;
-    height: $h;
-    margin-bottom: calc($h * (var(--jumbotron-percent) - 1));
+    height: var(--height);
+    margin-bottom: calc(var(--height) * (var(--jumbotron-percent) - 1));
     mask-image: linear-gradient(black calc(100% * var(--jumbotron-percent)), transparent 0);
 
     &:where(.v-enter-active, .v-leave-active) {
