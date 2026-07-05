@@ -46,6 +46,14 @@
       transition: all 0.4s;
     }
 
+    &.v-enter-active {
+      transition-timing-function: var(--ease-out-back);
+    }
+
+    &.v-leave-active {
+      transition-timing-function: var(--ease-in-cubic);
+    }
+
     &:where(.v-enter-from, .v-leave-to) {
       opacity: 0;
       margin-bottom: -38px;

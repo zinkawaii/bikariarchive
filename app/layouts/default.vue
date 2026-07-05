@@ -109,15 +109,14 @@
 
     &:where(.v-enter-active, .v-leave-active) {
       transition: opacity 0.4s;
-      transition-timing-function: var(--easing);
     }
 
     &.v-enter-active {
-      --easing: cubic-bezier(0, 0.43, 0.37, 1);
+      transition-timing-function: var(--ease-out-cubic);
     }
 
     &.v-leave-active {
-      --easing: cubic-bezier(0.43, 0, 1, 0.87);
+      transition-timing-function: var(--ease-in-cubic);
     }
 
     &:where(.v-enter-from, .v-leave-to) {

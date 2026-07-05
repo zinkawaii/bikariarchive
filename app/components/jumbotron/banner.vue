@@ -3,7 +3,7 @@
 
   const duration = 400;
   const titleDelay = 80;
-  const summaryDelay = 20;
+  const summaryDelay = 15;
   const { title, subtitle } = config.public;
   const titleChars = [...title];
   const subtitleChars = ref<string[]>([]);
@@ -72,35 +72,26 @@
   .jumbotron-title {
     font-size: 72px;
 
-    > .jumbotron-char {
-      &:nth-child(2n) {
-        animation-name: jumbo-char-cross-up;
-      }
-
-      &:nth-child(2n + 1) {
-        animation-name: jumbo-char-cross-down;
-      }
+    > .jumbotron-char:nth-child(2n + 1) {
+      animation-name: jumbo-char-cross-down;
     }
   }
 
   .jumbotron-subtitle {
     height: 1lh;
     margin-bottom: 0.5em;
-
-    > .jumbotron-char {
-      animation-name: jumbo-char-jump;
-    }
   }
 
   .jumbotron-char {
     display: inline flow-root;
     opacity: 0;
-    animation: _ 0.4s ease-out both;
+    animation: jumbo-char-cross-up 0.4s both;
+    animation-timing-function: var(--ease-out-back);
   }
 
   @keyframes jumbo-char-cross-up {
     from {
-      translate: 0 50%;
+      translate: 0 3.5rem;
     }
 
     to {
@@ -111,29 +102,10 @@
 
   @keyframes jumbo-char-cross-down {
     from {
-      translate: 0 -50%;
+      translate: 0 -3.5rem;
     }
 
     to {
-      opacity: 1;
-      translate: 0;
-    }
-  }
-
-  @keyframes jumbo-char-jump {
-    0% {
-      translate: 0 133%;
-    }
-
-    50% {
-      translate: 0 -33%;
-    }
-
-    75% {
-      translate: 0 16.7%;
-    }
-
-    100% {
       opacity: 1;
       translate: 0;
     }

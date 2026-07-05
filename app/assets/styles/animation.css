@@ -28,11 +28,8 @@
   }
 }
 
-.animate-rotate {
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-  animation-name: rotate;
-  animation-timing-function: linear;
+.animation-rotate {
+  animation: rotate 1.5s linear infinite;
 }
 
 @keyframes rotate {

@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     },
   },
   css: [
+    "easings-css/index.css",
     "~/assets/styles/var.css",
     "~/assets/styles/sinrabansyo.css",
     "~/assets/styles/animation.css",
