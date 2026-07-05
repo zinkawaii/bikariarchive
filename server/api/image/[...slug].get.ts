@@ -12,7 +12,7 @@ const schema = type({
   h: "string?",
 });
 
-export default defineJEventHandler<{
+export default defineJCachedEventHandler<{
   query: GetImageQuery;
 }>(async (event) => {
   const config = useRuntimeConfig();
@@ -49,4 +49,7 @@ export default defineJEventHandler<{
   });
 
   return redirect(request.url, 307);
+}, {
+  maxAge: 3600,
+  swr: false,
 });
