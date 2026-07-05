@@ -19,6 +19,12 @@ import slot from "./plugins/slot";
 import slug from "./plugins/slug";
 import strikethrough from "./plugins/strikethrough";
 
+declare module "mdast" {
+  interface Node {
+    attributes?: Record<string, any>;
+  }
+}
+
 const rehypeOptions: RehypeOptions = {
   allowDangerousHtml: true,
   footnoteLabel: "参考资料",

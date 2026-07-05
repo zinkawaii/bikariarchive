@@ -57,12 +57,12 @@
 </script>
 
 <template>
-  <figure class="mb-code">
-    <figcaption class="code-header">
+  <figure class="mb-forge">
+    <figcaption class="forge-header">
       <span class="text-uppercase">{{ lang }}</span>
       <button
         v-for="{ title, icon, action } in actions"
-        class="code-action"
+        class="forge-action"
         :aria-label="title"
         @click="action"
       >
@@ -70,15 +70,15 @@
       </button>
     </figcaption>
     <div
-      class="code-area"
+      class="forge-area"
       :class="{
         [`is-collapse`]: isCollapse,
         [`is-expand`]: isExpand,
       }"
     >
-      <pre class="code-line">{{ lineStr }}</pre>
+      <pre class="forge-line">{{ lineStr }}</pre>
       <pre ref="pre" class="shiki edge-fades-x no-scrollbar" v-html="code"></pre>
-      <button v-if="lines >= 10" class="code-expand" @click="toggleExpand()">
+      <button v-if="lines >= 10" class="forge-expand" @click="toggleExpand()">
         <iconify :name="`fa7-solid:angles-${isExpand ? `up` : `down`}`"/>
       </button>
     </div>
@@ -86,14 +86,14 @@
 </template>
 
 <style scoped>
-  .mb-code {
+  .mb-forge {
     overflow: hidden;
     border: 1px solid var(--color-border-lighter);
     border-radius: 16px;
     background-color: var(--color-background);
   }
 
-  .code-header {
+  .forge-header {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -107,7 +107,7 @@
     color: var(--color-theme-text);
   }
 
-  .code-action {
+  .forge-action {
     display: grid;
     place-items: center;
     width: 1rem;
@@ -117,7 +117,7 @@
     }
   }
 
-  .code-area {
+  .forge-area {
     display: flex;
     position: relative;
     overflow: hidden;
@@ -143,11 +143,11 @@
     }
   }
 
-  .code-line, .shiki {
+  .forge-line, .shiki {
     padding: 1ch;
   }
 
-  .code-line {
+  .forge-line {
     margin-left: 1ch;
     text-align: right;
     color: var(--color-info);
@@ -158,7 +158,7 @@
     overflow-y: hidden;
   }
 
-  .code-expand {
+  .forge-expand {
     display: grid;
     place-items: center;
     position: absolute;

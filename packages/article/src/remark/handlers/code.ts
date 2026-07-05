@@ -5,7 +5,7 @@ import type { Handler } from "mdast-util-to-hast";
 export default <Handler> function(state, node: Code) {
   const result: Element = {
     type: "element",
-    tagName: "mb-code",
+    tagName: "mb-forge",
     properties: {
       lang: node.lang,
       meta: node.meta,

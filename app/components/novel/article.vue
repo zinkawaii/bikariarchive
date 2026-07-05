@@ -3,14 +3,14 @@
   import { getProperty } from "propathy";
   import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
   import type { RenderFunction, VNodeChild } from "vue";
-  import { CommentCode, Iconify, MbCode, MbImage, MbMath, MbVideo, PlainLink, StoryHeading } from "#components";
+  import { CommentForge, Iconify, MbForge, MbImage, MbMath, MbVideo, PlainLink, StoryHeading } from "#components";
 
   const ariaRE = /^aria[A-Z]/;
 
   const globalComponents = {
-    CommentCode,
+    CommentForge,
     Iconify,
-    MbCode,
+    MbForge,
     MbImage,
     MbMath,
     MbVideo,
@@ -61,8 +61,8 @@
       }
     }
     else if (variant === "comment") {
-      if (tag === "mb-code") {
-        tag = "comment-code";
+      if (tag === "mb-forge") {
+        tag = "comment-forge";
       }
     }
     const comp = resolvedComponents.value[tag] ?? resolvedComponents.value["lazy-" + tag];
@@ -178,7 +178,7 @@
       font-weight: bold;
     }
 
-    :where(.mb-code, .mb-image, .mb-math, .mb-video) {
+    :where(.mb-forge, .mb-image, .mb-math, .mb-video) {
       margin-block: 1em;
     }
 

@@ -2,12 +2,6 @@ import type { Element } from "hast";
 import type { Link } from "mdast";
 import type { Handler } from "mdast-util-to-hast";
 
-declare module "mdast" {
-  interface Link {
-    attributes?: Record<string, string>;
-  }
-}
-
 export default <Handler> function(state, node: Link) {
   const result: Element = {
     type: "element",
