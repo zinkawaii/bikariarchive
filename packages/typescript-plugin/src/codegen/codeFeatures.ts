@@ -2,12 +2,10 @@ import type { CodeInformation } from "@volar/language-core";
 
 const raw = {
   all: {
-    completion: true,
-    format: true,
-    navigation: true,
-    semantic: true,
-    structure: true,
     verification: true,
+    completion: true,
+    semantic: true,
+    navigation: true,
   },
   verification: {
     verification: true,

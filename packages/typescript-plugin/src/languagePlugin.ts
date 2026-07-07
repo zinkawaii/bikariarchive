@@ -8,10 +8,19 @@ import parse from "remark-parse";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import { parseDocument } from "yaml";
-import type mdast from "mdast";
 import type ts from "typescript";
-import { generateFrontmatter } from "./codegen/generateFrontmatters";
+import { generateFrontmatters } from "./codegen/generateFrontmatters";
 import type { Code, Config, Expression, Frontmatter, Mapping } from "./types";
+
+declare module "mdast" {
+  interface RootContentMap {
+    containerComponent: Parent & {
+      type: "containerComponent";
+      name: string;
+      rawData?: string;
+    };
+  }
+}
 
 interface Context {
   root: string;
@@ -103,10 +112,7 @@ export class MdzVirtualCode implements VirtualCode {
       });
     });
 
-    visit(document, "containerComponent", (node: mdast.Parent & {
-      name: string;
-      rawData?: string;
-    }) => {
+    visit(document, "containerComponent", (node) => {
       if (node.name !== "draft" || node.rawData === void 0) {
         return;
       }
@@ -134,7 +140,7 @@ export class MdzVirtualCode implements VirtualCode {
     });
 
     this.embeddedCodes.push(
-      resolveCodes("frontmatter", "typescript", generateFrontmatter({
+      resolveCodes("document", "typescript", generateFrontmatters({
         import: options.frontmatter,
         frontmatters,
         expressions,

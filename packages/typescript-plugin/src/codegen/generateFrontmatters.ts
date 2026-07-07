@@ -1,5 +1,6 @@
-import { type Node, Scalar, YAMLMap, YAMLSeq } from "yaml";
+import { type Document, type Node, Scalar, YAMLMap, YAMLSeq } from "yaml";
 import { codeFeatures } from "./codeFeatures";
+import { Boundary } from "./utils";
 import type { Code, Expression, Frontmatter, Import } from "../types";
 
 export interface FrontmatterCodegenOptions {
@@ -8,15 +9,7 @@ export interface FrontmatterCodegenOptions {
   expressions: Expression[];
 }
 
-interface FrontmatterCodegenContext {
-  startOffset: number;
-}
-
-export function* generateFrontmatter(options: FrontmatterCodegenOptions): Generator<Code> {
-  const ctx: FrontmatterCodegenContext = {
-    startOffset: 0,
-  };
-
+export function* generateFrontmatters(options: FrontmatterCodegenOptions): Generator<Code> {
   if (options.import.length) {
     yield `type Frontmatter = import("${options.import[0]}").${options.import[1]};\n`;
   }
@@ -24,18 +17,27 @@ export function* generateFrontmatter(options: FrontmatterCodegenOptions): Genera
 
   for (let i = 0; i < options.frontmatters.length; i++) {
     const { root, offset } = options.frontmatters[i];
-    ctx.startOffset = offset + 4;
+    const startOffset = offset + 4;
 
-    yield `(): `;
-    yield* generateReturnType(i, options.expressions);
-    yield ` => (`;
-    yield* generateValue(ctx, root.contents, false);
-    yield `);\n`;
+    for (const code of generateFrontmatter(options, root, i)) {
+      if (typeof code === "object") {
+        code[1] += startOffset;
+      }
+      yield code;
+    }
   }
 
   for (const exp of options.expressions) {
     yield* generateExpression(exp);
   }
+}
+
+function* generateFrontmatter(options: FrontmatterCodegenOptions, root: Document, index: number): Generator<Code> {
+  yield `(): `;
+  yield* generateReturnType(index, options.expressions);
+  yield ` => (`;
+  yield* generateValue(root.contents);
+  yield `);\n`;
 }
 
 function* generateReturnType(index: number, expressions: Expression[]): Generator<Code> {
@@ -58,92 +60,77 @@ function* generateReturnType(index: number, expressions: Expression[]): Generato
   }
 }
 
-function* generateValue(
-  ctx: FrontmatterCodegenContext,
-  node: Node | null,
-  trailingComma: boolean,
-): Generator<Code> {
-  if (node) {
-    yield [
-      ``,
-      node.range![0] + ctx.startOffset,
-      codeFeatures.verification,
-    ];
-  }
-  if (!node) {
+function* generateValue(node: Node | null): Generator<Code> {
+  if (node === null) {
     yield `void 0`;
+    return;
   }
-  else if (node instanceof Scalar) {
-    yield* generateScalar(ctx, node);
+
+  const boundary = yield* Boundary.start(node.range![0], codeFeatures.verification);
+
+  if (node instanceof Scalar) {
+    yield* generateScalar(node);
   }
   else if (node instanceof YAMLMap) {
-    yield* generateMap(ctx, node);
+    yield* generateMap(node);
   }
   else if (node instanceof YAMLSeq) {
-    yield* generateSeq(ctx, node);
+    yield* generateSeq(node);
   }
-  if (node) {
-    yield [
-      ``,
-      node.range![1] + ctx.startOffset,
-      codeFeatures.verification,
-    ];
-  }
-  if (trailingComma) {
-    yield `,\n`;
-  }
+
+  yield boundary.end(node.range![1]);
 }
 
-function* generateScalar(ctx: FrontmatterCodegenContext, node: Scalar): Generator<Code> {
-  let start = ctx.startOffset;
-  let quote = true;
-
-  if (node.type === Scalar.QUOTE_SINGLE || node.type === Scalar.QUOTE_DOUBLE) {
-    start++;
-  }
-  else if (
+function* generateScalar(node: Scalar): Generator<Code> {
+  if (
+    node.type === Scalar.QUOTE_SINGLE ||
+    node.type === Scalar.QUOTE_DOUBLE ||
     !Number.isNaN(Number(node.value)) ||
     node.value === "true" ||
     node.value === "false" ||
     node.value === "null"
   ) {
-    quote = false;
+    yield [
+      JSON.stringify(node),
+      node.range![0],
+      codeFeatures.all,
+    ];
   }
-
-  if (quote) {
+  else {
+    const boundary = yield* Boundary.start(node.range![0], codeFeatures.verification);
     yield `"`;
-  }
-  yield [
-    String(node.value),
-    start + ctx.startOffset,
-    codeFeatures.all,
-  ];
-  if (quote) {
+    yield [
+      node.toString(),
+      node.range![0],
+      codeFeatures.all,
+    ];
     yield `"`;
+    yield boundary.end(node.range![1]);
   }
 }
 
-function* generateMap(ctx: FrontmatterCodegenContext, node: YAMLMap): Generator<Code> {
+function* generateMap(node: YAMLMap): Generator<Code> {
   yield `{\n`;
   for (const item of node.items) {
     if (item.key instanceof Scalar) {
       yield [
         String(item.key.value),
-        item.key.range![0] + ctx.startOffset,
+        item.key.range![0],
         codeFeatures.all,
       ];
     }
     yield `: `;
-    yield* generateValue(ctx, item.value as Node | null, false);
+    yield* generateValue(item.value as Node | null);
     yield `,\n`;
   }
   yield `}`;
 }
 
-function* generateSeq(ctx: FrontmatterCodegenContext, node: YAMLSeq): Generator<Code> {
+function* generateSeq(node: YAMLSeq): Generator<Code> {
   yield `[\n`;
   for (const item of node.items) {
-    yield* generateValue(ctx, item as Node | null, true);
+    yield* generateValue(item as Node | null);
+    yield `,\n`;
   }
   yield `]`;
 }
@@ -151,11 +138,7 @@ function* generateSeq(ctx: FrontmatterCodegenContext, node: YAMLSeq): Generator<
 function* generateExpression(exp: Expression): Generator<Code> {
   const { source, offset } = exp;
   yield `(`;
-  yield [
-    ``,
-    offset,
-    codeFeatures.verification,
-  ];
+  const boundary = yield* Boundary.start(offset, codeFeatures.verification);
   yield `$frontmatter.`;
   yield [
     source,
@@ -163,10 +146,6 @@ function* generateExpression(exp: Expression): Generator<Code> {
     codeFeatures.all,
   ];
   yield `)`;
-  yield [
-    ``,
-    offset + source.length,
-    codeFeatures.verification,
-  ];
+  yield boundary.end(offset + source.length);
   yield `;\n`;
 }
