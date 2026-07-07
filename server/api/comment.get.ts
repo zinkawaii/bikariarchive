@@ -27,32 +27,32 @@ export default defineJEventHandler<{
   const session = await readSession(event);
   const body = schema.assert(getQuery(event));
 
-  //获取严格路径
+  // 获取严格路径
   const path = getStrictPath(body.path);
 
-  //路径格式错误
+  // 路径格式错误
   if (!path) {
     throw 1;
   }
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
-  //单页评论数
+  // 单页评论数
   const limit = 10;
 
-  //总评论数
+  // 总评论数
   res.totalCount = await CommentDataModel.countDocuments({
     path,
   });
 
-  //主评论数
+  // 主评论数
   res.mainCount = await CommentDataModel.countDocuments({
     path,
     parent: null,
   });
 
-  //获取主评论
+  // 获取主评论
   const qComments = await CommentDataModel.find({
     path,
     parent: null,
@@ -61,7 +61,7 @@ export default defineJEventHandler<{
     .skip((body.page - 1) * limit)
     .limit(limit);
 
-  //获取子评论
+  // 获取子评论
   res.list = await Promise.all(
     qComments.map(async (comment) => {
       const children = await CommentDataModel.find({

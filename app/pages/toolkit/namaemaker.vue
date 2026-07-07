@@ -18,31 +18,31 @@
     { label: "女", value: "female" },
   ];
 
-  //数量
+  // 数量
   const count = ref(1);
 
-  //性别
+  // 性别
   const gender = ref("female");
 
-  //指定（姓）
+  // 指定（姓）
   const specLast = ref({
     kanji: "",
     kana: "",
   });
 
-  //指定（名）
+  // 指定（名）
   const specFirst = ref({
     kanji: "",
     kana: "",
   });
 
-  //结果
+  // 结果
   const results = shallowRef<{
     kanji: string;
     kana: string;
   }[]>([]);
 
-  //分列结果
+  // 分列结果
   const chunks = computed(() => {
     const median = Math.ceil(results.value.length / 2);
     return [
@@ -51,12 +51,12 @@
     ];
   });
 
-  //清空结果
+  // 清空结果
   function clear() {
     results.value = [];
   }
 
-  //生成
+  // 生成
   async function generate() {
     if (status.value === "idle") {
       await execute();
@@ -65,10 +65,10 @@
       return;
     }
 
-    //清空结果
+    // 清空结果
     clear();
 
-    //指定汉字与假名
+    // 指定汉字与假名
     const specLastKanji = specLast.value.kanji || specLast.value.kana;
     const specLastKana = specLast.value.kana || specLast.value.kanji;
     const specFirstKanji = specFirst.value.kanji || specFirst.value.kana;
@@ -91,7 +91,7 @@
     });
   }
 
-  //姓
+  // 姓
   function getLastName() {
     const r = randomInt(0, 100);
     const [kanji, kana] =
@@ -104,7 +104,7 @@
     return [kanji, kana] as const;
   }
 
-  //名
+  // 名
   function getFirstName(gender: string) {
     let a = "";
     let b = "";

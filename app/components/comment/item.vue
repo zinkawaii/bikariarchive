@@ -20,7 +20,7 @@
     locale: "zh-CN",
   });
 
-  //相对时间
+  // 相对时间
   const elapsed = computed(() => {
     const now = Temporal.Now.instant();
     const instant = Temporal.Instant.from(props.data.time);
@@ -33,7 +33,7 @@
       });
   });
 
-  //查看用户信息
+  // 查看用户信息
   function openUserInfo(data: CommentData) {
     modalStore.use(() => h(LazyCommentUser, {
       avatar: data.avatar,
@@ -45,17 +45,17 @@
     });
   }
 
-  //回复评论
+  // 回复评论
   function replyComment() {
     commentStore.requirePost(props.data);
   }
 
-  //修改评论
+  // 修改评论
   function modifyComment() {
     commentStore.requireModify(props.data);
   }
 
-  //删除评论
+  // 删除评论
   async function removeComment() {
     if (await requireConfirm("是否删除这条评论？")) {
       commentStore.remove({

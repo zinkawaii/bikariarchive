@@ -4,7 +4,7 @@
   const route = useRoute();
   const router = useRouter();
 
-  //退出登录
+  // 退出登录
   async function logout() {
     try {
       await $fetch("/api/user/logout", {

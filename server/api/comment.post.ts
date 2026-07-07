@@ -25,31 +25,31 @@ export default defineJEventHandler<{
   const session = await readSession(event);
   const body = schema.assert(await event.req.json());
 
-  //获取严格路径
+  // 获取严格路径
   const path = getStrictPath(body.path) as keyof RuntimeConfig["comment"];
 
-  //路径格式错误
+  // 路径格式错误
   if (!path.startsWith("/")) {
     throw 1;
   }
 
-  //权限验证
+  // 权限验证
   const identity = config.comment[path]?.identity ?? 0;
   validateIdentity(session.data, identity);
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
   const mode = session.data.uid !== void 0 ? "user" : "guest";
   const time = new Date();
 
-  //附加信息
+  // 附加信息
   let info:
         | Pick<CommentDataSchema, "nickname" | "email" | "address">
         | Pick<CommentDataSchema, "user">;
 
   if (mode === "guest") {
-    //无游客昵称
+    // 无游客昵称
     if (!body.nickname) {
       throw 2;
     }
@@ -61,12 +61,12 @@ export default defineJEventHandler<{
     };
   }
   else {
-    //获取用户
+    // 获取用户
     const qUser = await UserDataModel.findOne({
       uid: session.data.uid,
     });
 
-    //用户不存在
+    // 用户不存在
     if (!qUser) {
       throw 3;
     }
@@ -76,7 +76,7 @@ export default defineJEventHandler<{
     };
   }
 
-  //获取所回复评论的数据（如果有）
+  // 获取所回复评论的数据（如果有）
   const qParent = await CommentDataModel.findOne({
     _id: body.parent,
   }).populate<{
@@ -86,7 +86,7 @@ export default defineJEventHandler<{
     select: "email",
   });
 
-  //将评论数据写入数据库
+  // 将评论数据写入数据库
   await CommentDataModel.create({
     path,
     root: qParent?.root ?? qParent?._id,
@@ -103,10 +103,10 @@ export default defineJEventHandler<{
     return;
   }
 
-  //获取回复邮箱
+  // 获取回复邮箱
   const email = qParent.mode === "guest" ? qParent.email : qParent.user?.email;
 
-  //对被回复评论进行邮件通知
+  // 对被回复评论进行邮件通知
   if (email && email !== body.email) {
     sendEmail(CommentReply, {
       to: email,

@@ -11,10 +11,10 @@ export default defineJEventHandler(async (event) => {
   const session = await readSession(event);
   const { content } = schema.assert(await event.req.json());
 
-  //权限验证
+  // 权限验证
   validateIdentity(session.data, 1);
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
   const qUser = await UserDataModel.updateOne({
@@ -23,7 +23,7 @@ export default defineJEventHandler(async (event) => {
     sign: content,
   });
 
-  //找不到用户
+  // 找不到用户
   if (qUser.matchedCount === 0) {
     throw 1;
   }

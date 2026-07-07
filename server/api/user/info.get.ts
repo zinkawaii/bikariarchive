@@ -17,14 +17,14 @@ export default defineJEventHandler<{
   const session = await readSession(event);
   const { uid = session.data.uid } = schema.assert(getQuery(event));
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
   const qUser = await UserDataModel.findOne({
     uid,
   }, "nickname email identity sign");
 
-  //用户不存在
+  // 用户不存在
   if (!qUser) {
     throw 1;
   }
@@ -35,7 +35,7 @@ export default defineJEventHandler<{
   res.sign = qUser.sign;
 
   try {
-    //只有本人才能获取的信息
+    // 只有本人才能获取的信息
     validateMyself(session.data, uid!);
     res.identity = qUser.identity;
   }

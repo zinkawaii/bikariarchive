@@ -12,15 +12,15 @@
     required: true,
   });
 
-  //组件根元素
+  // 组件根元素
   const rootEl = useTemplateRef("root");
 
-  //总页数
+  // 总页数
   const totalPages = computed(() => {
     return Math.max(1, Math.ceil(props.total / props.sizes));
   });
 
-  //显示页码
+  // 显示页码
   const pages = computed(() => {
     const current = modelValue.value;
     const total = totalPages.value;
@@ -45,14 +45,14 @@
     return res;
   });
 
-  //滑动根元素
+  // 滑动根元素
   const scrollElement = computed(() => {
     if (props.scrollTarget) {
       return rootEl.value?.closest(props.scrollTarget) ?? document.querySelector(props.scrollTarget);
     }
   });
 
-  //切换页码时滑动到指定元素的起始位置
+  // 切换页码时滑动到指定元素的起始位置
   watch(modelValue, () => {
     if (scrollElement.value) {
       const pos = getPosition(scrollElement.value);
@@ -62,7 +62,7 @@
     }
   });
 
-  //点击页码时
+  // 点击页码时
   async function selectPage(val: number) {
     modelValue.value = modelValue.value === val ? await requireNumeric({
       title: "跳转到页码",

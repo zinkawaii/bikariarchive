@@ -30,7 +30,7 @@ export default defineJThrottledEventHandler<{
   const storage = useStorage("assets:data");
   const { novel, word } = schema.assert(getQuery(event));
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
   const code = word.codePointAt(0)!.toString();
@@ -41,7 +41,7 @@ export default defineJThrottledEventHandler<{
   const novels = new Set(novel === void 0 ? Object.keys(Article.meta) : [novel]);
   const weakTexts = new WeakMap<Element, string>();
 
-  //按章节遍历
+  // 按章节遍历
   res.list = [];
 
   for (const [uri, vectors] of Object.entries(data)) {

@@ -42,12 +42,12 @@ export default createKerria("Article", () => {
     ext: ".md",
     deep: false,
     async parse(path) {
-      //处理文件
+      // 处理文件
       const file = await readFile(path, "utf-8");
       const { attributes } = await parseEntry<NovelFrontmatter>(file);
       const [order, novel] = basename(path, ".md").split("-");
 
-      //写入缓存
+      // 写入缓存
       return {
         novel,
         order,
@@ -81,22 +81,22 @@ export default createKerria("Article", () => {
     ext: ".md",
     skip: 1,
     async parse(path, info) {
-      //处理文件
+      // 处理文件
       const file = await readFile(path, "utf-8");
       const { attributes, body } = await parseArticle<ArticleFrontmatter>(file);
 
-      //生产环境下忽略草稿文件
+      // 生产环境下忽略草稿文件
       if (attributes.draft && !isDevelopment) {
         return null;
       }
 
-      //解析文件名
+      // 解析文件名
       const match = basename(resolve(path, "..")).match(/^(.*?)\.(\d+)$/)!;
       const novel = match[1];
       const volume = Number(match[2]);
       const name = basename(path, ".md");
 
-      //简介转换
+      // 简介转换
       const firstChild = body.children[0];
       if (firstChild?.type === "element" && firstChild?.tag === "excerpt") {
         const node = firstChild.children[0];
@@ -106,7 +106,7 @@ export default createKerria("Article", () => {
         }
       }
 
-      //字数统计
+      // 字数统计
       let wordCount = 0;
       visit(body, "element", (node) => {
         if (node.tag === "p") {
@@ -114,12 +114,12 @@ export default createKerria("Article", () => {
         }
       });
 
-      //内容加密
+      // 内容加密
       const password = String(attributes.password || "") || void 0;
       const encrypted = Boolean(password) || void 0;
       delete attributes.password;
 
-      //生成映射
+      // 生成映射
       let order = `[${volume}]`;
       let index = "";
       switch (metaInfo.value[novel].type) {
@@ -140,10 +140,10 @@ export default createKerria("Article", () => {
         }
       }
 
-      //写入文件
+      // 写入文件
       await info.output(path, body);
 
-      //写入数据
+      // 写入数据
       const data = {
         index,
         volume,
@@ -152,7 +152,7 @@ export default createKerria("Article", () => {
         ...attributes,
       };
 
-      //写入缓存
+      // 写入缓存
       return {
         name,
         order,

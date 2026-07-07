@@ -11,12 +11,12 @@
 
   const readRecordStore = useReadRecordStore();
 
-  //小说代号
+  // 小说代号
   const code = computed(() => {
     return `- ${capitalize(props.novel)} -`;
   });
 
-  //阅读记录
+  // 阅读记录
   const record = computed(() => {
     const data = readRecordStore.get(props.novel) ?? Article.meta[props.novel].chapters[0];
     return data ? {
@@ -25,7 +25,7 @@
     } : null;
   });
 
-  //点击交换
+  // 点击交换
   function exchange() {
     if (props.layer === "inner") {
       emit("exchange");

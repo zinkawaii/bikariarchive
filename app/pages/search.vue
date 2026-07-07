@@ -45,7 +45,7 @@
 
   const { page, total, paginatedList } = usePagination(list);
 
-  //全文检索
+  // 全文检索
   const fullTextSearch = Zin.debounce(async () => {
     if (!inputWord.value) {
       toastStore.info("[search]:empty", "请输入内容");
@@ -55,13 +55,13 @@
     queryWord.value = inputWord.value;
     searchWord.value = inputWord.value;
 
-    //发送请求
+    // 发送请求
     await execute();
   }, {
     title: "检索",
   });
 
-  //带参数进入页面时
+  // 带参数进入页面时
   watchImmediate(queryWord, (value) => {
     inputWord.value = value;
     if (value && searchWord.value !== value) {
@@ -69,7 +69,7 @@
     }
   });
 
-  //错误处理
+  // 错误处理
   whenever(error, (err) => {
     if (err.statusCode === 429) {
       toastStore.info("[search]:throttle", "接口节流中");
@@ -78,7 +78,7 @@
     immediate: true,
   });
 
-  //总出现次数
+  // 总出现次数
   const totalCount = computed(() => {
     return list.value.reduce((count, item) => {
       return count + item.count;

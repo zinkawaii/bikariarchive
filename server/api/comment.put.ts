@@ -17,26 +17,26 @@ export default defineJEventHandler<{
   const session = await readSession(event);
   const body = schema.assert(await event.req.json());
 
-  //权限验证
+  // 权限验证
   validateIdentity(session.data, 9);
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
-  //获取时间
+  // 获取时间
   const time = new Date();
 
-  //获取评论
+  // 获取评论
   const qComment = await CommentDataModel.findOne({
     _id: body.id,
   });
 
-  //评论不存在
+  // 评论不存在
   if (!qComment) {
     throw 1;
   }
 
-  //更新评论数据
+  // 更新评论数据
   await qComment.updateOne({
     content: body.content,
     updated: time,

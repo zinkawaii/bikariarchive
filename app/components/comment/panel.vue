@@ -50,18 +50,18 @@
     },
   });
 
-  //标题
+  // 标题
   const title = computed(() => {
     return props.parent ? `回复 @${props.parent.nickname}` : "评论";
   });
 
-  //内容是否超长
+  // 内容是否超长
   const isContentOverlength = computed(() => {
     const { length } = content.value.trim();
     return length === 0 || length > 512;
   });
 
-  //发表评论
+  // 发表评论
   async function sendComment() {
     if (!validate()) {
       return;

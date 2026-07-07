@@ -32,7 +32,7 @@
     },
   ];
 
-  //代码
+  // 代码
   const code = computedAsync(async () => {
     const { lang, meta, raw } = props;
     const shiki = await shikiStore.load();
@@ -45,12 +45,12 @@
     });
   }, encodeHTML(props.raw), { lazy: true });
 
-  //行数
+  // 行数
   const lines = computed(() => {
     return props.raw.split("\n").length;
   });
 
-  //行号
+  // 行号
   const lineStr = computed(() => {
     return Array.from({ length: lines.value }, (_, i) => i + 1).join("\n");
   });

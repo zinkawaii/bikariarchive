@@ -4,14 +4,14 @@
   const indices = ref([0, 1]);
   let state = 1;
 
-  //表里互换
+  // 表里互换
   function exchange() {
     state ^= 1;
 
-    //首位小说入队尾
+    // 首位小说入队尾
     indices.value[state] = (indices.value[state] + 2) % novels.value.length;
 
-    //交换层级
+    // 交换层级
     layer.value.reverse();
   }
 </script>

@@ -9,7 +9,7 @@ export class Article {
 
   static FARAWAY = "很久以前";
 
-  //根据参数获取章节单例
+  // 根据参数获取章节单例
   static for(novel: string, index: string): Article;
   static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>): ComputedRef<Article>;
   static for(novel: MaybeRefOrGetter<string>, index: MaybeRefOrGetter<string>) {
@@ -46,75 +46,75 @@ export interface Article extends WithRequired<
 }
 
 function createArticle(...args: [novel: string, raw: JChapter]): Article {
-  //原始数据
+  // 原始数据
   const raw = shallowRef(args[1]);
 
-  //书籍名称
+  // 书籍名称
   const novel = args[0];
 
-  //书籍信息
+  // 书籍信息
   const novelInfo = computed(() => Article.meta[novel]);
 
-  //卷册序号
+  // 卷册序号
   const volume = computed(() => raw.value.volume);
 
-  //卷册信息
+  // 卷册信息
   const volumeInfo = computed(() => novelInfo.value.volumes[raw.value.volume]);
 
-  //章节名称
+  // 章节名称
   const index = computed(() => raw.value.index);
 
-  //章节序号
+  // 章节序号
   const order = computed(() => {
     return novelInfo.value.chapters.findIndex((art) => art.index === index.value);
   });
 
-  //章节名称
+  // 章节名称
   const title = computed(() => raw.value.title);
 
-  //摘要
+  // 摘要
   const excerpt = computed(() => raw.value.excerpt);
 
-  //日期
+  // 日期
   const date = computed(() => raw.value.date ?? {});
 
-  //创建日期
+  // 创建日期
   const createDate = computed(() => {
     return date.value.created ?? date.value.refactored ?? Article.FARAWAY;
   });
 
-  //发布日期
+  // 发布日期
   const publishDate = computed(() => {
     return date.value.published ?? createDate.value;
   });
 
-  //更新日期
+  // 更新日期
   const updateDate = computed(() => {
     return date.value.updated ?? publishDate.value;
   });
 
-  //封面
+  // 封面
   const cover = computed(() => raw.value.cover);
 
-  //变体
+  // 变体
   const variant = computed(() => raw.value.variant ?? volumeInfo.value.variant ?? `article`);
 
-  //草稿
+  // 草稿
   const draft = computed(() => raw.value.draft ?? false);
 
-  //加密
+  // 加密
   const encrypted = computed(() => raw.value.encrypted ?? false);
 
-  //终章
+  // 终章
   const ending = computed(() => raw.value.ending ?? false);
 
-  //置顶
+  // 置顶
   const sticky = computed(() => raw.value.sticky ?? Infinity);
 
-  //字数
+  // 字数
   const wordCount = computed(() => raw.value.wordCount);
 
-  //上一章节
+  // 上一章节
   const prev = computed(() => {
     const prev = novelInfo.value.chapters[order.value - 1];
     if (novelInfo.value.type === "novel" || volume.value === prev?.volume) {
@@ -122,7 +122,7 @@ function createArticle(...args: [novel: string, raw: JChapter]): Article {
     }
   });
 
-  //下一章节
+  // 下一章节
   const next = computed(() => {
     const next = novelInfo.value.chapters[order.value + 1];
     if (novelInfo.value.type === "novel" || volume.value === next?.volume) {
@@ -130,31 +130,31 @@ function createArticle(...args: [novel: string, raw: JChapter]): Article {
     }
   });
 
-  //是否为卷内起始章节
+  // 是否为卷内起始章节
   const isFirstInVol = computed(() => {
     return (prev.value?.volume ?? -Infinity) < volume.value;
   });
 
-  //是否为卷内最终章节
+  // 是否为卷内最终章节
   const isLastInVol = computed(() => {
     return (next.value?.volume ?? Infinity) > volume.value;
   });
 
-  //是否为起始章节
+  // 是否为起始章节
   const isFirst = computed(() => {
     return novelInfo.value.type === "novel"
       ? order.value === 0
       : isFirstInVol.value;
   });
 
-  //是否为最终章节
+  // 是否为最终章节
   const isLast = computed(() => {
     return novelInfo.value.type === "novel"
       ? order.value === novelInfo.value.chapters.length - 1
       : isLastInVol.value;
   });
 
-  //路由
+  // 路由
   const route = computed<RouteLocationRaw>(() => ({
     name: "article",
     params: {

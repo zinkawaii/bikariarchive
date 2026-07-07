@@ -68,7 +68,7 @@ export default createKerria("Entry", () => {
         redirects,
       };
 
-      //在生产环境下隐藏未知标题，修剪草稿词条
+      // 在生产环境下隐藏未知标题，修剪草稿词条
       function transform(tree: IntelNode) {
         if (tree.unknown && !(isDevelopment && tree.title)) {
           tree.title = "? ? ?";
@@ -122,12 +122,12 @@ export default createKerria("Entry", () => {
     ],
     ext: ".md",
     async parse(path) {
-      //处理文件
+      // 处理文件
       const file = await readFile(path, "utf-8");
       const { attributes } = await parseEntry<IntelNode>(file);
       const [order, abbr] = basename(path, ".md").split("-");
 
-      //写入缓存
+      // 写入缓存
       return {
         order,
         abbr,
@@ -161,26 +161,26 @@ export default createKerria("Entry", () => {
     folders: categories,
     ext: ".md",
     async parse(path, info) {
-      //处理文件
+      // 处理文件
       const file = await readFile(path, "utf-8");
       let { attributes, drafts } = await parseEntry<JEntry>(file);
 
-      //生产环境下忽略草稿文件
+      // 生产环境下忽略草稿文件
       if (attributes.draft && !isDevelopment) {
         return null;
       }
 
-      //合并草稿数据
+      // 合并草稿数据
       if (isDevelopment) {
         for (const draft of drafts) {
           attributes = defu(draft, attributes);
         }
       }
 
-      //转换数据
+      // 转换数据
       transformDetails(attributes);
 
-      //提取超能力信息
+      // 提取超能力信息
       const abilities: AbilityInfo[] = [];
       for (const talent of attributes.talents ?? []) {
         if (talent.type !== "超能力") {
@@ -197,14 +197,14 @@ export default createKerria("Entry", () => {
         attributes.alias.push(talent.name.zh);
       }
 
-      //写入文件
+      // 写入文件
       attributes.category = categories.find((category) => path.includes(`/${category}/`))!;
       await info.output(path.replace(attributes.category, "/entry/"), attributes);
 
-      //写入数据
+      // 写入数据
       const name = basename(path, ".md");
 
-      //写入缓存
+      // 写入缓存
       return {
         name,
         draft: attributes.draft,

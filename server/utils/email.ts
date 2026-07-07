@@ -12,7 +12,7 @@ export async function sendEmail<T extends Component>(component: T, options: {
 }) {
   const config = useRuntimeConfig();
 
-  //创建服务
+  // 创建服务
   const email = createEmail({
     driver: smtp({
       host: config.mail.host,
@@ -23,12 +23,12 @@ export async function sendEmail<T extends Component>(component: T, options: {
     }),
   });
 
-  //编译模板
+  // 编译模板
   const app = createSSRApp(component, options.props ?? {});
   const text = await renderToString(app);
   const html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">${text}`;
 
-  //发送邮件
+  // 发送邮件
   return email.send({
     from: {
       email: config.mail.user,

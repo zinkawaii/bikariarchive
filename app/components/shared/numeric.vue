@@ -21,10 +21,10 @@
   const displayValue = ref("");
   const [isInvalid, toggleInvalid] = useToggle(false);
 
-  //记录旧值
+  // 记录旧值
   let oldValue: number, oldDisplayValue: string;
 
-  //响应源数据变化
+  // 响应源数据变化
   watchImmediate(modelValue, (val: number) => {
     if (val !== oldValue) {
       oldDisplayValue = String(val);
@@ -33,7 +33,7 @@
     }
   });
 
-  //输入时
+  // 输入时
   function onInput() {
     const match = displayValue.value.match(numberRE);
     if (!match) {
@@ -59,7 +59,7 @@
     toggleInvalid(false);
   }
 
-  //失焦时
+  // 失焦时
   function onBlur() {
     const match = oldDisplayValue.match(numberRE)!;
     const i = Number(match[1]) || "0";
@@ -75,7 +75,7 @@
       d = "";
     }
 
-    //规整格式
+    // 规整格式
     displayValue.value = i + d;
     toggleInvalid(false);
   }

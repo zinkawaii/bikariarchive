@@ -27,7 +27,7 @@ export default createKerria("Update", () => {
     ],
     ext: ".md",
     async parse(path, info) {
-      //处理文件
+      // 处理文件
       const file = await readFile(path, "utf-8");
       const body = await parseUpdate(file);
 
@@ -74,7 +74,7 @@ export default createKerria("Update", () => {
         }
       }
 
-      //写入文件
+      // 写入文件
       await info.output(path, updates);
 
       return {

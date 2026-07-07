@@ -29,13 +29,13 @@
   let current = modelValue.value;
   let rect: DOMRect;
 
-  //鼠标拖动时
+  // 鼠标拖动时
   usePointer(rootEl, {
     onPointerdown(event) {
       rect = rootEl.value!.getBoundingClientRect();
       emit("dragstart");
 
-      //进度预变化
+      // 进度预变化
       this.onPointermove!(event);
     },
     onPointermove(event) {

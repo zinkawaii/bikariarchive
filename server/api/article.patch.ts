@@ -22,13 +22,13 @@ export default defineJEventHandler<{
   const session = await readSession(event);
   const { token } = schema.assert(await event.req.json());
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
   const ip = getRequestIP(event, { xForwardedFor: true });
   const time = new Date();
 
-  //获取用户
+  // 获取用户
   const user = await UserDataModel.findOne({
     uid: session.data.uid,
   });
@@ -38,7 +38,7 @@ export default defineJEventHandler<{
       AES.decrypt(token, config.article.key).toString(Utf8),
     );
 
-    //添加阅读记录
+    // 添加阅读记录
     await ReadRecordModel.create({
       ip,
       time,
@@ -47,7 +47,7 @@ export default defineJEventHandler<{
       user: user?._id,
     });
 
-    //获取阅读量
+    // 获取阅读量
     const qCounts = await ReadRecordModel.aggregate<{ count: number }>([
       {
         $match: {
@@ -77,7 +77,7 @@ export default defineJEventHandler<{
     res.count = qCounts.length ? qCounts[0].count : 0;
   }
   catch {
-    //代币解析错误
+    // 代币解析错误
     throw 1;
   }
 });

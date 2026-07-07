@@ -5,7 +5,7 @@
   const history = useLocalStorage<string[]>("search-history", []);
   const { searchWord } = inject(injectionKey)!;
 
-  //更新历史
+  // 更新历史
   watch(searchWord, (word) => {
     const pos = history.value.indexOf(word);
     if (pos !== -1) {
@@ -15,7 +15,7 @@
     history.value.splice(16);
   });
 
-  //清空历史
+  // 清空历史
   async function clear() {
     if (await requireConfirm("是否清空历史词条？")) {
       history.value.length = 0;

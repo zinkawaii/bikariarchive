@@ -3,12 +3,12 @@
   const userStore = useUserStore();
   const route = useRoute();
 
-  //根据登录状态切换视图
+  // 根据登录状态切换视图
   watchImmediate(() => userStore.isLoggedIn, (value) => {
     signerStore.currentView = value ? "profile" : "login";
   });
 
-  //路径变更时收起
+  // 路径变更时收起
   watch(() => route.path, () => {
     signerStore.close();
   });

@@ -5,12 +5,12 @@ interface DebounceOptions {
 }
 
 export const Zin = new class Z {
-  //视口宽度常量
+  // 视口宽度常量
   MAX_WINDOW_SIZE = 1024;
   MID_WINDOW_SIZE = 768;
   MIN_WINDOW_SIZE = 425;
 
-  //防抖（立即执行）
+  // 防抖（立即执行）
   debounce<T extends unknown[]>(func: (...args: T) => void, options: DebounceOptions = {}) {
     const {
       delay = 1500,
@@ -44,14 +44,14 @@ export const Zin = new class Z {
     }
   }
 
-  //延时执行函数
+  // 延时执行函数
   delay(duration: number) {
     return new Promise<void>((resolve) => {
       setTimeout(resolve, duration);
     });
   }
 
-  //按照一定时间和次数循环执行函数
+  // 按照一定时间和次数循环执行函数
   interval(func: (time: number) => void, {
     immediate = true,
     server = true,
@@ -79,9 +79,9 @@ export const Zin = new class Z {
     });
   }
 
-  //节流
+  // 节流
   throttle<T extends unknown[]>(func: (...args: T) => void, delay?: number) {
-    //根据延迟时长
+    // 根据延迟时长
     if (delay && delay > 0) {
       let timer: NodeJS.Timeout | undefined;
       return function(this: unknown, ...args: T) {
@@ -93,7 +93,7 @@ export const Zin = new class Z {
         }
       };
     }
-    //根据屏幕刷新率
+    // 根据屏幕刷新率
     else {
       let running = false;
       return function(this: unknown, ...args: T) {

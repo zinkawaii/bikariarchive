@@ -15,12 +15,12 @@ export const useSettingStore = defineStore("setting", () => {
   const modalStore = useModalStore();
   const isPreferredDark = usePreferredDark();
 
-  //挂载弹窗实例
+  // 挂载弹窗实例
   const { open, close } = modalStore.use(() => h(LazyZSetting), {
     unique: true,
   });
 
-  //主题名称
+  // 主题名称
   const themeName = computed(() => {
     return {
       /* 初空 */ 0: "hatsusora",
@@ -29,7 +29,7 @@ export const useSettingStore = defineStore("setting", () => {
     }[settings.value.theme];
   });
 
-  //是否为夜间模式
+  // 是否为夜间模式
   const isDarkMode = computed(() => ({
     1: false,
     2: true,
@@ -47,13 +47,13 @@ export const useSettingStore = defineStore("setting", () => {
     settings.value[key] = value ?? !settings.value[key];
   }
 
-  //事件映射
+  // 事件映射
   const mapping = new Map<string, {
     trigger: () => any;
     handlers: Set<WatchCallback>;
   }>();
 
-  //监听
+  // 监听
   function listen<
     T extends Omit<Settings, "theme" | "dark-mode"> & {
       theme: string;

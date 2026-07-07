@@ -50,7 +50,7 @@ export async function parseArticle<T>(text: string) {
     .use(ruby)
     .use(compiler);
 
-  //文本预处理
+  // 文本预处理
   text = text.replaceAll(/(?<=\n)<br\s*\/?>/g, "::p\n:br\n::");
 
   const result = await processor.process(text);
@@ -78,7 +78,7 @@ export async function parseEntry<T>(text: string) {
     .use(ruby)
     .use(slot);
 
-  //文本预处理
+  // 文本预处理
   text = generateSlottedText(text);
 
   const result = await processor.process(text);

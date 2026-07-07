@@ -9,7 +9,7 @@
     caption?: string;
   }>();
 
-  //附加样式
+  // 附加样式
   const style = computed(() => {
     return {
       maxWidth: props.maxWidth ? `${props.maxWidth}px` : void 0,

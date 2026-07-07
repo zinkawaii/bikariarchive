@@ -9,18 +9,18 @@ export interface UseArticleListOptions {
 }
 
 export function useArticleList(options: UseArticleListOptions) {
-  //筛选类型
+  // 筛选类型
   const type = toRef(options.type);
 
-  //排序字段
+  // 排序字段
   const sortBy = computed(() => {
     return [toValue(options.sortBy), "published", "created"].filter(notNullish);
   });
 
-  //是否显示置顶
+  // 是否显示置顶
   const sticky = toRef(options.sticky);
 
-  //总列表
+  // 总列表
   const totals = computed(() => {
     const arr = Object.values(Article.meta)
       .filter((item) => !type.value || item.type === type.value)

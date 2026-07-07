@@ -17,13 +17,13 @@
   const router = useRouter();
   const articleComp = useTemplateRef("article");
 
-  //初始化
+  // 初始化
   const art = Article.for(novel, index);
   if (!art) {
     throw new Error(`Article(${novel}, ${index}) is invalid.`);
   }
 
-  //面包屑
+  // 面包屑
   useBreadcrumb({
     name: "shelf",
     params: {
@@ -32,7 +32,7 @@
     },
   });
 
-  //上下章快捷键
+  // 上下章快捷键
   useEventListener("keyup", (event) => {
     if (isFocusedEditable()) {
       return;
@@ -46,17 +46,17 @@
     }
   });
 
-  //写入阅读记录
+  // 写入阅读记录
   readRecordStore.set(art.novel, {
     index: art.index,
     title: art.title,
   });
 
-  //密码
+  // 密码
   const password = ref("");
   const decrypted = ref(false);
 
-  //获取正文
+  // 获取正文
   const { execute, status, data: post, error } = useLazyFetch("/api/article", {
     query: {
       novel,
@@ -67,10 +67,10 @@
     watch: false,
   });
 
-  //热重载
+  // 热重载
   watch(art, () => execute());
 
-  //元信息
+  // 元信息
   useSeoMeta({
     title: `${art.title} - ${art.volumeInfo.title}`,
     articleAuthor: [art.novelInfo.author],
@@ -88,7 +88,7 @@
       .slice(0, 128),
   });
 
-  //添加阅读记录
+  // 添加阅读记录
   const count = ref<number>();
   onMounted(async () => {
     await until(status).toBe("success");
@@ -103,7 +103,7 @@
     count.value = res.count;
   });
 
-  //防抖化请求
+  // 防抖化请求
   const debouncedExecute = Zin.debounce(async () => {
     await execute();
 

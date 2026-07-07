@@ -22,10 +22,10 @@ export default defineJEventHandler<{
   const session = await readSession(event);
   const { account, password } = schema.assert(await event.req.json());
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
-  //查询UID、昵称或邮箱
+  // 查询UID、昵称或邮箱
   const qUser = await UserDataModel.findOne({
     $or: [
       { uid: Number(account) || -1 },
@@ -34,14 +34,14 @@ export default defineJEventHandler<{
     ],
   }, "uid nickname email identity sign hash salt");
 
-  //账号不存在
+  // 账号不存在
   if (!qUser) {
     throw 1;
   }
 
   const { uid, nickname, email, identity, sign, hash, salt } = qUser;
 
-  //密码错误
+  // 密码错误
   if (hash !== encryptSecret(password, salt)) {
     throw 2;
   }
@@ -52,7 +52,7 @@ export default defineJEventHandler<{
   res.identity = identity;
   res.sign = sign;
 
-  //写入会话
+  // 写入会话
   await session.update({
     uid,
     identity,

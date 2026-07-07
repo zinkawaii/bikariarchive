@@ -48,7 +48,7 @@ export const useContextMenuStore = defineStore("context-menu", () => {
     extra,
   };
 
-  //触发事件时关闭菜单
+  // 触发事件时关闭菜单
   function patchItems(items: ContextMenuItem[]) {
     for (const item of items) {
       const { action, children = [] } = item;

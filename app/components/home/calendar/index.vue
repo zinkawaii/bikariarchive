@@ -10,7 +10,7 @@
     lunar: string;
   }
 
-  //月份别名
+  // 月份别名
   const monthAlias = [
     ["初空", "はつそら"],
     ["梅见", "うめみ"],
@@ -26,7 +26,7 @@
     ["胧月", "おぼろづき"],
   ];
 
-  //二十四节气
+  // 二十四节气
   const solarTerms: Record<number, string>[] = [
     { 4: "立春", 19: "雨水" },
     { 4: "惊蛰", 19: "春分" },
@@ -58,10 +58,10 @@
   });
 
   function* generateDates(year: number, month: number) {
-    //当月第一天
+    // 当月第一天
     const firstDay = new Temporal.PlainDate(year, month, 1);
 
-    //上月日期
+    // 上月日期
     const weekday = (firstDay.dayOfWeek + 6) % 7;
     if (weekday > 0) {
       const [y, m] = month === 1
@@ -75,12 +75,12 @@
       }
     }
 
-    //当月日期
+    // 当月日期
     for (let i = 1; i <= firstDay.daysInMonth; i++) {
       yield createDate(year, month, i);
     }
 
-    //下月日期
+    // 下月日期
     const total = 42;
     if (weekday + firstDay.daysInMonth < total) {
       const [y, m] = month === 12
@@ -93,7 +93,7 @@
     }
   }
 
-  //创建日期对象
+  // 创建日期对象
   function createDate(year: number, month: number, day: number): CalendarDate {
     const solar = new Temporal.PlainDate(year, month, day);
     const lunar = solar.withCalendar("chinese");
@@ -112,17 +112,17 @@
     };
   }
 
-  //是否为起始月份
+  // 是否为起始月份
   const isFirstMonth = computed(() => {
     return currentYear.value === startDate.year && currentMonth.value === startDate.month;
   });
 
-  //是否为结束月份
+  // 是否为结束月份
   const isLastMonth = computed(() => {
     return currentYear.value === endDate.year && currentMonth.value === endDate.month;
   });
 
-  //上一月份
+  // 上一月份
   function toLastMonth() {
     if (currentMonth.value === 1) {
       currentYear.value--;
@@ -130,7 +130,7 @@
     currentMonth.value = (currentMonth.value + 10) % 12 + 1;
   }
 
-  //下一月份
+  // 下一月份
   function toNextMonth() {
     if (currentMonth.value === 12) {
       currentYear.value++;

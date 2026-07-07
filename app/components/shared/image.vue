@@ -25,12 +25,12 @@
   const tagComps = useTemplateRef("tag");
   const imgEl = computed<HTMLImageElement>(() => imgComp.value?.imgEl);
 
-  //角色列表
+  // 角色列表
   const characters = computed(() => {
     return props.character?.split(",");
   });
 
-  //附加样式
+  // 附加样式
   const style = computed(() => {
     return {
       maxWidth: props.maxWidth ? `${props.maxWidth}px` : void 0,
@@ -39,7 +39,7 @@
     };
   });
 
-  //右键菜单
+  // 右键菜单
   contextMenuStore.extra(imgEl, {
     title: "image",
     shield: ["image"],
@@ -55,7 +55,7 @@
     ],
   });
 
-  //查看器
+  // 查看器
   const { open, close } = modalStore.use(() => h(LazyBikariyaImageViewer, {
     target: imgEl.value!,
     async onClose() {
@@ -66,7 +66,7 @@
     },
   }));
 
-  //加载完成时
+  // 加载完成时
   const [isLoaded, toggleLoaded] = useToggle(false);
   onMounted(() => {
     if (imgEl.value!.complete) {
@@ -77,7 +77,7 @@
     }
   });
 
-  //触发回弹动画
+  // 触发回弹动画
   function displayCharacters() {
     for (let i = 0; i < tagComps.value!.length; i++) {
       const el = tagComps.value![i]!.$el as HTMLElement;

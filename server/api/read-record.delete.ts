@@ -13,10 +13,10 @@ export default defineJEventHandler<{
   const session = await readSession(event);
   const { id } = schema.assert(await event.req.json());
 
-  //权限验证
+  // 权限验证
   validateIdentity(session.data, 9);
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
   try {
@@ -25,7 +25,7 @@ export default defineJEventHandler<{
     });
   }
   catch {
-    //ID不存在
+    // ID不存在
     throw 1;
   }
 });

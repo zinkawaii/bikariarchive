@@ -7,16 +7,16 @@
 
   const { comments, totalCount, mainCount, isEmpty, page } = storeToRefs(commentStore);
 
-  //相对视口懒加载
+  // 相对视口懒加载
   let observer: UseIntersectionObserverReturn;
   watchImmediate(() => route.path, () => {
-    //清空上一页的评论
+    // 清空上一页的评论
     commentStore.clear();
 
-    //终止未触发的观测器
+    // 终止未触发的观测器
     observer?.stop();
 
-    //更新观测器
+    // 更新观测器
     observer = useIntersectionObserver(rootComp, ([{ isIntersecting }]) => {
       if (isIntersecting) {
         commentStore.update();

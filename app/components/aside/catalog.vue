@@ -3,13 +3,13 @@
     art: Article;
   }>();
 
-  //当前选中卷
+  // 当前选中卷
   const currentVolume = ref<number>();
   watchEffect(() => {
     currentVolume.value = props.art.volume;
   });
 
-  //本卷章节
+  // 本卷章节
   const articles = computed(() => {
     return props.art.novelInfo.chapters.filter((art) => art.volume === currentVolume.value);
   });

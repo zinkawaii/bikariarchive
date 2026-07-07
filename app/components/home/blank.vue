@@ -13,7 +13,6 @@
     "長く続くピークはグルービータイフーン 恋よりステキなトキメキ教えてあげる",
   ];
 
-  //每7秒随机显示
   Zin.interval(() => {
     serif.value = randomItem(serifs);
   }, {

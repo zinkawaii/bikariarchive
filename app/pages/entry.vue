@@ -36,7 +36,7 @@
     immediate: isExisted.value,
   });
 
-  //显示评论区
+  // 显示评论区
   watch(isExisted, (val) => {
     route.meta.comment = val;
   }, {

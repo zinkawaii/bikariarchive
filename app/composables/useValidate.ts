@@ -26,25 +26,25 @@ export function useValidate<T extends Record<string, ValidateEntry>>(entries: T)
     Object.fromEntries(Object.keys(entries).map((key) => [key, false])) as Record<keyof T, boolean>,
   );
 
-  //清除错误
+  // 清除错误
   function clear() {
     for (const key in errors.value) {
       errors.value[key] = false;
     }
   }
 
-  //错误提示
+  // 错误提示
   function glitch(key: keyof T, message: string) {
     toastStore.error(`[${key as string}]:validate`, message);
     errors.value[key] = true;
   }
 
-  //全字段验证
+  // 全字段验证
   function validate(key: keyof T = "") {
     return key ? check(key) : Object.keys(entries).every((key) => check(key));
   }
 
-  //单字段验证
+  // 单字段验证
   function check(key: keyof T) {
     const { target, required, rule, message, exec } = entries[key];
 

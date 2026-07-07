@@ -4,7 +4,7 @@
   defineProps<ModalProps>();
   const emit = defineEmits<ModalEmits>();
 
-  //按下 ESC 键关闭
+  // 按下 ESC 键关闭
   useEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       emit("close");

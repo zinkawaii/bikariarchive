@@ -28,10 +28,10 @@ export default defineJEventHandler<{
     throw 1;
   }
 
-  //权限验证
+  // 权限验证
   validateIdentity(session.data, 9);
 
-  //连接数据库
+  // 连接数据库
   await connectMongoose();
 
   const sizes = 20;

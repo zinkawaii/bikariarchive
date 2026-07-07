@@ -20,12 +20,12 @@ export const useCommentStore = defineStore("comment", () => {
   const modalStore = useModalStore();
   const toastStore = useToastStore();
 
-  //切换页数时立即更新
+  // 切换页数时立即更新
   const handle = watch(page, update);
 
-  //清空评论
+  // 清空评论
   function clear() {
-    //暂停更新
+    // 暂停更新
     handle.pause();
 
     comments.value = [];
@@ -35,9 +35,9 @@ export const useCommentStore = defineStore("comment", () => {
     page.value = 1;
   }
 
-  //更新评论
+  // 更新评论
   async function update(next?: number) {
-    //恢复更新
+    // 恢复更新
     handle.resume();
 
     const res = await $fetch("/api/comment", {
@@ -57,21 +57,21 @@ export const useCommentStore = defineStore("comment", () => {
     }
   }
 
-  //发送评论
+  // 发送评论
   const post = createRequest<PostCommentBody>("post", (statusCode) => {
     return statusCode === 403
       ? "无评论权限"
       : "评论发送失败";
   });
 
-  //修改评论
+  // 修改评论
   const modify = createRequest<PutCommentBody>("put", (statusCode) => {
     return statusCode === 403
       ? "无修改权限"
       : "评论修改失败";
   });
 
-  //删除评论
+  // 删除评论
   const remove = createRequest<DeleteCommentBody>("delete", (statusCode) => {
     return statusCode === 403
       ? "无删除权限"
@@ -156,7 +156,7 @@ export const useCommentStore = defineStore("comment", () => {
 //处理评论
 function processComments<T extends CommentData>(comments: WithParent<T>[]) {
   return comments.map((item) => {
-    //子评论回归指向
+    // 子评论回归指向
     function assign(parent: WithParent<T>) {
       for (const child of parent.children) {
         child.parent = parent;
@@ -165,7 +165,7 @@ function processComments<T extends CommentData>(comments: WithParent<T>[]) {
     }
     assign(item);
 
-    //将嵌套子评论拍平
+    // 将嵌套子评论拍平
     for (const child of item.children) {
       if (child.children.length) {
         item.children.push(...child.children);
@@ -173,7 +173,7 @@ function processComments<T extends CommentData>(comments: WithParent<T>[]) {
       }
     }
 
-    //按时间排序
+    // 按时间排序
     item.children.sort((a, b) => a.time.localeCompare(b.time));
 
     return item;

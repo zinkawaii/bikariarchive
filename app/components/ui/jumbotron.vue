@@ -4,7 +4,7 @@
   const height = computed<number>((prev = 0) => {
     return route.meta.jumbotron?.height ?? prev;
   });
-  //立即求值，防止首屏进入时不记录初始值
+  // 立即求值，防止首屏进入时不记录初始值
   void height.value;
 
   const percent = ref(1);
@@ -33,7 +33,7 @@
     }
   }
 
-  //点击箭头
+  // 点击箭头
   function toBottom() {
     window.scrollTo({
       top: window.innerHeight * height.value,

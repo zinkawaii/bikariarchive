@@ -29,7 +29,7 @@
     })) ?? [];
   });
 
-  //列表模板重用
+  // 列表模板重用
   const [DefineOutlineList, OutlineList] = createReusableTemplate<{
     headings: HeadingInfo[];
   }>({
@@ -70,7 +70,7 @@
     immediate: true,
   });
 
-  //页面滚动时
+  // 页面滚动时
   useEventListener("scroll", Zin.throttle(() => {
     const { scrollY, innerHeight } = window;
 

@@ -9,7 +9,7 @@ export const useUserStore = defineStore("user", () => {
     return uid.value !== -1;
   });
 
-  //获取登陆信息
+  // 获取登陆信息
   const promise = useFetch("/api/user/info").then(({ data }) => {
     if (data.value) {
       uid.value = data.value.uid;

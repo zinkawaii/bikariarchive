@@ -163,21 +163,21 @@
       return;
     }
 
-    //获取传播路径
+    // 获取传播路径
     composedPath.value = event.composedPath();
 
-    //显示菜单
+    // 显示菜单
     contextMenuStore.open = true;
 
-    //阻止原生菜单
+    // 阻止原生菜单
     event.preventDefault();
 
     nextTick(() => {
-      //获取宽高
+      // 获取宽高
       const width = rootEl.value!.offsetWidth;
       const height = rootEl.value!.offsetHeight;
 
-      //计算位置
+      // 计算位置
       let { x, y } = event;
       x -= (width + x > window.innerWidth) ? width : 0;
       y -= (height + y > window.innerHeight) ? height : 0;
@@ -187,7 +187,7 @@
     });
   });
 
-  //鼠标按下时
+  // 鼠标按下时
   useEventListener("mousedown", (event) => {
     if (contextMenuStore.open && !event.composedPath().includes(rootEl.value!)) {
       contextMenuStore.open = false;

@@ -33,14 +33,14 @@
     },
   });
 
-  //验证码输入限制
+  // 验证码输入限制
   function onCaptchaInput(event: InputEvent) {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     target.value = value.replace(/\D+/, "").slice(0, 6);
   }
 
-  //发送验证码
+  // 发送验证码
   async function sendCaptcha() {
     if (!validate("email")) {
       return;
@@ -74,7 +74,7 @@
     }
   }
 
-  //注册
+  // 注册
   const register = Zin.debounce(async () => {
     try {
       await $fetch("/api/user/logon", {
@@ -106,7 +106,7 @@
     title: "注册",
   });
 
-  //提交
+  // 提交
   function submit() {
     clear();
     validate() && register();
