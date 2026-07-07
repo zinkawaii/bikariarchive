@@ -1,7 +1,11 @@
 <script lang="ts" setup>
   definePageMeta({
     path: "/",
-    jumbotron: true,
+    jumbotron: {
+      height: 72,
+      hero: true,
+      image: "/api/image/jumbotron.webp",
+    },
   });
 
   const config = useRuntimeConfig();

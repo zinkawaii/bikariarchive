@@ -1,4 +1,12 @@
 <script lang="ts" setup>
+  const route = useRoute();
+
+  const height = computed<number>((prev = 0) => {
+    return route.meta.jumbotron?.height ?? prev;
+  });
+  //立即求值，防止首屏进入时不记录初始值
+  void height.value;
+
   const percent = ref(1);
 
   useAdoptedStyleSheet/* CSS */`
@@ -13,8 +21,9 @@
 
   function onBeforeLeave() {
     const { scrollY, innerHeight } = window;
-    const marginTop = innerHeight * 0.72 - scrollY;
-    percent.value = marginTop > 0 ? Math.min(1, marginTop / (innerHeight * 0.72)) : 0;
+    const bannerHeight = innerHeight * height.value / 100;
+    const marginTop = bannerHeight - scrollY;
+    percent.value = marginTop > 0 ? Math.min(1, marginTop / bannerHeight) : 0;
 
     if (percent.value) {
       window.scrollTo({
@@ -27,21 +36,21 @@
   //点击箭头
   function toBottom() {
     window.scrollTo({
-      top: window.innerHeight * 0.72,
+      top: window.innerHeight * height.value,
     });
   }
 </script>
 
 <template>
   <transition @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
-    <div v-if="$route.meta.jumbotron" class="z-jumbotron">
+    <div v-if="$route.meta.jumbotron" class="z-jumbotron" :style="`--height: ${height}svh`">
       <nuxt-img
         class="jumbotron-image"
-        src="/api/image/jumbotron.webp"
+        :src="$route.meta.jumbotron.image"
         alt="[jumbotron]"
         fetchpriority="high"
       />
-      <jumbotron-banner />
+      <jumbotron-hero v-if="$route.meta.jumbotron.hero"/>
       <button class="jumbotron-skip" aria-label="跳转到主要内容" @click="toBottom">
         <iconify name="fa7-solid:chevron-down"/>
       </button>
@@ -57,8 +66,6 @@
   }
 
   .z-jumbotron {
-    --height: 72svh;
-
     position: relative;
     height: var(--height);
     margin-bottom: calc(var(--height) * (var(--jumbotron-percent) - 1));

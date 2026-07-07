@@ -1,9 +1,13 @@
 declare module "#app" {
   interface PageMeta {
     identity?: number;
-    comment?: boolean;
-    jumbotron?: boolean;
     aside?: boolean;
+    comment?: boolean;
+    jumbotron?: {
+      height: number;
+      hero?: boolean;
+      image?: string;
+    };
     widePage?: boolean;
     fullPage?: boolean;
   }

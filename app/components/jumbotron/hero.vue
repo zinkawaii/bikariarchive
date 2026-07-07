@@ -4,20 +4,19 @@
   const duration = 400;
   const titleDelay = 80;
   const summaryDelay = 15;
-  const { title, subtitle } = config.public;
-  const titleChars = [...title];
-  const subtitleChars = ref<string[]>([]);
+  const title = config.public.title;
+  const subtitle = ref<string>("");
   const [isMotion, toggleMotion] = useToggle(true);
 
   //标题动效
   onMounted(async () => {
     await Zin.delay(duration + titleDelay);
     await Zin.interval((i) => {
-      const char = subtitle[i];
-      subtitleChars.value.push(char);
+      const char = config.public.subtitle[i];
+      subtitle.value += char;
     }, {
       duration: summaryDelay,
-      times: subtitle.length,
+      times: config.public.subtitle.length,
     });
     await Zin.delay(duration);
     toggleMotion(false);
@@ -25,11 +24,11 @@
 </script>
 
 <template>
-  <div class="jumbotron-banner">
+  <hgroup class="jumbotron-hero">
     <h1 class="jumbotron-title">
       <template v-if="isMotion">
         <span
-          v-for="(char, i) in titleChars"
+          v-for="(char, i) in title"
           class="jumbotron-char"
           :style="{ animationDelay: `${i * titleDelay}ms` }"
         >{{ char }}</span>
@@ -38,15 +37,15 @@
     </h1>
     <h2 class="jumbotron-subtitle">
       <template v-if="isMotion">
-        <span v-for="char in subtitleChars" class="jumbotron-char">{{ char }}</span>
+        <span v-for="char in subtitle" class="jumbotron-char">{{ char }}</span>
       </template>
       <template v-else>{{ subtitle }}</template>
     </h2>
-  </div>
+  </hgroup>
 </template>
 
 <style scoped>
-  .jumbotron-banner {
+  .jumbotron-hero {
     display: grid;
     align-content: center;
     position: absolute;
@@ -54,12 +53,12 @@
     text-align: center;
     text-shadow: 0 0 12px rgb(0 0 0 / 66%);
     color: white;
-    animation: jumbo-parallax linear;
+    animation: jumbotron-parallax linear;
     animation-range: exit;
     animation-timeline: view();
   }
 
-  @keyframes jumbo-parallax {
+  @keyframes jumbotron-parallax {
     from {
       translate: 0 calc(36svh * (var(--jumbotron-percent) - 1));
     }
@@ -73,7 +72,7 @@
     font-size: 72px;
 
     > .jumbotron-char:nth-child(2n + 1) {
-      animation-name: jumbo-char-cross-down;
+      --translate-y: -3.5rem;
     }
   }
 
@@ -85,24 +84,13 @@
   .jumbotron-char {
     display: inline flow-root;
     opacity: 0;
-    animation: jumbo-char-cross-up 0.4s both;
+    animation: jumbotron-jumping 0.4s both;
     animation-timing-function: var(--ease-out-back);
   }
 
-  @keyframes jumbo-char-cross-up {
+  @keyframes jumbotron-jumping {
     from {
-      translate: 0 3.5rem;
-    }
-
-    to {
-      opacity: 1;
-      translate: 0;
-    }
-  }
-
-  @keyframes jumbo-char-cross-down {
-    from {
-      translate: 0 -3.5rem;
+      translate: 0 var(--translate-y, 3.5rem);
     }
 
     to {
