@@ -12,6 +12,8 @@ const schema = type({
   h: "string?",
 });
 
+const maxAge = 3600;
+
 export default defineJCachedEventHandler<{
   query: GetImageQuery;
 }>(async (event) => {
@@ -40,7 +42,8 @@ export default defineJCachedEventHandler<{
   // 之后在图床上传原图后再启用这段代码
   // const fmt = query.fmt ?? (event.req.headers.get("accept")?.includes("image/avif") ? "avif" : "webp");
   // url.searchParams.set("fmt", fmt);
-  url.searchParams.set("X-Amz-Expires", "3600");
+  url.searchParams.set("X-Amz-Expires", maxAge.toString());
+  url.searchParams.set("response-cache-control", `public, max-age=${maxAge}`);
 
   const request = await s3.sign(url, {
     aws: {
@@ -48,8 +51,11 @@ export default defineJCachedEventHandler<{
     },
   });
 
+  // Nitro 的 `maxAge` 只缓存服务端生成的结果，同步设置缓存响应头以避免浏览器重复发起请求
+  event.res.headers.set("cache-control", `public, max-age=${maxAge}`);
+
   return redirect(request.url, 307);
 }, {
-  maxAge: 3600,
+  maxAge,
   swr: false,
 });
