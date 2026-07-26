@@ -16,8 +16,9 @@ export default <Plugin> {
       return {
         code: /* TS */`
 export default function(comp) {
-    (comp.articles ??= {})["${name}"] = ${JSON.stringify(body.children)};
-    (comp.computed ??= {}).$articles ??= () => comp.articles;
+  const modules = comp.__cssModules ??= {};
+  const articles = modules.$articles ??= {};
+  articles["${name}"] = ${JSON.stringify(body.children)};
 }
 `.trimStart(),
         moduleType: "js",
