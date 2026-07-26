@@ -4,17 +4,14 @@ export function useAdoptedStyleSheet(
 ) {
   let styleSheet: CSSStyleSheet;
 
-  const entries = cssVars.map((source) => [
-    randomHash(8),
-    source,
-  ]);
+  const hashs = Array.from({ length: cssVars.length }, () => randomHash(8));
 
   onMounted(() => {
     styleSheet = new CSSStyleSheet();
     document.adoptedStyleSheets.push(styleSheet);
 
     const css = cssText.reduce((acc, str, i) => {
-      const value = entries[i] ? `var(--${entries[i][0]})` : "";
+      const value = hashs[i] ? `var(--${hashs[i]})` : "";
       return acc + str + value;
     }, "");
 
@@ -37,9 +34,9 @@ export function useAdoptedStyleSheet(
   function update(newVals: unknown[]) {
     styleSheet.deleteRule(0);
     styleSheet.insertRule(/* CSS */`
-            :root {
-                ${newVals.map((val, i) => `--${entries[i][0]}: ${val};`).join("\n")}
-            }
-        `, 0);
+      :root {
+        ${newVals.map((val, i) => `--${hashs[i]}: ${val};`).join("\n")}
+      }
+    `, 0);
   }
 }

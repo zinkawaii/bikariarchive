@@ -13,8 +13,8 @@
 
   const shikiStore = useShikiStore();
 
-  const [isCollapse, toggleCollapse] = useToggle(false);
-  const [isExpand, toggleExpand] = useToggle(false);
+  const [isCollapsed, toggleCollapsed] = useToggle(false);
+  const [isExpanded, toggleExpanded] = useToggle(false);
   const codeEl = useTemplateRef("pre");
 
   const actions = [
@@ -27,8 +27,8 @@
     },
     {
       title: "折叠",
-      icon: () => `fa7-solid:chevron-${isCollapse.value ? `left` : `down`}`,
-      action: () => toggleCollapse(),
+      icon: () => `fa7-solid:chevron-${isCollapsed.value ? `left` : `down`}`,
+      action: () => toggleCollapsed(),
     },
   ];
 
@@ -72,14 +72,14 @@
     <div
       class="forge-area"
       :class="{
-        [`is-collapse`]: isCollapse,
-        [`is-expand`]: isExpand,
+        [`is-collapsed`]: isCollapsed,
+        [`is-expanded`]: isExpanded,
       }"
     >
       <pre class="forge-line">{{ lineStr }}</pre>
       <pre ref="pre" class="shiki edge-fades-x no-scrollbar" v-html="code"></pre>
-      <button v-if="lines >= 10" class="forge-expand" @click="toggleExpand()">
-        <iconify :name="`fa7-solid:angles-${isExpand ? `up` : `down`}`"/>
+      <button v-if="lines >= 10" class="forge-expand" @click="toggleExpanded()">
+        <iconify :name="`fa7-solid:angles-${isExpanded ? `up` : `down`}`"/>
       </button>
     </div>
   </figure>
@@ -129,7 +129,7 @@
     transition-property: max-height, margin;
     transition-duration: 0.25s;
 
-    &.is-expand {
+    &.is-expanded {
       max-height: fit-content;
 
       > .shiki {
@@ -137,7 +137,7 @@
       }
     }
 
-    &.is-collapse {
+    &.is-collapsed {
       max-height: 0;
       margin-bottom: 4px;
     }

@@ -1,5 +1,5 @@
 diff --git a/lib/footer.js b/lib/footer.js
-index 3ccf0958b96683f3f559265aeff73641ae328afc..fe3c6ff4a9785b7b7f7cc0db1e5dc5de37f56b5d 100644
+index 3ccf095..fe3c6ff 100644
 --- a/lib/footer.js
 +++ b/lib/footer.js
 @@ -126,7 +126,7 @@ export function footer(state) {
@@ -48,7 +48,7 @@ index 3ccf0958b96683f3f559265aeff73641ae328afc..fe3c6ff4a9785b7b7f7cc0db1e5dc5de
        {
          type: 'element',
 diff --git a/lib/handlers/footnote-reference.js b/lib/handlers/footnote-reference.js
-index 7c65fa88a641b615c3ccc65f7d3c319bef85d0f2..10253dca5a45ea4f72519a3becad7a91da4e119e 100644
+index 7c65fa8..10253dc 100644
 --- a/lib/handlers/footnote-reference.js
 +++ b/lib/handlers/footnote-reference.js
 @@ -20,7 +20,7 @@ export function footnoteReference(state, node) {

@@ -51,6 +51,7 @@
   }
 
   .bangumi-title {
+    color: white;
     transition: all 0.25s;
   }
 

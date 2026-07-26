@@ -11,7 +11,7 @@
   }>();
 
   const id = useId();
-  const isOpen = ref(false);
+  const [isOpen, toggleOpen] = useToggle(false);
   let closeTimer: NodeJS.Timeout;
 
   const vnode = computed(() => {
@@ -20,13 +20,13 @@
 
   function open() {
     clearTimeout(closeTimer);
-    isOpen.value = true;
+    toggleOpen(true);
   }
 
   function close() {
     clearTimeout(closeTimer);
     closeTimer = setTimeout(() => {
-      isOpen.value = false;
+      toggleOpen(false);
     }, 0);
   }
 </script>

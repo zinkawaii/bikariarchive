@@ -1,15 +1,15 @@
 diff --git a/dist/runtime/server/og-image/bindings/font-assets/cloudflare.js b/dist/runtime/server/og-image/bindings/font-assets/cloudflare.js
-index 76e5f72d94542623331803826700a74197cf3c1f..c19434e07fc30b2a7e1c08b450112eb41d5501f7 100644
+index 292f892..7f53523 100644
 --- a/dist/runtime/server/og-image/bindings/font-assets/cloudflare.js
 +++ b/dist/runtime/server/og-image/bindings/font-assets/cloudflare.js
 @@ -1,4 +1,4 @@
 -import { useRuntimeConfig } from "nitropack/runtime";
 +import { useRuntimeConfig } from "nitro/runtime-config";
  import { withBase } from "ufo";
+ import { getSiteConfig } from "#site-config/server/composables";
  import { getCloudflareAssets } from "../../../util/cloudflareAssets.js";
- import { fetchLocalAsset } from "../../../util/fetchLocalAsset.js";
 diff --git a/dist/runtime/server/og-image/bindings/font-assets/dev-prerender.js b/dist/runtime/server/og-image/bindings/font-assets/dev-prerender.js
-index d3974e26c458b01bd9b85f194e2b12c2040b36aa..8761d888d7520f01eb6cf3ce01bac25b45377880 100644
+index 419231f..7fc55bd 100644
 --- a/dist/runtime/server/og-image/bindings/font-assets/dev-prerender.js
 +++ b/dist/runtime/server/og-image/bindings/font-assets/dev-prerender.js
 @@ -1,6 +1,6 @@
@@ -21,29 +21,28 @@ index d3974e26c458b01bd9b85f194e2b12c2040b36aa..8761d888d7520f01eb6cf3ce01bac25b
  import { withBase } from "ufo";
  import { buildDir, rootDir } from "#og-image-virtual/build-dir.mjs";
 diff --git a/dist/runtime/server/og-image/bindings/font-assets/node.js b/dist/runtime/server/og-image/bindings/font-assets/node.js
-index f349cdd81b32f0faa580c722cfb20d1697a30c66..94efdb5c6098e39ffe0556f7cc43c28f055b194b 100644
+index af88fb7..54c440a 100644
 --- a/dist/runtime/server/og-image/bindings/font-assets/node.js
 +++ b/dist/runtime/server/og-image/bindings/font-assets/node.js
 @@ -1,4 +1,4 @@
 -import { useRuntimeConfig } from "nitropack/runtime";
 +import { useRuntimeConfig } from "nitro/runtime-config";
  import { withBase } from "ufo";
- import { getNitroOrigin } from "#site-config/server/composables";
+ import { getNitroOrigin, getSiteConfig } from "#site-config/server/composables";
  import { getFetchTimeout } from "../../../util/fetchTimeout.js";
 diff --git a/dist/runtime/server/og-image/context.js b/dist/runtime/server/og-image/context.js
-index 1e5ecc2d8ce8a3939d4d640f6a0dd383b501908b..dd531c911852c671e02a8af987955d3cc2484448 100644
+index 1e5ecc2..dd531c9 100644
 --- a/dist/runtime/server/og-image/context.js
 +++ b/dist/runtime/server/og-image/context.js
-@@ -1,6 +1,6 @@
+@@ -1,5 +1,5 @@
  import { defu } from "defu";
- import { createError, getQuery } from "h3";
+ import { createError } from "h3";
 -import { useNitroApp } from "nitropack/runtime";
 +import { useNitroApp } from "nitro/app";
- import { hash } from "ohash";
  import { parseURL, withoutLeadingSlash, withoutTrailingSlash, withQuery } from "ufo";
  import { normalizeKey } from "unstorage";
 diff --git a/dist/runtime/server/og-image/core/plugins/imageSrc.js b/dist/runtime/server/og-image/core/plugins/imageSrc.js
-index c4ab0a33166bba1b92ee74f8059a6f6c0d88f021..f7dd5696db4a6cb5325f5edef1bacaee16917b1d 100644
+index 166db95..46acade 100644
 --- a/dist/runtime/server/og-image/core/plugins/imageSrc.js
 +++ b/dist/runtime/server/og-image/core/plugins/imageSrc.js
 @@ -1,4 +1,4 @@
@@ -53,7 +52,7 @@ index c4ab0a33166bba1b92ee74f8059a6f6c0d88f021..f7dd5696db4a6cb5325f5edef1bacaee
  import { getNitroOrigin } from "#site-config/server/composables/getNitroOrigin";
  import { toBase64Image } from "../../../../shared.js";
 diff --git a/dist/runtime/server/og-image/core/transforms/emojis/local.js b/dist/runtime/server/og-image/core/transforms/emojis/local.js
-index 0fb64be6cded1d8bf4f8293026f8d49824705fb2..6f3709ce369781540cbc8c6948fac98fd94ae211 100644
+index 0fb64be..6f3709c 100644
 --- a/dist/runtime/server/og-image/core/transforms/emojis/local.js
 +++ b/dist/runtime/server/og-image/core/transforms/emojis/local.js
 @@ -1,4 +1,4 @@
@@ -63,7 +62,7 @@ index 0fb64be6cded1d8bf4f8293026f8d49824705fb2..6f3709ce369781540cbc8c6948fac98f
  function wrapDefsElements(body) {
    const defsElements = ["linearGradient", "radialGradient", "filter", "clipPath", "mask", "pattern"];
 diff --git a/dist/runtime/server/plugins/prerender.js b/dist/runtime/server/plugins/prerender.js
-index 8ade39ad8a297e0a7114534289edaf853ffab6ab..8f7627ee3c798efa36dd2247b331392c730bc75b 100644
+index 8ade39a..8f7627e 100644
 --- a/dist/runtime/server/plugins/prerender.js
 +++ b/dist/runtime/server/plugins/prerender.js
 @@ -1,6 +1,6 @@
@@ -84,29 +83,28 @@ index 8ade39ad8a297e0a7114534289edaf853ffab6ab..8f7627ee3c798efa36dd2247b331392c
      return;
    const routeRuleMatcher = createNitroRouteRuleMatcher();
 diff --git a/dist/runtime/server/util/cache.js b/dist/runtime/server/util/cache.js
-index c066efdb3a454b94a6d163dcb2c793aa2e82477e..f0ddd54b74fd3f82dd543380077e7e08c554eb45 100644
+index 882324f..16b79e4 100644
 --- a/dist/runtime/server/util/cache.js
 +++ b/dist/runtime/server/util/cache.js
 @@ -1,5 +1,5 @@
- import { createError, getQuery, handleCacheHeaders, setHeader, setHeaders } from "h3";
+ import { fnv1a64Base36 } from "fnv1a-64";
+ import { createError, handleCacheHeaders, setHeader, setHeaders } from "h3";
 -import { useStorage } from "nitropack/runtime";
 +import { useStorage } from "nitro/storage";
- import { digest } from "ohash";
  import { withTrailingSlash } from "ufo";
  import { prefixStorage } from "unstorage";
 diff --git a/dist/runtime/server/util/kit.js b/dist/runtime/server/util/kit.js
-index 766e628239d8c6e992b41be5980fcffba40659dd..c0a5896e07d6b86777e69a8bbc994a9fc095e306 100644
+index 766e628..c0a5896 100644
 --- a/dist/runtime/server/util/kit.js
 +++ b/dist/runtime/server/util/kit.js
-@@ -1,5 +1,5 @@
+@@ -1,4 +1,4 @@
  import { defu } from "defu";
 -import { useRuntimeConfig } from "nitropack/runtime";
 +import { useRuntimeConfig } from "nitro/runtime-config";
- import { hash } from "ohash";
  import { createRouter as createRadixRouter, toRouteMatcher } from "radix3";
  import { withoutBase, withoutTrailingSlash } from "ufo";
 diff --git a/dist/runtime/server/utils.js b/dist/runtime/server/utils.js
-index 2948f5135238ad97f9520b879b0aaf5513dfa995..0973aec2bf0f53629d05ea7a3639c9761e478577 100644
+index 2948f51..0973aec 100644
 --- a/dist/runtime/server/utils.js
 +++ b/dist/runtime/server/utils.js
 @@ -1,4 +1,4 @@

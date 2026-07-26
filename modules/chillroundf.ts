@@ -1,8 +1,8 @@
 import { createWriteStream, existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { pipeline } from "node:stream/promises";
+import { addPluginTemplate, defineNuxtModule } from "@nuxt/kit";
 import consola from "consola";
-import { addPluginTemplate, defineNuxtModule } from "nuxt/kit";
 import { join } from "pathe";
 
 interface FontSplitOptions {
@@ -55,11 +55,11 @@ export default defineNuxtModule<FontSplitOptions>({
 import css from "~~/${cacheDir}/result.css?url";
 
 export default defineNuxtPlugin(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.crossOrigin = "";
-    link.href = css;
-    document.head.appendChild(link);
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.crossOrigin = "";
+  link.href = css;
+  document.head.appendChild(link);
 });
 `.trimStart(),
     });

@@ -13,18 +13,17 @@ diff --git a/dist/runtime/server/routes/__link-checker__/inspect.js b/dist/runti
 index db432f134fcb41fa4eb225085195f201b1489e6a..f7891ccdb52654e2c4f1db56bc3cb055b5f28654 100644
 --- a/dist/runtime/server/routes/__link-checker__/inspect.js
 +++ b/dist/runtime/server/routes/__link-checker__/inspect.js
-@@ -1,9 +1,10 @@
+@@ -1,9 +1,9 @@
  import { createDefu } from "defu";
  import Fuse from "fuse.js";
- import { defineEventHandler, readBody } from "h3";
+ import { createError, defineEventHandler, readBody } from "h3";
 +import { useRuntimeConfig } from "nitro/runtime-config";
  import { fixSlashes } from "nuxt-site-config/urls";
  import { resolve } from "pathe";
--import { getNitroOrigin, getSiteConfig, useRuntimeConfig } from "#imports";
-+import { getNitroOrigin, getSiteConfig } from "#imports";
+-import { useRuntimeConfig } from "#imports";
+ import { getNitroOrigin } from "#site-config/server/composables/getNitroOrigin";
+ import { getSiteConfig } from "#site-config/server/composables/getSiteConfig";
  import { generateFileLinkDiff, generateFileLinkPreviews, getLinkResponse, inspect, isNonFetchableLink, lruFsCache } from "../../../shared/index.js";
- const merger = createDefu((obj, key, value) => {
-   if (Array.isArray(obj[key]) && Array.isArray(value))
 diff --git a/dist/runtime/server/routes/__link-checker__/links.js b/dist/runtime/server/routes/__link-checker__/links.js
 index 9195da8cc40fac9824d45f651d0642c58c15d802..125c5aa7af14196a6b284584fd988adb637ae01f 100644
 --- a/dist/runtime/server/routes/__link-checker__/links.js

@@ -64,8 +64,9 @@
     &::before {
       content: "";
       position: absolute;
-      inset: 0 0 0 -18px;
+      inset: -1px 0 -1px -18px;
       width: 2px;
+      border-radius: 1px;
       background-image:
         linear-gradient(
           var(--color-theme-dark) 23px,

@@ -1,5 +1,5 @@
 diff --git a/dist/runtime/server/api.js b/dist/runtime/server/api.js
-index 3685dcb9e566d70d675d6557c95106dddff1d6d2..873245729de6f315f832c660b28bad08dd948367 100644
+index 3685dcb..8732457 100644
 --- a/dist/runtime/server/api.js
 +++ b/dist/runtime/server/api.js
 @@ -1,9 +1,9 @@
@@ -27,3 +27,20 @@ index 3685dcb9e566d70d675d6557c95106dddff1d6d2..873245729de6f315f832c660b28bad08
    const collectionName = event.context.params?.collection?.replace(/\.json$/, "");
    const collection = collectionName && Object.hasOwn(collections, collectionName) ? await collections[collectionName]?.() : null;
    const apiEndPoint = options.iconifyApiEndpoint || DEFAULT_ENDPOINT;
+diff --git a/dist/runtime/plugin.js b/dist/runtime/plugin.js
+index bc7a295..52f0c8d 100644
+--- a/dist/runtime/plugin.js
++++ b/dist/runtime/plugin.js
+@@ -1,10 +1,11 @@
+ import { addAPIProvider, _api, setCustomIconsLoader } from "@iconify/vue";
+-import { defineNuxtPlugin, useAppConfig, useRuntimeConfig } from "#imports";
++import { defineNuxtPlugin, useAppConfig, useRequestFetch, useRuntimeConfig } from "#imports";
+ export default defineNuxtPlugin({
+   name: "@nuxt/icon",
+   setup() {
+     const configs = useRuntimeConfig();
+     const options = useAppConfig().icon;
++    const $fetch = useRequestFetch();
+     _api.setFetch($fetch.native);
+     const resources = [];
+     if (options.provider === "server") {

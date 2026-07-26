@@ -1,4 +1,4 @@
-import { type MaybeComputedElementRef, type MaybeElement, notNullish, toArray } from "@vueuse/core";
+import { type MaybeElement, notNullish, toArray } from "@vueuse/core";
 
 export interface UseHighlightOptions {
   name: string;
@@ -6,7 +6,7 @@ export interface UseHighlightOptions {
 }
 
 export function useHighlight(
-  target: MaybeComputedElementRef | MaybeComputedElementRef[] | MaybeRefOrGetter<MaybeElement[]>,
+  target: MaybeRefOrGetter<MaybeElement | MaybeElement[]>,
   word: MaybeRefOrGetter<string | RegExp>,
   options: UseHighlightOptions,
 ) {
@@ -16,16 +16,15 @@ export function useHighlight(
   });
 
   const textNodes = computedWithControl(targets, () => {
-    const res = [];
+    const nodes = [];
     for (const target of targets.value) {
       const treeWalker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT);
-      let currentNode = treeWalker.nextNode();
-      while (currentNode) {
-        res.push(currentNode);
-        currentNode = treeWalker.nextNode();
+      let node: Node | null;
+      while (node = treeWalker.nextNode()) {
+        nodes.push(node);
       }
     }
-    return res;
+    return nodes;
   });
 
   const ranges = computed(() => {
@@ -92,10 +91,10 @@ function findWordIndices(text: string, rule: string | RegExp) {
 
   if (typeof rule === "string") {
     for (let offset = 0; offset < text.length;) {
-      const idx = text.indexOf(rule, offset);
-      if (idx !== -1) {
-        offset = idx + rule.length;
-        indices.push([idx, offset]);
+      const index = text.indexOf(rule, offset);
+      if (index !== -1) {
+        offset = index + rule.length;
+        indices.push([index, offset]);
       }
       else break;
     }
@@ -103,8 +102,8 @@ function findWordIndices(text: string, rule: string | RegExp) {
   else {
     const matches = text.matchAll(rule);
     for (const match of matches) {
-      const { 0: res, index } = match;
-      indices.push([index, index + res.length]);
+      const { 0: text, index } = match;
+      indices.push([index, index + text.length]);
     }
   }
   return indices;

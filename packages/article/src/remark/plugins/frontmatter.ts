@@ -58,7 +58,7 @@ export default function(this: Processor, options?: Options & Matter) {
           data: {
             hName: "frontmatter",
             hProperties: {
-              order: frontmatters.length - 1,
+              index: frontmatters.length - 1,
             },
           },
         });

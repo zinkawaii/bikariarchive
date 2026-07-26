@@ -25,10 +25,7 @@
       { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
       { name: "apple-mobile-web-app-title", content: config.public.title },
     ],
-    titleTemplate: "%s %separator %site.name",
-    templateParams: {
-      separator: "-",
-    },
+    titleTemplate: "%s - %site.name",
     htmlAttrs: {
       theme,
       "z-dark": dark,

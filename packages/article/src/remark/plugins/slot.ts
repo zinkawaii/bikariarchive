@@ -14,7 +14,7 @@ export default function(this: Processor) {
         return;
       }
       if (node.tagName === "frontmatter") {
-        frontmatter = frontmatters?.[node.properties.order as number];
+        frontmatter = frontmatters?.[node.properties.index as number];
         parent.children.splice(index, 1);
       }
       else if (node.tagName === "slots" && frontmatter) {

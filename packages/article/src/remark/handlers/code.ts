@@ -7,7 +7,8 @@ export default <Handler> function(state, node: Code) {
     type: "element",
     tagName: "mb-forge",
     properties: {
-      lang: node.lang,
+      // null | undefined -> undefined
+      lang: node.lang ?? void 0,
       meta: node.meta,
       raw: node.value,
     },

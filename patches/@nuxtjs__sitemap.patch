@@ -1,5 +1,5 @@
 diff --git a/dist/runtime/server/kit.js b/dist/runtime/server/kit.js
-index a33b35dec16261a799c40c1ff4718d03b9e96c99..23cc1078620a475d97b5950fa6ae4fe0d2b36fbc 100644
+index a33b35d..23cc107 100644
 --- a/dist/runtime/server/kit.js
 +++ b/dist/runtime/server/kit.js
 @@ -1,5 +1,5 @@
@@ -10,27 +10,42 @@ index a33b35dec16261a799c40c1ff4718d03b9e96c99..23cc1078620a475d97b5950fa6ae4fe0
  import { parseURL, withoutBase, withoutTrailingSlash } from "ufo";
  function withoutQuery(path) {
 diff --git a/dist/runtime/server/plugins/compression.js b/dist/runtime/server/plugins/compression.js
-index 5952365cc4a618af5ac96276a5b6694d9a808283..d7e8e6df6bdbb92e148dcfbc09d8870cbc7643bf 100644
+index 5952365..d7e8e6d 100644
 --- a/dist/runtime/server/plugins/compression.js
 +++ b/dist/runtime/server/plugins/compression.js
 @@ -1,5 +1,5 @@
- import { getRequestHeader, setResponseHeader } from "h3";
+ import { appendResponseHeader, getRequestHeader, getResponseHeader, removeResponseHeader, setResponseHeader } from "h3";
 -import { defineNitroPlugin } from "nitropack/runtime";
 +import { definePlugin } from "nitro";
- function getPreferredEncoding(event) {
-   const acceptEncoding = getRequestHeader(event, "accept-encoding") || "";
-   if (acceptEncoding.includes("gzip"))
-@@ -8,7 +8,7 @@ function getPreferredEncoding(event) {
-     return "deflate";
-   return null;
+ import { logger } from "../../utils-pure.js";
+ import { hasNonIdentityEncoding, isReadableStream, negotiateCompressionEncoding } from "../sitemap/stream.js";
+ let warnedAboutCompressionStream = false;
+@@ -40,7 +40,7 @@ function addVaryAcceptEncoding(event) {
+   if (!values.includes("*") && !values.includes("accept-encoding"))
+     appendResponseHeader(event, "Vary", "Accept-Encoding");
  }
 -export default defineNitroPlugin((nitro) => {
 +export default definePlugin((nitro) => {
-   nitro.hooks.hook("beforeResponse", async (event, response) => {
+   nitro.hooks.hook("beforeResponse", (event, response) => {
      if (!event.context._isSitemap || !response.body)
        return;
+diff --git a/dist/runtime/server/plugins/stream-transport.js b/dist/runtime/server/plugins/stream-transport.js
+index 066a5be..44ce3be 100644
+--- a/dist/runtime/server/plugins/stream-transport.js
++++ b/dist/runtime/server/plugins/stream-transport.js
+@@ -1,8 +1,8 @@
+ import { removeResponseHeader } from "h3";
+-import { defineNitroPlugin } from "nitropack/runtime";
++import { definePlugin } from "nitro";
+ import { logger } from "../../utils-pure.js";
+ import { createNodeResponseStream, isReadableStream } from "../sitemap/stream.js";
+-export default defineNitroPlugin((nitro) => {
++export default definePlugin((nitro) => {
+   nitro.hooks.hook("beforeResponse", (event, response) => {
+     const nodeResponse = event.node.res;
+     if (!event.context._isSitemap || !isReadableStream(response.body) || !nodeResponse?.socket || typeof nodeResponse?.write !== "function" || typeof nodeResponse?.once !== "function") {
 diff --git a/dist/runtime/server/plugins/nuxt-content-v2.js b/dist/runtime/server/plugins/nuxt-content-v2.js
-index b63b55dd4d499b356a007000df9ad72cb48b720b..224da118b8a0a3691f9dfa18754a139818f6d18a 100644
+index b63b55d..224da11 100644
 --- a/dist/runtime/server/plugins/nuxt-content-v2.js
 +++ b/dist/runtime/server/plugins/nuxt-content-v2.js
 @@ -1,7 +1,7 @@
@@ -44,7 +59,7 @@ index b63b55dd4d499b356a007000df9ad72cb48b720b..224da118b8a0a3691f9dfa18754a1398
    nitroApp.hooks.hook("content:file:afterParse", async (content) => {
      const validExtensions = ["md", "mdx"];
 diff --git a/dist/runtime/server/plugins/warm-up.js b/dist/runtime/server/plugins/warm-up.js
-index 4322aee6566875cd49237fc02a2bff773ba61a3b..a75e07623c1b5688a7f54f0c8c45e69272996b49 100644
+index 4322aee..a75e076 100644
 --- a/dist/runtime/server/plugins/warm-up.js
 +++ b/dist/runtime/server/plugins/warm-up.js
 @@ -1,7 +1,7 @@
@@ -58,18 +73,18 @@ index 4322aee6566875cd49237fc02a2bff773ba61a3b..a75e07623c1b5688a7f54f0c8c45e692
    const queue = [];
    const timeoutIds = [];
 diff --git a/dist/runtime/server/sitemap/builder/sitemap-index.js b/dist/runtime/server/sitemap/builder/sitemap-index.js
-index 09fd7f22a1bbc240403c5d6f925235546a50139d..d3be82c6cc2bb3ca7e63c8090d87443fac4fbcdd 100644
+index 09fd7f2..d3be82c 100644
 --- a/dist/runtime/server/sitemap/builder/sitemap-index.js
 +++ b/dist/runtime/server/sitemap/builder/sitemap-index.js
 @@ -1,5 +1,5 @@
  import { getHeader } from "h3";
 -import { defineCachedFunction } from "nitropack/runtime";
 +import { defineCachedFunction } from "nitro/cache";
- import { joinURL, withQuery } from "ufo";
+ import { joinURL } from "ufo";
  import staticConfig from "#sitemap-virtual/static-config.mjs";
  import { normaliseDate } from "../urlset/normalise.js";
 diff --git a/dist/runtime/server/sitemap/builder/sitemap.js b/dist/runtime/server/sitemap/builder/sitemap.js
-index c679de963b94df517c61067b988d83e8d9390d68..ffcc410f9fe88a0d34fe560cab1ea8e5b7224649 100644
+index c679de9..ffcc410 100644
 --- a/dist/runtime/server/sitemap/builder/sitemap.js
 +++ b/dist/runtime/server/sitemap/builder/sitemap.js
 @@ -1,5 +1,6 @@
@@ -81,19 +96,19 @@ index c679de963b94df517c61067b988d83e8d9390d68..ffcc410f9fe88a0d34fe560cab1ea8e5
  import { joinURL, withHttps } from "ufo";
  import staticConfig from "#sitemap-virtual/static-config.mjs";
 diff --git a/dist/runtime/server/sitemap/event-handlers.js b/dist/runtime/server/sitemap/event-handlers.js
-index c6834ea3cc72f72ceb056e3b7873c0117fd57ca2..075c1ab0e98965de2466c44bdb5c3cf2bde7e222 100644
+index c6834ea..075c1ab 100644
 --- a/dist/runtime/server/sitemap/event-handlers.js
 +++ b/dist/runtime/server/sitemap/event-handlers.js
 @@ -1,5 +1,6 @@
- import { appendHeader, createError, getRouterParam, sendRedirect, setHeader } from "h3";
+ import { appendHeader, createError, getRequestURL, getRouterParam, sendRedirect, setHeader } from "h3";
 -import { useNitroApp, useRuntimeConfig } from "nitropack/runtime";
 +import { useNitroApp } from "nitro/app";
 +import { useRuntimeConfig } from "nitro/runtime-config";
  import { joinURL, withBase, withLeadingSlash, withoutLeadingSlash, withoutTrailingSlash } from "ufo";
  import { useSitemapRuntimeConfig } from "../utils.js";
- import { buildSitemapIndex, urlsToIndexXml } from "./builder/sitemap-index.js";
+ import { urlsToIndexXml, urlsToIndexXmlStream } from "./builder/index-xml.js";
 diff --git a/dist/runtime/server/sitemap/nitro.js b/dist/runtime/server/sitemap/nitro.js
-index 55e290c6d4c508cbdeb5db8230623c81c00abe42..2ae2401e3e61aa1d5846fe43a9177ca185d3cbaf 100644
+index 55e290c..2ae2401 100644
 --- a/dist/runtime/server/sitemap/nitro.js
 +++ b/dist/runtime/server/sitemap/nitro.js
 @@ -1,6 +1,7 @@
@@ -106,7 +121,7 @@ index 55e290c6d4c508cbdeb5db8230623c81c00abe42..2ae2401e3e61aa1d5846fe43a9177ca1
  import { getPathRobotConfig } from "#internal/nuxt-robots/getPathRobotConfig";
  import { getSiteConfig } from "#site-config/server/composables/getSiteConfig";
 diff --git a/dist/runtime/server/utils.js b/dist/runtime/server/utils.js
-index 9e4d8b556dbf948b59996a384099b0731a959bb4..7eb2692ccd04a39e8bbd86fe0e3bdd0add6fed1f 100644
+index 9e4d8b5..7eb2692 100644
 --- a/dist/runtime/server/utils.js
 +++ b/dist/runtime/server/utils.js
 @@ -1,4 +1,4 @@

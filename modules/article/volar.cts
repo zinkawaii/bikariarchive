@@ -29,7 +29,7 @@ const plugin: VueLanguagePlugin = ({ modules }) => [{
       block.content,
       block.name,
       0,
-      modules["@vue/language-core"].allCodeFeatures,
+      modules["@vue/language-core"].codeFeatures.full,
     ]);
   },
 }, {
@@ -50,7 +50,7 @@ const plugin: VueLanguagePlugin = ({ modules }) => [{
           match.groups!.exp,
           block.name,
           match.index! + "{{".length,
-          modules["@vue/language-core"].allCodeFeatures,
+          modules["@vue/language-core"].codeFeatures.full,
         ], `;\n`);
       }
     }

@@ -45,8 +45,8 @@ export default defineJEventHandler<{
 
   // 附加信息
   let info:
-        | Pick<CommentDataSchema, "nickname" | "email" | "address">
-        | Pick<CommentDataSchema, "user">;
+    | Pick<CommentDataSchema, "nickname" | "email" | "address">
+    | Pick<CommentDataSchema, "user">;
 
   if (mode === "guest") {
     // 无游客昵称

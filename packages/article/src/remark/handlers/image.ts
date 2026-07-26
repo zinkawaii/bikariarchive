@@ -26,7 +26,8 @@ export default <Handler> function(state, node: Image) {
       properties: {
         ...node.attributes,
         src: node.url,
-        alt: node.alt,
+        // null | undefined -> undefined
+        alt: node.alt ?? void 0,
         caption: node.title,
       },
       children: [],

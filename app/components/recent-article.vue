@@ -7,11 +7,6 @@
     sortBy?: string;
   }>();
 
-  //是否按更新日期排序
-  const sortByUpdated = computed(() => {
-    return props.sortBy === "updated";
-  });
-
   const { articles } = useArticleList(props);
 </script>
 
@@ -21,7 +16,7 @@
       <plain-link class="recent-title text-truncate" :to="route">{{ title }}</plain-link>
       <div class="recent-info">
         <span class="text-truncate">{{ Article.meta[novel].volumes[volume].title }}</span>
-        <time>{{ sortByUpdated ? updateDate : publishDate }}</time>
+        <time>{{ props.sortBy === "updated" ? updateDate : publishDate }}</time>
       </div>
     </li>
   </ul>

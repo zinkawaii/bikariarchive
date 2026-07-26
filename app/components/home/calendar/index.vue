@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { Temporal } from "temporal-polyfill";
+  import { Temporal } from "temporal-polyfill/full";
   import specialJson from "~/assets/json/special.json";
 
   export interface CalendarDate {

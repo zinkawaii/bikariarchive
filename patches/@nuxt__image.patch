@@ -1,5 +1,5 @@
 diff --git a/dist/runtime/server/routes/_ipx.js b/dist/runtime/server/routes/_ipx.js
-index e734868df856bddcb6b1f30bb427a28cce3555d6..bb4e4bd18ae530a2d9fc62e991fd164cd9a154b0 100644
+index e734868..bb4e4bd 100644
 --- a/dist/runtime/server/routes/_ipx.js
 +++ b/dist/runtime/server/routes/_ipx.js
 @@ -1,8 +1,8 @@
@@ -21,7 +21,7 @@ index e734868df856bddcb6b1f30bb427a28cce3555d6..bb4e4bd18ae530a2d9fc62e991fd164c
 +  return withBase(opts.baseURL, ipxHandler);
  });
 diff --git a/dist/runtime/server/utils/image.js b/dist/runtime/server/utils/image.js
-index 8e5abf7c1f57352c93d11d711765807d53d944ff..c5596790128e60567316a90808eda8c10ec56c5c 100644
+index 8e5abf7..c559679 100644
 --- a/dist/runtime/server/utils/image.js
 +++ b/dist/runtime/server/utils/image.js
 @@ -1,6 +1,6 @@

@@ -9,7 +9,8 @@ export default <Handler> function(state, node: Link) {
     properties: {
       ...node.attributes,
       to: node.url,
-      title: node.title,
+      // null | undefined -> undefined
+      title: node.title ?? void 0,
     },
     children: state.all(node),
   };

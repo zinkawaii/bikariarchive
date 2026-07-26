@@ -1,4 +1,4 @@
-import { addPlugin, addServerPlugin, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
+import { addPlugin, addServerPlugin, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
 import { join, relative } from "pathe";
 import { article, entry, update } from "../../packages/article/src";
 import { buildSearch } from "./search";

@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
+import { addTemplate, defineNuxtModule } from "@nuxt/kit";
 import consola from "consola";
-import { addTemplate, defineNuxtModule } from "nuxt/kit";
 import { join } from "pathe";
 
 const name = "@bikari/namaemaker";

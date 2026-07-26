@@ -13,7 +13,7 @@
   });
 
   const rootEl = useTemplateRef("root");
-  const [isDrop, toggleDrop] = useToggle(false);
+  const [isDropped, toggleDropped] = useToggle(false);
 
   const indexedItems = computed(() => {
     return Object.fromEntries(
@@ -38,12 +38,12 @@
     ref="root"
     class="mb-select"
     tabindex="0"
-    @focus="toggleDrop(true)"
-    @blur="toggleDrop(false)"
+    @focus="toggleDropped(true)"
+    @blur="toggleDropped(false)"
   >
     <span class="select-title">{{ activeItem?.label }}</span>
-    <iconify class="select-arrow" :class="{ [`is-reverse`]: isDrop }" name="fa7-solid:chevron-down"/>
-    <ul class="select-dropdown" :class="{ [`is-drop`]: isDrop }">
+    <iconify class="select-arrow" :class="{ [`is-reverse`]: isDropped }" name="fa7-solid:chevron-down"/>
+    <ul class="select-dropdown" :class="{ [`is-drop`]: isDropped }">
       <template v-for="{ label, group, value } in options">
         <li v-if="group" class="select-group">{{ label }}</li>
         <li

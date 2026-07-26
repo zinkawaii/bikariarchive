@@ -1,5 +1,5 @@
 diff --git a/dist/runtime/server/composables/getSiteConfig.js b/dist/runtime/server/composables/getSiteConfig.js
-index 746b0d154145dd30b6f6cb043acab707e6ae2e73..67d9d826e28135cc626a0f1e168201516284ca6b 100644
+index 746b0d1..67d9d82 100644
 --- a/dist/runtime/server/composables/getSiteConfig.js
 +++ b/dist/runtime/server/composables/getSiteConfig.js
 @@ -1,5 +1,5 @@
@@ -10,7 +10,7 @@ index 746b0d154145dd30b6f6cb043acab707e6ae2e73..67d9d826e28135cc626a0f1e16820151
  import { logger } from "../util.js";
  export function getSiteConfig(e, _options) {
 diff --git a/dist/runtime/server/composables/utils.js b/dist/runtime/server/composables/utils.js
-index 852647113e9e37ebacc10c87e696b1d577b4b4e0..4fc4f92da4ef28654210eedc90009cd8a6eedb34 100644
+index 8526471..4fc4f92 100644
 --- a/dist/runtime/server/composables/utils.js
 +++ b/dist/runtime/server/composables/utils.js
 @@ -1,4 +1,4 @@
@@ -29,7 +29,7 @@ index 852647113e9e37ebacc10c87e696b1d577b4b4e0..4fc4f92da4ef28654210eedc90009cd8
    });
  }
 diff --git a/dist/runtime/server/middleware/init.js b/dist/runtime/server/middleware/init.js
-index 401790c8f32853c63ff63525e89fb3d5f31472b1..9d4c252101f3562f44463dd91da2a07d5af7faa2 100644
+index 401790c..9d4c252 100644
 --- a/dist/runtime/server/middleware/init.js
 +++ b/dist/runtime/server/middleware/init.js
 @@ -1,5 +1,6 @@
@@ -55,16 +55,17 @@ index 401790c8f32853c63ff63525e89fb3d5f31472b1..9d4c252101f3562f44463dd91da2a07d
    }
    if (config.multiTenancy) {
 diff --git a/dist/runtime/server/plugins/injectState.js b/dist/runtime/server/plugins/injectState.js
-index 3b7945529e3d3b7fb9cd342509e23428a7165e1b..0bbe98dd8bb645846a1db355340baf1f03aa02ee 100644
+index 3b79455..0bbe98d 100644
 --- a/dist/runtime/server/plugins/injectState.js
 +++ b/dist/runtime/server/plugins/injectState.js
-@@ -1,14 +1,16 @@
+@@ -1,15 +1,17 @@
 -import devalue from "@nuxt/devalue";
 -import { defineNitroPlugin, getRouteRules } from "nitropack/runtime";
 +import { uneval as devalue } from "devalue";
 +import { definePlugin } from "nitro";
 +import { getRouteRules } from "nitro/app";
  import { toValue } from "vue";
+ import { NUXT_SITE_CONFIG_NO_SSR } from "#nuxt-site-config/no-ssr.mjs";
  import { getSiteConfig } from "../composables/getSiteConfig.js";
  const PRERENDER_NO_SSR_ROUTES = /* @__PURE__ */ new Set(["/index.html", "/200.html", "/404.html"]);
 -export default defineNitroPlugin(async (nitroApp) => {
@@ -75,13 +76,13 @@ index 3b7945529e3d3b7fb9cd342509e23428a7165e1b..0bbe98dd8bb645846a1db355340baf1f
 +    const ssr = routeOptions.ssr?.options;
      const isIsland = process.env.NUXT_COMPONENT_ISLANDS && event.path.startsWith("/__nuxt_island");
      const url = event.path;
--    const noSSR = !!process.env.NUXT_NO_SSR || event.context.nuxt?.noSSR || routeOptions.ssr === false && !isIsland || (import.meta.prerender ? PRERENDER_NO_SSR_ROUTES.has(url) : false);
-+    const noSSR = !!process.env.NUXT_NO_SSR || event.context.nuxt?.noSSR || ssr === false && !isIsland || (import.meta.prerender ? PRERENDER_NO_SSR_ROUTES.has(url) : false);
+-    const noSSR = !!NUXT_SITE_CONFIG_NO_SSR || !!process.env.NUXT_NO_SSR || event.context.nuxt?.noSSR || routeOptions.ssr === false && !isIsland || (import.meta.prerender ? PRERENDER_NO_SSR_ROUTES.has(url) : false);
++    const noSSR = !!NUXT_SITE_CONFIG_NO_SSR || !!process.env.NUXT_NO_SSR || event.context.nuxt?.noSSR || ssr === false && !isIsland || (import.meta.prerender ? PRERENDER_NO_SSR_ROUTES.has(url) : false);
      if (noSSR) {
        const siteConfig = Object.fromEntries(
          Object.entries(getSiteConfig(event)).map(([k, v]) => [k, toValue(v)])
 diff --git a/dist/runtime/server/routes/__site-config__/debug.js b/dist/runtime/server/routes/__site-config__/debug.js
-index a0bb4930b386ce8922c3d546e7620de2d8e29ecf..10736d93b9f68f844a129149504bb569362ff18a 100644
+index a0bb493..10736d9 100644
 --- a/dist/runtime/server/routes/__site-config__/debug.js
 +++ b/dist/runtime/server/routes/__site-config__/debug.js
 @@ -1,5 +1,5 @@
