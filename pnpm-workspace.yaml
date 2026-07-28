@@ -50,7 +50,6 @@ overrides:
 
 patchedDependencies:
   "@nuxt/fonts": patches/@nuxt__fonts.patch
-  "@nuxt/icon": patches/@nuxt__icon.patch
   "@nuxt/image": patches/@nuxt__image.patch
   "@nuxtjs/robots": patches/@nuxtjs__robots.patch
   "@nuxtjs/sitemap": patches/@nuxtjs__sitemap.patch
@@ -97,7 +96,7 @@ catalogs:
     "@bikariya/modals": *bikariya
     "@bikariya/shiki": *bikariya
     "@nuxt/fonts": ^0.14.0
-    "@nuxt/icon": ^2.3.1
+    "@nuxt/icon": ^2.4.1
     "@nuxt/image": ^2.0.0
     "@nuxt/kit": *nuxt
     "@nuxt/schema": *nuxt

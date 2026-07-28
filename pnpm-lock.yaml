@@ -93,8 +93,8 @@ catalogs:
       specifier: ^0.14.0
       version: 0.14.0
     '@nuxt/icon':
-      specifier: ^2.3.1
-      version: 2.3.1
+      specifier: ^2.4.1
+      version: 2.4.1
     '@nuxt/image':
       specifier: ^2.0.0
       version: 2.0.0
@@ -255,7 +255,6 @@ overrides:
 
 patchedDependencies:
   '@nuxt/fonts': 6e0d90d81e1827c11cebb59885cba460f2644a8ff7eb55cc48744f7b15cce533
-  '@nuxt/icon': d124b6ba99acdd59ecfbaaa5253b63fbc724ef0b248ff01a33fd377ddb9333ca
   '@nuxt/image': 905f835bf130cc71e7ef773dbe4c17236393c2fc015b531b0226028dec22422b
   '@nuxtjs/robots': 52482eeb5f58b8034c574ff849d481f40b10903312927bfefd021f2363b197fc
   '@nuxtjs/sitemap': 9ad7039ff7a980154d4118c49d0fc446306658d0a2fbaf58c5b07c0f16c1ff82
@@ -341,7 +340,7 @@ importers:
         version: 0.14.0(patch_hash=6e0d90d81e1827c11cebb59885cba460f2644a8ff7eb55cc48744f7b15cce533)(aws4fetch@1.0.20)(chokidar@5.0.0)(crossws@0.4.10(srvx@0.11.22))(db0@0.3.4)(esbuild@0.28.1)(giget@3.3.1)(lru-cache@11.5.2)(magic-string@1.1.0)(magicast@0.5.3)(mongodb@7.5.0)(oxc-parser@0.141.0)(rolldown@1.2.0)(vite@8.1.5)
       '@nuxt/icon':
         specifier: catalog:nuxt
-        version: 2.3.1(patch_hash=d124b6ba99acdd59ecfbaaa5253b63fbc724ef0b248ff01a33fd377ddb9333ca)(chokidar@5.0.0)(giget@3.3.1)(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.141.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.0)(vite@8.1.5))(vite@8.1.5)(vue@3.5.40(typescript@6.0.3))
+        version: 2.4.1(chokidar@5.0.0)(giget@3.3.1)(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.141.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.0)(vite@8.1.5))(vite@8.1.5)(vue@3.5.40(typescript@6.0.3))
       '@nuxt/image':
         specifier: catalog:nuxt
         version: 2.0.0(patch_hash=905f835bf130cc71e7ef773dbe4c17236393c2fc015b531b0226028dec22422b)(@types/node@26.1.1)(chokidar@5.0.0)(crossws@0.4.10(srvx@0.11.22))(giget@3.3.1)(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.141.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.0)(vite@8.1.5))(unstorage@2.0.0-alpha.7(aws4fetch@1.0.20)(chokidar@5.0.0)(db0@0.3.4)(lru-cache@11.5.2)(mongodb@7.5.0)(ofetch@2.0.0-alpha.3))
@@ -1393,8 +1392,8 @@ packages:
   '@nuxt/fonts@0.14.0':
     resolution: {integrity: sha512-4uXQl9fa5F4ibdgU8zomoOcyMdnwgdem+Pi8JEqeDYI5yPR32Kam6HnuRr47dTb97CstaepAvXPWQUUHMtjsFQ==}
 
-  '@nuxt/icon@2.3.1':
-    resolution: {integrity: sha512-ebx7Zp08eR0Mw3zFAh3aT+t5zC4RoI0Xf0wLEfbv23LIPUQ9fvxYpofNiNZdG9m96Fvc3pQu6v+NaCRbRYRRog==}
+  '@nuxt/icon@2.4.1':
+    resolution: {integrity: sha512-fOY3kiT6OoL4bWXVmMLc1VgoCm1PxIGSBmsSaLO090NEgtd1ub441dZ7MEoOD5UIilWzba1kCWdwJcAkGCOwLg==}
 
   '@nuxt/image@2.0.0':
     resolution: {integrity: sha512-otHi6gAoYXKLrp8m27ZjX1PjxOPaltQ4OiUs/BhkW995mF/vXf8SWQTw68fww+Uric0v+XgoVrP9icDi+yT6zw==}
@@ -6165,7 +6164,7 @@ snapshots:
       - vite
       - webpack
 
-  '@nuxt/icon@2.3.1(patch_hash=d124b6ba99acdd59ecfbaaa5253b63fbc724ef0b248ff01a33fd377ddb9333ca)(chokidar@5.0.0)(giget@3.3.1)(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.141.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.0)(vite@8.1.5))(vite@8.1.5)(vue@3.5.40(typescript@6.0.3))':
+  '@nuxt/icon@2.4.1(chokidar@5.0.0)(giget@3.3.1)(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.141.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.0)(vite@8.1.5))(vite@8.1.5)(vue@3.5.40(typescript@6.0.3))':
     dependencies:
       '@iconify/collections': 1.0.714
       '@iconify/types': 2.0.0
