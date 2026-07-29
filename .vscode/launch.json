@@ -17,7 +17,7 @@
       "name": "Launch Playground",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "code-insiders",
+      "runtimeExecutable": "codium",
       "args": [
         "content"
       ],
