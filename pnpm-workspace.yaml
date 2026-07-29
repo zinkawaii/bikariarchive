@@ -45,6 +45,7 @@ overrides:
   oxc-parser: ^0.141.0
   # vite > rolldown@1.1.5
   rolldown: ^1.2.0
+  typescript: npm:typescript-native-bridge@^6.0.3-bridge.7.tsgo.7.0.2
   # @nuxt/devtools, @nuxt/fonts, fontless, nuxt-link-checker > unstorage@1.17.5
   unstorage: ^2.0.0-alpha.7
 
