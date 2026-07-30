@@ -1,4 +1,5 @@
 import zin from "@zinkawaii/eslint-config";
+import css from "@zinkawaii/eslint-config-css";
 
 export default zin(
   {
@@ -36,4 +37,4 @@ export default zin(
       "markdown/no-multiple-h1": "off",
     },
   },
-);
+).append(css).setDefaultIgnores((prev) => [...prev, "**/*.css"]);

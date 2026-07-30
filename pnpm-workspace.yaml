@@ -14,12 +14,14 @@ define:
   - &vls ^3.3.8
   - &volar 2.4.28
   - &vueuse ^14.3.0
+  - &zin/eslint ^0.5.1
 
 overrides:
+  "@nuxt/cli": npm:@nuxt/cli-nightly@3.38.0-20260725-234243-e7aa760
   "@nuxt/devtools": ^4.0.0-alpha.9
   "@nuxt/devtools-kit": ^4.0.0-alpha.9
-  "@nuxt/kit": npm:@nuxt/kit-nightly@5x
-  "@nuxt/schema": npm:@nuxt/schema-nightly@5x
+  "@nuxt/kit": npm:@nuxt/kit-nightly@5.0.0-29750284.8e4f0798
+  "@nuxt/schema": npm:@nuxt/schema-nightly@5.0.0-29750284.8e4f0798
   # nuxt-seo-utils > @unhead/bundler@3.2.1
   "@unhead/bundler": ^3.2.3
   # @nuxt/devtools > @vitejs/devtools@0.3.4
@@ -32,13 +34,11 @@ overrides:
   esbuild: ^0.28.1
   # @nuxt/fonts, @nuxt/image, @nuxtjs/robots, listhen, nuxt-link-checker, nuxt-site-config > h3@1.15.11
   h3: ^2.0.1-rc.26
-  # postcss-html > htmlparser2@8.0.0
-  htmlparser2: ^12.0.0
   # @nuxt/image > ipx@3.1.1
   ipx: ^4.0.0-alpha.2
   # micromark-extension-math > katex@0.16.0
   katex: ^0.18.1
-  nuxt: npm:nuxt-nightly@5x
+  nuxt: npm:nuxt-nightly@5.0.0-29750284.8e4f0798
   # @nuxt/cli, @nuxt/fonts, @nuxtjs/sitemap, nuxt-link-checker, nuxt-og-image, nuxtseo-shared, unifont > ofetch@1.5.1
   ofetch: ^2.0.0-alpha.3
   # @unhead/bundler, nuxt-og-image > oxc-parser@0.140.0
@@ -88,10 +88,9 @@ catalogs:
   iconify:
     "@iconify-json/fa7-solid": ^1.2.5
   lint:
-    "@zinkawaii/eslint-config": ^0.4.5
-    "@zinkawaii/stylelint-config": ^0.5.2
+    "@zinkawaii/eslint-config": *zin/eslint
+    "@zinkawaii/eslint-config-css": *zin/eslint
     eslint: ^10.8.0
-    stylelint: ^17.14.1
   nuxt:
     "@bikariya/image-viewer": *bikariya
     "@bikariya/modals": *bikariya
