@@ -4,8 +4,8 @@
   "private": true,
   "main": "./index.cjs",
   "scripts": {
-    "dev": "tsdown -w --sourcemap",
-    "build": "tsdown"
+    "dev": "rolldown -c -w",
+    "build": "rolldown -c"
   },
   "dependencies": {
     "@volar/language-core": "catalog:volar",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@zinkawaii/tsconfig": "catalog:types",
-    "tsdown": "catalog:build",
+    "rolldown": "catalog:build",
     "typescript": "catalog:build"
   }
 }

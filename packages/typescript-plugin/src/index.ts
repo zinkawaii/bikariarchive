@@ -1,4 +1,4 @@
-import { createLanguageServicePlugin } from "@volar/typescript/lib/quickstart/createLanguageServicePlugin";
+import { createLanguageServicePlugin } from "@volar/typescript/lib/quickstart/createLanguageServicePlugin.js";
 import { createLanguagePlugin } from "./languagePlugin";
 
 export default createLanguageServicePlugin((ts, info) => {

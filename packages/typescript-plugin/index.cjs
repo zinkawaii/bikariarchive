@@ -1,1 +1,1 @@
-module.exports = require("./dist/index.mjs").default;
+module.exports = require("./dist/index.js").default;
