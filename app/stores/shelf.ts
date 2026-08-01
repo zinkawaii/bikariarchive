@@ -12,7 +12,7 @@ export const useShelfStore = defineStore("shelf", () => {
       if (route.name === "shelf") {
         novelRaw = route.params.novel;
       }
-      return novelRaw ?? "bikari";
+      return novelRaw ?? Object.keys(Article.meta)[0];
     },
     set(val) {
       novelRaw = val;
