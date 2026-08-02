@@ -56,8 +56,6 @@ patchedDependencies:
   "@nuxtjs/sitemap": patches/@nuxtjs__sitemap.patch
   "@pinia/nuxt": patches/@pinia__nuxt.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
-  nuxt-link-checker: patches/nuxt-link-checker.patch
-  nuxt-og-image: patches/nuxt-og-image.patch
   nuxt-schema-org: patches/nuxt-schema-org.patch
   nuxt-seo-utils: patches/nuxt-seo-utils.patch
   nuxt-site-config: patches/nuxt-site-config.patch

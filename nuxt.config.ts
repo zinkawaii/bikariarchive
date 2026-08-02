@@ -97,9 +97,8 @@ export default defineNuxtConfig({
   image: {
     provider: "none",
   },
-  ogImage: {
-    enabled: false,
-  },
+  linkChecker: false,
+  ogImage: false,
   robots: robotsConfig,
   site: {
     name: clientConfig.title,
