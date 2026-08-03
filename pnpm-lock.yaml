@@ -175,9 +175,6 @@ catalogs:
     unemail:
       specifier: ^0.5.0
       version: 0.5.0
-    unrun:
-      specifier: ^0.3.1
-      version: 0.3.1
     uqr:
       specifier: ^0.1.3
       version: 0.1.3
@@ -399,9 +396,6 @@ importers:
       unemail:
         specifier: catalog:utils
         version: 0.5.0
-      unrun:
-        specifier: catalog:utils
-        version: 0.3.1(synckit@0.11.13)
       vue-component-type-helpers:
         specifier: catalog:vue
         version: 3.3.8
@@ -542,9 +536,6 @@ importers:
       '@zinkawaii/tsconfig':
         specifier: catalog:types
         version: 0.1.0
-      rolldown:
-        specifier: ^1.2.0
-        version: 1.2.0
       typescript:
         specifier: npm:typescript-native-bridge@^6.0.3-bridge.7.tsgo.7.0.2
         version: typescript-native-bridge@6.0.3-bridge.7.tsgo.7.0.2
@@ -4114,16 +4105,6 @@ packages:
 
   unrouting@0.2.2:
     resolution: {integrity: sha512-EoCab68s1o9AWFq9fjKsMEsmjKrPO11SAsvopikks2eEm/KLXgZMCof4cgpVgdy0Vz71OFBJw6DoDqu1oOSFGw==}
-
-  unrun@0.3.1:
-    resolution: {integrity: sha512-onIck/oNnCaytwths1ZVp1LK2Gq2hPoyFhiHebObuUXqR3S0uHuLLaBK8K6mRRgV7Ptip8AnNvaUsgzwWwBZuA==}
-    engines: {node: ^22.13.0 || >=24.0.0}
-    hasBin: true
-    peerDependencies:
-      synckit: ^0.11.11
-    peerDependenciesMeta:
-      synckit:
-        optional: true
 
   unstorage@2.0.0-alpha.7:
     resolution: {integrity: sha512-ELPztchk2zgFJnakyodVY3vJWGW9jy//keJ32IOJVGUMyaPydwcA1FtVvWqT0TNRch9H+cMNEGllfVFfScImog==}
@@ -9066,12 +9047,6 @@ snapshots:
     dependencies:
       escape-string-regexp: 5.0.0
       ufo: 1.6.4
-
-  unrun@0.3.1(synckit@0.11.13):
-    dependencies:
-      rolldown: 1.2.0
-    optionalDependencies:
-      synckit: 0.11.13
 
   unstorage@2.0.0-alpha.7(aws4fetch@1.0.20)(chokidar@5.0.0)(db0@0.3.4)(lru-cache@11.5.2)(mongodb@7.5.0)(ofetch@2.0.0-alpha.3):
     optionalDependencies:

@@ -2,7 +2,7 @@ import { setProperty } from "propathy";
 import { visit } from "unist-util-visit";
 import type hast from "hast";
 import type { Processor } from "unified";
-import { transformNodes } from "./utils";
+import { transformNodes } from "./utils.ts";
 
 export default function(this: Processor) {
   this.compiler = (root, file) => {

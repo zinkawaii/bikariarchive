@@ -3,10 +3,6 @@
   "type": "module",
   "private": true,
   "main": "./index.cjs",
-  "scripts": {
-    "dev": "rolldown -c -w",
-    "build": "rolldown -c"
-  },
   "dependencies": {
     "@volar/language-core": "catalog:volar",
     "@volar/typescript": "catalog:volar",
@@ -20,7 +16,6 @@
   },
   "devDependencies": {
     "@zinkawaii/tsconfig": "catalog:types",
-    "rolldown": "catalog:build",
     "typescript": "catalog:build"
   }
 }

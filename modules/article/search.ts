@@ -3,7 +3,7 @@ import consola from "consola";
 import { toString } from "mdast-util-to-string";
 import { basename, dirname } from "pathe";
 import { glob } from "tinyglobby";
-import type { Child, JArticle, JArtmap, Root } from "../../packages/article/src";
+import type { Child, JArticle, JArtmap, Root } from "@bikari/article";
 
 export async function buildSearch() {
   const meta = await readFile(".data/json/article.json", "utf-8").then<JArticle>(JSON.parse);

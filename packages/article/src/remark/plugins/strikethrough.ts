@@ -1,7 +1,7 @@
 import { gfmStrikethroughFromMarkdown } from "mdast-util-gfm-strikethrough";
 import { gfmStrikethrough, type Options } from "micromark-extension-gfm-strikethrough";
 import type { Processor } from "unified";
-import { appendExtensions } from "./utils";
+import { appendExtensions } from "./utils.ts";
 
 export default function(this: Processor) {
   const options: Options = {

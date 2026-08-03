@@ -1,8 +1,8 @@
 import type { Element } from "hast";
 import type { InlineMath, Math } from "mdast-util-math";
-import type { Handler } from "mdast-util-to-hast";
+import type { State } from "mdast-util-to-hast";
 
-const math: Handler = (state, node: Math) => {
+function math(state: State, node: Math) {
   const result: Element = {
     type: "element",
     tagName: "mb-math",
@@ -14,9 +14,9 @@ const math: Handler = (state, node: Math) => {
   };
   state.patch(node, result);
   return result;
-};
+}
 
-const inlineMath: Handler = (state, node: InlineMath) => {
+function inlineMath(state: State, node: InlineMath) {
   const result: Element = {
     type: "element",
     tagName: "mb-math",
@@ -28,7 +28,7 @@ const inlineMath: Handler = (state, node: InlineMath) => {
   };
   state.patch(node, result);
   return result;
-};
+}
 
 export default {
   math,

@@ -8,13 +8,13 @@ function shared(): TSConfig["compilerOptions"] {
   };
 }
 
-export default <NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig>> {
+const config: NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig> = {
   nodeTsConfig: {
     compilerOptions: {
       ...shared(),
     },
     include: [
-      "../packages/*/*.ts",
+      "../config/**/*.ts",
       "../scripts/**/*.ts",
     ],
   },
@@ -49,3 +49,5 @@ export default <NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig>> {
     },
   },
 };
+
+export default config;

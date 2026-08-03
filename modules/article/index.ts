@@ -1,8 +1,8 @@
+import { article, entry, update } from "@bikari/article";
 import { addPlugin, addServerPlugin, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
 import { join, relative } from "pathe";
-import { article, entry, update } from "../../packages/article/src";
-import { buildSearch } from "./search";
-import vite from "./vite";
+import { buildSearch } from "./search.ts";
+import vite from "./vite.ts";
 
 export default defineNuxtModule({
   meta: {

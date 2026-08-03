@@ -1,8 +1,8 @@
+import { parseArticle } from "@bikari/article";
 import { parsePath, parseQuery } from "ufo";
 import type { Plugin } from "vite";
-import { parseArticle } from "../../packages/article/src/remark";
 
-export default <Plugin> {
+const plugin: Plugin = {
   name: "@bikari/article",
   transform: {
     filter: {
@@ -26,3 +26,5 @@ export default function(comp) {
     },
   },
 };
+
+export default plugin;

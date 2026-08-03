@@ -1,4 +1,4 @@
-import { article, entry, update } from "../packages/article/src";
+import { article, entry, update } from "@bikari/article";
 
 await Promise.all([
   article.build(),

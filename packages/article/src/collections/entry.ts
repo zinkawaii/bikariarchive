@@ -2,11 +2,11 @@ import { readFile } from "node:fs/promises";
 import defu from "defu";
 import { createKerria, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
-import { parseEntry } from "../remark";
-import { isDevelopment } from "../utils";
-import type { Child } from "../remark/types";
-import type { EntryCategory, EntryDetail, JEntry } from "../types/entry";
-import type { IntelNode, JIntel } from "../types/intel";
+import { parseEntry } from "../remark/index.ts";
+import { isDevelopment } from "../utils.ts";
+import type { Child } from "../remark/types.ts";
+import type { EntryCategory, EntryDetail, JEntry } from "../types/entry.ts";
+import type { IntelNode, JIntel } from "../types/intel.ts";
 
 interface AbilityInfo {
   name: string;
@@ -25,10 +25,10 @@ interface AbilityOwner {
   star: number;
 }
 
-enum SourceKind {
-  Meta,
-  Entry,
-}
+const SourceKind = {
+  Meta: 0,
+  Entry: 1,
+};
 
 export default createKerria("Entry", () => {
   const metaInfo = useLoad("meta", {

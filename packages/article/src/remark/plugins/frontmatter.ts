@@ -5,7 +5,7 @@ import YAML from "yaml";
 import type { Node, Root } from "mdast";
 import type { Processor } from "unified";
 import type { VFile } from "vfile";
-import { appendExtensions } from "./utils";
+import { appendExtensions } from "./utils.ts";
 
 declare module "vfile" {
   interface DataMap {

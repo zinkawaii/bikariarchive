@@ -5,8 +5,8 @@ import * as p from "@clack/prompts";
 import { dirname } from "pathe";
 import { exec } from "tinyexec";
 import YAML from "yaml";
-import { resolveRoot } from "./utils";
-import type { JArticle, JChapter } from "../../src/types/article";
+import { resolveRoot } from "./utils.ts";
+import type { JArticle, JChapter } from "../../src/types/article.ts";
 
 export async function createArticle() {
   const path = resolveRoot("/.data/json/article.json");

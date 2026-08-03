@@ -1,4 +1,4 @@
-import type { Child } from "../remark/types";
+import type { Child } from "../remark/types.ts";
 
 export interface JUpdate {
   date: string;

@@ -3,11 +3,12 @@
   "type": "module",
   "private": true,
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./remark": "./src/remark/index.ts"
   },
   "scripts": {
     "test": "vitest",
-    "new": "unrun scripts/new/index.ts"
+    "new": "node scripts/new/index.ts"
   },
   "dependencies": {
     "defu": "catalog:utils",

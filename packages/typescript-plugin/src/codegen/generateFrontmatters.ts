@@ -1,7 +1,7 @@
 import { type Document, type Node, Scalar, YAMLMap, YAMLSeq } from "yaml";
-import { codeFeatures } from "./codeFeatures";
-import { Boundary } from "./utils";
-import type { Code, Expression, Frontmatter, Import } from "../types";
+import { codeFeatures } from "./codeFeatures.ts";
+import { Boundary } from "./utils.ts";
+import type { Code, Expression, Frontmatter, Import } from "../types.ts";
 
 export interface FrontmatterCodegenOptions {
   import: Import;
@@ -66,7 +66,7 @@ function* generateValue(node: Node | null): Generator<Code> {
     return;
   }
 
-  const boundary = yield* Boundary.start(node.range![0], codeFeatures.verification);
+  const boundary = yield* Boundary.start(node.range![0], node.range![1], codeFeatures.verification);
 
   if (node instanceof Scalar) {
     yield* generateScalar(node);
@@ -78,7 +78,7 @@ function* generateValue(node: Node | null): Generator<Code> {
     yield* generateSeq(node);
   }
 
-  yield boundary.end(node.range![1]);
+  yield boundary.end();
 }
 
 function* generateScalar(node: Scalar): Generator<Code> {
@@ -97,7 +97,7 @@ function* generateScalar(node: Scalar): Generator<Code> {
     ];
   }
   else {
-    const boundary = yield* Boundary.start(node.range![0], codeFeatures.verification);
+    const boundary = yield* Boundary.start(node.range![0], node.range![1], codeFeatures.verification);
     yield `"`;
     yield [
       node.toString(),
@@ -105,7 +105,7 @@ function* generateScalar(node: Scalar): Generator<Code> {
       codeFeatures.all,
     ];
     yield `"`;
-    yield boundary.end(node.range![1]);
+    yield boundary.end();
   }
 }
 
@@ -138,7 +138,7 @@ function* generateSeq(node: YAMLSeq): Generator<Code> {
 function* generateExpression(exp: Expression): Generator<Code> {
   const { source, offset } = exp;
   yield `(`;
-  const boundary = yield* Boundary.start(offset, codeFeatures.verification);
+  const boundary = yield* Boundary.start(offset, offset + source.length, codeFeatures.verification);
   yield `$frontmatter.`;
   yield [
     source,
@@ -146,6 +146,6 @@ function* generateExpression(exp: Expression): Generator<Code> {
     codeFeatures.all,
   ];
   yield `)`;
-  yield boundary.end(offset + source.length);
+  yield boundary.end();
   yield `;\n`;
 }

@@ -1,6 +1,6 @@
 import type { ModuleOptions } from "@nuxtjs/robots";
 
-export default <ModuleOptions> {
+const config: Partial<ModuleOptions> = {
   credits: false,
   groups: [
     "AhrefsBot",
@@ -31,3 +31,5 @@ export default <ModuleOptions> {
     disallow: "/",
   })),
 };
+
+export default config;

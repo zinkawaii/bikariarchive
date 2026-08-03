@@ -23,7 +23,7 @@
 
   const imgComp = useTemplateRef("img");
   const tagComps = useTemplateRef("tag");
-  const imgEl = computed<HTMLImageElement>(() => imgComp.value?.imgEl);
+  const imgEl = computed(() => imgComp.value?.imgEl);
 
   // 角色列表
   const characters = computed(() => {

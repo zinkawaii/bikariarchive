@@ -3,14 +3,14 @@ import { createKerria, useLoad, useSource } from "kerria";
 import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
-import { parseArticle, parseEntry } from "../remark";
-import { isDevelopment } from "../utils";
-import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article";
+import { parseArticle, parseEntry } from "../remark/index.ts";
+import { isDevelopment } from "../utils.ts";
+import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article.ts";
 
-enum SourceKind {
-  Meta,
-  Article,
-}
+const SourceKind = {
+  Meta: 0,
+  Article: 1,
+};
 
 export default createKerria("Article", () => {
   const metaInfo = useLoad("meta", {

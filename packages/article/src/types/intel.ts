@@ -1,4 +1,4 @@
-import type { JEntry } from "./entry";
+import type { JEntry } from "./entry.ts";
 
 export interface JIntel {
   blocks: IntelBlock[];

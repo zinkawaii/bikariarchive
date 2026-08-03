@@ -4,19 +4,19 @@ import mdc from "remark-mdc";
 import parse from "remark-parse";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
 import { unified } from "unified";
-import code from "./handlers/code";
-import image from "./handlers/image";
-import link from "./handlers/link";
-import maths from "./handlers/math";
-import compiler from "./plugins/compiler";
-import emoji from "./plugins/emoji";
-import footnote from "./plugins/footnote";
-import frontmatter from "./plugins/frontmatter";
-import hoistImage from "./plugins/hoistImage";
-import ruby from "./plugins/ruby";
-import slot from "./plugins/slot";
-import slug from "./plugins/slug";
-import strikethrough from "./plugins/strikethrough";
+import code from "./handlers/code.ts";
+import image from "./handlers/image.ts";
+import link from "./handlers/link.ts";
+import maths from "./handlers/math.ts";
+import compiler from "./plugins/compiler.ts";
+import emoji from "./plugins/emoji.ts";
+import footnote from "./plugins/footnote.ts";
+import frontmatter from "./plugins/frontmatter.ts";
+import hoistImage from "./plugins/hoistImage.ts";
+import ruby from "./plugins/ruby.ts";
+import slot from "./plugins/slot.ts";
+import slug from "./plugins/slug.ts";
+import strikethrough from "./plugins/strikethrough.ts";
 
 declare module "mdast" {
   interface Node {

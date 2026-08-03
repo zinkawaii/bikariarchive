@@ -9,8 +9,8 @@ import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import { parseDocument } from "yaml";
 import type ts from "typescript";
-import { generateFrontmatters } from "./codegen/generateFrontmatters";
-import type { Code, Config, Expression, Frontmatter, Mapping } from "./types";
+import { generateFrontmatters } from "./codegen/generateFrontmatters.ts";
+import type { Code, Config, Expression, Frontmatter, Mapping } from "./types.ts";
 
 declare module "mdast" {
   interface RootContentMap {
@@ -44,7 +44,7 @@ export function createLanguagePlugin(
     },
     createVirtualCode(uri, languageId, snapshot) {
       if (languageId === "mdz") {
-        return new MdzVirtualCode(snapshot, uri, context);
+        return new MdzVirtualCode(uri, snapshot, context);
       }
     },
     typescript: {
@@ -71,14 +71,13 @@ export function createLanguagePlugin(
 export class MdzVirtualCode implements VirtualCode {
   id = "root";
   languageId = "mdz";
+  snapshot: ts.IScriptSnapshot;
   embeddedCodes: VirtualCode[] = [];
   mappings: CodeMapping[] = [];
 
-  constructor(
-    public snapshot: ts.IScriptSnapshot,
-    public fileName: string,
-    context: Context,
-  ) {
+  constructor(fileName: string, snapshot: ts.IScriptSnapshot, context: Context) {
+    this.snapshot = snapshot;
+
     let options: Mapping = {
       patterns: [],
       frontmatter: [],

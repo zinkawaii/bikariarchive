@@ -3,9 +3,9 @@ import { extname } from "pathe";
 import { parsePath } from "ufo";
 import type { Element } from "hast";
 import type { Image } from "mdast";
-import type { Handler } from "mdast-util-to-hast";
+import type { State } from "mdast-util-to-hast";
 
-export default <Handler> function(state, node: Image) {
+export default function(state: State, node: Image) {
   const path = parsePath(node.url).pathname;
   const ext = extname(path).slice(1).toLowerCase();
 
@@ -35,4 +35,4 @@ export default <Handler> function(state, node: Image) {
 
   state.patch(node, result);
   return state.applyData(node, result);
-};
+}

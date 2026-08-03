@@ -3,11 +3,11 @@ import parse from "remark-parse";
 import rehype from "remark-rehype";
 import { type CompileResults, type Processor, unified } from "unified";
 import { expect, it } from "vitest";
-import compiler from "../src/remark/plugins/compiler";
-import emoji from "../src/remark/plugins/emoji";
-import frontmatter from "../src/remark/plugins/frontmatter";
-import slot from "../src/remark/plugins/slot";
-import type { Child, Element } from "../src/remark/types";
+import compiler from "../src/remark/plugins/compiler.ts";
+import emoji from "../src/remark/plugins/emoji.ts";
+import frontmatter from "../src/remark/plugins/frontmatter.ts";
+import slot from "../src/remark/plugins/slot.ts";
+import type { Child, Element } from "../src/remark/types.ts";
 
 it("emoji", async () => {
   const processor = unified()

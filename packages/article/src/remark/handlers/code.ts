@@ -1,8 +1,8 @@
 import type { Element } from "hast";
 import type { Code } from "mdast";
-import type { Handler } from "mdast-util-to-hast";
+import type { State } from "mdast-util-to-hast";
 
-export default <Handler> function(state, node: Code) {
+export default function(state: State, node: Code) {
   const result: Element = {
     type: "element",
     tagName: "mb-forge",
@@ -16,4 +16,4 @@ export default <Handler> function(state, node: Code) {
   };
   state.patch(node, result);
   return state.applyData(node, result);
-};
+}

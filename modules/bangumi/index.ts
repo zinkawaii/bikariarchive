@@ -3,7 +3,7 @@ import { addTemplate, defineNuxtModule } from "@nuxt/kit";
 import { fetchFullSubjects } from "bgmt/cdn";
 import consola from "consola";
 import { join, relative } from "pathe";
-import { ids } from "./meta";
+import { ids } from "./meta.ts";
 
 interface Options {
   sizes?: number;

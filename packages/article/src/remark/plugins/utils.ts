@@ -2,7 +2,7 @@ import type hast from "hast";
 import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
 import type { Extension as MicromarkExtension } from "micromark-util-types";
 import type { Processor } from "unified";
-import type { Child, Root } from "../types";
+import type { Child, Root } from "../types.ts";
 
 interface PushExtensionsOptions {
   micromark: MicromarkExtension;

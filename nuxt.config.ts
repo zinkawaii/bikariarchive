@@ -1,8 +1,7 @@
 import vue from "@vitejs/plugin-vue";
-import { resolve } from "pathe";
-import robotsConfig from "./app/robots.config";
-import { clientConfig, serverConfig } from "./app/runtime.config";
-import typescriptConfig from "./app/typescript.config";
+import robotsConfig from "./config/robots.config.ts";
+import { clientConfig, serverConfig } from "./config/runtime.config.ts";
+import typescriptConfig from "./config/typescript.config.ts";
 
 export default defineNuxtConfig({
   app: {
@@ -16,9 +15,6 @@ export default defineNuxtConfig({
     "~/assets/styles/sinrabansyo.css",
     "~/assets/styles/animation.css",
   ],
-  alias: {
-    "@bikari/article": resolve(import.meta.dirname, "packages/article/src"),
-  },
   compatibilityDate: "2024-07-19",
   components: [
     {
