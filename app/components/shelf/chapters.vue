@@ -25,7 +25,7 @@
     {
       label: "状态",
       value: computed(() => {
-        return articles.value.some((art) => art.ending) ? "已完结" : "连载中";
+        return articles.value.some((art) => art.ending && !art.draft) ? "已完结" : "连载中";
       }),
     },
   ];
