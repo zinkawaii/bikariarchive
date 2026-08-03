@@ -34,15 +34,18 @@ export default defineNuxtModule<Options>({
       const fetched = await fetchFullSubjects();
       const bangumis = fetched.subjects
         .filter(({ id }) => ids.has(id))
-        .map((item) => ({
-          id: item.id,
-          title: {
-            ja: item.alias.ja?.[0],
-            zh: item.alias.zh?.[0],
-          },
-          cover: item.poster,
-          date: item.onair_date,
-        }))
+        .map((item) => {
+          const poster = new URL(item.poster);
+          return {
+            id: item.id,
+            title: {
+              ja: item.alias.ja?.[0],
+              zh: item.alias.zh?.[0],
+            },
+            cover: poster.origin + "/r/400" + poster.pathname,
+            date: item.onair_date,
+          };
+        })
         .sort((a, b) => a.date && b.date?.localeCompare(a.date) || a.id - b.id);
 
       await mkdir(chunksDir, { recursive: true });
