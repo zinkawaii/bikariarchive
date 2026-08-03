@@ -6,7 +6,7 @@
         <html lang="{@xml:lang}">
             <head>
                 <link rel="stylesheet" href="/feed/style.css"/>
-                <link rel="icon" href="/garden/favicon.svg"/>
+                <link rel="icon" href="/favicon.svg"/>
             </head>
             <body>
                 <div class="header">

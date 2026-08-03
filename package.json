@@ -1,19 +1,23 @@
 {
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@11.17.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^12.0.0-beta.3"
+    }
+  },
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "prepare": "nuxt-seo-utils icons --source image/favicon.svg",
+    "prepare": "nuxt-seo-utils icons --source favicon.svg",
     "preview": "nuxt preview",
     "eslint": "eslint -c .config/eslint.config.ts",
     "typecheck": "nuxt typecheck",
     "new": "pnpm --filter @bikari/article new",
     "task:article": "node scripts/article.ts",
     "task:article/dev": "NODE_ENV=\"development\" node --watch scripts/article.ts",
-    "task:feed": "node scripts/feed.ts",
-    "task:svgo": "pnpx svgo public/image/favicon.svg --pretty"
+    "task:feed": "node scripts/feed.ts"
   },
   "dependencies": {
     "@shikijs/transformers": "catalog:utils",

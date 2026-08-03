@@ -42,7 +42,7 @@ const client = {
     phrase: "うたかたなしあわせ",
     subtitle: "微かな力を尽くして、光の届いた彼方へ",
     avatar: "/garden/avatar/maestrale.webp",
-    favicon: "/garden/favicon.svg",
+    favicon: "/favicon.svg",
   },
   development: {
     domain: "zinkawaii",
