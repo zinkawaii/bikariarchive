@@ -31,23 +31,15 @@ export const CommentDataModel = model("CommentData", new Schema<CommentDataSchem
     type: String,
     required: true,
   },
-  mode: {
-    type: String,
-    enum: ["guest", "user"],
-    required: true,
-  },
   nickname: {
     type: String,
+    required: true,
   },
   email: {
     type: String,
   },
   address: {
     type: String,
-  },
-  user: {
-    type: Types.ObjectId,
-    ref: "UserData",
   },
 }, {
   collection: "comment_data",

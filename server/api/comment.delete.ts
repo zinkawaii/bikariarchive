@@ -10,11 +10,10 @@ const schema = type({
 export default defineJEventHandler<{
   body: DeleteCommentBody;
 }>(async (event) => {
-  const session = await readSession(event);
   const { id } = schema.assert(await event.req.json());
 
   // 权限验证
-  validateIdentity(session.data, 9);
+  await validateIdentity(event);
 
   // 连接数据库
   await connectMongoose();

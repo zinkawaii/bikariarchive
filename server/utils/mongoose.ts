@@ -4,8 +4,6 @@ import { useNitroApp } from "nitro/app";
 import { useRuntimeConfig } from "nitro/runtime-config";
 import "#server/models/CommentData";
 import "#server/models/ReadRecord";
-import "#server/models/TempCaptcha";
-import "#server/models/UserData";
 
 export async function connectMongoose() {
   const config = useRuntimeConfig();

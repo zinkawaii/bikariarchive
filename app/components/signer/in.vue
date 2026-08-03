@@ -1,7 +1,6 @@
 <script lang="ts" setup>
   const signerStore = useSignerStore();
   const toastStore = useToastStore();
-  const userStore = useUserStore();
 
   const nickname = ref("");
   const password = ref("");
@@ -19,7 +18,7 @@
     },
   });
 
-  const { execute, data, error } = useLazyFetch("/api/user/login", {
+  const { execute, error } = useLazyFetch("/api/auth/login", {
     method: "post",
     body: {
       account: nickname,
@@ -38,15 +37,12 @@
     if (error.value) {
       switch (getErrorCode(error.value)) {
         case "1":
-          return glitch("nickname", "账号不存在");
-        case "2":
-          return glitch("password", "密码错误");
+          return glitch("password", "账号或密码错误");
         default:
           return toastStore.error("[login]", "登录失败");
       }
     }
-
-    userStore.$patch(data.value!);
+    await signerStore.refresh();
   }, {
     title: "登录",
   });
@@ -54,14 +50,9 @@
 
 <template>
   <signer-view title="登录">
-    <template #subtitle>
-      <button @click="signerStore.switchView(`logon`)">
-        没有账号？立即注册<iconify name="fa7-solid:chevron-right"/>
-      </button>
-    </template>
     <meow-input
       type="text"
-      placeholder="昵称／UID／电子邮箱"
+      placeholder="账号"
       v-model="nickname"
       v-model:error="errors.nickname"
     />

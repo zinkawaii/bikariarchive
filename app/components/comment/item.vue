@@ -10,7 +10,7 @@
 
   const commentStore = useCommentStore();
   const modalStore = useModalStore();
-  const userStore = useUserStore();
+  const signerStore = useSignerStore();
 
   const body = computedAsync(() => {
     return parseComment(props.data.content);
@@ -39,7 +39,6 @@
       avatar: data.avatar,
       nickname: data.nickname,
       address: data.address,
-      character: data.character,
     }), {
       immediate: true,
     });
@@ -86,7 +85,7 @@
           <iconify name="fa7-solid:comment-dots"/>
           <span>回复</span>
         </button>
-        <template v-if="userStore.identity >= 9">
+        <template v-if="signerStore.isAdmin">
           <button class="comment-action" @click="modifyComment">
             <iconify name="fa7-solid:pen-to-square"/>
             <span>修改</span>

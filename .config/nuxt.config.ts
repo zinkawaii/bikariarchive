@@ -78,6 +78,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@vueuse/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "nuxt-auth-utils",
     "nuxt-schema-org",
     "nuxt-seo-utils",
     "nuxt-site-config",

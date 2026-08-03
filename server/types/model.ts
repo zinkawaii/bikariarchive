@@ -1,5 +1,4 @@
 import type { Types } from "mongoose";
-import type { CommentMode } from "#server/types/comment";
 
 export interface CommentDataSchema {
   path: string;
@@ -9,11 +8,9 @@ export interface CommentDataSchema {
   time: Date;
   updated: Date;
   ip: string;
-  mode: CommentMode;
-  nickname?: string;
+  nickname: string;
   email?: string;
   address?: string;
-  user?: Types.ObjectId;
 }
 
 export interface ReadRecordSchema {
@@ -21,23 +18,4 @@ export interface ReadRecordSchema {
   time: Date;
   novel: string;
   index: string;
-}
-
-export interface TempCaptchaSchema {
-  email: string;
-  time: Date;
-  captcha: string;
-}
-
-export interface UserDataSchema {
-  uid: number;
-  nickname: string;
-  email: string;
-  address?: string;
-  sex: number;
-  sign: string;
-  identity: number;
-  createTime: Date;
-  hash: string;
-  salt: string;
 }

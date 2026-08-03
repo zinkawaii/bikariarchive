@@ -1,12 +1,6 @@
 <script lang="ts" setup>
   const signerStore = useSignerStore();
-  const userStore = useUserStore();
   const route = useRoute();
-
-  // 根据登录状态切换视图
-  watchImmediate(() => userStore.isLoggedIn, (value) => {
-    signerStore.currentView = value ? "profile" : "login";
-  });
 
   // 路径变更时收起
   watch(() => route.path, () => {
@@ -18,9 +12,8 @@
   <mb-dialog class="z-signer" @close="signerStore.close()">
     <div class="signer-innerworld"></div>
     <transition mode="out-in">
-      <signer-in v-if="signerStore.currentView === `login`"/>
-      <signer-on v-else-if="signerStore.currentView === `logon`"/>
-      <signer-profile v-else-if="signerStore.currentView === `profile`"/>
+      <signer-profile v-if="signerStore.isAdmin"/>
+      <signer-in v-else/>
     </transition>
   </mb-dialog>
 </template>

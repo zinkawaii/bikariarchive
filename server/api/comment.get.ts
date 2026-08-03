@@ -3,7 +3,7 @@ import { getQuery } from "nitro/h3";
 import type { HydratedDocument } from "mongoose";
 import { CommentDataModel } from "#server/models/CommentData";
 import type { CommentData } from "#server/types/comment";
-import type { CommentDataSchema, UserDataSchema } from "#server/types/model";
+import type { CommentDataSchema } from "#server/types/model";
 
 export type GetCommentQuery = typeof schema.inferIn;
 
@@ -19,12 +19,11 @@ const schema = type({
 });
 
 // 需要获取的属性
-const select = "_id root parent content time mode nickname email address user";
+const select = "_id root parent content time nickname email address";
 
 export default defineJEventHandler<{
   query: GetCommentQuery;
 }, GetCommentResponse>(async (event, res) => {
-  const session = await readSession(event);
   const body = schema.assert(getQuery(event));
 
   // 获取严格路径
@@ -67,51 +66,26 @@ export default defineJEventHandler<{
       const children = await CommentDataModel.find({
         root: comment._id,
       }, select);
-      return transformComment(comment, children, {}, session.data.identity ?? 0);
+      return transformComment(comment, children);
     }),
   );
 });
 
-async function transformComment<T extends HydratedDocument<CommentDataSchema>>(
+function transformComment<T extends HydratedDocument<CommentDataSchema>>(
   item: T,
   all: T[],
-  users: Record<string, UserDataSchema>,
-  identity: number,
-): Promise<CommentData> {
-  let { nickname = "", email, address } = item;
-  let character = "游客";
-
-  if (item.mode === "user") {
-    const key = String(item.user);
-    const user = users[key] ??= (await item.populate<{
-      user: UserDataSchema;
-    }>({
-      path: "user",
-      select: "nickname email address identity",
-    })).user;
-
-    nickname = user.nickname;
-    email = user.email;
-    address = user.address;
-    character = user.identity >= 9 ? "站长" : "用户";
-  }
-
-  const children = await Promise.all(
-    all
-      .filter(({ parent }) => parent?.toString() === item._id.toString())
-      .map((child) => transformComment(child, all, users, identity)),
-  );
+): CommentData {
+  const children = all
+    .filter(({ parent }) => parent?.toString() === item._id.toString())
+    .map((child) => transformComment(child, all));
 
   return {
     id: item._id.toString(),
     children,
     content: item.content,
     time: item.time.toISOString(),
-    mode: item.mode,
-    nickname,
-    avatar: email ? generateAvatarUrl(email) : void 0,
-    email: identity >= 9 ? email : void 0,
-    address,
-    character,
+    nickname: item.nickname,
+    avatar: item.email ? generateAvatarUrl(item.email) : void 0,
+    address: item.address,
   };
 }

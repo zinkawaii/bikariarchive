@@ -2,15 +2,15 @@
   defineProps<{
     title: string;
   }>();
+
+  const config = useRuntimeConfig();
 </script>
 
 <template>
   <div class="signer-view">
     <hgroup class="signer-header">
       <h2 class="signer-title">{{ title }}</h2>
-      <p class="signer-subtitle">
-        <slot name="subtitle"></slot>
-      </p>
+      <p class="signer-subtitle">{{ config.public.phrase }}</p>
     </hgroup>
     <slot></slot>
   </div>

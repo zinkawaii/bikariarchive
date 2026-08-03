@@ -3,7 +3,6 @@
     avatar?: string;
     nickname: string;
     address?: string;
-    character: string;
   }>();
   defineEmits<{
     close: [];
@@ -19,12 +18,6 @@
     <div class="user-main">
       <user-avatar :src="avatar"/>
       <h3>{{ nickname }}</h3>
-      <ul class="user-tags">
-        <li class="user-tag">
-          <iconify name="fa7-solid:user"/>
-          <span>{{ character }}</span>
-        </li>
-      </ul>
     </div>
     <div v-if="address" class="user-address">
       <plain-link :to="address" hide-external>
@@ -52,22 +45,6 @@
 
   .user-avatar {
     width: 72px;
-  }
-
-  .user-tags {
-    display: flex;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--color-info);
-  }
-
-  .user-tag {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
-    border: 1px solid var(--color-border-lighter);
-    border-radius: 6px;
   }
 
   .user-address {

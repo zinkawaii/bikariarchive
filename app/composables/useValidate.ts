@@ -82,8 +82,8 @@ const presets = {
   },
   password: {
     exec(input) {
-      if (input.length < 12 || input.length > 24) {
-        return "密码位数必须在 12-24 位之间";
+      if (input.length < 12 || input.length > 64) {
+        return "密码位数必须在 12-64 位之间";
       }
     },
   },
@@ -94,12 +94,5 @@ const presets = {
   url: {
     rule: type("string.url"),
     message: "网址格式不正确",
-  },
-  captcha: {
-    exec(input) {
-      if (input.length !== 6) {
-        return "验证码长度必须为 6 位";
-      }
-    },
   },
 } satisfies Record<string, ValidatePreset>;

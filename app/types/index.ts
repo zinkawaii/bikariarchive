@@ -1,6 +1,5 @@
 declare module "#app" {
   interface PageMeta {
-    identity?: number;
     aside?: boolean;
     comment?: boolean;
     jumbotron?: {

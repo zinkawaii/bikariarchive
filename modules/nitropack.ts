@@ -10,13 +10,14 @@ export default defineNuxtModule({
       const imports = config.imports ||= {};
       const virtual = config.virtual ||= {};
 
-      // @nuxt/image > #imports
+      // @nuxt/image, nuxt-auth-utils > #imports
       imports.imports = [
         ...imports.imports ?? [],
+        { from: "h3", name: "createError" },
         { from: "nitro/runtime-config", name: "useRuntimeConfig" },
       ];
 
-      // @nuxtjs/robots, @nuxtjs/sitemap, nuxt-schema-org, nuxt-seo-utils, nuxt-site-config > nitropack/runtime
+      // @nuxtjs/robots, @nuxtjs/sitemap, nuxt-auth-utils, nuxt-schema-org, nuxt-seo-utils, nuxt-site-config > nitropack/runtime
       virtual["nitropack/runtime"] = [
         genExport("nitro", [{ name: "definePlugin", as: "defineNitroPlugin" }]),
         genExport("nitro/app", ["getRouteRules", "useNitroApp"]),

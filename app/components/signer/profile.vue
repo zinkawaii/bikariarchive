@@ -1,20 +1,12 @@
 <script lang="ts" setup>
+  const config = useRuntimeConfig();
+  const signerStore = useSignerStore();
   const toastStore = useToastStore();
-  const userStore = useUserStore();
-  const route = useRoute();
-  const router = useRouter();
 
   // 退出登录
   async function logout() {
     try {
-      await $fetch("/api/user/logout", {
-        method: "post",
-      });
-
-      userStore.reset();
-      if (route.meta.identity) {
-        router.push({ name: "home" });
-      }
+      await signerStore.clear();
     }
     catch {
       toastStore.error("[logout]", "退出登录失败");
@@ -24,15 +16,12 @@
 
 <template>
   <signer-view title="资料卡">
-    <template #subtitle>
-      {{ userStore.sign }}
-    </template>
     <div class="signer-profile">
-      <span class="signer-nickname">{{ userStore.nickname }}</span>
+      <span class="signer-nickname">{{ config.public.author }}</span>
       <div class="signer-operator">
         <mb-button @click="logout">退出登录</mb-button>
       </div>
-      <user-avatar class="signer-avatar" :src="userStore.avatar"/>
+      <user-avatar class="signer-avatar" :src="config.public.avatar"/>
     </div>
   </signer-view>
 </template>

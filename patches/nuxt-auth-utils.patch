@@ -1,0 +1,11 @@
+diff --git a/dist/runtime/app/composables/session.js b/dist/runtime/app/composables/session.js
+index 27c6533..ca9f112 100644
+--- a/dist/runtime/app/composables/session.js
++++ b/dist/runtime/app/composables/session.js
+@@ -20,5 +20,6 @@ export function useUserSession() {
+     sessionState.value = await useRequestFetch()("/api/_auth/session", {
+       headers: {
++        cookie: serverEvent?.req.headers.get("cookie") ?? "",
+         accept: "application/json"
+       },
+       retry: false

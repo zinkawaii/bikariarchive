@@ -65,6 +65,7 @@
     "knitwork": "catalog:utils",
     "mongoose": "catalog:database",
     "nuxt": "catalog:nuxt",
+    "nuxt-auth-utils": "catalog:nuxt",
     "nuxt-schema-org": "catalog:nuxt",
     "nuxt-seo-utils": "catalog:nuxt",
     "nuxt-site-config": "catalog:nuxt",

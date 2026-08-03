@@ -1,6 +1,10 @@
 import defu from "defu";
 
 export const serverConfig = {
+  admin: {
+    account: "<!-- ??? -->",
+    passwordHash: "<!-- ??? -->",
+  },
   article: {
     key: "<!-- ??? -->",
   },
@@ -12,7 +16,7 @@ export const serverConfig = {
   },
   comment: {
     "/tweet": {
-      identity: 9,
+      readonly: true,
     },
   },
   mail: {
@@ -30,6 +34,10 @@ export const serverConfig = {
     },
   },
   session: {
+    maxAge: 60 * 60 * 24 * 30,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+    },
     password: "<!-- ??? -->",
   },
 };
