@@ -14,7 +14,7 @@ const config: NuxtConfig["typescript"] & Record<"serverTsConfig", TSConfig> = {
       ...shared(),
     },
     include: [
-      "../config/**/*.ts",
+      "../.config/**/*.ts",
       "../scripts/**/*.ts",
     ],
   },

@@ -1,4 +1,10 @@
 {
+  "eslint.options": {
+    "overrideConfigFile": ".config/eslint.config.ts"
+  },
+  "eslint.workingDirectories": [
+    "."
+  ],
   "files.exclude": {
     "content/{.vscode,node_modules}": true
   },

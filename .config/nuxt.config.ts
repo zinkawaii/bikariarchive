@@ -1,7 +1,7 @@
 import vue from "@vitejs/plugin-vue";
-import robotsConfig from "./config/robots.config.ts";
-import { clientConfig, serverConfig } from "./config/runtime.config.ts";
-import typescriptConfig from "./config/typescript.config.ts";
+import robotsConfig from "./robots.config.ts";
+import { clientConfig, serverConfig } from "./runtime.config.ts";
+import typescriptConfig from "./typescript.config.ts";
 
 export default defineNuxtConfig({
   app: {
