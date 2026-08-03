@@ -90,7 +90,7 @@ export default defineJEventHandler<{
   });
 });
 
-//UID生成
+// UID 生成
 function createUid() {
   const uid = randomInt(10000, 100000);
   return uid;

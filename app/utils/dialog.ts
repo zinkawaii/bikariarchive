@@ -1,7 +1,7 @@
 import { LazyDialogConfirm, LazyDialogNumeric } from "#components";
 import type { DialogNumericProps } from "~/components/dialog/numeric.vue";
 
-//判断对话框
+// 判断对话框
 export function requireConfirm(message: string) {
   return new Promise<boolean>((resolve) => {
     const modalStore = useModalStore();
@@ -18,7 +18,7 @@ export function requireConfirm(message: string) {
   });
 }
 
-//数字选择框
+// 数字选择框
 export function requireNumeric(options: DialogNumericProps) {
   return new Promise<number>((resolve) => {
     const modalStore = useModalStore();

@@ -194,7 +194,7 @@ function createArticle(...args: [novel: string, raw: JChapter]): Article {
   });
 }
 
-//将元数据引用注入原型
+// 将元数据引用注入原型
 export function enrichJArticle(original: JArticle) {
   for (const novel in original) {
     const articles = Object.fromEntries(

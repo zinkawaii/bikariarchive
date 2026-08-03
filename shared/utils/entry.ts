@@ -15,7 +15,7 @@ export class Entry {
   }
 }
 
-//将元数据引用注入原型
+// 将元数据引用注入原型
 export function enrichJIntel(original: JIntel) {
   Object.assign(Entry.meta, original);
 }

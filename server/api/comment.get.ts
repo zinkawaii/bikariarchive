@@ -18,7 +18,7 @@ const schema = type({
   page: "string.numeric.parse",
 });
 
-//需要获取的属性
+// 需要获取的属性
 const select = "_id root parent content time mode nickname email address user";
 
 export default defineJEventHandler<{

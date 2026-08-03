@@ -1,4 +1,4 @@
-//复制文本
+// 复制文本
 export function copyText(text: string, message: string) {
   const toastStore = useToastStore();
 
@@ -6,7 +6,7 @@ export function copyText(text: string, message: string) {
   toastStore.success("[copy]:text", message);
 }
 
-//复制图像
+// 复制图像
 export function copyImage(link: string, message: string) {
   const toastStore = useToastStore();
 

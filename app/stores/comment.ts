@@ -153,7 +153,7 @@ export const useCommentStore = defineStore("comment", () => {
   },
 });
 
-//处理评论
+// 处理评论
 function processComments<T extends CommentData>(comments: WithParent<T>[]) {
   return comments.map((item) => {
     // 子评论回归指向
