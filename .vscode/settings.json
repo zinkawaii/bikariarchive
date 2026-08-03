@@ -10,6 +10,7 @@
   },
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "material-icon-theme.folders.associations": {
+    "garden": "images",
     "novel": "docs"
   },
   "vue.server.includeLanguages": [
