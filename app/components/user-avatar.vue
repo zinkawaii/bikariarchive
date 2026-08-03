@@ -4,7 +4,9 @@
   const attrs = useAttrs();
 
   const srcset = computed(() => {
-    return attrs.src ? `${attrs.src}&s=128 1x, ${attrs.src}&s=256 2x` : void 0;
+    return typeof attrs.src === "string" && !attrs.src.startsWith("/")
+      ? `${attrs.src}&s=128 1x, ${attrs.src}&s=256 2x`
+      : void 0;
   });
 </script>
 
