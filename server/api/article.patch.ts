@@ -3,7 +3,6 @@ import { AES, Utf8 } from "crypto-es";
 import { getRequestIP } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 import { ReadRecordModel } from "#server/models/ReadRecord";
-import { UserDataModel } from "#server/models/UserData";
 
 export type PatchArticleBody = typeof schema.inferIn;
 
@@ -19,7 +18,6 @@ export default defineJEventHandler<{
   body: PatchArticleBody;
 }, PatchArticleResponse>(async (event, res) => {
   const config = useRuntimeConfig();
-  const session = await readSession(event);
   const { token } = schema.assert(await event.req.json());
 
   // 连接数据库
@@ -27,11 +25,6 @@ export default defineJEventHandler<{
 
   const ip = getRequestIP(event, { xForwardedFor: true });
   const time = new Date();
-
-  // 获取用户
-  const user = await UserDataModel.findOne({
-    uid: session.data.uid,
-  });
 
   try {
     const { novel, index } = JSON.parse(
@@ -44,7 +37,6 @@ export default defineJEventHandler<{
       time,
       novel,
       index,
-      user: user?._id,
     });
 
     // 获取阅读量

@@ -1,4 +1,4 @@
-import { model, Schema, Types } from "mongoose";
+import { model, Schema } from "mongoose";
 import type { ReadRecordSchema } from "#server/types/model";
 
 export const ReadRecordModel = model("ReadRecord", new Schema<ReadRecordSchema>({
@@ -18,10 +18,6 @@ export const ReadRecordModel = model("ReadRecord", new Schema<ReadRecordSchema>(
     type: String,
     required: true,
     index: true,
-  },
-  user: {
-    type: Types.ObjectId,
-    ref: "UserData",
   },
 }, {
   collection: "read_record",

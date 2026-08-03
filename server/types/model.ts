@@ -21,7 +21,6 @@ export interface ReadRecordSchema {
   time: Date;
   novel: string;
   index: string;
-  user?: Types.ObjectId;
 }
 
 export interface TempCaptchaSchema {
