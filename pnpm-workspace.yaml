@@ -53,11 +53,8 @@ patchedDependencies:
   "@nuxt/fonts": patches/@nuxt__fonts.patch
   "@nuxt/image": patches/@nuxt__image.patch
   "@nuxtjs/robots": patches/@nuxtjs__robots.patch
-  "@nuxtjs/sitemap": patches/@nuxtjs__sitemap.patch
   "@pinia/nuxt": patches/@pinia__nuxt.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
-  nuxt-schema-org: patches/nuxt-schema-org.patch
-  nuxt-seo-utils: patches/nuxt-seo-utils.patch
   nuxt-site-config: patches/nuxt-site-config.patch
   remark-mdc: patches/remark-mdc.patch
 
@@ -124,6 +121,7 @@ catalogs:
     entities: ^8.0.0
     github-slugger: ^2.0.0
     katex: ^0.18.1
+    knitwork: ^1.3.0
     mrmime: ^2.0.1
     pathe: ^2.0.3
     plain-shiki: ^0.3.2

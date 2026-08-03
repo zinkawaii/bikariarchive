@@ -1,5 +1,4 @@
 diff --git a/dist/runtime/server/routes/_ipx.js b/dist/runtime/server/routes/_ipx.js
-index e734868..bb4e4bd 100644
 --- a/dist/runtime/server/routes/_ipx.js
 +++ b/dist/runtime/server/routes/_ipx.js
 @@ -1,8 +1,8 @@
@@ -8,8 +7,7 @@ index e734868..bb4e4bd 100644
 -import { lazyEventHandler, useBase } from "h3";
 +import { lazyEventHandler, withBase } from "h3";
  import { isAbsolute } from "pathe";
--import { useRuntimeConfig } from "#imports";
-+import { useRuntimeConfig } from "nitro/runtime-config";
+ import { useRuntimeConfig } from "#imports";
  export default lazyEventHandler(() => {
    const opts = useRuntimeConfig().ipx || {};
    const fsDir = opts?.fs?.dir ? (Array.isArray(opts.fs.dir) ? opts.fs.dir : [opts.fs.dir]).map((dir) => isAbsolute(dir) ? dir : fileURLToPath(new URL(dir, import.meta.url))) : void 0;
@@ -20,15 +18,3 @@ index e734868..bb4e4bd 100644
 -  return useBase(opts.baseURL, ipxHandler);
 +  return withBase(opts.baseURL, ipxHandler);
  });
-diff --git a/dist/runtime/server/utils/image.js b/dist/runtime/server/utils/image.js
-index 8e5abf7..c559679 100644
---- a/dist/runtime/server/utils/image.js
-+++ b/dist/runtime/server/utils/image.js
-@@ -1,6 +1,6 @@
- import { createImage } from "../../image.js";
- import { imageOptions } from "#internal/nuxt-image";
--import { useRuntimeConfig } from "#imports";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- export const useImage = (event) => {
-   const config = useRuntimeConfig();
-   return createImage({

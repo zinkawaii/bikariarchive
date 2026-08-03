@@ -62,6 +62,7 @@
     "crypto-es": "catalog:utils",
     "defu": "catalog:utils",
     "eslint": "catalog:lint",
+    "knitwork": "catalog:utils",
     "mongoose": "catalog:database",
     "nuxt": "catalog:nuxt",
     "nuxt-schema-org": "catalog:nuxt",

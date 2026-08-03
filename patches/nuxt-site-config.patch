@@ -1,24 +1,6 @@
-diff --git a/dist/runtime/server/composables/getSiteConfig.js b/dist/runtime/server/composables/getSiteConfig.js
-index 746b0d1..67d9d82 100644
---- a/dist/runtime/server/composables/getSiteConfig.js
-+++ b/dist/runtime/server/composables/getSiteConfig.js
-@@ -1,5 +1,5 @@
- import { defu } from "defu";
--import { useRuntimeConfig } from "nitropack/runtime";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- import { createSiteConfigStack } from "site-config-stack";
- import { logger } from "../util.js";
- export function getSiteConfig(e, _options) {
 diff --git a/dist/runtime/server/composables/utils.js b/dist/runtime/server/composables/utils.js
-index 8526471..4fc4f92 100644
 --- a/dist/runtime/server/composables/utils.js
 +++ b/dist/runtime/server/composables/utils.js
-@@ -1,4 +1,4 @@
--import { useRuntimeConfig } from "nitropack/runtime";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- import { fixSlashes, resolveSitePath } from "site-config-stack/urls";
- import { getNitroOrigin } from "./getNitroOrigin.js";
- import { getSiteConfig } from "./getSiteConfig.js";
 @@ -28,7 +28,7 @@ export function withSiteUrl(e, path, options = {}) {
      absolute: true,
      siteUrl,
@@ -29,18 +11,9 @@ index 8526471..4fc4f92 100644
    });
  }
 diff --git a/dist/runtime/server/middleware/init.js b/dist/runtime/server/middleware/init.js
-index 401790c..9d4c252 100644
 --- a/dist/runtime/server/middleware/init.js
 +++ b/dist/runtime/server/middleware/init.js
-@@ -1,5 +1,6 @@
- import { eventHandler } from "h3";
--import { useNitroApp, useRuntimeConfig } from "nitropack/runtime";
-+import { useNitroApp } from "nitro/app";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- import { createSiteConfigStack, envSiteConfig, SiteConfigPriority } from "site-config-stack";
- import { parseURL } from "ufo";
- import { getNitroOrigin } from "../composables/getNitroOrigin.js";
-@@ -32,10 +33,11 @@ export default eventHandler(async (e) => {
+@@ -32,10 +32,11 @@ export default eventHandler(async (e) => {
    });
    const buildStack = config.stack || [];
    buildStack.forEach((c) => siteConfig.push(c));
@@ -55,21 +28,17 @@ index 401790c..9d4c252 100644
    }
    if (config.multiTenancy) {
 diff --git a/dist/runtime/server/plugins/injectState.js b/dist/runtime/server/plugins/injectState.js
-index 3b79455..0bbe98d 100644
 --- a/dist/runtime/server/plugins/injectState.js
 +++ b/dist/runtime/server/plugins/injectState.js
-@@ -1,15 +1,17 @@
+@@ -1,4 +1,4 @@
 -import devalue from "@nuxt/devalue";
--import { defineNitroPlugin, getRouteRules } from "nitropack/runtime";
 +import { uneval as devalue } from "devalue";
-+import { definePlugin } from "nitro";
-+import { getRouteRules } from "nitro/app";
+ import { defineNitroPlugin, getRouteRules } from "nitropack/runtime";
  import { toValue } from "vue";
  import { NUXT_SITE_CONFIG_NO_SSR } from "#nuxt-site-config/no-ssr.mjs";
- import { getSiteConfig } from "../composables/getSiteConfig.js";
+@@ -6,10 +6,11 @@ import { getSiteConfig } from "../composables/getSiteConfig.js";
  const PRERENDER_NO_SSR_ROUTES = /* @__PURE__ */ new Set(["/index.html", "/200.html", "/404.html"]);
--export default defineNitroPlugin(async (nitroApp) => {
-+export default definePlugin(async (nitroApp) => {
+ export default defineNitroPlugin(async (nitroApp) => {
    nitroApp.hooks.hook("render:html", async (ctx, { event }) => {
 -    const routeOptions = getRouteRules(event);
 +    const routeOptions = event.context.routeRules || getRouteRules(event.req.method, event.url.pathname).routeRules || {};
@@ -81,14 +50,3 @@ index 3b79455..0bbe98d 100644
      if (noSSR) {
        const siteConfig = Object.fromEntries(
          Object.entries(getSiteConfig(event)).map(([k, v]) => [k, toValue(v)])
-diff --git a/dist/runtime/server/routes/__site-config__/debug.js b/dist/runtime/server/routes/__site-config__/debug.js
-index a0bb493..10736d9 100644
---- a/dist/runtime/server/routes/__site-config__/debug.js
-+++ b/dist/runtime/server/routes/__site-config__/debug.js
-@@ -1,5 +1,5 @@
- import { eventHandler, setHeader } from "h3";
--import { useRuntimeConfig } from "nitropack/runtime";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- import { getNitroOrigin } from "../../composables/getNitroOrigin.js";
- import { getSiteConfig } from "../../composables/getSiteConfig.js";
- export default eventHandler(async (e) => {

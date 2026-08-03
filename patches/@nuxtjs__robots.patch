@@ -1,69 +1,7 @@
-diff --git a/dist/runtime/server/composables/getBotDetection.js b/dist/runtime/server/composables/getBotDetection.js
-index c5ce977..76d434c 100644
---- a/dist/runtime/server/composables/getBotDetection.js
-+++ b/dist/runtime/server/composables/getBotDetection.js
-@@ -1,6 +1,6 @@
- import { getBotDetection as getBotDetectionFromHeaders, getBotInfo as getBotInfoFromHeaders, isBot as isBotFromHeaders } from "@nuxtjs/robots/util";
- import { getHeaders } from "h3";
--import { useNitroApp } from "nitropack/runtime";
-+import { useNitroApp } from "nitro/app";
- export function getBotDetection(event) {
-   const headers = getHeaders(event) || {};
-   const nitroApp = useNitroApp();
-diff --git a/dist/runtime/server/composables/getPathRobotConfig.js b/dist/runtime/server/composables/getPathRobotConfig.js
-index 03ce9ad..b180c7e 100644
---- a/dist/runtime/server/composables/getPathRobotConfig.js
-+++ b/dist/runtime/server/composables/getPathRobotConfig.js
-@@ -1,6 +1,7 @@
- import { matchPathToRule, normaliseRobotsRouteRule } from "@nuxtjs/robots/util";
- import { getRequestHeader } from "h3";
--import { useNitroApp, useRuntimeConfig } from "nitropack/runtime";
-+import { useNitroApp } from "nitro/app";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- import { withoutTrailingSlash } from "ufo";
- import { createNitroRouteRuleMatcher } from "../kit.js";
- import { getSiteRobotConfig } from "./getSiteRobotConfig.js";
-diff --git a/dist/runtime/server/composables/useRuntimeConfigNuxtRobots.js b/dist/runtime/server/composables/useRuntimeConfigNuxtRobots.js
-index eaf0243..4ceea8e 100644
---- a/dist/runtime/server/composables/useRuntimeConfigNuxtRobots.js
-+++ b/dist/runtime/server/composables/useRuntimeConfigNuxtRobots.js
-@@ -1,4 +1,4 @@
--import { useRuntimeConfig } from "nitropack/runtime";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- export function useRuntimeConfigNuxtRobots(event) {
-   return useRuntimeConfig(event)["nuxt-robots"];
- }
-diff --git a/dist/runtime/server/kit.js b/dist/runtime/server/kit.js
-index afcd734..7da25f7 100644
---- a/dist/runtime/server/kit.js
-+++ b/dist/runtime/server/kit.js
-@@ -1,5 +1,5 @@
- import { defu } from "defu";
--import { useRuntimeConfig } from "nitropack/runtime";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- import { createRouter as createRadixRouter, toRouteMatcher } from "radix3";
- import { withoutBase, withoutTrailingSlash } from "ufo";
- function withoutQuery(path) {
 diff --git a/dist/runtime/server/plugins/initContext.js b/dist/runtime/server/plugins/initContext.js
-index a8b625c..de3d717 100644
 --- a/dist/runtime/server/plugins/initContext.js
 +++ b/dist/runtime/server/plugins/initContext.js
-@@ -1,11 +1,12 @@
- import { createPatternMap } from "@nuxtjs/robots/util";
--import { defineNitroPlugin, getRouteRules } from "nitropack/runtime";
-+import { definePlugin } from "nitro";
-+import { getRouteRules } from "nitro/app";
- import { withoutTrailingSlash } from "ufo";
- import { useRuntimeConfigNuxtRobots } from "../composables/useRuntimeConfigNuxtRobots.js";
- import { logger } from "../logger.js";
- import { resolveRobotsTxtContext } from "../util.js";
- const PRERENDER_NO_SSR_ROUTES = /* @__PURE__ */ new Set(["/index.html", "/200.html", "/404.html"]);
--export default defineNitroPlugin(async (nitroApp) => {
-+export default definePlugin(async (nitroApp) => {
-   const { isNuxtContentV2, robotsDisabledValue, botDetection } = useRuntimeConfigNuxtRobots();
-   if (botDetection !== false) {
-     nitroApp._robotsPatternMap = createPatternMap();
-@@ -29,9 +30,10 @@ export default defineNitroPlugin(async (nitroApp) => {
+@@ -29,9 +29,10 @@ export default defineNitroPlugin(async (nitroApp) => {
    }
    if (import.meta.prerender) {
      nitroApp.hooks.hook("render:html", async (ctx, { event }) => {
@@ -76,26 +14,3 @@ index a8b625c..de3d717 100644
        if (noSSR) {
          let rule = event.context.robots?.rule;
          if (event.path === "/404.html")
-diff --git a/dist/runtime/server/routes/robots-txt.js b/dist/runtime/server/routes/robots-txt.js
-index 2479118..bb92de2 100644
---- a/dist/runtime/server/routes/robots-txt.js
-+++ b/dist/runtime/server/routes/robots-txt.js
-@@ -1,6 +1,6 @@
- import { asArray, generateRobotsTxt } from "@nuxtjs/robots/util";
- import { defineEventHandler, setHeader } from "h3";
--import { useNitroApp } from "nitropack/runtime";
-+import { useNitroApp } from "nitro/app";
- import { withSiteUrl } from "#site-config/server/composables/utils";
- import { getSiteRobotConfig } from "../composables/getSiteRobotConfig.js";
- import { useRuntimeConfigNuxtRobots } from "../composables/useRuntimeConfigNuxtRobots.js";
-diff --git a/dist/runtime/server/util.js b/dist/runtime/server/util.js
-index e6c554e..2c9fc91 100644
---- a/dist/runtime/server/util.js
-+++ b/dist/runtime/server/util.js
-@@ -1,5 +1,5 @@
- import { normalizeGroup } from "@nuxtjs/robots/util";
--import { useNitroApp } from "nitropack/runtime";
-+import { useNitroApp } from "nitro/app";
- import { useRuntimeConfigNuxtRobots } from "./composables/useRuntimeConfigNuxtRobots.js";
- export async function resolveRobotsTxtContext(e, nitro = useNitroApp()) {
-   const { groups, sitemap: sitemaps } = useRuntimeConfigNuxtRobots(e);
