@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-  import { easeInBack, easeOutBack } from "easings-css";
   import type { TransitionProps } from "vue";
+  import { easeInBack, easeOutBack } from "#build/easings";
 
   const props = withDefaults(defineProps<{
     scale?: number;

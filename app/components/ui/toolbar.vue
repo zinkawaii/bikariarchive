@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { easeInBack, easeOutBack } from "easings-css";
+  import { easeInBack, easeOutBack } from "#build/easings";
 
   const settingStore = useSettingStore();
   const signerStore = useSignerStore();

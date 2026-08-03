@@ -136,9 +136,6 @@ catalogs:
     defu:
       specifier: ^6.1.7
       version: 6.1.7
-    easings-css:
-      specifier: ^2.1.1
-      version: 2.1.1
     entities:
       specifier: ^8.0.0
       version: 8.0.0
@@ -269,9 +266,6 @@ importers:
       arktype:
         specifier: catalog:utils
         version: 2.2.3
-      easings-css:
-        specifier: catalog:utils
-        version: 2.1.1
       entities:
         specifier: catalog:utils
         version: 8.0.0
@@ -2360,9 +2354,6 @@ packages:
   diff@9.0.0:
     resolution: {integrity: sha512-svtcdpS8CgJyqAjEQIXdb3OjhFVVYjzGAPO8WGCmRbrml64SPw/jJD4GoE98aR7r25A0XcgrK3F02yw9R/vhQw==}
     engines: {node: '>=0.3.1'}
-
-  easings-css@2.1.1:
-    resolution: {integrity: sha512-M0nesxTBIKCaFpwwEnOnGDaLVFxTU2Vd0mckX/j77dUtVE0pYT5jdQO5qiBydHYsNei5F59UD3vyf6tBFHFD4Q==}
 
   empathic@2.0.1:
     resolution: {integrity: sha512-YGRs8knHhKHVShLkFET/rWAU8kmHbOV5LwN938RHI0pljAJ1Gf6SzXsSmRaEzcXTtOOmVqJ5+WtQPL5uigY50Q==}
@@ -6650,8 +6641,6 @@ snapshots:
   diff@8.0.4: {}
 
   diff@9.0.0: {}
-
-  easings-css@2.1.1: {}
 
   empathic@2.0.1: {}
 

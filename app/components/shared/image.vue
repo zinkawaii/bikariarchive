@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-  import { easeOutBack } from "easings-css";
   import type { ImgHTMLAttributes } from "vue";
+  import { easeOutBack } from "#build/easings";
   import { LazyBikariyaImageViewer } from "#components";
 
   const props = withDefaults(defineProps<{
