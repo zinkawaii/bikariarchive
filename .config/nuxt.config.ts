@@ -73,10 +73,14 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/icon",
     "@nuxt/image",
-    "@nuxtjs/seo",
+    "@nuxtjs/robots",
+    "@nuxtjs/sitemap",
     "@pinia/nuxt",
     "@vueuse/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "nuxt-schema-org",
+    "nuxt-seo-utils",
+    "nuxt-site-config",
   ],
   dxup: {
     features: {
@@ -92,8 +96,6 @@ export default defineNuxtConfig({
   image: {
     provider: "none",
   },
-  linkChecker: false,
-  ogImage: false,
   robots: robotsConfig,
   site: {
     name: clientConfig.title,

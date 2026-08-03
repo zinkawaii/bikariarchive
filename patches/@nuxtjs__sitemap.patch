@@ -1,16 +1,5 @@
-diff --git a/dist/runtime/server/kit.js b/dist/runtime/server/kit.js
-index a33b35d..23cc107 100644
---- a/dist/runtime/server/kit.js
-+++ b/dist/runtime/server/kit.js
-@@ -1,5 +1,5 @@
- import { defu } from "defu";
--import { useRuntimeConfig } from "nitropack/runtime";
-+import { useRuntimeConfig } from "nitro/runtime-config";
- import { createRouter as createRadixRouter, toRouteMatcher } from "radix3";
- import { parseURL, withoutBase, withoutTrailingSlash } from "ufo";
- function withoutQuery(path) {
 diff --git a/dist/runtime/server/plugins/compression.js b/dist/runtime/server/plugins/compression.js
-index 5952365..d7e8e6d 100644
+index 9c3afc0..4895fc2 100644
 --- a/dist/runtime/server/plugins/compression.js
 +++ b/dist/runtime/server/plugins/compression.js
 @@ -1,5 +1,5 @@
@@ -30,7 +19,7 @@ index 5952365..d7e8e6d 100644
      if (!event.context._isSitemap || !response.body)
        return;
 diff --git a/dist/runtime/server/plugins/stream-transport.js b/dist/runtime/server/plugins/stream-transport.js
-index 066a5be..44ce3be 100644
+index a8b61ce..be63b63 100644
 --- a/dist/runtime/server/plugins/stream-transport.js
 +++ b/dist/runtime/server/plugins/stream-transport.js
 @@ -1,8 +1,8 @@
@@ -73,7 +62,7 @@ index 4322aee..a75e076 100644
    const queue = [];
    const timeoutIds = [];
 diff --git a/dist/runtime/server/sitemap/builder/sitemap-index.js b/dist/runtime/server/sitemap/builder/sitemap-index.js
-index 09fd7f2..d3be82c 100644
+index 109c6ce..fc40573 100644
 --- a/dist/runtime/server/sitemap/builder/sitemap-index.js
 +++ b/dist/runtime/server/sitemap/builder/sitemap-index.js
 @@ -1,5 +1,5 @@
@@ -84,7 +73,7 @@ index 09fd7f2..d3be82c 100644
  import staticConfig from "#sitemap-virtual/static-config.mjs";
  import { normaliseDate } from "../urlset/normalise.js";
 diff --git a/dist/runtime/server/sitemap/builder/sitemap.js b/dist/runtime/server/sitemap/builder/sitemap.js
-index c679de9..ffcc410 100644
+index d841661..bd9c716 100644
 --- a/dist/runtime/server/sitemap/builder/sitemap.js
 +++ b/dist/runtime/server/sitemap/builder/sitemap.js
 @@ -1,5 +1,6 @@
@@ -96,11 +85,11 @@ index c679de9..ffcc410 100644
  import { joinURL, withHttps } from "ufo";
  import staticConfig from "#sitemap-virtual/static-config.mjs";
 diff --git a/dist/runtime/server/sitemap/event-handlers.js b/dist/runtime/server/sitemap/event-handlers.js
-index c6834ea..075c1ab 100644
+index 98e60c9..d8c2e19 100644
 --- a/dist/runtime/server/sitemap/event-handlers.js
 +++ b/dist/runtime/server/sitemap/event-handlers.js
 @@ -1,5 +1,6 @@
- import { appendHeader, createError, getRequestURL, getRouterParam, sendRedirect, setHeader } from "h3";
+ import { appendHeader, createError, getRequestURL, getRouterParam, sendRedirect } from "h3";
 -import { useNitroApp, useRuntimeConfig } from "nitropack/runtime";
 +import { useNitroApp } from "nitro/app";
 +import { useRuntimeConfig } from "nitro/runtime-config";
@@ -108,20 +97,21 @@ index c6834ea..075c1ab 100644
  import { useSitemapRuntimeConfig } from "../utils.js";
  import { urlsToIndexXml, urlsToIndexXmlStream } from "./builder/index-xml.js";
 diff --git a/dist/runtime/server/sitemap/nitro.js b/dist/runtime/server/sitemap/nitro.js
-index 55e290c..2ae2401 100644
+index 11b6cf8..e34820a 100644
 --- a/dist/runtime/server/sitemap/nitro.js
 +++ b/dist/runtime/server/sitemap/nitro.js
-@@ -1,6 +1,7 @@
+@@ -1,6 +1,8 @@
  import { defu } from "defu";
  import { createError, getHeader, getQuery, setHeader } from "h3";
--import { defineCachedFunction, useNitroApp } from "nitropack/runtime";
+-import { defineCachedFunction, useNitroApp, useRuntimeConfig } from "nitropack/runtime";
 +import { useNitroApp } from "nitro/app";
 +import { defineCachedFunction } from "nitro/cache";
++import { useRuntimeConfig } from "nitro/runtime-config";
  import { fixSlashes } from "nuxt-site-config/urls";
+ import { createNitroRouteRuleMatcher } from "nuxtseo-shared/server";
  import { getPathRobotConfig } from "#internal/nuxt-robots/getPathRobotConfig";
- import { getSiteConfig } from "#site-config/server/composables/getSiteConfig";
 diff --git a/dist/runtime/server/utils.js b/dist/runtime/server/utils.js
-index 9e4d8b5..7eb2692 100644
+index 97b0914..7c4dff3 100644
 --- a/dist/runtime/server/utils.js
 +++ b/dist/runtime/server/utils.js
 @@ -1,4 +1,4 @@

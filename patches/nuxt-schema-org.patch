@@ -1,12 +1,13 @@
 diff --git a/dist/runtime/server/plugins/nuxt-content-v2.js b/dist/runtime/server/plugins/nuxt-content-v2.js
-index 9aec185..90d9524 100644
+index 7155bb3..300b665 100644
 --- a/dist/runtime/server/plugins/nuxt-content-v2.js
 +++ b/dist/runtime/server/plugins/nuxt-content-v2.js
-@@ -1,8 +1,8 @@
+@@ -1,9 +1,9 @@
  import { defineWebPage } from "@unhead/schema-org/vue";
  import { defu } from "defu";
 -import { defineNitroPlugin } from "nitropack/runtime";
 +import { definePlugin } from "nitro";
+ import { buildSchemaOrgContentScript } from "../../utils/content.js";
  import { useSchemaOrgConfig } from "../utils/config.js";
 -export default defineNitroPlugin((nitroApp) => {
 +export default definePlugin((nitroApp) => {
@@ -14,7 +15,7 @@ index 9aec185..90d9524 100644
    nitroApp.hooks.hook("content:file:afterParse", async (content) => {
      if (content._draft || content._extension !== "md" || content._partial || content.indexable === false || content.index === false)
 diff --git a/dist/runtime/server/utils/config.js b/dist/runtime/server/utils/config.js
-index fc9086f..b97182b 100644
+index fc9086f..0ec89c6 100644
 --- a/dist/runtime/server/utils/config.js
 +++ b/dist/runtime/server/utils/config.js
 @@ -1,5 +1,5 @@

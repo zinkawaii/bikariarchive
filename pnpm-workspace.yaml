@@ -32,21 +32,21 @@ overrides:
   c12: ^4.0.0-beta.5
   # fontless > esbuild@0.27.0
   esbuild: ^0.28.1
-  # @nuxt/fonts, @nuxt/image, @nuxtjs/robots, listhen, nuxt-link-checker, nuxt-site-config > h3@1.15.11
+  # @nuxt/fonts, @nuxt/image, @nuxtjs/robots, listhen, nuxt-site-config > h3@1.15.11
   h3: ^2.0.1-rc.26
   # @nuxt/image > ipx@3.1.1
   ipx: ^4.0.0-alpha.2
   # micromark-extension-math > katex@0.16.0
   katex: ^0.18.1
   nuxt: npm:nuxt-nightly@5.0.0-29750284.8e4f0798
-  # @nuxt/cli, @nuxt/fonts, @nuxtjs/sitemap, nuxt-link-checker, nuxt-og-image, nuxtseo-shared, unifont > ofetch@1.5.1
+  # @nuxt/cli, @nuxt/fonts, @nuxtjs/sitemap, nuxtseo-shared, unifont > ofetch@1.5.1
   ofetch: ^2.0.0-alpha.3
-  # @unhead/bundler, nuxt-og-image > oxc-parser@0.140.0
+  # @unhead/bundler > oxc-parser@0.140.0
   oxc-parser: ^0.141.0
   # vite > rolldown@1.1.5
   rolldown: ^1.2.0
   typescript: npm:typescript-native-bridge@^6.0.3-bridge.7.tsgo.7.0.2
-  # @nuxt/devtools, @nuxt/fonts, fontless, nuxt-link-checker > unstorage@1.17.5
+  # @nuxt/devtools, @nuxt/fonts, fontless > unstorage@1.17.5
   unstorage: ^2.0.0-alpha.7
 
 patchedDependencies:
@@ -98,10 +98,14 @@ catalogs:
     "@nuxt/image": ^2.0.0
     "@nuxt/kit": *nuxt
     "@nuxt/schema": *nuxt
-    "@nuxtjs/seo": ^5.3.6
+    "@nuxtjs/robots": ^6.1.3
+    "@nuxtjs/sitemap": ^8.3.2
     "@pinia/nuxt": ^1.0.1
     "@vueuse/nuxt": *vueuse
     nuxt: *nuxt
+    nuxt-schema-org: ^6.2.8
+    nuxt-seo-utils: ^8.3.3
+    nuxt-site-config: ^4.1.2
   test:
     vitest: ^5.0.0-beta.7
   types:
