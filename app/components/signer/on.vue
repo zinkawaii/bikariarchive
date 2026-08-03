@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+  import { FetchError } from "ofetch";
+
   const signerStore = useSignerStore();
   const toastStore = useToastStore();
 
@@ -69,8 +71,13 @@
 
       captchaStage.value = 0;
     }
-    catch {
-      toastStore.error("[captcha]:send", "验证码发送失败");
+    catch (error) {
+      if (error instanceof FetchError && error.statusCode === 429) {
+        toastStore.error("[captcha]:throttle", "接口节流中");
+      }
+      else {
+        toastStore.error("[captcha]:send", "验证码发送失败");
+      }
     }
   }
 

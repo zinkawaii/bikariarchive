@@ -10,7 +10,7 @@ const schema = type({
   email: "string.email",
 });
 
-export default defineJEventHandler<{
+export default defineJThrottledEventHandler<{
   query: GetCaptchaQuery;
 }>(async (event) => {
   const { email } = schema.assert(getQuery(event));
@@ -50,4 +50,4 @@ export default defineJEventHandler<{
   catch {
     throw 1;
   }
-});
+}, 15000);
