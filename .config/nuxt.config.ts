@@ -1,5 +1,4 @@
 import vue from "@vitejs/plugin-vue";
-import robotsConfig from "./robots.config.ts";
 import { clientConfig, serverConfig } from "./runtime.config.ts";
 import typescriptConfig from "./typescript.config.ts";
 
@@ -97,7 +96,11 @@ export default defineNuxtConfig({
   image: {
     provider: "none",
   },
-  robots: robotsConfig,
+  robots: {
+    credits: false,
+    blockAiBots: true,
+    blockNonSeoBots: true,
+  },
   site: {
     name: clientConfig.title,
     url: `https://${clientConfig.domain}`,
