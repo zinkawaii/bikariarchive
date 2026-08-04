@@ -40,4 +40,4 @@ export default defineJThrottledEventHandler<{
     },
     loggedInAt: new Date(),
   });
-}, 1000);
+}, 1500);
