@@ -4,6 +4,22 @@
 
 <h1 align="center">微光档案</h1>
 
+<p align="center">
+  <a href="https://nuxt.com"><img
+    src="https://img.shields.io/badge/Nuxt-0A2727?logo=nuxt"
+    alt="Nuxt"
+  /></a>
+  <a href="https://www.netlify.com"><img
+    src="https://img.shields.io/badge/Netlify-004848?logo=netlify"
+    alt="Netlify"
+  /></a>
+  <a href="https://eslint.org"><img
+    src="https://img.shields.io/badge/-ESLint-4C32C3?logo=eslint"
+    alt="ESLint"
+  /></a>
+</p>
+
 ## 版权声明
 
-[MIT](./LICENSE) / code · [All Rights Reserved](./content/COPYRIGHT.md) / content
+- 项目本体：[MIT LICENSE](./LICENSE)
+- 内容资产：[All Rights Reserved](./content/COPYRIGHT.md)
