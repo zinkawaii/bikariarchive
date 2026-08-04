@@ -30,9 +30,6 @@ export default defineJThrottledEventHandler<{
   const storage = useStorage("assets:data");
   const { novel, word } = schema.assert(getQuery(event));
 
-  // 连接数据库
-  await connectMongoose();
-
   const code = word.codePointAt(0)!.toString();
   const data = await storage
     .getItem(`search/${code.slice(0, 2)}/${code}.json`)
