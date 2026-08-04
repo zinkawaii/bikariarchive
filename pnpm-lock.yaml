@@ -327,9 +327,6 @@ catalogs:
       specifier: 2.4.28
       version: 2.4.28
   vue:
-    '@vitejs/plugin-vue':
-      specifier: ^6.0.8
-      version: 6.0.8
     '@vueuse/core':
       specifier: ^14.4.0
       version: 14.4.0
@@ -459,22 +456,19 @@ importers:
         version: '@nuxt/schema-nightly@5.0.0-29762711.192612c7'
       '@nuxtjs/robots':
         specifier: catalog:nuxt
-        version: 6.1.3(patch_hash=cd733329ae0233a40bbd407391cb6a6103fa5a3c46d073b57497af4c721d6c56)(bcecf7383d61ca1f56f3a2c57b5e9455)
+        version: 6.1.3(patch_hash=cd733329ae0233a40bbd407391cb6a6103fa5a3c46d073b57497af4c721d6c56)(199d3b03951a379826d54ebf8a5754f7)
       '@nuxtjs/sitemap':
         specifier: catalog:nuxt
-        version: 8.3.2(bcecf7383d61ca1f56f3a2c57b5e9455)
+        version: 8.3.2(199d3b03951a379826d54ebf8a5754f7)
       '@pinia/nuxt':
         specifier: catalog:nuxt
         version: 1.0.1(patch_hash=4624f07f382858a3a89a47f7d7396a38d17181993964d46b39a520002b16f2a3)(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(pinia@4.0.2(@vue/devtools-api@8.2.1)(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)))(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))
       '@types/node':
         specifier: catalog:types
         version: 26.1.2
-      '@vitejs/plugin-vue':
-        specifier: catalog:vue
-        version: 6.0.8(vite@8.2.0)(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))
       '@vueuse/nuxt':
         specifier: catalog:nuxt
-        version: 14.4.0(3bf10c30c7ab27b46503883903e95e5f)
+        version: 14.4.0(b2cdfe31ca9179c3a2fdd76a697ebc98)
       '@zinkawaii/eslint-config':
         specifier: catalog:lint
         version: 0.5.2(@typescript-eslint/typescript-estree@8.66.0(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))(@typescript-eslint/utils@8.66.0(eslint@10.8.0(jiti@2.7.0))(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))(@vue/compiler-sfc@3.5.40)(eslint@10.8.0(jiti@2.7.0))(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)
@@ -516,13 +510,13 @@ importers:
         version: 0.5.29(patch_hash=f55c9811976d8414670e7ad07fd6f7665fa255f5288d08be8c4cc28969311d15)(crossws@0.4.10(srvx@0.11.22))(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))
       nuxt-schema-org:
         specifier: catalog:nuxt
-        version: 6.2.8(c18bdd89cad4d836f20933228c41d1e1)
+        version: 6.2.8(7c8ecbb3b3387058b84b895ed0f8ce53)
       nuxt-seo-utils:
         specifier: catalog:nuxt
-        version: 8.3.3(cfa8949aafea9ec6d8a1091e93c6a754)
+        version: 8.3.3(07294e764db82941d1e619483408bd2f)
       nuxt-site-config:
         specifier: catalog:nuxt
-        version: 4.1.4(bcecf7383d61ca1f56f3a2c57b5e9455)
+        version: 4.1.4(199d3b03951a379826d54ebf8a5754f7)
       pathe:
         specifier: catalog:utils
         version: 2.0.3
@@ -5444,15 +5438,15 @@ snapshots:
       - vue-tsc
       - yaml
 
-  '@nuxtjs/robots@6.1.3(patch_hash=cd733329ae0233a40bbd407391cb6a6103fa5a3c46d073b57497af4c721d6c56)(bcecf7383d61ca1f56f3a2c57b5e9455)':
+  '@nuxtjs/robots@6.1.3(patch_hash=cd733329ae0233a40bbd407391cb6a6103fa5a3c46d073b57497af4c721d6c56)(199d3b03951a379826d54ebf8a5754f7)':
     dependencies:
       '@fingerprintjs/botd': 2.0.0
       '@nuxt/kit': '@nuxt/kit-nightly@5.0.0-29762711.192612c7(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))'
       consola: 3.4.2
       defu: 6.1.7
       h3: 2.0.1-rc.26(crossws@0.4.10(srvx@0.11.22))
-      nuxt-site-config: 4.1.4(bcecf7383d61ca1f56f3a2c57b5e9455)
-      nuxtseo-shared: 5.3.8(e472515403fbbc59299588f2e618644e)
+      nuxt-site-config: 4.1.4(199d3b03951a379826d54ebf8a5754f7)
+      nuxtseo-shared: 5.3.8(44aea39dc0e99295e39862130b6daa16)
       pathe: 2.0.3
       pkg-types: 2.3.1
       ufo: 1.6.4
@@ -5475,13 +5469,13 @@ snapshots:
       - vite
       - vue
 
-  '@nuxtjs/sitemap@8.3.2(bcecf7383d61ca1f56f3a2c57b5e9455)':
+  '@nuxtjs/sitemap@8.3.2(199d3b03951a379826d54ebf8a5754f7)':
     dependencies:
       '@nuxt/kit': '@nuxt/kit-nightly@5.0.0-29762711.192612c7(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))'
       consola: 3.4.2
       defu: 6.1.7
-      nuxt-site-config: 4.1.4(bcecf7383d61ca1f56f3a2c57b5e9455)
-      nuxtseo-shared: 5.3.8(e472515403fbbc59299588f2e618644e)
+      nuxt-site-config: 4.1.4(199d3b03951a379826d54ebf8a5754f7)
+      nuxtseo-shared: 5.3.8(44aea39dc0e99295e39862130b6daa16)
       ofetch: 2.0.0-alpha.3
       pathe: 2.0.3
       pkg-types: 2.3.1
@@ -6043,7 +6037,7 @@ snapshots:
 
   '@vueuse/metadata@14.4.0': {}
 
-  '@vueuse/nuxt@14.4.0(3bf10c30c7ab27b46503883903e95e5f)':
+  '@vueuse/nuxt@14.4.0(b2cdfe31ca9179c3a2fdd76a697ebc98)':
     dependencies:
       '@nuxt/kit': '@nuxt/kit-nightly@5.0.0-29762711.192612c7(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))'
       '@vueuse/core': 14.4.0(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))
@@ -7741,12 +7735,12 @@ snapshots:
       - yaml
       - zephyr-agent
 
-  nuxt-schema-org@6.2.8(c18bdd89cad4d836f20933228c41d1e1):
+  nuxt-schema-org@6.2.8(7c8ecbb3b3387058b84b895ed0f8ce53):
     dependencies:
       '@nuxt/kit': '@nuxt/kit-nightly@5.0.0-29762711.192612c7(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))'
       defu: 6.1.7
-      nuxt-site-config: 4.1.4(bcecf7383d61ca1f56f3a2c57b5e9455)
-      nuxtseo-shared: 5.3.8(e472515403fbbc59299588f2e618644e)
+      nuxt-site-config: 4.1.4(199d3b03951a379826d54ebf8a5754f7)
+      nuxtseo-shared: 5.3.8(44aea39dc0e99295e39862130b6daa16)
       pkg-types: 2.3.1
       ufo: 1.6.4
     optionalDependencies:
@@ -7770,7 +7764,7 @@ snapshots:
       - vite
       - vue
 
-  nuxt-seo-utils@8.3.3(cfa8949aafea9ec6d8a1091e93c6a754):
+  nuxt-seo-utils@8.3.3(07294e764db82941d1e619483408bd2f):
     dependencies:
       '@nuxt/kit': '@nuxt/kit-nightly@5.0.0-29762711.192612c7(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))'
       citty: 0.2.2
@@ -7780,8 +7774,8 @@ snapshots:
       exsolve: 1.1.1
       image-size: 2.0.2
       nuxt: nuxt-nightly@5.0.0-29762711.192612c7(@oxc-project/types@0.142.0)(@types/node@26.1.2)(@vitejs/devtools-kit@0.4.12(cac@7.0.0)(srvx@0.11.22)(vite@8.2.0))(@vitejs/devtools@0.4.12)(@vue/compiler-sfc@3.5.40)(aws4fetch@1.0.20)(cac@7.0.0)(crossws@0.4.10(srvx@0.11.22))(db0@0.3.4)(devframe@0.8.0(cac@7.0.0)(srvx@0.11.22))(esbuild@0.28.1)(eslint@10.8.0(jiti@2.7.0))(jiti@2.7.0)(lightningcss@1.33.0)(lru-cache@11.5.2)(mlly@1.8.2)(mongodb@7.5.0)(nuxt-nightly@5.0.0-29762711.192612c7)(optionator@0.9.4)(pinia@4.0.2(@vue/devtools-api@8.2.1)(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)))(rolldown@1.2.2)(srvx@0.11.22)(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)(valibot@1.4.2(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))(vite@8.2.0)(vue-tsc@3.3.9(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))(yaml@2.9.0)
-      nuxt-site-config: 4.1.4(bcecf7383d61ca1f56f3a2c57b5e9455)
-      nuxtseo-shared: 5.3.8(e472515403fbbc59299588f2e618644e)
+      nuxt-site-config: 4.1.4(199d3b03951a379826d54ebf8a5754f7)
+      nuxtseo-shared: 5.3.8(44aea39dc0e99295e39862130b6daa16)
       pathe: 2.0.3
       pkg-types: 2.3.1
       scule: 1.3.0
@@ -7812,7 +7806,7 @@ snapshots:
       - vue
       - zod
 
-  nuxt-site-config-kit@4.1.4(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)):
+  nuxt-site-config-kit@4.1.4(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)):
     dependencies:
       '@nuxt/kit': '@nuxt/kit-nightly@5.0.0-29762711.192612c7(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))'
       site-config-stack: 4.1.4(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))
@@ -7829,15 +7823,15 @@ snapshots:
       - unplugin
       - vue
 
-  nuxt-site-config@4.1.4(bcecf7383d61ca1f56f3a2c57b5e9455):
+  nuxt-site-config@4.1.4(199d3b03951a379826d54ebf8a5754f7):
     dependencies:
       '@nuxt/devalue': 2.0.2
       '@nuxt/kit': '@nuxt/kit-nightly@5.0.0-29762711.192612c7(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))'
       consola: 3.4.2
       defu: 6.1.7
       h3: 2.0.1-rc.26(crossws@0.4.10(srvx@0.11.22))
-      nuxt-site-config-kit: 4.1.4(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))
-      nuxtseo-shared: 5.3.8(e472515403fbbc59299588f2e618644e)
+      nuxt-site-config-kit: 4.1.4(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))
+      nuxtseo-shared: 5.3.8(44aea39dc0e99295e39862130b6daa16)
       pathe: 2.0.3
       pkg-types: 2.3.1
       site-config-stack: 4.1.4(vue@3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2))
@@ -7860,7 +7854,7 @@ snapshots:
       - vite
       - zod
 
-  nuxtseo-shared@5.3.8(e472515403fbbc59299588f2e618644e):
+  nuxtseo-shared@5.3.8(44aea39dc0e99295e39862130b6daa16):
     dependencies:
       '@clack/prompts': 1.7.0
       '@nuxt/devtools-kit': 4.0.0-alpha.10(jiti@2.7.0)(magic-string@1.1.0)(mlly@1.8.2)(rolldown@1.2.2)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.2)(vite@8.2.0))(vite@8.2.0)
@@ -7880,7 +7874,7 @@ snapshots:
       ufo: 1.6.4
       vue: 3.5.40(typescript-native-bridge@6.0.3-bridge.9.tsgo.7.0.2)
     optionalDependencies:
-      nuxt-site-config: 4.1.4(bcecf7383d61ca1f56f3a2c57b5e9455)
+      nuxt-site-config: 4.1.4(199d3b03951a379826d54ebf8a5754f7)
       zod: 4.4.3
     transitivePeerDependencies:
       - dotenv

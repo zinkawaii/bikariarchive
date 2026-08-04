@@ -127,7 +127,6 @@ catalogs:
     "@volar/language-core": *volar
     "@volar/typescript": *volar
   vue:
-    "@vitejs/plugin-vue": ^6.0.8
     "@vueuse/core": *vueuse
     "@vueuse/router": *vueuse
     pinia: ^4.0.2
