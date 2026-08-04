@@ -1,4 +1,4 @@
 [submodule "public/garden"]
 	path = public/garden
-	url = https://github.com/zinkawaii/bikarigarden.git
+	url = git@github.com:zinkawaii/bikarigarden.git
 	branch = main
