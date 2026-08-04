@@ -2,6 +2,10 @@
   "type": "module",
   "private": true,
   "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.11.0 || >=26.0.0"
+    },
     "packageManager": {
       "name": "pnpm",
       "version": "11.20.0"
