@@ -14,8 +14,18 @@ export default defineJThrottledEventHandler<{
   const config = useRuntimeConfig();
   const body = schema.assert(await event.req.json());
 
+  // 账号
+  if (body.account !== config.admin.account) {
+    throw 1;
+  }
+
+  // 明文密码
+  if (config.admin.password && body.password !== config.admin.password) {
+    throw 1;
+  }
+
+  // 哈希密码
   if (
-    body.account !== config.admin.account ||
     !config.admin.passwordHash.startsWith("$scrypt$") ||
     !await verifyPassword(config.admin.passwordHash, body.password)
   ) {

@@ -3,6 +3,7 @@ import defu from "defu";
 export const serverConfig = {
   admin: {
     account: "<!-- ??? -->",
+    password: "<!-- ??? -->",
     passwordHash: "<!-- ??? -->",
   },
   article: {
