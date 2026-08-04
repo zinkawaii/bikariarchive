@@ -1,7 +1,6 @@
 import { type } from "arktype";
-import { getRequestIP } from "nitro/h3";
+import { getRequestIP, HTTPError } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
-import type { RuntimeConfig } from "@nuxt/schema";
 import CommentReply from "#server/emails/comment-reply.vue";
 import { CommentDataModel } from "#server/models/CommentData";
 
@@ -23,15 +22,15 @@ export default defineJEventHandler<{
   const body = schema.assert(await event.req.json());
 
   // 获取严格路径
-  const path = getStrictPath(body.path) as keyof RuntimeConfig["comment"];
+  const path = getStrictPath(body.path);
 
   // 路径格式错误
   if (!path.startsWith("/")) {
-    throw 1;
+    throw HTTPError.status(400);
   }
 
   // 只读页面
-  if (config.comment[path].readonly) {
+  if (Reflect.get(config.comment, path)?.readonly) {
     await validateIdentity(event);
   }
 

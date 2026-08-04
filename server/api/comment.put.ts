@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { HTTPError } from "nitro/h3";
 import { CommentDataModel } from "#server/models/CommentData";
 
 export type PutCommentBody = typeof schema.inferIn;
@@ -29,7 +30,7 @@ export default defineJEventHandler<{
 
   // 评论不存在
   if (!qComment) {
-    throw 1;
+    throw HTTPError.status(404);
   }
 
   // 更新评论数据

@@ -23,14 +23,6 @@ export default zin(
   },
   {
     files: [
-      "./server/api/**/*.ts",
-    ],
-    rules: {
-      "no-throw-literal": "off",
-    },
-  },
-  {
-    files: [
       "./content/{area,character,concept}/**/*.md",
     ],
     rules: {

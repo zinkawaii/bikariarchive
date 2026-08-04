@@ -1,6 +1,6 @@
 import { type } from "arktype";
 import { AES, Utf8 } from "crypto-es";
-import { getRequestIP } from "nitro/h3";
+import { getRequestIP, HTTPError } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 import { ReadRecordModel } from "#server/models/ReadRecord";
 
@@ -23,53 +23,57 @@ export default defineJEventHandler<{
   // 连接数据库
   await connectMongoose();
 
+  let novel: string;
+  let index: string;
+
+  try {
+    const parsed = JSON.parse(
+      AES.decrypt(token, config.article.key).toString(Utf8),
+    );
+    novel = parsed.novel;
+    index = parsed.index;
+  }
+  catch {
+    throw HTTPError.status(400);
+  }
+
   const ip = getRequestIP(event, { xForwardedFor: true });
   const time = new Date();
 
-  try {
-    const { novel, index } = JSON.parse(
-      AES.decrypt(token, config.article.key).toString(Utf8),
-    );
+  // 添加阅读记录
+  await ReadRecordModel.create({
+    ip,
+    time,
+    novel,
+    index,
+  });
 
-    // 添加阅读记录
-    await ReadRecordModel.create({
-      ip,
-      time,
-      novel,
-      index,
-    });
-
-    // 获取阅读量
-    const qCounts = await ReadRecordModel.aggregate<{ count: number }>([
-      {
-        $match: {
-          novel,
-          index,
-        },
+  // 获取阅读量
+  const qCounts = await ReadRecordModel.aggregate<{ count: number }>([
+    {
+      $match: {
+        novel,
+        index,
       },
-      {
-        $group: {
-          _id: {
-            ip: "$ip",
-            window: {
-              $dateTrunc: {
-                date: "$time",
-                unit: "hour",
-                binSize: 8,
-              },
+    },
+    {
+      $group: {
+        _id: {
+          ip: "$ip",
+          window: {
+            $dateTrunc: {
+              date: "$time",
+              unit: "hour",
+              binSize: 8,
             },
           },
         },
       },
-      {
-        $count: "count",
-      },
-    ]);
+    },
+    {
+      $count: "count",
+    },
+  ]);
 
-    res.count = qCounts.length ? qCounts[0].count : 0;
-  }
-  catch {
-    // 代币解析错误
-    throw 1;
-  }
+  res.count = qCounts.length ? qCounts[0].count : 0;
 });

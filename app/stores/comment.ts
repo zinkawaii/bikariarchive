@@ -58,29 +58,29 @@ export const useCommentStore = defineStore("comment", () => {
   }
 
   // 发送评论
-  const post = createRequest<PostCommentBody>("post", (statusCode) => {
-    return statusCode === 403
+  const post = createRequest<PostCommentBody>("post", (status) => {
+    return status === 403
       ? "无评论权限"
       : "评论发送失败";
   });
 
   // 修改评论
-  const modify = createRequest<PutCommentBody>("put", (statusCode) => {
-    return statusCode === 403
+  const modify = createRequest<PutCommentBody>("put", (status) => {
+    return status === 403
       ? "无修改权限"
       : "评论修改失败";
   });
 
   // 删除评论
-  const remove = createRequest<DeleteCommentBody>("delete", (statusCode) => {
-    return statusCode === 403
+  const remove = createRequest<DeleteCommentBody>("delete", (status) => {
+    return status === 403
       ? "无删除权限"
       : "评论删除失败";
   });
 
   function createRequest<T extends Record<string, any>>(
     method: "post" | "put" | "delete",
-    getter: (statusCode: number) => string,
+    getter: (status: number) => string,
   ) {
     return async (body: T) => {
       try {
@@ -91,7 +91,7 @@ export const useCommentStore = defineStore("comment", () => {
         update();
       }
       catch (err: any) {
-        const message = typeof err?.statusCode === "number" ? getter(err.statusCode) : String(err);
+        const message = typeof err?.status === "number" ? getter(err.status) : String(err);
         toastStore.error(`[comment]:${method}`, message);
         throw err;
       }

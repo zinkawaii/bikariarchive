@@ -35,9 +35,11 @@
     await execute();
 
     if (error.value) {
-      switch (getErrorCode(error.value)) {
-        case "1":
+      switch (error.value.status) {
+        case 401:
           return glitch("password", "账号或密码错误");
+        case 429:
+          return toastStore.info("[login]:throttle", "接口节流中");
         default:
           return toastStore.error("[login]", "登录失败");
       }

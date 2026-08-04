@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { HTTPError } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 
 export type LoginBody = typeof schema.inferIn;
@@ -16,20 +17,21 @@ export default defineJThrottledEventHandler<{
 
   // 账号
   if (body.account !== config.admin.account) {
-    throw 1;
+    throw HTTPError.status(401);
   }
 
   // 明文密码
-  if (config.admin.password && body.password !== config.admin.password) {
-    throw 1;
+  if (config.admin.password !== "<!-- ??? -->") {
+    if (body.password !== config.admin.password) {
+      throw HTTPError.status(401);
+    }
   }
-
   // 哈希密码
-  if (
+  else if (
     !config.admin.passwordHash.startsWith("$scrypt$") ||
     !await verifyPassword(config.admin.passwordHash, body.password)
   ) {
-    throw 1;
+    throw HTTPError.status(401);
   }
 
   await setUserSession(event, {
@@ -38,4 +40,4 @@ export default defineJThrottledEventHandler<{
     },
     loggedInAt: new Date(),
   });
-}, 1000);
+}, 1500);

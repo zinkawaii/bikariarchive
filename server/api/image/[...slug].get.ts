@@ -1,6 +1,6 @@
 import { type } from "arktype";
 import { AwsClient } from "aws4fetch";
-import { getQuery, getRouterParam, redirect } from "nitro/h3";
+import { getQuery, getRouterParam, HTTPError, redirect } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 
 export type GetImageQuery = typeof schema.inferIn;
@@ -22,7 +22,7 @@ export default defineJCachedEventHandler<{
   const slug = getRouterParam(event, "slug");
 
   if (slug === void 0) {
-    throw 1;
+    throw HTTPError.status(404);
   }
 
   const s3 = new AwsClient({
