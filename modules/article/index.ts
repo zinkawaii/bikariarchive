@@ -15,7 +15,7 @@ export default defineNuxtModule({
 
     addServerPlugin(resolve("runtime/server"));
 
-    addVitePlugin(vite);
+    addVitePlugin(vite, { prepend: true });
 
     nuxt.options.alias["#data"] = join(nuxt.options.rootDir, ".data");
 
