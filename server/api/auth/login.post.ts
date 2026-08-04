@@ -20,12 +20,13 @@ export default defineJThrottledEventHandler<{
   }
 
   // 明文密码
-  if (config.admin.password && body.password !== config.admin.password) {
-    throw 1;
+  if (config.admin.password !== "<!-- ??? -->") {
+    if (body.password !== config.admin.password) {
+      throw 1;
+    }
   }
-
   // 哈希密码
-  if (
+  else if (
     !config.admin.passwordHash.startsWith("$scrypt$") ||
     !await verifyPassword(config.admin.passwordHash, body.password)
   ) {
