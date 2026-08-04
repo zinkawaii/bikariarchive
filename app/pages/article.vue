@@ -108,8 +108,8 @@
     await execute();
 
     if (error.value) {
-      switch (getErrorCode(error.value)) {
-        case "2":
+      switch (error.value.status) {
+        case 403:
           return toastStore.error("[article]:password", "密码错误");
         default:
           return toastStore.error("[article]:password", "密码验证失败");

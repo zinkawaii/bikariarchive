@@ -71,7 +71,7 @@
 
   // 错误处理
   whenever(error, (err) => {
-    if (err.statusCode === 429) {
+    if (err.status === 429) {
       toastStore.info("[search]:throttle", "接口节流中");
     }
   }, {

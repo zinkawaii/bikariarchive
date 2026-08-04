@@ -17,26 +17,20 @@ const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>)
       throw err;
     }
 
-    let statusCode: number;
-    let statusMessage: string | undefined;
+    let status: number;
     let data: unknown;
 
     if (err instanceof TraversalError) {
-      statusCode = 400;
+      status = 400;
       data = err.message;
     }
-    else if (typeof err === "number") {
-      statusCode = 400;
-      statusMessage = err.toString();
-    }
     else {
-      statusCode = 500;
+      status = 500;
       data = err;
     }
 
     throw new HTTPError({
-      statusCode,
-      statusMessage,
+      status,
       data: import.meta.dev ? data : void 0,
     });
   }
@@ -67,9 +61,7 @@ export function defineJThrottledEventHandler<R extends EventHandlerRequest, T = 
       }, delay);
       return handler.apply(this, args);
     }
-    throw new HTTPError({
-      statusCode: 429,
-    });
+    throw HTTPError.status(429);
   }
   return defineEventHandler(createHandler<R, T>(throttledHandler));
 }

@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { getQuery } from "nitro/h3";
+import { getQuery, HTTPError } from "nitro/h3";
 import type { HydratedDocument } from "mongoose";
 import { CommentDataModel } from "#server/models/CommentData";
 import type { CommentData } from "#server/types/comment";
@@ -31,7 +31,7 @@ export default defineJEventHandler<{
 
   // 路径格式错误
   if (!path) {
-    throw 1;
+    throw HTTPError.status(400);
   }
 
   // 连接数据库

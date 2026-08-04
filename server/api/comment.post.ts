@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { getRequestIP } from "nitro/h3";
+import { getRequestIP, HTTPError } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 import CommentReply from "#server/emails/comment-reply.vue";
 import { CommentDataModel } from "#server/models/CommentData";
@@ -26,7 +26,7 @@ export default defineJEventHandler<{
 
   // 路径格式错误
   if (!path.startsWith("/")) {
-    throw 1;
+    throw HTTPError.status(400);
   }
 
   // 只读页面
