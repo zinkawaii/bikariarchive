@@ -17,11 +17,10 @@ export default defineNuxtModule({
         { from: "nitro/runtime-config", name: "useRuntimeConfig" },
       ];
 
-      // @nuxtjs/robots, @nuxtjs/sitemap, nuxt-auth-utils, nuxt-schema-org, nuxt-seo-utils > nitropack/runtime
+      // @nuxtjs/robots, nuxt-auth-utils, nuxt-schema-org, nuxt-seo-utils > nitropack/runtime
       virtual["nitropack/runtime"] = [
         genExport("nitro", [{ name: "definePlugin", as: "defineNitroPlugin" }]),
         genExport("nitro/app", ["getRouteRules", "useNitroApp"]),
-        genExport("nitro/cache", ["defineCachedFunction"]),
         genExport("nitro/runtime-config", ["useRuntimeConfig"]),
       ].join("\n");
     });
