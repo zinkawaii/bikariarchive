@@ -10,7 +10,7 @@ packages:
 define:
   - &bikariya ^0.0.8
   - &nuxt ^4.5.1
-  - &shiki ^4.4.1
+  - &shiki ^4.4.2
   - &vls ^3.3.9
   - &volar 2.4.28
   - &vueuse ^14.4.0
@@ -24,15 +24,15 @@ overrides:
   "@nuxt/schema": npm:@nuxt/schema-nightly@^5.0.0-29763987.a48dcbf9
   # fontless > esbuild@0.27.0
   esbuild: ^0.28.1
-  # @nuxt/fonts, @nuxt/image, @nuxtjs/robots, nuxt-site-config > h3@1.15.11
+  # @nuxt/fonts, @nuxt/image, @nuxtjs/robots, nuxt-auth-utils, nuxt-site-config > h3@1.15.11
   h3: ^2.0.1-rc.26
   # micromark-extension-math > katex@0.16.0
   katex: ^0.18.1
   nitro: npm:nitro-nightly@^3.0.1-20260731-205209-52abde8a
   nuxt: npm:nuxt-nightly@^5.0.0-29763987.a48dcbf9
-  # @nuxt/fonts, @nuxtjs/sitemap, nuxtseo-shared, unifont > ofetch@1.5.1
+  # @nuxt/fonts, @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared, unifont > ofetch@1.5.1
   ofetch: ^2.0.0-alpha.3
-  typescript: npm:typescript-native-bridge@^6.0.3-bridge.9.tsgo.7.0.2
+  typescript: npm:typescript-native-bridge@^6.0.3-bridge.10.tsgo.7.0.2
   # @nuxt/devtools, @nuxt/fonts, fontless > unstorage@1.17.5
   unstorage: ^2.0.0-alpha.7
 
@@ -81,14 +81,14 @@ catalogs:
     "@nuxt/kit": *nuxt
     "@nuxt/schema": *nuxt
     "@nuxtjs/robots": ^6.1.3
-    "@nuxtjs/sitemap": ^8.3.2
+    "@nuxtjs/sitemap": ^8.3.3
     "@pinia/nuxt": ^1.0.1
     "@vueuse/nuxt": *vueuse
     nuxt: *nuxt
-    nuxt-auth-utils: ^0.5.29
+    nuxt-auth-utils: ^0.5.30
     nuxt-schema-org: ^6.2.8
     nuxt-seo-utils: ^8.3.3
-    nuxt-site-config: ^4.1.4
+    nuxt-site-config: ^4.1.5
   test:
     vitest: ^5.0.0-beta.7
   types:
