@@ -23,22 +23,19 @@ export default defineJEventHandler<{
   // 连接数据库
   await connectMongoose();
 
-  // 获取评论
-  const comment = await CommentDataModel.findOne({
+  // 更新评论
+  const result = await CommentDataModel.updateOne({
     _id: body.id,
-  });
-
-  // 评论不存在
-  if (!comment) {
-    throw HTTPError.status(404);
-  }
-
-  // 更新评论数据
-  await comment.updateOne({
+  }, {
     content: body.content,
     nickname: body.nickname,
     email: body.email,
     address: body.address,
     updated: new Date(),
   });
+
+  // 评论不存在
+  if (!result.matchedCount) {
+    throw HTTPError.status(404);
+  }
 });
