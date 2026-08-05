@@ -1,5 +1,4 @@
 import { type } from "arktype";
-import { AES, Utf8 } from "crypto-es";
 import { getRequestIP, HTTPError } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 import { ReadRecordModel } from "#server/models/ReadRecord";
@@ -27,9 +26,7 @@ export default defineJEventHandler<{
   let index: string;
 
   try {
-    const parsed = JSON.parse(
-      AES.decrypt(token, config.article.key).toString(Utf8),
-    );
+    const parsed = decryptArticleToken(token, config.article.key);
     novel = parsed.novel;
     index = parsed.index;
   }

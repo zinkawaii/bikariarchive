@@ -1,5 +1,4 @@
 import { type } from "arktype";
-import { AES } from "crypto-es";
 import { getQuery, HTTPError } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 import type { Root } from "@bikari/article";
@@ -47,5 +46,5 @@ export default defineJEventHandler<{
     index,
   };
 
-  res.token = AES.encrypt(JSON.stringify(token), config.article.key).toString();
+  res.token = encryptArticleToken(token, config.article.key);
 });

@@ -344,9 +344,6 @@ catalogs:
     consola:
       specifier: ^3.4.2
       version: 3.4.2
-    crypto-es:
-      specifier: ^3.1.3
-      version: 3.1.3
     defu:
       specifier: ^6.1.7
       version: 6.1.7
@@ -581,9 +578,6 @@ importers:
       consola:
         specifier: catalog:utils
         version: 3.4.2
-      crypto-es:
-        specifier: catalog:utils
-        version: 3.1.3
       defu:
         specifier: catalog:utils
         version: 6.1.7
@@ -2491,10 +2485,6 @@ packages:
     peerDependenciesMeta:
       srvx:
         optional: true
-
-  crypto-es@3.1.3:
-    resolution: {integrity: sha512-NtOYHzTz98pZFeC2Tytv15mijxrdo+7cgUD3LmYPkJQ8DWauCo1ObOOBJFHzE3DnzPTn27UzcfPy/7qUTrFH7g==}
-    engines: {node: '>=18.0.0'}
 
   css-tree@3.2.1:
     resolution: {integrity: sha512-X7sjQzceUhu1u7Y/ylrRZFU2FS6LRiFVp6rKLPg23y3x3c3DOKAwuXGDp+PAGjh6CSnCjYeAul8pcT8bAl+lSA==}
@@ -6717,8 +6707,6 @@ snapshots:
   crossws@0.4.10(srvx@0.11.22):
     optionalDependencies:
       srvx: 0.11.22
-
-  crypto-es@3.1.3: {}
 
   css-tree@3.2.1:
     dependencies:
