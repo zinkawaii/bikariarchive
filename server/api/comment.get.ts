@@ -19,7 +19,7 @@ const schema = type({
 });
 
 // 需要获取的属性
-const select = "_id root parent content time nickname email address";
+const select = "_id root parent content time nickname email address status";
 
 export default defineJEventHandler<{
   query: GetCommentQuery;
@@ -37,24 +37,32 @@ export default defineJEventHandler<{
   // 连接数据库
   await connectMongoose();
 
+  // 评论状态
+  const status = await isIdentityAdmin(event) ? void 0 : {
+    status: "public" as const,
+  };
+
   // 单页评论数
   const limit = 10;
 
   // 总评论数
   res.totalCount = await CommentDataModel.countDocuments({
     path,
+    ...status,
   });
 
   // 主评论数
   res.mainCount = await CommentDataModel.countDocuments({
     path,
     parent: null,
+    ...status,
   });
 
   // 获取主评论
   const comments = await CommentDataModel.find({
     path,
     parent: null,
+    ...status,
   }, select)
     .sort({ time: "desc" })
     .skip((body.page - 1) * limit)
@@ -87,5 +95,6 @@ function transformComment<T extends HydratedDocument<CommentDataSchema>>(
     nickname: item.nickname,
     avatar: item.email ? generateAvatarUrl(item.email) : void 0,
     address: item.address,
+    pending: item.status === "pending" || void 0,
   };
 }
