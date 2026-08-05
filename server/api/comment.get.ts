@@ -19,7 +19,7 @@ const schema = type({
 });
 
 // 需要获取的属性
-const select = "_id root parent content time nickname email address status";
+const selectionKey = "root parent content time nickname email address status";
 
 export default defineJEventHandler<{
   query: GetCommentQuery;
@@ -63,7 +63,8 @@ export default defineJEventHandler<{
     path,
     parent: null,
     ...status,
-  }, select)
+  })
+    .select(selectionKey)
     .sort({ time: "desc" })
     .skip((body.page - 1) * limit)
     .limit(limit);
@@ -73,7 +74,7 @@ export default defineJEventHandler<{
     comments.map(async (comment) => {
       const children = await CommentDataModel.find({
         root: comment._id,
-      }, select);
+      }).select(selectionKey);
       return transformComment(comment, children);
     }),
   );
