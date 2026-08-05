@@ -52,7 +52,7 @@ export default defineJEventHandler<{
   });
 
   // 获取主评论
-  const qComments = await CommentDataModel.find({
+  const comments = await CommentDataModel.find({
     path,
     parent: null,
   }, select)
@@ -62,7 +62,7 @@ export default defineJEventHandler<{
 
   // 获取子评论
   res.list = await Promise.all(
-    qComments.map(async (comment) => {
+    comments.map(async (comment) => {
       const children = await CommentDataModel.find({
         root: comment._id,
       }, select);

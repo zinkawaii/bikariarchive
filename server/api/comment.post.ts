@@ -41,14 +41,14 @@ export default defineJEventHandler<{
   const time = new Date();
 
   // 获取所回复评论的数据（如果有）
-  const qParent = await CommentDataModel.findOne({
+  const parent = await CommentDataModel.findOne({
     _id: body.parent,
   }).select("root email");
 
   // 将评论数据写入数据库
   await CommentDataModel.create({
     path,
-    root: qParent?.root ?? qParent?._id,
+    root: parent?.root ?? parent?._id,
     parent: body.parent,
     content: body.content,
     time,
@@ -59,12 +59,12 @@ export default defineJEventHandler<{
     address: body.address,
   });
 
-  if (!qParent) {
+  if (!parent) {
     return;
   }
 
   // 获取回复邮箱
-  const email = qParent.email;
+  const email = parent.email;
 
   // 对被回复评论进行邮件通知
   if (email && email !== body.email) {

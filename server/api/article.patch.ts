@@ -46,7 +46,7 @@ export default defineJEventHandler<{
   });
 
   // 获取阅读量
-  const qCounts = await ReadRecordModel.aggregate<{ count: number }>([
+  const counts = await ReadRecordModel.aggregate<{ count: number }>([
     {
       $match: {
         novel,
@@ -72,5 +72,5 @@ export default defineJEventHandler<{
     },
   ]);
 
-  res.count = qCounts.length ? qCounts[0].count : 0;
+  res.count = counts.length ? counts[0].count : 0;
 });

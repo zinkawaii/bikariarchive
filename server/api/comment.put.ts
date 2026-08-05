@@ -24,17 +24,17 @@ export default defineJEventHandler<{
   await connectMongoose();
 
   // 获取评论
-  const qComment = await CommentDataModel.findOne({
+  const comment = await CommentDataModel.findOne({
     _id: body.id,
   });
 
   // 评论不存在
-  if (!qComment) {
+  if (!comment) {
     throw HTTPError.status(404);
   }
 
   // 更新评论数据
-  await qComment.updateOne({
+  await comment.updateOne({
     content: body.content,
     nickname: body.nickname,
     email: body.email,
