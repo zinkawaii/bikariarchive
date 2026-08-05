@@ -10,7 +10,7 @@ export type GetCommentQuery = typeof schema.inferIn;
 export interface GetCommentResponse {
   totalCount: number;
   mainCount: number;
-  list: CommentData[];
+  comments: CommentData[];
 }
 
 const schema = type({
@@ -70,7 +70,7 @@ export default defineJEventHandler<{
     .limit(limit);
 
   // 获取子评论
-  res.list = await Promise.all(
+  res.comments = await Promise.all(
     comments.map(async (comment) => {
       const children = await CommentDataModel.find({
         root: comment._id,

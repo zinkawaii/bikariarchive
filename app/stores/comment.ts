@@ -48,7 +48,7 @@ export const useCommentStore = defineStore("comment", () => {
       },
     });
 
-    comments.value = processComments(res.list);
+    comments.value = processComments(res.comments);
     mainCount.value = res.mainCount;
     totalCount.value = res.totalCount;
     isEmpty.value = false;
