@@ -56,6 +56,6 @@ export default defineJEventHandler<{
     nickname: body.nickname,
     email: body.email,
     address: body.address,
-    status: "pending",
+    status: await isIdentityAdmin(event) ? "public" : "pending",
   });
 });
