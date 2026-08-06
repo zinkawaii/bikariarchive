@@ -28,14 +28,14 @@ export default defineJThrottledEventHandler<{
   query: GetSearchQuery;
 }, GetSearchResponse>(async (event, res) => {
   const storage = useStorage("assets:data");
-  const { novel, word } = schema.assert(getQuery(event));
+  const query = schema.assert(getQuery(event));
 
-  const code = word.codePointAt(0)!.toString();
+  const code = query.word.codePointAt(0)!.toString();
   const data = await storage
     .getItem(`search/${code.slice(0, 2)}/${code}.json`)
     .catch(() => ({})) as Record<string, number[][]>;
 
-  const novels = new Set(novel === void 0 ? Object.keys(Article.meta) : [novel]);
+  const novels = new Set(query.novel === void 0 ? Object.keys(Article.meta) : [query.novel]);
   const weakTexts = new WeakMap<Element, string>();
 
   // 按章节遍历
@@ -69,7 +69,7 @@ export default defineJThrottledEventHandler<{
         weakTexts.set(node, text = toString(node));
       }
 
-      if (text.startsWith(word, vector.at(-1))) {
+      if (text.startsWith(query.word, vector.at(-1))) {
         nodes.push(node);
       }
     }

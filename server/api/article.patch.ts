@@ -17,7 +17,7 @@ export default defineJEventHandler<{
   body: PatchArticleBody;
 }, PatchArticleResponse>(async (event, res) => {
   const config = useRuntimeConfig();
-  const { token } = schema.assert(await event.req.json());
+  const body = schema.assert(await event.req.json());
 
   // 连接数据库
   await connectMongoose();
@@ -26,7 +26,7 @@ export default defineJEventHandler<{
   let index: string;
 
   try {
-    const parsed = decryptArticleToken(token, config.article.key);
+    const parsed = decryptArticleToken(body.token, config.article.key);
     novel = parsed.novel;
     index = parsed.index;
   }
@@ -46,7 +46,7 @@ export default defineJEventHandler<{
   });
 
   // 获取阅读量
-  const qCounts = await ReadRecordModel.aggregate<{ count: number }>([
+  const counts = await ReadRecordModel.aggregate<{ count: number }>([
     {
       $match: {
         novel,
@@ -72,5 +72,5 @@ export default defineJEventHandler<{
     },
   ]);
 
-  res.count = qCounts.length ? qCounts[0].count : 0;
+  res.count = counts.length ? counts[0].count : 0;
 });

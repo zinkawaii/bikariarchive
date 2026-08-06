@@ -6,4 +6,5 @@ export interface CommentData {
   nickname: string;
   avatar?: string;
   address?: string;
+  pending?: boolean;
 }
