@@ -11,6 +11,7 @@ export interface CommentDataSchema {
   nickname: string;
   email?: string;
   address?: string;
+  status: "pending" | "public";
 }
 
 export interface ReadRecordSchema {

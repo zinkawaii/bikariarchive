@@ -1,5 +1,6 @@
 import { LazyCommentPanel } from "#components";
 import type { DeleteCommentBody } from "#server/api/comment.delete";
+import type { PatchCommentBody } from "#server/api/comment.patch";
 import type { PostCommentBody } from "#server/api/comment.post";
 import type { PutCommentBody } from "#server/api/comment.put";
 import type { CommentData } from "#server/types/comment";
@@ -47,7 +48,7 @@ export const useCommentStore = defineStore("comment", () => {
       },
     });
 
-    comments.value = processComments(res.list);
+    comments.value = processComments(res.comments);
     mainCount.value = res.mainCount;
     totalCount.value = res.totalCount;
     isEmpty.value = false;
@@ -62,6 +63,12 @@ export const useCommentStore = defineStore("comment", () => {
     return status === 403
       ? "无评论权限"
       : "评论发送失败";
+  });
+
+  const audit = createRequest<PatchCommentBody>("patch", (status) => {
+    return status === 403
+      ? "无审核权限"
+      : "评论审核失败";
   });
 
   // 修改评论
@@ -79,7 +86,7 @@ export const useCommentStore = defineStore("comment", () => {
   });
 
   function createRequest<T extends Record<string, any>>(
-    method: "post" | "put" | "delete",
+    method: "post" | "patch" | "put" | "delete",
     getter: (status: number) => string,
   ) {
     return async (body: T) => {
@@ -116,6 +123,12 @@ export const useCommentStore = defineStore("comment", () => {
     });
   }
 
+  async function requireAudit(id: string) {
+    if (await requireConfirm("是否将此评论设置为公开状态？")) {
+      await audit({ id });
+    }
+  }
+
   function requireModify(data: CommentData) {
     modalStore.use(() => h(LazyCommentPanel, {
       kind: "modify",
@@ -137,9 +150,11 @@ export const useCommentStore = defineStore("comment", () => {
     clear,
     update,
     post,
+    audit,
     modify,
     remove,
     requirePost,
+    requireAudit,
     requireModify,
   };
 }, {
