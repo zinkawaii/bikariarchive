@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { getRequestIP, HTTPError } from "nitro/h3";
+import { getRequestIP } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 import CommentReply from "#server/emails/comment-reply.vue";
 import { CommentDataModel } from "#server/models/CommentData";
@@ -7,7 +7,7 @@ import { CommentDataModel } from "#server/models/CommentData";
 export type PostCommentBody = typeof schema.inferIn;
 
 const schema = type({
-  path: "string",
+  path: parseCommentPath,
   parent: "string?",
   content: "0 < string <= 512",
   nickname: "0 < string <= 18",
@@ -20,14 +20,6 @@ export default defineJEventHandler<{
 }>(async (event) => {
   const config = useRuntimeConfig();
   const body = schema.assert(await event.req.json());
-
-  // 获取严格路径
-  const path = getStrictPath(body.path);
-
-  // 路径格式错误
-  if (!path.startsWith("/")) {
-    throw HTTPError.status(400);
-  }
 
   // 只读页面
   if (Reflect.get(config.comment, path)?.readonly) {

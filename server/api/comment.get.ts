@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { getQuery, HTTPError } from "nitro/h3";
+import { getQuery } from "nitro/h3";
 import type { HydratedDocument } from "mongoose";
 import { CommentDataModel } from "#server/models/CommentData";
 import type { CommentData } from "#server/types/comment";
@@ -14,7 +14,7 @@ export interface GetCommentResponse {
 }
 
 const schema = type({
-  path: "string",
+  path: parseCommentPath,
   page: "string.numeric.parse",
 });
 
@@ -25,14 +25,6 @@ export default defineJEventHandler<{
   query: GetCommentQuery;
 }, GetCommentResponse>(async (event, res) => {
   const body = schema.assert(getQuery(event));
-
-  // 获取严格路径
-  const path = getStrictPath(body.path);
-
-  // 路径格式错误
-  if (!path) {
-    throw HTTPError.status(400);
-  }
 
   // 连接数据库
   await connectMongoose();
