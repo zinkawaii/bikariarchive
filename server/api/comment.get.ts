@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { getQuery, HTTPError } from "nitro/h3";
+import { getQuery } from "nitro/h3";
 import type { HydratedDocument } from "mongoose";
 import { CommentDataModel } from "#server/models/CommentData";
 import type { CommentData } from "#server/types/comment";
@@ -14,7 +14,7 @@ export interface GetCommentResponse {
 }
 
 const schema = type({
-  path: "string",
+  path: parseCommentPath,
   page: "string.numeric.parse",
 });
 
@@ -24,15 +24,7 @@ const selectionKey = "root parent content time nickname email address status";
 export default defineJEventHandler<{
   query: GetCommentQuery;
 }, GetCommentResponse>(async (event, res) => {
-  const body = schema.assert(getQuery(event));
-
-  // 获取严格路径
-  const path = getStrictPath(body.path);
-
-  // 路径格式错误
-  if (!path) {
-    throw HTTPError.status(400);
-  }
+  const query = schema.assert(getQuery(event));
 
   // 连接数据库
   await connectMongoose();
@@ -47,26 +39,26 @@ export default defineJEventHandler<{
 
   // 总评论数
   res.totalCount = await CommentDataModel.countDocuments({
-    path,
+    path: query.path,
     ...status,
   });
 
   // 主评论数
   res.mainCount = await CommentDataModel.countDocuments({
-    path,
+    path: query.path,
     parent: null,
     ...status,
   });
 
   // 获取主评论
   const comments = await CommentDataModel.find({
-    path,
+    path: query.path,
     parent: null,
     ...status,
   })
     .select(selectionKey)
     .sort({ time: "desc" })
-    .skip((body.page - 1) * limit)
+    .skip((query.page - 1) * limit)
     .limit(limit);
 
   // 获取子评论

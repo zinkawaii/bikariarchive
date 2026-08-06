@@ -1,10 +1,11 @@
 import { createHash } from "node:crypto";
-import { parsePath } from "ufo";
+import { type } from "arktype";
+import { parsePath, withoutTrailingSlash } from "ufo";
 
-// 获取无尾斜杠路径
-export function getStrictPath(path: string) {
-  return parsePath(path).pathname.replace(/\/$/, "");
-}
+// 无尾斜杠路径
+export const parseCommentPath = type(/^\//).pipe(
+  (path) => withoutTrailingSlash(parsePath(path).pathname),
+);
 
 // 从邮箱生成头像链接
 export function generateAvatarUrl(email: string) {

@@ -21,16 +21,16 @@ export default defineJEventHandler<{
   query: GetArticleQuery;
 }, GetArticleResponse>(async (event, res) => {
   const config = useRuntimeConfig();
-  const { novel, index, password } = schema.assert(getQuery(event));
+  const query = schema.assert(getQuery(event));
 
   // 初始化
-  const art = Article.for(novel, index);
+  const art = Article.for(query.novel, query.index);
   if (!art) {
     throw HTTPError.status(404);
   }
 
   // 验证密码
-  if (art.encrypted && password !== Article.map[novel][index].password) {
+  if (art.encrypted && query.password !== Article.serverInfo(art).password) {
     throw HTTPError.status(403);
   }
 
@@ -42,8 +42,8 @@ export default defineJEventHandler<{
 
   // 生成代币
   const token = {
-    novel,
-    index,
+    novel: query.novel,
+    index: query.index,
   };
 
   res.token = encryptArticleToken(token, config.article.key);
