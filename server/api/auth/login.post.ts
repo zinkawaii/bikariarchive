@@ -2,7 +2,7 @@ import { type } from "arktype";
 import { HTTPError } from "nitro/h3";
 import { useRuntimeConfig } from "nitro/runtime-config";
 
-export type LoginBody = typeof schema.inferIn;
+export type PostLoginBody = typeof schema.inferIn;
 
 const schema = type({
   account: "0 < string <= 18",
@@ -10,7 +10,7 @@ const schema = type({
 });
 
 export default defineJThrottledEventHandler<{
-  body: LoginBody;
+  body: PostLoginBody;
 }>(async (event) => {
   const config = useRuntimeConfig();
   const body = schema.assert(await event.req.json());
