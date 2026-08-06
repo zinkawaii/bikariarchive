@@ -10,7 +10,7 @@ const schema = type({
 export default defineJEventHandler<{
   body: DeleteCommentBody;
 }>(async (event) => {
-  const { id } = schema.assert(await event.req.json());
+  const body = schema.assert(await event.req.json());
 
   // 权限验证
   await validateIdentity(event);
@@ -20,6 +20,6 @@ export default defineJEventHandler<{
 
   // 删除评论
   await CommentDataModel.deleteOne({
-    _id: id,
+    _id: body.id,
   });
 });

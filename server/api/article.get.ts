@@ -30,7 +30,7 @@ export default defineJEventHandler<{
   }
 
   // 验证密码
-  if (art.encrypted && password !== Article.map[novel][index].password) {
+  if (art.encrypted && password !== Article.serverInfo(art).password) {
     throw HTTPError.status(403);
   }
 

@@ -24,7 +24,7 @@ const select = "_id root parent content time nickname email address";
 export default defineJEventHandler<{
   query: GetCommentQuery;
 }, GetCommentResponse>(async (event, res) => {
-  const body = schema.assert(getQuery(event));
+  const query = schema.assert(getQuery(event));
 
   // 连接数据库
   await connectMongoose();
@@ -34,22 +34,22 @@ export default defineJEventHandler<{
 
   // 总评论数
   res.totalCount = await CommentDataModel.countDocuments({
-    path,
+    path: query.path,
   });
 
   // 主评论数
   res.mainCount = await CommentDataModel.countDocuments({
-    path,
+    path: query.path,
     parent: null,
   });
 
   // 获取主评论
   const comments = await CommentDataModel.find({
-    path,
+    path: query.path,
     parent: null,
   }, select)
     .sort({ time: "desc" })
-    .skip((body.page - 1) * limit)
+    .skip((query.page - 1) * limit)
     .limit(limit);
 
   // 获取子评论

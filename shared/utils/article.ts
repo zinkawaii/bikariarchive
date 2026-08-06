@@ -22,6 +22,11 @@ export class Article {
     }
     return this.meta[novel]?.chapters.find((art) => art.index === index);
   }
+
+  // 获取仅服务端数据
+  static serverInfo(art: Article) {
+    return this.map[art.novel][art.index];
+  }
 }
 
 export interface Article extends WithRequired<

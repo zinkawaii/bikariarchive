@@ -22,7 +22,7 @@ export default defineJEventHandler<{
   const body = schema.assert(await event.req.json());
 
   // 只读页面
-  if (Reflect.get(config.comment, path)?.readonly) {
+  if (Reflect.get(config.comment, body.path)?.readonly) {
     await validateIdentity(event);
   }
 
@@ -39,7 +39,7 @@ export default defineJEventHandler<{
 
   // 将评论数据写入数据库
   await CommentDataModel.create({
-    path,
+    path: body.path,
     root: parent?.root ?? parent?._id,
     parent: body.parent,
     content: body.content,
@@ -65,7 +65,7 @@ export default defineJEventHandler<{
       title: `@${body.nickname} 回复了您的评论`,
       props: {
         content: body.content,
-        path,
+        path: body.path,
       },
     });
   }

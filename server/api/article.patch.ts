@@ -17,7 +17,7 @@ export default defineJEventHandler<{
   body: PatchArticleBody;
 }, PatchArticleResponse>(async (event, res) => {
   const config = useRuntimeConfig();
-  const { token } = schema.assert(await event.req.json());
+  const body = schema.assert(await event.req.json());
 
   // 连接数据库
   await connectMongoose();
@@ -26,7 +26,7 @@ export default defineJEventHandler<{
   let index: string;
 
   try {
-    const parsed = decryptArticleToken(token, config.article.key);
+    const parsed = decryptArticleToken(body.token, config.article.key);
     novel = parsed.novel;
     index = parsed.index;
   }
