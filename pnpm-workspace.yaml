@@ -20,8 +20,8 @@ overrides:
   # @nuxt/fonts, @nuxt/icon > @nuxt/devtools-kit@^3.3.1
   # nuxtseo-shared > @nuxt/devtools-kit@4.0.0-alpha.7
   "@nuxt/devtools-kit": ^4.0.0-alpha.10
-  "@nuxt/kit": npm:@nuxt/kit-nightly@^5.0.0-29766097.1e475df9
-  "@nuxt/schema": npm:@nuxt/schema-nightly@^5.0.0-29766097.1e475df9
+  "@nuxt/kit": npm:@nuxt/kit-nightly@^5.0.0-29767056.d45857f5
+  "@nuxt/schema": npm:@nuxt/schema-nightly@^5.0.0-29767056.d45857f5
   # fontless > esbuild@0.27.0
   esbuild: ^0.28.1
   # @nuxt/fonts, @nuxt/image, @nuxtjs/robots, nuxt-auth-utils, nuxt-site-config > h3@1.15.11
@@ -29,10 +29,10 @@ overrides:
   # micromark-extension-math > katex@0.16.0
   katex: ^0.18.1
   nitro: npm:nitro-nightly@^3.0.1-20260731-205209-52abde8a
-  nuxt: npm:nuxt-nightly@^5.0.0-29766097.1e475df9
+  nuxt: npm:nuxt-nightly@^5.0.0-29767056.d45857f5
   # @nuxt/fonts, @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared, unifont > ofetch@1.5.1
   ofetch: ^2.0.0-alpha.3
-  typescript: npm:typescript-native-bridge@^6.0.3-bridge.10.tsgo.7.0.2
+  typescript: link:../typescript-native-bridge
   # @nuxt/devtools, @nuxt/fonts, fontless > unstorage@1.17.5
   unstorage: ^2.0.0-alpha.7
 
@@ -88,7 +88,7 @@ catalogs:
     nuxt-auth-utils: ^0.5.30
     nuxt-schema-org: ^6.2.8
     nuxt-seo-utils: ^8.3.3
-    nuxt-site-config: ^4.1.5
+    nuxt-site-config: ^4.2.0
   test:
     vitest: ^5.0.0-beta.7
   types:
