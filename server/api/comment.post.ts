@@ -31,13 +31,16 @@ export default defineJEventHandler<{
   // 获取时间
   const time = new Date();
 
-  // 获取所回复评论的数据（如果有）
+  // 获取权限
+  const isAdmin = await isIdentityAdmin(event);
+
+  // 获取所回复的评论
   const parent = await CommentDataModel.findOne({
     _id: body.parent,
   }).select("root");
 
-  // 将评论数据写入数据库
-  await CommentDataModel.create({
+  // 写入评论数据
+  const comment = await CommentDataModel.create({
     path: body.path,
     root: parent?.root ?? parent?._id,
     parent: body.parent,
@@ -48,6 +51,11 @@ export default defineJEventHandler<{
     nickname: body.nickname,
     email: body.email,
     address: body.address,
-    status: await isIdentityAdmin(event) ? "public" : "pending",
+    status: isAdmin ? "public" : "pending",
   });
+
+  // 发送回复邮件
+  if (isAdmin) {
+    sendReplyEmail(event, comment, parent);
+  }
 });
