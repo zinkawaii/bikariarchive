@@ -2,13 +2,13 @@
   "type": "module",
   "private": true,
   "devEngines": {
-    "runtime": {
-      "name": "node",
-      "version": "^24.11.0 || >=26.0.0"
-    },
     "packageManager": {
       "name": "pnpm",
       "version": "11.20.0"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "^24.11.0 || >=26.0.0"
     }
   },
   "scripts": {
@@ -56,7 +56,6 @@
     "@nuxtjs/sitemap": "catalog:nuxt",
     "@pinia/nuxt": "catalog:nuxt",
     "@types/node": "catalog:types",
-    "@vitejs/plugin-vue": "catalog:vue",
     "@vueuse/nuxt": "catalog:nuxt",
     "@zinkawaii/eslint-config": "catalog:lint",
     "@zinkawaii/eslint-config-css": "catalog:lint",

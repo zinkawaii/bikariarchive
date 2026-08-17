@@ -9,60 +9,42 @@ packages:
 
 define:
   - &bikariya ^0.0.8
-  - &nuxt ^4.5.0
-  - &shiki ^4.3.1
-  - &vls ^3.3.8
+  - &nuxt ^4.5.2
+  - &shiki ^4.4.3
+  - &vls ^3.3.10
   - &volar 2.4.28
-  - &vueuse ^14.3.0
-  - &zin/eslint ^0.5.1
+  - &vueuse ^14.4.0
+  - &zin/eslint ^0.5.3
 
 overrides:
-  "@nuxt/cli": npm:@nuxt/cli-nightly@3.38.0-20260725-234243-e7aa760
-  "@nuxt/devtools": ^4.0.0-alpha.9
-  "@nuxt/devtools-kit": ^4.0.0-alpha.9
-  "@nuxt/kit": npm:@nuxt/kit-nightly@5.0.0-29750284.8e4f0798
-  "@nuxt/schema": npm:@nuxt/schema-nightly@5.0.0-29750284.8e4f0798
-  # nuxt-seo-utils > @unhead/bundler@3.2.1
-  "@unhead/bundler": ^3.2.3
-  # @nuxt/devtools > @vitejs/devtools@0.3.4
-  "@vitejs/devtools": ^0.4.8
-  # @unhead/bundler > @vitejs/devtools-kit@0.3.4
-  "@vitejs/devtools-kit": ^0.4.8
-  # @nuxt/cli, @nuxt/kit > c12@3.3.4
-  c12: ^4.0.0-beta.5
+  # @nuxt/fonts, @nuxt/icon > @nuxt/devtools-kit@^3.3.1
+  # nuxtseo-shared > @nuxt/devtools-kit@4.0.0-alpha.7
+  "@nuxt/devtools-kit": ^4.0.0-alpha.10
+  "@nuxt/kit": npm:@nuxt/kit-nightly@^5.0.0-29782608.64333519
+  "@nuxt/schema": npm:@nuxt/schema-nightly@^5.0.0-29782608.64333519
   # fontless > esbuild@0.27.0
-  esbuild: ^0.28.1
-  # @nuxt/fonts, @nuxt/image, @nuxtjs/robots, listhen, nuxt-site-config > h3@1.15.11
+  esbuild: ^0.28.2
+  # @nuxt/fonts, @nuxt/image, @nuxtjs/robots, nuxt-auth-utils, nuxt-site-config > h3@1.15.11
   h3: ^2.0.1-rc.26
-  # @nuxt/image > ipx@3.1.1
-  ipx: ^4.0.0-alpha.2
   # micromark-extension-math > katex@0.16.0
-  katex: ^0.18.1
-  nuxt: npm:nuxt-nightly@5.0.0-29750284.8e4f0798
-  # @nuxt/cli, @nuxt/fonts, @nuxtjs/sitemap, nuxtseo-shared, unifont > ofetch@1.5.1
+  katex: ^0.18.4
+  nitro: npm:nitro-nightly@^3.0.1-20260817-141030-4bfb35a7
+  nuxt: npm:nuxt-nightly@^5.0.0-29782608.64333519
+  # @nuxt/fonts, @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared, unifont > ofetch@1.5.1
   ofetch: ^2.0.0-alpha.3
-  # @unhead/bundler > oxc-parser@0.140.0
-  oxc-parser: ^0.141.0
-  # vite > rolldown@1.1.5
-  rolldown: ^1.2.0
-  typescript: npm:typescript-native-bridge@^6.0.3-bridge.7.tsgo.7.0.2
+  typescript: link:../typescript-native-bridge
   # @nuxt/devtools, @nuxt/fonts, fontless > unstorage@1.17.5
   unstorage: ^2.0.0-alpha.7
 
 patchedDependencies:
   "@nuxt/fonts": patches/@nuxt__fonts.patch
-  "@nuxt/image": patches/@nuxt__image.patch
-  "@nuxtjs/robots": patches/@nuxtjs__robots.patch
-  "@pinia/nuxt": patches/@pinia__nuxt.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
   nuxt-auth-utils: patches/nuxt-auth-utils.patch
-  nuxt-site-config: patches/nuxt-site-config.patch
   remark-mdc: patches/remark-mdc.patch
 
 catalogs:
   build:
-    rolldown: ^1.2.0
-    typescript: ^6.0.3
+    typescript: ?=6.0.3
   content:
     kerria: ^0.5.0
     mdast-util-gfm-footnote: ^2.1.0
@@ -80,35 +62,35 @@ catalogs:
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
   database:
-    mongoose: ^9.8.0
+    mongoose: ^9.9.2
   iconify:
     "@iconify-json/fa7-solid": ^1.2.5
   lint:
     "@zinkawaii/eslint-config": *zin/eslint
     "@zinkawaii/eslint-config-css": *zin/eslint
-    eslint: ^10.8.0
+    eslint: ^10.8.1
   nuxt:
     "@bikariya/image-viewer": *bikariya
     "@bikariya/modals": *bikariya
     "@bikariya/shiki": *bikariya
     "@nuxt/fonts": ^0.14.0
-    "@nuxt/icon": ^2.4.1
-    "@nuxt/image": ^2.0.0
+    "@nuxt/icon": ^2.5.0
+    "@nuxt/image": ^2.1.0
     "@nuxt/kit": *nuxt
     "@nuxt/schema": *nuxt
-    "@nuxtjs/robots": ^6.1.3
-    "@nuxtjs/sitemap": ^8.3.2
-    "@pinia/nuxt": ^1.0.1
+    "@nuxtjs/robots": ^6.1.4
+    "@nuxtjs/sitemap": ^8.3.4
+    "@pinia/nuxt": ^1.0.2
     "@vueuse/nuxt": *vueuse
     nuxt: *nuxt
-    nuxt-auth-utils: ^0.5.29
-    nuxt-schema-org: ^6.2.8
-    nuxt-seo-utils: ^8.3.3
-    nuxt-site-config: ^4.1.2
+    nuxt-auth-utils: ^0.5.30
+    nuxt-schema-org: ^6.2.9
+    nuxt-seo-utils: ^8.4.2
+    nuxt-site-config: ^4.2.3
   test:
-    vitest: ^5.0.0-beta.7
+    vitest: ^5.0.0-rc.2
   types:
-    "@types/node": ^26.1.1
+    "@types/node": ^26.2.0
     "@zinkawaii/tsconfig": ^0.1.0
   utils:
     "@clack/prompts": ^1.7.0
@@ -121,19 +103,18 @@ catalogs:
     defu: ^6.1.7
     entities: ^8.0.0
     github-slugger: ^2.0.0
-    katex: ^0.18.1
+    katex: ^0.18.4
     knitwork: ^1.3.0
     mrmime: ^2.0.1
     pathe: ^2.0.3
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
     shiki: *shiki
-    temporal-polyfill: ^1.0.1
-    tinyexec: ^1.2.4
+    temporal-polyfill: ^1.0.4
+    tinyexec: ^1.3.0
     tinyglobby: ^0.2.17
     ufo: ^1.6.4
     unemail: ^0.5.0
-    unrun: ^0.3.1
     uqr: ^0.1.3
     yaml: ^2.9.0
     zfeed: ^0.2.4
@@ -141,12 +122,11 @@ catalogs:
     "@volar/language-core": *volar
     "@volar/typescript": *volar
   vue:
-    "@vitejs/plugin-vue": ^6.0.8
     "@vueuse/core": *vueuse
     "@vueuse/router": *vueuse
-    pinia: ^4.0.2
+    pinia: ^4.0.3
     pinia-plugin-persistedstate: ^4.7.1
-    vue: ^3.5.40
+    vue: ^3.5.41
     vue-component-type-helpers: *vls
     vue-router: ^5.2.0
     vue-tsc: *vls

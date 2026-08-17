@@ -1,4 +1,3 @@
-import vue from "@vitejs/plugin-vue";
 import { clientConfig, serverConfig } from "./runtime.config.ts";
 import typescriptConfig from "./typescript.config.ts";
 
@@ -41,11 +40,6 @@ export default defineNuxtConfig({
     compatibilityVersion: 5,
   },
   nitro: {
-    rolldownConfig: {
-      plugins: [
-        vue(),
-      ],
-    },
     typescript: {
       tsConfig: typescriptConfig.serverTsConfig,
     },
