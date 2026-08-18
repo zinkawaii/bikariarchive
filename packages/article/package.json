@@ -7,27 +7,17 @@
     "./remark": "./src/remark/index.ts"
   },
   "scripts": {
-    "test": "vitest",
     "new": "node scripts/new/index.ts"
   },
   "dependencies": {
     "defu": "catalog:utils",
     "github-slugger": "catalog:utils",
     "kerria": "catalog:content",
-    "mdast-util-gfm-footnote": "catalog:content",
-    "mdast-util-gfm-strikethrough": "catalog:content",
     "mdast-util-to-string": "catalog:content",
-    "micromark-extension-gfm-footnote": "catalog:content",
-    "micromark-extension-gfm-strikethrough": "catalog:content",
-    "micromark-util-symbol": "catalog:content",
     "mrmime": "catalog:utils",
     "pathe": "catalog:utils",
     "propathy": "catalog:utils",
     "remark-breaks": "catalog:content",
-    "remark-frontmatter": "catalog:content",
-    "remark-math": "catalog:content",
-    "remark-mdc": "catalog:content",
-    "remark-parse": "catalog:content",
     "remark-rehype": "catalog:content",
     "temporal-polyfill": "catalog:utils",
     "ufo": "catalog:utils",
@@ -38,7 +28,6 @@
   "devDependencies": {
     "@clack/prompts": "catalog:utils",
     "@zinkawaii/tsconfig": "catalog:types",
-    "tinyexec": "catalog:utils",
-    "vitest": "catalog:test"
+    "tinyexec": "catalog:utils"
   }
 }

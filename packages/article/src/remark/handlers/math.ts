@@ -1,8 +1,8 @@
 import type { Element } from "hast";
-import type { InlineMath, Math } from "mdast-util-math";
 import type { State } from "mdast-util-to-hast";
+import type { InlineMath, Math } from "satorigear";
 
-function math(state: State, node: Math) {
+export function math(state: State, node: Math) {
   const result: Element = {
     type: "element",
     tagName: "mb-math",
@@ -16,7 +16,7 @@ function math(state: State, node: Math) {
   return result;
 }
 
-function inlineMath(state: State, node: InlineMath) {
+export function inlineMath(state: State, node: InlineMath) {
   const result: Element = {
     type: "element",
     tagName: "mb-math",
@@ -29,8 +29,3 @@ function inlineMath(state: State, node: InlineMath) {
   state.patch(node, result);
   return result;
 }
-
-export default {
-  math,
-  inlineMath,
-};

@@ -1,79 +1,91 @@
 import breaks from "remark-breaks";
-import math from "remark-math";
-import mdc from "remark-mdc";
-import parse from "remark-parse";
 import rehype, { type Options as RehypeOptions } from "remark-rehype";
+import { createParser } from "satorigear";
 import { unified } from "unified";
 import code from "./handlers/code.ts";
+import component from "./handlers/component.ts";
 import image from "./handlers/image.ts";
 import link from "./handlers/link.ts";
-import maths from "./handlers/math.ts";
+import { inlineMath, math } from "./handlers/math.ts";
 import compiler from "./plugins/compiler.ts";
 import emoji from "./plugins/emoji.ts";
-import footnote from "./plugins/footnote.ts";
 import frontmatter from "./plugins/frontmatter.ts";
 import hoistImage from "./plugins/hoistImage.ts";
 import ruby from "./plugins/ruby.ts";
 import slot from "./plugins/slot.ts";
 import slug from "./plugins/slug.ts";
-import strikethrough from "./plugins/strikethrough.ts";
-
-declare module "mdast" {
-  interface Node {
-    attributes?: Record<string, any>;
-  }
-}
 
 const rehypeOptions: RehypeOptions = {
   allowDangerousHtml: true,
   footnoteLabel: "参考资料",
   handlers: {
+    blockComponent: component,
+    inlineComponent: component,
     code,
     image,
     link,
-    ...maths,
+    math,
+    inlineMath,
   },
 };
 
+const parserArticle = createParser({
+  features: {
+    attributes: true,
+    binding: true,
+    component: true,
+    footnote: true,
+    frontmatter: true,
+    math: true,
+    strikethrough: true,
+    table: true,
+  },
+});
+
 export async function parseArticle<T>(text: string) {
+  // 文本预处理
+  text = text.replaceAll(/(?<=\n)<br\s*\/?>/g, "::p\n:br\n::");
+
   const processor = unified()
-    .use(parse)
+    .use(function() {
+      this.parser = (document) => parserArticle.parse(document);
+    })
     .use(frontmatter)
-    .use(mdc)
     .use(emoji)
-    .use(footnote)
     .use(hoistImage)
-    .use(math)
     .use(slug)
-    .use(strikethrough)
     .use(rehype, rehypeOptions)
     .use(ruby)
     .use(compiler);
 
-  // 文本预处理
-  text = text.replaceAll(/(?<=\n)<br\s*\/?>/g, "::p\n:br\n::");
-
   const result = await processor.process(text);
+  const attributes = result.data.frontmatters?.[0] ?? {};
+
   return {
-    attributes: result.data.frontmatters![0] as T,
+    attributes: attributes as T,
     body: result.result,
   };
 }
 
+const parserEntry = createParser({
+  features: {
+    attributes: true,
+    component: true,
+    frontmatter: true,
+    math: true,
+    strikethrough: true,
+    table: true,
+  },
+});
+
 export async function parseEntry<T>(text: string) {
   const processor = unified()
-    .use(parse)
-    .use(frontmatter, {
-      type: "yaml",
-      fence: "---",
-      anywhere: true,
-      fallthrough: true,
+    .use(function() {
+      this.parser = (document) => parserEntry.parse(document);
     })
-    .use(mdc)
+    .use(frontmatter)
     .use(emoji)
     .use(hoistImage)
-    .use(math)
-    .use(strikethrough)
     .use(rehype, rehypeOptions)
     .use(ruby)
     .use(slot);
@@ -90,12 +102,20 @@ export async function parseEntry<T>(text: string) {
   };
 }
 
+const parserUpdate = createParser({
+  features: {
+    attributes: true,
+    component: true,
+    strikethrough: true,
+  },
+});
+
 export async function parseUpdate(text: string) {
   const processor = unified()
-    .use(parse)
-    .use(mdc)
+    .use(function() {
+      this.parser = (document) => parserUpdate.parse(document);
+    })
     .use(emoji)
-    .use(strikethrough)
     .use(rehype, rehypeOptions)
     .use(ruby)
     .use(compiler);
@@ -104,14 +124,22 @@ export async function parseUpdate(text: string) {
   return result.result;
 }
 
+const parserComment = createParser({
+  features: {
+    attributes: true,
+    component: true,
+    strikethrough: true,
+  },
+});
+
 export async function parseComment(text: string) {
   const processor = unified()
-    .use(parse)
+    .use(function() {
+      this.parser = (document) => parserComment.parse(document);
+    })
     .use(breaks)
     .use(emoji)
     .use(hoistImage)
-    .use(math)
-    .use(strikethrough)
     .use(rehype, rehypeOptions)
     .use(ruby)
     .use(compiler);
@@ -121,24 +149,20 @@ export async function parseComment(text: string) {
 }
 
 function generateSlottedText(source: string) {
-  const start = source.match(/(?<=\n---\n)/)?.index ?? 0;
-  let text = "";
+  let text = `::slots\n`;
 
-  text += source.slice(0, start);
-  text += `\n::slots\n`;
-
-  const match = source.match(/^::draft\n(---[\s\S]*?\n---)/m);
+  const match = source.match(/(?=^::draft$)/m);
   if (match) {
-    text += source.slice(start, match.index);
+    text += source.slice(0, match.index);
     text += "::\n\n";
-    text += match[1];
-    text += "\n\n::slots";
     text += source.slice(match.index! + match[0].length);
   }
   else {
-    text += source.slice(start);
-    text += "\n::";
+    text += source;
+    text += "\n::\n";
   }
 
-  return text.replaceAll(/(?<=\n#) \b/g, "");
+  return text.replaceAll(/(?<=\n#) \b(.*)/g, (match, name) => (
+    name.replaceAll("[", ".").replaceAll("]", "")
+  ));
 }

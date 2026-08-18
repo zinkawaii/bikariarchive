@@ -1,0 +1,28 @@
+diff --git a/dist/index.d.mts b/dist/index.d.mts
+index 027575d11dab03b593503f1d889cdd96da03d527..ca00189a2f4e734fc535d8a2d8c8f0dc4546c8c8 100644
+--- a/dist/index.d.mts
++++ b/dist/index.d.mts
+@@ -109,6 +109,7 @@ declare module "mdast" {
+   }
+   interface RootContentMap {
+     blockComponent: BlockComponent;
++    inlineComponent: InlineComponent;
+   }
+ }
+ //#endregion
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 98a3283f6fb88e74c840e293a4077dcb5da20d3b..3be5ef01b915b3681422085d2be317ecb535cdd4 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -3075,9 +3075,10 @@ const blockStarts$2 = [{
+ }];
+ //#endregion
+ //#region src/profile/features/component/inline.ts
++const cjkBeforeComponent = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Punctuation}]/u;
+ function inlineComponentEnd(source, start) {
+ 	const previous = source[start - 1];
+-	if (start > 0 && previous !== " " && previous !== "	" && previous !== "\n" && previous !== "\r" && previous !== "*" && previous !== "_" && previous !== "[") return;
++	if (start > 0 && previous !== " " && previous !== "	" && previous !== "\n" && previous !== "\r" && previous !== "*" && previous !== "_" && previous !== "[" && !cjkBeforeComponent.test(previous)) return;
+ 	return componentNameEnd(source, start + 1, false);
+ }
+ const inlineScans = [{

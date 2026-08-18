@@ -104,7 +104,7 @@
         if (node.tag === "binding") {
           return String(
             currentInstance.parent?.proxy
-              ? getProperty(currentInstance.parent.proxy, node.props.value)
+              ? getProperty(currentInstance.parent.proxy, node.props[":value"])
               : void 0,
           );
         }

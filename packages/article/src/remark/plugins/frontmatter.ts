@@ -1,11 +1,8 @@
-import { frontmatterFromMarkdown } from "mdast-util-frontmatter";
-import { frontmatter, type Matter } from "micromark-extension-frontmatter";
 import { visit } from "unist-util-visit";
 import YAML from "yaml";
 import type { Node, Root } from "mdast";
 import type { Processor } from "unified";
 import type { VFile } from "vfile";
-import { appendExtensions } from "./utils.ts";
 
 declare module "vfile" {
   interface DataMap {
@@ -23,26 +20,10 @@ interface Frontmatter extends Node {
   type: "frontmatter";
 }
 
-interface Options {
-  fallthrough?: boolean;
-}
-
-export default function(this: Processor, options?: Options & Matter) {
-  appendExtensions(this, {
-    micromark: frontmatter(options),
-    fromMarkdown: frontmatterFromMarkdown(options),
-  });
-
+export default function(this: Processor) {
   return (tree: Root, file: VFile) => {
     const frontmatters: Record<string, unknown>[] = [];
     file.data.frontmatters = frontmatters;
-
-    if (tree.children[0]?.type !== "yaml") {
-      tree.children.unshift({
-        type: "yaml",
-        value: "",
-      });
-    }
 
     visit(tree, "yaml", (node, index, parent) => {
       if (parent === void 0 || index === void 0) {
@@ -50,18 +31,17 @@ export default function(this: Processor, options?: Options & Matter) {
       }
 
       const data = YAML.parse(node.value) ?? {};
-      frontmatters.push(data);
 
-      if (options?.fallthrough) {
-        parent.children.splice(index, 1, {
-          type: "frontmatter",
-          data: {
-            hName: "frontmatter",
-            hProperties: {
-              index: frontmatters.length - 1,
-            },
-          },
-        });
+      if (
+        parent === tree ||
+        parent.type === "blockComponent" && (
+          parent.name === "slots" || parent.name === "draft"
+        )
+      ) {
+        frontmatters.push(data);
+      }
+      else {
+        parent.attributes = data;
       }
     });
   };

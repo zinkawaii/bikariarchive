@@ -32,7 +32,7 @@ overrides:
   nuxt: npm:nuxt-nightly@^5.0.0-29782608.64333519
   # @nuxt/fonts, @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared, unifont > ofetch@1.5.1
   ofetch: ^2.0.0-alpha.3
-  typescript: link:../typescript-native-bridge
+  typescript: npm:typescript-native-bridge@^6.0.3-bridge.13.tsgo.7.0.2
   # @nuxt/devtools, @nuxt/fonts, fontless > unstorage@1.17.5
   unstorage: ^2.0.0-alpha.7
 
@@ -40,25 +40,17 @@ patchedDependencies:
   "@nuxt/fonts": patches/@nuxt__fonts.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
   nuxt-auth-utils: patches/nuxt-auth-utils.patch
-  remark-mdc: patches/remark-mdc.patch
+  satorigear: patches/satorigear.patch
 
 catalogs:
   build:
     typescript: ?=6.0.3
   content:
     kerria: ^0.5.0
-    mdast-util-gfm-footnote: ^2.1.0
-    mdast-util-gfm-strikethrough: ^2.0.0
     mdast-util-to-string: ^4.0.0
-    micromark-extension-gfm-footnote: ^2.1.0
-    micromark-extension-gfm-strikethrough: ^2.1.0
-    micromark-util-symbol: ^2.0.1
     remark-breaks: ^4.0.0
-    remark-frontmatter: ^5.0.0
-    remark-math: ^6.0.0
-    remark-mdc: ^3.11.1
-    remark-parse: ^11.0.0
     remark-rehype: ^11.1.2
+    satorigear: ^0.0.3
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
   database:
@@ -66,35 +58,34 @@ catalogs:
   iconify:
     "@iconify-json/fa7-solid": ^1.2.5
   lint:
-    "@zinkawaii/eslint-config": *zin/eslint
-    "@zinkawaii/eslint-config-css": *zin/eslint
+    "@zinkawaii/eslint-config": ^0.5.3
+    "@zinkawaii/eslint-config-css": ^0.5.3
     eslint: ^10.8.1
   nuxt:
-    "@bikariya/image-viewer": *bikariya
-    "@bikariya/modals": *bikariya
-    "@bikariya/shiki": *bikariya
+    "@bikariya/image-viewer": ^0.0.8
+    "@bikariya/modals": ^0.0.8
+    "@bikariya/shiki": ^0.0.8
     "@nuxt/fonts": ^0.14.0
     "@nuxt/icon": ^2.5.0
     "@nuxt/image": ^2.1.0
-    "@nuxt/kit": *nuxt
-    "@nuxt/schema": *nuxt
+    "@nuxt/kit": ^4.5.2
+    "@nuxt/schema": ^4.5.2
     "@nuxtjs/robots": ^6.1.4
     "@nuxtjs/sitemap": ^8.3.4
     "@pinia/nuxt": ^1.0.2
-    "@vueuse/nuxt": *vueuse
-    nuxt: *nuxt
+    "@vueuse/nuxt": ^14.4.0
+    nuxt: ^4.5.2
     nuxt-auth-utils: ^0.5.30
     nuxt-schema-org: ^6.2.9
     nuxt-seo-utils: ^8.4.2
     nuxt-site-config: ^4.2.3
-  test:
-    vitest: ^5.0.0-rc.2
   types:
     "@types/node": ^26.2.0
     "@zinkawaii/tsconfig": ^0.1.0
   utils:
     "@clack/prompts": ^1.7.0
-    "@shikijs/transformers": *shiki
+    "@shikijs/transformers": ^4.4.3
+    alien-signals: ^3.2.1
     arktype: ^2.2.3
     aws4fetch: ^1.0.20
     bgmt: ^0.3.1
@@ -109,7 +100,7 @@ catalogs:
     pathe: ^2.0.3
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
-    shiki: *shiki
+    shiki: ^4.4.3
     temporal-polyfill: ^1.0.4
     tinyexec: ^1.3.0
     tinyglobby: ^0.2.17
@@ -119,17 +110,17 @@ catalogs:
     yaml: ^2.9.0
     zfeed: ^0.2.4
   volar:
-    "@volar/language-core": *volar
-    "@volar/typescript": *volar
+    "@volar/language-core": 2.4.28
+    "@volar/typescript": 2.4.28
   vue:
-    "@vueuse/core": *vueuse
-    "@vueuse/router": *vueuse
+    "@vueuse/core": ^14.4.0
+    "@vueuse/router": ^14.4.0
     pinia: ^4.0.3
     pinia-plugin-persistedstate: ^4.7.1
     vue: ^3.5.41
-    vue-component-type-helpers: *vls
+    vue-component-type-helpers: ^3.3.10
     vue-router: ^5.2.0
-    vue-tsc: *vls
+    vue-tsc: ^3.3.10
 
 allowBuilds:
   "@parcel/watcher": true

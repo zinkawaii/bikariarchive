@@ -1,20 +1,5 @@
 import type hast from "hast";
-import type { Extension as FromMarkdownExtension } from "mdast-util-from-markdown";
-import type { Extension as MicromarkExtension } from "micromark-util-types";
-import type { Processor } from "unified";
 import type { Child, Root } from "../types.ts";
-
-interface PushExtensionsOptions {
-  micromark: MicromarkExtension;
-  fromMarkdown: FromMarkdownExtension;
-}
-
-export function appendExtensions(processor: Processor, options: PushExtensionsOptions) {
-  const data = processor.data();
-
-  (data.micromarkExtensions ??= []).push(options.micromark);
-  (data.fromMarkdownExtensions ??= []).push(options.fromMarkdown);
-}
 
 export function transformRoot(root: hast.Root): Root {
   return {
