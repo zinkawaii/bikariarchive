@@ -218,8 +218,8 @@ catalogs:
       specifier: ^11.1.2
       version: 11.1.2
     satorigear:
-      specifier: ^0.0.3
-      version: 0.0.3
+      specifier: ^0.0.4
+      version: 0.0.4
     unified:
       specifier: ^11.0.5
       version: 11.0.5
@@ -420,7 +420,6 @@ patchedDependencies:
   '@nuxt/fonts': 6e0d90d81e1827c11cebb59885cba460f2644a8ff7eb55cc48744f7b15cce533
   mdast-util-to-hast: d521b9d50a7aa7154351381862dc1832ff184c4049669f70bd8bd2b10b6c9411
   nuxt-auth-utils: f55c9811976d8414670e7ad07fd6f7665fa255f5288d08be8c4cc28969311d15
-  satorigear: 06dd37c8e6f657822c4d73ae27ea3f9f09fe68e732bd7369dbee3dbf61edfc90
 
 importers:
 
@@ -667,7 +666,7 @@ importers:
         version: 2.0.3
       satorigear:
         specifier: catalog:content
-        version: 0.0.3(patch_hash=06dd37c8e6f657822c4d73ae27ea3f9f09fe68e732bd7369dbee3dbf61edfc90)
+        version: 0.0.4
       unist-util-visit:
         specifier: catalog:content
         version: 5.1.0
@@ -3630,8 +3629,8 @@ packages:
     resolution: {integrity: sha512-b3rppTKm9T+PsVCBEOUR46GWI7fdOs00VKZ1+9c1EWDaDMvjQc6tUwuFyIprgGgTcWoVHSKrU8H31ZHA2e0RHA==}
     engines: {node: '>=10'}
 
-  satorigear@0.0.3:
-    resolution: {integrity: sha512-EFrOFkGWySswU5aRAt03FFGWKooBIUx8D4izFEkbuveJyknYVd+en1Rrn2A8i4znpw4H4b52Y51v4lxAnRZFbg==}
+  satorigear@0.0.4:
+    resolution: {integrity: sha512-DYwYz9JCF/Zko6XLpxcdlg6XPOvjjG5azlCMYn/0IBX3+hG0341hDnVX1sTg7S1vVJ9H+0dI/H+R7Xo9kr1KfA==}
 
   scslre@0.3.0:
     resolution: {integrity: sha512-3A6sD0WYP7+QrjbfNA2FN3FsOaGGFoekCVgTyypy53gPxhbkCIjtO6YWgdrfM+n/8sI8JeXZOIxsHjMTNxQ4nQ==}
@@ -7991,7 +7990,7 @@ snapshots:
 
   safe-stable-stringify@2.5.0: {}
 
-  satorigear@0.0.3(patch_hash=06dd37c8e6f657822c4d73ae27ea3f9f09fe68e732bd7369dbee3dbf61edfc90):
+  satorigear@0.0.4:
     dependencies:
       '@types/mdast': 4.0.4
       entities: 8.0.0

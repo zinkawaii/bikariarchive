@@ -40,7 +40,6 @@ patchedDependencies:
   "@nuxt/fonts": patches/@nuxt__fonts.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
   nuxt-auth-utils: patches/nuxt-auth-utils.patch
-  satorigear: patches/satorigear.patch
 
 catalogs:
   build:
@@ -50,7 +49,7 @@ catalogs:
     mdast-util-to-string: ^4.0.0
     remark-breaks: ^4.0.0
     remark-rehype: ^11.1.2
-    satorigear: ^0.0.3
+    satorigear: ^0.0.4
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
   database:
