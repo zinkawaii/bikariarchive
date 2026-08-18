@@ -4,7 +4,7 @@
   "private": true,
   "exports": {
     ".": "./src/index.ts",
-    "./remark": "./src/remark/index.ts"
+    "./markdown": "./src/markdown/index.ts"
   },
   "scripts": {
     "new": "node scripts/new/index.ts"

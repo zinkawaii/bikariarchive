@@ -1,4 +1,4 @@
-import type { Child } from "../remark/types.ts";
+import type { Child } from "../markdown/types.ts";
 
 export type NovelType = "novel" | "blog";
 
