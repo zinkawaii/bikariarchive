@@ -6,11 +6,9 @@
   "dependencies": {
     "@volar/language-core": "catalog:volar",
     "@volar/typescript": "catalog:volar",
+    "alien-signals": "catalog:utils",
     "pathe": "catalog:utils",
-    "remark-frontmatter": "catalog:content",
-    "remark-mdc": "catalog:content",
-    "remark-parse": "catalog:content",
-    "unified": "catalog:content",
+    "satorigear": "catalog:content",
     "unist-util-visit": "catalog:content",
     "yaml": "catalog:utils"
   },

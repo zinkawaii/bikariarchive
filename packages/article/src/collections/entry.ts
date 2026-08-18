@@ -2,9 +2,9 @@ import { readFile } from "node:fs/promises";
 import defu from "defu";
 import { createKerria, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
-import { parseEntry } from "../remark/index.ts";
+import { parseEntry } from "../markdown/index.ts";
 import { isDevelopment } from "../utils.ts";
-import type { Child } from "../remark/types.ts";
+import type { Child } from "../markdown/types.ts";
 import type { EntryCategory, EntryDetail, JEntry } from "../types/entry.ts";
 import type { IntelNode, JIntel } from "../types/intel.ts";
 

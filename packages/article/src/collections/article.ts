@@ -3,7 +3,7 @@ import { createKerria, useLoad, useSource } from "kerria";
 import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
-import { parseArticle, parseEntry } from "../remark/index.ts";
+import { parseArticle, parseEntry } from "../markdown/index.ts";
 import { isDevelopment } from "../utils.ts";
 import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article.ts";
 

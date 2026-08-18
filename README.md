@@ -17,6 +17,10 @@
     src="https://img.shields.io/badge/-ESLint-4C32C3?logo=eslint"
     alt="ESLint"
   /></a>
+  <a href="https://github.com/KazariEX/satorigear"><img
+    src="https://img.shields.io/badge/SatoriGear-EA7FA0?logo=markdown"
+    alt="SatoriGear"
+  /></a>
 </p>
 
 ## 版权声明

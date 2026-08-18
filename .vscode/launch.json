@@ -32,7 +32,7 @@
       "port": 5859,
       "restart": true,
       "outFiles": [
-        "${workspaceRoot}/packages/*/dist/**/*.cjs"
+        "${workspaceRoot}/packages/**/*.{ts,cjs}"
       ]
     }
   ]

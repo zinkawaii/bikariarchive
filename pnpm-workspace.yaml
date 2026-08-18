@@ -32,7 +32,7 @@ overrides:
   nuxt: npm:nuxt-nightly@^5.0.0-29782608.64333519
   # @nuxt/fonts, @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared, unifont > ofetch@1.5.1
   ofetch: ^2.0.0-alpha.3
-  typescript: link:../typescript-native-bridge
+  typescript: npm:typescript-native-bridge@^6.0.3-bridge.13.tsgo.7.0.2
   # @nuxt/devtools, @nuxt/fonts, fontless > unstorage@1.17.5
   unstorage: ^2.0.0-alpha.7
 
@@ -40,25 +40,16 @@ patchedDependencies:
   "@nuxt/fonts": patches/@nuxt__fonts.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
   nuxt-auth-utils: patches/nuxt-auth-utils.patch
-  remark-mdc: patches/remark-mdc.patch
 
 catalogs:
   build:
     typescript: ?=6.0.3
   content:
     kerria: ^0.5.0
-    mdast-util-gfm-footnote: ^2.1.0
-    mdast-util-gfm-strikethrough: ^2.0.0
     mdast-util-to-string: ^4.0.0
-    micromark-extension-gfm-footnote: ^2.1.0
-    micromark-extension-gfm-strikethrough: ^2.1.0
-    micromark-util-symbol: ^2.0.1
     remark-breaks: ^4.0.0
-    remark-frontmatter: ^5.0.0
-    remark-math: ^6.0.0
-    remark-mdc: ^3.11.1
-    remark-parse: ^11.0.0
     remark-rehype: ^11.1.2
+    satorigear: ^0.0.4
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
   database:
@@ -87,14 +78,13 @@ catalogs:
     nuxt-schema-org: ^6.2.9
     nuxt-seo-utils: ^8.4.2
     nuxt-site-config: ^4.2.3
-  test:
-    vitest: ^5.0.0-rc.2
   types:
     "@types/node": ^26.2.0
     "@zinkawaii/tsconfig": ^0.1.0
   utils:
     "@clack/prompts": ^1.7.0
     "@shikijs/transformers": *shiki
+    alien-signals: ^3.2.1
     arktype: ^2.2.3
     aws4fetch: ^1.0.20
     bgmt: ^0.3.1

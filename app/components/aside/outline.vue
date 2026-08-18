@@ -12,7 +12,7 @@
     children: HeadingInfo[];
   }
 
-  const { height } = useElementSize(document?.body);
+  const { height } = useElementSize(import.meta.browser ? document.body : null);
 
   const activeIdx = ref(0);
   const flatHeadings = shallowRef<HeadingInfo[]>([]);

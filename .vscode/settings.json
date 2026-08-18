@@ -6,7 +6,7 @@
     "."
   ],
   "files.associations": {
-    "content/**/*.md": "mdc"
+    "**/content/**/*.md": "mdc"
   },
   "files.exclude": {
     "content/{.vscode,node_modules}": true

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { parseComment } from "@bikari/article/remark";
+  import { parseComment } from "@bikari/article/markdown";
   import { Temporal } from "temporal-polyfill";
   import { LazyCommentUser } from "#components";
   import type { CommentData } from "#server/types/comment";
