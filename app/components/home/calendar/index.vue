@@ -42,6 +42,13 @@
     { 7: "小寒", 21: "大寒" },
   ];
 
+  // 农历日期
+  const lunarDays = [
+    ...["初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十"],
+    ...["十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十"],
+    ...["廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"],
+  ];
+
   const startDate = new Temporal.PlainDate(2018, 11, 7);
   const endDate = new Temporal.PlainDate(2019, 12, 31);
 
@@ -97,9 +104,6 @@
   function createDate(year: number, month: number, day: number): CalendarDate {
     const solar = new Temporal.PlainDate(year, month, day);
     const lunar = solar.withCalendar("chinese");
-    const raw = lunar.toLocaleString("zh-CN-u-ca-chinese", {
-      dateStyle: "medium",
-    });
 
     return {
       key: solar.toString(),
@@ -107,7 +111,9 @@
       month,
       day,
       lunar: solarTerms[lunar.month - 1]?.[lunar.day] ?? (
-        lunar.day === 1 ? raw.slice(5, -2) : raw.slice(-2)
+        lunar.day === 1
+          ? lunar.toLocaleString("zh-CN-u-ca-chinese", { month: "long" })
+          : lunarDays[lunar.day - 1]
       ),
     };
   }
