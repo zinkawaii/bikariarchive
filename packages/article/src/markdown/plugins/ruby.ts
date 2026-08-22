@@ -1,24 +1,24 @@
 import { visit } from "unist-util-visit";
-import type { Root } from "hast";
+import type { Root } from "mdast";
 
 export default function() {
   return (tree: Root) => {
-    visit(tree, "element", (node, index, parent) => {
+    visit(tree, "inlineComponent", (node, index, parent) => {
       if (parent === void 0 || index === void 0) {
         return;
       }
 
-      if (node.tagName === "ruby" && node.properties.rt !== void 0) {
+      if (node.name === "ruby" && node.attributes.rt !== void 0) {
         node.children.push({
-          type: "element",
-          tagName: "rt",
-          properties: {},
+          type: "inlineComponent",
+          name: "rt",
+          attributes: {},
           children: [{
             type: "text",
-            value: node.properties.rt as string,
+            value: node.attributes.rt as string,
           }],
         });
-        delete node.properties.rt;
+        delete node.attributes.rt;
       }
     });
   };

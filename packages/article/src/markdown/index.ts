@@ -42,23 +42,23 @@ const parserArticle = createParser({
   },
 });
 
+const processorArticle = unified()
+  .use(function() {
+    this.parser = (document) => parserArticle.parse(document);
+  })
+  .use(frontmatter)
+  .use(emoji)
+  .use(hoistImage)
+  .use(ruby)
+  .use(slug)
+  .use(rehype, rehypeOptions)
+  .use(compiler);
+
 export async function parseArticle<T>(text: string) {
   // 文本预处理
   text = text.replaceAll(/(?<=\n)<br\s*\/?>/g, "::p\n:br\n::");
 
-  const processor = unified()
-    .use(function() {
-      this.parser = (document) => parserArticle.parse(document);
-    })
-    .use(frontmatter)
-    .use(emoji)
-    .use(hoistImage)
-    .use(slug)
-    .use(rehype, rehypeOptions)
-    .use(ruby)
-    .use(compiler);
-
-  const result = await processor.process(text);
+  const result = await processorArticle.process(text);
   const attributes = result.data.frontmatters?.[0] ?? {};
 
   return {
@@ -78,22 +78,22 @@ const parserEntry = createParser({
   },
 });
 
-export async function parseEntry<T>(text: string) {
-  const processor = unified()
-    .use(function() {
-      this.parser = (document) => parserEntry.parse(document);
-    })
-    .use(frontmatter)
-    .use(emoji)
-    .use(hoistImage)
-    .use(rehype, rehypeOptions)
-    .use(ruby)
-    .use(slot);
+const processorEntry = unified()
+  .use(function() {
+    this.parser = (document) => parserEntry.parse(document);
+  })
+  .use(frontmatter)
+  .use(emoji)
+  .use(hoistImage)
+  .use(ruby)
+  .use(rehype, rehypeOptions)
+  .use(slot);
 
+export async function parseEntry<T>(text: string) {
   // 文本预处理
   text = generateSlottedText(text);
 
-  const result = await processor.process(text);
+  const result = await processorEntry.process(text);
   const [attributes, ...drafts] = result.data.frontmatters as T[];
 
   return {
@@ -110,17 +110,17 @@ const parserUpdate = createParser({
   },
 });
 
-export async function parseUpdate(text: string) {
-  const processor = unified()
-    .use(function() {
-      this.parser = (document) => parserUpdate.parse(document);
-    })
-    .use(emoji)
-    .use(rehype, rehypeOptions)
-    .use(ruby)
-    .use(compiler);
+const processorUpdate = unified()
+  .use(function() {
+    this.parser = (document) => parserUpdate.parse(document);
+  })
+  .use(emoji)
+  .use(ruby)
+  .use(rehype, rehypeOptions)
+  .use(compiler);
 
-  const result = await processor.process(text);
+export async function parseUpdate(text: string) {
+  const result = await processorUpdate.process(text);
   return result.result;
 }
 
@@ -132,19 +132,19 @@ const parserComment = createParser({
   },
 });
 
-export async function parseComment(text: string) {
-  const processor = unified()
-    .use(function() {
-      this.parser = (document) => parserComment.parse(document);
-    })
-    .use(breaks)
-    .use(emoji)
-    .use(hoistImage)
-    .use(rehype, rehypeOptions)
-    .use(ruby)
-    .use(compiler);
+const processorComment = unified()
+  .use(function() {
+    this.parser = (document) => parserComment.parse(document);
+  })
+  .use(breaks)
+  .use(emoji)
+  .use(hoistImage)
+  .use(ruby)
+  .use(rehype, rehypeOptions)
+  .use(compiler);
 
-  const result = await processor.process(text);
+export async function parseComment(text: string) {
+  const result = await processorComment.process(text);
   return result.result;
 }
 
