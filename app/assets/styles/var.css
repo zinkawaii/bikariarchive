@@ -30,9 +30,9 @@
   --box-shadow-dark        : 0 0 8px rgb(0 0 0 / 16%);
   --box-shadow-darker      : 0 0 8px rgb(0 0 0 / 32%);
   --text-shadow            : 1px 1px 2px rgb(0 0 0 / 50%);
-  --font-primary           : "Inter", "PingFang SC", "Noto Sans SC", sans-serif;
+  --font-primary           : "InterVariable", "PingFang SC", "Noto Sans SC", sans-serif;
   --font-monospace         : "JetBrains Mono", var(--font-primary);
-  --font-smooth            : "ChillRoundF", var(--font-primary);
+  --font-smooth            : "寒蝉全圆体", var(--font-primary);
   --rounded-circle         : 100%;
   --rounded-full           : calc(1px * infinity);
   --size-min-width         : 320px;
@@ -83,4 +83,18 @@
   --color-theme-text       : oklch(78% 0.1026 234deg);
 
   color-scheme: dark only;
+}
+
+@font-feature-values InterVariable {
+  /* eslint-disable-next-line css/no-invalid-at-rules */
+  @styleset {
+    --open-digits: 1;
+    --disambiguation: 2;
+    --round-quotes-and-commas: 3;
+    --disambiguation-except-zero: 4;
+    --circled-characters: 5;
+    --squared-characters: 6;
+    --square-punctuation: 7;
+    --square-quotes: 8;
+  }
 }

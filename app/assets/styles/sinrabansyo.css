@@ -13,6 +13,7 @@
   overflow: hidden scroll;
   font-family: var(--font-primary);
   font-size: 16px;
+  font-variant-alternates: styleset(--open-digits, --disambiguation-except-zero, --round-quotes-and-commas);
   line-height: 1.4;
   text-autospace: normal;
   text-size-adjust: 100%;

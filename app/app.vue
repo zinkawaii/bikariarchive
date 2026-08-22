@@ -7,15 +7,9 @@
   const dark = ref<boolean>();
   const theme = ref<string>();
 
-  const mediaLoads = {
-    media: "none",
-    onload: `this.onload=null;this.media="all"`,
-  };
-
   useHead({
     link: [
       { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" },
-      { rel: "stylesheet", href: "https://esm.sh/katex/dist/katex.min.css", ...mediaLoads },
     ],
     script: [
       { src: scriptDark },

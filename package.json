@@ -47,7 +47,6 @@
     "@bikariya/modals": "catalog:nuxt",
     "@bikariya/shiki": "catalog:nuxt",
     "@iconify-json/fa7-solid": "catalog:iconify",
-    "@nuxt/fonts": "catalog:nuxt",
     "@nuxt/icon": "catalog:nuxt",
     "@nuxt/image": "catalog:nuxt",
     "@nuxt/kit": "catalog:nuxt",

@@ -63,7 +63,6 @@ export default defineNuxtConfig({
     "@bikariya/image-viewer",
     "@bikariya/modals",
     "@bikariya/shiki",
-    "@nuxt/fonts",
     "@nuxt/icon",
     "@nuxt/image",
     "@nuxtjs/robots",
@@ -80,9 +79,6 @@ export default defineNuxtConfig({
     features: {
       namedLayoutSlots: true,
     },
-  },
-  fonts: {
-    provider: "google",
   },
   icon: {
     componentName: "iconify",
