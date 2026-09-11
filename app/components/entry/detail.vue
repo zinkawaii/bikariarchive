@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import type { EntryDetail } from "@bikari/article";
-  import { components } from "#build/article.mjs";
+  import { components } from "#build/article";
 
   defineProps<EntryDetail>();
 </script>

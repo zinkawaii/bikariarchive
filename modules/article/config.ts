@@ -30,8 +30,8 @@ export default defineConfig({
         "../content/concept/*",
       ],
       components: [
-        "LazyEntryKnownAbility",
-        "LazyEntryStarredAbility",
+        "EntryKnownAbility",
+        "EntryStarredAbility",
       ],
     },
     {

@@ -4,7 +4,7 @@
   import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
   import type { RenderFunction, VNodeChild } from "vue";
   // eslint-disable-next-line vue/no-dupe-keys
-  import { components } from "#build/article.mjs";
+  import { components } from "#build/article";
 
   const ariaRE = /^aria[A-Z]/;
 </script>
@@ -55,7 +55,7 @@
         tag = "comment-forge";
       }
     }
-    const comp = resolvedComponents.value[tag] ?? resolvedComponents.value["lazy-" + tag];
+    const comp = resolvedComponents.value[tag];
 
     if ("className" in props) {
       props.class = props.className;

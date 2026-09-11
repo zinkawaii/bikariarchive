@@ -77,7 +77,7 @@ export default defineNuxtModule({
         for (const mapping of config.mappings) {
           if (mapping.components?.length) {
             for (const name of mapping.components) {
-              all.add(name);
+              all.add("Lazy" + name);
             }
           }
         }
@@ -91,7 +91,7 @@ ${config.components?.map((name) => `    ${name},`).join("\n")}
 ${config.mappings
   .filter((mapping) => mapping.components?.length)
   .map((mapping) => /* TS */`  ${mapping.name}: {
-${mapping.components?.map((name) => `    ${name},`).join("\n")}
+${mapping.components?.map((name) => `    ${name}: Lazy${name},`).join("\n")}
   },`)
   .join("")}
 };
