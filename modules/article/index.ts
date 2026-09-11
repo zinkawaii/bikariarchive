@@ -1,5 +1,5 @@
 import { article, entry, update } from "@bikari/article";
-import { addPlugin, addServerPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
+import { addComponent, addPlugin, addServerPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
 import { join, relative } from "pathe";
 import config from "./config.ts";
 import { buildSearch } from "./search.ts";
@@ -12,11 +12,16 @@ export default defineNuxtModule({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
-    addPlugin({ src: resolve("runtime/client") });
+    addPlugin({ src: resolve("runtime/plugin") });
 
-    addServerPlugin(resolve("runtime/server"));
+    addServerPlugin(resolve("runtime/server/plugin"));
 
     addVitePlugin(vite, { prepend: true });
+
+    addComponent({
+      name: "BikariyaArticle",
+      filePath: resolve("runtime/article.vue"),
+    });
 
     nuxt.options.alias["#data"] = join(nuxt.options.rootDir, ".data");
 

@@ -130,7 +130,7 @@
     <novel-header :art :count/>
     <novel-decrypt v-if="art.encrypted && !decrypted" v-model="password" @decrypt="debouncedExecute"/>
     <mb-skeleton v-else-if="status !== `success` && !post"/>
-    <novel-article
+    <bikariya-article
       v-else-if="post"
       ref="article"
       :body="post.body"
@@ -142,7 +142,7 @@
 
 <style scoped>
   @container main (width >= 768px) {
-    :where(.mb-skeleton, .novel-text) {
+    :where(.mb-skeleton, .bikariya-article) {
       padding-inline: var(--meow-large);
     }
   }

@@ -17,9 +17,9 @@
         :attrs="[`volume`, `word-count`, `publish-date`, `update-date`]"
       />
       <!-- eslint-disable-next-line vue/valid-v-slot -->
-      <novel-article #fallback class="p-small text-secondary" as="p" :body="art.excerpt">
+      <bikariya-article #fallback class="p-small text-secondary" as="p" :body="art.excerpt">
         <span class="text-gray">这篇文章还没有简介。</span>
-      </novel-article>
+      </bikariya-article>
     </div>
     <span class="tabular-thumb"></span>
   </nuxt-link>

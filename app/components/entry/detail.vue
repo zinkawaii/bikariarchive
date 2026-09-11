@@ -7,6 +7,6 @@
 
 <template>
   <entry-section :title>
-    <novel-article as="div" :body="content" :components="components.entry"/>
+    <bikariya-article as="div" :body="content" :components="components.entry"/>
   </entry-section>
 </template>

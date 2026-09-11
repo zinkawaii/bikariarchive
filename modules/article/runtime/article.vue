@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" setup>
   import { hyphenate } from "@vueuse/core";
   import { getProperty } from "propathy";
   import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
@@ -6,10 +6,6 @@
   // eslint-disable-next-line vue/no-dupe-keys
   import { components } from "#build/article";
 
-  const ariaRE = /^aria[A-Z]/;
-</script>
-
-<script lang="ts" setup>
   const props = withDefaults(defineProps<{
     body?: Root | Child[];
     components?: Record<string, Component>;
@@ -23,6 +19,8 @@
     default?: (props: { render: RenderFunction }) => any;
     fallback?: () => any;
   }>();
+
+  const ariaRE = /^aria[A-Z]/;
 
   const currentInstance = getCurrentInstance()!;
   const resolvedComponents = computed(() => {
@@ -111,14 +109,14 @@
 </script>
 
 <template>
-  <mb-primitive class="novel-text" :class="`is-${variant}`" as="article">
+  <mb-primitive class="bikariya-article" :class="`is-${variant}`" as="article">
     <slot v-if="slots.default" :render></slot>
     <render v-else/>
   </mb-primitive>
 </template>
 
 <style>
-  .novel-text {
+  .bikariya-article {
     overflow-wrap: anywhere;
 
     :where(h2, h3, h4, h5, h6) {
