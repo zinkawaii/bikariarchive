@@ -1,6 +1,7 @@
 import { article, entry, update } from "@bikari/article";
-import { addPlugin, addServerPlugin, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
+import { addPlugin, addServerPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
 import { join, relative } from "pathe";
+import config from "./config.ts";
 import { buildSearch } from "./search.ts";
 import vite from "./vite.ts";
 
@@ -40,6 +41,78 @@ export default defineNuxtModule({
 
     nuxt.hook("close", async () => {
       await Promise.all(disposables.map((dispose) => dispose()));
+    });
+
+    addTemplate({
+      filename: "tsconfig.article.json",
+      write: true,
+      getContents: () => JSON.stringify({
+        extends: "@zinkawaii/tsconfig",
+        compilerOptions: {
+          paths: {
+            "#build/*": [
+              "./*",
+            ],
+          },
+          plugins: [
+            {
+              name: "@dxup/unimport",
+            },
+            {
+              name: "@bikari/typescript-plugin",
+              ...config,
+            },
+          ],
+        },
+        include: [
+          "../content/**/*.md",
+        ],
+      }, void 0, 2),
+    });
+
+    addTemplate({
+      filename: "article.mjs",
+      getContents() {
+        const all = new Set(config.components);
+        for (const mapping of config.mappings) {
+          if (mapping.components?.length) {
+            for (const name of mapping.components) {
+              all.add("Lazy" + name);
+            }
+          }
+        }
+        return /* TS */`
+import { ${[...all].join(", ")} } from "#components";
+
+export const components = {
+  global: {
+${config.components?.map((name) => `    ${name},`).join("\n")}
+  },
+${config.mappings
+  .filter((mapping) => mapping.components?.length)
+  .map((mapping) => /* TS */`  ${mapping.name}: {
+${mapping.components?.map((name) => `    ${name}: Lazy${name},`).join("\n")}
+  },`)
+  .join("")}
+};
+`.trimStart();
+      },
+    });
+
+    addTemplate({
+      filename: "article.d.ts",
+      getContents: () => /* TS */`
+export type Macros = typeof import("${relative(nuxt.options.buildDir, resolve("config.ts"))}").default["macros"];
+
+export declare const components: {
+  global: Pick<typeof import("./components"), ${config.components?.map((name) => `"${name}"`).join(" | ")}>;
+${config.mappings.map(
+  (mapping) => /* TS */`  ${mapping.name}: Pick<typeof import("./components"), ${
+    mapping.components?.map((name) => `"${name}"`).join(" | ") ?? `""`
+  }>`,
+).join("\n")}
+};
+`.trimStart(),
     });
   },
 });
