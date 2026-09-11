@@ -205,6 +205,9 @@ settings:
 
 catalogs:
   content:
+    html-tags:
+      specifier: ^5.1.0
+      version: 5.1.0
     kerria:
       specifier: ^0.5.0
       version: 0.5.0
@@ -642,6 +645,9 @@ importers:
       alien-signals:
         specifier: catalog:utils
         version: 3.2.1
+      html-tags:
+        specifier: catalog:content
+        version: 5.1.0
       pathe:
         specifier: catalog:utils
         version: 2.0.3
@@ -2560,6 +2566,10 @@ packages:
 
   html-entities@2.6.0:
     resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
+
+  html-tags@5.1.0:
+    resolution: {integrity: sha512-n6l5uca7/y5joxZ3LUePhzmBFUJ+U2YWzhMa8XUTecSeSlQiZdF5XAd/Q3/WUl0VsXgUwWi8I7CNIwdI5WN1SQ==}
+    engines: {node: '>=20.10'}
 
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
@@ -6243,6 +6253,8 @@ snapshots:
   hookable@6.1.1: {}
 
   html-entities@2.6.0: {}
+
+  html-tags@5.1.0: {}
 
   html-void-elements@3.0.0: {}
 

@@ -49,7 +49,15 @@ export default defineNuxtModule({
       getContents: () => JSON.stringify({
         extends: "@zinkawaii/tsconfig",
         compilerOptions: {
+          paths: {
+            "#build/*": [
+              "./*",
+            ],
+          },
           plugins: [
+            {
+              name: "@dxup/unimport",
+            },
             {
               name: "@bikari/typescript-plugin",
               ...config,
@@ -64,7 +72,6 @@ export default defineNuxtModule({
 
     addTemplate({
       filename: "article.mjs",
-      write: true,
       getContents() {
         const all = new Set(config.components);
         for (const mapping of config.mappings) {
@@ -90,6 +97,22 @@ ${mapping.components?.map((name) => `    ${name},`).join("\n")}
 };
 `.trimStart();
       },
+    });
+
+    addTemplate({
+      filename: "article.d.ts",
+      getContents: () => /* TS */`
+export type Macros = typeof import("${relative(nuxt.options.buildDir, resolve("config.ts"))}").default["macros"];
+
+export declare const components: {
+  global: Pick<typeof import("./components"), ${config.components?.map((name) => `"${name}"`).join(" | ")}>;
+${config.mappings.map(
+  (mapping) => /* TS */`  ${mapping.name}: Pick<typeof import("./components"), ${
+    mapping.components?.map((name) => `"${name}"`).join(" | ") ?? `""`
+  }>`,
+).join("\n")}
+};
+`.trimStart(),
     });
   },
 });

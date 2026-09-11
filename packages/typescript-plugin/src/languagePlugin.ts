@@ -4,13 +4,11 @@ import { type CodeMapping, forEachEmbeddedCode, type LanguagePlugin, type Virtua
 import { computed, signal } from "alien-signals";
 import { dirname, join, matchesGlob } from "pathe";
 import { createParser, type Document, type TextEdit } from "satorigear";
-import { visit } from "unist-util-visit";
-import { parseDocument } from "yaml";
 import type { Config, Mapping } from "@bikari/article";
 import type { Root } from "mdast";
 import type ts from "typescript";
-import { generateFrontmatters } from "./codegen/generateFrontmatters.ts";
-import type { Code, Expression, Frontmatter } from "./types.ts";
+import { generateRoot } from "./codegen/generate.ts";
+import type { Code } from "./types.ts";
 
 interface Context {
   root: string;
@@ -115,39 +113,12 @@ export class MdzVirtualCode implements VirtualCode {
 
     this.#embeddedCodes = computed(() => {
       const root = this.#root();
-      const text = this.snapshot.getText(0, this.snapshot.getLength());
-
-      const frontmatters: Frontmatter[] = [];
-      const expressions: Expression[] = [];
-
-      visit(root, "yaml", (node) => {
-        const root = parseDocument(node.value);
-        frontmatters.push({
-          root,
-          offset: node.position!.start.offset!,
-        });
-      });
-
-      visit(root, "heading", (node) => {
-        if (node.depth !== 1) {
-          return;
-        }
-
-        const start = node.position!.start.offset! + "# ".length;
-        const end = node.position!.end.offset!;
-
-        expressions.push({
-          type: "slot",
-          source: text.slice(start, end),
-          offset: start,
-        });
-      });
+      const source = this.snapshot.getText(0, this.snapshot.getLength());
 
       return [
-        resolveCodes("document", "typescript", generateFrontmatters({
+        resolveCodes("document", "typescript", generateRoot(root, {
           name: options.name,
-          frontmatters,
-          expressions,
+          source,
         })),
       ];
     });

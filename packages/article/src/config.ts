@@ -1,5 +1,6 @@
 export interface Config {
   components?: string[];
+  macros: Record<string, any>;
   mappings: Mapping[];
 }
 
@@ -9,6 +10,6 @@ export interface Mapping {
   components?: string[];
 }
 
-export function defineConfig(config: Config) {
+export function defineConfig<T extends Config>(config: T) {
   return config;
 }

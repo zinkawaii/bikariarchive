@@ -42,6 +42,7 @@ catalogs:
   build:
     typescript: ?=6.0.3
   content:
+    html-tags: ^5.1.0
     kerria: ^0.5.0
     mdast-util-to-string: ^4.0.0
     remark-breaks: ^4.0.0
