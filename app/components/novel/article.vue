@@ -3,20 +3,10 @@
   import { getProperty } from "propathy";
   import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
   import type { RenderFunction, VNodeChild } from "vue";
-  import { CommentForge, Iconify, MbForge, MbImage, MbMath, MbVideo, PlainLink, StoryHeading } from "#components";
+  // eslint-disable-next-line vue/no-dupe-keys
+  import { components } from "#build/article.mjs";
 
   const ariaRE = /^aria[A-Z]/;
-
-  const globalComponents = {
-    CommentForge,
-    Iconify,
-    MbForge,
-    MbImage,
-    MbMath,
-    MbVideo,
-    PlainLink,
-    StoryHeading,
-  };
 </script>
 
 <script lang="ts" setup>
@@ -37,7 +27,7 @@
   const currentInstance = getCurrentInstance()!;
   const resolvedComponents = computed(() => {
     const comps: Record<string, Component> = {};
-    for (const [name, comp] of Object.entries({ ...globalComponents, ...props.components })) {
+    for (const [name, comp] of Object.entries({ ...components.global, ...props.components })) {
       comps[hyphenate(name)] = comp;
     }
     return comps;

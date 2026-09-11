@@ -6,10 +6,11 @@ import { dirname, join, matchesGlob } from "pathe";
 import { createParser, type Document, type TextEdit } from "satorigear";
 import { visit } from "unist-util-visit";
 import { parseDocument } from "yaml";
+import type { Config, Mapping } from "@bikari/article";
 import type { Root } from "mdast";
 import type ts from "typescript";
 import { generateFrontmatters } from "./codegen/generateFrontmatters.ts";
-import type { Code, Config, Expression, Frontmatter, Mapping } from "./types.ts";
+import type { Code, Expression, Frontmatter } from "./types.ts";
 
 interface Context {
   root: string;
@@ -94,8 +95,8 @@ export class MdzVirtualCode implements VirtualCode {
     this.snapshot = snapshot;
 
     let options: Mapping = {
+      name: "",
       patterns: [],
-      frontmatter: [],
     };
 
     const { root, config } = context;
@@ -144,7 +145,7 @@ export class MdzVirtualCode implements VirtualCode {
 
       return [
         resolveCodes("document", "typescript", generateFrontmatters({
-          import: options.frontmatter,
+          name: options.name,
           frontmatters,
           expressions,
         })),

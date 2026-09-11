@@ -7,17 +7,6 @@ export type Code = string | [
     features: CodeInformation,
 ];
 
-export interface Config {
-  mappings: Mapping[];
-}
-
-export interface Mapping {
-  frontmatter: Import;
-  patterns: string[];
-}
-
-export type Import = [specifier: string, type: string] | [];
-
 export interface Frontmatter {
   root: Document;
   offset: number;

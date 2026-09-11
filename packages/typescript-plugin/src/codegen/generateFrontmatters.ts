@@ -1,18 +1,17 @@
 import { type Document, type Node, Scalar, YAMLMap, YAMLSeq } from "yaml";
 import { codeFeatures } from "./codeFeatures.ts";
 import { Boundary } from "./utils.ts";
-import type { Code, Expression, Frontmatter, Import } from "../types.ts";
+import type { Code, Expression, Frontmatter } from "../types.ts";
 
 export interface FrontmatterCodegenOptions {
-  import: Import;
+  name: string;
   frontmatters: Frontmatter[];
   expressions: Expression[];
 }
 
 export function* generateFrontmatters(options: FrontmatterCodegenOptions): Generator<Code> {
-  if (options.import.length) {
-    yield `type Frontmatter = import("${options.import[0]}").${options.import[1]};\n`;
-  }
+  const upperName = options.name[0]?.toUpperCase() + options.name.slice(1);
+  yield `type Frontmatter = import("@bikari/article").${upperName}Frontmatter;\n`;
   yield `let $frontmatter!: Required<Frontmatter>;\n`;
 
   for (let i = 0; i < options.frontmatters.length; i++) {
