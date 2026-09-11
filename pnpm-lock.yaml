@@ -576,18 +576,6 @@ importers:
         specifier: catalog:utils
         version: 0.2.4
 
-  content:
-    devDependencies:
-      '@bikari/article':
-        specifier: 'workspace:'
-        version: link:../packages/article
-      '@bikari/typescript-plugin':
-        specifier: 'workspace:'
-        version: link:../packages/typescript-plugin
-      typescript:
-        specifier: npm:typescript-native-bridge@^6.0.3-bridge.13.tsgo.7.0.2
-        version: typescript-native-bridge@6.0.3-bridge.13.tsgo.7.0.2
-
   packages/article:
     dependencies:
       defu:

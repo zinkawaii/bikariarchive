@@ -4,7 +4,6 @@ shellEmulator: true
 trustPolicy: no-downgrade
 
 packages:
-  - content
   - packages/*
 
 define:
