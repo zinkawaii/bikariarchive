@@ -1,9 +1,12 @@
 import { article, entry, update } from "@bikari/article";
 import { addComponent, addPlugin, addServerPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
 import { join, relative } from "pathe";
-import config from "./config.ts";
+import configLiteral from "./config.ts";
 import { buildSearch } from "./search.ts";
 import vite from "./vite.ts";
+
+// 将字面量类型泛化回对应的接口
+const config = configLiteral as import("@bikari/article").Config;
 
 export default defineNuxtModule({
   meta: {
@@ -107,7 +110,7 @@ ${mapping.components?.map((name) => `    ${name}: Lazy${name},`).join("\n")}
     addTemplate({
       filename: "article.d.ts",
       getContents: () => /* TS */`
-export type Macros = typeof import("${relative(nuxt.options.buildDir, resolve("config.ts"))}").default["macros"];
+export type Config = typeof import("${relative(nuxt.options.buildDir, resolve("config.ts"))}").default;
 
 export declare const components: {
   global: Pick<typeof import("./components"), ${config.components?.map((name) => `"${name}"`).join(" | ")}>;

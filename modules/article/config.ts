@@ -33,24 +33,28 @@ export default defineConfig({
         "EntryKnownAbility",
         "EntryStarredAbility",
       ],
+      frontmatter: {} as import("@bikari/article").EntryFrontmatter,
     },
     {
       name: "intel",
       patterns: [
         "../content/intel/*",
       ],
+      frontmatter: {} as import("@bikari/article").IntelFrontmatter,
     },
     {
       name: "novel",
       patterns: [
         "../content/novel/*",
       ],
+      frontmatter: {} as import("@bikari/article").NovelFrontmatter,
     },
     {
       name: "article",
       patterns: [
         "../content/novel/*/*",
       ],
+      frontmatter: {} as import("@bikari/article").ArticleFrontmatter,
     },
   ],
 });

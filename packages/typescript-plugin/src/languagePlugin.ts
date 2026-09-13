@@ -4,7 +4,7 @@ import { type CodeMapping, forEachEmbeddedCode, type LanguagePlugin, type Virtua
 import { computed, signal } from "alien-signals";
 import { dirname, join, matchesGlob } from "pathe";
 import { createParser, type Document, type TextEdit } from "satorigear";
-import type { Config, Mapping } from "@bikari/article";
+import type { Config } from "@bikari/article";
 import type { Root } from "mdast";
 import type ts from "typescript";
 import { generateRoot } from "./codegen/generate.ts";
@@ -92,16 +92,16 @@ export class MdzVirtualCode implements VirtualCode {
   constructor(fileName: string, snapshot: ts.IScriptSnapshot, context: Context) {
     this.snapshot = snapshot;
 
-    let options: Mapping = {
-      name: "",
-      patterns: [],
-    };
+    let name = "";
+    let index = 0;
 
-    const { root, config } = context;
-    outer: for (const mapping of config.mappings) {
+    const { root, config: { mappings } } = context;
+    outer: for (let i = 0; i < mappings.length; i++) {
+      const mapping = mappings[i];
       for (const pattern of mapping.patterns) {
         if (matchesGlob(fileName, join(root, pattern))) {
-          options = mapping;
+          name = mapping.name;
+          index = i;
           break outer;
         }
       }
@@ -117,7 +117,8 @@ export class MdzVirtualCode implements VirtualCode {
 
       return [
         resolveCodes("document", "typescript", generateRoot(root, {
-          name: options.name,
+          name,
+          index,
           source,
         })),
       ];

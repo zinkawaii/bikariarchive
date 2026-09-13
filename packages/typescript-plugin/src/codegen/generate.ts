@@ -8,16 +8,16 @@ import type { Code } from "../types.ts";
 
 export interface CodegenOptions {
   name: string;
+  index: number;
   source: string;
 }
 
 export function* generateRoot(root: Root, options: CodegenOptions): Generator<Code> {
-  const upperName = capitalize(options.name);
-  yield `type Frontmatter = import("@bikari/article").${upperName}Frontmatter;\n`;
+  yield `type Frontmatter = import("#build/article").Config["mappings"][${options.index}]["frontmatter"];\n`;
   yield `let $frontmatter!: Required<Frontmatter>;\n`;
   yield `let $elements!:\n`;
   yield `  & HTMLElementTagNameMap\n`;
-  yield `  & import("#build/article").Macros\n`;
+  yield `  & import("#build/article").Config["macros"]\n`;
   yield `  & typeof import("#build/article").components["global"]\n`;
   yield `  & typeof import("#build/article").components["${options.name}"];`;
 
