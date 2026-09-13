@@ -35,7 +35,7 @@
         <p v-for="{ type, scope, content } in items" class="p-small">
           <span class="update-type">{{ type }}</span>
           <span v-if="scope" class="update-scope">{{ scope }}</span>
-          <novel-article as="span" :body="content"/>
+          <bikariya-article as="span" :body="content"/>
         </p>
       </div>
     </li>

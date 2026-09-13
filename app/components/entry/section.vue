@@ -9,9 +9,9 @@
     <h2 v-if="title" :id="title">{{ title }}</h2>
     <slot>
       <!-- eslint-disable-next-line vue/valid-v-slot -->
-      <novel-article #fallback>
+      <bikariya-article #fallback>
         <p>未知。</p>
-      </novel-article>
+      </bikariya-article>
     </slot>
   </section>
 </template>

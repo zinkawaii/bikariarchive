@@ -16,3 +16,24 @@ export class Boundary {
     return this.code;
   }
 }
+
+export function* generateCamelized(code: string, offset: number, features: CodeInformation): Generator<Code> {
+  const parts = code.split("-");
+
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i];
+    if (part !== "") {
+      if (i === 0) {
+        yield [part, offset, features];
+      }
+      else {
+        yield [capitalize(part), offset, features];
+      }
+    }
+    offset += part.length + 1;
+  }
+}
+
+export function capitalize(text: string) {
+  return text[0]?.toUpperCase() + text.slice(1);
+}

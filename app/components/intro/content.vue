@@ -9,7 +9,7 @@
     <ul class="intro-tags edge-fades-x no-scrollbar">
       <li v-for="tag in Article.meta[novel].tag" class="intro-tag">{{ tag }}</li>
     </ul>
-    <novel-article class="intro-synopsis edge-fades-y" :body="Article.meta[props.novel].synopsis"/>
+    <bikariya-article class="intro-synopsis edge-fades-y" :body="Article.meta[props.novel].synopsis"/>
   </div>
 </template>
 

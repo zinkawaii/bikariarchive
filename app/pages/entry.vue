@@ -56,7 +56,7 @@
     <article v-else-if="data" ref="article" class="entry-article">
       <section class="entry-leading">
         <div class="entry-primary">
-          <novel-article as="div" :body="data.summary"/>
+          <bikariya-article as="div" :body="data.summary"/>
           <entry-appearance v-if="data.appearance" v-bind="data.appearance"/>
           <entry-brief v-if="data.brief" v-bind="data.brief"/>
         </div>

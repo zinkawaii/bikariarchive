@@ -6,7 +6,7 @@
 
 <template>
   <meow-widget title="站点协议">
-    <novel-article :body="$articles.default" variant="article"/>
+    <bikariya-article :body="$articles.default" variant="article"/>
   </meow-widget>
 </template>
 
