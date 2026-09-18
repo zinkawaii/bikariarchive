@@ -22,7 +22,7 @@
 
 <template>
   <meow-widget title="友情链接">
-    <novel-article class="text-small" variant="article">
+    <bikariya-article class="text-small" variant="article">
       <div class="friend-list">
         <nuxt-link v-for="item in friendJson" class="friend-item" :to="item.link" rel="noopener" target="_blank">
           <hgroup class="friend-info">
@@ -45,7 +45,7 @@
       <h2>申请格式</h2>
       <p>按照以下 Schema，使用你擅长的编程或标记语言将结构化的站点信息进行导出，并放置在评论的底部。</p>
       <mb-forge lang="js" :raw="schema"/>
-    </novel-article>
+    </bikariya-article>
   </meow-widget>
 </template>
 

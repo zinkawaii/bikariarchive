@@ -82,9 +82,9 @@
         <button v-if="data.pending" class="comment-pending" @click="auditComment">待审核</button>
       </div>
       <!-- eslint-disable-next-line vue/valid-v-slot -->
-      <novel-article #fallback :body variant="comment">
+      <bikariya-article #fallback :body variant="comment">
         <p class="comment-sanitized">好像说了什么，但是被清除了</p>
-      </novel-article>
+      </bikariya-article>
       <div class="comment-info">
         <time>{{ elapsed }}</time>
         <button class="comment-action" @click="replyComment">

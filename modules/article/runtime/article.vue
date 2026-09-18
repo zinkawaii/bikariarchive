@@ -1,25 +1,11 @@
-<script lang="ts">
+<script lang="ts" setup>
   import { hyphenate } from "@vueuse/core";
   import { getProperty } from "propathy";
   import type { ArticleVariant, Child, Element, Root } from "@bikari/article";
   import type { RenderFunction, VNodeChild } from "vue";
-  import { CommentForge, Iconify, MbForge, MbImage, MbMath, MbVideo, PlainLink, StoryHeading } from "#components";
+  // eslint-disable-next-line vue/no-dupe-keys
+  import { components } from "#build/article";
 
-  const ariaRE = /^aria[A-Z]/;
-
-  const globalComponents = {
-    CommentForge,
-    Iconify,
-    MbForge,
-    MbImage,
-    MbMath,
-    MbVideo,
-    PlainLink,
-    StoryHeading,
-  };
-</script>
-
-<script lang="ts" setup>
   const props = withDefaults(defineProps<{
     body?: Root | Child[];
     components?: Record<string, Component>;
@@ -34,10 +20,12 @@
     fallback?: () => any;
   }>();
 
+  const ariaRE = /^aria[A-Z]/;
+
   const currentInstance = getCurrentInstance()!;
   const resolvedComponents = computed(() => {
     const comps: Record<string, Component> = {};
-    for (const [name, comp] of Object.entries({ ...globalComponents, ...props.components })) {
+    for (const [name, comp] of Object.entries({ ...components.global, ...props.components })) {
       comps[hyphenate(name)] = comp;
     }
     return comps;
@@ -65,7 +53,7 @@
         tag = "comment-forge";
       }
     }
-    const comp = resolvedComponents.value[tag] ?? resolvedComponents.value["lazy-" + tag];
+    const comp = resolvedComponents.value[tag];
 
     if ("className" in props) {
       props.class = props.className;
@@ -121,14 +109,14 @@
 </script>
 
 <template>
-  <mb-primitive class="novel-text" :class="`is-${variant}`" as="article">
+  <mb-primitive class="bikariya-article" :class="`is-${variant}`" as="article">
     <slot v-if="slots.default" :render></slot>
     <render v-else/>
   </mb-primitive>
 </template>
 
 <style>
-  .novel-text {
+  .bikariya-article {
     overflow-wrap: anywhere;
 
     :where(h2, h3, h4, h5, h6) {
