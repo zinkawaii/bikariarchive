@@ -4,7 +4,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.20.0"
+      "version": "^12.7.0"
     },
     "runtime": {
       "name": "node",

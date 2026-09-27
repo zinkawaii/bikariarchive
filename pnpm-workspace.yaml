@@ -6,15 +6,6 @@ shellEmulator: true
 packages:
   - packages/*
 
-define:
-  - &bikariya ^0.0.8
-  - &nuxt ^4.5.2
-  - &shiki ^4.4.3
-  - &vls ^3.3.11
-  - &volar 2.4.28
-  - &vueuse ^15.0.0
-  - &zin/eslint ^0.5.4
-
 overrides:
   "@nuxt/cli": npm:@nuxt/cli-nightly@^4.0.0-20260926-162335-6eaa0eb
   # @nuxt/icon > @nuxt/devtools-kit@^3.4.2
@@ -61,21 +52,21 @@ catalogs:
   iconify:
     "@iconify-json/fa7-solid": ^1.2.5
   lint:
-    "@zinkawaii/eslint-config": *zin/eslint
+    "@zinkawaii/eslint-config": &zin/eslint ^0.5.4
     "@zinkawaii/eslint-config-css": *zin/eslint
     eslint: ^10.11.0
   nuxt:
-    "@bikariya/image-viewer": *bikariya
+    "@bikariya/image-viewer": &bikariya ^0.0.8
     "@bikariya/modals": *bikariya
     "@bikariya/shiki": *bikariya
     "@nuxt/icon": ^2.5.1
     "@nuxt/image": ^2.1.0
-    "@nuxt/kit": *nuxt
+    "@nuxt/kit": &nuxt ^4.5.2
     "@nuxt/schema": *nuxt
     "@nuxtjs/robots": ^6.2.3
     "@nuxtjs/sitemap": ^8.5.1
     "@pinia/nuxt": ^1.0.2
-    "@vueuse/nuxt": *vueuse
+    "@vueuse/nuxt": &vueuse ^15.0.0
     nuxt: *nuxt
     nuxt-auth-utils: ^0.5.30
     nuxt-schema-org: ^6.3.2
@@ -86,7 +77,7 @@ catalogs:
     "@zinkawaii/tsconfig": ^0.1.0
   utils:
     "@clack/prompts": ^1.8.1
-    "@shikijs/transformers": *shiki
+    "@shikijs/transformers": &shiki ^4.4.3
     alien-signals: ^3.2.1
     arktype: ^2.2.5
     aws4fetch: ^1.0.20
@@ -112,7 +103,7 @@ catalogs:
     yaml: ^2.9.1
     zfeed: ^0.2.4
   volar:
-    "@volar/language-core": *volar
+    "@volar/language-core": &volar 2.4.28
     "@volar/typescript": *volar
   vue:
     "@vueuse/core": *vueuse
@@ -120,6 +111,6 @@ catalogs:
     pinia: ^4.0.3
     pinia-plugin-persistedstate: ^4.7.1
     vue: ^3.5.43
-    vue-component-type-helpers: *vls
+    vue-component-type-helpers: &vls ^3.3.11
     vue-router: ^5.3.1
     vue-tsc: *vls
