@@ -1,0 +1,24 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 40a63c5..3234f77
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -2246,10 +2246,15 @@ async function setupNitroCompat(nuxt, nitroConfig, legacy, modulePresets, instal
+ 		return scope;
+ 	};
+ 	const registerLateScope = async (nitro) => {
+-		for (const [id, template] of deferredVirtuals.splice(0)) try {
+-			const code = await trackPendingTemplate(id, template);
+-			if (typeof code === "string") virtualSources.set(id, code);
+-		} catch {}
++		let rendered = false;
++		nuxt.hook("build:done", async () => {
++			if (rendered) return;
++			rendered = true;
++			for (const [id, template] of deferredVirtuals.splice(0)) try {
++				const code = await trackPendingTemplate(id, template);
++				if (typeof code === "string") virtualSources.set(id, code);
++			} catch {}
++		});
+ 		for (const handler of nitro.options.handlers || []) {
+ 			const entry = handler;
+ 			if (isMigrated(serverApiOf(entry)) || typeof entry.handler !== "string") continue;

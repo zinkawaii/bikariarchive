@@ -1,7 +1,7 @@
 /// <reference types="@volar/typescript" />
 
 import { type CodeMapping, forEachEmbeddedCode, type LanguagePlugin, type VirtualCode } from "@volar/language-core";
-import { computed, signal } from "alien-signals";
+import { computed, signal, trigger } from "alien-signals";
 import { dirname, join, matchesGlob } from "pathe";
 import { createParser, type Document, type TextEdit } from "satorigear";
 import type { Config } from "@bikari/article";
@@ -109,7 +109,7 @@ export class MdzVirtualCode implements VirtualCode {
 
     const text = snapshot.getText(0, snapshot.getLength());
     this.#document = parser.createDocument(text);
-    this.#root = signal(this.#document.snapshot());
+    this.#root = signal(this.#document.tree);
 
     this.#embeddedCodes = computed(() => {
       const root = this.#root();
@@ -136,12 +136,12 @@ export class MdzVirtualCode implements VirtualCode {
         text: snapshot.getText(change.span.start, change.span.start + change.newLength),
       };
       this.#document.edit([edit]);
-      this.#root(this.#document.snapshot());
+      trigger(this.#root);
     }
     else {
       const text = snapshot.getText(0, snapshot.getLength());
       this.#document = parser.createDocument(text);
-      this.#root(this.#document.snapshot());
+      this.#root(this.#document.tree);
     }
   }
 }
