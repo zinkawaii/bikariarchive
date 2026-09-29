@@ -1,6 +1,5 @@
 import { type } from "arktype";
-import { getRequestIP } from "nitro/h3";
-import { useRuntimeConfig } from "nitro/runtime-config";
+import { getRequestIP, useRuntimeConfig } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
 export type PostCommentBody = typeof schema.inferIn;
@@ -14,9 +13,7 @@ const schema = type({
   address: "string.url?",
 });
 
-export default defineJEventHandler<{
-  body: PostCommentBody;
-}>(async (event) => {
+export default defineJEventHandler<{ body: PostCommentBody }>(async (event) => {
   const config = useRuntimeConfig();
   const body = schema.assert(await event.req.json());
 

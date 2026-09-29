@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { getQuery } from "nitro/h3";
+import { getQuery } from "nuxt/server";
 import type { HydratedDocument } from "mongoose";
 import { CommentDataModel } from "#server/models/CommentData";
 import type { CommentData } from "#server/types/comment";
@@ -21,9 +21,7 @@ const schema = type({
 // 需要获取的属性
 const selectionKey = "root parent content time nickname email address status";
 
-export default defineJEventHandler<{
-  query: GetCommentQuery;
-}, GetCommentResponse>(async (event, res) => {
+export default defineJEventHandler<{ query: GetCommentQuery }, GetCommentResponse>(async (event, res) => {
   const query = schema.assert(getQuery(event));
 
   // 连接数据库

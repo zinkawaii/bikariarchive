@@ -1,11 +1,11 @@
 import { Buffer } from "node:buffer";
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { useStorage } from "nitro/storage";
+import { useKV } from "nitro/kv";
 import type { Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
 
 export async function readArticle(art: Article) {
-  const storage = useStorage("assets:data");
+  const storage = useKV("assets:data");
   const key = `novel/${art.novel}.${art.volume}/${Article.serverInfo(art).name}.json`;
   const root = await storage.getItem(key) as Root;
   return root;

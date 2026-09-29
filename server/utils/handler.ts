@@ -1,6 +1,7 @@
 import { TraversalError } from "arktype";
 import { defineCachedHandler } from "nitro/cache";
-import { defineEventHandler, type EventHandlerRequest, type H3Event, HTTPError } from "nitro/h3";
+import { defineEventHandler, type EventHandlerRequest, type H3Event } from "nitro/h3";
+import { createError, isNuxtError } from "nuxt/server";
 import type { CachedEventHandlerOptions } from "nitro/types";
 
 interface Handler<R extends EventHandlerRequest, T> {
@@ -10,10 +11,10 @@ interface Handler<R extends EventHandlerRequest, T> {
 const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>) => async (event: H3Event<R>) => {
   try {
     const res = {} as T;
-    return await handler(event, res) as T ?? res;
+    return await handler(event as H3Event<R>, res) as T ?? res;
   }
   catch (err) {
-    if (HTTPError.isError(err)) {
+    if (isNuxtError(err)) {
       throw err;
     }
 
@@ -29,7 +30,7 @@ const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>)
       data = err;
     }
 
-    throw new HTTPError({
+    throw createError({
       status,
       data: import.meta.dev ? data : void 0,
     });
@@ -61,7 +62,7 @@ export function defineJThrottledEventHandler<R extends EventHandlerRequest, T = 
       }, delay);
       return handler.apply(this, args);
     }
-    throw HTTPError.status(429);
+    throw createError({ status: 429 });
   }
   return defineEventHandler(createHandler<R, T>(throttledHandler));
 }

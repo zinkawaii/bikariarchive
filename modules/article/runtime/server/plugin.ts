@@ -1,12 +1,12 @@
 import chokidar from "chokidar";
 import { definePlugin } from "nitro";
-import { useStorage } from "nitro/storage";
+import { useKV } from "nitro/kv";
 import { basename, resolve } from "pathe";
 import { Article, enrichJArticle } from "#shared/utils/article";
 import { enrichJIntel } from "#shared/utils/entry";
 
 export default definePlugin(async (nitroApp) => {
-  const storage = useStorage("assets:data");
+  const storage = useKV("assets:data");
   const list = [
     "json/article.json",
     "json/artmap.json",

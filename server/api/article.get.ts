@@ -1,6 +1,5 @@
 import { type } from "arktype";
-import { getQuery, HTTPError } from "nitro/h3";
-import { useRuntimeConfig } from "nitro/runtime-config";
+import { createError, getQuery, useRuntimeConfig } from "nuxt/server";
 import type { Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
 
@@ -17,21 +16,19 @@ const schema = type({
   password: "string",
 });
 
-export default defineJEventHandler<{
-  query: GetArticleQuery;
-}, GetArticleResponse>(async (event, res) => {
+export default defineJEventHandler<{ query: GetArticleQuery }, GetArticleResponse>(async (event, res) => {
   const config = useRuntimeConfig();
   const query = schema.assert(getQuery(event));
 
   // 初始化
   const art = Article.for(query.novel, query.index);
   if (!art) {
-    throw HTTPError.status(404);
+    throw createError({ status: 404 });
   }
 
   // 验证密码
   if (art.encrypted && query.password !== Article.serverInfo(art).password) {
-    throw HTTPError.status(403);
+    throw createError({ status: 403 });
   }
 
   // 连接数据库

@@ -1,6 +1,6 @@
 import consola from "consola";
 import mongoose from "mongoose";
-import { useRuntimeConfig } from "nitro/runtime-config";
+import { useRuntimeConfig } from "nuxt/server";
 import "#server/models/CommentData";
 import "#server/models/ReadRecord";
 

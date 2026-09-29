@@ -1,7 +1,6 @@
 import { type } from "arktype";
 import { AwsClient } from "aws4fetch";
-import { getQuery, getRouterParam, HTTPError, redirect } from "nitro/h3";
-import { useRuntimeConfig } from "nitro/runtime-config";
+import { createError, getQuery, getRouterParam, sendRedirect, useRuntimeConfig } from "nuxt/server";
 
 export type GetImageQuery = typeof schema.inferIn;
 
@@ -14,15 +13,13 @@ const schema = type({
 
 const maxAge = 3600;
 
-export default defineJCachedEventHandler<{
-  query: GetImageQuery;
-}>(async (event) => {
+export default defineJCachedEventHandler<{ query: GetImageQuery }>(async (event) => {
   const config = useRuntimeConfig();
   const query = schema.assert(getQuery(event));
   const slug = getRouterParam(event, "slug");
 
   if (slug === void 0) {
-    throw HTTPError.status(404);
+    throw createError({ status: 404 });
   }
 
   const s3 = new AwsClient({
@@ -54,7 +51,7 @@ export default defineJCachedEventHandler<{
   // Nitro 的 `maxAge` 只缓存服务端生成的结果，同步设置缓存响应头以避免浏览器重复发起请求
   event.res.headers.set("cache-control", `public, max-age=${maxAge}`);
 
-  return redirect(request.url, 307);
+  return sendRedirect(event, request.url, 307);
 }, {
   maxAge,
   swr: false,

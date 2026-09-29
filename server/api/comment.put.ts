@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { HTTPError } from "nitro/h3";
+import { createError } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
 export type PutCommentBody = typeof schema.inferIn;
@@ -12,9 +12,7 @@ const schema = type({
   address: "string.url?",
 });
 
-export default defineJEventHandler<{
-  body: PutCommentBody;
-}>(async (event) => {
+export default defineJEventHandler<{ body: PutCommentBody }>(async (event) => {
   const body = schema.assert(await event.req.json());
 
   // 权限验证
@@ -36,6 +34,6 @@ export default defineJEventHandler<{
 
   // 评论不存在
   if (!result.matchedCount) {
-    throw HTTPError.status(404);
+    throw createError({ status: 404 });
   }
 });

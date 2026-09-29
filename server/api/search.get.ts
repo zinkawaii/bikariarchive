@@ -1,7 +1,7 @@
 import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
-import { getQuery } from "nitro/h3";
-import { useStorage } from "nitro/storage";
+import { useKV } from "nitro/kv";
+import { getQuery } from "nuxt/server";
 import { visit } from "unist-util-visit";
 import type { Child, Element, Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
@@ -24,10 +24,8 @@ const schema = type({
   word: "0 < string <= 64",
 });
 
-export default defineJThrottledEventHandler<{
-  query: GetSearchQuery;
-}, GetSearchResponse>(async (event, res) => {
-  const storage = useStorage("assets:data");
+export default defineJThrottledEventHandler<{ query: GetSearchQuery }, GetSearchResponse>(async (event, res) => {
+  const storage = useKV("assets:data");
   const query = schema.assert(getQuery(event));
 
   const code = query.word.codePointAt(0)!.toString();

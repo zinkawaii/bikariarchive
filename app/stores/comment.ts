@@ -44,7 +44,7 @@ export const useCommentStore = defineStore("comment", () => {
     const res = await $fetch("/api/comment", {
       query: {
         path: route.path,
-        page: next ?? page.value,
+        page: String(next ?? page.value),
       },
     });
 
@@ -85,7 +85,7 @@ export const useCommentStore = defineStore("comment", () => {
       : "评论删除失败";
   });
 
-  function createRequest<T extends Record<string, any>>(
+  function createRequest<T extends PostCommentBody | PatchCommentBody | PutCommentBody | DeleteCommentBody>(
     method: "post" | "patch" | "put" | "delete",
     getter: (status: number) => string,
   ) {

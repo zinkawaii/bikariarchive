@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { HTTPError } from "nitro/h3";
+import { createError } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
 export type PatchCommentBody = typeof schema.inferIn;
@@ -8,9 +8,7 @@ const schema = type({
   id: "string",
 });
 
-export default defineJEventHandler<{
-  body: PatchCommentBody;
-}>(async (event) => {
+export default defineJEventHandler<{ body: PatchCommentBody }>(async (event) => {
   const { id } = schema.assert(await event.req.json());
 
   // 权限验证
@@ -29,7 +27,7 @@ export default defineJEventHandler<{
 
   // 评论不存在
   if (!comment) {
-    return HTTPError.status(404);
+    return createError({ status: 404 });
   }
 
   // 获取所回复的评论

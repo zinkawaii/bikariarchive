@@ -7,7 +7,7 @@
 
   const toastStore = useToastStore();
 
-  const novel = useRouteQuery("novel");
+  const novel = useRouteQuery<string | undefined>("novel");
   const queryWord = useRouteQuery("word", "");
   const inputWord = ref(queryWord.value);
   const searchWord = ref("");

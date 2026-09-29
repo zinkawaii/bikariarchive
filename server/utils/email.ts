@@ -1,4 +1,4 @@
-import { useRuntimeConfig } from "nitro/runtime-config";
+import { useRuntimeConfig } from "nuxt/server";
 import { createEmail } from "unemail";
 import smtp from "unemail/drivers/smtp";
 import { type Component, createSSRApp } from "vue";

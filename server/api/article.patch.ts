@@ -1,6 +1,5 @@
 import { type } from "arktype";
-import { getRequestIP, HTTPError } from "nitro/h3";
-import { useRuntimeConfig } from "nitro/runtime-config";
+import { createError, getRequestIP, useRuntimeConfig } from "nuxt/server";
 import { ReadRecordModel } from "#server/models/ReadRecord";
 
 export type PatchArticleBody = typeof schema.inferIn;
@@ -13,9 +12,7 @@ const schema = type({
   token: "string",
 });
 
-export default defineJEventHandler<{
-  body: PatchArticleBody;
-}, PatchArticleResponse>(async (event, res) => {
+export default defineJEventHandler<{ body: PatchArticleBody }, PatchArticleResponse>(async (event, res) => {
   const config = useRuntimeConfig();
   const body = schema.assert(await event.req.json());
 
@@ -31,7 +28,7 @@ export default defineJEventHandler<{
     index = parsed.index;
   }
   catch {
-    throw HTTPError.status(400);
+    throw createError({ status: 400 });
   }
 
   const ip = getRequestIP(event, { xForwardedFor: true });

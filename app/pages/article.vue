@@ -96,7 +96,7 @@
     const res = await $fetch("/api/article", {
       method: "patch",
       body: {
-        token: post.value?.token,
+        token: post.value!.token,
       },
     });
 

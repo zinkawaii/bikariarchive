@@ -7,9 +7,7 @@ const schema = type({
   id: "string",
 });
 
-export default defineJEventHandler<{
-  body: DeleteCommentBody;
-}>(async (event) => {
+export default defineJEventHandler<{ body: DeleteCommentBody }>(async (event) => {
   const body = schema.assert(await event.req.json());
 
   // 权限验证
