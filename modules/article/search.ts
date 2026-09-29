@@ -6,8 +6,8 @@ import { glob } from "tinyglobby";
 import type { Child, JArticle, JArtmap, Root } from "@bikari/article";
 
 export async function buildSearch() {
-  const meta = await readFile(".data/json/article.json", "utf-8").then<JArticle>(JSON.parse);
-  const map = await readFile(".data/json/artmap.json", "utf-8").then<JArtmap>(JSON.parse);
+  const meta = await readFile("server/assets/json/article.json", "utf-8").then<JArticle>(JSON.parse);
+  const map = await readFile("server/assets/json/artmap.json", "utf-8").then<JArtmap>(JSON.parse);
 
   const data: Record<string, Record<string, number[][]>> = {};
 
@@ -17,7 +17,7 @@ export async function buildSearch() {
         continue;
       }
 
-      const path = `.data/novel/${novel}.${chapter.volume}/${map[novel][chapter.index].name}.json`;
+      const path = `server/assets/novel/${novel}.${chapter.volume}/${map[novel][chapter.index].name}.json`;
       const root = await readFile(path, "utf-8").then<Root>(JSON.parse);
 
       for (const [char, vector] of forEachVector(root)) {
@@ -27,7 +27,7 @@ export async function buildSearch() {
   }
 
   await Promise.all(
-    await glob(".data/search/**/*.json", { absolute: true }).then(
+    await glob("server/assets/search/**/*.json", { absolute: true }).then(
       (paths) => paths
         .filter((path) => !(String.fromCodePoint(+basename(path, ".json")) in data))
         .map((path) => rm(path)),
@@ -37,7 +37,7 @@ export async function buildSearch() {
   await Promise.all(
     Object.entries(data).map(async ([char, vectors]) => {
       const code = char.codePointAt(0)!.toString();
-      const path = `.data/search/${code.slice(0, 2)}/${code}.json`;
+      const path = `server/assets/search/${code.slice(0, 2)}/${code}.json`;
       const text = JSON.stringify(vectors);
 
       const stats = await stat(path).catch(() => void 0);

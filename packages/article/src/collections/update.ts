@@ -8,7 +8,7 @@ const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
 export default createKerria("Update", () => {
   const meta = useLoad("update", {
-    dist: ".data/json/update.json",
+    dist: "server/assets/json/update.json",
     defaultValue: {
       totalYears: new Set(),
     },
@@ -21,7 +21,7 @@ export default createKerria("Update", () => {
 
   useSource(0, {
     base: "content",
-    dist: ".data",
+    dist: "server/assets",
     folders: [
       "update",
     ],

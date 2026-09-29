@@ -52,11 +52,6 @@ export default defineNuxtConfig({
   vite: {
     server: {
       allowedHosts: true,
-      watch: {
-        ignored: [
-          "!**/.data/**",
-        ],
-      },
     },
   },
   modules: [

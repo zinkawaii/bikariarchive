@@ -10,7 +10,7 @@ export class Entry {
     }
 
     return this.meta.entries[title] ??= (
-      await import(`#data/entry/${title}.json`)
+      await import(`#server/assets/entry/${title}.json`)
     ).default;
   }
 }

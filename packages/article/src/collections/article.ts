@@ -14,7 +14,7 @@ const SourceKind = {
 
 export default createKerria("Article", () => {
   const metaInfo = useLoad("meta", {
-    dist: ".data/json/article.json",
+    dist: "server/assets/json/article.json",
     output(val) {
       const newVal = Object.fromEntries(
         Object.entries<any>(structuredClone(val))
@@ -31,7 +31,7 @@ export default createKerria("Article", () => {
   });
 
   const mapInfo = useLoad("map", {
-    dist: ".data/json/artmap.json",
+    dist: "server/assets/json/artmap.json",
   });
 
   useSource(SourceKind.Meta, {
@@ -74,7 +74,7 @@ export default createKerria("Article", () => {
 
   useSource(SourceKind.Article, {
     base: "content",
-    dist: ".data",
+    dist: "server/assets",
     folders: [
       "novel",
     ],

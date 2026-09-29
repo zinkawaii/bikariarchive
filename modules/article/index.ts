@@ -1,6 +1,6 @@
 import { article, entry, update } from "@bikari/article";
 import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
-import { join, relative } from "pathe";
+import { relative } from "pathe";
 import configLiteral from "./config.ts";
 import { buildSearch } from "./search.ts";
 import vite from "./vite.ts";
@@ -24,14 +24,6 @@ export default defineNuxtModule({
     addComponent({
       name: "BikariyaArticle",
       filePath: resolve("runtime/article.vue"),
-    });
-
-    nuxt.options.alias["#data"] = join(nuxt.options.rootDir, ".data");
-
-    (nuxt.options.nitro.serverAssets ??= []).push({
-      baseName: "data",
-      dir: ".data",
-      pattern: "{json,novel,search}/**/*.json",
     });
 
     ((nuxt.options.typescript.tsConfig.vueCompilerOptions ??= {}).plugins ??= []).push({

@@ -32,7 +32,7 @@ const SourceKind = {
 
 export default createKerria("Entry", () => {
   const metaInfo = useLoad("meta", {
-    dist: ".data/json/intel.json",
+    dist: "server/assets/json/intel.json",
     defaultValue: {
       blocks: [],
       all: {},
@@ -95,7 +95,7 @@ export default createKerria("Entry", () => {
   });
 
   const abilityInfo = useLoad("ability", {
-    dist: ".data/json/ability.json",
+    dist: "server/assets/json/ability.json",
     output(val) {
       const items: Record<string, AbilityItem> = {};
       for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {
@@ -157,7 +157,7 @@ export default createKerria("Entry", () => {
 
   useSource(SourceKind.Entry, {
     base: "content",
-    dist: ".data",
+    dist: "server/assets",
     folders: categories,
     ext: ".md",
     async parse(path, info) {

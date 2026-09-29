@@ -6,7 +6,7 @@ import { Article, enrichJArticle } from "#shared/utils/article";
 import { enrichJIntel } from "#shared/utils/entry";
 
 export default definePlugin(async (nitroApp) => {
-  const storage = useKV("assets:data");
+  const storage = useKV("assets:server");
   const list = [
     "json/article.json",
     "json/artmap.json",
@@ -19,7 +19,7 @@ export default definePlugin(async (nitroApp) => {
 
   if (import.meta.dev) {
     const watcher = chokidar
-      .watch(list.map((path) => resolve(`.data/${path}`)))
+      .watch(list.map((path) => resolve(`server/assets/${path}`)))
       .on("change", (path) => update(`json/${basename(path)}`));
     nitroApp.hooks.hook("close", () => watcher.close());
   }

@@ -9,7 +9,7 @@ import { resolveRoot } from "./utils.ts";
 import type { JArticle, JChapter } from "../../src/types/article.ts";
 
 export async function createArticle() {
-  const path = resolveRoot("/.data/json/article.json");
+  const path = resolveRoot("/server/assets/json/article.json");
   const meta = await readFile(path, "utf-8").then<JArticle>(JSON.parse);
 
   const novels = Object.entries(meta).map(([id, info]) => ({ label: info.title, value: id }));

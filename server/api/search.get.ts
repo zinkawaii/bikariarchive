@@ -25,7 +25,7 @@ const schema = type({
 });
 
 export default defineJThrottledEventHandler<{ query: GetSearchQuery }, GetSearchResponse>(async (event, res) => {
-  const storage = useKV("assets:data");
+  const storage = useKV("assets:server");
   const query = schema.assert(getQuery(event));
 
   const code = query.word.codePointAt(0)!.toString();

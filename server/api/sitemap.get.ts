@@ -1,4 +1,4 @@
-import { totalYears } from "#data/json/update.json";
+import { totalYears } from "#server/assets/json/update.json";
 import { Article } from "#shared/utils/article";
 import { Entry } from "#shared/utils/entry";
 
