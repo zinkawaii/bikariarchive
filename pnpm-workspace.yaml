@@ -1,42 +1,39 @@
 minimumReleaseAge: 0
+trustPolicy: no-downgrade
 shamefullyHoist: true
 shellEmulator: true
-trustPolicy: no-downgrade
 
 packages:
   - packages/*
 
-define:
-  - &bikariya ^0.0.8
-  - &nuxt ^4.5.2
-  - &shiki ^4.4.3
-  - &vls ^3.3.10
-  - &volar 2.4.28
-  - &vueuse ^14.4.0
-  - &zin/eslint ^0.5.3
-
 overrides:
-  "@nuxt/cli": npm:@nuxt/cli-nightly@^4.0.0-20260817-085717-0bb4e52
-  # @nuxt/icon > @nuxt/devtools-kit@^3.3.1
+  "@nuxt/cli": npm:@nuxt/cli-nightly@^4.0.0-20260928-093848-54eebce
+  # @nuxt/icon > @nuxt/devtools-kit@^3.4.2
   # nuxtseo-shared > @nuxt/devtools-kit@4.0.0-alpha.7
-  "@nuxt/devtools-kit": ^4.0.0-alpha.10
-  "@nuxt/kit": npm:@nuxt/kit-nightly@^5.0.0-29782608.64333519
-  "@nuxt/schema": npm:@nuxt/schema-nightly@^5.0.0-29782608.64333519
+  "@nuxt/devtools-kit": ^4.0.0-beta.2
+  "@nuxt/kit": npm:@nuxt/kit-nightly@^5.0.0-29843776.edcc3db2
+  "@nuxt/schema": npm:@nuxt/schema-nightly@^5.0.0-29843776.edcc3db2
   # @nuxt/image, @nuxtjs/robots, nuxt-auth-utils, nuxt-site-config > h3@1.15.11
-  h3: ^2.0.1-rc.26
+  h3: ^2.0.1-rc.32
   # micromark-extension-math > katex@0.16.0
-  katex: ^0.18.4
-  nitro: npm:nitro-nightly@^3.0.1-20260817-141030-4bfb35a7
-  nuxt: npm:nuxt-nightly@^5.0.0-29782608.64333519
-  # @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared, unifont > ofetch@1.5.1
+  katex: ^0.18.9
+  nitro: npm:nitro-nightly@^3.0.1-20260928-103646-f72e2ba6
+  nuxt: npm:nuxt-nightly@^5.0.0-29843776.edcc3db2
+  # vite-node > obug@2.2.1
+  obug: ^3.0.0
+  # @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared > ofetch@1.5.1
   ofetch: ^2.0.0-alpha.3
-  typescript: npm:typescript-native-bridge@^6.0.3-bridge.13.tsgo.7.0.2
-  # @nuxt/devtools, fontless > unstorage@1.17.5
-  unstorage: ^2.0.0-alpha.7
+  typescript: npm:typescript-native-bridge@^6.0.3-bridge.18.tsgo.7.0.2
+  # @nuxt/devtools > unstorage@1.17.5
+  unstorage: ^2.0.0-alpha.10
 
 patchedDependencies:
+  "@nuxt/nitro-server-nightly": patches/@nuxt__nitro-server-nightly.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
   nuxt-auth-utils: patches/nuxt-auth-utils.patch
+
+allowBuilds:
+  "@parcel/watcher": true
 
 catalogs:
   build:
@@ -47,76 +44,72 @@ catalogs:
     mdast-util-to-string: ^4.0.0
     remark-breaks: ^4.0.0
     remark-rehype: ^11.1.2
-    satorigear: ^0.0.4
+    satorigear: ^0.0.9
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
   database:
-    mongoose: ^9.9.2
+    mongoose: ^9.10.2
   iconify:
     "@iconify-json/fa7-solid": ^1.2.5
   lint:
-    "@zinkawaii/eslint-config": *zin/eslint
+    "@zinkawaii/eslint-config": &zin/eslint ^0.5.4
     "@zinkawaii/eslint-config-css": *zin/eslint
-    eslint: ^10.8.1
+    eslint: ^10.11.0
   nuxt:
-    "@bikariya/image-viewer": *bikariya
+    "@bikariya/image-viewer": &bikariya ^0.0.8
     "@bikariya/modals": *bikariya
     "@bikariya/shiki": *bikariya
-    "@nuxt/icon": ^2.5.0
+    "@nuxt/icon": ^2.5.1
     "@nuxt/image": ^2.1.0
-    "@nuxt/kit": *nuxt
+    "@nuxt/kit": &nuxt ^4.5.2
     "@nuxt/schema": *nuxt
-    "@nuxtjs/robots": ^6.1.4
-    "@nuxtjs/sitemap": ^8.3.4
+    "@nuxtjs/robots": ^6.2.3
+    "@nuxtjs/sitemap": ^8.5.1
     "@pinia/nuxt": ^1.0.2
-    "@vueuse/nuxt": *vueuse
+    "@vueuse/nuxt": &vueuse ^15.0.0
     nuxt: *nuxt
     nuxt-auth-utils: ^0.5.30
-    nuxt-schema-org: ^6.2.9
-    nuxt-seo-utils: ^8.4.2
+    nuxt-schema-org: ^6.3.2
+    nuxt-seo-utils: ^8.5.2
     nuxt-site-config: ^4.2.3
   types:
-    "@types/node": ^26.2.0
+    "@types/node": ^26.6.3
     "@zinkawaii/tsconfig": ^0.1.0
   utils:
-    "@clack/prompts": ^1.7.0
-    "@shikijs/transformers": *shiki
+    "@clack/prompts": ^1.8.1
+    "@shikijs/transformers": &shiki ^4.4.3
     alien-signals: ^3.2.1
-    arktype: ^2.2.3
+    arktype: ^2.2.5
     aws4fetch: ^1.0.20
     bgmt: ^0.3.1
     chokidar: ^5.0.0
     consola: ^3.4.2
     defu: ^6.1.7
-    entities: ^8.0.0
+    entities: ^8.1.0
     github-slugger: ^2.0.0
-    katex: ^0.18.4
-    knitwork: ^1.3.0
+    katex: ^0.18.9
     mrmime: ^2.0.1
     pathe: ^2.0.3
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
     shiki: *shiki
-    temporal-polyfill: ^1.0.4
-    tinyexec: ^1.3.0
+    temporal-polyfill: ^1.0.5
+    tinyexec: ^1.3.1
     tinyglobby: ^0.2.17
     ufo: ^1.6.4
-    unemail: ^0.5.0
+    unemail: ^0.7.0
     uqr: ^0.1.3
-    yaml: ^2.9.0
+    yaml: ^2.9.1
     zfeed: ^0.2.4
   volar:
-    "@volar/language-core": *volar
+    "@volar/language-core": &volar 2.4.28
     "@volar/typescript": *volar
   vue:
     "@vueuse/core": *vueuse
     "@vueuse/router": *vueuse
     pinia: ^4.0.3
     pinia-plugin-persistedstate: ^4.7.1
-    vue: ^3.5.41
-    vue-component-type-helpers: *vls
-    vue-router: ^5.2.0
+    vue: ^3.5.43
+    vue-component-type-helpers: &vls ^3.3.11
+    vue-router: ^5.3.1
     vue-tsc: *vls
-
-allowBuilds:
-  "@parcel/watcher": true

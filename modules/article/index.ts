@@ -1,5 +1,5 @@
 import { article, entry, update } from "@bikari/article";
-import { addComponent, addPlugin, addServerPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
+import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
 import { join, relative } from "pathe";
 import configLiteral from "./config.ts";
 import { buildSearch } from "./search.ts";
@@ -17,7 +17,7 @@ export default defineNuxtModule({
 
     addPlugin({ src: resolve("runtime/plugin") });
 
-    addServerPlugin(resolve("runtime/server/plugin"));
+    addNitroPlugin(resolve("runtime/server/plugin"));
 
     addVitePlugin(vite, { prepend: true });
 
