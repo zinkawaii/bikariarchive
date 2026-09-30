@@ -64,6 +64,7 @@ export default defineJEventHandler<{ query: GetCommentQuery }, GetCommentRespons
     comments.map(async (comment) => {
       const children = await CommentDataModel.find({
         root: comment._id,
+        ...status,
       }).select(selectionKey);
       return transformComment(comment, children);
     }),
