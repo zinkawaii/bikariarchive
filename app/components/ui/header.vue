@@ -14,6 +14,7 @@
   const shelfStore = useShelfStore();
   const router = useRouter();
   const word = ref("");
+  const [isNavbarActive, toggleNavbar] = useToggle(false);
 
   const navs: NavItem[] = [
     {
@@ -102,10 +103,10 @@
       </nuxt-link>
     </div>
     <nav class="header-nav">
-      <button class="nav-expand">
-        <iconify name="tabler:menu-deep"/>
+      <button class="nav-expand" @click="toggleNavbar()">
+        <iconify name="fa7-solid:bars"/>
       </button>
-      <ul class="nav-list">
+      <ul class="nav-list" :class="{ [`is-active`]: isNavbarActive }">
         <mb-popper v-for="{ title, icon, to, children } in navs" as="li">
           <component :is="to ? NuxtLink : `button`" class="nav-link" :to>
             <iconify :name="icon"/>
@@ -229,7 +230,7 @@
     height: fit-content;
     margin-block: auto;
     padding: 8px;
-    font-size: 28px;
+    font-size: 24px;
     color: white;
     transition: all 0.25s;
     filter: drop-shadow(var(--text-shadow));
@@ -256,7 +257,7 @@
       transform-origin: top right;
       transition: all 0.25s;
 
-      :not(:hover) > & {
+      &:not(.is-active) {
         opacity: 0;
         scale: 0.66;
         pointer-events: none;
