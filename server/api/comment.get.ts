@@ -28,8 +28,12 @@ export default defineJEventHandler<{ query: GetCommentQuery }, GetCommentRespons
   await connectMongoose();
 
   // 评论状态
-  const status = await isIdentityAdmin(event) ? void 0 : {
-    status: "public" as const,
+  const session = await getUserSession(event);
+  const status = session.user?.role === "admin" ? void 0 : {
+    $or: [
+      { status: "public" as const },
+      { token: session.id },
+    ],
   };
 
   // 单页评论数

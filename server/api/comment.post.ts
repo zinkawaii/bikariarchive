@@ -25,11 +25,12 @@ export default defineJEventHandler<{ body: PostCommentBody }>(async (event) => {
   // 连接数据库
   await connectMongoose();
 
+  // 获取用户会话
+  const session = await getUserSession(event);
+  const isAdmin = session.user?.role === "admin";
+
   // 获取时间
   const time = new Date();
-
-  // 获取权限
-  const isAdmin = await isIdentityAdmin(event);
 
   // 获取所回复的评论
   const parent = await CommentDataModel.findOne({
@@ -48,6 +49,7 @@ export default defineJEventHandler<{ body: PostCommentBody }>(async (event) => {
     nickname: body.nickname,
     email: body.email,
     address: body.address,
+    token: isAdmin ? void 0 : session.id,
     status: isAdmin ? "public" : "pending",
   });
 

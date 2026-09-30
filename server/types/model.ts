@@ -11,6 +11,7 @@ export interface CommentDataSchema {
   nickname: string;
   email?: string;
   address?: string;
+  token?: string;
   status: "pending" | "public";
 }
 

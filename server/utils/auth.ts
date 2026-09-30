@@ -7,8 +7,3 @@ export async function validateIdentity(event: RequestEvent) {
     throw createError({ status: 403 });
   }
 }
-
-export async function isIdentityAdmin(event: RequestEvent) {
-  const session = await getUserSession(event);
-  return session.user?.role === "admin";
-}

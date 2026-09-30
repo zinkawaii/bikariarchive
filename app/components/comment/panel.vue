@@ -9,6 +9,7 @@
   interface CommentPanelModifyProps {
     kind: "modify";
     id: string;
+    pending?: boolean;
   }
 
   const props = defineProps<(CommentPanelPostProps | CommentPanelModifyProps) & {
@@ -31,8 +32,9 @@
   }>();
 
   const commentStore = useCommentStore();
+  const signerStore = useSignerStore();
 
-  const [isSending, toggleSending] = useToggle(false);
+  const [isSubmitting, toggleSubmitting] = useToggle(false);
 
   const { errors, validate } = useValidate({
     nickname: {
@@ -61,13 +63,27 @@
     return length === 0 || length > 512;
   });
 
+  // 公开评论
+  async function auditComment() {
+    toggleSubmitting(true);
+    try {
+      if (props.kind === "modify") {
+        await commentStore.audit({ id: props.id });
+      }
+      emit("close");
+    }
+    finally {
+      toggleSubmitting(false);
+    }
+  }
+
   // 发表评论
   async function sendComment() {
     if (!validate()) {
       return;
     }
 
-    toggleSending(true);
+    toggleSubmitting(true);
     try {
       if (props.kind === "modify") {
         await commentStore.modify({
@@ -88,11 +104,10 @@
           address: address.value || void 0,
         });
       }
-      content.value = "";
       emit("close");
     }
     finally {
-      toggleSending(false);
+      toggleSubmitting(false);
     }
   }
 </script>
@@ -116,14 +131,25 @@
       <comment-editor v-model="content"/>
       <p class="panel-tip">支持部分 Markdown 语法</p>
     </div>
-    <mb-button
-      full round
-      :disabled="isContentOverlength || isSending"
-      @click="sendComment"
-    >
-      <iconify name="fa7-solid:paper-plane"/>
-      <span>{{ isSending ? "发送中……" : "发表评论" }}</span>
-    </mb-button>
+    <div class="panel-operators">
+      <mb-button
+        v-if="signerStore.isAdmin"
+        round
+        :disabled="kind !== `modify` || !pending || isSubmitting"
+        @click="auditComment"
+      >
+        <iconify name="fa7-solid:eye"/>
+        <span>公开</span>
+      </mb-button>
+      <mb-button
+        round
+        :disabled="isContentOverlength || isSubmitting"
+        @click="sendComment"
+      >
+        <iconify name="fa7-solid:paper-plane"/>
+        <span>{{ isSubmitting ? "发送中……" : "发表评论" }}</span>
+      </mb-button>
+    </div>
   </mb-dialog>
 </template>
 
@@ -158,5 +184,10 @@
     &::before {
       content: "• ";
     }
+  }
+
+  .panel-operators {
+    display: grid;
+    grid-template-columns: 96px 1fr;
   }
 </style>

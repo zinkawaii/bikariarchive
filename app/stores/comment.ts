@@ -123,12 +123,6 @@ export const useCommentStore = defineStore("comment", () => {
     });
   }
 
-  async function requireAudit(id: string) {
-    if (await requireConfirm("是否将此评论设置为公开状态？")) {
-      await audit({ id });
-    }
-  }
-
   function requireModify(data: CommentData) {
     modalStore.use(() => h(LazyCommentPanel, {
       kind: "modify",
@@ -154,7 +148,6 @@ export const useCommentStore = defineStore("comment", () => {
     modify,
     remove,
     requirePost,
-    requireAudit,
     requireModify,
   };
 }, {

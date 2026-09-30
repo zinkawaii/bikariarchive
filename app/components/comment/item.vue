@@ -49,11 +49,6 @@
     commentStore.requirePost(props.data);
   }
 
-  // 审核评论
-  function auditComment() {
-    commentStore.requireAudit(props.data.id);
-  }
-
   // 修改评论
   function modifyComment() {
     commentStore.requireModify(props.data);
@@ -79,7 +74,7 @@
           <iconify class="text-gray" name="fa7-solid:comments"/>
           <button class="comment-nickname" @click="openUserInfo(data.parent)">{{ data.parent.nickname }}</button>
         </template>
-        <button v-if="data.pending" class="comment-pending" @click="auditComment">待审核</button>
+        <span v-if="data.pending" class="comment-pending">待审核</span>
       </div>
       <!-- eslint-disable-next-line vue/valid-v-slot -->
       <bikariya-article #fallback :body variant="comment">

@@ -41,6 +41,9 @@ export const CommentDataModel = model("CommentData", new Schema<CommentDataSchem
   address: {
     type: String,
   },
+  token: {
+    type: String,
+  },
   status: {
     type: String,
     enum: ["pending", "public"],
