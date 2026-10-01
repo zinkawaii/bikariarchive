@@ -1,14 +1,14 @@
 import { readFile } from "node:fs/promises";
 import { basename } from "pathe";
 import { parseUpdate } from "../markdown/index.ts";
-import { createKerria } from "../processor/kerria.ts";
+import { createProcessor } from "../processor/kerria.ts";
 import { useLoad } from "../processor/useLoad.ts";
 import { useSource } from "../processor/useSource.ts";
 import type { JUpdate } from "../types/update.ts";
 
 const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
-export default createKerria("Update", () => {
+export default createProcessor("Update", () => {
   const meta = useLoad("update", {
     dist: "server/assets/json/update.json",
     defaultValue: {

@@ -1,4 +1,4 @@
-import { resolve } from "pathe";
+import { join } from "pathe";
 import { useCurrentContext } from "./kerria.ts";
 import { type MaybePromise, writeJson } from "./utils.ts";
 
@@ -29,10 +29,10 @@ export function useSource<T extends object>(kind: number, options: UseSourceOpti
     skip = 0,
   } = options;
 
-  const base = resolve(options.base);
-  const dist = options.dist && resolve(options.dist);
-  const folders = options.folders?.map((folder) => resolve(base, folder)) ?? [base];
-  const patterns = folders.map((path) => resolve(path, (deep ? "**/*" : "*") + options.ext));
+  const base = join(ctx.base, options.base);
+  const dist = options.dist && join(ctx.base, options.dist);
+  const folders = options.folders?.map((folder) => join(base, folder)) ?? [base];
+  const patterns = folders.map((path) => join(path, (deep ? "**/*" : "*") + options.ext));
 
   const info: SourceInfo = {
     ...options,

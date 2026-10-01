@@ -15,34 +15,74 @@ interface Cache {
   hash: string;
 }
 
-export interface KerriaContext {
+export interface ProcessorContext {
+  base: string;
   sign: string;
   loadInfos: LoadInfo[];
   sourceInfos: SourceInfo[];
 }
 
-let currentContext: KerriaContext | null = null;
+let currentContext: ProcessorContext | null = null;
 
 export function useCurrentContext() {
   return currentContext!;
 }
 
-export function createKerria(sign: string, setup: (ctx: KerriaContext) => void) {
-  const ctx: KerriaContext = {
+export function createKerria(base: string, processors: ReturnType<typeof createProcessor>[]) {
+  for (const processor of processors) {
+    processor.initialize(base);
+  }
+
+  async function build() {
+    for (const processor of processors) {
+      await processor.build();
+    }
+  }
+
+  function watch() {
+    const disposables: (() => Promise<unknown>)[] = [];
+    for (const processor of processors) {
+      const dispose = processor.watch();
+      disposables.push(dispose);
+    }
+
+    return async () => {
+      for (const dispose of disposables) {
+        await dispose();
+      }
+    };
+  }
+
+  return {
+    build,
+    watch,
+  };
+}
+
+export function createProcessor(sign: string, setup: (ctx: ProcessorContext) => void) {
+  const ctx: ProcessorContext = {
+    base: "",
     sign,
     loadInfos: [],
     sourceInfos: [],
   };
 
-  currentContext = ctx;
-  setup(ctx);
-  currentContext = null;
-
-  ctx.sourceInfos.sort((a, b) => a.kind - b.kind);
-
   const cacheDir = pkg.cache("kerria", { create: true });
   const cachePath = join(cacheDir!, `${sign}.json`);
-  const caches: Record<string, Cache> = existsSync(cachePath) ? readJsonSync(cachePath) : {};
+  let caches: Record<string, Cache> = {};
+
+  function initialize(base: string) {
+    currentContext = ctx;
+    ctx.base = base;
+    setup(ctx);
+    currentContext = null;
+
+    ctx.sourceInfos.sort((a, b) => a.kind - b.kind);
+
+    if (existsSync(cachePath)) {
+      caches = readJsonSync(cachePath);
+    }
+  }
 
   async function build() {
     for (const info of ctx.sourceInfos) {
@@ -174,6 +214,7 @@ export function createKerria(sign: string, setup: (ctx: KerriaContext) => void) 
   }
 
   return {
+    initialize,
     build,
     watch,
   };

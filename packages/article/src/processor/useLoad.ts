@@ -1,4 +1,4 @@
-import { resolve } from "pathe";
+import { join } from "pathe";
 import { useCurrentContext } from "./kerria.ts";
 import { writeJsonSync } from "./utils.ts";
 
@@ -23,7 +23,7 @@ export function useLoad(name: string, options: UseLoadOptions) {
     output,
   } = options;
 
-  const dist = options.dist && resolve(options.dist);
+  const dist = options.dist && join(ctx.base, options.dist);
 
   const info: LoadInfo = {
     name,
