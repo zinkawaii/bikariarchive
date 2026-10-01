@@ -1,18 +1,44 @@
-import { readFile, writeFile } from "node:fs/promises";
-import { resolve } from "pathe";
+import { addServerHandler, addTemplate, createResolver, defineNuxtModule } from "nuxt/kit";
 import { createHighlighterCore, createJavaScriptRegexEngine } from "shiki";
 import html from "shiki/dist/langs/html.mjs";
 import light from "shiki/themes/catppuccin-latte.mjs";
 import dark from "shiki/themes/one-dark-pro.mjs";
 
-const path = resolve(import.meta.dirname, "../public/feed/style.css");
-const file = await readFile(path, "utf-8");
-const tokens = await getShikiTokens();
-const content = file.replace(
-  /(?<=--shiki-(light|dark)-([\w-]+):\s).*?(?=;)/g,
-  (_, theme, type) => tokens[`--shiki-${theme}-${type}`],
-);
-await writeFile(path, content);
+export default defineNuxtModule({
+  meta: {
+    name: "@bikari/feed",
+  },
+  async setup(options, nuxt) {
+    const resolver = createResolver(import.meta.url);
+
+    const isCustomElement = nuxt.options.vue.compilerOptions.isCustomElement;
+    nuxt.options.vue.compilerOptions.isCustomElement = (tag) => isCustomElement?.(tag) || tag.startsWith("xsl:");
+
+    addServerHandler({
+      route: "/feed",
+      handler: resolver.resolve("runtime/server/feed.get"),
+    });
+
+    addServerHandler({
+      route: "/feed/template.xsl",
+      handler: resolver.resolve("runtime/server/template.get"),
+    });
+
+    const tokens = await getShikiTokens();
+    addTemplate({
+      filename: "feed.mjs",
+      write: true,
+      getContents: () => `
+export const variables = /* CSS */\`
+:root {
+${Object.entries(tokens).map(([key, value]) => `  ${key}: ${value};\n`).join("")}
+  color-scheme: light dark;
+}
+\`;
+`.trimStart(),
+    });
+  },
+});
 
 export async function getShikiTokens() {
   using shiki = await createHighlighterCore({

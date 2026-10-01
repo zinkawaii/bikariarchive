@@ -102,7 +102,7 @@
           </div>
           <div class="azur-block-wrapper">
             <div class="azur-block-content">
-              <p reset>有些人只拥吻影子，于是只拥有幸福的幻影</p>
+              <p reset>{{ $config.public.motto }}</p>
             </div>
           </div>
         </div>
