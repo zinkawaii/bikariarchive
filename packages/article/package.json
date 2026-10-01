@@ -7,7 +7,9 @@
     "./markdown": "./src/markdown/index.ts"
   },
   "scripts": {
-    "new": "node scripts/new/index.ts"
+    "new": "node scripts/new/index.ts",
+    "dev": "node scripts/exec.ts",
+    "watch": "NODE_ENV=\"development\" node --watch scripts/exec.ts"
   },
   "dependencies": {
     "chokidar": "catalog:utils",

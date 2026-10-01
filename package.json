@@ -19,8 +19,8 @@
     "eslint": "eslint -c .config/eslint.config.ts",
     "typecheck": "nuxt typecheck",
     "new": "pnpm --filter @bikari/article new",
-    "task:article": "node scripts/article.ts",
-    "task:article/dev": "NODE_ENV=\"development\" node --watch scripts/article.ts"
+    "task:article": "pnpm --filter @bikari/article dev",
+    "task:article/dev": "pnpm --filter @bikari/article watch"
   },
   "dependencies": {
     "@shikijs/transformers": "catalog:utils",
