@@ -132,7 +132,7 @@
     margin: 1em 0 0 20px;
     font-family: monospace;
     font-size: 13px;
-    color: light-dark(var(--shiki-light-text), var(--shiki-dark-text));
+    color: var(--shiki-text);
   }
 
   details:not(:open)::after {
@@ -152,19 +152,19 @@
   }
 
   .html-punctuation {
-    color: light-dark(var(--shiki-light-punctuation), var(--shiki-dark-punctuation));
+    color: var(--shiki-punctuation);
   }
 
   .html-tag {
-    color: light-dark(var(--shiki-light-tag), var(--shiki-dark-tag));
+    color: var(--shiki-tag);
   }
 
   .html-attribute-name {
-    color: light-dark(var(--shiki-light-attribute-name), var(--shiki-dark-attribute-name));
+    color: var(--shiki-attribute-name);
   }
 
   .html-attribute-value {
-    color: light-dark(var(--shiki-light-attribute-value), var(--shiki-dark-attribute-value));
+    color: var(--shiki-attribute-value);
   }
 
   .opened {

@@ -31,7 +31,10 @@ export default defineNuxtModule({
       getContents: () => `
 export const variables = /* CSS */\`
 :root {
-${Object.entries(tokens).map(([key, value]) => `  ${key}: ${value};\n`).join("")}
+${Object.entries(tokens.light).map(([key, value]) => `  ${key}: ${value};`).join("\n")}
+  @media (prefers-color-scheme: dark) {
+${Object.entries(tokens.dark).map(([key, value]) => `    ${key}: ${value};`).join("\n")}
+  }
   color-scheme: light dark;
 }
 \`;
@@ -58,17 +61,17 @@ export async function getShikiTokens() {
   });
 
   return {
-    ...get("light"),
-    ...get("dark"),
+    light: get("light"),
+    dark: get("dark"),
   };
 
   function get(theme: string) {
     return {
-      [`--shiki-${theme}-punctuation`]: tokens[0][0].htmlStyle![`--shiki-${theme}`],
-      [`--shiki-${theme}-tag`]: tokens[0][1].htmlStyle![`--shiki-${theme}`],
-      [`--shiki-${theme}-attribute-name`]: tokens[0][3].htmlStyle![`--shiki-${theme}`],
-      [`--shiki-${theme}-attribute-value`]: tokens[0][5].htmlStyle![`--shiki-${theme}`],
-      [`--shiki-${theme}-text`]: tokens[0][7].htmlStyle![`--shiki-${theme}`],
+      [`--shiki-punctuation`]: tokens[0][0].htmlStyle![`--shiki-${theme}`],
+      [`--shiki-tag`]: tokens[0][1].htmlStyle![`--shiki-${theme}`],
+      [`--shiki-attribute-name`]: tokens[0][3].htmlStyle![`--shiki-${theme}`],
+      [`--shiki-attribute-value`]: tokens[0][5].htmlStyle![`--shiki-${theme}`],
+      [`--shiki-text`]: tokens[0][7].htmlStyle![`--shiki-${theme}`],
     };
   }
 }
