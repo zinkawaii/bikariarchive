@@ -167,9 +167,6 @@ catalogs:
     html-tags:
       specifier: ^5.1.0
       version: 5.1.0
-    kerria:
-      specifier: ^0.5.0
-      version: 0.5.0
     mdast-util-to-string:
       specifier: ^4.0.0
       version: 4.0.0
@@ -281,6 +278,9 @@ catalogs:
     defu:
       specifier: ^6.1.7
       version: 6.1.7
+    empathic:
+      specifier: ^2.1.0
+      version: 2.1.0
     entities:
       specifier: ^8.1.0
       version: 8.1.0
@@ -530,15 +530,21 @@ importers:
 
   packages/article:
     dependencies:
+      chokidar:
+        specifier: catalog:utils
+        version: 5.0.0
+      consola:
+        specifier: catalog:utils
+        version: 3.4.2
       defu:
         specifier: catalog:utils
         version: 6.1.7
+      empathic:
+        specifier: catalog:utils
+        version: 2.1.0
       github-slugger:
         specifier: catalog:utils
         version: 2.0.0
-      kerria:
-        specifier: catalog:content
-        version: 0.5.0
       mdast-util-to-string:
         specifier: catalog:content
         version: 4.0.0
@@ -560,6 +566,9 @@ importers:
       temporal-polyfill:
         specifier: catalog:utils
         version: 1.0.5
+      tinyglobby:
+        specifier: catalog:utils
+        version: 0.2.17
       ufo:
         specifier: catalog:utils
         version: 1.6.4
@@ -2680,9 +2689,6 @@ packages:
   katex@0.18.9:
     resolution: {integrity: sha512-8ad9RyoKsb/g8/yLFE+KAlP+DhbCTRUNi/V9XGsxn0R+trJJltNwzcDNo0q/DEkOy5fQUQTAQyCXCYSE+OakTQ==}
     hasBin: true
-
-  kerria@0.5.0:
-    resolution: {integrity: sha512-qxqcaXcbi8sF/sM6+AkpCGhX0GnP9ihjO7IDwN5NOGVajLw2l8NlgC2EyKri0FsLp4/4/4KqMcEsc0tuDscPAg==}
 
   keyv@5.6.0:
     resolution: {integrity: sha512-CYDD3SOtsHtyXeEORYRx2qBtpDJFjRTGXUtmNEMGyzYOKj1TE3tycdlho7kA1Ufx9OYWZzg52QFBGALTirzDSw==}
@@ -6294,14 +6300,6 @@ snapshots:
   katex@0.18.9:
     dependencies:
       commander: 15.0.0
-
-  kerria@0.5.0:
-    dependencies:
-      chokidar: 5.0.0
-      consola: 3.4.2
-      empathic: 2.1.0
-      pathe: 2.0.3
-      tinyglobby: 0.2.17
 
   keyv@5.6.0:
     dependencies:

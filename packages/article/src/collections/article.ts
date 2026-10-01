@@ -1,9 +1,11 @@
 import { readFile } from "node:fs/promises";
-import { createKerria, useLoad, useSource } from "kerria";
 import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle, parseEntry } from "../markdown/index.ts";
+import { createProcessor } from "../processor/kerria.ts";
+import { useLoad } from "../processor/useLoad.ts";
+import { useSource } from "../processor/useSource.ts";
 import { isDevelopment } from "../utils.ts";
 import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article.ts";
 
@@ -12,7 +14,7 @@ const SourceKind = {
   Article: 1,
 };
 
-export default createKerria("Article", () => {
+export default createProcessor("Article", () => {
   const metaInfo = useLoad("meta", {
     dist: "server/assets/json/article.json",
     output(val) {

@@ -1,4 +1,4 @@
-import { article, entry, update } from "@bikari/article";
+import { createArticle } from "@bikari/article";
 import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 import { relative } from "pathe";
 import configLiteral from "./config.ts";
@@ -30,18 +30,14 @@ export default defineNuxtModule({
       name: relative(nuxt.options.buildDir, resolve("volar.cts")),
     });
 
-    const disposables: (() => Promise<unknown>)[] = [];
-    for (const processor of [article, entry, update]) {
-      await processor.build();
-      if (nuxt.options.dev) {
-        disposables.push(processor.watch());
-      }
-    }
-    await buildSearch();
+    const article = createArticle(nuxt.options.rootDir);
+    await article.build();
 
-    nuxt.hook("close", async () => {
-      await Promise.all(disposables.map((dispose) => dispose()));
-    });
+    if (nuxt.options.dev) {
+      nuxt.hook("close", article.watch());
+    }
+
+    await buildSearch();
 
     addTemplate({
       filename: "tsconfig.article.json",
