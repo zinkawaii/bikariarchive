@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises";
-import { createKerria, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
 import { parseUpdate } from "../markdown/index.ts";
+import { createKerria } from "../processor/kerria.ts";
+import { useLoad } from "../processor/useLoad.ts";
+import { useSource } from "../processor/useSource.ts";
 import type { JUpdate } from "../types/update.ts";
 
 const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;

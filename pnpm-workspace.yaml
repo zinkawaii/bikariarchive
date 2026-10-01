@@ -40,7 +40,6 @@ catalogs:
     typescript: ?=6.0.3
   content:
     html-tags: ^5.1.0
-    kerria: ^0.5.0
     mdast-util-to-string: ^4.0.0
     remark-breaks: ^4.0.0
     remark-rehype: ^11.1.2
@@ -83,6 +82,7 @@ catalogs:
     chokidar: ^5.0.0
     consola: ^3.4.2
     defu: ^6.1.7
+    empathic: ^2.1.0
     entities: ^8.1.0
     github-slugger: ^2.0.0
     katex: ^0.18.9

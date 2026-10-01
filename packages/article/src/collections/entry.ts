@@ -1,8 +1,10 @@
 import { readFile } from "node:fs/promises";
 import defu from "defu";
-import { createKerria, useLoad, useSource } from "kerria";
 import { basename } from "pathe";
 import { parseEntry } from "../markdown/index.ts";
+import { createKerria } from "../processor/kerria.ts";
+import { useLoad } from "../processor/useLoad.ts";
+import { useSource } from "../processor/useSource.ts";
 import { isDevelopment } from "../utils.ts";
 import type { Child } from "../markdown/types.ts";
 import type { EntryCategory, EntryDetail, JEntry } from "../types/entry.ts";

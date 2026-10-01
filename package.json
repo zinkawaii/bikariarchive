@@ -20,9 +20,7 @@
     "typecheck": "nuxt typecheck",
     "new": "pnpm --filter @bikari/article new",
     "task:article": "node scripts/article.ts",
-    "task:article/dev": "NODE_ENV=\"development\" node --watch scripts/article.ts",
-    "task:feed": "node scripts/feed.ts",
-    "task:password": "node scripts/password.ts"
+    "task:article/dev": "NODE_ENV=\"development\" node --watch scripts/article.ts"
   },
   "dependencies": {
     "@shikijs/transformers": "catalog:utils",
