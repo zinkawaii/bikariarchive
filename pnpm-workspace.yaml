@@ -61,13 +61,11 @@ catalogs:
     "@bikariya/shiki": *bikariya
     "@nuxt/icon": ^2.5.1
     "@nuxt/image": ^2.1.0
-    "@nuxt/kit": &nuxt ^4.5.2
-    "@nuxt/schema": *nuxt
     "@nuxtjs/robots": ^6.2.3
     "@nuxtjs/sitemap": ^8.5.1
     "@pinia/nuxt": ^1.0.2
     "@vueuse/nuxt": &vueuse ^15.0.0
-    nuxt: *nuxt
+    nuxt: ^4.5.2
     nuxt-auth-utils: ^0.5.30
     nuxt-schema-org: ^6.3.2
     nuxt-seo-utils: ^8.5.2

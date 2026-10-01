@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
-import { addPluginTemplate, defineNuxtModule, setGlobalHead } from "@nuxt/kit";
 import consola from "consola";
+import { addPluginTemplate, defineNuxtModule, setGlobalHead } from "nuxt/kit";
 import { join } from "pathe";
 
 interface FontInfo {

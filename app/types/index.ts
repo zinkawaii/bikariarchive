@@ -1,4 +1,4 @@
-declare module "#app" {
+declare module "nuxt/app" {
   interface PageMeta {
     aside?: boolean;
     comment?: boolean;

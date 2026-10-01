@@ -1,4 +1,4 @@
-import type { NuxtConfig } from "@nuxt/schema";
+import type { NuxtConfig } from "nuxt/schema";
 import type { TSConfig } from "pkg-types";
 
 function shared(): TSConfig["compilerOptions"] {

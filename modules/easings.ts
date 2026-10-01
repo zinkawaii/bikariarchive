@@ -1,5 +1,5 @@
-import { addTemplate, defineNuxtModule } from "@nuxt/kit";
 import { capitalize, hyphenate } from "@vue/shared";
+import { addTemplate, defineNuxtModule } from "nuxt/kit";
 
 const easings = {
   inBack: "0.6, -0.28, 0.735, 0.045",

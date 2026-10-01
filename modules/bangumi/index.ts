@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { addTemplate, defineNuxtModule } from "@nuxt/kit";
 import { fetchFullSubjects } from "bgmt/cdn";
 import consola from "consola";
+import { addTemplate, defineNuxtModule } from "nuxt/kit";
 import { join, relative } from "pathe";
 import { ids } from "./meta.ts";
 

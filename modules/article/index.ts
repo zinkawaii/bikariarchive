@@ -1,5 +1,5 @@
 import { article, entry, update } from "@bikari/article";
-import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "@nuxt/kit";
+import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 import { relative } from "pathe";
 import configLiteral from "./config.ts";
 import { buildSearch } from "./search.ts";
