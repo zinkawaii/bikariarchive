@@ -88,7 +88,7 @@ export default defineNuxtConfig({
   },
   site: {
     name: clientConfig.title,
-    url: `https://${clientConfig.domain}`,
+    url: clientConfig.origin,
     description: clientConfig.description,
     defaultLocale: "zh-CN",
     indexable: true,

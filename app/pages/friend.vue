@@ -13,8 +13,8 @@
 
   const schema = `export default defineFriend({
   title: "${config.public.title}",
-  link: "https://${config.public.domain}",
-  icon: "https://${config.public.domain}${config.public.favicon}",
+  link: "${config.public.origin}",
+  icon: "${config.public.origin + config.public.favicon}",
   nickname: "${config.public.author}",
   description: "${config.public.description}",
 });`;

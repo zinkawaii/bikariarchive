@@ -23,13 +23,13 @@ export default defineEventHandler(async (event) => {
     id: "BikariArchive",
     title: config.public.title,
     description: config.public.description,
-    link: `https://${config.public.domain}`,
-    feed: `https://${config.public.domain}/feed`,
+    link: config.public.origin,
+    feed: `${config.public.origin}/feed`,
     language: "zh-CN",
     generator: "https://github.com/KazariEX/zfeed",
     stylesheet: "/feed/template.xsl",
-    image: `https://${config.public.domain}${config.public.avatar}`,
-    favicon: `https://${config.public.domain}${config.public.favicon}`,
+    image: config.public.origin + config.public.avatar,
+    favicon: config.public.origin + config.public.favicon,
     copyright: `© 2022-${new Date().getFullYear()} KazariEX`,
     updatedAt: new Date(arts[0].updateDate),
     author: {
@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     },
     items: arts.map((art) => {
       const description = toString(art.excerpt);
-      const link = `https://${config.public.domain}/book/${art.novel}/${art.index}`;
+      const link = `${config.public.origin}/book/${art.novel}/${art.index}`;
       const content = `${
         art.cover ? `<img src="${art.cover.src}">` : ""
       }<p>${description}</p><a href="${link}">查看原文</a>`;

@@ -75,7 +75,7 @@
         icon: "fa7-solid:image",
         disabled: () => {
           const url = new URL(targetImageLink.value);
-          return url.hostname !== config.public.domain;
+          return url.origin !== config.public.origin;
         },
         action: () => {
           copyImage(targetImageLink.value, "图像已复制");

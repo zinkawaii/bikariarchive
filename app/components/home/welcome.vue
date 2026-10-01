@@ -6,7 +6,7 @@
 
   const qrcode = ref("");
   onMounted(() => {
-    qrcode.value = renderSVG(`https://${config.public.domain}`, {
+    qrcode.value = renderSVG(config.public.origin, {
       border: 0,
       ecc: "M",
       whiteColor: "transparent",

@@ -55,10 +55,10 @@ const client = {
     favicon: "/favicon.svg",
   },
   development: {
-    domain: "zinkawaii",
+    origin: "http://localhost:4615",
   },
   production: {
-    domain: "archive.bikari.top",
+    origin: "https://archive.bikari.top",
   },
 };
 

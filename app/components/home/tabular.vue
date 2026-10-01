@@ -9,7 +9,7 @@
     <novel-cover class="tabular-cover" v-bind="art.cover"/>
     <div class="tabular-wrapper">
       <h3 class="tabular-title">
-        <iconify v-if="art.sticky < Infinity" name="pepicons-print:pin"/>
+        <iconify v-if="art.sticky < Infinity" name="fa7-solid:thumb-tack"/>
         {{ art.title }}
       </h3>
       <novel-attributes
@@ -82,6 +82,7 @@
     line-height: 32px;
 
     > .iconify {
+      font-size: 1em;
       color: var(--color-theme-text);
     }
   }
