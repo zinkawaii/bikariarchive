@@ -36,7 +36,7 @@
   // 点击箭头
   function toBottom() {
     window.scrollTo({
-      top: window.innerHeight * height.value,
+      top: window.innerHeight * height.value / 100,
     });
   }
 </script>
