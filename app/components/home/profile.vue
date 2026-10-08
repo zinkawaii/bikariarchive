@@ -88,9 +88,9 @@
   .profile-header {
     display: grid;
     grid-template:
-      "A B"
+      "A B" 1fr
       "A C"
-      "A D" 1fr / auto 1fr;
+      "A D" / auto 1fr;
     column-gap: 12px;
     isolation: isolate;
   }
@@ -104,11 +104,10 @@
 
   .profile-author {
     align-self: end;
-    margin-top: 24px;
   }
 
   .profile-phrase {
-    padding-block: 2px;
+    padding-block: 2px 4px;
     color: var(--color-text-secondary);
   }
 
@@ -118,10 +117,9 @@
   }
 
   .profile-link {
-    display: grid;
-    place-items: center;
     width: 20px;
     aspect-ratio: 1;
+    text-align: center;
     color: var(--color-info);
 
     &:hover {

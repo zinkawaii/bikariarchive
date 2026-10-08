@@ -95,13 +95,13 @@
 
 <template>
   <header class="z-header">
-    <div class="header-logo">
+    <nav class="header-logo">
       <nuxt-link class="logo-wrapper" :to="breadcrumbStore.route">
         <span class="logo-aside">Bikari</span>
         <span class="logo-center">A</span>
         <span class="logo-aside">rchive</span>
       </nuxt-link>
-    </div>
+    </nav>
     <nav class="header-nav">
       <button class="nav-expand" @click="toggleNavbar()">
         <iconify name="fa7-solid:bars"/>
@@ -323,8 +323,6 @@
     }
 
     > button {
-      display: grid;
-      place-items: center;
       background-image: linear-gradient(to right, var(--color-theme), var(--color-theme-dark));
       color: white;
     }

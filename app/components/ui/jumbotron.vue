@@ -90,7 +90,6 @@
   }
 
   .jumbotron-skip {
-    display: flex;
     position: absolute;
     opacity: 0;
     inset: calc(100% - 14svh) 0 0;

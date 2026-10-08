@@ -66,10 +66,8 @@
   }
 
   .tabular-wrapper {
-    display: grid;
     flex: 1;
     align-content: center;
-    gap: 4px;
     padding-inline: 8px;
     text-align: center;
   }
@@ -85,6 +83,10 @@
       font-size: 1em;
       color: var(--color-theme-text);
     }
+  }
+
+  .novel-attributes {
+    margin-block: 4px;
   }
 
   .tabular-thumb {

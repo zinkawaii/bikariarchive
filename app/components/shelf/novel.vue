@@ -61,8 +61,7 @@
   }
 
   .novel-placeholder {
-    display: grid;
-    align-items: center;
+    align-content: center;
     border: 4px dashed var(--color-border);
     border-radius: 8px;
     font-size: 32px;

@@ -70,8 +70,6 @@
 
 <style scoped>
   .mb-slider {
-    display: grid;
-    align-items: center;
     position: relative;
     width: calc(100% - 16px);
     height: 20px;

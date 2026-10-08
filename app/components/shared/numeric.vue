@@ -131,8 +131,6 @@
   }
 
   .numeric-arrow {
-    display: grid;
-    place-items: center;
     position: absolute;
     height: 100%;
     aspect-ratio: 1;

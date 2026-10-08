@@ -251,8 +251,7 @@
     --half-height: calc(var(--height) / 2);
     --padding-right: 7px;
 
-    display: flex;
-    align-items: center;
+    align-content: center;
     position: absolute;
     top: 10px;
     left: 112px;

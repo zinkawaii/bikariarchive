@@ -62,14 +62,14 @@
   }
 
   .toolkit-icon {
-    display: grid;
     grid-area: A;
-    place-items: center;
+    align-content: center;
     width: 64px;
     aspect-ratio: 1;
     border: 3px dashed var(--color-border);
     border-radius: 8px;
     font-size: 24px;
+    text-align: center;
     color: var(--color-info);
   }
 

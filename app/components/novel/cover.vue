@@ -30,14 +30,14 @@
 
     &::before {
       content: "Cover.";
-      display: grid;
-      place-items: center;
+      align-content: center;
       position: absolute;
       opacity: 0.33;
       inset: 0;
       background-color: var(--color-gray-500);
       font-size: 48px;
       font-weight: bold;
+      text-align: center;
     }
   }
 </style>

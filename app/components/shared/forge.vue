@@ -159,8 +159,6 @@
   }
 
   .forge-expand {
-    display: grid;
-    place-items: center;
     position: absolute;
     inset: auto 0 0;
     height: 2em;

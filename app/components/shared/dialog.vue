@@ -54,8 +54,7 @@
   }
 
   .dialog-xmark {
-    display: grid;
-    place-items: center;
+    align-content: center;
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -64,6 +63,7 @@
     border-radius: var(--rounded-circle);
     background-color: var(--color-gray-800);
     font-size: 0.75rem;
+    text-align: center;
     color: var(--color-gray-300);
     transition: all 0.4s;
     cursor: pointer;

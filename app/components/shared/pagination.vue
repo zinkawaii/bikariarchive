@@ -120,8 +120,6 @@
   }
 
   .pagina-arr, .pagina-item {
-    display: grid;
-    place-items: center;
     height: 2em;
     margin-inline: 4px;
     border: 1px solid var(--color-border-lighter);

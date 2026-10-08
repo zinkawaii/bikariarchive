@@ -46,7 +46,6 @@
 
 <style scoped>
   .jumbotron-hero {
-    display: grid;
     align-content: center;
     position: absolute;
     inset: 0;

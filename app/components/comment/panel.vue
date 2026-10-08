@@ -131,9 +131,9 @@
       <comment-editor v-model="content"/>
       <p class="panel-tip">支持部分 Markdown 语法</p>
     </div>
-    <div class="panel-operators">
+    <div class="panel-operator">
       <mb-button
-        v-if="signerStore.isAdmin"
+        v-if="signerStore.isAdmin && kind === `modify`"
         round
         :disabled="kind !== `modify` || !pending || isSubmitting"
         @click="auditComment"
@@ -186,8 +186,17 @@
     }
   }
 
-  .panel-operators {
-    display: grid;
-    grid-template-columns: 96px 1fr;
+  .panel-operator {
+    display: flex;
+
+    > .mb-button {
+      &:not(:last-child) {
+        width: 96px;
+      }
+
+      &:last-child {
+        flex: 1;
+      }
+    }
   }
 </style>
