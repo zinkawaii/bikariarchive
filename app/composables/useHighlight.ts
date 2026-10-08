@@ -81,6 +81,12 @@ export function useHighlight(
     }
   });
 
+  onScopeDispose(() => {
+    for (const range of ranges.value) {
+      highlight.delete(range);
+    }
+  });
+
   return {
     update: textNodes.trigger,
   };
