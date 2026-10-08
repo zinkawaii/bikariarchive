@@ -62,6 +62,8 @@ export default defineNuxtModule({
         },
         include: [
           "../content/**/*.md",
+          // 用于消除 "在配置文件...中找不到任何输入" 的警告
+          "./article.d.ts",
         ],
       }, void 0, 2),
     });
