@@ -1,28 +1,21 @@
 <script lang="ts" setup>
-  import { encodeHTML } from "entities";
-  import type { BundledLanguage } from "shiki";
+  import type { BasicForgeProps } from "~/components/basic-forge.vue";
 
-  const props = withDefaults(defineProps<{
-    lang?: BundledLanguage;
-    meta?: string;
-    raw?: string;
-  }>(), {
+  const props = withDefaults(defineProps<BasicForgeProps>(), {
     lang: "js",
+    meta: "",
     raw: "",
   });
 
-  const shikiStore = useShikiStore();
-
   const [isCollapsed, toggleCollapsed] = useToggle(false);
   const [isExpanded, toggleExpanded] = useToggle(false);
-  const codeEl = useTemplateRef("pre");
 
   const actions = [
     {
       title: "复制",
       icon: "fa7-solid:paste",
       action() {
-        copyText(codeEl.value!.textContent!, "代码已复制");
+        copyText(props.raw, "代码已复制");
       },
     },
     {
@@ -31,19 +24,6 @@
       action: () => toggleCollapsed(),
     },
   ];
-
-  // 代码
-  const code = computedAsync(async () => {
-    const { lang, meta, raw } = props;
-    const shiki = await shikiStore.load();
-    await shikiStore.loadLang(lang);
-
-    return shiki.codeToHtml(raw, {
-      ...shikiStore.options,
-      lang,
-      meta: { __raw: meta },
-    });
-  }, encodeHTML(props.raw), { lazy: true });
 
   // 行数
   const lines = computed(() => {
@@ -57,7 +37,7 @@
 </script>
 
 <template>
-  <figure class="mb-forge">
+  <basic-forge v-slot="{ html }" class="mb-forge" v-bind="props">
     <figcaption class="forge-header">
       <span class="text-uppercase">{{ lang }}</span>
       <button
@@ -77,12 +57,12 @@
       }"
     >
       <pre class="forge-line">{{ lineStr }}</pre>
-      <pre ref="pre" class="shiki edge-fades-x no-scrollbar" v-html="code"></pre>
+      <pre class="shiki edge-fades-x no-scrollbar" v-html="html"></pre>
       <button v-if="lines >= 10" class="forge-expand" @click="toggleExpanded()">
         <iconify :name="`fa7-solid:angles-${isExpanded ? `up` : `down`}`"/>
       </button>
     </div>
-  </figure>
+  </basic-forge>
 </template>
 
 <style scoped>
