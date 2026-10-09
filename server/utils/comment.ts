@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { type } from "arktype";
+import { Types } from "mongoose";
 import { parsePath, withoutTrailingSlash } from "ufo";
 import type { H3Event } from "nitro/h3";
 import CommentReply from "#server/emails/comment-reply.vue";
@@ -7,6 +8,11 @@ import CommentReply from "#server/emails/comment-reply.vue";
 // 无尾斜杠路径
 export const parseCommentPath = type(/^\//).pipe(
   (path) => withoutTrailingSlash(parsePath(path).pathname),
+);
+
+// 文档标识符
+export const parseObjectId = type(/^[0-9a-f]{24}$/).pipe(
+  (value) => new Types.ObjectId(value),
 );
 
 // 发送回复邮件

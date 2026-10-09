@@ -6,9 +6,9 @@ import { CommentDataModel } from "#server/models/CommentData";
 export type PutCommentBody = typeof schema.inferIn;
 
 const schema = type({
-  id: "string",
-  content: "string <= 512",
-  nickname: "string <= 18",
+  id: parseObjectId,
+  content: "0 < string <= 512",
+  nickname: "0 < string <= 18",
   email: "string.email?",
   address: "string.url?",
 });

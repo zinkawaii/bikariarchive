@@ -16,7 +16,7 @@ export interface GetCommentResponse {
 
 const schema = type({
   path: parseCommentPath,
-  page: "string.numeric.parse",
+  page: type("string.numeric.parse").to("number >= 1 % 1"),
 });
 
 // 需要获取的属性

@@ -6,7 +6,7 @@ import { CommentDataModel } from "#server/models/CommentData";
 export type DeleteCommentBody = typeof schema.inferIn;
 
 const schema = type({
-  id: "string",
+  id: parseObjectId,
 });
 
 export default defineHandler<{ body: DeleteCommentBody }>(async (event) => {

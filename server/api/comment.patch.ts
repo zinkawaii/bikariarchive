@@ -6,7 +6,7 @@ import { CommentDataModel } from "#server/models/CommentData";
 export type PatchCommentBody = typeof schema.inferIn;
 
 const schema = type({
-  id: "string",
+  id: parseObjectId,
 });
 
 export default defineHandler<{ body: PatchCommentBody }>(async (event) => {

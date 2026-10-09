@@ -7,7 +7,7 @@ export type PostCommentBody = typeof schema.inferIn;
 
 const schema = type({
   path: parseCommentPath,
-  parent: "string?",
+  parent: parseObjectId.optional(),
   content: "0 < string <= 512",
   nickname: "0 < string <= 18",
   email: "string.email?",
