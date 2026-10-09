@@ -10,6 +10,7 @@ export const CommentDataModel = model("CommentData", new Schema<CommentDataSchem
   root: {
     type: Types.ObjectId,
     ref: "CommentData",
+    index: true,
   },
   parent: {
     type: Types.ObjectId,

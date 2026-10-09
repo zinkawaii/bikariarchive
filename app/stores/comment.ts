@@ -181,9 +181,6 @@ function processComments<T extends CommentData>(comments: WithParent<T>[]) {
       }
     }
 
-    // 按时间排序
-    item.children.sort((a, b) => a.time.localeCompare(b.time));
-
     return item;
   });
 }

@@ -65,15 +65,17 @@ export default defineHandler<{ query: GetCommentQuery }, Promise<GetCommentRespo
     .limit(limit);
 
   // 获取子评论
-  const comments = await Promise.all(
-    mains.map(async (comment) => {
-      const children = await CommentDataModel.find({
-        root: comment._id,
-        ...status,
-      }).select(selectionKey);
-      return transformComment(comment, children);
-    }),
-  );
+  const children = await CommentDataModel.find({
+    root: {
+      $in: mains.map((main) => main._id),
+    },
+    ...status,
+  })
+    .select(selectionKey)
+    .sort({ time: "asc" });
+
+  // 转换评论
+  const comments = mains.map((comment) => transformComment(comment, children));
 
   return {
     totalCount,
