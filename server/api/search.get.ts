@@ -1,7 +1,7 @@
 import { type } from "arktype";
 import { toString } from "mdast-util-to-string";
 import { useKV } from "nitro/kv";
-import { getQuery } from "nuxt/server";
+import { getValidatedQuery } from "nuxt/server";
 import { visit } from "unist-util-visit";
 import type { Child, Element, Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
@@ -26,7 +26,7 @@ const schema = type({
 
 export default defineJThrottledEventHandler<{ query: GetSearchQuery }, GetSearchResponse>(async (event, res) => {
   const storage = useKV("assets:server");
-  const query = schema.assert(getQuery(event));
+  const query = await getValidatedQuery(event, schema);
 
   const code = query.word.codePointAt(0)!.toString();
   const data = await storage

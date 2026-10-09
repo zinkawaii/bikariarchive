@@ -1,6 +1,6 @@
 import { type } from "arktype";
 import { AwsClient } from "aws4fetch";
-import { createError, getQuery, getRouterParam, sendRedirect, useRuntimeConfig } from "nuxt/server";
+import { createError, getRouterParam, getValidatedQuery, sendRedirect, useRuntimeConfig } from "nuxt/server";
 
 export type GetImageQuery = typeof schema.inferIn;
 
@@ -15,7 +15,7 @@ const maxAge = 3600;
 
 export default defineJCachedEventHandler<{ query: GetImageQuery }>(async (event) => {
   const config = useRuntimeConfig();
-  const query = schema.assert(getQuery(event));
+  const query = await getValidatedQuery(event, schema);
   const slug = getRouterParam(event, "slug");
 
   if (slug === void 0) {

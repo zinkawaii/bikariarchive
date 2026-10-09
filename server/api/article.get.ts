@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { createError, getQuery, useRuntimeConfig } from "nuxt/server";
+import { createError, getValidatedQuery, useRuntimeConfig } from "nuxt/server";
 import type { Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
 
@@ -18,7 +18,7 @@ const schema = type({
 
 export default defineJEventHandler<{ query: GetArticleQuery }, GetArticleResponse>(async (event, res) => {
   const config = useRuntimeConfig();
-  const query = schema.assert(getQuery(event));
+  const query = await getValidatedQuery(event, schema);
 
   // 初始化
   const art = Article.for(query.novel, query.index);

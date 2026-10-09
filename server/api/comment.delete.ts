@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { readValidatedBody } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
 export type DeleteCommentBody = typeof schema.inferIn;
@@ -8,7 +9,7 @@ const schema = type({
 });
 
 export default defineJEventHandler<{ body: DeleteCommentBody }>(async (event) => {
-  const body = schema.assert(await event.req.json());
+  const body = await readValidatedBody(event, schema);
 
   // 权限验证
   await validateIdentity(event);

@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { createError, getRequestIP, useRuntimeConfig } from "nuxt/server";
+import { createError, getRequestIP, readValidatedBody, useRuntimeConfig } from "nuxt/server";
 import { ReadRecordModel } from "#server/models/ReadRecord";
 
 export type PatchArticleBody = typeof schema.inferIn;
@@ -14,7 +14,7 @@ const schema = type({
 
 export default defineJEventHandler<{ body: PatchArticleBody }, PatchArticleResponse>(async (event, res) => {
   const config = useRuntimeConfig();
-  const body = schema.assert(await event.req.json());
+  const body = await readValidatedBody(event, schema);
 
   // 连接数据库
   await connectMongoose();

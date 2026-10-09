@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { createError, useRuntimeConfig } from "nuxt/server";
+import { createError, readValidatedBody, useRuntimeConfig } from "nuxt/server";
 
 export type PostLoginBody = typeof schema.inferIn;
 
@@ -10,7 +10,7 @@ const schema = type({
 
 export default defineJThrottledEventHandler<{ body: PostLoginBody }>(async (event) => {
   const config = useRuntimeConfig();
-  const body = schema.assert(await event.req.json());
+  const body = await readValidatedBody(event, schema);
 
   // 账号
   if (body.account !== config.admin.account) {

@@ -1,4 +1,3 @@
-import { TraversalError } from "arktype";
 import { defineCachedHandler } from "nitro/cache";
 import { defineEventHandler, type EventHandlerRequest, type H3Event } from "nitro/h3";
 import { createError, isNuxtError } from "nuxt/server";
@@ -17,22 +16,9 @@ const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>)
     if (isNuxtError(err)) {
       throw err;
     }
-
-    let status: number;
-    let data: unknown;
-
-    if (err instanceof TraversalError) {
-      status = 400;
-      data = err.message;
-    }
-    else {
-      status = 500;
-      data = err;
-    }
-
     throw createError({
-      status,
-      data: import.meta.dev ? data : void 0,
+      status: 500,
+      data: import.meta.dev ? err : void 0,
     });
   }
 };

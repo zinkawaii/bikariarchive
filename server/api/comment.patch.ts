@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { createError } from "nuxt/server";
+import { createError, readValidatedBody } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
 export type PatchCommentBody = typeof schema.inferIn;
@@ -9,7 +9,7 @@ const schema = type({
 });
 
 export default defineJEventHandler<{ body: PatchCommentBody }>(async (event) => {
-  const { id } = schema.assert(await event.req.json());
+  const { id } = await readValidatedBody(event, schema);
 
   // 权限验证
   await validateIdentity(event);

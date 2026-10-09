@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { getRequestIP, useRuntimeConfig } from "nuxt/server";
+import { getRequestIP, readValidatedBody, useRuntimeConfig } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
 export type PostCommentBody = typeof schema.inferIn;
@@ -15,7 +15,7 @@ const schema = type({
 
 export default defineJEventHandler<{ body: PostCommentBody }>(async (event) => {
   const config = useRuntimeConfig();
-  const body = schema.assert(await event.req.json());
+  const body = await readValidatedBody(event, schema);
 
   // 只读页面
   if (Reflect.get(config.comment, body.path)?.readonly) {
