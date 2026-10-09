@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import borrowingJson from "~/assets/json/borrowing.json";
+  import borrowingJson from "~/assets/constants/borrowing";
 
   useHead({
     title: "借物表",

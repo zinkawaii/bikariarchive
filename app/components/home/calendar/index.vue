@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { Temporal } from "temporal-polyfill/full";
-  import specialJson from "~/assets/json/special.json";
+  import specialJson from "~/assets/constants/special";
 
   export interface CalendarDate {
     key: string;
