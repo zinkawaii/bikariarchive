@@ -143,7 +143,7 @@ export default createProcessor("Article", () => {
       }
 
       // 写入文件
-      await info.output(path, body);
+      await info.output(path.replace(`/${name}.md`, `/${index}.md`), body);
 
       // 写入数据
       const data = {
@@ -156,7 +156,6 @@ export default createProcessor("Article", () => {
 
       // 写入缓存
       return {
-        name,
         order,
         novel,
         password,
@@ -164,12 +163,11 @@ export default createProcessor("Article", () => {
       };
     },
     cache(cache) {
-      const { order, name, novel, password, data } = cache;
+      const { order, novel, password, data } = cache;
       const { index } = data;
 
       metaInfo.value[novel].chapters[order] = data;
       mapInfo.value[novel][index] = {
-        name,
         password,
       };
     },

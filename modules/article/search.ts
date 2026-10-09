@@ -3,11 +3,10 @@ import consola from "consola";
 import { toString } from "mdast-util-to-string";
 import { basename, dirname } from "pathe";
 import { glob } from "tinyglobby";
-import type { Child, JArticle, JArtmap, Root } from "@bikari/article";
+import type { Child, JArticle, Root } from "@bikari/article";
 
 export async function buildSearch() {
   const meta = await readFile("content/generated/data/article.json", "utf-8").then<JArticle>(JSON.parse);
-  const map = await readFile("content/generated/data/artmap.json", "utf-8").then<JArtmap>(JSON.parse);
 
   const data: Record<string, Record<string, number[][]>> = {};
 
@@ -17,7 +16,7 @@ export async function buildSearch() {
         continue;
       }
 
-      const path = `content/generated/novel/${novel}.${chapter.volume}/${map[novel][chapter.index].name}.json`;
+      const path = `content/generated/novel/${novel}.${chapter.volume}/${chapter.index}.json`;
       const root = await readFile(path, "utf-8").then<Root>(JSON.parse);
 
       for (const [char, vector] of forEachVector(root)) {
