@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { defineHandler } from "nitro";
 import { createError, readValidatedBody } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
@@ -12,7 +13,7 @@ const schema = type({
   address: "string.url?",
 });
 
-export default defineJEventHandler<{ body: PutCommentBody }>(async (event) => {
+export default defineHandler<{ body: PutCommentBody }>(async (event) => {
   const body = await readValidatedBody(event, schema);
 
   // 权限验证

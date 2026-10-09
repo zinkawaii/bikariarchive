@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { defineHandler } from "nitro";
 import { getRequestIP, readValidatedBody, useRuntimeConfig } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
@@ -13,7 +14,7 @@ const schema = type({
   address: "string.url?",
 });
 
-export default defineJEventHandler<{ body: PostCommentBody }>(async (event) => {
+export default defineHandler<{ body: PostCommentBody }>(async (event) => {
   const config = useRuntimeConfig();
   const body = await readValidatedBody(event, schema);
 

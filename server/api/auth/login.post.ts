@@ -8,7 +8,7 @@ const schema = type({
   password: "12 <= string <= 64",
 });
 
-export default defineJThrottledEventHandler<{ body: PostLoginBody }>(async (event) => {
+export default defineJThrottledHandler<{ body: PostLoginBody }>(async (event) => {
   const config = useRuntimeConfig();
   const body = await readValidatedBody(event, schema);
 

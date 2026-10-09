@@ -1,54 +1,28 @@
 import { defineCachedHandler } from "nitro/cache";
-import { defineEventHandler, type EventHandlerRequest, type H3Event } from "nitro/h3";
-import { createError, isNuxtError } from "nuxt/server";
-import type { CachedEventHandlerOptions } from "nitro/types";
+import { defineHandler, type EventHandler, type EventHandlerRequest } from "nitro/h3";
+import { createError } from "nuxt/server";
+import type { CachedHandlerOptions } from "nitro/types";
 
-interface Handler<R extends EventHandlerRequest, T> {
-  (event: H3Event<R>, res: T): Awaited<unknown>;
-}
-
-const createHandler = <R extends EventHandlerRequest, T>(handler: Handler<R, T>) => async (event: H3Event<R>) => {
-  try {
-    const res = {} as T;
-    return await handler(event as H3Event<R>, res) as T ?? res;
-  }
-  catch (err) {
-    if (isNuxtError(err)) {
-      throw err;
-    }
-    throw createError({
-      status: 500,
-      data: import.meta.dev ? err : void 0,
-    });
-  }
-};
-
-export function defineJEventHandler<R extends EventHandlerRequest, T = {}>(
-  handler: Handler<R, T>,
+export function defineJCachedHandler<R extends EventHandlerRequest, T = {}>(
+  handler: EventHandler<R, T>,
+  options?: CachedHandlerOptions,
 ) {
-  return defineEventHandler(createHandler<R, T>(handler));
+  return defineCachedHandler(handler, options);
 }
 
-export function defineJCachedEventHandler<R extends EventHandlerRequest, T = {}>(
-  handler: Handler<R, T>,
-  options?: CachedEventHandlerOptions,
-) {
-  return defineCachedHandler(createHandler<R, T>(handler), options);
-}
-
-export function defineJThrottledEventHandler<R extends EventHandlerRequest, T = {}>(
-  handler: Handler<R, T>,
+export function defineJThrottledHandler<R extends EventHandlerRequest, T = {}>(
+  handler: EventHandler<R, T>,
   delay: number,
 ) {
   let timer: NodeJS.Timeout | undefined;
-  function throttledHandler(this: unknown, ...args: Parameters<typeof handler>) {
+
+  return defineHandler((...args: Parameters<typeof handler>) => {
     if (!timer) {
       timer = setTimeout(() => {
         timer = void 0;
       }, delay);
-      return handler.apply(this, args);
+      return handler(...args);
     }
     throw createError({ status: 429 });
-  }
-  return defineEventHandler(createHandler<R, T>(throttledHandler));
+  });
 }

@@ -24,7 +24,7 @@ const schema = type({
   word: "0 < string <= 64",
 });
 
-export default defineJThrottledEventHandler<{ query: GetSearchQuery }, GetSearchResponse>(async (event, res) => {
+export default defineJThrottledHandler<{ query: GetSearchQuery }, Promise<GetSearchResponse>>(async (event) => {
   const storage = useKV("assets:server");
   const query = await getValidatedQuery(event, schema);
 
@@ -37,7 +37,7 @@ export default defineJThrottledEventHandler<{ query: GetSearchQuery }, GetSearch
   const weakTexts = new WeakMap<Element, string>();
 
   // 按章节遍历
-  res.list = [];
+  const list = [];
 
   for (const [uri, vectors] of Object.entries(data)) {
     const [novel, index] = uri.split("/");
@@ -87,11 +87,15 @@ export default defineJThrottledEventHandler<{ query: GetSearchQuery }, GetSearch
     const start = Math.max(line - 1, 0);
     const end = Math.min(line + 2, paragraphs.length);
 
-    res.list.push({
+    list.push({
       novel: art.novel,
       index: art.index,
       count: nodes.length,
       parts: Array.from({ length: end - start }, (_, i) => paragraphs[i + start]),
     });
   }
+
+  return {
+    list,
+  };
 }, 1500);

@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { defineHandler } from "nitro";
 import { createError, getRequestIP, readValidatedBody, useRuntimeConfig } from "nuxt/server";
 import { ReadRecordModel } from "#server/models/ReadRecord";
 
@@ -12,7 +13,7 @@ const schema = type({
   token: "string",
 });
 
-export default defineJEventHandler<{ body: PatchArticleBody }, PatchArticleResponse>(async (event, res) => {
+export default defineHandler<{ body: PatchArticleBody }, Promise<PatchArticleResponse>>(async (event) => {
   const config = useRuntimeConfig();
   const body = await readValidatedBody(event, schema);
 
@@ -69,5 +70,7 @@ export default defineJEventHandler<{ body: PatchArticleBody }, PatchArticleRespo
     },
   ]);
 
-  res.count = counts.length ? counts[0].count : 0;
+  return {
+    count: counts.length ? counts[0].count : 0,
+  };
 });

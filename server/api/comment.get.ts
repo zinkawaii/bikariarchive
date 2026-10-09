@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { defineHandler } from "nitro";
 import { getValidatedQuery } from "nuxt/server";
 import type { HydratedDocument } from "mongoose";
 import { CommentDataModel } from "#server/models/CommentData";
@@ -21,7 +22,7 @@ const schema = type({
 // 需要获取的属性
 const selectionKey = "root parent content time nickname email address status";
 
-export default defineJEventHandler<{ query: GetCommentQuery }, GetCommentResponse>(async (event, res) => {
+export default defineHandler<{ query: GetCommentQuery }, Promise<GetCommentResponse>>(async (event) => {
   const query = await getValidatedQuery(event, schema);
 
   // 连接数据库
@@ -40,20 +41,20 @@ export default defineJEventHandler<{ query: GetCommentQuery }, GetCommentRespons
   const limit = 10;
 
   // 总评论数
-  res.totalCount = await CommentDataModel.countDocuments({
+  const totalCount = await CommentDataModel.countDocuments({
     path: query.path,
     ...status,
   });
 
   // 主评论数
-  res.mainCount = await CommentDataModel.countDocuments({
+  const mainCount = await CommentDataModel.countDocuments({
     path: query.path,
     parent: null,
     ...status,
   });
 
   // 获取主评论
-  const comments = await CommentDataModel.find({
+  const mains = await CommentDataModel.find({
     path: query.path,
     parent: null,
     ...status,
@@ -64,8 +65,8 @@ export default defineJEventHandler<{ query: GetCommentQuery }, GetCommentRespons
     .limit(limit);
 
   // 获取子评论
-  res.comments = await Promise.all(
-    comments.map(async (comment) => {
+  const comments = await Promise.all(
+    mains.map(async (comment) => {
       const children = await CommentDataModel.find({
         root: comment._id,
         ...status,
@@ -73,6 +74,12 @@ export default defineJEventHandler<{ query: GetCommentQuery }, GetCommentRespons
       return transformComment(comment, children);
     }),
   );
+
+  return {
+    totalCount,
+    mainCount,
+    comments,
+  };
 });
 
 function transformComment<T extends HydratedDocument<CommentDataSchema>>(

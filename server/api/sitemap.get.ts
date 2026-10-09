@@ -1,8 +1,9 @@
+import { defineHandler } from "nitro";
 import { totalYears } from "#server/assets/json/update.json";
 import { Article } from "#shared/utils/article";
 import { Entry } from "#shared/utils/entry";
 
-export default defineSitemapEventHandler(() => {
+export default defineHandler(() => {
   return [
     "/",
     "/about",

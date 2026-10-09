@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { defineHandler } from "nitro";
 import { createError, getValidatedQuery, useRuntimeConfig } from "nuxt/server";
 import type { Root } from "@bikari/article";
 import { Article } from "#shared/utils/article";
@@ -16,7 +17,7 @@ const schema = type({
   password: "string",
 });
 
-export default defineJEventHandler<{ query: GetArticleQuery }, GetArticleResponse>(async (event, res) => {
+export default defineHandler<{ query: GetArticleQuery }, Promise<GetArticleResponse>>(async (event) => {
   const config = useRuntimeConfig();
   const query = await getValidatedQuery(event, schema);
 
@@ -35,7 +36,7 @@ export default defineJEventHandler<{ query: GetArticleQuery }, GetArticleRespons
   await connectMongoose();
 
   // 读取文章
-  res.body = await readArticle(art);
+  const body = await readArticle(art);
 
   // 生成代币
   const token = {
@@ -43,5 +44,8 @@ export default defineJEventHandler<{ query: GetArticleQuery }, GetArticleRespons
     index: query.index,
   };
 
-  res.token = encryptArticleToken(token, config.article.key);
+  return {
+    body,
+    token: encryptArticleToken(token, config.article.key),
+  };
 });

@@ -13,7 +13,7 @@ const schema = type({
 
 const maxAge = 3600;
 
-export default defineJCachedEventHandler<{ query: GetImageQuery }>(async (event) => {
+export default defineJCachedHandler<{ query: GetImageQuery }>(async (event) => {
   const config = useRuntimeConfig();
   const query = await getValidatedQuery(event, schema);
   const slug = getRouterParam(event, "slug");

@@ -1,4 +1,5 @@
 import { type } from "arktype";
+import { defineHandler } from "nitro";
 import { readValidatedBody } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
@@ -8,7 +9,7 @@ const schema = type({
   id: "string",
 });
 
-export default defineJEventHandler<{ body: DeleteCommentBody }>(async (event) => {
+export default defineHandler<{ body: DeleteCommentBody }>(async (event) => {
   const body = await readValidatedBody(event, schema);
 
   // 权限验证
