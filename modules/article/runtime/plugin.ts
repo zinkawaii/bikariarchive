@@ -1,5 +1,5 @@
-import articleJson from "#server/assets/json/article.json";
-import intelJson from "#server/assets/json/intel.json";
+import articleJson from "#content/data/article.json";
+import intelJson from "#content/data/intel.json";
 
 const initialize = once(() => {
   enrichJArticle(articleJson as any);
@@ -9,10 +9,10 @@ const initialize = once(() => {
 export default defineNuxtPlugin(() => {
   initialize();
 
-  import.meta.hot?.accept("#server/assets/json/article.json", (mod) => {
+  import.meta.hot?.accept("#content/data/article.json", (mod) => {
     enrichJArticle(mod?.default);
   });
-  import.meta.hot?.accept("#server/assets/json/intel.json", (mod) => {
+  import.meta.hot?.accept("#content/data/intel.json", (mod) => {
     enrichJIntel(mod?.default);
   });
 });

@@ -12,7 +12,7 @@
   });
 
   const { status, data } = useAsyncData<JUpdate[]>(`update:${year}`, async () => {
-    const module = await import(`#server/assets/update/${year}.json`);
+    const module = await import(`#content/update/${year}.json`);
     return module.default;
   }, {
     default: () => [],

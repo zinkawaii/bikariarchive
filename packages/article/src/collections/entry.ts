@@ -34,7 +34,7 @@ const SourceKind = {
 
 export default createProcessor("Entry", () => {
   const metaInfo = useLoad("meta", {
-    dist: "server/assets/json/intel.json",
+    dist: "content/generated/data/intel.json",
     defaultValue: {
       blocks: [],
       all: {},
@@ -97,7 +97,7 @@ export default createProcessor("Entry", () => {
   });
 
   const abilityInfo = useLoad("ability", {
-    dist: "server/assets/json/ability.json",
+    dist: "content/generated/data/ability.json",
     output(val) {
       const items: Record<string, AbilityItem> = {};
       for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {
@@ -159,7 +159,7 @@ export default createProcessor("Entry", () => {
 
   useSource(SourceKind.Entry, {
     base: "content",
-    dist: "server/assets",
+    dist: "content/generated",
     folders: categories,
     ext: ".md",
     async parse(path, info) {

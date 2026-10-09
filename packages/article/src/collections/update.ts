@@ -10,7 +10,7 @@ const prefixRE = /^([-\w]+)(?:\(([-\w]+)\))?:/;
 
 export default createProcessor("Update", () => {
   const meta = useLoad("update", {
-    dist: "server/assets/json/update.json",
+    dist: "content/generated/data/update.json",
     defaultValue: {
       totalYears: new Set(),
     },
@@ -23,7 +23,7 @@ export default createProcessor("Update", () => {
 
   useSource(0, {
     base: "content",
-    dist: "server/assets",
+    dist: "content/generated",
     folders: [
       "update",
     ],

@@ -56,7 +56,6 @@
     "@zinkawaii/eslint-config-css": "catalog:lint",
     "aws4fetch": "catalog:utils",
     "bgmt": "catalog:utils",
-    "chokidar": "catalog:utils",
     "consola": "catalog:utils",
     "defu": "catalog:utils",
     "eslint": "catalog:lint",

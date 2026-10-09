@@ -1,16 +1,15 @@
-import chokidar from "chokidar";
 import { definePlugin } from "nitro";
 import { useKV } from "nitro/kv";
-import { basename, resolve } from "pathe";
+import { basename } from "pathe";
 import { Article, enrichJArticle } from "#shared/utils/article";
 import { enrichJIntel } from "#shared/utils/entry";
 
 export default definePlugin(async (nitroApp) => {
-  const storage = useKV("assets:server");
+  const storage = useKV("assets:content");
   const list = [
-    "json/article.json",
-    "json/artmap.json",
-    "json/intel.json",
+    "data/article.json",
+    "data/artmap.json",
+    "data/intel.json",
   ];
 
   for (const path of list) {
@@ -18,10 +17,12 @@ export default definePlugin(async (nitroApp) => {
   }
 
   if (import.meta.dev) {
-    const watcher = chokidar
-      .watch(list.map((path) => resolve(`server/assets/${path}`)))
-      .on("change", (path) => update(`json/${basename(path)}`));
-    nitroApp.hooks.hook("close", () => watcher.close());
+    const dispose = await storage.watch((event, key) => {
+      if (list.includes(key) && event === "update") {
+        update(key);
+      }
+    });
+    nitroApp.hooks.hook("close", dispose);
   }
 
   async function update(path: string) {

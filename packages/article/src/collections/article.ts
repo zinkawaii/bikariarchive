@@ -16,7 +16,7 @@ const SourceKind = {
 
 export default createProcessor("Article", () => {
   const metaInfo = useLoad("meta", {
-    dist: "server/assets/json/article.json",
+    dist: "content/generated/data/article.json",
     output(val) {
       const newVal = Object.fromEntries(
         Object.entries<any>(structuredClone(val))
@@ -33,7 +33,7 @@ export default createProcessor("Article", () => {
   });
 
   const mapInfo = useLoad("map", {
-    dist: "server/assets/json/artmap.json",
+    dist: "content/generated/data/artmap.json",
   });
 
   useSource(SourceKind.Meta, {
@@ -76,7 +76,7 @@ export default createProcessor("Article", () => {
 
   useSource(SourceKind.Article, {
     base: "content",
-    dist: "server/assets",
+    dist: "content/generated",
     folders: [
       "novel",
     ],

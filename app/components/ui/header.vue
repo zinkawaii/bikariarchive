@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import type { RouteLocationRaw } from "vue-router";
   import { NuxtLink } from "#components";
-  import { totalYears } from "#server/assets/json/update.json";
+  import { totalYears } from "#content/data/update.json";
 
   interface NavItem {
     title: string;

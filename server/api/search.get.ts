@@ -25,7 +25,7 @@ const schema = type({
 });
 
 export default defineJThrottledHandler<{ query: GetSearchQuery }, Promise<GetSearchResponse>>(async (event) => {
-  const storage = useKV("assets:server");
+  const storage = useKV("assets:content");
   const query = await getValidatedQuery(event, schema);
 
   const code = query.word.codePointAt(0)!.toString();

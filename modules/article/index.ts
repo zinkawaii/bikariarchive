@@ -1,6 +1,6 @@
 import { createArticle } from "@bikari/article";
 import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
-import { relative } from "pathe";
+import { join, relative } from "pathe";
 import configLiteral from "./config.ts";
 import { buildSearch } from "./search.ts";
 import vite from "./vite.ts";
@@ -24,6 +24,12 @@ export default defineNuxtModule({
     addComponent({
       name: "BikariyaArticle",
       filePath: resolve("runtime/article.vue"),
+    });
+
+    nuxt.options.nitro.serverAssets ??= [];
+    nuxt.options.nitro.serverAssets.push({
+      baseName: "content",
+      dir: nuxt.options.alias["#content"] = join(nuxt.options.rootDir, "content/generated"),
     });
 
     ((nuxt.options.typescript.tsConfig.vueCompilerOptions ??= {}).plugins ??= []).push({
