@@ -1,5 +1,6 @@
 import { type } from "arktype";
 import { AwsClient } from "aws4fetch";
+import { defineHandler } from "nitro";
 import { createError, getRouterParam, getValidatedQuery, sendRedirect, useRuntimeConfig } from "nuxt/server";
 
 export type GetImageQuery = typeof schema.inferIn;
@@ -13,7 +14,7 @@ const schema = type({
 
 const maxAge = 3600;
 
-export default defineJCachedHandler<{ query: GetImageQuery }>(async (event) => {
+export default defineHandler<{ query: GetImageQuery }>(async (event) => {
   const config = useRuntimeConfig();
   const query = await getValidatedQuery(event, schema);
   const slug = getRouterParam(event, "slug");
@@ -52,7 +53,4 @@ export default defineJCachedHandler<{ query: GetImageQuery }>(async (event) => {
   event.res.headers.set("cache-control", `public, max-age=${maxAge}`);
 
   return sendRedirect(event, request.url, 307);
-}, {
-  maxAge,
-  swr: false,
 });
