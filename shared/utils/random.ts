@@ -9,8 +9,8 @@ export function randomInt(from: number, to: number) {
 }
 
 // 获取随机哈希
-export function randomHash(length: number, radix = 16) {
-  return Math.random().toString(radix).slice(-length);
+export function randomHash(length: number) {
+  return crypto.randomUUID().replaceAll("-", "").slice(0, length);
 }
 
 // 获取单个数组的随机项
