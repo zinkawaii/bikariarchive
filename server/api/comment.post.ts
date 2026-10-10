@@ -1,6 +1,6 @@
 import { type } from "arktype";
 import { defineHandler } from "nitro";
-import { getRequestIP, readValidatedBody, useRuntimeConfig } from "nuxt/server";
+import { createError, getRequestIP, readValidatedBody, useRuntimeConfig } from "nuxt/server";
 import { CommentDataModel } from "#server/models/CommentData";
 
 export type PostCommentBody = typeof schema.inferIn;
@@ -35,8 +35,13 @@ export default defineHandler<{ body: PostCommentBody }>(async (event) => {
 
   // 获取所回复的评论
   const parent = await CommentDataModel.findOne({
+    path: body.path,
     _id: body.parent,
   }).select("root");
+
+  if (body.parent && !parent) {
+    throw createError({ status: 404 });
+  }
 
   // 写入评论数据
   const comment = await CommentDataModel.create({
