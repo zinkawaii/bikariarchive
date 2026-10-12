@@ -33,10 +33,6 @@ export default defineProcessor("Article", (ctx) => {
     },
   });
 
-  const mapInfo = useLoad("map", {
-    dist: "content/generated/data/artmap.json",
-  });
-
   useSource(SourceKind.Meta, {
     base: "content/novel",
     ext: ".md",
@@ -57,7 +53,6 @@ export default defineProcessor("Article", (ctx) => {
     cache(cache) {
       const { novel, order, data } = cache;
 
-      mapInfo.value[novel] ??= {};
       metaInfo.value[novel] = {
         ...data,
         order,
@@ -67,7 +62,6 @@ export default defineProcessor("Article", (ctx) => {
     unlink(cache) {
       const { novel } = cache;
 
-      delete mapInfo.value[novel];
       delete metaInfo.value[novel];
     },
   });
@@ -148,7 +142,7 @@ export default defineProcessor("Article", (ctx) => {
       }
 
       // 写入产物
-      await article.write(key, novel, index, body);
+      await article.write(key, novel, index, body, password);
 
       // 写入索引
       await search.write(key, paragraphs);
@@ -167,26 +161,18 @@ export default defineProcessor("Article", (ctx) => {
         key,
         order,
         novel,
-        password,
         data,
       };
     },
     cache(cache) {
-      const { order, novel, password, data } = cache;
-      const { index } = data;
+      const { order, novel, data } = cache;
 
       metaInfo.value[novel].chapters[order] = data;
-      mapInfo.value[novel][index] = {
-        password,
-      };
     },
     async unlink(cache) {
-      const { key, order, novel, data } = cache;
-      const { index } = data;
+      const { key, order, novel } = cache;
 
-      delete mapInfo.value[novel][index];
       delete metaInfo.value[novel].chapters[order];
-
       await article.remove(key);
     },
   });
@@ -200,24 +186,26 @@ function useArticle() {
         novel TEXT NOT NULL,
         chapter TEXT NOT NULL,
         body TEXT NOT NULL,
+        password TEXT,
         PRIMARY KEY (key),
         UNIQUE (novel, chapter)
       );
     `);
   });
 
-  async function write(key: string, novel: string, chapter: string, body: Root) {
+  async function write(key: string, novel: string, chapter: string, body: Root, password?: string) {
     const instance = await ready();
 
     instance.prepare(/* SQL */`
-      INSERT INTO article (key, novel, chapter, body)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO article (key, novel, chapter, body, password)
+      VALUES (?, ?, ?, ?, ?)
       ON CONFLICT (key)
       DO UPDATE SET
         novel = excluded.novel,
         chapter = excluded.chapter,
-        body = excluded.body
-    `).run(key, novel, chapter, JSON.stringify(body));
+        body = excluded.body,
+        password = excluded.password
+    `).run(key, novel, chapter, JSON.stringify(body), password ?? null);
   }
 
   async function remove(key: string) {

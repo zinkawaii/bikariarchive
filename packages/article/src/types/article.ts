@@ -58,11 +58,3 @@ export interface ArticleCover {
 }
 
 export type ArticleVariant = "general" | "article" | "story" | "comment";
-
-export interface JArtmap {
-  [novel: string]: {
-    [index: string]: {
-      password: string;
-    };
-  };
-}

@@ -1,11 +1,10 @@
 import { computed, type ComputedRef, type MaybeRefOrGetter, reactive, shallowRef, toValue } from "vue";
-import type { JArticle, JArtmap, JChapter, JNovel, JVolume } from "@bikari/article";
+import type { JArticle, JChapter, JNovel, JVolume } from "@bikari/article";
 import type { RouteLocationRaw } from "vue-router";
 import type { WithRequired } from "#shared/types";
 
 export class Article {
   static meta = reactive({} as JArticle<Article>);
-  static map: JArtmap;
 
   static FARAWAY = "很久以前";
 
@@ -22,16 +21,11 @@ export class Article {
     }
     return this.meta[novel]?.chapters.find((art) => art.index === index);
   }
-
-  // 获取仅服务端数据
-  static serverInfo(art: Article) {
-    return this.map[art.novel][art.index];
-  }
 }
 
 export interface Article extends WithRequired<
   JChapter,
-    "date" | "variant" | "draft" | "encrypted" | "ending" | "sticky"
+  "date" | "variant" | "draft" | "encrypted" | "ending" | "sticky"
 > {
   raw: JChapter;
   novel: string;
