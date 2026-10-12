@@ -103,7 +103,7 @@
     <div class="search-results">
       <mb-skeleton v-if="status !== `success`"/>
       <template v-else>
-        <search-result v-for="result in paginatedList" :key="result.index" v-bind="result"/>
+        <search-result v-for="result in paginatedList" :key="`${result.novel}:${result.index}`" v-bind="result"/>
       </template>
     </div>
     <mb-pagination :total scroll-target=".content-widget" v-model="page"/>
