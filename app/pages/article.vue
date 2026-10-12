@@ -20,7 +20,10 @@
   // 初始化
   const art = Article.for(novel, index);
   if (!art) {
-    throw new Error(`Article(${novel}, ${index}) is invalid.`);
+    throw createError({
+      status: 404,
+      message: `Article(${novel}, ${index}) is not found.`,
+    });
   }
 
   // 面包屑
