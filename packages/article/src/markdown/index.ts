@@ -126,8 +126,6 @@ export async function parseUpdate(text: string) {
 
 const parserComment = createParser({
   features: {
-    attributes: true,
-    component: true,
     strikethrough: true,
   },
 });
