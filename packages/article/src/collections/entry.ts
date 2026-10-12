@@ -5,7 +5,6 @@ import { parseEntry } from "../markdown/index.ts";
 import { defineProcessor } from "../processor/kerria.ts";
 import { useLoad } from "../processor/useLoad.ts";
 import { useSource } from "../processor/useSource.ts";
-import { isDevelopment } from "../utils.ts";
 import type { Child } from "../markdown/types.ts";
 import type { EntryCategory, EntryDetail, JEntry } from "../types/entry.ts";
 import type { IntelNode, JIntel } from "../types/intel.ts";
@@ -32,7 +31,7 @@ const SourceKind = {
   Entry: 1,
 };
 
-export default defineProcessor("Entry", () => {
+export default defineProcessor("Entry", (ctx) => {
   const metaInfo = useLoad("meta", {
     dist: "content/generated/data/intel.json",
     defaultValue: {
@@ -72,7 +71,7 @@ export default defineProcessor("Entry", () => {
 
       // 在生产环境下隐藏未知标题，修剪草稿词条
       function transform(tree: IntelNode) {
-        if (tree.unknown && !(isDevelopment && tree.title)) {
+        if (tree.unknown && !(ctx.dev && tree.title)) {
           tree.title = "? ? ?";
         }
 
@@ -168,12 +167,12 @@ export default defineProcessor("Entry", () => {
       let { attributes, drafts } = await parseEntry<JEntry>(file);
 
       // 生产环境下忽略草稿文件
-      if (attributes.draft && !isDevelopment) {
+      if (attributes.draft && !ctx.dev) {
         return null;
       }
 
       // 合并草稿数据
-      if (isDevelopment) {
+      if (ctx.dev) {
         for (const draft of drafts) {
           attributes = defu(draft, attributes);
         }

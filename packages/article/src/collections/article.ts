@@ -7,7 +7,6 @@ import { defineProcessor } from "../processor/kerria.ts";
 import { useLoad } from "../processor/useLoad.ts";
 import { useSource } from "../processor/useSource.ts";
 import { prepareSqlite } from "../processor/useSqlite.ts";
-import { isDevelopment } from "../utils.ts";
 import type { Child, Root } from "../markdown/types.ts";
 import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article.ts";
 
@@ -16,7 +15,7 @@ const SourceKind = {
   Article: 1,
 };
 
-export default defineProcessor("Article", () => {
+export default defineProcessor("Article", (ctx) => {
   const metaInfo = useLoad("meta", {
     dist: "content/generated/data/article.json",
     output(val) {
@@ -93,7 +92,7 @@ export default defineProcessor("Article", () => {
       const { attributes, body } = await parseArticle<ArticleFrontmatter>(file);
 
       // 生产环境下忽略草稿文件
-      if (attributes.draft && !isDevelopment) {
+      if (attributes.draft && !ctx.dev) {
         return null;
       }
 

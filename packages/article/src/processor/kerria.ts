@@ -5,7 +5,6 @@ import consola from "consola";
 import { glob } from "tinyglobby";
 import { createStorage, type Storage } from "unstorage";
 import db0 from "unstorage/drivers/db0";
-import { isDevelopment } from "../utils.ts";
 import { createSqliteContext, type SqliteContext } from "./useSqlite.ts";
 import { capitalize } from "./utils.ts";
 import type { LoadInfo } from "./useLoad.ts";
@@ -23,7 +22,7 @@ export interface ProcessorOptions {
 
 export interface ProcessorContext {
   base: string;
-  sign: string;
+  dev: boolean;
   sqlite: SqliteContext;
   loadInfos: LoadInfo[];
   sourceInfos: SourceInfo[];
@@ -93,7 +92,7 @@ export function defineProcessor(sign: string, setup: (ctx: ProcessorContext) => 
 
     const ctx: ProcessorContext = {
       base,
-      sign,
+      dev: process.env.NODE_ENV === "development",
       sqlite,
       loadInfos: [],
       sourceInfos: [],
@@ -168,7 +167,7 @@ export function defineProcessor(sign: string, setup: (ctx: ProcessorContext) => 
       let cache = await caches.get(path);
 
       // 当在开发环境下命中缓存时
-      if (isDevelopment && cache?.hash === hash) {
+      if (ctx.dev && cache?.hash === hash) {
         info.cache?.(cache);
         return false;
       }
