@@ -1,14 +1,19 @@
 import { Buffer } from "node:buffer";
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { useKV } from "nitro/kv";
+import { useDatabase } from "nitro/database";
 import type { Root } from "@bikari/article";
 import type { Article } from "#shared/utils/article";
 
 export async function readArticle(art: Article) {
-  const storage = useKV("assets:content");
-  const key = `novel/${art.novel}.${art.volume}/${art.index}.json`;
-  const root = await storage.getItem(key) as Root;
-  return root;
+  const db = useDatabase("content");
+
+  return db.prepare(/* SQL */`
+    SELECT body
+    FROM article
+    WHERE novel = ? AND chapter = ?
+  `).get(art.novel, art.index).then<Root>(
+    (row: { body: string }) => JSON.parse(row.body),
+  );
 }
 
 export function encryptArticleToken(token: Record<string, any>, key: string) {

@@ -40,6 +40,9 @@ export default defineNuxtConfig({
     compatibilityVersion: 5,
   },
   nitro: {
+    experimental: {
+      database: true,
+    },
     typescript: {
       tsConfig: typescriptConfig.serverTsConfig,
     },

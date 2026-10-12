@@ -19,7 +19,7 @@ export interface UseSourceOptions<T = any> {
   skip?: number;
   parse: (path: string, info: SourceInfo) => MaybePromise<T | null | void>;
   cache?: (cache: T) => void;
-  unlink?: (cache: T) => void;
+  unlink?: (cache: T) => MaybePromise<void>;
 }
 
 export function useSource<T extends object>(kind: number, options: UseSourceOptions<T>) {

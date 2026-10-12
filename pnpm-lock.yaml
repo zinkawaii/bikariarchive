@@ -278,12 +278,12 @@ catalogs:
     consola:
       specifier: ^3.4.2
       version: 3.4.2
+    db0:
+      specifier: ^0.4.1
+      version: 0.4.1
     defu:
       specifier: ^6.1.7
       version: 6.1.7
-    empathic:
-      specifier: ^2.1.0
-      version: 2.1.0
     entities:
       specifier: ^8.1.0
       version: 8.1.0
@@ -541,12 +541,12 @@ importers:
       consola:
         specifier: catalog:utils
         version: 3.4.2
+      db0:
+        specifier: catalog:utils
+        version: 0.4.1
       defu:
         specifier: catalog:utils
         version: 6.1.7
-      empathic:
-        specifier: catalog:utils
-        version: 2.1.0
       github-slugger:
         specifier: catalog:utils
         version: 2.0.0
@@ -583,6 +583,9 @@ importers:
       unist-util-visit:
         specifier: catalog:content
         version: 5.1.0
+      unstorage:
+        specifier: ^2.0.0-alpha.10
+        version: 2.0.0-alpha.10
       yaml:
         specifier: catalog:utils
         version: 2.9.1

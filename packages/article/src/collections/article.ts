@@ -3,10 +3,12 @@ import { toString } from "mdast-util-to-string";
 import { basename, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle, parseEntry } from "../markdown/index.ts";
-import { createProcessor } from "../processor/kerria.ts";
+import { defineProcessor } from "../processor/kerria.ts";
 import { useLoad } from "../processor/useLoad.ts";
 import { useSource } from "../processor/useSource.ts";
+import { prepareSqlite } from "../processor/useSqlite.ts";
 import { isDevelopment } from "../utils.ts";
+import type { Child, Root } from "../markdown/types.ts";
 import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article.ts";
 
 const SourceKind = {
@@ -14,7 +16,7 @@ const SourceKind = {
   Article: 1,
 };
 
-export default createProcessor("Article", () => {
+export default defineProcessor("Article", () => {
   const metaInfo = useLoad("meta", {
     dist: "content/generated/data/article.json",
     output(val) {
@@ -74,6 +76,9 @@ export default createProcessor("Article", () => {
     },
   });
 
+  const article = useArticle();
+  const search = useSearch();
+
   useSource(SourceKind.Article, {
     base: "content",
     dist: "content/generated",
@@ -82,7 +87,7 @@ export default createProcessor("Article", () => {
     ],
     ext: ".md",
     skip: 1,
-    async parse(path, info) {
+    async parse(path) {
       // 处理文件
       const file = await readFile(path, "utf-8");
       const { attributes, body } = await parseArticle<ArticleFrontmatter>(file);
@@ -108,18 +113,25 @@ export default createProcessor("Article", () => {
         }
       }
 
-      // 字数统计
-      let wordCount = 0;
-      visit(body, "element", (node) => {
-        if (node.tag === "p") {
-          wordCount += toString(node).length;
-        }
-      });
-
       // 内容加密
       const password = String(attributes.password || "") || void 0;
       const encrypted = Boolean(password) || void 0;
       delete attributes.password;
+
+      // 字数统计
+      const paragraphs: [string, Child[]][] = [];
+      let wordCount = 0;
+
+      visit(body, "element", (node) => {
+        if (node.tag === "p") {
+          const text = toString(node);
+
+          if (!encrypted) {
+            paragraphs.push([text, node.children]);
+          }
+          wordCount += text.length;
+        }
+      });
 
       // 生成映射
       let order = `[${volume}]`;
@@ -142,8 +154,11 @@ export default createProcessor("Article", () => {
         }
       }
 
-      // 写入文件
-      await info.output(path.replace(`/${name}.md`, `/${index}.md`), body);
+      // 写入产物
+      await article.write(novel, index, body);
+
+      // 写入索引
+      await search.write(novel, index, paragraphs);
 
       // 写入数据
       const data = {
@@ -171,12 +186,112 @@ export default createProcessor("Article", () => {
         password,
       };
     },
-    unlink(cache) {
+    async unlink(cache) {
       const { order, novel, data } = cache;
       const { index } = data;
 
       delete mapInfo.value[novel][index];
       delete metaInfo.value[novel].chapters[order];
+
+      await article.remove(novel, index);
+      await search.remove(novel, index);
     },
   });
 });
+
+function useArticle() {
+  const ready = prepareSqlite((instance) => {
+    instance.exec(/* SQL */`
+      CREATE TABLE IF NOT EXISTS article (
+        novel TEXT NOT NULL,
+        chapter TEXT NOT NULL,
+        body TEXT NOT NULL,
+        PRIMARY KEY (novel, chapter)
+      );
+    `);
+  });
+
+  async function write(novel: string, chapter: string, body: Root) {
+    const instance = await ready();
+
+    instance.prepare(/* SQL */`
+      INSERT INTO article (novel, chapter, body)
+      VALUES (?, ?, ?)
+      ON CONFLICT (novel, chapter)
+      DO UPDATE SET
+        body = excluded.body
+    `).run(novel, chapter, JSON.stringify(body));
+  }
+
+  async function remove(novel: string, chapter: string) {
+    const instance = await ready();
+
+    instance.prepare(/* SQL */`
+      DELETE FROM article
+      WHERE novel = ? AND chapter = ?
+    `).run(novel, chapter);
+  }
+
+  return {
+    write,
+    remove,
+  };
+}
+
+function useSearch() {
+  const ready = prepareSqlite((instance) => {
+    instance.exec(/* SQL */`
+      CREATE TABLE IF NOT EXISTS search (
+        rowid INTEGER PRIMARY KEY,
+        novel TEXT NOT NULL,
+        chapter TEXT NOT NULL,
+        sequence INTEGER NOT NULL,
+        content TEXT NOT NULL,
+        children TEXT NOT NULL,
+        UNIQUE(novel, chapter, sequence)
+      );
+    `);
+  });
+
+  async function write(novel: string, chapter: string, paragraphs: [string, Child[]][]) {
+    const instance = await ready();
+
+    instance.exec("BEGIN IMMEDIATE");
+
+    try {
+      instance.prepare(/* SQL */`
+        DELETE FROM search
+        WHERE novel = ? AND chapter = ?
+      `).run(novel, chapter);
+
+      const insert = instance.prepare(/* SQL */`
+        INSERT INTO search (novel, chapter, sequence, content, children)
+        VALUES (?, ?, ?, ?, ?)
+      `);
+
+      for (const [sequence, [text, children]] of paragraphs.entries()) {
+        insert.run(novel, chapter, sequence, text, JSON.stringify(children));
+      }
+
+      instance.exec("COMMIT");
+    }
+    catch (error) {
+      instance.exec("ROLLBACK");
+      throw error;
+    }
+  }
+
+  async function remove(novel: string, chapter: string) {
+    const instance = await ready();
+
+    instance.prepare(/* SQL */`
+      DELETE FROM search
+      WHERE novel = ? AND chapter = ?
+    `).run(novel, chapter);
+  }
+
+  return {
+    write,
+    remove,
+  };
+}

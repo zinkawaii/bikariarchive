@@ -3,7 +3,6 @@ import { defu } from "defu";
 import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 import { join, relative } from "pathe";
 import configLiteral from "./config.ts";
-import { buildSearch } from "./search.ts";
 import vite from "./vite.ts";
 
 // 将字面量类型泛化回对应的接口
@@ -27,10 +26,24 @@ export default defineNuxtModule({
       filePath: resolve("runtime/article.vue"),
     });
 
+    const generatedRoot = join(nuxt.options.rootDir, "content/generated");
+    nuxt.options.alias["#content"] = generatedRoot;
+
+    // @ts-expect-error 没有必选的 `default`
+    nuxt.options.nitro.database = {
+      ...nuxt.options.nitro.database,
+      content: {
+        connector: "sqlite",
+        options: {
+          path: join(generatedRoot, "kerria.sqlite"),
+        },
+      },
+    };
+
     nuxt.options.nitro.serverAssets ??= [];
     nuxt.options.nitro.serverAssets.push({
       baseName: "content",
-      dir: nuxt.options.alias["#content"] = join(nuxt.options.rootDir, "content/generated"),
+      dir: generatedRoot,
     });
 
     nuxt.options.typescript.appTsConfig = defu(nuxt.options.typescript.appTsConfig, {
@@ -49,8 +62,6 @@ export default defineNuxtModule({
     if (nuxt.options.dev) {
       nuxt.hook("close", article.watch());
     }
-
-    await buildSearch();
 
     addTemplate({
       filename: "tsconfig.article.json",
