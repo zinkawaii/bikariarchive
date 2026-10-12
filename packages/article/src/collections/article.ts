@@ -1,12 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { toString } from "mdast-util-to-string";
-import { basename, resolve } from "pathe";
+import { basename, relative, resolve } from "pathe";
 import { visit } from "unist-util-visit";
 import { parseArticle, parseEntry } from "../markdown/index.ts";
 import { defineProcessor } from "../processor/kerria.ts";
+import { prepareSqlite } from "../processor/sqlite.ts";
 import { useLoad } from "../processor/useLoad.ts";
 import { useSource } from "../processor/useSource.ts";
-import { prepareSqlite } from "../processor/useSqlite.ts";
 import type { Child, Root } from "../markdown/types.ts";
 import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article.ts";
 
@@ -93,6 +93,7 @@ export default defineProcessor("Article", (ctx) => {
       const match = basename(resolve(path, "..")).match(/^(.*?)\.(\d+)$/)!;
       const novel = match[1];
       const volume = Number(match[2]);
+      const key = relative(ctx.base, path);
       const name = basename(path, info.ext);
 
       // 简介转换
@@ -147,10 +148,10 @@ export default defineProcessor("Article", (ctx) => {
       }
 
       // 写入产物
-      await article.write(novel, index, body);
+      await article.write(key, novel, index, body);
 
       // 写入索引
-      await search.write(novel, index, paragraphs);
+      await search.write(key, paragraphs);
 
       // 写入数据
       const data = {
@@ -163,6 +164,7 @@ export default defineProcessor("Article", (ctx) => {
 
       // 写入缓存
       return {
+        key,
         order,
         novel,
         password,
@@ -179,14 +181,13 @@ export default defineProcessor("Article", (ctx) => {
       };
     },
     async unlink(cache) {
-      const { order, novel, data } = cache;
+      const { key, order, novel, data } = cache;
       const { index } = data;
 
       delete mapInfo.value[novel][index];
       delete metaInfo.value[novel].chapters[order];
 
-      await article.remove(novel, index);
-      await search.remove(novel, index);
+      await article.remove(key);
     },
   });
 });
@@ -195,33 +196,37 @@ function useArticle() {
   const ready = prepareSqlite((instance) => {
     instance.exec(/* SQL */`
       CREATE TABLE IF NOT EXISTS article (
+        key TEXT NOT NULL,
         novel TEXT NOT NULL,
         chapter TEXT NOT NULL,
         body TEXT NOT NULL,
-        PRIMARY KEY (novel, chapter)
+        PRIMARY KEY (key),
+        UNIQUE (novel, chapter)
       );
     `);
   });
 
-  async function write(novel: string, chapter: string, body: Root) {
+  async function write(key: string, novel: string, chapter: string, body: Root) {
     const instance = await ready();
 
     instance.prepare(/* SQL */`
-      INSERT INTO article (novel, chapter, body)
-      VALUES (?, ?, ?)
-      ON CONFLICT (novel, chapter)
+      INSERT INTO article (key, novel, chapter, body)
+      VALUES (?, ?, ?, ?)
+      ON CONFLICT (key)
       DO UPDATE SET
+        novel = excluded.novel,
+        chapter = excluded.chapter,
         body = excluded.body
-    `).run(novel, chapter, JSON.stringify(body));
+    `).run(key, novel, chapter, JSON.stringify(body));
   }
 
-  async function remove(novel: string, chapter: string) {
+  async function remove(key: string) {
     const instance = await ready();
 
     instance.prepare(/* SQL */`
       DELETE FROM article
-      WHERE novel = ? AND chapter = ?
-    `).run(novel, chapter);
+      WHERE key = ?
+    `).run(key);
   }
 
   return {
@@ -234,18 +239,20 @@ function useSearch() {
   const ready = prepareSqlite((instance) => {
     instance.exec(/* SQL */`
       CREATE TABLE IF NOT EXISTS search (
-        rowid INTEGER PRIMARY KEY,
-        novel TEXT NOT NULL,
-        chapter TEXT NOT NULL,
+        article_key TEXT NOT NULL,
         sequence INTEGER NOT NULL,
         content TEXT NOT NULL,
         children TEXT NOT NULL,
-        UNIQUE(novel, chapter, sequence)
+        PRIMARY KEY (article_key, sequence),
+        FOREIGN KEY (article_key)
+          REFERENCES article (key)
+          ON UPDATE CASCADE
+          ON DELETE CASCADE
       );
     `);
   });
 
-  async function write(novel: string, chapter: string, paragraphs: [string, Child[]][]) {
+  async function write(key: string, paragraphs: [string, Child[]][]) {
     const instance = await ready();
 
     instance.exec("BEGIN IMMEDIATE");
@@ -253,16 +260,16 @@ function useSearch() {
     try {
       instance.prepare(/* SQL */`
         DELETE FROM search
-        WHERE novel = ? AND chapter = ?
-      `).run(novel, chapter);
+        WHERE article_key = ?
+      `).run(key);
 
       const insert = instance.prepare(/* SQL */`
-        INSERT INTO search (novel, chapter, sequence, content, children)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO search (article_key, sequence, content, children)
+        VALUES (?, ?, ?, ?)
       `);
 
       for (const [sequence, [text, children]] of paragraphs.entries()) {
-        insert.run(novel, chapter, sequence, text, JSON.stringify(children));
+        insert.run(key, sequence, text, JSON.stringify(children));
       }
 
       instance.exec("COMMIT");
@@ -273,17 +280,7 @@ function useSearch() {
     }
   }
 
-  async function remove(novel: string, chapter: string) {
-    const instance = await ready();
-
-    instance.prepare(/* SQL */`
-      DELETE FROM search
-      WHERE novel = ? AND chapter = ?
-    `).run(novel, chapter);
-  }
-
   return {
     write,
-    remove,
   };
 }

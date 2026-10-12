@@ -5,7 +5,7 @@ import consola from "consola";
 import { glob } from "tinyglobby";
 import { createStorage, type Storage } from "unstorage";
 import db0 from "unstorage/drivers/db0";
-import { createSqliteContext, type SqliteContext } from "./useSqlite.ts";
+import { createSqliteContext, type SqliteContext } from "./sqlite.ts";
 import { capitalize } from "./utils.ts";
 import type { LoadInfo } from "./useLoad.ts";
 import type { SourceInfo } from "./useSource.ts";

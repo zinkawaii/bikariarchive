@@ -26,29 +26,32 @@ export default defineJThrottledHandler<{ query: GetSearchQuery }, Promise<GetSea
   const query = await getValidatedQuery(event, schema);
 
   const rows = await db.prepare(/* SQL */`
+    WITH matched AS (
+      SELECT
+        search.article_key,
+        min(search.sequence) AS sequence,
+        sum(
+          (length(search.content) - length(replace(search.content, ?, ''))) / length(?)
+        ) AS count
+      FROM search
+      JOIN article ON article.key = search.article_key
+      WHERE instr(search.content, ?) > 0 AND (? IS NULL OR article.novel = ?)
+      GROUP BY search.article_key
+    )
     SELECT
-      selected.novel,
-      selected.chapter,
-      selected.count,
+      article.novel,
+      article.chapter,
+      matched.count,
       (
         SELECT json_group_array(json(search.children))
         FROM search
-        WHERE search.novel = selected.novel
-          AND search.chapter = selected.chapter
-          AND search.sequence BETWEEN selected.sequence - 1 AND selected.sequence + 1
+        WHERE search.article_key = matched.article_key
+          AND search.sequence BETWEEN matched.sequence - 1 AND matched.sequence + 1
         ORDER BY search.sequence
       ) AS parts
-    FROM (
-      SELECT
-        novel,
-        chapter,
-        min(sequence) AS sequence,
-        sum((length(content) - length(replace(content, ?, ''))) / length(?)) AS count
-      FROM search
-      WHERE instr(content, ?) > 0 AND (? IS NULL OR novel = ?)
-      GROUP BY novel, chapter
-    ) AS selected
-    ORDER BY selected.novel, selected.chapter
+    FROM matched
+    JOIN article ON article.key = matched.article_key
+    ORDER BY article.novel, article.chapter
   `).all(
     query.word,
     query.word,

@@ -20,6 +20,8 @@ export function createSqliteContext(base: string): SqliteContext {
     prepares: [],
     ready: once(async () => {
       const instance = await context.database.getInstance();
+      instance.exec("PRAGMA foreign_keys = ON");
+
       for (const prepare of context.prepares) {
         prepare(instance);
       }
@@ -33,12 +35,8 @@ export function createSqliteContext(base: string): SqliteContext {
 export function prepareSqlite(prepare: (instance: DatabaseSync) => void) {
   const ctx = useCurrentContext();
 
-  ctx.sqlite!.prepares.push(prepare);
-  return ctx.sqlite!.ready;
-}
-
-export function useSqlite() {
-
+  ctx.sqlite.prepares.push(prepare);
+  return ctx.sqlite.ready;
 }
 
 function once<R>(func: () => R) {
