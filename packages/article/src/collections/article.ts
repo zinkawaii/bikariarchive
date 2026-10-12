@@ -38,17 +38,14 @@ export default defineProcessor("Article", (ctx) => {
   });
 
   useSource(SourceKind.Meta, {
-    base: "content",
-    folders: [
-      "novel",
-    ],
+    base: "content/novel",
     ext: ".md",
     deep: false,
-    async parse(path) {
+    async parse(path, info) {
       // 处理文件
       const file = await readFile(path, "utf-8");
       const { attributes } = await parseEntry<NovelFrontmatter>(file);
-      const [order, novel] = basename(path, ".md").split("-");
+      const [order, novel] = basename(path, info.ext).split("-");
 
       // 写入缓存
       return {
@@ -79,14 +76,10 @@ export default defineProcessor("Article", (ctx) => {
   const search = useSearch();
 
   useSource(SourceKind.Article, {
-    base: "content",
-    dist: "content/generated",
-    folders: [
-      "novel",
-    ],
+    base: "content/novel",
     ext: ".md",
     skip: 1,
-    async parse(path) {
+    async parse(path, info) {
       // 处理文件
       const file = await readFile(path, "utf-8");
       const { attributes, body } = await parseArticle<ArticleFrontmatter>(file);
@@ -100,7 +93,7 @@ export default defineProcessor("Article", (ctx) => {
       const match = basename(resolve(path, "..")).match(/^(.*?)\.(\d+)$/)!;
       const novel = match[1];
       const volume = Number(match[2]);
-      const name = basename(path, ".md");
+      const name = basename(path, info.ext);
 
       // 简介转换
       const firstChild = body.children[0];

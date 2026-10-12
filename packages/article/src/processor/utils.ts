@@ -4,6 +4,10 @@ import { dirname } from "pathe";
 
 export type MaybePromise<T> = T | Promise<T>;
 
+export function toArray<T>(value: T | T[]): T[] {
+  return Array.isArray(value) ? value : [value];
+}
+
 export function capitalize(str: string) {
   return str[0].toUpperCase() + str.slice(1);
 }

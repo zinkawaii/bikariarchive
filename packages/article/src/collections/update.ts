@@ -22,11 +22,8 @@ export default defineProcessor("Update", () => {
   });
 
   useSource(0, {
-    base: "content",
-    dist: "content/generated",
-    folders: [
-      "update",
-    ],
+    base: "content/update",
+    dist: "content/generated/update",
     ext: ".md",
     async parse(path, info) {
       // 处理文件
@@ -80,7 +77,7 @@ export default defineProcessor("Update", () => {
       await info.output(path, updates);
 
       return {
-        year: Number(basename(path, ".md")),
+        year: Number(basename(path, info.ext)),
       };
     },
     cache(cache) {

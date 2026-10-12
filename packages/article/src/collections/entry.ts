@@ -117,16 +117,13 @@ export default defineProcessor("Entry", (ctx) => {
   });
 
   useSource(SourceKind.Meta, {
-    base: "content",
-    folders: [
-      "intel",
-    ],
+    base: "content/intel",
     ext: ".md",
-    async parse(path) {
+    async parse(path, info) {
       // 处理文件
       const file = await readFile(path, "utf-8");
       const { attributes } = await parseEntry<IntelNode>(file);
-      const [order, abbr] = basename(path, ".md").split("-");
+      const [order, abbr] = basename(path, info.ext).split("-");
 
       // 写入缓存
       return {
@@ -157,9 +154,8 @@ export default defineProcessor("Entry", (ctx) => {
   ];
 
   useSource(SourceKind.Entry, {
-    base: "content",
-    dist: "content/generated",
-    folders: categories,
+    base: categories.map((category) => `content/${category}`),
+    dist: "content/generated/entry",
     ext: ".md",
     async parse(path, info) {
       // 处理文件
@@ -200,10 +196,10 @@ export default defineProcessor("Entry", (ctx) => {
 
       // 写入文件
       attributes.category = categories.find((category) => path.includes(`/${category}/`))!;
-      await info.output(path.replace(attributes.category, "/entry/"), attributes);
+      await info.output(path, attributes);
 
       // 写入数据
-      const name = basename(path, ".md");
+      const name = basename(path, info.ext);
 
       // 写入缓存
       return {

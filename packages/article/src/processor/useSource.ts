@@ -1,8 +1,8 @@
-import { join } from "pathe";
+import { join, relative } from "pathe";
 import { useCurrentContext } from "./kerria.ts";
-import { type MaybePromise, writeJson } from "./utils.ts";
+import { type MaybePromise, toArray, writeJson } from "./utils.ts";
 
-export interface SourceInfo extends Omit<UseSourceOptions, "folders"> {
+export interface SourceInfo extends UseSourceOptions {
   kind: number;
   folders: string[];
   patterns: string[];
@@ -11,9 +11,8 @@ export interface SourceInfo extends Omit<UseSourceOptions, "folders"> {
 }
 
 export interface UseSourceOptions<T = any> {
-  base: string;
+  base: string | string[];
   dist?: string;
-  folders?: string[];
   ext: string;
   deep?: boolean;
   skip?: number;
@@ -29,18 +28,16 @@ export function useSource<T extends object>(kind: number, options: UseSourceOpti
     skip = 0,
   } = options;
 
-  const base = join(ctx.base, options.base);
+  const folders = toArray(options.base).map((base) => join(ctx.base, base));
   const dist = options.dist && join(ctx.base, options.dist);
-  const folders = options.folders?.map((folder) => join(base, folder)) ?? [base];
   const patterns = folders.map((path) => join(path, (deep ? "**/*" : "*") + options.ext));
 
   const info: SourceInfo = {
     ...options,
     kind,
-    base,
-    dist,
     folders,
     patterns,
+    dist,
     deep,
     skip,
     filter(path) {
@@ -51,11 +48,22 @@ export function useSource<T extends object>(kind: number, options: UseSourceOpti
       if (dist === void 0) {
         return;
       }
-      const outPath = path.replace(base, dist).replace(info.ext, ".json");
+      const base = matchAncestor(path, folders);
+      const outPath = join(dist, relative(base, path)).replace(info.ext, ".json");
       return writeJson(outPath, data);
     },
   };
   ctx.sourceInfos.push(info);
 
   return info;
+}
+
+function matchAncestor(path: string, folders: string[]) {
+  for (const folder of folders) {
+    if (relative(folder, path).startsWith("../")) {
+      continue;
+    }
+    return folder;
+  }
+  throw new Error("找不到祖先。");
 }
