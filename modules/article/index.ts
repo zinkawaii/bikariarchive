@@ -41,6 +41,14 @@ export default defineNuxtModule({
     };
 
     nuxt.options.typescript.appTsConfig = defu(nuxt.options.typescript.appTsConfig, {
+      compilerOptions: {
+        plugins: [
+          {
+            name: "@bikari/typescript-plugin",
+            ...config,
+          },
+        ],
+      },
       vueCompilerOptions: {
         plugins: [
           {
@@ -48,6 +56,9 @@ export default defineNuxtModule({
           },
         ],
       },
+      include: [
+        "../content/**/*.md",
+      ],
     });
 
     const article = createArticle(nuxt.options.rootDir);
@@ -56,35 +67,6 @@ export default defineNuxtModule({
     if (nuxt.options.dev) {
       nuxt.hook("close", article.watch());
     }
-
-    addTemplate({
-      filename: "tsconfig.article.json",
-      write: true,
-      getContents: () => JSON.stringify({
-        extends: "@zinkawaii/tsconfig",
-        compilerOptions: {
-          paths: {
-            "#build/*": [
-              "./*",
-            ],
-          },
-          plugins: [
-            {
-              name: "@dxup/unimport",
-            },
-            {
-              name: "@bikari/typescript-plugin",
-              ...config,
-            },
-          ],
-        },
-        include: [
-          "../content/**/*.md",
-          // 用于消除 "在配置文件...中找不到任何输入" 的警告
-          "./article.d.ts",
-        ],
-      }, void 0, 2),
-    });
 
     addTemplate({
       filename: "article.mjs",
