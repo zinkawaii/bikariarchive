@@ -1,0 +1,13 @@
+diff --git a/dist/module.mjs b/dist/module.mjs
+index f6611b1..6f6642c 100644
+--- a/dist/module.mjs
++++ b/dist/module.mjs
+@@ -18,7 +18,7 @@ import { colors } from 'consola/utils';
+ import { splitForLocales, robotsBlocksIndexing, createPathFilter } from '../dist/runtime/utils-pure.js';
+ import { p as parseHtmlExtractSitemapMeta } from './shared/sitemap.BoMnWHOt.mjs';
+ import { normaliseDate } from '../dist/runtime/server/sitemap/urlset/normalise.js';
+-import { parseSync } from 'oxc-parser';
++import { parseSync } from 'rolldown/utils';
+ import { getUndeclaredIdentifiersInFunction } from 'oxc-walker';
+ import { mapPathForI18nPages, splitPathForI18nLocales as splitPathForI18nLocales$1, expandCompactLocaleRoute, normalizeLocales, generatePathForI18nPages } from 'nuxtseo-shared/i18n';
+ import 'ultrahtml';

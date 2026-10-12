@@ -76,7 +76,7 @@ export const useSettingStore = defineStore("setting", () => {
 
       const { trigger } = watchTriggerable(source, (newVal, oldVal, onCleanup) => {
         if (oldVal !== void 0) {
-          document.startViewTransition?.(fn) ?? fn();
+          document.startViewTransition(fn);
         }
         else fn();
 

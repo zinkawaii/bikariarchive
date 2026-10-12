@@ -4,7 +4,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "^12.8.1"
+      "version": "^12.12.1"
     },
     "runtime": {
       "name": "node",
@@ -45,6 +45,7 @@
     "@bikariya/modals": "catalog:nuxt",
     "@bikariya/shiki": "catalog:nuxt",
     "@iconify-json/fa7-solid": "catalog:iconify",
+    "@nuxt/devtools": "catalog:nuxt",
     "@nuxt/icon": "catalog:nuxt",
     "@nuxt/image": "catalog:nuxt",
     "@nuxtjs/robots": "catalog:nuxt",

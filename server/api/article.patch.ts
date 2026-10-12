@@ -71,6 +71,6 @@ export default defineHandler<{ body: PatchArticleBody }, Promise<PatchArticleRes
   ]);
 
   return {
-    count: counts.length ? counts[0].count : 0,
+    count: counts[0]?.count ?? 0,
   };
 });

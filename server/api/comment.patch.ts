@@ -28,7 +28,7 @@ export default defineHandler<{ body: PatchCommentBody }>(async (event) => {
 
   // 评论不存在
   if (!comment) {
-    return createError({ status: 404 });
+    throw createError({ status: 404 });
   }
 
   // 获取所回复的评论

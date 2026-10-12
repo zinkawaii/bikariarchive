@@ -1,4 +1,5 @@
 import { createArticle } from "@bikari/article";
+import { defu } from "defu";
 import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
 import { join, relative } from "pathe";
 import configLiteral from "./config.ts";
@@ -32,8 +33,14 @@ export default defineNuxtModule({
       dir: nuxt.options.alias["#content"] = join(nuxt.options.rootDir, "content/generated"),
     });
 
-    ((nuxt.options.typescript.tsConfig.vueCompilerOptions ??= {}).plugins ??= []).push({
-      name: relative(nuxt.options.buildDir, resolve("volar.cts")),
+    nuxt.options.typescript.appTsConfig = defu(nuxt.options.typescript.appTsConfig, {
+      vueCompilerOptions: {
+        plugins: [
+          {
+            name: relative(nuxt.options.buildDir, resolve("volar.cts")),
+          },
+        ],
+      },
     });
 
     const article = createArticle(nuxt.options.rootDir);

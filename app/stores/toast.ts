@@ -21,7 +21,7 @@ export const useToastStore = defineStore("toast", () => {
   function show(key: string, message: string, type: ToastType = "info") {
     const fullKey = `<${type}>${key}`;
     const hash = randomHash(8);
-    for (const [name] of toasts) {
+    for (const name of toasts.keys()) {
       if (name.startsWith(fullKey)) {
         remove(name);
         break;

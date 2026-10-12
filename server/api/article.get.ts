@@ -32,9 +32,6 @@ export default defineHandler<{ query: GetArticleQuery }, Promise<GetArticleRespo
     throw createError({ status: 403 });
   }
 
-  // 连接数据库
-  await connectMongoose();
-
   // 读取文章
   const body = await readArticle(art);
 

@@ -38,15 +38,13 @@
 
       await Promise.all(
         Array.from(widgetEls, (el, i) => {
-          return new Promise((resolve) => {
-            const animation = el.animate(reversed ? keyframes : keyframes.toReversed(), {
-              duration: 400,
-              delay: 50 * (reversed ? widgetEls.length - 1 - i : i),
-              easing: reversed ? easeInBack : easeOutBack,
-              fill: "both",
-            });
-            animation.addEventListener("finish", resolve);
+          const animation = el.animate(reversed ? keyframes : keyframes.toReversed(), {
+            duration: 400,
+            delay: 50 * (reversed ? widgetEls.length - 1 - i : i),
+            easing: reversed ? easeInBack : easeOutBack,
+            fill: "both",
           });
+          return animation.finished;
         }),
       );
     }

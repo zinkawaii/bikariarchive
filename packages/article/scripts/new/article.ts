@@ -57,7 +57,7 @@ export async function createArticle() {
       await writeFile(path, text);
     }
 
-    await exec(`code-insiders`, [path]);
+    await exec(`code`, [path]);
   }
 }
 
