@@ -31,17 +31,16 @@ export default defineNuxtModule({
     const sqliteName = "kerria.sqlite";
     nuxt.options.alias["#content"] = generatedRoot;
 
-    nuxt.hook("nitro:build:before", (nitro) => {
-      nitro.options.database = {
-        ...nitro.options.database,
-        content: {
-          connector: "sqlite",
-          options: {
-            path: join(nitro.options.output?.serverDir ?? generatedRoot, sqliteName),
-          },
+    // @ts-expect-error 没有必选的 `default`
+    nuxt.options.nitro.database = {
+      ...nuxt.options.nitro.database,
+      content: {
+        connector: "sqlite",
+        options: {
+          path: nuxt.options.dev ? join(generatedRoot, sqliteName) : sqliteName,
         },
-      };
-    });
+      },
+    };
 
     nuxt.hook("nitro:build:public-assets", async (nitro) => {
       if (nitro.options.output) {
