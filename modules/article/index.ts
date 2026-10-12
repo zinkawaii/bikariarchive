@@ -1,3 +1,4 @@
+import { copyFile } from "node:fs/promises";
 import { createArticle } from "@bikari/article";
 import { defu } from "defu";
 import { addComponent, addNitroPlugin, addPlugin, addTemplate, addVitePlugin, createResolver, defineNuxtModule } from "nuxt/kit";
@@ -27,18 +28,29 @@ export default defineNuxtModule({
     });
 
     const generatedRoot = join(nuxt.options.rootDir, "content/generated");
+    const sqliteName = "kerria.sqlite";
     nuxt.options.alias["#content"] = generatedRoot;
 
-    // @ts-expect-error 没有必选的 `default`
-    nuxt.options.nitro.database = {
-      ...nuxt.options.nitro.database,
-      content: {
-        connector: "sqlite",
-        options: {
-          path: join(generatedRoot, "kerria.sqlite"),
+    nuxt.hook("nitro:build:before", (nitro) => {
+      nitro.options.database = {
+        ...nitro.options.database,
+        content: {
+          connector: "sqlite",
+          options: {
+            path: join(nitro.options.output?.serverDir ?? generatedRoot, sqliteName),
+          },
         },
-      },
-    };
+      };
+    });
+
+    nuxt.hook("nitro:build:public-assets", async (nitro) => {
+      if (nitro.options.output) {
+        await copyFile(
+          join(generatedRoot, sqliteName),
+          join(nitro.options.output.serverDir, sqliteName),
+        );
+      }
+    });
 
     nuxt.options.typescript.appTsConfig = defu(nuxt.options.typescript.appTsConfig, {
       compilerOptions: {
