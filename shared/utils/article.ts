@@ -222,4 +222,11 @@ export function enrichJArticle(original: JArticle) {
       Article.meta[novel].chapters[i] = art;
     }
   }
+
+  for (const novel in Article.meta) {
+    if (novel in original) {
+      continue;
+    }
+    delete Article.meta[novel];
+  }
 }
