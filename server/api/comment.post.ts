@@ -37,7 +37,7 @@ export default defineHandler<{ body: PostCommentBody }>(async (event) => {
   const parent = await CommentDataModel.findOne({
     path: body.path,
     _id: body.parent,
-  }).select("root");
+  }).select("root email");
 
   if (body.parent && !parent) {
     throw createError({ status: 404 });
