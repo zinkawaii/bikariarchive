@@ -40,12 +40,6 @@ export default defineNuxtModule({
       },
     };
 
-    nuxt.options.nitro.serverAssets ??= [];
-    nuxt.options.nitro.serverAssets.push({
-      baseName: "content",
-      dir: generatedRoot,
-    });
-
     nuxt.options.typescript.appTsConfig = defu(nuxt.options.typescript.appTsConfig, {
       vueCompilerOptions: {
         plugins: [
