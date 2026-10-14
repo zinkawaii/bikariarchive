@@ -8,7 +8,7 @@ import { prepareSqlite } from "../processor/sqlite.ts";
 import { useLoad } from "../processor/useLoad.ts";
 import { useSource } from "../processor/useSource.ts";
 import type { Child, Root } from "../markdown/types.ts";
-import type { ArticleFrontmatter, NovelFrontmatter } from "../types/article.ts";
+import type { ArticleFrontmatter, JArticle, JChapter, NovelFrontmatter } from "../types/article.ts";
 
 const SourceKind = {
   Meta: 0,
@@ -16,20 +16,24 @@ const SourceKind = {
 };
 
 export default defineProcessor("Article", (ctx) => {
-  const metaInfo = useLoad("meta", {
+  const metaInfo = useLoad<
+    Record<string, NovelFrontmatter & {
+      order: string;
+      chapters: Record<string, JChapter>;
+    }>
+  >("meta", {
     dist: "content/generated/data/article.json",
-    output(val) {
-      const newVal = Object.fromEntries(
-        Object.entries<any>(structuredClone(val))
-          .sort(([, { order: a }], [, { order: b }]) => a.localeCompare(b)),
+    output(val): JArticle {
+      return Object.fromEntries(
+        Object.entries(val)
+          .sort(([, { order: a }], [, { order: b }]) => a.localeCompare(b))
+          .map(([novel, { order, ...info }]) => [novel, {
+            ...info,
+            chapters: Object.entries(info.chapters)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([, c]) => c),
+          }]),
       );
-      for (const novel in newVal) {
-        delete newVal[novel].order;
-        newVal[novel].chapters = Object.entries(newVal[novel].chapters)
-          .sort(([a], [b]) => a.localeCompare(b))
-          .map(([, c]) => c);
-      }
-      return newVal;
     },
   });
 
@@ -148,7 +152,7 @@ export default defineProcessor("Article", (ctx) => {
       await search.write(key, paragraphs);
 
       // 写入数据
-      const data = {
+      const chapter: JChapter = {
         index,
         volume,
         encrypted,
@@ -161,13 +165,13 @@ export default defineProcessor("Article", (ctx) => {
         key,
         order,
         novel,
-        data,
+        chapter,
       };
     },
     cache(cache) {
-      const { order, novel, data } = cache;
+      const { order, novel, chapter } = cache;
 
-      metaInfo.value[novel].chapters[order] = data;
+      metaInfo.value[novel].chapters[order] = chapter;
     },
     async unlink(cache) {
       const { key, order, novel } = cache;

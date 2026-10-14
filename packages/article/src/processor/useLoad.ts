@@ -2,34 +2,31 @@ import { join } from "pathe";
 import { useCurrentContext } from "./kerria.ts";
 import { writeJsonSync } from "./utils.ts";
 
-export interface LoadInfo extends Omit<UseLoadOptions, "defaultValue" | "output"> {
+export interface LoadInfo<T = {}> extends Omit<UseLoadOptions<T>, "defaultValue" | "output"> {
   name: string;
-  value: any;
+  value: T;
   output: () => void;
 }
 
-export interface UseLoadOptions {
+export interface UseLoadOptions<T> {
   dist?: string;
-  defaultValue?: unknown;
-  update?: (newVal: any, oldVal: any) => any;
-  output?: (val: any) => any;
+  defaultValue?: T;
+  output?: (val: T) => any;
 }
 
-export function useLoad(name: string, options: UseLoadOptions) {
+export function useLoad<T extends {}>(name: string, options: UseLoadOptions<T>) {
   const ctx = useCurrentContext();
   const {
     defaultValue = {},
-    update,
     output,
   } = options;
 
   const dist = options.dist && join(ctx.base, options.dist);
 
-  const info: LoadInfo = {
+  const info: LoadInfo<T> = {
     name,
     dist,
-    value: defaultValue,
-    update,
+    value: defaultValue as T,
     output() {
       if (dist === void 0) {
         return;
@@ -39,7 +36,6 @@ export function useLoad(name: string, options: UseLoadOptions) {
     },
   };
   ctx.loadInfos.push(info);
-  update?.(info.value, void 0);
 
   return info;
 }

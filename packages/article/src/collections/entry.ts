@@ -32,10 +32,18 @@ const SourceKind = {
 };
 
 export default defineProcessor("Entry", (ctx) => {
-  const metaInfo = useLoad("meta", {
+  const metaInfo = useLoad<{
+    blocks: Record<string, IntelNode & {
+      order: string;
+    }>;
+    all: Record<string, {
+      draft?: boolean;
+      alias?: string[];
+    }>;
+  }>("meta", {
     dist: "content/generated/data/intel.json",
     defaultValue: {
-      blocks: [],
+      blocks: {},
       all: {},
     },
     output(val) {
@@ -43,10 +51,7 @@ export default defineProcessor("Entry", (ctx) => {
       const drafts: JIntel["drafts"] = [];
       const redirects: JIntel["redirects"] = {};
 
-      for (const [name, { draft, alias }] of Object.entries<{
-        draft: boolean;
-        alias?: string[];
-      }>(val.all)) {
+      for (const [name, { draft, alias }] of Object.entries(val.all)) {
         entries[name] = null;
         if (draft) {
           drafts.push(name);
@@ -95,11 +100,11 @@ export default defineProcessor("Entry", (ctx) => {
     },
   });
 
-  const abilityInfo = useLoad("ability", {
+  const abilityInfo = useLoad<Record<string, AbilityInfo[]>>("ability", {
     dist: "content/generated/data/ability.json",
     output(val) {
       const items: Record<string, AbilityItem> = {};
-      for (const [name, abilities] of Object.entries<AbilityInfo[]>(val)) {
+      for (const [name, abilities] of Object.entries(val)) {
         for (const ability of abilities) {
           items[ability.name] ??= {
             name: ability.name,
