@@ -108,7 +108,7 @@
       </button>
       <ul class="nav-list" :class="{ [`is-active`]: isNavbarActive }">
         <mb-popper v-for="{ title, icon, to, children } in navs" as="li">
-          <component :is="to ? NuxtLink : `button`" class="nav-link" :to>
+          <component :is="to ? NuxtLink : `button`" class="nav-link" :to="toValue(to)">
             <iconify :name="icon"/>
             <span>{{ title }}</span>
           </component>
