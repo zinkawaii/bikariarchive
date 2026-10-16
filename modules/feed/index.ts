@@ -1,4 +1,4 @@
-import { addServerHandler, addTemplate, createResolver, defineNuxtModule } from "nuxt/kit";
+import { addServerHandler, addTemplate, createResolver, defineNuxtModule, setGlobalHead } from "nuxt/kit";
 import { createHighlighterCore, createJavaScriptRegexEngine } from "shiki";
 import html from "shiki/dist/langs/html.mjs";
 import light from "shiki/themes/catppuccin-latte.mjs";
@@ -13,6 +13,12 @@ export default defineNuxtModule({
 
     const isCustomElement = nuxt.options.vue.compilerOptions.isCustomElement;
     nuxt.options.vue.compilerOptions.isCustomElement = (tag) => isCustomElement?.(tag) || tag.startsWith("xsl:");
+
+    setGlobalHead({
+      link: [
+        { rel: "alternate", type: "application/atom+xml", href: "/feed" },
+      ],
+    });
 
     addServerHandler({
       route: "/feed",

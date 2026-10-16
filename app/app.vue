@@ -8,9 +8,6 @@
   const theme = ref<string>();
 
   useHead({
-    link: [
-      { rel: "alternate", type: "application/atom+xml", title: config.public.title, href: "/feed" },
-    ],
     script: [
       { src: scriptDark },
     ],
