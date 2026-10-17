@@ -1,9 +1,9 @@
+import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import * as p from "@clack/prompts";
 import { dirname } from "pathe";
-import { exec } from "tinyexec";
 import YAML from "yaml";
 import { resolveRoot } from "./utils.ts";
 import type { JArticle, JChapter } from "../../src/types/article.ts";
@@ -57,7 +57,7 @@ export async function createArticle() {
       await writeFile(path, text);
     }
 
-    await exec(`code`, [path]);
+    spawn("open", [path]).unref();
   }
 }
 
