@@ -219,9 +219,6 @@ catalogs:
     '@nuxt/icon':
       specifier: ^2.5.1
       version: 2.5.1
-    '@nuxt/image':
-      specifier: ^2.1.0
-      version: 2.1.0
     '@nuxtjs/robots':
       specifier: ^6.2.4
       version: 6.2.4
@@ -454,9 +451,6 @@ importers:
       '@nuxt/icon':
         specifier: catalog:nuxt
         version: 2.5.1(patch_hash=5fdcfacb15f458ce0b256efb9bed9e0fdcaaa443a919ef6cfb33f17c5990e4fb)(@nuxt/schema-nightly@5.0.0-2610111729-78f43dd)(confbox@0.3.1)(jiti@2.7.0)(magic-string@1.4.3)(rolldown@1.2.13)(unplugin@3.4.0(rolldown@1.2.13)(vite@8.3.4))(vite@8.3.4)(vue@3.5.43(typescript-native-bridge@6.0.3-bridge.18.tsgo.7.0.2))
-      '@nuxt/image':
-        specifier: catalog:nuxt
-        version: 2.1.0(@nuxt/schema-nightly@5.0.0-2610111729-78f43dd)(@types/node@26.6.5)(confbox@0.3.1)(crossws@0.4.15(srvx@1.0.5))(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(ocache@0.3.0)(rolldown@1.2.13)(unplugin@3.4.0(rolldown@1.2.13)(vite@8.3.4))(unstorage@2.0.0-alpha.10)
       '@nuxtjs/robots':
         specifier: catalog:nuxt
         version: 6.2.4(@nuxt/schema-nightly@5.0.0-2610111729-78f43dd)(confbox@0.3.1)(crossws@0.4.15(srvx@1.0.5))(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(nuxt-nightly@5.0.0-2610111729-78f43dd(1f2fdf456733ecdf61477f795b01d107))(ocache@0.3.0)(rolldown@1.2.13)(unplugin@3.4.0(rolldown@1.2.13)(vite@8.3.4))(vite@8.3.4)(vue@3.5.43(typescript-native-bridge@6.0.3-bridge.18.tsgo.7.0.2))(zod@4.6.6)
@@ -1212,10 +1206,6 @@ packages:
   '@mongodb-js/saslprep@1.6.0':
     resolution: {integrity: sha512-19jGXfpctLDJUELLUZGJ5BllcLT7rHdF+gTTaN2jzqu0bGkUhpdcYtgK2Vux+g3zuBAa0TM/W666QMIjYhYujw==}
 
-  '@noble/hashes@2.4.0':
-    resolution: {integrity: sha512-X5XaVWZIBCT7HHZGm5I7ZQXDwLG+bGXuSrMQAW+7Zvl87h1kmc1ZB1VSRJcpUfoUrGQp4Fkoxm5kZ+Ms+aW+eA==}
-    engines: {node: '>= 20.19.0'}
-
   '@nodable/entities@3.1.0':
     resolution: {integrity: sha512-LsS/DjHr+uDM647Gru/cA8+J3a3HfhttwCKLyuoyN7yXTFCxKBtSgMQBvrW9yNPa2/zDRUNuGPaH5QUFoa4arQ==}
 
@@ -1278,10 +1268,6 @@ packages:
 
   '@nuxt/icon@2.5.1':
     resolution: {integrity: sha512-zBP72Po7BS+tXzoeDRA/Y9TTY77OIcNCyzfgXsOmep7zZShTEoe4p1WZBXce/9oJDK3YXmbYC3ILQ7XvqM4/XA==}
-
-  '@nuxt/image@2.1.0':
-    resolution: {integrity: sha512-UzAYq25uhwH1G6jvZBn/SwmniJr77fgF8KzbwUI3MuSdkIP3WQqt/F5wWKXgbGgAWWZGt8Vv2NQ0WZgFuxUBgQ==}
-    engines: {node: ^20.19.0 || >=22.3.0}
 
   '@nuxt/kit-nightly@5.0.0-2610111729-78f43dd':
     resolution: {integrity: sha512-YPZtGUCIIIhcA3eRP+hniTcBXa+Ur7ecwO6QMBiEfBDBfCX1Yu2poKqSpbjUY7iO4y9vSYr5AftiIZapsywA4w==}
@@ -2649,16 +2635,6 @@ packages:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
 
-  ipx@4.0.0-beta.1:
-    resolution: {integrity: sha512-y6bt8CakzpsSO/TiiD8j+1oM+BFJs4rCiJyg8SyBiEaOUIhOu6DFX7lwCpZB/RnUzxVNQFqU4c4IL4MzyRcEQQ==}
-    engines: {node: ^20.16.0 || >=22.3.0}
-    hasBin: true
-    peerDependencies:
-      unstorage: ^2.0.0-alpha.10
-    peerDependenciesMeta:
-      unstorage:
-        optional: true
-
   iron-webcrypto@2.0.0:
     resolution: {integrity: sha512-rtffZKDUHciZElM8mjFCufBC7nVhCxHYyWHESqs89OioEDz4parOofd8/uhrejh/INhQFfYQfByS22LlezR9sQ==}
 
@@ -3534,11 +3510,6 @@ packages:
 
   spdx-license-ids@3.0.24:
     resolution: {integrity: sha512-cLS9TtWkIQFyLkJ3/5aFQAOHOSKTlOs/7WDut/XPSdjom1fJhUdkepeJAKXa9Y05+FabHd0sti+Et559vDtkpQ==}
-
-  srvx@0.12.8:
-    resolution: {integrity: sha512-7k9HoDhluTlD7UJ+F+OopZoPZXB2J8f/5nW2VMLaB8KsSlZlRQxyyoX0hWEQCxB+F+3ZvB5QX3LqB6xSBRfxQQ==}
-    engines: {node: '>=20.16.0'}
-    hasBin: true
 
   srvx@1.0.5:
     resolution: {integrity: sha512-KvSKRpgPG/oaq3cyT614OQ2bAa7DynuGamivCZeoZzIUULOdbQz6wUtnnVuC4+DCx2Zglzo8v5gBYmWIWYhDxA==}
@@ -4590,8 +4561,6 @@ snapshots:
     dependencies:
       sparse-bitfield: 3.0.3
 
-  '@noble/hashes@2.4.0': {}
-
   '@nodable/entities@3.1.0': {}
 
   '@nuxt/cli-nightly@4.0.0-2610090719-f2e6cde(jiti@2.7.0)(rolldown@1.2.13)(vite@8.3.4)':
@@ -4733,35 +4702,6 @@ snapshots:
       - unplugin
       - vite
       - vue
-
-  '@nuxt/image@2.1.0(@nuxt/schema-nightly@5.0.0-2610111729-78f43dd)(@types/node@26.6.5)(confbox@0.3.1)(crossws@0.4.15(srvx@1.0.5))(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(ocache@0.3.0)(rolldown@1.2.13)(unplugin@3.4.0(rolldown@1.2.13)(vite@8.3.4))(unstorage@2.0.0-alpha.10)':
-    dependencies:
-      '@noble/hashes': 2.4.0
-      '@nuxt/kit': '@nuxt/kit-nightly@5.0.0-2610111729-78f43dd(@nuxt/schema-nightly@5.0.0-2610111729-78f43dd)(confbox@0.3.1)(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(rolldown@1.2.13)(unplugin@3.4.0(rolldown@1.2.13)(vite@8.3.4))'
-      defu: 6.1.7
-      h3: 2.0.2(crossws@0.4.15(srvx@1.0.5))(ocache@0.3.0)
-      image-meta: 0.2.2
-      knitwork: 1.3.0
-      ohash: 2.0.12
-      pathe: 2.0.3
-      std-env: 4.3.0
-      ufo: 1.6.4
-    optionalDependencies:
-      ipx: 4.0.0-beta.1(@types/node@26.6.5)(unstorage@2.0.0-alpha.10)
-    transitivePeerDependencies:
-      - '@nuxt/schema'
-      - '@types/node'
-      - confbox
-      - crossws
-      - dotenv
-      - giget
-      - jiti
-      - magic-string
-      - mlly
-      - ocache
-      - rolldown
-      - unplugin
-      - unstorage
 
   '@nuxt/kit-nightly@5.0.0-2610111729-78f43dd(@nuxt/schema-nightly@5.0.0-2610111729-78f43dd)(confbox@0.3.1)(jiti@2.7.0)(magic-string@1.4.3)(mlly@1.8.2)(rolldown@1.2.13)(unplugin@3.4.0(rolldown@1.2.13)(vite@8.3.4))':
     dependencies:
@@ -6314,16 +6254,6 @@ snapshots:
 
   imurmurhash@0.1.4: {}
 
-  ipx@4.0.0-beta.1(@types/node@26.6.5)(unstorage@2.0.0-alpha.10):
-    dependencies:
-      sharp: 0.35.5(@types/node@26.6.5)
-      srvx: 0.12.8
-    optionalDependencies:
-      unstorage: 2.0.0-alpha.10
-    transitivePeerDependencies:
-      - '@types/node'
-    optional: true
-
   iron-webcrypto@2.0.0:
     dependencies:
       uint8array-extras: 1.6.0
@@ -7594,9 +7524,6 @@ snapshots:
       spdx-license-ids: 3.0.24
 
   spdx-license-ids@3.0.24: {}
-
-  srvx@0.12.8:
-    optional: true
 
   srvx@1.0.5: {}
 

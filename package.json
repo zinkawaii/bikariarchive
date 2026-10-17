@@ -47,7 +47,6 @@
     "@iconify-json/fa7-solid": "catalog:iconify",
     "@nuxt/devtools": "catalog:nuxt",
     "@nuxt/icon": "catalog:nuxt",
-    "@nuxt/image": "catalog:nuxt",
     "@nuxtjs/robots": "catalog:nuxt",
     "@nuxtjs/sitemap": "catalog:nuxt",
     "@pinia/nuxt": "catalog:nuxt",

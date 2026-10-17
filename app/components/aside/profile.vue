@@ -3,7 +3,7 @@
     <profile-backdrop light="10%"/>
     <h3 class="profile-author">{{ $config.public.author }}</h3>
     <p class="profile-phrase">{{ $config.public.phrase }}</p>
-    <nuxt-img class="profile-avatar" :src="$config.public.avatar" alt="[avatar]"/>
+    <img class="profile-avatar" :src="$config.public.avatar" alt="[avatar]"/>
   </aside-widget>
 </template>
 

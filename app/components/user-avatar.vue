@@ -1,22 +1,19 @@
-<!-- @inferTemplateDollarAttrs false -->
-
 <script lang="ts" setup>
-  const attrs = useAttrs();
+  const props = defineProps<{
+    src?: string;
+  }>();
 
-  const srcset = computed(() => {
-    return typeof attrs.src === "string" && !attrs.src.startsWith("/")
-      ? `${attrs.src}&s=128 1x, ${attrs.src}&s=256 2x`
-      : void 0;
-  });
+  const srcset = computed(() => (
+    props.src && !props.src?.startsWith("/")
+      ? `${props.src}&s=128 1x, ${props.src}&s=256 2x`
+      : void 0
+  ));
 </script>
 
 <template>
-  <nuxt-img
-    class="user-avatar"
-    :srcset
-    placeholder="/garden/icon/default.png"
-    alt="[avatar]"
-  />
+  <placeholder-image src="/garden/icon/default.png">
+    <img class="user-avatar" :srcset alt="[avatar]"/>
+  </placeholder-image>
 </template>
 
 <style scoped>

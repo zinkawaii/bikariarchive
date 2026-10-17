@@ -21,9 +21,8 @@
   const contextMenuStore = useContextMenuStore();
   const modalStore = useModalStore();
 
-  const imgComp = useTemplateRef("img");
+  const imgEl = useTemplateRef("img");
   const tagComps = useTemplateRef("tag");
-  const imgEl = computed(() => imgComp.value?.imgEl);
 
   // 角色列表
   const characters = computed(() => {
@@ -96,7 +95,7 @@
 
 <template>
   <figure class="mb-image">
-    <nuxt-img
+    <img
       ref="img"
       class="image-entity"
       :class="{

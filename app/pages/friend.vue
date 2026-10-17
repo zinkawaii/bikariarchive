@@ -26,7 +26,7 @@
       <div class="friend-list">
         <nuxt-link v-for="item in friendJson" class="friend-item" :to="item.link" rel="noopener" target="_blank">
           <hgroup class="friend-info">
-            <nuxt-img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
+            <img class="friend-icon" :src="item.icon" alt="[icon]" loading="lazy"/>
             <h3 class="friend-title text-truncate">{{ item.title }}</h3>
             <span class="text-gray">{{ item.nickname }}</span>
           </hgroup>

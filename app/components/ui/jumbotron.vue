@@ -44,12 +44,7 @@
 <template>
   <transition @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
     <div v-if="$route.meta.jumbotron" class="z-jumbotron" :style="`--height: ${height}svh`">
-      <nuxt-img
-        class="jumbotron-image"
-        :src="$route.meta.jumbotron.image"
-        alt="[jumbotron]"
-        fetchpriority="high"
-      />
+      <img class="jumbotron-image" :src="$route.meta.jumbotron.image" alt="[jumbotron]" fetchpriority="high"/>
       <jumbotron-hero v-if="$route.meta.jumbotron.hero"/>
       <button class="jumbotron-skip" aria-label="跳转到主要内容" @click="toBottom">
         <iconify name="fa7-solid:chevron-down"/>

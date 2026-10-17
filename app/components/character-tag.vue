@@ -6,7 +6,9 @@
 
 <template>
   <nuxt-link class="character-tag" :to="toEntry(name)">
-    <nuxt-img class="tag-avatar" :src="`/garden/icon/${name}.png`" alt="[avatar]" placeholder="/garden/icon/unknown.png"/>
+    <placeholder-image src="/garden/icon/unknown.png">
+      <img class="tag-avatar" :src="`/garden/icon/${name}.png`" alt="[avatar]"/>
+    </placeholder-image>
     <span class="tag-name">{{ name }}</span>
   </nuxt-link>
 </template>

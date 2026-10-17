@@ -62,7 +62,6 @@ export default defineNuxtConfig({
     "@bikariya/modals",
     "@bikariya/shiki",
     "@nuxt/icon",
-    "@nuxt/image",
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
     "@pinia/nuxt",
@@ -80,9 +79,6 @@ export default defineNuxtConfig({
   },
   icon: {
     componentName: "iconify",
-  },
-  image: {
-    provider: "none",
   },
   robots: {
     credits: false,
