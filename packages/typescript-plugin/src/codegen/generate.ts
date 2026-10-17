@@ -1,4 +1,4 @@
-import htmlTags from "html-tags";
+import { isHTMLTag } from "@vue/shared";
 import type { Root, RootContent } from "mdast";
 import type { BlockComponent, InlineComponent } from "satorigear";
 import { codeFeatures } from "./codeFeatures.ts";
@@ -79,7 +79,7 @@ function* generateComponent(node: BlockComponent | InlineComponent, options: Cod
   yield `$elements[`;
   const boundary2 = yield* Boundary.start(nameStart, nameEnd, codeFeatures.all);
   yield `"`;
-  if (htmlTags.includes(name as any)) {
+  if (isHTMLTag(name)) {
     yield [name, nameStart, codeFeatures.all];
   }
   else {

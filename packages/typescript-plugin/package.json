@@ -7,10 +7,10 @@
     "@volar/language-core": "catalog:volar",
     "@volar/typescript": "catalog:volar",
     "alien-signals": "catalog:utils",
-    "html-tags": "catalog:content",
     "pathe": "catalog:utils",
     "satorigear": "catalog:content",
     "unist-util-visit": "catalog:content",
+    "vue": "catalog:vue",
     "yaml": "catalog:utils"
   },
   "devDependencies": {
