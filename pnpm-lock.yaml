@@ -284,6 +284,9 @@ catalogs:
     github-slugger:
       specifier: ^2.0.0
       version: 2.0.0
+    katex:
+      specifier: ^0.19.1
+      version: 0.19.1
     mrmime:
       specifier: ^2.0.1
       version: 2.0.1
@@ -366,7 +369,6 @@ overrides:
   '@vue/devtools-api': ^9.0.0-rc.2
   '@vue/shared': ^3.6.0-rc.13
   h3: ^2.0.8
-  katex: ^0.19.1
   nitro: npm:nitro-nightly@^3.0.1-20261027-023028-e1743f2e
   nuxt: npm:nuxt-nightly@^5.0.0-2610270115-58d7824
   ofetch: ^2.0.0-alpha.3
@@ -403,7 +405,7 @@ importers:
         specifier: catalog:utils
         version: 2.0.0
       katex:
-        specifier: ^0.19.1
+        specifier: catalog:utils
         version: 0.19.1
       pinia:
         specifier: catalog:vue

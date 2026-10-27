@@ -26,8 +26,6 @@ overrides:
   "@vue/shared": *vue
   # nuxt-auth-utils > h3@^1.15.11
   h3: ^2.0.8
-  # micromark-extension-math > katex@^0.16.0
-  katex: ^0.19.1
   nitro: npm:nitro-nightly@^3.0.1-20261027-023028-e1743f2e
   nuxt: npm:nuxt-nightly@^5.0.0-2610270115-58d7824
   # @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared > ofetch@^1.5.1
