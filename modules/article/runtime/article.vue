@@ -218,18 +218,21 @@
     }
 
     &:where(.is-article, .is-story, .is-comment) {
+      margin-trim: block;
       line-height: 1.8;
 
       > p {
         margin-block: 0.8em;
       }
 
-      > :first-child {
-        margin-top: 0;
-      }
+      @supports not (margin-trim: block) {
+        > :first-child {
+          margin-top: 0;
+        }
 
-      > :last-child {
-        margin-bottom: 0;
+        > :last-child {
+          margin-bottom: 0;
+        }
       }
     }
 

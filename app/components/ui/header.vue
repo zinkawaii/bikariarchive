@@ -242,7 +242,6 @@
 
   .nav-list {
     display: flex;
-    justify-content: center;
 
     @media (width < 768px) {
       gap: 4px;
