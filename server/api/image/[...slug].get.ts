@@ -1,5 +1,5 @@
 import { type } from "arktype";
-import { AwsClient } from "aws4fetch";
+import { AwsV4Signer } from "aws4fetch";
 import { defineHandler } from "nitro";
 import { createError, getRouterParam, getValidatedQuery, sendRedirect, useRuntimeConfig } from "nuxt/server";
 
@@ -23,13 +23,6 @@ export default defineHandler<{ query: GetImageQuery }>(async (event) => {
     throw createError({ status: 404 });
   }
 
-  const s3 = new AwsClient({
-    accessKeyId: config.bitiful.accessKey,
-    secretAccessKey: config.bitiful.secretKey,
-    service: "s3",
-    region: "cn-east-1",
-  });
-
   const url = new URL(`https://${config.bitiful.bucket}.s3.bitiful.net/image/${slug}`);
 
   for (const [key, value] of Object.entries(query)) {
@@ -43,14 +36,18 @@ export default defineHandler<{ query: GetImageQuery }>(async (event) => {
   url.searchParams.set("X-Amz-Expires", maxAge.toString());
   url.searchParams.set("response-cache-control", `public, max-age=${maxAge}`);
 
-  const request = await s3.sign(url, {
-    aws: {
-      signQuery: true,
-    },
+  const signer = new AwsV4Signer({
+    url: url.toString(),
+    accessKeyId: config.bitiful.accessKey,
+    secretAccessKey: config.bitiful.secretKey,
+    service: "s3",
+    region: "cn-east-1",
+    signQuery: true,
   });
+  const signed = await signer.sign();
 
-  // Nitro 的 `maxAge` 只缓存服务端生成的结果，同步设置缓存响应头以避免浏览器重复发起请求
+  // FIXME: 完全一致的 `maxAge` 可能在极端情况下出现缓存失效
   event.res.headers.set("cache-control", `public, max-age=${maxAge}`);
 
-  return sendRedirect(event, request.url, 307);
+  return sendRedirect(event, signed.url.toString(), 307);
 });
