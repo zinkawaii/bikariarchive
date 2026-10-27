@@ -1,0 +1,60 @@
+diff --git a/lib/syntax/atrule/container.js b/lib/syntax/atrule/container.js
+index aa550de..cc7f9aa 100644
+--- a/lib/syntax/atrule/container.js
++++ b/lib/syntax/atrule/container.js
+@@ -21,8 +21,8 @@ export default {
+
+             return children;
+         },
+-        block(nested = false) {
+-            return this.Block(nested);
++        block(nested = false, { allowNestedRules = false } = {}) {
++            return this.Block(nested, { allowNestedRules });
+         }
+     }
+ };
+diff --git a/lib/syntax/atrule/scope.js b/lib/syntax/atrule/scope.js
+index 7185ca1..0eaca59 100644
+--- a/lib/syntax/atrule/scope.js
++++ b/lib/syntax/atrule/scope.js
+@@ -5,8 +5,8 @@ export default {
+                 this.Scope()
+             );
+         },
+-        block(nested = false) {
+-            return this.Block(nested);
++        block(nested = false, { allowNestedRules = false } = {}) {
++            return this.Block(nested, { allowNestedRules });
+         }
+     }
+ };
+diff --git a/lib/syntax/atrule/starting-style.js b/lib/syntax/atrule/starting-style.js
+index b964704..5a7bc5c 100644
+--- a/lib/syntax/atrule/starting-style.js
++++ b/lib/syntax/atrule/starting-style.js
+@@ -1,8 +1,8 @@
+ export default {
+     parse: {
+         prelude: null,
+-        block(nested = false) {
+-            return this.Block(nested);
++        block(nested = false, { allowNestedRules = false } = {}) {
++            return this.Block(nested, { allowNestedRules });
+         }
+     }
+ };
+diff --git a/lib/syntax/atrule/supports.js b/lib/syntax/atrule/supports.js
+index bdfffce..9677c74 100644
+--- a/lib/syntax/atrule/supports.js
++++ b/lib/syntax/atrule/supports.js
+@@ -5,8 +5,8 @@ export default {
+                 this.Condition('supports')
+             );
+         },
+-        block(nested = false) {
+-            return this.Block(nested);
++        block(nested = false, { allowNestedRules = false } = {}) {
++            return this.Block(nested, { allowNestedRules });
+         }
+     }
+ };

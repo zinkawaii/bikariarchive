@@ -1,5 +1,9 @@
 minimumReleaseAge: 0
+
 trustPolicy: no-downgrade
+trustPolicyExclude:
+  - seroval@1.7.2
+
 shamefullyHoist: true
 shellEmulator: true
 
@@ -9,31 +13,36 @@ packages:
 overrides:
   "@nuxt/cli": npm:@nuxt/cli-nightly@^4.0.0-2610090719-f2e6cde
   # @nuxt/icon > @nuxt/devtools-kit@^3.4.2
-  # nuxtseo-shared > @nuxt/devtools-kit@4.0.0-alpha.7
-  "@nuxt/devtools-kit": &nuxt/devtools ^4.0.0-beta.4
-  "@nuxt/kit": npm:@nuxt/kit-nightly@^5.0.0-2610111729-78f43dd
-  "@nuxt/schema": npm:@nuxt/schema-nightly@^5.0.0-2610111729-78f43dd
-  # @nuxtjs/robots, nuxt-auth-utils, nuxt-site-config > h3@^1.15.11
-  h3: ^2.0.2
+  "@nuxt/devtools-kit": &nuxt/devtools ^4.0.0-beta.7
+  "@nuxt/kit": npm:@nuxt/kit-nightly@^5.0.0-2610270115-58d7824
+  "@nuxt/schema": npm:@nuxt/schema-nightly@^5.0.0-2610270115-58d7824
+  # @vue/language-core > @vue/compiler-dom@^3.5.0
+  "@vue/compiler-dom": &vue ^3.6.0-rc.13
+  # @vue-macros/common > @vue/compiler-sfc@^3.5.22
+  "@vue/compiler-sfc": *vue
+  # pinia, vue-router > @vue/devtools-api@^8.2.1
+  "@vue/devtools-api": ^9.0.0-rc.2
+  # @vue/language-core > @vue/shared@^3.5.0
+  "@vue/shared": *vue
+  # nuxt-auth-utils > h3@^1.15.11
+  h3: ^2.0.8
   # micromark-extension-math > katex@^0.16.0
-  katex: ^0.19.0
-  nitro: npm:nitro-nightly@^3.0.1-20261008-023340-cef53050
-  nuxt: npm:nuxt-nightly@^5.0.0-2610111729-78f43dd
-  # vite-node > obug@^2.1.1
-  obug: ^3.0.0
+  katex: ^0.19.1
+  nitro: npm:nitro-nightly@^3.0.1-20261027-023028-e1743f2e
+  nuxt: npm:nuxt-nightly@^5.0.0-2610270115-58d7824
   # @nuxtjs/sitemap, nuxt-auth-utils, nuxtseo-shared > ofetch@^1.5.1
   ofetch: ^2.0.0-alpha.3
   # @nuxtjs/sitemap > oxc-parser@^0.141.0
-  oxc-parser: link:???
-  typescript: npm:typescript-native-bridge@^6.0.3-bridge.18.tsgo.7.0.2
-  # @nuxt/devtools > unstorage@^1.17.5
-  unstorage: ^2.0.0-alpha.10
+  oxc-parser: "-"
+  typescript: npm:typescript-native-bridge@^6.0.3-bridge.19.tsgo.7.0.2
+  # @nuxt/vite-builder > vite-plugin-checker@^0.14.5
+  vite-plugin-checker: "-"
+  vue: *vue
 
 patchedDependencies:
-  "@nuxt/icon": patches/@nuxt__icon.patch
+  "@eslint/css-tree": patches/@eslint__css-tree.patch
   "@nuxtjs/sitemap": patches/@nuxtjs__sitemap.patch
   mdast-util-to-hast: patches/mdast-util-to-hast.patch
-  nuxt-auth-utils: patches/nuxt-auth-utils.patch
 
 catalogs:
   build:
@@ -44,30 +53,30 @@ catalogs:
     remark-rehype: ^11.1.2
     satorigear: ^0.0.9
     unified: ^11.0.5
-    unist-util-visit: ^5.1.0
+    unist-util-visit: ^5.2.0
   database:
-    mongoose: ^9.11.1
+    mongoose: ^9.11.4
   iconify:
     "@iconify-json/fa7-solid": ^1.2.5
   lint:
-    "@zinkawaii/eslint-config": &zin/eslint ^0.5.4
-    "@zinkawaii/eslint-config-css": *zin/eslint
-    eslint: ^10.12.0
+    "@zinkawaii/eslint-config": ^0.5.5
+    "@zinkawaii/eslint-config-css": ^0.5.4
+    eslint: ^10.13.0
   nuxt:
     "@bikariya/image-viewer": &bikariya ^0.0.8
     "@bikariya/modals": *bikariya
     "@bikariya/shiki": *bikariya
     "@nuxt/devtools": *nuxt/devtools
-    "@nuxt/icon": ^2.5.1
-    "@nuxtjs/robots": ^6.2.4
-    "@nuxtjs/sitemap": ^8.6.1
-    "@pinia/nuxt": ^1.0.2
+    "@nuxt/icon": ^2.6.1
+    "@nuxtjs/robots": ^7.0.2
+    "@nuxtjs/sitemap": ^9.1.0
+    "@pinia/nuxt": ^1.0.3
     "@vueuse/nuxt": &vueuse ^15.0.0
-    nuxt: ^4.6.1
-    nuxt-auth-utils: ^0.5.31
-    nuxt-schema-org: ^6.4.3
-    nuxt-seo-utils: ^8.6.1
-    nuxt-site-config: ^4.2.3
+    nuxt: ^4.6.3
+    nuxt-auth-utils: ^0.5.32
+    nuxt-schema-org: ^7.0.1
+    nuxt-seo-utils: ^9.0.1
+    nuxt-site-config: ^5.0.3
   types:
     "@types/node": ^26.6.5
     "@zinkawaii/tsconfig": ^0.1.0
@@ -75,26 +84,27 @@ catalogs:
     "@clack/prompts": ^1.8.1
     "@shikijs/transformers": &shiki ^4.5.0
     alien-signals: ^3.2.1
-    arktype: ^2.2.8
+    arktype: ^2.2.9
     aws4fetch: ^1.0.20
-    bgmt: ^0.3.1
+    bgmt: ^0.3.2
     chokidar: ^5.0.0
     consola: ^3.4.2
     db0: ^0.4.1
     defu: ^6.1.7
     entities: ^8.1.0
     github-slugger: ^2.0.0
-    katex: ^0.19.0
+    katex: ^0.19.1
     mrmime: ^2.0.1
+    ocache: ^0.3.1
     pathe: ^2.0.3
     plain-shiki: ^0.3.2
     propathy: ^0.2.1
     shiki: *shiki
-    temporal-polyfill: ^1.0.5
+    temporal-polyfill: ^1.0.6
     tinyglobby: ^0.2.17
     ufo: ^1.6.4
     unemail: ^0.7.0
-    unstorage: ^1.17.5
+    unstorage: ^2.0.0-beta.0
     uqr: ^0.1.3
     yaml: ^2.9.1
     zfeed: ^0.2.4
@@ -104,9 +114,9 @@ catalogs:
   vue:
     "@vueuse/core": *vueuse
     "@vueuse/router": *vueuse
-    pinia: ^4.0.3
+    pinia: ^4.1.0
     pinia-plugin-persistedstate: ^4.7.1
-    vue: ^3.5.43
+    vue: ^3.5.44
     vue-component-type-helpers: &vls ^3.3.13
     vue-router: ^5.4.0
     vue-tsc: *vls
