@@ -12,7 +12,7 @@
 
 <template>
   <h2 :id class="story-heading" :data-modifier="modifier">
-    <slot></slot>
+    <slot />
   </h2>
 </template>
 

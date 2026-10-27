@@ -18,7 +18,7 @@
     </ul>
     <ul class="tab-content">
       <li v-for="(name, i) in items" v-show="selectedIndex === i">
-        <slot :name></slot>
+        <slot :name/>
       </li>
     </ul>
   </div>

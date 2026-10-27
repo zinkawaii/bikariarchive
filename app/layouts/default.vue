@@ -15,12 +15,12 @@
     }"
   >
     <main class="nakami">
-      <slot></slot>
+      <slot />
       <comment-area v-if="$route.meta.comment" v-show="settingStore.get(`interaction`)"/>
       <z-footer />
     </main>
     <z-aside v-show="$route.meta.aside ?? true">
-      <slot name="aside"></slot>
+      <slot name="aside"/>
     </z-aside>
   </div>
   <bikariya-modals />

@@ -1,5 +1,5 @@
 <template>
-  <h3 class="meow-title"><slot></slot></h3>
+  <h3 class="meow-title"><slot /></h3>
 </template>
 
 <style scoped>

@@ -10,6 +10,6 @@
 
 <template>
   <component :is="as">
-    <slot></slot>
+    <slot />
   </component>
 </template>

@@ -11,7 +11,7 @@
       <span class="form-title">{{ title }}</span>
       <p class="form-desc">{{ desc }}</p>
     </div>
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

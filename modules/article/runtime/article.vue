@@ -110,7 +110,7 @@
 
 <template>
   <mb-primitive class="bikariya-article" :class="`is-${variant}`" as="article">
-    <slot v-if="slots.default" :render></slot>
+    <slot v-if="slots.default" :render/>
     <render v-else/>
   </mb-primitive>
 </template>

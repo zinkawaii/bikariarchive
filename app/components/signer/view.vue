@@ -12,7 +12,7 @@
       <h2 class="signer-title">{{ title }}</h2>
       <p class="signer-subtitle">{{ config.public.phrase }}</p>
     </hgroup>
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

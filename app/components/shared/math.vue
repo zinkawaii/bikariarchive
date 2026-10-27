@@ -38,7 +38,9 @@
     });
   }, `<span class="katex">${props.raw}</span>`, { lazy: true });
 
-  function render() {
+  function render():
+    // 使 `useTemplateRef` 获取到 `ShallowRef<any>`
+    VNode & { __ctx?: {} } {
     if (props.type === "block") {
       return h("pre", {
         class: "mb-math",

@@ -9,7 +9,7 @@
     <header v-if="title" class="meow-header">
       <h1 class="meow-title">{{ title }}</h1>
     </header>
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

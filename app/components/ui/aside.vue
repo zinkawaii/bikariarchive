@@ -63,7 +63,7 @@
     <aside v-if="!isCollapsed" class="z-aside no-scrollbar" @click="onClick">
       <aside-profile />
       <div class="aside-sticky">
-        <slot></slot>
+        <slot />
         <aside-statistics />
         <aside-widget title="最近更新">
           <template #icon>
