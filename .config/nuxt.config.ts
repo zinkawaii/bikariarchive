@@ -52,11 +52,6 @@ export default defineNuxtConfig({
     public: clientConfig,
   },
   typescript: typescriptConfig,
-  vite: {
-    server: {
-      allowedHosts: true,
-    },
-  },
   modules: [
     "@bikariya/image-viewer",
     "@bikariya/modals",
