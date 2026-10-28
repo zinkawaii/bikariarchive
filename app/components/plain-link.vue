@@ -28,7 +28,7 @@
     :target
     :rel
   >
-    <slot></slot>
+    <slot />
     <iconify
       v-if="isExternal && !hideExternal"
       class="plain-external"

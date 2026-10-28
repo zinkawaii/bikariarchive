@@ -37,6 +37,6 @@
 
 <template>
   <transition :css="false" @enter="onEnter" @leave="onLeave">
-    <slot></slot>
+    <slot />
   </transition>
 </template>

@@ -27,7 +27,7 @@
 
 <template>
   <figure>
-    <slot :html></slot>
+    <slot :html/>
   </figure>
 </template>
 

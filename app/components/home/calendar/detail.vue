@@ -87,10 +87,9 @@
 
   .calendar-heroine {
     display: flex;
+    justify-content: safe center;
     gap: 8px;
-    max-width: 100%;
-    margin: 9px auto 0;
-    padding-bottom: 2px;
+    padding-block: 9px 2px;
     scroll-snap-type: x mandatory;
 
     > .character-tag {

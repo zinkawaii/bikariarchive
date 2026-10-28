@@ -11,9 +11,9 @@
 <template>
   <div class="meow-table" :class="`is-${variant}`">
     <table v-if="variant === `table`" :style="{ minWidth: `${minWidth}px` }">
-      <slot></slot>
+      <slot />
     </table>
-    <slot v-else></slot>
+    <slot v-else/>
   </div>
 </template>
 

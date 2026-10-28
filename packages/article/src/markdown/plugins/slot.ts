@@ -1,9 +1,16 @@
 import { setProperty } from "propathy";
 import type hast from "hast";
-import type { Processor } from "unified";
+import type { Plugin } from "unified";
 import { transformNodes } from "./utils.ts";
 
-export default function(this: Processor) {
+declare module "unified" {
+  interface CompileResultMap {
+    frontmatters: Record<string, unknown>[];
+  }
+}
+
+// eslint-disable-next-line func-style
+const plugin: Plugin<[], hast.Root, Record<string, unknown>[]> = function() {
   this.compiler = (root, file) => {
     const { frontmatters } = file.data;
 
@@ -23,7 +30,8 @@ export default function(this: Processor) {
         setProperty(frontmatter, tag, children);
       }
     }
-
-    return (void 0)!;
+    return frontmatters ?? [];
   };
-}
+};
+
+export default plugin;

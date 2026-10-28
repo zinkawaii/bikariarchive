@@ -7,10 +7,10 @@
 <template>
   <section class="aside-widget content-widget">
     <h3 v-if="title" class="aside-title">
-      <slot name="icon"></slot>
+      <slot name="icon"/>
       <span>{{ title }}</span>
     </h3>
-    <slot></slot>
+    <slot />
   </section>
 </template>
 

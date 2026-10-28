@@ -50,7 +50,7 @@
         >
           <div class="popper-inner" :class="{ [`is-plaintext`]: plaintext }">
             <template v-if="plaintext">{{ plaintext }}</template>
-            <slot v-else name="floating"></slot>
+            <slot v-else name="floating"/>
           </div>
         </div>
       </teleport>

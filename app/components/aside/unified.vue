@@ -3,7 +3,7 @@
 <template>
   <aside-widget class="aside-unified">
     <template v-for="slot, name in $slots" #[name]>
-      <slot :name></slot>
+      <slot :name/>
     </template>
   </aside-widget>
 </template>

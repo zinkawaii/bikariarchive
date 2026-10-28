@@ -1,7 +1,8 @@
+<!-- @checkUnknownComponents false -->
+
 <script lang="ts" setup>
   import { encodeXML } from "entities";
   import { variables } from "#build/feed.mjs";
-  // @ts-expect-error Vite 内部模块
   import css from "./template.vue?vue&type=style&index=0&inline&lang.css";
 
   defineProps<{

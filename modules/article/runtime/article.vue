@@ -110,7 +110,7 @@
 
 <template>
   <mb-primitive class="bikariya-article" :class="`is-${variant}`" as="article">
-    <slot v-if="slots.default" :render></slot>
+    <slot v-if="slots.default" :render/>
     <render v-else/>
   </mb-primitive>
 </template>
@@ -218,18 +218,21 @@
     }
 
     &:where(.is-article, .is-story, .is-comment) {
+      margin-trim: block;
       line-height: 1.8;
 
       > p {
         margin-block: 0.8em;
       }
 
-      > :first-child {
-        margin-top: 0;
-      }
+      @supports not (margin-trim: block) {
+        > :first-child {
+          margin-top: 0;
+        }
 
-      > :last-child {
-        margin-bottom: 0;
+        > :last-child {
+          margin-bottom: 0;
+        }
       }
     }
 

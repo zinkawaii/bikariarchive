@@ -13,7 +13,7 @@
 <template>
   <button class="meow-button">
     <iconify class="button-icon" :name="icon"/>
-    <span class="button-title" :data-code="code"><slot></slot></span>
+    <span class="button-title" :data-code="code"><slot /></span>
   </button>
 </template>
 

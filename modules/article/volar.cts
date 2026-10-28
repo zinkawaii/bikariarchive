@@ -49,7 +49,7 @@ const plugin: VueLanguagePlugin = ({ modules }) => [{
         embeddedFile.content.push(`__VLS_ctx.`, [
           match.groups!.exp,
           block.name,
-          match.index! + "{{".length,
+          match.index + "{{".length,
           modules["@vue/language-core"].codeFeatures.full,
         ], `;\n`);
       }

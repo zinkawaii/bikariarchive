@@ -4,7 +4,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "^12.12.1"
+      "version": "^12.15.0"
     },
     "runtime": {
       "name": "node",
@@ -14,7 +14,6 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "prepare": "nuxt-seo-utils icons --source favicon.svg",
     "preview": "nuxt preview",
     "eslint": "eslint -c .config/eslint.config.ts",
     "typecheck": "nuxt typecheck",
@@ -65,6 +64,7 @@
     "nuxt-schema-org": "catalog:nuxt",
     "nuxt-seo-utils": "catalog:nuxt",
     "nuxt-site-config": "catalog:nuxt",
+    "ocache": "catalog:utils",
     "pathe": "catalog:utils",
     "tinyglobby": "catalog:utils",
     "typescript": "catalog:build",

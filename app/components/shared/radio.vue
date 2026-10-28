@@ -10,7 +10,7 @@
 <template>
   <label class="mb-radio">
     <input class="radio-entity" type="radio" :value v-model="modelValue"/>
-    <span class="radio-title"><slot></slot></span>
+    <span class="radio-title"><slot /></span>
   </label>
 </template>
 

@@ -200,7 +200,7 @@ export function enrichJArticle(original: JArticle) {
       Article.meta[novel]?.chapters.map((art) => [art.index, art]) ?? [],
     );
 
-    Article.meta[novel] = structuredClone(original[novel]) as any;
+    Article.meta[novel] = structuredClone(original[novel]) as JNovel<Article>;
 
     const { chapters } = original[novel];
     for (let i = 0; i < chapters.length; i++) {

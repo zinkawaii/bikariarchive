@@ -86,7 +86,6 @@
 }
 
 @font-feature-values InterVariable {
-  /* eslint-disable-next-line css/no-invalid-at-rules */
   @styleset {
     --open-digits: 1;
     --disambiguation: 2;

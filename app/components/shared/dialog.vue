@@ -16,7 +16,7 @@
   <transition-scale>
     <div v-if="open" class="mb-dialog">
       <div class="dialog-wrapper edge-fades-y no-scrollbar">
-        <slot></slot>
+        <slot />
       </div>
       <span class="dialog-xmark" @click="emit(`close`)">
         <iconify name="fa7-solid:xmark"/>
